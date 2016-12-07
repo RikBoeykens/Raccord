@@ -1,0 +1,12 @@
+<div class="navbar-fixed">
+    <nav>
+        <div class="nav-wrapper" *ngIf="!showSearchBar">
+            <a routerLink="/" class="brand-logo">Raccord</a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li><a (click)="doShowSearchBar()"><i class="material-icons">search</i></a></li>
+                <li><a routerLink="/projects">Projects</a></li>
+            </ul>
+        </div>
+        <raccord-navbar-search (toggleSearchBar)="toggleSearchBar($event)" *ngIf="showSearchBar"></raccord-navbar-search>
+    </nav>
+</div>

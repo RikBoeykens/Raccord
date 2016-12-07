@@ -1,0 +1,25 @@
+<div class="row">      
+    <div class="col s12">
+        <a routerLink="/" class="breadcrumb">Dashboard</a>
+        <a routerLink="/projects" class="breadcrumb">Projects</a>
+        <span class="breadcrumb">Update Project</span>
+    </div>
+</div>
+<div class="row">
+    <form id="project-form" class="col offset-s2 s8"
+          #projectForm = "ngForm"
+          (ngSubmit)="updateProject()">
+        <div class="row">
+            <div class="input-field col s12">
+                <input type="text" id="project_title" required [(ngModel)]="viewProject.title" #title="ngModel" name="project_title" class="validate" />
+                <label for="project_title" class="active">Name</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s12">
+                <a routerLink="/projects" class="waves-effect waves-light btn red left">Back</a>
+                <button type="submit" class="waves-effect waves-light btn right" [disabled]="!projectForm.form.valid">Save</button>
+            </div>
+        </div>
+    </form>
+</div>

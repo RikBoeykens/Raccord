@@ -1,0 +1,19 @@
+<div class="nav-wrapper">
+    <form autocomplete="off">
+        <div class="input-field nav-search-input-field">
+            <input id="navbar-search" type="text" [(ngModel)]="searchText" raccord-focus name="searchText" (keyup)="doSearch()" required>
+            <i class="material-icons nav-search-icon nav-search-icon-left click-link" (click)="doSearch()">search</i>
+            <i class="material-icons nav-search-icon nav-search-icon-right click-link" (click)="resetSearchBar()">close</i>
+        </div>
+        <div class="navbar-search-result-container z-depth-3" *ngIf="showSearchResults">
+            <div class="search-type-result" *ngFor="let typeResult of searchTypeResults">
+                <label>{{typeResult.type}} ({{typeResult.count}})</label>
+                <ul class="autocomplete-content dropdown-content">
+                    <raccord-navbar-search-result *ngFor="let result of typeResult.results" [result]="result" [searchText]="searchText" (resetSearchBar)="resetSearchBar($event)">
+                    </raccord-navbar-search-result>
+                </ul>
+            </div>
+            <label *ngIf="searchTypeResults.length==0">No results</label>
+        </div>
+    </form>
+</div>

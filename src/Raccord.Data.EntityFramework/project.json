@@ -1,0 +1,30 @@
+{
+  "version": "1.0.0-*",
+
+  "dependencies": {
+    "NETStandard.Library": "1.6.0",
+    "Npgsql.EntityFrameworkCore.PostgreSQL": "1.0.0",
+    "Microsoft.EntityFrameworkCore.Design": "1.0.0-preview2-final",
+    "Raccord.Domain.Model": "1.0.0"
+  },
+
+  "tools": {
+    "Microsoft.EntityFrameworkCore.Tools": {
+      "version": "1.0.0-preview2-final",
+      "imports": "portable-net45+win8+dnxcore50"
+    }
+  },
+
+  "frameworks": {
+    "netstandard1.6": {
+      "imports": [
+        "dnxcore50",
+        "net451"
+      ]
+    }
+  },
+
+  "tooling": {
+    "defaultNamespace": "Raccord.Data.EntityFramework"
+  }
+}

@@ -1,0 +1,26 @@
+<div class="row">      
+    <div class="col s12">
+        <a routerLink="/" class="breadcrumb">Dashboard</a>
+        <span class="breadcrumb">Projects</span>
+    </div>
+</div>
+<div class="row">
+    <div class="col s12 m6 l4" *ngFor="let project of projects">
+        <div class="card">
+            <div class="card-content">
+                <a [routerLink]="[project.id]" class="card-title">{{project.title}}</a>
+            </div>
+            <div class="card-action card-icons-action">
+                <a class="right click-link grey-text" (click)="remove(project)"><i class="material-icons">delete</i></a>
+                <a class="right click-link grey-text" [routerLink]="[project.id, 'edit']"><i class="material-icons">edit</i></a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <a routerLink="/projects/add"
+       class="btn-floating btn-large waves-effect waves-light red right">
+       <i class="material-icons">add</i>
+    </a>
+</div>
+          
