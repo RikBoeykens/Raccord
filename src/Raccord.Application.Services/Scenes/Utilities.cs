@@ -21,6 +21,7 @@ namespace Raccord.Application.Services.Scenes
                 IntExt = scene.IntExt.TranslateSummary(),
                 Location = scene.Location.TranslateSummary(),
                 DayNight = scene.DayNight.TranslateSummary(),
+                ProjectID = scene.ProjectID,
             };
 
             return dto;
@@ -36,6 +37,7 @@ namespace Raccord.Application.Services.Scenes
                 IntExt = scene.IntExt.TranslateSummary(),
                 Location = scene.Location.TranslateSummary(),
                 DayNight = scene.DayNight.TranslateSummary(),
+                ProjectID = scene.ProjectID,
             };
 
             return dto;
@@ -45,6 +47,7 @@ namespace Raccord.Application.Services.Scenes
         {
             var dto = new SearchResultDto
             {
+                ID = scene.ID,
                 RouteIDs = new long[]{scene.ProjectID, scene.ID},
                 DisplayName = scene.GetDisplaySummary(),
                 Info = $"Project: {scene.Project.Title}",

@@ -7,6 +7,9 @@
     </div>
 </div>
 <div class="row">
+    <edit-scene [scene]="viewNewScene" (submitScene)="addScene()"></edit-scene>
+</div>
+<div class="row">
     <ul class="col s12 collection">
         <li class="collection-item" *ngFor="let scene of scenes">
             <a [routerLink]="[scene.id]">

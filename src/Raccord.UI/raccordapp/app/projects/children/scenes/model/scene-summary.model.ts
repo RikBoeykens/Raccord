@@ -33,6 +33,10 @@ export class SceneSummary extends BaseModel{
             this.location = obj.location;
             this.dayNight = obj.dayNight;
             this.projectId = obj.projectId;
+        }else{
+            this.intExt = new IntExtSummary();
+            this.location = new LocationSummary();
+            this.dayNight = new DayNightSummary();
         }
     }
 

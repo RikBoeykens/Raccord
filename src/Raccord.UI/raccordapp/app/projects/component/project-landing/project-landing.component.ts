@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { ProjectService } from '../../service/project.service';
+import { ProjectHttpService } from '../../service/project-http.service';
 import { Project } from '../../model/project.model';
 
 @Component({
     templateUrl: 'project-landing.component.html',
     providers: [
-        ProjectService
+        ProjectHttpService
     ]
 })
 export class ProjectLandingComponent {
@@ -14,7 +14,7 @@ export class ProjectLandingComponent {
     project: Project;
 
     constructor(
-        private projectService: ProjectService,
+        private _projectHttpService: ProjectHttpService,
         private route: ActivatedRoute,
         private router: Router
     ){

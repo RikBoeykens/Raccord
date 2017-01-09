@@ -7,7 +7,7 @@ import { Project } from '../model/project.model';
 import { JsonResponse } from '../../shared/model/json-response.model';
 
 @Injectable()
-export class ProjectService extends BaseHttpService {
+export class ProjectHttpService extends BaseHttpService {
 
     constructor(protected _http: Http) { 
         super(_http);

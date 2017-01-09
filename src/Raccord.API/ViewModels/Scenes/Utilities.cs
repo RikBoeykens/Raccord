@@ -43,6 +43,9 @@ namespace Raccord.API.ViewModels.Scenes
             return new SceneSummaryDto
             {
                 ID = vm.ID,
+                Number = vm.Number,
+                Summary = vm.Summary,
+                PageLength = vm.PageLength,
                 IntExt = vm.IntExt.Translate(),
                 Location = vm.Location.Translate(),
                 DayNight = vm.DayNight.Translate(),

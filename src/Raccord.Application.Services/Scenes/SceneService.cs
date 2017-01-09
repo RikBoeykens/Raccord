@@ -4,6 +4,10 @@ using System.Linq;
 using Raccord.Domain.Model.Scenes;
 using Raccord.Application.Core.Services.Scenes;
 using Raccord.Data.EntityFramework.Repositories.Scenes;
+using Raccord.Data.EntityFramework.Repositories.SceneProperties;
+using Raccord.Data.EntityFramework.Repositories.Locations;
+using Raccord.Domain.Model.SceneProperties;
+using Raccord.Domain.Model.Locations;
 
 namespace Raccord.Application.Services.Scenes
 {
@@ -11,14 +15,31 @@ namespace Raccord.Application.Services.Scenes
     public class SceneService : ISceneService
     {
         private readonly ISceneRepository _sceneRepository;
+        private readonly IIntExtRepository _intExtRepository;
+        private readonly IDayNightRepository _dayNightRepository;
+        private readonly ILocationRepository _locationRepository;
 
         // Initialises a new SceneService
-        public SceneService(ISceneRepository sceneRepository)
+        public SceneService(
+            ISceneRepository sceneRepository,
+            IIntExtRepository intExtRepository,
+            IDayNightRepository dayNightRepository,
+            ILocationRepository locationRepository
+            )
         {
             if(sceneRepository == null)
                 throw new ArgumentNullException(nameof(sceneRepository));
+            if(intExtRepository == null)
+                throw new ArgumentNullException(nameof(intExtRepository));
+            if(dayNightRepository == null)
+                throw new ArgumentNullException(nameof(dayNightRepository));
+            if(locationRepository == null)
+                throw new ArgumentNullException(nameof(locationRepository));
             
             _sceneRepository = sceneRepository;
+            _intExtRepository = intExtRepository;
+            _dayNightRepository = dayNightRepository;
+            _locationRepository = locationRepository;
         }
 
         // Gets all scene for a project
@@ -54,6 +75,8 @@ namespace Raccord.Application.Services.Scenes
         // Adds a scene
         public long Add(SceneSummaryDto dto)
         {
+            CreatePropertiesIfNecessary(dto);
+
             var scene = new Scene
             {
                 Number = dto.Number,
@@ -74,6 +97,8 @@ namespace Raccord.Application.Services.Scenes
         // Updates a scene
         public long Update(SceneSummaryDto dto)
         {
+            CreatePropertiesIfNecessary(dto);
+
             var scene = _sceneRepository.GetSingle(dto.ID);
 
             scene.Number = dto.Number;
@@ -97,6 +122,54 @@ namespace Raccord.Application.Services.Scenes
             _sceneRepository.Delete(scene);
 
             _sceneRepository.Commit();
+        }
+
+        private void CreatePropertiesIfNecessary(SceneSummaryDto scene)
+        {
+            if(scene.IntExt.ID == default(long))
+            {
+                var intExt = new IntExt
+                {
+                    Name = scene.IntExt.Name,
+                    Description = scene.IntExt.Description,
+                    ProjectID = scene.IntExt.ProjectID,
+                };
+
+                _intExtRepository.Add(intExt);
+                _intExtRepository.Commit();
+
+                scene.IntExt.ID = intExt.ID;
+            }
+
+            if(scene.DayNight.ID == default(long))
+            {
+                var dayNight = new DayNight
+                {
+                    Name = scene.DayNight.Name,
+                    Description = scene.DayNight.Description,
+                    ProjectID = scene.DayNight.ProjectID,
+                };
+
+                _dayNightRepository.Add(dayNight);
+                _dayNightRepository.Commit();
+
+                scene.DayNight.ID = dayNight.ID;
+            }
+
+            if(scene.Location.ID == default(long))
+            {
+                var location = new Location
+                {
+                    Name = scene.Location.Name,
+                    Description = scene.Location.Description,
+                    ProjectID = scene.Location.ProjectID,
+                };
+
+                _locationRepository.Add(location);
+                _locationRepository.Commit();
+
+                scene.Location.ID = location.ID;
+            }
         }
     }
 }

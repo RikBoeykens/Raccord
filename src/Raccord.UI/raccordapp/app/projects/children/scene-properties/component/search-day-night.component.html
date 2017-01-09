@@ -1,0 +1,9 @@
+<div class="input-field col s2">
+    <input type="text" id="scene_day_night" required class="validate" [(ngModel)]="sceneDayNight.name" name="scene_day_night" #daynight="ngModel" (keyup)="doSearch()" />
+    <ul class="autocomplete-content dropdown-content raccord-search-dropdown" *ngIf="showSearchResults">
+        <li (click)="setResult(result)"*ngFor="let result of searchResults">
+            <span raccord-highlight [search]="sceneDayNight.name" [text]="result.displayName" classToApply="highlight"></span>
+        </li>
+    </ul>
+    <label for="scene_day_night" [class.active]="sceneDayNight.name">Day/Night</label>
+</div>

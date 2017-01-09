@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { ProjectService } from '../../service/project.service';
+import { ProjectHttpService } from '../../service/project-http.service';
 import { ProjectSummary } from '../../model/project-summary.model';
 import { LoadingService } from '../../../loading/service/loading.service';
 import { CanComponentDeactivate } from '../../../shared/interface/can-component-deactivate.interface';
@@ -15,7 +15,7 @@ export class EditProjectComponent implements CanComponentDeactivate {
     project: ProjectSummary;
 
     constructor(
-        private _projectService: ProjectService,
+        private _projectHttpService: ProjectHttpService,
         private _loadingService: LoadingService,
         private _dialogService: DialogService,
         private _route: ActivatedRoute,
@@ -36,7 +36,7 @@ export class EditProjectComponent implements CanComponentDeactivate {
 
         this.project = this.viewProject;
 
-        this._projectService.post(this.project).then(data=>{
+        this._projectHttpService.post(this.project).then(data=>{
             if(typeof(data)=='string'){
                 this._dialogService.error(data);
             }else{

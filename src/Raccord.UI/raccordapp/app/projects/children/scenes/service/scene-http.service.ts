@@ -7,7 +7,7 @@ import { Scene } from '../model/scene.model';
 import { JsonResponse } from '../../../../shared/model/json-response.model';
 
 @Injectable()
-export class SceneService extends BaseHttpService {
+export class SceneHttpService extends BaseHttpService {
 
     constructor(protected _http: Http) { 
         super(_http);

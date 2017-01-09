@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { ProjectService } from '../../service/project.service';
+import { ProjectHttpService } from '../../service/project-http.service';
 import { ProjectSummary } from '../../model/project-summary.model';
 import { LoadingService } from '../../../loading/service/loading.service';
 import { DialogService } from '../../../shared/service/dialog.service';
@@ -13,7 +13,7 @@ export class ProjectsListComponent extends OnInit {
     projects: ProjectSummary[] = [];
 
     constructor(
-        private _projectService: ProjectService,
+        private _projectHttpService: ProjectHttpService,
         private _loadingService: LoadingService,
         private _dialogService: DialogService,
         private _route: ActivatedRoute,
@@ -32,7 +32,7 @@ export class ProjectsListComponent extends OnInit {
         
         let loadingId = this._loadingService.startLoading();
 
-        this._projectService.getAll().then(data => {
+        this._projectHttpService.getAll().then(data => {
             this.projects = data;
             this._loadingService.endLoading(loadingId);
         });
@@ -44,7 +44,7 @@ export class ProjectsListComponent extends OnInit {
 
             let loadingId = this._loadingService.startLoading();
 
-            this._projectService.delete(project.id).then(data=>{
+            this._projectHttpService.delete(project.id).then(data=>{
                 if(typeof(data)== 'string'){
                     this._dialogService.error(data);
                 }else{

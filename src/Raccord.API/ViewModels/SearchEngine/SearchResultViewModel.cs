@@ -5,7 +5,9 @@ namespace Raccord.API.ViewModels.SearchEngine
     // Viewmodel for a single search result
     public class SearchResultViewModel
     {
-        // ID
+        // ID of the result
+        public long ID { get; set; }
+        // IDs
         public long[] RouteIDs { get; set; }
 
         // Display name

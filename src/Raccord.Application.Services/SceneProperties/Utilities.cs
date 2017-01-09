@@ -18,6 +18,7 @@ namespace Raccord.Application.Services.SceneProperties
                 Name = intExt.Name,
                 Description = intExt.Description,
                 Scenes = intExt.Scenes.Select(s=> s.TranslateSummary()),
+                ProjectID = intExt.ProjectID,
             };
 
             return dto;
@@ -29,6 +30,7 @@ namespace Raccord.Application.Services.SceneProperties
                 ID = intExt.ID,
                 Name = intExt.Name,
                 Description = intExt.Description,
+                ProjectID = intExt.ProjectID,
             };
 
             return dto;
@@ -38,6 +40,7 @@ namespace Raccord.Application.Services.SceneProperties
         {
             var dto = new SearchResultDto
             {
+                ID = intExt.ID,
                 RouteIDs = new long[]{intExt.ProjectID, intExt.ID},
                 DisplayName = intExt.Name,
                 Type = SearchType.IntExt,
@@ -54,6 +57,7 @@ namespace Raccord.Application.Services.SceneProperties
                 Name = dayNight.Name,
                 Description = dayNight.Description,
                 Scenes = dayNight.Scenes.Select(s=> s.TranslateSummary()),
+                ProjectID = dayNight.ProjectID,
             };
 
             return dto;
@@ -65,17 +69,19 @@ namespace Raccord.Application.Services.SceneProperties
                 ID = dayNight.ID,
                 Name = dayNight.Name,
                 Description = dayNight.Description,
+                ProjectID = dayNight.ProjectID,
             };
 
             return dto;
         }
 
-        public static SearchResultDto TranslateToSearchResult(this DayNight intExt)
+        public static SearchResultDto TranslateToSearchResult(this DayNight dayNight)
         {
             var dto = new SearchResultDto
             {
-                RouteIDs = new long[]{intExt.ProjectID, intExt.ID},
-                DisplayName = intExt.Name,
+                ID = dayNight.ID,
+                RouteIDs = new long[]{dayNight.ProjectID, dayNight.ID},
+                DisplayName = dayNight.Name,
                 Type = SearchType.DayNight,
             };
 

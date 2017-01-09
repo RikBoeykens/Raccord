@@ -18,6 +18,7 @@ namespace Raccord.Application.Services.Locations
                 Name = location.Name,
                 Description = location.Description,
                 Scenes = location.Scenes.Select(s=> s.TranslateSummary()),
+                ProjectID = location.ProjectID,
             };
 
             return dto;
@@ -29,6 +30,7 @@ namespace Raccord.Application.Services.Locations
                 ID = location.ID,
                 Name = location.Name,
                 Description = location.Description,
+                ProjectID = location.ProjectID,
             };
 
             return dto;
@@ -38,6 +40,7 @@ namespace Raccord.Application.Services.Locations
         {
             var dto = new SearchResultDto
             {
+                ID = location.ID,
                 RouteIDs = new long[]{location.ProjectID, location.ID},
                 DisplayName = location.Name,
                 Info = $"Project: {location.Project.Title}",

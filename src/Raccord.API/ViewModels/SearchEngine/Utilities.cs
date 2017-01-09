@@ -22,6 +22,7 @@ namespace Raccord.API.ViewModels.SearchEngine
         {
             return new SearchResultViewModel
             {
+                ID = dto.ID,
                 RouteIDs = dto.RouteIDs,
                 DisplayName = dto.DisplayName,
                 Type = dto.Type,

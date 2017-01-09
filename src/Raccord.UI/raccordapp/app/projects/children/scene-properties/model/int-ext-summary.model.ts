@@ -19,5 +19,8 @@ export class IntExtSummary extends BaseModel{
             this.description = obj.description;
             this.projectId = obj.projectId;
         }
+        else{
+            this.id = 0;
+        }
     }
 }

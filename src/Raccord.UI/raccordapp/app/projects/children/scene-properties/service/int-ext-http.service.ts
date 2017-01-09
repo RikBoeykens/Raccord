@@ -7,7 +7,7 @@ import { IntExt } from '../model/int-ext.model';
 import { JsonResponse } from '../../../../shared/model/json-response.model';
 
 @Injectable()
-export class IntExtService extends BaseHttpService {
+export class IntExtHttpService extends BaseHttpService {
 
     constructor(protected _http: Http) { 
         super(_http);
@@ -35,7 +35,7 @@ export class IntExtService extends BaseHttpService {
         return this.doGet(uri);
     }
 
-    post(intExt: IntExtSummary): Promise<Number> {
+    post(intExt: IntExtSummary): Promise<number> {
         var uri = this._baseUri;
 
         return this.doPost(intExt, uri);

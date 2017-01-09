@@ -19,15 +19,25 @@ import { ProjectsListComponent }     from './projects/component/projects-list/pr
 import { AddProjectComponent }     from './projects/component/add-project/add-project.component';
 import { EditProjectComponent }     from './projects/component/edit-project/edit-project.component';
 import { ProjectLandingComponent } from './projects/component/project-landing/project-landing.component';
-import { ProjectService }        from './projects/service/project.service';
+import { ProjectHttpService }        from './projects/service/project-http.service';
 import { ProjectsResolve }        from './projects/service/projects-resolve.service';
 import { ProjectResolve }        from './projects/service/project-resolve.service';
 import { ProjectSummaryResolve }        from './projects/service/project-summary-resolve.service';
 
 import { ScenesListComponent } from './projects/children/scenes/component/scenes-list/scenes-list.component';
-import { SceneService }        from './projects/children/scenes/service/scene.service';
+import { EditSceneComponent } from './projects/children/scenes/component/edit-scene/edit-scene.component';
+import { SceneHttpService }        from './projects/children/scenes/service/scene-http.service';
 import { ScenesResolve }        from './projects/children/scenes/service/scenes-resolve.service';
 import { SceneResolve }        from './projects/children/scenes/service/scene-resolve.service';
+
+import { SearchIntExtComponent } from './projects/children/scene-properties/component/search-int-ext.component';
+import { IntExtHttpService }        from './projects/children/scene-properties/service/int-ext-http.service';
+
+import { SearchDayNightComponent } from './projects/children/scene-properties/component/search-day-night.component';
+import { DayNightHttpService }        from './projects/children/scene-properties/service/day-night-http.service';
+
+import { SearchLocationComponent } from './projects/children/locations/component/search-location.component';
+import { LocationHttpService }        from './projects/children/locations/service/location-http.service';
 
 // Services
 import { SearchEngineService }  from './search-engine/service/search-engine.service';
@@ -62,17 +72,24 @@ import {ToastModule} from 'ng2-toastr/ng2-toastr';
         EditProjectComponent,
         ProjectLandingComponent,
         ScenesListComponent,
+        EditSceneComponent,
+        SearchIntExtComponent,
+        SearchDayNightComponent,
+        SearchLocationComponent,
         HighlightDirective,
         FocusDirective
     ],
     providers: [
-        ProjectService,
+        ProjectHttpService,
         ProjectsResolve,
         ProjectResolve,
         ProjectSummaryResolve,
-        SceneService,
+        SceneHttpService,
         ScenesResolve,
         SceneResolve,
+        IntExtHttpService,
+        DayNightHttpService,
+        LocationHttpService,
         SearchEngineService,
         LoadingService,
         CanDeactivateGuard,
