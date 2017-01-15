@@ -13,7 +13,7 @@
     <ul class="col s12 collection">
         <li class="collection-item" *ngFor="let scene of scenes">
             <a [routerLink]="[scene.id]">
-                {{scene.number}}. {{scene.intExt.name}} {{scene.location.name}} {{scene.dayNight.name}} - {{scene.summary}} ({{scene.pageLength}})
+                {{scene.number}}. {{scene.intExt.name}} {{scene.location.name}} {{scene.dayNight.name}} - {{scene.summary}} ({{scene.pageLength | pagelength}})
             </a>
         </li>
     </ul>

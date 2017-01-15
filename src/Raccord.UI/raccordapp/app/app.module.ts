@@ -52,6 +52,9 @@ import { FocusDirective } from './shared/directives/focus.directive';
 // Vendor
 import {ToastModule} from 'ng2-toastr/ng2-toastr';
 
+// Pipes
+import { PageLengthPipe } from './shared/pipes/page-length.pipe';
+
 @NgModule({
     imports: [
         BrowserModule,
@@ -77,7 +80,8 @@ import {ToastModule} from 'ng2-toastr/ng2-toastr';
         SearchDayNightComponent,
         SearchLocationComponent,
         HighlightDirective,
-        FocusDirective
+        FocusDirective,
+        PageLengthPipe
     ],
     providers: [
         ProjectHttpService,
