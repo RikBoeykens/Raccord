@@ -1,9 +1,0 @@
-<div class="input-field col s6">
-    <input type="text" id="scene_location" required class="validate" [(ngModel)]="sceneLocation.name" name="scene_location" #location="ngModel" (keyup)="doSearch()" />
-    <ul class="autocomplete-content dropdown-content raccord-search-dropdown" *ngIf="showSearchResults">
-        <li (click)="setResult(result)"*ngFor="let result of searchResults">
-            <span raccord-highlight [search]="sceneLocation.name" [text]="result.displayName" classToApply="highlight"></span>
-        </li>
-    </ul>
-    <label for="scene_location" [class.active]="sceneLocation.name">Location</label>
-</div>

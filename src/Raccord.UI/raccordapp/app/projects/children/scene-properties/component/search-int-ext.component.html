@@ -1,9 +1,0 @@
-<div class="input-field col s2">
-    <input type="text" id="scene_int_ext" required class="validate" [(ngModel)]="sceneIntExt.name" name="scene_int_ext" #intext="ngModel" (keyup)="doSearch()" />
-    <ul class="autocomplete-content dropdown-content raccord-search-dropdown" *ngIf="showSearchResults">
-        <li (click)="setResult(result)"*ngFor="let result of searchResults">
-            <span raccord-highlight [search]="sceneIntExt.name" [text]="result.displayName" classToApply="highlight"></span>
-        </li>
-    </ul>
-    <label for="scene_int_ext" [class.active]="sceneIntExt.name">Int/Ext</label>
-</div>

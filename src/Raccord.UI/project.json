@@ -31,7 +31,11 @@
 
   "buildOptions": {
     "emitEntryPoint": true,
-    "preserveCompilationContext": true
+    "preserveCompilationContext": true,
+    "compile": {
+        "include" : ["**/*.cs"],
+        "exclude" : ["**/node_modules/"]
+      }
   },
 
   "runtimeOptions": {

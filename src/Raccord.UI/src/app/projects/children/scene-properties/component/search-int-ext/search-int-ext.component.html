@@ -1,0 +1,10 @@
+<div class="search-container">
+    <md-input-container class="search-input-container">
+        <input md-input placeholder="Int/Ext" id="scene_int_ext" required [(ngModel)]="sceneIntExt.name" #intext="ngModel" name="scene_int_ext"  (keyup)="doSearch()" (blur)="clearSearch()" />
+    </md-input-container>
+    <ul class="autocomplete-content" *ngIf="showSearchResults">
+        <li (mousedown)="setResult(result)"*ngFor="let result of searchResults">
+            <span raccord-highlight [search]="sceneIntExt.name" [text]="result.displayName" classToApply="highlight"></span>
+        </li>
+    </ul>
+</div>

@@ -52,7 +52,7 @@ namespace Raccord.API
             }
 
             app.UseCors(builder =>
-                builder.WithOrigins("http://localhost:5000")
+                builder.WithOrigins("http://localhost:5000", "http://localhost:3000")
                        .AllowAnyMethod()
                        .AllowAnyHeader()
             );

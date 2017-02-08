@@ -1,0 +1,10 @@
+<div class="search-container">
+    <md-input-container class="search-input-container">
+        <input md-input placeholder="Location" id="scene_location" required [(ngModel)]="sceneLocation.name" #location="ngModel" name="scene_location"  (keyup)="doSearch()" />
+    </md-input-container>
+    <ul class="autocomplete-content" *ngIf="showSearchResults">
+        <li (mousedown)="setResult(result)"*ngFor="let result of searchResults">
+            <span raccord-highlight [search]="sceneLocation.name" [text]="result.displayName" classToApply="highlight"></span>
+        </li>
+    </ul>
+</div>
