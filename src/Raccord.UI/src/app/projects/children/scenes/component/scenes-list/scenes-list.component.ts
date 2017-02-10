@@ -5,6 +5,7 @@ import { SceneSummary } from '../../model/scene-summary.model';
 import { ProjectSummary } from '../../../../model/project-summary.model';
 import { LoadingService } from '../../../../../loading/service/loading.service';
 import { DialogService } from '../../../../../shared/service/dialog.service';
+import { DragulaService } from 'ng2-dragula';
 
 @Component({
     templateUrl: 'scenes-list.component.html',
@@ -12,19 +13,31 @@ import { DialogService } from '../../../../../shared/service/dialog.service';
 export class ScenesListComponent extends OnInit {
 
     scenes: SceneSummary[] = [];
+    deleteScenes: SceneSummary[]=[];
     project: ProjectSummary;
     viewNewScene: SceneSummary;
     newScene: SceneSummary;
+    draggingScene: boolean;
 
     constructor(
         private _sceneHttpService: SceneHttpService,
         private _loadingService: LoadingService,
         private _dialogService: DialogService,
         private _route: ActivatedRoute,
-        private _router: Router
+        private _router: Router,
+        private dragulaService: DragulaService
     ) {
         super();
         this.viewNewScene = new SceneSummary();
+        dragulaService.drag.subscribe((value) => {
+            this.onSceneDrag();
+        });
+        dragulaService.dragend.subscribe(() => {
+            this.onSceneDragEnd();
+        });
+        dragulaService.dropModel.subscribe((value) => {
+            this.onSceneDrop(value.slice(1));
+        });
     }
 
     ngOnInit() {
@@ -71,6 +84,20 @@ export class ScenesListComponent extends OnInit {
             this._loadingService.endLoading(loadingId)
         );
     }
+
+    private onSceneDrag() {
+        this.draggingScene = true;
+    }
+    private onSceneDragEnd() {
+        this.draggingScene = false;
+    }
+    private onSceneDrop(args) {
+        if(this.deleteScenes.length){
+            var sceneToDelete = this.deleteScenes.splice(0, 1)[0];
+            this.remove(sceneToDelete);
+        }
+    }
+
 
     remove(scene: SceneSummary){
 

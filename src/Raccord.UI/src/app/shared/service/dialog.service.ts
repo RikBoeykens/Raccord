@@ -13,10 +13,10 @@ export class DialogService{
     }
 
     success(message: string){
-        this._snackBar.open(message);
+        this._snackBar.open(message, null, {duration: 3000});
     }
 
     error(message: string){
-        this._snackBar.open(message);
+        this._snackBar.open(message, null, {duration: 3000});
     }
 }

@@ -2,6 +2,7 @@
 /* This file is for setting global styles  */
 @import 'variables';
 @import '~@angular/material/core/theming/all-theme';
+@import '~dragula/dist/dragula.css';
 
 
 // Include non-theme styles for core.
@@ -82,4 +83,13 @@ ul.autocomplete-content{
 
 .search-input-container{
   width: 100%;
+}
+
+.delete-scene{
+  background-color: red;
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  color: $bg-color;
+  text-align: center;
 }
