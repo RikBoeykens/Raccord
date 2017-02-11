@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { JsonResponse } from '../model/json-response.model';
+import { SortOrder } from '../model/sort-order.model';
 import 'rxjs/add/operator/toPromise';
 
 @Injectable()
@@ -40,6 +41,17 @@ export abstract class BaseHttpService{
     protected doDelete(uri: string){
         
         return this._http.delete(uri)
+            .toPromise()
+            .then(response => this.extractJsonResponse(response))
+            .catch(this.handleErrorPromise);
+    }
+
+    protected doSort(order: SortOrder, uri: string){
+        let body = JSON.stringify(order);
+        let headers = new Headers({ 'Content-Type': 'application/json' });
+        let options = new RequestOptions({ headers: headers });
+
+        return this._http.post(uri, body, options)
             .toPromise()
             .then(response => this.extractJsonResponse(response))
             .catch(this.handleErrorPromise);

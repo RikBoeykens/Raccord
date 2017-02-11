@@ -16,7 +16,7 @@ namespace Raccord.Data.EntityFramework.Repositories.Scenes
         {
             var query = GetIncludedSummary();
 
-            return query.Where(s=> s.ProjectID == projectID);
+            return query.Where(s=> s.ProjectID == projectID).OrderBy(s=> s.SortingOrder);
         }
 
         public Scene GetFull(long ID)

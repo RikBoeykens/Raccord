@@ -5,6 +5,7 @@ import { AppSettings } from '../../../../app.settings';
 import { SceneSummary } from '../model/scene-summary.model';
 import { Scene } from '../model/scene.model';
 import { JsonResponse } from '../../../../shared/model/json-response.model';
+import { SortOrder } from '../../../../shared/model/sort-order.model';
 
 @Injectable()
 export class SceneHttpService extends BaseHttpService {
@@ -45,5 +46,13 @@ export class SceneHttpService extends BaseHttpService {
         var uri = `${this._baseUri}/${id}`;
 
         return this.doDelete(uri);
+    }
+
+    sort(id: number, sortIds: number[]): Promise<any>{
+        var uri = `${this._baseUri}/sort`;
+
+        var sortOrder = new SortOrder({parentId: id, sortIds: sortIds});
+
+        return this.doSort(sortOrder, uri);
     }
 }

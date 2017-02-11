@@ -8,6 +8,7 @@ using Raccord.Data.EntityFramework.Repositories.SceneProperties;
 using Raccord.Data.EntityFramework.Repositories.Locations;
 using Raccord.Domain.Model.SceneProperties;
 using Raccord.Domain.Model.Locations;
+using Raccord.Application.Core.Common.Sorting;
 
 namespace Raccord.Application.Services.Scenes
 {
@@ -85,7 +86,8 @@ namespace Raccord.Application.Services.Scenes
                 IntExtID = dto.IntExt.ID,
                 LocationID = dto.Location.ID,
                 DayNightID = dto.DayNight.ID,
-                ProjectID = dto.ProjectID
+                ProjectID = dto.ProjectID,
+                SortingOrder = GetNextSceneOrder(dto.ProjectID),
             };
 
             _sceneRepository.Add(scene);
@@ -120,6 +122,20 @@ namespace Raccord.Application.Services.Scenes
             var scene = _sceneRepository.GetSingle(ID);
 
             _sceneRepository.Delete(scene);
+
+            _sceneRepository.Commit();
+        }
+
+        public void Sort(SortOrderDto order)
+        {
+            var scenes = _sceneRepository.GetAllForProject(order.ParentID);
+
+            foreach(var scene in scenes)
+            {
+                var orderedIndex = Array.IndexOf(order.SortIDs, scene.ID);
+                scene.SortingOrder = orderedIndex != -1 ? orderedIndex : scenes.Count();
+                _sceneRepository.Edit(scene);
+            }
 
             _sceneRepository.Commit();
         }
@@ -170,6 +186,12 @@ namespace Raccord.Application.Services.Scenes
 
                 scene.Location.ID = location.ID;
             }
+        }
+
+        private int GetNextSceneOrder(long projectID)
+        {
+            var scenes = _sceneRepository.GetAllForProject(projectID);
+            return scenes.Count();
         }
     }
 }

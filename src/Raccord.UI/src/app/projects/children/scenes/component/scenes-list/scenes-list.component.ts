@@ -92,10 +92,27 @@ export class ScenesListComponent extends OnInit {
         this.draggingScene = false;
     }
     private onSceneDrop(args) {
+        //update sorting
+        this.sortScenes();
+
+        // Delete if necessary
         if(this.deleteScenes.length){
             var sceneToDelete = this.deleteScenes.splice(0, 1)[0];
             this.remove(sceneToDelete);
         }
+    }
+
+    sortScenes(){
+        let loadingId = this._loadingService.startLoading();
+
+        this._sceneHttpService.sort(this.project.id, this.getSortedOrder()).then(data=>{
+            if(typeof(data)=='string'){
+                this._dialogService.error(data);
+            }
+        }).catch()
+        .then(()=>
+            this._loadingService.endLoading(loadingId)
+        );
     }
 
 
@@ -108,13 +125,19 @@ export class ScenesListComponent extends OnInit {
             this._sceneHttpService.delete(scene.id).then(data=>{
                 if(typeof(data)== 'string'){
                     this._dialogService.error(data);
+                    this.getScenes();
                 }else{
                     this._dialogService.success('The scene was successfully removed');
-                    this.getScenes();
                 }
             }).catch()
             .then(()=> this._loadingService.endLoading(loadingId));
         }
 
+    }
+
+    getSortedOrder():number[]{
+        return this.scenes.map(function(scene){
+            return scene.id;
+        });
     }
 }
