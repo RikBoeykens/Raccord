@@ -2,7 +2,7 @@
     <md-input-container class="search-input-container">
         <input md-input placeholder="Day/Night" id="scene_day_night" required [(ngModel)]="sceneDayNight.name" #daynight="ngModel" name="scene_day_night"  (keyup)="doSearch()" (blur)="clearSearch()" />
     </md-input-container>
-    <ul class="autocomplete-content" *ngIf="showSearchResults">
+    <ul class="autocomplete-content" *ngIf="searchResults.length>0">
         <li (mousedown)="setResult(result)"*ngFor="let result of searchResults">
             <span raccord-highlight [search]="sceneDayNight.name" [text]="result.displayName" classToApply="highlight"></span>
         </li>

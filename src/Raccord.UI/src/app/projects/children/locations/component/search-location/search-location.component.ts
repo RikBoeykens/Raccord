@@ -14,7 +14,6 @@ export class SearchLocationComponent{
 
     @Input() sceneLocation: LocationSummary;
     searchResults: SearchResult[] = [];
-    showSearchResults: boolean = false;
 
     constructor(
         private _searchEngineService: SearchEngineService,
@@ -25,7 +24,6 @@ export class SearchLocationComponent{
 
     clearSearch(){
         this.searchResults = [];
-        this.showSearchResults = false;
     }
 
     doSearch(){
@@ -43,7 +41,9 @@ export class SearchLocationComponent{
             }
             else{
                 this.searchResults = results[0].results;
-                this.showSearchResults = true;
+                var exactResult = this.searchResults.find(result=> result.displayName.toLowerCase()==this.sceneLocation.name.toLowerCase());
+                if(exactResult)
+                    this.sceneLocation.id = exactResult.id;
             }
         }).catch()
         .then(()=> this._loadingService.endLoading(loadingId));
