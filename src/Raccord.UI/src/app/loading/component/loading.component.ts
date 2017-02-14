@@ -7,13 +7,13 @@ import { LoadingService } from '../service/loading.service';
     templateUrl: 'loading.component.html',
 })
 export class LoadingComponent {
-    showLoading: boolean = false;
+    showLoader: boolean = false;
     
     constructor(
         private loadingService: LoadingService
     ){
         loadingService.toggleLoading$.subscribe(show=>{
-            this.showLoading = show;
+            this.showLoader = show;
         });
     }
 }

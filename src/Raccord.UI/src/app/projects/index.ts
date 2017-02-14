@@ -10,6 +10,7 @@ export { ProjectsResolve } from './service/projects-resolve.service';
 
 export { ScenesListComponent } from './children/scenes/component/scenes-list/scenes-list.component';
 export { EditSceneComponent } from './children/scenes/component/edit-scene/edit-scene.component';
+export { SceneLandingComponent } from './children/scenes/component/scene-landing/scene-landing.component';
 export { SceneHttpService } from './children/scenes/service/scene-http.service';
 export { SceneResolve } from './children/scenes/service/scene-resolve.service';
 export { ScenesResolve } from './children/scenes/service/scenes-resolve.service';

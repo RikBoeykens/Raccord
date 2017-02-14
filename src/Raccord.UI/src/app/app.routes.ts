@@ -7,6 +7,7 @@ import { EditProjectComponent } from './projects';
 import { ProjectLandingComponent } from './projects';
 import { ProjectsListComponent } from './projects';
 import { ScenesListComponent } from './projects';
+import { SceneLandingComponent } from './projects';
 
 import { ProjectResolve } from './projects';
 import { ProjectSummaryResolve } from './projects';
@@ -61,11 +62,24 @@ export const ROUTES: Routes = [
           },
           {
             path: 'scenes',
-            component: ScenesListComponent,
-            resolve:{
-              project: ProjectSummaryResolve,
-              scenes: ScenesResolve
-            }
+            children:[
+              {
+                path: '',
+                component: ScenesListComponent,
+                resolve:{
+                  project: ProjectSummaryResolve,
+                  scenes: ScenesResolve
+                },
+              },
+              {
+                path: ':sceneId',
+                component: SceneLandingComponent,
+                resolve:{
+                  project: ProjectSummaryResolve,
+                  scene: SceneResolve
+                }
+              }
+            ]
           }
         ],
       },

@@ -5,9 +5,6 @@ import { Project } from '../../model/project.model';
 
 @Component({
     templateUrl: 'project-landing.component.html',
-    providers: [
-        ProjectHttpService
-    ]
 })
 export class ProjectLandingComponent {
 

@@ -1,0 +1,13 @@
+<div class="row">      
+    <div class="col s12">
+        <a routerLink="/" class="breadcrumb">Dashboard</a>
+        <a routerLink="/projects" class="breadcrumb">Projects</a>
+        <a routerLink="/projects/{{project.id}}" class="breadcrumb">{{project.title}}</a>
+        <a routerLink="/projects/{{project.id}}/scenes" class="breadcrumb">Scenes</a>
+    </div>
+</div>
+<div class="row">
+    <div class="col s12">
+        <h4>{{scene.number}}. {{scene.intExt.name}} {{scene.location.name}} {{scene.dayNight.name}} - {{scene.summary}} ({{scene.pageLength | pagelength}})</h4>
+    </div>
+</div>
