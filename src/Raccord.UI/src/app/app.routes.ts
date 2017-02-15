@@ -8,6 +8,7 @@ import { ProjectLandingComponent } from './projects';
 import { ProjectsListComponent } from './projects';
 import { ScenesListComponent } from './projects';
 import { SceneLandingComponent } from './projects';
+import { LocationsListComponent } from './projects';
 
 import { ProjectResolve } from './projects';
 import { ProjectSummaryResolve } from './projects';
@@ -78,6 +79,19 @@ export const ROUTES: Routes = [
                   project: ProjectSummaryResolve,
                   scene: SceneResolve
                 }
+              }
+            ]
+          },
+          {
+            path: 'locations',
+            children:[
+              {
+                path: '',
+                component: LocationsListComponent,
+                resolve:{
+                  project: ProjectSummaryResolve,
+                  locations: LocationsResolve
+                },
               }
             ]
           }

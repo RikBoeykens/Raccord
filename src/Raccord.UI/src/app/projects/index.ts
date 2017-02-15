@@ -15,6 +15,7 @@ export { SceneHttpService } from './children/scenes/service/scene-http.service';
 export { SceneResolve } from './children/scenes/service/scene-resolve.service';
 export { ScenesResolve } from './children/scenes/service/scenes-resolve.service';
 
+export { LocationsListComponent } from './children/locations/component/locations-list/locations-list.component';
 export { SearchLocationComponent } from './children/locations/component/search-location/search-location.component';
 export { LocationHttpService } from './children/locations/service/location-http.service';
 export { LocationResolve } from './children/locations/service/location-resolve.service';
