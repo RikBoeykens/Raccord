@@ -7,7 +7,7 @@ namespace Raccord.API.ViewModels.Scenes
     public class SceneSummaryViewModel
     {
         private IntExtSummaryViewModel _intExt;
-        private LocationSummaryViewModel _location;
+        private LocationViewModel _location;
         private DayNightSummaryViewModel _dayNight;
 
         // ID of the scene
@@ -39,11 +39,11 @@ namespace Raccord.API.ViewModels.Scenes
         }
 
         // The Scene's Location
-        public LocationSummaryViewModel Location
+        public LocationViewModel Location
         {
             get
             {
-                return _location ?? (_location = new LocationSummaryViewModel());
+                return _location ?? (_location = new LocationViewModel());
             }
             set
             {

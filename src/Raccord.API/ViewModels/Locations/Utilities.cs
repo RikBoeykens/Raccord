@@ -7,9 +7,9 @@ namespace Raccord.API.ViewModels.Locations
     public static class Utilities
     {
         // Translates a location dto to a location viewmodel
-        public static LocationViewModel Translate(this LocationDto dto)
+        public static FullLocationViewModel Translate(this FullLocationDto dto)
         {
-            return new LocationViewModel
+            return new FullLocationViewModel
             {
                 ID = dto.ID,
                 Name = dto.Name,
@@ -18,8 +18,22 @@ namespace Raccord.API.ViewModels.Locations
                 Scenes = dto.Scenes.Select(s=> s.Translate()),
             };
         }
-        // Translates a location summary dto to a location summary viewmodel
+
+        // Translates a location dto to a location viewmodel
         public static LocationSummaryViewModel Translate(this LocationSummaryDto dto)
+        {
+            return new LocationSummaryViewModel
+            {
+                ID = dto.ID,
+                Name = dto.Name,
+                Description = dto.Description,
+                ProjectID = dto.ProjectID,
+                SceneCount = dto.SceneCount,
+            };
+        }
+
+        // Translates a location dto to a location viewmodel
+        public static LocationViewModel Translate(this LocationDto dto)
         {
             return new LocationSummaryViewModel
             {
@@ -30,10 +44,10 @@ namespace Raccord.API.ViewModels.Locations
             };
         }
 
-        // Translates a location summary viewmodel to a dto
-        public static LocationSummaryDto Translate(this LocationSummaryViewModel vm)
+        // Translates a location viewmodel to a dto
+        public static LocationDto Translate(this LocationViewModel vm)
         {
-            return new LocationSummaryDto
+            return new LocationDto
             {
                 ID = vm.ID,
                 Name = vm.Name,

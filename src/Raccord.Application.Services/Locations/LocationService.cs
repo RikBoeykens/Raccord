@@ -26,33 +26,33 @@ namespace Raccord.Application.Services.Locations
         {
             var locations = _locationRepository.GetAllForProject(projectID);
 
-            var locationDtos = locations.Select(l => l.TranslateSummary());
+            var dtos = locations.Select(l => l.TranslateSummary());
 
-            return locationDtos;
+            return dtos;
         }
 
         // Gets a single location by id
-        public LocationDto Get(Int64 ID)
+        public FullLocationDto Get(long ID)
         {
             var location = _locationRepository.GetFull(ID);
 
-            var locationDto = location.Translate();
+            var dto = location.TranslateFull();
 
-            return locationDto;
+            return dto;
         }
 
         // Gets a summary of a single location
-        public LocationSummaryDto GetSummary(Int64 ID)
+        public LocationSummaryDto GetSummary(long ID)
         {
             var location = _locationRepository.GetSingle(ID);
 
-            var locationDto = location.TranslateSummary();
+            var dto = location.TranslateSummary();
 
-            return locationDto;
+            return dto;
         }
 
         // Adds a location
-        public long Add(LocationSummaryDto dto)
+        public long Add(LocationDto dto)
         {
             var location = new Location
             {
@@ -68,7 +68,7 @@ namespace Raccord.Application.Services.Locations
         }
 
         // Updates a location
-        public long Update(LocationSummaryDto dto)
+        public long Update(LocationDto dto)
         {
             var location = _locationRepository.GetSingle(dto.ID);
 

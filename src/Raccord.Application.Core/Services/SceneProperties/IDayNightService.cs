@@ -1,7 +1,7 @@
 namespace Raccord.Application.Core.Services.SceneProperties
 {
     // Interface for day/night functionality
-    public interface IDayNightService : IService<DayNightDto, DayNightSummaryDto>, IAllForProjectService<DayNightSummaryDto>
+    public interface IDayNightService : IService<DayNightSummaryDto, DayNightSummaryDto, DayNightDto>, IAllForProjectService<DayNightSummaryDto>
     {
     }
 }

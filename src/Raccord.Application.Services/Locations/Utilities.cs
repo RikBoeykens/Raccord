@@ -10,9 +10,9 @@ namespace Raccord.Application.Services.Locations
     // Utilities and helper methods for Locations
     public static class Utilities
     {
-        public static LocationDto Translate(this Location location)
+        public static FullLocationDto TranslateFull(this Location location)
         {
-            var dto = new LocationDto
+            var dto = new FullLocationDto
             {
                 ID = location.ID,
                 Name = location.Name,
@@ -26,6 +26,20 @@ namespace Raccord.Application.Services.Locations
         public static LocationSummaryDto TranslateSummary(this Location location)
         {
             var dto = new LocationSummaryDto
+            {
+                ID = location.ID,
+                Name = location.Name,
+                Description = location.Description,
+                ProjectID = location.ProjectID,
+                SceneCount = location.Scenes.Count(),
+            };
+
+            return dto;
+        }
+
+        public static LocationDto Translate(this Location location)
+        {
+            var dto = new LocationDto
             {
                 ID = location.ID,
                 Name = location.Name,

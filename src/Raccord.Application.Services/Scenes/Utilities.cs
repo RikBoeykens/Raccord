@@ -35,7 +35,7 @@ namespace Raccord.Application.Services.Scenes
                 Summary = scene.Summary,
                 PageLength = scene.PageLength,
                 IntExt = scene.IntExt.TranslateSummary(),
-                Location = scene.Location.TranslateSummary(),
+                Location = scene.Location.Translate(),
                 DayNight = scene.DayNight.TranslateSummary(),
                 ProjectID = scene.ProjectID,
             };

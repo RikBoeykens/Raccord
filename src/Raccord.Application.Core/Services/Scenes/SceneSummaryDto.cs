@@ -7,7 +7,7 @@ namespace Raccord.Application.Core.Services.Scenes
     public class SceneSummaryDto
     {
         private IntExtSummaryDto _intExt;
-        private LocationSummaryDto _location;
+        private LocationDto _location;
         private DayNightSummaryDto _dayNight;
 
         // ID of the scene
@@ -39,11 +39,11 @@ namespace Raccord.Application.Core.Services.Scenes
         }
 
         // The Scene's Location
-        public LocationSummaryDto Location
+        public LocationDto Location
         {
             get
             {
-                return _location ?? (_location = new LocationSummaryDto());
+                return _location ?? (_location = new LocationDto());
             }
             set
             {

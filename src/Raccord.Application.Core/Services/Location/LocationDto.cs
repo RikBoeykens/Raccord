@@ -1,24 +1,18 @@
-using Raccord.Application.Core.Services.Scenes;
-using System.Collections.Generic;
-
 namespace Raccord.Application.Core.Services.Locations
 {
     // Dto to represent a location
-    public class LocationDto: LocationSummaryDto
+    public class LocationDto
     {
-        private IEnumerable<SceneSummaryDto> _scenes;
+        // ID of the location
+        public long ID { get; set; }
 
-        // Scenes linked to the location
-        public IEnumerable<SceneSummaryDto> Scenes
-        {
-            get
-            {
-                return _scenes ?? (_scenes = new List<SceneSummaryDto>());
-            }
-            set
-            {
-                _scenes = value;
-            }
-        }
+        /// Name of the location
+        public string Name { get; set; }
+
+        /// Description of the location
+        public string Description { get; set; }
+
+        // ID of the project
+        public long ProjectID { get; set; }
     }
 }

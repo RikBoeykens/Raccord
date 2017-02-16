@@ -1,24 +1,18 @@
-using Raccord.API.ViewModels.Scenes;
-using System.Collections.Generic;
-
 namespace Raccord.API.ViewModels.Locations
 {
-    // ViewModel to represent a location
-    public class LocationViewModel : LocationSummaryViewModel
+    // Viewmodel to represents a location
+    public class LocationViewModel
     {
-        private IEnumerable<SceneSummaryViewModel> _scenes;
+        // ID of the location
+        public long ID { get; set; }
 
-        // Scenes linked to the location
-        public IEnumerable<SceneSummaryViewModel> Scenes
-        {
-            get
-            {
-                return _scenes ?? (_scenes = new List<SceneSummaryViewModel>());
-            }
-            set
-            {
-                _scenes = value;
-            }
-        }
+        /// Name of the location
+        public string Name { get; set; }
+
+        /// Description of the location
+        public string Description { get; set; }
+
+        // ID of the project
+        public long ProjectID { get; set; }
     }
 }

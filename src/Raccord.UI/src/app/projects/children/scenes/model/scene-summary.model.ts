@@ -1,7 +1,7 @@
 import { BaseModel } from '../../../../shared/model/base.model';
 import { IntExtSummary } from '../../scene-properties/model/int-ext-summary.model';
 import { DayNightSummary } from '../../scene-properties/model/day-night-summary.model';
-import { LocationSummary } from '../../locations/model/location-summary.model';
+import { Location } from '../../locations/model/location.model';
 
 export class SceneSummary extends BaseModel{
     id: number;
@@ -9,7 +9,7 @@ export class SceneSummary extends BaseModel{
     summary: string;
     pageLength: number;
     intExt: IntExtSummary;
-    location: LocationSummary;
+    location: Location;
     dayNight: DayNightSummary;
     projectId: number;
 
@@ -19,7 +19,7 @@ export class SceneSummary extends BaseModel{
                         summary: string,
                         pageLength: number,
                         intExt: IntExtSummary,
-                        location: LocationSummary,
+                        location: Location,
                         dayNight: DayNightSummary,
                         projectId: number
                     }){
@@ -35,7 +35,7 @@ export class SceneSummary extends BaseModel{
             this.projectId = obj.projectId;
         }else{
             this.intExt = new IntExtSummary();
-            this.location = new LocationSummary();
+            this.location = new Location();
             this.dayNight = new DayNightSummary();
         }
     }

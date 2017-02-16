@@ -44,7 +44,7 @@ namespace Raccord.API.Controllers
 
         // GET api/locations/5
         [HttpGet("{id}/summary")]
-        public LocationSummaryViewModel GetSummary(Int64 id)
+        public LocationSummaryViewModel GetSummary(long id)
         {
             var dto = _locationService.GetSummary(id);
 
@@ -53,9 +53,9 @@ namespace Raccord.API.Controllers
             return vm;
         }
 
-        // POST api/locationw
+        // POST api/location
         [HttpPost]
-        public JsonResult Post([FromBody]LocationSummaryViewModel vm)
+        public JsonResult Post([FromBody]LocationViewModel vm)
         {
             var response = new JsonResponse();
 
@@ -94,7 +94,7 @@ namespace Raccord.API.Controllers
 
         // DELETE api/locations/5
         [HttpDelete("{id}")]
-        public JsonResult Delete(Int64 id)
+        public JsonResult Delete(long id)
         {
             var response = new JsonResponse();
 

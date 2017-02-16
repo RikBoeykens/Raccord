@@ -1,18 +1,19 @@
 import { Location } from './location.model';
+import { SceneSummary } from '../../scenes/model/scene-summary.model';
 
-export class LocationSummary extends Location{
-    sceneCount: number;
+export class FullLocation extends Location{
+    scenes: SceneSummary[];
 
     constructor(obj?: {
                         id: number, 
                         name: string, 
                         description: string,
                         projectId: number,
-                        sceneCount: number
+                        scenes: SceneSummary[]
                     }){
         super(obj);
         if(obj){
-            this.sceneCount = obj.sceneCount;
+            this.scenes = obj.scenes;
         }
     }
 }

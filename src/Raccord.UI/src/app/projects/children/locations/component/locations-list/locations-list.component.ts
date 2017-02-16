@@ -30,7 +30,7 @@ export class LocationsListComponent extends OnInit {
         super();
         this.viewNewLocation = new LocationSummary();
         dragulaService.drag.subscribe((value) => {
-            this.onLocationDrag();
+            this.onLocationDrag(value.splice(1));
         });
         dragulaService.dragend.subscribe(() => {
             this.onLocationDragEnd();
@@ -82,8 +82,10 @@ export class LocationsListComponent extends OnInit {
         );
     }
 
-    private onLocationDrag() {
-        this.draggingLocation = true;
+    private onLocationDrag(args) {
+        let draggedElement = args[0];
+        if(draggedElement.classList.contains('can-delete'))
+            this.draggingLocation = true;
     }
     private onLocationDragEnd() {
         this.draggingLocation = false;
@@ -100,7 +102,7 @@ export class LocationsListComponent extends OnInit {
 
     remove(location: LocationSummary){
 
-        if(this._dialogService.confirm(`Are you sure you want to remove location #${location.name}`)){
+        if(this._dialogService.confirm(`Are you sure you want to remove location ${location.name}`)){
 
             let loadingId = this._loadingService.startLoading();
 

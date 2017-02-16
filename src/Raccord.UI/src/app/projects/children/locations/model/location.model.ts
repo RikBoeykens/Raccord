@@ -1,19 +1,26 @@
-import { LocationSummary } from './location-summary.model';
-import { SceneSummary } from '../../scenes/model/scene-summary.model';
+import { BaseModel } from '../../../../shared/model/base.model';
 
-export class Location extends LocationSummary{
-    scenes: SceneSummary[];
+export class Location extends BaseModel{
+    id: number;
+    name: string;
+    description: string;
+    projectId: number;
 
     constructor(obj?: {
                         id: number, 
                         name: string, 
                         description: string,
-                        projectId: number,
-                        scenes: SceneSummary[]
+                        projectId: number
                     }){
-        super(obj);
+        super();
         if(obj){
-            this.scenes = obj.scenes;
+            this.id = obj.id;
+            this.name = obj.name;
+            this.description = obj.description;
+            this.projectId = obj.projectId;
+        }
+        else{
+            this.id = 0;
         }
     }
 }

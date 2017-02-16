@@ -10,12 +10,15 @@
     
 </div>
 <div class="row">
-    <md-nav-list [dragula]='"location-bag"' [dragulaModel]='locations'>
-        <a md-list-item [routerLink]="[location.id]" *ngFor="let location of locations">
-            {{location.name}}
+    <md-nav-list [dragula]='"location-bag"' 
+                 [dragulaModel]='locations'>
+        <a md-list-item [routerLink]="[location.id]" 
+           *ngFor="let location of locations"
+           [ngClass]="{'can-delete': location.sceneCount==0}">
+            {{location.name}} ({{location.sceneCount}})
         </a>
     </md-nav-list>
 </div>
-<div class="delete-location" [dragula]="'location-bag'" *ngIf="draggingLocation" [dragulaModel]='deleteLocations'>
+<div class="delete-location drag-delete" [dragula]="'location-bag'" *ngIf="draggingLocation" [dragulaModel]='deleteLocations'>
     <md-icon>delete</md-icon>
 </div>

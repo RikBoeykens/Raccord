@@ -21,7 +21,7 @@ namespace Raccord.Data.EntityFramework.Repositories.Locations
 
         public Location GetFull(long ID)
         {
-            var query = GetIncludedLocation();
+            var query = GetIncludedFull();
 
             return query.FirstOrDefault(l => l.ID == ID);
         }
@@ -45,7 +45,7 @@ namespace Raccord.Data.EntityFramework.Repositories.Locations
             return GetSearchQuery(searchText, projectID);
         }
 
-        private IQueryable<Location> GetIncludedLocation()
+        private IQueryable<Location> GetIncludedFull()
         {
             IQueryable<Location> query = _context.Set<Location>();
 
@@ -56,6 +56,13 @@ namespace Raccord.Data.EntityFramework.Repositories.Locations
         }
 
         private IQueryable<Location> GetIncludedSummary()
+        {
+            IQueryable<Location> query = _context.Set<Location>();
+
+            return query.Include(l=> l.Scenes);
+        }
+
+        private IQueryable<Location> GetIncluded()
         {
             IQueryable<Location> query = _context.Set<Location>();
 
