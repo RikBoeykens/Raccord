@@ -20,7 +20,7 @@ namespace Raccord.Application.Services.Scenes
                 PageLength = scene.PageLength,
                 IntExt = scene.IntExt.TranslateSummary(),
                 Location = scene.Location.Translate(),
-                DayNight = scene.DayNight.TranslateSummary(),
+                DayNight = scene.DayNight.Translate(),
                 ProjectID = scene.ProjectID,
             };
 
@@ -36,7 +36,7 @@ namespace Raccord.Application.Services.Scenes
                 PageLength = scene.PageLength,
                 IntExt = scene.IntExt.TranslateSummary(),
                 Location = scene.Location.Translate(),
-                DayNight = scene.DayNight.TranslateSummary(),
+                DayNight = scene.DayNight.Translate(),
                 ProjectID = scene.ProjectID,
             };
 
@@ -51,8 +51,8 @@ namespace Raccord.Application.Services.Scenes
                 Summary = scene.Summary,
                 PageLength = scene.PageLength,
                 IntExt = scene.IntExt.TranslateSummary(),
-                Location = scene.Location.TranslateSummary(),
-                DayNight = scene.DayNight.TranslateSummary(),
+                Location = scene.Location.Translate(),
+                DayNight = scene.DayNight.Translate(),
                 ProjectID = scene.ProjectID,
             };
 

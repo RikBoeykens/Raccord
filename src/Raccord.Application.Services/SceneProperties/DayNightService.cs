@@ -32,11 +32,11 @@ namespace Raccord.Application.Services.SceneProperties
         }
 
         // Gets a single day/night by id
-        public DayNightDto Get(Int64 ID)
+        public FullDayNightDto Get(Int64 ID)
         {
             var dayNight = _dayNightRepository.GetFull(ID);
 
-            var dto = dayNight.Translate();
+            var dto = dayNight.TranslateFull();
 
             return dto;
         }
@@ -52,7 +52,7 @@ namespace Raccord.Application.Services.SceneProperties
         }
 
         // Adds a day/night
-        public long Add(DayNightSummaryDto dto)
+        public long Add(DayNightDto dto)
         {
             var dayNight = new DayNight
             {
@@ -68,7 +68,7 @@ namespace Raccord.Application.Services.SceneProperties
         }
 
         // Updates a day/night
-        public long Update(DayNightSummaryDto dto)
+        public long Update(DayNightDto dto)
         {
             var dayNight = _dayNightRepository.GetSingle(dto.ID);
 

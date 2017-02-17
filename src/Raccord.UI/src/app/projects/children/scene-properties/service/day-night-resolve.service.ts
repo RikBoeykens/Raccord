@@ -1,9 +1,9 @@
 import { Injectable }             from '@angular/core';
 import { Router, Resolve, ActivatedRouteSnapshot } from '@angular/router';
 import { DayNightHttpService } from './day-night-http.service';
-import { DayNight } from '../model/day-night.model';
+import { FullDayNight } from '../model/full-day-night.model';
 @Injectable()
-export class DayNightResolve implements Resolve<DayNight> {
+export class DayNightResolve implements Resolve<FullDayNight> {
 
   constructor(
       private dayNightHttpService: DayNightHttpService, 

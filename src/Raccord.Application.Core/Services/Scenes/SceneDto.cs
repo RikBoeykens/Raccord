@@ -8,7 +8,7 @@ namespace Raccord.Application.Core.Services.Scenes
     {
         private IntExtSummaryDto _intExt;
         private LocationDto _location;
-        private DayNightSummaryDto _dayNight;
+        private DayNightDto _dayNight;
 
         // ID of the scene
         public long ID { get; set; }
@@ -52,11 +52,11 @@ namespace Raccord.Application.Core.Services.Scenes
         }
 
         // The Scene's Day/Night
-        public DayNightSummaryDto DayNight
+        public DayNightDto DayNight
         {
             get
             {
-                return _dayNight ?? (_dayNight = new DayNightSummaryDto());
+                return _dayNight ?? (_dayNight = new DayNightDto());
             }
             set
             {

@@ -1,18 +1,19 @@
 import { DayNight } from './day-night.model';
+import { SceneSummary } from '../../scenes/model/scene-summary.model';
 
-export class DayNightSummary extends DayNight{
-    sceneCount: number;
+export class FullDayNight extends DayNight{
+    scenes: SceneSummary[];
 
     constructor(obj?: {
                         id: number, 
                         name: string, 
                         description: string,
                         projectId: number,
-                        sceneCount: number
+                        scenes: SceneSummary[]
                     }){
         super(obj);
         if(obj){
-            this.sceneCount = obj.sceneCount;
+            this.scenes = obj.scenes;
         }
     }
 }

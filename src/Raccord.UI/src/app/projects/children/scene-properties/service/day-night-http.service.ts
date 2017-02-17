@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { BaseHttpService } from '../../../../shared/service/base-http.service';
 import { AppSettings } from '../../../../app.settings';
+import { FullDayNight } from '../model/full-day-night.model';
 import { DayNightSummary } from '../model/day-night-summary.model';
 import { DayNight } from '../model/day-night.model';
 import { JsonResponse } from '../../../../shared/model/json-response.model';
@@ -21,7 +22,7 @@ export class DayNightHttpService extends BaseHttpService {
         return this.doGetArray(uri);
     }
 
-    get(id: number): Promise<DayNight>{
+    get(id: number): Promise<FullDayNight>{
 
         var uri = `${this._baseUri}/${id}`;
 
@@ -35,7 +36,7 @@ export class DayNightHttpService extends BaseHttpService {
         return this.doGet(uri);
     }
 
-    post(dayNight: DayNightSummary): Promise<number> {
+    post(dayNight: DayNight): Promise<number> {
         var uri = this._baseUri;
 
         return this.doPost(dayNight, uri);

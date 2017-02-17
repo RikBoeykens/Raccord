@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { DayNightSummary } from '../../model/day-night-summary.model';
+import { DayNight } from '../../model/day-night.model';
 import { SearchEngineService } from '../../../../../search/service/search-engine.service';
 import { LoadingService } from '../../../../../loading/service/loading.service';
 import { SearchResult } from '../../../../../search/model/search-result.model';
@@ -12,7 +12,7 @@ import { DialogService } from '../../../../../shared/service/dialog.service';
 })
 export class SearchDayNightComponent{
 
-    @Input() sceneDayNight: DayNightSummary;
+    @Input() sceneDayNight: DayNight;
     searchResults: SearchResult[] = [];
 
     constructor(

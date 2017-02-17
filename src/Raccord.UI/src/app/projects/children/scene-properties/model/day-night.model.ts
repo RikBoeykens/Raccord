@@ -1,19 +1,26 @@
-import { DayNightSummary } from './day-night-summary.model';
-import { SceneSummary } from '../../scenes/model/scene-summary.model';
+import { BaseModel } from '../../../../shared/model/base.model';
 
-export class DayNight extends DayNightSummary{
-    scenes: SceneSummary[];
+export class DayNight extends BaseModel{
+    id: number;
+    name: string;
+    description: string;
+    projectId: number;
 
     constructor(obj?: {
                         id: number, 
                         name: string, 
                         description: string,
-                        projectId: number,
-                        scenes: SceneSummary[]
+                        projectId: number
                     }){
-        super(obj);
+        super();
         if(obj){
-            this.scenes = obj.scenes;
+            this.id = obj.id;
+            this.name = obj.name;
+            this.description = obj.description;
+            this.projectId = obj.projectId;
+        }
+        else{
+            this.id = 0;
         }
     }
 }

@@ -43,9 +43,9 @@ namespace Raccord.API.ViewModels.SceneProperties
         }
 
         // Translates a day/night dto to a day/night viewmodel
-        public static DayNightViewModel Translate(this DayNightDto dto)
+        public static FullDayNightViewModel Translate(this FullDayNightDto dto)
         {
-            return new DayNightViewModel
+            return new FullDayNightViewModel
             {
                 ID = dto.ID,
                 Name = dto.Name,
@@ -63,13 +63,25 @@ namespace Raccord.API.ViewModels.SceneProperties
                 Name = dto.Name,
                 Description = dto.Description,
                 ProjectID = dto.ProjectID,
+                SceneCount = dto.SceneCount,
+            };
+        }
+        // Translates a day/night summary dto to a day/night summary viewmodel
+        public static DayNightViewModel Translate(this DayNightDto dto)
+        {
+            return new DayNightViewModel
+            {
+                ID = dto.ID,
+                Name = dto.Name,
+                Description = dto.Description,
+                ProjectID = dto.ProjectID,
             };
         }
 
         // Translates a day/night summary viewmodel to a dto
-        public static DayNightSummaryDto Translate(this DayNightSummaryViewModel vm)
+        public static DayNightDto Translate(this DayNightViewModel vm)
         {
-            return new DayNightSummaryDto
+            return new DayNightDto
             {
                 ID = vm.ID,
                 Name = vm.Name,

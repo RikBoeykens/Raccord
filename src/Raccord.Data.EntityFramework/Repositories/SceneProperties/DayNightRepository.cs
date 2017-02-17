@@ -21,7 +21,7 @@ namespace Raccord.Data.EntityFramework.Repositories.SceneProperties
 
         public DayNight GetFull(long ID)
         {
-            var query = GetIncludedDayNight();
+            var query = GetIncludedFull();
 
             return query.FirstOrDefault(d => d.ID == ID);
         }
@@ -46,7 +46,7 @@ namespace Raccord.Data.EntityFramework.Repositories.SceneProperties
 
         }
 
-        private IQueryable<DayNight> GetIncludedDayNight()
+        private IQueryable<DayNight> GetIncludedFull()
         {
             IQueryable<DayNight> query = _context.Set<DayNight>();
 
@@ -57,6 +57,13 @@ namespace Raccord.Data.EntityFramework.Repositories.SceneProperties
         }
 
         private IQueryable<DayNight> GetIncludedSummary()
+        {
+            IQueryable<DayNight> query = _context.Set<DayNight>();
+
+            return query.Include(d=> d.Scenes);
+        }
+
+        private IQueryable<DayNight> GetIncluded()
         {
             IQueryable<DayNight> query = _context.Set<DayNight>();
 

@@ -8,7 +8,7 @@ namespace Raccord.API.ViewModels.Scenes
     {
         private IntExtSummaryViewModel _intExt;
         private LocationViewModel _location;
-        private DayNightSummaryViewModel _dayNight;
+        private DayNightViewModel _dayNight;
 
         // ID of the scene
         public long ID { get; set; }
@@ -52,11 +52,11 @@ namespace Raccord.API.ViewModels.Scenes
         }
 
         // The Scene's Day/Night
-        public DayNightSummaryViewModel DayNight
+        public DayNightViewModel DayNight
         {
             get
             {
-                return _dayNight ?? (_dayNight = new DayNightSummaryViewModel());
+                return _dayNight ?? (_dayNight = new DayNightViewModel());
             }
             set
             {

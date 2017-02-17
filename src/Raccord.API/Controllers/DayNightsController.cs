@@ -33,7 +33,7 @@ namespace Raccord.API.Controllers
         }
         // GET api/daynights/5
         [HttpGet("{id}")]
-        public DayNightViewModel Get(long id)
+        public FullDayNightViewModel Get(long id)
         {
             var dto = _dayNightService.Get(id);
 
@@ -55,7 +55,7 @@ namespace Raccord.API.Controllers
 
         // POST api/daynights
         [HttpPost]
-        public JsonResult Post([FromBody]DayNightSummaryViewModel vm)
+        public JsonResult Post([FromBody]DayNightViewModel vm)
         {
             var response = new JsonResponse();
 

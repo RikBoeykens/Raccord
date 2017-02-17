@@ -1,24 +1,18 @@
-using Raccord.Application.Core.Services.Scenes;
-using System.Collections.Generic;
-
 namespace Raccord.Application.Core.Services.SceneProperties
 {
     // Dto to represent a day/night
-    public class DayNightDto: DayNightSummaryDto
+    public class DayNightDto
     {
-        private IEnumerable<SceneSummaryDto> _scenes;
+        // ID of the day/night
+        public long ID { get; set; }
 
-        // Scenes linked to the day/night
-        public IEnumerable<SceneSummaryDto> Scenes
-        {
-            get
-            {
-                return _scenes ?? (_scenes = new List<SceneSummaryDto>());
-            }
-            set
-            {
-                _scenes = value;
-            }
-        }
+        /// Name of the day/night
+        public string Name { get; set; }
+
+        /// Description of the day/night
+        public string Description { get; set; }
+
+        // ID of the project
+        public long ProjectID { get; set; }
     }
 }

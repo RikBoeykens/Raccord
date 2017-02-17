@@ -49,9 +49,9 @@ namespace Raccord.Application.Services.SceneProperties
             return dto;
         }
 
-        public static DayNightDto Translate(this DayNight dayNight)
+        public static FullDayNightDto TranslateFull(this DayNight dayNight)
         {
-            var dto = new DayNightDto
+            var dto = new FullDayNightDto
             {
                 ID = dayNight.ID,
                 Name = dayNight.Name,
@@ -65,6 +65,19 @@ namespace Raccord.Application.Services.SceneProperties
         public static DayNightSummaryDto TranslateSummary(this DayNight dayNight)
         {
             var dto = new DayNightSummaryDto
+            {
+                ID = dayNight.ID,
+                Name = dayNight.Name,
+                Description = dayNight.Description,
+                ProjectID = dayNight.ProjectID,
+                SceneCount = dayNight.Scenes.Count(),
+            };
+
+            return dto;
+        }
+        public static DayNightDto Translate(this DayNight dayNight)
+        {
+            var dto = new DayNightDto
             {
                 ID = dayNight.ID,
                 Name = dayNight.Name,
