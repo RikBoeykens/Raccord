@@ -1,9 +1,9 @@
 import { Injectable }             from '@angular/core';
 import { Router, Resolve, ActivatedRouteSnapshot } from '@angular/router';
 import { IntExtHttpService } from './int-ext-http.service';
-import { IntExt } from '../model/int-ext.model';
+import { FullIntExt } from '../model/full-int-ext.model';
 @Injectable()
-export class IntExtResolve implements Resolve<IntExt> {
+export class IntExtResolve implements Resolve<FullIntExt> {
 
   constructor(
       private intExtHttpService: IntExtHttpService, 

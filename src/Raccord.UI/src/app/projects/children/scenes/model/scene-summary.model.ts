@@ -1,6 +1,6 @@
 import { Scene } from './scene.model';
-import { IntExtSummary } from '../../scene-properties/model/int-ext-summary.model';
-import { DayNightSummary } from '../../scene-properties/model/day-night-summary.model';
+import { IntExt } from '../../scene-properties/model/int-ext.model';
+import { DayNight } from '../../scene-properties/model/day-night.model';
 import { Location } from '../../locations/model/location.model';
 
 export class SceneSummary extends Scene{
@@ -10,9 +10,9 @@ export class SceneSummary extends Scene{
                         number: string,
                         summary: string,
                         pageLength: number,
-                        intExt: IntExtSummary,
+                        intExt: IntExt,
                         location: Location,
-                        dayNight: DayNightSummary,
+                        dayNight: DayNight,
                         projectId: number
                     }){
         super(obj);

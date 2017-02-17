@@ -10,9 +10,9 @@ namespace Raccord.Application.Services.SceneProperties
     // Utilities and helper methods for Locations
     public static class Utilities
     {
-        public static IntExtDto Translate(this IntExt intExt)
+        public static FullIntExtDto TranslateFull(this IntExt intExt)
         {
-            var dto = new IntExtDto
+            var dto = new FullIntExtDto
             {
                 ID = intExt.ID,
                 Name = intExt.Name,
@@ -26,6 +26,19 @@ namespace Raccord.Application.Services.SceneProperties
         public static IntExtSummaryDto TranslateSummary(this IntExt intExt)
         {
             var dto = new IntExtSummaryDto
+            {
+                ID = intExt.ID,
+                Name = intExt.Name,
+                Description = intExt.Description,
+                ProjectID = intExt.ProjectID,
+                SceneCount = intExt.Scenes.Count(),
+            };
+
+            return dto;
+        }
+        public static IntExtDto Translate(this IntExt intExt)
+        {
+            var dto = new IntExtDto
             {
                 ID = intExt.ID,
                 Name = intExt.Name,

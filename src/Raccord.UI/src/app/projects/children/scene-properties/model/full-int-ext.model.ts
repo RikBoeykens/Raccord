@@ -1,19 +1,19 @@
 import { IntExt } from './int-ext.model';
 import { SceneSummary } from '../../scenes/model/scene-summary.model';
 
-export class IntExtSummary extends IntExt{
-    sceneCount: number;
+export class FullIntExt extends IntExt{
+    scenes: SceneSummary[];
 
     constructor(obj?: {
                         id: number, 
                         name: string, 
                         description: string,
                         projectId: number,
-                        sceneCount: number
+                        scenes: SceneSummary[]
                     }){
         super(obj);
         if(obj){
-            this.sceneCount = obj.sceneCount;
+            this.scenes = obj.scenes;
         }
     }
 }

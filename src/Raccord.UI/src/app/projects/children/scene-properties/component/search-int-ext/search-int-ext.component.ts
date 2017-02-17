@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { IntExtSummary } from '../../model/int-ext-summary.model';
+import { IntExt } from '../../model/int-ext.model';
 import { SearchEngineService } from '../../../../../search/service/search-engine.service';
 import { LoadingService } from '../../../../../loading/service/loading.service';
 import { SearchResult } from '../../../../../search/model/search-result.model';
@@ -12,7 +12,7 @@ import { DialogService } from '../../../../../shared/service/dialog.service';
 })
 export class SearchIntExtComponent{
 
-    @Input() sceneIntExt: IntExtSummary;
+    @Input() sceneIntExt: IntExt;
     searchResults: SearchResult[] = [];
 
     constructor(

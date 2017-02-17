@@ -1,6 +1,6 @@
 import { BaseModel } from '../../../../shared/model/base.model';
-import { IntExtSummary } from '../../scene-properties/model/int-ext-summary.model';
-import { DayNightSummary } from '../../scene-properties/model/day-night-summary.model';
+import { IntExt } from '../../scene-properties/model/int-ext.model';
+import { DayNight } from '../../scene-properties/model/day-night.model';
 import { Location } from '../../locations/model/location.model';
 
 export class Scene extends BaseModel{
@@ -8,9 +8,9 @@ export class Scene extends BaseModel{
     number: string;
     summary: string;
     pageLength: number;
-    intExt: IntExtSummary;
+    intExt: IntExt;
     location: Location;
-    dayNight: DayNightSummary;
+    dayNight: DayNight;
     projectId: number;
 
     constructor(obj?: {
@@ -18,9 +18,9 @@ export class Scene extends BaseModel{
                         number: string,
                         summary: string,
                         pageLength: number,
-                        intExt: IntExtSummary,
+                        intExt: IntExt,
                         location: Location,
-                        dayNight: DayNightSummary,
+                        dayNight: DayNight,
                         projectId: number
                     }){
         super();
@@ -34,9 +34,9 @@ export class Scene extends BaseModel{
             this.dayNight = obj.dayNight;
             this.projectId = obj.projectId;
         }else{
-            this.intExt = new IntExtSummary();
+            this.intExt = new IntExt();
             this.location = new Location();
-            this.dayNight = new DayNightSummary();
+            this.dayNight = new DayNight();
         }
     }
 

@@ -1,24 +1,18 @@
-using Raccord.API.ViewModels.Scenes;
-using System.Collections.Generic;
-
 namespace Raccord.API.ViewModels.SceneProperties
 {
-    // ViewModel to represent a int/ext
-    public class IntExtViewModel : IntExtSummaryViewModel
+    // Viewmodel to represent summary of int/ext
+    public class IntExtViewModel
     {
-        private IEnumerable<SceneSummaryViewModel> _scenes;
+        // ID of the Int/Ext
+        public long ID { get; set; }
 
-        // Scenes linked to the int/ext
-        public IEnumerable<SceneSummaryViewModel> Scenes
-        {
-            get
-            {
-                return _scenes ?? (_scenes = new List<SceneSummaryViewModel>());
-            }
-            set
-            {
-                _scenes = value;
-            }
-        }
+        /// Name of the int/ext
+        public string Name { get; set; }
+
+        /// Description of the int/ext
+        public string Description { get; set; }
+
+        // ID of the project
+        public long ProjectID { get; set; }
     }
 }

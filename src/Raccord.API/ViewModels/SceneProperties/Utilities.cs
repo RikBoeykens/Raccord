@@ -7,9 +7,9 @@ namespace Raccord.API.ViewModels.SceneProperties
     public static class Utilities
     {
         // Translates a int/ext dto to a int/ext viewmodel
-        public static IntExtViewModel Translate(this IntExtDto dto)
+        public static FullIntExtViewModel Translate(this FullIntExtDto dto)
         {
-            return new IntExtViewModel
+            return new FullIntExtViewModel
             {
                 ID = dto.ID,
                 Name = dto.Name,
@@ -27,13 +27,25 @@ namespace Raccord.API.ViewModels.SceneProperties
                 Name = dto.Name,
                 Description = dto.Description,
                 ProjectID = dto.ProjectID,
+                SceneCount = dto.SceneCount,
+            };
+        }
+        // Translates a int/ext dto to a int/ext viewmodel
+        public static IntExtViewModel Translate(this IntExtDto dto)
+        {
+            return new IntExtViewModel
+            {
+                ID = dto.ID,
+                Name = dto.Name,
+                Description = dto.Description,
+                ProjectID = dto.ProjectID,
             };
         }
 
         // Translates a int/ext summary viewmodel to a dto
-        public static IntExtSummaryDto Translate(this IntExtSummaryViewModel vm)
+        public static IntExtDto Translate(this IntExtViewModel vm)
         {
-            return new IntExtSummaryDto
+            return new IntExtDto
             {
                 ID = vm.ID,
                 Name = vm.Name,

@@ -32,11 +32,11 @@ namespace Raccord.Application.Services.SceneProperties
         }
 
         // Gets a single int/ext by id
-        public IntExtDto Get(Int64 ID)
+        public FullIntExtDto Get(long ID)
         {
             var intExt = _intExtRepository.GetFull(ID);
 
-            var dto = intExt.Translate();
+            var dto = intExt.TranslateFull();
 
             return dto;
         }
@@ -52,7 +52,7 @@ namespace Raccord.Application.Services.SceneProperties
         }
 
         // Adds a int/ext
-        public long Add(IntExtSummaryDto dto)
+        public long Add(IntExtDto dto)
         {
             var intExt = new IntExt
             {
@@ -68,7 +68,7 @@ namespace Raccord.Application.Services.SceneProperties
         }
 
         // Updates a int/ext
-        public long Update(IntExtSummaryDto dto)
+        public long Update(IntExtDto dto)
         {
             var intExt = _intExtRepository.GetSingle(dto.ID);
 

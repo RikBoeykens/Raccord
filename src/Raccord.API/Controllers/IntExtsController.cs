@@ -33,7 +33,7 @@ namespace Raccord.API.Controllers
         }
         // GET api/intexts/5
         [HttpGet("{id}")]
-        public IntExtViewModel Get(long id)
+        public FullIntExtViewModel Get(long id)
         {
             var dto = _intExtService.Get(id);
 
@@ -55,7 +55,7 @@ namespace Raccord.API.Controllers
 
         // POST api/intexts
         [HttpPost]
-        public JsonResult Post([FromBody]IntExtSummaryViewModel vm)
+        public JsonResult Post([FromBody]IntExtViewModel vm)
         {
             var response = new JsonResponse();
 

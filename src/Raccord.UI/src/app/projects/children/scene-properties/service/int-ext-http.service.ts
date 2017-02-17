@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { BaseHttpService } from '../../../../shared/service/base-http.service';
 import { AppSettings } from '../../../../app.settings';
+import { FullIntExt } from '../model/full-int-ext.model';
 import { IntExtSummary } from '../model/int-ext-summary.model';
 import { IntExt } from '../model/int-ext.model';
 import { JsonResponse } from '../../../../shared/model/json-response.model';
@@ -21,7 +22,7 @@ export class IntExtHttpService extends BaseHttpService {
         return this.doGetArray(uri);
     }
 
-    get(id: number): Promise<IntExt>{
+    get(id: number): Promise<FullIntExt>{
 
         var uri = `${this._baseUri}/${id}`;
 
@@ -35,7 +36,7 @@ export class IntExtHttpService extends BaseHttpService {
         return this.doGet(uri);
     }
 
-    post(intExt: IntExtSummary): Promise<number> {
+    post(intExt: IntExt): Promise<number> {
         var uri = this._baseUri;
 
         return this.doPost(intExt, uri);

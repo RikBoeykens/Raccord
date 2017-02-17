@@ -6,7 +6,7 @@ namespace Raccord.Application.Core.Services.Scenes
     // Dto to represent a scene
     public class SceneDto
     {
-        private IntExtSummaryDto _intExt;
+        private IntExtDto _intExt;
         private LocationDto _location;
         private DayNightDto _dayNight;
 
@@ -26,11 +26,11 @@ namespace Raccord.Application.Core.Services.Scenes
         public long ProjectID { get; set; }
 
         // The Scene's Int/Ext
-        public IntExtSummaryDto IntExt
+        public IntExtDto IntExt
         {
             get
             {
-                return _intExt ?? (_intExt = new IntExtSummaryDto());
+                return _intExt ?? (_intExt = new IntExtDto());
             }
             set
             {

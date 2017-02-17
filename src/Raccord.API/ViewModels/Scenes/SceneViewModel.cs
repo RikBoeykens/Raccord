@@ -6,7 +6,7 @@ namespace Raccord.API.ViewModels.Scenes
     // Viewmodel to represent a scene
     public class SceneViewModel
     {
-        private IntExtSummaryViewModel _intExt;
+        private IntExtViewModel _intExt;
         private LocationViewModel _location;
         private DayNightViewModel _dayNight;
 
@@ -26,11 +26,11 @@ namespace Raccord.API.ViewModels.Scenes
         public long ProjectID { get; set; }
 
         // The Scene's Int/Ext
-        public IntExtSummaryViewModel IntExt
+        public IntExtViewModel IntExt
         {
             get
             {
-                return _intExt ?? (_intExt = new IntExtSummaryViewModel());
+                return _intExt ?? (_intExt = new IntExtViewModel());
             }
             set
             {
