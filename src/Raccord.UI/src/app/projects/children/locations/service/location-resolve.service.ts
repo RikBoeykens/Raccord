@@ -1,9 +1,9 @@
 import { Injectable }             from '@angular/core';
 import { Router, Resolve, ActivatedRouteSnapshot } from '@angular/router';
 import { LocationHttpService } from './location-http.service';
-import { Location } from '../model/location.model';
+import { FullLocation } from '../model/full-location.model';
 @Injectable()
-export class LocationResolve implements Resolve<Location> {
+export class LocationResolve implements Resolve<FullLocation> {
 
   constructor(
       private locationHttpService: LocationHttpService, 

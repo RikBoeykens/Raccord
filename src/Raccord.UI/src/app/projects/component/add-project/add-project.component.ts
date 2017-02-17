@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { ProjectHttpService } from '../../service/project-http.service';
-import { ProjectSummary } from '../../model/project-summary.model';
+import { Project } from '../../model/project.model';
 import { LoadingService } from '../../../loading/service/loading.service';
 import { CanComponentDeactivate } from '../../../shared/interface/can-component-deactivate.interface';
 import { DialogService } from '../../../shared/service/dialog.service';
@@ -11,8 +11,8 @@ import { DialogService } from '../../../shared/service/dialog.service';
 })
 export class AddProjectComponent implements CanComponentDeactivate {
 
-    viewProject: ProjectSummary;
-    project: ProjectSummary;
+    viewProject: Project;
+    project: Project;
 
     constructor(
         private _projectHttpService: ProjectHttpService,
@@ -20,7 +20,7 @@ export class AddProjectComponent implements CanComponentDeactivate {
         private _dialogService: DialogService,
         private _router: Router
     ){
-        this.viewProject = new ProjectSummary();
+        this.viewProject = new Project();
     }
 
     addProject() {

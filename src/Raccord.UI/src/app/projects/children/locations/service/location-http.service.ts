@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { BaseHttpService } from '../../../../shared/service/base-http.service';
 import { AppSettings } from '../../../../app.settings';
+import { FullLocation } from '../model/full-location.model';
 import { LocationSummary } from '../model/location-summary.model';
 import { Location } from '../model/location.model';
 import { JsonResponse } from '../../../../shared/model/json-response.model';
@@ -21,7 +22,7 @@ export class LocationHttpService extends BaseHttpService {
         return this.doGetArray(uri);
     }
 
-    get(id: number): Promise<Location>{
+    get(id: number): Promise<FullLocation>{
 
         var uri = `${this._baseUri}/${id}`;
 
@@ -35,7 +36,7 @@ export class LocationHttpService extends BaseHttpService {
         return this.doGet(uri);
     }
 
-    post(location: LocationSummary): Promise<number> {
+    post(location: Location): Promise<number> {
         var uri = this._baseUri;
 
         return this.doPost(location, uri);

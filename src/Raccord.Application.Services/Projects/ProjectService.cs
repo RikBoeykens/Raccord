@@ -32,17 +32,17 @@ namespace Raccord.Application.Services.Projects
         }
 
         // Gets a single project by id
-        public ProjectDto Get(Int64 ID)
+        public FullProjectDto Get(long ID)
         {
             var project = _projectRepository.GetSingle(ID);
 
-            var projectDto = project.Translate();
+            var projectDto = project.TranslateFull();
 
             return projectDto;
         }
 
         // Gets a summary of a single project
-        public ProjectSummaryDto GetSummary(Int64 ID)
+        public ProjectSummaryDto GetSummary(long ID)
         {
             var project = _projectRepository.GetSingle(ID);
 
@@ -52,7 +52,7 @@ namespace Raccord.Application.Services.Projects
         }
 
         // Adds a project
-        public long Add(ProjectSummaryDto dto)
+        public long Add(ProjectDto dto)
         {
             var project = new Project
             {
@@ -66,7 +66,7 @@ namespace Raccord.Application.Services.Projects
         }
 
         // Updates a project
-        public long Update(ProjectSummaryDto dto)
+        public long Update(ProjectDto dto)
         {
             var project = _projectRepository.GetSingle(dto.ID);
 
@@ -79,7 +79,7 @@ namespace Raccord.Application.Services.Projects
         }
 
         // Deletes a project
-        public void Delete(Int64 ID)
+        public void Delete(long ID)
         {
             var project = _projectRepository.GetSingle(ID);
 

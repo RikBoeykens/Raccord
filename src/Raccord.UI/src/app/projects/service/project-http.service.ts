@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { BaseHttpService } from '../../shared/service/base-http.service';
 import { AppSettings } from '../../app.settings';
+import { FullProject } from '../model/full-project.model';
 import { ProjectSummary } from '../model/project-summary.model';
 import { Project } from '../model/project.model';
 import { JsonResponse } from '../../shared/model/json-response.model';
@@ -21,7 +22,7 @@ export class ProjectHttpService extends BaseHttpService {
         return this.doGetArray(uri);
     }
 
-    get(id: number): Promise<Project>{
+    get(id: number): Promise<FullProject>{
 
         var uri = `${this._baseUri}/${id}`;
 
@@ -35,7 +36,7 @@ export class ProjectHttpService extends BaseHttpService {
         return this.doGet(uri);
     }
 
-    post(project: ProjectSummary): Promise<Number> {
+    post(project: Project): Promise<Number> {
         var uri = this._baseUri;
 
         return this.doPost(project, uri);

@@ -8,9 +8,9 @@ namespace Raccord.Application.Services.Projects
     // Utilities and helper methods for Projects
     public static class Utilities
     {
-        public static ProjectDto Translate(this Project project)
+        public static FullProjectDto TranslateFull(this Project project)
         {
-            var dto = new ProjectDto
+            var dto = new FullProjectDto
             {
                 ID = project.ID,
                 Title = project.Title,
@@ -21,6 +21,16 @@ namespace Raccord.Application.Services.Projects
         public static ProjectSummaryDto TranslateSummary(this Project project)
         {
             var dto = new ProjectSummaryDto
+            {
+                ID = project.ID,
+                Title = project.Title,
+            };
+
+            return dto;
+        }
+        public static ProjectDto Translate(this Project project)
+        {
+            var dto = new ProjectDto
             {
                 ID = project.ID,
                 Title = project.Title,

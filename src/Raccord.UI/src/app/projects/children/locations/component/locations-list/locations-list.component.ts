@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { LocationHttpService } from '../../service/location-http.service';
 import { LocationSummary } from '../../model/location-summary.model';
+import { Location } from '../../model/location.model';
 import { ProjectSummary } from '../../../../model/project-summary.model';
 import { LoadingService } from '../../../../../loading/service/loading.service';
 import { DialogService } from '../../../../../shared/service/dialog.service';
@@ -15,8 +16,8 @@ export class LocationsListComponent extends OnInit {
     locations: LocationSummary[] = [];
     deleteLocations: LocationSummary[]=[];
     project: ProjectSummary;
-    viewNewLocation: LocationSummary;
-    newLocation: LocationSummary;
+    viewNewLocation: Location;
+    newLocation: Location;
     draggingLocation: boolean;
 
     constructor(
@@ -28,7 +29,7 @@ export class LocationsListComponent extends OnInit {
         private dragulaService: DragulaService
     ) {
         super();
-        this.viewNewLocation = new LocationSummary();
+        this.viewNewLocation = new Location();
         dragulaService.drag.subscribe((value) => {
             this.onLocationDrag(value.splice(1));
         });
@@ -49,7 +50,7 @@ export class LocationsListComponent extends OnInit {
     }
 
     resetNewLocation(){
-        this.viewNewLocation = new LocationSummary();
+        this.viewNewLocation = new Location();
         this.viewNewLocation.projectId = this.project.id;
         this.newLocation = null;
     }

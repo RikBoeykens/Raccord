@@ -5,9 +5,9 @@ namespace Raccord.API.ViewModels.Projects
     public static class Utilities
     {
         // Translates a project dto to a project viewmodel
-        public static ProjectViewModel Translate(this ProjectDto dto)
+        public static FullProjectViewModel Translate(this FullProjectDto dto)
         {
-            return new ProjectViewModel
+            return new FullProjectViewModel
             {
                 ID = dto.ID,
                 Title = dto.Title,
@@ -23,10 +23,20 @@ namespace Raccord.API.ViewModels.Projects
             };
         }
 
-        // Translates a project summary viewmodel to a dto
-        public static ProjectSummaryDto Translate(this ProjectSummaryViewModel vm)
+        // Translates a project dto to a project viewmodel
+        public static ProjectViewModel Translate(this ProjectDto dto)
         {
-            return new ProjectSummaryDto
+            return new ProjectViewModel
+            {
+                ID = dto.ID,
+                Title = dto.Title,
+            };
+        }
+
+        // Translates a project viewmodel to a dto
+        public static ProjectDto Translate(this ProjectViewModel vm)
+        {
+            return new ProjectDto
             {
                 ID = vm.ID,
                 Title = vm.Title,

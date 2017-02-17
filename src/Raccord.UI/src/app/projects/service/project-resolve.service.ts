@@ -1,9 +1,9 @@
 import { Injectable }             from '@angular/core';
 import { Router, Resolve, ActivatedRouteSnapshot } from '@angular/router';
 import { ProjectHttpService } from './project-http.service';
-import { Project } from '../model/project.model';
+import { FullProject } from '../model/full-project.model';
 @Injectable()
-export class ProjectResolve implements Resolve<Project> {
+export class ProjectResolve implements Resolve<FullProject> {
 
   constructor(
       private _projectHttpService: ProjectHttpService, 

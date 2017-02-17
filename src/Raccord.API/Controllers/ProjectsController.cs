@@ -33,7 +33,7 @@ namespace Raccord.API.Controllers
         }
         // GET api/projects/5
         [HttpGet("{id}")]
-        public ProjectViewModel Get(Int64 id)
+        public FullProjectViewModel Get(long id)
         {
             var projectDto = _projectService.Get(id);
 
@@ -44,7 +44,7 @@ namespace Raccord.API.Controllers
 
         // GET api/projects/5
         [HttpGet("{id}/summary")]
-        public ProjectSummaryViewModel GetSummary(Int64 id)
+        public ProjectSummaryViewModel GetSummary(long id)
         {
             var projectDto = _projectService.GetSummary(id);
 
@@ -55,7 +55,7 @@ namespace Raccord.API.Controllers
 
         // POST api/projects
         [HttpPost]
-        public JsonResult Post([FromBody]ProjectSummaryViewModel vm)
+        public JsonResult Post([FromBody]ProjectViewModel vm)
         {
             var response = new JsonResponse();
 
@@ -65,7 +65,7 @@ namespace Raccord.API.Controllers
 
                 Int64 projectID;
 
-                if (projectDto.ID == default(Int64))
+                if (projectDto.ID == default(long))
                 {
                     projectID = _projectService.Add(projectDto);
                 }
@@ -94,7 +94,7 @@ namespace Raccord.API.Controllers
 
         // DELETE api/projects/5
         [HttpDelete("{id}")]
-        public JsonResult Delete(Int64 id)
+        public JsonResult Delete(long id)
         {
             var response = new JsonResponse();
 

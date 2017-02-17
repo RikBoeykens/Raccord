@@ -33,7 +33,7 @@ namespace Raccord.API.Controllers
         }
         // GET api/locations/5
         [HttpGet("{id}")]
-        public LocationViewModel Get(long id)
+        public FullLocationViewModel Get(long id)
         {
             var dto = _locationService.Get(id);
 

@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ProjectHttpService } from '../../service/project-http.service';
-import { Project } from '../../model/project.model';
+import { FullProject } from '../../model/full-project.model';
 
 @Component({
     templateUrl: 'project-landing.component.html',
 })
 export class ProjectLandingComponent {
 
-    project: Project;
+    project: FullProject;
 
     constructor(
         private _projectHttpService: ProjectHttpService,
@@ -18,7 +18,7 @@ export class ProjectLandingComponent {
     }
 
     ngOnInit() {
-        this.route.data.subscribe((data: { project: Project }) => {
+        this.route.data.subscribe((data: { project: FullProject }) => {
             this.project = data.project;
         });
     }
