@@ -10,16 +10,16 @@ namespace Raccord.Application.Services.Scenes
     // Utilities and helper methods for Scenes
     public static class Utilities
     {
-        public static SceneDto Translate(this Scene scene)
+        public static FullSceneDto TranslateFull(this Scene scene)
         {
-            var dto = new SceneDto
+            var dto = new FullSceneDto
             {
                 ID = scene.ID,
                 Number = scene.Number,
                 Summary = scene.Summary,
                 PageLength = scene.PageLength,
                 IntExt = scene.IntExt.TranslateSummary(),
-                Location = scene.Location.TranslateSummary(),
+                Location = scene.Location.Translate(),
                 DayNight = scene.DayNight.TranslateSummary(),
                 ProjectID = scene.ProjectID,
             };
@@ -36,6 +36,22 @@ namespace Raccord.Application.Services.Scenes
                 PageLength = scene.PageLength,
                 IntExt = scene.IntExt.TranslateSummary(),
                 Location = scene.Location.Translate(),
+                DayNight = scene.DayNight.TranslateSummary(),
+                ProjectID = scene.ProjectID,
+            };
+
+            return dto;
+        }
+        public static SceneDto Translate(this Scene scene)
+        {
+            var dto = new SceneDto
+            {
+                ID = scene.ID,
+                Number = scene.Number,
+                Summary = scene.Summary,
+                PageLength = scene.PageLength,
+                IntExt = scene.IntExt.TranslateSummary(),
+                Location = scene.Location.TranslateSummary(),
                 DayNight = scene.DayNight.TranslateSummary(),
                 ProjectID = scene.ProjectID,
             };

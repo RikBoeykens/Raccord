@@ -3,7 +3,7 @@ import { IntExtSummary } from '../../scene-properties/model/int-ext-summary.mode
 import { DayNightSummary } from '../../scene-properties/model/day-night-summary.model';
 import { Location } from '../../locations/model/location.model';
 
-export class SceneSummary extends Scene{
+export class FullScene extends Scene{
 
     constructor(obj?: {
                         id: number,

@@ -21,7 +21,7 @@ namespace Raccord.Data.EntityFramework.Repositories.Scenes
 
         public Scene GetFull(long ID)
         {
-            var query = GetIncludedScene();
+            var query = GetIncludedFull();
 
             return query.FirstOrDefault(l => l.ID == ID);
         }
@@ -46,7 +46,7 @@ namespace Raccord.Data.EntityFramework.Repositories.Scenes
             return GetSearchQuery(searchText, projectID);
         }
 
-        private IQueryable<Scene> GetIncludedScene()
+        private IQueryable<Scene> GetIncludedFull()
         {
             IQueryable<Scene> query = _context.Set<Scene>();
 
@@ -56,6 +56,15 @@ namespace Raccord.Data.EntityFramework.Repositories.Scenes
         }
 
         private IQueryable<Scene> GetIncludedSummary()
+        {
+            IQueryable<Scene> query = _context.Set<Scene>();
+
+            return query.Include(s => s.IntExt)
+                         .Include(s => s.Location)
+                         .Include(s => s.DayNight);
+        }
+
+        private IQueryable<Scene> GetIncluded()
         {
             IQueryable<Scene> query = _context.Set<Scene>();
 

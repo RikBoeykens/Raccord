@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { BaseHttpService } from '../../../../shared/service/base-http.service';
 import { AppSettings } from '../../../../app.settings';
+import { FullScene } from '../model/full-scene.model';
 import { SceneSummary } from '../model/scene-summary.model';
 import { Scene } from '../model/scene.model';
 import { JsonResponse } from '../../../../shared/model/json-response.model';
@@ -22,7 +23,7 @@ export class SceneHttpService extends BaseHttpService {
         return this.doGetArray(uri);
     }
 
-    get(id: number): Promise<Scene>{
+    get(id: number): Promise<FullScene>{
 
         var uri = `${this._baseUri}/${id}`;
 
@@ -36,7 +37,7 @@ export class SceneHttpService extends BaseHttpService {
         return this.doGet(uri);
     }
 
-    post(scene: SceneSummary): Promise<Number> {
+    post(scene: Scene): Promise<Number> {
         var uri = this._baseUri;
 
         return this.doPost(scene, uri);

@@ -54,11 +54,11 @@ namespace Raccord.Application.Services.Scenes
         }
 
         // Gets a single scene by id
-        public SceneDto Get(Int64 ID)
+        public FullSceneDto Get(Int64 ID)
         {
             var scene = _sceneRepository.GetFull(ID);
 
-            var dto = scene.Translate();
+            var dto = scene.TranslateFull();
 
             return dto;
         }
@@ -74,7 +74,7 @@ namespace Raccord.Application.Services.Scenes
         }
 
         // Adds a scene
-        public long Add(SceneSummaryDto dto)
+        public long Add(SceneDto dto)
         {
             CreatePropertiesIfNecessary(dto);
 
@@ -97,7 +97,7 @@ namespace Raccord.Application.Services.Scenes
         }
 
         // Updates a scene
-        public long Update(SceneSummaryDto dto)
+        public long Update(SceneDto dto)
         {
             CreatePropertiesIfNecessary(dto);
 
@@ -140,7 +140,7 @@ namespace Raccord.Application.Services.Scenes
             _sceneRepository.Commit();
         }
 
-        private void CreatePropertiesIfNecessary(SceneSummaryDto scene)
+        private void CreatePropertiesIfNecessary(SceneDto scene)
         {
             if(scene.IntExt.ID == default(long))
             {

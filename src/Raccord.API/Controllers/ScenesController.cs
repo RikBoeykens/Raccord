@@ -34,7 +34,7 @@ namespace Raccord.API.Controllers
         }
         // GET api/scenes/5
         [HttpGet("{id}")]
-        public SceneViewModel Get(long id)
+        public FullSceneViewModel Get(long id)
         {
             var dto = _sceneService.Get(id);
 
@@ -56,7 +56,7 @@ namespace Raccord.API.Controllers
 
         // POST api/scenes
         [HttpPost]
-        public JsonResult Post([FromBody]SceneSummaryViewModel vm)
+        public JsonResult Post([FromBody]SceneViewModel vm)
         {
             var response = new JsonResponse();
 
@@ -95,7 +95,7 @@ namespace Raccord.API.Controllers
 
         // DELETE api/scenes/5
         [HttpDelete("{id}")]
-        public JsonResult Delete(Int64 id)
+        public JsonResult Delete(long id)
         {
             var response = new JsonResponse();
 

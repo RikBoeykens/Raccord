@@ -1,9 +1,9 @@
 import { Injectable }             from '@angular/core';
 import { Router, Resolve, ActivatedRouteSnapshot } from '@angular/router';
 import { SceneHttpService } from './scene-http.service';
-import { Scene } from '../model/scene.model';
+import { FullScene } from '../model/full-scene.model';
 @Injectable()
-export class SceneResolve implements Resolve<Scene> {
+export class SceneResolve implements Resolve<FullScene> {
 
   constructor(
       private sceneHttpService: SceneHttpService, 

@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter, OnChanges } from '@angular/core';
-import { SceneSummary } from '../../model/scene-summary.model';
+import { Scene } from '../../model/scene.model';
 import { PageLengthHelpers } from '../../../../../shared/helpers/page-length.helpers';
 
 @Component({
@@ -9,7 +9,7 @@ import { PageLengthHelpers } from '../../../../../shared/helpers/page-length.hel
 export class EditSceneComponent implements OnChanges{
 
     @Output() submitScene = new EventEmitter();
-    @Input() scene: SceneSummary;
+    @Input() scene: Scene;
 
     public stringPageLength: string;
 

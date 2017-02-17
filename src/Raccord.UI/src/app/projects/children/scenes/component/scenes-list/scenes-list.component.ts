@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { SceneHttpService } from '../../service/scene-http.service';
+import { Scene } from '../../model/scene.model';
 import { SceneSummary } from '../../model/scene-summary.model';
 import { ProjectSummary } from '../../../../model/project-summary.model';
 import { LoadingService } from '../../../../../loading/service/loading.service';
@@ -15,8 +16,8 @@ export class ScenesListComponent extends OnInit {
     scenes: SceneSummary[] = [];
     deleteScenes: SceneSummary[]=[];
     project: ProjectSummary;
-    viewNewScene: SceneSummary;
-    newScene: SceneSummary;
+    viewNewScene: Scene;
+    newScene: Scene;
     draggingScene: boolean;
 
     constructor(
@@ -28,7 +29,7 @@ export class ScenesListComponent extends OnInit {
         private dragulaService: DragulaService
     ) {
         super();
-        this.viewNewScene = new SceneSummary();
+        this.viewNewScene = new Scene();
         dragulaService.drag.subscribe((value) => {
             this.onSceneDrag();
         });
@@ -49,7 +50,7 @@ export class ScenesListComponent extends OnInit {
     }
 
     resetNewScene(){
-        this.viewNewScene = new SceneSummary();
+        this.viewNewScene = new Scene();
         this.viewNewScene.projectId = this.project.id;
         this.viewNewScene.intExt.projectId = this.project.id;
         this.viewNewScene.dayNight.projectId = this.project.id;

@@ -7,9 +7,9 @@ namespace Raccord.API.ViewModels.Scenes
     public static class Utilities
     {
         // Translates a scene dto to a scene viewmodel
-        public static SceneViewModel Translate(this SceneDto dto)
+        public static FullSceneViewModel Translate(this FullSceneDto dto)
         {
-            return new SceneViewModel
+            return new FullSceneViewModel
             {
                 ID = dto.ID,
                 Number = dto.Number,
@@ -36,11 +36,26 @@ namespace Raccord.API.ViewModels.Scenes
                 ProjectID = dto.ProjectID,
             };
         }
+        // Translates a scene dto to a scene viewmodel
+        public static SceneViewModel Translate(this SceneDto dto)
+        {
+            return new SceneViewModel
+            {
+                ID = dto.ID,
+                Number = dto.Number,
+                Summary = dto.Summary,
+                PageLength = dto.PageLength,
+                IntExt = dto.IntExt.Translate(),
+                Location = dto.Location.Translate(),
+                DayNight = dto.DayNight.Translate(),
+                ProjectID = dto.ProjectID,
+            };
+        }
 
         // Translates a scene summary viewmodel to a dto
-        public static SceneSummaryDto Translate(this SceneSummaryViewModel vm)
+        public static SceneDto Translate(this SceneViewModel vm)
         {
-            return new SceneSummaryDto
+            return new SceneDto
             {
                 ID = vm.ID,
                 Number = vm.Number,

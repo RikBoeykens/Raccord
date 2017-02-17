@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { SceneHttpService } from '../../service/scene-http.service';
-import { Scene } from '../../model/scene.model';
+import { FullScene } from '../../model/full-scene.model';
 import { ProjectSummary } from '../../../../model/project-summary.model';
 
 @Component({
@@ -9,7 +9,7 @@ import { ProjectSummary } from '../../../../model/project-summary.model';
 })
 export class SceneLandingComponent {
 
-    scene: Scene;
+    scene: FullScene;
     project: ProjectSummary;
 
     constructor(
@@ -20,7 +20,7 @@ export class SceneLandingComponent {
     }
 
     ngOnInit() {
-        this._route.data.subscribe((data: { scene: Scene, project: ProjectSummary }) => {
+        this._route.data.subscribe((data: { scene: FullScene, project: ProjectSummary }) => {
             this.scene = data.scene;
             this.project = data.project;
         });
