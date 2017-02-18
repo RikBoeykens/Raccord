@@ -133,6 +133,9 @@ export class ScenesListComponent extends OnInit {
             }).catch()
             .then(()=> this._loadingService.endLoading(loadingId));
         }
+        else{
+            this.getScenes();
+        }
 
     }
 
