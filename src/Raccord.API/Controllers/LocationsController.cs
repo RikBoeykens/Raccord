@@ -118,5 +118,32 @@ namespace Raccord.API.Controllers
 
             return new JsonResult(response);
         }
+
+        // DELETE api/locations/merge/5/1
+        [HttpPost("merge/{toId}/{mergeId}")]
+        public JsonResult Merge(long toId, long mergeId)
+        {
+            var response = new JsonResponse();
+
+            try
+            {
+                _locationService.Merge(toId, mergeId);
+
+                response = new JsonResponse
+                {
+                    ok = true,
+                };
+            }
+            catch (Exception)
+            {
+                response = new JsonResponse
+                {
+                    ok = false,
+                    message = "Something went wrong while attempting to merge locations.",
+                };
+            }
+
+            return new JsonResult(response);
+        }
     }
 }

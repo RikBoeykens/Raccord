@@ -13,8 +13,8 @@ import { DragulaService } from 'ng2-dragula';
 })
 export class LocationsListComponent extends OnInit {
 
-    locations: LocationSummary[] = [];
-    deleteLocations: LocationSummary[]=[];
+    locations: LocationDroppableWrapper[] = [];
+    deleteLocations: LocationDroppableWrapper[]=[];
     project: ProjectSummary;
     viewNewLocation: Location;
     newLocation: Location;
@@ -43,7 +43,7 @@ export class LocationsListComponent extends OnInit {
 
     ngOnInit() {
         this._route.data.subscribe((data: { locations: LocationSummary[], project: ProjectSummary }) => {
-            this.locations = data.locations;
+            this.locations = data.locations.map(function(location){ return new LocationDroppableWrapper(location); });
             this.project = data.project;
             this.resetNewLocation();
         });
@@ -60,7 +60,7 @@ export class LocationsListComponent extends OnInit {
         let loadingId = this._loadingService.startLoading();
 
         this._locationHttpService.getAll(this.project.id).then(data => {
-            this.locations = data;
+            this.locations = data.map(function(location){ return new LocationDroppableWrapper(location); });
             this._loadingService.endLoading(loadingId);
         });
     }
@@ -95,15 +95,26 @@ export class LocationsListComponent extends OnInit {
 
         // Delete if necessary
         if(this.deleteLocations.length){
-            var locationToDelete = this.deleteLocations.splice(0, 1)[0];
+            var locationToDelete = this.deleteLocations.splice(0, 1)[0].location;
             this.remove(locationToDelete);
         }
+
+        // Merge if necessary
+        var mergeLocationWrapper;
+        this.locations.forEach(function(locationWrapper){
+            if(locationWrapper.dropLocations.length){
+                mergeLocationWrapper = locationWrapper;
+            }
+        });
+        console.log(mergeLocationWrapper);
+        if(mergeLocationWrapper){}
+            this.merge(mergeLocationWrapper.location, mergeLocationWrapper.dropLocations.splice(0, 1)[0].location);
     }
 
 
     remove(location: LocationSummary){
 
-        if(this._dialogService.confirm(`Are you sure you want to remove location ${location.name}`)){
+        if(this._dialogService.confirm(`Are you sure you want to remove location ${location.name}?`)){
 
             let loadingId = this._loadingService.startLoading();
 
@@ -116,7 +127,37 @@ export class LocationsListComponent extends OnInit {
                 }
             }).catch()
             .then(()=> this._loadingService.endLoading(loadingId));
+        }else{
+            this.getLocations();
         }
 
+    }
+
+    merge(toLocation: LocationSummary, mergeLocation: LocationSummary){
+        if(this._dialogService.confirm(`Are you sure you want to merge location ${mergeLocation.name} to location ${toLocation.name}?`)){
+            let loadingId = this._loadingService.startLoading();
+
+            this._locationHttpService.merge(toLocation.id, mergeLocation.id).then(data=>{
+                if(typeof(data)== 'string'){
+                    this._dialogService.error(data);
+                    this.getLocations();
+                }else{
+                    toLocation.sceneCount += mergeLocation.sceneCount;
+                    this._dialogService.success('The locations were successfully merged');
+                }
+            }).catch()
+            .then(()=> this._loadingService.endLoading(loadingId));
+        }else{
+            this.getLocations();
+        }
+    }
+}
+
+export class LocationDroppableWrapper{
+    location: LocationSummary;
+    dropLocations: LocationSummary[] = [];
+
+    constructor(location: LocationSummary){
+        this.location = location;
     }
 }

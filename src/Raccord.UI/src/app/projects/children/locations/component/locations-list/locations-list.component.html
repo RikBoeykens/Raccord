@@ -12,10 +12,15 @@
 <div class="row">
     <md-nav-list [dragula]='"location-bag"' 
                  [dragulaModel]='locations'>
-        <a md-list-item [routerLink]="[location.id]" 
-           *ngFor="let location of locations"
-           [ngClass]="{'can-delete': location.sceneCount==0}">
-            {{location.name}} ({{location.sceneCount}})
+        <a md-list-item [routerLink]="[locationWrapper.location.id]" 
+           *ngFor="let locationWrapper of locations"
+           [ngClass]="{'can-delete': locationWrapper.location.sceneCount==0}">
+            {{locationWrapper.location.name}} ({{locationWrapper.location.sceneCount}})
+            <span class="drag-merge"
+                  [dragula]='"location-bag"' 
+                  [dragulaModel]='locationWrapper.dropLocations'>
+                <md-icon>merge_type</md-icon>                
+            </span>
         </a>
     </md-nav-list>
 </div>

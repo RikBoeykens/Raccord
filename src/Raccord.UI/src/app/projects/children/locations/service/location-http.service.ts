@@ -47,4 +47,10 @@ export class LocationHttpService extends BaseHttpService {
 
         return this.doDelete(uri);
     }
+
+    merge(toId: Number, mergeId): Promise<any> {
+        var uri = `${this._baseUri}/merge/${toId}/${mergeId}`;
+
+        return this.doPost(null, uri);
+    }
 }

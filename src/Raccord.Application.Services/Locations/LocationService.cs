@@ -90,5 +90,21 @@ namespace Raccord.Application.Services.Locations
 
             _locationRepository.Commit();
         }
+
+        public void Merge(long toID, long mergeID)
+        {
+            var toLocation = _locationRepository.GetFull(toID);
+            var mergeLocation = _locationRepository.GetFull(mergeID);
+
+            var sceneList = toLocation.Scenes.ToList();
+            sceneList.AddRange(mergeLocation.Scenes);
+
+            toLocation.Scenes = sceneList;
+            mergeLocation.Scenes.Clear();
+            _locationRepository.Edit(toLocation);
+            _locationRepository.Delete(mergeLocation);
+
+            _locationRepository.Commit();
+        }
     }
 }
