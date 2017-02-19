@@ -10,12 +10,16 @@
     <edit-scene [scene]="viewNewScene" (submitScene)="addScene()"></edit-scene>
 </div>
 <div class="row">
-    <md-nav-list [dragula]='"scene-bag"' [dragulaModel]='scenes'>
-        <a md-list-item [routerLink]="[scene.id]" *ngFor="let scene of scenes">
+    <md-nav-list [dragula]='"scene-bag"' [dragulaModel]='scenes' class="drag-sort-container">
+        <a md-list-item 
+           [routerLink]="[scene.id]" 
+           *ngFor="let scene of scenes"
+           class="drag-element drag-delete drag-sort">
+           <md-icon class=drag-handle>drag_handle</md-icon>
             {{scene.number}}. {{scene.intExt.name}} {{scene.location.name}} {{scene.dayNight.name}} - {{scene.summary}} ({{scene.pageLength | pagelength}})
         </a>
     </md-nav-list>
 </div>
-<div class="delete-scene  drag-delete" [dragula]="'scene-bag'" *ngIf="draggingScene" [dragulaModel]='deleteScenes'>
+<div class="delete-scene drop-container drop-delete-container" [dragula]="'scene-bag'" *ngIf="draggingScene" [dragulaModel]='deleteScenes'>
     <md-icon>delete</md-icon>
 </div>

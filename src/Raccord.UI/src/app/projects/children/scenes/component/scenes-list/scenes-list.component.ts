@@ -7,6 +7,7 @@ import { ProjectSummary } from '../../../../model/project-summary.model';
 import { LoadingService } from '../../../../../loading/service/loading.service';
 import { DialogService } from '../../../../../shared/service/dialog.service';
 import { DragulaService } from 'ng2-dragula';
+import { HtmlClassHelpers } from '../../../../../shared/helpers/html-class.helpers';
 
 @Component({
     templateUrl: 'scenes-list.component.html',
@@ -38,6 +39,17 @@ export class ScenesListComponent extends OnInit {
         });
         dragulaService.dropModel.subscribe((value) => {
             this.onSceneDrop(value.slice(1));
+        });
+        dragulaService.over.subscribe((value) => {
+            this.onOver(value.slice(1));
+        });
+        dragulaService.out.subscribe((value) => {
+            this.onOut(value.slice(1));
+        });
+        dragulaService.setOptions('scene-bag', {
+            moves: function (el, container, handle) {
+                return HtmlClassHelpers.hasClass(handle, 'drag-handle');
+            }
         });
     }
 
@@ -101,6 +113,16 @@ export class ScenesListComponent extends OnInit {
             var sceneToDelete = this.deleteScenes.splice(0, 1)[0];
             this.remove(sceneToDelete);
         }
+    }
+    
+    private onOver(args) {
+        let [e, el, container] = args;
+        HtmlClassHelpers.addClass(el, 'hovering');
+    }
+
+    private onOut(args) {
+        let [e, el, container] = args;
+        HtmlClassHelpers.removeClass(el, 'hovering');
     }
 
     sortScenes(){

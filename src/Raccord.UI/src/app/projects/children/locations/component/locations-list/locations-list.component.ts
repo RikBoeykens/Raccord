@@ -7,6 +7,7 @@ import { ProjectSummary } from '../../../../model/project-summary.model';
 import { LoadingService } from '../../../../../loading/service/loading.service';
 import { DialogService } from '../../../../../shared/service/dialog.service';
 import { DragulaService } from 'ng2-dragula';
+import { HtmlClassHelpers } from '../../../../../shared/helpers/html-class.helpers';
 
 @Component({
     templateUrl: 'locations-list.component.html',
@@ -18,7 +19,8 @@ export class LocationsListComponent extends OnInit {
     project: ProjectSummary;
     viewNewLocation: Location;
     newLocation: Location;
-    draggingLocation: boolean;
+    draggingToMerge: boolean;
+    draggingToDelete: boolean;
 
     constructor(
         private _locationHttpService: LocationHttpService,
@@ -30,6 +32,7 @@ export class LocationsListComponent extends OnInit {
     ) {
         super();
         this.viewNewLocation = new Location();
+
         dragulaService.drag.subscribe((value) => {
             this.onLocationDrag(value.splice(1));
         });
@@ -38,6 +41,17 @@ export class LocationsListComponent extends OnInit {
         });
         dragulaService.dropModel.subscribe((value) => {
             this.onLocationDrop(value.slice(1));
+        });
+        dragulaService.over.subscribe((value) => {
+            this.onOver(value.slice(1));
+        });
+        dragulaService.out.subscribe((value) => {
+            this.onOut(value.slice(1));
+        });
+        dragulaService.setOptions('location-bag', {
+            moves: function (el, container, handle) {
+                return HtmlClassHelpers.hasClass(handle, 'drag-handle');
+            }
         });
     }
 
@@ -85,19 +99,19 @@ export class LocationsListComponent extends OnInit {
 
     private onLocationDrag(args) {
         let draggedElement = args[0];
-        if(draggedElement.classList.contains('can-delete'))
-            this.draggingLocation = true;
+        this.draggingToMerge = true;
+        if(draggedElement && HtmlClassHelpers.hasClass(draggedElement, 'can-delete'))
+            this.draggingToDelete = true;
     }
     private onLocationDragEnd() {
-        this.draggingLocation = false;
+        this.draggingToMerge = false;
+        this.draggingToDelete = false;
     }
     private onLocationDrop(args) {
 
         // Delete if necessary
-        if(this.deleteLocations.length){
-            var locationToDelete = this.deleteLocations.splice(0, 1)[0].location;
-            this.remove(locationToDelete);
-        }
+        if(this.deleteLocations.length > 0)
+            this.remove(this.deleteLocations.splice(0, 1)[0].location);
 
         // Merge if necessary
         var mergeLocationWrapper;
@@ -106,11 +120,19 @@ export class LocationsListComponent extends OnInit {
                 mergeLocationWrapper = locationWrapper;
             }
         });
-        console.log(mergeLocationWrapper);
-        if(mergeLocationWrapper){}
+        if(mergeLocationWrapper)
             this.merge(mergeLocationWrapper.location, mergeLocationWrapper.dropLocations.splice(0, 1)[0].location);
     }
+    
+    private onOver(args) {
+        let [e, el, container] = args;
+        HtmlClassHelpers.addClass(el, 'hovering');
+    }
 
+    private onOut(args) {
+        let [e, el, container] = args;
+        HtmlClassHelpers.removeClass(el, 'hovering');
+    }
 
     remove(location: LocationSummary){
 

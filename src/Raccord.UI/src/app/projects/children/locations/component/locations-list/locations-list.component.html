@@ -14,9 +14,11 @@
                  [dragulaModel]='locations'>
         <a md-list-item [routerLink]="[locationWrapper.location.id]" 
            *ngFor="let locationWrapper of locations"
-           [ngClass]="{'can-delete': locationWrapper.location.sceneCount==0}">
+           [ngClass]="{'can-delete': locationWrapper.location.sceneCount==0}"
+           class="drag-element drag-delete drag-merge">
+           <md-icon class=drag-handle>drag_handle</md-icon>
             {{locationWrapper.location.name}} ({{locationWrapper.location.sceneCount}})
-            <span class="drag-merge"
+            <span class="drop-container drop-merge-container"
                   [dragula]='"location-bag"' 
                   [dragulaModel]='locationWrapper.dropLocations'>
                 <md-icon>merge_type</md-icon>                
@@ -24,6 +26,9 @@
         </a>
     </md-nav-list>
 </div>
-<div class="delete-location drag-delete" [dragula]="'location-bag'" *ngIf="draggingLocation" [dragulaModel]='deleteLocations'>
+<div class="delete-location drop-container drop-delete-container" 
+     [dragula]="'location-bag'" 
+     *ngIf="draggingToDelete" 
+     [dragulaModel]='deleteLocations'>
     <md-icon>delete</md-icon>
 </div>

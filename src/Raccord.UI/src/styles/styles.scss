@@ -11,8 +11,9 @@
 // Define a theme.
 $primary: md-palette($md-indigo);
 $accent:  md-palette($md-pink, A200, A100, A400);
+$warn: md-palette($md-red);
 
-$theme: md-light-theme($primary, $accent);
+$theme: md-light-theme($primary, $accent, $warn);
 
 // Include all theme styles for the components.
 @include angular-material-theme($theme);
@@ -85,11 +86,65 @@ ul.autocomplete-content{
   width: 100%;
 }
 
-.drag-delete{
-  background-color: red;
-  width: 100%;
+.drop-container{
+  text-align: center;
+  padding: 1px;
+
+  .drag-element{
+    display:none;
+  }
+}
+
+.drop-container.hovering{
+  border-style: solid;
+  padding: 0px;
+  border-width: 1px;
+}
+
+.drop-delete-container{
+  background-color: md-color($warn);
+  width: 50%;
   position: fixed;
   bottom: 0;
   color: $bg-color;
-  text-align: center;
+}
+
+.drop-delete-container.hovering{
+  background-color: $bg-color;
+  color: md-color($warn);
+  border-color: md-color($warn);
+}
+
+.drop-merge-container{
+  background-color: md-color($primary);
+  color: $bg-color;
+  width: 30px;
+  margin-left: auto;
+}
+
+.drop-merge-container.hovering{
+  background-color: $bg-color;
+  color: md-color($primary);
+  border-color: md-color($primary);
+}
+
+// dragged element
+.gu-mirror{
+  opacity: 1;
+  .drag-merge-container{
+    display:none;
+  }
+}
+
+.drag-merge.gu-transit{
+  .drag-merge-container{
+    display:none;
+  }
+}
+
+.drag-handle{
+    cursor: move; /* fallback if grab cursor is unsupported */
+    cursor: grab;
+    cursor: -moz-grab;
+    cursor: -webkit-grab;
 }
