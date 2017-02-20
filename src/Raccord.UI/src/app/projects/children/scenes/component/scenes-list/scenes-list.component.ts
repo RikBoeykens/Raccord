@@ -46,6 +46,8 @@ export class ScenesListComponent extends OnInit {
         dragulaService.out.subscribe((value) => {
             this.onOut(value.slice(1));
         });
+        const bag: any = this.dragulaService.find('scene-bag');
+        if (bag !== undefined ) this.dragulaService.destroy('scene-bag');
         dragulaService.setOptions('scene-bag', {
             moves: function (el, container, handle) {
                 return HtmlClassHelpers.hasClass(handle, 'drag-handle');

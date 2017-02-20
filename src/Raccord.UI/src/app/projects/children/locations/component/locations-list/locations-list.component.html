@@ -20,7 +20,8 @@
             {{locationWrapper.location.name}} ({{locationWrapper.location.sceneCount}})
             <span class="drop-container drop-merge-container"
                   [dragula]='"location-bag"' 
-                  [dragulaModel]='locationWrapper.dropLocations'>
+                  [dragulaModel]='locationWrapper.dropLocations'
+                  *ngIf="draggingToMerge">
                 <md-icon>merge_type</md-icon>                
             </span>
         </a>

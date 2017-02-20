@@ -48,6 +48,8 @@ export class LocationsListComponent extends OnInit {
         dragulaService.out.subscribe((value) => {
             this.onOut(value.slice(1));
         });
+        const bag: any = this.dragulaService.find('location-bag');
+        if (bag !== undefined ) this.dragulaService.destroy('location-bag');
         dragulaService.setOptions('location-bag', {
             moves: function (el, container, handle) {
                 return HtmlClassHelpers.hasClass(handle, 'drag-handle');
