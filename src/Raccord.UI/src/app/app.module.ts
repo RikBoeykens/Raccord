@@ -39,6 +39,7 @@ import { EditSceneComponent } from './projects';
 import { SceneLandingComponent } from './projects';
 import { LocationsListComponent } from './projects';
 import { EditLocationComponent } from './projects';
+import { LocationLandingComponent } from './projects';
 import { SearchLocationComponent } from './projects';
 import { SearchIntExtComponent } from './projects';
 import { SearchDayNightComponent } from './projects';
@@ -60,6 +61,7 @@ const COMPONENTS =[
   SceneLandingComponent,
   LocationsListComponent,
   EditLocationComponent,
+  LocationLandingComponent,
   SearchLocationComponent,
   SearchIntExtComponent,
   SearchDayNightComponent

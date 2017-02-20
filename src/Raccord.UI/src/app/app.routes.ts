@@ -9,6 +9,7 @@ import { ProjectsListComponent } from './projects';
 import { ScenesListComponent } from './projects';
 import { SceneLandingComponent } from './projects';
 import { LocationsListComponent } from './projects';
+import { LocationLandingComponent } from './projects';
 
 import { ProjectResolve } from './projects';
 import { ProjectSummaryResolve } from './projects';
@@ -91,6 +92,14 @@ export const ROUTES: Routes = [
                 resolve:{
                   project: ProjectSummaryResolve,
                   locations: LocationsResolve
+                },
+              },
+              {
+                path: ':locationId',
+                component: LocationLandingComponent,
+                resolve:{
+                  project: ProjectSummaryResolve,
+                  location: LocationResolve
                 },
               }
             ]

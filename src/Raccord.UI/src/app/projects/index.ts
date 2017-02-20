@@ -18,6 +18,7 @@ export { ScenesResolve } from './children/scenes/service/scenes-resolve.service'
 export { LocationsListComponent } from './children/locations/component/locations-list/locations-list.component';
 export { SearchLocationComponent } from './children/locations/component/search-location/search-location.component';
 export { EditLocationComponent } from './children/locations/component/edit-location/edit-location.component';
+export { LocationLandingComponent } from './children/locations/component/location-landing/location-landing.component';
 export { LocationHttpService } from './children/locations/service/location-http.service';
 export { LocationResolve } from './children/locations/service/location-resolve.service';
 export { LocationsResolve } from './children/locations/service/locations-resolve.service';
