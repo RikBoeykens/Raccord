@@ -159,7 +159,7 @@ export class DayNightListComponent extends OnInit {
 
     merge(toDayNight: DayNightSummary, mergeDayNight: DayNightSummary){
         if(this._dialogService.confirm(`Are you sure you want to merge day/night ${mergeDayNight.name} to ${toDayNight.name}?`)){
-            /*let loadingId = this._loadingService.startLoading();
+            let loadingId = this._loadingService.startLoading();
 
             this._dayNightHttpService.merge(toDayNight.id, mergeDayNight.id).then(data=>{
                 if(typeof(data)== 'string'){
@@ -170,7 +170,7 @@ export class DayNightListComponent extends OnInit {
                     this._dialogService.success('The day/nights were successfully merged');
                 }
             }).catch()
-            .then(()=> this._loadingService.endLoading(loadingId));*/
+            .then(()=> this._loadingService.endLoading(loadingId));
         }else{
             this.getDayNights();
         }

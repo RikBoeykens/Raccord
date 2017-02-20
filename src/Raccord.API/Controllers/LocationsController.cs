@@ -119,7 +119,7 @@ namespace Raccord.API.Controllers
             return new JsonResult(response);
         }
 
-        // DELETE api/locations/merge/5/1
+        // POST api/locations/merge/5/1
         [HttpPost("merge/{toId}/{mergeId}")]
         public JsonResult Merge(long toId, long mergeId)
         {
