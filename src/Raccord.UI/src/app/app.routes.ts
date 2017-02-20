@@ -10,6 +10,7 @@ import { ScenesListComponent } from './projects';
 import { SceneLandingComponent } from './projects';
 import { LocationsListComponent } from './projects';
 import { LocationLandingComponent } from './projects';
+import { IntExtListComponent } from './projects';
 import { DayNightListComponent } from './projects';
 import { ScenePropertiesLandingComponent } from './projects';
 
@@ -122,6 +123,19 @@ export const ROUTES: Routes = [
                 resolve:{
                   project: ProjectSummaryResolve,
                   dayNights: DayNightsResolve
+                },
+              }
+            ]
+          },
+          {
+            path: 'intexts',
+            children:[
+              {
+                path: '',
+                component: IntExtListComponent,
+                resolve:{
+                  project: ProjectSummaryResolve,
+                  intExts: IntExtsResolve
                 },
               }
             ]

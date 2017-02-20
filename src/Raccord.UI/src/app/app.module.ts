@@ -41,6 +41,8 @@ import { LocationsListComponent } from './projects';
 import { EditLocationComponent } from './projects';
 import { LocationLandingComponent } from './projects';
 import { SearchLocationComponent } from './projects';
+import { IntExtListComponent } from './projects';
+import { EditIntExtComponent } from './projects';
 import { SearchIntExtComponent } from './projects';
 import { DayNightListComponent } from './projects';
 import { EditDayNightComponent } from './projects';
@@ -66,6 +68,8 @@ const COMPONENTS =[
   EditLocationComponent,
   LocationLandingComponent,
   SearchLocationComponent,
+  IntExtListComponent,
+  EditIntExtComponent,
   SearchIntExtComponent,
   SearchDayNightComponent,
   DayNightListComponent,
