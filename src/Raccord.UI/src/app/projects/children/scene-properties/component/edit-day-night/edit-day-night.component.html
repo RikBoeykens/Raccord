@@ -1,0 +1,18 @@
+<form class="col s12"
+        id="day_night_form"
+        #dayNightForm = "ngForm"
+        (ngSubmit)="doDayNightSubmit()">
+    <div fxLayout="row" fxLayoutGap="10px">
+        <md-input-container fxFlex="25%">
+            <input md-input placeholder="Name" id="day_night_name" required [(ngModel)]="daynight.name" #name="ngModel" name="day_night_name">
+        </md-input-container>
+        <md-input-container fxFlex="75%">
+            <input md-input placeholder="Description" id="day_night_description" [(ngModel)]="daynight.description" #description="ngModel" name="day_night_description">
+        </md-input-container>
+    </div>
+    <div fxLayout="row">
+        <div class="col s12">
+            <button md-raised-button type="submit"[disabled]="!dayNightForm.form.valid">Save</button>
+        </div>
+    </div>
+</form>

@@ -10,6 +10,8 @@ import { ScenesListComponent } from './projects';
 import { SceneLandingComponent } from './projects';
 import { LocationsListComponent } from './projects';
 import { LocationLandingComponent } from './projects';
+import { DayNightListComponent } from './projects';
+import { ScenePropertiesLandingComponent } from './projects';
 
 import { ProjectResolve } from './projects';
 import { ProjectSummaryResolve } from './projects';
@@ -100,6 +102,26 @@ export const ROUTES: Routes = [
                 resolve:{
                   project: ProjectSummaryResolve,
                   location: LocationResolve
+                },
+              }
+            ]
+          },
+          {
+            path: 'sceneproperties',
+            component: ScenePropertiesLandingComponent,
+            resolve:{
+              project: ProjectSummaryResolve,
+            }
+          },
+          {
+            path: 'daynights',
+            children:[
+              {
+                path: '',
+                component: DayNightListComponent,
+                resolve:{
+                  project: ProjectSummaryResolve,
+                  dayNights: DayNightsResolve
                 },
               }
             ]

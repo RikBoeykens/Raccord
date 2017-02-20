@@ -42,7 +42,10 @@ import { EditLocationComponent } from './projects';
 import { LocationLandingComponent } from './projects';
 import { SearchLocationComponent } from './projects';
 import { SearchIntExtComponent } from './projects';
+import { DayNightListComponent } from './projects';
+import { EditDayNightComponent } from './projects';
 import { SearchDayNightComponent } from './projects';
+import { ScenePropertiesLandingComponent } from './projects';
 
 const COMPONENTS =[
   AppComponent,
@@ -64,7 +67,10 @@ const COMPONENTS =[
   LocationLandingComponent,
   SearchLocationComponent,
   SearchIntExtComponent,
-  SearchDayNightComponent
+  SearchDayNightComponent,
+  DayNightListComponent,
+  EditDayNightComponent,
+  ScenePropertiesLandingComponent
 ];
 
 // Services

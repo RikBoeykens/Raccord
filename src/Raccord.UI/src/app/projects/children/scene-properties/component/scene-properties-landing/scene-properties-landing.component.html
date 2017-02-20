@@ -1,0 +1,26 @@
+<div class="row">      
+    <div class="col s12">
+        <a routerLink="/" class="breadcrumb">Dashboard</a>
+        <a routerLink="/projects" class="breadcrumb">Projects</a>
+        <a routerLink="/projects/{{project.id}}" class="breadcrumb">{{project.title}}</a>
+        <span class="breadcrumb">Scene Properties</span>
+    </div>
+</div>
+<div class="row">
+    <div class='md-padding' layout="row" layout-wrap>
+        <md-card class="scene-properties-landing-card">
+            <md-card-header>
+                <md-card-title>
+                    <a routerLink="/projects/{{project.id}}/daynights" class="card-title">Day/Night</a>
+                </md-card-title>
+            </md-card-header>
+        </md-card>
+        <md-card class="scene-properties-landing-card">
+            <md-card-header>
+                <md-card-title>
+                    <a routerLink="/projects/{{project.id}}/intexts" class="card-title">Int/Ext</a>
+                </md-card-title>
+            </md-card-header>
+        </md-card>
+    </div>
+</div>

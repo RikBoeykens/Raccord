@@ -1,0 +1,36 @@
+<div class="row">      
+    <div class="col s12">
+        <a routerLink="/" class="breadcrumb">Dashboard</a>
+        <a routerLink="/projects" class="breadcrumb">Projects</a>
+        <a routerLink="/projects/{{project.id}}" class="breadcrumb">{{project.title}}</a>
+        <a routerLink="/projects/{{project.id}}/sceneproperties" class="breadcrumb">Scene Properties</a>
+        <span class="breadcrumb">Day/Night</span>
+    </div>
+</div>
+<div class="row">
+    <edit-day-night [daynight]="viewNewDayNight" (submitDayNight)="addDayNight()"></edit-day-night>
+</div>
+<div class="row">
+    <md-nav-list [dragula]='"day-night-bag"' 
+                 [dragulaModel]='dayNights'>
+        <a md-list-item [routerLink]="[dayNightWrapper.dayNight.id]" 
+           *ngFor="let dayNightWrapper of dayNights"
+           [ngClass]="{'can-delete': dayNightWrapper.dayNight.sceneCount==0}"
+           class="drag-element drag-delete drag-merge">
+           <md-icon class=drag-handle>drag_handle</md-icon>
+            {{dayNightWrapper.dayNight.name}} ({{dayNightWrapper.dayNight.sceneCount}})
+            <span class="drop-container drop-merge-container"
+                  [dragula]='"day-night-bag"' 
+                  [dragulaModel]='dayNightWrapper.dropDayNights'
+                  *ngIf="draggingToMerge">
+                <md-icon>merge_type</md-icon>                
+            </span>
+        </a>
+    </md-nav-list>
+</div>
+<div class="delete-day-night drop-container drop-delete-container" 
+     [dragula]="'day-night-bag'" 
+     *ngIf="draggingToDelete" 
+     [dragulaModel]='deleteDayNights'>
+    <md-icon>delete</md-icon>
+</div>
