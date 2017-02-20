@@ -90,5 +90,21 @@ namespace Raccord.Application.Services.SceneProperties
 
             _intExtRepository.Commit();
         }
+
+        public void Merge(long toID, long mergeID)
+        {
+            var toIntExt = _intExtRepository.GetFull(toID);
+            var mergeIntExt = _intExtRepository.GetFull(mergeID);
+
+            var sceneList = toIntExt.Scenes.ToList();
+            sceneList.AddRange(mergeIntExt.Scenes);
+
+            toIntExt.Scenes = sceneList;
+            mergeIntExt.Scenes.Clear();
+            _intExtRepository.Edit(toIntExt);
+            _intExtRepository.Delete(mergeIntExt);
+
+            _intExtRepository.Commit();
+        }
     }
 }

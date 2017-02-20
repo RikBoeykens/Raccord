@@ -159,7 +159,7 @@ export class IntExtListComponent extends OnInit {
 
     merge(toIntExt: IntExtSummary, mergeIntExt: IntExtSummary){
         if(this._dialogService.confirm(`Are you sure you want to merge int/ext ${mergeIntExt.name} to ${toIntExt.name}?`)){
-            /*let loadingId = this._loadingService.startLoading();
+            let loadingId = this._loadingService.startLoading();
 
             this._intExtHttpService.merge(toIntExt.id, mergeIntExt.id).then(data=>{
                 if(typeof(data)== 'string'){
@@ -170,7 +170,7 @@ export class IntExtListComponent extends OnInit {
                     this._dialogService.success('The int/exts were successfully merged');
                 }
             }).catch()
-            .then(()=> this._loadingService.endLoading(loadingId));*/
+            .then(()=> this._loadingService.endLoading(loadingId));
         }else{
             this.getIntExts();
         }
