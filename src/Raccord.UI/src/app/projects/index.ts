@@ -26,6 +26,7 @@ export { LocationsResolve } from './children/locations/service/locations-resolve
 export { IntExtListComponent } from './children/scene-properties/component/int-ext-list/int-ext-list.component';
 export { SearchIntExtComponent } from './children/scene-properties/component/search-int-ext/search-int-ext.component';
 export { EditIntExtComponent } from './children/scene-properties/component/edit-int-ext/edit-int-ext.component';
+export { IntExtLandingComponent } from './children/scene-properties/component/int-ext-landing/int-ext-landing.component';
 export { IntExtHttpService } from './children/scene-properties/service/int-ext-http.service';
 export { IntExtResolve } from './children/scene-properties/service/int-ext-resolve.service';
 export { IntExtsResolve } from './children/scene-properties/service/int-exts-resolve.service';

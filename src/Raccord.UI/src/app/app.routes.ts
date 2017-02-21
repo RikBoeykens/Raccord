@@ -11,6 +11,7 @@ import { SceneLandingComponent } from './projects';
 import { LocationsListComponent } from './projects';
 import { LocationLandingComponent } from './projects';
 import { IntExtListComponent } from './projects';
+import { IntExtLandingComponent } from './projects';
 import { DayNightListComponent } from './projects';
 import { ScenePropertiesLandingComponent } from './projects';
 
@@ -136,6 +137,14 @@ export const ROUTES: Routes = [
                 resolve:{
                   project: ProjectSummaryResolve,
                   intExts: IntExtsResolve
+                },
+              },
+              {
+                path: ':intExtId',
+                component: IntExtLandingComponent,
+                resolve:{
+                  project: ProjectSummaryResolve,
+                  intExt: IntExtResolve
                 },
               }
             ]
