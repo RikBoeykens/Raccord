@@ -34,6 +34,7 @@ export { IntExtsResolve } from './children/scene-properties/service/int-exts-res
 export { DayNightListComponent } from './children/scene-properties/component/day-night-list/day-night-list.component';
 export { SearchDayNightComponent } from './children/scene-properties/component/search-day-night/search-day-night.component';
 export { EditDayNightComponent } from './children/scene-properties/component/edit-day-night/edit-day-night.component';
+export { DayNightLandingComponent } from './children/scene-properties/component/day-night-landing/day-night-landing.component';
 export { DayNightHttpService } from './children/scene-properties/service/day-night-http.service';
 export { DayNightResolve } from './children/scene-properties/service/day-night-resolve.service';
 export { DayNightsResolve } from './children/scene-properties/service/day-nights-resolve.service';

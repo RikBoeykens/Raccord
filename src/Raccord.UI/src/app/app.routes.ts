@@ -13,6 +13,7 @@ import { LocationLandingComponent } from './projects';
 import { IntExtListComponent } from './projects';
 import { IntExtLandingComponent } from './projects';
 import { DayNightListComponent } from './projects';
+import { DayNightLandingComponent } from './projects';
 import { ScenePropertiesLandingComponent } from './projects';
 
 import { ProjectResolve } from './projects';
@@ -124,6 +125,14 @@ export const ROUTES: Routes = [
                 resolve:{
                   project: ProjectSummaryResolve,
                   dayNights: DayNightsResolve
+                },
+              },
+              {
+                path: ':dayNightId',
+                component: DayNightLandingComponent,
+                resolve:{
+                  project: ProjectSummaryResolve,
+                  dayNight: DayNightResolve
                 },
               }
             ]

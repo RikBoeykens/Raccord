@@ -47,6 +47,7 @@ import { IntExtLandingComponent } from './projects';
 import { SearchIntExtComponent } from './projects';
 import { DayNightListComponent } from './projects';
 import { EditDayNightComponent } from './projects';
+import { DayNightLandingComponent } from './projects';
 import { SearchDayNightComponent } from './projects';
 import { ScenePropertiesLandingComponent } from './projects';
 
@@ -76,6 +77,7 @@ const COMPONENTS =[
   SearchDayNightComponent,
   DayNightListComponent,
   EditDayNightComponent,
+  DayNightLandingComponent,
   ScenePropertiesLandingComponent
 ];
 
