@@ -49,6 +49,8 @@ import { DayNightListComponent } from './projects';
 import { EditDayNightComponent } from './projects';
 import { DayNightLandingComponent } from './projects';
 import { SearchDayNightComponent } from './projects';
+import { ImagesListComponent } from './projects';
+import { UploadImageComponent } from './projects';
 import { ScenePropertiesLandingComponent } from './projects';
 
 const COMPONENTS =[
@@ -78,6 +80,8 @@ const COMPONENTS =[
   DayNightListComponent,
   EditDayNightComponent,
   DayNightLandingComponent,
+  ImagesListComponent,
+  UploadImageComponent,
   ScenePropertiesLandingComponent
 ];
 
@@ -102,6 +106,9 @@ import { IntExtsResolve } from './projects';
 import { DayNightHttpService } from './projects';
 import { DayNightResolve } from './projects';
 import { DayNightsResolve } from './projects';
+import { ImageHttpService } from './projects';
+import { ImageResolve } from './projects';
+import { ImagesResolve } from './projects';
 
 const APP_PROVIDERS = [
   LoadingService,
@@ -123,7 +130,10 @@ const APP_PROVIDERS = [
   IntExtsResolve,
   DayNightHttpService,
   DayNightResolve,
-  DayNightsResolve
+  DayNightsResolve,
+  ImageHttpService,
+  ImageResolve,
+  ImagesResolve
 ];
 
 // Directives

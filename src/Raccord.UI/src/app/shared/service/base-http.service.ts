@@ -57,6 +57,17 @@ export abstract class BaseHttpService{
             .catch(this.handleErrorPromise);
     }
 
+    protected doFilePost(files: File[], object: any, uri: string){
+        let formData = new FormData();
+        for (let i = 0; i < files.length; i++) {
+            formData.append("files", files[i], files[i].name);
+        }
+        return this._http.post(uri, formData)
+            .toPromise()
+            .then(response => this.extractJsonResponse(response))
+            .catch(this.handleErrorPromise);
+    }
+
     protected extractJsonResponse(res: Response) {
 
         let response = <JsonResponse>res.json();

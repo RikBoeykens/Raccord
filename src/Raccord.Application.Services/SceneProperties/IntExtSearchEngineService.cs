@@ -21,9 +21,9 @@ namespace Raccord.Application.Services.SceneProperties
             _intExtRepository = intExtRepository;
         }
 
-        public new SearchType GetType()
+        public new EntityType GetType()
         {
-            return SearchType.IntExt;
+            return EntityType.IntExt;
         }
 
         public SearchTypeResultDto GetResults(SearchRequestDto request)

@@ -45,7 +45,7 @@ namespace Raccord.Application.Services.Projects
             {
                 RouteIDs = new long[]{project.ID},
                 DisplayName = project.Title,
-                Type = SearchType.Project,
+                Type = EntityType.Project,
             };
 
             return dto;

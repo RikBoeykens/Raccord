@@ -67,7 +67,7 @@ namespace Raccord.Application.Services.Scenes
                 RouteIDs = new long[]{scene.ProjectID, scene.ID},
                 DisplayName = scene.GetDisplaySummary(),
                 Info = $"Project: {scene.Project.Title}",
-                Type = SearchType.Scene,
+                Type = EntityType.Scene,
             };
 
             return dto;

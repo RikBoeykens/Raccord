@@ -1,0 +1,46 @@
+import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
+import { ImageHttpService } from '../../service/image-http.service';
+import { ImageSummary } from '../../model/image-summary.model';
+import { Image } from '../../model/image.model';
+import { ProjectSummary } from '../../../../model/project-summary.model';
+import { LoadingService } from '../../../../../loading/service/loading.service';
+import { DialogService } from '../../../../../shared/service/dialog.service';
+import { DragulaService } from 'ng2-dragula';
+import { HtmlClassHelpers } from '../../../../../shared/helpers/html-class.helpers';
+import { ImageUrlHelpers } from '../../helpers/image-url.helpers';
+
+@Component({
+    templateUrl: 'images-list.component.html',
+})
+export class ImagesListComponent extends OnInit {
+
+    images: ImageSummary[];
+    project: ProjectSummary;
+
+    constructor(
+        private _imageHttpService: ImageHttpService,
+        private _loadingService: LoadingService,
+        private _dialogService: DialogService,
+        private _route: ActivatedRoute,
+        private _router: Router,
+        private dragulaService: DragulaService
+    ) {
+        super();
+    }
+
+    ngOnInit() {
+        this._route.data.subscribe((data: { images: ImageSummary[], project: ProjectSummary }) => {
+            this.images = data.images;
+            this.project = data.project;
+        });
+    }
+
+    imagesUploaded(){
+
+    }
+
+    getImageUrl(image: ImageSummary): string{
+        return ImageUrlHelpers.getUrl(image);
+    }
+}

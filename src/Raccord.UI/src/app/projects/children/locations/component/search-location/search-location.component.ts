@@ -3,7 +3,7 @@ import { Location } from '../../model/location.model';
 import { SearchEngineService } from '../../../../../search/service/search-engine.service';
 import { LoadingService } from '../../../../../loading/service/loading.service';
 import { SearchResult } from '../../../../../search/model/search-result.model';
-import { SearchType } from '../../../../../shared/enums/search-type.enum';
+import { EntityType } from '../../../../../shared/enums/entity-type.enum';
 import { DialogService } from '../../../../../shared/service/dialog.service';
 
 @Component({
@@ -35,7 +35,7 @@ export class SearchLocationComponent{
 
         let loadingId = this._loadingService.startLoading();
         
-        this._searchEngineService.search({ searchText: this.sceneLocation.name, includeTypes: [SearchType.location], excludeTypes: [], projectId: this.sceneLocation.projectId}).then(results=>{
+        this._searchEngineService.search({ searchText: this.sceneLocation.name, includeTypes: [EntityType.location], excludeTypes: [], projectId: this.sceneLocation.projectId}).then(results=>{
             if(typeof(results)=='string'){
                 this._dialogService.error(results);
             }

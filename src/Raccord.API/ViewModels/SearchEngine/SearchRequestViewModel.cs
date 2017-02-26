@@ -6,17 +6,17 @@ namespace Raccord.API.ViewModels.SearchEngine
     // Viewmodel for making search requests
     public class SearchRequestViewModel
     {
-        private IEnumerable<SearchType> _includeTypes { get; set; }
-        private IEnumerable<SearchType> _excludeTypes { get; set; }
+        private IEnumerable<EntityType> _includeTypes { get; set; }
+        private IEnumerable<EntityType> _excludeTypes { get; set; }
         // Text to search on
         public string SearchText { get; set; }
 
         // Types to search for (if applicable)
-        public IEnumerable<SearchType> IncludeTypes
+        public IEnumerable<EntityType> IncludeTypes
         {
             get
             {
-                return _includeTypes ?? (_includeTypes = new List<SearchType>());
+                return _includeTypes ?? (_includeTypes = new List<EntityType>());
             }
             set
             {
@@ -25,11 +25,11 @@ namespace Raccord.API.ViewModels.SearchEngine
         }
 
         // Types to exclude (if applicable)
-        public IEnumerable<SearchType> ExcludeTypes
+        public IEnumerable<EntityType> ExcludeTypes
         {
             get
             {
-                return _excludeTypes ?? (_excludeTypes = new List<SearchType>());
+                return _excludeTypes ?? (_excludeTypes = new List<EntityType>());
             }
             set
             {

@@ -14,7 +14,7 @@ namespace Raccord.Application.Core.Services.SearchEngine
         public string DisplayName { get; set; }
 
         // Search result type
-        public SearchType Type { get; set; }
+        public EntityType Type { get; set; }
 
         // Optional extra info
         public string Info { get; set; }

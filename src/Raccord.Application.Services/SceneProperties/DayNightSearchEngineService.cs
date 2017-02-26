@@ -21,9 +21,9 @@ namespace Raccord.Application.Services.SceneProperties
             _dayNightRepository = dayNightRepository;
         }
 
-        public new SearchType GetType()
+        public new EntityType GetType()
         {
-            return SearchType.DayNight;
+            return EntityType.DayNight;
         }
 
         public SearchTypeResultDto GetResults(SearchRequestDto request)

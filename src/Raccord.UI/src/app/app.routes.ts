@@ -14,6 +14,7 @@ import { IntExtListComponent } from './projects';
 import { IntExtLandingComponent } from './projects';
 import { DayNightListComponent } from './projects';
 import { DayNightLandingComponent } from './projects';
+import { ImagesListComponent } from './projects';
 import { ScenePropertiesLandingComponent } from './projects';
 
 import { ProjectResolve } from './projects';
@@ -27,6 +28,8 @@ import { IntExtResolve } from './projects';
 import { IntExtsResolve } from './projects';
 import { DayNightResolve } from './projects';
 import { DayNightsResolve } from './projects';
+import { ImageResolve } from './projects';
+import { ImagesResolve } from './projects';
 
 import { CanDeactivateGuard } from './shared/service/can-deactivate-guard.service';
 
@@ -156,6 +159,19 @@ export const ROUTES: Routes = [
                   intExt: IntExtResolve
                 },
               }
+            ]
+          },
+          {
+            path: 'images',
+            children:[
+              {
+                path: '',
+                component: ImagesListComponent,
+                resolve:{
+                  project: ProjectSummaryResolve,
+                  images: ImagesResolve
+                },
+              },
             ]
           }
         ],

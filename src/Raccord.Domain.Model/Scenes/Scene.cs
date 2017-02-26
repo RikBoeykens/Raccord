@@ -1,12 +1,16 @@
+using System.Collections.Generic;
 using Raccord.Domain.Model.Projects;
 using Raccord.Domain.Model.Locations;
 using Raccord.Domain.Model.SceneProperties;
+using Raccord.Domain.Model.Images;
 
 namespace Raccord.Domain.Model.Scenes
 {
     /// Represents a scene
     public class Scene : Entity
     {
+        private ICollection<ImageScene> _images;
+
         // Number of the scene
         public string Number { get; set; }
 
@@ -42,5 +46,18 @@ namespace Raccord.Domain.Model.Scenes
 
         // Linked day/night
         public virtual Location Location { get; set; }
+
+        // Linked images
+        public virtual ICollection<ImageScene> ImageScenes
+        {
+            get
+            {
+                return _images ?? (_images = new List<ImageScene>());
+            }
+            set
+            {
+                _images = value;
+            }
+        }
     }
 }

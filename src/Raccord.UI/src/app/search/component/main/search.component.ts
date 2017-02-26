@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { SearchEngineService } from '../../service/search-engine.service';
 import { LoadingService } from '../../../loading/service/loading.service';
 import { SearchTypeResult } from '../../model/search-type-result.model';
-import { SearchType } from '../../../shared/enums/search-type.enum';
+import { EntityType } from '../../../shared/enums/entity-type.enum';
 import { DialogService } from '../../../shared/service/dialog.service';
 
 @Component({
@@ -35,7 +35,7 @@ export class SearchComponent {
 
         let loadingId = this._loadingService.startLoading();
         
-        this._searchEngineService.search({ searchText: this.searchText, includeTypes: [], excludeTypes: [SearchType.dayNight, SearchType.intExt]}).then(results=>{
+        this._searchEngineService.search({ searchText: this.searchText, includeTypes: [], excludeTypes: [EntityType.dayNight, EntityType.intExt]}).then(results=>{
             if(typeof(results)=='string'){
                 this._dialogService.error(results);
             }

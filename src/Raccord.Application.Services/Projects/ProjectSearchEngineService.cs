@@ -21,9 +21,9 @@ namespace Raccord.Application.Services.Projects
             _projectRepository = projectRepository;
         }
 
-        public new SearchType GetType()
+        public new EntityType GetType()
         {
-            return SearchType.Project;
+            return EntityType.Project;
         }
 
         public SearchTypeResultDto GetResults(SearchRequestDto request)

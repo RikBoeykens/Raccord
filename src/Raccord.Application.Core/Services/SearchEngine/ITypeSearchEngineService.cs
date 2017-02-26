@@ -6,7 +6,7 @@ namespace Raccord.Application.Core.Services.SearchEngine
     public interface ITypeSearchEngineService
     {
         //  Returns the specific type this search engine service is for
-        SearchType GetType();
+        EntityType GetType();
 
         //  Returns search type result for a search request
         SearchTypeResultDto GetResults(SearchRequestDto requestDto);

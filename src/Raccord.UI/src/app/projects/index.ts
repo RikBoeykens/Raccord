@@ -39,4 +39,10 @@ export { DayNightHttpService } from './children/scene-properties/service/day-nig
 export { DayNightResolve } from './children/scene-properties/service/day-night-resolve.service';
 export { DayNightsResolve } from './children/scene-properties/service/day-nights-resolve.service';
 
+export { ImagesListComponent } from './children/images/component/images-list/images-list.component';
+export { UploadImageComponent } from './children/images/component/upload-image/upload-image.component';
+export { ImageHttpService } from './children/images/service/image-http.service';
+export { ImageResolve } from './children/images/service/image-resolve.service';
+export { ImagesResolve } from './children/images/service/images-resolve.service';
+
 export { ScenePropertiesLandingComponent } from './children/scene-properties/component/scene-properties-landing/scene-properties-landing.component';

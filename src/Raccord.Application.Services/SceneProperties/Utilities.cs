@@ -56,7 +56,7 @@ namespace Raccord.Application.Services.SceneProperties
                 ID = intExt.ID,
                 RouteIDs = new long[]{intExt.ProjectID, intExt.ID},
                 DisplayName = intExt.Name,
-                Type = SearchType.IntExt,
+                Type = EntityType.IntExt,
             };
 
             return dto;
@@ -108,7 +108,7 @@ namespace Raccord.Application.Services.SceneProperties
                 ID = dayNight.ID,
                 RouteIDs = new long[]{dayNight.ProjectID, dayNight.ID},
                 DisplayName = dayNight.Name,
-                Type = SearchType.DayNight,
+                Type = EntityType.DayNight,
             };
 
             return dto;

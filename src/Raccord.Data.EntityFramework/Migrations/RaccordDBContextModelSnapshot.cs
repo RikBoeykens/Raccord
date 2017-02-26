@@ -15,6 +15,64 @@ namespace Raccord.Data.EntityFramework.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.0.0-rtm-21431");
 
+            modelBuilder.Entity("Raccord.Domain.Model.Images.Image", b =>
+                {
+                    b.Property<long>("ID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Description");
+
+                    b.Property<byte[]>("FileContent");
+
+                    b.Property<string>("FileName");
+
+                    b.Property<long>("ProjectID");
+
+                    b.Property<string>("Title");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("ProjectID");
+
+                    b.ToTable("Image");
+                });
+
+            modelBuilder.Entity("Raccord.Domain.Model.Images.ImageLocation", b =>
+                {
+                    b.Property<long>("ID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<long>("ImageID");
+
+                    b.Property<long>("LocationID");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("ImageID");
+
+                    b.HasIndex("LocationID");
+
+                    b.ToTable("ImageLocation");
+                });
+
+            modelBuilder.Entity("Raccord.Domain.Model.Images.ImageScene", b =>
+                {
+                    b.Property<long>("ID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<long>("ImageID");
+
+                    b.Property<long>("SceneID");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("ImageID");
+
+                    b.HasIndex("SceneID");
+
+                    b.ToTable("ImageScene");
+                });
+
             modelBuilder.Entity("Raccord.Domain.Model.Locations.Location", b =>
                 {
                     b.Property<long>("ID")
@@ -113,6 +171,40 @@ namespace Raccord.Data.EntityFramework.Migrations
                     b.HasIndex("ProjectID");
 
                     b.ToTable("Scenes");
+                });
+
+            modelBuilder.Entity("Raccord.Domain.Model.Images.Image", b =>
+                {
+                    b.HasOne("Raccord.Domain.Model.Projects.Project", "Project")
+                        .WithMany()
+                        .HasForeignKey("ProjectID")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Raccord.Domain.Model.Images.ImageLocation", b =>
+                {
+                    b.HasOne("Raccord.Domain.Model.Images.Image", "Image")
+                        .WithMany("ImageLocations")
+                        .HasForeignKey("ImageID")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Raccord.Domain.Model.Locations.Location", "Location")
+                        .WithMany("ImageLocations")
+                        .HasForeignKey("LocationID")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Raccord.Domain.Model.Images.ImageScene", b =>
+                {
+                    b.HasOne("Raccord.Domain.Model.Images.Image", "Image")
+                        .WithMany("ImageScenes")
+                        .HasForeignKey("ImageID")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Raccord.Domain.Model.Scenes.Scene", "Scene")
+                        .WithMany("ImageScenes")
+                        .HasForeignKey("SceneID")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Raccord.Domain.Model.Locations.Location", b =>

@@ -1,4 +1,4 @@
-export enum SearchType{
+export enum EntityType{
     project = 0,
     scene = 1,
     intExt = 2,

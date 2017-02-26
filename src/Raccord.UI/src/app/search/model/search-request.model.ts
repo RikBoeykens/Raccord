@@ -1,8 +1,8 @@
-import { SearchType } from '../../shared/enums/search-type.enum';
+import { EntityType } from '../../shared/enums/entity-type.enum';
 
 export class SearchRequest{
     searchText: string;
     projectId?: number;
-    includeTypes: SearchType[];
-    excludeTypes: SearchType[];
+    includeTypes: EntityType[];
+    excludeTypes: EntityType[];
 }

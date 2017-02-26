@@ -1,7 +1,7 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { SearchResult } from '../../model/search-result.model';
-import { SearchType } from '../../../shared/enums/search-type.enum';
+import { EntityType } from '../../../shared/enums/entity-type.enum';
 
 @Component({
     selector: 'raccord-search-result',
@@ -18,11 +18,11 @@ export class SearchResultComponent {
     }
 
     navigateToResult(){
-        if(this.result.type==SearchType.project)
+        if(this.result.type==EntityType.project)
             this.router.navigate(['projects', this.result.routeIDs[0]]);
-        if(this.result.type==SearchType.scene)
+        if(this.result.type==EntityType.scene)
             this.router.navigate(['projects', this.result.routeIDs[0], 'scenes', this.result.routeIDs[1]]);
-        if(this.result.type==SearchType.location)
+        if(this.result.type==EntityType.location)
             this.router.navigate(['projects', this.result.routeIDs[0], 'locations', this.result.routeIDs[1]]);
         this.resetSearchBar.emit();
     }

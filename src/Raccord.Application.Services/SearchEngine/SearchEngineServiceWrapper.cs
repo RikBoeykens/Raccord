@@ -6,6 +6,7 @@ using Raccord.Application.Core.Services.Projects;
 using Raccord.Application.Core.Services.Locations;
 using Raccord.Application.Core.Services.SceneProperties;
 using Raccord.Application.Core.Services.Scenes;
+using Raccord.Application.Core.Services.Images;
 using Raccord.Core.Enums;
 
 namespace Raccord.Application.Services.SearchEngine
@@ -18,13 +19,15 @@ namespace Raccord.Application.Services.SearchEngine
         private IIntExtSearchEngineService _intExtSearchEngineService;
         private ILocationSearchEngineService _locationSearchEngineService;
         private IDayNightSearchEngineService _dayNightSearchEngineService;
+        private IImageSearchEngineService _imageSearchEngineService;
 
         public SearchEngineServiceWrapper(
             IProjectSearchEngineService projectSearchEngineService,
             ISceneSearchEngineService sceneSearchEngineService,
             IIntExtSearchEngineService intExtSearchEngineService,
             ILocationSearchEngineService locationSearchEngineService,
-            IDayNightSearchEngineService dayNightSearchEngineService
+            IDayNightSearchEngineService dayNightSearchEngineService,
+            IImageSearchEngineService imageSearchEngineService
         )
         {
             if(projectSearchEngineService==null)
@@ -37,12 +40,15 @@ namespace Raccord.Application.Services.SearchEngine
                 throw new ArgumentNullException(nameof(locationSearchEngineService));
             if(dayNightSearchEngineService==null)
                 throw new ArgumentNullException(nameof(dayNightSearchEngineService));
+            if(imageSearchEngineService==null)
+                throw new ArgumentNullException(nameof(imageSearchEngineService));
 
             _projectSearchEngineService = projectSearchEngineService;
             _sceneSearchEngineService = sceneSearchEngineService;
             _intExtSearchEngineService = intExtSearchEngineService;
             _locationSearchEngineService = locationSearchEngineService;
             _dayNightSearchEngineService = dayNightSearchEngineService;
+            _imageSearchEngineService = imageSearchEngineService;
         }
         public IEnumerable<SearchTypeResultDto> GetResults(SearchRequestDto request)
         {
@@ -57,7 +63,7 @@ namespace Raccord.Application.Services.SearchEngine
             return results;
         }
 
-        private IEnumerable<ITypeSearchEngineService> GetSearchEngineServices(IEnumerable<SearchType> includeTypes, IEnumerable<SearchType> excludeTypes)
+        private IEnumerable<ITypeSearchEngineService> GetSearchEngineServices(IEnumerable<EntityType> includeTypes, IEnumerable<EntityType> excludeTypes)
         {
             var services = new List<ITypeSearchEngineService>
             {
@@ -65,7 +71,8 @@ namespace Raccord.Application.Services.SearchEngine
                 _sceneSearchEngineService,
                 _intExtSearchEngineService,
                 _locationSearchEngineService,
-                _dayNightSearchEngineService
+                _dayNightSearchEngineService,
+                _imageSearchEngineService
             };
 
             if(includeTypes.Any())

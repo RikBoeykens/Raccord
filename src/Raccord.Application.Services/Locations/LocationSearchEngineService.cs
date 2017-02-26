@@ -21,9 +21,9 @@ namespace Raccord.Application.Services.Locations
             _locationRepository = locationRepository;
         }
 
-        public new SearchType GetType()
+        public new EntityType GetType()
         {
-            return SearchType.Location;
+            return EntityType.Location;
         }
 
         public SearchTypeResultDto GetResults(SearchRequestDto request)

@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Raccord.Domain.Model.Projects;
 using Raccord.Domain.Model.Scenes;
+using Raccord.Domain.Model.Images;
 
 namespace Raccord.Domain.Model.Locations
 {
@@ -8,6 +9,7 @@ namespace Raccord.Domain.Model.Locations
     public class Location : Entity
     {
         private ICollection<Scene> _scenes;
+        private ICollection<ImageLocation> _images;
 
         /// Name of the location
         public string Name { get; set; }
@@ -31,6 +33,19 @@ namespace Raccord.Domain.Model.Locations
             set
             {
                 _scenes = value;
+            }
+        }
+
+        // Linked images
+        public virtual ICollection<ImageLocation> ImageLocations
+        {
+            get
+            {
+                return _images ?? (_images = new List<ImageLocation>());
+            }
+            set
+            {
+                _images = value;
             }
         }
     }

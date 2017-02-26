@@ -21,9 +21,9 @@ namespace Raccord.Application.Services.Scenes
             _sceneRepository = sceneRepository;
         }
 
-        public new SearchType GetType()
+        public new EntityType GetType()
         {
-            return SearchType.Scene;
+            return EntityType.Scene;
         }
 
         public SearchTypeResultDto GetResults(SearchRequestDto request)

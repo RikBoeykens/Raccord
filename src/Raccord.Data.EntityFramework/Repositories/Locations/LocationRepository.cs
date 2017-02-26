@@ -52,7 +52,9 @@ namespace Raccord.Data.EntityFramework.Repositories.Locations
             return query.Include(l=> l.Scenes)
                         .ThenInclude(s=> s.IntExt)
                         .Include(l=> l.Scenes)
-                        .ThenInclude(s=> s.DayNight);
+                        .ThenInclude(s=> s.DayNight)
+                        .Include(l=> l.ImageLocations)
+                        .ThenInclude(il=> il.Image);
         }
 
         private IQueryable<Location> GetIncludedSummary()

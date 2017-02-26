@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-
 namespace Raccord.Application.Core.Services
 {
     // Interface for general service functionality

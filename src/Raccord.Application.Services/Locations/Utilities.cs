@@ -58,7 +58,7 @@ namespace Raccord.Application.Services.Locations
                 RouteIDs = new long[]{location.ProjectID, location.ID},
                 DisplayName = location.Name,
                 Info = $"Project: {location.Project.Title}",
-                Type = SearchType.Location,
+                Type = EntityType.Location,
             };
 
             return dto;
