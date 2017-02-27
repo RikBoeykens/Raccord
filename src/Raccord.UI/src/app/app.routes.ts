@@ -15,6 +15,7 @@ import { IntExtLandingComponent } from './projects';
 import { DayNightListComponent } from './projects';
 import { DayNightLandingComponent } from './projects';
 import { ImagesListComponent } from './projects';
+import { ImageLandingComponent } from './projects';
 import { ScenePropertiesLandingComponent } from './projects';
 
 import { ProjectResolve } from './projects';
@@ -172,6 +173,14 @@ export const ROUTES: Routes = [
                   images: ImagesResolve
                 },
               },
+              {
+                path: ':imageId',
+                component: ImageLandingComponent,
+                resolve:{
+                  project: ProjectSummaryResolve,
+                  image: ImageResolve
+                },
+              }
             ]
           }
         ],

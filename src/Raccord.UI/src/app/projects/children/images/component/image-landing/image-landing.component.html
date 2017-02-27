@@ -3,15 +3,15 @@
         <a routerLink="/" class="breadcrumb">Dashboard</a>
         <a routerLink="/projects" class="breadcrumb">Projects</a>
         <a routerLink="/projects/{{project.id}}" class="breadcrumb">{{project.title}}</a>
-        <span class="breadcrumb">Images</span>
+        <a routerLink="/projects/{{project.id}}/images" class="breadcrumb">Images</a>
+        <span class="breadcrumb">{{image.title}}</span>
     </div>
 </div>
 <div class="row">
-    <upload-image [projectId]="project.id" (uploaded)="imagesUploaded()"></upload-image>
-</div>
-<div class="row image-list">
-    <div class="image-thumbnail" *ngFor="let image of images">
+    <div class="col s12">
         <img src="{{getImageUrl(image)}}" title="{{image.description}}">
-        <a [routerLink]="[image.id]">{{image.title}}</a>
     </div>
+</div>
+<div class="row">
+    <edit-image [image]="viewImage" (submitImage)="updateImage()"></edit-image>
 </div>

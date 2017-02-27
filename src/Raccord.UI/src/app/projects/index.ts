@@ -40,6 +40,8 @@ export { DayNightResolve } from './children/scene-properties/service/day-night-r
 export { DayNightsResolve } from './children/scene-properties/service/day-nights-resolve.service';
 
 export { ImagesListComponent } from './children/images/component/images-list/images-list.component';
+export { ImageLandingComponent } from './children/images/component/image-landing/image-landing.component';
+export { EditImageComponent } from './children/images/component/edit-image/edit-image.component';
 export { UploadImageComponent } from './children/images/component/upload-image/upload-image.component';
 export { ImageHttpService } from './children/images/service/image-http.service';
 export { ImageResolve } from './children/images/service/image-resolve.service';

@@ -36,8 +36,18 @@ export class ImagesListComponent extends OnInit {
         });
     }
 
-    imagesUploaded(){
+    getImages(){
+        
+        let loadingId = this._loadingService.startLoading();
 
+        this._imageHttpService.getAll(this.project.id).then(images => {
+            this.images = images;
+            this._loadingService.endLoading(loadingId);
+        });
+    }
+
+    imagesUploaded(){
+        this.getImages();
     }
 
     getImageUrl(image: ImageSummary): string{

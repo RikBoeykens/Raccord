@@ -50,6 +50,8 @@ import { EditDayNightComponent } from './projects';
 import { DayNightLandingComponent } from './projects';
 import { SearchDayNightComponent } from './projects';
 import { ImagesListComponent } from './projects';
+import { EditImageComponent } from './projects';
+import { ImageLandingComponent } from './projects';
 import { UploadImageComponent } from './projects';
 import { ScenePropertiesLandingComponent } from './projects';
 
@@ -81,6 +83,8 @@ const COMPONENTS =[
   EditDayNightComponent,
   DayNightLandingComponent,
   ImagesListComponent,
+  ImageLandingComponent,
+  EditImageComponent,
   UploadImageComponent,
   ScenePropertiesLandingComponent
 ];
