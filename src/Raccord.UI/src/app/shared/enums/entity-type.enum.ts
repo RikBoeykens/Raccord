@@ -3,5 +3,6 @@ export enum EntityType{
     scene = 1,
     intExt = 2,
     location = 3,
-    dayNight = 4
+    dayNight = 4,
+    image = 5
 }
