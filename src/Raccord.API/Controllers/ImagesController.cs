@@ -8,6 +8,7 @@ using Raccord.Application.Core.Services.Images;
 using Microsoft.Net.Http.Headers;
 using Microsoft.AspNetCore.Http;
 using Raccord.Core.Utilities;
+using Raccord.API.ViewModels.Common.SelectedEntity;
 
 namespace Raccord.API.Controllers
 {
@@ -177,6 +178,66 @@ namespace Raccord.API.Controllers
                 return new EmptyResult();
 
             }
+        }
+
+        
+        // POST api/images/link
+        [HttpPost("link")]
+        public JsonResult Link([FromBody]LinkImageViewModel vm)
+        {
+            var response = new JsonResponse();
+
+            try
+            {
+                var dto = vm.Translate();
+
+                _imageService.AddImageLink(dto);
+
+                response = new JsonResponse
+                {
+                    ok = true,
+                };
+            }
+            catch (Exception)
+            {
+                response = new JsonResponse
+                {
+                    ok = false,
+                    message = "Something went wrong while attempting to add image link",
+                };
+            }
+
+            return new JsonResult(response);
+        }
+
+        
+        // DELETE api/images/link
+        [HttpDelete("link")]
+        public JsonResult RemoveLink([FromBody]LinkImageViewModel vm)
+        {
+            var response = new JsonResponse();
+
+            try
+            {
+                var dto = vm.Translate();
+
+                _imageService.RemoveImageLink(dto);
+
+                response = new JsonResponse
+                {
+                    ok = true,
+                };
+            }
+            catch (Exception)
+            {
+                response = new JsonResponse
+                {
+                    ok = false,
+                    message = "Something went wrong while attempting to remove image link",
+                };
+            }
+
+            return new JsonResult(response);
         }
     }
 }

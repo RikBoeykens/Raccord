@@ -1,6 +1,7 @@
 using Raccord.Application.Core.Services.Images;
 using Raccord.API.ViewModels.Scenes;
 using Raccord.API.ViewModels.Locations;
+using Raccord.API.ViewModels.Common.SelectedEntity;
 using System.Linq;
 
 namespace Raccord.API.ViewModels.Images
@@ -57,6 +58,15 @@ namespace Raccord.API.ViewModels.Images
                 Title = vm.Title,
                 Description = vm.Description,
                 ProjectID = vm.ProjectID,
+            };
+        }
+
+        public static LinkImageDto Translate(this LinkImageViewModel vm)
+        {
+            return new LinkImageDto
+            {
+                ImageID = vm.ImageID,
+                SelectedEntity = vm.SelectedEntity.Translate(),
             };
         }
     }
