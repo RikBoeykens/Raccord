@@ -54,6 +54,7 @@ import { EditImageComponent } from './projects';
 import { ImageLandingComponent } from './projects';
 import { UploadImageComponent } from './projects';
 import { ScenePropertiesLandingComponent } from './projects';
+import { SelectEntityComponent } from './shared';
 
 const COMPONENTS =[
   AppComponent,
@@ -86,7 +87,8 @@ const COMPONENTS =[
   ImageLandingComponent,
   EditImageComponent,
   UploadImageComponent,
-  ScenePropertiesLandingComponent
+  ScenePropertiesLandingComponent,
+  SelectEntityComponent
 ];
 
 // Services

@@ -1,0 +1,1 @@
+export { SelectEntityComponent } from './component/select-entity/select-entity.component';
