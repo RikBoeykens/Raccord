@@ -53,4 +53,24 @@ export class ImagesListComponent extends OnInit {
     getImageUrl(image: ImageSummary): string{
         return ImageUrlHelpers.getUrl(image);
     }
+
+    remove(image: ImageSummary){
+
+        if(this._dialogService.confirm(`Are you sure you want to remove image ${image.title}?`)){
+
+            let loadingId = this._loadingService.startLoading();
+
+            this._imageHttpService.delete(image.id).then(data=>{
+                if(typeof(data)== 'string'){
+                    this._dialogService.error(data);
+                    this.getImages();
+                }else{
+                    this._dialogService.success('The image was successfully removed');
+                    this.getImages();
+                }
+            }).catch()
+            .then(()=> this._loadingService.endLoading(loadingId));
+        }
+
+    }
 }

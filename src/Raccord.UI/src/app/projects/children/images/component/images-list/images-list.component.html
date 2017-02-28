@@ -13,5 +13,6 @@
     <div class="image-thumbnail" *ngFor="let image of images">
         <img src="{{getImageUrl(image)}}" title="{{image.description}}">
         <a [routerLink]="[image.id]">{{image.title}}</a>
+        <button md-button (click)="remove(image)"><md-icon>delete</md-icon></button>
     </div>
 </div>
