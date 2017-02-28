@@ -5,6 +5,7 @@ using System.IO;
 using Raccord.Domain.Model.Images;
 using Raccord.Application.Core.Services.Images;
 using Raccord.Data.EntityFramework.Repositories.Images;
+using Raccord.Core.Enums;
 
 namespace Raccord.Application.Services.Images
 {
@@ -115,6 +116,88 @@ namespace Raccord.Application.Services.Images
             };
 
             return dto;
+        }
+
+        public void AddImageLink(LinkImageDto dto)
+        {
+            var image = _imageRepository.GetSingle(dto.ImageID);
+
+            switch(dto.SelectedEntity.Type)
+            {
+                case EntityType.Scene:
+                    AddSceneLink(image, dto.SelectedEntity.EntityID);
+                    break;
+                case EntityType.Location:
+                    AddLocationLink(image, dto.SelectedEntity.EntityID);
+                    break;
+            }
+
+            _imageRepository.Edit(image);
+
+            _imageRepository.Commit();        
+        }
+
+        public void RemoveImageLink(LinkImageDto dto)
+        {
+            var image = _imageRepository.GetSingle(dto.ImageID);
+
+            switch(dto.SelectedEntity.Type)
+            {
+                case EntityType.Scene:
+                    RemoveSceneLink(image, dto.SelectedEntity.EntityID);
+                    break;
+                case EntityType.Location:
+                    RemoveLocationLink(image, dto.SelectedEntity.EntityID);
+                    break;
+            }
+
+            _imageRepository.Edit(image);
+
+            _imageRepository.Commit();   
+        }
+
+        private void AddSceneLink(Image image, long sceneID)
+        {
+            if(image.ImageScenes.Any(i=> i.SceneID==sceneID))
+                return;
+
+            image.ImageScenes.Add(new ImageScene
+            {
+                ImageID = image.ID,
+                SceneID = sceneID,
+            });
+        }
+
+        private void RemoveSceneLink(Image image, long sceneID)
+        {
+            var toRemove = image.ImageScenes.FirstOrDefault(i=> i.SceneID==sceneID);
+
+            if(toRemove==null)
+                return;
+
+            image.ImageScenes.Remove(toRemove);
+        }
+
+        private void AddLocationLink(Image image, long locationID)
+        {
+            if(image.ImageLocations.Any(i=> i.LocationID==locationID))
+                return;
+
+            image.ImageLocations.Add(new ImageLocation
+            {
+                ImageID = image.ID,
+                LocationID = locationID,
+            });
+        }
+
+        private void RemoveLocationLink(Image image, long locationID)
+        {
+            var toRemove = image.ImageLocations.FirstOrDefault(i=> i.LocationID==locationID);
+
+            if(toRemove==null)
+                return;
+
+            image.ImageLocations.Remove(toRemove);
         }
     }
 }
