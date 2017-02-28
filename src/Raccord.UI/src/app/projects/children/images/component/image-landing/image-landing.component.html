@@ -8,10 +8,14 @@
     </div>
 </div>
 <div class="row">
+    <edit-image [image]="viewImage" (submitImage)="updateImage()"></edit-image>
+</div>
+<div class="row">
     <div class="col s12">
         <img src="{{getImageUrl(image)}}" title="{{image.description}}">
     </div>
 </div>
 <div class="row">
-    <edit-image [image]="viewImage" (submitImage)="updateImage()"></edit-image>
+    <h4>{{image.title}}</h4>
+    <p>{{image.description}}</p>
 </div>
