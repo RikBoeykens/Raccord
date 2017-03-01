@@ -4,9 +4,14 @@ import { ImageHttpService } from '../../service/image-http.service';
 import { LoadingService } from '../../../../../loading/service/loading.service';
 import { DialogService } from '../../../../../shared/service/dialog.service';
 import { Image } from '../../model/image.model';
+import { LinkImage } from '../../model/link-image.model';
 import { FullImage } from '../../model/full-image.model';
 import { ProjectSummary } from '../../../../model/project-summary.model';
+import { Scene } from '../../../scenes/model/scene.model';
+import { Location } from '../../../locations/model/location.model';
 import { ImageUrlHelpers } from '../../helpers/image-url.helpers';
+import { EntityType } from '../../../../../shared/enums/entity-type.enum';
+import { SelectedEntity } from '../../../../../shared/model/selected-entity.model';
 
 @Component({
     templateUrl: 'image-landing.component.html',
@@ -16,6 +21,7 @@ export class ImageLandingComponent {
     image: FullImage;
     viewImage: Image;
     project: ProjectSummary;
+    imageLinkTypes: EntityType[] = [EntityType.location, EntityType.scene];
 
     constructor(
         private _imageHttpService: ImageHttpService,
@@ -56,6 +62,48 @@ export class ImageLandingComponent {
                 this._dialogService.error(data);
             }else{
                 this.getImage();
+            }
+        }).catch()
+        .then(()=>
+            this._loadingService.endLoading(loadingId)
+        );
+    }
+
+    linkImage(selectedEntity: SelectedEntity){
+        let loadingId = this._loadingService.startLoading();
+
+        this._imageHttpService.addImageLink(new LinkImage({imageId: this.image.id, selectedEntity: selectedEntity})).then(data=>{
+            if(typeof(data)=='string'){
+                this._dialogService.error(data);
+            }else{
+                this.getImage();
+                this._dialogService.success("Successfully linked image.");
+            }
+        }).catch()
+        .then(()=>
+            this._loadingService.endLoading(loadingId)
+        );
+    }
+
+    removeSceneLink(scene: Scene){
+        let selectedEntity = new SelectedEntity({entityId: scene.id, type: EntityType.scene});
+        this.removeImageLink(selectedEntity);
+    }
+
+    removeLocationLink(location: Location){
+        let selectedEntity = new SelectedEntity({entityId: location.id, type: EntityType.location});
+        this.removeImageLink(selectedEntity);
+    }
+
+    private removeImageLink(selectedEntity: SelectedEntity){
+        let loadingId = this._loadingService.startLoading();
+
+        this._imageHttpService.removeImageLink(new LinkImage({imageId: this.image.id, selectedEntity: selectedEntity})).then(data=>{
+            if(typeof(data)=='string'){
+                this._dialogService.error(data);
+            }else{
+                this.getImage();
+                this._dialogService.success("Successfully removed link.");
             }
         }).catch()
         .then(()=>

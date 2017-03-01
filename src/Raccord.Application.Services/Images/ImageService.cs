@@ -120,7 +120,7 @@ namespace Raccord.Application.Services.Images
 
         public void AddImageLink(LinkImageDto dto)
         {
-            var image = _imageRepository.GetSingle(dto.ImageID);
+            var image = _imageRepository.GetFull(dto.ImageID);
 
             switch(dto.SelectedEntity.Type)
             {
@@ -139,7 +139,7 @@ namespace Raccord.Application.Services.Images
 
         public void RemoveImageLink(LinkImageDto dto)
         {
-            var image = _imageRepository.GetSingle(dto.ImageID);
+            var image = _imageRepository.GetFull(dto.ImageID);
 
             switch(dto.SelectedEntity.Type)
             {

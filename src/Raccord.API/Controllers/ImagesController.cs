@@ -211,8 +211,8 @@ namespace Raccord.API.Controllers
         }
 
         
-        // DELETE api/images/link
-        [HttpDelete("link")]
+        // POST api/images/removelink
+        [HttpPost("removelink")]
         public JsonResult RemoveLink([FromBody]LinkImageViewModel vm)
         {
             var response = new JsonResponse();

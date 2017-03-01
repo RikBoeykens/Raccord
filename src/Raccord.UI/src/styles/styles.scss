@@ -158,3 +158,17 @@ ul.autocomplete-content{
     }
   }
 }
+
+img.image-landing{
+  max-width: 100%;
+}
+
+.image-link-item{
+  &:not(:last-child)::after{
+    content: " -  ";
+  }
+}
+
+span.action-span{
+  cursor: pointer;
+}

@@ -3,6 +3,7 @@ import { SearchEngineService } from '../../../search/service/search-engine.servi
 import { LoadingService } from '../../../loading/service/loading.service';
 import { SearchResult } from '../../../search/model/search-result.model';
 import { SelectedEntity } from '../../model/selected-entity.model';
+import { SearchTypeResult } from '../../../search/model/search-type-result.model';
 import { EntityType } from '../../enums/entity-type.enum';
 import { DialogService } from '../../service/dialog.service';
 
@@ -18,7 +19,7 @@ export class SelectEntityComponent{
     @Output() entitySelected = new EventEmitter<SelectedEntity>();
 
     searchText: string;
-    searchResults: SearchResult[] = [];
+    searchTypeResults: SearchTypeResult[] = [];
 
     constructor(
         private _searchEngineService: SearchEngineService,
@@ -28,7 +29,7 @@ export class SelectEntityComponent{
     }
 
     clearSearch(){
-        this.searchResults = [];
+        this.searchTypeResults = [];
     }
 
     doSearch(){
@@ -44,7 +45,7 @@ export class SelectEntityComponent{
                 this._dialogService.error(results);
             }
             else{
-                this.searchResults = results[0].results;
+                this.searchTypeResults = results.filter(typeResult=> typeResult.count>0);
             }
         }).catch()
         .then(()=> this._loadingService.endLoading(loadingId));
@@ -54,5 +55,6 @@ export class SelectEntityComponent{
         var selectedEntity = new SelectedEntity({ entityId: result.id, type: result.type });
         this.entitySelected.emit(selectedEntity);
         this.clearSearch();
+        this.searchText = '';
     }
 }

@@ -5,6 +5,7 @@ import { AppSettings } from '../../../../app.settings';
 import { FullImage } from '../model/full-image.model';
 import { ImageSummary } from '../model/image-summary.model';
 import { Image } from '../model/image.model';
+import { LinkImage } from '../model/link-image.model';
 import { JsonResponse } from '../../../../shared/model/json-response.model';
 
 @Injectable()
@@ -53,5 +54,19 @@ export class ImageHttpService extends BaseHttpService {
         var uri = `${this._baseUri}/${projectId}/upload`;
 
         return this.doFilePost(files, null, uri);
+    }
+
+    addImageLink(link: LinkImage)
+    {
+        var uri = `${this._baseUri}/link`;
+
+        return this.doPost(link, uri);
+    }
+
+    removeImageLink(link: LinkImage)
+    {
+        var uri = `${this._baseUri}/removelink`;
+
+        return this.doPost(link, uri);
     }
 }

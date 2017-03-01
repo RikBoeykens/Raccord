@@ -12,10 +12,31 @@
 </div>
 <div class="row">
     <div class="col s12">
-        <img src="{{getImageUrl(image)}}" title="{{image.description}}">
+        <img class="image-landing" src="{{getImageUrl(image)}}" title="{{image.description}}">
     </div>
 </div>
 <div class="row">
     <h4>{{image.title}}</h4>
     <p>{{image.description}}</p>
+    <p>
+        <span class="image-link-item" *ngFor="let scene of image.scenes">
+            <a routerLink="/projects/{{project.id}}/scenes/{{scene.id}}">
+                {{scene.number}}. {{scene.intExt.name}} {{scene.location.name}} {{scene.dayNight.name}} - {{scene.summary}}
+            </a>
+            <span class="remove-image-link action-span" (click)="removeSceneLink(scene)">(remove)</span>
+        </span>
+        <span class="image-link-item" *ngFor="let location of image.locations">
+            <a routerLink="/projects/{{project.id}}/locations/{{location.id}}">
+                {{location.name}}
+            </a>
+            <span class="remove-image-link action-span" (click)="removeLocationLink(location)">(remove)</span>
+        </span>
+    <p>
+</div>
+<div class="row">
+    <h5>Add link</h5>
+    <select-entity [projectId]="project.id"
+                   [includeTypes]="imageLinkTypes"
+                   (entitySelected)="linkImage($event)">
+    </select-entity>
 </div>
