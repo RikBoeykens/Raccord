@@ -18,6 +18,7 @@ namespace Raccord.API.ViewModels.Locations
                 ProjectID = dto.ProjectID,
                 Scenes = dto.Scenes.Select(s=> s.Translate()),
                 Images = dto.Images.Select(i=> i.Translate()),
+                PrimaryImage = dto.PrimaryImage.Translate(),
             };
         }
 
@@ -31,6 +32,7 @@ namespace Raccord.API.ViewModels.Locations
                 Description = dto.Description,
                 ProjectID = dto.ProjectID,
                 SceneCount = dto.SceneCount,
+                PrimaryImage = dto.PrimaryImage.Translate(),
             };
         }
 

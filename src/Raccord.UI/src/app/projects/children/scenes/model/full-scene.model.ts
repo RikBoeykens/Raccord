@@ -6,6 +6,7 @@ import { Image } from '../../images/model/image.model';
 
 export class FullScene extends Scene{
     images: Image[];
+    primaryImage: Image;
 
     constructor(obj?: {
                         id: number,
@@ -16,11 +17,13 @@ export class FullScene extends Scene{
                         location: Location,
                         dayNight: DayNight,
                         projectId: number,
-                        images: Image[]
+                        images: Image[],
+                        primaryImage: Image
                     }){
         super(obj);
         if(obj){
             this.images = obj.images;
+            this.primaryImage = obj.primaryImage;
         }
     }
 }

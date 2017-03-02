@@ -21,6 +21,7 @@ namespace Raccord.API.ViewModels.Scenes
                 Location = dto.Location.Translate(),
                 DayNight = dto.DayNight.Translate(),
                 Images = dto.Images.Select(i=> i.Translate()),
+                PrimaryImage = dto.PrimaryImage.Translate(),
                 ProjectID = dto.ProjectID,
             };
         }
@@ -36,6 +37,7 @@ namespace Raccord.API.ViewModels.Scenes
                 IntExt = dto.IntExt.Translate(),
                 Location = dto.Location.Translate(),
                 DayNight = dto.DayNight.Translate(),
+                PrimaryImage = dto.PrimaryImage.Translate(),
                 ProjectID = dto.ProjectID,
             };
         }

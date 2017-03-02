@@ -5,6 +5,7 @@ import { Image } from '../../images/model/image.model';
 export class FullLocation extends Location{
     scenes: SceneSummary[];
     images: Image[];
+    primaryImage: Image;
 
     constructor(obj?: {
                         id: number, 
@@ -12,12 +13,14 @@ export class FullLocation extends Location{
                         description: string,
                         projectId: number,
                         scenes: SceneSummary[],
-                        images: Image[]
+                        images: Image[],
+                        primaryImage: Image
                     }){
         super(obj);
         if(obj){
             this.scenes = obj.scenes;
             this.images = obj.images;
+            this.primaryImage = obj.primaryImage;
         }
     }
 }

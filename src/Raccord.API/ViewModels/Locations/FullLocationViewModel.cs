@@ -9,6 +9,7 @@ namespace Raccord.API.ViewModels.Locations
     {
         private IEnumerable<SceneSummaryViewModel> _scenes;
         private IEnumerable<ImageViewModel> _images;
+        private ImageViewModel _primaryImage;
 
         // Scenes linked to the location
         public IEnumerable<SceneSummaryViewModel> Scenes
@@ -33,6 +34,19 @@ namespace Raccord.API.ViewModels.Locations
             set
             {
                 _images = value;
+            }
+        }
+
+        // Primary image linked to the location
+        public ImageViewModel PrimaryImage
+        {
+            get
+            {
+                return _primaryImage ?? (_primaryImage = new ImageViewModel());
+            }
+            set
+            {
+                _primaryImage = value;
             }
         }
     }
