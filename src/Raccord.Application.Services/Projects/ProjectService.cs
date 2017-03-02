@@ -34,7 +34,7 @@ namespace Raccord.Application.Services.Projects
         // Gets a single project by id
         public FullProjectDto Get(long ID)
         {
-            var project = _projectRepository.GetSingle(ID);
+            var project = _projectRepository.GetFull(ID);
 
             var projectDto = project.TranslateFull();
 
@@ -44,7 +44,7 @@ namespace Raccord.Application.Services.Projects
         // Gets a summary of a single project
         public ProjectSummaryDto GetSummary(long ID)
         {
-            var project = _projectRepository.GetSingle(ID);
+            var project = _projectRepository.GetSummary(ID);
 
             var projectDto = project.TranslateSummary();
 

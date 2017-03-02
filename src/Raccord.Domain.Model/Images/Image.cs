@@ -22,6 +22,9 @@ namespace Raccord.Domain.Model.Images
         // File name of the image
         public string FileName { get; set; }
 
+        // Indicates if the image is the primary image for the project
+        public bool IsPrimaryImage { get; set; }
+
         // ID of the linked project
         public long ProjectID { get; set; }
 

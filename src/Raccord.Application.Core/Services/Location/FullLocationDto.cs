@@ -9,6 +9,7 @@ namespace Raccord.Application.Core.Services.Locations
     {
         private IEnumerable<SceneSummaryDto> _scenes;
         private IEnumerable<ImageDto> _images;
+        private ImageDto _primaryImage;
 
         // Scenes linked to the location
         public IEnumerable<SceneSummaryDto> Scenes
@@ -33,6 +34,19 @@ namespace Raccord.Application.Core.Services.Locations
             set
             {
                 _images = value;
+            }
+        }
+
+        // Primary Image for the Location
+        public ImageDto PrimaryImage
+        {
+            get
+            {
+                return _primaryImage ?? (_primaryImage = new ImageDto());
+            }
+            set
+            {
+                _primaryImage = value;
             }
         }
     }

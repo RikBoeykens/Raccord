@@ -61,7 +61,9 @@ namespace Raccord.Data.EntityFramework.Repositories.Locations
         {
             IQueryable<Location> query = _context.Set<Location>();
 
-            return query.Include(l=> l.Scenes);
+            return query.Include(l=> l.Scenes)
+                        .Include(l=> l.ImageLocations)
+                        .ThenInclude(il=> il.Image);
         }
 
         private IQueryable<Location> GetIncluded()

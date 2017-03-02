@@ -24,6 +24,7 @@ namespace Raccord.Application.Services.Scenes
                 Location = scene.Location.Translate(),
                 DayNight = scene.DayNight.Translate(),
                 Images = scene.ImageScenes.Select(i=> i.Image.Translate()),
+                PrimaryImage = scene.ImageScenes.FirstOrDefault(i=> i.IsPrimaryImage)?.Image.Translate(),
                 ProjectID = scene.ProjectID,
             };
 
@@ -40,6 +41,7 @@ namespace Raccord.Application.Services.Scenes
                 IntExt = scene.IntExt.Translate(),
                 Location = scene.Location.Translate(),
                 DayNight = scene.DayNight.Translate(),
+                PrimaryImage = scene.ImageScenes.FirstOrDefault(i=> i.IsPrimaryImage)?.Image.Translate(),
                 ProjectID = scene.ProjectID,
             };
 

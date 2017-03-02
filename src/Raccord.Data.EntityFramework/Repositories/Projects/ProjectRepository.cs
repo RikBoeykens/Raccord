@@ -1,6 +1,7 @@
 using Raccord.Domain.Model.Projects;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace Raccord.Data.EntityFramework.Repositories.Projects
 {
@@ -11,6 +12,20 @@ namespace Raccord.Data.EntityFramework.Repositories.Projects
         {
         }
 
+        public Project GetFull(long ID)
+        {
+            var query = GetIncludedFull();
+
+            return query.FirstOrDefault(l => l.ID == ID);
+        }
+
+        public Project GetSummary(long ID)
+        {
+            var query = GetIncludedSummary();
+
+            return query.FirstOrDefault(l => l.ID == ID);
+        }
+
         public int SearchCount(string searchText)
         {
             return _context.Set<Project>().Count(p=> p.Title.ToLower().Contains(searchText.ToLower()));            
@@ -19,6 +34,27 @@ namespace Raccord.Data.EntityFramework.Repositories.Projects
         public IEnumerable<Project> Search(string searchText)
         {
             return _context.Set<Project>().Where(p=> p.Title.ToLower().Contains(searchText.ToLower()));
+        }
+
+        private IQueryable<Project> GetIncludedFull()
+        {
+            IQueryable<Project> query = _context.Set<Project>();
+
+            return query.Include(l=> l.Images);
+        }
+
+        private IQueryable<Project> GetIncludedSummary()
+        {
+            IQueryable<Project> query = _context.Set<Project>();
+
+            return query.Include(l=> l.Images);
+        }
+
+        private IQueryable<Project> GetIncluded()
+        {
+            IQueryable<Project> query = _context.Set<Project>();
+
+            return query;
         }
     }
 }

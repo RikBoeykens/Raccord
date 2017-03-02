@@ -20,6 +20,7 @@ namespace Raccord.Application.Services.Locations
                 Description = location.Description,
                 Scenes = location.Scenes.Select(s=> s.TranslateSummary()),
                 Images = location.ImageLocations.Select(s=> s.Image.Translate()),
+                PrimaryImage = location.ImageLocations.FirstOrDefault(il=> il.IsPrimaryImage)?.Image.Translate(),
                 ProjectID = location.ProjectID,
             };
 
@@ -34,6 +35,7 @@ namespace Raccord.Application.Services.Locations
                 Description = location.Description,
                 ProjectID = location.ProjectID,
                 SceneCount = location.Scenes.Count(),
+                PrimaryImage = location.ImageLocations.FirstOrDefault(il=> il.IsPrimaryImage)?.Image.Translate(),
             };
 
             return dto;

@@ -2,6 +2,8 @@ using Raccord.Application.Core.Services.Projects;
 using Raccord.Domain.Model.Projects;
 using Raccord.Application.Core.Services.SearchEngine;
 using Raccord.Core.Enums;
+using System.Linq;
+using Raccord.Application.Services.Images;
 
 namespace Raccord.Application.Services.Projects
 {
@@ -14,6 +16,7 @@ namespace Raccord.Application.Services.Projects
             {
                 ID = project.ID,
                 Title = project.Title,
+                PrimaryImage = project.Images.FirstOrDefault(i=> i.IsPrimaryImage)?.Translate(),
             };
 
             return dto;
@@ -24,6 +27,7 @@ namespace Raccord.Application.Services.Projects
             {
                 ID = project.ID,
                 Title = project.Title,
+                PrimaryImage = project.Images.FirstOrDefault(i=> i.IsPrimaryImage)?.Translate(),
             };
 
             return dto;
