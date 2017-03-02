@@ -1,6 +1,7 @@
 using Raccord.Application.Core.Services.Locations;
 using Raccord.API.ViewModels.Scenes;
 using System.Linq;
+using Raccord.API.ViewModels.Images;
 
 namespace Raccord.API.ViewModels.Locations
 {
@@ -16,6 +17,7 @@ namespace Raccord.API.ViewModels.Locations
                 Description = dto.Description,
                 ProjectID = dto.ProjectID,
                 Scenes = dto.Scenes.Select(s=> s.Translate()),
+                Images = dto.Images.Select(i=> i.Translate()),
             };
         }
 

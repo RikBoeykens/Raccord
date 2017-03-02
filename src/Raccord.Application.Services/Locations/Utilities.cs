@@ -4,6 +4,7 @@ using Raccord.Domain.Model.Locations;
 using Raccord.Application.Services.Scenes;
 using Raccord.Application.Core.Services.SearchEngine;
 using Raccord.Core.Enums;
+using Raccord.Application.Services.Images;
 
 namespace Raccord.Application.Services.Locations
 {
@@ -18,6 +19,7 @@ namespace Raccord.Application.Services.Locations
                 Name = location.Name,
                 Description = location.Description,
                 Scenes = location.Scenes.Select(s=> s.TranslateSummary()),
+                Images = location.ImageLocations.Select(s=> s.Image.Translate()),
                 ProjectID = location.ProjectID,
             };
 

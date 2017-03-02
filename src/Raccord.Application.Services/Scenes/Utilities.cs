@@ -4,6 +4,8 @@ using Raccord.Application.Services.Locations;
 using Raccord.Application.Services.SceneProperties;
 using Raccord.Application.Core.Services.SearchEngine;
 using Raccord.Core.Enums;
+using System.Linq;
+using Raccord.Application.Services.Images;
 
 namespace Raccord.Application.Services.Scenes
 {
@@ -21,6 +23,7 @@ namespace Raccord.Application.Services.Scenes
                 IntExt = scene.IntExt.Translate(),
                 Location = scene.Location.Translate(),
                 DayNight = scene.DayNight.Translate(),
+                Images = scene.ImageScenes.Select(i=> i.Image.Translate()),
                 ProjectID = scene.ProjectID,
             };
 
