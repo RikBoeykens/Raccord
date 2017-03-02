@@ -110,4 +110,36 @@ export class ImageLandingComponent {
             this._loadingService.endLoading(loadingId)
         );
     }
+
+    public setAsPrimary(image: FullImage){
+        let loadingId = this._loadingService.startLoading();
+
+        this._imageHttpService.setAsPrimary(image.id).then(data=>{
+            if(typeof(data)=='string'){
+                this._dialogService.error(data);
+            }else{
+                this.getImage();
+                this._dialogService.success("Successfully set as primary for project.");
+            }
+        }).catch()
+        .then(()=>
+            this._loadingService.endLoading(loadingId)
+        );
+    }
+
+    public removeAsPrimary(image: FullImage){
+        let loadingId = this._loadingService.startLoading();
+
+        this._imageHttpService.removeAsPrimary(image.id).then(data=>{
+            if(typeof(data)=='string'){
+                this._dialogService.error(data);
+            }else{
+                this.getImage();
+                this._dialogService.success("Successfully removed as primary for project.");
+            }
+        }).catch()
+        .then(()=>
+            this._loadingService.endLoading(loadingId)
+        );
+    }
 }

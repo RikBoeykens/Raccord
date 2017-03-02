@@ -156,6 +156,24 @@ namespace Raccord.Application.Services.Images
             _imageRepository.Commit();   
         }
 
+        public void SetAsPrimary(long ID)
+        {
+            ClearPrimaryImages();
+
+            var image = _imageRepository.GetSingle(ID);
+            image.IsPrimaryImage = true;
+            _imageRepository.Edit(image);
+            _imageRepository.Commit();
+        }
+
+        public void RemoveAsPrimary(long ID)
+        {
+            var image = _imageRepository.GetSingle(ID);
+            image.IsPrimaryImage = false;
+            _imageRepository.Edit(image);
+            _imageRepository.Commit();
+        }
+
         private void AddSceneLink(Image image, long sceneID)
         {
             if(image.ImageScenes.Any(i=> i.SceneID==sceneID))
@@ -198,6 +216,20 @@ namespace Raccord.Application.Services.Images
                 return;
 
             image.ImageLocations.Remove(toRemove);
+        }
+
+        // Clears previous primary images
+        private void ClearPrimaryImages()
+        {
+            var primaryImages = _imageRepository.FindBy(i=> i.IsPrimaryImage);
+
+            foreach(var image in primaryImages)
+            {
+                image.IsPrimaryImage = false;
+                _imageRepository.Edit(image);
+            }
+
+            _imageRepository.Commit();
         }
     }
 }

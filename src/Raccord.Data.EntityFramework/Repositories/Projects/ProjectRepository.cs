@@ -12,6 +12,13 @@ namespace Raccord.Data.EntityFramework.Repositories.Projects
         {
         }
 
+        public override IEnumerable<Project> GetAll()
+        {
+            var query = GetIncludedSummary();
+
+            return query;
+        }
+
         public Project GetFull(long ID)
         {
             var query = GetIncludedFull();

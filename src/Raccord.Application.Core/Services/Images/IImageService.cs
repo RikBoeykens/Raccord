@@ -31,5 +31,11 @@ namespace Raccord.Application.Core.Services.Images
 
         // Removes link to entity
         void RemoveImageLink(LinkImageDto dto);
+
+        // Sets the image as primary image for project
+        void SetAsPrimary(long ID);
+
+        // Unsets the image as primary image for project
+        void RemoveAsPrimary(long ID);
     }
 }

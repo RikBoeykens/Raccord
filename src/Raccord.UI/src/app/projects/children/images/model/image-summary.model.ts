@@ -1,6 +1,7 @@
 import { Image } from './image.model';
 
 export class ImageSummary extends Image{
+    isPrimary: boolean;
 
     constructor(obj?: {
                         id: number, 
@@ -8,9 +9,11 @@ export class ImageSummary extends Image{
                         description: string,
                         fileName: string,
                         projectId: number,
+                        isPrimary: boolean
                     }){
         super(obj);
         if(obj){
+            this.isPrimary = obj.isPrimary;
         }
     }
 }

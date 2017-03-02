@@ -3,6 +3,7 @@ import { Scene } from '../../scenes/model/scene.model';
 import { Location } from '../../locations/model/location.model';
 
 export class FullImage extends Image{
+    isPrimary: boolean;
     scenes: Scene[];
     locations: Location[];
 
@@ -12,11 +13,13 @@ export class FullImage extends Image{
                         description: string,
                         fileName: string,
                         projectId: number,
+                        isPrimary: boolean,
                         scenes: Scene[],
                         locations: Location[]
                     }){
         super(obj);
         if(obj){
+            this.isPrimary = obj.isPrimary;
             this.scenes = obj.scenes;
             this.locations = obj.locations;
         }

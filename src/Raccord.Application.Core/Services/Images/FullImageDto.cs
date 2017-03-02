@@ -9,6 +9,9 @@ namespace Raccord.Application.Core.Services.Images
     {
         private IEnumerable<SceneDto> _scenes;
         private IEnumerable<LocationDto> _locations;
+        
+        // Indicates if the image is primary image for the project
+        public bool IsPrimaryImage { get; set; }
 
         // Scenes linked to the image
         public IEnumerable<SceneDto> Scenes

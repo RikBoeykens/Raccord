@@ -33,6 +33,12 @@
         </span>
     <p>
 </div>
+<div class="row action-row">
+    <div class="col s12">
+        <button md-button *ngIf="!image.isPrimaryImage" (click)="setAsPrimary(image)"><md-icon>flash_on</md-icon> Set as Primary for Project</button>
+        <button md-button *ngIf="image.isPrimaryImage" (click)="removeAsPrimary(image)"><md-icon>flash_off</md-icon> Remove as Primary for Project</button>
+    </div>
+</div>
 <div class="row">
     <h5>Add link</h5>
     <select-entity [projectId]="project.id"

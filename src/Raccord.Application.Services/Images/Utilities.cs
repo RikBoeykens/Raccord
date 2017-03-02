@@ -23,6 +23,7 @@ namespace Raccord.Application.Services.Images
                 Scenes = image.ImageScenes.Select(s=> s.Scene.Translate()),
                 Locations = image.ImageLocations.Select(il=> il.Location.Translate()),
                 ProjectID = image.ProjectID,
+                IsPrimaryImage = image.IsPrimaryImage,
             };
 
             return dto;
@@ -36,6 +37,7 @@ namespace Raccord.Application.Services.Images
                 Description = image.Description,
                 FileName = image.FileName,
                 ProjectID = image.ProjectID,
+                IsPrimaryImage = image.IsPrimaryImage,
             };
 
             return dto;

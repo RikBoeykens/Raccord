@@ -9,6 +9,9 @@ namespace Raccord.API.ViewModels.Images
     {
         private IEnumerable<SceneViewModel> _scenes;
         private IEnumerable<LocationViewModel> _locations;
+        
+        // Indicates if the image is primary image for the project
+        public bool IsPrimaryImage { get; set; }
 
         // Scenes linked to the image
         public IEnumerable<SceneViewModel> Scenes

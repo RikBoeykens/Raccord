@@ -4,6 +4,8 @@ import { ProjectHttpService } from '../../service/project-http.service';
 import { ProjectSummary } from '../../model/project-summary.model';
 import { LoadingService } from '../../../loading/service/loading.service';
 import { DialogService } from '../../../shared/service/dialog.service';
+import { Image } from '../../children/images/model/image.model';
+import { ImageUrlHelpers } from '../../children/images/helpers/image-url.helpers';
 
 @Component({
     templateUrl: 'projects-list.component.html',
@@ -55,5 +57,9 @@ export class ProjectsListComponent extends OnInit {
             .then(()=> this._loadingService.endLoading(loadingId));
         }
 
+    }
+
+    getImageUrl(image: Image): string{
+        return ImageUrlHelpers.getUrl(image);
     }
 }

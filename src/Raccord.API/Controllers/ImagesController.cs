@@ -209,7 +209,6 @@ namespace Raccord.API.Controllers
 
             return new JsonResult(response);
         }
-
         
         // POST api/images/removelink
         [HttpPost("removelink")]
@@ -234,6 +233,60 @@ namespace Raccord.API.Controllers
                 {
                     ok = false,
                     message = "Something went wrong while attempting to remove image link",
+                };
+            }
+
+            return new JsonResult(response);
+        }
+        
+        // POST api/images/5/setprimary
+        [HttpPost("{id}/setprimary")]
+        public JsonResult SetAsPrimary(long id)
+        {
+            var response = new JsonResponse();
+
+            try
+            {
+                _imageService.SetAsPrimary(id);
+
+                response = new JsonResponse
+                {
+                    ok = true,
+                };
+            }
+            catch (Exception)
+            {
+                response = new JsonResponse
+                {
+                    ok = false,
+                    message = "Something went wrong while attempting to set image as primary for project",
+                };
+            }
+
+            return new JsonResult(response);
+        }
+        
+        // POST api/images/5/removeprimary
+        [HttpPost("{id}/removeprimary")]
+        public JsonResult RemoveAsPrimary(long id)
+        {
+            var response = new JsonResponse();
+
+            try
+            {
+                _imageService.RemoveAsPrimary(id);
+
+                response = new JsonResponse
+                {
+                    ok = true,
+                };
+            }
+            catch (Exception)
+            {
+                response = new JsonResponse
+                {
+                    ok = false,
+                    message = "Something went wrong while attempting to remove image as primary for project",
                 };
             }
 

@@ -20,6 +20,7 @@ namespace Raccord.API.ViewModels.Images
                 ProjectID = dto.ProjectID,
                 Scenes = dto.Scenes.Select(s=> s.Translate()),
                 Locations = dto.Locations.Select(s=> s.Translate()),
+                IsPrimaryImage = dto.IsPrimaryImage,
             };
         }
 
@@ -33,6 +34,7 @@ namespace Raccord.API.ViewModels.Images
                 Description = dto.Description,
                 FileName = dto.FileName,
                 ProjectID = dto.ProjectID,
+                IsPrimaryImage = dto.IsPrimaryImage,
             };
         }
 

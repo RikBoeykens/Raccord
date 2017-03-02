@@ -69,4 +69,18 @@ export class ImageHttpService extends BaseHttpService {
 
         return this.doPost(link, uri);
     }
+
+    setAsPrimary(id: number)
+    {
+        var uri = `${this._baseUri}/${id}/setprimary`;
+
+        return this.doPost(null, uri);
+    }
+
+    removeAsPrimary(id: number)
+    {
+        var uri = `${this._baseUri}/${id}/removeprimary`;
+
+        return this.doPost(null, uri);
+    }
 }
