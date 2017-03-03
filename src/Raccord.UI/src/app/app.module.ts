@@ -53,6 +53,7 @@ import { ImagesListComponent } from './projects';
 import { EditImageComponent } from './projects';
 import { ImageLandingComponent } from './projects';
 import { UploadImageComponent } from './projects';
+import { ShowImageComponent } from './projects';
 import { ScenePropertiesLandingComponent } from './projects';
 import { SelectEntityComponent } from './shared';
 
@@ -87,6 +88,7 @@ const COMPONENTS =[
   ImageLandingComponent,
   EditImageComponent,
   UploadImageComponent,
+  ShowImageComponent,
   ScenePropertiesLandingComponent,
   SelectEntityComponent
 ];
