@@ -51,6 +51,21 @@ namespace Raccord.API.ViewModels.Images
             };
         }
 
+        // Translates a image dto to a image viewmodel
+        public static LinkedImageViewModel Translate(this LinkedImageDto dto)
+        {
+            return new LinkedImageViewModel
+            {
+                ID = dto.ID,
+                Title = dto.Title,
+                Description = dto.Description,
+                FileName = dto.FileName,
+                ProjectID = dto.ProjectID,
+                LinkID = dto.LinkID,
+                IsPrimaryImage = dto.IsPrimaryImage,
+            };
+        }
+
         // Translates a image viewmodel to a dto
         public static ImageDto Translate(this ImageViewModel vm)
         {

@@ -8,8 +8,7 @@ namespace Raccord.Application.Core.Services.Locations
     public class FullLocationDto: LocationDto
     {
         private IEnumerable<SceneSummaryDto> _scenes;
-        private IEnumerable<ImageDto> _images;
-        private ImageDto _primaryImage;
+        private IEnumerable<LinkedImageDto> _images;
 
         // Scenes linked to the location
         public IEnumerable<SceneSummaryDto> Scenes
@@ -25,28 +24,15 @@ namespace Raccord.Application.Core.Services.Locations
         }
 
         // Images linked to the location
-        public IEnumerable<ImageDto> Images
+        public IEnumerable<LinkedImageDto> Images
         {
             get
             {
-                return _images ?? (_images = new List<ImageDto>());
+                return _images ?? (_images = new List<LinkedImageDto>());
             }
             set
             {
                 _images = value;
-            }
-        }
-
-        // Primary Image for the Location
-        public ImageDto PrimaryImage
-        {
-            get
-            {
-                return _primaryImage ?? (_primaryImage = new ImageDto());
-            }
-            set
-            {
-                _primaryImage = value;
             }
         }
     }

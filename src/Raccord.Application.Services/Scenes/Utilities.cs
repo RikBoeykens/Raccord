@@ -1,5 +1,6 @@
 using Raccord.Application.Core.Services.Scenes;
 using Raccord.Domain.Model.Scenes;
+using Raccord.Domain.Model.Images;
 using Raccord.Application.Services.Locations;
 using Raccord.Application.Services.SceneProperties;
 using Raccord.Application.Core.Services.SearchEngine;
@@ -23,13 +24,13 @@ namespace Raccord.Application.Services.Scenes
                 IntExt = scene.IntExt.Translate(),
                 Location = scene.Location.Translate(),
                 DayNight = scene.DayNight.Translate(),
-                Images = scene.ImageScenes.Select(i=> i.Image.Translate()),
-                PrimaryImage = scene.ImageScenes.FirstOrDefault(i=> i.IsPrimaryImage)?.Image.Translate(),
+                Images = scene.ImageScenes.Select(i=> i.TranslateImage()),
                 ProjectID = scene.ProjectID,
             };
 
             return dto;
         }
+
         public static SceneSummaryDto TranslateSummary(this Scene scene)
         {
             var dto = new SceneSummaryDto
@@ -47,6 +48,7 @@ namespace Raccord.Application.Services.Scenes
 
             return dto;
         }
+
         public static SceneDto Translate(this Scene scene)
         {
             var dto = new SceneDto
@@ -59,6 +61,24 @@ namespace Raccord.Application.Services.Scenes
                 Location = scene.Location.Translate(),
                 DayNight = scene.DayNight.Translate(),
                 ProjectID = scene.ProjectID,
+            };
+
+            return dto;
+        }
+
+        public static LinkedSceneDto TranslateScene(this ImageScene imageScene)
+        {
+            var dto = new LinkedSceneDto
+            {
+                ID = imageScene.Scene.ID,
+                Number = imageScene.Scene.Number,
+                Summary = imageScene.Scene.Summary,
+                PageLength = imageScene.Scene.PageLength,
+                IntExt = imageScene.Scene.IntExt.Translate(),
+                Location = imageScene.Scene.Location.Translate(),
+                DayNight = imageScene.Scene.DayNight.Translate(),
+                ProjectID = imageScene.Scene.ProjectID,
+                LinkID = imageScene.ID,
             };
 
             return dto;

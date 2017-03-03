@@ -7,8 +7,8 @@ import { Image } from '../../model/image.model';
 import { LinkImage } from '../../model/link-image.model';
 import { FullImage } from '../../model/full-image.model';
 import { ProjectSummary } from '../../../../model/project-summary.model';
-import { Scene } from '../../../scenes/model/scene.model';
-import { Location } from '../../../locations/model/location.model';
+import { LinkedScene } from '../../../scenes/model/linked-scene.model';
+import { LinkedLocation } from '../../../locations/model/linked-location.model';
 import { ImageUrlHelpers } from '../../helpers/image-url.helpers';
 import { EntityType } from '../../../../../shared/enums/entity-type.enum';
 import { SelectedEntity } from '../../../../../shared/model/selected-entity.model';
@@ -85,13 +85,13 @@ export class ImageLandingComponent {
         );
     }
 
-    removeSceneLink(scene: Scene){
-        let selectedEntity = new SelectedEntity({entityId: scene.id, type: EntityType.scene});
+    removeSceneLink(scene: LinkedScene){
+        let selectedEntity = new SelectedEntity({entityId: scene.linkID, type: EntityType.scene});
         this.removeImageLink(selectedEntity);
     }
 
-    removeLocationLink(location: Location){
-        let selectedEntity = new SelectedEntity({entityId: location.id, type: EntityType.location});
+    removeLocationLink(location: LinkedLocation){
+        let selectedEntity = new SelectedEntity({entityId: location.linkID, type: EntityType.location});
         this.removeImageLink(selectedEntity);
     }
 

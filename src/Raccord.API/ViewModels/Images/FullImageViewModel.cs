@@ -7,18 +7,18 @@ namespace Raccord.API.ViewModels.Images
     // ViewModel to represent a image
     public class FullImageViewModel : ImageViewModel
     {
-        private IEnumerable<SceneViewModel> _scenes;
-        private IEnumerable<LocationViewModel> _locations;
+        private IEnumerable<LinkedSceneViewModel> _scenes;
+        private IEnumerable<LinkedLocationViewModel> _locations;
         
         // Indicates if the image is primary image for the project
         public bool IsPrimaryImage { get; set; }
 
         // Scenes linked to the image
-        public IEnumerable<SceneViewModel> Scenes
+        public IEnumerable<LinkedSceneViewModel> Scenes
         {
             get
             {
-                return _scenes ?? (_scenes = new List<SceneViewModel>());
+                return _scenes ?? (_scenes = new List<LinkedSceneViewModel>());
             }
             set
             {
@@ -27,11 +27,11 @@ namespace Raccord.API.ViewModels.Images
         }
 
         // Locations linked to the image
-        public IEnumerable<LocationViewModel> Locations
+        public IEnumerable<LinkedLocationViewModel> Locations
         {
             get
             {
-                return _locations ?? (_locations = new List<LocationViewModel>());
+                return _locations ?? (_locations = new List<LinkedLocationViewModel>());
             }
             set
             {

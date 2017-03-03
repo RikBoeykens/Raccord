@@ -1,11 +1,11 @@
 import { Image } from './image.model';
-import { Scene } from '../../scenes/model/scene.model';
-import { Location } from '../../locations/model/location.model';
+import { LinkedScene } from '../../scenes/model/linked-scene.model';
+import { LinkedLocation } from '../../locations/model/linked-location.model';
 
 export class FullImage extends Image{
     isPrimary: boolean;
-    scenes: Scene[];
-    locations: Location[];
+    scenes: LinkedScene[];
+    locations: LinkedLocation[];
 
     constructor(obj?: {
                         id: number, 
@@ -14,8 +14,8 @@ export class FullImage extends Image{
                         fileName: string,
                         projectId: number,
                         isPrimary: boolean,
-                        scenes: Scene[],
-                        locations: Location[]
+                        scenes: LinkedScene[],
+                        locations: LinkedLocation[]
                     }){
         super(obj);
         if(obj){

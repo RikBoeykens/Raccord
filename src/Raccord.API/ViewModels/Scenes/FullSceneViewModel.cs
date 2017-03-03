@@ -6,32 +6,18 @@ namespace Raccord.API.ViewModels.Scenes
     // Viewmodel to represent scene
     public class FullSceneViewModel : SceneViewModel
     {
-        private IEnumerable<ImageViewModel> _images;
-        private ImageViewModel _primaryImage;
+        private IEnumerable<LinkedImageViewModel> _images;
 
         // Images linked to the scene
-        public IEnumerable<ImageViewModel> Images
+        public IEnumerable<LinkedImageViewModel> Images
         {
             get
             {
-                return _images ?? (_images = new List<ImageViewModel>());
+                return _images ?? (_images = new List<LinkedImageViewModel>());
             }
             set
             {
                 _images = value;
-            }
-        }
-
-        // Primary image linked to the scene
-        public ImageViewModel PrimaryImage
-        {
-            get
-            {
-                return _primaryImage ?? (_primaryImage = new ImageViewModel());
-            }
-            set
-            {
-                _primaryImage = value;
             }
         }
     }

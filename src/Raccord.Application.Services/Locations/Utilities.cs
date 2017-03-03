@@ -1,6 +1,7 @@
 using System.Linq;
 using Raccord.Application.Core.Services.Locations;
 using Raccord.Domain.Model.Locations;
+using Raccord.Domain.Model.Images;
 using Raccord.Application.Services.Scenes;
 using Raccord.Application.Core.Services.SearchEngine;
 using Raccord.Core.Enums;
@@ -19,8 +20,7 @@ namespace Raccord.Application.Services.Locations
                 Name = location.Name,
                 Description = location.Description,
                 Scenes = location.Scenes.Select(s=> s.TranslateSummary()),
-                Images = location.ImageLocations.Select(s=> s.Image.Translate()),
-                PrimaryImage = location.ImageLocations.FirstOrDefault(il=> il.IsPrimaryImage)?.Image.Translate(),
+                Images = location.ImageLocations.Select(s=> s.TranslateImage()),
                 ProjectID = location.ProjectID,
             };
 
@@ -49,6 +49,20 @@ namespace Raccord.Application.Services.Locations
                 Name = location.Name,
                 Description = location.Description,
                 ProjectID = location.ProjectID,
+            };
+
+            return dto;
+        }
+
+        public static LinkedLocationDto TranslateLocation(this ImageLocation imageLocation)
+        {
+            var dto = new LinkedLocationDto
+            {
+                ID = imageLocation.Location.ID,
+                Name = imageLocation.Location.Name,
+                Description = imageLocation.Location.Description,
+                ProjectID = imageLocation.Location.ProjectID,
+                LinkID = imageLocation.ID
             };
 
             return dto;

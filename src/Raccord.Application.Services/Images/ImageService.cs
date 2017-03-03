@@ -186,9 +186,9 @@ namespace Raccord.Application.Services.Images
             });
         }
 
-        private void RemoveSceneLink(Image image, long sceneID)
+        private void RemoveSceneLink(Image image, long ID)
         {
-            var toRemove = image.ImageScenes.FirstOrDefault(i=> i.SceneID==sceneID);
+            var toRemove = image.ImageScenes.FirstOrDefault(i=> i.ID ==ID);
 
             if(toRemove==null)
                 return;
@@ -208,9 +208,9 @@ namespace Raccord.Application.Services.Images
             });
         }
 
-        private void RemoveLocationLink(Image image, long locationID)
+        private void RemoveLocationLink(Image image, long ID)
         {
-            var toRemove = image.ImageLocations.FirstOrDefault(i=> i.LocationID==locationID);
+            var toRemove = image.ImageLocations.FirstOrDefault(i=> i.ID==ID);
 
             if(toRemove==null)
                 return;

@@ -2,10 +2,9 @@ import { Scene } from './scene.model';
 import { IntExt } from '../../scene-properties/model/int-ext.model';
 import { DayNight } from '../../scene-properties/model/day-night.model';
 import { Location } from '../../locations/model/location.model';
-import { LinkedImage } from '../../images/model/linked-image.model';
 
-export class FullScene extends Scene{
-    images: LinkedImage[];
+export class LinkedScene extends Scene{
+    linkID: number;
 
     constructor(obj?: {
                         id: number,
@@ -16,11 +15,11 @@ export class FullScene extends Scene{
                         location: Location,
                         dayNight: DayNight,
                         projectId: number,
-                        images: LinkedImage[]
+                        linkID: number
                     }){
         super(obj);
         if(obj){
-            this.images = obj.images;
+            this.linkID = obj.linkID;
         }
     }
 }

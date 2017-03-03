@@ -20,8 +20,8 @@ namespace Raccord.Application.Services.Images
                 Title = image.Title,
                 Description = image.Description,
                 FileName = image.FileName,
-                Scenes = image.ImageScenes.Select(s=> s.Scene.Translate()),
-                Locations = image.ImageLocations.Select(il=> il.Location.Translate()),
+                Scenes = image.ImageScenes.Select(s=> s.TranslateScene()),
+                Locations = image.ImageLocations.Select(il=> il.TranslateLocation()),
                 ProjectID = image.ProjectID,
                 IsPrimaryImage = image.IsPrimaryImage,
             };
@@ -52,6 +52,38 @@ namespace Raccord.Application.Services.Images
                 FileName = image.FileName,
                 Description = image.Description,
                 ProjectID = image.ProjectID,
+            };
+
+            return dto;
+        }
+
+        public static LinkedImageDto TranslateImage(this ImageScene imageScene)
+        {
+            var dto = new LinkedImageDto
+            {
+                ID = imageScene.Image.ID,
+                Title = imageScene.Image.Title,
+                FileName = imageScene.Image.FileName,
+                Description = imageScene.Image.Description,
+                ProjectID = imageScene.Image.ProjectID,
+                LinkID = imageScene.ID,
+                IsPrimaryImage = imageScene.IsPrimaryImage,
+            };
+
+            return dto;
+        }
+
+        public static LinkedImageDto TranslateImage(this ImageLocation imageLocation)
+        {
+            var dto = new LinkedImageDto
+            {
+                ID = imageLocation.Image.ID,
+                Title = imageLocation.Image.Title,
+                FileName = imageLocation.Image.FileName,
+                Description = imageLocation.Image.Description,
+                ProjectID = imageLocation.Image.ProjectID,
+                LinkID = imageLocation.ID,
+                IsPrimaryImage = imageLocation.IsPrimaryImage,
             };
 
             return dto;

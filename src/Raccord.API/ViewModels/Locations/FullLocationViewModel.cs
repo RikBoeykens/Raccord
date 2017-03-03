@@ -8,8 +8,7 @@ namespace Raccord.API.ViewModels.Locations
     public class FullLocationViewModel : LocationViewModel
     {
         private IEnumerable<SceneSummaryViewModel> _scenes;
-        private IEnumerable<ImageViewModel> _images;
-        private ImageViewModel _primaryImage;
+        private IEnumerable<LinkedImageViewModel> _images;
 
         // Scenes linked to the location
         public IEnumerable<SceneSummaryViewModel> Scenes
@@ -25,28 +24,15 @@ namespace Raccord.API.ViewModels.Locations
         }
 
         // Images linked to the location
-        public IEnumerable<ImageViewModel> Images
+        public IEnumerable<LinkedImageViewModel> Images
         {
             get
             {
-                return _images ?? (_images = new List<ImageViewModel>());
+                return _images ?? (_images = new List<LinkedImageViewModel>());
             }
             set
             {
                 _images = value;
-            }
-        }
-
-        // Primary image linked to the location
-        public ImageViewModel PrimaryImage
-        {
-            get
-            {
-                return _primaryImage ?? (_primaryImage = new ImageViewModel());
-            }
-            set
-            {
-                _primaryImage = value;
             }
         }
     }

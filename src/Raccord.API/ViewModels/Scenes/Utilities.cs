@@ -21,7 +21,6 @@ namespace Raccord.API.ViewModels.Scenes
                 Location = dto.Location.Translate(),
                 DayNight = dto.DayNight.Translate(),
                 Images = dto.Images.Select(i=> i.Translate()),
-                PrimaryImage = dto.PrimaryImage.Translate(),
                 ProjectID = dto.ProjectID,
             };
         }
@@ -54,6 +53,22 @@ namespace Raccord.API.ViewModels.Scenes
                 Location = dto.Location.Translate(),
                 DayNight = dto.DayNight.Translate(),
                 ProjectID = dto.ProjectID,
+            };
+        }
+        // Translates a scene dto to a scene viewmodel
+        public static LinkedSceneViewModel Translate(this LinkedSceneDto dto)
+        {
+            return new LinkedSceneViewModel
+            {
+                ID = dto.ID,
+                Number = dto.Number,
+                Summary = dto.Summary,
+                PageLength = dto.PageLength,
+                IntExt = dto.IntExt.Translate(),
+                Location = dto.Location.Translate(),
+                DayNight = dto.DayNight.Translate(),
+                ProjectID = dto.ProjectID,
+                LinkID = dto.LinkID,
             };
         }
 

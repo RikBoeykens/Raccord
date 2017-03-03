@@ -18,7 +18,6 @@ namespace Raccord.API.ViewModels.Locations
                 ProjectID = dto.ProjectID,
                 Scenes = dto.Scenes.Select(s=> s.Translate()),
                 Images = dto.Images.Select(i=> i.Translate()),
-                PrimaryImage = dto.PrimaryImage.Translate(),
             };
         }
 
@@ -45,6 +44,19 @@ namespace Raccord.API.ViewModels.Locations
                 Name = dto.Name,
                 Description = dto.Description,
                 ProjectID = dto.ProjectID,
+            };
+        }
+
+        // Translates a location dto to a location viewmodel
+        public static LinkedLocationViewModel Translate(this LinkedLocationDto dto)
+        {
+            return new LinkedLocationViewModel
+            {
+                ID = dto.ID,
+                Name = dto.Name,
+                Description = dto.Description,
+                ProjectID = dto.ProjectID,
+                LinkID = dto.LinkID
             };
         }
 

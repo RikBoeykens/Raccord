@@ -6,32 +6,18 @@ namespace Raccord.Application.Core.Services.Scenes
     // Dto to represent a full scene
     public class FullSceneDto : SceneDto
     {
-        private IEnumerable<ImageDto> _images;
-        private ImageDto _primaryImage;
+        private IEnumerable<LinkedImageDto> _images;
 
         // Images linked to the scene
-        public IEnumerable<ImageDto> Images
+        public IEnumerable<LinkedImageDto> Images
         {
             get
             {
-                return _images ?? (_images = new List<ImageDto>());
+                return _images ?? (_images = new List<LinkedImageDto>());
             }
             set
             {
                 _images = value;
-            }
-        }
-
-        // Primary Image for the scene
-        public ImageDto PrimaryImage
-        {
-            get
-            {
-                return _primaryImage ?? (_primaryImage = new ImageDto());
-            }
-            set
-            {
-                _primaryImage = value;
             }
         }
     }
