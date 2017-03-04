@@ -10,5 +10,11 @@ namespace Raccord.Application.Core.Services.Scenes
         void Sort(SortOrderDto order);
 
         IEnumerable<LinkedImageDto> GetImages(long ID);
+
+        // Sets the image as primary image for scene
+        void SetImageAsPrimary(long ID);
+
+        // Unsets the image as primary image for scene
+        void RemoveImageAsPrimary(long ID);
     }
 }

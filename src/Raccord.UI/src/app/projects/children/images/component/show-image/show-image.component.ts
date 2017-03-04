@@ -9,6 +9,8 @@ import { ImageUrlHelpers } from '../../helpers/image-url.helpers';
 export class ShowImageComponent{
 
     @Input() image: Image;
+    @Input() cardImage;
+    @Input() listAvatar;
 
     constructor(
     ){

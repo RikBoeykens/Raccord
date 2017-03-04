@@ -44,6 +44,7 @@ namespace Raccord.API
             services.AddTransient<IDayNightSearchEngineService, DayNightSearchEngineService>();
             
             services.AddTransient<IImageRepository, ImageRepository>();
+            services.AddTransient<IImageSceneRepository, ImageSceneRepository>();
             services.AddTransient<IImageService, ImageService>();
             services.AddTransient<IImageSearchEngineService, ImageSearchEngineService>();
 

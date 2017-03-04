@@ -45,7 +45,6 @@ export { ImageLandingComponent } from './children/images/component/image-landing
 export { EditImageComponent } from './children/images/component/edit-image/edit-image.component';
 export { UploadImageComponent } from './children/images/component/upload-image/upload-image.component';
 export { ShowImageComponent } from './children/images/component/show-image/show-image.component';
-export { ShowCardImageComponent } from './children/images/component/show-card-image/show-card-image.component';
 export { ImageHttpService } from './children/images/service/image-http.service';
 export { ImageResolve } from './children/images/service/image-resolve.service';
 export { ImagesResolve } from './children/images/service/images-resolve.service';

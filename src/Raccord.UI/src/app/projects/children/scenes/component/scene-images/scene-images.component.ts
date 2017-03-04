@@ -30,10 +30,34 @@ export class SceneImagesComponent{
     }
 
     setAsPrimary(image: LinkedImage){
-        alert('set as primary');
+        let loadingId = this._loadingService.startLoading();
+
+        this._sceneHttpService.setImageAsPrimary(image.linkID).then(data=>{
+            if(typeof(data)=='string'){
+                this._dialogService.error(data);
+            }else{
+                this.getImages();
+                this._dialogService.success("Successfully set as primary for scene.");
+            }
+        }).catch()
+        .then(()=>
+            this._loadingService.endLoading(loadingId)
+        );
     }
 
     removeAsPrimary(image: LinkedImage){
-        alert('remove as primary');
+        let loadingId = this._loadingService.startLoading();
+
+        this._sceneHttpService.removeImageAsPrimary(image.linkID).then(data=>{
+            if(typeof(data)=='string'){
+                this._dialogService.error(data);
+            }else{
+                this.getImages();
+                this._dialogService.success("Successfully removed as primary for scene.");
+            }
+        }).catch()
+        .then(()=>
+            this._loadingService.endLoading(loadingId)
+        );
     }
 }
