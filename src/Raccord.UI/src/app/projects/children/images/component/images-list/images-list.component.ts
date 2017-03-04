@@ -8,7 +8,6 @@ import { LoadingService } from '../../../../../loading/service/loading.service';
 import { DialogService } from '../../../../../shared/service/dialog.service';
 import { DragulaService } from 'ng2-dragula';
 import { HtmlClassHelpers } from '../../../../../shared/helpers/html-class.helpers';
-import { ImageUrlHelpers } from '../../helpers/image-url.helpers';
 
 @Component({
     templateUrl: 'images-list.component.html',
@@ -48,10 +47,6 @@ export class ImagesListComponent extends OnInit {
 
     imagesUploaded(){
         this.getImages();
-    }
-
-    getImageUrl(image: ImageSummary): string{
-        return ImageUrlHelpers.getUrl(image);
     }
 
     remove(image: ImageSummary){

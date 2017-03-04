@@ -9,7 +9,6 @@ import { FullImage } from '../../model/full-image.model';
 import { ProjectSummary } from '../../../../model/project-summary.model';
 import { LinkedScene } from '../../../scenes/model/linked-scene.model';
 import { LinkedLocation } from '../../../locations/model/linked-location.model';
-import { ImageUrlHelpers } from '../../helpers/image-url.helpers';
 import { EntityType } from '../../../../../shared/enums/entity-type.enum';
 import { SelectedEntity } from '../../../../../shared/model/selected-entity.model';
 
@@ -38,10 +37,6 @@ export class ImageLandingComponent {
             this.viewImage = new Image(data.image);
             this.project = data.project;
         });
-    }
-
-    getImageUrl(image: FullImage): string{
-        return ImageUrlHelpers.getUrl(image);
     }
 
     getImage(){

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using Raccord.Domain.Model.Scenes;
 using Raccord.Application.Core.Services.Scenes;
+using Raccord.Application.Core.Services.Images;
+using Raccord.Application.Services.Images;
 using Raccord.Data.EntityFramework.Repositories.Scenes;
 using Raccord.Data.EntityFramework.Repositories.SceneProperties;
 using Raccord.Data.EntityFramework.Repositories.Locations;
@@ -126,6 +128,7 @@ namespace Raccord.Application.Services.Scenes
             _sceneRepository.Commit();
         }
 
+        // Sorts scenes
         public void Sort(SortOrderDto order)
         {
             var scenes = _sceneRepository.GetAllForProject(order.ParentID);
@@ -138,6 +141,15 @@ namespace Raccord.Application.Services.Scenes
             }
 
             _sceneRepository.Commit();
+        }
+
+        public IEnumerable<LinkedImageDto> GetImages(long ID)
+        {
+            var scene = _sceneRepository.GetFull(ID);
+
+            var dtos = scene.ImageScenes.Select(i=> i.TranslateImage());
+
+            return dtos;
         }
 
         private void CreatePropertiesIfNecessary(SceneDto scene)

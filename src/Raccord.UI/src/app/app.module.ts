@@ -37,6 +37,7 @@ import { ProjectsListComponent } from './projects';
 import { ScenesListComponent } from './projects';
 import { EditSceneComponent } from './projects';
 import { SceneLandingComponent } from './projects';
+import { SceneImagesComponent } from './projects';
 import { LocationsListComponent } from './projects';
 import { EditLocationComponent } from './projects';
 import { LocationLandingComponent } from './projects';
@@ -54,6 +55,7 @@ import { EditImageComponent } from './projects';
 import { ImageLandingComponent } from './projects';
 import { UploadImageComponent } from './projects';
 import { ShowImageComponent } from './projects';
+import { ShowCardImageComponent } from './projects';
 import { ScenePropertiesLandingComponent } from './projects';
 import { SelectEntityComponent } from './shared';
 
@@ -72,6 +74,7 @@ const COMPONENTS =[
   ScenesListComponent,
   EditSceneComponent,
   SceneLandingComponent,
+  SceneImagesComponent,
   LocationsListComponent,
   EditLocationComponent,
   LocationLandingComponent,
@@ -89,6 +92,7 @@ const COMPONENTS =[
   EditImageComponent,
   UploadImageComponent,
   ShowImageComponent,
+  ShowCardImageComponent,
   ScenePropertiesLandingComponent,
   SelectEntityComponent
 ];

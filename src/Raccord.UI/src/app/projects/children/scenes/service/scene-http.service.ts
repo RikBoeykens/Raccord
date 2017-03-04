@@ -5,6 +5,7 @@ import { AppSettings } from '../../../../app.settings';
 import { FullScene } from '../model/full-scene.model';
 import { SceneSummary } from '../model/scene-summary.model';
 import { Scene } from '../model/scene.model';
+import { LinkedImage } from '../../images/model/linked-image.model';
 import { JsonResponse } from '../../../../shared/model/json-response.model';
 import { SortOrder } from '../../../../shared/model/sort-order.model';
 
@@ -33,6 +34,13 @@ export class SceneHttpService extends BaseHttpService {
     getSummary(id: Number): Promise<SceneSummary> {
 
         var uri = `${this._baseUri}/${id}/summary`;
+
+        return this.doGet(uri);
+    }
+
+    getImages(id: number): Promise<LinkedImage[]> {
+
+        var uri = `${this._baseUri}/${id}/images`;
 
         return this.doGet(uri);
     }

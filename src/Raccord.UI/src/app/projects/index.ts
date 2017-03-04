@@ -11,6 +11,7 @@ export { ProjectsResolve } from './service/projects-resolve.service';
 export { ScenesListComponent } from './children/scenes/component/scenes-list/scenes-list.component';
 export { EditSceneComponent } from './children/scenes/component/edit-scene/edit-scene.component';
 export { SceneLandingComponent } from './children/scenes/component/scene-landing/scene-landing.component';
+export { SceneImagesComponent } from './children/scenes/component/scene-images/scene-images.component';
 export { SceneHttpService } from './children/scenes/service/scene-http.service';
 export { SceneResolve } from './children/scenes/service/scene-resolve.service';
 export { ScenesResolve } from './children/scenes/service/scenes-resolve.service';
@@ -44,6 +45,7 @@ export { ImageLandingComponent } from './children/images/component/image-landing
 export { EditImageComponent } from './children/images/component/edit-image/edit-image.component';
 export { UploadImageComponent } from './children/images/component/upload-image/upload-image.component';
 export { ShowImageComponent } from './children/images/component/show-image/show-image.component';
+export { ShowCardImageComponent } from './children/images/component/show-card-image/show-card-image.component';
 export { ImageHttpService } from './children/images/service/image-http.service';
 export { ImageResolve } from './children/images/service/image-resolve.service';
 export { ImagesResolve } from './children/images/service/images-resolve.service';

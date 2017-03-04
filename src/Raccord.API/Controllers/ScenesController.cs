@@ -6,6 +6,7 @@ using Raccord.API.ViewModels.Scenes;
 using Raccord.API.ViewModels.Core;
 using Raccord.Application.Core.Services.Scenes;
 using Raccord.API.ViewModels.Common.Sorting;
+using Raccord.API.ViewModels.Images;
 
 namespace Raccord.API.Controllers
 {
@@ -43,13 +44,24 @@ namespace Raccord.API.Controllers
             return vm;
         }
 
-        // GET api/scenes/5
+        // GET api/scenes/5/summary
         [HttpGet("{id}/summary")]
         public SceneSummaryViewModel GetSummary(Int64 id)
         {
             var dto = _sceneService.GetSummary(id);
 
             var vm = dto.Translate();
+
+            return vm;
+        }
+
+        // GET api/scenes/5/images
+        [HttpGet("{id}/images")]
+        public IEnumerable<LinkedImageViewModel> GetImages(Int64 id)
+        {
+            var dto = _sceneService.GetImages(id);
+
+            var vm = dto.Select(i=> i.Translate());
 
             return vm;
         }
