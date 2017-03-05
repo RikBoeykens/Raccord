@@ -16,6 +16,9 @@ using Raccord.Application.Services.Images;
 using Raccord.Application.Core.Services.SearchEngine;
 using Raccord.Application.Services.SearchEngine;
 using Microsoft.Extensions.DependencyInjection;
+using Raccord.Data.EntityFramework.Repositories.ImageScenes;
+using Raccord.Application.Services.ImageScenes;
+using Raccord.Application.Core.Services.ImageScenes;
 
 namespace Raccord.API
 {
@@ -44,9 +47,11 @@ namespace Raccord.API
             services.AddTransient<IDayNightSearchEngineService, DayNightSearchEngineService>();
             
             services.AddTransient<IImageRepository, ImageRepository>();
-            services.AddTransient<IImageSceneRepository, ImageSceneRepository>();
             services.AddTransient<IImageService, ImageService>();
             services.AddTransient<IImageSearchEngineService, ImageSearchEngineService>();
+
+            services.AddTransient<IImageSceneRepository, ImageSceneRepository>();
+            services.AddTransient<IImageSceneService, ImageSceneService>();
 
             services.AddTransient<ISearchEngineServiceWrapper, SearchEngineServiceWrapper>();
         }

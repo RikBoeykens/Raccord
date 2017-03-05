@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ImageHttpService } from '../../service/image-http.service';
+import { ImageSceneHttpService } from '../../../scenes/service/image-scene-http.service';
 import { LoadingService } from '../../../../../loading/service/loading.service';
 import { DialogService } from '../../../../../shared/service/dialog.service';
 import { Image } from '../../model/image.model';
@@ -24,6 +25,7 @@ export class ImageLandingComponent {
 
     constructor(
         private _imageHttpService: ImageHttpService,
+        private _imageSceneHttpService: ImageSceneHttpService,
         private _loadingService: LoadingService,
         private _dialogService: DialogService,
         private _route: ActivatedRoute,
@@ -65,6 +67,32 @@ export class ImageLandingComponent {
     }
 
     linkImage(selectedEntity: SelectedEntity){
+        switch(selectedEntity.type){
+            case EntityType.scene:
+                this.linkSceneImage(selectedEntity.entityId);
+                break;
+            case EntityType.location:
+                this.linkLocationImage(selectedEntity);
+        }
+    }
+
+    linkSceneImage(sceneId: number){
+        let loadingId = this._loadingService.startLoading();
+
+        this._imageSceneHttpService.addLink(this.image.id, sceneId).then(data=>{
+            if(typeof(data)=='string'){
+                this._dialogService.error(data);
+            }else{
+                this.getImage();
+                this._dialogService.success("Successfully linked image.");
+            }
+        }).catch()
+        .then(()=>
+            this._loadingService.endLoading(loadingId)
+        );
+    }
+
+    linkLocationImage(selectedEntity: SelectedEntity){
         let loadingId = this._loadingService.startLoading();
 
         this._imageHttpService.addImageLink(new LinkImage({imageId: this.image.id, selectedEntity: selectedEntity})).then(data=>{
@@ -81,8 +109,19 @@ export class ImageLandingComponent {
     }
 
     removeSceneLink(scene: LinkedScene){
-        let selectedEntity = new SelectedEntity({entityId: scene.linkID, type: EntityType.scene});
-        this.removeImageLink(selectedEntity);
+        let loadingId = this._loadingService.startLoading();
+
+        this._imageSceneHttpService.removeLink(scene.linkID).then(data=>{
+            if(typeof(data)=='string'){
+                this._dialogService.error(data);
+            }else{
+                this.getImage();
+                this._dialogService.success("Successfully removed link.");
+            }
+        }).catch()
+        .then(()=>
+            this._loadingService.endLoading(loadingId)
+        );
     }
 
     removeLocationLink(location: LinkedLocation){

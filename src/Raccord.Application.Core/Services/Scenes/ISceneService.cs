@@ -1,6 +1,4 @@
-using System.Collections.Generic;
 using Raccord.Application.Core.Common.Sorting;
-using Raccord.Application.Core.Services.Images;
 
 namespace Raccord.Application.Core.Services.Scenes
 {
@@ -8,13 +6,5 @@ namespace Raccord.Application.Core.Services.Scenes
     public interface ISceneService : IService<SceneDto, SceneSummaryDto, FullSceneDto>, IAllForProjectService<SceneSummaryDto>
     {
         void Sort(SortOrderDto order);
-
-        IEnumerable<LinkedImageDto> GetImages(long ID);
-
-        // Sets the image as primary image for scene
-        void SetImageAsPrimary(long ID);
-
-        // Unsets the image as primary image for scene
-        void RemoveImageAsPrimary(long ID);
     }
 }

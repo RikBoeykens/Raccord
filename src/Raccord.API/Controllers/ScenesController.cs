@@ -55,17 +55,6 @@ namespace Raccord.API.Controllers
             return vm;
         }
 
-        // GET api/scenes/5/images
-        [HttpGet("{id}/images")]
-        public IEnumerable<LinkedImageViewModel> GetImages(Int64 id)
-        {
-            var dto = _sceneService.GetImages(id);
-
-            var vm = dto.Select(i=> i.Translate());
-
-            return vm;
-        }
-
         // POST api/scenes
         [HttpPost]
         public JsonResult Post([FromBody]SceneViewModel vm)
@@ -155,62 +144,6 @@ namespace Raccord.API.Controllers
                 {
                     ok = false,
                     message = "Something went wrong while attempting to sort scenes",
-                };
-            }
-
-            return new JsonResult(response);
-        }
-
-
-        
-        // POST api/scenes/images/5/setprimary
-        [HttpPost("images/{id}/setprimary")]
-        public JsonResult SetAsPrimary(long id)
-        {
-            var response = new JsonResponse();
-
-            try
-            {
-                _sceneService.SetImageAsPrimary(id);
-
-                response = new JsonResponse
-                {
-                    ok = true,
-                };
-            }
-            catch (Exception)
-            {
-                response = new JsonResponse
-                {
-                    ok = false,
-                    message = "Something went wrong while attempting to set image as primary for scene",
-                };
-            }
-
-            return new JsonResult(response);
-        }
-        
-        // POST api/scenes/images/5/removeprimary
-        [HttpPost("images/{id}/removeprimary")]
-        public JsonResult RemoveAsPrimary(long id)
-        {
-            var response = new JsonResponse();
-
-            try
-            {
-                _sceneService.RemoveImageAsPrimary(id);
-
-                response = new JsonResponse
-                {
-                    ok = true,
-                };
-            }
-            catch (Exception)
-            {
-                response = new JsonResponse
-                {
-                    ok = false,
-                    message = "Something went wrong while attempting to remove image as primary for scene",
                 };
             }
 

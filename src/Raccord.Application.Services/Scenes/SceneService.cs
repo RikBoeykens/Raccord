@@ -22,15 +22,13 @@ namespace Raccord.Application.Services.Scenes
         private readonly IIntExtRepository _intExtRepository;
         private readonly IDayNightRepository _dayNightRepository;
         private readonly ILocationRepository _locationRepository;
-        private readonly IImageSceneRepository _imageSceneRepository;
 
         // Initialises a new SceneService
         public SceneService(
             ISceneRepository sceneRepository,
             IIntExtRepository intExtRepository,
             IDayNightRepository dayNightRepository,
-            ILocationRepository locationRepository,
-            IImageSceneRepository imageSceneRepository
+            ILocationRepository locationRepository
             )
         {
             if(sceneRepository == null)
@@ -41,14 +39,11 @@ namespace Raccord.Application.Services.Scenes
                 throw new ArgumentNullException(nameof(dayNightRepository));
             if(locationRepository == null)
                 throw new ArgumentNullException(nameof(locationRepository));
-            if(imageSceneRepository == null)
-                throw new ArgumentNullException(nameof(imageSceneRepository));
             
             _sceneRepository = sceneRepository;
             _intExtRepository = intExtRepository;
             _dayNightRepository = dayNightRepository;
             _locationRepository = locationRepository;
-            _imageSceneRepository = imageSceneRepository;
         }
 
         // Gets all scene for a project
@@ -149,36 +144,6 @@ namespace Raccord.Application.Services.Scenes
             _sceneRepository.Commit();
         }
 
-        public IEnumerable<LinkedImageDto> GetImages(long ID)
-        {
-            var scene = _sceneRepository.GetFull(ID);
-
-            var dtos = scene.ImageScenes.Select(i=> i.TranslateImage());
-
-            return dtos;
-        }
-
-        public void SetImageAsPrimary(long ID)
-        {
-            var imageScene = _imageSceneRepository.GetSingle(ID);
-            ClearPrimaryImages(imageScene.SceneID);
-
-            imageScene.IsPrimaryImage = true;
-
-            _imageSceneRepository.Edit(imageScene);
-            _imageSceneRepository.Commit();
-        }
-
-        public void RemoveImageAsPrimary(long ID)
-        {
-            var imageScene = _imageSceneRepository.GetSingle(ID);
-
-            imageScene.IsPrimaryImage = true;
-
-            _imageSceneRepository.Edit(imageScene);
-            _imageSceneRepository.Commit();
-        }
-
         private void CreatePropertiesIfNecessary(SceneDto scene)
         {
             if(scene.IntExt.ID == default(long))
@@ -231,19 +196,6 @@ namespace Raccord.Application.Services.Scenes
         {
             var scenes = _sceneRepository.GetAllForProject(projectID);
             return scenes.Count();
-        }
-
-        private void ClearPrimaryImages(long sceneID)
-        {
-            var primaryImages = _imageSceneRepository.FindBy(i=> i.SceneID == sceneID && i.IsPrimaryImage);
-
-            foreach(var imageScene in primaryImages)
-            {
-                imageScene.IsPrimaryImage = false;
-                _imageSceneRepository.Edit(imageScene);
-            }
-
-            _imageSceneRepository.Commit();
         }
     }
 }

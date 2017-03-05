@@ -64,16 +64,4 @@ export class SceneHttpService extends BaseHttpService {
 
         return this.doSort(sortOrder, uri);
     }
-
-    setImageAsPrimary(linkID: number): Promise<any>{
-        var uri = `${this._baseUri}/images/${linkID}/setprimary`;
-
-        return this.doPost(null, uri);
-    }
-
-    removeImageAsPrimary(linkID: number): Promise<any>{
-        var uri = `${this._baseUri}/images/${linkID}/removeprimary`;
-
-        return this.doPost(null, uri);
-    }
 }

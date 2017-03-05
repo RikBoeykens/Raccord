@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { LinkedImage } from '../../../images/model/linked-image.model';
-import { SceneHttpService } from '../../service/scene-http.service';
+import { ImageSceneHttpService } from '../../service/image-scene-http.service';
 import { LoadingService } from '../../../../../loading/service/loading.service';
 import { DialogService } from '../../../../../shared/service/dialog.service';
 
@@ -14,7 +14,7 @@ export class SceneImagesComponent{
     @Input() images: LinkedImage[];
 
     constructor(
-        private _sceneHttpService: SceneHttpService,
+        private _imageSceneHttpService: ImageSceneHttpService,
         private _loadingService: LoadingService,
         private _dialogService: DialogService,
     ){
@@ -23,7 +23,7 @@ export class SceneImagesComponent{
     getImages(){
         let loadingId = this._loadingService.startLoading();
 
-        this._sceneHttpService.getImages(this.sceneId).then(data => {
+        this._imageSceneHttpService.getImages(this.sceneId).then(data => {
             this.images = data;
             this._loadingService.endLoading(loadingId);
         });
@@ -32,7 +32,7 @@ export class SceneImagesComponent{
     setAsPrimary(image: LinkedImage){
         let loadingId = this._loadingService.startLoading();
 
-        this._sceneHttpService.setImageAsPrimary(image.linkID).then(data=>{
+        this._imageSceneHttpService.setImageAsPrimary(image.linkID).then(data=>{
             if(typeof(data)=='string'){
                 this._dialogService.error(data);
             }else{
@@ -48,7 +48,7 @@ export class SceneImagesComponent{
     removeAsPrimary(image: LinkedImage){
         let loadingId = this._loadingService.startLoading();
 
-        this._sceneHttpService.removeImageAsPrimary(image.linkID).then(data=>{
+        this._imageSceneHttpService.removeImageAsPrimary(image.linkID).then(data=>{
             if(typeof(data)=='string'){
                 this._dialogService.error(data);
             }else{

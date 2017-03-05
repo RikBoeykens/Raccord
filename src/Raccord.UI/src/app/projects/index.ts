@@ -13,6 +13,7 @@ export { EditSceneComponent } from './children/scenes/component/edit-scene/edit-
 export { SceneLandingComponent } from './children/scenes/component/scene-landing/scene-landing.component';
 export { SceneImagesComponent } from './children/scenes/component/scene-images/scene-images.component';
 export { SceneHttpService } from './children/scenes/service/scene-http.service';
+export { ImageSceneHttpService } from './children/scenes/service/image-scene-http.service';
 export { SceneResolve } from './children/scenes/service/scene-resolve.service';
 export { ScenesResolve } from './children/scenes/service/scenes-resolve.service';
 
