@@ -1,6 +1,7 @@
 using Raccord.Application.Core.Services.Scenes;
 using System.Collections.Generic;
 using Raccord.Application.Core.Services.Locations;
+using Raccord.Application.Core.Services.Characters;
 
 namespace Raccord.Application.Core.Services.Images
 {
@@ -9,6 +10,7 @@ namespace Raccord.Application.Core.Services.Images
     {
         private IEnumerable<LinkedSceneDto> _scenes;
         private IEnumerable<LinkedLocationDto> _locations;
+        private IEnumerable<LinkedCharacterDto> _characters;
         
         // Indicates if the image is primary image for the project
         public bool IsPrimaryImage { get; set; }
@@ -36,6 +38,19 @@ namespace Raccord.Application.Core.Services.Images
             set
             {
                 _locations = value;
+            }
+        }
+
+        // Characters linked to the image
+        public IEnumerable<LinkedCharacterDto> Characters
+        {
+            get
+            {
+                return _characters ?? (_characters = new List<LinkedCharacterDto>());
+            }
+            set
+            {
+                _characters = value;
             }
         }
     }

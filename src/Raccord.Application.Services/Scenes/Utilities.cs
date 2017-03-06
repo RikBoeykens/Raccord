@@ -7,6 +7,8 @@ using Raccord.Application.Core.Services.SearchEngine;
 using Raccord.Core.Enums;
 using System.Linq;
 using Raccord.Application.Services.Images;
+using Raccord.Domain.Model.Characters;
+using Raccord.Application.Services.Characters;
 
 namespace Raccord.Application.Services.Scenes
 {
@@ -25,6 +27,7 @@ namespace Raccord.Application.Services.Scenes
                 Location = scene.Location.Translate(),
                 DayNight = scene.DayNight.Translate(),
                 Images = scene.ImageScenes.Select(i=> i.TranslateImage()),
+                Characters = scene.CharacterScenes.Select(i=> i.TranslateCharacter()),
                 ProjectID = scene.ProjectID,
             };
 
@@ -79,6 +82,25 @@ namespace Raccord.Application.Services.Scenes
                 DayNight = imageScene.Scene.DayNight.Translate(),
                 ProjectID = imageScene.Scene.ProjectID,
                 LinkID = imageScene.ID,
+            };
+
+            return dto;
+        }
+
+        public static LinkedSceneDto TranslateScene(this CharacterScene characterScene)
+        {
+            var dto = new LinkedSceneDto
+            {
+                ID = characterScene.Scene.ID,
+                Number = characterScene.Scene.Number,
+                Summary = characterScene.Scene.Summary,
+                PageLength = characterScene.Scene.PageLength,
+                IntExt = characterScene.Scene.IntExt.Translate(),
+                Location = characterScene.Scene.Location.Translate(),
+                DayNight = characterScene.Scene.DayNight.Translate(),
+                ProjectID = characterScene.Scene.ProjectID,
+                PrimaryImage = characterScene.Scene.ImageScenes.FirstOrDefault(i=> i.IsPrimaryImage)?.Image.Translate(),
+                LinkID = characterScene.ID,
             };
 
             return dto;

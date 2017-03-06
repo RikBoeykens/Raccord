@@ -1,5 +1,6 @@
 using Raccord.Application.Core.Services.Images;
 using System.Collections.Generic;
+using Raccord.Application.Core.Services.Characters;
 
 namespace Raccord.Application.Core.Services.Scenes
 {
@@ -7,6 +8,7 @@ namespace Raccord.Application.Core.Services.Scenes
     public class FullSceneDto : SceneDto
     {
         private IEnumerable<LinkedImageDto> _images;
+        private IEnumerable<LinkedCharacterDto> _characters;
 
         // Images linked to the scene
         public IEnumerable<LinkedImageDto> Images
@@ -18,6 +20,19 @@ namespace Raccord.Application.Core.Services.Scenes
             set
             {
                 _images = value;
+            }
+        }
+
+        // Characters linked to the scene
+        public IEnumerable<LinkedCharacterDto> Characters
+        {
+            get
+            {
+                return _characters ?? (_characters = new List<LinkedCharacterDto>());
+            }
+            set
+            {
+                _characters = value;
             }
         }
     }

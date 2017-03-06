@@ -59,7 +59,9 @@ namespace Raccord.Data.EntityFramework.Repositories.Images
                         .ThenInclude(i=> i.Scene)
                         .ThenInclude(s=> s.Location)
                         .Include(i=> i.ImageLocations)
-                        .ThenInclude(il=> il.Location);
+                        .ThenInclude(il=> il.Location)
+                        .Include(i=> i.ImageCharacters)
+                        .ThenInclude(ic=> ic.Character);
         }
 
         private IQueryable<Image> GetIncludedSummary()

@@ -3,6 +3,7 @@ using Raccord.Domain.Model.Projects;
 using Raccord.Domain.Model.Locations;
 using Raccord.Domain.Model.SceneProperties;
 using Raccord.Domain.Model.Images;
+using Raccord.Domain.Model.Characters;
 
 namespace Raccord.Domain.Model.Scenes
 {
@@ -10,6 +11,7 @@ namespace Raccord.Domain.Model.Scenes
     public class Scene : Entity
     {
         private ICollection<ImageScene> _images;
+        private ICollection<CharacterScene> _characters;
 
         // Number of the scene
         public string Number { get; set; }
@@ -57,6 +59,19 @@ namespace Raccord.Domain.Model.Scenes
             set
             {
                 _images = value;
+            }
+        }
+
+        // Linked characters
+        public virtual ICollection<CharacterScene> CharacterScenes
+        {
+            get
+            {
+                return _characters ?? (_characters = new List<CharacterScene>());
+            }
+            set
+            {
+                _characters = value;
             }
         }
     }

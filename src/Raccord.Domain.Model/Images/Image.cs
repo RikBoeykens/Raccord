@@ -9,6 +9,7 @@ namespace Raccord.Domain.Model.Images
     {
         private ICollection<ImageScene> _scenes;
         private ICollection<ImageLocation> _locations;
+        private ICollection<ImageCharacter> _characters;
 
         /// Title of the image
         public string Title { get; set; }
@@ -54,6 +55,19 @@ namespace Raccord.Domain.Model.Images
             set
             {
                 _locations = value;
+            }
+        }
+
+        // Linked characters
+        public virtual ICollection<ImageCharacter> ImageCharacters
+        {
+            get
+            {
+                return _characters ?? (_characters = new List<ImageCharacter>());
+            }
+            set
+            {
+                _characters = value;
             }
         }
     }

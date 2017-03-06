@@ -9,5 +9,6 @@ namespace Raccord.Core.Enums
         Location = 3,
         DayNight = 4,
         Image = 5,
+        Character = 6
     }
 }
