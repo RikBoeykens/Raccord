@@ -77,14 +77,5 @@ namespace Raccord.API.ViewModels.Images
                 ProjectID = vm.ProjectID,
             };
         }
-
-        public static LinkImageDto Translate(this LinkImageViewModel vm)
-        {
-            return new LinkImageDto
-            {
-                ImageID = vm.ImageID,
-                SelectedEntity = vm.SelectedEntity.Translate(),
-            };
-        }
     }
 }

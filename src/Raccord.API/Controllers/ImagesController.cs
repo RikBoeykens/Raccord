@@ -179,65 +179,6 @@ namespace Raccord.API.Controllers
 
             }
         }
-
-        
-        // POST api/images/link
-        [HttpPost("link")]
-        public JsonResult Link([FromBody]LinkImageViewModel vm)
-        {
-            var response = new JsonResponse();
-
-            try
-            {
-                var dto = vm.Translate();
-
-                _imageService.AddImageLink(dto);
-
-                response = new JsonResponse
-                {
-                    ok = true,
-                };
-            }
-            catch (Exception)
-            {
-                response = new JsonResponse
-                {
-                    ok = false,
-                    message = "Something went wrong while attempting to add image link",
-                };
-            }
-
-            return new JsonResult(response);
-        }
-        
-        // POST api/images/removelink
-        [HttpPost("removelink")]
-        public JsonResult RemoveLink([FromBody]LinkImageViewModel vm)
-        {
-            var response = new JsonResponse();
-
-            try
-            {
-                var dto = vm.Translate();
-
-                _imageService.RemoveImageLink(dto);
-
-                response = new JsonResponse
-                {
-                    ok = true,
-                };
-            }
-            catch (Exception)
-            {
-                response = new JsonResponse
-                {
-                    ok = false,
-                    message = "Something went wrong while attempting to remove image link",
-                };
-            }
-
-            return new JsonResult(response);
-        }
         
         // POST api/images/5/setprimary
         [HttpPost("{id}/setprimary")]

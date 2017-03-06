@@ -26,12 +26,6 @@ namespace Raccord.Application.Core.Services.Images
         // Gets content of an image
         ImageContentDto GetContent(long ID);
 
-        // Links an image to entity
-        void AddImageLink(LinkImageDto dto);
-
-        // Removes link to entity
-        void RemoveImageLink(LinkImageDto dto);
-
         // Sets the image as primary image for project
         void SetAsPrimary(long ID);
 

@@ -56,20 +56,6 @@ export class ImageHttpService extends BaseHttpService {
         return this.doFilePost(files, null, uri);
     }
 
-    addImageLink(link: LinkImage)
-    {
-        var uri = `${this._baseUri}/link`;
-
-        return this.doPost(link, uri);
-    }
-
-    removeImageLink(link: LinkImage)
-    {
-        var uri = `${this._baseUri}/removelink`;
-
-        return this.doPost(link, uri);
-    }
-
     setAsPrimary(id: number)
     {
         var uri = `${this._baseUri}/${id}/setprimary`;
