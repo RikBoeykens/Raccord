@@ -7,3 +7,13 @@
         <span class="breadcrumb">{{location.name}}</span>
     </div>
 </div>
+<div class="row">
+    <edit-location [location]="viewLocation" (submitLocation)="updateLocation()"></edit-location>
+</div>
+<md-tab-group>
+  <md-tab label="Overview">
+  </md-tab>
+  <md-tab label="Pictures">
+      <location-images [images]="location.images" [locationId]="location.id"></location-images>
+  </md-tab>
+</md-tab-group>

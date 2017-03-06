@@ -41,6 +41,7 @@ import { SceneImagesComponent } from './projects';
 import { LocationsListComponent } from './projects';
 import { EditLocationComponent } from './projects';
 import { LocationLandingComponent } from './projects';
+import { LocationImagesComponent } from './projects';
 import { SearchLocationComponent } from './projects';
 import { IntExtListComponent } from './projects';
 import { EditIntExtComponent } from './projects';
@@ -77,6 +78,7 @@ const COMPONENTS =[
   LocationsListComponent,
   EditLocationComponent,
   LocationLandingComponent,
+  LocationImagesComponent,
   SearchLocationComponent,
   IntExtListComponent,
   EditIntExtComponent,
@@ -109,6 +111,7 @@ import { ImageSceneHttpService } from './projects';
 import { SceneResolve } from './projects';
 import { ScenesResolve } from './projects';
 import { LocationHttpService } from './projects';
+import { ImageLocationHttpService } from './projects';
 import { LocationResolve } from './projects';
 import { LocationsResolve } from './projects';
 import { IntExtHttpService } from './projects';
@@ -135,6 +138,7 @@ const APP_PROVIDERS = [
   SceneResolve,
   ScenesResolve,
   LocationHttpService,
+  ImageLocationHttpService,
   LocationResolve,
   LocationsResolve,
   IntExtHttpService,

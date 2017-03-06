@@ -21,7 +21,9 @@ export { LocationsListComponent } from './children/locations/component/locations
 export { SearchLocationComponent } from './children/locations/component/search-location/search-location.component';
 export { EditLocationComponent } from './children/locations/component/edit-location/edit-location.component';
 export { LocationLandingComponent } from './children/locations/component/location-landing/location-landing.component';
+export { LocationImagesComponent } from './children/locations/component/location-images/location-images.component';
 export { LocationHttpService } from './children/locations/service/location-http.service';
+export { ImageLocationHttpService } from './children/locations/service/image-location-http.service';
 export { LocationResolve } from './children/locations/service/location-resolve.service';
 export { LocationsResolve } from './children/locations/service/locations-resolve.service';
 

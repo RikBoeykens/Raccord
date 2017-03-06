@@ -17,6 +17,7 @@
            [ngClass]="{'can-delete': locationWrapper.location.sceneCount==0}"
            class="drag-element drag-delete drag-merge">
            <md-icon class=drag-handle>drag_handle</md-icon>
+            <show-image *ngIf="locationWrapper.location.primaryImage.id!=0" [image]="locationWrapper.location.primaryImage" [listAvatar]="true"></show-image>
             {{locationWrapper.location.name}} ({{locationWrapper.location.sceneCount}})
             <span class="drop-container drop-merge-container"
                   [dragula]='"location-bag"' 

@@ -1,0 +1,8 @@
+<div class="row image-list">
+    <div class="image-thumbnail" *ngFor="let image of images">
+        <show-image [image]="image"></show-image>
+        <a [routerLink]="[image.id]">{{image.title}}</a>
+        <button md-button *ngIf="image.isPrimaryImage" (click)="removeAsPrimary(image)" title="Remove as primary"><md-icon>flash_on</md-icon></button>
+        <button md-button *ngIf="!image.isPrimaryImage" (click)="setAsPrimary(image)" title="Set as primary"><md-icon>flash_off</md-icon></button>
+    </div>
+</div>
