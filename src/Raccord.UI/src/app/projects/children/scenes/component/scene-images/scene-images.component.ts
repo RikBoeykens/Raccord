@@ -60,4 +60,20 @@ export class SceneImagesComponent{
             this._loadingService.endLoading(loadingId)
         );
     }
+
+    removeLink(image: LinkedImage){
+        let loadingId = this._loadingService.startLoading();
+
+        this._imageSceneHttpService.removeLink(image.linkID).then(data=>{
+            if(typeof(data)=='string'){
+                this._dialogService.error(data);
+            }else{
+                this.getImages();
+                this._dialogService.success("Successfully removed link between image and scene.");
+            }
+        }).catch()
+        .then(()=>
+            this._loadingService.endLoading(loadingId)
+        );
+    }
 }
