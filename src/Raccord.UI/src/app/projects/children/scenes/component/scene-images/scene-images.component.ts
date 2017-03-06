@@ -1,23 +1,32 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { LinkedImage } from '../../../images/model/linked-image.model';
 import { ImageSceneHttpService } from '../../service/image-scene-http.service';
 import { LoadingService } from '../../../../../loading/service/loading.service';
 import { DialogService } from '../../../../../shared/service/dialog.service';
+import { SelectedEntity } from '../../../../../shared/model/selected-entity.model';
+import { EntityType } from '../../../../../shared/enums/entity-type.enum';
 
 @Component({
     selector: 'scene-images',
     templateUrl: 'scene-images.component.html'
 })
-export class SceneImagesComponent{
+export class SceneImagesComponent implements OnInit{
 
+    @Input() projectId: number;
     @Input() sceneId: number;
     @Input() images: LinkedImage[];
+
+    selectedEntity: SelectedEntity;
 
     constructor(
         private _imageSceneHttpService: ImageSceneHttpService,
         private _loadingService: LoadingService,
         private _dialogService: DialogService,
     ){
+    }
+
+    ngOnInit(){
+        this.selectedEntity = new SelectedEntity({entityId: this.sceneId, type: EntityType.scene});
     }
 
     getImages(){
@@ -75,5 +84,9 @@ export class SceneImagesComponent{
         .then(()=>
             this._loadingService.endLoading(loadingId)
         );
+    }
+
+    imagesUploaded(){
+        this.getImages();
     }
 }

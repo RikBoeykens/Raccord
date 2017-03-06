@@ -58,7 +58,7 @@ namespace Raccord.API.Controllers
         }
 
         [HttpPost("{projectID}/upload")]
-        public JsonResult Add(ICollection<IFormFile> files, long projectID)
+        public JsonResult Add(ICollection<IFormFile> files, long projectID, SelectedEntityViewModel selectedEntity)
         {
             var response = new JsonResponse();
 
@@ -73,6 +73,7 @@ namespace Raccord.API.Controllers
                     {
                         FileContent = file.OpenReadStream(),
                         FileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"'),
+                        SelectedEntity = selectedEntity?.Translate(),
                     });
                 }
 

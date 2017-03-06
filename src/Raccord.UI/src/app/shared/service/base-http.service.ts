@@ -62,6 +62,10 @@ export abstract class BaseHttpService{
         for (let i = 0; i < files.length; i++) {
             formData.append("files", files[i], files[i].name);
         }
+        for(var property in object){
+            formData.append(property, object[property]);
+        }
+
         return this._http.post(uri, formData)
             .toPromise()
             .then(response => this.extractJsonResponse(response))

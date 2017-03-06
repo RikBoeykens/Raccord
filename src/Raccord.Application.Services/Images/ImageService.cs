@@ -70,6 +70,16 @@ namespace Raccord.Application.Services.Images
                         ProjectID = dto.ProjectID
                     };
 
+                    if(newImageDto.SelectedEntity.EntityID!=default(long))
+                    {
+                        if(newImageDto.SelectedEntity.Type==EntityType.Scene)
+                            image.ImageScenes.Add(new ImageScene{ SceneID = newImageDto.SelectedEntity.EntityID });
+                        else if(newImageDto.SelectedEntity.Type==EntityType.Location)
+                            image.ImageLocations.Add(new ImageLocation{ LocationID = newImageDto.SelectedEntity.EntityID });
+                        else if(newImageDto.SelectedEntity.Type==EntityType.Character)
+                            image.ImageCharacters.Add(new ImageCharacter{ CharacterID = newImageDto.SelectedEntity.EntityID });
+                    }
+
                     _imageRepository.Add(image);
 
                     ids.Add(image.ID);

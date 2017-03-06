@@ -7,6 +7,7 @@ import { ImageSummary } from '../model/image-summary.model';
 import { Image } from '../model/image.model';
 import { LinkImage } from '../model/link-image.model';
 import { JsonResponse } from '../../../../shared/model/json-response.model';
+import { SelectedEntity } from '../../../../shared/model/selected-entity.model';
 
 @Injectable()
 export class ImageHttpService extends BaseHttpService {
@@ -49,11 +50,11 @@ export class ImageHttpService extends BaseHttpService {
         return this.doDelete(uri);
     }
 
-    upload(files: File[], projectId: number)
+    upload(files: File[], projectId: number, selectedEntity: SelectedEntity)
     {
         var uri = `${this._baseUri}/${projectId}/upload`;
 
-        return this.doFilePost(files, null, uri);
+        return this.doFilePost(files, selectedEntity, uri);
     }
 
     setAsPrimary(id: number)

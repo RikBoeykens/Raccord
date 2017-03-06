@@ -2,6 +2,7 @@ import { Component, Input, Output, EventEmitter, OnChanges } from '@angular/core
 import { LoadingService } from '../../../../../loading/service/loading.service';
 import { DialogService } from '../../../../../shared/service/dialog.service';
 import { ImageHttpService } from '../../service/image-http.service';
+import { SelectedEntity } from '../../../../../shared/model/selected-entity.model';
 
 @Component({
     selector: 'upload-image',
@@ -11,6 +12,7 @@ export class UploadImageComponent{
 
     @Output() uploaded = new EventEmitter();
     @Input() projectId: number;
+    @Input() selectedEntity: SelectedEntity;
 
     constructor(
         private _imageHttpService: ImageHttpService,
@@ -24,7 +26,7 @@ export class UploadImageComponent{
 
         let files = <Array<File>>fileInput.target.files;
 
-        this._imageHttpService.upload(files, this.projectId).then(data=>{
+        this._imageHttpService.upload(files, this.projectId, this.selectedEntity).then(data=>{
             if(typeof(data)=='string'){
                 this._dialogService.error(data);
             }else{

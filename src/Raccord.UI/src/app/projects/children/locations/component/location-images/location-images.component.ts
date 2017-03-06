@@ -1,23 +1,32 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { LinkedImage } from '../../../images/model/linked-image.model';
 import { ImageLocationHttpService } from '../../service/image-location-http.service';
 import { LoadingService } from '../../../../../loading/service/loading.service';
 import { DialogService } from '../../../../../shared/service/dialog.service';
+import { SelectedEntity } from '../../../../../shared/model/selected-entity.model';
+import { EntityType } from '../../../../../shared/enums/entity-type.enum';
 
 @Component({
     selector: 'location-images',
     templateUrl: 'location-images.component.html'
 })
-export class LocationImagesComponent{
+export class LocationImagesComponent implements OnInit{
 
+    @Input() projectId: number;
     @Input() locationId: number;
     @Input() images: LinkedImage[];
+
+    selectedEntity: SelectedEntity;
 
     constructor(
         private _imageLocationHttpService: ImageLocationHttpService,
         private _loadingService: LoadingService,
         private _dialogService: DialogService,
     ){
+    }
+
+    ngOnInit(){
+        this.selectedEntity = new SelectedEntity({entityId: this.locationId, type: EntityType.location});
     }
 
     getImages(){
@@ -75,5 +84,9 @@ export class LocationImagesComponent{
         .then(()=>
             this._loadingService.endLoading(loadingId)
         );
+    }
+
+    imagesUploaded(){
+        this.getImages();
     }
 }
