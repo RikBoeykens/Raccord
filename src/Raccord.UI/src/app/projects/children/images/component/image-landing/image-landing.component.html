@@ -31,6 +31,12 @@
             </a>
             <span class="remove-image-link action-span" (click)="removeLocationLink(location)">(remove)</span>
         </span>
+        <span class="image-link-item" *ngFor="let character of image.characters">
+            <a routerLink="/projects/{{project.id}}/characters/{{character.id}}">
+                {{character.number}}. {{character.name}}
+            </a>
+            <span class="remove-image-link action-span" (click)="removeCharacterLink(character)">(remove)</span>
+        </span>
     <p>
 </div>
 <div class="row action-row">

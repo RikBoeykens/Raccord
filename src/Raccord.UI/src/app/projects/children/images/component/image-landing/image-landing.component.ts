@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { ImageHttpService } from '../../service/image-http.service';
 import { ImageSceneHttpService } from '../../../scenes/service/image-scene-http.service';
 import { ImageLocationHttpService } from '../../../locations/service/image-location-http.service';
+import { ImageCharacterHttpService } from '../../../characters/service/image-character-http.service';
 import { LoadingService } from '../../../../../loading/service/loading.service';
 import { DialogService } from '../../../../../shared/service/dialog.service';
 import { Image } from '../../model/image.model';
@@ -11,6 +12,7 @@ import { FullImage } from '../../model/full-image.model';
 import { ProjectSummary } from '../../../../model/project-summary.model';
 import { LinkedScene } from '../../../scenes/model/linked-scene.model';
 import { LinkedLocation } from '../../../locations/model/linked-location.model';
+import { LinkedCharacter } from '../../../characters/model/linked-character.model';
 import { EntityType } from '../../../../../shared/enums/entity-type.enum';
 import { SelectedEntity } from '../../../../../shared/model/selected-entity.model';
 
@@ -22,12 +24,13 @@ export class ImageLandingComponent {
     image: FullImage;
     viewImage: Image;
     project: ProjectSummary;
-    imageLinkTypes: EntityType[] = [EntityType.location, EntityType.scene];
+    imageLinkTypes: EntityType[] = [EntityType.location, EntityType.scene, EntityType.character];
 
     constructor(
         private _imageHttpService: ImageHttpService,
         private _imageSceneHttpService: ImageSceneHttpService,
         private _imageLocationHttpService: ImageLocationHttpService,
+        private _imageCharacterHttpService: ImageCharacterHttpService,
         private _loadingService: LoadingService,
         private _dialogService: DialogService,
         private _route: ActivatedRoute,
@@ -75,6 +78,9 @@ export class ImageLandingComponent {
                 break;
             case EntityType.location:
                 this.linkLocationImage(selectedEntity.entityId);
+                break;
+            case EntityType.character:
+                this.linkCharacterImage(selectedEntity.entityId);
         }
     }
 
@@ -110,6 +116,22 @@ export class ImageLandingComponent {
         );
     }
 
+    linkCharacterImage(characterId: number){
+        let loadingId = this._loadingService.startLoading();
+
+        this._imageCharacterHttpService.addLink(this.image.id, characterId).then(data=>{
+            if(typeof(data)=='string'){
+                this._dialogService.error(data);
+            }else{
+                this.getImage();
+                this._dialogService.success("Successfully linked image.");
+            }
+        }).catch()
+        .then(()=>
+            this._loadingService.endLoading(loadingId)
+        );
+    }
+
     removeSceneLink(scene: LinkedScene){
         let loadingId = this._loadingService.startLoading();
 
@@ -130,6 +152,22 @@ export class ImageLandingComponent {
         let loadingId = this._loadingService.startLoading();
 
         this._imageLocationHttpService.removeLink(location.linkID).then(data=>{
+            if(typeof(data)=='string'){
+                this._dialogService.error(data);
+            }else{
+                this.getImage();
+                this._dialogService.success("Successfully removed link.");
+            }
+        }).catch()
+        .then(()=>
+            this._loadingService.endLoading(loadingId)
+        );
+    }
+
+    removeCharacterLink(character: LinkedCharacter){
+        let loadingId = this._loadingService.startLoading();
+
+        this._imageCharacterHttpService.removeLink(character.linkID).then(data=>{
             if(typeof(data)=='string'){
                 this._dialogService.error(data);
             }else{

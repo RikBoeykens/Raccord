@@ -63,7 +63,7 @@ namespace Raccord.Application.Services.Characters
         {
             var character = new Character
             {
-                Number = GetNextCharacterNumber(dto.ProjectID),
+                Number = dto.Number,
                 Name = dto.Name,
                 Description = dto.Description,
                 ProjectID = dto.ProjectID,
@@ -80,6 +80,7 @@ namespace Raccord.Application.Services.Characters
         {
             var character = _characterRepository.GetSingle(dto.ID);
 
+            character.Number = dto.Number;
             character.Name = dto.Name;
             character.Description = dto.Description;
 
@@ -129,10 +130,5 @@ namespace Raccord.Application.Services.Characters
             _characterRepository.Commit();
         }
 
-        private int GetNextCharacterNumber(long projectID)
-        {
-            var characters = _characterRepository.GetAllForProject(projectID);
-            return characters.Count();
-        }
     }
 }

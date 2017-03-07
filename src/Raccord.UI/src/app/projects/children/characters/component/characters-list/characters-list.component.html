@@ -1,0 +1,36 @@
+<div class="row">      
+    <div class="col s12">
+        <a routerLink="/" class="breadcrumb">Dashboard</a>
+        <a routerLink="/projects" class="breadcrumb">Projects</a>
+        <a routerLink="/projects/{{project.id}}" class="breadcrumb">{{project.title}}</a>
+        <span class="breadcrumb">Characters</span>
+    </div>
+</div>
+<div class="row">
+    <edit-character [character]="viewNewCharacter" (submitCharacter)="addCharacter()"></edit-character>
+</div>
+<div class="row">
+    <md-nav-list [dragula]='"character-bag"' 
+                 [dragulaModel]='characters'>
+        <a md-list-item [routerLink]="[characterWrapper.character.id]" 
+           *ngFor="let characterWrapper of characters"
+           [ngClass]="{'can-delete': characterWrapper.character.sceneCount==0}"
+           class="drag-element drag-delete drag-merge">
+           <md-icon class=drag-handle>drag_handle</md-icon>
+            <show-image *ngIf="characterWrapper.character.primaryImage.id!=0" [image]="characterWrapper.character.primaryImage" [listAvatar]="true"></show-image>
+            {{characterWrapper.character.number}}. {{characterWrapper.character.name}} ({{characterWrapper.character.sceneCount}})
+            <span class="drop-container drop-merge-container"
+                  [dragula]='"character-bag"' 
+                  [dragulaModel]='characterWrapper.dropCharacters'
+                  *ngIf="draggingToMerge">
+                <md-icon>merge_type</md-icon>                
+            </span>
+        </a>
+    </md-nav-list>
+</div>
+<div class="delete-character drop-container drop-delete-container" 
+     [dragula]="'character-bag'" 
+     *ngIf="draggingToDelete" 
+     [dragulaModel]='deleteCharacters'>
+    <md-icon>delete</md-icon>
+</div>

@@ -26,6 +26,8 @@ export class SearchResultComponent {
             this.router.navigate(['projects', this.result.routeIDs[0], 'locations', this.result.routeIDs[1]]);
         if(this.result.type==EntityType.image)
             this.router.navigate(['projects', this.result.routeIDs[0], 'images', this.result.routeIDs[1]]);
+        if(this.result.type==EntityType.character)
+            this.router.navigate(['projects', this.result.routeIDs[0], 'characters', this.result.routeIDs[1]]);
         this.resetSearchBar.emit();
     }
 }

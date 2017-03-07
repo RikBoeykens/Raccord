@@ -56,6 +56,11 @@ import { EditImageComponent } from './projects';
 import { ImageLandingComponent } from './projects';
 import { UploadImageComponent } from './projects';
 import { ShowImageComponent } from './projects';
+import { CharactersListComponent } from './projects';
+import { EditCharacterComponent } from './projects';
+import { CharacterLandingComponent } from './projects';
+import { CharacterImagesComponent } from './projects';
+import { SearchCharacterComponent } from './projects';
 import { ScenePropertiesLandingComponent } from './projects';
 import { SelectEntityComponent } from './shared';
 
@@ -93,6 +98,11 @@ const COMPONENTS =[
   EditImageComponent,
   UploadImageComponent,
   ShowImageComponent,
+  CharactersListComponent,
+  EditCharacterComponent,
+  CharacterLandingComponent,
+  CharacterImagesComponent,
+  SearchCharacterComponent,
   ScenePropertiesLandingComponent,
   SelectEntityComponent
 ];

@@ -53,6 +53,11 @@ export { ImageHttpService } from './children/images/service/image-http.service';
 export { ImageResolve } from './children/images/service/image-resolve.service';
 export { ImagesResolve } from './children/images/service/images-resolve.service';
 
+export { CharactersListComponent } from './children/characters/component/characters-list/characters-list.component';
+export { SearchCharacterComponent } from './children/characters/component/search-character/search-character.component';
+export { EditCharacterComponent } from './children/characters/component/edit-character/edit-character.component';
+export { CharacterLandingComponent } from './children/characters/component/character-landing/character-landing.component';
+export { CharacterImagesComponent } from './children/characters/component/character-images/character-images.component';
 export { CharacterHttpService } from './children/characters/service/character-http.service';
 export { ImageCharacterHttpService } from './children/characters/service/image-character-http.service';
 export { CharacterResolve } from './children/characters/service/character-resolve.service';
