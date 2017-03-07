@@ -108,6 +108,7 @@ import { ProjectSummaryResolve } from './projects';
 import { ProjectsResolve } from './projects';
 import { SceneHttpService } from './projects';
 import { ImageSceneHttpService } from './projects';
+import { CharacterSceneHttpService } from './projects';
 import { SceneResolve } from './projects';
 import { ScenesResolve } from './projects';
 import { LocationHttpService } from './projects';
@@ -123,6 +124,10 @@ import { DayNightsResolve } from './projects';
 import { ImageHttpService } from './projects';
 import { ImageResolve } from './projects';
 import { ImagesResolve } from './projects';
+import { CharacterHttpService } from './projects';
+import { ImageCharacterHttpService } from './projects';
+import { CharacterResolve } from './projects';
+import { CharactersResolve } from './projects';
 
 const APP_PROVIDERS = [
   LoadingService,
@@ -135,6 +140,7 @@ const APP_PROVIDERS = [
   ProjectsResolve,
   SceneHttpService,
   ImageSceneHttpService,
+  CharacterSceneHttpService,
   SceneResolve,
   ScenesResolve,
   LocationHttpService,
@@ -149,7 +155,11 @@ const APP_PROVIDERS = [
   DayNightsResolve,
   ImageHttpService,
   ImageResolve,
-  ImagesResolve
+  ImagesResolve,
+  CharacterHttpService,
+  ImageCharacterHttpService,
+  CharacterResolve,
+  CharactersResolve
 ];
 
 // Directives
