@@ -14,6 +14,7 @@ export { SceneLandingComponent } from './children/scenes/component/scene-landing
 export { SceneImagesComponent } from './children/scenes/component/scene-images/scene-images.component';
 export { SceneHttpService } from './children/scenes/service/scene-http.service';
 export { ImageSceneHttpService } from './children/scenes/service/image-scene-http.service';
+export { CharacterSceneHttpService } from './children/scenes/service/character-scene-http.service';
 export { SceneResolve } from './children/scenes/service/scene-resolve.service';
 export { ScenesResolve } from './children/scenes/service/scenes-resolve.service';
 
@@ -51,5 +52,10 @@ export { ShowImageComponent } from './children/images/component/show-image/show-
 export { ImageHttpService } from './children/images/service/image-http.service';
 export { ImageResolve } from './children/images/service/image-resolve.service';
 export { ImagesResolve } from './children/images/service/images-resolve.service';
+
+export { CharacterHttpService } from './children/characters/service/character-http.service';
+export { ImageCharacterHttpService } from './children/characters/service/image-character-http.service';
+export { CharacterResolve } from './children/characters/service/character-resolve.service';
+export { CharactersResolve } from './children/characters/service/characters-resolve.service';
 
 export { ScenePropertiesLandingComponent } from './children/scene-properties/component/scene-properties-landing/scene-properties-landing.component';
