@@ -38,6 +38,7 @@ import { ScenesListComponent } from './projects';
 import { EditSceneComponent } from './projects';
 import { SceneLandingComponent } from './projects';
 import { SceneImagesComponent } from './projects';
+import { SceneCharactersComponent } from './projects';
 import { LocationsListComponent } from './projects';
 import { EditLocationComponent } from './projects';
 import { LocationLandingComponent } from './projects';
@@ -80,6 +81,7 @@ const COMPONENTS =[
   EditSceneComponent,
   SceneLandingComponent,
   SceneImagesComponent,
+  SceneCharactersComponent,
   LocationsListComponent,
   EditLocationComponent,
   LocationLandingComponent,

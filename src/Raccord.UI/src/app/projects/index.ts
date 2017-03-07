@@ -12,6 +12,7 @@ export { ScenesListComponent } from './children/scenes/component/scenes-list/sce
 export { EditSceneComponent } from './children/scenes/component/edit-scene/edit-scene.component';
 export { SceneLandingComponent } from './children/scenes/component/scene-landing/scene-landing.component';
 export { SceneImagesComponent } from './children/scenes/component/scene-images/scene-images.component';
+export { SceneCharactersComponent } from './children/scenes/component/scene-characters/scene-characters.component';
 export { SceneHttpService } from './children/scenes/service/scene-http.service';
 export { ImageSceneHttpService } from './children/scenes/service/image-scene-http.service';
 export { CharacterSceneHttpService } from './children/scenes/service/character-scene-http.service';

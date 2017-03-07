@@ -32,6 +32,7 @@ namespace Raccord.API.ViewModels.Characters
                 Name = dto.Name,
                 Description = dto.Description,
                 ProjectID = dto.ProjectID,
+                SceneCount = dto.SceneCount,
                 PrimaryImage = dto.PrimaryImage.Translate(),
             };
         }
@@ -59,6 +60,7 @@ namespace Raccord.API.ViewModels.Characters
                 Name = dto.Name,
                 Description = dto.Description,
                 ProjectID = dto.ProjectID,
+                PrimaryImage = dto.PrimaryImage.Translate(),
                 LinkID = dto.LinkID,
             };
         }

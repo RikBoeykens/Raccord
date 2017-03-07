@@ -13,6 +13,9 @@
 <md-tab-group>
   <md-tab label="Overview">
   </md-tab>
+  <md-tab label="Characters">
+      <scene-characters [characters]="scene.characters" [sceneId]="scene.id" [projectId]="project.id"></scene-characters>
+  </md-tab>
   <md-tab label="Pictures">
       <scene-images [images]="scene.images" [sceneId]="scene.id" [projectId]="project.id"></scene-images>
   </md-tab>

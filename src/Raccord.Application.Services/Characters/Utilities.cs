@@ -35,6 +35,7 @@ namespace Raccord.Application.Services.Characters
                 Name = character.Name,
                 Description = character.Description,
                 PrimaryImage = character.ImageCharacters.FirstOrDefault(i=> i.IsPrimaryImage)?.Image.Translate(),
+                SceneCount = character.CharacterScenes.Count(),
                 ProjectID = character.ProjectID,
             };
 
@@ -92,7 +93,7 @@ namespace Raccord.Application.Services.Characters
             {
                 ID = character.ID,
                 RouteIDs = new long[]{character.ProjectID, character.ID},
-                DisplayName = character.GetDisplaySummary(),
+                DisplayName = character.Name,
                 Info = $"Project: {character.Project.Title}",
                 Type = EntityType.Character,
             };
