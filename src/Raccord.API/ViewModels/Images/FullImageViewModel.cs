@@ -1,5 +1,6 @@
 using Raccord.API.ViewModels.Scenes;
 using Raccord.API.ViewModels.Locations;
+using Raccord.API.ViewModels.Characters;
 using System.Collections.Generic;
 
 namespace Raccord.API.ViewModels.Images
@@ -9,6 +10,7 @@ namespace Raccord.API.ViewModels.Images
     {
         private IEnumerable<LinkedSceneViewModel> _scenes;
         private IEnumerable<LinkedLocationViewModel> _locations;
+        private IEnumerable<LinkedCharacterViewModel> _characters;
         
         // Indicates if the image is primary image for the project
         public bool IsPrimaryImage { get; set; }
@@ -36,6 +38,19 @@ namespace Raccord.API.ViewModels.Images
             set
             {
                 _locations = value;
+            }
+        }
+
+        // Characters linked to the image
+        public IEnumerable<LinkedCharacterViewModel> Characters
+        {
+            get
+            {
+                return _characters ?? (_characters = new List<LinkedCharacterViewModel>());
+            }
+            set
+            {
+                _characters = value;
             }
         }
     }

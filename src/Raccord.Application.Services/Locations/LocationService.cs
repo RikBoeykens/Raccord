@@ -4,6 +4,7 @@ using System.Linq;
 using Raccord.Domain.Model.Locations;
 using Raccord.Application.Core.Services.Locations;
 using Raccord.Data.EntityFramework.Repositories.Locations;
+using Raccord.Domain.Model.Images;
 
 namespace Raccord.Application.Services.Locations
 {
@@ -101,6 +102,17 @@ namespace Raccord.Application.Services.Locations
 
             toLocation.Scenes = sceneList;
             mergeLocation.Scenes.Clear();
+
+            var imageList = mergeLocation.ImageLocations.ToList();
+
+            foreach(var image in imageList)
+            {
+                if(!toLocation.ImageLocations.Any(cs=> cs.ImageID == image.ImageID))
+                {
+                    toLocation.ImageLocations.Add(new ImageLocation{ImageID = image.ImageID});
+                }
+            }
+
             _locationRepository.Edit(toLocation);
             _locationRepository.Delete(mergeLocation);
 

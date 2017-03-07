@@ -8,6 +8,7 @@ using Raccord.Application.Services.Images;
 using Raccord.Data.EntityFramework.Repositories.Characters;
 using Raccord.Application.Core.Common.Sorting;
 using Raccord.Data.EntityFramework.Repositories.Images;
+using Raccord.Domain.Model.Images;
 
 namespace Raccord.Application.Services.Characters
 {
@@ -98,17 +99,32 @@ namespace Raccord.Application.Services.Characters
             _characterRepository.Commit();
         }
 
-        // Sorts characters
-        public void Sort(SortOrderDto order)
+        public void Merge(long toID, long mergeID)
         {
-            var characters = _characterRepository.GetAllForProject(order.ParentID);
+            var toCharacter = _characterRepository.GetFull(toID);
+            var mergeCharacter = _characterRepository.GetFull(mergeID);
 
-            foreach(var character in characters)
+            var sceneList = mergeCharacter.CharacterScenes.ToList();
+
+            foreach(var scene in sceneList)
             {
-                var orderedIndex = Array.IndexOf(order.SortIDs, character.ID);
-                character.Number = orderedIndex != -1 ? orderedIndex : characters.Count();
-                _characterRepository.Edit(character);
+                if(!toCharacter.CharacterScenes.Any(cs=> cs.SceneID == scene.SceneID))
+                {
+                    toCharacter.CharacterScenes.Add(new CharacterScene{ SceneID = scene.SceneID});
+                }
             }
+
+            var imageList = mergeCharacter.ImageCharacters.ToList();
+
+            foreach(var image in imageList)
+            {
+                if(!toCharacter.ImageCharacters.Any(cs=> cs.ImageID == image.ImageID))
+                {
+                    toCharacter.ImageCharacters.Add(new ImageCharacter{ImageID = image.ImageID});
+                }
+            }
+            _characterRepository.Edit(toCharacter);
+            _characterRepository.Delete(mergeCharacter);
 
             _characterRepository.Commit();
         }

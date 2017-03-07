@@ -2,6 +2,7 @@ using Raccord.Application.Core.Services.Scenes;
 using Raccord.API.ViewModels.Locations;
 using Raccord.API.ViewModels.SceneProperties;
 using Raccord.API.ViewModels.Images;
+using Raccord.API.ViewModels.Characters;
 using System.Linq;
 
 namespace Raccord.API.ViewModels.Scenes
@@ -21,6 +22,7 @@ namespace Raccord.API.ViewModels.Scenes
                 Location = dto.Location.Translate(),
                 DayNight = dto.DayNight.Translate(),
                 Images = dto.Images.Select(i=> i.Translate()),
+                Characters = dto.Characters.Select(i=> i.Translate()),
                 ProjectID = dto.ProjectID,
             };
         }

@@ -3,6 +3,7 @@ using Raccord.API.ViewModels.Scenes;
 using Raccord.API.ViewModels.Locations;
 using Raccord.API.ViewModels.Common.SelectedEntity;
 using System.Linq;
+using Raccord.API.ViewModels.Characters;
 
 namespace Raccord.API.ViewModels.Images
 {
@@ -20,6 +21,7 @@ namespace Raccord.API.ViewModels.Images
                 ProjectID = dto.ProjectID,
                 Scenes = dto.Scenes.Select(s=> s.Translate()),
                 Locations = dto.Locations.Select(s=> s.Translate()),
+                Characters = dto.Characters.Select(s=> s.Translate()),
                 IsPrimaryImage = dto.IsPrimaryImage,
             };
         }

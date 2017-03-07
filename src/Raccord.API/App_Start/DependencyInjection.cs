@@ -1,27 +1,36 @@
+using Microsoft.Extensions.DependencyInjection;
 using Raccord.Data.EntityFramework.Repositories.Projects;
 using Raccord.Data.EntityFramework.Repositories.Scenes;
 using Raccord.Data.EntityFramework.Repositories.Locations;
 using Raccord.Data.EntityFramework.Repositories.SceneProperties;
 using Raccord.Data.EntityFramework.Repositories.Images;
+using Raccord.Data.EntityFramework.Repositories.ImageScenes;
+using Raccord.Data.EntityFramework.Repositories.ImageLocations;
+using Raccord.Data.EntityFramework.Repositories.Characters;
+using Raccord.Data.EntityFramework.Repositories.ImageCharacters;
+using Raccord.Data.EntityFramework.Repositories.CharacterScenes;
 using Raccord.Application.Core.Services.Projects;
 using Raccord.Application.Core.Services.Scenes;
 using Raccord.Application.Core.Services.Locations;
 using Raccord.Application.Core.Services.SceneProperties;
 using Raccord.Application.Core.Services.Images;
+using Raccord.Application.Core.Services.SearchEngine;
+using Raccord.Application.Core.Services.ImageScenes;
+using Raccord.Application.Core.Services.ImageLocations;
+using Raccord.Application.Core.Services.Characters;
+using Raccord.Application.Core.Services.ImageCharacters;
+using Raccord.Application.Core.Services.CharacterScenes;
 using Raccord.Application.Services.Projects;
 using Raccord.Application.Services.Scenes;
 using Raccord.Application.Services.Locations;
 using Raccord.Application.Services.SceneProperties;
 using Raccord.Application.Services.Images;
-using Raccord.Application.Core.Services.SearchEngine;
 using Raccord.Application.Services.SearchEngine;
-using Microsoft.Extensions.DependencyInjection;
-using Raccord.Data.EntityFramework.Repositories.ImageScenes;
 using Raccord.Application.Services.ImageScenes;
-using Raccord.Application.Core.Services.ImageScenes;
-using Raccord.Application.Core.Services.ImageLocations;
 using Raccord.Application.Services.ImageLocations;
-using Raccord.Data.EntityFramework.Repositories.ImageLocations;
+using Raccord.Application.Services.Characters;
+using Raccord.Application.Services.ImageCharacters;
+using Raccord.Application.Services.CharacterScenes;
 
 namespace Raccord.API
 {
@@ -58,6 +67,16 @@ namespace Raccord.API
 
             services.AddTransient<IImageLocationRepository, ImageLocationRepository>();
             services.AddTransient<IImageLocationService, ImageLocationService>();
+
+            services.AddTransient<ICharacterRepository, CharacterRepository>();
+            services.AddTransient<ICharacterService, CharacterService>();
+            services.AddTransient<ICharacterSearchEngineService, CharacterSearchEngineService>();            
+
+            services.AddTransient<IImageCharacterRepository, ImageCharacterRepository>();
+            services.AddTransient<IImageCharacterService, ImageCharacterService>();
+
+            services.AddTransient<ICharacterSceneRepository, CharacterSceneRepository>();
+            services.AddTransient<ICharacterSceneService, CharacterSceneService>();
 
             services.AddTransient<ISearchEngineServiceWrapper, SearchEngineServiceWrapper>();
         }

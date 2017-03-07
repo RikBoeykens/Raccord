@@ -5,6 +5,6 @@ namespace Raccord.Application.Core.Services.Characters
     // Interface for character functionality
     public interface ICharacterService : IService<CharacterDto, CharacterSummaryDto, FullCharacterDto>, IAllForProjectService<CharacterSummaryDto>
     {
-        void Sort(SortOrderDto order);
+        void Merge(long toID, long mergeID);
     }
 }
