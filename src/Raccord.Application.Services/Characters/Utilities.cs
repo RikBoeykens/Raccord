@@ -5,6 +5,7 @@ using Raccord.Application.Core.Services.SearchEngine;
 using Raccord.Core.Enums;
 using System.Linq;
 using Raccord.Application.Services.Images;
+using Raccord.Application.Services.Scenes;
 
 namespace Raccord.Application.Services.Characters
 {
@@ -20,6 +21,7 @@ namespace Raccord.Application.Services.Characters
                 Name = character.Name,
                 Description = character.Description,
                 Images = character.ImageCharacters.Select(i=> i.TranslateImage()),
+                Scenes = character.CharacterScenes.Select(i=> i.TranslateScene()),
                 ProjectID = character.ProjectID,
             };
 

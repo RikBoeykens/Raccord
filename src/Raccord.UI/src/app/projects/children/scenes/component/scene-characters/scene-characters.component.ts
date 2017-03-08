@@ -90,8 +90,7 @@ export class SceneCharactersComponent implements OnInit{
         );
     }
 
-    removeLink(character: LinkedCharacter, event: Event){
-        event.stopPropagation();
+    removeLink(character: LinkedCharacter){
         let loadingId = this._loadingService.startLoading();
 
         this._characterSceneHttpService.removeLink(character.linkID).then(data=>{

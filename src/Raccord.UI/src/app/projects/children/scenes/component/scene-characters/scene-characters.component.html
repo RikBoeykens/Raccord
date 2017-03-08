@@ -17,7 +17,7 @@
             <a routerLink="/projects/{{projectId}}/characters/{{character.id}}">
                 {{character.number}}. {{character.name}}
             </a>
-            <button md-button (click)="removeLink(character, $event)"><md-icon>delete</md-icon></button>
+            <button md-button (click)="removeLink(character)"><md-icon>delete</md-icon></button>
         </md-list-item>
     </md-nav-list>
 </div>
