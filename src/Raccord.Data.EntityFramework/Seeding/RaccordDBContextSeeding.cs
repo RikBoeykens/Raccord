@@ -4,6 +4,7 @@ using Raccord.Domain.Model.Locations;
 using Raccord.Domain.Model.Scenes;
 using System.Collections.Generic;
 using System.Linq;
+using Raccord.Domain.Model.Breakdowns.BreakdownTypes;
 
 namespace Raccord.Data.EntityFramework.Seeding
 {
@@ -18,6 +19,24 @@ namespace Raccord.Data.EntityFramework.Seeding
         public static void SystemSeeding(this RaccordDBContext context)
         {
 
+        }
+
+        public static void SeedBreakdownTypes(this RaccordDBContext context)
+        {
+            if(!context.BreakdownTypeDefinitions.Any())
+            {
+                var definitions = new List<BreakdownTypeDefinition>
+                {
+                    new BreakdownTypeDefinition{ Name = "Costume" },
+                    new BreakdownTypeDefinition{ Name = "Hair / Make Up" },
+                    new BreakdownTypeDefinition{ Name = "Props" },
+                    new BreakdownTypeDefinition{ Name = "Vehicles" },
+                };
+
+                context.BreakdownTypeDefinitions.AddRange(definitions);
+
+                context.SaveChanges();
+            }
         }
 
         public static void TestSeeding(this RaccordDBContext context)

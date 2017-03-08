@@ -4,6 +4,8 @@ using System.Linq;
 using Raccord.Domain.Model.Projects;
 using Raccord.Application.Core.Services.Projects;
 using Raccord.Data.EntityFramework.Repositories.Projects;
+using Raccord.Data.EntityFramework.Repositories.Breakdowns.BreakdownTypes;
+using Raccord.Domain.Model.Breakdowns.BreakdownTypes;
 
 namespace Raccord.Application.Services.Projects
 {
@@ -11,14 +13,21 @@ namespace Raccord.Application.Services.Projects
     public class ProjectService : IProjectService
     {
         private readonly IProjectRepository _projectRepository;
+        private readonly IBreakdownTypeDefinitionRepository _breakdownTypeDefinitionRepository;
 
         // Initialises a new ProjectService
-        public ProjectService(IProjectRepository projectRepository)
+        public ProjectService(
+            IProjectRepository projectRepository,
+            IBreakdownTypeDefinitionRepository breakdownTypeDefinitionRepository
+            )
         {
             if(projectRepository == null)
                 throw new ArgumentNullException(nameof(projectRepository));
+            if(breakdownTypeDefinitionRepository == null)
+                throw new ArgumentNullException(nameof(breakdownTypeDefinitionRepository));
             
             _projectRepository = projectRepository;
+            _breakdownTypeDefinitionRepository = breakdownTypeDefinitionRepository;
         }
 
         // Gets all projects
@@ -54,9 +63,16 @@ namespace Raccord.Application.Services.Projects
         // Adds a project
         public long Add(ProjectDto dto)
         {
+            var breakdownTypeDefinitions = _breakdownTypeDefinitionRepository.GetAll();
+
             var project = new Project
             {
                 Title = dto.Title,
+                BreakdownTypes = breakdownTypeDefinitions.Select(bt=> new BreakdownType
+                {
+                    Name = bt.Name,
+                    Description = bt.Description,
+                }).ToList()
             };
 
             _projectRepository.Add(project);

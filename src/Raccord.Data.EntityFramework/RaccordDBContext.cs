@@ -3,6 +3,7 @@ using Raccord.Domain.Model.Projects;
 using Raccord.Domain.Model.Scenes;
 using Raccord.Domain.Model.Locations;
 using Raccord.Domain.Model.SceneProperties;
+using Raccord.Domain.Model.Breakdowns.BreakdownTypes;
 using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace Raccord.Data.EntityFramework
@@ -18,6 +19,7 @@ namespace Raccord.Data.EntityFramework
         public DbSet<Location> Locations { get; set; }
         public DbSet<IntExt> IntExts { get; set; }
         public DbSet<DayNight> DayNights { get; set; }
+        public DbSet<BreakdownTypeDefinition> BreakdownTypeDefinitions { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

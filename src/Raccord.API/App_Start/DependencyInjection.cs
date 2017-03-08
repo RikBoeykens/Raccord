@@ -31,6 +31,7 @@ using Raccord.Application.Services.ImageLocations;
 using Raccord.Application.Services.Characters;
 using Raccord.Application.Services.ImageCharacters;
 using Raccord.Application.Services.CharacterScenes;
+using Raccord.Data.EntityFramework.Repositories.Breakdowns.BreakdownTypes;
 
 namespace Raccord.API
 {
@@ -77,6 +78,9 @@ namespace Raccord.API
 
             services.AddTransient<ICharacterSceneRepository, CharacterSceneRepository>();
             services.AddTransient<ICharacterSceneService, CharacterSceneService>();
+            
+            services.AddTransient<IBreakdownTypeDefinitionRepository, BreakdownTypeDefinitionRepository>();
+            services.AddTransient<IBreakdownTypeRepository, BreakdownTypeRepository>();
 
             services.AddTransient<ISearchEngineServiceWrapper, SearchEngineServiceWrapper>();
         }
