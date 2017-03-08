@@ -16,7 +16,7 @@
   <md-tab label="Scenes">
     <div class="row">
         <md-nav-list>
-            <a routerLink="/projects/{{projectId}}/scenes/{{scene.id}}"
+            <a routerLink="/projects/{{project.id}}/scenes/{{scene.id}}"
                 md-list-item 
                 *ngFor="let scene of character.scenes">
                 <show-image *ngIf="scene.primaryImage.id!=0" [image]="scene.primaryImage" [listAvatar]="true"></show-image>

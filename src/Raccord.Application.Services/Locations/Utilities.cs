@@ -19,7 +19,7 @@ namespace Raccord.Application.Services.Locations
                 ID = location.ID,
                 Name = location.Name,
                 Description = location.Description,
-                Scenes = location.Scenes.Select(s=> s.TranslateSummary()),
+                Scenes = location.Scenes.OrderBy(s=> s.Number).Select(s=> s.TranslateSummary()),
                 Images = location.ImageLocations.Select(s=> s.TranslateImage()),
                 ProjectID = location.ProjectID,
             };

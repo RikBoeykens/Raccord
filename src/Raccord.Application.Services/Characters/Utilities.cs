@@ -21,7 +21,7 @@ namespace Raccord.Application.Services.Characters
                 Name = character.Name,
                 Description = character.Description,
                 Images = character.ImageCharacters.Select(i=> i.TranslateImage()),
-                Scenes = character.CharacterScenes.Select(i=> i.TranslateScene()),
+                Scenes = character.CharacterScenes.OrderBy(s=> s.Scene.Number).Select(s=> s.TranslateScene()),
                 ProjectID = character.ProjectID,
             };
 
