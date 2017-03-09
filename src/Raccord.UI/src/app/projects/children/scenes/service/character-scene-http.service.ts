@@ -6,6 +6,7 @@ import { FullScene } from '../model/full-scene.model';
 import { SceneSummary } from '../model/scene-summary.model';
 import { Scene } from '../model/scene.model';
 import { LinkedCharacter } from '../../characters/model/linked-character.model';
+import { LinkedScene } from '..//model/linked-scene.model';
 import { JsonResponse } from '../../../../shared/model/json-response.model';
 import { SortOrder } from '../../../../shared/model/sort-order.model';
 
@@ -20,6 +21,13 @@ export class CharacterSceneHttpService extends BaseHttpService {
     getCharacters(sceneId): Promise<LinkedCharacter[]> {
 
         var uri = `${this._baseUri}/${sceneId}/characters`;
+
+        return this.doGetArray(uri);
+    }
+
+    getScenes(characterId): Promise<LinkedScene[]> {
+
+        var uri = `${this._baseUri}/${characterId}/scenes`;
 
         return this.doGetArray(uri);
     }

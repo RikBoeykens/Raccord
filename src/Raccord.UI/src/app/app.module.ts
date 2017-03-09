@@ -61,6 +61,7 @@ import { CharactersListComponent } from './projects';
 import { EditCharacterComponent } from './projects';
 import { CharacterLandingComponent } from './projects';
 import { CharacterImagesComponent } from './projects';
+import { CharacterScenesComponent } from './projects';
 import { SearchCharacterComponent } from './projects';
 import { ScenePropertiesLandingComponent } from './projects';
 import { SelectEntityComponent } from './shared';
@@ -104,6 +105,7 @@ const COMPONENTS =[
   EditCharacterComponent,
   CharacterLandingComponent,
   CharacterImagesComponent,
+  CharacterScenesComponent,
   SearchCharacterComponent,
   ScenePropertiesLandingComponent,
   SelectEntityComponent

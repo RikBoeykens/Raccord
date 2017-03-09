@@ -6,55 +6,67 @@ using Raccord.Application.Core.Services.Characters;
 using Raccord.Data.EntityFramework.Repositories.CharacterScenes;
 using Raccord.Application.Services.Characters;
 using Raccord.Application.Core.Services.CharacterScenes;
+using Raccord.Application.Core.Services.Scenes;
+using Raccord.Application.Services.Scenes;
 
 namespace Raccord.Application.Services.CharacterScenes
 {
     // Service used for character scene functionality
     public class CharacterSceneService : ICharacterSceneService
     {
-        private readonly ICharacterSceneRepository _imageSceneRepository;
+        private readonly ICharacterSceneRepository _characterSceneRepository;
 
         // Initialises a new CharacterSceneService
-        public CharacterSceneService(ICharacterSceneRepository imageSceneRepository)
+        public CharacterSceneService(ICharacterSceneRepository characterSceneRepository)
         {
-            if(imageSceneRepository == null)
-                throw new ArgumentNullException(nameof(imageSceneRepository));
+            if(characterSceneRepository == null)
+                throw new ArgumentNullException(nameof(characterSceneRepository));
             
-            _imageSceneRepository = imageSceneRepository;
+            _characterSceneRepository = characterSceneRepository;
         }
 
-        // Gets all characters
+        // Gets all characters for a scene
         public IEnumerable<LinkedCharacterDto> GetCharacters(long ID)
         {
-            var characterScenes = _imageSceneRepository.GetAllForScene(ID);
+            var characterScenes = _characterSceneRepository.GetAllForScene(ID);
 
             var dtos = characterScenes.Select(i=> i.TranslateCharacter());
 
             return dtos;
         }
 
-        public void AddLink(long imageID, long sceneID)
+        // Gets all scenes for a character
+        public IEnumerable<LinkedSceneDto> GetScenes(long ID)
         {
-            var imageScene = _imageSceneRepository.FindBy(i=> i.CharacterID == imageID && i.SceneID==sceneID);
+            var characterScenes = _characterSceneRepository.GetAllForCharacter(ID);
 
-            if(!imageScene.Any()){
-                _imageSceneRepository.Add(new CharacterScene
+            var dtos = characterScenes.Select(i=> i.TranslateScene());
+
+            return dtos;
+        }
+
+        public void AddLink(long characterID, long sceneID)
+        {
+            var characterScene = _characterSceneRepository.FindBy(i=> i.CharacterID == characterID && i.SceneID==sceneID);
+
+            if(!characterScene.Any()){
+                _characterSceneRepository.Add(new CharacterScene
                 {
-                    CharacterID = imageID,
+                    CharacterID = characterID,
                     SceneID = sceneID
                 });
 
-                _imageSceneRepository.Commit();
+                _characterSceneRepository.Commit();
             }     
         }
 
         public void RemoveLink(long ID)
         {
-            var imageScene = _imageSceneRepository.GetSingle(ID);
+            var characterScene = _characterSceneRepository.GetSingle(ID);
 
-            _imageSceneRepository.Delete(imageScene);
+            _characterSceneRepository.Delete(characterScene);
 
-            _imageSceneRepository.Commit();
+            _characterSceneRepository.Commit();
         }
     }
 }

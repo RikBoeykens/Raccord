@@ -19,13 +19,35 @@ namespace Raccord.Data.EntityFramework.Repositories.CharacterScenes
             return query.Where(l=> l.SceneID == sceneID);
         }
 
+        public IEnumerable<CharacterScene> GetAllForCharacter(long characterID)
+        {
+            var query = GetIncludedScene();
+
+            return query.Where(l=> l.CharacterID == characterID);
+        }
+
         private IQueryable<CharacterScene> GetIncludedCharacter()
         {
             IQueryable<CharacterScene> query = _context.Set<CharacterScene>();
 
-            return query.Include(i=> i.Character)
-                        .ThenInclude(i=> i.ImageCharacters)
+            return query.Include(cs=> cs.Character)
+                        .ThenInclude(c=> c.ImageCharacters)
                         .ThenInclude(ic=> ic.Image);
+        }
+
+        private IQueryable<CharacterScene> GetIncludedScene()
+        {
+            IQueryable<CharacterScene> query = _context.Set<CharacterScene>();
+
+            return query.Include(cs=> cs.Scene)
+                        .ThenInclude(s=> s.IntExt)
+                        .Include(cs=> cs.Scene)
+                        .ThenInclude(s=> s.DayNight)
+                        .Include(cs=> cs.Scene)
+                        .ThenInclude(s=> s.Location)
+                        .Include(cs=> cs.Scene)
+                        .ThenInclude(s=> s.ImageScenes)
+                        .ThenInclude(i=> i.Image);
         }
     }
 }

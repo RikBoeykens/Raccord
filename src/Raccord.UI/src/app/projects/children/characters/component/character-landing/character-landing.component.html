@@ -14,16 +14,7 @@
   <md-tab label="Overview">
   </md-tab>
   <md-tab label="Scenes">
-    <div class="row">
-        <md-nav-list>
-            <a routerLink="/projects/{{project.id}}/scenes/{{scene.id}}"
-                md-list-item 
-                *ngFor="let scene of character.scenes">
-                <show-image *ngIf="scene.primaryImage.id!=0" [image]="scene.primaryImage" [listAvatar]="true"></show-image>
-                {{scene.number}}. {{scene.intExt.name}} {{scene.location.name}} {{scene.dayNight.name}} - {{scene.summary}}
-            </a>
-        </md-nav-list>
-    </div>
+      <character-scenes [scenes]="character.scenes" [characterId]="character.id" [projectId]="project.id"></character-scenes>
   </md-tab>
   <md-tab label="Pictures">
       <character-images [images]="character.images" [characterId]="character.id" [projectId]="project.id"></character-images>

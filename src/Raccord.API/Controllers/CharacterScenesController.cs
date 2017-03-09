@@ -26,9 +26,20 @@ namespace Raccord.API.Controllers
 
         // GET: api/characterscenes/1/characters
         [HttpGet("{id}/characters")]
-        public IEnumerable<LinkedCharacterViewModel> GetAll(long id)
+        public IEnumerable<LinkedCharacterViewModel> GetCharacters(long id)
         {
             var dtos = _characterSceneService.GetCharacters(id);
+
+            var vms = dtos.Select(p => p.Translate());
+
+            return vms;
+        }
+
+        // GET: api/characterscenes/1/scenes
+        [HttpGet("{id}/scenes")]
+        public IEnumerable<LinkedSceneViewModel> GetScenes(long id)
+        {
+            var dtos = _characterSceneService.GetScenes(id);
 
             var vms = dtos.Select(p => p.Translate());
 

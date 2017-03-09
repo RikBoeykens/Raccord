@@ -7,5 +7,6 @@ namespace Raccord.Data.EntityFramework.Repositories.CharacterScenes
     public interface ICharacterSceneRepository : IBaseRepository<CharacterScene>
     {
         IEnumerable<CharacterScene> GetAllForScene(long sceneID);
+        IEnumerable<CharacterScene> GetAllForCharacter(long characterID);
     }
 }
