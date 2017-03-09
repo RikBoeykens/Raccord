@@ -65,4 +65,8 @@ export { ImageCharacterHttpService } from './children/characters/service/image-c
 export { CharacterResolve } from './children/characters/service/character-resolve.service';
 export { CharactersResolve } from './children/characters/service/characters-resolve.service';
 
+export { BreakdownTypeHttpService } from './children/breakdowns/breakdown-types/service/breakdown-type-http.service';
+export { BreakdownTypeResolve } from './children/breakdowns/breakdown-types/service/breakdown-type-resolve.service';
+export { BreakdownTypesResolve } from './children/breakdowns/breakdown-types/service/breakdown-types-resolve.service';
+
 export { ScenePropertiesLandingComponent } from './children/scene-properties/component/scene-properties-landing/scene-properties-landing.component';

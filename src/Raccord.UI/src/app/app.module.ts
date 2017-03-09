@@ -142,6 +142,9 @@ import { CharacterHttpService } from './projects';
 import { ImageCharacterHttpService } from './projects';
 import { CharacterResolve } from './projects';
 import { CharactersResolve } from './projects';
+import { BreakdownTypeHttpService } from './projects';
+import { BreakdownTypeResolve } from './projects';
+import { BreakdownTypesResolve } from './projects';
 
 const APP_PROVIDERS = [
   LoadingService,
@@ -173,7 +176,10 @@ const APP_PROVIDERS = [
   CharacterHttpService,
   ImageCharacterHttpService,
   CharacterResolve,
-  CharactersResolve
+  CharactersResolve,
+  BreakdownTypeHttpService,
+  BreakdownTypeResolve,
+  BreakdownTypesResolve
 ];
 
 // Directives
