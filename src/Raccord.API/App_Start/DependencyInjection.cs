@@ -9,6 +9,7 @@ using Raccord.Data.EntityFramework.Repositories.ImageLocations;
 using Raccord.Data.EntityFramework.Repositories.Characters;
 using Raccord.Data.EntityFramework.Repositories.ImageCharacters;
 using Raccord.Data.EntityFramework.Repositories.CharacterScenes;
+using Raccord.Data.EntityFramework.Repositories.Breakdowns.BreakdownTypes;
 using Raccord.Application.Core.Services.Projects;
 using Raccord.Application.Core.Services.Scenes;
 using Raccord.Application.Core.Services.Locations;
@@ -20,6 +21,7 @@ using Raccord.Application.Core.Services.ImageLocations;
 using Raccord.Application.Core.Services.Characters;
 using Raccord.Application.Core.Services.ImageCharacters;
 using Raccord.Application.Core.Services.CharacterScenes;
+using Raccord.Application.Core.Services.Breakdowns.BreakdownTypes;
 using Raccord.Application.Services.Projects;
 using Raccord.Application.Services.Scenes;
 using Raccord.Application.Services.Locations;
@@ -31,7 +33,7 @@ using Raccord.Application.Services.ImageLocations;
 using Raccord.Application.Services.Characters;
 using Raccord.Application.Services.ImageCharacters;
 using Raccord.Application.Services.CharacterScenes;
-using Raccord.Data.EntityFramework.Repositories.Breakdowns.BreakdownTypes;
+using Raccord.Application.Services.Breakdowns.BreakdownTypes;
 
 namespace Raccord.API
 {
@@ -81,6 +83,7 @@ namespace Raccord.API
             
             services.AddTransient<IBreakdownTypeDefinitionRepository, BreakdownTypeDefinitionRepository>();
             services.AddTransient<IBreakdownTypeRepository, BreakdownTypeRepository>();
+            services.AddTransient<IBreakdownTypeService, BreakdownTypeService>();
 
             services.AddTransient<ISearchEngineServiceWrapper, SearchEngineServiceWrapper>();
         }
