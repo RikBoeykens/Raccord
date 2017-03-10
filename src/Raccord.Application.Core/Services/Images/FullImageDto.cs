@@ -2,6 +2,7 @@ using Raccord.Application.Core.Services.Scenes;
 using System.Collections.Generic;
 using Raccord.Application.Core.Services.Locations;
 using Raccord.Application.Core.Services.Characters;
+using Raccord.Application.Core.Services.Breakdowns.BreakdownItems;
 
 namespace Raccord.Application.Core.Services.Images
 {
@@ -11,6 +12,7 @@ namespace Raccord.Application.Core.Services.Images
         private IEnumerable<LinkedSceneDto> _scenes;
         private IEnumerable<LinkedLocationDto> _locations;
         private IEnumerable<LinkedCharacterDto> _characters;
+        private IEnumerable<LinkedBreakdownItemDto> _items;
         
         // Indicates if the image is primary image for the project
         public bool IsPrimaryImage { get; set; }
@@ -51,6 +53,19 @@ namespace Raccord.Application.Core.Services.Images
             set
             {
                 _characters = value;
+            }
+        }
+
+        // Breakdown items linked to the image
+        public IEnumerable<LinkedBreakdownItemDto> BreakdownItems
+        {
+            get
+            {
+                return _items ?? (_items = new List<LinkedBreakdownItemDto>());
+            }
+            set
+            {
+                _items = value;
             }
         }
     }

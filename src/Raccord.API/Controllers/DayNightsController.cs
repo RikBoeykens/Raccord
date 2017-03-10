@@ -25,7 +25,7 @@ namespace Raccord.API.Controllers
         [HttpGet("{id}/project")]
         public IEnumerable<DayNightSummaryViewModel> GetAll(long id)
         {
-            var dtos = _dayNightService.GetAllForProject(id);
+            var dtos = _dayNightService.GetAllForParent(id);
 
             var vms = dtos.Select(p => p.Translate());
 

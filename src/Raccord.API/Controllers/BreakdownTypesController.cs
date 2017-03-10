@@ -25,7 +25,7 @@ namespace Raccord.API.Controllers
         [HttpGet("{id}/project")]
         public IEnumerable<BreakdownTypeSummaryViewModel> GetAll(long id)
         {
-            var dtos = _breakdownTypeService.GetAllForProject(id);
+            var dtos = _breakdownTypeService.GetAllForParent(id);
 
             var vms = dtos.Select(p => p.Translate());
 

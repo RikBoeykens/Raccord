@@ -9,6 +9,8 @@ using System.Linq;
 using Raccord.Application.Services.Images;
 using Raccord.Domain.Model.Characters;
 using Raccord.Application.Services.Characters;
+using Raccord.Application.Services.Breakdowns.BreakdownItems;
+using Raccord.Domain.Model.Breakdowns.BreakdownItems;
 
 namespace Raccord.Application.Services.Scenes
 {
@@ -28,6 +30,7 @@ namespace Raccord.Application.Services.Scenes
                 DayNight = scene.DayNight.Translate(),
                 Images = scene.ImageScenes.Select(i=> i.TranslateImage()),
                 Characters = scene.CharacterScenes.Select(i=> i.TranslateCharacter()),
+                BreakdownItems = scene.BreakdownItemScenes.Select(bis=> bis.TranslateBreakdownItem()),
                 ProjectID = scene.ProjectID,
             };
 
@@ -101,6 +104,25 @@ namespace Raccord.Application.Services.Scenes
                 ProjectID = characterScene.Scene.ProjectID,
                 PrimaryImage = characterScene.Scene.ImageScenes.FirstOrDefault(i=> i.IsPrimaryImage)?.Image.Translate(),
                 LinkID = characterScene.ID,
+            };
+
+            return dto;
+        }
+
+        public static LinkedSceneDto TranslateScene(this BreakdownItemScene breakdownItemScene)
+        {
+            var dto = new LinkedSceneDto
+            {
+                ID = breakdownItemScene.Scene.ID,
+                Number = breakdownItemScene.Scene.Number,
+                Summary = breakdownItemScene.Scene.Summary,
+                PageLength = breakdownItemScene.Scene.PageLength,
+                IntExt = breakdownItemScene.Scene.IntExt.Translate(),
+                Location = breakdownItemScene.Scene.Location.Translate(),
+                DayNight = breakdownItemScene.Scene.DayNight.Translate(),
+                ProjectID = breakdownItemScene.Scene.ProjectID,
+                PrimaryImage = breakdownItemScene.Scene.ImageScenes.FirstOrDefault(i=> i.IsPrimaryImage)?.Image.Translate(),
+                LinkID = breakdownItemScene.ID,
             };
 
             return dto;

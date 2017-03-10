@@ -25,7 +25,7 @@ namespace Raccord.API.Controllers
         [HttpGet("{id}/project")]
         public IEnumerable<IntExtSummaryViewModel> GetAll(long id)
         {
-            var dtos = _intExtService.GetAllForProject(id);
+            var dtos = _intExtService.GetAllForParent(id);
 
             var vms = dtos.Select(p => p.Translate());
 

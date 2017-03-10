@@ -24,7 +24,7 @@ namespace Raccord.Application.Services.Images
         }
 
         // Gets all images
-        public IEnumerable<ImageSummaryDto> GetAllForProject(long projectID)
+        public IEnumerable<ImageSummaryDto> GetAllForParent(long projectID)
         {
             var images = _imageRepository.GetAllForProject(projectID);
 

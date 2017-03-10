@@ -25,7 +25,7 @@ namespace Raccord.API.Controllers
         [HttpGet("{id}/project")]
         public IEnumerable<LocationSummaryViewModel> GetAll(long id)
         {
-            var dtos = _locationService.GetAllForProject(id);
+            var dtos = _locationService.GetAllForParent(id);
 
             var vms = dtos.Select(p => p.Translate());
 

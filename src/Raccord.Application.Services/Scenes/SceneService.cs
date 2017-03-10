@@ -47,7 +47,7 @@ namespace Raccord.Application.Services.Scenes
         }
 
         // Gets all scene for a project
-        public IEnumerable<SceneSummaryDto> GetAllForProject(long projectID)
+        public IEnumerable<SceneSummaryDto> GetAllForParent(long projectID)
         {
             var scenes = _sceneRepository.GetAllForProject(projectID);
 

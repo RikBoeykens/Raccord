@@ -29,7 +29,7 @@ namespace Raccord.API.Controllers
         [HttpGet("{id}/project")]
         public IEnumerable<ImageSummaryViewModel> GetAll(long id)
         {
-            var dtos = _imageService.GetAllForProject(id);
+            var dtos = _imageService.GetAllForParent(id);
 
             var vms = dtos.Select(p => p.Translate());
 

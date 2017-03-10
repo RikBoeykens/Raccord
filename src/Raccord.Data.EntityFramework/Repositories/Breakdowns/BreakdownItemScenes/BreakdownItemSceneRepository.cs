@@ -3,7 +3,7 @@ using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using Raccord.Domain.Model.Breakdowns.BreakdownItems;
 
-namespace Raccord.Data.EntityFramework.Repositories.BreakdownItemScenes
+namespace Raccord.Data.EntityFramework.Repositories.Breakdowns.BreakdownItemScenes
 {
     // Repository for breakdown item scenes
     public class BreakdownItemSceneRepository : BaseRepository<BreakdownItemScene>, IBreakdownItemSceneRepository

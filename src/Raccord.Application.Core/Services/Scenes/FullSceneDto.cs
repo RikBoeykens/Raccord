@@ -1,6 +1,7 @@
 using Raccord.Application.Core.Services.Images;
 using System.Collections.Generic;
 using Raccord.Application.Core.Services.Characters;
+using Raccord.Application.Core.Services.Breakdowns.BreakdownItems;
 
 namespace Raccord.Application.Core.Services.Scenes
 {
@@ -9,6 +10,7 @@ namespace Raccord.Application.Core.Services.Scenes
     {
         private IEnumerable<LinkedImageDto> _images;
         private IEnumerable<LinkedCharacterDto> _characters;
+        private IEnumerable<LinkedBreakdownItemDto> _items;
 
         // Images linked to the scene
         public IEnumerable<LinkedImageDto> Images
@@ -33,6 +35,19 @@ namespace Raccord.Application.Core.Services.Scenes
             set
             {
                 _characters = value;
+            }
+        }
+
+        // Breakdown items linked to the scene
+        public IEnumerable<LinkedBreakdownItemDto> BreakdownItems
+        {
+            get
+            {
+                return _items ?? (_items = new List<LinkedBreakdownItemDto>());
+            }
+            set
+            {
+                _items = value;
             }
         }
     }

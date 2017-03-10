@@ -22,7 +22,7 @@ namespace Raccord.Application.Services.Breakdowns.BreakdownTypes
         }
 
         // Gets all breakdown types
-        public IEnumerable<BreakdownTypeSummaryDto> GetAllForProject(long projectID)
+        public IEnumerable<BreakdownTypeSummaryDto> GetAllForParent(long projectID)
         {
             var breakdownTypes = _breakdownTypeRepository.GetAllForProject(projectID);
 

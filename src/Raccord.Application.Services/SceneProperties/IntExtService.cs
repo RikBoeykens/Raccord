@@ -22,7 +22,7 @@ namespace Raccord.Application.Services.SceneProperties
         }
 
         // Gets all int/exts for a project
-        public IEnumerable<IntExtSummaryDto> GetAllForProject(long projectID)
+        public IEnumerable<IntExtSummaryDto> GetAllForParent(long projectID)
         {
             var intExts = _intExtRepository.GetAllForProject(projectID);
 

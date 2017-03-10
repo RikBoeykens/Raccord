@@ -36,7 +36,7 @@ using Raccord.Application.Services.CharacterScenes;
 using Raccord.Application.Services.Breakdowns.BreakdownTypes;
 using Raccord.Data.EntityFramework.Repositories.Breakdowns.BreakdownItems;
 using Raccord.Data.EntityFramework.Repositories.ImageBreakdownItems;
-using Raccord.Data.EntityFramework.Repositories.BreakdownItemScenes;
+using Raccord.Data.EntityFramework.Repositories.Breakdowns.BreakdownItemScenes;
 
 namespace Raccord.API
 {

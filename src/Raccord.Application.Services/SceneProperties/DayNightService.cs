@@ -22,7 +22,7 @@ namespace Raccord.Application.Services.SceneProperties
         }
 
         // Gets all day/night for a project
-        public IEnumerable<DayNightSummaryDto> GetAllForProject(long projectID)
+        public IEnumerable<DayNightSummaryDto> GetAllForParent(long projectID)
         {
             var dayNights = _dayNightRepository.GetAllForProject(projectID);
 

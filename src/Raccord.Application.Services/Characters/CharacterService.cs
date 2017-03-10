@@ -29,7 +29,7 @@ namespace Raccord.Application.Services.Characters
         }
 
         // Gets all characters for a project
-        public IEnumerable<CharacterSummaryDto> GetAllForProject(long projectID)
+        public IEnumerable<CharacterSummaryDto> GetAllForParent(long projectID)
         {
             var characters = _characterRepository.GetAllForProject(projectID);
 

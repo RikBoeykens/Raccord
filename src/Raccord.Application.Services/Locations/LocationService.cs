@@ -23,7 +23,7 @@ namespace Raccord.Application.Services.Locations
         }
 
         // Gets all locations
-        public IEnumerable<LocationSummaryDto> GetAllForProject(long projectID)
+        public IEnumerable<LocationSummaryDto> GetAllForParent(long projectID)
         {
             var locations = _locationRepository.GetAllForProject(projectID);
 

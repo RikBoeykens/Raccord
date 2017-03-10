@@ -27,7 +27,7 @@ namespace Raccord.API.Controllers
         [HttpGet("{id}/project")]
         public IEnumerable<SceneSummaryViewModel> GetAll(long id)
         {
-            var dtos = _sceneService.GetAllForProject(id);
+            var dtos = _sceneService.GetAllForParent(id);
 
             var vms = dtos.Select(p => p.Translate());
 

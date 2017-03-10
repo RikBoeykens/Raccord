@@ -12,7 +12,7 @@ namespace Raccord.Application.Core.Services.Images
         ImageSummaryDto GetSummary(long ID);
 
         // Returns all as summary
-        IEnumerable<ImageSummaryDto> GetAllForProject(long projectID);
+        IEnumerable<ImageSummaryDto> GetAllForParent(long projectID);
 
         // Adds a single instance
         IEnumerable<long> Add(AddImageContentDto dto);
