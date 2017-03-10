@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using Raccord.Domain.Model.Projects;
-using Raccord.Domain.Model.Locations;
 
 namespace Raccord.Domain.Model.Images
 {
@@ -10,6 +9,7 @@ namespace Raccord.Domain.Model.Images
         private ICollection<ImageScene> _scenes;
         private ICollection<ImageLocation> _locations;
         private ICollection<ImageCharacter> _characters;
+        private ICollection<ImageBreakdownItem> _breakdownItems;
 
         /// Title of the image
         public string Title { get; set; }
@@ -68,6 +68,19 @@ namespace Raccord.Domain.Model.Images
             set
             {
                 _characters = value;
+            }
+        }
+
+        // Linked breakdown item
+        public virtual ICollection<ImageBreakdownItem> ImageBreakdownItems
+        {
+            get
+            {
+                return _breakdownItems ?? (_breakdownItems = new List<ImageBreakdownItem>());
+            }
+            set
+            {
+                _breakdownItems = value;
             }
         }
     }

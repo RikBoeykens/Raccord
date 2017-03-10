@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 using Raccord.Domain.Model.Breakdowns.BreakdownTypes;
 
 namespace Raccord.Data.EntityFramework.Repositories.Breakdowns.BreakdownTypes
@@ -37,14 +38,16 @@ namespace Raccord.Data.EntityFramework.Repositories.Breakdowns.BreakdownTypes
         {
             IQueryable<BreakdownType> query = _context.Set<BreakdownType>();
 
-            return query;
+            return query.Include(bt=> bt.BreakdownItems)
+                        .ThenInclude(bi=> bi.ImageBreakdownItems)
+                        .ThenInclude(ibi=> ibi.Image);
         }
 
         private IQueryable<BreakdownType> GetIncludedSummary()
         {
             IQueryable<BreakdownType> query = _context.Set<BreakdownType>();
 
-            return query;
+            return query.Include(bt=> bt.BreakdownItems);
         }
 
         private IQueryable<BreakdownType> GetIncluded()

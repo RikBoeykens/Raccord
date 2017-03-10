@@ -4,6 +4,7 @@ using Raccord.Domain.Model.Locations;
 using Raccord.Domain.Model.SceneProperties;
 using Raccord.Domain.Model.Images;
 using Raccord.Domain.Model.Characters;
+using Raccord.Domain.Model.Breakdowns.BreakdownItems;
 
 namespace Raccord.Domain.Model.Scenes
 {
@@ -12,6 +13,7 @@ namespace Raccord.Domain.Model.Scenes
     {
         private ICollection<ImageScene> _images;
         private ICollection<CharacterScene> _characters;
+        private ICollection<BreakdownItemScene> _breakdownItems;
 
         // Number of the scene
         public string Number { get; set; }
@@ -72,6 +74,19 @@ namespace Raccord.Domain.Model.Scenes
             set
             {
                 _characters = value;
+            }
+        }
+
+        // Linked breakdown items
+        public virtual ICollection<BreakdownItemScene> BreakdownItemScenes
+        {
+            get
+            {
+                return _breakdownItems ?? (_breakdownItems = new List<BreakdownItemScene>());
+            }
+            set
+            {
+                _breakdownItems = value;
             }
         }
     }
