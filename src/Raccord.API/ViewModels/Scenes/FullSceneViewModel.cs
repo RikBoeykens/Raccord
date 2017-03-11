@@ -1,6 +1,7 @@
 using Raccord.API.ViewModels.Images;
 using System.Collections.Generic;
 using Raccord.API.ViewModels.Characters;
+using Raccord.API.ViewModels.Breakdowns.BreakdownItems;
 
 namespace Raccord.API.ViewModels.Scenes
 {
@@ -9,6 +10,7 @@ namespace Raccord.API.ViewModels.Scenes
     {
         private IEnumerable<LinkedImageViewModel> _images;
         private IEnumerable<LinkedCharacterViewModel> _characters;
+        private IEnumerable<LinkedBreakdownItemViewModel> _breakdownItems;
 
         // Images linked to the scene
         public IEnumerable<LinkedImageViewModel> Images
@@ -33,6 +35,19 @@ namespace Raccord.API.ViewModels.Scenes
             set
             {
                 _characters = value;
+            }
+        }
+
+        // Breakdown items linked to the scene
+        public IEnumerable<LinkedBreakdownItemViewModel> BreakdownItems
+        {
+            get
+            {
+                return _breakdownItems ?? (_breakdownItems = new List<LinkedBreakdownItemViewModel>());
+            }
+            set
+            {
+                _breakdownItems = value;
             }
         }
     }

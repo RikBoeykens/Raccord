@@ -4,6 +4,7 @@ using Raccord.API.ViewModels.SceneProperties;
 using Raccord.API.ViewModels.Images;
 using Raccord.API.ViewModels.Characters;
 using System.Linq;
+using Raccord.API.ViewModels.Breakdowns.BreakdownItems;
 
 namespace Raccord.API.ViewModels.Scenes
 {
@@ -23,6 +24,7 @@ namespace Raccord.API.ViewModels.Scenes
                 DayNight = dto.DayNight.Translate(),
                 Images = dto.Images.Select(i=> i.Translate()),
                 Characters = dto.Characters.Select(i=> i.Translate()),
+                BreakdownItems = dto.BreakdownItems.Select(bi=> bi.Translate()),
                 ProjectID = dto.ProjectID,
             };
         }

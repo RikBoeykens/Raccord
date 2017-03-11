@@ -10,6 +10,9 @@ using Raccord.Data.EntityFramework.Repositories.Characters;
 using Raccord.Data.EntityFramework.Repositories.ImageCharacters;
 using Raccord.Data.EntityFramework.Repositories.CharacterScenes;
 using Raccord.Data.EntityFramework.Repositories.Breakdowns.BreakdownTypes;
+using Raccord.Data.EntityFramework.Repositories.Breakdowns.BreakdownItems;
+using Raccord.Data.EntityFramework.Repositories.Breakdowns.BreakdownItemScenes;
+using Raccord.Data.EntityFramework.Repositories.ImageBreakdownItems;
 using Raccord.Application.Core.Services.Projects;
 using Raccord.Application.Core.Services.Scenes;
 using Raccord.Application.Core.Services.Locations;
@@ -22,6 +25,9 @@ using Raccord.Application.Core.Services.Characters;
 using Raccord.Application.Core.Services.ImageCharacters;
 using Raccord.Application.Core.Services.CharacterScenes;
 using Raccord.Application.Core.Services.Breakdowns.BreakdownTypes;
+using Raccord.Application.Core.Services.Breakdowns.BreakdownItems;
+using Raccord.Application.Core.Services.Breakdowns.BreakdownItemScenes;
+using Raccord.Application.Core.Services.ImageBreakdownItems;
 using Raccord.Application.Services.Projects;
 using Raccord.Application.Services.Scenes;
 using Raccord.Application.Services.Locations;
@@ -34,9 +40,9 @@ using Raccord.Application.Services.Characters;
 using Raccord.Application.Services.ImageCharacters;
 using Raccord.Application.Services.CharacterScenes;
 using Raccord.Application.Services.Breakdowns.BreakdownTypes;
-using Raccord.Data.EntityFramework.Repositories.Breakdowns.BreakdownItems;
-using Raccord.Data.EntityFramework.Repositories.ImageBreakdownItems;
-using Raccord.Data.EntityFramework.Repositories.Breakdowns.BreakdownItemScenes;
+using Raccord.Application.Services.Breakdowns.BreakdownItems;
+using Raccord.Application.Services.Breakdowns.BreakdownItemScenes;
+using Raccord.Application.Services.ImageBreakdownItems;
 
 namespace Raccord.API
 {
@@ -75,6 +81,7 @@ namespace Raccord.API
             services.AddTransient<IImageLocationService, ImageLocationService>();
 
             services.AddTransient<IImageBreakdownItemRepository, ImageBreakdownItemRepository>();
+            services.AddTransient<IImageBreakdownItemService, ImageBreakdownItemService>();
 
             services.AddTransient<ICharacterRepository, CharacterRepository>();
             services.AddTransient<ICharacterService, CharacterService>();
@@ -91,8 +98,11 @@ namespace Raccord.API
             services.AddTransient<IBreakdownTypeService, BreakdownTypeService>();
 
             services.AddTransient<IBreakdownItemRepository, BreakdownItemRepository>();
+            services.AddTransient<IBreakdownItemService, BreakdownItemService>();
+            services.AddTransient<IBreakdownItemSearchEngineService, BreakdownItemSearchEngineService>(); 
 
             services.AddTransient<IBreakdownItemSceneRepository, BreakdownItemSceneRepository>();
+            services.AddTransient<IBreakdownItemSceneService, BreakdownItemSceneService>();
             
 
             services.AddTransient<ISearchEngineServiceWrapper, SearchEngineServiceWrapper>();

@@ -4,6 +4,7 @@ using Raccord.API.ViewModels.Locations;
 using Raccord.API.ViewModels.Common.SelectedEntity;
 using System.Linq;
 using Raccord.API.ViewModels.Characters;
+using Raccord.API.ViewModels.Breakdowns.BreakdownItems;
 
 namespace Raccord.API.ViewModels.Images
 {
@@ -22,6 +23,7 @@ namespace Raccord.API.ViewModels.Images
                 Scenes = dto.Scenes.Select(s=> s.Translate()),
                 Locations = dto.Locations.Select(s=> s.Translate()),
                 Characters = dto.Characters.Select(s=> s.Translate()),
+                BreakdownItems = dto.BreakdownItems.Select(bi=> bi.Translate()),
                 IsPrimaryImage = dto.IsPrimaryImage,
             };
         }

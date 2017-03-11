@@ -2,6 +2,7 @@ using Raccord.API.ViewModels.Scenes;
 using Raccord.API.ViewModels.Locations;
 using Raccord.API.ViewModels.Characters;
 using System.Collections.Generic;
+using Raccord.API.ViewModels.Breakdowns.BreakdownItems;
 
 namespace Raccord.API.ViewModels.Images
 {
@@ -11,6 +12,7 @@ namespace Raccord.API.ViewModels.Images
         private IEnumerable<LinkedSceneViewModel> _scenes;
         private IEnumerable<LinkedLocationViewModel> _locations;
         private IEnumerable<LinkedCharacterViewModel> _characters;
+        private IEnumerable<LinkedBreakdownItemViewModel> _breakdownItems;
         
         // Indicates if the image is primary image for the project
         public bool IsPrimaryImage { get; set; }
@@ -51,6 +53,19 @@ namespace Raccord.API.ViewModels.Images
             set
             {
                 _characters = value;
+            }
+        }
+
+        // Breakdown items linked to the image
+        public IEnumerable<LinkedBreakdownItemViewModel> BreakdownItems
+        {
+            get
+            {
+                return _breakdownItems ?? (_breakdownItems = new List<LinkedBreakdownItemViewModel>());
+            }
+            set
+            {
+                _breakdownItems = value;
             }
         }
     }
