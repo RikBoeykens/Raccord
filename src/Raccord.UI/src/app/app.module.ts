@@ -145,6 +145,11 @@ import { CharactersResolve } from './projects';
 import { BreakdownTypeHttpService } from './projects';
 import { BreakdownTypeResolve } from './projects';
 import { BreakdownTypesResolve } from './projects';
+import { BreakdownItemHttpService } from './projects';
+import { ImageBreakdownItemHttpService } from './projects';
+import { BreakdownItemSceneHttpService } from './projects';
+import { BreakdownItemResolve } from './projects';
+import { BreakdownItemsResolve } from './projects';
 
 const APP_PROVIDERS = [
   LoadingService,
@@ -179,7 +184,12 @@ const APP_PROVIDERS = [
   CharactersResolve,
   BreakdownTypeHttpService,
   BreakdownTypeResolve,
-  BreakdownTypesResolve
+  BreakdownTypesResolve,
+  BreakdownItemHttpService,
+  ImageBreakdownItemHttpService,
+  BreakdownItemSceneHttpService,
+  BreakdownItemResolve,
+  BreakdownItemsResolve
 ];
 
 // Directives

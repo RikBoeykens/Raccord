@@ -16,6 +16,7 @@ export { SceneCharactersComponent } from './children/scenes/component/scene-char
 export { SceneHttpService } from './children/scenes/service/scene-http.service';
 export { ImageSceneHttpService } from './children/scenes/service/image-scene-http.service';
 export { CharacterSceneHttpService } from './children/scenes/service/character-scene-http.service';
+export { BreakdownItemSceneHttpService } from './children/scenes/service/breakdown-item-scene-http.service';
 export { SceneResolve } from './children/scenes/service/scene-resolve.service';
 export { ScenesResolve } from './children/scenes/service/scenes-resolve.service';
 
@@ -68,5 +69,10 @@ export { CharactersResolve } from './children/characters/service/characters-reso
 export { BreakdownTypeHttpService } from './children/breakdowns/breakdown-types/service/breakdown-type-http.service';
 export { BreakdownTypeResolve } from './children/breakdowns/breakdown-types/service/breakdown-type-resolve.service';
 export { BreakdownTypesResolve } from './children/breakdowns/breakdown-types/service/breakdown-types-resolve.service';
+
+export { BreakdownItemHttpService } from './children/breakdowns/breakdown-items/service/breakdown-item-http.service';
+export { ImageBreakdownItemHttpService } from './children/breakdowns/breakdown-items/service/image-breakdown-item-http.service';
+export { BreakdownItemResolve } from './children/breakdowns/breakdown-items/service/breakdown-item-resolve.service';
+export { BreakdownItemsResolve } from './children/breakdowns/breakdown-items/service/breakdown-items-resolve.service';
 
 export { ScenePropertiesLandingComponent } from './children/scene-properties/component/scene-properties-landing/scene-properties-landing.component';
