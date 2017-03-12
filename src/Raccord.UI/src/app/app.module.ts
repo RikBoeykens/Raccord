@@ -63,6 +63,9 @@ import { CharacterLandingComponent } from './projects';
 import { CharacterImagesComponent } from './projects';
 import { CharacterScenesComponent } from './projects';
 import { SearchCharacterComponent } from './projects';
+import { BreakdownLandingComponent } from './projects';
+import { BreakdownTypeSettingsComponent } from './projects';
+import { EditBreakdownTypeComponent } from './projects';
 import { ScenePropertiesLandingComponent } from './projects';
 import { SelectEntityComponent } from './shared';
 
@@ -107,6 +110,9 @@ const COMPONENTS =[
   CharacterImagesComponent,
   CharacterScenesComponent,
   SearchCharacterComponent,
+  BreakdownLandingComponent,
+  BreakdownTypeSettingsComponent,
+  EditBreakdownTypeComponent,
   ScenePropertiesLandingComponent,
   SelectEntityComponent
 ];

@@ -63,17 +63,20 @@ namespace Raccord.Application.Services.Projects
         // Adds a project
         public long Add(ProjectDto dto)
         {
-            var breakdownTypeDefinitions = _breakdownTypeDefinitionRepository.GetAll();
-
             var project = new Project
             {
                 Title = dto.Title,
-                BreakdownTypes = breakdownTypeDefinitions.Select(bt=> new BreakdownType
-                {
-                    Name = bt.Name,
-                    Description = bt.Description,
-                }).ToList()
             };
+
+            var breakdownTypeDefinitions = _breakdownTypeDefinitionRepository.GetAll();
+            foreach(var definition in breakdownTypeDefinitions)
+            {
+                project.BreakdownTypes.Add(new BreakdownType
+                {
+                    Name = definition.Name,
+                    Description = definition.Description,
+                });
+            }
 
             _projectRepository.Add(project);
             _projectRepository.Commit();

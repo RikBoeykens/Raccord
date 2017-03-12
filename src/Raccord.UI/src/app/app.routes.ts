@@ -18,6 +18,8 @@ import { ImagesListComponent } from './projects';
 import { ImageLandingComponent } from './projects';
 import { CharactersListComponent } from './projects';
 import { CharacterLandingComponent } from './projects';
+import { BreakdownLandingComponent } from './projects';
+import { BreakdownTypeSettingsComponent } from './projects';
 import { ScenePropertiesLandingComponent } from './projects';
 
 import { ProjectResolve } from './projects';
@@ -35,6 +37,10 @@ import { ImageResolve } from './projects';
 import { ImagesResolve } from './projects';
 import { CharacterResolve } from './projects';
 import { CharactersResolve } from './projects';
+import { BreakdownTypeResolve } from './projects';
+import { BreakdownTypesResolve } from './projects';
+import { BreakdownItemResolve } from './projects';
+import { BreakdownItemsResolve } from './projects';
 
 import { CanDeactivateGuard } from './shared/service/can-deactivate-guard.service';
 
@@ -206,6 +212,27 @@ export const ROUTES: Routes = [
                   character: CharacterResolve
                 },
               }
+            ]
+          },
+          {
+            path: 'breakdown',
+            children:[
+              {
+                path: '',
+                component: BreakdownLandingComponent,
+                resolve:{
+                  project: ProjectSummaryResolve,
+                  breakdownTypes: BreakdownTypesResolve
+                },
+              },
+              {
+                path: 'settings',
+                component: BreakdownTypeSettingsComponent,
+                resolve:{
+                  project: ProjectSummaryResolve,
+                  breakdownTypes: BreakdownTypesResolve
+                },
+              },
             ]
           }
         ],

@@ -18,7 +18,7 @@ namespace Raccord.Data.EntityFramework.Seeding
 
         public static void SystemSeeding(this RaccordDBContext context)
         {
-
+            context.SeedBreakdownTypes();
         }
 
         public static void SeedBreakdownTypes(this RaccordDBContext context)
