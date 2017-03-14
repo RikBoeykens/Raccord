@@ -5,5 +5,6 @@ export enum EntityType{
     location = 3,
     dayNight = 4,
     image = 5,
-    character = 6
+    character = 6,
+    breakdownItem = 7
 }
