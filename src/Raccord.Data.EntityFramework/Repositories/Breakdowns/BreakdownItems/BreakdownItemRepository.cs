@@ -49,7 +49,8 @@ namespace Raccord.Data.EntityFramework.Repositories.Breakdowns.BreakdownItems
         {
             IQueryable<BreakdownItem> query = _context.Set<BreakdownItem>();
 
-            return query.Include(bi=> bi.BreakdownItemScenes)
+            return query.Include(bi=> bi.BreakdownType)
+                        .Include(bi=> bi.BreakdownItemScenes)
                         .ThenInclude(s=> s.Scene)
                         .ThenInclude(s=> s.IntExt)
                         .Include(bi=> bi.BreakdownItemScenes)
@@ -66,7 +67,8 @@ namespace Raccord.Data.EntityFramework.Repositories.Breakdowns.BreakdownItems
         {
             IQueryable<BreakdownItem> query = _context.Set<BreakdownItem>();
 
-            return query.Include(bi=> bi.BreakdownItemScenes)
+            return query.Include(bi=> bi.BreakdownType)
+                        .Include(bi=> bi.BreakdownItemScenes)
                         .Include(bi=> bi.ImageBreakdownItems)
                         .ThenInclude(ibi=> ibi.Image);
         }
@@ -75,7 +77,7 @@ namespace Raccord.Data.EntityFramework.Repositories.Breakdowns.BreakdownItems
         {
             IQueryable<BreakdownItem> query = _context.Set<BreakdownItem>();
 
-            return query;
+            return query.Include(bi=> bi.BreakdownType);
         }
 
         private IQueryable<BreakdownItem> GetIncludedSearch()
@@ -86,14 +88,14 @@ namespace Raccord.Data.EntityFramework.Repositories.Breakdowns.BreakdownItems
                         .ThenInclude(bt=> bt.Project);
         }
 
-        private IQueryable<BreakdownItem> GetSearchQuery(string searchText, long? typeID)
+        private IQueryable<BreakdownItem> GetSearchQuery(string searchText, long? projectID)
         {
             var query = GetIncludedSearch();
 
             query = query.Where(bi=> bi.Name.ToLower().Contains(searchText.ToLower()));
 
-            if(typeID.HasValue)
-                query = query.Where(bi=> bi.BreakdownTypeID==typeID.Value);
+            if(projectID.HasValue)
+                query = query.Where(bi=> bi.BreakdownType.ProjectID==projectID.Value);
 
             return query;
         }

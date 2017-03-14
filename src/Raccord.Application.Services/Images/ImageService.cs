@@ -78,6 +78,8 @@ namespace Raccord.Application.Services.Images
                             image.ImageLocations.Add(new ImageLocation{ LocationID = newImageDto.SelectedEntity.EntityID });
                         else if(newImageDto.SelectedEntity.Type==EntityType.Character)
                             image.ImageCharacters.Add(new ImageCharacter{ CharacterID = newImageDto.SelectedEntity.EntityID });
+                        else if(newImageDto.SelectedEntity.Type==EntityType.BreakdownItem)
+                            image.ImageBreakdownItems.Add(new ImageBreakdownItem{ BreakdownItemID = newImageDto.SelectedEntity.EntityID });
                     }
 
                     _imageRepository.Add(image);

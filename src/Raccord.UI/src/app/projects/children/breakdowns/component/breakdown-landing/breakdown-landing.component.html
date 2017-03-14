@@ -15,7 +15,7 @@
     <div class='md-padding' layout="row" layout-wrap>
         <md-card class="breakdown-type-card" *ngFor="let breakdownType of breakdownTypes">
             <md-card-header>
-                <md-card-title><a [routerLink]="[breakdownType.id]" class="card-title">{{breakdownType.name}}</a></md-card-title>
+                <md-card-title><a routerLink="/projects/{{project.id}}/breakdown/types/{{breakdownType.id}}" class="card-title">{{breakdownType.name}}</a></md-card-title>
             </md-card-header>
         </md-card>
     </div>

@@ -4,12 +4,12 @@
         <a routerLink="/projects" class="breadcrumb">Projects</a>
         <a routerLink="/projects/{{project.id}}" class="breadcrumb">{{project.title}}</a>
         <a routerLink="/projects/{{project.id}}/breakdown" class="breadcrumb">Breakdowns</a>
-        <a routerLink="/projects/{{project.id}}/breakdown/types/{{breakdownItem.breakdownType.id}}" class="breadcrumb">{{breakdownItem.breakdownType.name}}</a>
+        <a routerLink="/projects/{{project.id}}/breakdown/types/{{breakdownItem.type.id}}" class="breadcrumb">{{breakdownItem.type.name}}</a>
         <span class="breadcrumb">{{breakdownItem.name}}</span>
     </div>
 </div>
 <div class="row">
-    <edit-breakdown-item [breakdownItem]="viewBreakdownItem" (submitBreakdownItem)="updateBreakdownItem()"></edit--breakdown-item>
+    <edit-breakdown-item [breakdownItem]="viewBreakdownItem" (submitBreakdownItem)="updateBreakdownItem()"></edit-breakdown-item>
 </div>
 <md-tab-group>
   <md-tab label="Overview">

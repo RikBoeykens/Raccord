@@ -26,7 +26,7 @@ export class ImageLandingComponent {
     image: FullImage;
     viewImage: Image;
     project: ProjectSummary;
-    imageLinkTypes: EntityType[] = [EntityType.location, EntityType.scene, EntityType.character];
+    imageLinkTypes: EntityType[] = [EntityType.location, EntityType.scene, EntityType.character, EntityType.breakdownItem];
 
     constructor(
         private _imageHttpService: ImageHttpService,

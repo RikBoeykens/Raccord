@@ -65,7 +65,10 @@ namespace Raccord.Data.EntityFramework.Repositories.Scenes
                          .Include(s=> s.BreakdownItemScenes)
                          .ThenInclude(bis=> bis.BreakdownItem)
                          .ThenInclude(bi=> bi.ImageBreakdownItems)
-                         .ThenInclude(ibi=> ibi.Image);
+                         .ThenInclude(ibi=> ibi.Image)
+                         .Include(s=> s.BreakdownItemScenes)
+                         .ThenInclude(bis=> bis.BreakdownItem)
+                         .ThenInclude(bi=> bi.BreakdownType);
         }
 
         private IQueryable<Scene> GetIncludedSummary()

@@ -4,7 +4,7 @@ import { ImageBreakdownItemHttpService } from '../../service/image-breakdown-ite
 import { LoadingService } from '../../../../../../loading/service/loading.service';
 import { DialogService } from '../../../../../../shared/service/dialog.service';
 import { SelectedEntity } from '../../../../../../shared/model/selected-entity.model';
-import { EntityType } from '../../../../../shared/enums/entity-type.enum';
+import { EntityType } from '../../../../../../shared/enums/entity-type.enum';
 
 @Component({
     selector: 'breakdown-item-images',
