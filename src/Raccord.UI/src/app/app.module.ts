@@ -67,7 +67,9 @@ import { BreakdownLandingComponent } from './projects';
 import { BreakdownTypeSettingsComponent } from './projects';
 import { EditBreakdownTypeComponent } from './projects';
 import { BreakdownTypeLandingComponent } from './projects';
+import { BreakdownItemLandingComponent } from './projects';
 import { EditBreakdownItemComponent } from './projects';
+import { BreakdownItemImagesComponent } from './projects';
 import { ScenePropertiesLandingComponent } from './projects';
 import { SelectEntityComponent } from './shared';
 
@@ -116,7 +118,9 @@ const COMPONENTS =[
   BreakdownTypeSettingsComponent,
   EditBreakdownTypeComponent,
   BreakdownTypeLandingComponent,
+  BreakdownItemLandingComponent,
   EditBreakdownItemComponent,
+  BreakdownItemImagesComponent,
   ScenePropertiesLandingComponent,
   SelectEntityComponent
 ];

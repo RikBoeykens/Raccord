@@ -13,7 +13,7 @@
 <div class="row">
     <md-nav-list [dragula]='"breakdown-item-bag"' 
                  [dragulaModel]='breakdownItems'>
-        <a md-list-item [routerLink]="[breakdownItemWrapper.breakdownItem.id]" 
+        <a md-list-item routerLink="/projects/{{project.id}}/breakdown/items/{{breakdownItemWrapper.breakdownItem.id}}" 
            *ngFor="let breakdownItemWrapper of breakdownItems"
            [ngClass]="{'can-delete': breakdownItemWrapper.breakdownItem.sceneCount==0}"
            class="drag-element drag-delete drag-merge">
