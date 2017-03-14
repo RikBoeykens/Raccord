@@ -145,5 +145,16 @@ namespace Raccord.API.Controllers
 
             return new JsonResult(response);
         }
+
+        // GET: api/breakdownitems/search/text/type/4
+        [HttpGet("search/{searchText}/type/{typeID}")]
+        public IEnumerable<BreakdownItemViewModel> SearchByType(string searchText, long typeID)
+        {
+            var dtos = _breakdownItemService.SearchByType(searchText, typeID);
+
+            var vms = dtos.Select(p => p.Translate());
+
+            return vms;
+        }
     }
 }

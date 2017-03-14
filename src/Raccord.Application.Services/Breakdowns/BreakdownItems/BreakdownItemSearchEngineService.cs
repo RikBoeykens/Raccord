@@ -29,7 +29,7 @@ namespace Raccord.Application.Services.Breakdowns.BreakdownItems
         public SearchTypeResultDto GetResults(SearchRequestDto request)
         {
             var itemCount = _breakdownItemRepository.SearchCount(request.SearchText, request.ProjectID);
-            var items = _breakdownItemRepository.Search(request.SearchText, request.ProjectID);
+            var items = _breakdownItemRepository.Search(request.SearchText, projectID: request.ProjectID);
 
             return new SearchTypeResultDto
             {

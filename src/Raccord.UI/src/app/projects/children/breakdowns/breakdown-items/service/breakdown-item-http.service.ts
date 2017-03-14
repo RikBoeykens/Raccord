@@ -53,4 +53,11 @@ export class BreakdownItemHttpService extends BaseHttpService {
 
         return this.doPost(null, uri);
     }
+
+    searchByType(searchText: string, typeId: number): Promise<BreakdownItem[]> {
+
+        var uri = `${this._baseUri}/search/${searchText}/type/${typeId}`;
+
+        return this.doGetArray(uri);
+    }
 }

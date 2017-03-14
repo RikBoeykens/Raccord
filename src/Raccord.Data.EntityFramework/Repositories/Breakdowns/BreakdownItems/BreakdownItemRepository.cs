@@ -40,7 +40,7 @@ namespace Raccord.Data.EntityFramework.Repositories.Breakdowns.BreakdownItems
             return query.Count();            
         }
 
-        public IEnumerable<BreakdownItem> Search(string searchText, long? projectID)
+        public IEnumerable<BreakdownItem> Search(string searchText, long? projectID = null, long? typeID = null)
         {
             return GetSearchQuery(searchText, projectID);
         }
@@ -88,7 +88,7 @@ namespace Raccord.Data.EntityFramework.Repositories.Breakdowns.BreakdownItems
                         .ThenInclude(bt=> bt.Project);
         }
 
-        private IQueryable<BreakdownItem> GetSearchQuery(string searchText, long? projectID)
+        private IQueryable<BreakdownItem> GetSearchQuery(string searchText, long? projectID = null, long? typeID = null)
         {
             var query = GetIncludedSearch();
 
@@ -96,6 +96,9 @@ namespace Raccord.Data.EntityFramework.Repositories.Breakdowns.BreakdownItems
 
             if(projectID.HasValue)
                 query = query.Where(bi=> bi.BreakdownType.ProjectID==projectID.Value);
+
+            if(typeID.HasValue)
+                query = query.Where(bi=> bi.BreakdownTypeID==typeID.Value);
 
             return query;
         }

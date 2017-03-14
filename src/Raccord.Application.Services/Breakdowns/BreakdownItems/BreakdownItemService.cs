@@ -120,5 +120,12 @@ namespace Raccord.Application.Services.Breakdowns.BreakdownItems
 
             _breakdownItemRepository.Commit();
         }
+
+        public IEnumerable<BreakdownItemDto>SearchByType(string searchText, long typeID)
+        {
+            var items = _breakdownItemRepository.Search(searchText, typeID: typeID);
+
+            return items.Select(i=> i.Translate());
+        }
     }
 }

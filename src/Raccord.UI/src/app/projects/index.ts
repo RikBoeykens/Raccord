@@ -74,6 +74,7 @@ export { BreakdownTypeLandingComponent } from './children/breakdowns/breakdown-t
 export { BreakdownItemLandingComponent } from './children/breakdowns/breakdown-items/component/breakdown-item-landing/breakdown-item-landing.component';
 export { EditBreakdownItemComponent } from './children/breakdowns/breakdown-items/component/edit-breakdown-item/edit-breakdown-item.component';
 export { BreakdownItemImagesComponent } from './children/breakdowns/breakdown-items/component/breakdown-item-images/breakdown-item-images.component';
+export { SearchBreakdownItemComponent } from './children/breakdowns/breakdown-items/component/search-breakdown-item/search-breakdown-item.component';
 
 export { BreakdownTypeHttpService } from './children/breakdowns/breakdown-types/service/breakdown-type-http.service';
 export { BreakdownTypeResolve } from './children/breakdowns/breakdown-types/service/breakdown-type-resolve.service';
