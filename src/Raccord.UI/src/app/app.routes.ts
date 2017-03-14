@@ -20,6 +20,7 @@ import { CharactersListComponent } from './projects';
 import { CharacterLandingComponent } from './projects';
 import { BreakdownLandingComponent } from './projects';
 import { BreakdownTypeSettingsComponent } from './projects';
+import { BreakdownTypeLandingComponent } from './projects';
 import { ScenePropertiesLandingComponent } from './projects';
 
 import { ProjectResolve } from './projects';
@@ -233,6 +234,19 @@ export const ROUTES: Routes = [
                   breakdownTypes: BreakdownTypesResolve
                 },
               },
+              {
+                path: ':breakdownTypeId',
+                children:[
+                  {
+                    path: '',
+                    component: BreakdownTypeLandingComponent,
+                    resolve:{
+                      project: ProjectSummaryResolve,
+                      breakdownType: BreakdownTypeResolve
+                    }
+                  }
+                ]
+              }
             ]
           }
         ],

@@ -1,5 +1,6 @@
 using System.Linq;
 using Raccord.Application.Core.Services.Breakdowns.BreakdownTypes;
+using Raccord.Application.Services.Breakdowns.BreakdownItems;
 using Raccord.Domain.Model.Breakdowns.BreakdownTypes;
 
 namespace Raccord.Application.Services.Breakdowns.BreakdownTypes
@@ -15,6 +16,7 @@ namespace Raccord.Application.Services.Breakdowns.BreakdownTypes
                 Name = breakdownType.Name,
                 Description = breakdownType.Description,
                 ProjectID = breakdownType.ProjectID,
+                BreakdownItems = breakdownType.BreakdownItems.Select(bi=> bi.TranslateSummary())
             };
 
             return dto;
@@ -27,7 +29,7 @@ namespace Raccord.Application.Services.Breakdowns.BreakdownTypes
                 Name = breakdownType.Name,
                 Description = breakdownType.Description,
                 ProjectID = breakdownType.ProjectID,
-                ItemCount = 0,
+                ItemCount = breakdownType.BreakdownItems.Count(),
             };
 
             return dto;

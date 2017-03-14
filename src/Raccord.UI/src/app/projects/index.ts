@@ -69,6 +69,9 @@ export { CharactersResolve } from './children/characters/service/characters-reso
 export { BreakdownLandingComponent } from './children/breakdowns/component/breakdown-landing/breakdown-landing.component';
 export { BreakdownTypeSettingsComponent } from './children/breakdowns/breakdown-types/component/breakdown-type-settings/breakdown-type-settings.component';
 export { EditBreakdownTypeComponent } from './children/breakdowns/breakdown-types/component/edit-breakdown-type/edit-breakdown-type.component';
+export { BreakdownTypeLandingComponent } from './children/breakdowns/breakdown-types/component/breakdown-type-landing/breakdown-type-landing.component';
+
+export { EditBreakdownItemComponent } from './children/breakdowns/breakdown-items/component/edit-breakdown-item/edit-breakdown-item.component';
 
 export { BreakdownTypeHttpService } from './children/breakdowns/breakdown-types/service/breakdown-type-http.service';
 export { BreakdownTypeResolve } from './children/breakdowns/breakdown-types/service/breakdown-type-resolve.service';

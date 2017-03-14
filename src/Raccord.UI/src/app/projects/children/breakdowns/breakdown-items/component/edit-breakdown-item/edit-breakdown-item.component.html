@@ -1,0 +1,18 @@
+<form class="col s12"
+        id="breakdown_item_form"
+        #breakdownItemForm = "ngForm"
+        (ngSubmit)="doBreakdownItemSubmit()">
+    <div fxLayout="row" fxLayoutGap="10px">
+        <md-input-container fxFlex="25%">
+            <input md-input placeholder="Name" id="breakdown_item_name" required [(ngModel)]="breakdownItem.name" #name="ngModel" name="breakdown_item_name">
+        </md-input-container>
+        <md-input-container fxFlex="75%">
+            <input md-input placeholder="Description" id="breakdown_item_description" [(ngModel)]="breakdownItem.description" #description="ngModel" name="breakdown_item_description">
+        </md-input-container>
+    </div>
+    <div fxLayout="row">
+        <div class="col s12">
+            <button md-raised-button type="submit"[disabled]="!breakdownItemForm.form.valid">Save</button>
+        </div>
+    </div>
+</form>
