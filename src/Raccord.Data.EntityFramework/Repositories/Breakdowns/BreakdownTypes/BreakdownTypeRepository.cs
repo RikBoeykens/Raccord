@@ -40,7 +40,9 @@ namespace Raccord.Data.EntityFramework.Repositories.Breakdowns.BreakdownTypes
 
             return query.Include(bt=> bt.BreakdownItems)
                         .ThenInclude(bi=> bi.ImageBreakdownItems)
-                        .ThenInclude(ibi=> ibi.Image);
+                        .ThenInclude(ibi=> ibi.Image)
+                        .Include(bt=> bt.BreakdownItems)
+                        .ThenInclude(bi=> bi.BreakdownItemScenes);
         }
 
         private IQueryable<BreakdownType> GetIncludedSummary()

@@ -20,7 +20,7 @@ export class BreakdownItemSceneHttpService extends BaseHttpService {
 
     getBreakdownItems(sceneId): Promise<LinkedBreakdownItem[]> {
 
-        var uri = `${this._baseUri}/${sceneId}/breakdownitems`;
+        var uri = `${this._baseUri}/${sceneId}/items`;
 
         return this.doGetArray(uri);
     }

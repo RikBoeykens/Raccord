@@ -4,7 +4,7 @@
     </md-input-container>
     <ul class="autocomplete-content" *ngIf="searchResults.length>0">
         <li (mousedown)="setResult(result)"*ngFor="let result of searchResults">
-            <span raccord-highlight [search]="searchBreakdownItem.name" [text]="result.displayName" classToApply="highlight"></span>
+            <span raccord-highlight [search]="searchBreakdownItem.name" [text]="result.name" classToApply="highlight"></span>
         </li>
     </ul>
 </div>

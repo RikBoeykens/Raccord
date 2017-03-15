@@ -5,7 +5,7 @@
             (ngSubmit)="addLink()">
         <div fxLayout="row" fxLayoutGap="10px">
             <search-breakdown-item fxFlex="33%" [searchBreakdownItem]="viewNewBreakdownItem" [typeId]="selectedTypeId"></search-breakdown-item>
-            <md-select placeholder="Type" [(ngModel)]="selectedTypeId">
+            <md-select placeholder="Type" [(ngModel)]="selectedTypeId" name="select_type">
                 <md-option *ngFor="let type of breakdownTypes" [value]="type.id">{{ type.name }}</md-option>
             </md-select>
             <button fxFlex="33%" md-raised-button type="submit"[disabled]="!breakdownItemForm.form.valid">Add</button>            

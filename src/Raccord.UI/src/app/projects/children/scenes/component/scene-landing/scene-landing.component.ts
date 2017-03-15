@@ -28,10 +28,11 @@ export class SceneLandingComponent {
     }
 
     ngOnInit() {
-        this._route.data.subscribe((data: { scene: FullScene, project: ProjectSummary }) => {
+        this._route.data.subscribe((data: { scene: FullScene, project: ProjectSummary, breakdownTypes: BreakdownTypeSummary[] }) => {
             this.scene = data.scene;
             this.viewScene = new Scene(data.scene);
             this.project = data.project;
+            this.breakdownTypes = data.breakdownTypes;
         });
     }
 

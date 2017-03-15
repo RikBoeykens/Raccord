@@ -31,6 +31,8 @@ namespace Raccord.Data.EntityFramework.Repositories.Breakdowns.BreakdownItemScen
             IQueryable<BreakdownItemScene> query = _context.Set<BreakdownItemScene>();
 
             return query.Include(bis=> bis.BreakdownItem)
+                        .ThenInclude(bi=> bi.BreakdownType)
+                        .Include(bis=> bis.BreakdownItem)
                         .ThenInclude(bi=> bi.ImageBreakdownItems)
                         .ThenInclude(ibi=> ibi.Image);
         }

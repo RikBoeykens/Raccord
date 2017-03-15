@@ -33,16 +33,16 @@ namespace Raccord.Data.EntityFramework.Repositories.Breakdowns.BreakdownItems
             return query.FirstOrDefault(l => l.ID == ID);
         }
 
-        public int SearchCount(string searchText, long? typeID)
+        public int SearchCount(string searchText, long? projectID = null, long? typeID = null)
         {
-            var query = GetSearchQuery(searchText, typeID);
+            var query = GetSearchQuery(searchText, projectID, typeID);
 
             return query.Count();            
         }
 
         public IEnumerable<BreakdownItem> Search(string searchText, long? projectID = null, long? typeID = null)
         {
-            return GetSearchQuery(searchText, projectID);
+            return GetSearchQuery(searchText, projectID, typeID);
         }
 
         private IQueryable<BreakdownItem> GetIncludedFull()

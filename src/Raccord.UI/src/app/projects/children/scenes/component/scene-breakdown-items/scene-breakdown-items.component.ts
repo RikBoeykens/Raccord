@@ -16,6 +16,7 @@ import { EntityType } from '../../../../../shared/enums/entity-type.enum';
 export class SceneBreakdownItemsComponent implements OnInit{
 
     @Input() sceneId: number;
+    @Input() projectId: number;
     @Input() breakdownItems: LinkedBreakdownItem[];
     @Input() breakdownTypes: BreakdownType[];
 
@@ -50,7 +51,6 @@ export class SceneBreakdownItemsComponent implements OnInit{
     resetNewBreakdownItem(){
         this.viewNewBreakdownItem = new BreakdownItem();
         this.viewNewBreakdownItem.type = new BreakdownType();
-        this.viewNewBreakdownItem.type.id = this.selectedTypeId;
         this.newBreakdownItem = null;
     }
 
@@ -62,6 +62,7 @@ export class SceneBreakdownItemsComponent implements OnInit{
             // first create breakdown item, then link it
             let loadingId = this._loadingService.startLoading();
 
+            this.viewNewBreakdownItem.type.id = this.selectedTypeId;
             this.newBreakdownItem = this.viewNewBreakdownItem;
 
             this._breakdownItemHttpService.post(this.newBreakdownItem).then(data=>{
