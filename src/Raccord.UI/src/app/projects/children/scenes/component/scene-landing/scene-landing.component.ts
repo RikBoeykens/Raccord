@@ -6,6 +6,7 @@ import { DialogService } from '../../../../../shared/service/dialog.service';
 import { FullScene } from '../../model/full-scene.model';
 import { Scene } from '../../model/scene.model';
 import { ProjectSummary } from '../../../../model/project-summary.model';
+import { BreakdownTypeSummary } from '../../../breakdowns/breakdown-types/model/breakdown-type-summary.model';
 
 @Component({
     templateUrl: 'scene-landing.component.html',
@@ -15,6 +16,7 @@ export class SceneLandingComponent {
     scene: FullScene;
     viewScene: Scene;
     project: ProjectSummary;
+    breakdownTypes: BreakdownTypeSummary[];
 
     constructor(
         private _sceneHttpService: SceneHttpService,

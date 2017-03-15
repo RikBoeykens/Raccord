@@ -1,0 +1,26 @@
+<div class="row">
+    <form class="col s12"
+            id="breakdown_item_form"
+            #breakdownItemForm = "ngForm"
+            (ngSubmit)="addLink()">
+        <div fxLayout="row" fxLayoutGap="10px">
+            <search-breakdown-item fxFlex="33%" [searchBreakdownItem]="viewNewBreakdownItem" [typeId]="selectedTypeId"></search-breakdown-item>
+            <md-select placeholder="Type" [(ngModel)]="selectedTypeId">
+                <md-option *ngFor="let type of breakdownTypes" [value]="type.id">{{ type.name }}</md-option>
+            </md-select>
+            <button fxFlex="33%" md-raised-button type="submit"[disabled]="!breakdownItemForm.form.valid">Add</button>            
+        </div>
+    </form>
+</div>
+<div class="row">
+    <md-nav-list>
+        <md-list-item 
+           *ngFor="let breakdownItem of breakdownItems">
+            <show-image *ngIf="breakdownItem.primaryImage.id!=0" [image]="breakdownItem.primaryImage" [listAvatar]="true"></show-image>
+            <a routerLink="/projects/{{projectId}}/breakdown/items/{{breakdownItem.id}}">
+                {{breakdownItem.name}} ({{breakdownItem.type.name}})
+            </a>
+            <button md-button (click)="removeLink(breakdownItem)"><md-icon>delete</md-icon></button>
+        </md-list-item>
+    </md-nav-list>
+</div>

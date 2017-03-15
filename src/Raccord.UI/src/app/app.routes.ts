@@ -99,7 +99,8 @@ export const ROUTES: Routes = [
                 component: SceneLandingComponent,
                 resolve:{
                   project: ProjectSummaryResolve,
-                  scene: SceneResolve
+                  scene: SceneResolve,
+                  breakdownTypes: BreakdownTypesResolve
                 }
               }
             ]

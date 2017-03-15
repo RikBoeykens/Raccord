@@ -16,6 +16,9 @@
   <md-tab label="Characters">
       <scene-characters [characters]="scene.characters" [sceneId]="scene.id" [projectId]="project.id"></scene-characters>
   </md-tab>
+  <md-tab label="Breakdown">
+      <scene-breakdown-items [breakdownItems]="scene.breakdownItems" [sceneId]="scene.id" [breakdownTypes]="breakdownTypes"></scene-breakdown-items>
+  </md-tab>
   <md-tab label="Pictures">
       <scene-images [images]="scene.images" [sceneId]="scene.id" [projectId]="project.id"></scene-images>
   </md-tab>

@@ -13,6 +13,7 @@ export { EditSceneComponent } from './children/scenes/component/edit-scene/edit-
 export { SceneLandingComponent } from './children/scenes/component/scene-landing/scene-landing.component';
 export { SceneImagesComponent } from './children/scenes/component/scene-images/scene-images.component';
 export { SceneCharactersComponent } from './children/scenes/component/scene-characters/scene-characters.component';
+export { SceneBreakdownItemsComponent } from './children/scenes/component/scene-breakdown-items/scene-breakdown-items.component';
 export { SceneHttpService } from './children/scenes/service/scene-http.service';
 export { ImageSceneHttpService } from './children/scenes/service/image-scene-http.service';
 export { CharacterSceneHttpService } from './children/scenes/service/character-scene-http.service';
@@ -74,6 +75,7 @@ export { BreakdownTypeLandingComponent } from './children/breakdowns/breakdown-t
 export { BreakdownItemLandingComponent } from './children/breakdowns/breakdown-items/component/breakdown-item-landing/breakdown-item-landing.component';
 export { EditBreakdownItemComponent } from './children/breakdowns/breakdown-items/component/edit-breakdown-item/edit-breakdown-item.component';
 export { BreakdownItemImagesComponent } from './children/breakdowns/breakdown-items/component/breakdown-item-images/breakdown-item-images.component';
+export { BreakdownItemScenesComponent } from './children/breakdowns/breakdown-items/component/breakdown-item-scenes/breakdown-item-scenes.component';
 export { SearchBreakdownItemComponent } from './children/breakdowns/breakdown-items/component/search-breakdown-item/search-breakdown-item.component';
 
 export { BreakdownTypeHttpService } from './children/breakdowns/breakdown-types/service/breakdown-type-http.service';
