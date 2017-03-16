@@ -43,6 +43,9 @@ using Raccord.Application.Services.Breakdowns.BreakdownTypes;
 using Raccord.Application.Services.Breakdowns.BreakdownItems;
 using Raccord.Application.Services.Breakdowns.BreakdownItemScenes;
 using Raccord.Application.Services.ImageBreakdownItems;
+using Raccord.Data.EntityFramework.Repositories.Scheduling.ScheduleDays;
+using Raccord.Data.EntityFramework.Repositories.Scheduling.ScheduleScenes;
+using Raccord.Data.EntityFramework.Repositories.Scheduling.ScheduleDayNotes;
 
 namespace Raccord.API
 {
@@ -103,6 +106,10 @@ namespace Raccord.API
 
             services.AddTransient<IBreakdownItemSceneRepository, BreakdownItemSceneRepository>();
             services.AddTransient<IBreakdownItemSceneService, BreakdownItemSceneService>();
+            
+            services.AddTransient<IScheduleDayRepository, ScheduleDayRepository>();
+            services.AddTransient<IScheduleSceneRepository, ScheduleSceneRepository>();
+            services.AddTransient<IScheduleDayNoteRepository, ScheduleDayNoteRepository>();
             
 
             services.AddTransient<ISearchEngineServiceWrapper, SearchEngineServiceWrapper>();
