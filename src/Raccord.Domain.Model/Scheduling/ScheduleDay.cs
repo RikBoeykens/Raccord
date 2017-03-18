@@ -13,6 +13,12 @@ namespace Raccord.Domain.Model.Scheduling
         // Date of the schedule day
         public DateTime Date { get; set; }
 
+        // Time of day the schedule day starts
+        public DateTime? Start { get; set; }
+
+        // Time of day the schedule day ends
+        public DateTime? End { get; set; }
+
         // ID of the linked project
         public long ProjectID { get; set; }
 

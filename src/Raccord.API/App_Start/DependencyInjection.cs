@@ -13,6 +13,9 @@ using Raccord.Data.EntityFramework.Repositories.Breakdowns.BreakdownTypes;
 using Raccord.Data.EntityFramework.Repositories.Breakdowns.BreakdownItems;
 using Raccord.Data.EntityFramework.Repositories.Breakdowns.BreakdownItemScenes;
 using Raccord.Data.EntityFramework.Repositories.ImageBreakdownItems;
+using Raccord.Data.EntityFramework.Repositories.Scheduling.ScheduleDays;
+using Raccord.Data.EntityFramework.Repositories.Scheduling.ScheduleScenes;
+using Raccord.Data.EntityFramework.Repositories.Scheduling.ScheduleDayNotes;
 using Raccord.Application.Core.Services.Projects;
 using Raccord.Application.Core.Services.Scenes;
 using Raccord.Application.Core.Services.Locations;
@@ -28,6 +31,9 @@ using Raccord.Application.Core.Services.Breakdowns.BreakdownTypes;
 using Raccord.Application.Core.Services.Breakdowns.BreakdownItems;
 using Raccord.Application.Core.Services.Breakdowns.BreakdownItemScenes;
 using Raccord.Application.Core.Services.ImageBreakdownItems;
+using Raccord.Application.Core.Services.Scheduling.ScheduleDays;
+using Raccord.Application.Core.Services.Scheduling.ScheduleScenes;
+using Raccord.Application.Core.Services.Scheduling.ScheduleDayNotes;
 using Raccord.Application.Services.Projects;
 using Raccord.Application.Services.Scenes;
 using Raccord.Application.Services.Locations;
@@ -43,9 +49,9 @@ using Raccord.Application.Services.Breakdowns.BreakdownTypes;
 using Raccord.Application.Services.Breakdowns.BreakdownItems;
 using Raccord.Application.Services.Breakdowns.BreakdownItemScenes;
 using Raccord.Application.Services.ImageBreakdownItems;
-using Raccord.Data.EntityFramework.Repositories.Scheduling.ScheduleDays;
-using Raccord.Data.EntityFramework.Repositories.Scheduling.ScheduleScenes;
-using Raccord.Data.EntityFramework.Repositories.Scheduling.ScheduleDayNotes;
+using Raccord.Application.Services.Scheduling.ScheduleDays;
+using Raccord.Application.Services.Scheduling.ScheduleScenes;
+using Raccord.Application.Services.Scheduling.ScheduleDayNotes;
 
 namespace Raccord.API
 {
@@ -108,8 +114,13 @@ namespace Raccord.API
             services.AddTransient<IBreakdownItemSceneService, BreakdownItemSceneService>();
             
             services.AddTransient<IScheduleDayRepository, ScheduleDayRepository>();
+            services.AddTransient<IScheduleDayService, ScheduleDayService>();
+
             services.AddTransient<IScheduleSceneRepository, ScheduleSceneRepository>();
+            services.AddTransient<IScheduleSceneService, ScheduleSceneService>();
+
             services.AddTransient<IScheduleDayNoteRepository, ScheduleDayNoteRepository>();
+            services.AddTransient<IScheduleDayNoteService, ScheduleDayNoteService>();
             
 
             services.AddTransient<ISearchEngineServiceWrapper, SearchEngineServiceWrapper>();
