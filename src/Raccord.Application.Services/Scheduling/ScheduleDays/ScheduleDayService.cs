@@ -22,11 +22,11 @@ namespace Raccord.Application.Services.Scheduling.ScheduleDays
         }
 
         // Gets all schedule days
-        public IEnumerable<ScheduleDaySummaryDto> GetAllForParent(long projectID)
+        public IEnumerable<FullScheduleDayDto> GetAllForParent(long projectID)
         {
             var scheduleDays = _scheduleDayRepository.GetAllForProject(projectID);
 
-            var dtos = scheduleDays.Select(l => l.TranslateSummary());
+            var dtos = scheduleDays.Select(l => l.TranslateFull());
 
             return dtos;
         }
