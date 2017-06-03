@@ -87,4 +87,16 @@ export { ImageBreakdownItemHttpService } from './children/breakdowns/breakdown-i
 export { BreakdownItemResolve } from './children/breakdowns/breakdown-items/service/breakdown-item-resolve.service';
 export { BreakdownItemsResolve } from './children/breakdowns/breakdown-items/service/breakdown-items-resolve.service';
 
+export { ScheduleLandingComponent } from './children/scheduling/component/schedule-landing/schedule-landing.component';
+
+export { ScheduleDayHttpService } from './children/scheduling/schedule-days/service/schedule-day-http.service';
+export { ScheduleDayResolve } from './children/scheduling/schedule-days/service/schedule-day-resolve.service';
+export { ScheduleDaysResolve } from './children/scheduling/schedule-days/service/schedule-days-resolve.service';
+
+export { ScheduleDayNoteHttpService } from './children/scheduling/schedule-day-notes/service/schedule-day-note-http.service';
+export { ScheduleDayNoteResolve } from './children/scheduling/schedule-day-notes/service/schedule-day-note-resolve.service';
+export { ScheduleDayNotesResolve } from './children/scheduling/schedule-day-notes/service/schedule-day-notes-resolve.service';
+
+export { ScheduleSceneHttpService } from './children/scheduling/schedule-scenes/service/schedule-scene-http.service';
+
 export { ScenePropertiesLandingComponent } from './children/scene-properties/component/scene-properties-landing/scene-properties-landing.component';
