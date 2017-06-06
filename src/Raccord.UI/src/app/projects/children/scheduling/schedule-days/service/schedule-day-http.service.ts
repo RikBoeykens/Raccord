@@ -15,7 +15,7 @@ export class ScheduleDayHttpService extends BaseHttpService {
         this._baseUri = `${AppSettings.API_ENDPOINT}/scheduledays`;
     }
 
-    getAll(projectId): Promise<ScheduleDaySummary[]> {
+    getAll(projectId): Promise<FullScheduleDay[]> {
 
         var uri = `${this._baseUri}/${projectId}/project`;
 
