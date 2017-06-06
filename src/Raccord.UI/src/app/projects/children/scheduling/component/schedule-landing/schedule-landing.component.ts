@@ -6,6 +6,8 @@ import { ScheduleDayHttpService } from '../../schedule-days/service/schedule-day
 import { LoadingService } from '../../../../../loading/service/loading.service';
 import { DialogService } from '../../../../../shared/service/dialog.service';
 import { ProjectSummary } from '../../../../model/project-summary.model';
+import { SelectedEntity } from '../../../../../shared/model/selected-entity.model';
+import { EntityType } from '../../../../../shared/enums/entity-type.enum';
 
 @Component({
     templateUrl: 'schedule-landing.component.html',
@@ -16,6 +18,7 @@ export class ScheduleLandingComponent extends OnInit {
     project: ProjectSummary;
     viewNewScheduleDay: ScheduleDay;
     newScheduleDay: ScheduleDay;
+    sceneType: EntityType[] = [EntityType.scene];
 
     constructor(
         private _scheduleDayHttpService: ScheduleDayHttpService,
@@ -69,5 +72,9 @@ export class ScheduleLandingComponent extends OnInit {
         .then(()=>
             this._loadingService.endLoading(loadingId)
         );
+    }
+
+    addScheduleScene(scene: SelectedEntity, scheduleDay: ScheduleDay){
+        console.log("Scene: " + scene.entityId + "; day: " + scheduleDay.date);
     }
 }

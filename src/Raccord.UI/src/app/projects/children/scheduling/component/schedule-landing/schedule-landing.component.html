@@ -24,7 +24,26 @@
     <div class="col s12">
         <div class="row schedule-day-row"
              *ngFor="let scheduleDay of scheduleDays">
-             {{scheduleDay.date | date}}
+             <div class="col s12">
+                 <div class="row">
+                     <h4>{{scheduleDay.date | date}}</h4>
+                 </div>
+                 <div class="row">
+                    <select-entity fxFlex="33%"
+                                [projectId]="project.id"
+                                [includeTypes]="sceneType"
+                                (entitySelected)="addScheduleScene($event, scheduleDay)">
+                    </select-entity>
+                 </div>
+                 <div class="row">
+                     <div class="col s12">
+                         <div class="row"
+                              *ngFor="let scheduleScene of scheduleDay.scenes">
+                              <span>{{scheduleScene.summary}}</span>
+                         </div>
+                     </div>
+                 </div>
+             </div>
         </div>
     </div>
 </div>
