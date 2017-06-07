@@ -14,7 +14,7 @@ namespace Raccord.Data.EntityFramework.Repositories.Scheduling.ScheduleDays
 
         public IEnumerable<ScheduleDay> GetAllForProject(long projectID)
         {
-            var query = GetIncludedSummary();
+            var query = GetIncludedFull();
 
             return query.Where(sd=> sd.ProjectID == projectID);
         }
