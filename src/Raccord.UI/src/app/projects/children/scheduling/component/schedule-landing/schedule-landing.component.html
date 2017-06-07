@@ -29,6 +29,9 @@
                      <h4>{{scheduleDay.date | date}}</h4>
                  </div>
                  <div class="row">
+                     <h5>Scenes</h5>
+                 </div>
+                 <div class="row">
                     <select-entity fxFlex="33%"
                                 [projectId]="project.id"
                                 [includeTypes]="sceneType"
@@ -39,7 +42,8 @@
                      <div class="col s12">
                          <div class="row"
                               *ngFor="let scheduleScene of scheduleDay.scenes">
-                              <span>{{scheduleScene.summary}}</span>
+                            <span>{{scheduleScene.scene.number}}. {{scheduleScene.scene.intExt.name}} {{scheduleScene.scene.location.name}} {{scheduleScene.scene.dayNight.name}} - {{scheduleScene.scene.summary}}</span>
+                            <span class="remove-schedule-scene action-span" (click)="removeScheduleScene(scheduleScene)">(remove)</span>
                          </div>
                      </div>
                  </div>

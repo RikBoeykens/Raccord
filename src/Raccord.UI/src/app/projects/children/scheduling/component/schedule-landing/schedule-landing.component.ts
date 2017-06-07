@@ -97,4 +97,19 @@ export class ScheduleLandingComponent extends OnInit {
             this._loadingService.endLoading(loadingId)
         );
     }
+
+    removeScheduleScene(scheduleScene: ScheduleScene){
+        let loadingId = this._loadingService.startLoading();
+
+        this._scheduleSceneHttpService.delete(scheduleScene.id).then(data=>{
+            if(typeof(data)=='string'){
+                this._dialogService.error(data);
+            }else{
+                this.getScheduleDays();
+            }
+        }).catch()
+        .then(()=>
+            this._loadingService.endLoading(loadingId)
+        );
+    }
 }
