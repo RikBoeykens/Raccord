@@ -28,6 +28,7 @@
                  <div class="row">
                      <h4>{{scheduleDay.date | date}}</h4>
                  </div>
+                 <!-- TODO: Add start- end time -->
                  <div class="row">
                      <h5>Scenes</h5>
                  </div>
@@ -39,14 +40,22 @@
                     </select-entity>
                  </div>
                  <div class="row">
-                     <div class="col s12">
-                         <div class="row"
-                              *ngFor="let scheduleScene of scheduleDay.scenes">
-                            <span>{{scheduleScene.scene.number}}. {{scheduleScene.scene.intExt.name}} {{scheduleScene.scene.location.name}} {{scheduleScene.scene.dayNight.name}} - {{scheduleScene.scene.summary}}</span>
-                            <span class="remove-schedule-scene action-span" (click)="removeScheduleScene(scheduleScene)">(remove)</span>
-                         </div>
-                     </div>
+                    <md-nav-list>
+                        <a md-list-item 
+                        [routerLink]="[scheduleScene.id]" 
+                        *ngFor="let scheduleScene of scheduleDay.scenes">
+                            <show-image *ngIf="scheduleScene.scene.primaryImage.id!=0" [image]="scheduleScene.scene.primaryImage" [listAvatar]="true"></show-image>
+                            {{scheduleScene.scene.number}}. {{scheduleScene.scene.intExt.name}} {{scheduleScene.scene.location.name}} {{scheduleScene.scene.dayNight.name}} - {{scheduleScene.scene.summary}} ({{scheduleScene.pageLength | pagelength}})
+                            <button md-button (click)="removeScheduleScene($event, scheduleScene)"><md-icon>delete</md-icon></button>
+                        </a>
+                    </md-nav-list>
                  </div>
+                 <div class="row">
+                     <span class="col s12">
+                         Total page length: {{getScheduledPageLength(scheduleDay) | pagelength}}
+                     </span>
+                 </div>
+                 <!-- TODO: Add notes -->
              </div>
         </div>
     </div>

@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { ScheduleDay } from '../../schedule-days/model/schedule-day.model';
 import { FullScheduleDay } from '../../schedule-days/model/full-schedule-day.model';
 import { ScheduleScene } from '../../schedule-scenes/model/schedule-scene.model';
+import { ScheduleSceneScene } from '../../schedule-scenes/model/schedule-scene-scene.model';
 import { ScheduleDayHttpService } from '../../schedule-days/service/schedule-day-http.service';
 import { ScheduleDayNoteHttpService } from '../../schedule-day-notes/service/schedule-day-note-http.service';
 import { ScheduleSceneHttpService } from '../../schedule-scenes/service/schedule-scene-http.service';
@@ -79,6 +80,12 @@ export class ScheduleLandingComponent extends OnInit {
         );
     }
 
+    getScheduledPageLength(scheduleDay: FullScheduleDay){
+        let sum = 0;
+        scheduleDay.scenes.map((scheduleScene: ScheduleSceneScene)=> sum+=scheduleScene.pageLength);
+        return sum;
+    }
+
     addScheduleScene(scene: SelectedEntity, scheduleDay: ScheduleDay){
         let loadingId = this._loadingService.startLoading();
 
@@ -98,7 +105,8 @@ export class ScheduleLandingComponent extends OnInit {
         );
     }
 
-    removeScheduleScene(scheduleScene: ScheduleScene){
+    removeScheduleScene(event, scheduleScene: ScheduleScene){
+        event.stopPropagation();
         let loadingId = this._loadingService.startLoading();
 
         this._scheduleSceneHttpService.delete(scheduleScene.id).then(data=>{
