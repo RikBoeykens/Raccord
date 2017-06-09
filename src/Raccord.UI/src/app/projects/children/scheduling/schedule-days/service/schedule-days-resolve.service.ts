@@ -1,9 +1,9 @@
 import { Injectable }             from '@angular/core';
 import { Router, Resolve, ActivatedRouteSnapshot } from '@angular/router';
 import { ScheduleDayHttpService } from './schedule-day-http.service';
-import { ScheduleDaySummary } from '../model/schedule-day-summary.model';
+import { FullScheduleDay } from '../model/full-schedule-day.model';
 @Injectable()
-export class ScheduleDaysResolve implements Resolve<ScheduleDaySummary[]> {
+export class ScheduleDaysResolve implements Resolve<FullScheduleDay[]> {
 
   constructor(
     private scheduleDayHttpService: ScheduleDayHttpService, 

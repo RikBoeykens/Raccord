@@ -1,6 +1,6 @@
 export class PageLengthHelpers {
     public static getPageLengthString(value: number): string {
-        if(!value)
+        if(typeof(value)==="undefined")
             return "";
         var resultString = "";
         var pages = Math.floor(value / 8);
