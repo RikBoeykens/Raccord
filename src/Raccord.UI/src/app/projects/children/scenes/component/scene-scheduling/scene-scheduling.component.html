@@ -1,0 +1,15 @@
+<div class="row">
+    <md-nav-list>
+        <md-list-item 
+           *ngFor="let scheduleDay of scheduleDays">
+            <a routerLink="/projects/{{projectId}}/scheduling/scene/{{scheduleDay.id}}">
+                {{scheduleDay.scheduleDay.date | date}} {{scheduleDay.pageLength | pagelength}}
+            </a>
+        </md-list-item>
+    </md-nav-list>
+</div>
+<div class="row">
+    <span class="col s12">
+        Total page length: {{getScheduledPageLength() | pagelength}}
+    </span>
+</div>

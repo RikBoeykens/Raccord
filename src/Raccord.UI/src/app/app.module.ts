@@ -40,6 +40,7 @@ import { SceneLandingComponent } from './projects';
 import { SceneImagesComponent } from './projects';
 import { SceneCharactersComponent } from './projects';
 import { SceneBreakdownItemsComponent } from './projects';
+import { SceneSchedulingComponent } from './projects';
 import { LocationsListComponent } from './projects';
 import { EditLocationComponent } from './projects';
 import { LocationLandingComponent } from './projects';
@@ -98,6 +99,7 @@ const COMPONENTS =[
   SceneImagesComponent,
   SceneCharactersComponent,
   SceneBreakdownItemsComponent,
+  SceneSchedulingComponent,
   LocationsListComponent,
   EditLocationComponent,
   LocationLandingComponent,

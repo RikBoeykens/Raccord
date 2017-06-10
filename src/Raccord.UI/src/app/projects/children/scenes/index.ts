@@ -1,0 +1,1 @@
+export {SceneSchedulingComponent} from "./component/scene-scheduling/scene-scheduling.component";
