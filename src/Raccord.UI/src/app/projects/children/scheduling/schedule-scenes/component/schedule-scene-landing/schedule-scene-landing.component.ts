@@ -1,11 +1,11 @@
 import { Component, OnInit, OnChanges } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import { FullScheduleScene } from '../../model/full-schedule-scene.model';
 import { ScheduleScene } from '../../model/schedule-scene.model';
 import { ScheduleSceneHttpService } from '../../service/schedule-scene-http.service';
 import { LoadingService } from '../../../../../../loading/service/loading.service';
 import { DialogService } from '../../../../../../shared/service/dialog.service';
 import { ProjectSummary } from '../../../../../model/project-summary.model';
-import { SelectedEntity } from '../../../../../shared/model/selected-entity.model';
 import { PageLengthHelpers } from '../../../../../../shared/helpers/page-length.helpers';
 
 @Component({
@@ -13,7 +13,7 @@ import { PageLengthHelpers } from '../../../../../../shared/helpers/page-length.
 })
 export class ScheduleSceneLandingComponent extends OnInit  implements OnChanges{
 
-    scheduleScene: ScheduleScene;
+    scheduleScene: FullScheduleScene;
     project: ProjectSummary;
     stringPageLength: string;
 
@@ -28,7 +28,7 @@ export class ScheduleSceneLandingComponent extends OnInit  implements OnChanges{
     }
 
     ngOnInit() {
-        this._route.data.subscribe((data: { scheduleScene: ScheduleScene, project: ProjectSummary }) => {
+        this._route.data.subscribe((data: { scheduleScene: FullScheduleScene, project: ProjectSummary }) => {
             this.scheduleScene = data.scheduleScene;
             this.setStringPageLength();
             this.project = data.project;
@@ -56,8 +56,13 @@ export class ScheduleSceneLandingComponent extends OnInit  implements OnChanges{
     updateScheduleScene(){
         let loadingId = this._loadingService.startLoading();
 
-        this.scheduleScene.pageLength = PageLengthHelpers.getPageLengthNumber(this.stringPageLength);
-        this._scheduleSceneHttpService.post(this.scheduleScene).then(data=>{
+        let updatedScheduleScene = new ScheduleScene({
+            id: this.scheduleScene.id, 
+            pageLength: PageLengthHelpers.getPageLengthNumber(this.stringPageLength),
+            sceneId: this.scheduleScene.scene.id,
+            scheduleDayId: this.scheduleScene.scheduleDay.id
+        });
+        this._scheduleSceneHttpService.post(updatedScheduleScene).then(data=>{
             if(typeof(data)=='string'){
                 this._dialogService.error(data);
             }else{

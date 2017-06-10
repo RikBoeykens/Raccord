@@ -1,9 +1,9 @@
 import { Injectable }             from '@angular/core';
 import { Router, Resolve, ActivatedRouteSnapshot } from '@angular/router';
 import { ScheduleSceneHttpService } from './schedule-scene-http.service';
-import { ScheduleScene } from '../model/schedule-scene.model';
+import { FullScheduleScene } from '../model/full-schedule-scene.model';
 @Injectable()
-export class ScheduleSceneResolve implements Resolve<ScheduleScene> {
+export class ScheduleSceneResolve implements Resolve<FullScheduleScene> {
 
   constructor(
       private scheduleSceneHttpService: ScheduleSceneHttpService, 

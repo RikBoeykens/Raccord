@@ -45,7 +45,7 @@ namespace Raccord.API.Controllers
 
         // GET api/schedulescenes/5
         [HttpGet("{id}")]
-        public ScheduleSceneViewModel Get(long id)
+        public FullScheduleSceneViewModel Get(long id)
         {
             var dto = _scheduleSceneService.Get(id);
 

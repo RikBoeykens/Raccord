@@ -9,7 +9,7 @@ namespace Raccord.Application.Core.Services.Scheduling.ScheduleScenes
 
         IEnumerable<ScheduleSceneSceneDto> GetScenes(long dayID);
 
-        ScheduleSceneDto Get(long ID);
+        FullScheduleSceneDto Get(long ID);
 
         long Add(ScheduleSceneDto dto);
 
