@@ -73,7 +73,10 @@ import { EditBreakdownItemComponent } from './projects';
 import { SearchBreakdownItemComponent } from './projects';
 import { BreakdownItemImagesComponent } from './projects';
 import { BreakdownItemScenesComponent } from './projects';
-import { ScheduleLandingComponent } from './projects';
+import { 
+  ScheduleLandingComponent,
+  ScheduleSceneLandingComponent
+} from './projects';
 import { ScenePropertiesLandingComponent } from './projects';
 import { SelectEntityComponent } from './shared';
 
@@ -129,6 +132,7 @@ const COMPONENTS =[
   BreakdownItemImagesComponent,
   BreakdownItemScenesComponent,
   ScheduleLandingComponent,
+  ScheduleSceneLandingComponent,
   ScenePropertiesLandingComponent,
   SelectEntityComponent
 ];
@@ -178,7 +182,10 @@ import { ScheduleDaysResolve } from './projects';
 import { ScheduleDayNoteHttpService } from './projects';
 import { ScheduleDayNoteResolve } from './projects';
 import { ScheduleDayNotesResolve } from './projects';
-import { ScheduleSceneHttpService } from './projects';
+import { 
+  ScheduleSceneHttpService,
+  ScheduleSceneResolve
+} from './projects';
 
 const APP_PROVIDERS = [
   LoadingService,
@@ -225,7 +232,8 @@ const APP_PROVIDERS = [
   ScheduleDayNoteHttpService,
   ScheduleDayNoteResolve,
   ScheduleDayNotesResolve,
-  ScheduleSceneHttpService
+  ScheduleSceneHttpService,
+  ScheduleSceneResolve
 ];
 
 // Directives

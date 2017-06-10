@@ -22,7 +22,10 @@ import { BreakdownLandingComponent } from './projects';
 import { BreakdownTypeSettingsComponent } from './projects';
 import { BreakdownTypeLandingComponent } from './projects';
 import { BreakdownItemLandingComponent } from './projects';
-import { ScheduleLandingComponent } from './projects';
+import { 
+  ScheduleLandingComponent,
+  ScheduleSceneLandingComponent
+} from './projects';
 import { ScenePropertiesLandingComponent } from './projects';
 
 import { ProjectResolve } from './projects';
@@ -44,7 +47,10 @@ import { BreakdownTypeResolve } from './projects';
 import { BreakdownTypesResolve } from './projects';
 import { BreakdownItemResolve } from './projects';
 import { BreakdownItemsResolve } from './projects';
-import { ScheduleDaysResolve } from './projects';
+import { 
+  ScheduleDaysResolve,
+  ScheduleSceneResolve
+} from './projects';
 
 import { CanDeactivateGuard } from './shared/service/can-deactivate-guard.service';
 
@@ -268,11 +274,24 @@ export const ROUTES: Routes = [
           },
           {
             path: 'scheduling',
-            component: ScheduleLandingComponent,
-            resolve:{
-              project: ProjectSummaryResolve,
-              scheduleDays: ScheduleDaysResolve,
-            }
+            children:[
+              {
+                path: '',
+                component: ScheduleLandingComponent,
+                resolve:{
+                  project: ProjectSummaryResolve,
+                  scheduleDays: ScheduleDaysResolve,
+                }
+              },
+              {
+                path: 'scene/:scheduleSceneId',
+                component: ScheduleSceneLandingComponent,
+                resolve:{
+                  project: ProjectSummaryResolve,
+                  scheduleScene: ScheduleSceneResolve,
+                }
+              },
+            ]
           }
         ],
       },

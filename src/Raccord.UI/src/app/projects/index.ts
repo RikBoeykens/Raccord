@@ -97,6 +97,10 @@ export { ScheduleDayNoteHttpService } from './children/scheduling/schedule-day-n
 export { ScheduleDayNoteResolve } from './children/scheduling/schedule-day-notes/service/schedule-day-note-resolve.service';
 export { ScheduleDayNotesResolve } from './children/scheduling/schedule-day-notes/service/schedule-day-notes-resolve.service';
 
-export { ScheduleSceneHttpService } from './children/scheduling/schedule-scenes/service/schedule-scene-http.service';
+export { 
+    ScheduleSceneLandingComponent,
+    ScheduleSceneHttpService,
+    ScheduleSceneResolve
+ } from './children/scheduling/schedule-scenes';
 
 export { ScenePropertiesLandingComponent } from './children/scene-properties/component/scene-properties-landing/scene-properties-landing.component';
