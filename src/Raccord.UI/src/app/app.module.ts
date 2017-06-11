@@ -40,6 +40,7 @@ import { SceneLandingComponent } from './projects';
 import { SceneImagesComponent } from './projects';
 import { SceneCharactersComponent } from './projects';
 import { SceneBreakdownItemsComponent } from './projects';
+import { SceneSchedulingComponent } from './projects';
 import { LocationsListComponent } from './projects';
 import { EditLocationComponent } from './projects';
 import { LocationLandingComponent } from './projects';
@@ -73,7 +74,10 @@ import { EditBreakdownItemComponent } from './projects';
 import { SearchBreakdownItemComponent } from './projects';
 import { BreakdownItemImagesComponent } from './projects';
 import { BreakdownItemScenesComponent } from './projects';
-import { ScheduleLandingComponent } from './projects';
+import { 
+  ScheduleLandingComponent,
+  ScheduleSceneLandingComponent
+} from './projects';
 import { ScenePropertiesLandingComponent } from './projects';
 import { SelectEntityComponent } from './shared';
 
@@ -95,6 +99,7 @@ const COMPONENTS =[
   SceneImagesComponent,
   SceneCharactersComponent,
   SceneBreakdownItemsComponent,
+  SceneSchedulingComponent,
   LocationsListComponent,
   EditLocationComponent,
   LocationLandingComponent,
@@ -129,6 +134,7 @@ const COMPONENTS =[
   BreakdownItemImagesComponent,
   BreakdownItemScenesComponent,
   ScheduleLandingComponent,
+  ScheduleSceneLandingComponent,
   ScenePropertiesLandingComponent,
   SelectEntityComponent
 ];
@@ -178,7 +184,10 @@ import { ScheduleDaysResolve } from './projects';
 import { ScheduleDayNoteHttpService } from './projects';
 import { ScheduleDayNoteResolve } from './projects';
 import { ScheduleDayNotesResolve } from './projects';
-import { ScheduleSceneHttpService } from './projects';
+import { 
+  ScheduleSceneHttpService,
+  ScheduleSceneResolve
+} from './projects';
 
 const APP_PROVIDERS = [
   LoadingService,
@@ -225,7 +234,8 @@ const APP_PROVIDERS = [
   ScheduleDayNoteHttpService,
   ScheduleDayNoteResolve,
   ScheduleDayNotesResolve,
-  ScheduleSceneHttpService
+  ScheduleSceneHttpService,
+  ScheduleSceneResolve
 ];
 
 // Directives

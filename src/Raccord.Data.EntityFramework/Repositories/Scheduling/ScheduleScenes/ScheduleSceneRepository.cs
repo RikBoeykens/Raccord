@@ -61,7 +61,9 @@ namespace Raccord.Data.EntityFramework.Repositories.Scheduling.ScheduleScenes
                         .ThenInclude(s=> s.DayNight)
                         .Include(ss=> ss.Scene)
                         .ThenInclude(s=> s.ImageScenes)
-                        .ThenInclude(s=> s.Image);
+                        .ThenInclude(s=> s.Image)
+                        .Include(ss=> ss.Scene)
+                        .ThenInclude(s=> s.ScheduleScenes);
         }
 
         private IQueryable<ScheduleScene> GetIncludedSummary()

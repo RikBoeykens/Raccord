@@ -14,6 +14,7 @@ export { SceneLandingComponent } from './children/scenes/component/scene-landing
 export { SceneImagesComponent } from './children/scenes/component/scene-images/scene-images.component';
 export { SceneCharactersComponent } from './children/scenes/component/scene-characters/scene-characters.component';
 export { SceneBreakdownItemsComponent } from './children/scenes/component/scene-breakdown-items/scene-breakdown-items.component';
+export { SceneSchedulingComponent } from './children/scenes';
 export { SceneHttpService } from './children/scenes/service/scene-http.service';
 export { ImageSceneHttpService } from './children/scenes/service/image-scene-http.service';
 export { CharacterSceneHttpService } from './children/scenes/service/character-scene-http.service';
@@ -97,6 +98,10 @@ export { ScheduleDayNoteHttpService } from './children/scheduling/schedule-day-n
 export { ScheduleDayNoteResolve } from './children/scheduling/schedule-day-notes/service/schedule-day-note-resolve.service';
 export { ScheduleDayNotesResolve } from './children/scheduling/schedule-day-notes/service/schedule-day-notes-resolve.service';
 
-export { ScheduleSceneHttpService } from './children/scheduling/schedule-scenes/service/schedule-scene-http.service';
+export { 
+    ScheduleSceneLandingComponent,
+    ScheduleSceneHttpService,
+    ScheduleSceneResolve
+ } from './children/scheduling/schedule-scenes';
 
 export { ScenePropertiesLandingComponent } from './children/scene-properties/component/scene-properties-landing/scene-properties-landing.component';

@@ -11,9 +11,22 @@ using Raccord.Application.Services.Scheduling.ScheduleDays;
 
 namespace Raccord.Application.Services.Scheduling.ScheduleScenes
 {
-    // Utilities and helper methods for Locations
+    // Utilities and helper methods for Schedule Scenes
     public static class Utilities
     {
+        public static FullScheduleSceneDto TranslateFull(this ScheduleScene scheduleScene)
+        {
+            var dto = new FullScheduleSceneDto
+            {
+                ID = scheduleScene.ID,
+                PageLength = scheduleScene.PageLength,
+                SceneScheduledPageLength = scheduleScene.Scene.ScheduleScenes.Sum(ss=> ss.PageLength),
+                ScheduleDay = scheduleScene.ScheduleDay.TranslateSummary(),
+                Scene = scheduleScene.Scene.TranslateSummary(),
+            };
+
+            return dto;
+        }
         public static ScheduleSceneDayDto TranslateDay(this ScheduleScene scheduleScene)
         {
             var dto = new ScheduleSceneDayDto

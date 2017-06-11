@@ -1,0 +1,32 @@
+<div class="row">      
+    <div class="col s12">
+        <a routerLink="/" class="breadcrumb">Dashboard</a>
+        <a routerLink="/projects" class="breadcrumb">Projects</a>
+        <a routerLink="/projects/{{project.id}}" class="breadcrumb">{{project.title}}</a>
+        <a routerLink="/projects/{{project.id}}/scheduling" class="breadcrumb">Schedule</a>
+        <span class="breadcrumb">{{scheduleScene.scene.number}}. {{scheduleScene.scene.intExt.name}} {{scheduleScene.scene.location.name}} {{scheduleScene.scene.dayNight.name}} - {{scheduleScene.scene.summary}}</span>
+    </div>
+</div>
+<div class="row">
+    <div class="col s12">
+        <span>Total length: {{scheduleScene.scene.pageLength | pagelength}}</span>
+    </div>
+</div>
+<div class="row">
+    <div class="col s12">
+        <span>Unscheduled: {{scheduleScene.scene.pageLength - scheduleScene.sceneScheduledPageLength | pagelength}}</span>
+    </div>
+</div>
+<div class="row">
+    <form class="col s12"
+            id="schedule_scene_form"
+            #scheduleSceneForm = "ngForm"
+            (ngSubmit)="updateScheduleScene()">
+        <div fxLayout="row" fxLayoutGap="10px">
+            <md-input-container fxFlex="25%">
+                <input md-input placeholder="Page Length" id="schedulescene_pagelength" required [(ngModel)]="stringPageLength" #pagelength="ngModel" name="schedulescene_pagelength">
+            </md-input-container>
+            <button fxFlex="25%" md-raised-button type="submit"[disabled]="!scheduleSceneForm.form.valid">Update</button>            
+        </div>
+    </form>
+</div>

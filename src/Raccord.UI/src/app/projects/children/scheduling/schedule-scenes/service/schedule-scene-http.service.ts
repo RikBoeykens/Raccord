@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { BaseHttpService } from '../../../../../shared/service/base-http.service';
 import { AppSettings } from '../../../../../app.settings';
+import { FullScheduleScene } from '../model/full-schedule-scene.model';
 import { ScheduleSceneDay } from '../model/schedule-scene-day.model';
 import { ScheduleSceneScene } from '../model/schedule-scene-scene.model';
 import { ScheduleScene } from '../model/schedule-scene.model';
@@ -29,7 +30,7 @@ export class ScheduleSceneHttpService extends BaseHttpService {
         return this.doGetArray(uri);
     }
 
-    get(id: number): Promise<ScheduleScene>{
+    get(id: number): Promise<FullScheduleScene>{
 
         var uri = `${this._baseUri}/${id}`;
 

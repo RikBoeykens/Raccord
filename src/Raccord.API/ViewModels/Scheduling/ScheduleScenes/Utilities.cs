@@ -7,6 +7,18 @@ namespace Raccord.API.ViewModels.Scheduling.ScheduleScenes
     public static class Utilities
     {
         // Translates a scene dto to a scene viewmodel
+        public static FullScheduleSceneViewModel Translate(this FullScheduleSceneDto dto)
+        {
+            return new FullScheduleSceneViewModel
+            {
+                ID = dto.ID,
+                PageLength = dto.PageLength,
+                SceneScheduledPageLength = dto.SceneScheduledPageLength,
+                Scene = dto.Scene.Translate(),
+                ScheduleDay = dto.ScheduleDay.Translate(),
+            };
+        }
+        // Translates a scene dto to a scene viewmodel
         public static ScheduleSceneDayViewModel Translate(this ScheduleSceneDayDto dto)
         {
             return new ScheduleSceneDayViewModel

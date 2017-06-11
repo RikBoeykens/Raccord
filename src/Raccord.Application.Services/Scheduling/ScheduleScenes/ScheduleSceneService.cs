@@ -43,11 +43,11 @@ namespace Raccord.Application.Services.Scheduling.ScheduleScenes
         }
 
         // Gets a single schedule scene by id
-        public ScheduleSceneDto Get(long ID)
+        public FullScheduleSceneDto Get(long ID)
         {
-            var scheduleScene = _scheduleSceneRepository.GetSingle(ID);
+            var scheduleScene = _scheduleSceneRepository.GetFull(ID);
 
-            var dto = scheduleScene.Translate();
+            var dto = scheduleScene.TranslateFull();
 
             return dto;
         }
