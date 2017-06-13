@@ -53,6 +53,8 @@ using Raccord.Application.Services.ImageBreakdownItems;
 using Raccord.Application.Services.Scheduling.ScheduleDays;
 using Raccord.Application.Services.Scheduling.ScheduleScenes;
 using Raccord.Application.Services.Scheduling.ScheduleDayNotes;
+using Raccord.Application.Core.Services.Scheduling.ScheduleCharacters;
+using Raccord.Application.Services.Scheduling.ScheduleCharacters;
 
 namespace Raccord.API
 {
@@ -124,6 +126,7 @@ namespace Raccord.API
             services.AddTransient<IScheduleDayNoteService, ScheduleDayNoteService>();
 
             services.AddTransient<IScheduleCharacterRepository, ScheduleCharacterRepository>();
+            services.AddTransient<IScheduleCharacterService, ScheduleCharacterService>();
             
 
             services.AddTransient<ISearchEngineServiceWrapper, SearchEngineServiceWrapper>();
