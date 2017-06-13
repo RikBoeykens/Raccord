@@ -6,6 +6,7 @@ using Raccord.Core.Enums;
 using System.Linq;
 using Raccord.Application.Services.Images;
 using Raccord.Application.Services.Scenes;
+using Raccord.Domain.Model.Scheduling;
 
 namespace Raccord.Application.Services.Characters
 {
@@ -98,6 +99,22 @@ namespace Raccord.Application.Services.Characters
                 DisplayName = character.Name,
                 Info = $"Project: {character.Project.Title}",
                 Type = EntityType.Character,
+            };
+
+            return dto;
+        }
+
+        public static LinkedCharacterDto TranslateCharacter(this ScheduleCharacter scheduleCharacter)
+        {
+            var dto = new LinkedCharacterDto
+            {
+                ID = scheduleCharacter.CharacterScene.Character.ID,
+                Number = scheduleCharacter.CharacterScene.Character.Number,
+                Name = scheduleCharacter.CharacterScene.Character.Name,
+                Description = scheduleCharacter.CharacterScene.Character.Description,
+                ProjectID = scheduleCharacter.CharacterScene.Character.ProjectID,
+                PrimaryImage = scheduleCharacter.CharacterScene.Character.ImageCharacters.FirstOrDefault(i=> i.IsPrimaryImage)?.Image.Translate(),
+                LinkID = scheduleCharacter.ID,
             };
 
             return dto;

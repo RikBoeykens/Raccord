@@ -61,5 +61,32 @@ namespace Raccord.Application.Services.Scheduling.ScheduleScenes
 
             return dto;
         }
+
+        public static ScheduleSceneSummaryDto TranslateSummary(this ScheduleScene scheduleScene)
+        {
+            var dto = new ScheduleSceneSummaryDto
+            {
+                ID = scheduleScene.ID,
+                PageLength = scheduleScene.PageLength,
+                ScheduleDay = scheduleScene.ScheduleDay.TranslateSummary(),
+                Scene = scheduleScene.Scene.TranslateSummary(),
+            };
+
+            return dto;
+        }
+        
+        public static LinkedScheduleSceneDto TranslateScene(this ScheduleCharacter scheduleCharacter)
+        {
+            var dto = new LinkedScheduleSceneDto
+            {
+                ID = scheduleCharacter.ScheduleScene.ID,
+                PageLength = scheduleCharacter.ScheduleScene.PageLength,
+                ScheduleDay = scheduleCharacter.ScheduleScene.ScheduleDay.TranslateSummary(),
+                Scene = scheduleCharacter.ScheduleScene.Scene.TranslateSummary(),
+                LinkID = scheduleCharacter.ID,
+            };
+
+            return dto;
+        }
     }
 }
