@@ -75,7 +75,7 @@ namespace Raccord.Application.Services.Scheduling.ScheduleScenes
             return dto;
         }
         
-        public static LinkedScheduleSceneDto TranslateScene(this ScheduleCharacter scheduleCharacter)
+        public static LinkedScheduleSceneDto TranslateScheduleScene(this ScheduleCharacter scheduleCharacter)
         {
             var dto = new LinkedScheduleSceneDto
             {
