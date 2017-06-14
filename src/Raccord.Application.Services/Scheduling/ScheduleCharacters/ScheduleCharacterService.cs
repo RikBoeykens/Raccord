@@ -25,9 +25,9 @@ namespace Raccord.Application.Services.Scheduling.ScheduleCharacters
         // Gets all characters for a schedule scene
         public IEnumerable<LinkedCharacterDto> GetCharacters(long ID)
         {
-            var characterScenes = _scheduleCharacterRepository.GetAllForScheduleScene(ID);
+            var scheduleCharacters = _scheduleCharacterRepository.GetAllForScheduleScene(ID);
 
-            var dtos = characterScenes.Select(i=> i.TranslateCharacter());
+            var dtos = scheduleCharacters.Select(i=> i.TranslateCharacter());
 
             return dtos;
         }
@@ -35,18 +35,18 @@ namespace Raccord.Application.Services.Scheduling.ScheduleCharacters
         // Gets all scenes for a character
         public IEnumerable<LinkedScheduleSceneDto> GetScheduleScenes(long ID)
         {
-            var characterScenes = _scheduleCharacterRepository.GetAllForCharacter(ID);
+            var scheduleCharacters = _scheduleCharacterRepository.GetAllForCharacter(ID);
 
-            var dtos = characterScenes.Select(i=> i.TranslateScheduleScene());
+            var dtos = scheduleCharacters.Select(i=> i.TranslateScheduleScene());
 
             return dtos;
         }
 
-        public void AddLink(long characterSceneID, long scheduleSceneID)
+        public void AddLink(long scheduleSceneID, long characterSceneID)
         {
-            var characterScene = _scheduleCharacterRepository.FindBy(i=> i.CharacterSceneID == characterSceneID && i.ScheduleSceneID==scheduleSceneID);
+            var scheduleCharacter = _scheduleCharacterRepository.FindBy(i=> i.CharacterSceneID == characterSceneID && i.ScheduleSceneID==scheduleSceneID);
 
-            if(!characterScene.Any()){
+            if(!scheduleCharacter.Any()){
                 _scheduleCharacterRepository.Add(new ScheduleCharacter
                 {
                     CharacterSceneID = characterSceneID,

@@ -11,7 +11,7 @@ namespace Raccord.Application.Core.Services.Scheduling.ScheduleCharacters
         IEnumerable<LinkedScheduleSceneDto> GetScheduleScenes(long ID);
 
         // Links a character to a schedule scene
-        void AddLink(long scheduleSceneID, long characterID);
+        void AddLink(long scheduleSceneID, long characterSceneID);
 
         // Removes link between character and scene
         void RemoveLink(long ID);
