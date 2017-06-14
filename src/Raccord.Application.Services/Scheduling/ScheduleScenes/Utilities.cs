@@ -8,6 +8,7 @@ using Raccord.Core.Enums;
 using Raccord.Application.Services.Images;
 using Raccord.Application.Core.Services.Scheduling.ScheduleScenes;
 using Raccord.Application.Services.Scheduling.ScheduleDays;
+using Raccord.Application.Services.Characters;
 
 namespace Raccord.Application.Services.Scheduling.ScheduleScenes
 {
@@ -23,6 +24,7 @@ namespace Raccord.Application.Services.Scheduling.ScheduleScenes
                 SceneScheduledPageLength = scheduleScene.Scene.ScheduleScenes.Sum(ss=> ss.PageLength),
                 ScheduleDay = scheduleScene.ScheduleDay.TranslateSummary(),
                 Scene = scheduleScene.Scene.TranslateSummary(),
+                Characters = scheduleScene.Characters.Select(c=> c.TranslateCharacter()),
             };
 
             return dto;
@@ -45,6 +47,7 @@ namespace Raccord.Application.Services.Scheduling.ScheduleScenes
                 ID = scheduleScene.ID,
                 PageLength = scheduleScene.PageLength,
                 Scene = scheduleScene.Scene.TranslateSummary(),
+                Characters = scheduleScene.Characters.Select(c=> c.TranslateCharacter()),
             };
 
             return dto;
