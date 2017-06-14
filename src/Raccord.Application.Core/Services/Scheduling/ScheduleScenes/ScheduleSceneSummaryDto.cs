@@ -1,25 +1,19 @@
-using System.Collections.Generic;
-using Raccord.Application.Core.Services.Characters;
 using Raccord.Application.Core.Services.Scenes;
 using Raccord.Application.Core.Services.Scheduling.ScheduleDays;
 
 namespace Raccord.Application.Core.Services.Scheduling.ScheduleScenes
 {
-    // Dto to represent a full schedule scene
-    public class FullScheduleSceneDto
+    // Dto to represent a scene on a schedule day
+    public class ScheduleSceneSummaryDto
     {
         private SceneSummaryDto _scene;
         private ScheduleDaySummaryDto _scheduleDay;
-        private IEnumerable<LinkedCharacterDto> _characters;
 
         // ID of the schedule scene
         public long ID { get; set; }
 
         // Length in eights
         public int PageLength { get; set; }
-
-        // Length in eights
-        public int SceneScheduledPageLength { get; set; }
 
         // Linked scene
         public SceneSummaryDto Scene
@@ -44,19 +38,6 @@ namespace Raccord.Application.Core.Services.Scheduling.ScheduleScenes
             set
             {
                 _scheduleDay = value;
-            }
-        }
-
-        // Characters on the schedule scene
-        public IEnumerable<LinkedCharacterDto> Characters
-        {
-            get
-            {
-                return _characters ?? (_characters = new List<LinkedCharacterDto>());
-            }
-            set
-            {
-                _characters = value;
             }
         }
     }

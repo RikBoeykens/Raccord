@@ -1,5 +1,3 @@
-using System;
-
 namespace Raccord.Application.Core.Services.Scheduling.ScheduleScenes
 {
     // Dto to represent a scene on a schedule day

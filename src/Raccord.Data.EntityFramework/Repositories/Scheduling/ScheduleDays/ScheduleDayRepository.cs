@@ -50,6 +50,12 @@ namespace Raccord.Data.EntityFramework.Repositories.Scheduling.ScheduleDays
                         .ThenInclude(ss=> ss.Scene)
                         .ThenInclude(s=> s.ImageScenes)
                         .ThenInclude(i=> i.Image)
+                        .Include(ss=> ss.ScheduleScenes)
+                        .ThenInclude(ss=> ss.Characters)
+                        .ThenInclude(cs=> cs.CharacterScene)
+                        .ThenInclude(cs=> cs.Character)
+                        .ThenInclude(c=> c.ImageCharacters)
+                        .ThenInclude(ic=> ic.Image)
                         .Include(sd=> sd.Notes);
         }
 
