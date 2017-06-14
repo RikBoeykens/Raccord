@@ -4,6 +4,7 @@ using System.Linq;
 using Raccord.Domain.Model.Scheduling;
 using Raccord.Application.Core.Services.Scheduling.ScheduleScenes;
 using Raccord.Data.EntityFramework.Repositories.Scheduling.ScheduleScenes;
+using Raccord.Data.EntityFramework.Repositories.CharacterScenes;
 using Raccord.Domain.Model.Images;
 
 namespace Raccord.Application.Services.Scheduling.ScheduleScenes
@@ -12,14 +13,19 @@ namespace Raccord.Application.Services.Scheduling.ScheduleScenes
     public class ScheduleSceneService : IScheduleSceneService
     {
         private readonly IScheduleSceneRepository _scheduleSceneRepository;
+        private readonly ICharacterSceneRepository _characterSceneRepository;
 
         // Initialises a new ScheduleSceneService
-        public ScheduleSceneService(IScheduleSceneRepository scheduleSceneRepository)
+        public ScheduleSceneService(IScheduleSceneRepository scheduleSceneRepository,
+                                    ICharacterSceneRepository characterSceneRepository)
         {
             if(scheduleSceneRepository == null)
                 throw new ArgumentNullException(nameof(scheduleSceneRepository));
+            if(characterSceneRepository == null)
+                throw new ArgumentNullException(nameof(characterSceneRepository));
             
             _scheduleSceneRepository = scheduleSceneRepository;
+            _characterSceneRepository = characterSceneRepository;
         }
 
         // Gets all schedule scenes for a scene
@@ -61,6 +67,16 @@ namespace Raccord.Application.Services.Scheduling.ScheduleScenes
                 ScheduleDayID = dto.ScheduleDayID,
                 SceneID = dto.SceneID
             };
+
+            // add all characters in the scene by default
+            var characterScenes = _characterSceneRepository.GetAllForScene(dto.SceneID);
+            foreach(var characterScene in characterScenes)
+            {
+                scheduleScene.Characters.Add(new ScheduleCharacter
+                {
+                    CharacterSceneID = characterScene.ID
+                });
+            }
 
             _scheduleSceneRepository.Add(scheduleScene);
             _scheduleSceneRepository.Commit();
