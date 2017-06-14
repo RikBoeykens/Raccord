@@ -1,6 +1,7 @@
 using Raccord.API.ViewModels.Scenes;
 using Raccord.API.ViewModels.Images;
 using System.Collections.Generic;
+using Raccord.API.ViewModels.Scheduling.ScheduleScenes;
 
 namespace Raccord.API.ViewModels.Characters
 {
@@ -9,6 +10,7 @@ namespace Raccord.API.ViewModels.Characters
     {
         private IEnumerable<LinkedSceneViewModel> _scenes;
         private IEnumerable<LinkedImageViewModel> _images;
+        private IEnumerable<LinkedScheduleSceneViewModel> _scheduleScenes;
 
         // Scenes linked to the character
         public IEnumerable<LinkedSceneViewModel> Scenes
@@ -33,6 +35,19 @@ namespace Raccord.API.ViewModels.Characters
             set
             {
                 _images = value;
+            }
+        }
+
+        // Schedule scenes linked to the character
+        public IEnumerable<LinkedScheduleSceneViewModel> ScheduleScenes
+        {
+            get
+            {
+                return _scheduleScenes ?? (_scheduleScenes = new List<LinkedScheduleSceneViewModel>());
+            }
+            set
+            {
+                _scheduleScenes = value;
             }
         }
     }
