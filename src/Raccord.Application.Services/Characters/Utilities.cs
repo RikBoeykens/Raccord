@@ -6,6 +6,7 @@ using Raccord.Core.Enums;
 using System.Linq;
 using Raccord.Application.Services.Images;
 using Raccord.Application.Services.Scenes;
+using Raccord.Application.Services.Scheduling.ScheduleScenes;
 using Raccord.Domain.Model.Scheduling;
 
 namespace Raccord.Application.Services.Characters
@@ -23,6 +24,7 @@ namespace Raccord.Application.Services.Characters
                 Description = character.Description,
                 Images = character.ImageCharacters.Select(i=> i.TranslateImage()),
                 Scenes = character.CharacterScenes.OrderBy(s=> s.Scene.Number).Select(s=> s.TranslateScene()),
+                ScheduleScenes = character.CharacterScenes.SelectMany(cs=> cs.ScheduleDays.Select(sd=> sd.TranslateScheduleScene())),
                 ProjectID = character.ProjectID,
             };
 
