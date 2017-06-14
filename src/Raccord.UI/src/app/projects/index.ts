@@ -104,4 +104,8 @@ export {
     ScheduleSceneResolve
  } from './children/scheduling/schedule-scenes';
 
+ export{
+    ScheduleCharacterHttpService
+ } from "./children/scheduling/schedule-characters"
+
 export { ScenePropertiesLandingComponent } from './children/scene-properties/component/scene-properties-landing/scene-properties-landing.component';
