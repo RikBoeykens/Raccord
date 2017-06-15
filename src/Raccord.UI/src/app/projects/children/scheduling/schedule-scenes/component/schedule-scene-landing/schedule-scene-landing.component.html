@@ -30,3 +30,13 @@
         </div>
     </form>
 </div>
+<div class="row">
+    <div class="col s12">
+        <div *ngFor="let character of characters"
+             class="row">
+            <span>
+                {{character.name}}
+            </span>
+        </div>
+    </div>
+</div>

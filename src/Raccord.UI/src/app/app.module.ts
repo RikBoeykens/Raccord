@@ -151,8 +151,11 @@ import { ProjectsResolve } from './projects';
 import { SceneHttpService } from './projects';
 import { ImageSceneHttpService } from './projects';
 import { CharacterSceneHttpService } from './projects';
-import { SceneResolve } from './projects';
-import { ScenesResolve } from './projects';
+import { 
+  SceneResolve,
+  ScenesResolve,
+  SceneCharactersResolve 
+} from './projects';
 import { LocationHttpService } from './projects';
 import { ImageLocationHttpService } from './projects';
 import { LocationResolve } from './projects';
@@ -204,6 +207,7 @@ const APP_PROVIDERS = [
   CharacterSceneHttpService,
   SceneResolve,
   ScenesResolve,
+  SceneCharactersResolve,
   LocationHttpService,
   ImageLocationHttpService,
   LocationResolve,

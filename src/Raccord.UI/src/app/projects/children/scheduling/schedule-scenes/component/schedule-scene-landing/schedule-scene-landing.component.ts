@@ -2,6 +2,7 @@ import { Component, OnInit, OnChanges } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FullScheduleScene } from '../../model/full-schedule-scene.model';
 import { ScheduleScene } from '../../model/schedule-scene.model';
+import { LinkedCharacter } from '../../../../../children/characters/model/linked-character.model';
 import { ScheduleSceneHttpService } from '../../service/schedule-scene-http.service';
 import { LoadingService } from '../../../../../../loading/service/loading.service';
 import { DialogService } from '../../../../../../shared/service/dialog.service';
@@ -16,6 +17,7 @@ export class ScheduleSceneLandingComponent extends OnInit  implements OnChanges{
     scheduleScene: FullScheduleScene;
     project: ProjectSummary;
     stringPageLength: string;
+    characters: LinkedCharacter[] = [];
 
     constructor(
         private _scheduleSceneHttpService: ScheduleSceneHttpService,
@@ -28,10 +30,11 @@ export class ScheduleSceneLandingComponent extends OnInit  implements OnChanges{
     }
 
     ngOnInit() {
-        this._route.data.subscribe((data: { scheduleScene: FullScheduleScene, project: ProjectSummary }) => {
+        this._route.data.subscribe((data: { scheduleScene: FullScheduleScene, project: ProjectSummary, characters: LinkedCharacter[] }) => {
             this.scheduleScene = data.scheduleScene;
             this.setStringPageLength();
             this.project = data.project;
+            this.characters = data.characters;
         });
     }
 

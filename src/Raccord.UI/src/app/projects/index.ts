@@ -21,6 +21,7 @@ export { CharacterSceneHttpService } from './children/scenes/service/character-s
 export { BreakdownItemSceneHttpService } from './children/scenes/service/breakdown-item-scene-http.service';
 export { SceneResolve } from './children/scenes/service/scene-resolve.service';
 export { ScenesResolve } from './children/scenes/service/scenes-resolve.service';
+export { SceneCharactersResolve } from './children/scenes';
 
 export { LocationsListComponent } from './children/locations/component/locations-list/locations-list.component';
 export { SearchLocationComponent } from './children/locations/component/search-location/search-location.component';
