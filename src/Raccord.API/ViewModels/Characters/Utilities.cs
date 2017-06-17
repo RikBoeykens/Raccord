@@ -3,6 +3,7 @@ using Raccord.API.ViewModels.Scenes;
 using Raccord.API.ViewModels.Images;
 using Raccord.API.ViewModels.Scheduling.ScheduleScenes;
 using System.Linq;
+using Raccord.API.ViewModels.Scheduling.ScheduleDays;
 
 namespace Raccord.API.ViewModels.Characters
 {
@@ -20,7 +21,7 @@ namespace Raccord.API.ViewModels.Characters
                 ProjectID = dto.ProjectID,
                 Scenes = dto.Scenes.Select(s=> s.Translate()),
                 Images = dto.Images.Select(s=> s.Translate()),
-                ScheduleScenes = dto.ScheduleScenes.Select(ss=> ss.Translate())
+                ScheduleDays = dto.ScheduleDays.Select(sd=> sd.Translate())
             };
         }
 

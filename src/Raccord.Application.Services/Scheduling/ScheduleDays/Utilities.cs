@@ -7,6 +7,9 @@ using Raccord.Application.Core.Services.SearchEngine;
 using Raccord.Core.Enums;
 using Raccord.Application.Services.Images;
 using Raccord.Application.Services.Scheduling.ScheduleScenes;
+using System.Collections.Generic;
+using Raccord.Domain.Model.Characters;
+using Raccord.Application.Core.Services.Scenes;
 
 namespace Raccord.Application.Services.Scheduling.ScheduleDays
 {
@@ -55,6 +58,21 @@ namespace Raccord.Application.Services.Scheduling.ScheduleDays
             };
 
             return dto;
+        }
+
+        public static IEnumerable<CharacterScheduleDayDto> GetCharacterScheduleDays(this Character character)
+        {
+            var scheduleDays = character.CharacterScenes.SelectMany(cs=> cs.ScheduleDays.Select(sd=> sd.ScheduleScene)).GroupBy(sd=> sd.ScheduleDay, sd=> sd, (scheduleDay, scenes)=> new CharacterScheduleDayDto
+            {
+                ID = scheduleDay.ID,
+                Date = scheduleDay.Date,
+                Start = scheduleDay.Start,
+                End = scheduleDay.End,
+                ProjectID = scheduleDay.ProjectID,
+                Scenes = scenes.Select(s=> s.TranslateLinkedScene())
+             });
+
+             return scheduleDays;
         }
     }
 }

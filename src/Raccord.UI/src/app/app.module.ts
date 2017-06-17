@@ -59,12 +59,15 @@ import { EditImageComponent } from './projects';
 import { ImageLandingComponent } from './projects';
 import { UploadImageComponent } from './projects';
 import { ShowImageComponent } from './projects';
-import { CharactersListComponent } from './projects';
-import { EditCharacterComponent } from './projects';
-import { CharacterLandingComponent } from './projects';
-import { CharacterImagesComponent } from './projects';
-import { CharacterScenesComponent } from './projects';
-import { SearchCharacterComponent } from './projects';
+import { 
+  CharactersListComponent,
+  EditCharacterComponent,
+  CharacterLandingComponent,
+  CharacterImagesComponent,
+  CharacterScenesComponent,
+  CharacterScheduleComponent,
+  SearchCharacterComponent 
+} from './projects';
 import { BreakdownLandingComponent } from './projects';
 import { BreakdownTypeSettingsComponent } from './projects';
 import { EditBreakdownTypeComponent } from './projects';
@@ -123,6 +126,7 @@ const COMPONENTS =[
   CharacterLandingComponent,
   CharacterImagesComponent,
   CharacterScenesComponent,
+  CharacterScheduleComponent,
   SearchCharacterComponent,
   BreakdownLandingComponent,
   BreakdownTypeSettingsComponent,

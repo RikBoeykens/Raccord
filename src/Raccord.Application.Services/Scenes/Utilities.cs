@@ -12,6 +12,7 @@ using Raccord.Application.Services.Characters;
 using Raccord.Application.Services.Breakdowns.BreakdownItems;
 using Raccord.Domain.Model.Breakdowns.BreakdownItems;
 using Raccord.Application.Services.Scheduling.ScheduleScenes;
+using Raccord.Domain.Model.Scheduling;
 
 namespace Raccord.Application.Services.Scenes
 {
@@ -125,6 +126,25 @@ namespace Raccord.Application.Services.Scenes
                 ProjectID = breakdownItemScene.Scene.ProjectID,
                 PrimaryImage = breakdownItemScene.Scene.ImageScenes.FirstOrDefault(i=> i.IsPrimaryImage)?.Image.Translate(),
                 LinkID = breakdownItemScene.ID,
+            };
+
+            return dto;
+        }
+
+        public static LinkedSceneDto TranslateLinkedScene(this ScheduleScene scheduleScene)
+        {
+            var dto = new LinkedSceneDto
+            {
+                ID = scheduleScene.Scene.ID,
+                Number = scheduleScene.Scene.Number,
+                Summary = scheduleScene.Scene.Summary,
+                PageLength = scheduleScene.Scene.PageLength,
+                IntExt = scheduleScene.Scene.IntExt.Translate(),
+                Location = scheduleScene.Scene.Location.Translate(),
+                DayNight = scheduleScene.Scene.DayNight.Translate(),
+                ProjectID = scheduleScene.Scene.ProjectID,
+                PrimaryImage = scheduleScene.Scene.ImageScenes.FirstOrDefault(i=> i.IsPrimaryImage)?.Image.Translate(),
+                LinkID = scheduleScene.ID,
             };
 
             return dto;

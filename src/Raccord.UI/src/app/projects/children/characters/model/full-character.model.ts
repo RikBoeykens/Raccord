@@ -1,12 +1,12 @@
 import { Character } from './character.model';
 import { LinkedScene } from '../../scenes/model/linked-scene.model';
 import { LinkedImage } from '../../images/model/linked-image.model';
-import { LinkedScheduleScene } from '../../scheduling/schedule-scenes/model/linked-schedule-scene.model';
+import { CharacterScheduleDay } from '../../scheduling/schedule-days/model/character-schedule-day.model';
 
 export class FullCharacter extends Character{
     scenes: LinkedScene[];
     images: LinkedImage[];
-    scheduleScenes: LinkedScheduleScene[];
+    scheduleDays: CharacterScheduleDay[];
 
     constructor(obj?: {
                         id: number,
@@ -16,13 +16,13 @@ export class FullCharacter extends Character{
                         projectId: number,
                         scenes: LinkedScene[],
                         images: LinkedImage[],
-                        scheduleScenes: LinkedScheduleScene[]
+                        scheduleDays: CharacterScheduleDay[]
                     }){
         super(obj);
         if(obj){
             this.scenes = obj.scenes;
             this.images = obj.images;
-            this.scheduleScenes = obj.scheduleScenes;
+            this.scheduleDays = obj.scheduleDays;
         }
     }
 }

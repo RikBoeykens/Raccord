@@ -50,7 +50,10 @@
                                 <a md-button [routerLink]="[scheduleScene.scene.id, 'scene', scheduleScene.id]"><md-icon>edit</md-icon></a>
                             </div>
                             <md-chip-list md-line>
-                                <md-chip *ngFor="let character of scheduleScene.characters">{{character.number}}. {{character.name}}</md-chip>
+                                <a *ngFor="let character of scheduleScene.characters"
+                                    routerLink="/projects/{{project.id}}/characters/{{character.id}}">
+                                    <md-chip >{{character.number}}. {{character.name}}</md-chip>
+                                </a>
                             </md-chip-list>
                         </md-list-item>
                     </md-list>

@@ -64,6 +64,9 @@ export { EditCharacterComponent } from './children/characters/component/edit-cha
 export { CharacterLandingComponent } from './children/characters/component/character-landing/character-landing.component';
 export { CharacterImagesComponent } from './children/characters/component/character-images/character-images.component';
 export { CharacterScenesComponent } from './children/characters/component/character-scenes/character-scenes.component';
+export {
+    CharacterScheduleComponent
+} from "./children/characters";
 export { CharacterHttpService } from './children/characters/service/character-http.service';
 export { ImageCharacterHttpService } from './children/characters/service/image-character-http.service';
 export { CharacterResolve } from './children/characters/service/character-resolve.service';
