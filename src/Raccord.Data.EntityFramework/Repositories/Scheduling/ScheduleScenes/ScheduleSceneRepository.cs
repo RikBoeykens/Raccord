@@ -63,7 +63,12 @@ namespace Raccord.Data.EntityFramework.Repositories.Scheduling.ScheduleScenes
                         .ThenInclude(s=> s.ImageScenes)
                         .ThenInclude(s=> s.Image)
                         .Include(ss=> ss.Scene)
-                        .ThenInclude(s=> s.ScheduleScenes);
+                        .ThenInclude(s=> s.ScheduleScenes)
+                        .Include(ss=> ss.Characters)
+                        .ThenInclude(cs=> cs.CharacterScene)
+                        .ThenInclude(cs=> cs.Character)
+                        .ThenInclude(c=> c.ImageCharacters)
+                        .ThenInclude(ic=> ic.Image);
         }
 
         private IQueryable<ScheduleScene> GetIncludedSummary()
@@ -79,7 +84,12 @@ namespace Raccord.Data.EntityFramework.Repositories.Scheduling.ScheduleScenes
                         .ThenInclude(s=> s.DayNight)
                         .Include(ss=> ss.Scene)
                         .ThenInclude(s=> s.ImageScenes)
-                        .ThenInclude(s=> s.Image);
+                        .ThenInclude(s=> s.Image)
+                        .Include(ss=> ss.Characters)
+                        .ThenInclude(cs=> cs.CharacterScene)
+                        .ThenInclude(cs=> cs.Character)
+                        .ThenInclude(c=> c.ImageCharacters)
+                        .ThenInclude(ic=> ic.Image);
         }
 
         private IQueryable<ScheduleScene> GetIncluded()

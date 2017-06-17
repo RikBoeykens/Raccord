@@ -19,4 +19,7 @@
   <md-tab label="Pictures">
       <character-images [images]="character.images" [characterId]="character.id" [projectId]="project.id"></character-images>
   </md-tab>
+  <md-tab label="Schedule">
+      <character-schedule [scheduleDays]="character.scheduleDays" [characterId]="character.id" [projectId]="project.id"></character-schedule>
+  </md-tab>
 </md-tab-group>

@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using Raccord.API.ViewModels.Characters;
 using Raccord.API.ViewModels.Scenes;
 using Raccord.API.ViewModels.Scheduling.ScheduleDays;
 
@@ -7,6 +9,7 @@ namespace Raccord.API.ViewModels.Scheduling.ScheduleScenes
     public class ScheduleSceneSceneViewModel
     {
         private SceneSummaryViewModel _scene;
+        private IEnumerable<LinkedCharacterViewModel> _characters;
 
         // ID of the schedule scene
         public long ID { get; set; }
@@ -24,6 +27,19 @@ namespace Raccord.API.ViewModels.Scheduling.ScheduleScenes
             set
             {
                 _scene = value;
+            }
+        }
+
+        // Linked characters
+        public IEnumerable<LinkedCharacterViewModel> Characters
+        {
+            get
+            {
+                return _characters ?? (_characters = new List<LinkedCharacterViewModel>()); 
+            }
+            set
+            {
+                _characters = value;
             }
         }
     }

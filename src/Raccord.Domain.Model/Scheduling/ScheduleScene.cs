@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using Raccord.Domain.Model.Characters;
 using Raccord.Domain.Model.Scenes;
 
 namespace Raccord.Domain.Model.Scheduling
@@ -5,6 +7,8 @@ namespace Raccord.Domain.Model.Scheduling
     /// Represents schedule scene on a day
     public class ScheduleScene : Entity
     {
+        private ICollection<ScheduleCharacter> _characters;
+
         // Length in eights
         public int PageLength { get; set; }
 
@@ -22,5 +26,18 @@ namespace Raccord.Domain.Model.Scheduling
 
         // Linked scene
         public virtual Scene Scene { get; set; }
+
+        // Linked characters
+        public virtual ICollection<ScheduleCharacter> Characters
+        {
+            get
+            {
+                return _characters ?? (_characters = new List<ScheduleCharacter>());
+            }
+            set
+            {
+                _characters = value;
+            }
+        }
     }
 }

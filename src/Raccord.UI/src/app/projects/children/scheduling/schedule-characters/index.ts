@@ -1,0 +1,1 @@
+export { ScheduleCharacterHttpService } from "./service/schedule-character-http.service";

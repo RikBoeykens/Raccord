@@ -21,6 +21,7 @@ export { CharacterSceneHttpService } from './children/scenes/service/character-s
 export { BreakdownItemSceneHttpService } from './children/scenes/service/breakdown-item-scene-http.service';
 export { SceneResolve } from './children/scenes/service/scene-resolve.service';
 export { ScenesResolve } from './children/scenes/service/scenes-resolve.service';
+export { SceneCharactersResolve } from './children/scenes';
 
 export { LocationsListComponent } from './children/locations/component/locations-list/locations-list.component';
 export { SearchLocationComponent } from './children/locations/component/search-location/search-location.component';
@@ -63,6 +64,9 @@ export { EditCharacterComponent } from './children/characters/component/edit-cha
 export { CharacterLandingComponent } from './children/characters/component/character-landing/character-landing.component';
 export { CharacterImagesComponent } from './children/characters/component/character-images/character-images.component';
 export { CharacterScenesComponent } from './children/characters/component/character-scenes/character-scenes.component';
+export {
+    CharacterScheduleComponent
+} from "./children/characters";
 export { CharacterHttpService } from './children/characters/service/character-http.service';
 export { ImageCharacterHttpService } from './children/characters/service/image-character-http.service';
 export { CharacterResolve } from './children/characters/service/character-resolve.service';
@@ -103,5 +107,9 @@ export {
     ScheduleSceneHttpService,
     ScheduleSceneResolve
  } from './children/scheduling/schedule-scenes';
+
+ export{
+    ScheduleCharacterHttpService
+ } from "./children/scheduling/schedule-characters"
 
 export { ScenePropertiesLandingComponent } from './children/scene-properties/component/scene-properties-landing/scene-properties-landing.component';

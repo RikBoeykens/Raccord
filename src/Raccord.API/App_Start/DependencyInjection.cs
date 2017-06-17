@@ -16,6 +16,7 @@ using Raccord.Data.EntityFramework.Repositories.ImageBreakdownItems;
 using Raccord.Data.EntityFramework.Repositories.Scheduling.ScheduleDays;
 using Raccord.Data.EntityFramework.Repositories.Scheduling.ScheduleScenes;
 using Raccord.Data.EntityFramework.Repositories.Scheduling.ScheduleDayNotes;
+using Raccord.Data.EntityFramework.Repositories.Scheduling.ScheduleCharacters;
 using Raccord.Application.Core.Services.Projects;
 using Raccord.Application.Core.Services.Scenes;
 using Raccord.Application.Core.Services.Locations;
@@ -52,6 +53,8 @@ using Raccord.Application.Services.ImageBreakdownItems;
 using Raccord.Application.Services.Scheduling.ScheduleDays;
 using Raccord.Application.Services.Scheduling.ScheduleScenes;
 using Raccord.Application.Services.Scheduling.ScheduleDayNotes;
+using Raccord.Application.Core.Services.Scheduling.ScheduleCharacters;
+using Raccord.Application.Services.Scheduling.ScheduleCharacters;
 
 namespace Raccord.API
 {
@@ -121,6 +124,9 @@ namespace Raccord.API
 
             services.AddTransient<IScheduleDayNoteRepository, ScheduleDayNoteRepository>();
             services.AddTransient<IScheduleDayNoteService, ScheduleDayNoteService>();
+
+            services.AddTransient<IScheduleCharacterRepository, ScheduleCharacterRepository>();
+            services.AddTransient<IScheduleCharacterService, ScheduleCharacterService>();
             
 
             services.AddTransient<ISearchEngineServiceWrapper, SearchEngineServiceWrapper>();

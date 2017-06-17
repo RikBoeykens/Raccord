@@ -59,12 +59,15 @@ import { EditImageComponent } from './projects';
 import { ImageLandingComponent } from './projects';
 import { UploadImageComponent } from './projects';
 import { ShowImageComponent } from './projects';
-import { CharactersListComponent } from './projects';
-import { EditCharacterComponent } from './projects';
-import { CharacterLandingComponent } from './projects';
-import { CharacterImagesComponent } from './projects';
-import { CharacterScenesComponent } from './projects';
-import { SearchCharacterComponent } from './projects';
+import { 
+  CharactersListComponent,
+  EditCharacterComponent,
+  CharacterLandingComponent,
+  CharacterImagesComponent,
+  CharacterScenesComponent,
+  CharacterScheduleComponent,
+  SearchCharacterComponent 
+} from './projects';
 import { BreakdownLandingComponent } from './projects';
 import { BreakdownTypeSettingsComponent } from './projects';
 import { EditBreakdownTypeComponent } from './projects';
@@ -123,6 +126,7 @@ const COMPONENTS =[
   CharacterLandingComponent,
   CharacterImagesComponent,
   CharacterScenesComponent,
+  CharacterScheduleComponent,
   SearchCharacterComponent,
   BreakdownLandingComponent,
   BreakdownTypeSettingsComponent,
@@ -151,8 +155,11 @@ import { ProjectsResolve } from './projects';
 import { SceneHttpService } from './projects';
 import { ImageSceneHttpService } from './projects';
 import { CharacterSceneHttpService } from './projects';
-import { SceneResolve } from './projects';
-import { ScenesResolve } from './projects';
+import { 
+  SceneResolve,
+  ScenesResolve,
+  SceneCharactersResolve 
+} from './projects';
 import { LocationHttpService } from './projects';
 import { ImageLocationHttpService } from './projects';
 import { LocationResolve } from './projects';
@@ -186,7 +193,8 @@ import { ScheduleDayNoteResolve } from './projects';
 import { ScheduleDayNotesResolve } from './projects';
 import { 
   ScheduleSceneHttpService,
-  ScheduleSceneResolve
+  ScheduleSceneResolve,
+  ScheduleCharacterHttpService
 } from './projects';
 
 const APP_PROVIDERS = [
@@ -203,6 +211,7 @@ const APP_PROVIDERS = [
   CharacterSceneHttpService,
   SceneResolve,
   ScenesResolve,
+  SceneCharactersResolve,
   LocationHttpService,
   ImageLocationHttpService,
   LocationResolve,
@@ -235,7 +244,8 @@ const APP_PROVIDERS = [
   ScheduleDayNoteResolve,
   ScheduleDayNotesResolve,
   ScheduleSceneHttpService,
-  ScheduleSceneResolve
+  ScheduleSceneResolve,
+  ScheduleCharacterHttpService
 ];
 
 // Directives

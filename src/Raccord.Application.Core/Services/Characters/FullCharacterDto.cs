@@ -1,6 +1,8 @@
 using Raccord.Application.Core.Services.Scenes;
 using Raccord.Application.Core.Services.Images;
+using Raccord.Application.Core.Services.Scheduling.ScheduleScenes;
 using System.Collections.Generic;
+using Raccord.Application.Core.Services.Scheduling.ScheduleDays;
 
 namespace Raccord.Application.Core.Services.Characters
 {
@@ -9,6 +11,7 @@ namespace Raccord.Application.Core.Services.Characters
     {
         private IEnumerable<LinkedSceneDto> _scenes;
         private IEnumerable<LinkedImageDto> _images;
+        private IEnumerable<CharacterScheduleDayDto> _scheduleDays;
 
         // Scenes linked to the character
         public IEnumerable<LinkedSceneDto> Scenes
@@ -33,6 +36,19 @@ namespace Raccord.Application.Core.Services.Characters
             set
             {
                 _images = value;
+            }
+        }
+
+        // Schedule days linked to the character
+        public IEnumerable<CharacterScheduleDayDto> ScheduleDays
+        {
+            get
+            {
+                return _scheduleDays ?? (_scheduleDays = new List<CharacterScheduleDayDto>());
+            }
+            set
+            {
+                _scheduleDays = value;
             }
         }
     }

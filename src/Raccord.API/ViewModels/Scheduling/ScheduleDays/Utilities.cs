@@ -1,4 +1,5 @@
 using System.Linq;
+using Raccord.API.ViewModels.Scenes;
 using Raccord.API.ViewModels.Scheduling.ScheduleDayNotes;
 using Raccord.API.ViewModels.Scheduling.ScheduleScenes;
 using Raccord.Application.Core.Services.Scheduling.ScheduleDays;
@@ -45,6 +46,20 @@ namespace Raccord.API.ViewModels.Scheduling.ScheduleDays
                 Start = dto.Start,
                 End = dto.End,
                 ProjectID = dto.ProjectID,
+            };
+        }
+
+        // Translates a scene dto to a scene viewmodel
+        public static CharacterScheduleDayViewModel Translate(this CharacterScheduleDayDto dto)
+        {
+            return new CharacterScheduleDayViewModel
+            {
+                ID = dto.ID,
+                Date = dto.Date,
+                Start = dto.Start,
+                End = dto.End,
+                ProjectID = dto.ProjectID,
+                Scenes = dto.Scenes.Select(s=> s.Translate()),
             };
         }
 

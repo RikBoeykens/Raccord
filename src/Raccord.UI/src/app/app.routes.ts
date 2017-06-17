@@ -31,8 +31,11 @@ import { ScenePropertiesLandingComponent } from './projects';
 import { ProjectResolve } from './projects';
 import { ProjectSummaryResolve } from './projects';
 import { ProjectsResolve } from './projects';
-import { SceneResolve } from './projects';
-import { ScenesResolve } from './projects';
+import { 
+  SceneResolve,
+  ScenesResolve,
+  SceneCharactersResolve
+} from './projects';
 import { LocationResolve } from './projects';
 import { LocationsResolve } from './projects';
 import { IntExtResolve } from './projects';
@@ -284,11 +287,12 @@ export const ROUTES: Routes = [
                 }
               },
               {
-                path: 'scene/:scheduleSceneId',
+                path: ':sceneId/scene/:scheduleSceneId',
                 component: ScheduleSceneLandingComponent,
                 resolve:{
                   project: ProjectSummaryResolve,
                   scheduleScene: ScheduleSceneResolve,
+                  characters: SceneCharactersResolve
                 }
               },
             ]

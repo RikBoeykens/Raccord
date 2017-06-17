@@ -17,16 +17,28 @@
         <span>Unscheduled: {{scheduleScene.scene.pageLength - scheduleScene.sceneScheduledPageLength | pagelength}}</span>
     </div>
 </div>
-<div class="row">
-    <form class="col s12"
-            id="schedule_scene_form"
-            #scheduleSceneForm = "ngForm"
-            (ngSubmit)="updateScheduleScene()">
+<form class="row"
+        id="schedule_scene_form"
+        #scheduleSceneForm = "ngForm"
+        (ngSubmit)="updateScheduleScene()">
+    <div class="col s12">
         <div fxLayout="row" fxLayoutGap="10px">
             <md-input-container fxFlex="25%">
                 <input md-input placeholder="Page Length" id="schedulescene_pagelength" required [(ngModel)]="stringPageLength" #pagelength="ngModel" name="schedulescene_pagelength">
             </md-input-container>
+        </div>
+        <div class="row">
+            <div class="col s12">
+                <div *ngFor="let character of scheduleCharacters"
+                    class="row">
+                    <md-checkbox [(ngModel)]="character.isLinked" name="scheduleCharacter{{character.linkID}}">
+                        {{character.name}}
+                    </md-checkbox>
+                </div>
+            </div>
+        </div>
+        <div fxLayout="row" fxLayoutGap="10px">
             <button fxFlex="25%" md-raised-button type="submit"[disabled]="!scheduleSceneForm.form.valid">Update</button>            
         </div>
-    </form>
-</div>
+    </div>
+</form>
