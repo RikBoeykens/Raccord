@@ -50,7 +50,7 @@ namespace Raccord.Data.EntityFramework.Repositories.Scheduling.ScheduleCharacter
                         .ThenInclude(s=> s.DayNight)
                         .Include(sc=> sc.ScheduleScene)
                         .ThenInclude(cs=> cs.Scene)
-                        .ThenInclude(s=> s.Location)
+                        .ThenInclude(s=> s.ScriptLocation)
                         .Include(sc=> sc.ScheduleScene)
                         .ThenInclude(cs=> cs.Scene)
                         .ThenInclude(s=> s.ImageScenes)

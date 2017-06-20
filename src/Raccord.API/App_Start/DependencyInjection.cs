@@ -1,11 +1,11 @@
 using Microsoft.Extensions.DependencyInjection;
 using Raccord.Data.EntityFramework.Repositories.Projects;
 using Raccord.Data.EntityFramework.Repositories.Scenes;
-using Raccord.Data.EntityFramework.Repositories.Locations;
+using Raccord.Data.EntityFramework.Repositories.ScriptLocations;
 using Raccord.Data.EntityFramework.Repositories.SceneProperties;
 using Raccord.Data.EntityFramework.Repositories.Images;
 using Raccord.Data.EntityFramework.Repositories.ImageScenes;
-using Raccord.Data.EntityFramework.Repositories.ImageLocations;
+using Raccord.Data.EntityFramework.Repositories.ImageScriptLocations;
 using Raccord.Data.EntityFramework.Repositories.Characters;
 using Raccord.Data.EntityFramework.Repositories.ImageCharacters;
 using Raccord.Data.EntityFramework.Repositories.CharacterScenes;
@@ -74,7 +74,7 @@ namespace Raccord.API
             services.AddTransient<IIntExtService, IntExtService>();
             services.AddTransient<IIntExtSearchEngineService, IntExtSearchEngineService>();
             
-            services.AddTransient<ILocationRepository, LocationRepository>();
+            services.AddTransient<IScriptLocationRepository, ScriptLocationRepository>();
             services.AddTransient<ILocationService, LocationService>();
             services.AddTransient<ILocationSearchEngineService, LocationSearchEngineService>();
             
@@ -89,7 +89,7 @@ namespace Raccord.API
             services.AddTransient<IImageSceneRepository, ImageSceneRepository>();
             services.AddTransient<IImageSceneService, ImageSceneService>();
 
-            services.AddTransient<IImageLocationRepository, ImageLocationRepository>();
+            services.AddTransient<IImageScriptLocationRepository, ImageScriptLocationRepository>();
             services.AddTransient<IImageLocationService, ImageLocationService>();
 
             services.AddTransient<IImageBreakdownItemRepository, ImageBreakdownItemRepository>();

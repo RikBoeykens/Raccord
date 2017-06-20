@@ -50,7 +50,7 @@ namespace Raccord.Data.EntityFramework.Repositories.SceneProperties
             IQueryable<IntExt> query = _context.Set<IntExt>();
 
             return query.Include(i=> i.Scenes)
-                        .ThenInclude(s=> s.Location)
+                        .ThenInclude(s=> s.ScriptLocation)
                         .Include(i=> i.Scenes)
                         .ThenInclude(s=> s.DayNight);
         }

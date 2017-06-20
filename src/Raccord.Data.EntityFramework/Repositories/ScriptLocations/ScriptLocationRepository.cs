@@ -1,32 +1,32 @@
-using Raccord.Domain.Model.Locations;
+using Raccord.Domain.Model.ScriptLocations;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 
-namespace Raccord.Data.EntityFramework.Repositories.Locations
+namespace Raccord.Data.EntityFramework.Repositories.ScriptLocations
 {
     // Repository for locations
-    public class LocationRepository : BaseRepository<Location>, ILocationRepository
+    public class ScriptLocationRepository : BaseRepository<ScriptLocation>, IScriptLocationRepository
     {
-        public LocationRepository(RaccordDBContext context) : base(context) 
+        public ScriptLocationRepository(RaccordDBContext context) : base(context) 
         {
         }
 
-        public IEnumerable<Location> GetAllForProject(long projectID)
+        public IEnumerable<ScriptLocation> GetAllForProject(long projectID)
         {
             var query = GetIncludedSummary();
 
             return query.Where(l=> l.ProjectID == projectID);
         }
 
-        public Location GetFull(long ID)
+        public ScriptLocation GetFull(long ID)
         {
             var query = GetIncludedFull();
 
             return query.FirstOrDefault(l => l.ID == ID);
         }
 
-        public Location GetSummary(long ID)
+        public ScriptLocation GetSummary(long ID)
         {
             var query = GetIncludedSummary();
 
@@ -40,14 +40,14 @@ namespace Raccord.Data.EntityFramework.Repositories.Locations
             return query.Count();            
         }
 
-        public IEnumerable<Location> Search(string searchText, long? projectID)
+        public IEnumerable<ScriptLocation> Search(string searchText, long? projectID)
         {
             return GetSearchQuery(searchText, projectID);
         }
 
-        private IQueryable<Location> GetIncludedFull()
+        private IQueryable<ScriptLocation> GetIncludedFull()
         {
-            IQueryable<Location> query = _context.Set<Location>();
+            IQueryable<ScriptLocation> query = _context.Set<ScriptLocation>();
 
             return query.Include(l=> l.Scenes)
                         .ThenInclude(s=> s.IntExt)
@@ -57,30 +57,30 @@ namespace Raccord.Data.EntityFramework.Repositories.Locations
                         .ThenInclude(il=> il.Image);
         }
 
-        private IQueryable<Location> GetIncludedSummary()
+        private IQueryable<ScriptLocation> GetIncludedSummary()
         {
-            IQueryable<Location> query = _context.Set<Location>();
+            IQueryable<ScriptLocation> query = _context.Set<ScriptLocation>();
 
             return query.Include(l=> l.Scenes)
                         .Include(l=> l.ImageLocations)
                         .ThenInclude(il=> il.Image);
         }
 
-        private IQueryable<Location> GetIncluded()
+        private IQueryable<ScriptLocation> GetIncluded()
         {
-            IQueryable<Location> query = _context.Set<Location>();
+            IQueryable<ScriptLocation> query = _context.Set<ScriptLocation>();
 
             return query;
         }
 
-        private IQueryable<Location> GetIncludedSearch()
+        private IQueryable<ScriptLocation> GetIncludedSearch()
         {
-            IQueryable<Location> query = _context.Set<Location>();
+            IQueryable<ScriptLocation> query = _context.Set<ScriptLocation>();
 
             return query.Include(l=> l.Project);
         }
 
-        private IQueryable<Location> GetSearchQuery(string searchText, long? projectID)
+        private IQueryable<ScriptLocation> GetSearchQuery(string searchText, long? projectID)
         {
             var query = GetIncludedSearch();
 

@@ -7,7 +7,7 @@ namespace Raccord.Domain.Model.Images
     public class Image : Entity
     {
         private ICollection<ImageScene> _scenes;
-        private ICollection<ImageLocation> _locations;
+        private ICollection<ImageScriptLocation> _locations;
         private ICollection<ImageCharacter> _characters;
         private ICollection<ImageBreakdownItem> _breakdownItems;
 
@@ -46,11 +46,11 @@ namespace Raccord.Domain.Model.Images
         }
 
         // Linked locations
-        public virtual ICollection<ImageLocation> ImageLocations
+        public virtual ICollection<ImageScriptLocation> ImageScriptLocations
         {
             get
             {
-                return _locations ?? (_locations = new List<ImageLocation>());
+                return _locations ?? (_locations = new List<ImageScriptLocation>());
             }
             set
             {

@@ -1,9 +1,9 @@
-using Raccord.Domain.Model.Locations;
+using Raccord.Domain.Model.ScriptLocations;
 
 namespace Raccord.Domain.Model.Images
 {
-    // join for image and location
-    public class ImageLocation : Entity
+    // join for image and script location
+    public class ImageScriptLocation : Entity
     {
         // Indicates if the image is the primary image for the location
         public bool IsPrimaryImage { get; set; }
@@ -17,7 +17,7 @@ namespace Raccord.Domain.Model.Images
         // ID of the linked location
         public long LocationID { get; set; }
 
-        // Linked location
-        public virtual Location Location { get; set; }
+        // Linked script location
+        public virtual ScriptLocation ScriptLocation { get; set; }
     }
 }

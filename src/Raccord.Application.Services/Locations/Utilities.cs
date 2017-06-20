@@ -1,6 +1,6 @@
 using System.Linq;
 using Raccord.Application.Core.Services.Locations;
-using Raccord.Domain.Model.Locations;
+using Raccord.Domain.Model.ScriptLocations;
 using Raccord.Domain.Model.Images;
 using Raccord.Application.Services.Scenes;
 using Raccord.Application.Core.Services.SearchEngine;
@@ -12,7 +12,7 @@ namespace Raccord.Application.Services.Locations
     // Utilities and helper methods for Locations
     public static class Utilities
     {
-        public static FullLocationDto TranslateFull(this Location location)
+        public static FullLocationDto TranslateFull(this ScriptLocation location)
         {
             var dto = new FullLocationDto
             {
@@ -26,7 +26,7 @@ namespace Raccord.Application.Services.Locations
 
             return dto;
         }
-        public static LocationSummaryDto TranslateSummary(this Location location)
+        public static LocationSummaryDto TranslateSummary(this ScriptLocation location)
         {
             var dto = new LocationSummaryDto
             {
@@ -41,7 +41,7 @@ namespace Raccord.Application.Services.Locations
             return dto;
         }
 
-        public static LocationDto Translate(this Location location)
+        public static LocationDto Translate(this ScriptLocation location)
         {
             var dto = new LocationDto
             {
@@ -54,21 +54,21 @@ namespace Raccord.Application.Services.Locations
             return dto;
         }
 
-        public static LinkedLocationDto TranslateLocation(this ImageLocation imageLocation)
+        public static LinkedLocationDto TranslateLocation(this ImageScriptLocation imageLocation)
         {
             var dto = new LinkedLocationDto
             {
-                ID = imageLocation.Location.ID,
-                Name = imageLocation.Location.Name,
-                Description = imageLocation.Location.Description,
-                ProjectID = imageLocation.Location.ProjectID,
+                ID = imageLocation.ScriptLocation.ID,
+                Name = imageLocation.ScriptLocation.Name,
+                Description = imageLocation.ScriptLocation.Description,
+                ProjectID = imageLocation.ScriptLocation.ProjectID,
                 LinkID = imageLocation.ID
             };
 
             return dto;
         }
 
-        public static SearchResultDto TranslateToSearchResult(this Location location)
+        public static SearchResultDto TranslateToSearchResult(this ScriptLocation location)
         {
             var dto = new SearchResultDto
             {

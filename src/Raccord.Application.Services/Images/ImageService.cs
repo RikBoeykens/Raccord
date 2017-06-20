@@ -75,7 +75,7 @@ namespace Raccord.Application.Services.Images
                         if(newImageDto.SelectedEntity.Type==EntityType.Scene)
                             image.ImageScenes.Add(new ImageScene{ SceneID = newImageDto.SelectedEntity.EntityID });
                         else if(newImageDto.SelectedEntity.Type==EntityType.Location)
-                            image.ImageLocations.Add(new ImageLocation{ LocationID = newImageDto.SelectedEntity.EntityID });
+                            image.ImageScriptLocations.Add(new ImageScriptLocation{ LocationID = newImageDto.SelectedEntity.EntityID });
                         else if(newImageDto.SelectedEntity.Type==EntityType.Character)
                             image.ImageCharacters.Add(new ImageCharacter{ CharacterID = newImageDto.SelectedEntity.EntityID });
                         else if(newImageDto.SelectedEntity.Type==EntityType.BreakdownItem)

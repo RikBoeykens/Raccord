@@ -1,6 +1,6 @@
 using Raccord.Domain.Model.Projects;
 using Raccord.Domain.Model.SceneProperties;
-using Raccord.Domain.Model.Locations;
+using Raccord.Domain.Model.ScriptLocations;
 using Raccord.Domain.Model.Scenes;
 using System.Collections.Generic;
 using System.Linq;
@@ -44,7 +44,7 @@ namespace Raccord.Data.EntityFramework.Seeding
             context.SeedProjects();
             context.SeedIntExts();
             context.SeedDayNights();
-            context.SeedLocations();
+            context.SeedScriptLocations();
             context.SeedScenes();
         }
 
@@ -103,25 +103,25 @@ namespace Raccord.Data.EntityFramework.Seeding
             }
         }
 
-        public static void SeedLocations(this RaccordDBContext context)
+        public static void SeedScriptLocations(this RaccordDBContext context)
         {
-            if(!context.Locations.Any())
+            if(!context.ScriptLocations.Any())
             {
-                var entities = new List<Location>
+                var entities = new List<ScriptLocation>
                 {
-                    new Location { ProjectID = 1, Name = "HOUSE" },
-                    new Location { ProjectID = 1, Name = "HOUSE - KITCHEN" },
-                    new Location { ProjectID = 1, Name = "HOUSE - LIVING ROOM" },
-                    new Location { ProjectID = 1, Name = "STREET" },
-                    new Location { ProjectID = 1, Name = "PARK" },
+                    new ScriptLocation { ProjectID = 1, Name = "HOUSE" },
+                    new ScriptLocation { ProjectID = 1, Name = "HOUSE - KITCHEN" },
+                    new ScriptLocation { ProjectID = 1, Name = "HOUSE - LIVING ROOM" },
+                    new ScriptLocation { ProjectID = 1, Name = "STREET" },
+                    new ScriptLocation { ProjectID = 1, Name = "PARK" },
 
-                    new Location { ProjectID = 2, Name = "FOREST" },
-                    new Location { ProjectID = 2, Name = "COTTAGE" },
-                    new Location { ProjectID = 2, Name = "MEADOW" },
-                    new Location { ProjectID = 2, Name = "RIVER" },
+                    new ScriptLocation { ProjectID = 2, Name = "FOREST" },
+                    new ScriptLocation { ProjectID = 2, Name = "COTTAGE" },
+                    new ScriptLocation { ProjectID = 2, Name = "MEADOW" },
+                    new ScriptLocation { ProjectID = 2, Name = "RIVER" },
                 };
 
-                context.Locations.AddRange(entities);
+                context.ScriptLocations.AddRange(entities);
 
                 context.SaveChanges();
             }

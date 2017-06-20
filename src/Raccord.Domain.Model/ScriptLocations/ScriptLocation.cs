@@ -3,13 +3,13 @@ using Raccord.Domain.Model.Projects;
 using Raccord.Domain.Model.Scenes;
 using Raccord.Domain.Model.Images;
 
-namespace Raccord.Domain.Model.Locations
+namespace Raccord.Domain.Model.ScriptLocations
 {
     /// Represents a location
-    public class Location : Entity
+    public class ScriptLocation : Entity
     {
         private ICollection<Scene> _scenes;
-        private ICollection<ImageLocation> _images;
+        private ICollection<ImageScriptLocation> _images;
 
         /// Name of the location
         public string Name { get; set; }
@@ -37,11 +37,11 @@ namespace Raccord.Domain.Model.Locations
         }
 
         // Linked images
-        public virtual ICollection<ImageLocation> ImageLocations
+        public virtual ICollection<ImageScriptLocation> ImageLocations
         {
             get
             {
-                return _images ?? (_images = new List<ImageLocation>());
+                return _images ?? (_images = new List<ImageScriptLocation>());
             }
             set
             {

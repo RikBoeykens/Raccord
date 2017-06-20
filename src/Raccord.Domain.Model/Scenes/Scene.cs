@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using Raccord.Domain.Model.Projects;
-using Raccord.Domain.Model.Locations;
+using Raccord.Domain.Model.ScriptLocations;
 using Raccord.Domain.Model.SceneProperties;
 using Raccord.Domain.Model.Images;
 using Raccord.Domain.Model.Characters;
@@ -51,7 +51,7 @@ namespace Raccord.Domain.Model.Scenes
         public long LocationID { get; set; }
 
         // Linked day/night
-        public virtual Location Location { get; set; }
+        public virtual ScriptLocation ScriptLocation { get; set; }
 
         // Linked images
         public virtual ICollection<ImageScene> ImageScenes

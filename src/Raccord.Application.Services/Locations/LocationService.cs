@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Raccord.Domain.Model.Locations;
+using Raccord.Domain.Model.ScriptLocations;
 using Raccord.Application.Core.Services.Locations;
-using Raccord.Data.EntityFramework.Repositories.Locations;
+using Raccord.Data.EntityFramework.Repositories.ScriptLocations;
 using Raccord.Domain.Model.Images;
 
 namespace Raccord.Application.Services.Locations
@@ -11,21 +11,21 @@ namespace Raccord.Application.Services.Locations
     // Service used for location functionality
     public class LocationService : ILocationService
     {
-        private readonly ILocationRepository _locationRepository;
+        private readonly IScriptLocationRepository _scriptLocationRepository;
 
         // Initialises a new LocationService
-        public LocationService(ILocationRepository locationRepository)
+        public LocationService(IScriptLocationRepository locationRepository)
         {
             if(locationRepository == null)
                 throw new ArgumentNullException(nameof(locationRepository));
             
-            _locationRepository = locationRepository;
+            _scriptLocationRepository = locationRepository;
         }
 
         // Gets all locations
         public IEnumerable<LocationSummaryDto> GetAllForParent(long projectID)
         {
-            var locations = _locationRepository.GetAllForProject(projectID);
+            var locations = _scriptLocationRepository.GetAllForProject(projectID);
 
             var dtos = locations.Select(l => l.TranslateSummary());
 
@@ -35,7 +35,7 @@ namespace Raccord.Application.Services.Locations
         // Gets a single location by id
         public FullLocationDto Get(long ID)
         {
-            var location = _locationRepository.GetFull(ID);
+            var location = _scriptLocationRepository.GetFull(ID);
 
             var dto = location.TranslateFull();
 
@@ -45,7 +45,7 @@ namespace Raccord.Application.Services.Locations
         // Gets a summary of a single location
         public LocationSummaryDto GetSummary(long ID)
         {
-            var location = _locationRepository.GetSingle(ID);
+            var location = _scriptLocationRepository.GetSingle(ID);
 
             var dto = location.TranslateSummary();
 
@@ -55,15 +55,15 @@ namespace Raccord.Application.Services.Locations
         // Adds a location
         public long Add(LocationDto dto)
         {
-            var location = new Location
+            var location = new ScriptLocation
             {
                 Name = dto.Name,
                 Description = dto.Description,
                 ProjectID = dto.ProjectID
             };
 
-            _locationRepository.Add(location);
-            _locationRepository.Commit();
+            _scriptLocationRepository.Add(location);
+            _scriptLocationRepository.Commit();
 
             return location.ID;
         }
@@ -71,13 +71,13 @@ namespace Raccord.Application.Services.Locations
         // Updates a location
         public long Update(LocationDto dto)
         {
-            var location = _locationRepository.GetSingle(dto.ID);
+            var location = _scriptLocationRepository.GetSingle(dto.ID);
 
             location.Name = dto.Name;
             location.Description = dto.Description;
 
-            _locationRepository.Edit(location);
-            _locationRepository.Commit();
+            _scriptLocationRepository.Edit(location);
+            _scriptLocationRepository.Commit();
 
             return location.ID;
         }
@@ -85,17 +85,17 @@ namespace Raccord.Application.Services.Locations
         // Deletes a location
         public void Delete(Int64 ID)
         {
-            var location = _locationRepository.GetSingle(ID);
+            var location = _scriptLocationRepository.GetSingle(ID);
 
-            _locationRepository.Delete(location);
+            _scriptLocationRepository.Delete(location);
 
-            _locationRepository.Commit();
+            _scriptLocationRepository.Commit();
         }
 
         public void Merge(long toID, long mergeID)
         {
-            var toLocation = _locationRepository.GetFull(toID);
-            var mergeLocation = _locationRepository.GetFull(mergeID);
+            var toLocation = _scriptLocationRepository.GetFull(toID);
+            var mergeLocation = _scriptLocationRepository.GetFull(mergeID);
 
             var sceneList = toLocation.Scenes.ToList();
             sceneList.AddRange(mergeLocation.Scenes);
@@ -109,14 +109,14 @@ namespace Raccord.Application.Services.Locations
             {
                 if(!toLocation.ImageLocations.Any(cs=> cs.ImageID == image.ImageID))
                 {
-                    toLocation.ImageLocations.Add(new ImageLocation{ImageID = image.ImageID});
+                    toLocation.ImageLocations.Add(new ImageScriptLocation{ImageID = image.ImageID});
                 }
             }
 
-            _locationRepository.Edit(toLocation);
-            _locationRepository.Delete(mergeLocation);
+            _scriptLocationRepository.Edit(toLocation);
+            _scriptLocationRepository.Delete(mergeLocation);
 
-            _locationRepository.Commit();
+            _scriptLocationRepository.Commit();
         }
     }
 }

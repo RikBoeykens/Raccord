@@ -7,9 +7,9 @@ using Raccord.Application.Core.Services.Images;
 using Raccord.Application.Services.Images;
 using Raccord.Data.EntityFramework.Repositories.Scenes;
 using Raccord.Data.EntityFramework.Repositories.SceneProperties;
-using Raccord.Data.EntityFramework.Repositories.Locations;
+using Raccord.Data.EntityFramework.Repositories.ScriptLocations;
 using Raccord.Domain.Model.SceneProperties;
-using Raccord.Domain.Model.Locations;
+using Raccord.Domain.Model.ScriptLocations;
 using Raccord.Application.Core.Common.Sorting;
 using Raccord.Data.EntityFramework.Repositories.Images;
 
@@ -21,14 +21,14 @@ namespace Raccord.Application.Services.Scenes
         private readonly ISceneRepository _sceneRepository;
         private readonly IIntExtRepository _intExtRepository;
         private readonly IDayNightRepository _dayNightRepository;
-        private readonly ILocationRepository _locationRepository;
+        private readonly IScriptLocationRepository _scriptLocationRepository;
 
         // Initialises a new SceneService
         public SceneService(
             ISceneRepository sceneRepository,
             IIntExtRepository intExtRepository,
             IDayNightRepository dayNightRepository,
-            ILocationRepository locationRepository
+            IScriptLocationRepository scriptLocationRepository
             )
         {
             if(sceneRepository == null)
@@ -37,13 +37,13 @@ namespace Raccord.Application.Services.Scenes
                 throw new ArgumentNullException(nameof(intExtRepository));
             if(dayNightRepository == null)
                 throw new ArgumentNullException(nameof(dayNightRepository));
-            if(locationRepository == null)
-                throw new ArgumentNullException(nameof(locationRepository));
+            if(scriptLocationRepository == null)
+                throw new ArgumentNullException(nameof(scriptLocationRepository));
             
             _sceneRepository = sceneRepository;
             _intExtRepository = intExtRepository;
             _dayNightRepository = dayNightRepository;
-            _locationRepository = locationRepository;
+            _scriptLocationRepository = scriptLocationRepository;
         }
 
         // Gets all scene for a project
@@ -178,15 +178,15 @@ namespace Raccord.Application.Services.Scenes
 
             if(scene.Location.ID == default(long))
             {
-                var location = new Location
+                var location = new ScriptLocation
                 {
                     Name = scene.Location.Name,
                     Description = scene.Location.Description,
                     ProjectID = scene.Location.ProjectID,
                 };
 
-                _locationRepository.Add(location);
-                _locationRepository.Commit();
+                _scriptLocationRepository.Add(location);
+                _scriptLocationRepository.Commit();
 
                 scene.Location.ID = location.ID;
             }

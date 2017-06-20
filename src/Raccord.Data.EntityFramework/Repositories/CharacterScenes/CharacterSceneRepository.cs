@@ -44,7 +44,7 @@ namespace Raccord.Data.EntityFramework.Repositories.CharacterScenes
                         .Include(cs=> cs.Scene)
                         .ThenInclude(s=> s.DayNight)
                         .Include(cs=> cs.Scene)
-                        .ThenInclude(s=> s.Location)
+                        .ThenInclude(s=> s.ScriptLocation)
                         .Include(cs=> cs.Scene)
                         .ThenInclude(s=> s.ImageScenes)
                         .ThenInclude(i=> i.Image);
