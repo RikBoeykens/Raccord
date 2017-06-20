@@ -10,12 +10,12 @@ using Raccord.Application.Core.Services.ImageLocations;
 namespace Raccord.Application.Services.ImageLocations
 {
     // Service used for image location functionality
-    public class ImageLocationService : IImageLocationService
+    public class ImageScriptLocationService : IImageScriptLocationService
     {
         private readonly IImageScriptLocationRepository _imageScriptLocationRepository;
 
         // Initialises a new ImageLocationService
-        public ImageLocationService(IImageScriptLocationRepository imagescriptLocationRepository)
+        public ImageScriptLocationService(IImageScriptLocationRepository imagescriptLocationRepository)
         {
             if(imagescriptLocationRepository == null)
                 throw new ArgumentNullException(nameof(imagescriptLocationRepository));
@@ -33,15 +33,15 @@ namespace Raccord.Application.Services.ImageLocations
             return dtos;
         }
 
-        public void AddLink(long imageID, long locationID)
+        public void AddLink(long imageID, long scriptLocationID)
         {
-            var imageLocation = _imageScriptLocationRepository.FindBy(i=> i.ImageID == imageID && i.LocationID==locationID);
+            var imageLocation = _imageScriptLocationRepository.FindBy(i=> i.ImageID == imageID && i.ScriptLocationID==scriptLocationID);
 
             if(!imageLocation.Any()){
                 _imageScriptLocationRepository.Add(new ImageScriptLocation
                 {
                     ImageID = imageID,
-                    LocationID = locationID
+                    ScriptLocationID = scriptLocationID
                 });
 
                 _imageScriptLocationRepository.Commit();
@@ -58,28 +58,28 @@ namespace Raccord.Application.Services.ImageLocations
         }
         public void SetAsPrimary(long ID)
         {
-            var imageLocation = _imageScriptLocationRepository.GetSingle(ID);
-            ClearPrimaryImages(imageLocation.LocationID);
+            var imageScriptLocation = _imageScriptLocationRepository.GetSingle(ID);
+            ClearPrimaryImages(imageScriptLocation.ScriptLocationID);
 
-            imageLocation.IsPrimaryImage = true;
+            imageScriptLocation.IsPrimaryImage = true;
 
-            _imageScriptLocationRepository.Edit(imageLocation);
+            _imageScriptLocationRepository.Edit(imageScriptLocation);
             _imageScriptLocationRepository.Commit();
         }
 
         public void RemoveAsPrimary(long ID)
         {
-            var imageLocation = _imageScriptLocationRepository.GetSingle(ID);
+            var imageScriptLocation = _imageScriptLocationRepository.GetSingle(ID);
 
-            imageLocation.IsPrimaryImage = false;
+            imageScriptLocation.IsPrimaryImage = false;
 
-            _imageScriptLocationRepository.Edit(imageLocation);
+            _imageScriptLocationRepository.Edit(imageScriptLocation);
             _imageScriptLocationRepository.Commit();
         }
 
         private void ClearPrimaryImages(long locationID)
         {
-            var primaryImages = _imageScriptLocationRepository.FindBy(i=> i.LocationID == locationID && i.IsPrimaryImage);
+            var primaryImages = _imageScriptLocationRepository.FindBy(i=> i.ScriptLocationID == locationID && i.IsPrimaryImage);
 
             foreach(var imageLocation in primaryImages)
             {

@@ -1,6 +1,6 @@
 using Raccord.Application.Core.Services.Scenes;
 using System.Collections.Generic;
-using Raccord.Application.Core.Services.Locations;
+using Raccord.Application.Core.Services.ScriptLocations;
 using Raccord.Application.Core.Services.Characters;
 using Raccord.Application.Core.Services.Breakdowns.BreakdownItems;
 
@@ -10,7 +10,7 @@ namespace Raccord.Application.Core.Services.Images
     public class FullImageDto : ImageDto
     {
         private IEnumerable<LinkedSceneDto> _scenes;
-        private IEnumerable<LinkedLocationDto> _locations;
+        private IEnumerable<LinkedScriptLocationDto> _scriptLocations;
         private IEnumerable<LinkedCharacterDto> _characters;
         private IEnumerable<LinkedBreakdownItemDto> _items;
         
@@ -31,15 +31,15 @@ namespace Raccord.Application.Core.Services.Images
         }
 
         // Locations linked to the image
-        public IEnumerable<LinkedLocationDto> Locations
+        public IEnumerable<LinkedScriptLocationDto> ScriptLocations
         {
             get
             {
-                return _locations ?? (_locations = new List<LinkedLocationDto>());
+                return _scriptLocations ?? (_scriptLocations = new List<LinkedScriptLocationDto>());
             }
             set
             {
-                _locations = value;
+                _scriptLocations = value;
             }
         }
 

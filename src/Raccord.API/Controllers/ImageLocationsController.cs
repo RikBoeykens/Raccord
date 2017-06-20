@@ -14,21 +14,21 @@ namespace Raccord.API.Controllers
     [Route("api/[controller]")]
     public class ImageLocationsController : Controller
     {
-        private readonly IImageLocationService _imageLocationService;
+        private readonly IImageScriptLocationService _imageScriptLocationService;
 
-        public ImageLocationsController(IImageLocationService imageLocationService)
+        public ImageLocationsController(IImageScriptLocationService imageScriptLocationService)
         {
-            if (imageLocationService == null)
-                throw new ArgumentNullException(nameof(imageLocationService));
+            if (imageScriptLocationService == null)
+                throw new ArgumentNullException(nameof(imageScriptLocationService));
 
-            _imageLocationService = imageLocationService;
+            _imageScriptLocationService = imageScriptLocationService;
         }
 
         // GET: api/imagelocations/1/images
         [HttpGet("{id}/images")]
         public IEnumerable<LinkedImageViewModel> GetAll(long id)
         {
-            var dtos = _imageLocationService.GetImages(id);
+            var dtos = _imageScriptLocationService.GetImages(id);
 
             var vms = dtos.Select(p => p.Translate());
 
@@ -43,7 +43,7 @@ namespace Raccord.API.Controllers
 
             try
             {
-                _imageLocationService.AddLink(imageId, locationId);
+                _imageScriptLocationService.AddLink(imageId, locationId);
 
                 response = new JsonResponse
                 {
@@ -70,7 +70,7 @@ namespace Raccord.API.Controllers
 
             try
             {
-                _imageLocationService.RemoveLink(id);
+                _imageScriptLocationService.RemoveLink(id);
 
                 response = new JsonResponse
                 {
@@ -97,7 +97,7 @@ namespace Raccord.API.Controllers
 
             try
             {
-                _imageLocationService.SetAsPrimary(id);
+                _imageScriptLocationService.SetAsPrimary(id);
 
                 response = new JsonResponse
                 {
@@ -124,7 +124,7 @@ namespace Raccord.API.Controllers
 
             try
             {
-                _imageLocationService.RemoveAsPrimary(id);
+                _imageScriptLocationService.RemoveAsPrimary(id);
 
                 response = new JsonResponse
                 {

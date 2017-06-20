@@ -15,7 +15,7 @@ namespace Raccord.Domain.Model.Images
         public virtual Image Image { get; set; }
 
         // ID of the linked location
-        public long LocationID { get; set; }
+        public long ScriptLocationID { get; set; }
 
         // Linked script location
         public virtual ScriptLocation ScriptLocation { get; set; }

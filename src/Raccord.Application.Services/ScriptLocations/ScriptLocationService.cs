@@ -2,19 +2,19 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Raccord.Domain.Model.ScriptLocations;
-using Raccord.Application.Core.Services.Locations;
+using Raccord.Application.Core.Services.ScriptLocations;
 using Raccord.Data.EntityFramework.Repositories.ScriptLocations;
 using Raccord.Domain.Model.Images;
 
-namespace Raccord.Application.Services.Locations
+namespace Raccord.Application.Services.ScriptLocations
 {
     // Service used for location functionality
-    public class LocationService : ILocationService
+    public class ScriptLocationService : IScriptLocationService
     {
         private readonly IScriptLocationRepository _scriptLocationRepository;
 
         // Initialises a new LocationService
-        public LocationService(IScriptLocationRepository locationRepository)
+        public ScriptLocationService(IScriptLocationRepository locationRepository)
         {
             if(locationRepository == null)
                 throw new ArgumentNullException(nameof(locationRepository));
@@ -23,7 +23,7 @@ namespace Raccord.Application.Services.Locations
         }
 
         // Gets all locations
-        public IEnumerable<LocationSummaryDto> GetAllForParent(long projectID)
+        public IEnumerable<ScriptLocationSummaryDto> GetAllForParent(long projectID)
         {
             var locations = _scriptLocationRepository.GetAllForProject(projectID);
 
@@ -33,7 +33,7 @@ namespace Raccord.Application.Services.Locations
         }
 
         // Gets a single location by id
-        public FullLocationDto Get(long ID)
+        public FullScriptLocationDto Get(long ID)
         {
             var location = _scriptLocationRepository.GetFull(ID);
 
@@ -43,7 +43,7 @@ namespace Raccord.Application.Services.Locations
         }
 
         // Gets a summary of a single location
-        public LocationSummaryDto GetSummary(long ID)
+        public ScriptLocationSummaryDto GetSummary(long ID)
         {
             var location = _scriptLocationRepository.GetSingle(ID);
 
@@ -53,7 +53,7 @@ namespace Raccord.Application.Services.Locations
         }
 
         // Adds a location
-        public long Add(LocationDto dto)
+        public long Add(ScriptLocationDto dto)
         {
             var location = new ScriptLocation
             {
@@ -69,7 +69,7 @@ namespace Raccord.Application.Services.Locations
         }
 
         // Updates a location
-        public long Update(LocationDto dto)
+        public long Update(ScriptLocationDto dto)
         {
             var location = _scriptLocationRepository.GetSingle(dto.ID);
 

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Raccord.Application.Core.Services.SearchEngine;
 using Raccord.Application.Core.Services.Projects;
-using Raccord.Application.Core.Services.Locations;
+using Raccord.Application.Core.Services.ScriptLocations;
 using Raccord.Application.Core.Services.SceneProperties;
 using Raccord.Application.Core.Services.Scenes;
 using Raccord.Application.Core.Services.Images;
@@ -19,7 +19,7 @@ namespace Raccord.Application.Services.SearchEngine
         private IProjectSearchEngineService _projectSearchEngineService;
         private ISceneSearchEngineService _sceneSearchEngineService;
         private IIntExtSearchEngineService _intExtSearchEngineService;
-        private ILocationSearchEngineService _locationSearchEngineService;
+        private IScriptLocationSearchEngineService _scriptLocationSearchEngineService;
         private IDayNightSearchEngineService _dayNightSearchEngineService;
         private IImageSearchEngineService _imageSearchEngineService;
         private ICharacterSearchEngineService _characterSearchEngineService;
@@ -29,7 +29,7 @@ namespace Raccord.Application.Services.SearchEngine
             IProjectSearchEngineService projectSearchEngineService,
             ISceneSearchEngineService sceneSearchEngineService,
             IIntExtSearchEngineService intExtSearchEngineService,
-            ILocationSearchEngineService locationSearchEngineService,
+            IScriptLocationSearchEngineService scriptLocationSearchEngineService,
             IDayNightSearchEngineService dayNightSearchEngineService,
             IImageSearchEngineService imageSearchEngineService,
             ICharacterSearchEngineService characterSearchEngineService,
@@ -42,8 +42,8 @@ namespace Raccord.Application.Services.SearchEngine
                 throw new ArgumentNullException(nameof(sceneSearchEngineService));
             if(intExtSearchEngineService==null)
                 throw new ArgumentNullException(nameof(intExtSearchEngineService));
-            if(locationSearchEngineService==null)
-                throw new ArgumentNullException(nameof(locationSearchEngineService));
+            if(scriptLocationSearchEngineService==null)
+                throw new ArgumentNullException(nameof(scriptLocationSearchEngineService));
             if(dayNightSearchEngineService==null)
                 throw new ArgumentNullException(nameof(dayNightSearchEngineService));
             if(imageSearchEngineService==null)
@@ -56,7 +56,7 @@ namespace Raccord.Application.Services.SearchEngine
             _projectSearchEngineService = projectSearchEngineService;
             _sceneSearchEngineService = sceneSearchEngineService;
             _intExtSearchEngineService = intExtSearchEngineService;
-            _locationSearchEngineService = locationSearchEngineService;
+            _scriptLocationSearchEngineService = scriptLocationSearchEngineService;
             _dayNightSearchEngineService = dayNightSearchEngineService;
             _imageSearchEngineService = imageSearchEngineService;
             _characterSearchEngineService = characterSearchEngineService;
@@ -82,7 +82,7 @@ namespace Raccord.Application.Services.SearchEngine
                 _projectSearchEngineService,
                 _sceneSearchEngineService,
                 _intExtSearchEngineService,
-                _locationSearchEngineService,
+                _scriptLocationSearchEngineService,
                 _dayNightSearchEngineService,
                 _imageSearchEngineService,
                 _characterSearchEngineService,

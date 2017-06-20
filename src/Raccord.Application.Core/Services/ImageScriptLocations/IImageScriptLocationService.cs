@@ -4,7 +4,7 @@ using Raccord.Application.Core.Services.Images;
 namespace Raccord.Application.Core.Services.ImageLocations
 {
     // Interface for location functionality
-    public interface IImageLocationService
+    public interface IImageScriptLocationService
     {
         IEnumerable<LinkedImageDto> GetImages(long ID);
 

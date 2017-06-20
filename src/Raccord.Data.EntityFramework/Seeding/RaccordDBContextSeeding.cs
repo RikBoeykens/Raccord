@@ -133,16 +133,16 @@ namespace Raccord.Data.EntityFramework.Seeding
             {
                 var entities = new List<Scene>
                 {
-                    new Scene { ProjectID = 1, IntExtID = 2, LocationID = 1, DayNightID = 1, PageLength = 1, Number = "1", Summary = "Establishing shot" },
-                    new Scene { ProjectID = 1, IntExtID = 1, LocationID = 2, DayNightID = 1, PageLength = 9, Number = "2", Summary = "Janice gets ready to go out." },
-                    new Scene { ProjectID = 1, IntExtID = 1, LocationID = 3, DayNightID = 1, PageLength = 2, Number = "2A", Summary = "Janice picks up her lunch." },
-                    new Scene { ProjectID = 1, IntExtID = 2, LocationID = 5, DayNightID = 2, PageLength = 8, Number = "3", Summary = "Janice goes home through the park." },
+                    new Scene { ProjectID = 1, IntExtID = 2, ScriptLocationID = 1, DayNightID = 1, PageLength = 1, Number = "1", Summary = "Establishing shot" },
+                    new Scene { ProjectID = 1, IntExtID = 1, ScriptLocationID = 2, DayNightID = 1, PageLength = 9, Number = "2", Summary = "Janice gets ready to go out." },
+                    new Scene { ProjectID = 1, IntExtID = 1, ScriptLocationID = 3, DayNightID = 1, PageLength = 2, Number = "2A", Summary = "Janice picks up her lunch." },
+                    new Scene { ProjectID = 1, IntExtID = 2, ScriptLocationID = 5, DayNightID = 2, PageLength = 8, Number = "3", Summary = "Janice goes home through the park." },
 
-                    new Scene { ProjectID = 2, IntExtID = 3, LocationID = 6, DayNightID = 4, PageLength = 2, Number = "1", Summary = "A dark forest" },                    
-                    new Scene { ProjectID = 2, IntExtID = 4, LocationID = 7, DayNightID = 4, PageLength = 10, Number = "2", Summary = "Freddy in his little cottage" },                    
-                    new Scene { ProjectID = 2, IntExtID = 3, LocationID = 6, DayNightID = 4, PageLength = 6, Number = "3", Summary = "Freddy goes for a walk in the forest" },                    
-                    new Scene { ProjectID = 2, IntExtID = 3, LocationID = 8, DayNightID = 3, PageLength = 2, Number = "4", Summary = "Freddy walks through a meadow" },                    
-                    new Scene { ProjectID = 2, IntExtID = 3, LocationID = 9, DayNightID = 3, PageLength = 3, Number = "5", Summary = "Freddy takes a bath in a river" },                    
+                    new Scene { ProjectID = 2, IntExtID = 3, ScriptLocationID = 6, DayNightID = 4, PageLength = 2, Number = "1", Summary = "A dark forest" },                    
+                    new Scene { ProjectID = 2, IntExtID = 4, ScriptLocationID = 7, DayNightID = 4, PageLength = 10, Number = "2", Summary = "Freddy in his little cottage" },                    
+                    new Scene { ProjectID = 2, IntExtID = 3, ScriptLocationID = 6, DayNightID = 4, PageLength = 6, Number = "3", Summary = "Freddy goes for a walk in the forest" },                    
+                    new Scene { ProjectID = 2, IntExtID = 3, ScriptLocationID = 8, DayNightID = 3, PageLength = 2, Number = "4", Summary = "Freddy walks through a meadow" },                    
+                    new Scene { ProjectID = 2, IntExtID = 3, ScriptLocationID = 9, DayNightID = 3, PageLength = 3, Number = "5", Summary = "Freddy takes a bath in a river" },                    
                 };
 
                 context.Scenes.AddRange(entities);

@@ -21,7 +21,7 @@ namespace Raccord.API.ViewModels.Images
                 FileName = dto.FileName,
                 ProjectID = dto.ProjectID,
                 Scenes = dto.Scenes.Select(s=> s.Translate()),
-                Locations = dto.Locations.Select(s=> s.Translate()),
+                Locations = dto.ScriptLocations.Select(s=> s.Translate()),
                 Characters = dto.Characters.Select(s=> s.Translate()),
                 BreakdownItems = dto.BreakdownItems.Select(bi=> bi.Translate()),
                 IsPrimaryImage = dto.IsPrimaryImage,

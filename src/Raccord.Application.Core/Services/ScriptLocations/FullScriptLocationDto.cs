@@ -2,10 +2,10 @@ using Raccord.Application.Core.Services.Scenes;
 using Raccord.Application.Core.Services.Images;
 using System.Collections.Generic;
 
-namespace Raccord.Application.Core.Services.Locations
+namespace Raccord.Application.Core.Services.ScriptLocations
 {
     // Dto to represent a full location
-    public class FullLocationDto: LocationDto
+    public class FullScriptLocationDto: ScriptLocationDto
     {
         private IEnumerable<SceneSummaryDto> _scenes;
         private IEnumerable<LinkedImageDto> _images;

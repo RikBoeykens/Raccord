@@ -1,5 +1,5 @@
 using System.Linq;
-using Raccord.Application.Core.Services.Locations;
+using Raccord.Application.Core.Services.ScriptLocations;
 using Raccord.Domain.Model.ScriptLocations;
 using Raccord.Domain.Model.Images;
 using Raccord.Application.Services.Scenes;
@@ -7,14 +7,14 @@ using Raccord.Application.Core.Services.SearchEngine;
 using Raccord.Core.Enums;
 using Raccord.Application.Services.Images;
 
-namespace Raccord.Application.Services.Locations
+namespace Raccord.Application.Services.ScriptLocations
 {
     // Utilities and helper methods for Locations
     public static class Utilities
     {
-        public static FullLocationDto TranslateFull(this ScriptLocation location)
+        public static FullScriptLocationDto TranslateFull(this ScriptLocation location)
         {
-            var dto = new FullLocationDto
+            var dto = new FullScriptLocationDto
             {
                 ID = location.ID,
                 Name = location.Name,
@@ -26,9 +26,9 @@ namespace Raccord.Application.Services.Locations
 
             return dto;
         }
-        public static LocationSummaryDto TranslateSummary(this ScriptLocation location)
+        public static ScriptLocationSummaryDto TranslateSummary(this ScriptLocation location)
         {
-            var dto = new LocationSummaryDto
+            var dto = new ScriptLocationSummaryDto
             {
                 ID = location.ID,
                 Name = location.Name,
@@ -41,9 +41,9 @@ namespace Raccord.Application.Services.Locations
             return dto;
         }
 
-        public static LocationDto Translate(this ScriptLocation location)
+        public static ScriptLocationDto Translate(this ScriptLocation location)
         {
-            var dto = new LocationDto
+            var dto = new ScriptLocationDto
             {
                 ID = location.ID,
                 Name = location.Name,
@@ -54,9 +54,9 @@ namespace Raccord.Application.Services.Locations
             return dto;
         }
 
-        public static LinkedLocationDto TranslateLocation(this ImageScriptLocation imageLocation)
+        public static LinkedScriptLocationDto TranslateLocation(this ImageScriptLocation imageLocation)
         {
-            var dto = new LinkedLocationDto
+            var dto = new LinkedScriptLocationDto
             {
                 ID = imageLocation.ScriptLocation.ID,
                 Name = imageLocation.ScriptLocation.Name,
@@ -68,15 +68,15 @@ namespace Raccord.Application.Services.Locations
             return dto;
         }
 
-        public static SearchResultDto TranslateToSearchResult(this ScriptLocation location)
+        public static SearchResultDto TranslateToSearchResult(this ScriptLocation scriptLocation)
         {
             var dto = new SearchResultDto
             {
-                ID = location.ID,
-                RouteIDs = new long[]{location.ProjectID, location.ID},
-                DisplayName = location.Name,
-                Info = $"Project: {location.Project.Title}",
-                Type = EntityType.Location,
+                ID = scriptLocation.ID,
+                RouteIDs = new long[]{scriptLocation.ProjectID, scriptLocation.ID},
+                DisplayName = scriptLocation.Name,
+                Info = $"Project: {scriptLocation.Project.Title}",
+                Type = EntityType.ScriptLocation,
             };
 
             return dto;

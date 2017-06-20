@@ -1,19 +1,19 @@
 using System;
 using System.Linq;
-using Raccord.Application.Core.Services.Locations;
+using Raccord.Application.Core.Services.ScriptLocations;
 using Raccord.Application.Core.Services.SearchEngine;
 using Raccord.Data.EntityFramework.Repositories.ScriptLocations;
 using Raccord.Core.Enums;
 
-namespace Raccord.Application.Services.Locations
+namespace Raccord.Application.Services.ScriptLocations
 {
     // Service to search for locations
-    public class LocationSearchEngineService : ILocationSearchEngineService
+    public class ScriptLocationSearchEngineService : IScriptLocationSearchEngineService
     {
         private readonly IScriptLocationRepository _scriptLocationRepository;
 
         // Initialises a new LocationSearchEngineService
-        public LocationSearchEngineService(IScriptLocationRepository scriptLocationRepository)
+        public ScriptLocationSearchEngineService(IScriptLocationRepository scriptLocationRepository)
         {
             if(scriptLocationRepository == null)
                 throw new ArgumentNullException(nameof(scriptLocationRepository));
@@ -23,7 +23,7 @@ namespace Raccord.Application.Services.Locations
 
         public new EntityType GetType()
         {
-            return EntityType.Location;
+            return EntityType.ScriptLocation;
         }
 
         public SearchTypeResultDto GetResults(SearchRequestDto request)
@@ -34,7 +34,7 @@ namespace Raccord.Application.Services.Locations
             return new SearchTypeResultDto
             {
                 Count = locationCount,
-                Type = "Locations",
+                Type = "Script Locations",
                 Results = locations.Select(l=> l.TranslateToSearchResult()),
             };
             

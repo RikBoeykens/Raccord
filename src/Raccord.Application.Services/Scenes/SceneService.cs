@@ -87,7 +87,7 @@ namespace Raccord.Application.Services.Scenes
                 Summary = dto.Summary,
                 PageLength = dto.PageLength,
                 IntExtID = dto.IntExt.ID,
-                LocationID = dto.Location.ID,
+                ScriptLocationID = dto.ScriptLocation.ID,
                 DayNightID = dto.DayNight.ID,
                 ProjectID = dto.ProjectID,
                 SortingOrder = GetNextSceneOrder(dto.ProjectID),
@@ -110,7 +110,7 @@ namespace Raccord.Application.Services.Scenes
             scene.Summary = dto.Summary;
             scene.PageLength = dto.PageLength;
             scene.IntExtID = dto.IntExt.ID;
-            scene.LocationID = dto.Location.ID;
+            scene.ScriptLocationID = dto.ScriptLocation.ID;
             scene.DayNightID = dto.DayNight.ID;
 
             _sceneRepository.Edit(scene);
@@ -176,19 +176,19 @@ namespace Raccord.Application.Services.Scenes
                 scene.DayNight.ID = dayNight.ID;
             }
 
-            if(scene.Location.ID == default(long))
+            if(scene.ScriptLocation.ID == default(long))
             {
-                var location = new ScriptLocation
+                var scriptLocation = new ScriptLocation
                 {
-                    Name = scene.Location.Name,
-                    Description = scene.Location.Description,
-                    ProjectID = scene.Location.ProjectID,
+                    Name = scene.ScriptLocation.Name,
+                    Description = scene.ScriptLocation.Description,
+                    ProjectID = scene.ScriptLocation.ProjectID,
                 };
 
-                _scriptLocationRepository.Add(location);
+                _scriptLocationRepository.Add(scriptLocation);
                 _scriptLocationRepository.Commit();
 
-                scene.Location.ID = location.ID;
+                scene.ScriptLocation.ID = scriptLocation.ID;
             }
         }
 

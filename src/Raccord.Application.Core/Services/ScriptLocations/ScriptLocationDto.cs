@@ -1,7 +1,7 @@
-namespace Raccord.Application.Core.Services.Locations
+namespace Raccord.Application.Core.Services.ScriptLocations
 {
     // Dto to represent a location
-    public class LocationDto
+    public class ScriptLocationDto
     {
         // ID of the location
         public long ID { get; set; }

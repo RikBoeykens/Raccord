@@ -1,9 +1,9 @@
 using Raccord.Application.Core.Services.Images;
 
-namespace Raccord.Application.Core.Services.Locations
+namespace Raccord.Application.Core.Services.ScriptLocations
 {
     // Dto to represent a full location
-    public class LocationSummaryDto: LocationDto
+    public class ScriptLocationSummaryDto: ScriptLocationDto
     {
         private ImageDto _primaryImage;
 

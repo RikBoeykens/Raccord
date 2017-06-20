@@ -4,28 +4,28 @@ using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Raccord.API.ViewModels.Locations;
 using Raccord.API.ViewModels.Core;
-using Raccord.Application.Core.Services.Locations;
+using Raccord.Application.Core.Services.ScriptLocations;
 
 namespace Raccord.API.Controllers
 {
     [Route("api/[controller]")]
     public class LocationsController : Controller
     {
-        private readonly ILocationService _locationService;
+        private readonly IScriptLocationService _scriptLocationService;
 
-        public LocationsController(ILocationService locationService)
+        public LocationsController(IScriptLocationService locationService)
         {
             if (locationService == null)
                 throw new ArgumentNullException(nameof(locationService));
 
-            _locationService = locationService;
+            _scriptLocationService = locationService;
         }
 
         // GET: api/locations/1/project
         [HttpGet("{id}/project")]
         public IEnumerable<LocationSummaryViewModel> GetAll(long id)
         {
-            var dtos = _locationService.GetAllForParent(id);
+            var dtos = _scriptLocationService.GetAllForParent(id);
 
             var vms = dtos.Select(p => p.Translate());
 
@@ -35,7 +35,7 @@ namespace Raccord.API.Controllers
         [HttpGet("{id}")]
         public FullLocationViewModel Get(long id)
         {
-            var dto = _locationService.Get(id);
+            var dto = _scriptLocationService.Get(id);
 
             var vm = dto.Translate();
 
@@ -46,7 +46,7 @@ namespace Raccord.API.Controllers
         [HttpGet("{id}/summary")]
         public LocationSummaryViewModel GetSummary(long id)
         {
-            var dto = _locationService.GetSummary(id);
+            var dto = _scriptLocationService.GetSummary(id);
 
             var vm = dto.Translate();
 
@@ -67,11 +67,11 @@ namespace Raccord.API.Controllers
 
                 if (dto.ID == default(long))
                 {
-                    id = _locationService.Add(dto);
+                    id = _scriptLocationService.Add(dto);
                 }
                 else
                 {
-                    id = _locationService.Update(dto);
+                    id = _scriptLocationService.Update(dto);
                 }
 
                 response = new JsonResponse
@@ -100,7 +100,7 @@ namespace Raccord.API.Controllers
 
             try
             {
-                _locationService.Delete(id);
+                _scriptLocationService.Delete(id);
 
                 response = new JsonResponse
                 {
@@ -127,7 +127,7 @@ namespace Raccord.API.Controllers
 
             try
             {
-                _locationService.Merge(toId, mergeId);
+                _scriptLocationService.Merge(toId, mergeId);
 
                 response = new JsonResponse
                 {

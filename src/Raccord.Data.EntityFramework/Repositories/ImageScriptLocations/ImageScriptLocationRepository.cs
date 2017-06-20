@@ -16,7 +16,7 @@ namespace Raccord.Data.EntityFramework.Repositories.ImageScriptLocations
         {
             var query = GetIncludedImage();
 
-            return query.Where(l=> l.LocationID == scriptLocationID);
+            return query.Where(l=> l.ScriptLocationID == scriptLocationID);
         }
 
         private IQueryable<ImageScriptLocation> GetIncludedImage()

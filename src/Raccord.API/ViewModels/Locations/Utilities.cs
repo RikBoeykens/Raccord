@@ -1,4 +1,4 @@
-using Raccord.Application.Core.Services.Locations;
+using Raccord.Application.Core.Services.ScriptLocations;
 using Raccord.API.ViewModels.Scenes;
 using System.Linq;
 using Raccord.API.ViewModels.Images;
@@ -8,7 +8,7 @@ namespace Raccord.API.ViewModels.Locations
     public static class Utilities
     {
         // Translates a location dto to a location viewmodel
-        public static FullLocationViewModel Translate(this FullLocationDto dto)
+        public static FullLocationViewModel Translate(this FullScriptLocationDto dto)
         {
             return new FullLocationViewModel
             {
@@ -22,7 +22,7 @@ namespace Raccord.API.ViewModels.Locations
         }
 
         // Translates a location dto to a location viewmodel
-        public static LocationSummaryViewModel Translate(this LocationSummaryDto dto)
+        public static LocationSummaryViewModel Translate(this ScriptLocationSummaryDto dto)
         {
             return new LocationSummaryViewModel
             {
@@ -36,7 +36,7 @@ namespace Raccord.API.ViewModels.Locations
         }
 
         // Translates a location dto to a location viewmodel
-        public static LocationViewModel Translate(this LocationDto dto)
+        public static LocationViewModel Translate(this ScriptLocationDto dto)
         {
             return new LocationSummaryViewModel
             {
@@ -48,7 +48,7 @@ namespace Raccord.API.ViewModels.Locations
         }
 
         // Translates a location dto to a location viewmodel
-        public static LinkedLocationViewModel Translate(this LinkedLocationDto dto)
+        public static LinkedLocationViewModel Translate(this LinkedScriptLocationDto dto)
         {
             return new LinkedLocationViewModel
             {
@@ -61,9 +61,9 @@ namespace Raccord.API.ViewModels.Locations
         }
 
         // Translates a location viewmodel to a dto
-        public static LocationDto Translate(this LocationViewModel vm)
+        public static ScriptLocationDto Translate(this LocationViewModel vm)
         {
-            return new LocationDto
+            return new ScriptLocationDto
             {
                 ID = vm.ID,
                 Name = vm.Name,
