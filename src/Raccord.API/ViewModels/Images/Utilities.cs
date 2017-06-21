@@ -1,6 +1,6 @@
 using Raccord.Application.Core.Services.Images;
 using Raccord.API.ViewModels.Scenes;
-using Raccord.API.ViewModels.Locations;
+using Raccord.API.ViewModels.ScriptLocations;
 using Raccord.API.ViewModels.Common.SelectedEntity;
 using System.Linq;
 using Raccord.API.ViewModels.Characters;
@@ -21,7 +21,7 @@ namespace Raccord.API.ViewModels.Images
                 FileName = dto.FileName,
                 ProjectID = dto.ProjectID,
                 Scenes = dto.Scenes.Select(s=> s.Translate()),
-                Locations = dto.ScriptLocations.Select(s=> s.Translate()),
+                ScriptLocations = dto.ScriptLocations.Select(s=> s.Translate()),
                 Characters = dto.Characters.Select(s=> s.Translate()),
                 BreakdownItems = dto.BreakdownItems.Select(bi=> bi.Translate()),
                 IsPrimaryImage = dto.IsPrimaryImage,

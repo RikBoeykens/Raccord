@@ -2,10 +2,10 @@ using Raccord.API.ViewModels.Scenes;
 using Raccord.API.ViewModels.Images;
 using System.Collections.Generic;
 
-namespace Raccord.API.ViewModels.Locations
+namespace Raccord.API.ViewModels.ScriptLocations
 {
     // ViewModel to represent a location
-    public class FullLocationViewModel : LocationViewModel
+    public class FullScriptLocationViewModel : ScriptLocationViewModel
     {
         private IEnumerable<SceneSummaryViewModel> _scenes;
         private IEnumerable<LinkedImageViewModel> _images;

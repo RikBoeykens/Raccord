@@ -2,18 +2,18 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
-using Raccord.API.ViewModels.Locations;
+using Raccord.API.ViewModels.ScriptLocations;
 using Raccord.API.ViewModels.Core;
 using Raccord.Application.Core.Services.ScriptLocations;
 
 namespace Raccord.API.Controllers
 {
     [Route("api/[controller]")]
-    public class LocationsController : Controller
+    public class ScriptLocationsController : Controller
     {
         private readonly IScriptLocationService _scriptLocationService;
 
-        public LocationsController(IScriptLocationService locationService)
+        public ScriptLocationsController(IScriptLocationService locationService)
         {
             if (locationService == null)
                 throw new ArgumentNullException(nameof(locationService));
@@ -21,9 +21,9 @@ namespace Raccord.API.Controllers
             _scriptLocationService = locationService;
         }
 
-        // GET: api/locations/1/project
+        // GET: api/scriptlocations/1/project
         [HttpGet("{id}/project")]
-        public IEnumerable<LocationSummaryViewModel> GetAll(long id)
+        public IEnumerable<ScriptLocationSummaryViewModel> GetAll(long id)
         {
             var dtos = _scriptLocationService.GetAllForParent(id);
 
@@ -31,9 +31,9 @@ namespace Raccord.API.Controllers
 
             return vms;
         }
-        // GET api/locations/5
+        // GET api/scriptlocations/5
         [HttpGet("{id}")]
-        public FullLocationViewModel Get(long id)
+        public FullScriptLocationViewModel Get(long id)
         {
             var dto = _scriptLocationService.Get(id);
 
@@ -42,9 +42,9 @@ namespace Raccord.API.Controllers
             return vm;
         }
 
-        // GET api/locations/5
+        // GET api/scriptlocations/5
         [HttpGet("{id}/summary")]
-        public LocationSummaryViewModel GetSummary(long id)
+        public ScriptLocationSummaryViewModel GetSummary(long id)
         {
             var dto = _scriptLocationService.GetSummary(id);
 
@@ -53,9 +53,9 @@ namespace Raccord.API.Controllers
             return vm;
         }
 
-        // POST api/location
+        // POST api/scriptlocations
         [HttpPost]
-        public JsonResult Post([FromBody]LocationViewModel vm)
+        public JsonResult Post([FromBody]ScriptLocationViewModel vm)
         {
             var response = new JsonResponse();
 
@@ -85,14 +85,14 @@ namespace Raccord.API.Controllers
                 response = new JsonResponse
                 {
                     ok = false,
-                    message = "Something went wrong while attempting to update location",
+                    message = "Something went wrong while attempting to update script location",
                 };
             }
 
             return new JsonResult(response);
         }
 
-        // DELETE api/locations/5
+        // DELETE api/scriptlocations/5
         [HttpDelete("{id}")]
         public JsonResult Delete(long id)
         {
@@ -112,14 +112,14 @@ namespace Raccord.API.Controllers
                 response = new JsonResponse
                 {
                     ok = false,
-                    message = "Something went wrong while attempting to delete location.",
+                    message = "Something went wrong while attempting to delete script location.",
                 };
             }
 
             return new JsonResult(response);
         }
 
-        // POST api/locations/merge/5/1
+        // POST api/scriptlocations/merge/5/1
         [HttpPost("merge/{toId}/{mergeId}")]
         public JsonResult Merge(long toId, long mergeId)
         {
@@ -139,7 +139,7 @@ namespace Raccord.API.Controllers
                 response = new JsonResponse
                 {
                     ok = false,
-                    message = "Something went wrong while attempting to merge locations.",
+                    message = "Something went wrong while attempting to merge script locations.",
                 };
             }
 

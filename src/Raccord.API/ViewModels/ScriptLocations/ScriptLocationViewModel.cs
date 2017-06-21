@@ -1,7 +1,7 @@
-namespace Raccord.API.ViewModels.Locations
+namespace Raccord.API.ViewModels.ScriptLocations
 {
     // Viewmodel to represents a location
-    public class LocationViewModel
+    public class ScriptLocationViewModel
     {
         // ID of the location
         public long ID { get; set; }

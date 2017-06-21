@@ -1,9 +1,9 @@
 using Raccord.API.ViewModels.Images;
 
-namespace Raccord.API.ViewModels.Locations
+namespace Raccord.API.ViewModels.ScriptLocations
 {
     // ViewModel to represent a summary of a location
-    public class LocationSummaryViewModel : LocationViewModel
+    public class ScriptLocationSummaryViewModel : ScriptLocationViewModel
     {
         private ImageViewModel _primaryImage;
 

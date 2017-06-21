@@ -3,14 +3,14 @@ using Raccord.API.ViewModels.Scenes;
 using System.Linq;
 using Raccord.API.ViewModels.Images;
 
-namespace Raccord.API.ViewModels.Locations
+namespace Raccord.API.ViewModels.ScriptLocations
 {
     public static class Utilities
     {
         // Translates a location dto to a location viewmodel
-        public static FullLocationViewModel Translate(this FullScriptLocationDto dto)
+        public static FullScriptLocationViewModel Translate(this FullScriptLocationDto dto)
         {
-            return new FullLocationViewModel
+            return new FullScriptLocationViewModel
             {
                 ID = dto.ID,
                 Name = dto.Name,
@@ -22,9 +22,9 @@ namespace Raccord.API.ViewModels.Locations
         }
 
         // Translates a location dto to a location viewmodel
-        public static LocationSummaryViewModel Translate(this ScriptLocationSummaryDto dto)
+        public static ScriptLocationSummaryViewModel Translate(this ScriptLocationSummaryDto dto)
         {
-            return new LocationSummaryViewModel
+            return new ScriptLocationSummaryViewModel
             {
                 ID = dto.ID,
                 Name = dto.Name,
@@ -36,9 +36,9 @@ namespace Raccord.API.ViewModels.Locations
         }
 
         // Translates a location dto to a location viewmodel
-        public static LocationViewModel Translate(this ScriptLocationDto dto)
+        public static ScriptLocationViewModel Translate(this ScriptLocationDto dto)
         {
-            return new LocationSummaryViewModel
+            return new ScriptLocationSummaryViewModel
             {
                 ID = dto.ID,
                 Name = dto.Name,
@@ -48,9 +48,9 @@ namespace Raccord.API.ViewModels.Locations
         }
 
         // Translates a location dto to a location viewmodel
-        public static LinkedLocationViewModel Translate(this LinkedScriptLocationDto dto)
+        public static LinkedScriptLocationViewModel Translate(this LinkedScriptLocationDto dto)
         {
-            return new LinkedLocationViewModel
+            return new LinkedScriptLocationViewModel
             {
                 ID = dto.ID,
                 Name = dto.Name,
@@ -61,7 +61,7 @@ namespace Raccord.API.ViewModels.Locations
         }
 
         // Translates a location viewmodel to a dto
-        public static ScriptLocationDto Translate(this LocationViewModel vm)
+        public static ScriptLocationDto Translate(this ScriptLocationViewModel vm)
         {
             return new ScriptLocationDto
             {

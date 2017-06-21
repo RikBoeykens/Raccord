@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
-using Raccord.API.ViewModels.Locations;
+using Raccord.API.ViewModels.ScriptLocations;
 using Raccord.API.ViewModels.Core;
 using Raccord.Application.Core.Services.Images;
 using Raccord.Application.Core.Services.ImageLocations;
@@ -12,11 +12,11 @@ using Raccord.API.ViewModels.Images;
 namespace Raccord.API.Controllers
 {
     [Route("api/[controller]")]
-    public class ImageLocationsController : Controller
+    public class ImageScriptLocationsController : Controller
     {
         private readonly IImageScriptLocationService _imageScriptLocationService;
 
-        public ImageLocationsController(IImageScriptLocationService imageScriptLocationService)
+        public ImageScriptLocationsController(IImageScriptLocationService imageScriptLocationService)
         {
             if (imageScriptLocationService == null)
                 throw new ArgumentNullException(nameof(imageScriptLocationService));
@@ -24,7 +24,7 @@ namespace Raccord.API.Controllers
             _imageScriptLocationService = imageScriptLocationService;
         }
 
-        // GET: api/imagelocations/1/images
+        // GET: api/imagescriptlocations/1/images
         [HttpGet("{id}/images")]
         public IEnumerable<LinkedImageViewModel> GetAll(long id)
         {
@@ -35,7 +35,7 @@ namespace Raccord.API.Controllers
             return vms;
         }
 
-        // POST api/imagelocations/5/1/link
+        // POST api/imagescriptlocations/5/1/link
         [HttpPost("{imageId}/{locationId}/addlink")]
         public JsonResult AddLink(long imageId, long locationId)
         {
@@ -55,14 +55,14 @@ namespace Raccord.API.Controllers
                 response = new JsonResponse
                 {
                     ok = false,
-                    message = "Something went wrong while attempting to add link between image and location",
+                    message = "Something went wrong while attempting to add link between image and script location",
                 };
             }
 
             return new JsonResult(response);
         }
 
-        // POST api/imagelocations/5/removelink
+        // POST api/imagescriptlocations/5/removelink
         [HttpPost("{id}/removelink")]
         public JsonResult RemoveLink(long id)
         {
@@ -89,7 +89,7 @@ namespace Raccord.API.Controllers
             return new JsonResult(response);
         }
         
-        // POST api/imagelocations/5/removeprimary
+        // POST api/imagescriptlocations/5/removeprimary
         [HttpPost("{id}/setprimary")]
         public JsonResult SetAsPrimary(long id)
         {
@@ -109,14 +109,14 @@ namespace Raccord.API.Controllers
                 response = new JsonResponse
                 {
                     ok = false,
-                    message = "Something went wrong while attempting to set image as primary for location",
+                    message = "Something went wrong while attempting to set image as primary for script location",
                 };
             }
 
             return new JsonResult(response);
         }
         
-        // POST api/imagelocations/5/removeprimary
+        // POST api/imagescriptlocations/5/removeprimary
         [HttpPost("{id}/removeprimary")]
         public JsonResult RemoveAsPrimary(long id)
         {
@@ -136,7 +136,7 @@ namespace Raccord.API.Controllers
                 response = new JsonResponse
                 {
                     ok = false,
-                    message = "Something went wrong while attempting to remove image as primary for location",
+                    message = "Something went wrong while attempting to remove image as primary for script location",
                 };
             }
 
