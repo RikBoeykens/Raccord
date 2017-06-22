@@ -10,7 +10,7 @@ import { ProjectSummary } from '../../../../../model/project-summary.model';
 @Component({
     templateUrl: 'breakdown-type-settings.component.html',
 })
-export class BreakdownTypeSettingsComponent extends OnInit {
+export class BreakdownTypeSettingsComponent implements OnInit {
 
     breakdownTypes: BreakdownTypeSummary[] = [];
     project: ProjectSummary;
@@ -29,7 +29,6 @@ export class BreakdownTypeSettingsComponent extends OnInit {
         private _route: ActivatedRoute,
         private _router: Router,
     ) {
-        super();
         this.viewNewBreakdownType = new BreakdownType();
     }
 

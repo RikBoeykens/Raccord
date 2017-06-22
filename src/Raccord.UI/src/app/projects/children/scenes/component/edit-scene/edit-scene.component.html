@@ -4,7 +4,7 @@
         (ngSubmit)="doSceneSubmit()">
     <div fxLayout="row" fxLayoutGap="10px">
         <md-input-container fxFlex="10%">
-            <input md-input placeholder="No" id="scene_number" required [(ngModel)]="scene.number" #no="ngModel" name="scene_number">
+            <input mdInput placeholder="No" id="scene_number" required [(ngModel)]="scene.number" #no="ngModel" name="scene_number">
         </md-input-container>
         <search-int-ext  fxFlex="15%" [sceneIntExt]="scene.intExt"></search-int-ext>
         <search-day-night  fxFlex="15%" [sceneDayNight]="scene.dayNight"></search-day-night>
@@ -12,10 +12,10 @@
     </div>
     <div fxLayout="row" fxLayoutGap="10px">
         <md-input-container fxFlex="75%">
-            <input md-input placeholder="Summary" id="scene_summary" required [(ngModel)]="scene.summary" #summary="ngModel" name="scene_summary">
+            <input mdInput placeholder="Summary" id="scene_summary" required [(ngModel)]="scene.summary" #summary="ngModel" name="scene_summary">
         </md-input-container>
         <md-input-container fxFlex="25%">
-            <input md-input placeholder="Page Length" id="scene_pagelength" required [(ngModel)]="stringPageLength" #pagelength="ngModel" name="scene_pagelength">
+            <input mdInput placeholder="Page Length" id="scene_pagelength" required [(ngModel)]="stringPageLength" #pagelength="ngModel" name="scene_pagelength">
         </md-input-container>
     </div>
     <div fxLayout="row">

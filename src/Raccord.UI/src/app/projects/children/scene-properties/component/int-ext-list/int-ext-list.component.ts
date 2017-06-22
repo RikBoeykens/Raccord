@@ -12,7 +12,7 @@ import { HtmlClassHelpers } from '../../../../../shared/helpers/html-class.helpe
 @Component({
     templateUrl: 'int-ext-list.component.html',
 })
-export class IntExtListComponent extends OnInit {
+export class IntExtListComponent implements OnInit {
 
     intExts: IntExtDroppableWrapper[] = [];
     deleteIntExts: IntExtDroppableWrapper[]=[];
@@ -30,7 +30,6 @@ export class IntExtListComponent extends OnInit {
         private _router: Router,
         private dragulaService: DragulaService
     ) {
-        super();
         this.viewNewIntExt = new IntExt();
 
         dragulaService.drag.subscribe((value) => {

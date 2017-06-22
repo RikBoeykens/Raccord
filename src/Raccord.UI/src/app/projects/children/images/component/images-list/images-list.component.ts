@@ -12,7 +12,7 @@ import { HtmlClassHelpers } from '../../../../../shared/helpers/html-class.helpe
 @Component({
     templateUrl: 'images-list.component.html',
 })
-export class ImagesListComponent extends OnInit {
+export class ImagesListComponent implements OnInit {
 
     images: ImageSummary[];
     project: ProjectSummary;
@@ -25,7 +25,6 @@ export class ImagesListComponent extends OnInit {
         private _router: Router,
         private dragulaService: DragulaService
     ) {
-        super();
     }
 
     ngOnInit() {

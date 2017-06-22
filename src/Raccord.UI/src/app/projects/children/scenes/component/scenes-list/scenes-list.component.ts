@@ -12,7 +12,7 @@ import { HtmlClassHelpers } from '../../../../../shared/helpers/html-class.helpe
 @Component({
     templateUrl: 'scenes-list.component.html',
 })
-export class ScenesListComponent extends OnInit {
+export class ScenesListComponent implements OnInit {
 
     scenes: SceneSummary[] = [];
     deleteScenes: SceneSummary[]=[];
@@ -29,7 +29,6 @@ export class ScenesListComponent extends OnInit {
         private _router: Router,
         private dragulaService: DragulaService
     ) {
-        super();
         this.viewNewScene = new Scene();
         dragulaService.drag.subscribe((value) => {
             this.onSceneDrag();

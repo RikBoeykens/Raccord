@@ -12,7 +12,7 @@ import { HtmlClassHelpers } from '../../../../../shared/helpers/html-class.helpe
 @Component({
     templateUrl: 'day-night-list.component.html',
 })
-export class DayNightListComponent extends OnInit {
+export class DayNightListComponent implements OnInit {
 
     dayNights: DayNightDroppableWrapper[] = [];
     deleteDayNights: DayNightDroppableWrapper[]=[];
@@ -30,7 +30,6 @@ export class DayNightListComponent extends OnInit {
         private _router: Router,
         private dragulaService: DragulaService
     ) {
-        super();
         this.viewNewDayNight = new DayNight();
 
         dragulaService.drag.subscribe((value) => {

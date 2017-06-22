@@ -12,7 +12,7 @@ import { HtmlClassHelpers } from '../../../../../shared/helpers/html-class.helpe
 @Component({
     templateUrl: 'characters-list.component.html',
 })
-export class CharactersListComponent extends OnInit {
+export class CharactersListComponent implements OnInit {
 
     characters: CharacterDroppableWrapper[] = [];
     deleteCharacters: CharacterDroppableWrapper[]=[];
@@ -30,7 +30,6 @@ export class CharactersListComponent extends OnInit {
         private _router: Router,
         private dragulaService: DragulaService
     ) {
-        super();
         this.viewNewCharacter = new Character();
 
         dragulaService.drag.subscribe((value) => {

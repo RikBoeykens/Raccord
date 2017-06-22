@@ -1,6 +1,6 @@
 <div class="search-container">
     <md-input-container class="search-input-container">
-        <input md-input placeholder="Character" id="character_name" required [(ngModel)]="searchCharacter.name" #character="ngModel" name="character_name"  (keyup)="doSearch()" (blur)="clearSearch()" />
+        <input mdInput placeholder="Character" id="character_name" required [(ngModel)]="searchCharacter.name" #character="ngModel" name="character_name"  (keyup)="doSearch()" (blur)="clearSearch()" />
     </md-input-container>
     <ul class="autocomplete-content" *ngIf="searchResults.length>0">
         <li (mousedown)="setResult(result)"*ngFor="let result of searchResults">

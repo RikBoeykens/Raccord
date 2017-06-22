@@ -16,7 +16,7 @@ import { EntityType } from '../../../../../shared/enums/entity-type.enum';
 @Component({
     templateUrl: 'schedule-landing.component.html',
 })
-export class ScheduleLandingComponent extends OnInit {
+export class ScheduleLandingComponent implements OnInit {
 
     scheduleDays: FullScheduleDay[] = [];
     project: ProjectSummary;
@@ -33,7 +33,6 @@ export class ScheduleLandingComponent extends OnInit {
         private _route: ActivatedRoute,
         private _router: Router,
     ) {
-        super();
         this.viewNewScheduleDay = new ScheduleDay();
     }
 
