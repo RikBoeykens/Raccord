@@ -6,7 +6,7 @@ namespace Raccord.Core.Enums
         Project = 0,
         Scene = 1,
         IntExt = 2,
-        Location = 3,
+        ScriptLocation = 3,
         DayNight = 4,
         Image = 5,
         Character = 6,

@@ -46,7 +46,7 @@ namespace Raccord.Data.EntityFramework.Repositories.Breakdowns.BreakdownItemScen
                         .Include(bis=> bis.Scene)
                         .ThenInclude(s=> s.DayNight)
                         .Include(bis=> bis.Scene)
-                        .ThenInclude(s=> s.Location)
+                        .ThenInclude(s=> s.ScriptLocation)
                         .Include(bis=> bis.Scene)
                         .ThenInclude(s=> s.ImageScenes)
                         .ThenInclude(i=> i.Image);

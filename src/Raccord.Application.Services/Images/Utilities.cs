@@ -3,7 +3,7 @@ using System.IO;
 using Raccord.Application.Core.Services.Images;
 using Raccord.Domain.Model.Images;
 using Raccord.Application.Services.Scenes;
-using Raccord.Application.Services.Locations;
+using Raccord.Application.Services.ScriptLocations;
 using Raccord.Application.Core.Services.SearchEngine;
 using Raccord.Core.Enums;
 using Raccord.Application.Services.Characters;
@@ -23,7 +23,7 @@ namespace Raccord.Application.Services.Images
                 Description = image.Description,
                 FileName = image.FileName,
                 Scenes = image.ImageScenes.Select(s=> s.TranslateScene()),
-                Locations = image.ImageLocations.Select(il=> il.TranslateLocation()),
+                ScriptLocations = image.ImageScriptLocations.Select(il=> il.TranslateLocation()),
                 Characters = image.ImageCharacters.Select(il=> il.TranslateCharacter()),
                 BreakdownItems = image.ImageBreakdownItems.Select(ibi=> ibi.TranslateBreakdownItem()),
                 ProjectID = image.ProjectID,
@@ -77,7 +77,7 @@ namespace Raccord.Application.Services.Images
             return dto;
         }
 
-        public static LinkedImageDto TranslateImage(this ImageLocation imageLocation)
+        public static LinkedImageDto TranslateImage(this ImageScriptLocation imageLocation)
         {
             var dto = new LinkedImageDto
             {

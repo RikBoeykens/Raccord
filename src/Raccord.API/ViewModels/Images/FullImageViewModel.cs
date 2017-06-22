@@ -1,5 +1,5 @@
 using Raccord.API.ViewModels.Scenes;
-using Raccord.API.ViewModels.Locations;
+using Raccord.API.ViewModels.ScriptLocations;
 using Raccord.API.ViewModels.Characters;
 using System.Collections.Generic;
 using Raccord.API.ViewModels.Breakdowns.BreakdownItems;
@@ -10,7 +10,7 @@ namespace Raccord.API.ViewModels.Images
     public class FullImageViewModel : ImageViewModel
     {
         private IEnumerable<LinkedSceneViewModel> _scenes;
-        private IEnumerable<LinkedLocationViewModel> _locations;
+        private IEnumerable<LinkedScriptLocationViewModel> _scriptLocations;
         private IEnumerable<LinkedCharacterViewModel> _characters;
         private IEnumerable<LinkedBreakdownItemViewModel> _breakdownItems;
         
@@ -31,15 +31,15 @@ namespace Raccord.API.ViewModels.Images
         }
 
         // Locations linked to the image
-        public IEnumerable<LinkedLocationViewModel> Locations
+        public IEnumerable<LinkedScriptLocationViewModel> ScriptLocations
         {
             get
             {
-                return _locations ?? (_locations = new List<LinkedLocationViewModel>());
+                return _scriptLocations ?? (_scriptLocations = new List<LinkedScriptLocationViewModel>());
             }
             set
             {
-                _locations = value;
+                _scriptLocations = value;
             }
         }
 

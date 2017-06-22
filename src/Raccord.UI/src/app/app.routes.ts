@@ -8,8 +8,10 @@ import { ProjectLandingComponent } from './projects';
 import { ProjectsListComponent } from './projects';
 import { ScenesListComponent } from './projects';
 import { SceneLandingComponent } from './projects';
-import { LocationsListComponent } from './projects';
-import { LocationLandingComponent } from './projects';
+import { 
+  ScriptLocationsListComponent,
+  ScriptLocationLandingComponent
+ } from './projects';
 import { IntExtListComponent } from './projects';
 import { IntExtLandingComponent } from './projects';
 import { DayNightListComponent } from './projects';
@@ -34,10 +36,10 @@ import { ProjectsResolve } from './projects';
 import { 
   SceneResolve,
   ScenesResolve,
-  SceneCharactersResolve
+  SceneCharactersResolve,
+  ScriptLocationResolve,
+  ScriptLocationsResolve
 } from './projects';
-import { LocationResolve } from './projects';
-import { LocationsResolve } from './projects';
 import { IntExtResolve } from './projects';
 import { IntExtsResolve } from './projects';
 import { DayNightResolve } from './projects';
@@ -117,22 +119,22 @@ export const ROUTES: Routes = [
             ]
           },
           {
-            path: 'locations',
+            path: 'scriptlocations',
             children:[
               {
                 path: '',
-                component: LocationsListComponent,
+                component: ScriptLocationsListComponent,
                 resolve:{
                   project: ProjectSummaryResolve,
-                  locations: LocationsResolve
+                  scriptLocations: ScriptLocationsResolve
                 },
               },
               {
-                path: ':locationId',
-                component: LocationLandingComponent,
+                path: ':scriptLocationId',
+                component: ScriptLocationLandingComponent,
                 resolve:{
                   project: ProjectSummaryResolve,
-                  location: LocationResolve
+                  scriptLocation: ScriptLocationResolve
                 },
               }
             ]

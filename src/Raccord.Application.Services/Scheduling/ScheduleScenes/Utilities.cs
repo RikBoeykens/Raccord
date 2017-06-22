@@ -1,5 +1,5 @@
 using System.Linq;
-using Raccord.Application.Core.Services.Locations;
+using Raccord.Application.Core.Services.ScriptLocations;
 using Raccord.Domain.Model.Scheduling;
 using Raccord.Domain.Model.Images;
 using Raccord.Application.Services.Scenes;

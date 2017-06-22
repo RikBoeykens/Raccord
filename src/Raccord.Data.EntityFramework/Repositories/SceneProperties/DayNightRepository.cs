@@ -53,7 +53,7 @@ namespace Raccord.Data.EntityFramework.Repositories.SceneProperties
             return query.Include(d=> d.Scenes)
                         .ThenInclude(s=> s.IntExt)
                         .Include(d=> d.Scenes)
-                        .ThenInclude(s=> s.Location);
+                        .ThenInclude(s=> s.ScriptLocation);
         }
 
         private IQueryable<DayNight> GetIncludedSummary()

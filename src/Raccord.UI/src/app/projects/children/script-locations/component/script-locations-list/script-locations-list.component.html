@@ -1,0 +1,36 @@
+<div class="row">      
+    <div class="col s12">
+        <a routerLink="/" class="breadcrumb">Dashboard</a>
+        <a routerLink="/projects" class="breadcrumb">Projects</a>
+        <a routerLink="/projects/{{project.id}}" class="breadcrumb">{{project.title}}</a>
+        <span class="breadcrumb">Script Locations</span>
+    </div>
+</div>
+<div class="row">
+    <edit-script-location [scriptLocation]="viewNewScriptLocation" (submitScriptLocation)="addScriptLocation()"></edit-script-location>
+</div>
+<div class="row">
+    <md-nav-list [dragula]='"screenplay-location-bag"' 
+                 [dragulaModel]='scriptLocations'>
+        <a md-list-item [routerLink]="[locationWrapper.scriptLocation.id]" 
+           *ngFor="let locationWrapper of scriptLocations"
+           [ngClass]="{'can-delete': locationWrapper.scriptLocation.sceneCount==0}"
+           class="drag-element drag-delete drag-merge">
+           <md-icon class=drag-handle>drag_handle</md-icon>
+            <show-image *ngIf="locationWrapper.scriptLocation.primaryImage.id!=0" [image]="locationWrapper.scriptLocation.primaryImage" [listAvatar]="true"></show-image>
+            {{locationWrapper.scriptLocation.name}} ({{locationWrapper.scriptLocation.sceneCount}})
+            <span class="drop-container drop-merge-container"
+                  [dragula]='"screenplay-location-bag"' 
+                  [dragulaModel]='locationWrapper.dropScriptLocations'
+                  *ngIf="draggingToMerge">
+                <md-icon>merge_type</md-icon>                
+            </span>
+        </a>
+    </md-nav-list>
+</div>
+<div class="delete-script-location drop-container drop-delete-container" 
+     [dragula]="'screenplay-location-bag'" 
+     *ngIf="draggingToDelete" 
+     [dragulaModel]='deleteScriptLocations'>
+    <md-icon>delete</md-icon>
+</div>

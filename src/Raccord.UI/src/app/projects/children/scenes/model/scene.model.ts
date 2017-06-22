@@ -1,7 +1,7 @@
 import { BaseModel } from '../../../../shared/model/base.model';
 import { IntExt } from '../../scene-properties/model/int-ext.model';
 import { DayNight } from '../../scene-properties/model/day-night.model';
-import { Location } from '../../locations/model/location.model';
+import { ScriptLocation } from '../../script-locations/model/script-location.model';
 
 export class Scene extends BaseModel{
     id: number;
@@ -9,7 +9,7 @@ export class Scene extends BaseModel{
     summary: string;
     pageLength: number;
     intExt: IntExt;
-    location: Location;
+    scriptLocation: ScriptLocation;
     dayNight: DayNight;
     projectId: number;
 
@@ -19,7 +19,7 @@ export class Scene extends BaseModel{
                         summary: string,
                         pageLength: number,
                         intExt: IntExt,
-                        location: Location,
+                        scriptLocation: ScriptLocation,
                         dayNight: DayNight,
                         projectId: number
                     }){
@@ -30,17 +30,17 @@ export class Scene extends BaseModel{
             this.summary = obj.summary;
             this.pageLength = obj.pageLength;
             this.intExt = obj.intExt;
-            this.location = obj.location;
+            this.scriptLocation = obj.scriptLocation;
             this.dayNight = obj.dayNight;
             this.projectId = obj.projectId;
         }else{
             this.intExt = new IntExt();
-            this.location = new Location();
+            this.scriptLocation = new ScriptLocation();
             this.dayNight = new DayNight();
         }
     }
 
     get displaySummary(): string{
-        return `${this.number}. ${this.intExt.name} ${this.location.name} ${this.dayNight.name} - ${this.summary}`;
+        return `${this.number}. ${this.intExt.name} ${this.scriptLocation.name} ${this.dayNight.name} - ${this.summary}`;
     }
 }

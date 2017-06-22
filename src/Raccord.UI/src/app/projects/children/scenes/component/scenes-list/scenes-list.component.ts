@@ -68,7 +68,7 @@ export class ScenesListComponent extends OnInit {
         this.viewNewScene.projectId = this.project.id;
         this.viewNewScene.intExt.projectId = this.project.id;
         this.viewNewScene.dayNight.projectId = this.project.id;
-        this.viewNewScene.location.projectId = this.project.id;
+        this.viewNewScene.scriptLocation.projectId = this.project.id;
         this.newScene = null;
     }
 

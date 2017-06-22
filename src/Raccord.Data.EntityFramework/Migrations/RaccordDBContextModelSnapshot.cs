@@ -185,26 +185,6 @@ namespace Raccord.Data.EntityFramework.Migrations
                     b.ToTable("ImageCharacter");
                 });
 
-            modelBuilder.Entity("Raccord.Domain.Model.Images.ImageLocation", b =>
-                {
-                    b.Property<long>("ID")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<long>("ImageID");
-
-                    b.Property<bool>("IsPrimaryImage");
-
-                    b.Property<long>("LocationID");
-
-                    b.HasKey("ID");
-
-                    b.HasIndex("ImageID");
-
-                    b.HasIndex("LocationID");
-
-                    b.ToTable("ImageLocation");
-                });
-
             modelBuilder.Entity("Raccord.Domain.Model.Images.ImageScene", b =>
                 {
                     b.Property<long>("ID")
@@ -225,22 +205,24 @@ namespace Raccord.Data.EntityFramework.Migrations
                     b.ToTable("ImageScene");
                 });
 
-            modelBuilder.Entity("Raccord.Domain.Model.Locations.Location", b =>
+            modelBuilder.Entity("Raccord.Domain.Model.Images.ImageScriptLocation", b =>
                 {
                     b.Property<long>("ID")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("Description");
+                    b.Property<long>("ImageID");
 
-                    b.Property<string>("Name");
+                    b.Property<bool>("IsPrimaryImage");
 
-                    b.Property<long>("ProjectID");
+                    b.Property<long>("ScriptLocationID");
 
                     b.HasKey("ID");
 
-                    b.HasIndex("ProjectID");
+                    b.HasIndex("ImageID");
 
-                    b.ToTable("Locations");
+                    b.HasIndex("ScriptLocationID");
+
+                    b.ToTable("ImageScriptLocation");
                 });
 
             modelBuilder.Entity("Raccord.Domain.Model.Projects.Project", b =>
@@ -300,13 +282,13 @@ namespace Raccord.Data.EntityFramework.Migrations
 
                     b.Property<long>("IntExtID");
 
-                    b.Property<long>("LocationID");
-
                     b.Property<string>("Number");
 
                     b.Property<int>("PageLength");
 
                     b.Property<long>("ProjectID");
+
+                    b.Property<long>("ScriptLocationID");
 
                     b.Property<int>("SortingOrder");
 
@@ -318,9 +300,9 @@ namespace Raccord.Data.EntityFramework.Migrations
 
                     b.HasIndex("IntExtID");
 
-                    b.HasIndex("LocationID");
-
                     b.HasIndex("ProjectID");
+
+                    b.HasIndex("ScriptLocationID");
 
                     b.ToTable("Scenes");
                 });
@@ -401,6 +383,24 @@ namespace Raccord.Data.EntityFramework.Migrations
                     b.HasIndex("ScheduleDayID");
 
                     b.ToTable("ScheduleScene");
+                });
+
+            modelBuilder.Entity("Raccord.Domain.Model.ScriptLocations.ScriptLocation", b =>
+                {
+                    b.Property<long>("ID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Description");
+
+                    b.Property<string>("Name");
+
+                    b.Property<long>("ProjectID");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("ProjectID");
+
+                    b.ToTable("ScriptLocations");
                 });
 
             modelBuilder.Entity("Raccord.Domain.Model.Breakdowns.BreakdownItems.BreakdownItem", b =>
@@ -487,19 +487,6 @@ namespace Raccord.Data.EntityFramework.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("Raccord.Domain.Model.Images.ImageLocation", b =>
-                {
-                    b.HasOne("Raccord.Domain.Model.Images.Image", "Image")
-                        .WithMany("ImageLocations")
-                        .HasForeignKey("ImageID")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("Raccord.Domain.Model.Locations.Location", "Location")
-                        .WithMany("ImageLocations")
-                        .HasForeignKey("LocationID")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
             modelBuilder.Entity("Raccord.Domain.Model.Images.ImageScene", b =>
                 {
                     b.HasOne("Raccord.Domain.Model.Images.Image", "Image")
@@ -513,11 +500,16 @@ namespace Raccord.Data.EntityFramework.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("Raccord.Domain.Model.Locations.Location", b =>
+            modelBuilder.Entity("Raccord.Domain.Model.Images.ImageScriptLocation", b =>
                 {
-                    b.HasOne("Raccord.Domain.Model.Projects.Project", "Project")
-                        .WithMany()
-                        .HasForeignKey("ProjectID")
+                    b.HasOne("Raccord.Domain.Model.Images.Image", "Image")
+                        .WithMany("ImageScriptLocations")
+                        .HasForeignKey("ImageID")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Raccord.Domain.Model.ScriptLocations.ScriptLocation", "ScriptLocation")
+                        .WithMany("ImageLocations")
+                        .HasForeignKey("ScriptLocationID")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
@@ -547,14 +539,14 @@ namespace Raccord.Data.EntityFramework.Migrations
                         .WithMany("Scenes")
                         .HasForeignKey("IntExtID");
 
-                    b.HasOne("Raccord.Domain.Model.Locations.Location", "Location")
-                        .WithMany("Scenes")
-                        .HasForeignKey("LocationID");
-
                     b.HasOne("Raccord.Domain.Model.Projects.Project", "Project")
                         .WithMany()
                         .HasForeignKey("ProjectID")
                         .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Raccord.Domain.Model.ScriptLocations.ScriptLocation", "ScriptLocation")
+                        .WithMany("Scenes")
+                        .HasForeignKey("ScriptLocationID");
                 });
 
             modelBuilder.Entity("Raccord.Domain.Model.Scheduling.ScheduleCharacter", b =>
@@ -596,6 +588,14 @@ namespace Raccord.Data.EntityFramework.Migrations
                     b.HasOne("Raccord.Domain.Model.Scheduling.ScheduleDay", "ScheduleDay")
                         .WithMany("ScheduleScenes")
                         .HasForeignKey("ScheduleDayID")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Raccord.Domain.Model.ScriptLocations.ScriptLocation", b =>
+                {
+                    b.HasOne("Raccord.Domain.Model.Projects.Project", "Project")
+                        .WithMany()
+                        .HasForeignKey("ProjectID")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
         }

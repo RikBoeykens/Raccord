@@ -21,15 +21,15 @@
     <p>
         <span class="image-link-item" *ngFor="let scene of image.scenes">
             <a routerLink="/projects/{{project.id}}/scenes/{{scene.id}}">
-                {{scene.number}}. {{scene.intExt.name}} {{scene.location.name}} {{scene.dayNight.name}} - {{scene.summary}}
+                {{scene.number}}. {{scene.intExt.name}} {{scene.scriptLocation.name}} {{scene.dayNight.name}} - {{scene.summary}}
             </a>
             <span class="remove-image-link action-span" (click)="removeSceneLink(scene)">(remove)</span>
         </span>
-        <span class="image-link-item" *ngFor="let location of image.locations">
-            <a routerLink="/projects/{{project.id}}/locations/{{location.id}}">
-                {{location.name}}
+        <span class="image-link-item" *ngFor="let scriptLocation of image.scriptLocations">
+            <a routerLink="/projects/{{project.id}}/scriptlocations/{{scriptLocation.id}}">
+                {{scriptLocation.name}}
             </a>
-            <span class="remove-image-link action-span" (click)="removeLocationLink(location)">(remove)</span>
+            <span class="remove-image-link action-span" (click)="removeScriptLocationLink(scriptLocation)">(remove)</span>
         </span>
         <span class="image-link-item" *ngFor="let character of image.characters">
             <a routerLink="/projects/{{project.id}}/characters/{{character.id}}">

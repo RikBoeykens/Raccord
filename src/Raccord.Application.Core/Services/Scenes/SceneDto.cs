@@ -1,5 +1,5 @@
 using Raccord.Application.Core.Services.SceneProperties;
-using Raccord.Application.Core.Services.Locations;
+using Raccord.Application.Core.Services.ScriptLocations;
 
 namespace Raccord.Application.Core.Services.Scenes
 {
@@ -7,7 +7,7 @@ namespace Raccord.Application.Core.Services.Scenes
     public class SceneDto
     {
         private IntExtDto _intExt;
-        private LocationDto _location;
+        private ScriptLocationDto _scriptLocation;
         private DayNightDto _dayNight;
 
         // ID of the scene
@@ -39,15 +39,15 @@ namespace Raccord.Application.Core.Services.Scenes
         }
 
         // The Scene's Location
-        public LocationDto Location
+        public ScriptLocationDto ScriptLocation
         {
             get
             {
-                return _location ?? (_location = new LocationDto());
+                return _scriptLocation ?? (_scriptLocation = new ScriptLocationDto());
             }
             set
             {
-                _location = value;
+                _scriptLocation = value;
             }
         }
 

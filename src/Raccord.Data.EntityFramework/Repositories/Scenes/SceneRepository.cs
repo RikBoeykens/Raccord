@@ -51,7 +51,7 @@ namespace Raccord.Data.EntityFramework.Repositories.Scenes
             IQueryable<Scene> query = _context.Set<Scene>();
 
             return query.Include(s => s.IntExt)
-                         .Include(s => s.Location)
+                         .Include(s => s.ScriptLocation)
                          .Include(s => s.DayNight)
                          .Include(s=> s.ImageScenes)
                          .ThenInclude(i=> i.Image)
@@ -79,7 +79,7 @@ namespace Raccord.Data.EntityFramework.Repositories.Scenes
             IQueryable<Scene> query = _context.Set<Scene>();
 
             return query.Include(s => s.IntExt)
-                         .Include(s => s.Location)
+                         .Include(s => s.ScriptLocation)
                          .Include(s => s.DayNight)
                          .Include(s=> s.ImageScenes)
                          .ThenInclude(i=> i.Image);
@@ -90,7 +90,7 @@ namespace Raccord.Data.EntityFramework.Repositories.Scenes
             IQueryable<Scene> query = _context.Set<Scene>();
 
             return query.Include(s => s.IntExt)
-                         .Include(s => s.Location)
+                         .Include(s => s.ScriptLocation)
                          .Include(s => s.DayNight);
         }
 
@@ -99,7 +99,7 @@ namespace Raccord.Data.EntityFramework.Repositories.Scenes
             IQueryable<Scene> query = _context.Set<Scene>();
 
             return query.Include(s => s.IntExt)
-                         .Include(s => s.Location)
+                         .Include(s => s.ScriptLocation)
                          .Include(s => s.DayNight)
                          .Include(s=> s.Project);
         }

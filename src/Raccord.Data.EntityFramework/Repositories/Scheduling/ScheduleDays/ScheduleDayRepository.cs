@@ -42,7 +42,7 @@ namespace Raccord.Data.EntityFramework.Repositories.Scheduling.ScheduleDays
                         .ThenInclude(s=> s.IntExt)
                         .Include(sd=> sd.ScheduleScenes)
                         .ThenInclude(ss=> ss.Scene)
-                        .ThenInclude(s=> s.Location)
+                        .ThenInclude(s=> s.ScriptLocation)
                         .Include(sd=> sd.ScheduleScenes)
                         .ThenInclude(ss=> ss.Scene)
                         .ThenInclude(s=> s.DayNight)
