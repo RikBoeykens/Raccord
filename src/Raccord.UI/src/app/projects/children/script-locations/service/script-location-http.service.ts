@@ -2,41 +2,41 @@ import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { BaseHttpService } from '../../../../shared/service/base-http.service';
 import { AppSettings } from '../../../../app.settings';
-import { FullLocation } from '../model/full-location.model';
-import { LocationSummary } from '../model/location-summary.model';
-import { Location } from '../model/location.model';
+import { FullScriptLocation } from '../model/full-script-location.model';
+import { ScriptLocationSummary } from '../model/script-location-summary.model';
+import { ScriptLocation } from '../model/script-location.model';
 import { JsonResponse } from '../../../../shared/model/json-response.model';
 
 @Injectable()
-export class LocationHttpService extends BaseHttpService {
+export class ScriptLocationHttpService extends BaseHttpService {
 
     constructor(protected _http: Http) { 
         super(_http);
-        this._baseUri = `${AppSettings.API_ENDPOINT}/locations`;
+        this._baseUri = `${AppSettings.API_ENDPOINT}/scriptlocations`;
     }
 
-    getAll(projectId): Promise<LocationSummary[]> {
+    getAll(projectId): Promise<ScriptLocationSummary[]> {
 
         var uri = `${this._baseUri}/${projectId}/project`;
 
         return this.doGetArray(uri);
     }
 
-    get(id: number): Promise<FullLocation>{
+    get(id: number): Promise<FullScriptLocation>{
 
         var uri = `${this._baseUri}/${id}`;
 
         return this.doGet(uri);
     }
 
-    getSummary(id: Number): Promise<LocationSummary> {
+    getSummary(id: Number): Promise<ScriptLocationSummary> {
 
         var uri = `${this._baseUri}/${id}/summary`;
 
         return this.doGet(uri);
     }
 
-    post(location: Location): Promise<number> {
+    post(location: ScriptLocation): Promise<number> {
         var uri = this._baseUri;
 
         return this.doPost(location, uri);

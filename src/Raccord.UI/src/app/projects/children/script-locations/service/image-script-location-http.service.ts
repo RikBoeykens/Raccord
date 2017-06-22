@@ -2,19 +2,16 @@ import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { BaseHttpService } from '../../../../shared/service/base-http.service';
 import { AppSettings } from '../../../../app.settings';
-import { FullLocation } from '../model/full-location.model';
-import { LocationSummary } from '../model/location-summary.model';
-import { Location } from '../model/location.model';
 import { LinkedImage } from '../../images/model/linked-image.model';
 import { JsonResponse } from '../../../../shared/model/json-response.model';
 import { SortOrder } from '../../../../shared/model/sort-order.model';
 
 @Injectable()
-export class ImageLocationHttpService extends BaseHttpService {
+export class ImageScriptLocationHttpService extends BaseHttpService {
 
     constructor(protected _http: Http) { 
         super(_http);
-        this._baseUri = `${AppSettings.API_ENDPOINT}/imagelocations`;
+        this._baseUri = `${AppSettings.API_ENDPOINT}/imagescriptlocations`;
     }
 
     getImages(locationId): Promise<LinkedImage[]> {

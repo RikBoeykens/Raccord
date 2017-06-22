@@ -45,7 +45,7 @@
                             *ngFor="let scheduleScene of scheduleDay.scenes">
                             <div md-line>
                                 <show-image *ngIf="scheduleScene.scene.primaryImage.id!=0" [image]="scheduleScene.scene.primaryImage" [listAvatar]="true"></show-image>
-                                <a routerLink="/projects/{{project.id}}/scenes/{{scheduleScene.scene.id}}">{{scheduleScene.scene.number}}. {{scheduleScene.scene.intExt.name}} {{scheduleScene.scene.location.name}} {{scheduleScene.scene.dayNight.name}} - {{scheduleScene.scene.summary}}</a> ({{scheduleScene.pageLength | pagelength}})
+                                <a routerLink="/projects/{{project.id}}/scenes/{{scheduleScene.scene.id}}">{{scheduleScene.scene.number}}. {{scheduleScene.scene.intExt.name}} {{scheduleScene.scene.scriptLocation.name}} {{scheduleScene.scene.dayNight.name}} - {{scheduleScene.scene.summary}}</a> ({{scheduleScene.pageLength | pagelength}})
                                 <button md-button (click)="removeScheduleScene($event, scheduleScene)"><md-icon>delete</md-icon></button>
                                 <a md-button [routerLink]="[scheduleScene.scene.id, 'scene', scheduleScene.id]"><md-icon>edit</md-icon></a>
                             </div>

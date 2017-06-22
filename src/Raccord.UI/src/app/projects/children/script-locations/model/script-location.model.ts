@@ -1,6 +1,6 @@
 import { BaseModel } from '../../../../shared/model/base.model';
 
-export class Location extends BaseModel{
+export class ScriptLocation extends BaseModel{
     id: number;
     name: string;
     description: string;

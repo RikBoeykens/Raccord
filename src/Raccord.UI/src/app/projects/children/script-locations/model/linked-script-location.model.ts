@@ -1,6 +1,6 @@
-import { Location } from './location.model';
+import { ScriptLocation } from './script-location.model';
 
-export class LinkedLocation extends Location{
+export class LinkedScriptLocation extends ScriptLocation{
     linkID: number
 
     constructor(obj?: {

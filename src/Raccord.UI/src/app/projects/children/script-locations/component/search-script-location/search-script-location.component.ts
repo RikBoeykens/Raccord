@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Location } from '../../model/location.model';
+import { ScriptLocation } from '../../model/script-location.model';
 import { SearchEngineService } from '../../../../../search/service/search-engine.service';
 import { LoadingService } from '../../../../../loading/service/loading.service';
 import { SearchResult } from '../../../../../search/model/search-result.model';
@@ -7,12 +7,12 @@ import { EntityType } from '../../../../../shared/enums/entity-type.enum';
 import { DialogService } from '../../../../../shared/service/dialog.service';
 
 @Component({
-    selector: 'search-location',
-    templateUrl: 'search-location.component.html'
+    selector: 'search-script-location',
+    templateUrl: 'search-script-location.component.html'
 })
-export class SearchLocationComponent{
+export class SearchScriptLocationComponent{
 
-    @Input() sceneLocation: Location;
+    @Input() sceneScriptLocation: ScriptLocation;
     searchResults: SearchResult[] = [];
 
     constructor(
@@ -27,31 +27,31 @@ export class SearchLocationComponent{
     }
 
     doSearch(){
-        this.sceneLocation.id = 0;
-        if(!this.sceneLocation.name || this.sceneLocation.name ===''){
+        this.sceneScriptLocation.id = 0;
+        if(!this.sceneScriptLocation.name || this.sceneScriptLocation.name ===''){
             this.clearSearch();
             return;
         }
 
         let loadingId = this._loadingService.startLoading();
         
-        this._searchEngineService.search({ searchText: this.sceneLocation.name, includeTypes: [EntityType.location], excludeTypes: [], projectId: this.sceneLocation.projectId}).then(results=>{
+        this._searchEngineService.search({ searchText: this.sceneScriptLocation.name, includeTypes: [EntityType.scriptLocation], excludeTypes: [], projectId: this.sceneScriptLocation.projectId}).then(results=>{
             if(typeof(results)=='string'){
                 this._dialogService.error(results);
             }
             else{
                 this.searchResults = results[0].results;
-                var exactResult = this.searchResults.find(result=> result.displayName.toLowerCase()==this.sceneLocation.name.toLowerCase());
+                var exactResult = this.searchResults.find(result=> result.displayName.toLowerCase()==this.sceneScriptLocation.name.toLowerCase());
                 if(exactResult)
-                    this.sceneLocation.id = exactResult.id;
+                    this.sceneScriptLocation.id = exactResult.id;
             }
         }).catch()
         .then(()=> this._loadingService.endLoading(loadingId));
     }
 
     setResult(result: SearchResult){
-        this.sceneLocation.name = result.displayName;
-        this.sceneLocation.id = result.id;
+        this.sceneScriptLocation.name = result.displayName;
+        this.sceneScriptLocation.id = result.id;
         this.clearSearch();
     }
 }

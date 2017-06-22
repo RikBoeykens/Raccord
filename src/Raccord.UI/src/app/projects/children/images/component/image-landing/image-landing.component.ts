@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ImageHttpService } from '../../service/image-http.service';
 import { ImageSceneHttpService } from '../../../scenes/service/image-scene-http.service';
-import { ImageLocationHttpService } from '../../../locations/service/image-location-http.service';
+import { ImageScriptLocationHttpService } from '../../../script-locations/service/image-script-location-http.service';
 import { ImageCharacterHttpService } from '../../../characters/service/image-character-http.service';
 import { ImageBreakdownItemHttpService } from '../../../breakdowns/breakdown-items/service/image-breakdown-item-http.service';
 import { LoadingService } from '../../../../../loading/service/loading.service';
@@ -12,7 +12,7 @@ import { LinkImage } from '../../model/link-image.model';
 import { FullImage } from '../../model/full-image.model';
 import { ProjectSummary } from '../../../../model/project-summary.model';
 import { LinkedScene } from '../../../scenes/model/linked-scene.model';
-import { LinkedLocation } from '../../../locations/model/linked-location.model';
+import { LinkedScriptLocation } from '../../../script-locations/model/linked-script-location.model';
 import { LinkedCharacter } from '../../../characters/model/linked-character.model';
 import { LinkedBreakdownItem } from '../../../breakdowns/breakdown-items/model/linked-breakdown-item.model';
 import { EntityType } from '../../../../../shared/enums/entity-type.enum';
@@ -26,12 +26,12 @@ export class ImageLandingComponent {
     image: FullImage;
     viewImage: Image;
     project: ProjectSummary;
-    imageLinkTypes: EntityType[] = [EntityType.location, EntityType.scene, EntityType.character, EntityType.breakdownItem];
+    imageLinkTypes: EntityType[] = [EntityType.scriptLocation, EntityType.scene, EntityType.character, EntityType.breakdownItem];
 
     constructor(
         private _imageHttpService: ImageHttpService,
         private _imageSceneHttpService: ImageSceneHttpService,
-        private _imageLocationHttpService: ImageLocationHttpService,
+        private _imageScriptLocationHttpService: ImageScriptLocationHttpService,
         private _imageCharacterHttpService: ImageCharacterHttpService,
         private _imageBreakdownItemHttpService: ImageBreakdownItemHttpService,
         private _loadingService: LoadingService,
@@ -79,8 +79,8 @@ export class ImageLandingComponent {
             case EntityType.scene:
                 this.linkSceneImage(selectedEntity.entityId);
                 break;
-            case EntityType.location:
-                this.linkLocationImage(selectedEntity.entityId);
+            case EntityType.scriptLocation:
+                this.linkScriptLocationImage(selectedEntity.entityId);
                 break;
             case EntityType.character:
                 this.linkCharacterImage(selectedEntity.entityId);
@@ -107,10 +107,10 @@ export class ImageLandingComponent {
         );
     }
 
-    linkLocationImage(locationId: number){
+    linkScriptLocationImage(locationId: number){
         let loadingId = this._loadingService.startLoading();
 
-        this._imageLocationHttpService.addLink(this.image.id, locationId).then(data=>{
+        this._imageScriptLocationHttpService.addLink(this.image.id, locationId).then(data=>{
             if(typeof(data)=='string'){
                 this._dialogService.error(data);
             }else{
@@ -171,10 +171,10 @@ export class ImageLandingComponent {
         );
     }
 
-    removeLocationLink(location: LinkedLocation){
+    removeScriptLocationLink(location: LinkedScriptLocation){
         let loadingId = this._loadingService.startLoading();
 
-        this._imageLocationHttpService.removeLink(location.linkID).then(data=>{
+        this._imageScriptLocationHttpService.removeLink(location.linkID).then(data=>{
             if(typeof(data)=='string'){
                 this._dialogService.error(data);
             }else{

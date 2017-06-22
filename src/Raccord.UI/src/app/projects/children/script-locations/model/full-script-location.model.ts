@@ -1,8 +1,8 @@
-import { Location } from './location.model';
+import { ScriptLocation } from './script-location.model';
 import { SceneSummary } from '../../scenes/model/scene-summary.model';
 import { LinkedImage } from '../../images/model/linked-image.model';
 
-export class FullLocation extends Location{
+export class FullScriptLocation extends ScriptLocation{
     scenes: SceneSummary[];
     images: LinkedImage[];
 

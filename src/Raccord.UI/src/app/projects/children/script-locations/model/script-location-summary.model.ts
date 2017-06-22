@@ -1,7 +1,7 @@
-import { Location } from './location.model';
+import { ScriptLocation } from './script-location.model';
 import { Image } from '../../images/model/image.model';
 
-export class LocationSummary extends Location{
+export class ScriptLocationSummary extends ScriptLocation{
     sceneCount: number;
     primaryImage: Image;
 
