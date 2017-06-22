@@ -4,10 +4,10 @@
         (ngSubmit)="doImageSubmit()">
     <div fxLayout="row" fxLayoutGap="10px">
         <md-input-container fxFlex="25%">
-            <input md-input placeholder="Title" id="image_title" required [(ngModel)]="image.title" #title="ngModel" name="image_title">
+            <input mdInput placeholder="Title" id="image_title" required [(ngModel)]="image.title" #title="ngModel" name="image_title">
         </md-input-container>
         <md-input-container fxFlex="75%">
-            <input md-input placeholder="Description" id="image_description" [(ngModel)]="image.description" #description="ngModel" name="image_description">
+            <input mdInput placeholder="Description" id="image_description" [(ngModel)]="image.description" #description="ngModel" name="image_description">
         </md-input-container>
     </div>
     <div fxLayout="row">

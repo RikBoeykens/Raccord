@@ -4,13 +4,13 @@
         (ngSubmit)="doCharacterSubmit()">
     <div fxLayout="row" fxLayoutGap="10px">
         <md-input-container fxFlex="25%">
-            <input md-input placeholder="Number" id="character_number" required [(ngModel)]="character.number" #name="ngModel" name="character_number">
+            <input mdInput placeholder="Number" id="character_number" required [(ngModel)]="character.number" #name="ngModel" name="character_number">
         </md-input-container>
         <md-input-container fxFlex="25%">
-            <input md-input placeholder="Name" id="character_name" required [(ngModel)]="character.name" #name="ngModel" name="character_name">
+            <input mdInput placeholder="Name" id="character_name" required [(ngModel)]="character.name" #name="ngModel" name="character_name">
         </md-input-container>
         <md-input-container fxFlex="50%">
-            <input md-input placeholder="Description" id="character_description" [(ngModel)]="character.description" #description="ngModel" name="character_description">
+            <input mdInput placeholder="Description" id="character_description" [(ngModel)]="character.description" #description="ngModel" name="character_description">
         </md-input-container>
     </div>
     <div fxLayout="row">

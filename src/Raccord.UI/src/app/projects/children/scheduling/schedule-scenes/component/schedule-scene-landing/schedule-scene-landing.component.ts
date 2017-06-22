@@ -13,7 +13,7 @@ import { PageLengthHelpers } from '../../../../../../shared/helpers/page-length.
 @Component({
     templateUrl: 'schedule-scene-landing.component.html',
 })
-export class ScheduleSceneLandingComponent extends OnInit  implements OnChanges{
+export class ScheduleSceneLandingComponent implements OnInit, OnChanges{
 
     scheduleScene: FullScheduleScene;
     project: ProjectSummary;
@@ -29,7 +29,6 @@ export class ScheduleSceneLandingComponent extends OnInit  implements OnChanges{
         private _route: ActivatedRoute,
         private _router: Router,
     ) {
-        super();
     }
 
     ngOnInit() {

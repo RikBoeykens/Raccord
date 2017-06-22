@@ -12,7 +12,7 @@ import { HtmlClassHelpers } from '../../../../../shared/helpers/html-class.helpe
 @Component({
     templateUrl: 'script-locations-list.component.html',
 })
-export class ScriptLocationsListComponent extends OnInit {
+export class ScriptLocationsListComponent implements OnInit {
 
     scriptLocations: ScriptLocationDroppableWrapper[] = [];
     deleteScriptLocations: ScriptLocationDroppableWrapper[]=[];
@@ -30,7 +30,6 @@ export class ScriptLocationsListComponent extends OnInit {
         private _router: Router,
         private dragulaService: DragulaService
     ) {
-        super();
         this.viewNewScriptLocation = new ScriptLocation();
 
         dragulaService.drag.subscribe((value) => {

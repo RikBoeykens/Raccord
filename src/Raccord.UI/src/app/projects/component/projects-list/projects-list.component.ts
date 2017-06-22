@@ -9,7 +9,7 @@ import { Image } from '../../children/images/model/image.model';
 @Component({
     templateUrl: 'projects-list.component.html',
 })
-export class ProjectsListComponent extends OnInit {
+export class ProjectsListComponent implements OnInit {
 
     projects: ProjectSummary[] = [];
 
@@ -20,7 +20,6 @@ export class ProjectsListComponent extends OnInit {
         private _route: ActivatedRoute,
         private _router: Router
     ) {
-        super();
     }
 
     ngOnInit() {

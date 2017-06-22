@@ -13,7 +13,7 @@
             (ngSubmit)="addScheduleDay()">
         <div fxLayout="row" fxLayoutGap="10px">
             <md-input-container fxFlex="33%">
-                <input md-input type="date" required [(ngModel)]="viewNewScheduleDay.date" #newDate="ngModel" name="new_schedule_day_date" />
+                <input mdInput type="date" required [(ngModel)]="viewNewScheduleDay.date" #newDate="ngModel" name="new_schedule_day_date" />
             </md-input-container>
             <button fxFlex="33%" md-raised-button type="submit"[disabled]="!newScheduleDayForm.form.valid">Add</button>            
         </div>

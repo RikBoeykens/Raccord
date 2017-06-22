@@ -6,7 +6,7 @@ import { ProjectSummary } from '../../../../model/project-summary.model';
 @Component({
     templateUrl: 'breakdown-landing.component.html',
 })
-export class BreakdownLandingComponent extends OnInit {
+export class BreakdownLandingComponent implements OnInit {
 
     breakdownTypes: BreakdownTypeSummary[] = [];
     project: ProjectSummary;
@@ -15,7 +15,6 @@ export class BreakdownLandingComponent extends OnInit {
         private _route: ActivatedRoute,
         private _router: Router,
     ) {
-        super();
     }
 
     ngOnInit() {
