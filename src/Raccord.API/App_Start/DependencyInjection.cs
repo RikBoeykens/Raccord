@@ -19,7 +19,7 @@ using Raccord.Data.EntityFramework.Repositories.Scheduling.ScheduleDayNotes;
 using Raccord.Data.EntityFramework.Repositories.Scheduling.ScheduleCharacters;
 using Raccord.Application.Core.Services.Projects;
 using Raccord.Application.Core.Services.Scenes;
-using Raccord.Application.Core.Services.Locations;
+using Raccord.Application.Core.Services.ScriptLocations;
 using Raccord.Application.Core.Services.SceneProperties;
 using Raccord.Application.Core.Services.Images;
 using Raccord.Application.Core.Services.SearchEngine;
@@ -37,7 +37,7 @@ using Raccord.Application.Core.Services.Scheduling.ScheduleScenes;
 using Raccord.Application.Core.Services.Scheduling.ScheduleDayNotes;
 using Raccord.Application.Services.Projects;
 using Raccord.Application.Services.Scenes;
-using Raccord.Application.Services.Locations;
+using Raccord.Application.Services.ScriptLocations;
 using Raccord.Application.Services.SceneProperties;
 using Raccord.Application.Services.Images;
 using Raccord.Application.Services.SearchEngine;
@@ -75,8 +75,8 @@ namespace Raccord.API
             services.AddTransient<IIntExtSearchEngineService, IntExtSearchEngineService>();
             
             services.AddTransient<IScriptLocationRepository, ScriptLocationRepository>();
-            services.AddTransient<ILocationService, LocationService>();
-            services.AddTransient<ILocationSearchEngineService, LocationSearchEngineService>();
+            services.AddTransient<IScriptLocationService, ScriptLocationService>();
+            services.AddTransient<IScriptLocationSearchEngineService, ScriptLocationSearchEngineService>();
             
             services.AddTransient<IDayNightRepository, DayNightRepository>();
             services.AddTransient<IDayNightService, DayNightService>();
@@ -90,7 +90,7 @@ namespace Raccord.API
             services.AddTransient<IImageSceneService, ImageSceneService>();
 
             services.AddTransient<IImageScriptLocationRepository, ImageScriptLocationRepository>();
-            services.AddTransient<IImageLocationService, ImageLocationService>();
+            services.AddTransient<IImageScriptLocationService, ImageScriptLocationService>();
 
             services.AddTransient<IImageBreakdownItemRepository, ImageBreakdownItemRepository>();
             services.AddTransient<IImageBreakdownItemService, ImageBreakdownItemService>();

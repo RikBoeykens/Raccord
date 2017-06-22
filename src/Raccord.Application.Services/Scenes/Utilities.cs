@@ -1,7 +1,7 @@
 using Raccord.Application.Core.Services.Scenes;
 using Raccord.Domain.Model.Scenes;
 using Raccord.Domain.Model.Images;
-using Raccord.Application.Services.Locations;
+using Raccord.Application.Services.ScriptLocations;
 using Raccord.Application.Services.SceneProperties;
 using Raccord.Application.Core.Services.SearchEngine;
 using Raccord.Core.Enums;
@@ -28,7 +28,7 @@ namespace Raccord.Application.Services.Scenes
                 Summary = scene.Summary,
                 PageLength = scene.PageLength,
                 IntExt = scene.IntExt.Translate(),
-                Location = scene.ScriptLocation.Translate(),
+                ScriptLocation = scene.ScriptLocation.Translate(),
                 DayNight = scene.DayNight.Translate(),
                 Images = scene.ImageScenes.Select(i=> i.TranslateImage()),
                 Characters = scene.CharacterScenes.Select(i=> i.TranslateCharacter()),
@@ -49,7 +49,7 @@ namespace Raccord.Application.Services.Scenes
                 Summary = scene.Summary,
                 PageLength = scene.PageLength,
                 IntExt = scene.IntExt.Translate(),
-                Location = scene.ScriptLocation.Translate(),
+                ScriptLocation = scene.ScriptLocation.Translate(),
                 DayNight = scene.DayNight.Translate(),
                 PrimaryImage = scene.ImageScenes.FirstOrDefault(i=> i.IsPrimaryImage)?.Image.Translate(),
                 ProjectID = scene.ProjectID,
@@ -67,7 +67,7 @@ namespace Raccord.Application.Services.Scenes
                 Summary = scene.Summary,
                 PageLength = scene.PageLength,
                 IntExt = scene.IntExt.Translate(),
-                Location = scene.ScriptLocation.Translate(),
+                ScriptLocation = scene.ScriptLocation.Translate(),
                 DayNight = scene.DayNight.Translate(),
                 ProjectID = scene.ProjectID,
             };
@@ -84,7 +84,7 @@ namespace Raccord.Application.Services.Scenes
                 Summary = imageScene.Scene.Summary,
                 PageLength = imageScene.Scene.PageLength,
                 IntExt = imageScene.Scene.IntExt.Translate(),
-                Location = imageScene.Scene.ScriptLocation.Translate(),
+                ScriptLocation = imageScene.Scene.ScriptLocation.Translate(),
                 DayNight = imageScene.Scene.DayNight.Translate(),
                 ProjectID = imageScene.Scene.ProjectID,
                 LinkID = imageScene.ID,
@@ -102,7 +102,7 @@ namespace Raccord.Application.Services.Scenes
                 Summary = characterScene.Scene.Summary,
                 PageLength = characterScene.Scene.PageLength,
                 IntExt = characterScene.Scene.IntExt.Translate(),
-                Location = characterScene.Scene.ScriptLocation.Translate(),
+                ScriptLocation = characterScene.Scene.ScriptLocation.Translate(),
                 DayNight = characterScene.Scene.DayNight.Translate(),
                 ProjectID = characterScene.Scene.ProjectID,
                 PrimaryImage = characterScene.Scene.ImageScenes.FirstOrDefault(i=> i.IsPrimaryImage)?.Image.Translate(),
@@ -121,7 +121,7 @@ namespace Raccord.Application.Services.Scenes
                 Summary = breakdownItemScene.Scene.Summary,
                 PageLength = breakdownItemScene.Scene.PageLength,
                 IntExt = breakdownItemScene.Scene.IntExt.Translate(),
-                Location = breakdownItemScene.Scene.ScriptLocation.Translate(),
+                ScriptLocation = breakdownItemScene.Scene.ScriptLocation.Translate(),
                 DayNight = breakdownItemScene.Scene.DayNight.Translate(),
                 ProjectID = breakdownItemScene.Scene.ProjectID,
                 PrimaryImage = breakdownItemScene.Scene.ImageScenes.FirstOrDefault(i=> i.IsPrimaryImage)?.Image.Translate(),
@@ -140,7 +140,7 @@ namespace Raccord.Application.Services.Scenes
                 Summary = scheduleScene.Scene.Summary,
                 PageLength = scheduleScene.Scene.PageLength,
                 IntExt = scheduleScene.Scene.IntExt.Translate(),
-                Location = scheduleScene.Scene.ScriptLocation.Translate(),
+                ScriptLocation = scheduleScene.Scene.ScriptLocation.Translate(),
                 DayNight = scheduleScene.Scene.DayNight.Translate(),
                 ProjectID = scheduleScene.Scene.ProjectID,
                 PrimaryImage = scheduleScene.Scene.ImageScenes.FirstOrDefault(i=> i.IsPrimaryImage)?.Image.Translate(),

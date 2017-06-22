@@ -48,7 +48,7 @@ namespace Raccord.Domain.Model.Scenes
         public virtual DayNight DayNight { get; set; }
 
         // ID of the linked day/night
-        public long LocationID { get; set; }
+        public long ScriptLocationID { get; set; }
 
         // Linked day/night
         public virtual ScriptLocation ScriptLocation { get; set; }

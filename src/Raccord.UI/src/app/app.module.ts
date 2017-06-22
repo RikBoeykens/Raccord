@@ -42,11 +42,11 @@ import { SceneImagesComponent } from './projects';
 import { SceneCharactersComponent } from './projects';
 import { SceneBreakdownItemsComponent } from './projects';
 import { SceneSchedulingComponent } from './projects';
-import { LocationsListComponent } from './projects';
-import { EditLocationComponent } from './projects';
-import { LocationLandingComponent } from './projects';
-import { LocationImagesComponent } from './projects';
-import { SearchLocationComponent } from './projects';
+import { ScriptLocationsListComponent } from './projects';
+import { EditScriptLocationComponent } from './projects';
+import { ScriptLocationLandingComponent } from './projects';
+import { ScriptLocationImagesComponent } from './projects';
+import { SearchScriptLocationComponent } from './projects';
 import { IntExtListComponent } from './projects';
 import { EditIntExtComponent } from './projects';
 import { IntExtLandingComponent } from './projects';
@@ -104,11 +104,11 @@ const COMPONENTS =[
   SceneCharactersComponent,
   SceneBreakdownItemsComponent,
   SceneSchedulingComponent,
-  LocationsListComponent,
-  EditLocationComponent,
-  LocationLandingComponent,
-  LocationImagesComponent,
-  SearchLocationComponent,
+  ScriptLocationsListComponent,
+  EditScriptLocationComponent,
+  ScriptLocationLandingComponent,
+  ScriptLocationImagesComponent,
+  SearchScriptLocationComponent,
   IntExtListComponent,
   EditIntExtComponent,
   IntExtLandingComponent,
@@ -161,10 +161,10 @@ import {
   ScenesResolve,
   SceneCharactersResolve 
 } from './projects';
-import { LocationHttpService } from './projects';
-import { ImageLocationHttpService } from './projects';
-import { LocationResolve } from './projects';
-import { LocationsResolve } from './projects';
+import { ScriptLocationHttpService } from './projects';
+import { ImageScriptLocationHttpService } from './projects';
+import { ScriptLocationResolve } from './projects';
+import { ScriptLocationsResolve } from './projects';
 import { IntExtHttpService } from './projects';
 import { IntExtResolve } from './projects';
 import { IntExtsResolve } from './projects';
@@ -213,10 +213,10 @@ const APP_PROVIDERS = [
   SceneResolve,
   ScenesResolve,
   SceneCharactersResolve,
-  LocationHttpService,
-  ImageLocationHttpService,
-  LocationResolve,
-  LocationsResolve,
+  ScriptLocationHttpService,
+  ImageScriptLocationHttpService,
+  ScriptLocationResolve,
+  ScriptLocationsResolve,
   IntExtHttpService,
   IntExtResolve,
   IntExtsResolve,

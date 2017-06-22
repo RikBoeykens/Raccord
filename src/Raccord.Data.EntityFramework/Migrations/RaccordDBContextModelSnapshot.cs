@@ -214,9 +214,7 @@ namespace Raccord.Data.EntityFramework.Migrations
 
                     b.Property<bool>("IsPrimaryImage");
 
-                    b.Property<long>("LocationID");
-
-                    b.Property<long?>("ScriptLocationID");
+                    b.Property<long>("ScriptLocationID");
 
                     b.HasKey("ID");
 
@@ -284,15 +282,13 @@ namespace Raccord.Data.EntityFramework.Migrations
 
                     b.Property<long>("IntExtID");
 
-                    b.Property<long>("LocationID");
-
                     b.Property<string>("Number");
 
                     b.Property<int>("PageLength");
 
                     b.Property<long>("ProjectID");
 
-                    b.Property<long?>("ScriptLocationID");
+                    b.Property<long>("ScriptLocationID");
 
                     b.Property<int>("SortingOrder");
 
@@ -513,7 +509,8 @@ namespace Raccord.Data.EntityFramework.Migrations
 
                     b.HasOne("Raccord.Domain.Model.ScriptLocations.ScriptLocation", "ScriptLocation")
                         .WithMany("ImageLocations")
-                        .HasForeignKey("ScriptLocationID");
+                        .HasForeignKey("ScriptLocationID")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Raccord.Domain.Model.SceneProperties.DayNight", b =>

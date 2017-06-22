@@ -1,4 +1,4 @@
-using Raccord.Application.Core.Services.Locations;
+using Raccord.Application.Core.Services.ScriptLocations;
 using Raccord.Application.Core.Common.Sorting;
 
 namespace Raccord.API.ViewModels.Common.Sorting

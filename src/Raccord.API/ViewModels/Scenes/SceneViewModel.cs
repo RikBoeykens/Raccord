@@ -1,5 +1,5 @@
 using Raccord.API.ViewModels.SceneProperties;
-using Raccord.API.ViewModels.Locations;
+using Raccord.API.ViewModels.ScriptLocations;
 
 namespace Raccord.API.ViewModels.Scenes
 {
@@ -7,7 +7,7 @@ namespace Raccord.API.ViewModels.Scenes
     public class SceneViewModel
     {
         private IntExtViewModel _intExt;
-        private LocationViewModel _location;
+        private ScriptLocationViewModel _scriptLocation;
         private DayNightViewModel _dayNight;
 
         // ID of the scene
@@ -39,15 +39,15 @@ namespace Raccord.API.ViewModels.Scenes
         }
 
         // The Scene's Location
-        public LocationViewModel Location
+        public ScriptLocationViewModel ScriptLocation
         {
             get
             {
-                return _location ?? (_location = new LocationViewModel());
+                return _scriptLocation ?? (_scriptLocation = new ScriptLocationViewModel());
             }
             set
             {
-                _location = value;
+                _scriptLocation = value;
             }
         }
 

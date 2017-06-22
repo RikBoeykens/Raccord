@@ -1,5 +1,5 @@
 using Raccord.Application.Core.Services.Scenes;
-using Raccord.API.ViewModels.Locations;
+using Raccord.API.ViewModels.ScriptLocations;
 using Raccord.API.ViewModels.SceneProperties;
 using Raccord.API.ViewModels.Images;
 using Raccord.API.ViewModels.Characters;
@@ -21,7 +21,7 @@ namespace Raccord.API.ViewModels.Scenes
                 Summary = dto.Summary,
                 PageLength = dto.PageLength,
                 IntExt = dto.IntExt.Translate(),
-                Location = dto.Location.Translate(),
+                ScriptLocation = dto.ScriptLocation.Translate(),
                 DayNight = dto.DayNight.Translate(),
                 Images = dto.Images.Select(i=> i.Translate()),
                 Characters = dto.Characters.Select(i=> i.Translate()),
@@ -40,7 +40,7 @@ namespace Raccord.API.ViewModels.Scenes
                 Summary = dto.Summary,
                 PageLength = dto.PageLength,
                 IntExt = dto.IntExt.Translate(),
-                Location = dto.Location.Translate(),
+                ScriptLocation = dto.ScriptLocation.Translate(),
                 DayNight = dto.DayNight.Translate(),
                 PrimaryImage = dto.PrimaryImage.Translate(),
                 ProjectID = dto.ProjectID,
@@ -56,7 +56,7 @@ namespace Raccord.API.ViewModels.Scenes
                 Summary = dto.Summary,
                 PageLength = dto.PageLength,
                 IntExt = dto.IntExt.Translate(),
-                Location = dto.Location.Translate(),
+                ScriptLocation = dto.ScriptLocation.Translate(),
                 DayNight = dto.DayNight.Translate(),
                 ProjectID = dto.ProjectID,
             };
@@ -71,7 +71,7 @@ namespace Raccord.API.ViewModels.Scenes
                 Summary = dto.Summary,
                 PageLength = dto.PageLength,
                 IntExt = dto.IntExt.Translate(),
-                Location = dto.Location.Translate(),
+                ScriptLocation = dto.ScriptLocation.Translate(),
                 DayNight = dto.DayNight.Translate(),
                 PrimaryImage = dto.PrimaryImage.Translate(),
                 ProjectID = dto.ProjectID,
@@ -89,7 +89,7 @@ namespace Raccord.API.ViewModels.Scenes
                 Summary = vm.Summary,
                 PageLength = vm.PageLength,
                 IntExt = vm.IntExt.Translate(),
-                Location = vm.Location.Translate(),
+                ScriptLocation = vm.ScriptLocation.Translate(),
                 DayNight = vm.DayNight.Translate(),
                 ProjectID = vm.ProjectID,
             };
