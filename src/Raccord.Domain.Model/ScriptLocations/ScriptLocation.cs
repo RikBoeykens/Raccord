@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Raccord.Domain.Model.Projects;
 using Raccord.Domain.Model.Scenes;
 using Raccord.Domain.Model.Images;
+using Raccord.Domain.Model.Locations.LocationSets;
 
 namespace Raccord.Domain.Model.ScriptLocations
 {
@@ -10,6 +11,7 @@ namespace Raccord.Domain.Model.ScriptLocations
     {
         private ICollection<Scene> _scenes;
         private ICollection<ImageScriptLocation> _images;
+        private ICollection<LocationSet> _sets;
 
         /// Name of the location
         public string Name { get; set; }
@@ -46,6 +48,19 @@ namespace Raccord.Domain.Model.ScriptLocations
             set
             {
                 _images = value;
+            }
+        }
+
+        // Linked sets
+        public virtual ICollection<LocationSet> LocationSets
+        {
+            get
+            {
+                return _sets ?? (_sets = new List<LocationSet>());
+            }
+            set
+            {
+                _sets = value;
             }
         }
     }
