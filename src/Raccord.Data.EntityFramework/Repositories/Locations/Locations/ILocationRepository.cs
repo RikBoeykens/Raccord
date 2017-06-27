@@ -1,13 +1,13 @@
-using Raccord.Domain.Model.Scheduling;
+using Raccord.Domain.Model.Locations.Locations;
 using System.Collections.Generic;
 
-namespace Raccord.Data.EntityFramework.Repositories.Scheduling.ScheduleDays
+namespace Raccord.Data.EntityFramework.Repositories.Locations.Locations
 {
     // Interface defining a repository for Int/Ext
-    public interface ILocationRepository : IBaseRepository<ScheduleDay>
+    public interface ILocationRepository : IBaseRepository<Location>
     {
-        IEnumerable<ScheduleDay> GetAllForProject(long projectID);
-        ScheduleDay GetFull(long ID);
-        ScheduleDay GetSummary(long ID);
+        IEnumerable<Location> GetAllForProject(long projectID);
+        Location GetFull(long ID);
+        Location GetSummary(long ID);
     }
 }

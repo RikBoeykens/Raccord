@@ -1,74 +1,58 @@
-using Raccord.Domain.Model.Scheduling;
+using Raccord.Domain.Model.Locations.Locations;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 
-namespace Raccord.Data.EntityFramework.Repositories.Scheduling.ScheduleDays
+namespace Raccord.Data.EntityFramework.Repositories.Locations.Locations
 {
     // Repository for ScheduleDay
-    public class LocationRepository : BaseRepository<ScheduleDay>, ILocationRepository
+    public class LocationRepository : BaseRepository<Location>, ILocationRepository
     {
         public LocationRepository(RaccordDBContext context) : base(context) 
         {
         }
 
-        public IEnumerable<ScheduleDay> GetAllForProject(long projectID)
+        public IEnumerable<Location> GetAllForProject(long projectID)
         {
             var query = GetIncludedFull();
 
             return query.Where(sd=> sd.ProjectID == projectID);
         }
 
-        public ScheduleDay GetFull(long ID)
+        public Location GetFull(long ID)
         {
             var query = GetIncludedFull();
 
             return query.FirstOrDefault(sd => sd.ID == ID);
         }
 
-        public ScheduleDay GetSummary(long ID)
+        public Location GetSummary(long ID)
         {
             var query = GetIncludedSummary();
 
             return query.FirstOrDefault(sd => sd.ID == ID);
         }
 
-        private IQueryable<ScheduleDay> GetIncludedFull()
+        private IQueryable<Location> GetIncludedFull()
         {
-            IQueryable<ScheduleDay> query = _context.Set<ScheduleDay>();
+            IQueryable<Location> query = _context.Set<Location>();
 
-            return query.Include(sd=> sd.ScheduleScenes)
-                        .ThenInclude(ss=> ss.Scene)
-                        .ThenInclude(s=> s.IntExt)
-                        .Include(sd=> sd.ScheduleScenes)
-                        .ThenInclude(ss=> ss.Scene)
-                        .ThenInclude(s=> s.ScriptLocation)
-                        .Include(sd=> sd.ScheduleScenes)
-                        .ThenInclude(ss=> ss.Scene)
-                        .ThenInclude(s=> s.DayNight)
-                        .Include(sd=> sd.ScheduleScenes)
-                        .ThenInclude(ss=> ss.Scene)
-                        .ThenInclude(s=> s.ImageScenes)
-                        .ThenInclude(i=> i.Image)
-                        .Include(ss=> ss.ScheduleScenes)
-                        .ThenInclude(ss=> ss.Characters)
-                        .ThenInclude(cs=> cs.CharacterScene)
-                        .ThenInclude(cs=> cs.Character)
-                        .ThenInclude(c=> c.ImageCharacters)
-                        .ThenInclude(ic=> ic.Image)
-                        .Include(sd=> sd.Notes);
+            return query.Include(l=> l.LocationSets)
+                        .ThenInclude(ls=> ls.ScriptLocation)
+                        .ThenInclude(sl=> sl.ImageLocations)
+                        .ThenInclude(il=> il.Image);
         }
 
-        private IQueryable<ScheduleDay> GetIncludedSummary()
+        private IQueryable<Location> GetIncludedSummary()
         {
-            IQueryable<ScheduleDay> query = _context.Set<ScheduleDay>();
+            IQueryable<Location> query = _context.Set<Location>();
 
-            return query.Include(sd=> sd.ScheduleScenes);
+            return query.Include(sd=> sd.LocationSets);
         }
 
-        private IQueryable<ScheduleDay> GetIncluded()
+        private IQueryable<Location> GetIncluded()
         {
-            IQueryable<ScheduleDay> query = _context.Set<ScheduleDay>();
+            IQueryable<Location> query = _context.Set<Location>();
 
             return query;
         }
