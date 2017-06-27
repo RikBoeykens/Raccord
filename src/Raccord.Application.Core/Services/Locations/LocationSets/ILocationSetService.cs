@@ -3,17 +3,17 @@ using System.Collections.Generic;
 namespace Raccord.Application.Core.Services.Locations.LocationSets
 {
     // Interface for location functionality
-    public interface IScheduleSceneService
+    public interface ILocationSetService
     {
-        IEnumerable<ScheduleSceneDayDto> GetDays(long sceneID);
+        IEnumerable<LocationSetLocationDto> GetLocations(long scriptLocationID);
 
-        IEnumerable<ScheduleSceneSceneDto> GetScenes(long dayID);
+        IEnumerable<LocationSetScriptLocationDto> GetScriptLocations(long locationID);
 
-        FullScheduleSceneDto Get(long ID);
+        FullLocationSetDto Get(long ID);
 
-        long Add(ScheduleSceneDto dto);
+        long Add(LocationSetDto dto);
 
-        long Update(ScheduleSceneDto dto);
+        long Update(LocationSetDto dto);
 
         void Delete(long ID);
     }

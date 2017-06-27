@@ -1,45 +1,47 @@
-using System.Collections.Generic;
-using Raccord.Application.Core.Services.Characters;
-using Raccord.Application.Core.Services.Scenes;
-using Raccord.Application.Core.Services.Scheduling.ScheduleDays;
+using Raccord.Application.Core.Common.Location;
+using Raccord.Application.Core.Services.Locations.Locations;
+using Raccord.Application.Core.Services.ScriptLocations;
 
 namespace Raccord.Application.Core.Services.Locations.LocationSets
 {
-    // Dto to represent a summary of a schedule scene with scene info
-    public class ScheduleSceneSceneDto
+    // Dto to represent a summary of a location set with script location info
+    public class LocationSetScriptLocationDto
     {
-        private SceneSummaryDto _scene;
-        private IEnumerable<LinkedCharacterDto> _characters;
+        private LatLngDto _latLng;
+        private ScriptLocationSummaryDto _scriptLocation;
 
-        // ID of the schedule scene
+        // ID of the set
         public long ID { get; set; }
 
-        // Length in eights
-        public int PageLength { get; set; }
+        // Name of the set
+        public string Name { get; set; }
 
-        // Linked scene
-        public SceneSummaryDto Scene
+        // Description of the set
+        public string Description { get; set; }
+
+        // Lat lng of the set
+        public LatLngDto LatLng
         {
-            get
-            {
-                return _scene ?? (_scene = new SceneSummaryDto()); 
+            get 
+            { 
+                return _latLng ?? (_latLng = new LatLngDto()); 
             }
             set
-            {
-                _scene = value;
+            { 
+                _latLng = value;
             }
         }
 
-        // Characters on the schedule scene
-        public IEnumerable<LinkedCharacterDto> Characters
+        // Linked script location
+        public ScriptLocationSummaryDto ScriptLocation
         {
             get
             {
-                return _characters ?? (_characters = new List<LinkedCharacterDto>());
+                return _scriptLocation ?? (_scriptLocation = new ScriptLocationSummaryDto()); 
             }
             set
             {
-                _characters = value;
+                _scriptLocation = value;
             }
         }
     }
