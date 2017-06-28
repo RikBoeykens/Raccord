@@ -14,6 +14,8 @@ namespace Raccord.Application.Core.Services.Locations.Locations
 
         public string Name { get; set; }
 
+        public string Description { get; set; }
+
         // ID of the project
         public long ProjectID { get; set; }
 
