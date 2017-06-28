@@ -10,94 +10,90 @@ namespace Raccord.Application.Services.Locations.LocationSets
     // Service used for location set functionality
     public class LocationSetService : ILocationSetService
     {
-        private readonly IScheduleSceneRepository _scheduleSceneRepository;
+        private readonly ILocationSetRepository _locationSetRepository;
 
-        // Initialises a new ScheduleSceneService
-        public ScheduleSceneService(IScheduleSceneRepository scheduleSceneRepository)
+        // Initialises a new LocationSetService
+        public LocationSetService(ILocationSetRepository locationSetRepository)
         {
-            if(scheduleSceneRepository == null)
-                throw new ArgumentNullException(nameof(scheduleSceneRepository));
+            if(locationSetRepository == null)
+                throw new ArgumentNullException(nameof(locationSetRepository));
             
-            _scheduleSceneRepository = scheduleSceneRepository;
+            _locationSetRepository = locationSetRepository;
         }
 
-        // Gets all schedule scenes for a scene
-        public IEnumerable<ScheduleSceneDayDto> GetDays(long sceneID)
+        // Gets all sets for a location
+        public IEnumerable<LocationSetLocationDto> GetLocations(long locationID)
         {
-            var scheduleScenes = _scheduleSceneRepository.GetAllForScene(sceneID);
+            var locationSets = _locationSetRepository.GetAllForLocation(locationID);
 
-            var dtos = scheduleScenes.Select(l => l.TranslateDay());
+            var dtos = locationSets.Select(l => l.TranslateLocation());
 
             return dtos;
         }
 
-        // Gets all schedule scenes for a day
-        public IEnumerable<ScheduleSceneSceneDto> GetScenes(long dayID)
+        // Gets all sets for a script location
+        public IEnumerable<LocationSetScriptLocationDto> GetScriptLocations(long scriptLocationID)
         {
-            var scheduleScenes = _scheduleSceneRepository.GetAllForScheduleDay(dayID);
+            var locationSets = _locationSetRepository.GetAllForScriptLocation(scriptLocationID);
 
-            var dtos = scheduleScenes.Select(l => l.TranslateScene());
+            var dtos = locationSets.Select(l => l.TranslateScriptLocation());
 
             return dtos;
         }
 
-        // Gets a single schedule scene by id
-        public FullScheduleSceneDto Get(long ID)
+        // Gets a single locationset by id
+        public FullLocationSetDto Get(long ID)
         {
-            var scheduleScene = _scheduleSceneRepository.GetFull(ID);
+            var locationSet = _locationSetRepository.GetFull(ID);
 
-            var dto = scheduleScene.TranslateFull();
+            var dto = locationSet.TranslateFull();
 
             return dto;
         }
 
-        // Adds a schedule scene
-        public long Add(ScheduleSceneDto dto)
+        // Adds a locationset
+        public long Add(LocationSetDto dto)
         {
-            var scheduleScene = new ScheduleScene
+            var locationSet = new LocationSet
             {
-                PageLength = dto.PageLength,
-                ScheduleDayID = dto.ScheduleDayID,
-                SceneID = dto.SceneID
+                Name = dto.Name,
+                Description = dto.Description,
+                Latitude = dto.LatLng.Latitude,
+                Longitude = dto.LatLng.Longitude,
+                LocationID = dto.LocationID,
+                ScriptLocationID = dto.ScriptLocationID,
             };
 
-            // add all characters in the scene by default
-            var characterScenes = _characterSceneRepository.GetAllForScene(dto.SceneID);
-            foreach(var characterScene in characterScenes)
-            {
-                scheduleScene.Characters.Add(new ScheduleCharacter
-                {
-                    CharacterSceneID = characterScene.ID
-                });
-            }
+            _locationSetRepository.Add(locationSet);
+            _locationSetRepository.Commit();
 
-            _scheduleSceneRepository.Add(scheduleScene);
-            _scheduleSceneRepository.Commit();
-
-            return scheduleScene.ID;
+            return locationSet.ID;
         }
 
-        // Updates a schedule scene
-        public long Update(ScheduleSceneDto dto)
+        // Updates a locationset
+        public long Update(LocationSetDto dto)
         {
-            var scheduleScene = _scheduleSceneRepository.GetSingle(dto.ID);
+            var locationSet = _locationSetRepository.GetSingle(dto.ID);
 
-            scheduleScene.PageLength = dto.PageLength;
+            locationSet.Name = dto.Name;
+            locationSet.Description = dto.Description;
+            locationSet.Latitude = dto.LatLng.Latitude;
+            locationSet.Longitude = dto.LatLng.Longitude;
 
-            _scheduleSceneRepository.Edit(scheduleScene);
-            _scheduleSceneRepository.Commit();
+            _locationSetRepository.Edit(locationSet);
+            _locationSetRepository.Commit();
 
-            return scheduleScene.ID;
+            return locationSet.ID;
         }
 
-        // Deletes a schedule scene
+        // Deletes a locationset
         public void Delete(Int64 ID)
         {
-            var scheduleScene = _scheduleSceneRepository.GetSingle(ID);
+            var locationSet = _locationSetRepository.GetSingle(ID);
 
-            _scheduleSceneRepository.Delete(scheduleScene);
+            _locationSetRepository.Delete(locationSet);
 
-            _scheduleSceneRepository.Commit();
+            _locationSetRepository.Commit();
         }
     }
 }
