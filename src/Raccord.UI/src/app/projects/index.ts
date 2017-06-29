@@ -114,4 +114,12 @@ export {
     ScheduleCharacterHttpService
  } from "./children/scheduling/schedule-characters"
 
+ export{
+    LocationHttpService,
+    LocationResolve,
+    LocationsResolve,
+    LocationSetHttpService,
+    LocationSetResolve
+ } from "./children/locations";
+
 export { ScenePropertiesLandingComponent } from './children/scene-properties/component/scene-properties-landing/scene-properties-landing.component';

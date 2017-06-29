@@ -195,7 +195,12 @@ import { ScheduleDayNotesResolve } from './projects';
 import { 
   ScheduleSceneHttpService,
   ScheduleSceneResolve,
-  ScheduleCharacterHttpService
+  ScheduleCharacterHttpService,
+  LocationHttpService,
+  LocationResolve,
+  LocationsResolve,
+  LocationSetHttpService,
+  LocationSetResolve
 } from './projects';
 
 const APP_PROVIDERS = [
@@ -246,7 +251,12 @@ const APP_PROVIDERS = [
   ScheduleDayNotesResolve,
   ScheduleSceneHttpService,
   ScheduleSceneResolve,
-  ScheduleCharacterHttpService
+  ScheduleCharacterHttpService,
+  LocationHttpService,
+  LocationsResolve,
+  LocationResolve,
+  LocationSetHttpService,
+  LocationSetResolve
 ];
 
 // Directives
