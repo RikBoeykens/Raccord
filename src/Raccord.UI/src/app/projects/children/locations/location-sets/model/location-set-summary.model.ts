@@ -1,31 +1,33 @@
 import { BaseModel } from '../../../../../shared';
 import { Address } from '../../../../../shared';
 import { LatLng } from '../../../../../shared';
+import { Location } from "../../";
+import { ScriptLocation } from "../../../../children/script-locations/model/script-location.model";
 
-export class Location extends BaseModel{
+export class LocationSetSummary extends BaseModel{
     id: number;
     name: string;
     description: string;
-    address: Address;
     latLng: LatLng;
-    projectId: number;
+    location: Location;
+    scriptLocation: ScriptLocation;
 
     constructor(obj?: {
                         id: number, 
                         name: string,
                         description: string,
-                        address: Address,
                         latLng: LatLng,
-                        projectId: number
+                        location: Location, 
+                        scriptLocation: ScriptLocation
                     }){
         super();
         if(obj){
             this.id = obj.id;
             this.name = obj.name;
             this.description = obj.description;
-            this.address = obj.address;
             this.latLng = obj.latLng;
-            this.projectId = obj.projectId;
+            this.location = obj.location;
+            this.scriptLocation = obj.scriptLocation;
         }
         else{
             this.id = 0;
