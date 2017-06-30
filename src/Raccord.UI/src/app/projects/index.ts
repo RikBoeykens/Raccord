@@ -118,6 +118,8 @@ export {
     LocationHttpService,
     LocationResolve,
     LocationsResolve,
+    LocationsListComponent,
+    EditLocationComponent,
     LocationSetHttpService,
     LocationSetResolve
  } from "./children/locations";

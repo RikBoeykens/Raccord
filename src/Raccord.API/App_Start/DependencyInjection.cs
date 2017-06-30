@@ -57,6 +57,10 @@ using Raccord.Application.Core.Services.Scheduling.ScheduleCharacters;
 using Raccord.Application.Services.Scheduling.ScheduleCharacters;
 using Raccord.Data.EntityFramework.Repositories.Locations.Locations;
 using Raccord.Data.EntityFramework.Repositories.Locations.LocationSets;
+using Raccord.Application.Core.Services.Locations.LocationSets;
+using Raccord.Application.Services.Locations.LocationSets;
+using Raccord.Application.Core.Services.Locations.Locations;
+using Raccord.Application.Services.Locations.Locations;
 
 namespace Raccord.API
 {
@@ -131,8 +135,10 @@ namespace Raccord.API
             services.AddTransient<IScheduleCharacterService, ScheduleCharacterService>();
 
             services.AddTransient<ILocationRepository, LocationRepository>();
+            services.AddTransient<ILocationService, LocationService>();
 
             services.AddTransient<ILocationSetRepository, LocationSetRepository>();
+            services.AddTransient<ILocationSetService, LocationSetService>();
 
             services.AddTransient<ISearchEngineServiceWrapper, SearchEngineServiceWrapper>();
         }

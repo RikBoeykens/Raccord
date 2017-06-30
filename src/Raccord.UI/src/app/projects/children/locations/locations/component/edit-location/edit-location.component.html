@@ -1,0 +1,38 @@
+<form class="col s12"
+        id="location_form"
+        #locationForm = "ngForm"
+        (ngSubmit)="doLocationSubmit()">
+    <div fxLayout="row" fxLayoutGap="10px">
+        <md-input-container fxFlex="25%">
+            <input mdInput placeholder="Name" id="location_name" required [(ngModel)]="location.name" #name="ngModel" name="location_name">
+        </md-input-container>
+        <md-input-container fxFlex="75%">
+            <input mdInput placeholder="Description" id="location_description" [(ngModel)]="location.description" #description="ngModel" name="location_description">
+        </md-input-container>
+    </div>
+    <div fxLayout="row" fxLayoutGap="10px">
+        <md-input-container fxFlex="25%">
+            <input mdInput placeholder="Address 1" id="location_address1" [(ngModel)]="location.address.address1" #name="ngModel" name="location_address1">
+        </md-input-container>
+    </div>
+    <div fxLayout="row" fxLayoutGap="10px">
+        <md-input-container fxFlex="25%">
+            <input mdInput placeholder="Address 2" id="location_address2" [(ngModel)]="location.address.address2" #name="ngModel" name="location_address2">
+        </md-input-container>
+    </div>
+    <div fxLayout="row" fxLayoutGap="10px">
+        <md-input-container fxFlex="25%">
+            <input mdInput placeholder="Address 3" id="location_address3" [(ngModel)]="location.address.address3" #name="ngModel" name="location_address3">
+        </md-input-container>
+    </div>
+    <div fxLayout="row" fxLayoutGap="10px">
+        <md-input-container fxFlex="25%">
+            <input mdInput placeholder="Address 4" id="location_address4" [(ngModel)]="location.address.address4" #name="ngModel" name="location_address4">
+        </md-input-container>
+    </div>
+    <div fxLayout="row">
+        <div class="col s12">
+            <button md-raised-button type="submit"[disabled]="!locationForm.form.valid">Save</button>
+        </div>
+    </div>
+</form>

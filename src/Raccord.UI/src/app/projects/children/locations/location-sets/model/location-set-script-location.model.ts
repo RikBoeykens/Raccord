@@ -27,6 +27,7 @@ export class LocationSetScriptLocation extends BaseModel{
         }
         else{
             this.id = 0;
+            this.latLng = new LatLng();
         }
     }
 }

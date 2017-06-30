@@ -80,7 +80,9 @@ import { BreakdownItemImagesComponent } from './projects';
 import { BreakdownItemScenesComponent } from './projects';
 import { 
   ScheduleLandingComponent,
-  ScheduleSceneLandingComponent
+  ScheduleSceneLandingComponent,
+  LocationsListComponent,
+  EditLocationComponent
 } from './projects';
 import { ScenePropertiesLandingComponent } from './projects';
 import { SelectEntityComponent } from './shared';
@@ -140,6 +142,8 @@ const COMPONENTS =[
   BreakdownItemScenesComponent,
   ScheduleLandingComponent,
   ScheduleSceneLandingComponent,
+  LocationsListComponent,
+  EditLocationComponent,
   ScenePropertiesLandingComponent,
   SelectEntityComponent
 ];

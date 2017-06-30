@@ -26,7 +26,8 @@ import { BreakdownTypeLandingComponent } from './projects';
 import { BreakdownItemLandingComponent } from './projects';
 import { 
   ScheduleLandingComponent,
-  ScheduleSceneLandingComponent
+  ScheduleSceneLandingComponent,
+  LocationsListComponent
 } from './projects';
 import { ScenePropertiesLandingComponent } from './projects';
 
@@ -54,7 +55,9 @@ import { BreakdownItemResolve } from './projects';
 import { BreakdownItemsResolve } from './projects';
 import { 
   ScheduleDaysResolve,
-  ScheduleSceneResolve
+  ScheduleSceneResolve,
+  LocationsResolve,
+  LocationResolve
 } from './projects';
 
 import { CanDeactivateGuard } from './shared/service/can-deactivate-guard.service';
@@ -297,6 +300,19 @@ export const ROUTES: Routes = [
                   characters: SceneCharactersResolve
                 }
               },
+            ]
+          },
+          {
+            path: "locations",
+            children:[
+              {
+                path: "",
+                component: LocationsListComponent,
+                resolve:{
+                  project: ProjectSummaryResolve,
+                  locations: LocationsResolve
+                }
+              }
             ]
           }
         ],

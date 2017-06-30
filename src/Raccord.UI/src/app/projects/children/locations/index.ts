@@ -1,4 +1,8 @@
 // Locations
+// component
+export { LocationsListComponent } from "./locations/component/locations-list/locations-list.component";
+export { EditLocationComponent } from "./locations/component/edit-location/edit-location.component";
+
 // models
 export { Location } from "./locations/model/location.model";
 export { LocationSummary } from "./locations/model/location-summary.model";

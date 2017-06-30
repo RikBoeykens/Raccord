@@ -29,6 +29,8 @@ export class Location extends BaseModel{
         }
         else{
             this.id = 0;
+            this.address = new Address();
+            this.latLng = new LatLng();
         }
     }
 }
