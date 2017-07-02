@@ -27,7 +27,8 @@ import { BreakdownItemLandingComponent } from './projects';
 import { 
   ScheduleLandingComponent,
   ScheduleSceneLandingComponent,
-  LocationsListComponent
+  LocationsListComponent,
+  LocationLandingComponent
 } from './projects';
 import { ScenePropertiesLandingComponent } from './projects';
 
@@ -311,6 +312,14 @@ export const ROUTES: Routes = [
                 resolve:{
                   project: ProjectSummaryResolve,
                   locations: LocationsResolve
+                }
+              },
+              {
+                path: ":locationId",
+                component: LocationLandingComponent,
+                resolve:{
+                  project: ProjectSummaryResolve,
+                  location: LocationResolve
                 }
               }
             ]

@@ -22,9 +22,9 @@ namespace Raccord.Application.Services.Locations.LocationSets
         }
 
         // Gets all sets for a location
-        public IEnumerable<LocationSetLocationDto> GetLocations(long locationID)
+        public IEnumerable<LocationSetLocationDto> GetLocations(long scriptLocationID)
         {
-            var locationSets = _locationSetRepository.GetAllForLocation(locationID);
+            var locationSets = _locationSetRepository.GetAllForScriptLocation(scriptLocationID);
 
             var dtos = locationSets.Select(l => l.TranslateLocation());
 
@@ -32,9 +32,9 @@ namespace Raccord.Application.Services.Locations.LocationSets
         }
 
         // Gets all sets for a script location
-        public IEnumerable<LocationSetScriptLocationDto> GetScriptLocations(long scriptLocationID)
+        public IEnumerable<LocationSetScriptLocationDto> GetScriptLocations(long locationID)
         {
-            var locationSets = _locationSetRepository.GetAllForScriptLocation(scriptLocationID);
+            var locationSets = _locationSetRepository.GetAllForLocation(locationID);
 
             var dtos = locationSets.Select(l => l.TranslateScriptLocation());
 
