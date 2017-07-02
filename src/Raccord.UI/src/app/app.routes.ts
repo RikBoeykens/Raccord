@@ -28,7 +28,8 @@ import {
   ScheduleLandingComponent,
   ScheduleSceneLandingComponent,
   LocationsListComponent,
-  LocationLandingComponent
+  LocationLandingComponent,
+  LocationSetLandingComponent
 } from './projects';
 import { ScenePropertiesLandingComponent } from './projects';
 
@@ -58,7 +59,8 @@ import {
   ScheduleDaysResolve,
   ScheduleSceneResolve,
   LocationsResolve,
-  LocationResolve
+  LocationResolve,
+  LocationSetResolve
 } from './projects';
 
 import { CanDeactivateGuard } from './shared/service/can-deactivate-guard.service';
@@ -320,6 +322,19 @@ export const ROUTES: Routes = [
                 resolve:{
                   project: ProjectSummaryResolve,
                   location: LocationResolve
+                }
+              }
+            ]
+          },
+          {
+            path: "locationsets",
+            children:[
+              {
+                path: ":locationSetId",
+                component: LocationSetLandingComponent,
+                resolve:{
+                  project: ProjectSummaryResolve,
+                  locationSet: LocationSetResolve
                 }
               }
             ]
