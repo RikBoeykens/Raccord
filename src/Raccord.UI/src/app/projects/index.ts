@@ -29,6 +29,7 @@ export{
     EditScriptLocationComponent,
     ScriptLocationLandingComponent,
     ScriptLocationImagesComponent,
+    ScriptLocationSetsComponent,
     ScriptLocationHttpService,
     ImageScriptLocationHttpService,
     ScriptLocationResolve,

@@ -45,7 +45,10 @@ import { SceneSchedulingComponent } from './projects';
 import { ScriptLocationsListComponent } from './projects';
 import { EditScriptLocationComponent } from './projects';
 import { ScriptLocationLandingComponent } from './projects';
-import { ScriptLocationImagesComponent } from './projects';
+import { 
+  ScriptLocationImagesComponent,
+  ScriptLocationSetsComponent 
+} from './projects';
 import { SearchScriptLocationComponent } from './projects';
 import { IntExtListComponent } from './projects';
 import { EditIntExtComponent } from './projects';
@@ -114,6 +117,7 @@ const COMPONENTS =[
   EditScriptLocationComponent,
   ScriptLocationLandingComponent,
   ScriptLocationImagesComponent,
+  ScriptLocationSetsComponent,
   SearchScriptLocationComponent,
   IntExtListComponent,
   EditIntExtComponent,

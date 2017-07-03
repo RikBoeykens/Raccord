@@ -1,0 +1,11 @@
+<div class="row">
+    <md-nav-list>
+        <a routerLink="/projects/{{projectId}}/locationsets/{{set.id}}"
+            md-list-item 
+            *ngFor="let set of locationSets">
+            <!-- TODO: add images to sets -->
+            <!--show-image *ngIf="scene.primaryImage.id!=0" [image]="scene.primaryImage" [listAvatar]="true"></show-image-->
+            {{set.name}}
+        </a>
+    </md-nav-list>
+</div>

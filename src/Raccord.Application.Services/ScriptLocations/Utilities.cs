@@ -6,6 +6,7 @@ using Raccord.Application.Services.Scenes;
 using Raccord.Application.Core.Services.SearchEngine;
 using Raccord.Core.Enums;
 using Raccord.Application.Services.Images;
+using Raccord.Application.Services.Locations.LocationSets;
 
 namespace Raccord.Application.Services.ScriptLocations
 {
@@ -21,6 +22,7 @@ namespace Raccord.Application.Services.ScriptLocations
                 Description = location.Description,
                 Scenes = location.Scenes.OrderBy(s=> s.Number).Select(s=> s.TranslateSummary()),
                 Images = location.ImageLocations.Select(s=> s.TranslateImage()),
+                Sets = location.LocationSets.Select(ls=> ls.TranslateLocation()),
                 ProjectID = location.ProjectID,
             };
 

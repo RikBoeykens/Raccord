@@ -54,7 +54,9 @@ namespace Raccord.Data.EntityFramework.Repositories.ScriptLocations
                         .Include(l=> l.Scenes)
                         .ThenInclude(s=> s.DayNight)
                         .Include(l=> l.ImageLocations)
-                        .ThenInclude(il=> il.Image);
+                        .ThenInclude(il=> il.Image)
+                        .Include(l=> l.LocationSets)
+                        .ThenInclude(ls=> ls.Location);
         }
 
         private IQueryable<ScriptLocation> GetIncludedSummary()
