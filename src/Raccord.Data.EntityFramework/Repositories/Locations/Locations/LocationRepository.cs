@@ -33,6 +33,18 @@ namespace Raccord.Data.EntityFramework.Repositories.Locations.Locations
             return query.FirstOrDefault(sd => sd.ID == ID);
         }
 
+        public int SearchCount(string searchText, long? projectID)
+        {
+            var query = GetSearchQuery(searchText, projectID);
+
+            return query.Count();            
+        }
+
+        public IEnumerable<Location> Search(string searchText, long? projectID)
+        {
+            return GetSearchQuery(searchText, projectID);
+        }
+
         private IQueryable<Location> GetIncludedFull()
         {
             IQueryable<Location> query = _context.Set<Location>();
@@ -53,6 +65,25 @@ namespace Raccord.Data.EntityFramework.Repositories.Locations.Locations
         private IQueryable<Location> GetIncluded()
         {
             IQueryable<Location> query = _context.Set<Location>();
+
+            return query;
+        }
+
+        private IQueryable<Location> GetIncludedSearch()
+        {
+            IQueryable<Location> query = _context.Set<Location>();
+
+            return query.Include(l=> l.Project);
+        }
+
+        private IQueryable<Location> GetSearchQuery(string searchText, long? projectID)
+        {
+            var query = GetIncludedSearch();
+
+            query = query.Where(l=> l.Name.ToLower().Contains(searchText.ToLower()));
+
+            if(projectID.HasValue)
+                query = query.Where(l=> l.ProjectID==projectID.Value);
 
             return query;
         }

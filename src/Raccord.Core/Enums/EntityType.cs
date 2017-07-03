@@ -10,6 +10,7 @@ namespace Raccord.Core.Enums
         DayNight = 4,
         Image = 5,
         Character = 6,
-        BreakdownItem = 7
+        BreakdownItem = 7,
+        Location = 8
     }
 }

@@ -4,6 +4,8 @@ using Raccord.Domain.Model.Locations.Locations;
 using Raccord.Application.Services.ScriptLocations;
 using Raccord.Application.Services.Common.Locations;
 using Raccord.Application.Services.Locations.LocationSets;
+using Raccord.Application.Core.Services.SearchEngine;
+using Raccord.Core.Enums;
 
 namespace Raccord.Application.Services.Locations.Locations
 {
@@ -51,6 +53,20 @@ namespace Raccord.Application.Services.Locations.Locations
                 Address = LocationUtilities.TranslateAddress(location.Address1, location.Address2, location.Address3, location.Address4),
                 LatLng = LocationUtilities.TranslateLatLng(location.Latitude, location.Longitude),
                 ProjectID = location.ProjectID,
+            };
+
+            return dto;
+        }
+
+        public static SearchResultDto TranslateToSearchResult(this Location location)
+        {
+            var dto = new SearchResultDto
+            {
+                ID = location.ID,
+                RouteIDs = new long[]{location.ProjectID, location.ID},
+                DisplayName = location.Name,
+                Info = $"Project: {location.Project.Title}",
+                Type = EntityType.Location,
             };
 
             return dto;

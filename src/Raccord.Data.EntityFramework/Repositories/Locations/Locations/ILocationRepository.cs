@@ -9,5 +9,7 @@ namespace Raccord.Data.EntityFramework.Repositories.Locations.Locations
         IEnumerable<Location> GetAllForProject(long projectID);
         Location GetFull(long ID);
         Location GetSummary(long ID);
+        int SearchCount(string searchText, long? projectID);
+        IEnumerable<Location> Search(string searchText, long? projectID);
     }
 }

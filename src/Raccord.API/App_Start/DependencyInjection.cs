@@ -136,6 +136,7 @@ namespace Raccord.API
 
             services.AddTransient<ILocationRepository, LocationRepository>();
             services.AddTransient<ILocationService, LocationService>();
+            services.AddTransient<ILocationSearchEngineService, LocationSearchEngineService>();
 
             services.AddTransient<ILocationSetRepository, LocationSetRepository>();
             services.AddTransient<ILocationSetService, LocationSetService>();
