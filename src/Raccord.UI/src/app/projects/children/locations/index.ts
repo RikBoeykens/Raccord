@@ -31,3 +31,4 @@ export { LocationSet } from "./location-sets/model/location-set.model";
 // services
 export { LocationSetHttpService } from "./location-sets/service/location-set-http.service";
 export { LocationSetResolve } from "./location-sets/service/location-set-resolve.service";
+export { SceneLocationSetsResolve } from "./location-sets/service/scene-location-sets-resolve.service";

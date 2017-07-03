@@ -9,6 +9,7 @@ namespace Raccord.Data.EntityFramework.Repositories.Locations.LocationSets
     {
         IEnumerable<LocationSet> GetAllForLocation(long locationID);
         IEnumerable<LocationSet> GetAllForScriptLocation(long scriptLocationID);
+        IEnumerable<LocationSet> GetAllForScene(long sceneID);
         LocationSet GetFull(long ID);
         LocationSet GetSummary(long ID);
     }

@@ -1,11 +1,15 @@
 using Raccord.Domain.Model.Locations.Locations;
 using Raccord.Domain.Model.ScriptLocations;
+using Raccord.Domain.Model.Scheduling;
+using System.Collections.Generic;
 
 namespace Raccord.Domain.Model.Locations.LocationSets
 {
     // Represents a set on a location, linked to a script location
     public class LocationSet : Entity
     {
+        private ICollection<ScheduleScene> _scheduleScenes;
+
         /// Name of the set
         public string Name { get; set; }
 
@@ -29,5 +33,18 @@ namespace Raccord.Domain.Model.Locations.LocationSets
 
         // Linked script location
         public virtual ScriptLocation ScriptLocation { get; set; }
+
+        // Linked schedule scenes
+        public virtual ICollection<ScheduleScene> ScheduleScenes
+        {
+            get
+            {
+                return _scheduleScenes ?? (_scheduleScenes = new List<ScheduleScene>());
+            }
+            set
+            {
+                _scheduleScenes = value;
+            }
+        }
     }
 }

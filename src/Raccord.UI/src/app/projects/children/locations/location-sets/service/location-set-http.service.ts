@@ -5,6 +5,7 @@ import { AppSettings } from '../../../../../app.settings';
 import { FullLocationSet } from '../model/full-location-set.model';
 import { LocationSetLocation } from '../model/location-set-location.model';
 import { LocationSetScriptLocation } from '../model/location-set-script-location.model';
+import { LocationSetSummary } from '../model/location-set-summary.model';
 import { LocationSet } from '../model/location-set.model';
 import { JsonResponse } from '../../../../../shared/model/json-response.model';
 
@@ -26,6 +27,13 @@ export class LocationSetHttpService extends BaseHttpService {
     getScriptLocations(id): Promise<LocationSetScriptLocation[]> {
 
         var uri = `${this._baseUri}/${id}/location`;
+
+        return this.doGetArray(uri);
+    }
+
+    getForScene(id): Promise<LocationSetSummary[]> {
+
+        var uri = `${this._baseUri}/${id}/scene`;
 
         return this.doGetArray(uri);
     }

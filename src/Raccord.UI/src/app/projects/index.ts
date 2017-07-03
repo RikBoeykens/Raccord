@@ -125,6 +125,7 @@ export {
     LocationLocationSetsComponent,
     LocationSetHttpService,
     LocationSetResolve,
+    SceneLocationSetsResolve,
     EditLocationSetComponent,
     LocationSetLandingComponent
  } from "./children/locations";

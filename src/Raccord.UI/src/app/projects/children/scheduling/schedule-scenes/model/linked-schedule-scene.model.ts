@@ -2,6 +2,7 @@ import { BaseModel } from '../../../../../shared/model/base.model';
 import { ScheduleSceneSummary } from "../model/schedule-scene-summary.model";
 import { ScheduleDay } from '../../schedule-days/model/schedule-day.model';
 import { Scene } from '../../../scenes/model/scene.model';
+import { LocationSetSummary } from "../../../locations";
 
 export class LinkedScheduleScene extends ScheduleSceneSummary{
     linkID: number;
@@ -11,7 +12,8 @@ export class LinkedScheduleScene extends ScheduleSceneSummary{
                         pageLength: number,
                         scene: Scene, 
                         scheduleDay: ScheduleDay,
-                        linkID: number
+                        linkID: number,
+                        locationSet: LocationSetSummary
                     }){
         super(obj);
         if(obj){

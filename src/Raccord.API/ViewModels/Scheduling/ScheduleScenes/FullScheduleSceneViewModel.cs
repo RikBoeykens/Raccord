@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Raccord.API.ViewModels.Characters;
+using Raccord.API.ViewModels.Locations.LocationSets;
 using Raccord.API.ViewModels.Scenes;
 using Raccord.API.ViewModels.Scheduling.ScheduleDays;
 
@@ -11,6 +12,7 @@ namespace Raccord.API.ViewModels.Scheduling.ScheduleScenes
         private SceneSummaryViewModel _scene;
         private ScheduleDaySummaryViewModel _scheduleDay;
         private IEnumerable<LinkedCharacterViewModel> _characters;
+        private LocationSetSummaryViewModel _locationSet;
 
         // ID of the schedule scene
         public long ID { get; set; }
@@ -57,6 +59,19 @@ namespace Raccord.API.ViewModels.Scheduling.ScheduleScenes
             set
             {
                 _characters = value;
+            }
+        }
+
+        // Linked location set
+        public LocationSetSummaryViewModel LocationSet
+        {
+            get
+            {
+                return _locationSet ?? (_locationSet = new LocationSetSummaryViewModel()); 
+            }
+            set
+            {
+                _locationSet = value;
             }
         }
     }

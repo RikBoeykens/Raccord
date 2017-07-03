@@ -27,6 +27,13 @@ namespace Raccord.Data.EntityFramework.Repositories.Locations.LocationSets
             return query.Where(sd=> sd.ScriptLocationID == scriptLocationID);
         }
 
+        public IEnumerable<LocationSet> GetAllForScene(long sceneID)
+        {
+            var query = GetIncludedScene();
+
+            return query.Where(sd=> sd.ScriptLocation.Scenes.Any(s=> s.ID == sceneID));
+        }
+
         public LocationSet GetFull(long ID)
         {
             var query = GetIncludedFull();
@@ -66,6 +73,15 @@ namespace Raccord.Data.EntityFramework.Repositories.Locations.LocationSets
             IQueryable<LocationSet> query = _context.Set<LocationSet>();
 
             return query;
+        }
+
+        private IQueryable<LocationSet> GetIncludedScene()
+        {
+            IQueryable<LocationSet> query = _context.Set<LocationSet>();
+
+            return query.Include(ls=> ls.ScriptLocation)
+                        .ThenInclude(sl=> sl.Scenes)
+                        .Include(ls=>ls.Location);
         }
     }
 }

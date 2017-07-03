@@ -43,6 +43,17 @@ namespace Raccord.API.Controllers
             return vms;
         }
 
+        // GET: api/locationsets/1/scene
+        [HttpGet("{id}/scene")]
+        public IEnumerable<LocationSetSummaryViewModel> GetForScene(long id)
+        {
+            var dtos = _locationSetService.GetSetsForScene(id);
+
+            var vms = dtos.Select(p => p.Translate());
+
+            return vms;
+        }
+
         // GET api/locationsets/5
         [HttpGet("{id}")]
         public FullLocationSetViewModel Get(long id)

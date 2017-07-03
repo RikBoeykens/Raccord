@@ -16,5 +16,8 @@ namespace Raccord.API.ViewModels.Scheduling.ScheduleScenes
 
         // ID of the linked scene
         public long SceneID { get; set; }
+
+        // ID of the linked location Set
+        public long? LocationSetID { get; set; }
     }
 }

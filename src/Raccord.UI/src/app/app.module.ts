@@ -216,7 +216,8 @@ import {
   LocationResolve,
   LocationsResolve,
   LocationSetHttpService,
-  LocationSetResolve
+  LocationSetResolve,
+  SceneLocationSetsResolve
 } from './projects';
 
 const APP_PROVIDERS = [
@@ -272,7 +273,8 @@ const APP_PROVIDERS = [
   LocationsResolve,
   LocationResolve,
   LocationSetHttpService,
-  LocationSetResolve
+  LocationSetResolve,
+  SceneLocationSetsResolve
 ];
 
 // Directives

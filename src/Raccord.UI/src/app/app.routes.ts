@@ -60,7 +60,8 @@ import {
   ScheduleSceneResolve,
   LocationsResolve,
   LocationResolve,
-  LocationSetResolve
+  LocationSetResolve,
+  SceneLocationSetsResolve
 } from './projects';
 
 import { CanDeactivateGuard } from './shared/service/can-deactivate-guard.service';
@@ -300,7 +301,8 @@ export const ROUTES: Routes = [
                 resolve:{
                   project: ProjectSummaryResolve,
                   scheduleScene: ScheduleSceneResolve,
-                  characters: SceneCharactersResolve
+                  characters: SceneCharactersResolve,
+                  locationSets: SceneLocationSetsResolve
                 }
               },
             ]

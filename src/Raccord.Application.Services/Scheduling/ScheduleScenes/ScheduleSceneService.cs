@@ -65,7 +65,8 @@ namespace Raccord.Application.Services.Scheduling.ScheduleScenes
             {
                 PageLength = dto.PageLength,
                 ScheduleDayID = dto.ScheduleDayID,
-                SceneID = dto.SceneID
+                SceneID = dto.SceneID,
+                LocationSetID = dto.LocationSetID,
             };
 
             // add all characters in the scene by default
@@ -90,6 +91,7 @@ namespace Raccord.Application.Services.Scheduling.ScheduleScenes
             var scheduleScene = _scheduleSceneRepository.GetSingle(dto.ID);
 
             scheduleScene.PageLength = dto.PageLength;
+            scheduleScene.LocationSetID = dto.LocationSetID;
 
             _scheduleSceneRepository.Edit(scheduleScene);
             _scheduleSceneRepository.Commit();

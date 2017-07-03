@@ -41,6 +41,15 @@ namespace Raccord.Application.Services.Locations.LocationSets
             return dtos;
         }
 
+        public IEnumerable<LocationSetSummaryDto> GetSetsForScene(long sceneID)
+        {
+            var locationSets = _locationSetRepository.GetAllForScene(sceneID);
+
+            var dtos = locationSets.Select(l=> l.TranslateSummary());
+
+            return dtos;
+        }
+
         // Gets a single locationset by id
         public FullLocationSetDto Get(long ID)
         {
