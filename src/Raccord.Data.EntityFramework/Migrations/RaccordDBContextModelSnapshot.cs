@@ -13,7 +13,7 @@ namespace Raccord.Data.EntityFramework.Migrations
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
             modelBuilder
-                .HasAnnotation("ProductVersion", "1.0.0-rtm-21431");
+                .HasAnnotation("ProductVersion", "1.0.3");
 
             modelBuilder.Entity("Raccord.Domain.Model.Breakdowns.BreakdownItems.BreakdownItem", b =>
                 {
@@ -225,6 +225,62 @@ namespace Raccord.Data.EntityFramework.Migrations
                     b.ToTable("ImageScriptLocation");
                 });
 
+            modelBuilder.Entity("Raccord.Domain.Model.Locations.Locations.Location", b =>
+                {
+                    b.Property<long>("ID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Address1");
+
+                    b.Property<string>("Address2");
+
+                    b.Property<string>("Address3");
+
+                    b.Property<string>("Address4");
+
+                    b.Property<string>("Description");
+
+                    b.Property<double?>("Latitude");
+
+                    b.Property<double?>("Longitude");
+
+                    b.Property<string>("Name");
+
+                    b.Property<long>("ProjectID");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("ProjectID");
+
+                    b.ToTable("Location");
+                });
+
+            modelBuilder.Entity("Raccord.Domain.Model.Locations.LocationSets.LocationSet", b =>
+                {
+                    b.Property<long>("ID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Description");
+
+                    b.Property<double?>("Latitude");
+
+                    b.Property<long>("LocationID");
+
+                    b.Property<double?>("Longitude");
+
+                    b.Property<string>("Name");
+
+                    b.Property<long>("ScriptLocationID");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("LocationID");
+
+                    b.HasIndex("ScriptLocationID");
+
+                    b.ToTable("LocationSet");
+                });
+
             modelBuilder.Entity("Raccord.Domain.Model.Projects.Project", b =>
                 {
                     b.Property<long>("ID")
@@ -368,6 +424,8 @@ namespace Raccord.Data.EntityFramework.Migrations
                     b.Property<long>("ID")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<long?>("LocationSetID");
+
                     b.Property<int>("PageLength");
 
                     b.Property<long>("SceneID");
@@ -377,6 +435,8 @@ namespace Raccord.Data.EntityFramework.Migrations
                     b.Property<int>("SortingOrder");
 
                     b.HasKey("ID");
+
+                    b.HasIndex("LocationSetID");
 
                     b.HasIndex("SceneID");
 
@@ -513,6 +573,27 @@ namespace Raccord.Data.EntityFramework.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
+            modelBuilder.Entity("Raccord.Domain.Model.Locations.Locations.Location", b =>
+                {
+                    b.HasOne("Raccord.Domain.Model.Projects.Project", "Project")
+                        .WithMany()
+                        .HasForeignKey("ProjectID")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Raccord.Domain.Model.Locations.LocationSets.LocationSet", b =>
+                {
+                    b.HasOne("Raccord.Domain.Model.Locations.Locations.Location", "Location")
+                        .WithMany("LocationSets")
+                        .HasForeignKey("LocationID")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Raccord.Domain.Model.ScriptLocations.ScriptLocation", "ScriptLocation")
+                        .WithMany("LocationSets")
+                        .HasForeignKey("ScriptLocationID")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
             modelBuilder.Entity("Raccord.Domain.Model.SceneProperties.DayNight", b =>
                 {
                     b.HasOne("Raccord.Domain.Model.Projects.Project", "Project")
@@ -580,6 +661,10 @@ namespace Raccord.Data.EntityFramework.Migrations
 
             modelBuilder.Entity("Raccord.Domain.Model.Scheduling.ScheduleScene", b =>
                 {
+                    b.HasOne("Raccord.Domain.Model.Locations.LocationSets.LocationSet", "LocationSet")
+                        .WithMany("ScheduleScenes")
+                        .HasForeignKey("LocationSetID");
+
                     b.HasOne("Raccord.Domain.Model.Scenes.Scene", "Scene")
                         .WithMany("ScheduleScenes")
                         .HasForeignKey("SceneID")

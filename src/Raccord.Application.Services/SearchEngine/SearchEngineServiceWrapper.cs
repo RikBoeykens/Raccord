@@ -10,6 +10,7 @@ using Raccord.Application.Core.Services.Images;
 using Raccord.Application.Core.Services.Breakdowns.BreakdownItems;
 using Raccord.Core.Enums;
 using Raccord.Application.Core.Services.Characters;
+using Raccord.Application.Core.Services.Locations.Locations;
 
 namespace Raccord.Application.Services.SearchEngine
 {
@@ -24,6 +25,7 @@ namespace Raccord.Application.Services.SearchEngine
         private IImageSearchEngineService _imageSearchEngineService;
         private ICharacterSearchEngineService _characterSearchEngineService;
         private IBreakdownItemSearchEngineService _breakdownItemSearchEngineService;
+        private ILocationSearchEngineService _locationSearchEngineService;
 
         public SearchEngineServiceWrapper(
             IProjectSearchEngineService projectSearchEngineService,
@@ -33,7 +35,8 @@ namespace Raccord.Application.Services.SearchEngine
             IDayNightSearchEngineService dayNightSearchEngineService,
             IImageSearchEngineService imageSearchEngineService,
             ICharacterSearchEngineService characterSearchEngineService,
-            IBreakdownItemSearchEngineService breakdownItemSearchEngineService
+            IBreakdownItemSearchEngineService breakdownItemSearchEngineService,
+            ILocationSearchEngineService locationSearchEngineService
         )
         {
             if(projectSearchEngineService==null)
@@ -52,6 +55,8 @@ namespace Raccord.Application.Services.SearchEngine
                 throw new ArgumentNullException(nameof(characterSearchEngineService));
             if(breakdownItemSearchEngineService==null)
                 throw new ArgumentNullException(nameof(breakdownItemSearchEngineService));
+            if(locationSearchEngineService==null)
+                throw new ArgumentNullException(nameof(locationSearchEngineService));
 
             _projectSearchEngineService = projectSearchEngineService;
             _sceneSearchEngineService = sceneSearchEngineService;
@@ -61,6 +66,7 @@ namespace Raccord.Application.Services.SearchEngine
             _imageSearchEngineService = imageSearchEngineService;
             _characterSearchEngineService = characterSearchEngineService;
             _breakdownItemSearchEngineService = breakdownItemSearchEngineService;
+            _locationSearchEngineService = locationSearchEngineService;
         }
         public IEnumerable<SearchTypeResultDto> GetResults(SearchRequestDto request)
         {
@@ -86,7 +92,8 @@ namespace Raccord.Application.Services.SearchEngine
                 _dayNightSearchEngineService,
                 _imageSearchEngineService,
                 _characterSearchEngineService,
-                _breakdownItemSearchEngineService
+                _breakdownItemSearchEngineService,
+                _locationSearchEngineService
             };
 
             if(includeTypes.Any())

@@ -9,6 +9,8 @@ using Raccord.Application.Services.Images;
 using Raccord.Application.Core.Services.Scheduling.ScheduleScenes;
 using Raccord.Application.Services.Scheduling.ScheduleDays;
 using Raccord.Application.Services.Characters;
+using Raccord.Application.Services.Locations.LocationSets;
+using Raccord.Application.Core.Services.Locations.LocationSets;
 
 namespace Raccord.Application.Services.Scheduling.ScheduleScenes
 {
@@ -25,6 +27,7 @@ namespace Raccord.Application.Services.Scheduling.ScheduleScenes
                 ScheduleDay = scheduleScene.ScheduleDay.TranslateSummary(),
                 Scene = scheduleScene.Scene.TranslateSummary(),
                 Characters = scheduleScene.Characters.Select(c=> c.TranslateCharacter()),
+                LocationSet = scheduleScene.LocationSetID.HasValue ? scheduleScene.LocationSet.TranslateSummary() : new LocationSetSummaryDto(),
             };
 
             return dto;
@@ -36,6 +39,7 @@ namespace Raccord.Application.Services.Scheduling.ScheduleScenes
                 ID = scheduleScene.ID,
                 PageLength = scheduleScene.PageLength,
                 ScheduleDay = scheduleScene.ScheduleDay.TranslateSummary(),
+                LocationSet = scheduleScene.LocationSetID.HasValue ? scheduleScene.LocationSet.TranslateSummary() : new LocationSetSummaryDto(),
             };
 
             return dto;
@@ -48,6 +52,7 @@ namespace Raccord.Application.Services.Scheduling.ScheduleScenes
                 PageLength = scheduleScene.PageLength,
                 Scene = scheduleScene.Scene.TranslateSummary(),
                 Characters = scheduleScene.Characters.Select(c=> c.TranslateCharacter()),
+                LocationSet = scheduleScene.LocationSetID.HasValue ? scheduleScene.LocationSet.TranslateSummary() : new LocationSetSummaryDto(),
             };
 
             return dto;
@@ -60,6 +65,7 @@ namespace Raccord.Application.Services.Scheduling.ScheduleScenes
                 PageLength = scheduleScene.PageLength,
                 ScheduleDayID = scheduleScene.ScheduleDayID,
                 SceneID = scheduleScene.SceneID,
+                LocationSetID = scheduleScene.LocationSetID,
             };
 
             return dto;
@@ -73,6 +79,7 @@ namespace Raccord.Application.Services.Scheduling.ScheduleScenes
                 PageLength = scheduleScene.PageLength,
                 ScheduleDay = scheduleScene.ScheduleDay.TranslateSummary(),
                 Scene = scheduleScene.Scene.TranslateSummary(),
+                LocationSet = scheduleScene.LocationSetID.HasValue ? scheduleScene.LocationSet.TranslateSummary() : new LocationSetSummaryDto(),
             };
 
             return dto;
@@ -86,6 +93,7 @@ namespace Raccord.Application.Services.Scheduling.ScheduleScenes
                 PageLength = scheduleCharacter.ScheduleScene.PageLength,
                 ScheduleDay = scheduleCharacter.ScheduleScene.ScheduleDay.TranslateSummary(),
                 Scene = scheduleCharacter.ScheduleScene.Scene.TranslateSummary(),
+                LocationSet = scheduleCharacter.ScheduleScene.LocationSetID.HasValue ? scheduleCharacter.ScheduleScene.LocationSet.TranslateSummary() : new LocationSetSummaryDto(),
                 LinkID = scheduleCharacter.ID,
             };
 

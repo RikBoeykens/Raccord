@@ -1,6 +1,7 @@
 using Raccord.Application.Core.Services.Scenes;
 using Raccord.Application.Core.Services.Images;
 using System.Collections.Generic;
+using Raccord.Application.Core.Services.Locations.LocationSets;
 
 namespace Raccord.Application.Core.Services.ScriptLocations
 {
@@ -9,6 +10,7 @@ namespace Raccord.Application.Core.Services.ScriptLocations
     {
         private IEnumerable<SceneSummaryDto> _scenes;
         private IEnumerable<LinkedImageDto> _images;
+        private IEnumerable<LocationSetLocationDto> _sets;
 
         // Scenes linked to the location
         public IEnumerable<SceneSummaryDto> Scenes
@@ -33,6 +35,19 @@ namespace Raccord.Application.Core.Services.ScriptLocations
             set
             {
                 _images = value;
+            }
+        }
+
+        // Sets linked to the location
+        public IEnumerable<LocationSetLocationDto> Sets
+        {
+            get
+            {
+                return _sets ?? (_sets = new List<LocationSetLocationDto>());
+            }
+            set
+            {
+                _sets = value;
             }
         }
     }

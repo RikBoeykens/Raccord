@@ -56,7 +56,13 @@ namespace Raccord.Data.EntityFramework.Repositories.Scheduling.ScheduleDays
                         .ThenInclude(cs=> cs.Character)
                         .ThenInclude(c=> c.ImageCharacters)
                         .ThenInclude(ic=> ic.Image)
-                        .Include(sd=> sd.Notes);
+                        .Include(sd=> sd.Notes)
+                        .Include(sd=> sd.ScheduleScenes)
+                        .ThenInclude(ss=> ss.LocationSet)
+                        .ThenInclude(ls=> ls.Location)
+                        .Include(sd=> sd.ScheduleScenes)
+                        .ThenInclude(ss=> ss.LocationSet)
+                        .ThenInclude(ls=> ls.ScriptLocation);
         }
 
         private IQueryable<ScheduleDay> GetIncludedSummary()

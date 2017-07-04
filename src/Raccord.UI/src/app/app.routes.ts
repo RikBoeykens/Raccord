@@ -26,7 +26,10 @@ import { BreakdownTypeLandingComponent } from './projects';
 import { BreakdownItemLandingComponent } from './projects';
 import { 
   ScheduleLandingComponent,
-  ScheduleSceneLandingComponent
+  ScheduleSceneLandingComponent,
+  LocationsListComponent,
+  LocationLandingComponent,
+  LocationSetLandingComponent
 } from './projects';
 import { ScenePropertiesLandingComponent } from './projects';
 
@@ -54,7 +57,11 @@ import { BreakdownItemResolve } from './projects';
 import { BreakdownItemsResolve } from './projects';
 import { 
   ScheduleDaysResolve,
-  ScheduleSceneResolve
+  ScheduleSceneResolve,
+  LocationsResolve,
+  LocationResolve,
+  LocationSetResolve,
+  SceneLocationSetsResolve
 } from './projects';
 
 import { CanDeactivateGuard } from './shared/service/can-deactivate-guard.service';
@@ -294,9 +301,44 @@ export const ROUTES: Routes = [
                 resolve:{
                   project: ProjectSummaryResolve,
                   scheduleScene: ScheduleSceneResolve,
-                  characters: SceneCharactersResolve
+                  characters: SceneCharactersResolve,
+                  locationSets: SceneLocationSetsResolve
                 }
               },
+            ]
+          },
+          {
+            path: "locations",
+            children:[
+              {
+                path: "",
+                component: LocationsListComponent,
+                resolve:{
+                  project: ProjectSummaryResolve,
+                  locations: LocationsResolve
+                }
+              },
+              {
+                path: ":locationId",
+                component: LocationLandingComponent,
+                resolve:{
+                  project: ProjectSummaryResolve,
+                  location: LocationResolve
+                }
+              }
+            ]
+          },
+          {
+            path: "locationsets",
+            children:[
+              {
+                path: ":locationSetId",
+                component: LocationSetLandingComponent,
+                resolve:{
+                  project: ProjectSummaryResolve,
+                  locationSet: LocationSetResolve
+                }
+              }
             ]
           }
         ],

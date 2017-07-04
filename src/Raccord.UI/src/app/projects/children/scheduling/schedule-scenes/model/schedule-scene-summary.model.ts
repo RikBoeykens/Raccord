@@ -1,18 +1,21 @@
 import { BaseModel } from '../../../../../shared/model/base.model';
 import { ScheduleDay } from '../../schedule-days/model/schedule-day.model';
 import { Scene } from '../../../scenes/model/scene.model';
+import { LocationSetSummary } from "../../../locations";
 
 export class ScheduleSceneSummary extends BaseModel{
     id: number;
     pageLength: number;
     scene: Scene;
     scheduleDay: ScheduleDay;
+    locationSet: LocationSetSummary;
 
     constructor(obj?: {
                         id: number, 
                         pageLength: number,
                         scene: Scene, 
-                        scheduleDay: ScheduleDay
+                        scheduleDay: ScheduleDay,
+                        locationSet: LocationSetSummary,
                     }){
         super();
         if(obj){
@@ -20,6 +23,7 @@ export class ScheduleSceneSummary extends BaseModel{
             this.pageLength = obj.pageLength;
             this.scene = obj.scene;
             this.scheduleDay = obj.scheduleDay;
+            this.locationSet = obj.locationSet;
         }
         else{
             this.id = 0;

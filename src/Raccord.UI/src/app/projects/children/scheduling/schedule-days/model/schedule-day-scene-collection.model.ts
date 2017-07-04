@@ -1,9 +1,8 @@
 import { ScheduleDay } from './schedule-day.model';
 import { ScheduleSceneScene } from '../../schedule-scenes/model/schedule-scene-scene.model';
-import { LinkedScene } from '../../../../children/scenes/model/linked-scene.model';
 
-export class CharacterScheduleDay extends ScheduleDay{
-    scenes: LinkedScene[];
+export class ScheduleDaySceneCollection extends ScheduleDay{
+    scenes: ScheduleSceneScene[];
 
     constructor(obj?: {
                         id: number, 
@@ -11,7 +10,7 @@ export class CharacterScheduleDay extends ScheduleDay{
                         start?: Date, 
                         end?: Date, 
                         projectId: number,
-                        scenes: LinkedScene[],
+                        scenes: ScheduleSceneScene[],
                     }){
         super(obj);
         if(obj){

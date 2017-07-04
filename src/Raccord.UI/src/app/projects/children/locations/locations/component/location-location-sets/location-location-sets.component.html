@@ -1,0 +1,19 @@
+
+<div class="row">
+    <select-entity fxFlex="33%"
+                [projectId]="projectId"
+                [includeTypes]="scriptLocationType"
+                (entitySelected)="addSet($event)">
+    </select-entity>
+</div>
+<div class="row">
+    <md-nav-list>
+        <a routerLink="/projects/{{projectId}}/locationsets/{{set.id}}"
+            md-list-item 
+            *ngFor="let set of sets">
+            <!-- TODO: add images to sets -->
+            <!--show-image *ngIf="scene.primaryImage.id!=0" [image]="scene.primaryImage" [listAvatar]="true"></show-image-->
+            {{set.name}}
+        </a>
+    </md-nav-list>
+</div>

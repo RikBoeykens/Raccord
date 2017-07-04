@@ -1,6 +1,7 @@
 using Raccord.API.ViewModels.Scenes;
 using Raccord.API.ViewModels.Images;
 using System.Collections.Generic;
+using Raccord.API.ViewModels.Locations.LocationSets;
 
 namespace Raccord.API.ViewModels.ScriptLocations
 {
@@ -9,6 +10,7 @@ namespace Raccord.API.ViewModels.ScriptLocations
     {
         private IEnumerable<SceneSummaryViewModel> _scenes;
         private IEnumerable<LinkedImageViewModel> _images;
+        private IEnumerable<LocationSetLocationViewModel> _sets;
 
         // Scenes linked to the location
         public IEnumerable<SceneSummaryViewModel> Scenes
@@ -33,6 +35,19 @@ namespace Raccord.API.ViewModels.ScriptLocations
             set
             {
                 _images = value;
+            }
+        }
+
+        // sets linked to the location
+        public IEnumerable<LocationSetLocationViewModel> Sets
+        {
+            get
+            {
+                return _sets ?? (_sets = new List<LocationSetLocationViewModel>());
+            }
+            set
+            {
+                _sets = value;
             }
         }
     }

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Raccord.Domain.Model.Characters;
+using Raccord.Domain.Model.Locations.LocationSets;
 using Raccord.Domain.Model.Scenes;
 
 namespace Raccord.Domain.Model.Scheduling
@@ -26,6 +27,10 @@ namespace Raccord.Domain.Model.Scheduling
 
         // Linked scene
         public virtual Scene Scene { get; set; }
+
+        public long? LocationSetID { get; set; }
+
+        public virtual LocationSet LocationSet { get; set; }
 
         // Linked characters
         public virtual ICollection<ScheduleCharacter> Characters

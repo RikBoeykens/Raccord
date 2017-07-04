@@ -1,25 +1,24 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { LocationHttpService } from '../../service/location-http.service';
-import { LocationSummary } from '../../model/location-summary.model';
-import { Location } from '../../model/location.model';
-import { ProjectSummary } from '../../../../model/project-summary.model';
-import { LoadingService } from '../../../../../loading/service/loading.service';
-import { DialogService } from '../../../../../shared/service/dialog.service';
+import { LocationSummary } from '../../../';
+import { Location } from '../../../';
+import { ProjectSummary } from '../../../../../model/project-summary.model';
+import { LoadingService } from '../../../../../../loading/service/loading.service';
+import { DialogService } from '../../../../../../shared/service/dialog.service';
 import { DragulaService } from 'ng2-dragula';
-import { HtmlClassHelpers } from '../../../../../shared/helpers/html-class.helpers';
+import { HtmlClassHelpers } from '../../../../../../shared/helpers/html-class.helpers';
 
 @Component({
     templateUrl: 'locations-list.component.html',
 })
 export class LocationsListComponent implements OnInit {
 
-    locations: LocationDroppableWrapper[] = [];
-    deleteLocations: LocationDroppableWrapper[]=[];
+    locations: LocationSummary[] = [];
+    deleteLocations: LocationSummary[]=[];
     project: ProjectSummary;
     viewNewLocation: Location;
     newLocation: Location;
-    draggingToMerge: boolean;
     draggingToDelete: boolean;
 
     constructor(
@@ -58,7 +57,7 @@ export class LocationsListComponent implements OnInit {
 
     ngOnInit() {
         this._route.data.subscribe((data: { locations: LocationSummary[], project: ProjectSummary }) => {
-            this.locations = data.locations.map(function(location){ return new LocationDroppableWrapper(location); });
+            this.locations = data.locations;
             this.project = data.project;
             this.resetNewLocation();
         });
@@ -75,7 +74,7 @@ export class LocationsListComponent implements OnInit {
         let loadingId = this._loadingService.startLoading();
 
         this._locationHttpService.getAll(this.project.id).then(data => {
-            this.locations = data.map(function(location){ return new LocationDroppableWrapper(location); });
+            this.locations = data;
             this._loadingService.endLoading(loadingId);
         });
     }
@@ -100,29 +99,17 @@ export class LocationsListComponent implements OnInit {
 
     private onLocationDrag(args) {
         let draggedElement = args[0];
-        this.draggingToMerge = true;
         if(draggedElement && HtmlClassHelpers.hasClass(draggedElement, 'can-delete'))
             this.draggingToDelete = true;
     }
     private onLocationDragEnd() {
-        this.draggingToMerge = false;
         this.draggingToDelete = false;
     }
     private onLocationDrop(args) {
 
         // Delete if necessary
         if(this.deleteLocations.length > 0)
-            this.remove(this.deleteLocations.splice(0, 1)[0].location);
-
-        // Merge if necessary
-        var mergeLocationWrapper;
-        this.locations.forEach(function(locationWrapper){
-            if(locationWrapper.dropLocations.length){
-                mergeLocationWrapper = locationWrapper;
-            }
-        });
-        if(mergeLocationWrapper)
-            this.merge(mergeLocationWrapper.location, mergeLocationWrapper.dropLocations.splice(0, 1)[0].location);
+            this.remove(this.deleteLocations.splice(0, 1)[0]);
     }
     
     private onOver(args) {
@@ -154,33 +141,5 @@ export class LocationsListComponent implements OnInit {
             this.getLocations();
         }
 
-    }
-
-    merge(toLocation: LocationSummary, mergeLocation: LocationSummary){
-        if(this._dialogService.confirm(`Are you sure you want to merge location ${mergeLocation.name} to location ${toLocation.name}?`)){
-            let loadingId = this._loadingService.startLoading();
-
-            this._locationHttpService.merge(toLocation.id, mergeLocation.id).then(data=>{
-                if(typeof(data)== 'string'){
-                    this._dialogService.error(data);
-                    this.getLocations();
-                }else{
-                    toLocation.sceneCount += mergeLocation.sceneCount;
-                    this._dialogService.success('The locations were successfully merged');
-                }
-            }).catch()
-            .then(()=> this._loadingService.endLoading(loadingId));
-        }else{
-            this.getLocations();
-        }
-    }
-}
-
-export class LocationDroppableWrapper{
-    location: LocationSummary;
-    dropLocations: LocationSummary[] = [];
-
-    constructor(location: LocationSummary){
-        this.location = location;
     }
 }

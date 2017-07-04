@@ -11,7 +11,7 @@ namespace Raccord.API.ViewModels.Characters
     {
         private IEnumerable<LinkedSceneViewModel> _scenes;
         private IEnumerable<LinkedImageViewModel> _images;
-        private IEnumerable<CharacterScheduleDayViewModel> _scheduleDays;
+        private IEnumerable<ScheduleDaySceneCollectionViewModel> _scheduleDays;
 
         // Scenes linked to the character
         public IEnumerable<LinkedSceneViewModel> Scenes
@@ -40,11 +40,11 @@ namespace Raccord.API.ViewModels.Characters
         }
 
         // Schedule scenes linked to the character
-        public IEnumerable<CharacterScheduleDayViewModel> ScheduleDays
+        public IEnumerable<ScheduleDaySceneCollectionViewModel> ScheduleDays
         {
             get
             {
-                return _scheduleDays ?? (_scheduleDays = new List<CharacterScheduleDayViewModel>());
+                return _scheduleDays ?? (_scheduleDays = new List<ScheduleDaySceneCollectionViewModel>());
             }
             set
             {

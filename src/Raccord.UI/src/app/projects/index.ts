@@ -29,6 +29,7 @@ export{
     EditScriptLocationComponent,
     ScriptLocationLandingComponent,
     ScriptLocationImagesComponent,
+    ScriptLocationSetsComponent,
     ScriptLocationHttpService,
     ImageScriptLocationHttpService,
     ScriptLocationResolve,
@@ -113,5 +114,22 @@ export {
  export{
     ScheduleCharacterHttpService
  } from "./children/scheduling/schedule-characters"
+
+ export{
+    LocationHttpService,
+    LocationResolve,
+    LocationsResolve,
+    LocationsListComponent,
+    EditLocationComponent,
+    LocationLandingComponent,
+    LocationLocationSetsComponent,
+    LocationScheduleComponent,
+    LocationSetHttpService,
+    LocationSetResolve,
+    SceneLocationSetsResolve,
+    EditLocationSetComponent,
+    LocationSetLandingComponent,
+    LocationSetScheduleComponent
+ } from "./children/locations";
 
 export { ScenePropertiesLandingComponent } from './children/scene-properties/component/scene-properties-landing/scene-properties-landing.component';

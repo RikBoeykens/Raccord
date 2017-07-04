@@ -1,0 +1,12 @@
+<div class="row">
+    <md-list>
+        <div *ngFor="let scheduleDay of scheduleDays">
+            <h3 sub-header>{{scheduleDay.date | date}}</h3>
+            <md-list-item *ngFor="let scheduleScene of scheduleDay.scenes">
+                <a routerLink="/projects{{projectId}}/locationsets/{{scheduleScene.locationSet.id}}">{{scheduleScene.locationSet.name}}</a>&nbsp;
+                <a routerLink="/projects/{{projectId}}/scheduling/{{scheduleScene.scene.id}}/scene/{{scheduleScene.id}}">{{scheduleScene.scene.number}}. {{scheduleScene.scene.intExt.name}} {{scheduleScene.scene.scriptLocation.name}} {{scheduleScene.scene.dayNight.name}} - {{scheduleScene.scene.summary}}</a>
+            </md-list-item>
+            <md-divider></md-divider>
+        </div>
+    </md-list>
+</div>

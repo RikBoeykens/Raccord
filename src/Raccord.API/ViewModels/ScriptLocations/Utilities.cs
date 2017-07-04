@@ -2,6 +2,7 @@ using Raccord.Application.Core.Services.ScriptLocations;
 using Raccord.API.ViewModels.Scenes;
 using System.Linq;
 using Raccord.API.ViewModels.Images;
+using Raccord.API.ViewModels.Locations.LocationSets;
 
 namespace Raccord.API.ViewModels.ScriptLocations
 {
@@ -18,6 +19,7 @@ namespace Raccord.API.ViewModels.ScriptLocations
                 ProjectID = dto.ProjectID,
                 Scenes = dto.Scenes.Select(s=> s.Translate()),
                 Images = dto.Images.Select(i=> i.Translate()),
+                Sets = dto.Sets.Select(s=> s.Translate()),
             };
         }
 

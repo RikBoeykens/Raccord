@@ -3,6 +3,7 @@ using Raccord.API.ViewModels.Scenes;
 using Raccord.API.ViewModels.Characters;
 using Raccord.API.ViewModels.Scheduling.ScheduleDays;
 using Raccord.Application.Core.Services.Scheduling.ScheduleScenes;
+using Raccord.API.ViewModels.Locations.LocationSets;
 
 namespace Raccord.API.ViewModels.Scheduling.ScheduleScenes
 {
@@ -19,6 +20,7 @@ namespace Raccord.API.ViewModels.Scheduling.ScheduleScenes
                 Scene = dto.Scene.Translate(),
                 ScheduleDay = dto.ScheduleDay.Translate(),
                 Characters = dto.Characters.Select(c=>c.Translate()),
+                LocationSet = dto.LocationSet.ID!= default(long) ? dto.LocationSet.Translate() : new LocationSetSummaryViewModel(),
             };
         }
         // Translates a scene dto to a scene viewmodel
@@ -29,6 +31,7 @@ namespace Raccord.API.ViewModels.Scheduling.ScheduleScenes
                 ID = dto.ID,
                 PageLength = dto.PageLength,
                 ScheduleDay = dto.ScheduleDay.Translate(),
+                LocationSet = dto.LocationSet.ID!= default(long) ? dto.LocationSet.Translate() : new LocationSetSummaryViewModel(),
             };
         }
         // Translates a scene summary dto to a scene summary viewmodel
@@ -40,6 +43,7 @@ namespace Raccord.API.ViewModels.Scheduling.ScheduleScenes
                 PageLength = dto.PageLength,
                 Scene = dto.Scene.Translate(),
                 Characters = dto.Characters.Select(c=> c.Translate()),
+                LocationSet = dto.LocationSet.ID!= default(long) ? dto.LocationSet.Translate() : new LocationSetSummaryViewModel(),
             };
         }
         // Translates a scene dto to a scene viewmodel
@@ -51,6 +55,7 @@ namespace Raccord.API.ViewModels.Scheduling.ScheduleScenes
                 PageLength = dto.PageLength,
                 ScheduleDayID = dto.ScheduleDayID,
                 SceneID = dto.SceneID,
+                LocationSetID = dto.LocationSetID,
             };
         }
 
@@ -63,6 +68,7 @@ namespace Raccord.API.ViewModels.Scheduling.ScheduleScenes
                 PageLength = dto.PageLength,
                 Scene = dto.Scene.Translate(),
                 ScheduleDay = dto.ScheduleDay.Translate(),
+                LocationSet = dto.LocationSet.ID!= default(long) ? dto.LocationSet.Translate() : new LocationSetSummaryViewModel(),
             };
         }
 
@@ -75,6 +81,7 @@ namespace Raccord.API.ViewModels.Scheduling.ScheduleScenes
                 PageLength = dto.PageLength,
                 Scene = dto.Scene.Translate(),
                 ScheduleDay = dto.ScheduleDay.Translate(),
+                LocationSet = dto.LocationSet.ID!= default(long) ? dto.LocationSet.Translate() : new LocationSetSummaryViewModel(),
                 LinkID = dto.LinkID,
             };
         }
@@ -88,6 +95,7 @@ namespace Raccord.API.ViewModels.Scheduling.ScheduleScenes
                 PageLength = vm.PageLength,
                 ScheduleDayID = vm.ScheduleDayID,
                 SceneID = vm.SceneID,
+                LocationSetID = vm.LocationSetID,
             };
         }
     }

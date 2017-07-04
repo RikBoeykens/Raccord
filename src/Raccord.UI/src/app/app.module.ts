@@ -45,7 +45,10 @@ import { SceneSchedulingComponent } from './projects';
 import { ScriptLocationsListComponent } from './projects';
 import { EditScriptLocationComponent } from './projects';
 import { ScriptLocationLandingComponent } from './projects';
-import { ScriptLocationImagesComponent } from './projects';
+import { 
+  ScriptLocationImagesComponent,
+  ScriptLocationSetsComponent 
+} from './projects';
 import { SearchScriptLocationComponent } from './projects';
 import { IntExtListComponent } from './projects';
 import { EditIntExtComponent } from './projects';
@@ -80,7 +83,15 @@ import { BreakdownItemImagesComponent } from './projects';
 import { BreakdownItemScenesComponent } from './projects';
 import { 
   ScheduleLandingComponent,
-  ScheduleSceneLandingComponent
+  ScheduleSceneLandingComponent,
+  LocationsListComponent,
+  EditLocationComponent,
+  LocationLandingComponent,
+  LocationLocationSetsComponent,
+  LocationScheduleComponent,
+  EditLocationSetComponent,
+  LocationSetLandingComponent,
+  LocationSetScheduleComponent
 } from './projects';
 import { ScenePropertiesLandingComponent } from './projects';
 import { SelectEntityComponent } from './shared';
@@ -108,6 +119,7 @@ const COMPONENTS =[
   EditScriptLocationComponent,
   ScriptLocationLandingComponent,
   ScriptLocationImagesComponent,
+  ScriptLocationSetsComponent,
   SearchScriptLocationComponent,
   IntExtListComponent,
   EditIntExtComponent,
@@ -140,6 +152,14 @@ const COMPONENTS =[
   BreakdownItemScenesComponent,
   ScheduleLandingComponent,
   ScheduleSceneLandingComponent,
+  LocationsListComponent,
+  EditLocationComponent,
+  LocationLandingComponent,
+  LocationLocationSetsComponent,
+  LocationScheduleComponent,
+  EditLocationSetComponent,
+  LocationSetLandingComponent,
+  LocationSetScheduleComponent,
   ScenePropertiesLandingComponent,
   SelectEntityComponent
 ];
@@ -195,7 +215,13 @@ import { ScheduleDayNotesResolve } from './projects';
 import { 
   ScheduleSceneHttpService,
   ScheduleSceneResolve,
-  ScheduleCharacterHttpService
+  ScheduleCharacterHttpService,
+  LocationHttpService,
+  LocationResolve,
+  LocationsResolve,
+  LocationSetHttpService,
+  LocationSetResolve,
+  SceneLocationSetsResolve
 } from './projects';
 
 const APP_PROVIDERS = [
@@ -246,7 +272,13 @@ const APP_PROVIDERS = [
   ScheduleDayNotesResolve,
   ScheduleSceneHttpService,
   ScheduleSceneResolve,
-  ScheduleCharacterHttpService
+  ScheduleCharacterHttpService,
+  LocationHttpService,
+  LocationsResolve,
+  LocationResolve,
+  LocationSetHttpService,
+  LocationSetResolve,
+  SceneLocationSetsResolve
 ];
 
 // Directives

@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { CharacterScheduleDay } from '../../../scheduling/schedule-days/model/character-schedule-day.model';
+import { ScheduleDaySceneCollection } from '../../../scheduling/schedule-days/model/schedule-day-scene-collection.model';
 
 @Component({
     selector: 'character-schedule',
@@ -9,7 +9,7 @@ export class CharacterScheduleComponent{
 
     @Input() projectId: number;
     @Input() characterId: number;
-    @Input() scheduleDays: CharacterScheduleDay[];
+    @Input() scheduleDays: ScheduleDaySceneCollection[];
 
 
     constructor(

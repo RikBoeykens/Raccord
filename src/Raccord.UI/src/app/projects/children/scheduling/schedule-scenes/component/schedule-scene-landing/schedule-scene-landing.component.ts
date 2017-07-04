@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { FullScheduleScene } from '../../model/full-schedule-scene.model';
 import { ScheduleScene } from '../../model/schedule-scene.model';
 import { LinkedCharacter } from '../../../../../children/characters/model/linked-character.model';
+import { LocationSetSummary } from '../../../../locations';
 import { ScheduleSceneHttpService } from '../../service/schedule-scene-http.service';
 import { ScheduleCharacterHttpService } from '../../../schedule-characters/service/schedule-character-http.service';
 import { LoadingService } from '../../../../../../loading/service/loading.service';
@@ -20,6 +21,7 @@ export class ScheduleSceneLandingComponent implements OnInit, OnChanges{
     stringPageLength: string;
     characters: LinkedCharacter[] = [];
     scheduleCharacters: ScheduleCharacterWrapper[] = [];
+    locationSets: LocationSetSummary[] = [];
 
     constructor(
         private _scheduleSceneHttpService: ScheduleSceneHttpService,
@@ -32,11 +34,12 @@ export class ScheduleSceneLandingComponent implements OnInit, OnChanges{
     }
 
     ngOnInit() {
-        this._route.data.subscribe((data: { scheduleScene: FullScheduleScene, project: ProjectSummary, characters: LinkedCharacter[] }) => {
+        this._route.data.subscribe((data: { scheduleScene: FullScheduleScene, project: ProjectSummary, characters: LinkedCharacter[], locationSets: LocationSetSummary[] }) => {
             this.scheduleScene = data.scheduleScene;
             this.setStringPageLength();
             this.project = data.project;
             this.characters = data.characters;
+            this.locationSets = data.locationSets;
             this.setScheduleCharacterWrappers();
         });
     }
@@ -69,6 +72,9 @@ export class ScheduleSceneLandingComponent implements OnInit, OnChanges{
             sceneId: this.scheduleScene.scene.id,
             scheduleDayId: this.scheduleScene.scheduleDay.id
         });
+        if(this.scheduleScene.locationSet.id!==0){
+            updatedScheduleScene.locationSetId = this.scheduleScene.locationSet.id;
+        }
         this._scheduleSceneHttpService.post(updatedScheduleScene).then(data=>{
             if(typeof(data)=='string'){
                 this._dialogService.error(data);

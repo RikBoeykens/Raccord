@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Raccord.Application.Core.Services.Characters;
+using Raccord.Application.Core.Services.Locations.LocationSets;
 using Raccord.Application.Core.Services.Scenes;
 using Raccord.Application.Core.Services.Scheduling.ScheduleDays;
 
@@ -11,6 +12,7 @@ namespace Raccord.Application.Core.Services.Scheduling.ScheduleScenes
         private SceneSummaryDto _scene;
         private ScheduleDaySummaryDto _scheduleDay;
         private IEnumerable<LinkedCharacterDto> _characters;
+        private LocationSetSummaryDto _locationSet;
 
         // ID of the schedule scene
         public long ID { get; set; }
@@ -57,6 +59,19 @@ namespace Raccord.Application.Core.Services.Scheduling.ScheduleScenes
             set
             {
                 _characters = value;
+            }
+        }
+
+        // Linked location set
+        public LocationSetSummaryDto LocationSet
+        {
+            get
+            {
+                return _locationSet ?? (_locationSet = new LocationSetSummaryDto()); 
+            }
+            set
+            {
+                _locationSet = value;
             }
         }
     }
