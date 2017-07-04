@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Raccord.Application.Core.Services.Locations.LocationSets;
+using Raccord.Application.Core.Services.Scheduling.ScheduleDays;
 
 namespace Raccord.Application.Core.Services.Locations.Locations
 {
@@ -7,6 +8,7 @@ namespace Raccord.Application.Core.Services.Locations.Locations
     public class FullLocationDto: LocationDto
     {
         private IEnumerable<LocationSetScriptLocationDto> _sets;
+        private IEnumerable<ScheduleDaySceneCollectionDto> _scheduleDays;
 
         // Sets linked to the location
         public IEnumerable<LocationSetScriptLocationDto> Sets
@@ -18,6 +20,19 @@ namespace Raccord.Application.Core.Services.Locations.Locations
             set
             {
                 _sets = value;
+            }
+        }
+
+        // Schedule days linked to the location
+        public IEnumerable<ScheduleDaySceneCollectionDto> ScheduleDays
+        {
+            get
+            {
+                return _scheduleDays ?? (_scheduleDays = new List<ScheduleDaySceneCollectionDto>());
+            }
+            set
+            {
+                _scheduleDays = value;
             }
         }
     }

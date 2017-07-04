@@ -4,6 +4,7 @@ export { LocationsListComponent } from "./locations/component/locations-list/loc
 export { EditLocationComponent } from "./locations/component/edit-location/edit-location.component";
 export { LocationLandingComponent } from "./locations/component/location-landing/location-landing.component";
 export { LocationLocationSetsComponent } from "./locations/component/location-location-sets/location-location-sets.component";
+export { LocationScheduleComponent } from "./locations/component/location-schedule/location-schedule.component";
 
 // models
 export { Location } from "./locations/model/location.model";
@@ -19,6 +20,7 @@ export { LocationsResolve } from "./locations/service/locations-resolve.service"
 // component
 export { EditLocationSetComponent } from "./location-sets/component/edit-location-set/edit-location-set.component";
 export { LocationSetLandingComponent } from "./location-sets/component/location-set-landing/location-set-landing.component";
+export { LocationSetScheduleComponent } from "./location-sets/component/location-set-schedule/location-set-schedule.component";
 
 // models
 export { FullLocationSet } from "./location-sets/model/full-location-set.model";

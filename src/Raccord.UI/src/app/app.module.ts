@@ -88,8 +88,10 @@ import {
   EditLocationComponent,
   LocationLandingComponent,
   LocationLocationSetsComponent,
+  LocationScheduleComponent,
   EditLocationSetComponent,
-  LocationSetLandingComponent
+  LocationSetLandingComponent,
+  LocationSetScheduleComponent
 } from './projects';
 import { ScenePropertiesLandingComponent } from './projects';
 import { SelectEntityComponent } from './shared';
@@ -154,8 +156,10 @@ const COMPONENTS =[
   EditLocationComponent,
   LocationLandingComponent,
   LocationLocationSetsComponent,
+  LocationScheduleComponent,
   EditLocationSetComponent,
   LocationSetLandingComponent,
+  LocationSetScheduleComponent,
   ScenePropertiesLandingComponent,
   SelectEntityComponent
 ];

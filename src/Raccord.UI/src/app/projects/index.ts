@@ -123,11 +123,13 @@ export {
     EditLocationComponent,
     LocationLandingComponent,
     LocationLocationSetsComponent,
+    LocationScheduleComponent,
     LocationSetHttpService,
     LocationSetResolve,
     SceneLocationSetsResolve,
     EditLocationSetComponent,
-    LocationSetLandingComponent
+    LocationSetLandingComponent,
+    LocationSetScheduleComponent
  } from "./children/locations";
 
 export { ScenePropertiesLandingComponent } from './children/scene-properties/component/scene-properties-landing/scene-properties-landing.component';

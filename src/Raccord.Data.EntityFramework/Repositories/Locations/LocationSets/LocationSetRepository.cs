@@ -55,7 +55,22 @@ namespace Raccord.Data.EntityFramework.Repositories.Locations.LocationSets
             return query.Include(ss=> ss.Location)
                         .Include(ss=> ss.ScriptLocation)
                         .ThenInclude(s=> s.ImageLocations)
-                        .ThenInclude(ss=> ss.Image);
+                        .ThenInclude(ss=> ss.Image)
+                        .Include(ls=> ls.ScheduleScenes)
+                        .ThenInclude(ss=> ss.Scene)
+                        .ThenInclude(s=> s.IntExt)
+                        .Include(ls=> ls.ScheduleScenes)
+                        .ThenInclude(ss=> ss.Scene)
+                        .ThenInclude(s=> s.DayNight)
+                        .Include(ls=> ls.ScheduleScenes)
+                        .ThenInclude(ss=> ss.Scene)
+                        .ThenInclude(s=> s.ScriptLocation)
+                        .Include(ls=> ls.ScheduleScenes)
+                        .ThenInclude(ss=> ss.Scene)
+                        .ThenInclude(s=> s.ImageScenes)
+                        .ThenInclude(i=> i.Image)
+                        .Include(ls=> ls.ScheduleScenes)
+                        .ThenInclude(ss=> ss.ScheduleDay);
         }
 
         private IQueryable<LocationSet> GetIncludedSummary()

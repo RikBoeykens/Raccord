@@ -3,9 +3,10 @@ import { Address } from '../../../../../shared';
 import { LatLng } from '../../../../../shared';
 import { Location } from "../../";
 import { ScriptLocation } from "../../../../children/script-locations/model/script-location.model";
+import { ScheduleDaySceneCollection } from '../../../scheduling/schedule-days/model/schedule-day-scene-collection.model';
 
 export class FullLocationSet extends LocationSetSummary{
-    linkID: number;
+    scheduleDays: ScheduleDaySceneCollection[];
 
     constructor(obj?: {
                         id: number, 
@@ -13,12 +14,12 @@ export class FullLocationSet extends LocationSetSummary{
                         description: string,
                         latLng: LatLng,
                         location: Location, 
-                        scriptLocation: ScriptLocation
-                        linkID: number
+                        scriptLocation: ScriptLocation,
+                        scheduleDays: ScheduleDaySceneCollection[]
                     }){
         super(obj);
         if(obj){
-            this.linkID = obj.linkID;
+            this.scheduleDays = obj.scheduleDays;
         }
     }
 }

@@ -50,9 +50,9 @@ namespace Raccord.API.ViewModels.Scheduling.ScheduleDays
         }
 
         // Translates a scene dto to a scene viewmodel
-        public static CharacterScheduleDayViewModel Translate(this CharacterScheduleDayDto dto)
+        public static ScheduleDaySceneCollectionViewModel Translate(this ScheduleDaySceneCollectionDto dto)
         {
-            return new CharacterScheduleDayViewModel
+            return new ScheduleDaySceneCollectionViewModel
             {
                 ID = dto.ID,
                 Date = dto.Date,

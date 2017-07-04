@@ -5,17 +5,17 @@ using Raccord.Application.Core.Services.Scheduling.ScheduleScenes;
 
 namespace Raccord.Application.Core.Services.Scheduling.ScheduleDays
 {
-    // Dto to represent a schedule day with info specific to a character
-    public class CharacterScheduleDayDto: ScheduleDayDto
+    // Dto to represent a schedule day with info specific entity
+    public class ScheduleDaySceneCollectionDto: ScheduleDayDto
     {
-        private IEnumerable<LinkedSceneDto> _scenes;
+        private IEnumerable<ScheduleSceneSceneDto> _scenes;
 
         // Scenes scheduled for the day
-        public IEnumerable<LinkedSceneDto> Scenes
+        public IEnumerable<ScheduleSceneSceneDto> Scenes
         {
             get
             {
-                return _scenes ?? (_scenes = new List<LinkedSceneDto>());
+                return _scenes ?? (_scenes = new List<ScheduleSceneSceneDto>());
             }
             set
             {

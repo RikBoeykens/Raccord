@@ -6,6 +6,7 @@ using Raccord.Application.Services.Common.Locations;
 using Raccord.Application.Services.Locations.LocationSets;
 using Raccord.Application.Core.Services.SearchEngine;
 using Raccord.Core.Enums;
+using Raccord.Application.Services.Scheduling.ScheduleDays;
 
 namespace Raccord.Application.Services.Locations.Locations
 {
@@ -22,6 +23,7 @@ namespace Raccord.Application.Services.Locations.Locations
                 Address = LocationUtilities.TranslateAddress(location.Address1, location.Address2, location.Address3, location.Address4),
                 LatLng = LocationUtilities.TranslateLatLng(location.Latitude, location.Longitude),
                 Sets = location.LocationSets.Select(ls=> ls.TranslateScriptLocation()),
+                ScheduleDays = location.GetLocationScheduleDays(),
                 ProjectID = location.ProjectID,
             };
 
