@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Raccord.Application.Core.Services.Scheduling.ScheduleDays;
 using Raccord.Data.EntityFramework.Repositories.Scheduling.ScheduleDays;
+using Raccord.Data.EntityFramework.Repositories.ShootingDays;
 using Raccord.Domain.Model.Scheduling;
 using Raccord.Domain.Model.ShootingDays;
 
@@ -12,14 +13,21 @@ namespace Raccord.Application.Services.Scheduling.ScheduleDays
     public class ScheduleDayService : IScheduleDayService
     {
         private readonly IScheduleDayRepository _scheduleDayRepository;
+        private readonly IShootingDayRepository _shootingDayRepository;
 
         // Initialises a new ScheduleDayService
-        public ScheduleDayService(IScheduleDayRepository scheduleDayRepository)
+        public ScheduleDayService(
+            IScheduleDayRepository scheduleDayRepository,
+            IShootingDayRepository shootingDayRepository
+            )
         {
             if(scheduleDayRepository == null)
                 throw new ArgumentNullException(nameof(scheduleDayRepository));
+            if(shootingDayRepository == null)
+                throw new ArgumentNullException(nameof(shootingDayRepository));
             
             _scheduleDayRepository = scheduleDayRepository;
+            _shootingDayRepository = shootingDayRepository;
         }
 
         // Gets all schedule days
@@ -102,16 +110,21 @@ namespace Raccord.Application.Services.Scheduling.ScheduleDays
             {
                 if(!scheduleDay.ShootingDayID.HasValue)
                 {
-                    scheduleDay.ShootingDay = new ShootingDay
+                    var newShootingDay = new ShootingDay
                     {
                         Date = scheduleDay.Date,
                         Number = number.ToString(),
+                        ScheduleDayID = scheduleDay.ID,
+                        ProjectID = scheduleDay.ProjectID,
                     };
                     number++;
+                    _shootingDayRepository.Add(newShootingDay);
+                    _shootingDayRepository.Commit();
+                    scheduleDay.ShootingDayID = newShootingDay.ID;
                     _scheduleDayRepository.Edit(scheduleDay);
+                    _scheduleDayRepository.Commit();
                 }
             }
-            _scheduleDayRepository.Commit();
         }
     }
 }

@@ -93,7 +93,12 @@ namespace Raccord.Data.EntityFramework.Repositories.Characters
                         .ThenInclude(s=> s.ImageScenes)
                         .ThenInclude(s=> s.Image)
                         .Include(i=> i.ImageCharacters)
-                        .ThenInclude(ic=> ic.Image);
+                        .ThenInclude(ic=> ic.Image)
+                        .Include(i=> i.CharacterScenes)
+                        .ThenInclude(cs=> cs.ScheduleDays)
+                        .ThenInclude(sd=> sd.ScheduleScene)
+                        .ThenInclude(ss=> ss.ScheduleDay)
+                        .ThenInclude(sd=> sd.ShootingDay);
         }
 
         private IQueryable<Character> GetIncludedSummary()

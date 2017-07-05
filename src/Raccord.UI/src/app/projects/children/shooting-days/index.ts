@@ -1,0 +1,1 @@
+export { ShootingDay } from "./model/shooting-day.model";

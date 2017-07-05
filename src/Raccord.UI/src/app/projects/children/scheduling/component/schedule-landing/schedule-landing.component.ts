@@ -119,4 +119,19 @@ export class ScheduleLandingComponent implements OnInit {
             this._loadingService.endLoading(loadingId)
         );
     }
+
+    publishDays(){
+        let loadingId = this._loadingService.startLoading();
+
+        this._scheduleDayHttpService.publish(this.project.id).then(data=>{
+            if(typeof(data)=='string'){
+                this._dialogService.error(data);
+            }else{
+                this.getScheduleDays();
+            }
+        }).catch()
+        .then(()=>
+            this._loadingService.endLoading(loadingId)
+        );
+    }
 }

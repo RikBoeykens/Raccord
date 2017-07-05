@@ -37,14 +37,16 @@ namespace Raccord.Data.EntityFramework.Repositories.Scheduling.ScheduleDayNotes
         {
             IQueryable<ScheduleDayNote> query = _context.Set<ScheduleDayNote>();
 
-            return query.Include(sd=> sd.ScheduleDay);
+            return query.Include(sd=> sd.ScheduleDay)
+                        .ThenInclude(sd=> sd.ShootingDay);
         }
 
         private IQueryable<ScheduleDayNote> GetIncludedSummary()
         {
             IQueryable<ScheduleDayNote> query = _context.Set<ScheduleDayNote>();
 
-            return query.Include(sd=> sd.ScheduleDay);
+            return query.Include(sd=> sd.ScheduleDay)
+                        .ThenInclude(sd=> sd.ShootingDay);
         }
 
         private IQueryable<ScheduleDayNote> GetIncluded()
