@@ -8,9 +8,10 @@ using Raccord.Data.EntityFramework;
 namespace Raccord.Data.EntityFramework.Migrations
 {
     [DbContext(typeof(RaccordDBContext))]
-    partial class RaccordDBContextModelSnapshot : ModelSnapshot
+    [Migration("20170705051848_shooting-days")]
+    partial class shootingdays
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.0.3");

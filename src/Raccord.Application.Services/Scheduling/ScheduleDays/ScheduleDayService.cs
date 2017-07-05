@@ -4,6 +4,7 @@ using System.Linq;
 using Raccord.Application.Core.Services.Scheduling.ScheduleDays;
 using Raccord.Data.EntityFramework.Repositories.Scheduling.ScheduleDays;
 using Raccord.Domain.Model.Scheduling;
+using Raccord.Domain.Model.ShootingDays;
 
 namespace Raccord.Application.Services.Scheduling.ScheduleDays
 {
@@ -89,6 +90,27 @@ namespace Raccord.Application.Services.Scheduling.ScheduleDays
 
             _scheduleDayRepository.Delete(scheduleDay);
 
+            _scheduleDayRepository.Commit();
+        }
+
+        public void PublishDays(long projectID)
+        {
+            var scheduleDaysWithScenes = _scheduleDayRepository.GetAllWithScenesForProject(projectID).OrderBy(sd=> sd.Date).ToList();
+
+            var number = 1;
+            foreach(var scheduleDay in scheduleDaysWithScenes)
+            {
+                if(!scheduleDay.ShootingDayID.HasValue)
+                {
+                    scheduleDay.ShootingDay = new ShootingDay
+                    {
+                        Date = scheduleDay.Date,
+                        Number = number.ToString(),
+                    };
+                    number++;
+                    _scheduleDayRepository.Edit(scheduleDay);
+                }
+            }
             _scheduleDayRepository.Commit();
         }
     }

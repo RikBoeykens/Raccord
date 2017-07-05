@@ -47,4 +47,10 @@ export class ScheduleDayHttpService extends BaseHttpService {
 
         return this.doDelete(uri);
     }
+
+    publish(projectId: number): Promise<any>{
+        var uri = `${this._baseUri}/${projectId}/publish`;
+
+        return this.doPost(null, uri);
+    }
 }
