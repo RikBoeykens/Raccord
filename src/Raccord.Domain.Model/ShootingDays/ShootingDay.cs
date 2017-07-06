@@ -1,4 +1,5 @@
 using System;
+using Raccord.Domain.Model.Callsheets;
 using Raccord.Domain.Model.Projects;
 using Raccord.Domain.Model.Scheduling;
 using Raccord.Domain.Model.ShootingDays;
@@ -22,5 +23,9 @@ namespace Raccord.Domain.Model.ShootingDays
         public long? ScheduleDayID { get; set; }
 
         public virtual ScheduleDay ScheduleDay { get; set; }
+
+        public long? CallsheetID { get; set; }
+
+        public virtual Callsheet Callsheet { get; set; }
     }
 }
