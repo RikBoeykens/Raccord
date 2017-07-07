@@ -132,4 +132,14 @@ export {
     LocationSetScheduleComponent
  } from "./children/locations";
 
+ export {
+    ShootingDayHttpService,
+    AvailableShootingDaysResolve
+ } from "./children/shooting-days";
+
+ export{
+    CallsheetLandingComponent,
+    NewCallsheetComponent
+ } from "./children/callsheets";
+
 export { ScenePropertiesLandingComponent } from './children/scene-properties/component/scene-properties-landing/scene-properties-landing.component';

@@ -17,7 +17,7 @@ namespace Raccord.Domain.Model.Callsheets
         // Linked project
         public virtual Project Project { get; set; }
 
-        public long? ShootingDayID { get; set; }
+        public long ShootingDayID { get; set; }
 
         public virtual ShootingDay ShootingDay { get; set; }
     }

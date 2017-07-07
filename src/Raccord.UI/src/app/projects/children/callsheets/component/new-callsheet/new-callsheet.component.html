@@ -1,0 +1,22 @@
+<div class="row">      
+    <div class="col s12">
+        <a routerLink="/" class="breadcrumb">Dashboard</a>
+        <a routerLink="/projects" class="breadcrumb">Projects</a>
+        <a routerLink="/projects/{{project.id}}" class="breadcrumb">{{project.title}}</a>
+        <a routerLink="/projects/{{project.id}}/callsheets" class="breadcrumb">Callsheets</a>
+        <span class="breadcrumb">New</span>
+    </div>
+</div>
+<form class="row"
+        id="new_callsheet_form"
+        #newCallsheetForm = "ngForm"
+        (ngSubmit)="addCallsheet()">
+    <div class="col s12">
+        <div fxLayout="row" fxLayoutGap="10px">
+            <md-select fxFlex="25%" mdInput placeholder="Day" [(ngModel)]="selectedDayId" #scheduleday="ngModel" name="schedule_day">
+                <md-option *ngFor="let day of availableShootingDays" [value]="day.id">{{ day.number }} {{ day.date | date }}</md-option>
+            </md-select>
+            <button fxFlex="25%" md-raised-button type="submit"[disabled]="!newCallsheetForm.form.valid">Start</button>                        
+        </div>
+    </div>
+</form>
