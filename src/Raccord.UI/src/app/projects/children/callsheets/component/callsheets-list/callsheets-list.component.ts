@@ -1,13 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ProjectSummary } from '../../../../model/project-summary.model';
+import { CallsheetSummary } from "../../";
 
 @Component({
-    templateUrl: 'callsheet-landing.component.html',
+    templateUrl: 'callsheets-list.component.html',
 })
-export class CallsheetLandingComponent implements OnInit {
+export class CallsheetsListComponent implements OnInit {
 
     project: ProjectSummary;
+    callsheets: CallsheetSummary[] = [];
 
     constructor(
         private _route: ActivatedRoute,
@@ -16,8 +18,9 @@ export class CallsheetLandingComponent implements OnInit {
     }
 
     ngOnInit() {
-        this._route.data.subscribe((data: { project: ProjectSummary }) => {
+        this._route.data.subscribe((data: { project: ProjectSummary, callsheets: CallsheetSummary[] }) => {
             this.project = data.project;
+            this.callsheets = data.callsheets;
         });
     }
 }

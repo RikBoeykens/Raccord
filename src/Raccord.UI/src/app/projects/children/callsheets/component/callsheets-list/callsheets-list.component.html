@@ -11,3 +11,11 @@
         <a routerLink="/projects/{{project.id}}/callsheets/new">New Callsheet</a>
     </div>
 </div>
+<div class="row">
+    <md-nav-list>
+        <a md-list-item [routerLink]="[callsheet.id]" 
+           *ngFor="let callsheet of callsheets">
+           {{callsheet.shootingDay.number}} - {{callsheet.shootingDay.date | date}}
+        </a>
+    </md-nav-list>
+</div>

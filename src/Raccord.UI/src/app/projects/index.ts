@@ -138,7 +138,10 @@ export {
  } from "./children/shooting-days";
 
  export{
-    CallsheetLandingComponent,
+    CallsheetHttpService,
+    CallsheetResolve,
+    CallsheetsResolve,
+    CallsheetsListComponent,
     NewCallsheetComponent
  } from "./children/callsheets";
 

@@ -30,7 +30,7 @@ import {
   LocationsListComponent,
   LocationLandingComponent,
   LocationSetLandingComponent,
-  CallsheetLandingComponent,
+  CallsheetsListComponent,
   NewCallsheetComponent
 } from './projects';
 import { ScenePropertiesLandingComponent } from './projects';
@@ -64,7 +64,9 @@ import {
   LocationResolve,
   LocationSetResolve,
   SceneLocationSetsResolve,
-  AvailableShootingDaysResolve
+  AvailableShootingDaysResolve,
+  CallsheetsResolve,
+  CallsheetResolve
 } from './projects';
 
 import { CanDeactivateGuard } from './shared/service/can-deactivate-guard.service';
@@ -349,9 +351,10 @@ export const ROUTES: Routes = [
             children:[
               {
                 path: "",
-                component: CallsheetLandingComponent,
+                component: CallsheetsListComponent,
                 resolve:{
                   project: ProjectSummaryResolve,
+                  callsheets:  CallsheetsResolve
                 }
               },
               {

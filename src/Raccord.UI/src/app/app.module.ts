@@ -92,7 +92,7 @@ import {
   EditLocationSetComponent,
   LocationSetLandingComponent,
   LocationSetScheduleComponent,
-  CallsheetLandingComponent,
+  CallsheetsListComponent,
   NewCallsheetComponent
 } from './projects';
 import { ScenePropertiesLandingComponent } from './projects';
@@ -162,7 +162,7 @@ const COMPONENTS =[
   EditLocationSetComponent,
   LocationSetLandingComponent,
   LocationSetScheduleComponent,
-  CallsheetLandingComponent,
+  CallsheetsListComponent,
   NewCallsheetComponent,
   ScenePropertiesLandingComponent,
   SelectEntityComponent
@@ -227,7 +227,10 @@ import {
   LocationSetResolve,
   SceneLocationSetsResolve,
   ShootingDayHttpService,
-  AvailableShootingDaysResolve
+  AvailableShootingDaysResolve,
+  CallsheetHttpService,
+  CallsheetsResolve,
+  CallsheetResolve
 } from './projects';
 
 const APP_PROVIDERS = [
@@ -286,7 +289,10 @@ const APP_PROVIDERS = [
   LocationSetResolve,
   SceneLocationSetsResolve,
   ShootingDayHttpService,
-  AvailableShootingDaysResolve
+  AvailableShootingDaysResolve,
+  CallsheetHttpService,
+  CallsheetsResolve,
+  CallsheetResolve
 ];
 
 // Directives
