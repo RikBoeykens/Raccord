@@ -11,6 +11,7 @@ namespace Raccord.API.ViewModels.ShootingDays
                 ID = dto.ID,
                 Number = dto.Number,
                 Date = dto.Date,
+                CallsheetID = dto.CallsheetID,
                 ProjectID = dto.ProjectID,
             };
         }
@@ -21,6 +22,7 @@ namespace Raccord.API.ViewModels.ShootingDays
                 ID =  vm.ID,
                 Number =  vm.Number,
                 Date = vm.Date,
+                CallsheetID = vm.CallsheetID,
                 ProjectID = vm.ProjectID,
             };
         }

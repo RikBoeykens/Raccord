@@ -50,21 +50,21 @@ namespace Raccord.Data.EntityFramework.Repositories.Callsheets
         {
             IQueryable<Callsheet> query = _context.Set<Callsheet>();
 
-            return query;
+            return query.Include(cs=> cs.ShootingDay);
         }
 
         private IQueryable<Callsheet> GetIncludedSummary()
         {
             IQueryable<Callsheet> query = _context.Set<Callsheet>();
 
-            return query;
+            return query.Include(cs=> cs.ShootingDay);
         }
 
         private IQueryable<Callsheet> GetIncluded()
         {
             IQueryable<Callsheet> query = _context.Set<Callsheet>();
 
-            return query;
+            return query.Include(cs=> cs.ShootingDay);
         }
 
 

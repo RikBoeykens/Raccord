@@ -12,6 +12,7 @@ namespace Raccord.Application.Services.ShootingDays
                 ID = shootingDay.ID,
                 Number = shootingDay.Number,
                 Date = shootingDay.Date,
+                CallsheetID = shootingDay.CallsheetID,
                 ProjectID = shootingDay.ProjectID
             };
         }

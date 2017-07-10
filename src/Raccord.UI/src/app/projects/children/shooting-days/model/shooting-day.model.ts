@@ -4,12 +4,14 @@ export class ShootingDay extends BaseModel{
     id: number;
     number: string;
     date: Date;
+    callsheetId?: number;
     projectId: number;
 
     constructor(obj?: {
                         id: number,
                         number: string, 
                         date: Date,
+                        callsheetId?: number,
                         projectId: number
                     }){
         super();
@@ -17,6 +19,7 @@ export class ShootingDay extends BaseModel{
             this.id = obj.id;
             this.number = obj.number;
             this.date = obj.date;
+            this.callsheetId = obj.callsheetId;
             this.projectId = obj.projectId;
         }
         else{
