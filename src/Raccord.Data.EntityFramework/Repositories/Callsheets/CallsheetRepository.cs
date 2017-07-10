@@ -70,9 +70,9 @@ namespace Raccord.Data.EntityFramework.Repositories.Callsheets
 
         private IQueryable<Callsheet> GetSearchQuery(string searchText, long? projectID)
         {
-            IQueryable<Callsheet> query = _context.Set<Callsheet>();
+            IQueryable<Callsheet> query = _context.Set<Callsheet>().Include(cs=> cs.ShootingDay);
 
-            query = query.Where(l=> l.Number.ToLower().Contains(searchText.ToLower()));
+            query = query.Where(l=> l.ShootingDay.Number.ToLower().Contains(searchText.ToLower()));
 
             if(projectID.HasValue)
                 query = query.Where(l=> l.ProjectID==projectID.Value);

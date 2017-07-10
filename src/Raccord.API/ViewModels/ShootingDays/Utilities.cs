@@ -14,5 +14,15 @@ namespace Raccord.API.ViewModels.ShootingDays
                 ProjectID = dto.ProjectID,
             };
         }
+        public static ShootingDayDto Translate(this ShootingDayViewModel vm)
+        {
+            return new ShootingDayDto
+            {
+                ID =  vm.ID,
+                Number =  vm.Number,
+                Date = vm.Date,
+                ProjectID = vm.ProjectID,
+            };
+        }
     }
 }
