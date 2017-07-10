@@ -4,7 +4,7 @@
         <a routerLink="/projects" class="breadcrumb">Projects</a>
         <a routerLink="/projects/{{project.id}}" class="breadcrumb">{{project.title}}</a>
         <a routerLink="/projects/{{project.id}}/callsheets" class="breadcrumb">Callsheets</a>
-        <span class="breadcrumb">Wizard</span>
+        <span class="breadcrumb">{{callsheet.shootingDay.number}} - {{callsheet.shootingDay.date | date}}</span>
     </div>
 </div>
-<h3>{{callsheet.shootingDay.number}} - {{callsheet.shootingDay.date}}</h3>
+<h3>Step 1 - Scenes</h3>

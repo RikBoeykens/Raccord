@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { ProjectSummary } from '../../../../model/project-summary.model';
-import { FullCallsheet } from "../../";
+import { ProjectSummary } from '../../../../../model/project-summary.model';
+import { FullCallsheet } from "../../../";
 
 @Component({
-    templateUrl: 'callsheet-wizard.component.html',
+    templateUrl: 'callsheet-wizard-step-1.component.html',
 })
-export class CallsheetWizardComponent implements OnInit {
+export class CallsheetWizardStep1Component implements OnInit {
 
     project: ProjectSummary;
     callsheet: FullCallsheet;

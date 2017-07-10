@@ -44,7 +44,7 @@ export class NewCallsheetComponent implements OnInit {
             if(typeof(data)== 'string'){
                 this._dialogService.error(data);
             }else{
-                this._router.navigate(["projects", this.project.id, "callsheets", data, "wizard"]);
+                this._router.navigate(["projects", this.project.id, "callsheets", data, "wizard", 1]);
             }
         }).catch()
         .then(()=> this._loadingService.endLoading(loadingId));

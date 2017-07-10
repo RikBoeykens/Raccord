@@ -143,7 +143,7 @@ export {
     CallsheetsResolve,
     CallsheetsListComponent,
     NewCallsheetComponent,
-    CallsheetWizardComponent
+    CallsheetWizardStep1Component
  } from "./children/callsheets";
 
 export { ScenePropertiesLandingComponent } from './children/scene-properties/component/scene-properties-landing/scene-properties-landing.component';
