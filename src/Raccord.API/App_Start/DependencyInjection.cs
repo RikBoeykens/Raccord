@@ -63,6 +63,7 @@ using Raccord.Application.Core.Services.Locations.Locations;
 using Raccord.Application.Services.Locations.Locations;
 using Raccord.Data.EntityFramework.Repositories.ShootingDays;
 using Raccord.Data.EntityFramework.Repositories.Callsheets;
+using Raccord.Data.EntityFramework.Repositories.Callsheets.Scenes;
 using Raccord.Application.Core.Services.ShootingDays;
 using Raccord.Application.Services.ShootingDays;
 using Raccord.Application.Core.Services.Callsheets;
@@ -152,6 +153,9 @@ namespace Raccord.API
 
             services.AddTransient<ICallsheetRepository, CallsheetRepository>();
             services.AddTransient<ICallsheetService, CallsheetService>();
+
+            services.AddTransient<ICallsheetSceneRepository, CallsheetSceneRepository>();
+            services.AddTransient<ICallsheetSceneCharacterRepository, CallsheetSceneCharacterRepository>();            
 
             services.AddTransient<ISearchEngineServiceWrapper, SearchEngineServiceWrapper>();
         }
