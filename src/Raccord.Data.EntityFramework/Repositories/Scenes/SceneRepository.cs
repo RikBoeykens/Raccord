@@ -74,7 +74,10 @@ namespace Raccord.Data.EntityFramework.Repositories.Scenes
                          .ThenInclude(sd=> sd.ScheduleScenes)
                          .Include(s => s.ScheduleScenes)
                          .ThenInclude(ss=> ss.ScheduleDay)
-                         .ThenInclude(sd=> sd.ShootingDay);
+                         .ThenInclude(sd=> sd.ShootingDay)
+                         .Include(s => s.ScheduleScenes)
+                         .ThenInclude(ss=> ss.LocationSet)
+                         .ThenInclude(ls=> ls.Location);
         }
 
         private IQueryable<Scene> GetIncludedSummary()

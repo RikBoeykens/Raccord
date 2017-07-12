@@ -10,6 +10,12 @@ namespace Raccord.Domain.Model.Callsheets
     {
         private ICollection<CallsheetScene> _scenes;
 
+        // Time of day the callsheet day starts
+        public DateTime Start { get; set; }
+
+        // Time of day the callsheet day ends
+        public DateTime End { get; set; }
+
         // ID of the linked project
         public long ProjectID { get; set; }
 

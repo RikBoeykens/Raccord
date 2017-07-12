@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using Raccord.Application.Core.Services.Callsheets;
 using Raccord.Data.EntityFramework.Repositories.Callsheets;
+using Raccord.Data.EntityFramework.Repositories.Scheduling.ScheduleDays;
 using Raccord.Data.EntityFramework.Repositories.ShootingDays;
 using Raccord.Domain.Model.Callsheets;
+using Raccord.Domain.Model.Callsheets.Scenes;
 
 namespace Raccord.Application.Services.Callsheets
 {
@@ -13,20 +15,25 @@ namespace Raccord.Application.Services.Callsheets
     {
         private readonly ICallsheetRepository _callsheetRepository;
         private readonly IShootingDayRepository _shootingDayRepository;
+        private readonly IScheduleDayRepository _scheduleDayRepository;
 
         // Initialises a new CharacterService
         public CallsheetService(
             ICallsheetRepository callsheetRepository,
-            IShootingDayRepository shootingDayRepository
+            IShootingDayRepository shootingDayRepository,
+            IScheduleDayRepository scheduleDayRepository
             )
         {
             if(callsheetRepository == null)
                 throw new ArgumentNullException(nameof(callsheetRepository));
             if(shootingDayRepository == null)
                 throw new ArgumentNullException(nameof(shootingDayRepository));
+            if(scheduleDayRepository == null)
+                throw new ArgumentNullException(nameof(scheduleDayRepository));
             
             _callsheetRepository = callsheetRepository;
             _shootingDayRepository = shootingDayRepository;
+            _scheduleDayRepository = scheduleDayRepository;
         }
 
         // Gets all characters for a project
@@ -63,12 +70,29 @@ namespace Raccord.Application.Services.Callsheets
         public long Add(CallsheetDto dto)
         {
             var linkedShootingDay = _shootingDayRepository.GetSingle(dto.ShootingDay.ID);
+            var linkedScheduleDay = _scheduleDayRepository.GetFull(linkedShootingDay.ScheduleDayID.Value);
 
             var callsheet = new Callsheet
             {
+                Start = linkedScheduleDay.Start ?? default(DateTime),
+                End = linkedScheduleDay.End ?? default(DateTime),
                 ShootingDayID = dto.ShootingDay.ID,
                 ProjectID = dto.ProjectID,
             };
+
+            foreach(var scheduleScene in linkedScheduleDay.ScheduleScenes)
+            {
+                callsheet.CallsheetScenes.Add(new CallsheetScene
+                {
+                    PageLength = scheduleScene.PageLength,
+                    LocationSetID = scheduleScene.LocationSetID,
+                    SceneID = scheduleScene.SceneID,
+                    Characters = scheduleScene.Characters.Select(cs=> new CallsheetSceneCharacter
+                    {
+                        CharacterSceneID = cs.CharacterSceneID,
+                    }).ToList(),
+                });
+            }
 
             _callsheetRepository.Add(callsheet);
             _callsheetRepository.Commit();
