@@ -50,7 +50,32 @@ namespace Raccord.Data.EntityFramework.Repositories.Callsheets
         {
             IQueryable<Callsheet> query = _context.Set<Callsheet>();
 
-            return query.Include(cs=> cs.ShootingDay);
+            return query.Include(sd=> sd.CallsheetScenes)
+                        .ThenInclude(ss=> ss.Scene)
+                        .ThenInclude(s=> s.IntExt)
+                        .Include(sd=> sd.CallsheetScenes)
+                        .ThenInclude(ss=> ss.Scene)
+                        .ThenInclude(s=> s.ScriptLocation)
+                        .Include(sd=> sd.CallsheetScenes)
+                        .ThenInclude(ss=> ss.Scene)
+                        .ThenInclude(s=> s.DayNight)
+                        .Include(sd=> sd.CallsheetScenes)
+                        .ThenInclude(ss=> ss.Scene)
+                        .ThenInclude(s=> s.ImageScenes)
+                        .ThenInclude(i=> i.Image)
+                        .Include(ss=> ss.CallsheetScenes)
+                        .ThenInclude(ss=> ss.Characters)
+                        .ThenInclude(cs=> cs.CharacterScene)
+                        .ThenInclude(cs=> cs.Character)
+                        .ThenInclude(c=> c.ImageCharacters)
+                        .ThenInclude(ic=> ic.Image)
+                        .Include(sd=> sd.CallsheetScenes)
+                        .ThenInclude(ss=> ss.LocationSet)
+                        .ThenInclude(ls=> ls.Location)
+                        .Include(sd=> sd.CallsheetScenes)
+                        .ThenInclude(ss=> ss.LocationSet)
+                        .ThenInclude(ls=> ls.ScriptLocation)
+                        .Include(sd=> sd.ShootingDay);
         }
 
         private IQueryable<Callsheet> GetIncludedSummary()
