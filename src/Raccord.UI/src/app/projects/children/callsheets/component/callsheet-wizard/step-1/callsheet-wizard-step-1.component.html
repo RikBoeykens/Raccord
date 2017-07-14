@@ -20,10 +20,13 @@
 <div class="row">
     <md-list>
         <md-list-item 
-            *ngFor="let callsheetScene of callsheet.scenes">
+            *ngFor="let callsheetScene of callsheetScenes">
             <div md-line>
                 <show-image *ngIf="callsheetScene.scene.primaryImage.id!=0" [image]="callsheetScene.scene.primaryImage" [listAvatar]="true"></show-image>
-                <span>{{callsheetScene.scene.number}}. {{callsheetScene.scene.intExt.name}} {{callsheetScene.scene.scriptLocation.name}} {{callsheetScene.scene.dayNight.name}} - {{callsheetScene.scene.summary}}</span> ({{callsheetScene.pageLength | pagelength}})
+                <span>{{callsheetScene.scene.number}}. {{callsheetScene.scene.intExt.name}} {{callsheetScene.scene.scriptLocation.name}} {{callsheetScene.scene.dayNight.name}} - {{callsheetScene.scene.summary}}</span>
+                <md-input-container fxFlex="10%">
+                    <input mdInput id="scene_{{callsheetScene.id}}_pagelength" required [(ngModel)]="callsheetScene.stringPageLength" name="scene_{{callsheetScene.id}}_pagelength" (blur)="updatePageLength(callsheetScene)" />
+                </md-input-container>
                 <button md-button (click)="removeCallsheetScene(callsheetScene)"><md-icon>delete</md-icon></button>
             </div>
         </md-list-item>
