@@ -21,8 +21,8 @@ namespace Raccord.API.Controllers
             _callsheetSceneService = callsheetSceneService;
         }
 
-        // GET: api/callsheetscenes/1/day
-        [HttpGet("{id}/day")]
+        // GET: api/callsheetscenes/1/callsheet
+        [HttpGet("{id}/callsheet")]
         public IEnumerable<CallsheetSceneSceneViewModel> GetScenes(long id)
         {
             var dtos = _callsheetSceneService.GetScenes(id);

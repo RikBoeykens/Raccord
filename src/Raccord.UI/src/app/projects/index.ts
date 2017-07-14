@@ -141,9 +141,11 @@ export {
     CallsheetHttpService,
     CallsheetResolve,
     CallsheetsResolve,
+    CallsheetSceneHttpService,
+    CallsheetSceneCharacterHttpService,
     CallsheetsListComponent,
     NewCallsheetComponent,
-    CallsheetWizardStep1Component
+    CallsheetWizardStep1Component,
  } from "./children/callsheets";
 
 export { ScenePropertiesLandingComponent } from './children/scene-properties/component/scene-properties-landing/scene-properties-landing.component';

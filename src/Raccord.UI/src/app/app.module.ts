@@ -232,7 +232,9 @@ import {
   AvailableShootingDaysResolve,
   CallsheetHttpService,
   CallsheetsResolve,
-  CallsheetResolve
+  CallsheetResolve,
+  CallsheetSceneHttpService,
+  CallsheetSceneCharacterHttpService
 } from './projects';
 
 const APP_PROVIDERS = [
@@ -294,7 +296,9 @@ const APP_PROVIDERS = [
   AvailableShootingDaysResolve,
   CallsheetHttpService,
   CallsheetsResolve,
-  CallsheetResolve
+  CallsheetResolve,
+  CallsheetSceneHttpService,
+  CallsheetSceneCharacterHttpService
 ];
 
 // Directives
