@@ -32,7 +32,8 @@ import {
   LocationSetLandingComponent,
   CallsheetsListComponent,
   NewCallsheetComponent,
-  CallsheetWizardStep1Component
+  CallsheetWizardStep1Component,
+  CallsheetWizardStep2Component
 } from './projects';
 import { ScenePropertiesLandingComponent } from './projects';
 
@@ -372,6 +373,14 @@ export const ROUTES: Routes = [
                   {
                     path: "1",                
                     component: CallsheetWizardStep1Component,
+                    resolve:{
+                      project: ProjectSummaryResolve,
+                      callsheet: CallsheetResolve
+                    }
+                  },
+                  {
+                    path: "2",                
+                    component: CallsheetWizardStep2Component,
                     resolve:{
                       project: ProjectSummaryResolve,
                       callsheet: CallsheetResolve

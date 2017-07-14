@@ -146,6 +146,7 @@ export {
     CallsheetsListComponent,
     NewCallsheetComponent,
     CallsheetWizardStep1Component,
+    CallsheetWizardStep2Component
  } from "./children/callsheets";
 
 export { ScenePropertiesLandingComponent } from './children/scene-properties/component/scene-properties-landing/scene-properties-landing.component';

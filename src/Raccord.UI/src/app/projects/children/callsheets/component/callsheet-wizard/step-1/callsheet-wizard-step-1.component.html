@@ -36,6 +36,15 @@
         Total page length: {{getScheduledPageLength() | pagelength}}
     </span>
 </div>
+<div class="row">
+    <div class="col s12">
+        <a routerLink="/projects/{{project.id}}/callsheets/{{callsheet.id}}/wizard/2"
+            md-raised-button
+            class="wizard-next-button">
+            Next
+        </a>
+    </div>
+</div>
 <div class="delete-scene drop-container drop-delete-container" [dragula]="'callsheet-scene-bag'" *ngIf="draggingScene" [dragulaModel]='deleteScenes'>
     <md-icon>delete</md-icon>
 </div>
