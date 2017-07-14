@@ -7,6 +7,7 @@ import { CallsheetSceneCallsheet } from '../model/callsheet-scene-callsheet.mode
 import { CallsheetSceneScene } from '../model/callsheet-scene-scene.model';
 import { CallsheetScene } from '../model/callsheet-scene.model';
 import { JsonResponse } from '../../../../../shared/model/json-response.model';
+import { SortOrder } from "../../../../../../shared/model/sort-order.model";
 
 @Injectable()
 export class CallsheetSceneHttpService extends BaseHttpService {
@@ -47,5 +48,13 @@ export class CallsheetSceneHttpService extends BaseHttpService {
         var uri = `${this._baseUri}/${id}`;
 
         return this.doDelete(uri);
+    }
+
+    sort(id: number, sortIds: number[]): Promise<any>{
+        var uri = `${this._baseUri}/sort`;
+
+        var sortOrder = new SortOrder({parentId: id, sortIds: sortIds});
+
+        return this.doSort(sortOrder, uri);
     }
 }

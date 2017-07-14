@@ -18,17 +18,16 @@
     </div>
 </div>
 <div class="row">
-    <md-list>
+    <md-list [dragula]='"callsheet-scene-bag"' [dragulaModel]='callsheetScenes' class="drag-sort-container">
         <md-list-item 
-            *ngFor="let callsheetScene of callsheetScenes">
-            <div md-line>
-                <show-image *ngIf="callsheetScene.scene.primaryImage.id!=0" [image]="callsheetScene.scene.primaryImage" [listAvatar]="true"></show-image>
-                <span>{{callsheetScene.scene.number}}. {{callsheetScene.scene.intExt.name}} {{callsheetScene.scene.scriptLocation.name}} {{callsheetScene.scene.dayNight.name}} - {{callsheetScene.scene.summary}}</span>
-                <md-input-container fxFlex="10%">
-                    <input mdInput id="scene_{{callsheetScene.id}}_pagelength" required [(ngModel)]="callsheetScene.stringPageLength" name="scene_{{callsheetScene.id}}_pagelength" (blur)="updatePageLength(callsheetScene)" />
-                </md-input-container>
-                <button md-button (click)="removeCallsheetScene(callsheetScene)"><md-icon>delete</md-icon></button>
-            </div>
+            *ngFor="let callsheetScene of callsheetScenes"
+            class="drag-element drag-delete drag-sort">
+            <md-icon class=drag-handle>drag_handle</md-icon>
+            <show-image *ngIf="callsheetScene.scene.primaryImage.id!=0" [image]="callsheetScene.scene.primaryImage" [listAvatar]="true"></show-image>
+            <span>{{callsheetScene.scene.number}}. {{callsheetScene.scene.intExt.name}} {{callsheetScene.scene.scriptLocation.name}} {{callsheetScene.scene.dayNight.name}} - {{callsheetScene.scene.summary}} ({{callsheetScene.scene.pageLength | pagelength}})</span>
+            <md-input-container fxFlex="10%" *ngIf="!draggingScene">
+                <input mdInput id="scene_{{callsheetScene.id}}_pagelength" required [(ngModel)]="callsheetScene.stringPageLength" name="scene_{{callsheetScene.id}}_pagelength" (blur)="updatePageLength(callsheetScene)" />
+            </md-input-container>
         </md-list-item>
     </md-list>
 </div>
@@ -36,4 +35,7 @@
     <span class="col s12">
         Total page length: {{getScheduledPageLength() | pagelength}}
     </span>
+</div>
+<div class="delete-scene drop-container drop-delete-container" [dragula]="'callsheet-scene-bag'" *ngIf="draggingScene" [dragulaModel]='deleteScenes'>
+    <md-icon>delete</md-icon>
 </div>

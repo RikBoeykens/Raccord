@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Raccord.API.ViewModels.Callsheets.CallsheetScenes;
+using Raccord.API.ViewModels.Common.Sorting;
 using Raccord.API.ViewModels.Core;
 using Raccord.Application.Core.Services.Callsheets.CallsheetScenes;
 
@@ -114,6 +115,35 @@ namespace Raccord.API.Controllers
                 {
                     ok = false,
                     message = "Something went wrong while attempting to delete callsheet scene.",
+                };
+            }
+
+            return new JsonResult(response);
+        }
+
+        // POST api/sort
+        [HttpPost("sort")]
+        public JsonResult Sort([FromBody]SortOrderViewModel vm)
+        {
+            var response = new JsonResponse();
+
+            try
+            {
+                var dto = vm.Translate();
+
+                _callsheetSceneService.Sort(dto);
+
+                response = new JsonResponse
+                {
+                    ok = true,
+                };
+            }
+            catch (Exception)
+            {
+                response = new JsonResponse
+                {
+                    ok = false,
+                    message = "Something went wrong while attempting to sort scenes",
                 };
             }
 

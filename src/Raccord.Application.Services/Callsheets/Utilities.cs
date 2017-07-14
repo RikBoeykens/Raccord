@@ -16,7 +16,7 @@ namespace Raccord.Application.Services.Callsheets
                 ID = callsheet.ID,
                 ProjectID = callsheet.ProjectID,
                 ShootingDay = callsheet.ShootingDay.Translate(),
-                Scenes = callsheet.CallsheetScenes.Select(cs=> cs.TranslateScene()),
+                Scenes = callsheet.CallsheetScenes.OrderBy(cs=> cs.SortingOrder).Select(cs=> cs.TranslateScene()),
             };
 
             return dto;

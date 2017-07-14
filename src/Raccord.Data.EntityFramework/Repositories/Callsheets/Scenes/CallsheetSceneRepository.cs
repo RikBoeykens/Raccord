@@ -17,14 +17,14 @@ namespace Raccord.Data.EntityFramework.Repositories.Callsheets.Scenes
         {
             var query = GetIncludedSummary();
 
-            return query.Where(sd=> sd.CallsheetID == callsheetID);
+            return query.Where(sd=> sd.CallsheetID == callsheetID).OrderBy(sd=> sd.SortingOrder);
         }
 
         public IEnumerable<CallsheetScene> GetAllForScene(long sceneID)
         {
             var query = GetIncludedSummary();
 
-            return query.Where(sd=> sd.SceneID == sceneID);
+            return query.Where(sd=> sd.SceneID == sceneID).OrderBy(sd=> sd.Callsheet.ShootingDay.Date);
         }
 
         public CallsheetScene GetFull(long ID)

@@ -11,6 +11,8 @@ import { CallsheetSceneScene } from "../../../";
 import { SelectedEntity } from '../../../../../../shared/model/selected-entity.model';
 import { EntityType } from '../../../../../../shared/enums/entity-type.enum';
 import { PageLengthHelpers } from '../../../../../../shared/helpers/page-length.helpers';
+import { DragulaService } from 'ng2-dragula';
+import { HtmlClassHelpers } from '../../../../../../shared/helpers/html-class.helpers';
 
 @Component({
     templateUrl: 'callsheet-wizard-step-1.component.html',
@@ -19,8 +21,10 @@ export class CallsheetWizardStep1Component implements OnInit {
 
     project: ProjectSummary;
     callsheet: FullCallsheet;
-    callsheetScenes: CallsheetSceneScene[]=[];
+    callsheetScenes: CallsheetSceneWrapper[]=[];
     sceneType: EntityType[] = [EntityType.scene];
+    draggingScene: boolean;
+    deleteScenes: CallsheetSceneWrapper[]=[];
 
     constructor(
         private _route: ActivatedRoute,
@@ -29,7 +33,31 @@ export class CallsheetWizardStep1Component implements OnInit {
         private _callsheetSceneHttpService: CallsheetSceneHttpService,
         private _loadingService: LoadingService,
         private _dialogService: DialogService,
+        private dragulaService: DragulaService
     ) {
+        dragulaService.drag.subscribe((value) => {
+            this.onSceneDrag();
+            console.log("dragging started");
+        });
+        dragulaService.dragend.subscribe(() => {
+            this.onSceneDragEnd();
+        });
+        dragulaService.dropModel.subscribe((value) => {
+            this.onSceneDrop(value.slice(1));
+        });
+        dragulaService.over.subscribe((value) => {
+            this.onOver(value.slice(1));
+        });
+        dragulaService.out.subscribe((value) => {
+            this.onOut(value.slice(1));
+        });
+        const bag: any = this.dragulaService.find('callsheet-scene-bag');
+        if (bag !== undefined ) this.dragulaService.destroy('callsheet-scene-bag');
+        dragulaService.setOptions('callsheet-scene-bag', {
+            moves: function (el, container, handle) {
+                return HtmlClassHelpers.hasClass(handle, 'drag-handle');
+            }
+        });
     }
 
     ngOnInit() {
@@ -68,7 +96,7 @@ export class CallsheetWizardStep1Component implements OnInit {
         );
     }
 
-    removeCallsheetScene(callsheetScene: CallsheetScene){
+    removeCallsheetScene(callsheetScene: CallsheetSceneWrapper){
         let loadingId = this._loadingService.startLoading();
 
         this._callsheetSceneHttpService.delete(callsheetScene.id).then(data=>{
@@ -90,21 +118,71 @@ export class CallsheetWizardStep1Component implements OnInit {
     }
 
     updatePageLength(callsheetScene: CallsheetSceneWrapper){
-        let sceneToUpdate = new CallsheetScene();
-        sceneToUpdate.id = callsheetScene.id;
-        sceneToUpdate.pageLength = PageLengthHelpers.getPageLengthNumber(callsheetScene.stringPageLength);
+        let newPageLength = PageLengthHelpers.getPageLengthNumber(callsheetScene.stringPageLength);
 
+        if(newPageLength && newPageLength!==callsheetScene.pageLength){
+            let loadingId = this._loadingService.startLoading();
+            let sceneToUpdate = new CallsheetScene();
+            sceneToUpdate.id = callsheetScene.id;
+            sceneToUpdate.pageLength = newPageLength;
+
+            this._callsheetSceneHttpService.post(sceneToUpdate).then(data=>{
+                if(typeof(data)=='string'){
+                    this._dialogService.error(data);
+                }else{
+                    this.getScenes();
+                }
+            }).catch()
+            .then(()=>
+                this._loadingService.endLoading(loadingId)
+            );
+        }
+    }
+
+    private onSceneDrag() {
+        this.draggingScene = true;
+    }
+    private onSceneDragEnd() {
+        this.draggingScene = false;
+    }
+    private onSceneDrop(args) {
+        //update sorting
+        this.sortScenes();
+
+        // Delete if necessary
+        if(this.deleteScenes.length){
+            var sceneToDelete = this.deleteScenes.splice(0, 1)[0];
+            this.removeCallsheetScene(sceneToDelete);
+        }
+    }
+    
+    private onOver(args) {
+        let [e, el, container] = args;
+        HtmlClassHelpers.addClass(el, 'hovering');
+    }
+
+    private onOut(args) {
+        let [e, el, container] = args;
+        HtmlClassHelpers.removeClass(el, 'hovering');
+    }
+
+    sortScenes(){
         let loadingId = this._loadingService.startLoading();
-        this._callsheetSceneHttpService.post(sceneToUpdate).then(data=>{
+
+        this._callsheetSceneHttpService.sort(this.project.id, this.getSortedOrder()).then(data=>{
             if(typeof(data)=='string'){
                 this._dialogService.error(data);
-            }else{
-                this.getScenes();
             }
         }).catch()
         .then(()=>
             this._loadingService.endLoading(loadingId)
         );
+    }
+
+    getSortedOrder():number[]{
+        return this.callsheetScenes.map(function(scene){
+            return scene.id;
+        });
     }
 }
 

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Raccord.Application.Core.Common.Sorting;
 
 namespace Raccord.Application.Core.Services.Callsheets.CallsheetScenes
 {
@@ -16,5 +17,6 @@ namespace Raccord.Application.Core.Services.Callsheets.CallsheetScenes
         long Update(CallsheetSceneDto dto);
 
         void Delete(long ID);
+        void Sort(SortOrderDto order);
     }
 }

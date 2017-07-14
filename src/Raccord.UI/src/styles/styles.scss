@@ -32,7 +32,7 @@ ul{
 .search-result-container{
 
   label.search-type-info{
-    color: md-color($primary);
+    color: mat-color($primary);
   }
 }
 
@@ -63,7 +63,7 @@ ul.autocomplete-content{
 }
 
 .highlight{
-  color: md-color($accent);
+  color: mat-color($accent);
 }
 
 .project-card{
@@ -102,7 +102,7 @@ ul.autocomplete-content{
 }
 
 .drop-delete-container{
-  background-color: md-color($warn);
+  background-color: mat-color($warn);
   width: 50%;
   position: fixed;
   bottom: 0;
@@ -111,12 +111,12 @@ ul.autocomplete-content{
 
 .drop-delete-container.hovering{
   background-color: $bg-color;
-  color: md-color($warn);
-  border-color: md-color($warn);
+  color: mat-color($warn);
+  border-color: mat-color($warn);
 }
 
 .drop-merge-container{
-  background-color: md-color($primary);
+  background-color: mat-color($primary);
   color: $bg-color;
   width: 30px;
   margin-left: auto;
@@ -124,8 +124,8 @@ ul.autocomplete-content{
 
 .drop-merge-container.hovering{
   background-color: $bg-color;
-  color: md-color($primary);
-  border-color: md-color($primary);
+  color: mat-color($primary);
+  border-color: mat-color($primary);
 }
 
 // dragged element

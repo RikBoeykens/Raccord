@@ -6,6 +6,7 @@ using Raccord.Application.Core.Services.Callsheets.CallsheetScenes;
 using Raccord.Data.EntityFramework.Repositories.Callsheets.Scenes;
 using Raccord.Data.EntityFramework.Repositories.CharacterScenes;
 using Raccord.Domain.Model.Images;
+using Raccord.Application.Core.Common.Sorting;
 
 namespace Raccord.Application.Services.Callsheets.CallsheetScenes
 {
@@ -105,6 +106,21 @@ namespace Raccord.Application.Services.Callsheets.CallsheetScenes
             var callsheetScene = _callsheetSceneRepository.GetSingle(ID);
 
             _callsheetSceneRepository.Delete(callsheetScene);
+
+            _callsheetSceneRepository.Commit();
+        }
+
+        // Sorts scenes
+        public void Sort(SortOrderDto order)
+        {
+            var scenes = _callsheetSceneRepository.GetAllForCallsheet(order.ParentID);
+
+            foreach(var scene in scenes)
+            {
+                var orderedIndex = Array.IndexOf(order.SortIDs, scene.ID);
+                scene.SortingOrder = orderedIndex != -1 ? orderedIndex : scenes.Count();
+                _callsheetSceneRepository.Edit(scene);
+            }
 
             _callsheetSceneRepository.Commit();
         }
