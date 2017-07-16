@@ -140,8 +140,10 @@ export {
  export{
     CallsheetHttpService,
     CallsheetResolve,
+    CallsheetSummaryResolve,
     CallsheetsResolve,
     CallsheetSceneHttpService,
+    CallsheetSceneLocationsResolve,
     CallsheetSceneCharacterHttpService,
     CallsheetsListComponent,
     NewCallsheetComponent,

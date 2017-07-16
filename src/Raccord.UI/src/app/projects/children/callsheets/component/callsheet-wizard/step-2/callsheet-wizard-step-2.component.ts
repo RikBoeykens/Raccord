@@ -4,9 +4,9 @@ import { CallsheetSceneHttpService } from "../../../children/callsheet-scenes/se
 import { LoadingService } from '../../../../../../loading/service/loading.service';
 import { DialogService } from '../../../../../../shared/service/dialog.service';
 import { ProjectSummary } from '../../../../../model/project-summary.model';
-import { FullCallsheet } from "../../../";
+import { CallsheetSummary } from "../../../";
 import { CallsheetScene } from "../../../";
-import { CallsheetSceneScene } from "../../../";
+import { CallsheetSceneLocation } from "../../../";
 
 @Component({
     templateUrl: 'callsheet-wizard-step-2.component.html',
@@ -14,7 +14,8 @@ import { CallsheetSceneScene } from "../../../";
 export class CallsheetWizardStep2Component implements OnInit {
 
     project: ProjectSummary;
-    callsheet: FullCallsheet;
+    callsheet: CallsheetSummary;
+    scenes: CallsheetSceneLocation[] = [];
 
     constructor(
         private _route: ActivatedRoute,
@@ -26,9 +27,10 @@ export class CallsheetWizardStep2Component implements OnInit {
     }
 
     ngOnInit() {
-        this._route.data.subscribe((data: { project: ProjectSummary, callsheet: FullCallsheet }) => {
+        this._route.data.subscribe((data: { project: ProjectSummary, callsheet: CallsheetSummary, scenes: CallsheetSceneLocation[] }) => {
             this.project = data.project;
             this.callsheet = data.callsheet;
+            this.scenes = data.scenes;
         });
     }
 }

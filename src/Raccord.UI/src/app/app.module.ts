@@ -235,7 +235,9 @@ import {
   CallsheetHttpService,
   CallsheetsResolve,
   CallsheetResolve,
+  CallsheetSummaryResolve,
   CallsheetSceneHttpService,
+  CallsheetSceneLocationsResolve,
   CallsheetSceneCharacterHttpService
 } from './projects';
 
@@ -299,7 +301,9 @@ const APP_PROVIDERS = [
   CallsheetHttpService,
   CallsheetsResolve,
   CallsheetResolve,
+  CallsheetSummaryResolve,
   CallsheetSceneHttpService,
+  CallsheetSceneLocationsResolve,
   CallsheetSceneCharacterHttpService
 ];
 

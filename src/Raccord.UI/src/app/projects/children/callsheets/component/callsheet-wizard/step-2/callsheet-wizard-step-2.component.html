@@ -11,7 +11,7 @@
 <div class="row">
     <md-list>
         <md-list-item 
-            *ngFor="let callsheetScene of callsheet.scenes">
+            *ngFor="let callsheetScene of scenes">
             <show-image *ngIf="callsheetScene.scene.primaryImage.id!=0" [image]="callsheetScene.scene.primaryImage" [listAvatar]="true"></show-image>
             <span>{{callsheetScene.scene.number}}. {{callsheetScene.scene.intExt.name}} {{callsheetScene.scene.scriptLocation.name}} {{callsheetScene.scene.dayNight.name}} - {{callsheetScene.scene.summary}} ({{callsheetScene.pageLength | pagelength}})</span>
         </md-list-item>

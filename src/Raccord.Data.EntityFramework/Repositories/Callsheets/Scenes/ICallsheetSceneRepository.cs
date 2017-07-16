@@ -7,9 +7,10 @@ namespace Raccord.Data.EntityFramework.Repositories.Callsheets.Scenes
     // Interface defining a repository for callsheet
     public interface ICallsheetSceneRepository : IBaseRepository<CallsheetScene>
     {
-        IEnumerable<CallsheetScene> GetAllForCallsheet(long callshet);
+        IEnumerable<CallsheetScene> GetAllForCallsheet(long callsheetID);
         IEnumerable<CallsheetScene> GetAllForScene(long sceneID);
         CallsheetScene GetFull(long ID);
         CallsheetScene GetSummary(long ID);
+        IEnumerable<CallsheetScene> GetAllForCallsheetWithLocation(long callsheetID);
     }
 }

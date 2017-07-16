@@ -41,6 +41,13 @@ namespace Raccord.Data.EntityFramework.Repositories.Callsheets.Scenes
             return query.FirstOrDefault(sd => sd.ID == ID);
         }
 
+        public IEnumerable<CallsheetScene> GetAllForCallsheetWithLocation(long callsheetID)
+        {
+            var query = GetIncludedLocation();
+
+            return query.Where(sd=> sd.CallsheetID == callsheetID).OrderBy(sd=> sd.SortingOrder);
+        }
+
         private IQueryable<CallsheetScene> GetIncludedFull()
         {
             IQueryable<CallsheetScene> query = _context.Set<CallsheetScene>();
@@ -94,6 +101,25 @@ namespace Raccord.Data.EntityFramework.Repositories.Callsheets.Scenes
             IQueryable<CallsheetScene> query = _context.Set<CallsheetScene>();
 
             return query;
+        }
+
+        private IQueryable<CallsheetScene> GetIncludedLocation()
+        {
+            IQueryable<CallsheetScene> query = _context.Set<CallsheetScene>();
+
+            return query.Include(ss=> ss.Callsheet)
+                        .ThenInclude(sd=> sd.ShootingDay)
+                        .Include(ss=> ss.Scene)
+                        .ThenInclude(s=> s.IntExt)
+                        .Include(ss=> ss.Scene)
+                        .ThenInclude(s=> s.ScriptLocation)
+                        .ThenInclude(sl=> sl.LocationSets)
+                        .ThenInclude(ls=> ls.Location)
+                        .Include(ss=> ss.Scene)
+                        .ThenInclude(s=> s.DayNight)
+                        .Include(ss=> ss.Scene)
+                        .ThenInclude(s=> s.ImageScenes)
+                        .ThenInclude(s=> s.Image);
         }
     }
 }

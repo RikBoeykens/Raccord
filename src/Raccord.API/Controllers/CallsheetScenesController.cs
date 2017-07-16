@@ -33,6 +33,17 @@ namespace Raccord.API.Controllers
             return vms;
         }
 
+        // GET: api/callsheetscenes/1/locations
+        [HttpGet("{id}/locations")]
+        public IEnumerable<CallsheetSceneLocationViewModel> GetLocations(long id)
+        {
+            var dtos = _callsheetSceneService.GetLocations(id);
+
+            var vms = dtos.Select(p => p.Translate());
+
+            return vms;
+        }
+
         // GET: api/callsheetscenes/1/scene
         [HttpGet("{id}/scene")]
         public IEnumerable<CallsheetSceneCallsheetViewModel> GetCallsheets(long id)

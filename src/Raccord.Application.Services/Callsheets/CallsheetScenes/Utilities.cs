@@ -98,5 +98,18 @@ namespace Raccord.Application.Services.Callsheets.CallsheetScenes
 
             return dto;
         }
+        public static CallsheetSceneLocationDto TranslateLocation(this CallsheetScene callsheetScene)
+        {
+            var dto = new CallsheetSceneLocationDto
+            {
+                ID = callsheetScene.ID,
+                PageLength = callsheetScene.PageLength,
+                Scene = callsheetScene.Scene.TranslateSummary(),
+                LocationSet = callsheetScene.LocationSetID.HasValue ? callsheetScene.LocationSet.TranslateSummary() : new LocationSetSummaryDto(),
+                AvailableLocations = callsheetScene.Scene.ScriptLocation.LocationSets.Select(ls=> ls.TranslateSummary()),
+            };
+
+            return dto;
+        }
     }
 }

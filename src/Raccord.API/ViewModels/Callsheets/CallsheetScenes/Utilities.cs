@@ -97,5 +97,18 @@ namespace Raccord.API.ViewModels.Callsheets.CallsheetScenes
                 LocationSetID = vm.LocationSetID,
             };
         }
+
+        // Translates a scene summary dto to a scene summary viewmodel
+        public static CallsheetSceneLocationViewModel Translate(this CallsheetSceneLocationDto dto)
+        {
+            return new CallsheetSceneLocationViewModel
+            {
+                ID = dto.ID,
+                PageLength = dto.PageLength,
+                Scene = dto.Scene.Translate(),
+                AvailableLocations = dto.AvailableLocations.Select(c=> c.Translate()),
+                LocationSet = dto.LocationSet.ID!= default(long) ? dto.LocationSet.Translate() : new LocationSetSummaryViewModel(),
+            };
+        }
     }
 }

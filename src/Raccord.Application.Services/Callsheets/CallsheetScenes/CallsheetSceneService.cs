@@ -49,6 +49,16 @@ namespace Raccord.Application.Services.Callsheets.CallsheetScenes
             return dtos;
         }
 
+        // Gets all callsheet scenes for a day
+        public IEnumerable<CallsheetSceneLocationDto> GetLocations(long dayID)
+        {
+            var callsheetScenes = _callsheetSceneRepository.GetAllForCallsheetWithLocation(dayID);
+
+            var dtos = callsheetScenes.Select(l => l.TranslateLocation());
+
+            return dtos;
+        }
+
         // Gets a single callsheet scene by id
         public FullCallsheetSceneDto Get(long ID)
         {
