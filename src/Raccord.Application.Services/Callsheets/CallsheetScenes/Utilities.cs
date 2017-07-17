@@ -111,5 +111,18 @@ namespace Raccord.Application.Services.Callsheets.CallsheetScenes
 
             return dto;
         }
+        public static CallsheetSceneCharactersDto TranslateCharacters(this CallsheetScene callsheetScene)
+        {
+            var dto = new CallsheetSceneCharactersDto
+            {
+                ID = callsheetScene.ID,
+                PageLength = callsheetScene.PageLength,
+                Scene = callsheetScene.Scene.TranslateSummary(),
+                Characters = callsheetScene.Characters.Select(c=> c.TranslateCharacter()),
+                AvailableCharacters = callsheetScene.Scene.CharacterScenes.Select(cs=> cs.TranslateCharacter()),
+            };
+
+            return dto;
+        }
     }
 }

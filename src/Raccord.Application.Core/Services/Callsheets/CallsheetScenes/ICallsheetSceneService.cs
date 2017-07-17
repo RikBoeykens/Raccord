@@ -10,6 +10,7 @@ namespace Raccord.Application.Core.Services.Callsheets.CallsheetScenes
 
         IEnumerable<CallsheetSceneSceneDto> GetScenes(long callsheetID);
         IEnumerable<CallsheetSceneLocationDto> GetLocations(long callsheetID);
+        IEnumerable<CallsheetSceneCharactersDto> GetCharacters(long callsheetID);
 
         FullCallsheetSceneDto Get(long ID);
 

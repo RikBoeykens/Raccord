@@ -48,6 +48,13 @@ namespace Raccord.Data.EntityFramework.Repositories.Callsheets.Scenes
             return query.Where(sd=> sd.CallsheetID == callsheetID).OrderBy(sd=> sd.SortingOrder);
         }
 
+        public IEnumerable<CallsheetScene> GetAllForCallsheetWithCharacters(long callsheetID)
+        {
+            var query = GetIncludedCharacters();
+
+            return query.Where(sd=> sd.CallsheetID == callsheetID).OrderBy(sd=> sd.SortingOrder);
+        }
+
         private IQueryable<CallsheetScene> GetIncludedFull()
         {
             IQueryable<CallsheetScene> query = _context.Set<CallsheetScene>();
@@ -120,6 +127,33 @@ namespace Raccord.Data.EntityFramework.Repositories.Callsheets.Scenes
                         .Include(ss=> ss.Scene)
                         .ThenInclude(s=> s.ImageScenes)
                         .ThenInclude(s=> s.Image);
+        }
+
+        private IQueryable<CallsheetScene> GetIncludedCharacters()
+        {
+            IQueryable<CallsheetScene> query = _context.Set<CallsheetScene>();
+
+            return query.Include(ss=> ss.Callsheet)
+                        .ThenInclude(sd=> sd.ShootingDay)
+                        .Include(ss=> ss.Scene)
+                        .ThenInclude(s=> s.IntExt)
+                        .Include(ss=> ss.Scene)
+                        .ThenInclude(s=> s.ScriptLocation)
+                        .Include(ss=> ss.Scene)
+                        .ThenInclude(s=> s.DayNight)
+                        .Include(ss=> ss.Scene)
+                        .ThenInclude(s=> s.ImageScenes)
+                        .ThenInclude(s=> s.Image)
+                        .Include(ss=> ss.Scene)
+                        .ThenInclude(s=> s.CharacterScenes)
+                        .ThenInclude(cs=> cs.Character)
+                        .ThenInclude(c=> c.ImageCharacters)
+                        .ThenInclude(ic=> ic.Image)
+                        .Include(ss=> ss.Characters)
+                        .ThenInclude(cs=> cs.CharacterScene)
+                        .ThenInclude(cs=> cs.Character)
+                        .ThenInclude(c=> c.ImageCharacters)
+                        .ThenInclude(ic=> ic.Image);
         }
     }
 }

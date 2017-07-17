@@ -12,5 +12,6 @@ namespace Raccord.Data.EntityFramework.Repositories.Callsheets.Scenes
         CallsheetScene GetFull(long ID);
         CallsheetScene GetSummary(long ID);
         IEnumerable<CallsheetScene> GetAllForCallsheetWithLocation(long callsheetID);
+        IEnumerable<CallsheetScene> GetAllForCallsheetWithCharacters(long callsheetID);
     }
 }

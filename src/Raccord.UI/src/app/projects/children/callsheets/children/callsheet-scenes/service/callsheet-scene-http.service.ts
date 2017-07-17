@@ -6,6 +6,7 @@ import { FullCallsheetScene } from '../model/full-callsheet-scene.model';
 import { CallsheetSceneCallsheet } from '../model/callsheet-scene-callsheet.model';
 import { CallsheetSceneScene } from '../model/callsheet-scene-scene.model';
 import { CallsheetSceneLocation } from '../model/callsheet-scene-location.model';
+import { CallsheetSceneCharacters } from '../model/callsheet-scene-characters.model';
 import { CallsheetScene } from '../model/callsheet-scene.model';
 import { JsonResponse } from '../../../../../shared/model/json-response.model';
 import { SortOrder } from "../../../../../../shared/model/sort-order.model";
@@ -35,6 +36,13 @@ export class CallsheetSceneHttpService extends BaseHttpService {
     getLocations(id): Promise<CallsheetSceneLocation[]> {
 
         var uri = `${this._baseUri}/${id}/locations`;
+
+        return this.doGetArray(uri);
+    }
+
+    getCharacters(id): Promise<CallsheetSceneCharacters[]> {
+
+        var uri = `${this._baseUri}/${id}/characters`;
 
         return this.doGetArray(uri);
     }

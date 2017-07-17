@@ -7,6 +7,7 @@ export { CallsheetSceneSummary } from "./children/callsheet-scenes/model/callshe
 export { CallsheetSceneCallsheet } from "./children/callsheet-scenes/model/callsheet-scene-callsheet.model";
 export { CallsheetSceneScene } from "./children/callsheet-scenes/model/callsheet-scene-scene.model";
 export { CallsheetSceneLocation } from "./children/callsheet-scenes/model/callsheet-scene-location.model";
+export { CallsheetSceneCharacters } from "./children/callsheet-scenes/model/callsheet-scene-characters.model";
 export { LinkedCallsheetScene } from "./children/callsheet-scenes/model/linked-callsheet-scene.model";
 export { FullCallsheetScene } from "./children/callsheet-scenes/model/full-callsheet-scene.model";
 
