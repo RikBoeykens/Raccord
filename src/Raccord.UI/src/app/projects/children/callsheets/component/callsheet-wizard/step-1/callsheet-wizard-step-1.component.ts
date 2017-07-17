@@ -125,6 +125,7 @@ export class CallsheetWizardStep1Component implements OnInit {
             let sceneToUpdate = new CallsheetScene();
             sceneToUpdate.id = callsheetScene.id;
             sceneToUpdate.pageLength = newPageLength;
+            sceneToUpdate.locationSetId = callsheetScene.locationSet.id;
 
             this._callsheetSceneHttpService.post(sceneToUpdate).then(data=>{
                 if(typeof(data)=='string'){

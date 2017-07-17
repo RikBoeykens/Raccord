@@ -7,6 +7,8 @@ import { ProjectSummary } from '../../../../../model/project-summary.model';
 import { CallsheetSummary } from "../../../";
 import { CallsheetScene } from "../../../";
 import { CallsheetSceneLocation } from "../../../";
+import { LocationSetSummary } from "../../../../locations/location-sets/model/location-set-summary.model";
+import { Location } from "../../../../locations/locations/model/location.model";
 
 @Component({
     templateUrl: 'callsheet-wizard-step-2.component.html',
@@ -32,5 +34,38 @@ export class CallsheetWizardStep2Component implements OnInit {
             this.callsheet = data.callsheet;
             this.scenes = data.scenes;
         });
+    }
+
+    getLocations(){
+        let locations:  Location[] = [];
+        this.scenes.forEach((scene: CallsheetSceneLocation)=> {
+            let currentSceneLocation = scene.locationSet.id!==0 ? scene.locationSet.location : null;
+            if(currentSceneLocation&&(locations.length===0 || locations[locations.length - 1].id !== currentSceneLocation.id)){
+                locations.push(currentSceneLocation);
+            }
+        });
+        return locations;
+    }
+
+    updateLocationSet(callsheetScene: CallsheetSceneLocation){
+
+        if(callsheetScene.locationSet.id!==0){
+            let loadingId = this._loadingService.startLoading();
+            let sceneToUpdate = new CallsheetScene();
+            sceneToUpdate.id = callsheetScene.id;
+            sceneToUpdate.pageLength = callsheetScene.pageLength;
+            sceneToUpdate.locationSetId = callsheetScene.locationSet.id;
+
+            this._callsheetSceneHttpService.post(sceneToUpdate).then(data=>{
+                if(typeof(data)=='string'){
+                    this._dialogService.error(data);
+                }else{
+                    this.getLocations();
+                }
+            }).catch()
+            .then(()=>
+                this._loadingService.endLoading(loadingId)
+            );
+        }
     }
 }
