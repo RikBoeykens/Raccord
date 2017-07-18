@@ -7,34 +7,29 @@
         <span class="breadcrumb">{{callsheet.shootingDay.number}} - {{callsheet.shootingDay.date | date}}</span>
     </div>
 </div>
-<h3>Step 2 - Locations</h3>
+<h3>Step 3 - Characters</h3>
 <div class="row">
     <md-list>
         <md-list-item 
             *ngFor="let callsheetScene of scenes">
             <show-image *ngIf="callsheetScene.scene.primaryImage.id!=0" [image]="callsheetScene.scene.primaryImage" [listAvatar]="true"></show-image>
             <span>{{callsheetScene.scene.number}}. {{callsheetScene.scene.intExt.name}} {{callsheetScene.scene.scriptLocation.name}} {{callsheetScene.scene.dayNight.name}} - {{callsheetScene.scene.summary}} ({{callsheetScene.pageLength | pagelength}})</span>
-            <md-select fxFlex="25%" mdInput placeholder="Set" [(ngModel)]="callsheetScene.locationSet.id" #locationset="ngModel" name="callsheetScene_locationset" (change)="updateLocationSet(callsheetScene)">
-                <md-option *ngFor="let set of callsheetScene.availableLocations" [value]="set.id">{{ set.location.name }}</md-option>
-            </md-select>
+            <div class="row">
+                <div class="col s12">
+                    <div *ngFor="let character of callsheetScene.characterWrappers"
+                        class="row">
+                        <md-checkbox [(ngModel)]="character.isLinked" name="callsheetSceneCharacter{{character.linkID}}">
+                            {{character.name}}
+                        </md-checkbox>
+                    </div>
+                </div>
+            </div>
         </md-list-item>
     </md-list>
 </div>
 <div class="row">
     <div class="col s12">
-        <div class="row"
-             *ngFor="let location of getLocations(); let i = index">
-            <p><strong>Location {{i + 1}}:</strong>{{location.name}}</p>
-            <p>{{location.address.address1}}</p>
-            <p>{{location.address.address2}}</p>
-            <p>{{location.address.address3}}</p>
-            <p>{{location.address.address4}}</p>
-        </div>
-    </div>
-</div>
-<div class="row">
-    <div class="col s12">
-        <a routerLink="/projects/{{project.id}}/callsheets/{{callsheet.id}}/wizard/3"
+        <a routerLink="/projects/{{project.id}}/callsheets/{{callsheet.id}}/wizard/4"
             md-raised-button
             class="wizard-next-button">
             Next

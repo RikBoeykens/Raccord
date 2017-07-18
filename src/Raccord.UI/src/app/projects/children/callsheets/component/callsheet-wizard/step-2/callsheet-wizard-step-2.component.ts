@@ -36,6 +36,15 @@ export class CallsheetWizardStep2Component implements OnInit {
         });
     }
 
+    getScenes(){
+        let loadingId = this._loadingService.startLoading();
+
+        this._callsheetSceneHttpService.getLocations(this.callsheet.id).then(data => {
+            this.scenes = data;
+            this._loadingService.endLoading(loadingId);
+        });
+    }
+
     getLocations(){
         let locations:  Location[] = [];
         this.scenes.forEach((scene: CallsheetSceneLocation)=> {
@@ -60,7 +69,7 @@ export class CallsheetWizardStep2Component implements OnInit {
                 if(typeof(data)=='string'){
                     this._dialogService.error(data);
                 }else{
-                    this.getLocations();
+                    this.getScenes();
                 }
             }).catch()
             .then(()=>

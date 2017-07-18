@@ -95,7 +95,8 @@ import {
   CallsheetsListComponent,
   NewCallsheetComponent,
   CallsheetWizardStep1Component,
-  CallsheetWizardStep2Component
+  CallsheetWizardStep2Component,
+  CallsheetWizardStep3Component
 } from './projects';
 import { ScenePropertiesLandingComponent } from './projects';
 import { SelectEntityComponent } from './shared';
@@ -168,6 +169,7 @@ const COMPONENTS =[
   NewCallsheetComponent,
   CallsheetWizardStep1Component,
   CallsheetWizardStep2Component,
+  CallsheetWizardStep3Component,
   ScenePropertiesLandingComponent,
   SelectEntityComponent
 ];
@@ -238,6 +240,7 @@ import {
   CallsheetSummaryResolve,
   CallsheetSceneHttpService,
   CallsheetSceneLocationsResolve,
+  CallsheetSceneCharactersResolve,
   CallsheetSceneCharacterHttpService
 } from './projects';
 
@@ -304,6 +307,7 @@ const APP_PROVIDERS = [
   CallsheetSummaryResolve,
   CallsheetSceneHttpService,
   CallsheetSceneLocationsResolve,
+  CallsheetSceneCharactersResolve,
   CallsheetSceneCharacterHttpService
 ];
 

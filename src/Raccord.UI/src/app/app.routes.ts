@@ -33,7 +33,8 @@ import {
   CallsheetsListComponent,
   NewCallsheetComponent,
   CallsheetWizardStep1Component,
-  CallsheetWizardStep2Component
+  CallsheetWizardStep2Component,
+  CallsheetWizardStep3Component,
 } from './projects';
 import { ScenePropertiesLandingComponent } from './projects';
 
@@ -70,7 +71,8 @@ import {
   CallsheetsResolve,
   CallsheetResolve,
   CallsheetSummaryResolve,
-  CallsheetSceneLocationsResolve
+  CallsheetSceneLocationsResolve,
+  CallsheetSceneCharactersResolve
 } from './projects';
 
 import { CanDeactivateGuard } from './shared/service/can-deactivate-guard.service';
@@ -387,6 +389,15 @@ export const ROUTES: Routes = [
                       project: ProjectSummaryResolve,
                       callsheet: CallsheetSummaryResolve,
                       scenes: CallsheetSceneLocationsResolve
+                    }
+                  },
+                  {
+                    path: "3",                
+                    component: CallsheetWizardStep3Component,
+                    resolve:{
+                      project: ProjectSummaryResolve,
+                      callsheet: CallsheetSummaryResolve,
+                      scenes: CallsheetSceneCharactersResolve
                     }
                   }
                 ]
