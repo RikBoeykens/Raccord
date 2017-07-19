@@ -146,6 +146,7 @@ export {
     CallsheetSceneLocationsResolve,
     CallsheetSceneCharactersResolve,
     CallsheetSceneCharacterHttpService,
+    CallsheetCharacterHttpService,
     CallsheetsListComponent,
     NewCallsheetComponent,
     CallsheetWizardStep1Component,

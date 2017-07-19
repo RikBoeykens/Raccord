@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Raccord.Application.Core.Services.Callsheets;
 using Raccord.Data.EntityFramework.Repositories.Callsheets;
+using Raccord.Data.EntityFramework.Repositories.Callsheets.Scenes;
 using Raccord.Data.EntityFramework.Repositories.Scheduling.ScheduleDays;
 using Raccord.Data.EntityFramework.Repositories.ShootingDays;
 using Raccord.Domain.Model.Callsheets;
@@ -16,12 +17,14 @@ namespace Raccord.Application.Services.Callsheets
         private readonly ICallsheetRepository _callsheetRepository;
         private readonly IShootingDayRepository _shootingDayRepository;
         private readonly IScheduleDayRepository _scheduleDayRepository;
+        private readonly ICallsheetSceneCharacterRepository _callsheetSceneCharacterRepository;
 
         // Initialises a new CharacterService
         public CallsheetService(
             ICallsheetRepository callsheetRepository,
             IShootingDayRepository shootingDayRepository,
-            IScheduleDayRepository scheduleDayRepository
+            IScheduleDayRepository scheduleDayRepository,
+            ICallsheetSceneCharacterRepository callsheetSceneCharacterRepository
             )
         {
             if(callsheetRepository == null)
@@ -30,10 +33,13 @@ namespace Raccord.Application.Services.Callsheets
                 throw new ArgumentNullException(nameof(shootingDayRepository));
             if(scheduleDayRepository == null)
                 throw new ArgumentNullException(nameof(scheduleDayRepository));
+            if(callsheetSceneCharacterRepository == null)
+                throw new ArgumentNullException(nameof(callsheetSceneCharacterRepository));
             
             _callsheetRepository = callsheetRepository;
             _shootingDayRepository = shootingDayRepository;
             _scheduleDayRepository = scheduleDayRepository;
+            _callsheetSceneCharacterRepository = callsheetSceneCharacterRepository;
         }
 
         // Gets all characters for a project
@@ -124,6 +130,5 @@ namespace Raccord.Application.Services.Callsheets
 
             _callsheetRepository.Commit();
         }
-
     }
 }

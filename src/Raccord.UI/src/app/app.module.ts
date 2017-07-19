@@ -241,7 +241,8 @@ import {
   CallsheetSceneHttpService,
   CallsheetSceneLocationsResolve,
   CallsheetSceneCharactersResolve,
-  CallsheetSceneCharacterHttpService
+  CallsheetSceneCharacterHttpService,
+  CallsheetCharacterHttpService
 } from './projects';
 
 const APP_PROVIDERS = [
@@ -308,7 +309,8 @@ const APP_PROVIDERS = [
   CallsheetSceneHttpService,
   CallsheetSceneLocationsResolve,
   CallsheetSceneCharactersResolve,
-  CallsheetSceneCharacterHttpService
+  CallsheetSceneCharacterHttpService,
+  CallsheetCharacterHttpService
 ];
 
 // Directives

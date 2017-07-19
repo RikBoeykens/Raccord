@@ -8,5 +8,6 @@ namespace Raccord.Data.EntityFramework.Repositories.Callsheets.Scenes
     {
         IEnumerable<CallsheetSceneCharacter> GetAllForCallsheetScene(long callsheetSceneID);
         IEnumerable<CallsheetSceneCharacter> GetAllForCharacter(long characterID);
+        IEnumerable<CallsheetSceneCharacter> GetAllForCallsheet(long callsheetID);
     }
 }

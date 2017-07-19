@@ -5,6 +5,8 @@ using Raccord.Domain.Model.Scenes;
 using System.Collections.Generic;
 using System.Linq;
 using Raccord.Domain.Model.Breakdowns.BreakdownTypes;
+using Raccord.Domain.Model.Callsheets.CallTypes;
+using Microsoft.EntityFrameworkCore;
 
 namespace Raccord.Data.EntityFramework.Seeding
 {
@@ -18,10 +20,11 @@ namespace Raccord.Data.EntityFramework.Seeding
 
         public static void SystemSeeding(this RaccordDBContext context)
         {
-            context.SeedBreakdownTypes();
+            context.SeedBreakdownTypeDefinitions();
+            context.SeedCallTypeDefinitions();
         }
 
-        public static void SeedBreakdownTypes(this RaccordDBContext context)
+        public static void SeedBreakdownTypeDefinitions(this RaccordDBContext context)
         {
             if(!context.BreakdownTypeDefinitions.Any())
             {
@@ -39,6 +42,23 @@ namespace Raccord.Data.EntityFramework.Seeding
             }
         }
 
+        public static void SeedCallTypeDefinitions(this RaccordDBContext context)
+        {
+            if(!context.CallTypeDefinitions.Any())
+            {
+                var definitions = new List<CallTypeDefinition>
+                {
+                    new CallTypeDefinition{ SortingOrder = 1, ShortName = "CO", Name = "Costume" },
+                    new CallTypeDefinition{ SortingOrder = 2, ShortName = "MU", Name = "Hair / Make Up" },
+                    new CallTypeDefinition{ SortingOrder = 3, ShortName = "S", Name = "Set" },
+                };
+
+                context.CallTypeDefinitions.AddRange(definitions);
+
+                context.SaveChanges();
+            }
+        }
+
         public static void TestSeeding(this RaccordDBContext context)
         {
             context.SeedProjects();
@@ -46,6 +66,8 @@ namespace Raccord.Data.EntityFramework.Seeding
             context.SeedDayNights();
             context.SeedScriptLocations();
             context.SeedScenes();
+            context.SeedBreakdownTypes();
+            context.SeedCallTypes();
         }
 
         public static void SeedProjects(this RaccordDBContext context)
@@ -149,6 +171,52 @@ namespace Raccord.Data.EntityFramework.Seeding
 
                 context.SaveChanges();
             }
+        }
+
+        public static void SeedBreakdownTypes(this RaccordDBContext context)
+        {
+            var definitions = context.BreakdownTypeDefinitions.ToArray();
+
+            foreach(var project in context.Projects.Include(p=> p.BreakdownTypes))
+            {
+                if(!project.BreakdownTypes.Any())
+                {
+                    foreach(var definition in definitions)
+                    {
+                        project.BreakdownTypes.Add(new BreakdownType
+                        {
+                            Name = definition.Name,
+                            Description = definition.Description,
+                        });
+                    }
+                }
+            }
+
+            context.SaveChanges();
+        }
+
+        public static void SeedCallTypes(this RaccordDBContext context)
+        {
+            var definitions = context.CallTypeDefinitions.ToArray();
+
+            foreach(var project in context.Projects.Include(p=> p.CallTypes))
+            {
+                if(!project.CallTypes.Any())
+                {
+                    foreach(var definition in definitions)
+                    {
+                        project.CallTypes.Add(new CallType
+                        {
+                            ShortName = definition.ShortName,
+                            Name = definition.Name,
+                            Description = definition.Description,
+                            SortingOrder = definition.SortingOrder,
+                        });
+                    }
+                }
+            }
+
+            context.SaveChanges();
         }
     }
 }

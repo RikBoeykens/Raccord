@@ -21,9 +21,16 @@ namespace Raccord.Data.EntityFramework.Repositories.Callsheets.Scenes
 
         public IEnumerable<CallsheetSceneCharacter> GetAllForCharacter(long characterID)
         {
-            var query = GetIncludedScheduleScene();
+            var query = GetIncludedCallsheetScene();
 
             return query.Where(sc=> sc.CharacterScene.CharacterID == characterID);
+        }
+
+        public IEnumerable<CallsheetSceneCharacter> GetAllForCallsheet(long callsheetID)
+        {
+            var query = GetIncludedCallsheetCharacter();
+
+            return query.Where(sc=> sc.CallsheetScene.CallsheetID == callsheetID);
         }
 
         private IQueryable<CallsheetSceneCharacter> GetIncludedCharacter()
@@ -36,7 +43,7 @@ namespace Raccord.Data.EntityFramework.Repositories.Callsheets.Scenes
                         .ThenInclude(ic=> ic.Image);
         }
 
-        private IQueryable<CallsheetSceneCharacter> GetIncludedScheduleScene()
+        private IQueryable<CallsheetSceneCharacter> GetIncludedCallsheetScene()
         {
             IQueryable<CallsheetSceneCharacter> query = _context.Set<CallsheetSceneCharacter>();
 
@@ -56,6 +63,18 @@ namespace Raccord.Data.EntityFramework.Repositories.Callsheets.Scenes
                         .ThenInclude(cs=> cs.Scene)
                         .ThenInclude(s=> s.ImageScenes)
                         .ThenInclude(i=> i.Image);
+        }
+
+        private IQueryable<CallsheetSceneCharacter> GetIncludedCallsheetCharacter()
+        {
+            IQueryable<CallsheetSceneCharacter> query = _context.Set<CallsheetSceneCharacter>();
+
+            return query.Include(sc=> sc.CallsheetScene)
+                        .ThenInclude(ss=> ss.Callsheet)
+                        .Include(sc=> sc.CharacterScene)
+                        .ThenInclude(cs=> cs.Character)
+                        .ThenInclude(c=> c.ImageCharacters)
+                        .ThenInclude(ic=> ic.Image);
         }
     }
 }

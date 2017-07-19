@@ -26,3 +26,5 @@ export { CallsheetSceneHttpService } from "./children/callsheet-scenes/service/c
 export { CallsheetSceneLocationsResolve } from "./children/callsheet-scenes/service/callsheet-scene-locations-resolve.service";
 export { CallsheetSceneCharactersResolve } from "./children/callsheet-scenes/service/callsheet-scene-characters-resolve.service";
 export { CallsheetSceneCharacterHttpService } from "./children/callsheet-scene-characters/service/callsheet-scene-character-http.service";
+
+export { CallsheetCharacterHttpService } from "./children/callsheet-characters/service/callsheet-character-http.service";

@@ -8,9 +8,10 @@ using Raccord.Data.EntityFramework;
 namespace Raccord.Data.EntityFramework.Migrations
 {
     [DbContext(typeof(RaccordDBContext))]
-    partial class RaccordDBContextModelSnapshot : ModelSnapshot
+    [Migration("20170719065320_calltypes-sorting-order")]
+    partial class calltypessortingorder
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.0.3");
@@ -125,24 +126,6 @@ namespace Raccord.Data.EntityFramework.Migrations
                     b.HasIndex("ProjectID");
 
                     b.ToTable("CallType");
-                });
-
-            modelBuilder.Entity("Raccord.Domain.Model.Callsheets.CallTypes.CallTypeDefinition", b =>
-                {
-                    b.Property<long>("ID")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Description");
-
-                    b.Property<string>("Name");
-
-                    b.Property<string>("ShortName");
-
-                    b.Property<int>("SortingOrder");
-
-                    b.HasKey("ID");
-
-                    b.ToTable("CallTypeDefinitions");
                 });
 
             modelBuilder.Entity("Raccord.Domain.Model.Callsheets.Characters.CallsheetCharacter", b =>
@@ -544,6 +527,9 @@ namespace Raccord.Data.EntityFramework.Migrations
 
                     b.HasIndex("ProjectID");
 
+                    b.HasIndex("ShootingDayID")
+                        .IsUnique();
+
                     b.ToTable("ScheduleDay");
                 });
 
@@ -631,9 +617,6 @@ namespace Raccord.Data.EntityFramework.Migrations
 
                     b.HasIndex("ProjectID");
 
-                    b.HasIndex("ScheduleDayID")
-                        .IsUnique();
-
                     b.ToTable("ShootingDay");
                 });
 
@@ -677,7 +660,7 @@ namespace Raccord.Data.EntityFramework.Migrations
             modelBuilder.Entity("Raccord.Domain.Model.Callsheets.CallTypes.CallType", b =>
                 {
                     b.HasOne("Raccord.Domain.Model.Projects.Project", "Project")
-                        .WithMany("CallTypes")
+                        .WithMany()
                         .HasForeignKey("ProjectID")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
@@ -895,6 +878,10 @@ namespace Raccord.Data.EntityFramework.Migrations
                         .WithMany()
                         .HasForeignKey("ProjectID")
                         .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Raccord.Domain.Model.ShootingDays.ShootingDay", "ShootingDay")
+                        .WithOne("ScheduleDay")
+                        .HasForeignKey("Raccord.Domain.Model.Scheduling.ScheduleDay", "ShootingDayID");
                 });
 
             modelBuilder.Entity("Raccord.Domain.Model.Scheduling.ScheduleDayNote", b =>
@@ -940,10 +927,6 @@ namespace Raccord.Data.EntityFramework.Migrations
                         .WithMany()
                         .HasForeignKey("ProjectID")
                         .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("Raccord.Domain.Model.Scheduling.ScheduleDay", "ScheduleDay")
-                        .WithOne("ShootingDay")
-                        .HasForeignKey("Raccord.Domain.Model.ShootingDays.ShootingDay", "ScheduleDayID");
                 });
         }
     }

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Raccord.Domain.Model.Callsheets.Characters;
 using Raccord.Domain.Model.Callsheets.Scenes;
 using Raccord.Domain.Model.Projects;
 using Raccord.Domain.Model.ShootingDays;
@@ -9,12 +10,16 @@ namespace Raccord.Domain.Model.Callsheets
     public class Callsheet : Entity
     {
         private ICollection<CallsheetScene> _scenes;
+        private ICollection<CallsheetCharacter> _callsheetCharacters;
 
         // Time of day the callsheet day starts
         public DateTime Start { get; set; }
 
         // Time of day the callsheet day ends
         public DateTime End { get; set; }
+
+        // Time of crew call
+        public DateTime CrewCall { get; set; }
 
         // ID of the linked project
         public long ProjectID { get; set; }
@@ -38,6 +43,19 @@ namespace Raccord.Domain.Model.Callsheets
             set
             {
                 _scenes = value;
+            }
+        }
+
+        // Linked callsheet characters
+        public virtual ICollection<CallsheetCharacter> CallsheetCharacters
+        {
+            get
+            {
+                return _callsheetCharacters ?? (_callsheetCharacters = new List<CallsheetCharacter>());
+            }
+            set
+            {
+                _callsheetCharacters = value;
             }
         }
     }
