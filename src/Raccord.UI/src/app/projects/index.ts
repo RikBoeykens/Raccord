@@ -151,7 +151,8 @@ export {
     NewCallsheetComponent,
     CallsheetWizardStep1Component,
     CallsheetWizardStep2Component,
-    CallsheetWizardStep3Component
+    CallsheetWizardStep3Component,
+    CallsheetWizardStep4Component
  } from "./children/callsheets";
 
 export { ScenePropertiesLandingComponent } from './children/scene-properties/component/scene-properties-landing/scene-properties-landing.component';

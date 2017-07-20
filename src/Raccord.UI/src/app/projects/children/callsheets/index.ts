@@ -16,6 +16,7 @@ export { NewCallsheetComponent } from "./component/new-callsheet/new-callsheet.c
 export { CallsheetWizardStep1Component } from "./component/callsheet-wizard/step-1/callsheet-wizard-step-1.component";
 export { CallsheetWizardStep2Component } from "./component/callsheet-wizard/step-2/callsheet-wizard-step-2.component";
 export { CallsheetWizardStep3Component } from "./component/callsheet-wizard/step-3/callsheet-wizard-step-3.component";
+export { CallsheetWizardStep4Component } from "./component/callsheet-wizard/step-4/callsheet-wizard-step-4.component";
 
 export { CallsheetHttpService } from "./service/callsheet-http.service";
 export { CallsheetResolve } from "./service/callsheet-resolve.service";

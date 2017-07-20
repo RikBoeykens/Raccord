@@ -96,7 +96,8 @@ import {
   NewCallsheetComponent,
   CallsheetWizardStep1Component,
   CallsheetWizardStep2Component,
-  CallsheetWizardStep3Component
+  CallsheetWizardStep3Component,
+  CallsheetWizardStep4Component
 } from './projects';
 import { ScenePropertiesLandingComponent } from './projects';
 import { SelectEntityComponent } from './shared';
@@ -170,6 +171,7 @@ const COMPONENTS =[
   CallsheetWizardStep1Component,
   CallsheetWizardStep2Component,
   CallsheetWizardStep3Component,
+  CallsheetWizardStep4Component,
   ScenePropertiesLandingComponent,
   SelectEntityComponent
 ];

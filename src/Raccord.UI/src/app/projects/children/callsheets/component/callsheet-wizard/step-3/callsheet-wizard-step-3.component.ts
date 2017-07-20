@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { CallsheetSceneHttpService } from "../../../children/callsheet-scenes/service/callsheet-scene-http.service";
 import { CallsheetSceneCharacterHttpService } from "../../../children/callsheet-scene-characters/service/callsheet-scene-character-http.service";
+import { CallsheetCharacterHttpService } from "../../../children/callsheet-characters/service/callsheet-character-http.service";
 import { LoadingService } from '../../../../../../loading/service/loading.service';
 import { DialogService } from '../../../../../../shared/service/dialog.service';
 import { ProjectSummary } from '../../../../../model/project-summary.model';
@@ -24,6 +25,7 @@ export class CallsheetWizardStep3Component implements OnInit {
         private _router: Router,
         private _callsheetSceneHttpService: CallsheetSceneHttpService,
         private _callsheetSceneCharacterHttpService: CallsheetSceneCharacterHttpService,
+        private _callsheetCharacterHttpService: CallsheetCharacterHttpService,
         private _loadingService: LoadingService,
         private _dialogService: DialogService
     ) {
@@ -47,7 +49,18 @@ export class CallsheetWizardStep3Component implements OnInit {
     }
 
     goToNextStep(){
+        let loadingId = this._loadingService.startLoading();
 
+        this._callsheetCharacterHttpService.setCharacters(this.callsheet.id, this.project.id).then(data=>{
+            if(typeof(data)=='string'){
+                this._dialogService.error(data);
+            }else{
+                this._router.navigateByUrl(`/projects/${this.project.id}/callsheets/${this.callsheet.id}/wizard/4`)
+            }
+        }).catch()
+        .then(()=>
+            this._loadingService.endLoading(loadingId)
+        );
     }
 
     updateCharacterLink(character: CallsheetSceneCharacterWrapper, callsheetSceneId: number){

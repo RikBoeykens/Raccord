@@ -1,0 +1,21 @@
+<div class="row">      
+    <div class="col s12">
+        <a routerLink="/" class="breadcrumb">Dashboard</a>
+        <a routerLink="/projects" class="breadcrumb">Projects</a>
+        <a routerLink="/projects/{{project.id}}" class="breadcrumb">{{project.title}}</a>
+        <a routerLink="/projects/{{project.id}}/callsheets" class="breadcrumb">Callsheets</a>
+        <span class="breadcrumb">{{callsheet.shootingDay.number}} - {{callsheet.shootingDay.date | date}}</span>
+    </div>
+</div>
+<h3>Step 4 - Characters</h3>
+<div class="row">
+    <div class="col s12">
+        <button type="button"
+                md-raised-button
+                (click)="goToNextStep()"
+                class="wizard-next-button">
+            Next
+        </button>
+    </div>
+</div>
+ <!--routerLink="/projects/{{project.id}}/callsheets/{{callsheet.id}}/wizard/5"-->
