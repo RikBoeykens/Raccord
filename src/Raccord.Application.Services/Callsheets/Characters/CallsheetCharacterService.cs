@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using Raccord.Application.Core.Services.Callsheets.Characters;
 using Raccord.Data.EntityFramework.Repositories.Callsheets.CallTypes;
@@ -36,9 +37,18 @@ namespace Raccord.Application.Services.Callsheets.Characters
             _characterCallRepository = characterCallRepository;
         }
 
+        public IEnumerable<CallsheetCharacterCharacterDto> GetCharacters(long callsheetID)
+        {
+            var characters = _callsheetCharacterRepository.GetAllForCallsheet(callsheetID);
+
+            var dtos = characters.Select(c=> c.TranslateCharacter());
+
+            return dtos;
+        }
+
         public void SetCharacters(long callsheetID, long projectID)
         {
-            var currentCharacters = _callsheetCharacterRepository.GetAllForParent(callsheetID);
+            var currentCharacters = _callsheetCharacterRepository.GetAllForCallsheet(callsheetID);
             var callsheetSceneCharacters = _callsheetSceneCharacterRepository.GetAllForCallsheet(callsheetID).GroupBy(csc=> csc.CharacterScene.Character, csc=> csc, (character, csc)=>character);
             var callTypes = _callTypeRepository.GetAllForProject(projectID);
 

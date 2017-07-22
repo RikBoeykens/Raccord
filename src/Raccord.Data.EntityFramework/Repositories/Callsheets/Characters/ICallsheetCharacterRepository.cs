@@ -6,6 +6,6 @@ namespace Raccord.Data.EntityFramework.Repositories.Callsheets.Characters
     // Interface defining a repository for Call type definitions
     public interface ICallsheetCharacterRepository : IBaseRepository<CallsheetCharacter>
     {
-        IEnumerable<CallsheetCharacter> GetAllForParent(long ID);
+        IEnumerable<CallsheetCharacter> GetAllForCallsheet(long ID);
     }
 }

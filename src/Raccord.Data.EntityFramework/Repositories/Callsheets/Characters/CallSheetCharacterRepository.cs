@@ -12,7 +12,7 @@ namespace Raccord.Data.EntityFramework.Repositories.Callsheets.Characters
         {
         }
 
-        public IEnumerable<CallsheetCharacter> GetAllForParent(long ID)
+        public IEnumerable<CallsheetCharacter> GetAllForCallsheet(long ID)
         {
             var query = GetIncludedSummary();
 
@@ -24,7 +24,10 @@ namespace Raccord.Data.EntityFramework.Repositories.Callsheets.Characters
             IQueryable<CallsheetCharacter> query = _context.Set<CallsheetCharacter>();
 
             return query.Include(cc=> cc.CharacterCalls)
-                        .ThenInclude(cc=> cc.CallType);
+                        .ThenInclude(cc=> cc.CallType)
+                        .Include(cc=> cc.Character)
+                        .ThenInclude(c=> c.ImageCharacters)
+                        .ThenInclude(ic=> ic.Image);
         }
     }
 }
