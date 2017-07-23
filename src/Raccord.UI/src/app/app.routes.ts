@@ -73,7 +73,8 @@ import {
   CallsheetResolve,
   CallsheetSummaryResolve,
   CallsheetSceneLocationsResolve,
-  CallsheetSceneCharactersResolve
+  CallsheetSceneCharactersResolve,
+  CallsheetCharactersCharactersResolve
 } from './projects';
 
 import { CanDeactivateGuard } from './shared/service/can-deactivate-guard.service';
@@ -406,7 +407,8 @@ export const ROUTES: Routes = [
                     component: CallsheetWizardStep4Component,
                     resolve:{
                       project: ProjectSummaryResolve,
-                      callsheet: CallsheetSummaryResolve
+                      callsheet: CallsheetSummaryResolve,
+                      characters: CallsheetCharactersCharactersResolve
                     }
                   }
                 ]

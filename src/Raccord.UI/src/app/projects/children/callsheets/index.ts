@@ -11,6 +11,12 @@ export { CallsheetSceneCharacters } from "./children/callsheet-scenes/model/call
 export { LinkedCallsheetScene } from "./children/callsheet-scenes/model/linked-callsheet-scene.model";
 export { FullCallsheetScene } from "./children/callsheet-scenes/model/full-callsheet-scene.model";
 
+export { CallType } from "./children/call-types/model/call-type.model";
+
+export { CharacterCallCallType } from "./children/character-calls/model/character-call-call-type.model";
+
+export { CallsheetCharacterCharacter } from "./children/callsheet-characters/model/callsheet-character-character.model";
+
 export { CallsheetsListComponent } from "./component/callsheets-list/callsheets-list.component";
 export { NewCallsheetComponent } from "./component/new-callsheet/new-callsheet.component";
 export { CallsheetWizardStep1Component } from "./component/callsheet-wizard/step-1/callsheet-wizard-step-1.component";
@@ -29,3 +35,4 @@ export { CallsheetSceneCharactersResolve } from "./children/callsheet-scenes/ser
 export { CallsheetSceneCharacterHttpService } from "./children/callsheet-scene-characters/service/callsheet-scene-character-http.service";
 
 export { CallsheetCharacterHttpService } from "./children/callsheet-characters/service/callsheet-character-http.service";
+export { CallsheetCharactersCharactersResolve } from "./children/callsheet-characters/service/callsheet-characters-characters-resolve.service";

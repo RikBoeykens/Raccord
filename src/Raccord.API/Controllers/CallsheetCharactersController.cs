@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
+using Raccord.API.ViewModels.Callsheets.Characters;
 using Raccord.API.ViewModels.Core;
 using Raccord.Application.Core.Services.Callsheets.Characters;
 
@@ -18,6 +19,14 @@ namespace Raccord.API.Controllers
                 throw new ArgumentNullException(nameof(callsheetCharacterService));
 
             _callsheetCharacterService = callsheetCharacterService;
+        }
+
+        [HttpGet("{callsheetId}/characters")]
+        public IEnumerable<CallsheetCharacterCharacterViewModel> GetCharacters(long callsheetId)
+        {
+            var dtos = _callsheetCharacterService.GetCharacters(callsheetId);
+
+            return dtos.Select(d=> d.Translate());
         }
 
         // POST api/callsheetcharacters/7/5/setcharacters

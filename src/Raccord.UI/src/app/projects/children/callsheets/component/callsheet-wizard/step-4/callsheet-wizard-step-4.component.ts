@@ -5,6 +5,7 @@ import { LoadingService } from '../../../../../../loading/service/loading.servic
 import { DialogService } from '../../../../../../shared/service/dialog.service';
 import { ProjectSummary } from '../../../../../model/project-summary.model';
 import { CallsheetSummary } from "../../../";
+import { CallsheetCharacterCharacter } from "../../../";
 import { LinkedCharacter } from "../../../..//characters/model/linked-character.model";
 
 @Component({
@@ -14,6 +15,7 @@ export class CallsheetWizardStep4Component implements OnInit {
 
     project: ProjectSummary;
     callsheet: CallsheetSummary;
+    characters: CallsheetCharacterCharacter[]=[];
 
     constructor(
         private _route: ActivatedRoute,
@@ -25,9 +27,10 @@ export class CallsheetWizardStep4Component implements OnInit {
     }
 
     ngOnInit() {
-        this._route.data.subscribe((data: { project: ProjectSummary, callsheet: CallsheetSummary }) => {
+        this._route.data.subscribe((data: { project: ProjectSummary, callsheet: CallsheetSummary, characters: CallsheetCharacterCharacter[] }) => {
             this.project = data.project;
             this.callsheet = data.callsheet;
+            this.characters = data.characters;
         });
     }
 }
