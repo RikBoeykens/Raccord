@@ -1,11 +1,13 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
 using Raccord.Data.EntityFramework;
 using Raccord.Data.EntityFramework.Seeding;
+using Raccord.Domain.Model.Users;
 
 namespace Raccord.API
 {
@@ -35,6 +37,11 @@ namespace Raccord.API
             services.AddDbContext<RaccordDBContext>(
                 opts => opts.UseNpgsql(connectionString)
             );
+
+            services.AddIdentity<ApplicationUser, IdentityRole>()
+                .AddEntityFrameworkStores<RaccordDBContext>()
+                .AddDefaultTokenProviders();
+
 
             DependencyInjection.ConfigureServices(services);
         }
