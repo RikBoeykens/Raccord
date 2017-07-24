@@ -48,9 +48,10 @@ namespace Raccord.Application.Services.Callsheets.Characters
 
         public void SetCharacters(long callsheetID, long projectID)
         {
-            var currentCharacters = _callsheetCharacterRepository.GetAllForCallsheet(callsheetID);
-            var callsheetSceneCharacters = _callsheetSceneCharacterRepository.GetAllForCallsheet(callsheetID).GroupBy(csc=> csc.CharacterScene.Character, csc=> csc, (character, csc)=>character);
-            var callTypes = _callTypeRepository.GetAllForProject(projectID);
+            var currentCharacters = _callsheetCharacterRepository.GetAllForCallsheet(callsheetID).ToArray();
+            var callsheetSceneCharacters = _callsheetSceneCharacterRepository.GetAllForCallsheet(callsheetID).ToArray();
+            var characters = callsheetSceneCharacters.GroupBy(csc=> csc.CharacterScene.Character, csc=> csc, (character, csc)=>character);
+            var callTypes = _callTypeRepository.GetAllForProject(projectID).ToArray();
 
             // remove characters no longer on the callsheet and add new calltypes
             foreach(var character in currentCharacters)
@@ -77,7 +78,7 @@ namespace Raccord.Application.Services.Callsheets.Characters
                 }
             }
 
-            foreach(var character in callsheetSceneCharacters)
+            foreach(var character in characters)
             {
                 if(!currentCharacters.Any(csc=> csc.CharacterID == character.ID))
                 {
