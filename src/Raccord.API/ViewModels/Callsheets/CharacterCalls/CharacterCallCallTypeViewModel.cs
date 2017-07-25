@@ -1,18 +1,11 @@
-using System;
 using Raccord.API.ViewModels.Callsheets.CallTypes;
 
 namespace Raccord.API.ViewModels.Callsheets.CharacterCalls
 {
     // Dto to represent a character with call type info
-    public class CharacterCallCallTypeViewModel
+    public class CharacterCallCallTypeViewModel : CharacterCallViewModel
     {
         private CallTypeViewModel _callType;
-
-        // ID of the character call
-        public long ID { get; set; }
-
-        // Time of call
-        public DateTime CallTime { get; set; }
 
         // Linked call type
         public CallTypeViewModel CallType

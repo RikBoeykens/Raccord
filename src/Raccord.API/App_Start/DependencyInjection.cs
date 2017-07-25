@@ -76,6 +76,8 @@ using Raccord.Data.EntityFramework.Repositories.Callsheets.CallTypes;
 using Raccord.Data.EntityFramework.Repositories.Callsheets.Characters;
 using Raccord.Application.Core.Services.Callsheets.Characters;
 using Raccord.Application.Services.Callsheets.Characters;
+using Raccord.Application.Core.Services.Callsheets.CharacterCalls;
+using Raccord.Application.Services.Callsheets.CharacterCalls;
 
 namespace Raccord.API
 {
@@ -173,7 +175,9 @@ namespace Raccord.API
 
             services.AddTransient<ICallsheetCharacterRepository, CallsheetCharacterRepository>();
             services.AddTransient<ICallsheetCharacterService, CallsheetCharacterService>();
+
             services.AddTransient<ICharacterCallRepository, CharacterCallRepository>();
+            services.AddTransient<ICharacterCallService, CharacterCallService>();
 
             services.AddTransient<ISearchEngineServiceWrapper, SearchEngineServiceWrapper>();
         }

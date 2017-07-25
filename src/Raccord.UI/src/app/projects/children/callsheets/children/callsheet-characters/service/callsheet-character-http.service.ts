@@ -20,7 +20,7 @@ export class CallsheetCharacterHttpService extends BaseHttpService {
     }
 
     setCharacters(callsheetId: number, projectId: number): Promise<any>{
-        var uri = `${this._baseUri}/${callsheetId}/${projectId}/setcharacters`;
+        var uri = `${this._baseUri}/${projectId}/${callsheetId}/setcharacters`;
 
         return this.doPost(null, uri);
     }

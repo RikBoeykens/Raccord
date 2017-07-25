@@ -13,6 +13,7 @@ export { FullCallsheetScene } from "./children/callsheet-scenes/model/full-calls
 
 export { CallType } from "./children/call-types/model/call-type.model";
 
+export { CharacterCall } from "./children/character-calls/model/character-call.model";
 export { CharacterCallCallType } from "./children/character-calls/model/character-call-call-type.model";
 
 export { CallsheetCharacterCharacter } from "./children/callsheet-characters/model/callsheet-character-character.model";
@@ -36,3 +37,5 @@ export { CallsheetSceneCharacterHttpService } from "./children/callsheet-scene-c
 
 export { CallsheetCharacterHttpService } from "./children/callsheet-characters/service/callsheet-character-http.service";
 export { CallsheetCharactersCharactersResolve } from "./children/callsheet-characters/service/callsheet-characters-characters-resolve.service";
+
+export { CharacterCallHttpService } from "./children/character-calls/service/character-call-http.service";

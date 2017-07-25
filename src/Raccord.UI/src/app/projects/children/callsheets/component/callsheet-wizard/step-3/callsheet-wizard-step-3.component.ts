@@ -64,7 +64,7 @@ export class CallsheetWizardStep3Component implements OnInit {
     }
 
     updateCharacterLink(character: CallsheetSceneCharacterWrapper, callsheetSceneId: number){
-        if(character.isLinked&&character.callsheetSceneCharacterId){
+        if(!character.isLinked&&character.callsheetSceneCharacterId){
             this.removeScheduleCharacterLink(character);
         }else{
             this.addScheduleCharacterLink(character, callsheetSceneId);
@@ -78,7 +78,6 @@ export class CallsheetWizardStep3Component implements OnInit {
             if(typeof(data)=='string'){
                 this._dialogService.error(data);
             }else{
-                this.getScenes();
             }
         }).catch()
         .then(()=>
@@ -93,7 +92,6 @@ export class CallsheetWizardStep3Component implements OnInit {
             if(typeof(data)=='string'){
                 this._dialogService.error(data);
             }else{
-                this.getScenes();
             }
         }).catch()
         .then(()=>

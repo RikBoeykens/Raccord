@@ -1,9 +1,7 @@
-import { BaseModel } from '../../../../../../shared/model/base.model';
 import { CallType } from "../../../";
+import { CharacterCall } from "../../../"
 
-export class CharacterCallCallType extends BaseModel{
-    id: number;
-    callTime: Date;
+export class CharacterCallCallType extends CharacterCall{
     callType: CallType;
 
     constructor(obj?: {
@@ -11,10 +9,8 @@ export class CharacterCallCallType extends BaseModel{
                         callTime: Date, 
                         callType: CallType
                     }){
-        super();
+        super(obj);
         if(obj){
-            this.id = obj.id;
-            this.callTime = obj.callTime;
             this.callType = obj.callType;
         }
         else{

@@ -15,5 +15,13 @@ namespace Raccord.Application.Services.Callsheets.CharacterCalls
                 CallType = characterCall.CallType.Translate(),
             };
         }
+        public static CharacterCallDto Translate(this CharacterCall characterCall)
+        {
+            return new CharacterCallDto
+            {
+                ID = characterCall.ID,
+                CallTime = characterCall.CallTime,
+            };
+        }
     }
 }
