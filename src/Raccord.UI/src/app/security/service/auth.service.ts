@@ -5,6 +5,8 @@ import { BaseHttpService } from '../../shared/service/base-http.service';
 import { AppSettings } from '../../app.settings';
 import { OpenIdDictToken } from '../';
 import { Login } from '../';
+import { TokenHelpers } from "../";
+import { HeaderHelpers } from "../../shared/helpers/header.helpers";
  
 @Injectable()
 export class AuthService {
@@ -14,46 +16,12 @@ export class AuthService {
         this._baseUri = `${AppSettings.API_ENDPOINT}/authorization`;
     }
 
-        // for requesting secure data using json
-    authJsonHeaders() {
-        let header = new Headers();
-        header.append('Content-Type', 'application/json');
-        header.append('Accept', 'application/json');
-        header.append('Authorization', 'Bearer ' + sessionStorage.getItem('bearer_token'));
-        return header;
-    }
- 
-    // for requesting secure data from a form post
-    authFormHeaders() {
-        let header = new Headers();
-        header.append('Content-Type', 'application/x-www-form-urlencoded');
-        header.append('Accept', 'application/json');
-        header.append('Authorization', 'Bearer ' + sessionStorage.getItem('bearer_token'));
-        return header;
-    }
- 
-    // for requesting unsecured data using json
-    jsonHeaders() {
-        let header = new Headers();
-        header.append('Content-Type', 'application/json');
-        header.append('Accept', 'application/json');
-        return header;
-    }
- 
-    // for requesting unsecured data using form post
-    contentHeaders() {
-        let header = new Headers();
-        header.append('Content-Type', 'application/x-www-form-urlencoded');
-        header.append('Accept', 'application/json');
-        return header;
-    }
-
     login(login: Login):Promise<any>{
         let uri = `${this._baseUri}/connect/token`;
 
         let body = 'username=' + login.email + '&password=' + login.password + '&grant_type=password';
  
-        return this._http.post(uri, body, { headers: this.contentHeaders() })
+        return this._http.post(uri, body, { headers: HeaderHelpers.ContentHeaders() })
                     .toPromise()
                     .then((response)=>{
                         this.internalLogin(response.json());
@@ -65,23 +33,17 @@ export class AuthService {
     internalLogin(responseData: OpenIdDictToken) {
         let access_token: string = responseData.access_token;
         let expires_in: number = responseData.expires_in;
-        sessionStorage.setItem('access_token', access_token);
-        sessionStorage.setItem('bearer_token', access_token);
-        // TODO: implement meaningful refresh, handle expiry 
-        sessionStorage.setItem('expires_in', expires_in.toString());
+        TokenHelpers.setTokens(access_token, expires_in);
     }
  
     // called when logging out user; clears tokens from browser
     logout() {
-        //localStorage.removeItem('access_token');
-        sessionStorage.removeItem('access_token');
-        sessionStorage.removeItem('bearer_token');
-        sessionStorage.removeItem('expires_in');
+        TokenHelpers.removeTokens();
     }
  
     // simple check of logged in status: if there is a token, we're (probably) logged in.
     // ideally we check status and check token has not expired (server will back us up, if this not done, but it could be cleaner)
     loggedIn() {
-        return !!sessionStorage.getItem('bearer_token');
+        return !!TokenHelpers.getAcessToken();
     }
 }

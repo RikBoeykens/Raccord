@@ -8,8 +8,7 @@ using Raccord.Application.Core.Services.Breakdowns.BreakdownItems;
 
 namespace Raccord.API.Controllers
 {
-    [Route("api/[controller]")]
-    public class BreakdownItemsController : Controller
+    public class BreakdownItemsController : RaccordApiAuthController
     {
         private readonly IBreakdownItemService _breakdownItemService;
 

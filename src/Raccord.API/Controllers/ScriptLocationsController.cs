@@ -8,8 +8,7 @@ using Raccord.Application.Core.Services.ScriptLocations;
 
 namespace Raccord.API.Controllers
 {
-    [Route("api/[controller]")]
-    public class ScriptLocationsController : Controller
+    public class ScriptLocationsController : RaccordApiAuthController
     {
         private readonly IScriptLocationService _scriptLocationService;
 

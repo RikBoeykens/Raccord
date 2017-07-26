@@ -19,8 +19,7 @@ using Raccord.Domain.Model.Users;
 
 namespace Raccord.API.Controllers
 {
-    [Route("api/[controller]")]
-    public class AuthorizationController : Controller
+    public class AuthorizationController : RaccordApiController
     {
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly UserManager<ApplicationUser> _userManager;

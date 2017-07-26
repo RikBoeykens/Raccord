@@ -9,9 +9,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace Raccord.API.Controllers
 {
-    [Route("api/[controller]")]
-    [Authorize]
-    public class ProjectsController : Controller
+    public class ProjectsController : RaccordApiAuthController
     {
         private readonly IProjectService _projectService;
 

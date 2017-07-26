@@ -10,8 +10,7 @@ using Raccord.API.ViewModels.Images;
 
 namespace Raccord.API.Controllers
 {
-    [Route("api/[controller]")]
-    public class ImageBreakdownItemsController : Controller
+    public class ImageBreakdownItemsController : RaccordApiAuthController
     {
         private readonly IImageBreakdownItemService _imageBreakdownItemService;
 
