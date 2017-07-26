@@ -7,6 +7,9 @@ export class FullCallsheet extends Callsheet{
 
     constructor(obj?: {
                         id: number,
+                        start: Date,
+                        end: Date,
+                        crewCall: Date,
                         shootingDay: ShootingDay,
                         scenes: CallsheetSceneScene[],
                         projectId: number,

@@ -14,6 +14,9 @@ namespace Raccord.Application.Services.Callsheets
             var dto = new FullCallsheetDto
             {
                 ID = callsheet.ID,
+                Start = callsheet.Start,
+                End = callsheet.End,
+                CrewCall = callsheet.CrewCall,
                 ProjectID = callsheet.ProjectID,
                 ShootingDay = callsheet.ShootingDay.Translate(),
                 Scenes = callsheet.CallsheetScenes.OrderBy(cs=> cs.SortingOrder).Select(cs=> cs.TranslateScene()),
@@ -27,6 +30,9 @@ namespace Raccord.Application.Services.Callsheets
             var dto = new CallsheetSummaryDto
             {
                 ID = callsheet.ID,
+                Start = callsheet.Start,
+                End = callsheet.End,
+                CrewCall = callsheet.CrewCall,
                 ProjectID = callsheet.ProjectID,
                 ShootingDay = callsheet.ShootingDay.Translate(),
             };
@@ -39,6 +45,9 @@ namespace Raccord.Application.Services.Callsheets
             var dto = new CallsheetDto
             {
                 ID = callsheet.ID,
+                Start = callsheet.Start,
+                End = callsheet.End,
+                CrewCall = callsheet.CrewCall,
                 ProjectID = callsheet.ProjectID,
                 ShootingDay = callsheet.ShootingDay.Translate(),
             };

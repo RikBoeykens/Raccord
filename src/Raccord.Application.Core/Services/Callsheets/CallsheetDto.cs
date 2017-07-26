@@ -1,3 +1,4 @@
+using System;
 using Raccord.Application.Core.Services.ShootingDays;
 
 namespace Raccord.Application.Core.Services.Callsheets
@@ -12,6 +13,15 @@ namespace Raccord.Application.Core.Services.Callsheets
 
         // ID of the project
         public long ProjectID { get; set; }
+
+        // Start of the day
+        public DateTime Start { get; set; }
+
+        // End of the day
+        public DateTime End { get; set; }
+
+        // Crewcall
+        public DateTime CrewCall { get; set; }
 
         // Linked shooting day
         public ShootingDayDto ShootingDay

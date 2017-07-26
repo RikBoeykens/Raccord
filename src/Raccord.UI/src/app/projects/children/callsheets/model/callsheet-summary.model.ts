@@ -5,6 +5,9 @@ export class CallsheetSummary extends Callsheet{
 
     constructor(obj?: {
                         id: number,
+                        start: Date,
+                        end: Date,
+                        crewCall: Date,
                         shootingDay: ShootingDay,
                         projectId: number,
                     }){

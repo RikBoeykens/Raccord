@@ -12,6 +12,9 @@ namespace Raccord.API.ViewModels.Callsheets
             return new FullCallsheetViewModel
             {
                 ID = dto.ID,
+                Start = dto.Start,
+                End = dto.End,
+                CrewCall = dto.CrewCall,
                 ProjectID = dto.ProjectID,
                 ShootingDay = dto.ShootingDay.Translate(),
                 Scenes = dto.Scenes.Select(s=> s.Translate()),
@@ -22,6 +25,9 @@ namespace Raccord.API.ViewModels.Callsheets
             return new CallsheetSummaryViewModel
             {
                 ID = dto.ID,
+                Start = dto.Start,
+                End = dto.End,
+                CrewCall = dto.CrewCall,
                 ProjectID = dto.ProjectID,
                 ShootingDay = dto.ShootingDay.Translate(),
             };
@@ -31,6 +37,9 @@ namespace Raccord.API.ViewModels.Callsheets
             return new CallsheetViewModel
             {
                 ID = dto.ID,
+                Start = dto.Start,
+                End = dto.End,
+                CrewCall = dto.CrewCall,
                 ProjectID = dto.ProjectID,
                 ShootingDay = dto.ShootingDay.Translate(),
             };
@@ -40,6 +49,9 @@ namespace Raccord.API.ViewModels.Callsheets
             return new CallsheetDto
             {
                 ID = vm.ID,
+                Start = vm.Start,
+                End = vm.End,
+                CrewCall = vm.CrewCall,
                 ProjectID = vm.ProjectID,
                 ShootingDay = vm.ShootingDay.Translate(),
             };

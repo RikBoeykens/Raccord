@@ -115,6 +115,10 @@ namespace Raccord.Application.Services.Callsheets
         {
             var callsheet = _callsheetRepository.GetSingle(dto.ID);
 
+            callsheet.Start = dto.Start;
+            callsheet.End = dto.End;
+            callsheet.CrewCall = dto.CrewCall;
+
             _callsheetRepository.Edit(callsheet);
             _callsheetRepository.Commit();
 
