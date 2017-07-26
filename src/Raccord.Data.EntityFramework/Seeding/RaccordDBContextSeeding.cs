@@ -5,25 +5,45 @@ using Raccord.Domain.Model.Scenes;
 using System.Collections.Generic;
 using System.Linq;
 using Raccord.Domain.Model.Breakdowns.BreakdownTypes;
+using Microsoft.AspNetCore.Identity;
+using Raccord.Domain.Model.Users;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using System.Threading.Tasks;
+using System;
 
 namespace Raccord.Data.EntityFramework.Seeding
 {
-    public static class RaccordDBContextSeeding
+    public class RaccordDBContextSeeding
     {
-        public static void EnsureSeedData(this RaccordDBContext context)
+        private RaccordDBContext _context;
+        private UserManager<ApplicationUser> _userManager;
+        private RoleManager<IdentityRole> _roleManager;
+
+        public RaccordDBContextSeeding(
+            RaccordDBContext context,
+            UserManager<ApplicationUser> userManager,
+            RoleManager<IdentityRole> roleManager
+        )
         {
-            context.SystemSeeding();
-            context.TestSeeding();
+            _context = context;
+            _userManager = userManager;
+            _roleManager = roleManager;
+        }
+        public void EnsureSeedData()
+        {
+            SystemSeeding();
+            TestSeeding();
         }
 
-        public static void SystemSeeding(this RaccordDBContext context)
+        private void SystemSeeding()
         {
-            context.SeedBreakdownTypes();
+            SeedBreakdownTypes();
+            SeedRolesAndAdminUser();
         }
 
-        public static void SeedBreakdownTypes(this RaccordDBContext context)
+        private void SeedBreakdownTypes()
         {
-            if(!context.BreakdownTypeDefinitions.Any())
+            if(!_context.BreakdownTypeDefinitions.Any())
             {
                 var definitions = new List<BreakdownTypeDefinition>
                 {
@@ -33,24 +53,47 @@ namespace Raccord.Data.EntityFramework.Seeding
                     new BreakdownTypeDefinition{ Name = "Vehicles" },
                 };
 
-                context.BreakdownTypeDefinitions.AddRange(definitions);
+                _context.BreakdownTypeDefinitions.AddRange(definitions);
 
-                context.SaveChanges();
+                _context.SaveChanges();
             }
         }
 
-        public static void TestSeeding(this RaccordDBContext context)
+        private void SeedRolesAndAdminUser()
         {
-            context.SeedProjects();
-            context.SeedIntExts();
-            context.SeedDayNights();
-            context.SeedScriptLocations();
-            context.SeedScenes();
+            var rolesToAdd = new List<IdentityRole>(){
+                new IdentityRole { Name= "admin"},
+                new IdentityRole { Name= "user"}
+            };
+            foreach (var role in rolesToAdd)
+            {
+                if (!_roleManager.RoleExistsAsync(role.Name).Result)
+                {
+                     _roleManager.CreateAsync(role).Result.ToString();
+                }
+            }
+
+            if (!_context.Users.Any())
+            {
+                var email = "rikboeykens@gmail.com";
+                var password = "P@ssw0rd!";
+                _userManager.CreateAsync(new ApplicationUser { UserName = email, Email = email, EmailConfirmed = true }, password).Result.ToString();
+                _userManager.AddToRoleAsync(_userManager.FindByNameAsync(email).GetAwaiter().GetResult(), "admin").Result.ToString();
+            }
         }
 
-        public static void SeedProjects(this RaccordDBContext context)
+        private void TestSeeding()
         {
-            if(!context.Projects.Any())
+            SeedProjects();
+            SeedIntExts();
+            SeedDayNights();
+            SeedScriptLocations();
+            SeedScenes();
+        }
+
+        private void SeedProjects()
+        {
+            if(!_context.Projects.Any())
             {
                 var projects = new List<Project>
                 {
@@ -61,15 +104,15 @@ namespace Raccord.Data.EntityFramework.Seeding
                     new Project { Title = "Monstro!" },
                 };
 
-                context.Projects.AddRange(projects);
+                _context.Projects.AddRange(projects);
 
-                context.SaveChanges();
+                _context.SaveChanges();
             }
         }
 
-        public static void SeedIntExts(this RaccordDBContext context)
+        private void SeedIntExts()
         {
-            if(!context.IntExts.Any())
+            if(!_context.IntExts.Any())
             {
                 var entities = new List<IntExt>
                 {
@@ -79,15 +122,15 @@ namespace Raccord.Data.EntityFramework.Seeding
                     new IntExt { ProjectID = 2, Name = "EXT" },
                 };
 
-                context.IntExts.AddRange(entities);
+                _context.IntExts.AddRange(entities);
 
-                context.SaveChanges();
+                _context.SaveChanges();
             }
         }
 
-        public static void SeedDayNights(this RaccordDBContext context)
+        private void SeedDayNights()
         {
-            if(!context.DayNights.Any())
+            if(!_context.DayNights.Any())
             {
                 var entities = new List<DayNight>
                 {
@@ -97,15 +140,15 @@ namespace Raccord.Data.EntityFramework.Seeding
                     new DayNight { ProjectID = 2, Name = "NIGHT" },
                 };
 
-                context.DayNights.AddRange(entities);
+                _context.DayNights.AddRange(entities);
 
-                context.SaveChanges();
+                _context.SaveChanges();
             }
         }
 
-        public static void SeedScriptLocations(this RaccordDBContext context)
+        private void SeedScriptLocations()
         {
-            if(!context.ScriptLocations.Any())
+            if(!_context.ScriptLocations.Any())
             {
                 var entities = new List<ScriptLocation>
                 {
@@ -121,15 +164,15 @@ namespace Raccord.Data.EntityFramework.Seeding
                     new ScriptLocation { ProjectID = 2, Name = "RIVER" },
                 };
 
-                context.ScriptLocations.AddRange(entities);
+                _context.ScriptLocations.AddRange(entities);
 
-                context.SaveChanges();
+                _context.SaveChanges();
             }
         }
 
-        public static void SeedScenes(this RaccordDBContext context)
+        private void SeedScenes()
         {
-            if(!context.Scenes.Any())
+            if(!_context.Scenes.Any())
             {
                 var entities = new List<Scene>
                 {
@@ -145,9 +188,9 @@ namespace Raccord.Data.EntityFramework.Seeding
                     new Scene { ProjectID = 2, IntExtID = 3, ScriptLocationID = 9, DayNightID = 3, PageLength = 3, Number = "5", Summary = "Freddy takes a bath in a river" },                    
                 };
 
-                context.Scenes.AddRange(entities);
+                _context.Scenes.AddRange(entities);
 
-                context.SaveChanges();
+                _context.SaveChanges();
             }
         }
     }

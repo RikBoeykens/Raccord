@@ -61,6 +61,7 @@ using Raccord.Application.Core.Services.Locations.LocationSets;
 using Raccord.Application.Services.Locations.LocationSets;
 using Raccord.Application.Core.Services.Locations.Locations;
 using Raccord.Application.Services.Locations.Locations;
+using Raccord.Data.EntityFramework.Seeding;
 
 namespace Raccord.API
 {
@@ -68,6 +69,8 @@ namespace Raccord.API
     {
         public static void ConfigureServices(IServiceCollection services)
         {
+            services.AddTransient<RaccordDBContextSeeding>();
+
             services.AddTransient<IProjectRepository, ProjectRepository>();
             services.AddTransient<IProjectService, ProjectService>();
             services.AddTransient<IProjectSearchEngineService, ProjectSearchEngineService>();

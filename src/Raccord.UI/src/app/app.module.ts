@@ -95,6 +95,7 @@ import {
 } from './projects';
 import { ScenePropertiesLandingComponent } from './projects';
 import { SelectEntityComponent } from './shared';
+import { LoginComponent } from "./security";
 
 const COMPONENTS =[
   AppComponent,
@@ -161,7 +162,8 @@ const COMPONENTS =[
   LocationSetLandingComponent,
   LocationSetScheduleComponent,
   ScenePropertiesLandingComponent,
-  SelectEntityComponent
+  SelectEntityComponent,
+  LoginComponent
 ];
 
 // Services
@@ -224,6 +226,11 @@ import {
   SceneLocationSetsResolve
 } from './projects';
 
+import {
+  AuthService,
+  AuthGuard
+} from "./security";
+
 const APP_PROVIDERS = [
   LoadingService,
   CanDeactivateGuard,
@@ -278,7 +285,9 @@ const APP_PROVIDERS = [
   LocationResolve,
   LocationSetHttpService,
   LocationSetResolve,
-  SceneLocationSetsResolve
+  SceneLocationSetsResolve,
+  AuthService,
+  AuthGuard
 ];
 
 // Directives

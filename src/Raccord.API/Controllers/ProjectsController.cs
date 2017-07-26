@@ -5,10 +5,12 @@ using Microsoft.AspNetCore.Mvc;
 using Raccord.API.ViewModels.Projects;
 using Raccord.API.ViewModels.Core;
 using Raccord.Application.Core.Services.Projects;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Raccord.API.Controllers
 {
     [Route("api/[controller]")]
+    [Authorize]
     public class ProjectsController : Controller
     {
         private readonly IProjectService _projectService;

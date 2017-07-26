@@ -32,6 +32,7 @@ import {
   LocationSetLandingComponent
 } from './projects';
 import { ScenePropertiesLandingComponent } from './projects';
+import { LoginComponent } from "./security";
 
 import { ProjectResolve } from './projects';
 import { ProjectSummaryResolve } from './projects';
@@ -65,13 +66,16 @@ import {
 } from './projects';
 
 import { CanDeactivateGuard } from './shared/service/can-deactivate-guard.service';
+import { AuthGuard } from "./security";
 
 export const ROUTES: Routes = [
-  { path: '',      component: DashboardComponent },
-  { path: 'dashboard',  component: DashboardComponent },
-  { path: 'search',  component: SearchComponent },
+  { path: '',      component: DashboardComponent, canActivate: [AuthGuard] },
+  { path: 'dashboard',  component: DashboardComponent, canActivate: [AuthGuard] },
+  { path: 'login',  component: LoginComponent },
+  { path: 'search',  component: SearchComponent, canActivate: [AuthGuard] },
   {
     path: 'projects',
+    canActivate: [AuthGuard],
     children:[
       {
         path:'',
