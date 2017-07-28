@@ -32,6 +32,7 @@ import {
   LocationSetLandingComponent,
   CallsheetsListComponent,
   NewCallsheetComponent,
+  CallsheetComponent,
   CallsheetWizardStep1Component,
   CallsheetWizardStep2Component,
   CallsheetWizardStep3Component,
@@ -371,6 +372,14 @@ export const ROUTES: Routes = [
                 resolve:{
                   project: ProjectSummaryResolve,
                   availableDays: AvailableShootingDaysResolve
+                }
+              },
+              {
+                path: ":callsheetId",
+                component: CallsheetComponent,
+                resolve:{
+                  project: ProjectSummaryResolve,
+                  callsheet: CallsheetResolve
                 }
               },
               {

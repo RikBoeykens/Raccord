@@ -20,6 +20,7 @@ export { CallsheetCharacterCharacter } from "./children/callsheet-characters/mod
 
 export { CallsheetsListComponent } from "./component/callsheets-list/callsheets-list.component";
 export { NewCallsheetComponent } from "./component/new-callsheet/new-callsheet.component";
+export { CallsheetComponent } from "./component/callsheet/callsheet.component";
 export { CallsheetWizardStep1Component } from "./component/callsheet-wizard/step-1/callsheet-wizard-step-1.component";
 export { CallsheetWizardStep2Component } from "./component/callsheet-wizard/step-2/callsheet-wizard-step-2.component";
 export { CallsheetWizardStep3Component } from "./component/callsheet-wizard/step-3/callsheet-wizard-step-3.component";

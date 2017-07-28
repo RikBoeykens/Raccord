@@ -1,6 +1,7 @@
 using System.Linq;
 using Raccord.Application.Core.Services.Callsheets;
 using Raccord.Application.Services.Callsheets.CallsheetScenes;
+using Raccord.Application.Services.Callsheets.Characters;
 using Raccord.Application.Services.ShootingDays;
 using Raccord.Domain.Model.Callsheets;
 
@@ -20,6 +21,7 @@ namespace Raccord.Application.Services.Callsheets
                 ProjectID = callsheet.ProjectID,
                 ShootingDay = callsheet.ShootingDay.Translate(),
                 Scenes = callsheet.CallsheetScenes.OrderBy(cs=> cs.SortingOrder).Select(cs=> cs.TranslateScene()),
+                Characters = callsheet.CallsheetCharacters.Select(cc=> cc.TranslateCharacter()),
             };
 
             return dto;

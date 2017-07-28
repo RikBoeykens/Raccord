@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Raccord.API.ViewModels.Callsheets.CallsheetScenes;
+using Raccord.API.ViewModels.Callsheets.Characters;
 
 namespace Raccord.API.ViewModels.Callsheets
 {
@@ -7,6 +8,7 @@ namespace Raccord.API.ViewModels.Callsheets
     public class FullCallsheetViewModel: CallsheetViewModel
     {
         private IEnumerable<CallsheetSceneSceneViewModel> _scenes;
+        private IEnumerable<CallsheetCharacterCharacterViewModel> _characters;
 
         // Scenes scheduled for the day
         public IEnumerable<CallsheetSceneSceneViewModel> Scenes
@@ -18,6 +20,19 @@ namespace Raccord.API.ViewModels.Callsheets
             set
             {
                 _scenes = value;
+            }
+        }
+
+        // Characters scheduled for the day
+        public IEnumerable<CallsheetCharacterCharacterViewModel> Characters
+        {
+            get
+            {
+                return _characters ?? (_characters = new List<CallsheetCharacterCharacterViewModel>());
+            }
+            set
+            {
+                _characters = value;
             }
         }
     }

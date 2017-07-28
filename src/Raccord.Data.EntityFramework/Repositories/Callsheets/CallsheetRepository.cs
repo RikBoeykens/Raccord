@@ -75,7 +75,14 @@ namespace Raccord.Data.EntityFramework.Repositories.Callsheets
                         .Include(sd=> sd.CallsheetScenes)
                         .ThenInclude(ss=> ss.LocationSet)
                         .ThenInclude(ls=> ls.ScriptLocation)
-                        .Include(sd=> sd.ShootingDay);
+                        .Include(sd=> sd.ShootingDay)
+                        .Include(cs=> cs.CallsheetCharacters)
+                        .ThenInclude(cc=> cc.Character)
+                        .ThenInclude(c=> c.ImageCharacters)
+                        .ThenInclude(ic=>ic.Image)
+                        .Include(cs=> cs.CallsheetCharacters)
+                        .ThenInclude(cc=> cc.CharacterCalls)
+                        .ThenInclude(cc=> cc.CallType);
         }
 
         private IQueryable<Callsheet> GetIncludedSummary()

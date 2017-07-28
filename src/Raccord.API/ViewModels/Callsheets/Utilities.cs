@@ -1,5 +1,6 @@
 using System.Linq;
 using Raccord.API.ViewModels.Callsheets.CallsheetScenes;
+using Raccord.API.ViewModels.Callsheets.Characters;
 using Raccord.API.ViewModels.ShootingDays;
 using Raccord.Application.Core.Services.Callsheets;
 
@@ -18,6 +19,7 @@ namespace Raccord.API.ViewModels.Callsheets
                 ProjectID = dto.ProjectID,
                 ShootingDay = dto.ShootingDay.Translate(),
                 Scenes = dto.Scenes.Select(s=> s.Translate()),
+                Characters = dto.Characters.Select(c=> c.Translate()),
             };
         }
         public static CallsheetSummaryViewModel Translate(this CallsheetSummaryDto dto)
