@@ -66,7 +66,7 @@ export class ScriptLocationsListComponent implements OnInit {
 
     resetNewScriptLocation(){
         this.viewNewScriptLocation = new ScriptLocation();
-        this.viewNewScriptLocation.projectId = this.project.id;
+        this.viewNewScriptLocation.projectID = this.project.id;
         this.newScriptLocation = null;
     }
 

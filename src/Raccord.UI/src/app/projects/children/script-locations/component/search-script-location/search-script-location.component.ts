@@ -34,8 +34,7 @@ export class SearchScriptLocationComponent{
         }
 
         let loadingId = this._loadingService.startLoading();
-        
-        this._searchEngineService.search({ searchText: this.sceneScriptLocation.name, includeTypes: [EntityType.scriptLocation], excludeTypes: [], projectId: this.sceneScriptLocation.projectId}).then(results=>{
+        this._searchEngineService.search({ searchText: this.sceneScriptLocation.name, includeTypes: [EntityType.scriptLocation], excludeTypes: [], projectId: this.sceneScriptLocation.projectID}).then(results=>{
             if(typeof(results)=='string'){
                 this._dialogService.error(results);
             }

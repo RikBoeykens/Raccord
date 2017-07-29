@@ -9,7 +9,7 @@ export class ScriptLocationSummary extends ScriptLocation{
                         id: number, 
                         name: string, 
                         description: string,
-                        projectId: number,
+                        projectID: number,
                         sceneCount: number,
                         primaryImage: Image
                     }){

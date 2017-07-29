@@ -12,7 +12,7 @@ export class FullScriptLocation extends ScriptLocation{
                         id: number, 
                         name: string, 
                         description: string,
-                        projectId: number,
+                        projectID: number,
                         scenes: SceneSummary[],
                         images: LinkedImage[],
                         sets: LocationSetLocation[]
