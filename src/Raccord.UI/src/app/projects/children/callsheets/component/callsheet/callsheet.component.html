@@ -23,7 +23,9 @@
             <div class="col s12">
                 <div class="row"
                     *ngFor="let location of getLocations(); let i = index">
-                    <p><strong>Location {{i + 1}}:</strong> {{location.name}}</p>
+                    <p><strong>Location {{i + 1}}:</strong> 
+                        <a routerLink="/projects/{{project.id}}/locations/{{location.id}}">{{location.name}}</a>
+                    </p>
                     <p>{{location.address.address1}}</p>
                     <p>{{location.address.address2}}</p>
                     <p>{{location.address.address3}}</p>
@@ -55,16 +57,16 @@
                             <show-image *ngIf="callsheetScene.scene.primaryImage.id!=0" [image]="callsheetScene.scene.primaryImage" [listAvatar]="true"></show-image>
                         </td>
                         <td>
-                            <div>{{callsheetScene.scene.intExt.name}}. {{callsheetScene.locationSet.name}}</div>
-                            <div>{{callsheetScene.scene.summary}}</div>
+                            <div>{{callsheetScene.scene.intExt.name}}. <a routerLink="/projects/{{project.id}}/scriptlocations/{{callsheetScene.scene.scriptLocation.id}}">{{callsheetScene.scene.scriptLocation.name}}</a></div>
+                            <div><a routerLink="/projects/{{project.id}}/scenes/{{callsheetScene.scene.id}}">{{callsheetScene.scene.summary}}</a></div>
                         </td>
                         <td>{{callsheetScene.scene.number}}</td>
                         <td>{{callsheetScene.scene.dayNight.name}}</td>
                         <td>{{callsheetScene.pageLength | pagelength}}</td>
                         <td>
-                            <span *ngFor="let character of callsheetScene.characters">{{character.number}} </span>
+                            <span *ngFor="let character of callsheetScene.characters"><a routerLink="/projects/{{project.id}}/characters/{{character.id}}">{{character.number}}</a> </span>
                         </td>
-                        <td>{{callsheetScene.locationSet.location.name}}</td>
+                        <td><a routerLink="/projects/{{project.id}}/locations/{{callsheetScene.locationSet.location.id}}">{{callsheetScene.locationSet.location.name}}</a></td>
                     </tr>
                 </tbody>
             </table>
@@ -90,7 +92,7 @@
                             <show-image *ngIf="callsheetCharacter.character.primaryImage.id!=0" [image]="callsheetCharacter.character.primaryImage" [listAvatar]="true"></show-image>
                         </td>
                         <td>
-                            {{callsheetCharacter.character.number}}. {{callsheetCharacter.character.name}}
+                            <a routerLink="/projects/{{project.id}}/characters/{{callsheetCharacter.character.id}}">{{callsheetCharacter.character.number}}. {{callsheetCharacter.character.name}}</a>
                         </td>
                         <td *ngFor="let characterCall of callsheetCharacter.calls">
                             {{characterCall.callTime | date:'shortTime'}}
