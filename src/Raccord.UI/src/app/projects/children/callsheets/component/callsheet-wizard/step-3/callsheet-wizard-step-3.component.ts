@@ -78,6 +78,7 @@ export class CallsheetWizardStep3Component implements OnInit {
             if(typeof(data)=='string'){
                 this._dialogService.error(data);
             }else{
+                character.callsheetSceneCharacterId = null;
             }
         }).catch()
         .then(()=>
@@ -92,6 +93,7 @@ export class CallsheetWizardStep3Component implements OnInit {
             if(typeof(data)=='string'){
                 this._dialogService.error(data);
             }else{
+                character.callsheetSceneCharacterId = data;
             }
         }).catch()
         .then(()=>

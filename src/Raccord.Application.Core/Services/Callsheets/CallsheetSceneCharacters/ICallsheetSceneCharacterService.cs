@@ -11,7 +11,7 @@ namespace Raccord.Application.Core.Services.Callsheets.CallsheetSceneCharacters
         IEnumerable<LinkedCallsheetSceneDto> GetCallsheetScenes(long ID);
 
         // Links a character to a callsheet scene
-        void AddLink(long callsheetSceneID, long characterSceneID);
+        long AddLink(long callsheetSceneID, long characterSceneID);
 
         // Removes link between character and scene
         void RemoveLink(long ID);

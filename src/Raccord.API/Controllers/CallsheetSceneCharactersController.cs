@@ -56,11 +56,12 @@ namespace Raccord.API.Controllers
 
             try
             {
-                _callsheetSceneCharacterService.AddLink(callsheetSceneId, characterSceneId);
+                var id = _callsheetSceneCharacterService.AddLink(callsheetSceneId, characterSceneId);
 
                 response = new JsonResponse
                 {
                     ok = true,
+                    data = id
                 };
             }
             catch (Exception)

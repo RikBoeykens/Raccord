@@ -100,7 +100,9 @@ namespace Raccord.Data.EntityFramework.Repositories.Callsheets.Scenes
                         .ThenInclude(cs=> cs.CharacterScene)
                         .ThenInclude(cs=> cs.Character)
                         .ThenInclude(c=> c.ImageCharacters)
-                        .ThenInclude(ic=> ic.Image);
+                        .ThenInclude(ic=> ic.Image)
+                        .Include(cs=> cs.LocationSet)
+                        .ThenInclude(ls=> ls.Location);
         }
 
         private IQueryable<CallsheetScene> GetIncluded()

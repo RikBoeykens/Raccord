@@ -42,19 +42,24 @@ namespace Raccord.Application.Services.Callsheets.CallsheetSceneCharacters
             return dtos;
         }
 
-        public void AddLink(long callsheetSceneID, long characterSceneID)
+        public long AddLink(long callsheetSceneID, long characterSceneID)
         {
             var callsheetSceneCharacter = _callsheetSceneCharacterRepository.FindBy(i=> i.CharacterSceneID == characterSceneID && i.CallsheetSceneID==callsheetSceneID);
 
-            if(!callsheetSceneCharacter.Any()){
-                _callsheetSceneCharacterRepository.Add(new CallsheetSceneCharacter
-                {
-                    CharacterSceneID = characterSceneID,
-                    CallsheetSceneID = callsheetSceneID
-                });
+            if(callsheetSceneCharacter.Any()){
+                return callsheetSceneCharacter.First().ID;
+            }
 
-                _callsheetSceneCharacterRepository.Commit();
-            }     
+            var newCharacter = new CallsheetSceneCharacter
+            {
+                CharacterSceneID = characterSceneID,
+                CallsheetSceneID = callsheetSceneID
+            };
+            _callsheetSceneCharacterRepository.Add(newCharacter);
+
+            _callsheetSceneCharacterRepository.Commit();
+
+            return newCharacter.ID;
         }
 
         public void RemoveLink(long ID)
