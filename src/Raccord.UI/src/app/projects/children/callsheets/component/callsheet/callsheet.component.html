@@ -1,0 +1,105 @@
+<div class="row">      
+    <div class="col s12">
+        <a routerLink="/" class="breadcrumb">Dashboard</a>
+        <a routerLink="/projects" class="breadcrumb">Projects</a>
+        <a routerLink="/projects/{{project.id}}" class="breadcrumb">{{project.title}}</a>
+        <a routerLink="/projects/{{project.id}}/callsheets" class="breadcrumb">Callsheets</a>
+        <span class="breadcrumb">{{callsheet.shootingDay.number}} - {{callsheet.shootingDay.date | date}}</span>
+    </div>
+</div>
+<h2>Callsheet {{callsheet.shootingDay.number}}</h2>
+<md-card>
+    <md-card-content>
+        <p><strong>Date:</strong> {{callsheet.shootingDay.date | date}}</p>
+        <p><strong>Start:</strong> {{callsheet.start | date:'shortTime'}}</p>
+        <p><strong>End:</strong> {{callsheet.end | date:'shortTime'}}</p>
+        <p><strong>Unit call:</strong> {{callsheet.crewCall | date:'shortTime'}}</p>
+    </md-card-content>
+</md-card>
+<md-card>
+    <md-card-title>Locations</md-card-title>
+    <md-card-content>
+        <div class="row">
+            <div class="col s12">
+                <div class="row"
+                    *ngFor="let location of getLocations(); let i = index">
+                    <p><strong>Location {{i + 1}}:</strong> 
+                        <a routerLink="/projects/{{project.id}}/locations/{{location.id}}">{{location.name}}</a>
+                    </p>
+                    <p>{{location.address.address1}}</p>
+                    <p>{{location.address.address2}}</p>
+                    <p>{{location.address.address3}}</p>
+                    <p>{{location.address.address4}}</p>
+                </div>
+            </div>
+        </div>
+    </md-card-content>
+</md-card>
+<md-card>
+<md-card-title>Scenes</md-card-title>
+    <md-card-content>
+        <div class="row">
+            <table class="col s12">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Set and Scene Description</th>
+                        <th>Sc's</th>
+                        <th>D/N</th>
+                        <th>PG's</th>
+                        <th>Cast</th>
+                        <th>Location</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let callsheetScene of callsheet.scenes">
+                        <td>
+                            <show-image *ngIf="callsheetScene.scene.primaryImage.id!=0" [image]="callsheetScene.scene.primaryImage" [listAvatar]="true"></show-image>
+                        </td>
+                        <td>
+                            <div>{{callsheetScene.scene.intExt.name}}. <a routerLink="/projects/{{project.id}}/scriptlocations/{{callsheetScene.scene.scriptLocation.id}}">{{callsheetScene.scene.scriptLocation.name}}</a></div>
+                            <div><a routerLink="/projects/{{project.id}}/scenes/{{callsheetScene.scene.id}}">{{callsheetScene.scene.summary}}</a></div>
+                        </td>
+                        <td>{{callsheetScene.scene.number}}</td>
+                        <td>{{callsheetScene.scene.dayNight.name}}</td>
+                        <td>{{callsheetScene.pageLength | pagelength}}</td>
+                        <td>
+                            <span *ngFor="let character of callsheetScene.characters"><a routerLink="/projects/{{project.id}}/characters/{{character.id}}">{{character.number}}</a> </span>
+                        </td>
+                        <td><a routerLink="/projects/{{project.id}}/locations/{{callsheetScene.locationSet.location.id}}">{{callsheetScene.locationSet.location.name}}</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </md-card-content>
+</md-card>
+<md-card>
+    <md-card-title>Cast</md-card-title>
+    <md-card-content>
+        <div class="row">
+            <table class="col s12">
+                <thead *ngIf="callsheet.characters.length">
+                    <tr>
+                        <th colspan="2"></th>
+                        <th *ngFor="let call of callsheet.characters[0].calls">
+                            {{call.callType.shortName}}
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let callsheetCharacter of callsheet.characters">
+                        <td>
+                            <show-image *ngIf="callsheetCharacter.character.primaryImage.id!=0" [image]="callsheetCharacter.character.primaryImage" [listAvatar]="true"></show-image>
+                        </td>
+                        <td>
+                            <a routerLink="/projects/{{project.id}}/characters/{{callsheetCharacter.character.id}}">{{callsheetCharacter.character.number}}. {{callsheetCharacter.character.name}}</a>
+                        </td>
+                        <td *ngFor="let characterCall of callsheetCharacter.calls">
+                            {{characterCall.callTime | date:'shortTime'}}
+                        </td>
+                    </tr>
+                <tbody>
+            </table>
+        </div>
+    </md-card-content>
+</md-card>

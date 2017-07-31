@@ -118,5 +118,32 @@ namespace Raccord.API.Controllers
 
             return new JsonResult(response);
         }
+
+        // POST api/scheduledays/5/publish
+        [HttpPost("{projectID}/publish")]
+        public JsonResult Publish(long projectID)
+        {
+            var response = new JsonResponse();
+
+            try
+            {
+                _scheduleDayService.PublishDays(projectID);
+
+                response = new JsonResponse
+                {
+                    ok = true,
+                };
+            }
+            catch (Exception)
+            {
+                response = new JsonResponse
+                {
+                    ok = false,
+                    message = "Something went wrong while attempting to publish schedule days.",
+                };
+            }
+
+            return new JsonResult(response);
+        }
     }
 }

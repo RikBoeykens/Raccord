@@ -83,6 +83,150 @@ namespace Raccord.Data.EntityFramework.Migrations
                     b.ToTable("BreakdownTypeDefinitions");
                 });
 
+            modelBuilder.Entity("Raccord.Domain.Model.Callsheets.Callsheet", b =>
+                {
+                    b.Property<long>("ID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("CrewCall");
+
+                    b.Property<DateTime>("End");
+
+                    b.Property<long>("ProjectID");
+
+                    b.Property<long>("ShootingDayID");
+
+                    b.Property<DateTime>("Start");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("ProjectID");
+
+                    b.ToTable("Callsheet");
+                });
+
+            modelBuilder.Entity("Raccord.Domain.Model.Callsheets.CallTypes.CallType", b =>
+                {
+                    b.Property<long>("ID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Description");
+
+                    b.Property<string>("Name");
+
+                    b.Property<long>("ProjectID");
+
+                    b.Property<string>("ShortName");
+
+                    b.Property<int>("SortingOrder");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("ProjectID");
+
+                    b.ToTable("CallType");
+                });
+
+            modelBuilder.Entity("Raccord.Domain.Model.Callsheets.CallTypes.CallTypeDefinition", b =>
+                {
+                    b.Property<long>("ID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Description");
+
+                    b.Property<string>("Name");
+
+                    b.Property<string>("ShortName");
+
+                    b.Property<int>("SortingOrder");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("CallTypeDefinitions");
+                });
+
+            modelBuilder.Entity("Raccord.Domain.Model.Callsheets.Characters.CallsheetCharacter", b =>
+                {
+                    b.Property<long>("ID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<long>("CallsheetID");
+
+                    b.Property<long>("CharacterID");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("CallsheetID");
+
+                    b.HasIndex("CharacterID");
+
+                    b.ToTable("CallsheetCharacter");
+                });
+
+            modelBuilder.Entity("Raccord.Domain.Model.Callsheets.Characters.CharacterCall", b =>
+                {
+                    b.Property<long>("ID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("CallTime");
+
+                    b.Property<long>("CallTypeID");
+
+                    b.Property<long>("CallsheetCharacterID");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("CallTypeID");
+
+                    b.HasIndex("CallsheetCharacterID");
+
+                    b.ToTable("CharacterCall");
+                });
+
+            modelBuilder.Entity("Raccord.Domain.Model.Callsheets.Scenes.CallsheetScene", b =>
+                {
+                    b.Property<long>("ID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<long>("CallsheetID");
+
+                    b.Property<long?>("LocationSetID");
+
+                    b.Property<int>("PageLength");
+
+                    b.Property<long>("SceneID");
+
+                    b.Property<int>("SortingOrder");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("CallsheetID");
+
+                    b.HasIndex("LocationSetID");
+
+                    b.HasIndex("SceneID");
+
+                    b.ToTable("CallsheetScene");
+                });
+
+            modelBuilder.Entity("Raccord.Domain.Model.Callsheets.Scenes.CallsheetSceneCharacter", b =>
+                {
+                    b.Property<long>("ID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<long>("CallsheetSceneID");
+
+                    b.Property<long>("CharacterSceneID");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("CallsheetSceneID");
+
+                    b.HasIndex("CharacterSceneID");
+
+                    b.ToTable("CallsheetSceneCharacter");
+                });
+
             modelBuilder.Entity("Raccord.Domain.Model.Characters.Character", b =>
                 {
                     b.Property<long>("ID")
@@ -392,6 +536,8 @@ namespace Raccord.Data.EntityFramework.Migrations
 
                     b.Property<long>("ProjectID");
 
+                    b.Property<long?>("ShootingDayID");
+
                     b.Property<DateTime?>("Start");
 
                     b.HasKey("ID");
@@ -463,6 +609,34 @@ namespace Raccord.Data.EntityFramework.Migrations
                     b.ToTable("ScriptLocations");
                 });
 
+            modelBuilder.Entity("Raccord.Domain.Model.ShootingDays.ShootingDay", b =>
+                {
+                    b.Property<long>("ID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<long?>("CallsheetID");
+
+                    b.Property<DateTime>("Date");
+
+                    b.Property<string>("Number");
+
+                    b.Property<long>("ProjectID");
+
+                    b.Property<long?>("ScheduleDayID");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("CallsheetID")
+                        .IsUnique();
+
+                    b.HasIndex("ProjectID");
+
+                    b.HasIndex("ScheduleDayID")
+                        .IsUnique();
+
+                    b.ToTable("ShootingDay");
+                });
+
             modelBuilder.Entity("Raccord.Domain.Model.Breakdowns.BreakdownItems.BreakdownItem", b =>
                 {
                     b.HasOne("Raccord.Domain.Model.Breakdowns.BreakdownTypes.BreakdownType", "BreakdownType")
@@ -489,6 +663,78 @@ namespace Raccord.Data.EntityFramework.Migrations
                     b.HasOne("Raccord.Domain.Model.Projects.Project", "Project")
                         .WithMany("BreakdownTypes")
                         .HasForeignKey("ProjectID")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Raccord.Domain.Model.Callsheets.Callsheet", b =>
+                {
+                    b.HasOne("Raccord.Domain.Model.Projects.Project", "Project")
+                        .WithMany()
+                        .HasForeignKey("ProjectID")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Raccord.Domain.Model.Callsheets.CallTypes.CallType", b =>
+                {
+                    b.HasOne("Raccord.Domain.Model.Projects.Project", "Project")
+                        .WithMany("CallTypes")
+                        .HasForeignKey("ProjectID")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Raccord.Domain.Model.Callsheets.Characters.CallsheetCharacter", b =>
+                {
+                    b.HasOne("Raccord.Domain.Model.Callsheets.Callsheet", "Callsheet")
+                        .WithMany("CallsheetCharacters")
+                        .HasForeignKey("CallsheetID")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Raccord.Domain.Model.Characters.Character", "Character")
+                        .WithMany()
+                        .HasForeignKey("CharacterID")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Raccord.Domain.Model.Callsheets.Characters.CharacterCall", b =>
+                {
+                    b.HasOne("Raccord.Domain.Model.Callsheets.CallTypes.CallType", "CallType")
+                        .WithMany("CharacterCalls")
+                        .HasForeignKey("CallTypeID")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Raccord.Domain.Model.Callsheets.Characters.CallsheetCharacter", "CallsheetCharacter")
+                        .WithMany("CharacterCalls")
+                        .HasForeignKey("CallsheetCharacterID")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Raccord.Domain.Model.Callsheets.Scenes.CallsheetScene", b =>
+                {
+                    b.HasOne("Raccord.Domain.Model.Callsheets.Callsheet", "Callsheet")
+                        .WithMany("CallsheetScenes")
+                        .HasForeignKey("CallsheetID")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Raccord.Domain.Model.Locations.LocationSets.LocationSet", "LocationSet")
+                        .WithMany("CallsheetScenes")
+                        .HasForeignKey("LocationSetID");
+
+                    b.HasOne("Raccord.Domain.Model.Scenes.Scene", "Scene")
+                        .WithMany("CallsheetScenes")
+                        .HasForeignKey("SceneID")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Raccord.Domain.Model.Callsheets.Scenes.CallsheetSceneCharacter", b =>
+                {
+                    b.HasOne("Raccord.Domain.Model.Callsheets.Scenes.CallsheetScene", "CallsheetScene")
+                        .WithMany("Characters")
+                        .HasForeignKey("CallsheetSceneID")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Raccord.Domain.Model.Characters.CharacterScene", "CharacterScene")
+                        .WithMany("CallsheetScenes")
+                        .HasForeignKey("CharacterSceneID")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
@@ -682,6 +928,22 @@ namespace Raccord.Data.EntityFramework.Migrations
                         .WithMany()
                         .HasForeignKey("ProjectID")
                         .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Raccord.Domain.Model.ShootingDays.ShootingDay", b =>
+                {
+                    b.HasOne("Raccord.Domain.Model.Callsheets.Callsheet", "Callsheet")
+                        .WithOne("ShootingDay")
+                        .HasForeignKey("Raccord.Domain.Model.ShootingDays.ShootingDay", "CallsheetID");
+
+                    b.HasOne("Raccord.Domain.Model.Projects.Project", "Project")
+                        .WithMany()
+                        .HasForeignKey("ProjectID")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Raccord.Domain.Model.Scheduling.ScheduleDay", "ScheduleDay")
+                        .WithOne("ShootingDay")
+                        .HasForeignKey("Raccord.Domain.Model.ShootingDays.ShootingDay", "ScheduleDayID");
                 });
         }
     }

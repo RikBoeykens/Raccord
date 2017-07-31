@@ -7,7 +7,7 @@ export class LinkedScriptLocation extends ScriptLocation{
                         id: number, 
                         name: string, 
                         description: string,
-                        projectId: number,
+                        projectID: number,
                         sceneCount: number,
                         linkID: number
                     }){

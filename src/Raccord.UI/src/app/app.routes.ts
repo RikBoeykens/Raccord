@@ -29,7 +29,14 @@ import {
   ScheduleSceneLandingComponent,
   LocationsListComponent,
   LocationLandingComponent,
-  LocationSetLandingComponent
+  LocationSetLandingComponent,
+  CallsheetsListComponent,
+  NewCallsheetComponent,
+  CallsheetComponent,
+  CallsheetWizardStep1Component,
+  CallsheetWizardStep2Component,
+  CallsheetWizardStep3Component,
+  CallsheetWizardStep4Component,
 } from './projects';
 import { ScenePropertiesLandingComponent } from './projects';
 
@@ -61,7 +68,14 @@ import {
   LocationsResolve,
   LocationResolve,
   LocationSetResolve,
-  SceneLocationSetsResolve
+  SceneLocationSetsResolve,
+  AvailableShootingDaysResolve,
+  CallsheetsResolve,
+  CallsheetResolve,
+  CallsheetSummaryResolve,
+  CallsheetSceneLocationsResolve,
+  CallsheetSceneCharactersResolve,
+  CallsheetCharactersCharactersResolve
 } from './projects';
 
 import { CanDeactivateGuard } from './shared/service/can-deactivate-guard.service';
@@ -338,6 +352,76 @@ export const ROUTES: Routes = [
                   project: ProjectSummaryResolve,
                   locationSet: LocationSetResolve
                 }
+              }
+            ]
+          },
+          {
+            path: "callsheets",
+            children:[
+              {
+                path: "",
+                component: CallsheetsListComponent,
+                resolve:{
+                  project: ProjectSummaryResolve,
+                  callsheets:  CallsheetsResolve
+                }
+              },
+              {
+                path: "new",
+                component: NewCallsheetComponent,
+                resolve:{
+                  project: ProjectSummaryResolve,
+                  availableDays: AvailableShootingDaysResolve
+                }
+              },
+              {
+                path: ":callsheetId",
+                component: CallsheetComponent,
+                resolve:{
+                  project: ProjectSummaryResolve,
+                  callsheet: CallsheetResolve
+                }
+              },
+              {
+                path: ":callsheetId/wizard",
+                children:[
+                  {
+                    path: "1",                
+                    component: CallsheetWizardStep1Component,
+                    resolve:{
+                      project: ProjectSummaryResolve,
+                      callsheet: CallsheetResolve
+                    }
+                  },
+                  {
+                    path: "2",                
+                    component: CallsheetWizardStep2Component,
+                    resolve:{
+                      project: ProjectSummaryResolve,
+                      callsheet: CallsheetSummaryResolve,
+                      scenes: CallsheetSceneLocationsResolve
+                    }
+                  },
+                  {
+                    path: "3",                
+                    component: CallsheetWizardStep3Component,
+                    resolve:{
+                      project: ProjectSummaryResolve,
+                      callsheet: CallsheetSummaryResolve,
+                      scenes: CallsheetSceneCharactersResolve
+                    }
+                  },
+                  {
+                    path: "4",                
+                    component: CallsheetWizardStep4Component,
+                    resolve:{
+                      project: ProjectSummaryResolve,
+                      callsheet: CallsheetSummaryResolve,
+                      characters: CallsheetCharactersCharactersResolve
+                    }
+                  }
+                ]
+
               }
             ]
           }

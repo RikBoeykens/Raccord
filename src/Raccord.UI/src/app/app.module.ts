@@ -91,7 +91,14 @@ import {
   LocationScheduleComponent,
   EditLocationSetComponent,
   LocationSetLandingComponent,
-  LocationSetScheduleComponent
+  LocationSetScheduleComponent,
+  CallsheetsListComponent,
+  NewCallsheetComponent,
+  CallsheetComponent,
+  CallsheetWizardStep1Component,
+  CallsheetWizardStep2Component,
+  CallsheetWizardStep3Component,
+  CallsheetWizardStep4Component
 } from './projects';
 import { ScenePropertiesLandingComponent } from './projects';
 import { SelectEntityComponent } from './shared';
@@ -160,6 +167,13 @@ const COMPONENTS =[
   EditLocationSetComponent,
   LocationSetLandingComponent,
   LocationSetScheduleComponent,
+  CallsheetsListComponent,
+  NewCallsheetComponent,
+  CallsheetComponent,
+  CallsheetWizardStep1Component,
+  CallsheetWizardStep2Component,
+  CallsheetWizardStep3Component,
+  CallsheetWizardStep4Component,
   ScenePropertiesLandingComponent,
   SelectEntityComponent
 ];
@@ -221,7 +235,20 @@ import {
   LocationsResolve,
   LocationSetHttpService,
   LocationSetResolve,
-  SceneLocationSetsResolve
+  SceneLocationSetsResolve,
+  ShootingDayHttpService,
+  AvailableShootingDaysResolve,
+  CallsheetHttpService,
+  CallsheetsResolve,
+  CallsheetResolve,
+  CallsheetSummaryResolve,
+  CallsheetSceneHttpService,
+  CallsheetSceneLocationsResolve,
+  CallsheetSceneCharactersResolve,
+  CallsheetSceneCharacterHttpService,
+  CallsheetCharacterHttpService,
+  CallsheetCharactersCharactersResolve,
+  CharacterCallHttpService
 } from './projects';
 
 const APP_PROVIDERS = [
@@ -278,7 +305,20 @@ const APP_PROVIDERS = [
   LocationResolve,
   LocationSetHttpService,
   LocationSetResolve,
-  SceneLocationSetsResolve
+  SceneLocationSetsResolve,
+  ShootingDayHttpService,
+  AvailableShootingDaysResolve,
+  CallsheetHttpService,
+  CallsheetsResolve,
+  CallsheetResolve,
+  CallsheetSummaryResolve,
+  CallsheetSceneHttpService,
+  CallsheetSceneLocationsResolve,
+  CallsheetSceneCharactersResolve,
+  CallsheetSceneCharacterHttpService,
+  CallsheetCharacterHttpService,
+  CallsheetCharactersCharactersResolve,
+  CharacterCallHttpService
 ];
 
 // Directives

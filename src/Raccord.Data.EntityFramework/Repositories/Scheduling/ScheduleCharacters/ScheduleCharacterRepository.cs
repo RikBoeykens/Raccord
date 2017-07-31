@@ -42,6 +42,7 @@ namespace Raccord.Data.EntityFramework.Repositories.Scheduling.ScheduleCharacter
 
             return query.Include(sc=> sc.ScheduleScene)
                         .ThenInclude(ss=> ss.ScheduleDay)
+                        .ThenInclude(sd=> sd.ShootingDay)
                         .Include(sc=> sc.ScheduleScene)
                         .ThenInclude(cs=> cs.Scene)
                         .ThenInclude(s=> s.IntExt)

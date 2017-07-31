@@ -4,9 +4,12 @@ import { ScheduleDay } from '../../schedule-days/model/schedule-day.model';
 import { FullScheduleDay } from '../../schedule-days/model/full-schedule-day.model';
 import { ScheduleScene } from '../../schedule-scenes/model/schedule-scene.model';
 import { ScheduleSceneScene } from '../../schedule-scenes/model/schedule-scene-scene.model';
+import { Callsheet } from "../../../callsheets";
+import { ShootingDay } from "../../../shooting-days";
 import { ScheduleDayHttpService } from '../../schedule-days/service/schedule-day-http.service';
 import { ScheduleDayNoteHttpService } from '../../schedule-day-notes/service/schedule-day-note-http.service';
 import { ScheduleSceneHttpService } from '../../schedule-scenes/service/schedule-scene-http.service';
+import { CallsheetHttpService } from '../../../callsheets/service/callsheet-http.service';
 import { LoadingService } from '../../../../../loading/service/loading.service';
 import { DialogService } from '../../../../../shared/service/dialog.service';
 import { ProjectSummary } from '../../../../model/project-summary.model';
@@ -28,6 +31,7 @@ export class ScheduleLandingComponent implements OnInit {
         private _scheduleDayHttpService: ScheduleDayHttpService,
         private _scheduleDayNoteHttpService: ScheduleDayNoteHttpService,
         private _scheduleSceneHttpService: ScheduleSceneHttpService,
+        private _callsheetHttpService: CallsheetHttpService,
         private _loadingService: LoadingService,
         private _dialogService: DialogService,
         private _route: ActivatedRoute,
@@ -104,11 +108,44 @@ export class ScheduleLandingComponent implements OnInit {
         );
     }
 
+    addCallsheet(scheduleDay: FullScheduleDay){
+        let callsheet = new Callsheet();
+        callsheet.shootingDay = new ShootingDay();
+        callsheet.shootingDay.id = scheduleDay.shootingDay.id;
+        callsheet.projectId = this.project.id;
+
+        let loadingId = this._loadingService.startLoading();
+
+        this._callsheetHttpService.post(callsheet).then(data=>{
+            if(typeof(data)== 'string'){
+                this._dialogService.error(data);
+            }else{
+                this._router.navigate(["projects", this.project.id, "callsheets", data, "wizard", 1]);
+            }
+        }).catch()
+        .then(()=> this._loadingService.endLoading(loadingId));
+    }
+
     removeScheduleScene(event, scheduleScene: ScheduleScene){
         event.stopPropagation();
         let loadingId = this._loadingService.startLoading();
 
         this._scheduleSceneHttpService.delete(scheduleScene.id).then(data=>{
+            if(typeof(data)=='string'){
+                this._dialogService.error(data);
+            }else{
+                this.getScheduleDays();
+            }
+        }).catch()
+        .then(()=>
+            this._loadingService.endLoading(loadingId)
+        );
+    }
+
+    publishDays(){
+        let loadingId = this._loadingService.startLoading();
+
+        this._scheduleDayHttpService.publish(this.project.id).then(data=>{
             if(typeof(data)=='string'){
                 this._dialogService.error(data);
             }else{
