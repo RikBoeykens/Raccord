@@ -11,7 +11,7 @@ using Raccord.API.ViewModels.Images;
 
 namespace Raccord.API.Controllers
 {
-    public class ImageCharactersController : RaccordApiAuthController
+    public class ImageCharactersController : AbstractApiAuthController
     {
         private readonly IImageCharacterService _imageCharacterService;
 

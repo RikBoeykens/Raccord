@@ -11,7 +11,7 @@ using Raccord.API.ViewModels.Breakdowns.BreakdownItems;
 
 namespace Raccord.API.Controllers
 {
-    public class BreakdownItemScenesController : RaccordApiAuthController
+    public class BreakdownItemScenesController : AbstractApiAuthController
     {
         private readonly IBreakdownItemSceneService _breakdownItemSceneService;
 

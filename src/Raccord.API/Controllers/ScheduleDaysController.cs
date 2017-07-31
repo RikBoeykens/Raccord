@@ -8,7 +8,7 @@ using Raccord.Application.Core.Services.Scheduling.ScheduleDays;
 
 namespace Raccord.API.Controllers
 {
-    public class ScheduleDaysController : RaccordApiAuthController
+    public class ScheduleDaysController : AbstractApiAuthController
     {
         private readonly IScheduleDayService _scheduleDayService;
 

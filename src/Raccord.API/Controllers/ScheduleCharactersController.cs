@@ -13,7 +13,7 @@ using Raccord.API.ViewModels.Scheduling.ScheduleScenes;
 
 namespace Raccord.API.Controllers
 {
-    public class ScheduleCharactersController : RaccordApiAuthController
+    public class ScheduleCharactersController : AbstractApiAuthController
     {
         private readonly IScheduleCharacterService _scheduleCharacterService;
 

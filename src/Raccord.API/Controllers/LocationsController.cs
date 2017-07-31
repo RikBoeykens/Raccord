@@ -8,7 +8,7 @@ using Raccord.Application.Core.Services.Locations.Locations;
 
 namespace Raccord.API.Controllers
 {
-    public class LocationsController : RaccordApiAuthController
+    public class LocationsController : AbstractApiAuthController
     {
         private readonly ILocationService _locationService;
 

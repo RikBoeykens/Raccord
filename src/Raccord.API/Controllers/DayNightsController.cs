@@ -8,7 +8,7 @@ using Raccord.Application.Core.Services.SceneProperties;
 
 namespace Raccord.API.Controllers
 {
-    public class DayNightsController : RaccordApiAuthController
+    public class DayNightsController : AbstractApiAuthController
     {
         private readonly IDayNightService _dayNightService;
 

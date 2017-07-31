@@ -11,7 +11,7 @@ using Raccord.API.ViewModels.Images;
 
 namespace Raccord.API.Controllers
 {
-    public class ImageScriptLocationsController : RaccordApiAuthController
+    public class ImageScriptLocationsController : AbstractApiAuthController
     {
         private readonly IImageScriptLocationService _imageScriptLocationService;
 

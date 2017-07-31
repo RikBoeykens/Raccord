@@ -8,7 +8,7 @@ using Raccord.Application.Core.Services.Scheduling.ScheduleDayNotes;
 
 namespace Raccord.API.Controllers
 {
-    public class ScheduleDayNotesController : RaccordApiAuthController
+    public class ScheduleDayNotesController : AbstractApiAuthController
     {
         private readonly IScheduleDayNoteService _scheduleDayNoteService;
 

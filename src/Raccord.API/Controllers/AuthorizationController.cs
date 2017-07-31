@@ -19,7 +19,7 @@ using Raccord.Domain.Model.Users;
 
 namespace Raccord.API.Controllers
 {
-    public class AuthorizationController : RaccordApiController
+    public class AuthorizationController : AbstractApiController
     {
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly UserManager<ApplicationUser> _userManager;

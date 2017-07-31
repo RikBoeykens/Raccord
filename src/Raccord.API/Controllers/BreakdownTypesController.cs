@@ -8,7 +8,7 @@ using Raccord.Application.Core.Services.Breakdowns.BreakdownTypes;
 
 namespace Raccord.API.Controllers
 {
-    public class BreakdownTypesController : RaccordApiAuthController
+    public class BreakdownTypesController : AbstractApiAuthController
     {
         private readonly IBreakdownTypeService _breakdownTypeService;
 

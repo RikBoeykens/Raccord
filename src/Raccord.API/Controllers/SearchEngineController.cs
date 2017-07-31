@@ -8,7 +8,7 @@ using Raccord.API.ViewModels.SearchEngine;
 
 namespace Raccord.API.Controllers
 {
-    public class SearchEngineController : RaccordApiAuthController
+    public class SearchEngineController : AbstractApiAuthController
     {
         private ISearchEngineServiceWrapper _searchEngineService;
 

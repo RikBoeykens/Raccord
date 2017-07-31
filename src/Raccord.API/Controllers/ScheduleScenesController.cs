@@ -8,7 +8,7 @@ using Raccord.Application.Core.Services.Scheduling.ScheduleScenes;
 
 namespace Raccord.API.Controllers
 {
-    public class ScheduleScenesController : RaccordApiAuthController
+    public class ScheduleScenesController : AbstractApiAuthController
     {
         private readonly IScheduleSceneService _scheduleSceneService;
 

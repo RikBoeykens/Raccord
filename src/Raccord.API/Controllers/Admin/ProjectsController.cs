@@ -7,9 +7,9 @@ using Raccord.API.ViewModels.Core;
 using Raccord.Application.Core.Services.Projects;
 using Microsoft.AspNetCore.Authorization;
 
-namespace Raccord.API.Controllers
+namespace Raccord.API.Controllers.Admin
 {
-    public class ProjectsController : AbstractApiAuthController
+    public class ProjectsController : AbstractAdminController
     {
         private readonly IProjectService _projectService;
 

@@ -3,5 +3,5 @@ using Microsoft.AspNetCore.Mvc;
 namespace Raccord.API.Controllers
 {
     [Route("api/[controller]")]
-    public abstract class RaccordApiController : Controller {}
+    public abstract class AbstractApiController : Controller {}
 }

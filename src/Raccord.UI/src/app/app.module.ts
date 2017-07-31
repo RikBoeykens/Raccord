@@ -231,6 +231,10 @@ import {
   AuthGuard
 } from "./security";
 
+import {
+  AccountHttpService
+} from "./account";
+
 const APP_PROVIDERS = [
   LoadingService,
   CanDeactivateGuard,
@@ -287,7 +291,8 @@ const APP_PROVIDERS = [
   LocationSetResolve,
   SceneLocationSetsResolve,
   AuthService,
-  AuthGuard
+  AuthGuard,
+  AccountHttpService
 ];
 
 // Directives

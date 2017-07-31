@@ -11,7 +11,7 @@ using Raccord.API.ViewModels.Characters;
 
 namespace Raccord.API.Controllers
 {
-    public class CharacterScenesController : RaccordApiAuthController
+    public class CharacterScenesController : AbstractApiAuthController
     {
         private readonly ICharacterSceneService _characterSceneService;
 

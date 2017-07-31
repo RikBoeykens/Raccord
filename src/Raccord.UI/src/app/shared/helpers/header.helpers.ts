@@ -1,4 +1,4 @@
-import { TokenHelpers } from "../../security";
+import { TokenHelpers } from "../../security/helpers/token.helpers";
 import { Headers } from '@angular/http';
 
 export class HeaderHelpers {
@@ -31,7 +31,7 @@ export class HeaderHelpers {
     // for requesting unsecured data using form post
     public static ContentHeaders():Headers {
         let header = new Headers();
-        header.append('Content-Type', 'application/json');
+        header.append('Content-Type', 'application/x-www-form-urlencoded');
         header.append('Accept', 'application/json');
         return header;
     }

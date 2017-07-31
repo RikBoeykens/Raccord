@@ -8,7 +8,7 @@ using Raccord.Application.Core.Services.SceneProperties;
 
 namespace Raccord.API.Controllers
 {
-    public class IntExtsController : RaccordApiAuthController
+    public class IntExtsController : AbstractApiAuthController
     {
         private readonly IIntExtService _intExtService;
 

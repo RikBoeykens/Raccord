@@ -7,6 +7,7 @@ import { OpenIdDictToken } from '../';
 import { Login } from '../';
 import { TokenHelpers } from "../";
 import { HeaderHelpers } from "../../shared/helpers/header.helpers";
+import { AccountHelpers } from "../../account/helpers/account.helper";
  
 @Injectable()
 export class AuthService {
@@ -39,6 +40,7 @@ export class AuthService {
     // called when logging out user; clears tokens from browser
     logout() {
         TokenHelpers.removeTokens();
+        AccountHelpers.removeUser();
     }
  
     // simple check of logged in status: if there is a token, we're (probably) logged in.
