@@ -39,12 +39,12 @@ namespace Raccord.Data.EntityFramework.Seeding
 
         private void SystemSeeding()
         {
-            SeedBreakdownTypes();
+            SeedBreakdownTypeDefinitions();
             SeedCallTypeDefinitions();
             SeedRolesAndAdminUser();
         }
 
-        private void SeedBreakdownTypes()
+        private void SeedBreakdownTypeDefinitions()
         {
             if(!_context.BreakdownTypeDefinitions.Any())
             {
@@ -108,6 +108,8 @@ namespace Raccord.Data.EntityFramework.Seeding
             SeedDayNights();
             SeedScriptLocations();
             SeedScenes();
+            SeedBreakdownTypes();
+            SeedCallTypes();
         }
 
         private void SeedProjects()
@@ -213,11 +215,11 @@ namespace Raccord.Data.EntityFramework.Seeding
             }
         }
 
-        public static void SeedBreakdownTypes(this RaccordDBContext context)
+        private void SeedBreakdownTypes()
         {
-            var definitions = context.BreakdownTypeDefinitions.ToArray();
+            var definitions = _context.BreakdownTypeDefinitions.ToArray();
 
-            foreach(var project in context.Projects.Include(p=> p.BreakdownTypes))
+            foreach(var project in _context.Projects.Include(p=> p.BreakdownTypes))
             {
                 if(!project.BreakdownTypes.Any())
                 {
@@ -232,14 +234,14 @@ namespace Raccord.Data.EntityFramework.Seeding
                 }
             }
 
-            context.SaveChanges();
+            _context.SaveChanges();
         }
 
-        public static void SeedCallTypes(this RaccordDBContext context)
+        private void SeedCallTypes()
         {
-            var definitions = context.CallTypeDefinitions.ToArray();
+            var definitions = _context.CallTypeDefinitions.ToArray();
 
-            foreach(var project in context.Projects.Include(p=> p.CallTypes))
+            foreach(var project in _context.Projects.Include(p=> p.CallTypes))
             {
                 if(!project.CallTypes.Any())
                 {
@@ -256,7 +258,7 @@ namespace Raccord.Data.EntityFramework.Seeding
                 }
             }
 
-            context.SaveChanges();
+            _context.SaveChanges();
         }
     }
 }

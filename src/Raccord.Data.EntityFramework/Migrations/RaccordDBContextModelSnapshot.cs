@@ -800,6 +800,8 @@ namespace Raccord.Data.EntityFramework.Migrations
                         .WithMany("Roles")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
+                });
+                
             modelBuilder.Entity("Raccord.Domain.Model.ShootingDays.ShootingDay", b =>
                 {
                     b.Property<long>("ID")
