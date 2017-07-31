@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using Raccord.Application.Core.Services.Scheduling.ScheduleDays;
 using Raccord.Application.Core.Services.Scenes;
 using Raccord.Application.Services.Scheduling.ScheduleDays;
+using Raccord.Domain.Model.Callsheets.Scenes;
 
 namespace Raccord.Application.Services.Characters
 {
@@ -121,6 +122,22 @@ namespace Raccord.Application.Services.Characters
                 ProjectID = scheduleCharacter.CharacterScene.Character.ProjectID,
                 PrimaryImage = scheduleCharacter.CharacterScene.Character.ImageCharacters.FirstOrDefault(i=> i.IsPrimaryImage)?.Image.Translate(),
                 LinkID = scheduleCharacter.ID,
+            };
+
+            return dto;
+        }
+
+        public static LinkedCharacterDto TranslateCharacter(this CallsheetSceneCharacter callsheetSceneCharacter)
+        {
+            var dto = new LinkedCharacterDto
+            {
+                ID = callsheetSceneCharacter.CharacterScene.Character.ID,
+                Number = callsheetSceneCharacter.CharacterScene.Character.Number,
+                Name = callsheetSceneCharacter.CharacterScene.Character.Name,
+                Description = callsheetSceneCharacter.CharacterScene.Character.Description,
+                ProjectID = callsheetSceneCharacter.CharacterScene.Character.ProjectID,
+                PrimaryImage = callsheetSceneCharacter.CharacterScene.Character.ImageCharacters.FirstOrDefault(i=> i.IsPrimaryImage)?.Image.Translate(),
+                LinkID = callsheetSceneCharacter.ID,
             };
 
             return dto;

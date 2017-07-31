@@ -1,0 +1,80 @@
+import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
+import { CallsheetSceneHttpService } from "../../../children/callsheet-scenes/service/callsheet-scene-http.service";
+import { LoadingService } from '../../../../../../loading/service/loading.service';
+import { DialogService } from '../../../../../../shared/service/dialog.service';
+import { ProjectSummary } from '../../../../../model/project-summary.model';
+import { CallsheetSummary } from "../../../";
+import { CallsheetScene } from "../../../";
+import { CallsheetSceneLocation } from "../../../";
+import { LocationSetSummary } from "../../../../locations/location-sets/model/location-set-summary.model";
+import { Location } from "../../../../locations/locations/model/location.model";
+
+@Component({
+    templateUrl: 'callsheet-wizard-step-2.component.html',
+})
+export class CallsheetWizardStep2Component implements OnInit {
+
+    project: ProjectSummary;
+    callsheet: CallsheetSummary;
+    scenes: CallsheetSceneLocation[] = [];
+
+    constructor(
+        private _route: ActivatedRoute,
+        private _router: Router,
+        private _callsheetSceneHttpService: CallsheetSceneHttpService,
+        private _loadingService: LoadingService,
+        private _dialogService: DialogService
+    ) {
+    }
+
+    ngOnInit() {
+        this._route.data.subscribe((data: { project: ProjectSummary, callsheet: CallsheetSummary, scenes: CallsheetSceneLocation[] }) => {
+            this.project = data.project;
+            this.callsheet = data.callsheet;
+            this.scenes = data.scenes;
+        });
+    }
+
+    getScenes(){
+        let loadingId = this._loadingService.startLoading();
+
+        this._callsheetSceneHttpService.getLocations(this.callsheet.id).then(data => {
+            this.scenes = data;
+            this._loadingService.endLoading(loadingId);
+        });
+    }
+
+    getLocations(){
+        let locations:  Location[] = [];
+        this.scenes.forEach((scene: CallsheetSceneLocation)=> {
+            let currentSceneLocation = scene.locationSet.id!==0 ? scene.locationSet.location : null;
+            if(currentSceneLocation&&(locations.length===0 || locations[locations.length - 1].id !== currentSceneLocation.id)){
+                locations.push(currentSceneLocation);
+            }
+        });
+        return locations;
+    }
+
+    updateLocationSet(callsheetScene: CallsheetSceneLocation){
+
+        if(callsheetScene.locationSet.id!==0){
+            let loadingId = this._loadingService.startLoading();
+            let sceneToUpdate = new CallsheetScene();
+            sceneToUpdate.id = callsheetScene.id;
+            sceneToUpdate.pageLength = callsheetScene.pageLength;
+            sceneToUpdate.locationSetId = callsheetScene.locationSet.id;
+
+            this._callsheetSceneHttpService.post(sceneToUpdate).then(data=>{
+                if(typeof(data)=='string'){
+                    this._dialogService.error(data);
+                }else{
+                    this.getScenes();
+                }
+            }).catch()
+            .then(()=>
+                this._loadingService.endLoading(loadingId)
+            );
+        }
+    }
+}

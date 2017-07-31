@@ -7,6 +7,7 @@ using Raccord.Domain.Model.Breakdowns.BreakdownTypes;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Raccord.Domain.Model.Users;
+using Raccord.Domain.Model.Callsheets.CallTypes;
 
 namespace Raccord.Data.EntityFramework
 {
@@ -22,6 +23,7 @@ namespace Raccord.Data.EntityFramework
         public DbSet<IntExt> IntExts { get; set; }
         public DbSet<DayNight> DayNights { get; set; }
         public DbSet<BreakdownTypeDefinition> BreakdownTypeDefinitions { get; set; }
+        public DbSet<CallTypeDefinition> CallTypeDefinitions { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

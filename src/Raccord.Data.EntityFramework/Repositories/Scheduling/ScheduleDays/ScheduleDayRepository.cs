@@ -19,6 +19,13 @@ namespace Raccord.Data.EntityFramework.Repositories.Scheduling.ScheduleDays
             return query.Where(sd=> sd.ProjectID == projectID);
         }
 
+        public IEnumerable<ScheduleDay> GetAllWithScenesForProject(long projectID)
+        {
+            var query = GetIncludedSummary();
+
+            return query.Where(sd=> sd.ProjectID == projectID && sd.ScheduleScenes.Any());
+        }
+
         public ScheduleDay GetFull(long ID)
         {
             var query = GetIncludedFull();
@@ -62,14 +69,16 @@ namespace Raccord.Data.EntityFramework.Repositories.Scheduling.ScheduleDays
                         .ThenInclude(ls=> ls.Location)
                         .Include(sd=> sd.ScheduleScenes)
                         .ThenInclude(ss=> ss.LocationSet)
-                        .ThenInclude(ls=> ls.ScriptLocation);
+                        .ThenInclude(ls=> ls.ScriptLocation)
+                        .Include(sd=> sd.ShootingDay);
         }
 
         private IQueryable<ScheduleDay> GetIncludedSummary()
         {
             IQueryable<ScheduleDay> query = _context.Set<ScheduleDay>();
 
-            return query.Include(sd=> sd.ScheduleScenes);
+            return query.Include(sd=> sd.ScheduleScenes)
+                        .Include(sd=> sd.ShootingDay);
         }
 
         private IQueryable<ScheduleDay> GetIncluded()

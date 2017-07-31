@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Raccord.Domain.Model.Callsheets.Scenes;
 using Raccord.Domain.Model.Scenes;
 using Raccord.Domain.Model.Scheduling;
 
@@ -8,6 +9,7 @@ namespace Raccord.Domain.Model.Characters
     public class CharacterScene : Entity
     {
         private ICollection<ScheduleCharacter> _scheduleDays;
+        private ICollection<CallsheetSceneCharacter> _callsheets;
 
         // ID of the linked image
         public long CharacterID { get; set; }
@@ -31,6 +33,19 @@ namespace Raccord.Domain.Model.Characters
             set
             {
                 _scheduleDays = value;
+            }
+        }
+
+        // Linked callsheets
+        public virtual ICollection<CallsheetSceneCharacter> CallsheetScenes
+        {
+            get
+            {
+                return _callsheets ?? (_callsheets = new List<CallsheetSceneCharacter>());
+            }
+            set
+            {
+                _callsheets = value;
             }
         }
     }

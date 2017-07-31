@@ -10,6 +10,8 @@ using Raccord.Domain.Model.Users;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using System.Threading.Tasks;
 using System;
+using Raccord.Domain.Model.Callsheets.CallTypes;
+using Microsoft.EntityFrameworkCore;
 
 namespace Raccord.Data.EntityFramework.Seeding
 {
@@ -38,6 +40,7 @@ namespace Raccord.Data.EntityFramework.Seeding
         private void SystemSeeding()
         {
             SeedBreakdownTypes();
+            SeedCallTypeDefinitions();
             SeedRolesAndAdminUser();
         }
 
@@ -54,6 +57,23 @@ namespace Raccord.Data.EntityFramework.Seeding
                 };
 
                 _context.BreakdownTypeDefinitions.AddRange(definitions);
+
+                _context.SaveChanges();
+            }
+        }
+        
+        public void SeedCallTypeDefinitions()
+        {
+            if(!_context.CallTypeDefinitions.Any())
+            {
+                var definitions = new List<CallTypeDefinition>
+                {
+                    new CallTypeDefinition{ SortingOrder = 1, ShortName = "CO", Name = "Costume" },
+                    new CallTypeDefinition{ SortingOrder = 2, ShortName = "MU", Name = "Hair / Make Up" },
+                    new CallTypeDefinition{ SortingOrder = 3, ShortName = "S", Name = "Set" },
+                };
+
+                _context.CallTypeDefinitions.AddRange(definitions);
 
                 _context.SaveChanges();
             }
@@ -81,7 +101,6 @@ namespace Raccord.Data.EntityFramework.Seeding
                 _userManager.AddToRoleAsync(_userManager.FindByNameAsync(email).GetAwaiter().GetResult(), "admin").Result.ToString();
             }
         }
-
         private void TestSeeding()
         {
             SeedProjects();
@@ -192,6 +211,52 @@ namespace Raccord.Data.EntityFramework.Seeding
 
                 _context.SaveChanges();
             }
+        }
+
+        public static void SeedBreakdownTypes(this RaccordDBContext context)
+        {
+            var definitions = context.BreakdownTypeDefinitions.ToArray();
+
+            foreach(var project in context.Projects.Include(p=> p.BreakdownTypes))
+            {
+                if(!project.BreakdownTypes.Any())
+                {
+                    foreach(var definition in definitions)
+                    {
+                        project.BreakdownTypes.Add(new BreakdownType
+                        {
+                            Name = definition.Name,
+                            Description = definition.Description,
+                        });
+                    }
+                }
+            }
+
+            context.SaveChanges();
+        }
+
+        public static void SeedCallTypes(this RaccordDBContext context)
+        {
+            var definitions = context.CallTypeDefinitions.ToArray();
+
+            foreach(var project in context.Projects.Include(p=> p.CallTypes))
+            {
+                if(!project.CallTypes.Any())
+                {
+                    foreach(var definition in definitions)
+                    {
+                        project.CallTypes.Add(new CallType
+                        {
+                            ShortName = definition.ShortName,
+                            Name = definition.Name,
+                            Description = definition.Description,
+                            SortingOrder = definition.SortingOrder,
+                        });
+                    }
+                }
+            }
+
+            context.SaveChanges();
         }
     }
 }

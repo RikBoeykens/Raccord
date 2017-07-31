@@ -53,6 +53,7 @@ namespace Raccord.Data.EntityFramework.Repositories.Scheduling.ScheduleScenes
             IQueryable<ScheduleScene> query = _context.Set<ScheduleScene>();
 
             return query.Include(ss=> ss.ScheduleDay)
+                        .ThenInclude(sd=> sd.ShootingDay)
                         .Include(ss=> ss.Scene)
                         .ThenInclude(s=> s.IntExt)
                         .Include(ss=> ss.Scene)
@@ -78,6 +79,7 @@ namespace Raccord.Data.EntityFramework.Repositories.Scheduling.ScheduleScenes
             IQueryable<ScheduleScene> query = _context.Set<ScheduleScene>();
 
             return query.Include(ss=> ss.ScheduleDay)
+                        .ThenInclude(sd=> sd.ShootingDay)
                         .Include(ss=> ss.Scene)
                         .ThenInclude(s=> s.IntExt)
                         .Include(ss=> ss.Scene)

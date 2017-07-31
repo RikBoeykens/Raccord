@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Raccord.Domain.Model.Breakdowns.BreakdownTypes;
+using Raccord.Domain.Model.Callsheets.CallTypes;
 using Raccord.Domain.Model.Images;
 using Raccord.Domain.Model.Crew;
 
@@ -11,6 +12,7 @@ namespace Raccord.Domain.Model.Projects
         private ICollection<Image> _images;
         private ICollection<BreakdownType> _breakdownTypes;
         private ICollection<CrewUser> _crew;
+        private ICollection<CallType> _callTypes;
 
         /// Title of the project
         public string Title { get; set; }
@@ -51,6 +53,20 @@ namespace Raccord.Domain.Model.Projects
             set
             {
                 _crew = value;
+            }
+
+        }
+        
+        // Breakdown types associated with the project
+        public virtual ICollection<CallType> CallTypes
+        {
+            get
+            {
+                return _callTypes ?? (_callTypes = new List<CallType>());
+            }
+            set
+            {
+                _callTypes = value;
             }
         }
     }

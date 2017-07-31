@@ -1,0 +1,42 @@
+<div class="row">      
+    <div class="col s12">
+        <a routerLink="/" class="breadcrumb">Dashboard</a>
+        <a routerLink="/projects" class="breadcrumb">Projects</a>
+        <a routerLink="/projects/{{project.id}}" class="breadcrumb">{{project.title}}</a>
+        <a routerLink="/projects/{{project.id}}/callsheets" class="breadcrumb">Callsheets</a>
+        <span class="breadcrumb">{{callsheet.shootingDay.number}} - {{callsheet.shootingDay.date | date}}</span>
+    </div>
+</div>
+<h3>Step 3 - Characters</h3>
+<div class="row">
+    <md-list>
+        <md-list-item 
+            *ngFor="let callsheetScene of scenes">
+            <div md-line>
+                <show-image *ngIf="callsheetScene.scene.primaryImage.id!=0" [image]="callsheetScene.scene.primaryImage" [listAvatar]="true"></show-image>
+                <span>{{callsheetScene.scene.number}}. {{callsheetScene.scene.intExt.name}} {{callsheetScene.scene.scriptLocation.name}} {{callsheetScene.scene.dayNight.name}} - {{callsheetScene.scene.summary}} ({{callsheetScene.pageLength | pagelength}})</span>
+            </div>
+            <div md-line class="row">
+                <div class="col s12">
+                    <div *ngFor="let character of callsheetScene.characterWrappers"
+                        class="row">
+                        <md-checkbox [(ngModel)]="character.isLinked" name="callsheetSceneCharacter{{character.linkID}}" (change)="updateCharacterLink(character, callsheetScene.id)">
+                            {{character.name}}
+                        </md-checkbox>
+                    </div>
+                </div>
+            </div>
+        </md-list-item>
+    </md-list>
+</div>
+<div class="row">
+    <div class="col s12">
+        <button type="button"
+                md-raised-button
+                (click)="goToNextStep()"
+                class="wizard-next-button">
+            Next
+        </button>
+    </div>
+</div>
+ <!--routerLink="/projects/{{project.id}}/callsheets/{{callsheet.id}}/wizard/4"-->

@@ -2,6 +2,7 @@ using Raccord.Domain.Model.Locations.Locations;
 using Raccord.Domain.Model.ScriptLocations;
 using Raccord.Domain.Model.Scheduling;
 using System.Collections.Generic;
+using Raccord.Domain.Model.Callsheets.Scenes;
 
 namespace Raccord.Domain.Model.Locations.LocationSets
 {
@@ -9,6 +10,7 @@ namespace Raccord.Domain.Model.Locations.LocationSets
     public class LocationSet : Entity
     {
         private ICollection<ScheduleScene> _scheduleScenes;
+        private ICollection<CallsheetScene> _callsheetScenes;
 
         /// Name of the set
         public string Name { get; set; }
@@ -44,6 +46,19 @@ namespace Raccord.Domain.Model.Locations.LocationSets
             set
             {
                 _scheduleScenes = value;
+            }
+        }
+
+        // Linked schedule scenes
+        public virtual ICollection<CallsheetScene> CallsheetScenes
+        {
+            get
+            {
+                return _callsheetScenes ?? (_callsheetScenes = new List<CallsheetScene>());
+            }
+            set
+            {
+                _callsheetScenes = value;
             }
         }
     }

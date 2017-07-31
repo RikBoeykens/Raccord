@@ -3,6 +3,7 @@ using Raccord.API.ViewModels.Scenes;
 using Raccord.API.ViewModels.Scheduling.ScheduleDayNotes;
 using Raccord.API.ViewModels.Scheduling.ScheduleScenes;
 using Raccord.Application.Core.Services.Scheduling.ScheduleDays;
+using Raccord.API.ViewModels.ShootingDays;
 
 namespace Raccord.API.ViewModels.Scheduling.ScheduleDays
 {
@@ -20,6 +21,7 @@ namespace Raccord.API.ViewModels.Scheduling.ScheduleDays
                 ProjectID = dto.ProjectID,
                 Scenes = dto.Scenes.Select(s=> s.Translate()),
                 Notes = dto.Notes.Select(n=> n.Translate()),
+                ShootingDay = dto.ShootingDay.Translate(),
             };
         }
         // Translates a scene summary dto to a scene summary viewmodel
@@ -34,6 +36,7 @@ namespace Raccord.API.ViewModels.Scheduling.ScheduleDays
                 ProjectID = dto.ProjectID,
                 SceneCount = dto.SceneCount,
                 PageLength = dto.PageLength,
+                ShootingDay = dto.ShootingDay.Translate(),
             };
         }
         // Translates a scene dto to a scene viewmodel
@@ -60,6 +63,7 @@ namespace Raccord.API.ViewModels.Scheduling.ScheduleDays
                 End = dto.End,
                 ProjectID = dto.ProjectID,
                 Scenes = dto.Scenes.Select(s=> s.Translate()),
+                ShootingDay = dto.ShootingDay.Translate(),
             };
         }
 

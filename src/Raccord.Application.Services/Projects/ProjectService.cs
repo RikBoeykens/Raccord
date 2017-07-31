@@ -6,6 +6,8 @@ using Raccord.Application.Core.Services.Projects;
 using Raccord.Data.EntityFramework.Repositories.Projects;
 using Raccord.Data.EntityFramework.Repositories.Breakdowns.BreakdownTypes;
 using Raccord.Domain.Model.Breakdowns.BreakdownTypes;
+using Raccord.Data.EntityFramework.Repositories.Callsheets.CallTypes;
+using Raccord.Domain.Model.Callsheets.CallTypes;
 
 namespace Raccord.Application.Services.Projects
 {
@@ -14,20 +16,25 @@ namespace Raccord.Application.Services.Projects
     {
         private readonly IProjectRepository _projectRepository;
         private readonly IBreakdownTypeDefinitionRepository _breakdownTypeDefinitionRepository;
+        private readonly ICallTypeDefinitionRepository _callTypeDefinitionRepository;
 
         // Initialises a new ProjectService
         public ProjectService(
             IProjectRepository projectRepository,
-            IBreakdownTypeDefinitionRepository breakdownTypeDefinitionRepository
+            IBreakdownTypeDefinitionRepository breakdownTypeDefinitionRepository,
+            ICallTypeDefinitionRepository callTypeDefinitionRepository
             )
         {
             if(projectRepository == null)
                 throw new ArgumentNullException(nameof(projectRepository));
             if(breakdownTypeDefinitionRepository == null)
                 throw new ArgumentNullException(nameof(breakdownTypeDefinitionRepository));
+            if(callTypeDefinitionRepository == null)
+                throw new ArgumentNullException(nameof(callTypeDefinitionRepository));
             
             _projectRepository = projectRepository;
             _breakdownTypeDefinitionRepository = breakdownTypeDefinitionRepository;
+            _callTypeDefinitionRepository = callTypeDefinitionRepository;
         }
 
         // Gets all projects
@@ -75,6 +82,18 @@ namespace Raccord.Application.Services.Projects
                 {
                     Name = definition.Name,
                     Description = definition.Description,
+                });
+            }
+
+            var callTypeDefinitions = _callTypeDefinitionRepository.GetAll();
+            foreach(var definition in callTypeDefinitions)
+            {
+                project.CallTypes.Add(new CallType
+                {
+                    ShortName = definition.ShortName,
+                    Name = definition.Name,
+                    Description = definition.Description,
+                    SortingOrder = definition.SortingOrder,
                 });
             }
 
