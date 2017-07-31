@@ -319,7 +319,7 @@ const APP_PROVIDERS = [
   SceneLocationSetsResolve,
   AuthService,
   AuthGuard,
-  AccountHttpService
+  AccountHttpService,
   ShootingDayHttpService,
   AvailableShootingDaysResolve,
   CallsheetHttpService,
