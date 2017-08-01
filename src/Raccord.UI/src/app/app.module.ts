@@ -103,7 +103,12 @@ import {
 import { ScenePropertiesLandingComponent } from './projects';
 import { SelectEntityComponent } from './shared';
 import { LoginComponent } from "./security";
-import { AdminProjectsListComponent } from "./admin";
+import { 
+  AdminProjectsListComponent,
+  AdminAddProjectComponent,
+  AdminProjectLandingComponent,
+  AdminProjectSettingsComponent
+} from "./admin";
 
 const COMPONENTS =[
   AppComponent,
@@ -179,7 +184,10 @@ const COMPONENTS =[
   ScenePropertiesLandingComponent,
   SelectEntityComponent,
   LoginComponent,
-  AdminProjectsListComponent
+  AdminProjectsListComponent,
+  AdminAddProjectComponent,
+  AdminProjectLandingComponent,
+  AdminProjectSettingsComponent
 ];
 
 // Services
@@ -267,6 +275,7 @@ import {
 import {
   AdminProjectHttpService,
   AdminProjectsResolve,
+  AdminProjectResolve,
   AdminGuard
 } from "./admin";
 
@@ -343,6 +352,7 @@ const APP_PROVIDERS = [
   CharacterCallHttpService,
   AdminProjectHttpService,
   AdminProjectsResolve,
+  AdminProjectResolve,
   AdminGuard
 ];
 

@@ -41,7 +41,10 @@ import {
 import { ScenePropertiesLandingComponent } from './projects';
 import { LoginComponent } from "./security";
 import { 
-  AdminProjectsListComponent 
+  AdminProjectsListComponent,
+  AdminAddProjectComponent,
+  AdminProjectLandingComponent,
+  AdminProjectSettingsComponent
 } from "./admin";
 
 import { ProjectResolve } from './projects';
@@ -83,6 +86,7 @@ import {
 } from './projects';
 import { 
   AdminProjectsResolve,
+  AdminProjectResolve,
   AdminGuard
 } from "./admin";
 
@@ -107,6 +111,31 @@ export const ROUTES: Routes = [
             resolve:{
               projects: AdminProjectsResolve
             }
+          },
+          {
+            path: 'add',
+            component: AdminAddProjectComponent,
+            canDeactivate: [CanDeactivateGuard],
+          },
+          {
+            path: ':projectId',
+            children:[
+              {
+                path: '',
+                component: AdminProjectLandingComponent,
+                resolve:{
+                  project: AdminProjectResolve
+                }               
+              },
+              {
+                path: 'settings',
+                component: AdminProjectSettingsComponent,
+                resolve:{
+                  project: AdminProjectResolve
+                },
+                canDeactivate: [CanDeactivateGuard],
+              },
+            ]
           }
         ]
       }
