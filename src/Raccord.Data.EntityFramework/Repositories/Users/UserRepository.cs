@@ -20,6 +20,13 @@ namespace Raccord.Data.EntityFramework.Repositories.Users
             return query.FirstOrDefault(u => u.Id == ID);
         }
 
+        public ApplicationUser GetSummary(string ID)
+        {
+            var query = GetIncludedSummary();
+
+            return query.FirstOrDefault(u => u.Id == ID);
+        }
+
         public ApplicationUser GetFull(string ID)
         {
             var query = GetIncludedFull();

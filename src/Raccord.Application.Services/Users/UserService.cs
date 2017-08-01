@@ -42,6 +42,13 @@ namespace Raccord.Application.Services.Users
             return user.TranslateFull();
         }
 
+        public UserSummaryDto GetSummary(string ID)
+        {
+            var user = _userRepository.GetSummary(ID);
+
+            return user.TranslateSummary();
+        }
+
         public async Task<string> Add(CreateUserDto dto)
         {
             var user = new ApplicationUser

@@ -7,6 +7,9 @@ namespace Raccord.Application.Core.Services.Users
         // Returns a single full instance
         FullUserDto Get(string ID);
 
+        // Returns a summary of a single user
+        UserSummaryDto GetSummary(string ID);
+
         // Adds a single instance
         Task<string> Add(CreateUserDto dto);
         
