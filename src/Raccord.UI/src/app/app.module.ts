@@ -103,6 +103,7 @@ import {
 import { ScenePropertiesLandingComponent } from './projects';
 import { SelectEntityComponent } from './shared';
 import { LoginComponent } from "./security";
+import { AdminProjectsListComponent } from "./admin";
 
 const COMPONENTS =[
   AppComponent,
@@ -177,7 +178,8 @@ const COMPONENTS =[
   CallsheetWizardStep4Component,
   ScenePropertiesLandingComponent,
   SelectEntityComponent,
-  LoginComponent
+  LoginComponent,
+  AdminProjectsListComponent
 ];
 
 // Services
@@ -262,6 +264,12 @@ import {
   AccountHttpService
 } from "./account";
 
+import {
+  AdminProjectHttpService,
+  AdminProjectsResolve,
+  AdminGuard
+} from "./admin";
+
 const APP_PROVIDERS = [
   LoadingService,
   CanDeactivateGuard,
@@ -332,7 +340,10 @@ const APP_PROVIDERS = [
   CallsheetSceneCharacterHttpService,
   CallsheetCharacterHttpService,
   CallsheetCharactersCharactersResolve,
-  CharacterCallHttpService
+  CharacterCallHttpService,
+  AdminProjectHttpService,
+  AdminProjectsResolve,
+  AdminGuard
 ];
 
 // Directives

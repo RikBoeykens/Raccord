@@ -40,6 +40,9 @@ import {
 } from './projects';
 import { ScenePropertiesLandingComponent } from './projects';
 import { LoginComponent } from "./security";
+import { 
+  AdminProjectsListComponent 
+} from "./admin";
 
 import { ProjectResolve } from './projects';
 import { ProjectSummaryResolve } from './projects';
@@ -78,6 +81,10 @@ import {
   CallsheetSceneCharactersResolve,
   CallsheetCharactersCharactersResolve
 } from './projects';
+import { 
+  AdminProjectsResolve,
+  AdminGuard
+} from "./admin";
 
 import { CanDeactivateGuard } from './shared/service/can-deactivate-guard.service';
 import { AuthGuard } from "./security";
@@ -87,6 +94,24 @@ export const ROUTES: Routes = [
   { path: 'dashboard',  component: DashboardComponent, canActivate: [AuthGuard] },
   { path: 'login',  component: LoginComponent },
   { path: 'search',  component: SearchComponent, canActivate: [AuthGuard] },
+  { 
+    path: 'admin',
+    canActivate: [AdminGuard],
+    children:[
+      {
+        path: 'projects',
+        children:[
+          {
+            path: '',
+            component: AdminProjectsListComponent,
+            resolve:{
+              projects: AdminProjectsResolve
+            }
+          }
+        ]
+      }
+    ]
+  },
   {
     path: 'projects',
     canActivate: [AuthGuard],

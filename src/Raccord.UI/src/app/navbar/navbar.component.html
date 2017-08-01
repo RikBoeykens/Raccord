@@ -6,7 +6,7 @@
     <span *ngIf="isAdmin()">
         <button md-button [mdMenuTriggerFor]="adminMenu">Admin</button>
         <md-menu #adminMenu="mdMenu">
-            <button md-menu-item>Projects</button>
+            <a routerLink="/admin/projects" md-menu-item>Projects</a>
             <button md-menu-item>Users</button>
         </md-menu>
     </span>
