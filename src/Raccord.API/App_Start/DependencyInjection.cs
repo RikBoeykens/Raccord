@@ -79,6 +79,9 @@ using Raccord.Application.Core.Services.Callsheets.Characters;
 using Raccord.Application.Services.Callsheets.Characters;
 using Raccord.Application.Core.Services.Callsheets.CharacterCalls;
 using Raccord.Application.Services.Callsheets.CharacterCalls;
+using Raccord.Application.Core.Services.Users;
+using Raccord.Application.Services.Users;
+using Raccord.Data.EntityFramework.Repositories.Users;
 
 namespace Raccord.API
 {
@@ -183,6 +186,9 @@ namespace Raccord.API
             services.AddTransient<ICharacterCallService, CharacterCallService>();
 
             services.AddTransient<ISearchEngineServiceWrapper, SearchEngineServiceWrapper>();
+
+            services.AddTransient<IUserRepository, UserRepository>();
+            services.AddTransient<IUserService, UserService>();
         }
     }
 }
