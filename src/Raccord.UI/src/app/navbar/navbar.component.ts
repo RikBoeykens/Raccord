@@ -24,6 +24,10 @@ export class NavbarComponent {
         return AccountHelpers.isAdmin();
     }
 
+    getUserName(): string{
+        return AccountHelpers.getEmail();
+    }
+
     logOff(){
         this._authService.logout();
         this._router.navigate(["/login"]);
