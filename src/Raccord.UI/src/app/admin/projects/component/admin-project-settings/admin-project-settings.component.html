@@ -1,0 +1,25 @@
+<div class="row">      
+    <div class="col s12">
+        <a routerLink="/" class="breadcrumb">Dashboard</a>
+        <a routerLink="/admin/projects" class="breadcrumb">Projects</a>
+        <a routerLink="/admin/projects/{{project.id}}">{{project.title}}</a>
+        <span class="breadcrumb">Settings</span>
+    </div>
+</div>
+<div class="row">
+    <form id="project-form" class="col offset-s2 s8"
+          #projectForm = "ngForm"
+          (ngSubmit)="updateProject()">
+        <div class="row">
+            <md-input-container>
+                <input mdInput placeholder="Title" id="project_title" required [(ngModel)]="viewProject.title" #title="ngModel" name="project_title">
+            </md-input-container>
+        </div>
+        <div class="row">
+            <div class="col s12">
+                <a md-raised-button color="warn" routerLink="/admin/projects/{{project.id}}">Back</a>
+                <button md-raised-button type="submit" [disabled]="!projectForm.form.valid">Save</button>
+            </div>
+        </div>
+    </form>
+</div>

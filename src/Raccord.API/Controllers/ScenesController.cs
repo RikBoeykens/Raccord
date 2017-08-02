@@ -10,8 +10,7 @@ using Raccord.API.ViewModels.Images;
 
 namespace Raccord.API.Controllers
 {
-    [Route("api/[controller]")]
-    public class ScenesController : Controller
+    public class ScenesController : AbstractApiAuthController
     {
         private readonly ISceneService _sceneService;
 

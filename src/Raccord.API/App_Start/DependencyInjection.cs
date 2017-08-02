@@ -61,6 +61,7 @@ using Raccord.Application.Core.Services.Locations.LocationSets;
 using Raccord.Application.Services.Locations.LocationSets;
 using Raccord.Application.Core.Services.Locations.Locations;
 using Raccord.Application.Services.Locations.Locations;
+using Raccord.Data.EntityFramework.Seeding;
 using Raccord.Data.EntityFramework.Repositories.ShootingDays;
 using Raccord.Data.EntityFramework.Repositories.Callsheets;
 using Raccord.Data.EntityFramework.Repositories.Callsheets.Scenes;
@@ -78,6 +79,9 @@ using Raccord.Application.Core.Services.Callsheets.Characters;
 using Raccord.Application.Services.Callsheets.Characters;
 using Raccord.Application.Core.Services.Callsheets.CharacterCalls;
 using Raccord.Application.Services.Callsheets.CharacterCalls;
+using Raccord.Application.Core.Services.Users;
+using Raccord.Application.Services.Users;
+using Raccord.Data.EntityFramework.Repositories.Users;
 
 namespace Raccord.API
 {
@@ -85,6 +89,8 @@ namespace Raccord.API
     {
         public static void ConfigureServices(IServiceCollection services)
         {
+            services.AddTransient<RaccordDBContextSeeding>();
+
             services.AddTransient<IProjectRepository, ProjectRepository>();
             services.AddTransient<IProjectService, ProjectService>();
             services.AddTransient<IProjectSearchEngineService, ProjectSearchEngineService>();
@@ -180,6 +186,9 @@ namespace Raccord.API
             services.AddTransient<ICharacterCallService, CharacterCallService>();
 
             services.AddTransient<ISearchEngineServiceWrapper, SearchEngineServiceWrapper>();
+
+            services.AddTransient<IUserRepository, UserRepository>();
+            services.AddTransient<IUserService, UserService>();
         }
     }
 }

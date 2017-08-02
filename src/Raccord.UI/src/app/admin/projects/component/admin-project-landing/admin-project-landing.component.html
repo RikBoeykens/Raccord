@@ -1,0 +1,8 @@
+<div class="row">      
+    <div class="col s12">
+        <a routerLink="/" class="breadcrumb">Dashboard</a>
+        <a routerLink="/admin/projects" class="breadcrumb">Projects</a>
+        <span class="breadcrumb">{{project.title}}</span>
+    </div>
+</div>
+<a md-button [routerLink]="['settings']"><md-icon>settings</md-icon></a>

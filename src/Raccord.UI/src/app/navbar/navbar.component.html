@@ -1,7 +1,23 @@
 <md-toolbar color="primary">
-    <span><a md-button routerLink="/">Raccord</a></span>
+    <span *ngIf="loggedIn()"><a md-button routerLink="/">Raccord</a></span>
 
-    <span class="navbar-fill-remaining-space"></span>
-    <span><a md-button routerLink="/search"><md-icon>search</md-icon></a></span>
-    <span><a md-button routerLink="/projects">Projects</a></span>
+    <span *ngIf="loggedIn()" class="navbar-fill-remaining-space"></span>
+    <span *ngIf="loggedIn()"><a md-button routerLink="/search"><md-icon>search</md-icon></a></span>
+    <span *ngIf="isAdmin()">
+        <button md-button [mdMenuTriggerFor]="adminMenu">Admin</button>
+        <md-menu #adminMenu="mdMenu">
+            <a routerLink="/admin/projects" md-menu-item>Projects</a>
+            <a routerLink="/admin/users" md-menu-item>Users</a>
+        </md-menu>
+    </span>
+    <span *ngIf="loggedIn()">
+        <button md-button [mdMenuTriggerFor]="navMenu">{{getUserName()}}</button>
+        <md-menu #navMenu="mdMenu">
+            <button md-menu-item>Account</button>
+            <button md-menu-item (click)="logOff()">Log out</button>
+        </md-menu>
+    </span>
+    <span *ngIf="!loggedIn()">
+        Raccord
+    </span>
 </md-toolbar>

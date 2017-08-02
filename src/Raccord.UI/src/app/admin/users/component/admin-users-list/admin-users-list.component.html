@@ -1,0 +1,42 @@
+<div class="row">      
+    <div class="col s12">
+        <a routerLink="/" class="breadcrumb">Dashboard</a>
+        <span class="breadcrumb">Users</span>
+    </div>
+</div>
+<div class="row">
+    <div class='md-padding' layout="row" layout-wrap>
+        <md-card class="project-card" *ngFor="let project of projects">
+            <show-image *ngIf="project.primaryImage.id!=0" [image]="project.primaryImage" [cardImage]="true"></show-image>
+            <md-card-header>
+                <md-card-title><a [routerLink]="[project.id]" class="card-title">{{project.title}}</a></md-card-title>
+            </md-card-header>
+            <md-card-actions>
+                <button md-button (click)="remove(project)"><md-icon>delete</md-icon></button>
+            </md-card-actions>
+        </md-card>
+    </div>
+</div>
+<div class="row">
+    <table class="col s12">
+        <thead>
+            <tr>
+                <th>Email</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let user of users">
+                <td>
+                    <a [routerLink]="[user.id]">{{user.email}}</a>
+                </td>
+                <td>
+                    <button md-button (click)="remove(user)"><md-icon>delete</md-icon></button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div class="row">
+    <a md-fab routerLink="/admin/users/add"><md-icon>add</md-icon></a>
+</div>

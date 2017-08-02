@@ -39,6 +39,16 @@ import {
   CallsheetWizardStep4Component,
 } from './projects';
 import { ScenePropertiesLandingComponent } from './projects';
+import { LoginComponent } from "./security";
+import { 
+  AdminProjectsListComponent,
+  AdminAddProjectComponent,
+  AdminProjectLandingComponent,
+  AdminProjectSettingsComponent,
+  AdminUsersListComponent,
+  AdminAddUserComponent,
+  AdminUserLandingComponent
+} from "./admin";
 
 import { ProjectResolve } from './projects';
 import { ProjectSummaryResolve } from './projects';
@@ -77,15 +87,97 @@ import {
   CallsheetSceneCharactersResolve,
   CallsheetCharactersCharactersResolve
 } from './projects';
+import { 
+  AdminProjectsResolve,
+  AdminProjectResolve,
+  AdminGuard,
+  AdminUsersResolve,
+  AdminUserResolve
+} from "./admin";
 
 import { CanDeactivateGuard } from './shared/service/can-deactivate-guard.service';
+import { AuthGuard } from "./security";
 
 export const ROUTES: Routes = [
-  { path: '',      component: DashboardComponent },
-  { path: 'dashboard',  component: DashboardComponent },
-  { path: 'search',  component: SearchComponent },
+  { path: '',      component: DashboardComponent, canActivate: [AuthGuard] },
+  { path: 'dashboard',  component: DashboardComponent, canActivate: [AuthGuard] },
+  { path: 'login',  component: LoginComponent },
+  { path: 'search',  component: SearchComponent, canActivate: [AuthGuard] },
+  { 
+    path: 'admin',
+    canActivate: [AdminGuard],
+    children:[
+      {
+        path: 'projects',
+        children:[
+          {
+            path: '',
+            component: AdminProjectsListComponent,
+            resolve:{
+              projects: AdminProjectsResolve
+            }
+          },
+          {
+            path: 'add',
+            component: AdminAddProjectComponent,
+            canDeactivate: [CanDeactivateGuard],
+          },
+          {
+            path: ':projectId',
+            children:[
+              {
+                path: '',
+                component: AdminProjectLandingComponent,
+                resolve:{
+                  project: AdminProjectResolve
+                }               
+              },
+              {
+                path: 'settings',
+                component: AdminProjectSettingsComponent,
+                resolve:{
+                  project: AdminProjectResolve
+                },
+                canDeactivate: [CanDeactivateGuard],
+              },
+            ]
+          }
+        ]
+      },
+      {
+        path: 'users',
+        children:[
+          {
+            path: '',
+            component: AdminUsersListComponent,
+            resolve:{
+              users: AdminUsersResolve
+            }
+          },
+          {
+            path: 'add',
+            component: AdminAddUserComponent,
+            canDeactivate: [CanDeactivateGuard],
+          },
+          {
+            path: ':userId',
+            children:[
+              {
+                path: '',
+                component: AdminUserLandingComponent,
+                resolve:{
+                  user: AdminUserResolve
+                }               
+              },
+            ]
+          }
+        ]
+      }
+    ]
+  },
   {
     path: 'projects',
+    canActivate: [AuthGuard],
     children:[
       {
         path:'',

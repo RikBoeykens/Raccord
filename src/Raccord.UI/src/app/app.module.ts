@@ -102,6 +102,16 @@ import {
 } from './projects';
 import { ScenePropertiesLandingComponent } from './projects';
 import { SelectEntityComponent } from './shared';
+import { LoginComponent } from "./security";
+import { 
+  AdminProjectsListComponent,
+  AdminAddProjectComponent,
+  AdminProjectLandingComponent,
+  AdminProjectSettingsComponent,
+  AdminUsersListComponent,
+  AdminAddUserComponent,
+  AdminUserLandingComponent
+} from "./admin";
 
 const COMPONENTS =[
   AppComponent,
@@ -175,7 +185,15 @@ const COMPONENTS =[
   CallsheetWizardStep3Component,
   CallsheetWizardStep4Component,
   ScenePropertiesLandingComponent,
-  SelectEntityComponent
+  SelectEntityComponent,
+  LoginComponent,
+  AdminProjectsListComponent,
+  AdminAddProjectComponent,
+  AdminProjectLandingComponent,
+  AdminProjectSettingsComponent,
+  AdminUsersListComponent,
+  AdminAddUserComponent,
+  AdminUserLandingComponent
 ];
 
 // Services
@@ -251,6 +269,25 @@ import {
   CharacterCallHttpService
 } from './projects';
 
+import {
+  AuthService,
+  AuthGuard
+} from "./security";
+
+import {
+  AccountHttpService
+} from "./account";
+
+import {
+  AdminProjectHttpService,
+  AdminProjectsResolve,
+  AdminProjectResolve,
+  AdminGuard,
+  AdminUserHttpService,
+  AdminUsersResolve,
+  AdminUserResolve
+} from "./admin";
+
 const APP_PROVIDERS = [
   LoadingService,
   CanDeactivateGuard,
@@ -306,6 +343,9 @@ const APP_PROVIDERS = [
   LocationSetHttpService,
   LocationSetResolve,
   SceneLocationSetsResolve,
+  AuthService,
+  AuthGuard,
+  AccountHttpService,
   ShootingDayHttpService,
   AvailableShootingDaysResolve,
   CallsheetHttpService,
@@ -318,7 +358,14 @@ const APP_PROVIDERS = [
   CallsheetSceneCharacterHttpService,
   CallsheetCharacterHttpService,
   CallsheetCharactersCharactersResolve,
-  CharacterCallHttpService
+  CharacterCallHttpService,
+  AdminProjectHttpService,
+  AdminProjectsResolve,
+  AdminProjectResolve,
+  AdminGuard,
+  AdminUserHttpService,
+  AdminUsersResolve,
+  AdminUserResolve
 ];
 
 // Directives

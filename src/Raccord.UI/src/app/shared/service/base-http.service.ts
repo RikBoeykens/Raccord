@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { JsonResponse } from '../model/json-response.model';
 import { SortOrder } from '../model/sort-order.model';
+import { HeaderHelpers } from "../helpers/header.helpers";
 import 'rxjs/add/operator/toPromise';
 
 @Injectable()
@@ -12,25 +13,29 @@ export abstract class BaseHttpService{
     constructor(protected _http: Http) {
     }    
     
-    protected doGetArray(uri: string){
-        return this._http.get(uri)
+    protected doGetArray(uri: string, useAuthToken: Boolean = true){
+        let headers = useAuthToken ? HeaderHelpers.AuthJsonHeaders() : HeaderHelpers.JsonHeaders();
+        let options = new RequestOptions({headers: headers});
+        return this._http.get(uri, options)
             .toPromise()
             .then(response => this.extractArray(response))
             .catch(this.handleErrorPromise);
     }
 
-    protected doGet(uri: string){
-        return this._http.get(uri)
+    protected doGet(uri: string, useAuthToken: Boolean = true){
+        let headers = useAuthToken ? HeaderHelpers.AuthJsonHeaders() : HeaderHelpers.JsonHeaders();
+        let options = new RequestOptions({headers: headers});
+        return this._http.get(uri, options)
             .toPromise()
             .then(response => response.json())
             .catch(this.handleErrorPromise);
     }
 
-    protected doPost(object: any, uri: string){
+    protected doPost(object: any, uri: string, useAuthToken: Boolean = true){
 
         let body = JSON.stringify(object);
-        let headers = new Headers({ 'Content-Type': 'application/json' });
-        let options = new RequestOptions({ headers: headers });
+        let headers = useAuthToken ? HeaderHelpers.AuthFormHeaders() : HeaderHelpers.ContentHeaders();
+        let options = new RequestOptions({headers: headers});
 
         return this._http.post(uri, body, options)
             .toPromise()
@@ -38,17 +43,20 @@ export abstract class BaseHttpService{
             .catch(this.handleErrorPromise);
     }
 
-    protected doDelete(uri: string){
+    protected doDelete(uri: string, useAuthToken: Boolean = true){
         
-        return this._http.delete(uri)
+        let headers = useAuthToken ? HeaderHelpers.AuthFormHeaders() : HeaderHelpers.ContentHeaders();
+        let options = new RequestOptions({headers: headers});
+
+        return this._http.delete(uri, options)
             .toPromise()
             .then(response => this.extractJsonResponse(response))
             .catch(this.handleErrorPromise);
     }
 
-    protected doSort(order: SortOrder, uri: string){
+    protected doSort(order: SortOrder, uri: string, useAuthToken: Boolean = true){
         let body = JSON.stringify(order);
-        let headers = new Headers({ 'Content-Type': 'application/json' });
+        let headers = useAuthToken ? HeaderHelpers.AuthFormHeaders() : HeaderHelpers.ContentHeaders();
         let options = new RequestOptions({ headers: headers });
 
         return this._http.post(uri, body, options)

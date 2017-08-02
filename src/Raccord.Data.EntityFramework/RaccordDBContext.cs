@@ -5,11 +5,13 @@ using Raccord.Domain.Model.ScriptLocations;
 using Raccord.Domain.Model.SceneProperties;
 using Raccord.Domain.Model.Breakdowns.BreakdownTypes;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Raccord.Domain.Model.Users;
 using Raccord.Domain.Model.Callsheets.CallTypes;
 
 namespace Raccord.Data.EntityFramework
 {
-    public class RaccordDBContext : DbContext
+    public class RaccordDBContext : IdentityDbContext<ApplicationUser>
     {
         public RaccordDBContext(DbContextOptions<RaccordDBContext> options)
             : base(options)
@@ -25,6 +27,8 @@ namespace Raccord.Data.EntityFramework
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+            
             modelBuilder.Entity<Scene>()
                         .HasOne(s => s.ScriptLocation)
                         .WithMany(l => l.Scenes)

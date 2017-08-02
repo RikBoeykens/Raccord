@@ -1,3 +1,7 @@
+export { Project } from "./model/project.model";
+export { ProjectSummary } from "./model/project-summary.model";
+export { FullProject } from "./model/full-project.model";
+
 export { AddProjectComponent } from './component/add-project/add-project.component';
 export { EditProjectComponent } from './component/edit-project/edit-project.component';
 export { ProjectLandingComponent } from './component/project-landing/project-landing.component';

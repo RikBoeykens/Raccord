@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { Router } from "@angular/router";
+import { AuthService } from "../security/service/auth.service";
+import { AccountHelpers } from "../account/helpers/account.helper";
 
 @Component({
     selector: 'raccord-navbar',
@@ -6,17 +9,27 @@ import { Component } from '@angular/core';
     templateUrl: 'navbar.component.html',
 })
 export class NavbarComponent {
-    showSearchBar: boolean = false;
     
     constructor(
+        private _authService: AuthService,
+        private _router: Router
     ){
     }
 
-    toggleSearchBar(value: boolean){
-        this.showSearchBar = value;
+    loggedIn():boolean{
+        return this._authService.loggedIn();
     }
 
-    doShowSearchBar(){
-        this.toggleSearchBar(true);
+    isAdmin(): boolean{
+        return AccountHelpers.isAdmin();
+    }
+
+    getUserName(): string{
+        return AccountHelpers.getEmail();
+    }
+
+    logOff(){
+        this._authService.logout();
+        this._router.navigate(["/login"]);
     }
 }

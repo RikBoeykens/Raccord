@@ -12,8 +12,7 @@ using Raccord.API.ViewModels.Common.SelectedEntity;
 
 namespace Raccord.API.Controllers
 {
-    [Route("api/[controller]")]
-    public class ImagesController : Controller
+    public class ImagesController : AbstractApiAuthController
     {
         private readonly IImageService _imageService;
 
