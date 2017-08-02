@@ -82,6 +82,7 @@ using Raccord.Application.Services.Callsheets.CharacterCalls;
 using Raccord.Application.Core.Services.Users;
 using Raccord.Application.Services.Users;
 using Raccord.Data.EntityFramework.Repositories.Users;
+using Raccord.Data.EntityFramework.Repositories.Crew;
 
 namespace Raccord.API
 {
@@ -189,6 +190,8 @@ namespace Raccord.API
 
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<IUserService, UserService>();
+
+            services.AddTransient<ICrewRepository, CrewRepository>();            
         }
     }
 }
