@@ -13,6 +13,7 @@ export class AdminAddUserComponent implements CanComponentDeactivate {
 
     viewUser: CreateUser;
     user: CreateUser;
+    userCreated: boolean = false;
 
     constructor(
         private _userHttpService: AdminUserHttpService,
@@ -30,6 +31,7 @@ export class AdminAddUserComponent implements CanComponentDeactivate {
         this.user = this.viewUser;
 
         this._userHttpService.add(this.user).then(data=>{
+            this.userCreated = true;
             this._router.navigate(['/admin/users', data]);
         }).catch()
         .then(()=>
@@ -38,7 +40,7 @@ export class AdminAddUserComponent implements CanComponentDeactivate {
     }
 
     canDeactivate(){
-        if(!this.viewUser.email.length && !this.viewUser.password.length)
+        if((!this.viewUser.email.length && !this.viewUser.password.length)||this.userCreated)
             return true;
 
         return this._dialogService.confirm('All data will be lost by navigating away');

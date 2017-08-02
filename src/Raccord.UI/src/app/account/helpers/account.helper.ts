@@ -11,7 +11,7 @@ export class AccountHelpers {
   }
 
   public static isAdmin(): boolean {
-    return !!sessionStorage.getItem('user_is_admin');
+    return sessionStorage.getItem('user_is_admin')===true.toString();
   }
 
   public static removeUser(){
