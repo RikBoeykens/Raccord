@@ -11,7 +11,7 @@ export class AdminUserResolve implements Resolve<FullUser> {
   ) {}
 
   resolve(route: ActivatedRouteSnapshot) {
-    let id = route.params['projectId'];
+    let id = route.params['userId'];
 
     return this._userHttpService.get(id).then(user => {
       if (user) {

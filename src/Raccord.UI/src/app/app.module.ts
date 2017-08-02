@@ -107,7 +107,10 @@ import {
   AdminProjectsListComponent,
   AdminAddProjectComponent,
   AdminProjectLandingComponent,
-  AdminProjectSettingsComponent
+  AdminProjectSettingsComponent,
+  AdminUsersListComponent,
+  AdminAddUserComponent,
+  AdminUserLandingComponent
 } from "./admin";
 
 const COMPONENTS =[
@@ -187,7 +190,10 @@ const COMPONENTS =[
   AdminProjectsListComponent,
   AdminAddProjectComponent,
   AdminProjectLandingComponent,
-  AdminProjectSettingsComponent
+  AdminProjectSettingsComponent,
+  AdminUsersListComponent,
+  AdminAddUserComponent,
+  AdminUserLandingComponent
 ];
 
 // Services

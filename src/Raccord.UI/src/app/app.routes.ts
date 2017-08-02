@@ -44,7 +44,10 @@ import {
   AdminProjectsListComponent,
   AdminAddProjectComponent,
   AdminProjectLandingComponent,
-  AdminProjectSettingsComponent
+  AdminProjectSettingsComponent,
+  AdminUsersListComponent,
+  AdminAddUserComponent,
+  AdminUserLandingComponent
 } from "./admin";
 
 import { ProjectResolve } from './projects';
@@ -136,6 +139,35 @@ export const ROUTES: Routes = [
                   project: AdminProjectResolve
                 },
                 canDeactivate: [CanDeactivateGuard],
+              },
+            ]
+          }
+        ]
+      },
+      {
+        path: 'users',
+        children:[
+          {
+            path: '',
+            component: AdminUsersListComponent,
+            resolve:{
+              users: AdminUsersResolve
+            }
+          },
+          {
+            path: 'add',
+            component: AdminAddUserComponent,
+            canDeactivate: [CanDeactivateGuard],
+          },
+          {
+            path: ':userId',
+            children:[
+              {
+                path: '',
+                component: AdminUserLandingComponent,
+                resolve:{
+                  user: AdminUserResolve
+                }               
               },
             ]
           }

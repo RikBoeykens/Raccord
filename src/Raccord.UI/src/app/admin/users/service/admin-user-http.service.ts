@@ -48,7 +48,7 @@ export class AdminUserHttpService extends BaseHttpService {
         return this.doPost(user, uri);
     }
 
-    delete(id: Number): Promise<any> {
+    delete(id: string): Promise<any> {
         var uri = `${this._baseUri}/${id}`;
 
         return this.doDelete(uri);

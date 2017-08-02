@@ -1,0 +1,29 @@
+<div class="row">      
+    <div class="col s12">
+        <a routerLink="/" class="breadcrumb">Dashboard</a>
+        <a routerLink="/admin/users" class="breadcrumb">Users</a>
+        <span class="breadcrumb">Add User</span>
+    </div>
+</div>
+<div class="row">
+    <form id="user-form" class="col offset-s2 s8"
+          #userForm = "ngForm"
+          (ngSubmit)="addUser()">
+        <div class="row">
+            <md-input-container>
+                <input mdInput placeholder="Email" id="user_email" required [(ngModel)]="viewUser.email" #email="ngModel" name="user_email">
+            </md-input-container>
+        </div>
+        <div class="row">
+            <md-input-container>
+                <input mdInput type="password" placeholder="Password" id="user_password" required [(ngModel)]="viewUser.password" #password="ngModel" name="user_password">
+            </md-input-container>
+        </div>
+        <div class="row">
+            <div class="col s12">
+                <a md-raised-button color="warn" routerLink="/admin/users">Back</a>
+                <button md-raised-button type="submit" [disabled]="!userForm.form.valid">Save</button>
+            </div>
+        </div>
+    </form>
+</div>

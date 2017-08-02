@@ -11,3 +11,7 @@ export { AdminProjectSettingsComponent } from "./projects/component/admin-projec
 export { AdminUserHttpService } from "./users/service/admin-user-http.service";
 export { AdminUsersResolve } from "./users/service/admin-users-resolve.service";
 export { AdminUserResolve } from "./users/service/admin-user-resolve.service";
+
+export { AdminUsersListComponent } from "./users/component/admin-users-list/admin-users-list.component";
+export { AdminAddUserComponent } from "./users/component/admin-add-user/admin-add-user.component";
+export { AdminUserLandingComponent } from "./users/component/admin-user-landing/admin-user-landing.component";

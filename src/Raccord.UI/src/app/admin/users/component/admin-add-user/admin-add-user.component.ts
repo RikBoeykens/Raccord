@@ -1,40 +1,36 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { AdminProjectHttpService } from '../../service/admin-project-http.service';
-import { Project } from '../../../../projects';
+import { AdminUserHttpService } from '../../service/admin-user-http.service';
+import { CreateUser } from '../../model/create-user.model';
 import { LoadingService } from '../../../../loading/service/loading.service';
 import { CanComponentDeactivate } from '../../../../shared/interface/can-component-deactivate.interface';
 import { DialogService } from '../../../../shared/service/dialog.service';
 
 @Component({
-    templateUrl: 'admin-add-project.component.html'
+    templateUrl: 'admin-add-user.component.html'
 })
-export class AdminAddProjectComponent implements CanComponentDeactivate {
+export class AdminAddUserComponent implements CanComponentDeactivate {
 
-    viewProject: Project;
-    project: Project;
+    viewUser: CreateUser;
+    user: CreateUser;
 
     constructor(
-        private _projectHttpService: AdminProjectHttpService,
+        private _userHttpService: AdminUserHttpService,
         private _loadingService: LoadingService,
         private _dialogService: DialogService,
         private _router: Router
     ){
-        this.viewProject = new Project();
+        this.viewUser = new CreateUser();
     }
 
-    addProject() {
+    addUser() {
 
         let loadingId = this._loadingService.startLoading();
 
-        this.project = this.viewProject;
+        this.user = this.viewUser;
 
-        this._projectHttpService.post(this.project).then(data=>{
-            if(typeof(data)=='string'){
-                this._dialogService.error(data);
-            }else{
-                this._router.navigate(['/admin/projects', data]);
-            }
+        this._userHttpService.add(this.user).then(data=>{
+            this._router.navigate(['/admin/users', data]);
         }).catch()
         .then(()=>
             this._loadingService.endLoading(loadingId)
@@ -42,7 +38,7 @@ export class AdminAddProjectComponent implements CanComponentDeactivate {
     }
 
     canDeactivate(){
-        if(!this.viewProject.title.length)
+        if(!this.viewUser.email.length && !this.viewUser.password.length)
             return true;
 
         return this._dialogService.confirm('All data will be lost by navigating away');
