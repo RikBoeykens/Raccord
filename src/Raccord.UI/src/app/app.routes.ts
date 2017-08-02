@@ -87,7 +87,9 @@ import {
 import { 
   AdminProjectsResolve,
   AdminProjectResolve,
-  AdminGuard
+  AdminGuard,
+  AdminUsersResolve,
+  AdminUserResolve
 } from "./admin";
 
 import { CanDeactivateGuard } from './shared/service/can-deactivate-guard.service';

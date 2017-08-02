@@ -7,3 +7,7 @@ export { AdminProjectsListComponent } from "./projects/component/admin-projects-
 export { AdminAddProjectComponent } from "./projects/component/admin-add-project/admin-add-project.component";
 export { AdminProjectLandingComponent } from "./projects/component/admin-project-landing/admin-project-landing.component";
 export { AdminProjectSettingsComponent } from "./projects/component/admin-project-settings/admin-project-settings.component";
+
+export { AdminUserHttpService } from "./users/service/admin-user-http.service";
+export { AdminUsersResolve } from "./users/service/admin-users-resolve.service";
+export { AdminUserResolve } from "./users/service/admin-user-resolve.service";
