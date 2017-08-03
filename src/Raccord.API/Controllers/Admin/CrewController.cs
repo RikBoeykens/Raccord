@@ -2,59 +2,60 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
-using Raccord.API.ViewModels.Callsheets;
 using Raccord.API.ViewModels.Core;
-using Raccord.Application.Core.Services.Callsheets;
+using Raccord.API.ViewModels.Crew;
+using Raccord.Application.Core.Services.Crew;
 
-namespace Raccord.API.Controllers
+namespace Raccord.API.Controllers.Admin
 {
-    public class CallsheetsController : AbstractApiAuthController
+    public class CrewController : AbstractAdminController
     {
-        private readonly ICallsheetService _callsheetService;
+        private readonly ICrewService _crewService;
 
-        public CallsheetsController(ICallsheetService callsheetService)
+        public CrewController(ICrewService crewService)
         {
-            if (callsheetService == null)
-                throw new ArgumentNullException(nameof(callsheetService));
+            if (crewService == null)
+                throw new ArgumentNullException(nameof(crewService));
 
-            _callsheetService = callsheetService;
+            _crewService = crewService;
         }
 
-        // GET: api/callsheets/1/project
-        [HttpGet("{id}/project")]
-        public IEnumerable<CallsheetSummaryViewModel> GetAll(long id)
+        // GET: api/crew/1/projects
+        [HttpGet("{userID}/projects")]
+        public IEnumerable<CrewUserProjectViewModel> GetProjects(string userID)
         {
-            var dtos = _callsheetService.GetAllForParent(id);
+            var dtos = _crewService.GetProjects(userID);
 
             var vms = dtos.Select(p => p.Translate());
 
             return vms;
         }
-        // GET api/callsheets/5
+
+        // GET: api/crew/1/users
+        [HttpGet("{projectID}/users")]
+        public IEnumerable<CrewUserUserViewModel> GetUsers(long projectID)
+        {
+            var dtos = _crewService.GetUsers(projectID);
+
+            var vms = dtos.Select(p => p.Translate());
+
+            return vms;
+        }
+
+        // GET api/crew/5
         [HttpGet("{id}")]
-        public FullCallsheetViewModel Get(long id)
+        public FullCrewUserViewModel Get(long id)
         {
-            var dto = _callsheetService.Get(id);
+            var dto = _crewService.Get(id);
 
             var vm = dto.Translate();
 
             return vm;
         }
 
-        // GET api/callsheets/5
-        [HttpGet("{id}/summary")]
-        public CallsheetSummaryViewModel GetSummary(long id)
-        {
-            var dto = _callsheetService.GetSummary(id);
-
-            var vm = dto.Translate();
-
-            return vm;
-        }
-
-        // POST api/callsheets
+        // POST api/crew
         [HttpPost]
-        public JsonResult Post([FromBody]CallsheetViewModel vm)
+        public JsonResult Post([FromBody]CrewUserViewModel vm)
         {
             var response = new JsonResponse();
 
@@ -66,11 +67,11 @@ namespace Raccord.API.Controllers
 
                 if (dto.ID == default(long))
                 {
-                    id = _callsheetService.Add(dto);
+                    id = _crewService.Add(dto);
                 }
                 else
                 {
-                    id = _callsheetService.Update(dto);
+                    id = _crewService.Update(dto);
                 }
 
                 response = new JsonResponse
@@ -84,14 +85,14 @@ namespace Raccord.API.Controllers
                 response = new JsonResponse
                 {
                     ok = false,
-                    message = "Something went wrong while attempting to update callsheet",
+                    message = "Something went wrong while attempting to update crew",
                 };
             }
 
             return new JsonResult(response);
         }
 
-        // DELETE api/callsheets/5
+        // DELETE api/crew/5
         [HttpDelete("{id}")]
         public JsonResult Delete(long id)
         {
@@ -99,7 +100,7 @@ namespace Raccord.API.Controllers
 
             try
             {
-                _callsheetService.Delete(id);
+                _crewService.Delete(id);
 
                 response = new JsonResponse
                 {
@@ -111,7 +112,7 @@ namespace Raccord.API.Controllers
                 response = new JsonResponse
                 {
                     ok = false,
-                    message = "Something went wrong while attempting to delete callsheet.",
+                    message = "Something went wrong while attempting to delete crew.",
                 };
             }
 

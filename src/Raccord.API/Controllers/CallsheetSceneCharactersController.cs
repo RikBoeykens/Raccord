@@ -13,8 +13,7 @@ using Raccord.API.ViewModels.Callsheets.CallsheetScenes;
 
 namespace Raccord.API.Controllers
 {
-    [Route("api/[controller]")]
-    public class CallsheetSceneCharactersController : Controller
+    public class CallsheetSceneCharactersController : AbstractApiAuthController
     {
         private readonly ICallsheetSceneCharacterService _callsheetSceneCharacterService;
 

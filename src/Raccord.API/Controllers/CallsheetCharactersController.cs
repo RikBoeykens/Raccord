@@ -8,8 +8,7 @@ using Raccord.Application.Core.Services.Callsheets.Characters;
 
 namespace Raccord.API.Controllers
 {
-    [Route("api/[controller]")]
-    public class CallsheetCharactersController : Controller
+    public class CallsheetCharactersController : AbstractApiAuthController
     {
         private readonly ICallsheetCharacterService _callsheetCharacterService;
 
