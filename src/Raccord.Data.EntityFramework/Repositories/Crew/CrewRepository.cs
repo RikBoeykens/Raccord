@@ -26,6 +26,22 @@ namespace Raccord.Data.EntityFramework.Repositories.Crew
             return query.Where(c=> c.UserID == userID);
         }
 
+        public CrewUser GetFull(long ID)
+        {
+            var query = GetIncludedFull();
+
+            return query.FirstOrDefault(cu=> cu.ID == ID);
+        }
+
+        private IQueryable<CrewUser> GetIncludedFull()
+        {
+            IQueryable<CrewUser> query = _context.Set<CrewUser>();
+
+            return query.Include(cs=> cs.User)
+                        .Include(cu=> cu.Project)
+                        .ThenInclude(p=> p.Images);
+        }
+
         private IQueryable<CrewUser> GetIncludedUser()
         {
             IQueryable<CrewUser> query = _context.Set<CrewUser>();

@@ -9,5 +9,6 @@ namespace Raccord.Data.EntityFramework.Repositories.Crew
     {
         IEnumerable<CrewUser> GetAllForProject(long projectID);
         IEnumerable<CrewUser> GetAllForUser(string userID);
+        CrewUser GetFull(long ID);
     }
 }
