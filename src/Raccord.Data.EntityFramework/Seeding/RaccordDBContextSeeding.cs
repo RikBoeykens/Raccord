@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using System;
 using Raccord.Domain.Model.Callsheets.CallTypes;
 using Microsoft.EntityFrameworkCore;
+using Raccord.Domain.Model.Crew;
 
 namespace Raccord.Data.EntityFramework.Seeding
 {
@@ -20,6 +21,8 @@ namespace Raccord.Data.EntityFramework.Seeding
         private RaccordDBContext _context;
         private UserManager<ApplicationUser> _userManager;
         private RoleManager<IdentityRole> _roleManager;
+        private const string adminEmail = "rikboeykens@gmail.com";
+        private const string adminPassword = "P@ssw0rd!";
 
         public RaccordDBContextSeeding(
             RaccordDBContext context,
@@ -95,10 +98,8 @@ namespace Raccord.Data.EntityFramework.Seeding
 
             if (!_context.Users.Any())
             {
-                var email = "rikboeykens@gmail.com";
-                var password = "P@ssw0rd!";
-                _userManager.CreateAsync(new ApplicationUser { UserName = email, Email = email, EmailConfirmed = true }, password).Result.ToString();
-                _userManager.AddToRoleAsync(_userManager.FindByNameAsync(email).GetAwaiter().GetResult(), "admin").Result.ToString();
+                _userManager.CreateAsync(new ApplicationUser { UserName = adminEmail, Email = adminEmail, EmailConfirmed = true }, adminEmail).Result.ToString();
+                _userManager.AddToRoleAsync(_userManager.FindByNameAsync(adminEmail).GetAwaiter().GetResult(), "admin").Result.ToString();
             }
         }
         private void TestSeeding()
@@ -110,6 +111,7 @@ namespace Raccord.Data.EntityFramework.Seeding
             SeedScenes();
             SeedBreakdownTypes();
             SeedCallTypes();
+            SeedCrew();
         }
 
         private void SeedProjects()
@@ -257,6 +259,28 @@ namespace Raccord.Data.EntityFramework.Seeding
                     }
                 }
             }
+
+            _context.SaveChanges();
+        }
+
+        private void SeedCrew()
+        {
+            var adminUser = _context.Users.FirstOrDefault(u=> u.Email == adminEmail);
+
+            if(adminUser!= null)
+            {
+                foreach(var project in _context.Projects.Include(p=> p.Crew).ThenInclude(c=> c.User))
+                {
+                    if(!project.Crew.Any())
+                    {
+                        project.Crew.Add(new CrewUser
+                        {
+                            UserID = adminUser.Id
+                        });
+                    }
+                }
+            }
+
 
             _context.SaveChanges();
         }
