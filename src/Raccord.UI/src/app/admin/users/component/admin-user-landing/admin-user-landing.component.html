@@ -5,7 +5,19 @@
         <span class="breadcrumb">{{user.email}}</span>
     </div>
 </div>
+<h3>Projects</h3>
 <div class="row">
+    <form class="col s12"
+            id="project_search_form"
+            #projectSearchFrom = "ngForm"
+            (ngSubmit)="addProject()">
+        <div fxLayout="row" fxLayoutGap="10px">
+            <admin-search-project fxFlex="50%" [searchProject]="searchProject"></admin-search-project>
+            <button fxFlex="50%" md-raised-button type="submit"[disabled]="!projectSearchFrom.form.valid">Add</button>            
+        </div>
+    </form>
+</div>
+<div class="row" *ngIf="projects.length">
     <table class="col s12">
         <thead>
             <tr>
@@ -14,12 +26,12 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let project of projects">
+            <tr *ngFor="let crew of projects">
                 <td>
-                    {{project.title}}
+                    {{crew.project.title}}
                 </td>
                 <td>
-                    <button md-button (click)="remove(project)"><md-icon>delete</md-icon></button>
+                    <button md-button (click)="removeProject(crew)"><md-icon>delete</md-icon></button>
                 </td>
             </tr>
         </tbody>

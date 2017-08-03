@@ -104,6 +104,7 @@ import { ScenePropertiesLandingComponent } from './projects';
 import { SelectEntityComponent } from './shared';
 import { LoginComponent } from "./security";
 import { 
+  AdminSearchProjectComponent,
   AdminProjectsListComponent,
   AdminAddProjectComponent,
   AdminProjectLandingComponent,
@@ -187,6 +188,7 @@ const COMPONENTS =[
   ScenePropertiesLandingComponent,
   SelectEntityComponent,
   LoginComponent,
+  AdminSearchProjectComponent,
   AdminProjectsListComponent,
   AdminAddProjectComponent,
   AdminProjectLandingComponent,

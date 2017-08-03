@@ -11,6 +11,7 @@ export { AdminCrewHttpService } from "./crew/service/admin-crew-http.service";
 export { AdminProjectCrewResolve } from "./crew/service/admin-project-crew-resolve.service";
 export { AdminUserProjectsResolve } from "./crew/service/admin-user-projects-resolve.service";
 
+export { AdminSearchProjectComponent } from "./projects/component/admin-search-project/admin-search-project.component";
 export { AdminProjectsListComponent } from "./projects/component/admin-projects-list/admin-projects-list.component";
 export { AdminAddProjectComponent } from "./projects/component/admin-add-project/admin-add-project.component";
 export { AdminProjectLandingComponent } from "./projects/component/admin-project-landing/admin-project-landing.component";

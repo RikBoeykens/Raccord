@@ -3,12 +3,12 @@ import { BaseModel } from '../../../shared/model/base.model';
 export class CrewUser extends BaseModel{
     id: number;
     projectID: number;
-    userID: number;
+    userID: string;
 
     constructor(obj?: {
         id: number, 
         projectID: number,
-        userID: number
+        userID: string
     }){
         super();
         if(obj){

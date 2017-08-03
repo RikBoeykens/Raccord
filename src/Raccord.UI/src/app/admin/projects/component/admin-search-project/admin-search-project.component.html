@@ -1,0 +1,10 @@
+<div class="search-container">
+    <md-input-container class="search-input-container">
+        <input mdInput placeholder="Project" id="projec_title" required [(ngModel)]="searchProject.title" #project="ngModel" name="project_title"  (keyup)="doSearch()" (blur)="clearSearch()" />
+    </md-input-container>
+    <ul class="autocomplete-content" *ngIf="searchResults.length>0">
+        <li (mousedown)="setResult(result)"*ngFor="let result of searchResults">
+            <span raccord-highlight [search]="searchProject.title" [text]="result.displayName" classToApply="highlight"></span>
+        </li>
+    </ul>
+</div>

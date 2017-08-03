@@ -18,14 +18,14 @@ export class AdminCrewHttpService extends BaseHttpService {
     getProjects(id): Promise<CrewUserProject[]> {
 
         var uri = `${this._baseUri}/${id}/projects`;
-
+        console.log("getting projects");
         return this.doGetArray(uri);
     }
 
     getUsers(id): Promise<CrewUserUser[]> {
 
         var uri = `${this._baseUri}/${id}/users`;
-
+        console.log("getting users");
         return this.doGetArray(uri);
     }
 
