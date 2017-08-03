@@ -40,6 +40,21 @@ export class AdminUserLandingComponent {
         this.searchProject = new Project();
     }
 
+    getProjects(){
+        let loadingId = this._loadingService.startLoading();
+
+        this._crewHttpService.getProjects(this.user.id).then(data=>{
+            if(typeof(data)=='string'){
+                this._dialogService.error(data);
+            }else{
+                this.projects = data;
+            }
+        }).catch()
+        .then(()=>
+            this._loadingService.endLoading(loadingId)
+        );
+    }
+
     addProject(){
         let loadingId = this._loadingService.startLoading();
 
@@ -51,7 +66,24 @@ export class AdminUserLandingComponent {
                 this._dialogService.error(data);
             }else{
                 this.resetSearchProject();
-                this._dialogService.success("Successfully added crew member.");
+                this._dialogService.success("Successfully added project.");
+                this.getProjects();
+            }
+        }).catch()
+        .then(()=>
+            this._loadingService.endLoading(loadingId)
+        );
+    }
+
+    removeProject(crewUser: CrewUserProject){
+        let loadingId = this._loadingService.startLoading();
+
+        this._crewHttpService.delete(crewUser.id).then(data=>{
+            if(typeof(data)=='string'){
+                this._dialogService.error(data);
+            }else{
+                this._dialogService.success("Successfully removed project.");
+                this.getProjects();
             }
         }).catch()
         .then(()=>
