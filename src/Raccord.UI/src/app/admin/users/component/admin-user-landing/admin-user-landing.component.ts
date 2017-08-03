@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AdminUserHttpService } from '../../service/admin-user-http.service';
 import { FullUser } from '../../model/full-user.model';
+import { CrewUserProject } from "../../../crew/model/crew-user-project.model";
 
 @Component({
     templateUrl: 'admin-user-landing.component.html',
@@ -9,6 +10,7 @@ import { FullUser } from '../../model/full-user.model';
 export class AdminUserLandingComponent {
 
     user: FullUser;
+    projects: CrewUserProject[] = [];
 
     constructor(
         private _projectHttpService: AdminUserHttpService,
@@ -18,8 +20,9 @@ export class AdminUserLandingComponent {
     }
 
     ngOnInit() {
-        this.route.data.subscribe((data: { user: FullUser }) => {
+        this.route.data.subscribe((data: { user: FullUser, projects: CrewUserProject[] }) => {
             this.user = data.user;
+            this.projects = data.projects;
         });
     }
 }

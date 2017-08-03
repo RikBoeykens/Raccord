@@ -5,3 +5,23 @@
         <span class="breadcrumb">{{user.email}}</span>
     </div>
 </div>
+<div class="row">
+    <table class="col s12">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let project of projects">
+                <td>
+                    {{project.title}}
+                </td>
+                <td>
+                    <button md-button (click)="remove(project)"><md-icon>delete</md-icon></button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

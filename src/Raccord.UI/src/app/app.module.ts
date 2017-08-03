@@ -285,7 +285,10 @@ import {
   AdminGuard,
   AdminUserHttpService,
   AdminUsersResolve,
-  AdminUserResolve
+  AdminUserResolve,
+  AdminCrewHttpService,
+  AdminProjectCrewResolve,
+  AdminUserProjectsResolve
 } from "./admin";
 
 const APP_PROVIDERS = [
@@ -365,7 +368,10 @@ const APP_PROVIDERS = [
   AdminGuard,
   AdminUserHttpService,
   AdminUsersResolve,
-  AdminUserResolve
+  AdminUserResolve,
+  AdminCrewHttpService,
+  AdminProjectCrewResolve,
+  AdminUserProjectsResolve
 ];
 
 // Directives

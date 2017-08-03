@@ -3,14 +3,18 @@ export { AdminProjectsResolve } from "./projects/service/admin-projects-resolve.
 export { AdminProjectResolve } from "./projects/service/admin-project-resolve.service";
 export { AdminGuard } from "./projects/service/admin-guard.service";
 
+export { AdminUserHttpService } from "./users/service/admin-user-http.service";
+export { AdminUsersResolve } from "./users/service/admin-users-resolve.service";
+export { AdminUserResolve } from "./users/service/admin-user-resolve.service";
+
+export { AdminCrewHttpService } from "./crew/service/admin-crew-http.service";
+export { AdminProjectCrewResolve } from "./crew/service/admin-project-crew-resolve.service";
+export { AdminUserProjectsResolve } from "./crew/service/admin-user-projects-resolve.service";
+
 export { AdminProjectsListComponent } from "./projects/component/admin-projects-list/admin-projects-list.component";
 export { AdminAddProjectComponent } from "./projects/component/admin-add-project/admin-add-project.component";
 export { AdminProjectLandingComponent } from "./projects/component/admin-project-landing/admin-project-landing.component";
 export { AdminProjectSettingsComponent } from "./projects/component/admin-project-settings/admin-project-settings.component";
-
-export { AdminUserHttpService } from "./users/service/admin-user-http.service";
-export { AdminUsersResolve } from "./users/service/admin-users-resolve.service";
-export { AdminUserResolve } from "./users/service/admin-user-resolve.service";
 
 export { AdminUsersListComponent } from "./users/component/admin-users-list/admin-users-list.component";
 export { AdminAddUserComponent } from "./users/component/admin-add-user/admin-add-user.component";

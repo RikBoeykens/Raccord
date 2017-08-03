@@ -92,7 +92,9 @@ import {
   AdminProjectResolve,
   AdminGuard,
   AdminUsersResolve,
-  AdminUserResolve
+  AdminUserResolve,
+  AdminProjectCrewResolve,
+  AdminUserProjectsResolve
 } from "./admin";
 
 import { CanDeactivateGuard } from './shared/service/can-deactivate-guard.service';
@@ -129,7 +131,8 @@ export const ROUTES: Routes = [
                 path: '',
                 component: AdminProjectLandingComponent,
                 resolve:{
-                  project: AdminProjectResolve
+                  project: AdminProjectResolve,
+                  crew: AdminProjectCrewResolve
                 }               
               },
               {
@@ -166,7 +169,8 @@ export const ROUTES: Routes = [
                 path: '',
                 component: AdminUserLandingComponent,
                 resolve:{
-                  user: AdminUserResolve
+                  user: AdminUserResolve,
+                  projects: AdminUserProjectsResolve
                 }               
               },
             ]
