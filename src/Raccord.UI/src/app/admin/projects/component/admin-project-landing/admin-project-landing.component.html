@@ -6,6 +6,7 @@
     </div>
 </div>
 <a md-button [routerLink]="['settings']"><md-icon>settings</md-icon></a>
+<h3>Crew</h3>
 <div class="row" *ngIf="crew.length">
     <table class="col s12">
         <thead>
@@ -20,7 +21,7 @@
                     {{crewMember.user.email}}
                 </td>
                 <td>
-                    <button md-button (click)="remove(crewMember)"><md-icon>delete</md-icon></button>
+                    <button md-button (click)="removeCrewMember(crewMember)"><md-icon>delete</md-icon></button>
                 </td>
             </tr>
         </tbody>
