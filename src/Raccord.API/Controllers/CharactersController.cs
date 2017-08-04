@@ -7,6 +7,8 @@ using Raccord.API.ViewModels.Core;
 using Raccord.Application.Core.Services.Characters;
 using Raccord.API.ViewModels.Common.Sorting;
 using Raccord.API.ViewModels.Images;
+using Microsoft.AspNetCore.Identity;
+using Raccord.Domain.Model.Users;
 
 namespace Raccord.API.Controllers
 {
@@ -14,7 +16,10 @@ namespace Raccord.API.Controllers
     {
         private readonly ICharacterService _characterService;
 
-        public CharactersController(ICharacterService characterService)
+        public CharactersController(
+            ICharacterService characterService,
+            UserManager<ApplicationUser> userManager
+            ): base(userManager)
         {
             if (characterService == null)
                 throw new ArgumentNullException(nameof(characterService));

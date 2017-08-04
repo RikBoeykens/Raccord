@@ -1,10 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Raccord.API.ViewModels.Callsheets.Characters;
 using Raccord.API.ViewModels.Core;
 using Raccord.Application.Core.Services.Callsheets.Characters;
+using Raccord.Domain.Model.Users;
 
 namespace Raccord.API.Controllers
 {
@@ -12,7 +14,10 @@ namespace Raccord.API.Controllers
     {
         private readonly ICallsheetCharacterService _callsheetCharacterService;
 
-        public CallsheetCharactersController(ICallsheetCharacterService callsheetCharacterService)
+        public CallsheetCharactersController(
+            ICallsheetCharacterService callsheetCharacterService,
+            UserManager<ApplicationUser> userManager
+            ): base(userManager)
         {
             if (callsheetCharacterService == null)
                 throw new ArgumentNullException(nameof(callsheetCharacterService));

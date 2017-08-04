@@ -1,20 +1,23 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Raccord.API.ViewModels.ShootingDays;
 using Raccord.Application.Core.Services.ShootingDays;
+using Raccord.Domain.Model.Users;
 
 namespace Raccord.API.Controllers
 {
-    [Route("api/shootingdays")]
-    public class ShootingDaysController : Controller
+    public class ShootingDaysController : AbstractApiAuthController
     {
         private IShootingDayService _shootingDayService;
 
         public ShootingDaysController(
-            IShootingDayService shootingDayService
-        ){
+            IShootingDayService shootingDayService,
+            UserManager<ApplicationUser> userManager
+            ): base(userManager)
+        {
             if(shootingDayService==null)
                 throw new ArgumentNullException(nameof(shootingDayService));
 

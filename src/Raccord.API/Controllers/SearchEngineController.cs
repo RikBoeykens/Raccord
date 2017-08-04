@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 using Raccord.Application.Core.Services.SearchEngine;
 using Raccord.API.ViewModels.Core;
 using Raccord.API.ViewModels.SearchEngine;
+using Microsoft.AspNetCore.Identity;
+using Raccord.Domain.Model.Users;
 
 namespace Raccord.API.Controllers
 {
@@ -12,7 +14,10 @@ namespace Raccord.API.Controllers
     {
         private ISearchEngineServiceWrapper _searchEngineService;
 
-        public SearchEngineController(ISearchEngineServiceWrapper searchEngineService)
+        public SearchEngineController(
+            ISearchEngineServiceWrapper searchEngineService,
+            UserManager<ApplicationUser> userManager
+            ): base(userManager)
         {
             if (searchEngineService == null)
                 throw new ArgumentNullException(nameof(searchEngineService));

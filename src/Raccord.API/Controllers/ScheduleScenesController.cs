@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 using Raccord.API.ViewModels.Scheduling.ScheduleScenes;
 using Raccord.API.ViewModels.Core;
 using Raccord.Application.Core.Services.Scheduling.ScheduleScenes;
+using Microsoft.AspNetCore.Identity;
+using Raccord.Domain.Model.Users;
 
 namespace Raccord.API.Controllers
 {
@@ -12,7 +14,10 @@ namespace Raccord.API.Controllers
     {
         private readonly IScheduleSceneService _scheduleSceneService;
 
-        public ScheduleScenesController(IScheduleSceneService scheduleSceneService)
+        public ScheduleScenesController(
+            IScheduleSceneService scheduleSceneService,
+            UserManager<ApplicationUser> userManager
+            ): base(userManager)
         {
             if (scheduleSceneService == null)
                 throw new ArgumentNullException(nameof(scheduleSceneService));

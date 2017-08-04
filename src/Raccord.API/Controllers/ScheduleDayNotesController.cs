@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 using Raccord.API.ViewModels.Scheduling.ScheduleDayNotes;
 using Raccord.API.ViewModels.Core;
 using Raccord.Application.Core.Services.Scheduling.ScheduleDayNotes;
+using Microsoft.AspNetCore.Identity;
+using Raccord.Domain.Model.Users;
 
 namespace Raccord.API.Controllers
 {
@@ -12,7 +14,10 @@ namespace Raccord.API.Controllers
     {
         private readonly IScheduleDayNoteService _scheduleDayNoteService;
 
-        public ScheduleDayNotesController(IScheduleDayNoteService scheduleDayNoteService)
+        public ScheduleDayNotesController(
+            IScheduleDayNoteService scheduleDayNoteService,
+            UserManager<ApplicationUser> userManager
+            ): base(userManager)
         {
             if (scheduleDayNoteService == null)
                 throw new ArgumentNullException(nameof(scheduleDayNoteService));

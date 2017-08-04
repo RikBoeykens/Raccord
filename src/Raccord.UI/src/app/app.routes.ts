@@ -190,22 +190,22 @@ export const ROUTES: Routes = [
           projects: ProjectsResolve
         }
       },
-      {
+      /*{
         path: 'add',
         component: AddProjectComponent,
         canDeactivate: [CanDeactivateGuard],
-      },
+      },*/
       {
         path: ':projectId',
         children:[
-          {
+          /*{
             path: 'edit',
             component: EditProjectComponent,
             resolve:{
               project: ProjectSummaryResolve
             },
             canDeactivate: [CanDeactivateGuard],
-          },
+          },*/
           {
             path: '',
             component: ProjectLandingComponent,

@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 using Raccord.API.ViewModels.Locations.LocationSets;
 using Raccord.API.ViewModels.Core;
 using Raccord.Application.Core.Services.Locations.LocationSets;
+using Microsoft.AspNetCore.Identity;
+using Raccord.Domain.Model.Users;
 
 namespace Raccord.API.Controllers
 {
@@ -12,7 +14,10 @@ namespace Raccord.API.Controllers
     {
         private readonly ILocationSetService _locationSetService;
 
-        public LocationSetsController(ILocationSetService locationSetService)
+        public LocationSetsController(
+            ILocationSetService locationSetService,
+            UserManager<ApplicationUser> userManager
+            ): base(userManager)
         {
             if (locationSetService == null)
                 throw new ArgumentNullException(nameof(locationSetService));

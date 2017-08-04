@@ -19,6 +19,13 @@ namespace Raccord.Data.EntityFramework.Repositories.Projects
             return query;
         }
 
+        public IEnumerable<Project> GetAllForUser(string userID)
+        {
+            var query = GetIncludedSummary();
+
+            return query.Where(p=> p.Crew.Any(c=> c.UserID == userID));
+        }
+
         public Project GetFull(long ID)
         {
             var query = GetIncludedFull();
@@ -54,7 +61,9 @@ namespace Raccord.Data.EntityFramework.Repositories.Projects
         {
             IQueryable<Project> query = _context.Set<Project>();
 
-            return query.Include(l=> l.Images);
+            return query.Include(l=> l.Images)
+                        .Include(p=> p.Crew)
+                        .ThenInclude(p=> p.User);
         }
 
         private IQueryable<Project> GetIncluded()

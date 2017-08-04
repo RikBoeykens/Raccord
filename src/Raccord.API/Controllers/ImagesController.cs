@@ -9,6 +9,8 @@ using Microsoft.Net.Http.Headers;
 using Microsoft.AspNetCore.Http;
 using Raccord.Core.Utilities;
 using Raccord.API.ViewModels.Common.SelectedEntity;
+using Microsoft.AspNetCore.Identity;
+using Raccord.Domain.Model.Users;
 
 namespace Raccord.API.Controllers
 {
@@ -16,7 +18,10 @@ namespace Raccord.API.Controllers
     {
         private readonly IImageService _imageService;
 
-        public ImagesController(IImageService imageService)
+        public ImagesController(
+            IImageService imageService,
+            UserManager<ApplicationUser> userManager
+            ): base(userManager)
         {
             if (imageService == null)
                 throw new ArgumentNullException(nameof(imageService));
