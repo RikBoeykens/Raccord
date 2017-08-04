@@ -28,8 +28,8 @@ namespace Raccord.Application.Services.Scenes
 
         public SearchTypeResultDto GetResults(SearchRequestDto request)
         {
-            var sceneCount = _sceneRepository.SearchCount(request.SearchText, request.ProjectID);
-            var scenes = _sceneRepository.Search(request.SearchText, request.ProjectID);
+            var sceneCount = _sceneRepository.SearchCount(request.SearchText, request.ProjectID, request.UserID, request.IsAdminSearch);
+            var scenes = _sceneRepository.Search(request.SearchText, request.ProjectID, request.UserID, request.IsAdminSearch);
 
             return new SearchTypeResultDto
             {
