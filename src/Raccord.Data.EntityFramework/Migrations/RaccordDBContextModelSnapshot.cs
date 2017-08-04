@@ -122,6 +122,79 @@ namespace Raccord.Data.EntityFramework.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("OpenIddict.Models.OpenIddictApplication", b =>
+                {
+                    b.Property<string>("Id");
+
+                    b.Property<string>("ClientId");
+
+                    b.Property<string>("ClientSecret");
+
+                    b.Property<string>("DisplayName");
+
+                    b.Property<string>("LogoutRedirectUri");
+
+                    b.Property<string>("RedirectUri");
+
+                    b.Property<string>("Type");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ClientId")
+                        .IsUnique();
+
+                    b.ToTable("OpenIddictApplications");
+                });
+
+            modelBuilder.Entity("OpenIddict.Models.OpenIddictAuthorization", b =>
+                {
+                    b.Property<string>("Id");
+
+                    b.Property<string>("ApplicationId");
+
+                    b.Property<string>("Scope");
+
+                    b.Property<string>("Subject");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ApplicationId");
+
+                    b.ToTable("OpenIddictAuthorizations");
+                });
+
+            modelBuilder.Entity("OpenIddict.Models.OpenIddictScope", b =>
+                {
+                    b.Property<string>("Id");
+
+                    b.Property<string>("Description");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("OpenIddictScopes");
+                });
+
+            modelBuilder.Entity("OpenIddict.Models.OpenIddictToken", b =>
+                {
+                    b.Property<string>("Id");
+
+                    b.Property<string>("ApplicationId");
+
+                    b.Property<string>("AuthorizationId");
+
+                    b.Property<string>("Subject");
+
+                    b.Property<string>("Type");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ApplicationId");
+
+                    b.HasIndex("AuthorizationId");
+
+                    b.ToTable("OpenIddictTokens");
+                });
+
             modelBuilder.Entity("Raccord.Domain.Model.Breakdowns.BreakdownItems.BreakdownItem", b =>
                 {
                     b.Property<long>("ID")
@@ -370,6 +443,24 @@ namespace Raccord.Data.EntityFramework.Migrations
                     b.HasIndex("SceneID");
 
                     b.ToTable("CharacterScene");
+                });
+
+            modelBuilder.Entity("Raccord.Domain.Model.Crew.CrewUser", b =>
+                {
+                    b.Property<long>("ID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<long>("ProjectID");
+
+                    b.Property<string>("UserID");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("ProjectID");
+
+                    b.HasIndex("UserID");
+
+                    b.ToTable("CrewUser");
                 });
 
             modelBuilder.Entity("Raccord.Domain.Model.Images.Image", b =>
@@ -716,6 +807,34 @@ namespace Raccord.Data.EntityFramework.Migrations
                     b.ToTable("ScriptLocations");
                 });
 
+            modelBuilder.Entity("Raccord.Domain.Model.ShootingDays.ShootingDay", b =>
+                {
+                    b.Property<long>("ID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<long?>("CallsheetID");
+
+                    b.Property<DateTime>("Date");
+
+                    b.Property<string>("Number");
+
+                    b.Property<long>("ProjectID");
+
+                    b.Property<long?>("ScheduleDayID");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("CallsheetID")
+                        .IsUnique();
+
+                    b.HasIndex("ProjectID");
+
+                    b.HasIndex("ScheduleDayID")
+                        .IsUnique();
+
+                    b.ToTable("ShootingDay");
+                });
+
             modelBuilder.Entity("Raccord.Domain.Model.Users.ApplicationUser", b =>
                 {
                     b.Property<string>("Id");
@@ -801,33 +920,23 @@ namespace Raccord.Data.EntityFramework.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
-                
-            modelBuilder.Entity("Raccord.Domain.Model.ShootingDays.ShootingDay", b =>
+
+            modelBuilder.Entity("OpenIddict.Models.OpenIddictAuthorization", b =>
                 {
-                    b.Property<long>("ID")
-                        .ValueGeneratedOnAdd();
+                    b.HasOne("OpenIddict.Models.OpenIddictApplication", "Application")
+                        .WithMany("Authorizations")
+                        .HasForeignKey("ApplicationId");
+                });
 
-                    b.Property<long?>("CallsheetID");
+            modelBuilder.Entity("OpenIddict.Models.OpenIddictToken", b =>
+                {
+                    b.HasOne("OpenIddict.Models.OpenIddictApplication", "Application")
+                        .WithMany("Tokens")
+                        .HasForeignKey("ApplicationId");
 
-                    b.Property<DateTime>("Date");
-
-                    b.Property<string>("Number");
-
-                    b.Property<long>("ProjectID");
-
-                    b.Property<long?>("ScheduleDayID");
-
-                    b.HasKey("ID");
-
-                    b.HasIndex("CallsheetID")
-                        .IsUnique();
-
-                    b.HasIndex("ProjectID");
-
-                    b.HasIndex("ScheduleDayID")
-                        .IsUnique();
-
-                    b.ToTable("ShootingDay");
+                    b.HasOne("OpenIddict.Models.OpenIddictAuthorization", "Authorization")
+                        .WithMany("Tokens")
+                        .HasForeignKey("AuthorizationId");
                 });
 
             modelBuilder.Entity("Raccord.Domain.Model.Breakdowns.BreakdownItems.BreakdownItem", b =>
@@ -950,6 +1059,18 @@ namespace Raccord.Data.EntityFramework.Migrations
                         .WithMany("CharacterScenes")
                         .HasForeignKey("SceneID")
                         .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Raccord.Domain.Model.Crew.CrewUser", b =>
+                {
+                    b.HasOne("Raccord.Domain.Model.Projects.Project", "Project")
+                        .WithMany("Crew")
+                        .HasForeignKey("ProjectID")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Raccord.Domain.Model.Users.ApplicationUser", "User")
+                        .WithMany("Crew")
+                        .HasForeignKey("UserID");
                 });
 
             modelBuilder.Entity("Raccord.Domain.Model.Images.Image", b =>

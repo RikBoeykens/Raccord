@@ -33,16 +33,16 @@ namespace Raccord.Data.EntityFramework.Repositories.ScriptLocations
             return query.FirstOrDefault(l => l.ID == ID);
         }
 
-        public int SearchCount(string searchText, long? projectID)
+        public int SearchCount(string searchText, long? projectID, string userID, bool isAdmin)
         {
-            var query = GetSearchQuery(searchText, projectID);
+            var query = GetSearchQuery(searchText, projectID, userID, isAdmin);
 
             return query.Count();            
         }
 
-        public IEnumerable<ScriptLocation> Search(string searchText, long? projectID)
+        public IEnumerable<ScriptLocation> Search(string searchText, long? projectID, string userID, bool isAdmin)
         {
-            return GetSearchQuery(searchText, projectID);
+            return GetSearchQuery(searchText, projectID, userID, isAdmin);
         }
 
         private IQueryable<ScriptLocation> GetIncludedFull()
@@ -79,10 +79,11 @@ namespace Raccord.Data.EntityFramework.Repositories.ScriptLocations
         {
             IQueryable<ScriptLocation> query = _context.Set<ScriptLocation>();
 
-            return query.Include(l=> l.Project);
+            return query.Include(l=> l.Project)
+                        .ThenInclude(p=> p.Crew);
         }
 
-        private IQueryable<ScriptLocation> GetSearchQuery(string searchText, long? projectID)
+        private IQueryable<ScriptLocation> GetSearchQuery(string searchText, long? projectID, string userID, bool isAdmin)
         {
             var query = GetIncludedSearch();
 
@@ -90,6 +91,9 @@ namespace Raccord.Data.EntityFramework.Repositories.ScriptLocations
 
             if(projectID.HasValue)
                 query = query.Where(l=> l.ProjectID==projectID.Value);
+
+            if(!isAdmin)
+                query = query.Where(l=> l.Project.Crew.Any(c=> c.UserID == userID));
 
             return query;
         }

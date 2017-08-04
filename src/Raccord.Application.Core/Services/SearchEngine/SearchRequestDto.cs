@@ -39,5 +39,11 @@ namespace Raccord.Application.Core.Services.SearchEngine
 
         // ProjectID of the project to search in (if applicable)
         public long? ProjectID { get; set; }
+
+        // UserID of the user to search for
+        public string UserID { get; set; }
+
+        // Search regardless of user id
+        public bool IsAdminSearch { get; set; }
     }
 }

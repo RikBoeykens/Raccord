@@ -9,7 +9,7 @@ namespace Raccord.Data.EntityFramework.Repositories.SceneProperties
         IEnumerable<IntExt> GetAllForProject(long projectID);
         IntExt GetFull(long ID);
         IntExt GetSummary(long ID);
-        int SearchCount(string searchText, long? projectID);
-        IEnumerable<IntExt> Search(string searchText, long? projectID);
+        int SearchCount(string searchText, long? projectID, string userID, bool isAdmin);
+        IEnumerable<IntExt> Search(string searchText, long? projectID, string userID, bool isAdmin);
     }
 }

@@ -6,9 +6,10 @@ namespace Raccord.Data.EntityFramework.Repositories.Projects
     // Interface defining a repository for Projects
     public interface IProjectRepository : IBaseRepository<Project>
     {
-        int SearchCount(string searchText);
+        IEnumerable<Project> GetAllForUser(string userID);
+        int SearchCount(string searchText, string userID, bool isAdmin);
         Project GetFull(long ID);
         Project GetSummary(long ID);
-        IEnumerable<Project> Search(string searchText);
+        IEnumerable<Project> Search(string searchText, string userID, bool isAdmin);
     }
 }

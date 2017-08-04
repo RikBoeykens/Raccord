@@ -47,6 +47,15 @@ namespace Raccord.Application.Services.Projects
             return projectDtos;
         }
 
+        public IEnumerable<ProjectSummaryDto> GetAllForUser(string userId)
+        {
+            var projects = _projectRepository.GetAllForUser(userId);
+
+            var projectDtos = projects.Select(p => p.TranslateSummary());
+
+            return projectDtos;
+        }
+
         // Gets a single project by id
         public FullProjectDto Get(long ID)
         {

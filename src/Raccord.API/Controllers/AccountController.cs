@@ -7,13 +7,11 @@ using Raccord.Domain.Model.Users;
 namespace Raccord.API.Controllers
 {
     public class AccountController : AbstractApiAuthController
-    {
-        private readonly UserManager<ApplicationUser> _userManager;
- 
+    { 
         public AccountController(
             UserManager<ApplicationUser> userManager)
+            : base(userManager)
         {
-            _userManager = userManager;
         }
 
         // GET: api/account/sumary

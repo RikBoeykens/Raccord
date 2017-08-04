@@ -6,6 +6,8 @@ using Raccord.API.ViewModels.Projects;
 using Raccord.API.ViewModels.Core;
 using Raccord.Application.Core.Services.Projects;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Raccord.Domain.Model.Users;
 
 namespace Raccord.API.Controllers
 {
@@ -13,7 +15,10 @@ namespace Raccord.API.Controllers
     {
         private readonly IProjectService _projectService;
 
-        public ProjectsController(IProjectService projectService)
+        public ProjectsController(
+            IProjectService projectService,
+            UserManager<ApplicationUser> userManager
+            ):base(userManager)
         {
             if (projectService == null)
                 throw new ArgumentNullException(nameof(projectService));
@@ -25,7 +30,7 @@ namespace Raccord.API.Controllers
         [HttpGet]
         public IEnumerable<ProjectSummaryViewModel> Get()
         {
-            var projectDtos = _projectService.GetAll();
+            var projectDtos = _projectService.GetAllForUser(GetUserId());
 
             var projectVms = projectDtos.Select(p => p.Translate());
 

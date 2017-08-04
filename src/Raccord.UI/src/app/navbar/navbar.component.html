@@ -3,6 +3,7 @@
 
     <span *ngIf="loggedIn()" class="navbar-fill-remaining-space"></span>
     <span *ngIf="loggedIn()"><a md-button routerLink="/search"><md-icon>search</md-icon></a></span>
+    <span *ngIf="loggedIn()"><a md-button routerLink="/projects">My Projects</a></span>
     <span *ngIf="isAdmin()">
         <button md-button [mdMenuTriggerFor]="adminMenu">Admin</button>
         <md-menu #adminMenu="mdMenu">

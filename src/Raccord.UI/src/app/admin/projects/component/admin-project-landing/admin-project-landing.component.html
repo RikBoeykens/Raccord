@@ -6,3 +6,24 @@
     </div>
 </div>
 <a md-button [routerLink]="['settings']"><md-icon>settings</md-icon></a>
+<h3>Crew</h3>
+<div class="row" *ngIf="crew.length">
+    <table class="col s12">
+        <thead>
+            <tr>
+                <th>Email</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let crewMember of crew">
+                <td>
+                    {{crewMember.user.email}}
+                </td>
+                <td>
+                    <button md-button (click)="removeCrewMember(crewMember)"><md-icon>delete</md-icon></button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

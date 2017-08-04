@@ -47,6 +47,7 @@ namespace Raccord.Application.Services.Projects
         {
             var dto = new SearchResultDto
             {
+                ID = project.ID,
                 RouteIDs = new long[]{project.ID},
                 DisplayName = project.Title,
                 Type = EntityType.Project,

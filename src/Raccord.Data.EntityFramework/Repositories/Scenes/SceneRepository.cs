@@ -34,16 +34,16 @@ namespace Raccord.Data.EntityFramework.Repositories.Scenes
         }
 
 
-        public int SearchCount(string searchText, long? projectID)
+        public int SearchCount(string searchText, long? projectID, string userID, bool isAdmin)
         {
-            var query = GetSearchQuery(searchText, projectID);
+            var query = GetSearchQuery(searchText, projectID, userID, isAdmin);
 
             return query.Count();            
         }
 
-        public IEnumerable<Scene> Search(string searchText, long? projectID)
+        public IEnumerable<Scene> Search(string searchText, long? projectID, string userID, bool isAdmin)
         {
-            return GetSearchQuery(searchText, projectID);
+            return GetSearchQuery(searchText, projectID, userID, isAdmin);
         }
 
         private IQueryable<Scene> GetIncludedFull()
@@ -107,17 +107,22 @@ namespace Raccord.Data.EntityFramework.Repositories.Scenes
             return query.Include(s => s.IntExt)
                          .Include(s => s.ScriptLocation)
                          .Include(s => s.DayNight)
-                         .Include(s=> s.Project);
+                         .Include(s=> s.Project)
+                         .ThenInclude(p=> p.Crew);
         }
 
-        private IQueryable<Scene> GetSearchQuery(string searchText, long? projectID)
+        private IQueryable<Scene> GetSearchQuery(string searchText, long? projectID, string userID, bool isAdmin)
         {
             var query = GetIncludedSearch();
 
-            query = query.Where(l=> l.Summary.ToLower().Contains(searchText.ToLower()));
+            query = query.Where(s=> s.Summary.ToLower().Contains(searchText.ToLower()) || 
+                                    s.Number.ToLower().Contains(searchText.ToLower()));
 
             if(projectID.HasValue)
-                query = query.Where(l=> l.ProjectID==projectID.Value);
+                query = query.Where(s=> s.ProjectID==projectID.Value);
+
+            if(!isAdmin)
+                query = query.Where(s=> s.Project.Crew.Any(c=> c.UserID == userID));
 
             return query;
         }

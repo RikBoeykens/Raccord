@@ -1,10 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Raccord.API.ViewModels.Breakdowns.BreakdownItems;
 using Raccord.API.ViewModels.Core;
 using Raccord.Application.Core.Services.Breakdowns.BreakdownItems;
+using Raccord.Domain.Model.Users;
 
 namespace Raccord.API.Controllers
 {
@@ -12,7 +14,10 @@ namespace Raccord.API.Controllers
     {
         private readonly IBreakdownItemService _breakdownItemService;
 
-        public BreakdownItemsController(IBreakdownItemService breakdownItemService)
+        public BreakdownItemsController(
+            IBreakdownItemService breakdownItemService,
+            UserManager<ApplicationUser> userManager
+            ): base(userManager)
         {
             if (breakdownItemService == null)
                 throw new ArgumentNullException(nameof(breakdownItemService));
@@ -149,7 +154,7 @@ namespace Raccord.API.Controllers
         [HttpGet("search/{searchText}/type/{typeID}")]
         public IEnumerable<BreakdownItemViewModel> SearchByType(string searchText, long typeID)
         {
-            var dtos = _breakdownItemService.SearchByType(searchText, typeID);
+            var dtos = _breakdownItemService.SearchByType(searchText, typeID, GetUserId(), false);
 
             var vms = dtos.Select(p => p.Translate());
 

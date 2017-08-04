@@ -8,6 +8,8 @@ using Raccord.Application.Core.Services.Characters;
 using Raccord.Application.Core.Services.CharacterScenes;
 using Raccord.API.ViewModels.Common.Sorting;
 using Raccord.API.ViewModels.Characters;
+using Microsoft.AspNetCore.Identity;
+using Raccord.Domain.Model.Users;
 
 namespace Raccord.API.Controllers
 {
@@ -15,7 +17,10 @@ namespace Raccord.API.Controllers
     {
         private readonly ICharacterSceneService _characterSceneService;
 
-        public CharacterScenesController(ICharacterSceneService characterSceneService)
+        public CharacterScenesController(
+            ICharacterSceneService characterSceneService,
+            UserManager<ApplicationUser> userManager
+            ): base(userManager)
         {
             if (characterSceneService == null)
                 throw new ArgumentNullException(nameof(characterSceneService));

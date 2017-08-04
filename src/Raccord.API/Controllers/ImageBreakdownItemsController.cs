@@ -7,6 +7,8 @@ using Raccord.API.ViewModels.Core;
 using Raccord.Application.Core.Services.ImageBreakdownItems;
 using Raccord.API.ViewModels.Common.Sorting;
 using Raccord.API.ViewModels.Images;
+using Microsoft.AspNetCore.Identity;
+using Raccord.Domain.Model.Users;
 
 namespace Raccord.API.Controllers
 {
@@ -14,7 +16,10 @@ namespace Raccord.API.Controllers
     {
         private readonly IImageBreakdownItemService _imageBreakdownItemService;
 
-        public ImageBreakdownItemsController(IImageBreakdownItemService imageBreakdownItemService)
+        public ImageBreakdownItemsController(
+            IImageBreakdownItemService imageBreakdownItemService,
+            UserManager<ApplicationUser> userManager
+            ): base(userManager)
         {
             if (imageBreakdownItemService == null)
                 throw new ArgumentNullException(nameof(imageBreakdownItemService));

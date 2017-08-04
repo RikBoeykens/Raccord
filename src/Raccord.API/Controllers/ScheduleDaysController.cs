@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 using Raccord.API.ViewModels.Scheduling.ScheduleDays;
 using Raccord.API.ViewModels.Core;
 using Raccord.Application.Core.Services.Scheduling.ScheduleDays;
+using Microsoft.AspNetCore.Identity;
+using Raccord.Domain.Model.Users;
 
 namespace Raccord.API.Controllers
 {
@@ -12,7 +14,10 @@ namespace Raccord.API.Controllers
     {
         private readonly IScheduleDayService _scheduleDayService;
 
-        public ScheduleDaysController(IScheduleDayService scheduleDayService)
+        public ScheduleDaysController(
+            IScheduleDayService scheduleDayService,
+            UserManager<ApplicationUser> userManager
+            ): base(userManager)
         {
             if (scheduleDayService == null)
                 throw new ArgumentNullException(nameof(scheduleDayService));

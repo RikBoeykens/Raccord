@@ -8,6 +8,8 @@ using Raccord.Application.Core.Services.Images;
 using Raccord.Application.Core.Services.ImageScenes;
 using Raccord.API.ViewModels.Common.Sorting;
 using Raccord.API.ViewModels.Images;
+using Microsoft.AspNetCore.Identity;
+using Raccord.Domain.Model.Users;
 
 namespace Raccord.API.Controllers
 {
@@ -15,7 +17,10 @@ namespace Raccord.API.Controllers
     {
         private readonly IImageSceneService _imageSceneService;
 
-        public ImageScenesController(IImageSceneService imageSceneService)
+        public ImageScenesController(
+            IImageSceneService imageSceneService,
+            UserManager<ApplicationUser> userManager
+            ): base(userManager)
         {
             if (imageSceneService == null)
                 throw new ArgumentNullException(nameof(imageSceneService));

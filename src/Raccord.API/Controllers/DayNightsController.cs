@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 using Raccord.API.ViewModels.SceneProperties;
 using Raccord.API.ViewModels.Core;
 using Raccord.Application.Core.Services.SceneProperties;
+using Microsoft.AspNetCore.Identity;
+using Raccord.Domain.Model.Users;
 
 namespace Raccord.API.Controllers
 {
@@ -12,7 +14,10 @@ namespace Raccord.API.Controllers
     {
         private readonly IDayNightService _dayNightService;
 
-        public DayNightsController(IDayNightService dayNightService)
+        public DayNightsController(
+            IDayNightService dayNightService,
+            UserManager<ApplicationUser> userManager
+            ): base(userManager)
         {
             if (dayNightService == null)
                 throw new ArgumentNullException(nameof(dayNightService));

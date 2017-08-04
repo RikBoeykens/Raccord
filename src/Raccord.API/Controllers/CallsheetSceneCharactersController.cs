@@ -10,15 +10,19 @@ using Raccord.API.ViewModels.Common.Sorting;
 using Raccord.API.ViewModels.Characters;
 using Raccord.Application.Core.Services.Callsheets.CallsheetSceneCharacters;
 using Raccord.API.ViewModels.Callsheets.CallsheetScenes;
+using Microsoft.AspNetCore.Identity;
+using Raccord.Domain.Model.Users;
 
 namespace Raccord.API.Controllers
 {
-    [Route("api/[controller]")]
-    public class CallsheetSceneCharactersController : Controller
+    public class CallsheetSceneCharactersController : AbstractApiAuthController
     {
         private readonly ICallsheetSceneCharacterService _callsheetSceneCharacterService;
 
-        public CallsheetSceneCharactersController(ICallsheetSceneCharacterService callsheetSceneCharacterService)
+        public CallsheetSceneCharactersController(
+            ICallsheetSceneCharacterService callsheetSceneCharacterService,
+            UserManager<ApplicationUser> userManager
+            ): base(userManager)
         {
             if (callsheetSceneCharacterService == null)
                 throw new ArgumentNullException(nameof(callsheetSceneCharacterService));

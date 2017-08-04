@@ -104,6 +104,7 @@ import { ScenePropertiesLandingComponent } from './projects';
 import { SelectEntityComponent } from './shared';
 import { LoginComponent } from "./security";
 import { 
+  AdminSearchProjectComponent,
   AdminProjectsListComponent,
   AdminAddProjectComponent,
   AdminProjectLandingComponent,
@@ -187,6 +188,7 @@ const COMPONENTS =[
   ScenePropertiesLandingComponent,
   SelectEntityComponent,
   LoginComponent,
+  AdminSearchProjectComponent,
   AdminProjectsListComponent,
   AdminAddProjectComponent,
   AdminProjectLandingComponent,
@@ -285,7 +287,11 @@ import {
   AdminGuard,
   AdminUserHttpService,
   AdminUsersResolve,
-  AdminUserResolve
+  AdminUserResolve,
+  AdminCrewHttpService,
+  AdminProjectCrewResolve,
+  AdminUserProjectsResolve,
+  AdminSearchEngineService
 } from "./admin";
 
 const APP_PROVIDERS = [
@@ -365,7 +371,11 @@ const APP_PROVIDERS = [
   AdminGuard,
   AdminUserHttpService,
   AdminUsersResolve,
-  AdminUserResolve
+  AdminUserResolve,
+  AdminCrewHttpService,
+  AdminProjectCrewResolve,
+  AdminUserProjectsResolve,
+  AdminSearchEngineService
 ];
 
 // Directives

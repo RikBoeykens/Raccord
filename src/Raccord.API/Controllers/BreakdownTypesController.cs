@@ -1,10 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Raccord.API.ViewModels.Breakdowns.BreakdownTypes;
 using Raccord.API.ViewModels.Core;
 using Raccord.Application.Core.Services.Breakdowns.BreakdownTypes;
+using Raccord.Domain.Model.Users;
 
 namespace Raccord.API.Controllers
 {
@@ -12,7 +14,10 @@ namespace Raccord.API.Controllers
     {
         private readonly IBreakdownTypeService _breakdownTypeService;
 
-        public BreakdownTypesController(IBreakdownTypeService breakdownTypeService)
+        public BreakdownTypesController(
+            IBreakdownTypeService breakdownTypeService,
+            UserManager<ApplicationUser> userManager
+            ): base(userManager)
         {
             if (breakdownTypeService == null)
                 throw new ArgumentNullException(nameof(breakdownTypeService));

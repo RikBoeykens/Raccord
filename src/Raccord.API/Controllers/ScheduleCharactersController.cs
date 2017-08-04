@@ -10,6 +10,8 @@ using Raccord.API.ViewModels.Common.Sorting;
 using Raccord.API.ViewModels.Characters;
 using Raccord.Application.Core.Services.Scheduling.ScheduleCharacters;
 using Raccord.API.ViewModels.Scheduling.ScheduleScenes;
+using Microsoft.AspNetCore.Identity;
+using Raccord.Domain.Model.Users;
 
 namespace Raccord.API.Controllers
 {
@@ -17,7 +19,10 @@ namespace Raccord.API.Controllers
     {
         private readonly IScheduleCharacterService _scheduleCharacterService;
 
-        public ScheduleCharactersController(IScheduleCharacterService scheduleCharacterService)
+        public ScheduleCharactersController(
+            IScheduleCharacterService scheduleCharacterService,
+            UserManager<ApplicationUser> userManager
+            ): base(userManager)
         {
             if (scheduleCharacterService == null)
                 throw new ArgumentNullException(nameof(scheduleCharacterService));

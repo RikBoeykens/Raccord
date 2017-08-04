@@ -1,19 +1,23 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Raccord.API.ViewModels.Callsheets;
 using Raccord.API.ViewModels.Core;
 using Raccord.Application.Core.Services.Callsheets;
+using Raccord.Domain.Model.Users;
 
 namespace Raccord.API.Controllers
 {
-    [Route("api/[controller]")]
-    public class CallsheetsController : Controller
+    public class CallsheetsController : AbstractApiAuthController
     {
         private readonly ICallsheetService _callsheetService;
 
-        public CallsheetsController(ICallsheetService callsheetService)
+        public CallsheetsController(
+            ICallsheetService callsheetService,
+            UserManager<ApplicationUser> userManager
+            ): base(userManager)
         {
             if (callsheetService == null)
                 throw new ArgumentNullException(nameof(callsheetService));

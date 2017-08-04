@@ -9,7 +9,7 @@ namespace Raccord.Data.EntityFramework.Repositories.Images
         IEnumerable<Image> GetAllForProject(long projectID);
         Image GetFull(long ID);
         Image GetSummary(long ID);
-        int SearchCount(string searchText, long? projectID);
-        IEnumerable<Image> Search(string searchText, long? projectID);
+        int SearchCount(string searchText, long? projectID, string userID, bool isAdmin);
+        IEnumerable<Image> Search(string searchText, long? projectID, string userID, bool isAdmin);
     }
 }

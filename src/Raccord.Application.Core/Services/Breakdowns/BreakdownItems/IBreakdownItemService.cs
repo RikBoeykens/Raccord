@@ -9,6 +9,6 @@ namespace Raccord.Application.Core.Services.Breakdowns.BreakdownItems
         void Merge(long toID, long mergeID);
 
         // Search for breakdown items by type
-        IEnumerable<BreakdownItemDto> SearchByType(string searchText, long typeID);
+        IEnumerable<BreakdownItemDto> SearchByType(string searchText, long typeID, string userID, bool isAdmin);
     }
 }
