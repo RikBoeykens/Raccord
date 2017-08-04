@@ -28,8 +28,8 @@ namespace Raccord.Application.Services.Characters
 
         public SearchTypeResultDto GetResults(SearchRequestDto request)
         {
-            var characterCount = _characterRepository.SearchCount(request.SearchText, request.ProjectID);
-            var characters = _characterRepository.Search(request.SearchText, request.ProjectID);
+            var characterCount = _characterRepository.SearchCount(request.SearchText, request.ProjectID, request.UserID, request.IsAdminSearch);
+            var characters = _characterRepository.Search(request.SearchText, request.ProjectID, request.UserID, request.IsAdminSearch);
 
             return new SearchTypeResultDto
             {

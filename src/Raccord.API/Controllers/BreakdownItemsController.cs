@@ -154,7 +154,7 @@ namespace Raccord.API.Controllers
         [HttpGet("search/{searchText}/type/{typeID}")]
         public IEnumerable<BreakdownItemViewModel> SearchByType(string searchText, long typeID)
         {
-            var dtos = _breakdownItemService.SearchByType(searchText, typeID);
+            var dtos = _breakdownItemService.SearchByType(searchText, typeID, GetUserId(), false);
 
             var vms = dtos.Select(p => p.Translate());
 

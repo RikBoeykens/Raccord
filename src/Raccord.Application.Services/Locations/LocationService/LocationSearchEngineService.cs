@@ -28,8 +28,8 @@ namespace Raccord.Application.Services.Locations.Locations
 
         public SearchTypeResultDto GetResults(SearchRequestDto request)
         {
-            var locationCount = _locationRepository.SearchCount(request.SearchText, request.ProjectID);
-            var locations = _locationRepository.Search(request.SearchText, request.ProjectID);
+            var locationCount = _locationRepository.SearchCount(request.SearchText, request.ProjectID, request.UserID, request.IsAdminSearch);
+            var locations = _locationRepository.Search(request.SearchText, request.ProjectID, request.UserID, request.IsAdminSearch);
 
             return new SearchTypeResultDto
             {

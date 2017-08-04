@@ -33,16 +33,16 @@ namespace Raccord.Data.EntityFramework.Repositories.Breakdowns.BreakdownItems
             return query.FirstOrDefault(l => l.ID == ID);
         }
 
-        public int SearchCount(string searchText, long? projectID = null, long? typeID = null)
+        public int SearchCount(string searchText, long? projectID, long? typeID, string userID, bool isAdmin)
         {
-            var query = GetSearchQuery(searchText, projectID, typeID);
+            var query = GetSearchQuery(searchText, projectID, typeID, userID, isAdmin);
 
             return query.Count();            
         }
 
-        public IEnumerable<BreakdownItem> Search(string searchText, long? projectID = null, long? typeID = null)
+        public IEnumerable<BreakdownItem> Search(string searchText, long? projectID, long? typeID, string userID, bool isAdmin)
         {
-            return GetSearchQuery(searchText, projectID, typeID);
+            return GetSearchQuery(searchText, projectID, typeID, userID, isAdmin);
         }
 
         private IQueryable<BreakdownItem> GetIncludedFull()
@@ -85,10 +85,11 @@ namespace Raccord.Data.EntityFramework.Repositories.Breakdowns.BreakdownItems
             IQueryable<BreakdownItem> query = _context.Set<BreakdownItem>();
 
             return query.Include(bi=> bi.BreakdownType)
-                        .ThenInclude(bt=> bt.Project);
+                        .ThenInclude(bt=> bt.Project)
+                        .ThenInclude(p=> p.Crew);
         }
 
-        private IQueryable<BreakdownItem> GetSearchQuery(string searchText, long? projectID = null, long? typeID = null)
+        private IQueryable<BreakdownItem> GetSearchQuery(string searchText, long? projectID, long? typeID, string userID, bool isAdmin)
         {
             var query = GetIncludedSearch();
 
@@ -99,6 +100,9 @@ namespace Raccord.Data.EntityFramework.Repositories.Breakdowns.BreakdownItems
 
             if(typeID.HasValue)
                 query = query.Where(bi=> bi.BreakdownTypeID==typeID.Value);
+
+            if(!isAdmin)
+                query = query.Where(bi=> bi.BreakdownType.Project.Crew.Any(c=> c.UserID == userID));
 
             return query;
         }

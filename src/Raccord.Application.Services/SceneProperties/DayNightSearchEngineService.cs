@@ -28,8 +28,8 @@ namespace Raccord.Application.Services.SceneProperties
 
         public SearchTypeResultDto GetResults(SearchRequestDto request)
         {
-            var dayNightCount = _dayNightRepository.SearchCount(request.SearchText, request.ProjectID);
-            var dayNights = _dayNightRepository.Search(request.SearchText, request.ProjectID);
+            var dayNightCount = _dayNightRepository.SearchCount(request.SearchText, request.ProjectID, request.UserID, request.IsAdminSearch);
+            var dayNights = _dayNightRepository.Search(request.SearchText, request.ProjectID, request.UserID, request.IsAdminSearch);
 
             return new SearchTypeResultDto
             {

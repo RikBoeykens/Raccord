@@ -33,16 +33,16 @@ namespace Raccord.Data.EntityFramework.Repositories.Images
             return query.FirstOrDefault(i => i.ID == ID);
         }
 
-        public int SearchCount(string searchText, long? projectID)
+        public int SearchCount(string searchText, long? projectID, string userID, bool isAdmin)
         {
-            var query = GetSearchQuery(searchText, projectID);
+            var query = GetSearchQuery(searchText, projectID, userID, isAdmin);
 
             return query.Count();            
         }
 
-        public IEnumerable<Image> Search(string searchText, long? projectID)
+        public IEnumerable<Image> Search(string searchText, long? projectID, string userID, bool isAdmin)
         {
-            return GetSearchQuery(searchText, projectID);
+            return GetSearchQuery(searchText, projectID, userID, isAdmin);
         }
 
         private IQueryable<Image> GetIncludedFull()
@@ -85,10 +85,11 @@ namespace Raccord.Data.EntityFramework.Repositories.Images
         {
             IQueryable<Image> query = _context.Set<Image>();
 
-            return query.Include(i=> i.Project);
+            return query.Include(i=> i.Project)
+                        .ThenInclude(p=> p.Crew);
         }
 
-        private IQueryable<Image> GetSearchQuery(string searchText, long? projectID)
+        private IQueryable<Image> GetSearchQuery(string searchText, long? projectID, string userID, bool isAdmin)
         {
             var query = GetIncludedSearch();
 
@@ -96,6 +97,9 @@ namespace Raccord.Data.EntityFramework.Repositories.Images
 
             if(projectID.HasValue)
                 query = query.Where(i=> i.ProjectID==projectID.Value);
+
+            if(!isAdmin)
+                query = query.Where(l=> l.Project.Crew.Any(c=> c.UserID == userID));
 
             return query;
         }

@@ -28,8 +28,8 @@ namespace Raccord.Application.Services.Images
 
         public SearchTypeResultDto GetResults(SearchRequestDto request)
         {
-            var imageCount = _imageRepository.SearchCount(request.SearchText, request.ProjectID);
-            var images = _imageRepository.Search(request.SearchText, request.ProjectID);
+            var imageCount = _imageRepository.SearchCount(request.SearchText, request.ProjectID, request.UserID, request.IsAdminSearch);
+            var images = _imageRepository.Search(request.SearchText, request.ProjectID, request.UserID, request.IsAdminSearch);
 
             return new SearchTypeResultDto
             {
