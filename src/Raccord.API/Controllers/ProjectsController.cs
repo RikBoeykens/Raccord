@@ -30,8 +30,7 @@ namespace Raccord.API.Controllers
         [HttpGet]
         public IEnumerable<ProjectSummaryViewModel> Get()
         {
-            var userId = _userManager.GetUserId(HttpContext.User);
-            var projectDtos = _projectService.GetAllForUser(userId);
+            var projectDtos = _projectService.GetAllForUser(GetUserId());
 
             var projectVms = projectDtos.Select(p => p.Translate());
 

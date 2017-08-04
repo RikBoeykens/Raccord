@@ -34,6 +34,7 @@ namespace Raccord.API.Controllers
             try
             {
                 var requestDto = vm.Translate();
+                requestDto.UserID = GetUserId();
                 var results = _searchEngineService.GetResults(requestDto);
 
                 response = new JsonResponse
@@ -42,7 +43,7 @@ namespace Raccord.API.Controllers
                     data = results.Select(r=> r.Translate()),
                 };
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 response = new JsonResponse
                 {

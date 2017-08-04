@@ -28,8 +28,8 @@ namespace Raccord.Application.Services.Projects
 
         public SearchTypeResultDto GetResults(SearchRequestDto request)
         {
-            var projectCount = _projectRepository.SearchCount(request.SearchText);
-            var projects = _projectRepository.Search(request.SearchText);
+            var projectCount = _projectRepository.SearchCount(request.SearchText, request.UserID, request.IsAdminSearch);
+            var projects = _projectRepository.Search(request.SearchText, request.UserID, request.IsAdminSearch);
 
             return new SearchTypeResultDto
             {
