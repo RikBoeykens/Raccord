@@ -28,8 +28,8 @@ namespace Raccord.Application.Services.SceneProperties
 
         public SearchTypeResultDto GetResults(SearchRequestDto request)
         {
-            var intExtCount = _intExtRepository.SearchCount(request.SearchText, request.ProjectID);
-            var intExts = _intExtRepository.Search(request.SearchText, request.ProjectID);
+            var intExtCount = _intExtRepository.SearchCount(request.SearchText, request.ProjectID, request.UserID, request.IsAdminSearch);
+            var intExts = _intExtRepository.Search(request.SearchText, request.ProjectID, request.UserID, request.IsAdminSearch);
 
             return new SearchTypeResultDto
             {
