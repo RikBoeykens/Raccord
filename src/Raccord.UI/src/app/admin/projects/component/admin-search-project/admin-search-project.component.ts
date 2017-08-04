@@ -1,11 +1,11 @@
 import { Component, Input } from '@angular/core';
 import { Character } from '../../model/character.model';
-import { SearchEngineService } from '../../../../search/service/search-engine.service';
 import { LoadingService } from '../../../../loading/service/loading.service';
 import { SearchResult } from '../../../../search/model/search-result.model';
 import { EntityType } from '../../../../shared/enums/entity-type.enum';
 import { DialogService } from '../../../../shared/service/dialog.service';
 import { Project } from "../../../../projects";
+import { AdminSearchEngineService } from "../../../search/service/admin-search-engine.service";
 
 @Component({
     selector: 'admin-search-project',
@@ -17,7 +17,7 @@ export class AdminSearchProjectComponent{
     searchResults: SearchResult[] = [];
 
     constructor(
-        private _searchEngineService: SearchEngineService,
+        private _searchEngineService: AdminSearchEngineService,
         private _loadingService: LoadingService,
         private _dialogService: DialogService,
     ){
