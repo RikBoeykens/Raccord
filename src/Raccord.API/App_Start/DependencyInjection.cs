@@ -85,6 +85,8 @@ using Raccord.Data.EntityFramework.Repositories.Users;
 using Raccord.Data.EntityFramework.Repositories.Crew;
 using Raccord.Application.Core.Services.Crew;
 using Raccord.Application.Services.Crew;
+using Raccord.Data.EntityFramework.Repositories.Shots.Slates;
+using Raccord.Data.EntityFramework.Repositories.Shots.Takes;
 
 namespace Raccord.API
 {
@@ -194,7 +196,11 @@ namespace Raccord.API
             services.AddTransient<IUserService, UserService>();
 
             services.AddTransient<ICrewRepository, CrewRepository>();            
-            services.AddTransient<ICrewService, CrewService>();            
+            services.AddTransient<ICrewService, CrewService>();    
+
+            services.AddTransient<ISlateRepository, SlateRepository>();
+
+            services.AddTransient<ITakeRepository, TakeRepository>();    
         }
     }
 }
