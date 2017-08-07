@@ -28,14 +28,17 @@ namespace Raccord.Domain.Model.Shots
         // Sound used
         public string Sound { get; set; }
 
+        // Sorting order
+        public int SortingOrder { get; set; }
+
         // ID of the linked scene
-        public long SceneID { get; set; }
+        public long? SceneID { get; set; }
 
         // Linked scene
         public virtual Scene Scene { get; set; }
 
         // ID of the linked schooting day
-        public long ShootingDayID { get; set; }
+        public long? ShootingDayID { get; set; }
 
         // Linked Shooting day
         public virtual ShootingDay  ShootingDay { get; set; }

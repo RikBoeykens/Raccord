@@ -22,6 +22,9 @@ namespace Raccord.Domain.Model.Shots
         // Sound roll the take is on
         public string SoundRoll { get; set; }
 
+        // Sorting order
+        public int SortingOrder { get; set; }
+
         // ID of the parent slate
         public long SlateID { get; set; }
 
