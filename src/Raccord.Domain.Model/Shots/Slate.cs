@@ -19,6 +19,9 @@ namespace Raccord.Domain.Model.Shots
         // Lens used
         public string Lens { get; set; }
 
+        // Distance
+        public string Distance { get; set; }
+
         // Aperture used
         public string Aperture { get; set; }
 
