@@ -89,6 +89,8 @@ using Raccord.Data.EntityFramework.Repositories.Shots.Slates;
 using Raccord.Data.EntityFramework.Repositories.Shots.Takes;
 using Raccord.Application.Core.Services.Shots.Slates;
 using Raccord.Application.Services.Shots.Slates;
+using Raccord.Application.Core.Services.Shots.Takes;
+using Raccord.Application.Services.Shots.Takes;
 
 namespace Raccord.API
 {
@@ -203,7 +205,8 @@ namespace Raccord.API
             services.AddTransient<ISlateRepository, SlateRepository>();
             services.AddTransient<ISlateService, SlateService>();
 
-            services.AddTransient<ITakeRepository, TakeRepository>();    
+            services.AddTransient<ITakeRepository, TakeRepository>(); 
+            services.AddTransient<ITakeService, TakeService>();   
         }
     }
 }
