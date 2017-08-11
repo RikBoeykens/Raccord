@@ -1,6 +1,7 @@
 using System.Linq;
 using Raccord.API.ViewModels.Scenes;
 using Raccord.API.ViewModels.ShootingDays;
+using Raccord.API.ViewModels.Shots.Takes;
 using Raccord.Application.Core.Services.Shots.Slates;
 
 namespace Raccord.API.ViewModels.Shots.Slates
