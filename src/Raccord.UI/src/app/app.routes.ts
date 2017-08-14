@@ -37,6 +37,8 @@ import {
   CallsheetWizardStep2Component,
   CallsheetWizardStep3Component,
   CallsheetWizardStep4Component,
+  SlatesListComponent,
+  SlateLandingComponent
 } from './projects';
 import { ScenePropertiesLandingComponent } from './projects';
 import { LoginComponent } from "./security";
@@ -521,10 +523,30 @@ export const ROUTES: Routes = [
                     }
                   }
                 ]
-
               }
             ]
-          }
+          },
+          {
+            path: 'slates',
+            children:[
+              {
+                path: '',
+                component: SlatesListComponent,
+                resolve:{
+                  project: ProjectSummaryResolve,
+                  slates: SlatesResolve,
+                }
+              },
+              {
+                path: ':slateId',
+                component: SlateLandingComponent,
+                resolve:{
+                  project: ProjectSummaryResolve,
+                  slate: SlateResolve,
+                }
+              }
+            ]
+          },
         ],
       },
     ],

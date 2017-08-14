@@ -45,4 +45,8 @@ export class Slate extends BaseModel{
             this.id = 0;
         }
     }
+
+    getNumber(): string{
+        return this.number ? this.number : "..."; 
+    }
 }

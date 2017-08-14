@@ -98,7 +98,9 @@ import {
   CallsheetWizardStep1Component,
   CallsheetWizardStep2Component,
   CallsheetWizardStep3Component,
-  CallsheetWizardStep4Component
+  CallsheetWizardStep4Component,
+  SlatesListComponent,
+  SlateLandingComponent
 } from './projects';
 import { ScenePropertiesLandingComponent } from './projects';
 import { SelectEntityComponent } from './shared';
@@ -185,6 +187,8 @@ const COMPONENTS =[
   CallsheetWizardStep2Component,
   CallsheetWizardStep3Component,
   CallsheetWizardStep4Component,
+  SlatesListComponent,
+  SlateLandingComponent,
   ScenePropertiesLandingComponent,
   SelectEntityComponent,
   LoginComponent,

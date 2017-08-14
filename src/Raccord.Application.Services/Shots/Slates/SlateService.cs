@@ -63,8 +63,8 @@ namespace Raccord.Application.Services.Shots.Slates
                 Aperture = dto.Aperture,
                 Filters = dto.Filters,
                 Sound = dto.Sound,
-                SceneID = dto.Scene.ID,
-                ShootingDayID = dto.ShootingDay.ID,
+                SceneID = dto.Scene.ID!=default(long) ? dto.Scene.ID : (long?)null,
+                ShootingDayID = dto.ShootingDay.ID!=default(long) ? dto.ShootingDay.ID : (long?)null,
                 ProjectID = dto.ProjectID
             };
 
@@ -86,8 +86,8 @@ namespace Raccord.Application.Services.Shots.Slates
             slate.Aperture = dto.Aperture;
             slate.Filters = dto.Filters;
             slate.Sound = dto.Sound;
-            slate.SceneID = dto.Scene.ID;
-            slate.ShootingDayID = dto.ShootingDay.ID;
+            slate.SceneID = dto.Scene.ID!=default(long) ? dto.Scene.ID : (long?)null;
+            slate.ShootingDayID = dto.ShootingDay.ID!=default(long) ? dto.ShootingDay.ID : (long?)null;
 
             _slateRepository.Edit(slate);
             _slateRepository.Commit();

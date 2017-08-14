@@ -1,0 +1,14 @@
+<md-card>
+        <a routerLink="/" class="breadcrumb">Dashboard</a>
+        <a routerLink="/projects" class="breadcrumb">Projects</a>
+        <a routerLink="/projects/{{project.id}}" class="breadcrumb">{{project.title}}</a>
+        <a routerLink="/projects/{{project.id}}/slates" class="breadcrumb">Slates</a>
+        <span class="breadcrumb">{{slate.number ? slate.number: "..."}}</span>
+</md-card>
+<md-card>
+    <div fxLayout="row" fxLayoutGap="10px">
+        <md-input-container fxFlex="33%">
+            <input mdInput type="text" placeholder="Number" required [(ngModel)]="viewSlate.number" name="slate_number" (blur)="updateSlate()" />
+        </md-input-container>
+    </div>
+</md-card>

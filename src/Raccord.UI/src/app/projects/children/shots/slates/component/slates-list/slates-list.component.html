@@ -1,0 +1,21 @@
+<div class="row">      
+    <div class="col s12">
+        <a routerLink="/" class="breadcrumb">Dashboard</a>
+        <a routerLink="/projects" class="breadcrumb">Projects</a>
+        <a routerLink="/projects/{{project.id}}" class="breadcrumb">{{project.title}}</a>
+        <span class="breadcrumb">Slates</span>
+    </div>
+</div>
+<div class="row">
+    <md-list>
+        <md-list-item 
+            *ngFor="let slate of slates">
+            <!--show-image *ngIf="scheduleScene.scene.primaryImage.id!=0" [image]="scheduleScene.scene.primaryImage" [listAvatar]="true"></show-image-->
+            <a routerLink="/projects/{{project.id}}/slates/{{slate.id}}">{{slate.number ? slate.number: "..."}}</a>
+            <button md-button (click)="remove(slate)"><md-icon>delete</md-icon></button>
+        </md-list-item>
+    </md-list>
+</div>
+<div class="row">
+    <button md-fab (click)="addSlate()"><md-icon>add</md-icon></button>
+</div>
