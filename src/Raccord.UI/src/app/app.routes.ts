@@ -85,7 +85,11 @@ import {
   CallsheetSummaryResolve,
   CallsheetSceneLocationsResolve,
   CallsheetSceneCharactersResolve,
-  CallsheetCharactersCharactersResolve
+  CallsheetCharactersCharactersResolve,
+  SlateResolve,
+  SlatesResolve,
+  TakeResolve,
+  TakesResolve
 } from './projects';
 import { 
   AdminProjectsResolve,

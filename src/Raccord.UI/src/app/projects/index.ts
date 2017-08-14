@@ -162,4 +162,13 @@ export {
     CallsheetWizardStep4Component
  } from "./children/callsheets";
 
+ export{
+    SlateHttpService,
+    SlateResolve,
+    SlatesResolve,
+    TakeHttpService,
+    TakeResolve,
+    TakesResolve
+ } from "./children/shots";
+
 export { ScenePropertiesLandingComponent } from './children/scene-properties/component/scene-properties-landing/scene-properties-landing.component';

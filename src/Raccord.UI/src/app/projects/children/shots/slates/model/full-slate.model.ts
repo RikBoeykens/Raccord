@@ -3,7 +3,7 @@ import { Scene } from "../../../scenes/model/scene.model";
 import { ShootingDay } from "../../../shooting-days/index";
 import { Take } from "../../takes/model/take.model";
 
-export class ScheduleDayNote extends Slate {
+export class FullSlate extends Slate {
     takes: Take[];
 
     constructor(obj?: {

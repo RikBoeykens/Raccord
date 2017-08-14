@@ -268,7 +268,13 @@ import {
   CallsheetSceneCharacterHttpService,
   CallsheetCharacterHttpService,
   CallsheetCharactersCharactersResolve,
-  CharacterCallHttpService
+  CharacterCallHttpService,
+  SlateHttpService,
+  SlateResolve,
+  SlatesResolve,
+  TakeHttpService,
+  TakeResolve,
+  TakesResolve
 } from './projects';
 
 import {
@@ -365,6 +371,12 @@ const APP_PROVIDERS = [
   CallsheetCharacterHttpService,
   CallsheetCharactersCharactersResolve,
   CharacterCallHttpService,
+  SlateHttpService,
+  SlateResolve,
+  SlatesResolve,
+  TakeHttpService,
+  TakeResolve,
+  TakesResolve,
   AdminProjectHttpService,
   AdminProjectsResolve,
   AdminProjectResolve,
