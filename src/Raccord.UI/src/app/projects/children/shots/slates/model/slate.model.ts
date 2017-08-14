@@ -9,7 +9,7 @@ export class Slate extends BaseModel{
     lens: string;
     distance: string;
     aperture: string;
-    filter: string;
+    filters: string;
     sound: string;
     projectID: number;
     scene? : Scene;
@@ -22,7 +22,7 @@ export class Slate extends BaseModel{
                         lens: string,
                         distance: string,
                         aperture: string,
-                        filter: string,
+                        filters: string,
                         sound: string,
                         projectID: number,
                         scene?: Scene,
@@ -36,7 +36,7 @@ export class Slate extends BaseModel{
             this.lens = obj.lens;
             this.distance = obj.distance;
             this.aperture = obj.aperture;
-            this.filter = obj.filter;
+            this.filters = obj.filters;
             this.sound = obj.sound;
             this.projectID = obj.projectID;
             this.scene = obj.scene;

@@ -13,7 +13,7 @@ export class FullSlate extends Slate {
                         lens: string,
                         distance: string,
                         aperture: string,
-                        filter: string,
+                        filters: string,
                         sound: string,
                         projectID: number,
                         scene?: Scene,

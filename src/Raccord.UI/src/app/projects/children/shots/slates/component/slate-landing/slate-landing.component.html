@@ -22,3 +22,29 @@
         </span>
     </div>
 </md-card>
+<md-card>
+    <div fxLayout="row" fxLayoutGap="10px">
+        <md-input-container fxFlex="100%">
+            <input mdInput type="text" placeholder="Description" required [(ngModel)]="viewSlate.description" name="slate_description" (blur)="updateSlate()" />
+        </md-input-container>
+    </div>
+    <div fxLayout="row" fxLayoutGap="10px">
+        <md-input-container fxFlex="33%">
+            <input mdInput type="text" placeholder="Lens" required [(ngModel)]="viewSlate.lens" name="slate_lens" (blur)="updateSlate()" />
+        </md-input-container>
+        <md-input-container fxFlex="33%">
+            <input mdInput type="text" placeholder="Distance" required [(ngModel)]="viewSlate.distance" name="slate_distance" (blur)="updateSlate()" />
+        </md-input-container>
+        <md-input-container fxFlex="33%">
+            <input mdInput type="text" placeholder="Aperture" required [(ngModel)]="viewSlate.aperture" name="slate_aperture" (blur)="updateSlate()" />
+        </md-input-container>
+    </div>
+    <div fxLayout="row" fxLayoutGap="10px">
+        <md-input-container fxFlex="33%">
+            <input mdInput type="text" placeholder="Filters" [(ngModel)]="viewSlate.filters" name="slate_filter" (blur)="updateSlate()" />
+        </md-input-container>
+        <md-input-container fxFlex="33%">
+            <input mdInput type="text" placeholder="Sound" required [(ngModel)]="viewSlate.sound" name="slate_sound" (blur)="updateSlate()" />
+        </md-input-container>
+    </div>
+</md-card>
