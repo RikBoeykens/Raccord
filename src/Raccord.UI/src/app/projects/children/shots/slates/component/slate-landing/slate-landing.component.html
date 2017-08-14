@@ -10,5 +10,15 @@
         <md-input-container fxFlex="33%">
             <input mdInput type="text" placeholder="Number" required [(ngModel)]="viewSlate.number" name="slate_number" (blur)="updateSlate()" />
         </md-input-container>
+        <span fxFlex="33%">
+            <span *ngIf="viewSlate.scene.id!==0">Scene # {{viewSlate.scene.number}}</span>
+            <span *ngIf="viewSlate.scene.id===0"><i>no scene selected</i></span>
+            <a (click)="chooseScene()">choose scene</a>
+        </span>
+        <span fxFlex="33%">
+            <span *ngIf="viewSlate.shootingDay.id!==0">SD # {{viewSlate.shootingDay.number}} {{viewSlate.shootingDay.date | date}}</span>
+            <span *ngIf="viewSlate.shootingDay.id===0"><i>no day selected</i></span>
+            <a (click)="chooseShootingDay()">choose day</a>
+        </span>
     </div>
 </md-card>

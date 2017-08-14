@@ -67,7 +67,17 @@ namespace Raccord.Data.EntityFramework.Repositories.Shots.Slates
         {
             IQueryable<Slate> query = _context.Set<Slate>();
 
-            return query.Include(s => s.Takes);
+            return query.Include(s => s.Takes)
+                        .Include(s=> s.Scene)
+                        .ThenInclude(s=> s.IntExt)
+                        .Include(s=> s.Scene)
+                        .ThenInclude(s=> s.ScriptLocation)
+                        .Include(s=> s.Scene)
+                        .ThenInclude(s=> s.DayNight)
+                        .Include(s=> s.Scene)
+                        .ThenInclude(s=> s.ImageScenes)
+                        .ThenInclude(ims=> ims.Image)
+                        .Include(s=> s.ShootingDay);
         }
 
         private IQueryable<Slate> GetIncluded()

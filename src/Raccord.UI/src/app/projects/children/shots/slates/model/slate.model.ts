@@ -39,6 +39,7 @@ export class Slate extends BaseModel{
             this.filter = obj.filter;
             this.sound = obj.sound;
             this.projectID = obj.projectID;
+            this.scene = obj.scene;
             this.shootingDay = obj.shootingDay;
         }
         else{

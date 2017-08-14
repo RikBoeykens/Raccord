@@ -82,6 +82,7 @@ import {
   LocationSetResolve,
   SceneLocationSetsResolve,
   AvailableShootingDaysResolve,
+  ShootingDaysResolve,
   CallsheetsResolve,
   CallsheetResolve,
   CallsheetSummaryResolve,
@@ -543,6 +544,8 @@ export const ROUTES: Routes = [
                 resolve:{
                   project: ProjectSummaryResolve,
                   slate: SlateResolve,
+                  scenes: ScenesResolve,
+                  shootingDays: ShootingDaysResolve
                 }
               }
             ]

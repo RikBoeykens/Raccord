@@ -25,5 +25,12 @@ namespace Raccord.Application.Services.ShootingDays
 
             return availableShootingDays.Select(asd=> asd.Translate());
         }
+
+        public IEnumerable<ShootingDayDto> GetAll(long projectID)
+        {
+            var availableShootingDays = _shootingDayRepository.GetAllForProject(projectID);
+
+            return availableShootingDays.Select(asd=> asd.Translate());
+        }
     }
 }

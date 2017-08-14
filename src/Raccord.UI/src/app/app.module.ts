@@ -41,7 +41,10 @@ import { SceneLandingComponent } from './projects';
 import { SceneImagesComponent } from './projects';
 import { SceneCharactersComponent } from './projects';
 import { SceneBreakdownItemsComponent } from './projects';
-import { SceneSchedulingComponent } from './projects';
+import { 
+  SceneSchedulingComponent,
+  ChooseSceneDialog
+} from './projects';
 import { ScriptLocationsListComponent } from './projects';
 import { EditScriptLocationComponent } from './projects';
 import { ScriptLocationLandingComponent } from './projects';
@@ -100,7 +103,8 @@ import {
   CallsheetWizardStep3Component,
   CallsheetWizardStep4Component,
   SlatesListComponent,
-  SlateLandingComponent
+  SlateLandingComponent,
+  ChooseShootingDayDialog
 } from './projects';
 import { ScenePropertiesLandingComponent } from './projects';
 import { SelectEntityComponent } from './shared';
@@ -202,6 +206,11 @@ const COMPONENTS =[
   AdminUserLandingComponent
 ];
 
+const ENTRY_COMPONENTS = [
+  ChooseSceneDialog,
+  ChooseShootingDayDialog
+];
+
 // Services
 import { LoadingService } from './loading/service/loading.service';
 import { CanDeactivateGuard } from './shared/service/can-deactivate-guard.service';
@@ -262,6 +271,7 @@ import {
   SceneLocationSetsResolve,
   ShootingDayHttpService,
   AvailableShootingDaysResolve,
+  ShootingDaysResolve,
   CallsheetHttpService,
   CallsheetsResolve,
   CallsheetResolve,
@@ -364,6 +374,7 @@ const APP_PROVIDERS = [
   AccountHttpService,
   ShootingDayHttpService,
   AvailableShootingDaysResolve,
+  ShootingDaysResolve,
   CallsheetHttpService,
   CallsheetsResolve,
   CallsheetResolve,
@@ -427,8 +438,12 @@ import '../styles/headings.css';
   bootstrap: [ AppComponent ],
   declarations: [
     COMPONENTS,
+    ENTRY_COMPONENTS,
     DIRECTIVES,
     PIPES
+  ],
+  entryComponents:[
+    ENTRY_COMPONENTS
   ],
   imports: [ // import Angular's modules
     BrowserModule,

@@ -33,5 +33,15 @@ namespace Raccord.API.Controllers
 
             return availableDays.Select(ad=> ad.Translate());
         }
+
+        
+        // GET: api/shootingdays/1/project
+        [HttpGet("{projectID}/project")]
+        public IEnumerable<ShootingDayViewModel> GetAll(long projectID)
+        {
+            var availableDays = _shootingDayService.GetAll(projectID);
+
+            return availableDays.Select(ad=> ad.Translate());
+        }
     }
 }
