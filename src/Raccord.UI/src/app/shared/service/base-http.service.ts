@@ -65,16 +65,20 @@ export abstract class BaseHttpService{
             .catch(this.handleErrorPromise);
     }
 
-    protected doFilePost(files: File[], object: any, uri: string){
+    protected doFilePost(files: File[], object: any, uri: string, useAuthToken: Boolean = true){
         let formData = new FormData();
+        console.log(files);
         for (let i = 0; i < files.length; i++) {
             formData.append("files", files[i], files[i].name);
         }
         for(var property in object){
             formData.append(property, object[property]);
         }
+        console.log(formData);
+        let headers = useAuthToken ? HeaderHelpers.AuthFormHeaders() : HeaderHelpers.ContentHeaders();
+        let options = new RequestOptions({ headers: headers });
 
-        return this._http.post(uri, formData)
+        return this._http.post(uri, formData, options)
             .toPromise()
             .then(response => this.extractJsonResponse(response))
             .catch(this.handleErrorPromise);

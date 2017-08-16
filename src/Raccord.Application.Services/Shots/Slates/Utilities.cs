@@ -95,7 +95,7 @@ namespace Raccord.Application.Services.Shots.Slates
                 RouteIDs = new long[]{slate.ProjectID, slate.ID},
                 DisplayName = slate.Number,
                 Info = $"Project: {slate.Project.Title}",
-                Type = EntityType.ScriptLocation,  
+                Type = EntityType.Slate,  
             };
         }
     }

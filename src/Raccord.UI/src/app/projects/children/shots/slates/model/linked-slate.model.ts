@@ -1,11 +1,9 @@
 import { Slate } from "./slate.model";
 import { Scene } from "../../../scenes/model/scene.model";
 import { ShootingDay } from "../../../shooting-days/index";
-import { Image } from "../../../images/model/image.model";
 
-export class SlateSummary extends Slate {
-    takeCount: number;
-    primaryImage: Image;
+export class LinkedSlate extends Slate {
+    linkID: number;
 
     constructor(obj?: {
                         id: number,
@@ -19,13 +17,11 @@ export class SlateSummary extends Slate {
                         projectID: number,
                         scene?: Scene,
                         shootingDay?: ShootingDay,
-                        takeCount: number,
-                        primaryImage: Image
+                        linkID: number
                     }){
         super(obj);
         if(obj){
-            this.takeCount = obj.takeCount;
-            this.primaryImage = obj.primaryImage;
+            this.linkID = obj.linkID;
         }
         else{
             this.id = 0;

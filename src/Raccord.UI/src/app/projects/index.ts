@@ -171,11 +171,13 @@ export {
     SlateHttpService,
     SlateResolve,
     SlatesResolve,
+    ImageSlateHttpService,
     TakeHttpService,
     TakeResolve,
     TakesResolve,
     SlatesListComponent,
-    SlateLandingComponent
+    SlateLandingComponent,
+    SlateImagesComponent
  } from "./children/shots";
 
 export { ScenePropertiesLandingComponent } from './children/scene-properties/component/scene-properties-landing/scene-properties-landing.component';

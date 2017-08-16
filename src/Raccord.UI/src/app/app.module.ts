@@ -104,6 +104,7 @@ import {
   CallsheetWizardStep4Component,
   SlatesListComponent,
   SlateLandingComponent,
+  SlateImagesComponent,
   ChooseShootingDayDialog
 } from './projects';
 import { ScenePropertiesLandingComponent } from './projects';
@@ -193,6 +194,7 @@ const COMPONENTS =[
   CallsheetWizardStep4Component,
   SlatesListComponent,
   SlateLandingComponent,
+  SlateImagesComponent,
   ScenePropertiesLandingComponent,
   SelectEntityComponent,
   LoginComponent,
@@ -286,6 +288,7 @@ import {
   SlateHttpService,
   SlateResolve,
   SlatesResolve,
+  ImageSlateHttpService,
   TakeHttpService,
   TakeResolve,
   TakesResolve
@@ -389,6 +392,7 @@ const APP_PROVIDERS = [
   SlateHttpService,
   SlateResolve,
   SlatesResolve,
+  ImageSlateHttpService,
   TakeHttpService,
   TakeResolve,
   TakesResolve,

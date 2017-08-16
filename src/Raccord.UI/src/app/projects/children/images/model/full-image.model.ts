@@ -3,6 +3,7 @@ import { LinkedScene } from '../../scenes/model/linked-scene.model';
 import { LinkedScriptLocation } from '../../script-locations/model/linked-script-location.model';
 import { LinkedCharacter } from '../../characters/model/linked-character.model';
 import { LinkedBreakdownItem } from '../../breakdowns/breakdown-items/model/linked-breakdown-item.model';
+import { LinkedSlate } from "../../shots/slates/model/linked-slate.model";
 
 export class FullImage extends Image{
     isPrimary: boolean;
@@ -10,6 +11,7 @@ export class FullImage extends Image{
     scriptLocations: LinkedScriptLocation[];
     characters: LinkedCharacter[];
     breakdownItems: LinkedBreakdownItem[];
+    slates: LinkedSlate[];
 
     constructor(obj?: {
                         id: number, 
@@ -22,6 +24,7 @@ export class FullImage extends Image{
                         scriptLocations: LinkedScriptLocation[],
                         characters: LinkedCharacter[],
                         breakdownItems: LinkedBreakdownItem[],
+                        slates: LinkedSlate[]
                     }){
         super(obj);
         if(obj){
@@ -30,6 +33,7 @@ export class FullImage extends Image{
             this.scriptLocations = obj.scriptLocations;
             this.characters = obj.characters;
             this.breakdownItems = obj.breakdownItems;
+            this.slates = obj.slates;
         }
     }
 }
