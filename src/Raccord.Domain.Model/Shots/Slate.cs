@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Raccord.Domain.Model.Images;
 using Raccord.Domain.Model.Projects;
 using Raccord.Domain.Model.Scenes;
 using Raccord.Domain.Model.ShootingDays;
@@ -9,6 +10,7 @@ namespace Raccord.Domain.Model.Shots
     public class Slate : Entity
     {
         private ICollection<Take> _takes;
+        private ICollection<ImageSlate> _images;
 
         // Number of the shot
         public string Number { get; set; }
@@ -62,6 +64,19 @@ namespace Raccord.Domain.Model.Shots
             set
             {
                 _takes = value;
+            }
+        }
+
+        // Linked images
+        public virtual ICollection<ImageSlate> ImageSlates
+        {
+            get
+            {
+                return _images ?? (_images = new List<ImageSlate>());
+            }
+            set
+            {
+                _images = value;
             }
         }
     }
