@@ -1,8 +1,10 @@
 using System.Linq;
+using Raccord.Application.Core.Services.SearchEngine;
 using Raccord.Application.Core.Services.Shots.Slates;
 using Raccord.Application.Services.Scenes;
 using Raccord.Application.Services.ShootingDays;
 using Raccord.Application.Services.Shots.Takes;
+using Raccord.Core.Enums;
 using Raccord.Domain.Model.Shots;
 
 namespace Raccord.Application.Services.Shots.Slates
@@ -60,6 +62,18 @@ namespace Raccord.Application.Services.Shots.Slates
                 ProjectID = slate.ProjectID,
                 Scene = slate.SceneID.HasValue ? slate.Scene.Translate() : null,
                 ShootingDay = slate.ShootingDayID.HasValue ? slate.ShootingDay.Translate() : null,
+            };
+        }
+
+        public static SearchResultDto TranslateToSearchResult(this Slate slate)
+        {
+            return new SearchResultDto
+            {
+                ID = slate.ID,
+                RouteIDs = new long[]{slate.ProjectID, slate.ID},
+                DisplayName = slate.Number,
+                Info = $"Project: {slate.Project.Title}",
+                Type = EntityType.ScriptLocation,  
             };
         }
     }

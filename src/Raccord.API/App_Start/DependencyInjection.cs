@@ -204,6 +204,7 @@ namespace Raccord.API
 
             services.AddTransient<ISlateRepository, SlateRepository>();
             services.AddTransient<ISlateService, SlateService>();
+            services.AddTransient<ISlateSearchEngineService, SlateSearchEngineService>();
 
             services.AddTransient<ITakeRepository, TakeRepository>(); 
             services.AddTransient<ITakeService, TakeService>();   
