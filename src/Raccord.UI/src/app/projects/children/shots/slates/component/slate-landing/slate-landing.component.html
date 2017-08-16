@@ -48,3 +48,32 @@
         </md-input-container>
     </div>
 </md-card>
+<md-card>
+    <div fxLayout="row" fxLayoutGap="10px">
+        <button md-raised-button type="button" (click)="addTake()">Add Take</button>
+    </div>
+    <div fxLayout="row">
+        <md-list>
+            <md-list-item *ngFor="let take of slate.takes">
+                <md-checkbox [(ngModel)]="take.selected" name="take_{{take.id}}_selected" (change)="updateTake(take)">
+                </md-checkbox>
+                <md-input-container>
+                    <input mdInput type="text" placeholder="Number" required [(ngModel)]="take.number" name="stake_{{take.id}}_number" (blur)="updateTake(take)" />
+                </md-input-container>
+                <md-input-container>
+                    <input mdInput type="text" placeholder="Length" required [(ngModel)]="take.length" name="stake_{{take.id}}_length" (blur)="updateTake(take)" />
+                </md-input-container>
+                <md-input-container>
+                    <input mdInput type="text" placeholder="Notes" required [(ngModel)]="take.notes" name="stake_{{take.id}}_notes" (blur)="updateTake(take)" />
+                </md-input-container>
+                <md-input-container>
+                    <input mdInput type="text" placeholder="Camera Roll" required [(ngModel)]="take.cameraRoll" name="stake_{{take.id}}_camera_roll" (blur)="updateTake(take)" />
+                </md-input-container>
+                <md-input-container>
+                    <input mdInput type="text" placeholder="Sound Roll" required [(ngModel)]="take.soundRoll" name="stake_{{take.id}}_sound_roll" (blur)="updateTake(take)" />
+                </md-input-container>
+                <button md-button (click)="removeTake(take)"><md-icon>delete</md-icon></button>
+            </md-list-item>
+        </md-list>
+    </div>
+</md-card>
