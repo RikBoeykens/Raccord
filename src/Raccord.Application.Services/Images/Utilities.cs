@@ -8,6 +8,7 @@ using Raccord.Application.Core.Services.SearchEngine;
 using Raccord.Core.Enums;
 using Raccord.Application.Services.Characters;
 using Raccord.Application.Services.Breakdowns.BreakdownItems;
+using Raccord.Application.Services.Shots.Slates;
 
 namespace Raccord.Application.Services.Images
 {
@@ -26,6 +27,7 @@ namespace Raccord.Application.Services.Images
                 ScriptLocations = image.ImageScriptLocations.Select(il=> il.TranslateLocation()),
                 Characters = image.ImageCharacters.Select(il=> il.TranslateCharacter()),
                 BreakdownItems = image.ImageBreakdownItems.Select(ibi=> ibi.TranslateBreakdownItem()),
+                Slates = image.ImageSlates.Select(isl=> isl.TranslateSlate()),
                 ProjectID = image.ProjectID,
                 IsPrimaryImage = image.IsPrimaryImage,
             };
@@ -120,6 +122,22 @@ namespace Raccord.Application.Services.Images
                 ProjectID = imageBreakdownItem.Image.ProjectID,
                 LinkID = imageBreakdownItem.ID,
                 IsPrimaryImage = imageBreakdownItem.IsPrimaryImage,
+            };
+
+            return dto;
+        }
+
+        public static LinkedImageDto TranslateImage(this ImageSlate imageSlate)
+        {
+            var dto = new LinkedImageDto
+            {
+                ID = imageSlate.Image.ID,
+                Title = imageSlate.Image.Title,
+                FileName = imageSlate.Image.FileName,
+                Description = imageSlate.Image.Description,
+                ProjectID = imageSlate.Image.ProjectID,
+                LinkID = imageSlate.ID,
+                IsPrimaryImage = imageSlate.IsPrimaryImage,
             };
 
             return dto;

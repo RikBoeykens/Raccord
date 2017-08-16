@@ -7,7 +7,7 @@ using Raccord.Data.EntityFramework.Repositories.ImageSlates;
 using Raccord.Application.Services.Images;
 using Raccord.Application.Core.Services.ImageSlates;
 
-namespace Raccord.Application.Services.ImageCharacters
+namespace Raccord.Application.Services.ImageSlates
 {
     // Service used for image slate functionality
     public class ImageSlateService : IImageSlateService
@@ -15,18 +15,18 @@ namespace Raccord.Application.Services.ImageCharacters
         private readonly IImageSlateRepository _imageSlateRepository;
 
         // Initialises a new ImageSlateService
-        public ImageSlateService(IImageSlateRepository imageCharacterRepository)
+        public ImageSlateService(IImageSlateRepository imageSlateRepository)
         {
-            if(imageCharacterRepository == null)
-                throw new ArgumentNullException(nameof(imageCharacterRepository));
+            if(imageSlateRepository == null)
+                throw new ArgumentNullException(nameof(imageSlateRepository));
             
-            _imageSlateRepository = imageCharacterRepository;
+            _imageSlateRepository = imageSlateRepository;
         }
 
         // Gets all images
         public IEnumerable<LinkedImageDto> GetImages(long ID)
         {
-            var imageCharacters = _imageSlateRepository.GetAllForCharacter(ID);
+            var imageCharacters = _imageSlateRepository.GetAllForSlate(ID);
 
             var dtos = imageCharacters.Select(i=> i.TranslateImage());
 
@@ -59,7 +59,7 @@ namespace Raccord.Application.Services.ImageCharacters
         public void SetAsPrimary(long ID)
         {
             var imageSlate = _imageSlateRepository.GetSingle(ID);
-            ClearPrimaryImages(imageSlate.CharacterID);
+            ClearPrimaryImages(imageSlate.SlateID);
 
             imageSlate.IsPrimaryImage = true;
 

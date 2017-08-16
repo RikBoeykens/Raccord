@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Raccord.Application.Core.Services.ScriptLocations;
 using Raccord.Application.Core.Services.Characters;
 using Raccord.Application.Core.Services.Breakdowns.BreakdownItems;
+using Raccord.Application.Core.Services.Shots.Slates;
 
 namespace Raccord.Application.Core.Services.Images
 {
@@ -13,6 +14,7 @@ namespace Raccord.Application.Core.Services.Images
         private IEnumerable<LinkedScriptLocationDto> _scriptLocations;
         private IEnumerable<LinkedCharacterDto> _characters;
         private IEnumerable<LinkedBreakdownItemDto> _items;
+        private IEnumerable<LinkedSlateDto> _slates;
         
         // Indicates if the image is primary image for the project
         public bool IsPrimaryImage { get; set; }
@@ -66,6 +68,19 @@ namespace Raccord.Application.Core.Services.Images
             set
             {
                 _items = value;
+            }
+        }
+
+        // Slates linked to the image
+        public IEnumerable<LinkedSlateDto> Slates
+        {
+            get
+            {
+                return _slates ?? (_slates = new List<LinkedSlateDto>());
+            }
+            set
+            {
+                _slates = value;
             }
         }
     }

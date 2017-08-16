@@ -1,4 +1,5 @@
 using System.Linq;
+using Raccord.API.ViewModels.Images;
 using Raccord.API.ViewModels.Scenes;
 using Raccord.API.ViewModels.ShootingDays;
 using Raccord.API.ViewModels.Shots.Takes;
@@ -24,6 +25,7 @@ namespace Raccord.API.ViewModels.Shots.Slates
                 Scene = dto.Scene.Translate(),
                 ShootingDay = dto.ShootingDay.Translate(),
                 Takes = dto.Takes.Select(t=> t.Translate()),
+                Images = dto.Images.Select(i=> i.Translate()),
             };
         }
         public static SlateSummaryViewModel Translate(this SlateSummaryDto dto)
@@ -42,6 +44,25 @@ namespace Raccord.API.ViewModels.Shots.Slates
                 Scene = dto.Scene.Translate(),
                 ShootingDay = dto.ShootingDay.Translate(),
                 TakeCount = dto.TakeCount,
+                PrimaryImage = dto.PrimaryImage.Translate(),
+            };
+        }
+        public static LinkedSlateViewModel Translate(this LinkedSlateDto dto)
+        {
+            return new LinkedSlateViewModel
+            {
+                ID = dto.ID,
+                Number = dto.Number,
+                Description = dto.Description,
+                Lens = dto.Lens,
+                Distance = dto.Distance,
+                Aperture = dto.Aperture,
+                Filters = dto.Filters,
+                Sound = dto.Sound,
+                ProjectID = dto.ProjectID,
+                Scene = dto.Scene.Translate(),
+                ShootingDay = dto.ShootingDay.Translate(),
+                LinkID = dto.LinkID,
             };
         }
         public static SlateViewModel Translate(this SlateDto dto)

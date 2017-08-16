@@ -60,7 +60,9 @@ namespace Raccord.Data.EntityFramework.Repositories.Shots.Slates
                         .Include(s=> s.Scene)
                         .ThenInclude(s=> s.ImageScenes)
                         .ThenInclude(ims=> ims.Image)
-                        .Include(s=> s.ShootingDay);
+                        .Include(s=> s.ShootingDay)
+                        .Include(s=> s.ImageSlates)
+                        .ThenInclude(isl=> isl.Image);
         }
 
         private IQueryable<Slate> GetIncludedSummary()
@@ -77,7 +79,9 @@ namespace Raccord.Data.EntityFramework.Repositories.Shots.Slates
                         .Include(s=> s.Scene)
                         .ThenInclude(s=> s.ImageScenes)
                         .ThenInclude(ims=> ims.Image)
-                        .Include(s=> s.ShootingDay);
+                        .Include(s=> s.ShootingDay)
+                        .Include(s=> s.ImageSlates)
+                        .ThenInclude(isl=> isl.Image);
         }
 
         private IQueryable<Slate> GetIncluded()
