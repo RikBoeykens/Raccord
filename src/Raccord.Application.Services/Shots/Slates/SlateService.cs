@@ -54,6 +54,8 @@ namespace Raccord.Application.Services.Shots.Slates
         // Adds a day/night
         public long Add(SlateDto dto)
         {
+            var previousSlate = _slateRepository.GetAllForProject(dto.ProjectID).OrderByDescending(s=> s.SortingOrder).FirstOrDefault();
+
             var slate = new Slate
             {
                 Number = dto.Number,
@@ -63,6 +65,7 @@ namespace Raccord.Application.Services.Shots.Slates
                 Aperture = dto.Aperture,
                 Filters = dto.Filters,
                 Sound = dto.Sound,
+                SortingOrder = previousSlate != null ? previousSlate.SortingOrder + 1 : 1,
                 SceneID = dto.Scene.ID!=default(long) ? dto.Scene.ID : (long?)null,
                 ShootingDayID = dto.ShootingDay.ID!=default(long) ? dto.ShootingDay.ID : (long?)null,
                 ProjectID = dto.ProjectID

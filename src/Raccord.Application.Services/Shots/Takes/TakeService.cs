@@ -54,6 +54,7 @@ namespace Raccord.Application.Services.Shots.Takes
         // Adds a take
         public long Add(TakeDto dto)
         {
+            var previousTake = _takeRepository.GetAllForSlate(dto.Slate.ID).OrderByDescending(t=> t.SortingOrder).FirstOrDefault();
             var take = new Take
             {
                 Number = dto.Number,
@@ -62,6 +63,7 @@ namespace Raccord.Application.Services.Shots.Takes
                 Selected = dto.Selected,
                 CameraRoll = dto.CameraRoll,
                 SoundRoll = dto.SoundRoll,
+                SortingOrder = previousTake != null ? previousTake.SortingOrder + 1 : 1,
                 SlateID = dto.Slate.ID,
             };
 
