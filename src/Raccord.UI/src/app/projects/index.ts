@@ -20,6 +20,7 @@ export { SceneCharactersComponent } from './children/scenes/component/scene-char
 export { SceneBreakdownItemsComponent } from './children/scenes/component/scene-breakdown-items/scene-breakdown-items.component';
 export { 
     SceneSchedulingComponent,
+    SceneSlatesComponent,
     ChooseSceneDialog
 } from './children/scenes';
 export { SceneHttpService } from './children/scenes/service/scene-http.service';

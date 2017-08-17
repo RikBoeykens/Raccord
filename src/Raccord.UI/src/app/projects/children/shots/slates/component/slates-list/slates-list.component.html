@@ -10,7 +10,7 @@
     <md-list>
         <md-list-item 
             *ngFor="let slate of slates">
-            <!--show-image *ngIf="scheduleScene.scene.primaryImage.id!=0" [image]="scheduleScene.scene.primaryImage" [listAvatar]="true"></show-image-->
+            <show-image *ngIf="slate.primaryImage.id!=0" [image]="slate.primaryImage" [listAvatar]="true"></show-image>
             <a routerLink="/projects/{{project.id}}/slates/{{slate.id}}">{{slate.number ? slate.number: "..."}}</a>
             <button md-button (click)="remove(slate)"><md-icon>delete</md-icon></button>
         </md-list-item>

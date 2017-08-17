@@ -43,6 +43,7 @@ import { SceneCharactersComponent } from './projects';
 import { SceneBreakdownItemsComponent } from './projects';
 import { 
   SceneSchedulingComponent,
+  SceneSlatesComponent,
   ChooseSceneDialog
 } from './projects';
 import { ScriptLocationsListComponent } from './projects';
@@ -140,6 +141,7 @@ const COMPONENTS =[
   SceneCharactersComponent,
   SceneBreakdownItemsComponent,
   SceneSchedulingComponent,
+  SceneSlatesComponent,
   ScriptLocationsListComponent,
   EditScriptLocationComponent,
   ScriptLocationLandingComponent,

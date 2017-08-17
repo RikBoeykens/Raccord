@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Raccord.API.ViewModels.Characters;
 using Raccord.API.ViewModels.Breakdowns.BreakdownItems;
 using Raccord.API.ViewModels.Scheduling.ScheduleScenes;
+using Raccord.API.ViewModels.Shots.Slates;
 
 namespace Raccord.API.ViewModels.Scenes
 {
@@ -13,6 +14,7 @@ namespace Raccord.API.ViewModels.Scenes
         private IEnumerable<LinkedCharacterViewModel> _characters;
         private IEnumerable<LinkedBreakdownItemViewModel> _breakdownItems;
         private IEnumerable<ScheduleSceneDayViewModel> _scheduleDays;
+        private IEnumerable<SlateSummaryViewModel> _slates;
 
         // Images linked to the scene
         public IEnumerable<LinkedImageViewModel> Images
@@ -63,6 +65,19 @@ namespace Raccord.API.ViewModels.Scenes
             set
             {
                 _scheduleDays = value;
+            }
+        }
+
+        // Slates linked to the scene
+        public IEnumerable<SlateSummaryViewModel> Slates
+        {
+            get
+            {
+                return _slates ?? (_slates = new List<SlateSummaryViewModel>());
+            }
+            set
+            {
+                _slates = value;
             }
         }
     }
