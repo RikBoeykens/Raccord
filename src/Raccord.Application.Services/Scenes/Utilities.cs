@@ -13,6 +13,7 @@ using Raccord.Application.Services.Breakdowns.BreakdownItems;
 using Raccord.Domain.Model.Breakdowns.BreakdownItems;
 using Raccord.Application.Services.Scheduling.ScheduleScenes;
 using Raccord.Domain.Model.Scheduling;
+using Raccord.Application.Services.Shots.Slates;
 
 namespace Raccord.Application.Services.Scenes
 {
@@ -34,6 +35,7 @@ namespace Raccord.Application.Services.Scenes
                 Characters = scene.CharacterScenes.Select(i=> i.TranslateCharacter()),
                 BreakdownItems = scene.BreakdownItemScenes.Select(bis=> bis.TranslateBreakdownItem()),
                 ScheduleDays = scene.ScheduleScenes.Select(ss=> ss.TranslateDay()),
+                Slates = scene.Slates.Select(s=> s.TranslateSummary()),
                 ProjectID = scene.ProjectID,
             };
 

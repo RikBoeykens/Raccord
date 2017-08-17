@@ -64,7 +64,22 @@ namespace Raccord.Data.EntityFramework.Repositories.Images
                         .ThenInclude(ic=> ic.Character)
                         .Include(i=> i.ImageBreakdownItems)
                         .ThenInclude(ibi=> ibi.BreakdownItem)
-                        .ThenInclude(ibi=> ibi.BreakdownType);
+                        .ThenInclude(ibi=> ibi.BreakdownType)
+                        .Include(i=> i.ImageSlates)
+                        .ThenInclude(isl=> isl.Slate)
+                        .ThenInclude(isl=> isl.ShootingDay)
+                        .Include(i=> i.ImageSlates)
+                        .ThenInclude(isl=> isl.Slate)
+                        .ThenInclude(isl=> isl.Scene)
+                        .ThenInclude(s=> s.IntExt)
+                        .Include(i=> i.ImageSlates)
+                        .ThenInclude(isl=> isl.Slate)
+                        .ThenInclude(isl=> isl.Scene)
+                        .ThenInclude(s=> s.ScriptLocation)
+                        .Include(i=> i.ImageSlates)
+                        .ThenInclude(isl=> isl.Slate)
+                        .ThenInclude(isl=> isl.Scene)
+                        .ThenInclude(s=> s.DayNight);
         }
 
         private IQueryable<Image> GetIncludedSummary()

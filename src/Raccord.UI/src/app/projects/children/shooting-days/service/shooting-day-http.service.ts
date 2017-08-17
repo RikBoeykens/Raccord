@@ -19,4 +19,11 @@ export class ShootingDayHttpService extends BaseHttpService {
 
         return this.doGetArray(uri);
     }
+
+    getAll(projectId): Promise<ShootingDay[]> {
+        
+        var uri = `${this._baseUri}/${projectId}/project`;
+
+        return this.doGetArray(uri);
+    }
 }

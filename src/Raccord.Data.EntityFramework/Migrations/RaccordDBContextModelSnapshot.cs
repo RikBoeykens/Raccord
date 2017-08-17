@@ -567,6 +567,26 @@ namespace Raccord.Data.EntityFramework.Migrations
                     b.ToTable("ImageScriptLocation");
                 });
 
+            modelBuilder.Entity("Raccord.Domain.Model.Images.ImageSlate", b =>
+                {
+                    b.Property<long>("ID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<long>("ImageID");
+
+                    b.Property<bool>("IsPrimaryImage");
+
+                    b.Property<long>("SlateID");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("ImageID");
+
+                    b.HasIndex("SlateID");
+
+                    b.ToTable("ImageSlate");
+                });
+
             modelBuilder.Entity("Raccord.Domain.Model.Locations.Locations.Location", b =>
                 {
                     b.Property<long>("ID")
@@ -833,6 +853,72 @@ namespace Raccord.Data.EntityFramework.Migrations
                         .IsUnique();
 
                     b.ToTable("ShootingDay");
+                });
+
+            modelBuilder.Entity("Raccord.Domain.Model.Shots.Slate", b =>
+                {
+                    b.Property<long>("ID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Aperture");
+
+                    b.Property<string>("Description");
+
+                    b.Property<string>("Distance");
+
+                    b.Property<string>("Filters");
+
+                    b.Property<string>("Lens");
+
+                    b.Property<string>("Number");
+
+                    b.Property<long>("ProjectID");
+
+                    b.Property<long?>("SceneID");
+
+                    b.Property<long?>("ShootingDayID");
+
+                    b.Property<int>("SortingOrder");
+
+                    b.Property<string>("Sound");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("ProjectID");
+
+                    b.HasIndex("SceneID");
+
+                    b.HasIndex("ShootingDayID");
+
+                    b.ToTable("Slate");
+                });
+
+            modelBuilder.Entity("Raccord.Domain.Model.Shots.Take", b =>
+                {
+                    b.Property<long>("ID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("CameraRoll");
+
+                    b.Property<TimeSpan>("Length");
+
+                    b.Property<string>("Notes");
+
+                    b.Property<string>("Number");
+
+                    b.Property<bool>("Selected");
+
+                    b.Property<long>("SlateID");
+
+                    b.Property<int>("SortingOrder");
+
+                    b.Property<string>("SoundRoll");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("SlateID");
+
+                    b.ToTable("Take");
                 });
 
             modelBuilder.Entity("Raccord.Domain.Model.Users.ApplicationUser", b =>
@@ -1133,6 +1219,19 @@ namespace Raccord.Data.EntityFramework.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
+            modelBuilder.Entity("Raccord.Domain.Model.Images.ImageSlate", b =>
+                {
+                    b.HasOne("Raccord.Domain.Model.Images.Image", "Image")
+                        .WithMany("ImageSlates")
+                        .HasForeignKey("ImageID")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Raccord.Domain.Model.Shots.Slate", "Slate")
+                        .WithMany("ImageSlates")
+                        .HasForeignKey("SlateID")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
             modelBuilder.Entity("Raccord.Domain.Model.Locations.Locations.Location", b =>
                 {
                     b.HasOne("Raccord.Domain.Model.Projects.Project", "Project")
@@ -1258,6 +1357,30 @@ namespace Raccord.Data.EntityFramework.Migrations
                     b.HasOne("Raccord.Domain.Model.Scheduling.ScheduleDay", "ScheduleDay")
                         .WithOne("ShootingDay")
                         .HasForeignKey("Raccord.Domain.Model.ShootingDays.ShootingDay", "ScheduleDayID");
+                });
+
+            modelBuilder.Entity("Raccord.Domain.Model.Shots.Slate", b =>
+                {
+                    b.HasOne("Raccord.Domain.Model.Projects.Project", "Project")
+                        .WithMany()
+                        .HasForeignKey("ProjectID")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Raccord.Domain.Model.Scenes.Scene", "Scene")
+                        .WithMany("Slates")
+                        .HasForeignKey("SceneID");
+
+                    b.HasOne("Raccord.Domain.Model.ShootingDays.ShootingDay", "ShootingDay")
+                        .WithMany("Slates")
+                        .HasForeignKey("ShootingDayID");
+                });
+
+            modelBuilder.Entity("Raccord.Domain.Model.Shots.Take", b =>
+                {
+                    b.HasOne("Raccord.Domain.Model.Shots.Slate", "Slate")
+                        .WithMany("Takes")
+                        .HasForeignKey("SlateID")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
         }
     }

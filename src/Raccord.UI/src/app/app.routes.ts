@@ -37,6 +37,8 @@ import {
   CallsheetWizardStep2Component,
   CallsheetWizardStep3Component,
   CallsheetWizardStep4Component,
+  SlatesListComponent,
+  SlateLandingComponent
 } from './projects';
 import { ScenePropertiesLandingComponent } from './projects';
 import { LoginComponent } from "./security";
@@ -80,12 +82,17 @@ import {
   LocationSetResolve,
   SceneLocationSetsResolve,
   AvailableShootingDaysResolve,
+  ShootingDaysResolve,
   CallsheetsResolve,
   CallsheetResolve,
   CallsheetSummaryResolve,
   CallsheetSceneLocationsResolve,
   CallsheetSceneCharactersResolve,
-  CallsheetCharactersCharactersResolve
+  CallsheetCharactersCharactersResolve,
+  SlateResolve,
+  SlatesResolve,
+  TakeResolve,
+  TakesResolve
 } from './projects';
 import { 
   AdminProjectsResolve,
@@ -517,10 +524,32 @@ export const ROUTES: Routes = [
                     }
                   }
                 ]
-
               }
             ]
-          }
+          },
+          {
+            path: 'slates',
+            children:[
+              {
+                path: '',
+                component: SlatesListComponent,
+                resolve:{
+                  project: ProjectSummaryResolve,
+                  slates: SlatesResolve,
+                }
+              },
+              {
+                path: ':slateId',
+                component: SlateLandingComponent,
+                resolve:{
+                  project: ProjectSummaryResolve,
+                  slate: SlateResolve,
+                  scenes: ScenesResolve,
+                  shootingDays: ShootingDaysResolve
+                }
+              }
+            ]
+          },
         ],
       },
     ],

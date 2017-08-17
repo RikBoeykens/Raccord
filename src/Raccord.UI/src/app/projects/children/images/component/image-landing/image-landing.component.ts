@@ -5,6 +5,7 @@ import { ImageSceneHttpService } from '../../../scenes/service/image-scene-http.
 import { ImageScriptLocationHttpService } from '../../../script-locations/service/image-script-location-http.service';
 import { ImageCharacterHttpService } from '../../../characters/service/image-character-http.service';
 import { ImageBreakdownItemHttpService } from '../../../breakdowns/breakdown-items/service/image-breakdown-item-http.service';
+import { ImageSlateHttpService } from '../../../shots/slates/service/image-slate-http.service';
 import { LoadingService } from '../../../../../loading/service/loading.service';
 import { DialogService } from '../../../../../shared/service/dialog.service';
 import { Image } from '../../model/image.model';
@@ -17,6 +18,7 @@ import { LinkedCharacter } from '../../../characters/model/linked-character.mode
 import { LinkedBreakdownItem } from '../../../breakdowns/breakdown-items/model/linked-breakdown-item.model';
 import { EntityType } from '../../../../../shared/enums/entity-type.enum';
 import { SelectedEntity } from '../../../../../shared/model/selected-entity.model';
+import { LinkedSlate } from "../../../shots/slates/model/linked-slate.model";
 
 @Component({
     templateUrl: 'image-landing.component.html',
@@ -26,7 +28,12 @@ export class ImageLandingComponent {
     image: FullImage;
     viewImage: Image;
     project: ProjectSummary;
-    imageLinkTypes: EntityType[] = [EntityType.scriptLocation, EntityType.scene, EntityType.character, EntityType.breakdownItem];
+    imageLinkTypes: EntityType[] = 
+        [EntityType.scriptLocation, 
+         EntityType.scene, 
+         EntityType.character, 
+         EntityType.breakdownItem,
+         EntityType.slate];
 
     constructor(
         private _imageHttpService: ImageHttpService,
@@ -34,6 +41,7 @@ export class ImageLandingComponent {
         private _imageScriptLocationHttpService: ImageScriptLocationHttpService,
         private _imageCharacterHttpService: ImageCharacterHttpService,
         private _imageBreakdownItemHttpService: ImageBreakdownItemHttpService,
+        private _imageSlateHttpService: ImageSlateHttpService,
         private _loadingService: LoadingService,
         private _dialogService: DialogService,
         private _route: ActivatedRoute,
@@ -87,6 +95,9 @@ export class ImageLandingComponent {
                 break;
             case EntityType.breakdownItem:
                 this.linkBreakdownItemImage(selectedEntity.entityId);
+                break;
+            case EntityType.slate:
+                this.linkSlateImage(selectedEntity.entityId);
                 break;
         }
     }
@@ -154,6 +165,22 @@ export class ImageLandingComponent {
             this._loadingService.endLoading(loadingId)
         );
     }
+    
+    linkSlateImage(slateId: number){
+        let loadingId = this._loadingService.startLoading();
+
+        this._imageSlateHttpService.addLink(this.image.id, slateId).then(data=>{
+            if(typeof(data)=='string'){
+                this._dialogService.error(data);
+            }else{
+                this.getImage();
+                this._dialogService.success("Successfully linked image.");
+            }
+        }).catch()
+        .then(()=>
+            this._loadingService.endLoading(loadingId)
+        );
+    }
 
     removeSceneLink(scene: LinkedScene){
         let loadingId = this._loadingService.startLoading();
@@ -207,6 +234,22 @@ export class ImageLandingComponent {
         let loadingId = this._loadingService.startLoading();
 
         this._imageBreakdownItemHttpService.removeLink(breakdownItem.linkID).then(data=>{
+            if(typeof(data)=='string'){
+                this._dialogService.error(data);
+            }else{
+                this.getImage();
+                this._dialogService.success("Successfully removed link.");
+            }
+        }).catch()
+        .then(()=>
+            this._loadingService.endLoading(loadingId)
+        );
+    }
+    
+    removeSlateLink(slate: LinkedSlate){
+        let loadingId = this._loadingService.startLoading();
+
+        this._imageSlateHttpService.removeLink(slate.linkID).then(data=>{
             if(typeof(data)=='string'){
                 this._dialogService.error(data);
             }else{

@@ -1,0 +1,11 @@
+<h1 md-dialog-title>
+    Choose a Scene
+</h1>
+<md-dialog-content>
+    <md-list>
+        <md-list-item *ngFor="let scene of scenes"
+                      (click)="chooseScene(scene)">
+            {{scene.number}}. {{scene.intExt.name}} {{scene.scriptLocation.name}} {{scene.dayNight.name}}
+        </md-list-item>
+    </md-list>
+</md-dialog-content>

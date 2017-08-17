@@ -18,7 +18,11 @@ export { SceneLandingComponent } from './children/scenes/component/scene-landing
 export { SceneImagesComponent } from './children/scenes/component/scene-images/scene-images.component';
 export { SceneCharactersComponent } from './children/scenes/component/scene-characters/scene-characters.component';
 export { SceneBreakdownItemsComponent } from './children/scenes/component/scene-breakdown-items/scene-breakdown-items.component';
-export { SceneSchedulingComponent } from './children/scenes';
+export { 
+    SceneSchedulingComponent,
+    SceneSlatesComponent,
+    ChooseSceneDialog
+} from './children/scenes';
 export { SceneHttpService } from './children/scenes/service/scene-http.service';
 export { ImageSceneHttpService } from './children/scenes/service/image-scene-http.service';
 export { CharacterSceneHttpService } from './children/scenes/service/character-scene-http.service';
@@ -137,8 +141,10 @@ export {
  } from "./children/locations";
 
  export {
+     ChooseShootingDayDialog,
     ShootingDayHttpService,
-    AvailableShootingDaysResolve
+    AvailableShootingDaysResolve,
+    ShootingDaysResolve
  } from "./children/shooting-days";
 
  export{
@@ -161,5 +167,18 @@ export {
     CallsheetWizardStep3Component,
     CallsheetWizardStep4Component
  } from "./children/callsheets";
+
+ export{
+    SlateHttpService,
+    SlateResolve,
+    SlatesResolve,
+    ImageSlateHttpService,
+    TakeHttpService,
+    TakeResolve,
+    TakesResolve,
+    SlatesListComponent,
+    SlateLandingComponent,
+    SlateImagesComponent
+ } from "./children/shots";
 
 export { ScenePropertiesLandingComponent } from './children/scene-properties/component/scene-properties-landing/scene-properties-landing.component';

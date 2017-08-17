@@ -43,6 +43,12 @@
             </a>
             <span class="remove-image-link action-span" (click)="removeBreakdownItemLink(breakdownItem)">(remove)</span>
         </span>
+        <span class="image-link-item" *ngFor="let slate of image.slates">
+            <a routerLink="/projects/{{project.id}}/slates/{{slate.id}}">
+                Slate #{{slate.number}}
+            </a>
+            <span class="remove-image-link action-span" (click)="removeSlateLink(slate)">(remove)</span>
+        </span>
     <p>
 </div>
 <div class="row action-row">

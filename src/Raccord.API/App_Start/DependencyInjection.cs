@@ -85,6 +85,15 @@ using Raccord.Data.EntityFramework.Repositories.Users;
 using Raccord.Data.EntityFramework.Repositories.Crew;
 using Raccord.Application.Core.Services.Crew;
 using Raccord.Application.Services.Crew;
+using Raccord.Data.EntityFramework.Repositories.Shots.Slates;
+using Raccord.Data.EntityFramework.Repositories.Shots.Takes;
+using Raccord.Application.Core.Services.Shots.Slates;
+using Raccord.Application.Services.Shots.Slates;
+using Raccord.Application.Core.Services.Shots.Takes;
+using Raccord.Application.Services.Shots.Takes;
+using Raccord.Application.Core.Services.ImageSlates;
+using Raccord.Application.Services.ImageSlates;
+using Raccord.Data.EntityFramework.Repositories.ImageSlates;
 
 namespace Raccord.API
 {
@@ -194,7 +203,17 @@ namespace Raccord.API
             services.AddTransient<IUserService, UserService>();
 
             services.AddTransient<ICrewRepository, CrewRepository>();            
-            services.AddTransient<ICrewService, CrewService>();            
+            services.AddTransient<ICrewService, CrewService>();    
+
+            services.AddTransient<ISlateRepository, SlateRepository>();
+            services.AddTransient<ISlateService, SlateService>();
+            services.AddTransient<ISlateSearchEngineService, SlateSearchEngineService>();
+
+            services.AddTransient<IImageSlateRepository, ImageSlateRepository>();
+            services.AddTransient<IImageSlateService, ImageSlateService>();
+
+            services.AddTransient<ITakeRepository, TakeRepository>(); 
+            services.AddTransient<ITakeService, TakeService>();   
         }
     }
 }

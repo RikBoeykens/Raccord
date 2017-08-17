@@ -1,0 +1,82 @@
+<md-card>
+        <a routerLink="/" class="breadcrumb">Dashboard</a>
+        <a routerLink="/projects" class="breadcrumb">Projects</a>
+        <a routerLink="/projects/{{project.id}}" class="breadcrumb">{{project.title}}</a>
+        <a routerLink="/projects/{{project.id}}/slates" class="breadcrumb">Slates</a>
+        <span class="breadcrumb">{{slate.number ? slate.number: "..."}}</span>
+</md-card>
+<md-card>
+    <div fxLayout="row" fxLayoutGap="10px">
+        <md-input-container fxFlex="33%">
+            <input mdInput type="text" placeholder="Number" required [(ngModel)]="viewSlate.number" name="slate_number" (blur)="updateSlate()" />
+        </md-input-container>
+        <span fxFlex="33%">
+            <span *ngIf="viewSlate.scene.id!==0">Scene # {{viewSlate.scene.number}}</span>
+            <span *ngIf="viewSlate.scene.id===0"><i>no scene selected</i></span>
+            <a (click)="chooseScene()">choose scene</a>
+        </span>
+        <span fxFlex="33%">
+            <span *ngIf="viewSlate.shootingDay.id!==0">SD # {{viewSlate.shootingDay.number}} {{viewSlate.shootingDay.date | date}}</span>
+            <span *ngIf="viewSlate.shootingDay.id===0"><i>no day selected</i></span>
+            <a (click)="chooseShootingDay()">choose day</a>
+        </span>
+    </div>
+</md-card>
+<md-card>
+    <div fxLayout="row" fxLayoutGap="10px">
+        <md-input-container fxFlex="100%">
+            <input mdInput type="text" placeholder="Description" required [(ngModel)]="viewSlate.description" name="slate_description" (blur)="updateSlate()" />
+        </md-input-container>
+    </div>
+    <div fxLayout="row" fxLayoutGap="10px">
+        <md-input-container fxFlex="33%">
+            <input mdInput type="text" placeholder="Lens" required [(ngModel)]="viewSlate.lens" name="slate_lens" (blur)="updateSlate()" />
+        </md-input-container>
+        <md-input-container fxFlex="33%">
+            <input mdInput type="text" placeholder="Distance" required [(ngModel)]="viewSlate.distance" name="slate_distance" (blur)="updateSlate()" />
+        </md-input-container>
+        <md-input-container fxFlex="33%">
+            <input mdInput type="text" placeholder="Aperture" required [(ngModel)]="viewSlate.aperture" name="slate_aperture" (blur)="updateSlate()" />
+        </md-input-container>
+    </div>
+    <div fxLayout="row" fxLayoutGap="10px">
+        <md-input-container fxFlex="33%">
+            <input mdInput type="text" placeholder="Filters" [(ngModel)]="viewSlate.filters" name="slate_filter" (blur)="updateSlate()" />
+        </md-input-container>
+        <md-input-container fxFlex="33%">
+            <input mdInput type="text" placeholder="Sound" required [(ngModel)]="viewSlate.sound" name="slate_sound" (blur)="updateSlate()" />
+        </md-input-container>
+    </div>
+</md-card>
+<md-card>
+    <div fxLayout="row" fxLayoutGap="10px">
+        <button md-raised-button type="button" (click)="addTake()">Add Take</button>
+    </div>
+    <div fxLayout="row">
+        <md-list>
+            <md-list-item *ngFor="let take of slate.takes">
+                <md-checkbox [(ngModel)]="take.selected" name="take_{{take.id}}_selected" (change)="updateTake(take)">
+                </md-checkbox>
+                <md-input-container>
+                    <input mdInput type="text" placeholder="Number" required [(ngModel)]="take.number" name="stake_{{take.id}}_number" (blur)="updateTake(take)" />
+                </md-input-container>
+                <md-input-container>
+                    <input mdInput type="text" placeholder="Length" required [(ngModel)]="take.length" name="stake_{{take.id}}_length" (blur)="updateTake(take)" />
+                </md-input-container>
+                <md-input-container>
+                    <input mdInput type="text" placeholder="Notes" required [(ngModel)]="take.notes" name="stake_{{take.id}}_notes" (blur)="updateTake(take)" />
+                </md-input-container>
+                <md-input-container>
+                    <input mdInput type="text" placeholder="Camera Roll" required [(ngModel)]="take.cameraRoll" name="stake_{{take.id}}_camera_roll" (blur)="updateTake(take)" />
+                </md-input-container>
+                <md-input-container>
+                    <input mdInput type="text" placeholder="Sound Roll" required [(ngModel)]="take.soundRoll" name="stake_{{take.id}}_sound_roll" (blur)="updateTake(take)" />
+                </md-input-container>
+                <button md-button (click)="removeTake(take)"><md-icon>delete</md-icon></button>
+            </md-list-item>
+        </md-list>
+    </div>
+</md-card>
+<md-card>
+    <slate-images [images]="slate.images" [slateId]="slate.id" [projectId]="project.id"></slate-images>
+</md-card>

@@ -41,7 +41,11 @@ import { SceneLandingComponent } from './projects';
 import { SceneImagesComponent } from './projects';
 import { SceneCharactersComponent } from './projects';
 import { SceneBreakdownItemsComponent } from './projects';
-import { SceneSchedulingComponent } from './projects';
+import { 
+  SceneSchedulingComponent,
+  SceneSlatesComponent,
+  ChooseSceneDialog
+} from './projects';
 import { ScriptLocationsListComponent } from './projects';
 import { EditScriptLocationComponent } from './projects';
 import { ScriptLocationLandingComponent } from './projects';
@@ -98,7 +102,11 @@ import {
   CallsheetWizardStep1Component,
   CallsheetWizardStep2Component,
   CallsheetWizardStep3Component,
-  CallsheetWizardStep4Component
+  CallsheetWizardStep4Component,
+  SlatesListComponent,
+  SlateLandingComponent,
+  SlateImagesComponent,
+  ChooseShootingDayDialog
 } from './projects';
 import { ScenePropertiesLandingComponent } from './projects';
 import { SelectEntityComponent } from './shared';
@@ -133,6 +141,7 @@ const COMPONENTS =[
   SceneCharactersComponent,
   SceneBreakdownItemsComponent,
   SceneSchedulingComponent,
+  SceneSlatesComponent,
   ScriptLocationsListComponent,
   EditScriptLocationComponent,
   ScriptLocationLandingComponent,
@@ -185,6 +194,9 @@ const COMPONENTS =[
   CallsheetWizardStep2Component,
   CallsheetWizardStep3Component,
   CallsheetWizardStep4Component,
+  SlatesListComponent,
+  SlateLandingComponent,
+  SlateImagesComponent,
   ScenePropertiesLandingComponent,
   SelectEntityComponent,
   LoginComponent,
@@ -196,6 +208,11 @@ const COMPONENTS =[
   AdminUsersListComponent,
   AdminAddUserComponent,
   AdminUserLandingComponent
+];
+
+const ENTRY_COMPONENTS = [
+  ChooseSceneDialog,
+  ChooseShootingDayDialog
 ];
 
 // Services
@@ -258,6 +275,7 @@ import {
   SceneLocationSetsResolve,
   ShootingDayHttpService,
   AvailableShootingDaysResolve,
+  ShootingDaysResolve,
   CallsheetHttpService,
   CallsheetsResolve,
   CallsheetResolve,
@@ -268,7 +286,14 @@ import {
   CallsheetSceneCharacterHttpService,
   CallsheetCharacterHttpService,
   CallsheetCharactersCharactersResolve,
-  CharacterCallHttpService
+  CharacterCallHttpService,
+  SlateHttpService,
+  SlateResolve,
+  SlatesResolve,
+  ImageSlateHttpService,
+  TakeHttpService,
+  TakeResolve,
+  TakesResolve
 } from './projects';
 
 import {
@@ -354,6 +379,7 @@ const APP_PROVIDERS = [
   AccountHttpService,
   ShootingDayHttpService,
   AvailableShootingDaysResolve,
+  ShootingDaysResolve,
   CallsheetHttpService,
   CallsheetsResolve,
   CallsheetResolve,
@@ -365,6 +391,13 @@ const APP_PROVIDERS = [
   CallsheetCharacterHttpService,
   CallsheetCharactersCharactersResolve,
   CharacterCallHttpService,
+  SlateHttpService,
+  SlateResolve,
+  SlatesResolve,
+  ImageSlateHttpService,
+  TakeHttpService,
+  TakeResolve,
+  TakesResolve,
   AdminProjectHttpService,
   AdminProjectsResolve,
   AdminProjectResolve,
@@ -411,8 +444,12 @@ import '../styles/headings.css';
   bootstrap: [ AppComponent ],
   declarations: [
     COMPONENTS,
+    ENTRY_COMPONENTS,
     DIRECTIVES,
     PIPES
+  ],
+  entryComponents:[
+    ENTRY_COMPONENTS
   ],
   imports: [ // import Angular's modules
     BrowserModule,

@@ -10,6 +10,7 @@ namespace Raccord.Domain.Model.Images
         private ICollection<ImageScriptLocation> _locations;
         private ICollection<ImageCharacter> _characters;
         private ICollection<ImageBreakdownItem> _breakdownItems;
+        private ICollection<ImageSlate> _slates;
 
         /// Title of the image
         public string Title { get; set; }
@@ -81,6 +82,19 @@ namespace Raccord.Domain.Model.Images
             set
             {
                 _breakdownItems = value;
+            }
+        }
+
+        // Linked slates
+        public virtual ICollection<ImageSlate> ImageSlates
+        {
+            get
+            {
+                return _slates ?? (_slates = new List<ImageSlate>());
+            }
+            set
+            {
+                _slates = value;
             }
         }
     }

@@ -11,6 +11,7 @@ namespace Raccord.Core.Enums
         Image = 5,
         Character = 6,
         BreakdownItem = 7,
-        Location = 8
+        Location = 8,
+        Slate = 9
     }
 }
