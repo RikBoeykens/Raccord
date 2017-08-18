@@ -21,6 +21,7 @@ export { SceneBreakdownItemsComponent } from './children/scenes/component/scene-
 export { 
     SceneSchedulingComponent,
     SceneSlatesComponent,
+    SceneTimingsComponent,
     ChooseSceneDialog
 } from './children/scenes';
 export { SceneHttpService } from './children/scenes/service/scene-http.service';

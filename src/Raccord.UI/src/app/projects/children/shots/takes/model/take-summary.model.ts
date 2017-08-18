@@ -7,7 +7,7 @@ export class TakeSummary extends Take {
                         id: number,
                         number: string,
                         notes: string,
-                        length: Date,
+                        length: string,
                         selected: Boolean,
                         cameraRoll: string,
                         soundRoll: string,

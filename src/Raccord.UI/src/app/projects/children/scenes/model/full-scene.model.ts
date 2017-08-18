@@ -20,6 +20,7 @@ export class FullScene extends Scene{
                         number: string,
                         summary: string,
                         pageLength: number,
+                        timing: string,
                         intExt: IntExt,
                         scriptLocation: ScriptLocation,
                         dayNight: DayNight,

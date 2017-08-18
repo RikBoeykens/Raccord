@@ -1,3 +1,4 @@
+using System;
 using Raccord.API.ViewModels.SceneProperties;
 using Raccord.API.ViewModels.ScriptLocations;
 
@@ -21,6 +22,9 @@ namespace Raccord.API.ViewModels.Scenes
 
         // Page length of the scene
         public int PageLength { get; set; }
+
+        // Timing of the scene
+        public TimeSpan Timing { get; set; }
 
         // The linked project ID
         public long ProjectID { get; set; }

@@ -86,6 +86,7 @@ namespace Raccord.Application.Services.Scenes
                 Number = dto.Number,
                 Summary = dto.Summary,
                 PageLength = dto.PageLength,
+                Timing = dto.Timing,
                 IntExtID = dto.IntExt.ID,
                 ScriptLocationID = dto.ScriptLocation.ID,
                 DayNightID = dto.DayNight.ID,
@@ -109,6 +110,7 @@ namespace Raccord.Application.Services.Scenes
             scene.Number = dto.Number;
             scene.Summary = dto.Summary;
             scene.PageLength = dto.PageLength;
+            scene.Timing = dto.Timing;
             scene.IntExtID = dto.IntExt.ID;
             scene.ScriptLocationID = dto.ScriptLocation.ID;
             scene.DayNightID = dto.DayNight.ID;

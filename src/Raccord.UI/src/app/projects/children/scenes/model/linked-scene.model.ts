@@ -12,6 +12,7 @@ export class LinkedScene extends SceneSummary{
                         number: string,
                         summary: string,
                         pageLength: number,
+                        timing: string,
                         intExt: IntExt,
                         scriptLocation: ScriptLocation,
                         dayNight: DayNight,
