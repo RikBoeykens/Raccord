@@ -1,3 +1,4 @@
+using System;
 using Raccord.Application.Core.Services.SceneProperties;
 using Raccord.Application.Core.Services.ScriptLocations;
 
@@ -21,6 +22,9 @@ namespace Raccord.Application.Core.Services.Scenes
 
         // Page length of the scene
         public int PageLength { get; set; }
+
+        // Timing length of the scene
+        public TimeSpan Timing { get; set; }
 
         // The linked project ID
         public long ProjectID { get; set; }

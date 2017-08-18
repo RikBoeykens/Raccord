@@ -8,6 +8,7 @@ export class Scene extends BaseModel{
     number: string;
     summary: string;
     pageLength: number;
+    timing: string;
     intExt: IntExt;
     scriptLocation: ScriptLocation;
     dayNight: DayNight;
@@ -18,6 +19,7 @@ export class Scene extends BaseModel{
                         number: string,
                         summary: string,
                         pageLength: number,
+                        timing: string,
                         intExt: IntExt,
                         scriptLocation: ScriptLocation,
                         dayNight: DayNight,
@@ -29,6 +31,7 @@ export class Scene extends BaseModel{
             this.number = obj.number;
             this.summary = obj.summary;
             this.pageLength = obj.pageLength;
+            this.timing = obj.timing;
             this.intExt = obj.intExt;
             this.scriptLocation = obj.scriptLocation;
             this.dayNight = obj.dayNight;

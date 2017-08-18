@@ -8,6 +8,7 @@ using Raccord.Domain.Model.Breakdowns.BreakdownItems;
 using Raccord.Domain.Model.Scheduling;
 using Raccord.Domain.Model.Callsheets.Scenes;
 using Raccord.Domain.Model.Shots;
+using System;
 
 namespace Raccord.Domain.Model.Scenes
 {
@@ -32,6 +33,9 @@ namespace Raccord.Domain.Model.Scenes
 
         // The sorting order of the scene within the project
         public int SortingOrder { get; set; }
+
+        // Timing length
+        public TimeSpan Timing { get; set; }
 
         // ID of the linked project
         public long ProjectID { get; set; }
