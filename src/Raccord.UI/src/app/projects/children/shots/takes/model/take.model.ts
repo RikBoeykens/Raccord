@@ -5,7 +5,7 @@ export class Take extends BaseModel {
     id: number;
     number: string;
     notes: string;
-    length: Date;
+    length: string;
     selected: Boolean;
     cameraRoll: string;
     soundRoll: string;
@@ -15,7 +15,7 @@ export class Take extends BaseModel {
                         id: number,
                         number: string,
                         notes: string,
-                        length: Date,
+                        length: string,
                         selected: Boolean,
                         cameraRoll: string,
                         soundRoll: string,

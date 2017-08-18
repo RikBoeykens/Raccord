@@ -422,9 +422,11 @@ const DIRECTIVES =[
 
 // Pipes
 import { PageLengthPipe } from './shared/pipes/page-length.pipe';
+import { TimespanPipe } from './shared/pipes/timespan.pipe';
 
 const PIPES = [
-    PageLengthPipe
+    PageLengthPipe,
+    TimespanPipe
 ];
 
 // external modules
