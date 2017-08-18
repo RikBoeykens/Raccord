@@ -6,9 +6,10 @@ import { AddProjectComponent } from './projects';
 import { EditProjectComponent } from './projects';
 import { ProjectLandingComponent } from './projects';
 import { ProjectsListComponent } from './projects';
-import { ScenesListComponent } from './projects';
-import { SceneLandingComponent } from './projects';
 import { 
+  ScenesListComponent,
+  SceneLandingComponent,
+  SceneTimingsComponent,
   ScriptLocationsListComponent,
   ScriptLocationLandingComponent
  } from './projects';
@@ -226,6 +227,14 @@ export const ROUTES: Routes = [
               {
                 path: '',
                 component: ScenesListComponent,
+                resolve:{
+                  project: ProjectSummaryResolve,
+                  scenes: ScenesResolve
+                },
+              },
+              {
+                path: 'timings',
+                component: SceneTimingsComponent,
                 resolve:{
                   project: ProjectSummaryResolve,
                   scenes: ScenesResolve

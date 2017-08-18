@@ -7,6 +7,9 @@
     </div>
 </div>
 <div class="row">
+    <a routerLink="/projects/{{project.id}}/scenes/timings" class="breadcrumb">Timings</a>
+</div>
+<div class="row">
     <edit-scene [scene]="viewNewScene" (submitScene)="addScene()"></edit-scene>
 </div>
 <div class="row">
