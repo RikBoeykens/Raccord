@@ -14,6 +14,14 @@ namespace Raccord.Application.Core.Services.ShootingDays
         // Date of the shooting day
         public DateTime Date { get; set; }
 
+        public DateTime Start { get; set; }
+
+        public DateTime Turn { get; set; }
+
+        public DateTime End { get; set; }
+
+        public long? ScheduleDayID { get; set; }
+
         public long? CallsheetID { get; set; }
 
         public long ProjectID { get; set; }
