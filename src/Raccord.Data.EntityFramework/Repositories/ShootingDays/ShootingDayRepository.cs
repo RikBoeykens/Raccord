@@ -50,7 +50,22 @@ namespace Raccord.Data.EntityFramework.Repositories.ShootingDays
         {
             IQueryable<ShootingDay> query = _context.Set<ShootingDay>();
 
-            return query;
+            return query.Include(sd=> sd.ShootingDayScenes)
+                        .ThenInclude(sds=> sds.Scene)
+                        .ThenInclude(s=> s.IntExt)
+                        .Include(sd=> sd.ShootingDayScenes)
+                        .ThenInclude(sds=> sds.Scene)
+                        .ThenInclude(s=> s.ScriptLocation)
+                        .Include(sd=> sd.ShootingDayScenes)
+                        .ThenInclude(sds=> sds.Scene)
+                        .ThenInclude(s=> s.DayNight)
+                        .Include(sd=> sd.ShootingDayScenes)
+                        .ThenInclude(sds=> sds.Scene)
+                        .ThenInclude(s=> s.ImageScenes)
+                        .ThenInclude(isc=> isc.Image)
+                        .Include(sd=> sd.ShootingDayScenes)
+                        .ThenInclude(sds=> sds.LocationSet)
+                        .ThenInclude(ls=> ls.Location);
         }
 
         private IQueryable<ShootingDay> GetIncludedSummary()
