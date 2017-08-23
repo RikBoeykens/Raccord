@@ -15,44 +15,40 @@ namespace Raccord.Data.EntityFramework.Repositories.ShootingDays.Scenes
 
         public IEnumerable<ShootingDayScene> GetAllForShootingDay(long dayID)
         {
-            var query = GetIncludedSummary();
+            var query = GetIncludedScene();
 
             return query.Where(sd=> sd.ShootingDayID == dayID);
         }
 
         public IEnumerable<ShootingDayScene> GetAllForDate(DateTime date)
         {
-            var query = GetIncludedSummary();
+            var query = GetIncludedScene();
 
             return query.Where(sd=> sd.ShootingDay.Date == date);
         }
 
         public IEnumerable<ShootingDayScene> GetAllForScene(long sceneID)
         {
-            var query = GetIncludedSummary();
+            var query = GetIncludedDay();
 
             return query.Where(sd=> sd.SceneID == sceneID);
         }
 
-        public ShootingDayScene GetFull(long ID)
+        public IEnumerable<ShootingDayScene> GetAllBeforeDate(DateTime date)
         {
-            var query = GetIncludedFull();
+            var query = GetIncluded();
 
-            return query.FirstOrDefault(sd => sd.ID == ID);
+            return query.Where(sds=> sds.ShootingDay.Date > date);
         }
 
-        public ShootingDayScene GetSummary(long ID)
-        {
-            var query = GetIncludedSummary();
-
-            return query.FirstOrDefault(sd => sd.ID == ID);
-        }
-
-        private IQueryable<ShootingDayScene> GetIncludedFull()
+        private IQueryable<ShootingDayScene> GetIncludedScene()
         {
             IQueryable<ShootingDayScene> query = _context.Set<ShootingDayScene>();
 
             return query.Include(sd=> sd.ShootingDay)
+                        .Include(ss=> ss.Scene)
+                        .ThenInclude(s=> s.ShootingDayScenes)
+                        .ThenInclude(sds=> sds.ShootingDay)
                         .Include(ss=> ss.Scene)
                         .ThenInclude(s=> s.IntExt)
                         .Include(ss=> ss.Scene)
@@ -62,33 +58,24 @@ namespace Raccord.Data.EntityFramework.Repositories.ShootingDays.Scenes
                         .Include(ss=> ss.Scene)
                         .ThenInclude(s=> s.ImageScenes)
                         .ThenInclude(s=> s.Image)
-                        .Include(ss=> ss.Scene)
-                        .ThenInclude(s=> s.ScheduleScenes)
-                        .Include(ss=> ss.LocationSet)
+                        .Include(s=> s.LocationSet)
                         .ThenInclude(ls=> ls.Location);
         }
 
-        private IQueryable<ShootingDayScene> GetIncludedSummary()
+        private IQueryable<ShootingDayScene> GetIncludedDay()
         {
             IQueryable<ShootingDayScene> query = _context.Set<ShootingDayScene>();
 
             return query.Include(sd=> sd.ShootingDay)
-                        .Include(ss=> ss.Scene)
-                        .ThenInclude(s=> s.IntExt)
-                        .Include(ss=> ss.Scene)
-                        .ThenInclude(s=> s.ScriptLocation)
-                        .Include(ss=> ss.Scene)
-                        .ThenInclude(s=> s.DayNight)
-                        .Include(ss=> ss.Scene)
-                        .ThenInclude(s=> s.ImageScenes)
-                        .ThenInclude(s=> s.Image);
+                        .Include(s=> s.LocationSet)
+                        .ThenInclude(ls=> ls.Location);
         }
 
         private IQueryable<ShootingDayScene> GetIncluded()
         {
             IQueryable<ShootingDayScene> query = _context.Set<ShootingDayScene>();
 
-            return query;
+            return query.Include(sds=> sds.ShootingDay);
         }
     }
 }

@@ -20,6 +20,8 @@ namespace Raccord.Application.Core.Services.ShootingDays
 
         public DateTime End { get; set; }
 
+        public bool Completed { get; set; }
+
         public long? ScheduleDayID { get; set; }
 
         public long? CallsheetID { get; set; }

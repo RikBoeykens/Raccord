@@ -10,6 +10,10 @@ namespace Raccord.Application.Core.Services.ShootingDays.Scenes
         private SceneSummaryDto _scene;
         private LocationSetSummaryDto _locationSet;
 
+        public int ScenePageLength { get; set; }
+
+        public TimeSpan SceneTimings { get; set; }
+
         // Previous page length
         public int PreviousPageLength { get; set; }
 

@@ -1,3 +1,5 @@
+using System;
+
 namespace Raccord.Application.Core.Services.ShootingDays
 {
     // Dto to represent a shooting day
@@ -11,5 +13,8 @@ namespace Raccord.Application.Core.Services.ShootingDays
 
         // Total page count
         public int TotalPageCount { get; set; }
+
+        // Total timings
+        public TimeSpan TotalTimings { get; set; }
     }
 }

@@ -10,7 +10,6 @@ namespace Raccord.Data.EntityFramework.Repositories.ShootingDays.Scenes
         IEnumerable<ShootingDayScene> GetAllForShootingDay(long dayID);
         IEnumerable<ShootingDayScene> GetAllForDate(DateTime date);
         IEnumerable<ShootingDayScene> GetAllForScene(long sceneID);
-        ShootingDayScene GetFull(long ID);
-        ShootingDayScene GetSummary(long ID);
+        IEnumerable<ShootingDayScene> GetAllBeforeDate(DateTime date);
     }
 }

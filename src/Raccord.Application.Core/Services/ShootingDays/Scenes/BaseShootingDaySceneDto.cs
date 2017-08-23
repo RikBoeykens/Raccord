@@ -13,5 +13,8 @@ namespace Raccord.Application.Core.Services.ShootingDays.Scenes
 
         // Length in time
         public TimeSpan Timings { get; set; }
+
+        // Indicates if the shooting day scene completes the scene
+        public bool CompletesScene { get; set; }
     }
 }

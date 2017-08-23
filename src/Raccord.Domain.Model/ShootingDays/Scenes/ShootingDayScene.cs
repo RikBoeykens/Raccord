@@ -15,6 +15,9 @@ namespace Raccord.Domain.Model.ShootingDays.Scenes
         // Length in eights
         public TimeSpan Timings { get; set; }
 
+        // Indicates if the scene is completed
+        public bool CompletesScene { get; set; }
+
         // ID of the linked callsheet
         public long ShootingDayID { get; set; }
 
