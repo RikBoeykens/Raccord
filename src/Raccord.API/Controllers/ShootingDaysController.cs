@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Raccord.API.ViewModels.Core;
 using Raccord.API.ViewModels.ShootingDays;
 using Raccord.Application.Core.Services.ShootingDays;
 using Raccord.Domain.Model.Users;
@@ -25,11 +26,29 @@ namespace Raccord.API.Controllers
         }
 
         
-        // GET: api/shootingdays/1/available
-        [HttpGet("{projectID}/available")]
-        public IEnumerable<ShootingDayViewModel> GetAvailableDays(long projectID)
+        // GET: api/shootingdays/1/available/callsheet
+        [HttpGet("{projectID}/available/callsheet")]
+        public IEnumerable<ShootingDayViewModel> GetAvailableCallsheet(long projectID)
         {
-            var availableDays = _shootingDayService.GetAvailableDays(projectID);
+            var availableDays = _shootingDayService.GetAvailableForCallsheet(projectID);
+
+            return availableDays.Select(ad=> ad.Translate());
+        }
+
+        // GET: api/shootingdays/1/available/completion
+        [HttpGet("{projectID}/available/completion")]
+        public IEnumerable<ShootingDayViewModel> GetAvailableCompletion(long projectID)
+        {
+            var availableDays = _shootingDayService.GetAvailableForCompletion(projectID);
+
+            return availableDays.Select(ad=> ad.Translate());
+        }
+        
+        // GET: api/shootingdays/1/completed
+        [HttpGet("{projectID}/completed")]
+        public IEnumerable<ShootingDaySummaryViewModel> GetCompleted(long projectID)
+        {
+            var availableDays = _shootingDayService.GetCompleted(projectID);
 
             return availableDays.Select(ad=> ad.Translate());
         }
@@ -42,6 +61,86 @@ namespace Raccord.API.Controllers
             var availableDays = _shootingDayService.GetAll(projectID);
 
             return availableDays.Select(ad=> ad.Translate());
+        }
+        
+        // GET api/shootingdays/5
+        [HttpGet("{id}")]
+        public FullShootingDayViewModel Get(long id)
+        {
+            var dto = _shootingDayService.GetFull(id);
+
+            var vm = dto.Translate();
+
+            return vm;
+        }
+
+        // GET api/shootingdays/5/summary
+        [HttpGet("{id}/summary")]
+        public ShootingDaySummaryViewModel GetSummary(Int64 id)
+        {
+            var dto = _shootingDayService.GetSummary(id);
+
+            var vm = dto.Translate();
+
+            return vm;
+        }
+
+        // POST api/shootingdays/5/preparecompletion
+        [HttpPost]
+        public JsonResult PrepareCompletion(long id)
+        {
+            var response = new JsonResponse();
+
+            try
+            {
+                long returnedId  = _shootingDayService.PrepareForCompletion(id);
+
+                response = new JsonResponse
+                {
+                    ok = true,
+                    data = id,
+                };
+            }
+            catch (Exception)
+            {
+                response = new JsonResponse
+                {
+                    ok = false,
+                    message = "Something went wrong while attempting to prepare shooting day for completion",
+                };
+            }
+
+            return new JsonResult(response);
+        }
+
+        // POST api/shootingdays
+        [HttpPost]
+        public JsonResult Post([FromBody]ShootingDayViewModel vm)
+        {
+            var response = new JsonResponse();
+
+            try
+            {
+                var dto = vm.Translate();
+
+                long id  = _shootingDayService.Update(dto);
+
+                response = new JsonResponse
+                {
+                    ok = true,
+                    data = id,
+                };
+            }
+            catch (Exception)
+            {
+                response = new JsonResponse
+                {
+                    ok = false,
+                    message = "Something went wrong while attempting to update shooting day",
+                };
+            }
+
+            return new JsonResult(response);
         }
     }
 }

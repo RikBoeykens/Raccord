@@ -32,7 +32,7 @@ namespace Raccord.Application.Services.ShootingDays
             _callsheetRepository = callsheetRepository;
         }
 
-        public IEnumerable<ShootingDayDto> GetAvailableDays(long projectID)
+        public IEnumerable<ShootingDayDto> GetAvailableForCallsheet(long projectID)
         {
             var availableShootingDays = _shootingDayRepository.GetAllForProject(projectID).Where(sd=> !sd.CallsheetID.HasValue);
 
@@ -73,7 +73,7 @@ namespace Raccord.Application.Services.ShootingDays
             return shootingDay.TranslateSummary();
         }
 
-        public void PrepareForCompletion(long ID)
+        public long PrepareForCompletion(long ID)
         {
             var shootingDay = _shootingDayRepository.GetSingle(ID);
             var callsheet = _callsheetRepository.GetSummary(shootingDay.CallsheetID.Value);
@@ -89,11 +89,21 @@ namespace Raccord.Application.Services.ShootingDays
             }).ToList();
             _shootingDayRepository.Edit(shootingDay);
             _shootingDayRepository.Commit();
+            return shootingDay.ID;
         }
 
-        public void Update(ShootingDayDto dto)
+        public long Update(ShootingDayDto dto)
         {
+            var shootingDay = _shootingDayRepository.GetSingle(dto.ID);
+            
+            shootingDay.Start = dto.Start;
+            shootingDay.Turn = dto.Turn;
+            shootingDay.End = dto.End;
+            shootingDay.Completed = dto.Completed;
 
+            _shootingDayRepository.Edit(shootingDay);
+            _shootingDayRepository.Commit();
+            return shootingDay.ID;
         }
     }
 }
