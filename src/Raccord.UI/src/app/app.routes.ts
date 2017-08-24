@@ -82,8 +82,11 @@ import {
   LocationResolve,
   LocationSetResolve,
   SceneLocationSetsResolve,
-  AvailableShootingDaysResolve,
+  AvailableCallsheetShootingDaysResolve,
+  AvailableCompletionShootingDaysResolve,
+  CompletedShootingDaysResolve,
   ShootingDaysResolve,
+  ShootingDayResolve,
   CallsheetsResolve,
   CallsheetResolve,
   CallsheetSummaryResolve,
@@ -483,7 +486,7 @@ export const ROUTES: Routes = [
                 component: NewCallsheetComponent,
                 resolve:{
                   project: ProjectSummaryResolve,
-                  availableDays: AvailableShootingDaysResolve
+                  availableDays: AvailableCallsheetShootingDaysResolve
                 }
               },
               {

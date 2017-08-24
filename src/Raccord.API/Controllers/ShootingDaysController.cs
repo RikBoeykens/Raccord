@@ -86,7 +86,7 @@ namespace Raccord.API.Controllers
         }
 
         // POST api/shootingdays/5/preparecompletion
-        [HttpPost]
+        [HttpPost("{id}/preparecompletion")]
         public JsonResult PrepareCompletion(long id)
         {
             var response = new JsonResponse();

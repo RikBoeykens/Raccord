@@ -144,8 +144,12 @@ export {
  export {
      ChooseShootingDayDialog,
     ShootingDayHttpService,
-    AvailableShootingDaysResolve,
-    ShootingDaysResolve
+    AvailableCallsheetShootingDaysResolve,
+    AvailableCompletionShootingDaysResolve,
+    CompletedShootingDaysResolve,
+    ShootingDaysResolve,
+    ShootingDayResolve,
+    ShootingDaySceneHttpService
  } from "./children/shooting-days";
 
  export{
