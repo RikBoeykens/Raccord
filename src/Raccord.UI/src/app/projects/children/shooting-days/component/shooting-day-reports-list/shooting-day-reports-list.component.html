@@ -1,0 +1,66 @@
+<md-card>      
+    <div class="col s12">
+        <a routerLink="/" class="breadcrumb">Dashboard</a>
+        <a routerLink="/projects" class="breadcrumb">Projects</a>
+        <a routerLink="/projects/{{project.id}}" class="breadcrumb">{{project.title}}</a>
+        <span class="breadcrumb">Shooting Day Reports</span>
+    </div>
+</md-card>
+<div class="row">
+    <md-nav-list>
+        <a md-list-item [routerLink]="[callsheet.id]" 
+           *ngFor="let callsheet of callsheets"
+           class="">
+           {{callsheet.shootingDay.number}} - {{callsheet.shootingDay.date | date}}
+        </a>
+    </md-nav-list>
+</div>
+
+<md-card>
+    <table>
+        <thead>
+            <tr>
+                <th>Day</th>
+                <th>Total Scenes</th>
+                <th>Scenes Completed</th>
+                <th>Page Length Completed</th>
+                <th>Timings Completed</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let day of shootingDays">
+                <td>
+                    <a [routerLink]="[day.id]">#{{day.number}} - {{day.date | date}}</a>
+                </td>
+                <td>
+                    {{day.totalScenes}}
+                </td>
+                <td>
+                    {{day.completedScenes}}
+                </td>
+                <td>
+                    {{day.totalPageCount | pagelength}}
+                </td>
+                <td>
+                    {{day.totalTimings}}
+                </td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="2">
+                </td>
+                <td>
+                    {{getTotalCompletedScenes()}}
+                </td>
+                <td>
+                    {{getTotalPageCount()}}
+                </td>
+                <td>
+                    {{getTotalTimings() | timespan}}
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+</md-card>
+<button *ngIf="availableDays.length" md-fab type="button" (click)="createReport()"><md-icon>add</md-icon></button>

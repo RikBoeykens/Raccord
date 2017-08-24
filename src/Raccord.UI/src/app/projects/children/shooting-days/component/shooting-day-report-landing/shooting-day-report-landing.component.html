@@ -1,0 +1,7 @@
+<md-card>      
+    <a routerLink="/" class="breadcrumb">Dashboard</a>
+    <a routerLink="/projects" class="breadcrumb">Projects</a>
+    <a routerLink="/projects/{{project.id}}" class="breadcrumb">{{project.title}}</a>
+    <a routerLink="/projects/{{project.id}}/shootingdays" class="breadcrumb">Shooting Day Reports</a>
+    <span class="breadcrumb">#{{shootingDay.number}} - {{shootingDay.date | date}}</span>
+</md-card>

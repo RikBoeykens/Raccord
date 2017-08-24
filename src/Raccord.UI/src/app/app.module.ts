@@ -107,7 +107,9 @@ import {
   SlatesListComponent,
   SlateLandingComponent,
   SlateImagesComponent,
-  ChooseShootingDayDialog
+  ChooseShootingDayDialog,
+  ShootingDayReportsListComponent,
+  ShootingDayReportLandingComponent
 } from './projects';
 import { ScenePropertiesLandingComponent } from './projects';
 import { SelectEntityComponent } from './shared';
@@ -199,6 +201,8 @@ const COMPONENTS =[
   SlatesListComponent,
   SlateLandingComponent,
   SlateImagesComponent,
+  ShootingDayReportsListComponent,
+  ShootingDayReportLandingComponent,
   ScenePropertiesLandingComponent,
   SelectEntityComponent,
   LoginComponent,
