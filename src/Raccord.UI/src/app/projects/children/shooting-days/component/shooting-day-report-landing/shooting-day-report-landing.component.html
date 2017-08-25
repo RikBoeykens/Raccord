@@ -5,3 +5,16 @@
     <a routerLink="/projects/{{project.id}}/shootingdays" class="breadcrumb">Shooting Day Reports</a>
     <span class="breadcrumb">#{{shootingDay.number}} - {{shootingDay.date | date}}</span>
 </md-card>
+<md-card>
+    <div fxLayout="row" fxLayoutGap="10px">
+        <md-input-container fxFlex="33%">
+            <input mdInput type="time" placeholder="Start" required [(ngModel)]="shootingDay.startString" name="shooting_day_start" (blur)="updateShootingDay()" />
+        </md-input-container>
+        <md-input-container fxFlex="33%">
+            <input mdInput type="time" placeholder="Turn" required [(ngModel)]="shootingDay.turnString" name="shooting_day_turn" (blur)="updateShootingDay()" />
+        </md-input-container>
+        <md-input-container fxFlex="33%">
+            <input mdInput type="time" placeholder="Wrap" required [(ngModel)]="shootingDay.endString" name="shooting_day_end" (blur)="updateShootingDay()" />
+        </md-input-container>
+    </div>
+</md-card>

@@ -5,13 +5,14 @@ import { DialogService } from '../../../../../shared/service/dialog.service';
 import { ProjectSummary } from '../../../../model/project-summary.model';
 import { FullShootingDay } from "../../model/full-shooting-day.model";
 import { ShootingDayHttpService } from "../../service/shooting-day-http.service";
+import { TimeHelpers } from "../../../../../shared/helpers/time.helpers";
 
 @Component({
     templateUrl: 'shooting-day-report-landing.component.html',
 })
 export class ShootingDayReportLandingComponent {
 
-    shootingDay: FullShootingDay;
+    shootingDay: ShootingDayWrapper;
     project: ProjectSummary;
 
     constructor(
@@ -25,7 +26,7 @@ export class ShootingDayReportLandingComponent {
 
     ngOnInit() {
         this._route.data.subscribe((data: { shootingDay: FullShootingDay, project: ProjectSummary }) => {
-            this.shootingDay = data.shootingDay;
+            this.shootingDay = new ShootingDayWrapper(data.shootingDay);
             this.project = data.project;
         });
     }
@@ -34,23 +35,43 @@ export class ShootingDayReportLandingComponent {
         let loadingId = this._loadingService.startLoading();
 
         this._shootingDayHttpService.get(this.shootingDay.id).then(data => {
-            this.shootingDay = data;
+            this.shootingDay = new ShootingDayWrapper(data);
             this._loadingService.endLoading(loadingId);
         });
     }
 
-    updateScriptLocation(){
+    updateShootingDay(){
         let loadingId = this._loadingService.startLoading();
+
+        this.setTimes(this.shootingDay);
 
         this._shootingDayHttpService.post(this.shootingDay).then(data=>{
             if(typeof(data)=='string'){
                 this._dialogService.error(data);
-            }else{
                 this.getShootingDay();
+            }else{
             }
         }).catch()
         .then(()=>
             this._loadingService.endLoading(loadingId)
         );
     }
+
+    setTimes(shootingDay: ShootingDayWrapper){
+        shootingDay.start = TimeHelpers.getTime(shootingDay.startString);
+        shootingDay.turn = TimeHelpers.getTime(shootingDay.turnString);
+        shootingDay.end = TimeHelpers.getTime(shootingDay.endString);
+    }
+}
+
+export class ShootingDayWrapper extends FullShootingDay{
+    startString: string;
+    endString: string;
+    turnString: string;
+    constructor(obj: FullShootingDay){
+        super(obj);
+        this.startString = TimeHelpers.getTimeString(obj.start);
+        this.endString = TimeHelpers.getTimeString(obj.end);
+        this.turnString = TimeHelpers.getTimeString(obj.turn);
+    }    
 }
