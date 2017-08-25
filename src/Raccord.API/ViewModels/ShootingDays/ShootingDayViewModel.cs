@@ -20,6 +20,8 @@ namespace Raccord.API.ViewModels.ShootingDays
 
         public DateTime End { get; set; }
 
+        public TimeSpan OverTime { get; set; }
+
         public bool Completed { get; set; }
 
         public long? ScheduleDayID { get; set; }

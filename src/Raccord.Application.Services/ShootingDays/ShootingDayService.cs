@@ -99,6 +99,7 @@ namespace Raccord.Application.Services.ShootingDays
             shootingDay.Start = dto.Start;
             shootingDay.Turn = dto.Turn;
             shootingDay.End = dto.End;
+            shootingDay.OverTime = dto.OverTime;
             shootingDay.Completed = dto.Completed;
 
             _shootingDayRepository.Edit(shootingDay);

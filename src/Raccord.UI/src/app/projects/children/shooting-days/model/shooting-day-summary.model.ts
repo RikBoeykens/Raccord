@@ -13,6 +13,7 @@ export class ShootingDaySummary extends ShootingDay{
                         start: Date,
                         turn: Date,
                         end: Date,
+                        overTime: string,
                         completed: boolean,
                         scheduleDayID?: number,
                         callsheetID?: number,

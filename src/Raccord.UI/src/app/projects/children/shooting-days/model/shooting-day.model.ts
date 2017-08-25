@@ -7,6 +7,7 @@ export class ShootingDay extends BaseModel{
     start: Date;
     turn: Date;
     end: Date;
+    overTime: string;
     completed: boolean;
     scheduleDayID?: number;
     callsheetID?: number;
@@ -19,6 +20,7 @@ export class ShootingDay extends BaseModel{
                         start: Date,
                         turn: Date,
                         end: Date,
+                        overTime: string,
                         completed: boolean,
                         scheduleDayID?: number,
                         callsheetID?: number,
@@ -31,6 +33,7 @@ export class ShootingDay extends BaseModel{
             this.date = obj.date;
             this.turn = obj.turn;
             this.end = obj.end;
+            this.overTime = obj.overTime;
             this.completed = obj.completed;
             this.scheduleDayID = obj.scheduleDayID;
             this.callsheetID = obj.callsheetID;

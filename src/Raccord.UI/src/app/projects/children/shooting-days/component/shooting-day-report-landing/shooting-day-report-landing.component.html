@@ -13,8 +13,13 @@
         <md-input-container fxFlex="33%">
             <input mdInput type="time" placeholder="Turn" required [(ngModel)]="shootingDay.turnString" name="shooting_day_turn" (blur)="updateShootingDay()" />
         </md-input-container>
+    </div>
+    <div fxLayout="row" fxLayoutGap="10px">
         <md-input-container fxFlex="33%">
             <input mdInput type="time" placeholder="Wrap" required [(ngModel)]="shootingDay.endString" name="shooting_day_end" (blur)="updateShootingDay()" />
+        </md-input-container>
+        <md-input-container fxFlex="33%">
+            <input mdInput type="string" placeholder="Overtime" required [(ngModel)]="shootingDay.overTime" name="shooting_day_overtime" (blur)="updateShootingDay()" />
         </md-input-container>
     </div>
 </md-card>

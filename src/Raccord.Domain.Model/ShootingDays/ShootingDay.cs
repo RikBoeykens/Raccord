@@ -26,6 +26,8 @@ namespace Raccord.Domain.Model.ShootingDays
 
         public DateTime End { get; set; }
 
+        public TimeSpan OverTime { get; set; }
+
         public bool Completed { get; set; }
 
         // ID of the linked project

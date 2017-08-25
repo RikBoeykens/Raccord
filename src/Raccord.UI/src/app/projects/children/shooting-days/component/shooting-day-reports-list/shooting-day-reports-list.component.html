@@ -25,6 +25,7 @@
                 <th>Scenes Completed</th>
                 <th>Page Length Completed</th>
                 <th>Timings Completed</th>
+                <th>Overtime</th>
             </tr>
         </thead>
         <tbody>
@@ -44,6 +45,11 @@
                 <td>
                     {{day.totalTimings}}
                 </td>
+                <td>
+                    <span *ngIf="day.overTime!=='00:00:00'">
+                        +{{day.overTime}}
+                    </span>
+                </td>
             </tr>
         </tbody>
         <tfoot>
@@ -58,6 +64,9 @@
                 </td>
                 <td>
                     {{getTotalTimings() | timespan}}
+                </td>
+                <td>
+                    +{{getTotalOvertime() | timespan}}
                 </td>
             </tr>
         </tfoot>

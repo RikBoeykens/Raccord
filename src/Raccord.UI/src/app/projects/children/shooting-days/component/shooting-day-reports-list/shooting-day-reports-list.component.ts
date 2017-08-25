@@ -74,4 +74,10 @@ export class ShootingDayReportsListComponent implements OnInit {
         this.shootingDays.forEach((shootingDay: ShootingDaySummary)=>{ count += TimespanHelpers.getTimespanNumber(shootingDay.totalTimings)});
         return count;
     }
+    
+    getTotalOvertime(){
+        let count = 0;
+        this.shootingDays.forEach((shootingDay: ShootingDaySummary)=>{ count += TimespanHelpers.getTimespanNumber(shootingDay.overTime)});
+        return count;
+    }
 }
