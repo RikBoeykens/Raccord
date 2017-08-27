@@ -18,13 +18,12 @@ namespace Raccord.Application.Services.ShootingDays.Scenes
                 ID = shootingDayScene.ID,
                 PageLength = shootingDayScene.PageLength,
                 Timings = shootingDayScene.Timings,
-                CompletesScene = shootingDayScene.CompletesScene,
+                //CompletesScene = shootingDayScene.CompletesScene,
                 ScenePageLength = shootingDayScene.Scene.PageLength,
                 SceneTimings = shootingDayScene.Scene.Timing,
                 PreviousPageLength = previousShootingDayScenes.Sum(sds=> sds.PageLength),
                 PreviousTimings = new TimeSpan(previousShootingDayScenes.Sum(sds=> sds.Timings.Ticks)),
                 Scene = shootingDayScene.Scene.TranslateSummary(),
-                LocationSet = shootingDayScene.LocationSet.TranslateSummary(),
             };
         }
         public static ShootingDaySceneDayDto TranslateDay(this ShootingDayScene shootingDayScene)
@@ -34,9 +33,8 @@ namespace Raccord.Application.Services.ShootingDays.Scenes
                 ID = shootingDayScene.ID,
                 PageLength = shootingDayScene.PageLength,
                 Timings = shootingDayScene.Timings,
-                CompletesScene = shootingDayScene.CompletesScene,
+                //CompletesScene = shootingDayScene.CompletesScene,
                 ShootingDay = shootingDayScene.ShootingDay.Translate(),
-                LocationSet = shootingDayScene.LocationSet.TranslateSummary(),
             };
         }
         public static ShootingDaySceneDto Translate(this ShootingDayScene shootingDayScene)
@@ -46,10 +44,9 @@ namespace Raccord.Application.Services.ShootingDays.Scenes
                 ID = shootingDayScene.ID,
                 PageLength = shootingDayScene.PageLength,
                 Timings = shootingDayScene.Timings,
-                CompletesScene = shootingDayScene.CompletesScene,
+                //CompletesScene = shootingDayScene.CompletesScene,
                 ShootingDayID = shootingDayScene.ShootingDayID,
                 SceneID = shootingDayScene.SceneID,
-                LocationSetID = shootingDayScene.LocationSetID,
             };
         }
     }

@@ -81,12 +81,6 @@ namespace Raccord.Application.Services.ShootingDays
             shootingDay.Start = callsheet.Start;
             shootingDay.End = callsheet.End;
             shootingDay.Completed = true;
-            shootingDay.ShootingDayScenes = callsheet.CallsheetScenes.Select(cs=> new ShootingDayScene
-            {
-                SceneID = cs.SceneID,
-                PageLength = cs.PageLength,
-                LocationSetID = cs.LocationSetID,
-            }).ToList();
             _shootingDayRepository.Edit(shootingDay);
             _shootingDayRepository.Commit();
             return shootingDay.ID;

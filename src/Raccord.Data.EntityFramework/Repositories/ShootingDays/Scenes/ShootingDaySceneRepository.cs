@@ -57,18 +57,14 @@ namespace Raccord.Data.EntityFramework.Repositories.ShootingDays.Scenes
                         .ThenInclude(s=> s.DayNight)
                         .Include(ss=> ss.Scene)
                         .ThenInclude(s=> s.ImageScenes)
-                        .ThenInclude(s=> s.Image)
-                        .Include(s=> s.LocationSet)
-                        .ThenInclude(ls=> ls.Location);
+                        .ThenInclude(s=> s.Image);
         }
 
         private IQueryable<ShootingDayScene> GetIncludedDay()
         {
             IQueryable<ShootingDayScene> query = _context.Set<ShootingDayScene>();
 
-            return query.Include(sd=> sd.ShootingDay)
-                        .Include(s=> s.LocationSet)
-                        .ThenInclude(ls=> ls.Location);
+            return query.Include(sd=> sd.ShootingDay);
         }
 
         private IQueryable<ShootingDayScene> GetIncluded()

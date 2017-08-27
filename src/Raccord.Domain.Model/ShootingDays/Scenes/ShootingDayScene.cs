@@ -5,6 +5,7 @@ using Raccord.Domain.Model.Characters;
 using Raccord.Domain.Model.Locations.LocationSets;
 using Raccord.Domain.Model.Scenes;
 using Raccord.Domain.Model.ShootingDays;
+using Raccord.Core.Enums;
 
 namespace Raccord.Domain.Model.ShootingDays.Scenes
 {
@@ -17,7 +18,7 @@ namespace Raccord.Domain.Model.ShootingDays.Scenes
         public TimeSpan Timings { get; set; }
 
         // Indicates if the scene is completed
-        public bool CompletesScene { get; set; }
+        public Completion Completion { get; set; }
 
         // ID of the linked callsheet
         public long ShootingDayID { get; set; }
@@ -30,10 +31,6 @@ namespace Raccord.Domain.Model.ShootingDays.Scenes
 
         // Linked scene
         public virtual Scene Scene { get; set; }
-
-        public long? LocationSetID { get; set; }
-
-        public virtual LocationSet LocationSet { get; set; }
 
         public long? CallsheetSceneID { get; set; }
 
