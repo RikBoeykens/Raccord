@@ -8,9 +8,10 @@ using Raccord.Data.EntityFramework;
 namespace Raccord.Data.EntityFramework.Migrations
 {
     [DbContext(typeof(RaccordDBContext))]
-    partial class RaccordDBContextModelSnapshot : ModelSnapshot
+    [Migration("20170827110633_shooting-day-schedule-day")]
+    partial class shootingdayscheduleday
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.0.3");
@@ -1394,8 +1395,7 @@ namespace Raccord.Data.EntityFramework.Migrations
                 {
                     b.HasOne("Raccord.Domain.Model.Callsheets.Scenes.CallsheetScene", "CallsheetScene")
                         .WithOne("ShootingDayScene")
-                        .HasForeignKey("Raccord.Domain.Model.ShootingDays.Scenes.ShootingDayScene", "CallsheetSceneID")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("Raccord.Domain.Model.ShootingDays.Scenes.ShootingDayScene", "CallsheetSceneID");
 
                     b.HasOne("Raccord.Domain.Model.Locations.LocationSets.LocationSet", "LocationSet")
                         .WithMany("ShootingDayScenes")

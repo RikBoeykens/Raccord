@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Raccord.Domain.Model.Callsheets.Scenes;
 using Raccord.Domain.Model.Characters;
 using Raccord.Domain.Model.Locations.LocationSets;
 using Raccord.Domain.Model.Scenes;
@@ -33,5 +34,9 @@ namespace Raccord.Domain.Model.ShootingDays.Scenes
         public long? LocationSetID { get; set; }
 
         public virtual LocationSet LocationSet { get; set; }
+
+        public long? CallsheetSceneID { get; set; }
+
+        public virtual CallsheetScene CallsheetScene { get; set; }
     }
 }
