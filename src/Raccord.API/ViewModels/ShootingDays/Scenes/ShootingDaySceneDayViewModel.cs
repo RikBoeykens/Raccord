@@ -8,7 +8,6 @@ namespace Raccord.API.ViewModels.ShootingDays.Scenes
     public class ShootingDaySceneDayViewModel : BaseShootingDaySceneViewModel
     {
         private ShootingDayViewModel _shootingDay;
-        private LocationSetSummaryViewModel _locationSet;
 
         // Linked shooting day
         public ShootingDayViewModel ShootingDay
@@ -20,19 +19,6 @@ namespace Raccord.API.ViewModels.ShootingDays.Scenes
             set
             {
                 _shootingDay = value;
-            }
-        }
-
-        // Linked location set
-        public LocationSetSummaryViewModel LocationSet
-        {
-            get
-            {
-                return _locationSet ?? (_locationSet = new LocationSetSummaryViewModel()); 
-            }
-            set
-            {
-                _locationSet = value;
             }
         }
     }

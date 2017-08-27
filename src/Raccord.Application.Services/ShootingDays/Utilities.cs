@@ -4,6 +4,7 @@ using System.Linq;
 using Raccord.Application.Core.Services.ShootingDays;
 using Raccord.Application.Services.ShootingDays.Scenes;
 using Raccord.Application.Services.Shots.Slates;
+using Raccord.Core.Enums;
 using Raccord.Domain.Model.ShootingDays;
 using Raccord.Domain.Model.ShootingDays.Scenes;
 
@@ -26,7 +27,7 @@ namespace Raccord.Application.Services.ShootingDays
                 ScheduleDayID = shootingDay.ScheduleDayID,
                 CallsheetID = shootingDay.CallsheetID,
                 ProjectID = shootingDay.ProjectID,
-                //PreviouslyCompletedSceneCount = previousScenes.Count(pcs=> pcs.CompletesScene),
+                PreviouslyCompletedSceneCount = previousScenes.Count(pcs=> pcs.Completion == Completion.Completed),
                 PreviouslyCompletedScenePageCount = previousScenes.Sum(pcs=> pcs.PageLength),
                 PreviouslyCompletedTimingsCount = new TimeSpan(previousScenes.Sum(pcs=> pcs.Timings.Ticks)),
                 Scenes = shootingDay.ShootingDayScenes.Select(s=> s.TranslateScene()),
@@ -51,7 +52,7 @@ namespace Raccord.Application.Services.ShootingDays
                 CallsheetID = shootingDay.CallsheetID,
                 ProjectID = shootingDay.ProjectID,
                 TotalScenes = shootingDay.ShootingDayScenes.Count,
-                //CompletedScenes = shootingDay.ShootingDayScenes.Count(sds=> sds.CompletesScene),
+                CompletedScenes = shootingDay.ShootingDayScenes.Count(sds=> sds.Completion == Completion.Completed),
                 TotalPageCount = shootingDay.ShootingDayScenes.Sum(sds=> sds.PageLength),
                 TotalTimings = new TimeSpan(shootingDay.ShootingDayScenes.Sum(sds=> sds.Timings.Ticks)),
             };

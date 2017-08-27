@@ -3,6 +3,7 @@ using System.Linq;
 using Raccord.Application.Core.Services.ShootingDays.Scenes;
 using Raccord.Application.Services.Locations.LocationSets;
 using Raccord.Application.Services.Scenes;
+using Raccord.Core.Enums;
 using Raccord.Domain.Model.ShootingDays.Scenes;
 
 namespace Raccord.Application.Services.ShootingDays.Scenes
@@ -18,12 +19,15 @@ namespace Raccord.Application.Services.ShootingDays.Scenes
                 ID = shootingDayScene.ID,
                 PageLength = shootingDayScene.PageLength,
                 Timings = shootingDayScene.Timings,
-                //CompletesScene = shootingDayScene.CompletesScene,
+                Completion = shootingDayScene.Completion,
                 ScenePageLength = shootingDayScene.Scene.PageLength,
                 SceneTimings = shootingDayScene.Scene.Timing,
                 PreviousPageLength = previousShootingDayScenes.Sum(sds=> sds.PageLength),
                 PreviousTimings = new TimeSpan(previousShootingDayScenes.Sum(sds=> sds.Timings.Ticks)),
+                PlannedPageLength = shootingDayScene.CallsheetSceneID.HasValue ? shootingDayScene.CallsheetScene.PageLength : 0,
+                CompletedByOther = shootingDayScene.Scene.ShootingDayScenes.Any(sds=> sds.Completion==Completion.Completed && sds.ID != shootingDayScene.ID),
                 Scene = shootingDayScene.Scene.TranslateSummary(),
+                CallsheetSceneID = shootingDayScene.CallsheetSceneID
             };
         }
         public static ShootingDaySceneDayDto TranslateDay(this ShootingDayScene shootingDayScene)
@@ -33,8 +37,9 @@ namespace Raccord.Application.Services.ShootingDays.Scenes
                 ID = shootingDayScene.ID,
                 PageLength = shootingDayScene.PageLength,
                 Timings = shootingDayScene.Timings,
-                //CompletesScene = shootingDayScene.CompletesScene,
+                Completion = shootingDayScene.Completion,
                 ShootingDay = shootingDayScene.ShootingDay.Translate(),
+                CallsheetSceneID = shootingDayScene.CallsheetSceneID
             };
         }
         public static ShootingDaySceneDto Translate(this ShootingDayScene shootingDayScene)
@@ -44,9 +49,10 @@ namespace Raccord.Application.Services.ShootingDays.Scenes
                 ID = shootingDayScene.ID,
                 PageLength = shootingDayScene.PageLength,
                 Timings = shootingDayScene.Timings,
-                //CompletesScene = shootingDayScene.CompletesScene,
+                Completion = shootingDayScene.Completion,
                 ShootingDayID = shootingDayScene.ShootingDayID,
                 SceneID = shootingDayScene.SceneID,
+                CallsheetSceneID = shootingDayScene.CallsheetSceneID
             };
         }
     }

@@ -67,6 +67,8 @@ namespace Raccord.Data.EntityFramework.Repositories.ShootingDays
                         .ThenInclude(sds=> sds.Scene)
                         .ThenInclude(s=> s.ImageScenes)
                         .ThenInclude(isc=> isc.Image)
+                        .Include(sd=> sd.ShootingDayScenes)
+                        .ThenInclude(sds=> sds.CallsheetScene)
                         .Include(sds=> sds.Slates)
                         .ThenInclude(s=> s.Scene)
                         .ThenInclude(s=> s.IntExt)

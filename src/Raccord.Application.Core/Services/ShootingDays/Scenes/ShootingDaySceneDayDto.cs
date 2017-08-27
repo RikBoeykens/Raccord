@@ -8,7 +8,6 @@ namespace Raccord.Application.Core.Services.ShootingDays.Scenes
     public class ShootingDaySceneDayDto : BaseShootingDaySceneDto
     {
         private ShootingDayDto _shootingDay;
-        private LocationSetSummaryDto _locationSet;
 
         // Linked shooting day
         public ShootingDayDto ShootingDay
@@ -20,19 +19,6 @@ namespace Raccord.Application.Core.Services.ShootingDays.Scenes
             set
             {
                 _shootingDay = value;
-            }
-        }
-
-        // Linked location set
-        public LocationSetSummaryDto LocationSet
-        {
-            get
-            {
-                return _locationSet ?? (_locationSet = new LocationSetSummaryDto()); 
-            }
-            set
-            {
-                _locationSet = value;
             }
         }
     }

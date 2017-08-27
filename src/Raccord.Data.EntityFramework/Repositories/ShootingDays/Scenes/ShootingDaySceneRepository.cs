@@ -57,7 +57,8 @@ namespace Raccord.Data.EntityFramework.Repositories.ShootingDays.Scenes
                         .ThenInclude(s=> s.DayNight)
                         .Include(ss=> ss.Scene)
                         .ThenInclude(s=> s.ImageScenes)
-                        .ThenInclude(s=> s.Image);
+                        .ThenInclude(s=> s.Image)
+                        .Include(ss=> ss.CallsheetScene);
         }
 
         private IQueryable<ShootingDayScene> GetIncludedDay()

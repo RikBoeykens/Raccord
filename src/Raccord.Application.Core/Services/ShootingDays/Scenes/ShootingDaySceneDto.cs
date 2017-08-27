@@ -10,8 +10,5 @@ namespace Raccord.Application.Core.Services.ShootingDays.Scenes
 
         // ID of the linked scene
         public long SceneID { get; set; }
-
-        // ID of the location set
-        public long? LocationSetID { get; set; }
     }
 }

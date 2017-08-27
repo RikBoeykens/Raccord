@@ -1,4 +1,5 @@
 using System;
+using Raccord.Core.Enums;
 
 namespace Raccord.Application.Core.Services.ShootingDays.Scenes
 {
@@ -15,6 +16,8 @@ namespace Raccord.Application.Core.Services.ShootingDays.Scenes
         public TimeSpan Timings { get; set; }
 
         // Indicates if the shooting day scene completes the scene
-        public bool CompletesScene { get; set; }
+        public Completion Completion { get; set; }
+
+        public long? CallsheetSceneID { get; set; }
     }
 }

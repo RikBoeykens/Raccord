@@ -8,7 +8,6 @@ namespace Raccord.Application.Core.Services.ShootingDays.Scenes
     public class ShootingDaySceneSceneDto : BaseShootingDaySceneDto
     {
         private SceneSummaryDto _scene;
-        private LocationSetSummaryDto _locationSet;
 
         public int ScenePageLength { get; set; }
 
@@ -20,6 +19,12 @@ namespace Raccord.Application.Core.Services.ShootingDays.Scenes
         // Previous timings
         public TimeSpan PreviousTimings { get; set; }
 
+        // Page length planned on callsheet
+        public int PlannedPageLength { get; set; }
+
+        // Indicates if the scene has been completed on another day
+        public bool CompletedByOther { get; set; }
+
         // Linked scene
         public SceneSummaryDto Scene
         {
@@ -30,19 +35,6 @@ namespace Raccord.Application.Core.Services.ShootingDays.Scenes
             set
             {
                 _scene = value;
-            }
-        }
-
-        // Linked location set
-        public LocationSetSummaryDto LocationSet
-        {
-            get
-            {
-                return _locationSet ?? (_locationSet = new LocationSetSummaryDto()); 
-            }
-            set
-            {
-                _locationSet = value;
             }
         }
     }

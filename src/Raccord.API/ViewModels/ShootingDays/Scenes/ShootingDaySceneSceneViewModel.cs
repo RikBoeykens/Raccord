@@ -8,7 +8,6 @@ namespace Raccord.API.ViewModels.ShootingDays.Scenes
     public class ShootingDaySceneSceneViewModel : BaseShootingDaySceneViewModel
     {
         private SceneSummaryViewModel _scene;
-        private LocationSetSummaryViewModel _locationSet;
 
         public int ScenePageLength { get; set; }
 
@@ -20,6 +19,12 @@ namespace Raccord.API.ViewModels.ShootingDays.Scenes
         // Previous timings
         public TimeSpan PreviousTimings { get; set; }
 
+        // Planned page length
+        public int PlannedPageLength { get; set; }
+
+        // Indicates if the scene has been completed elsewhere
+        public bool CompletedByOther { get; set; }
+
         // Linked scene
         public SceneSummaryViewModel Scene
         {
@@ -30,19 +35,6 @@ namespace Raccord.API.ViewModels.ShootingDays.Scenes
             set
             {
                 _scene = value;
-            }
-        }
-
-        // Linked location set
-        public LocationSetSummaryViewModel LocationSet
-        {
-            get
-            {
-                return _locationSet ?? (_locationSet = new LocationSetSummaryViewModel()); 
-            }
-            set
-            {
-                _locationSet = value;
             }
         }
     }

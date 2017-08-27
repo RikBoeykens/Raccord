@@ -13,9 +13,9 @@ namespace Raccord.API.ViewModels.ShootingDays.Scenes
                 ID = dto.ID,
                 PageLength = dto.PageLength,
                 Timings = dto.Timings,
-                CompletesScene = dto.CompletesScene,
+                Completion = dto.Completion,
                 ShootingDay = dto.ShootingDay.Translate(),
-                LocationSet = dto.LocationSet.Translate(),
+                CallsheetSceneID = dto.CallsheetSceneID
             };
         }
         public static ShootingDaySceneSceneViewModel Translate(this ShootingDaySceneSceneDto dto)
@@ -25,13 +25,15 @@ namespace Raccord.API.ViewModels.ShootingDays.Scenes
                 ID = dto.ID,
                 PageLength = dto.PageLength,
                 Timings = dto.Timings,
-                CompletesScene = dto.CompletesScene,
+                Completion = dto.Completion,
                 ScenePageLength = dto.ScenePageLength,
                 SceneTimings = dto.SceneTimings,
                 PreviousPageLength = dto.PreviousPageLength,
                 PreviousTimings = dto.PreviousTimings,
+                PlannedPageLength = dto.PlannedPageLength,
+                CompletedByOther = dto.CompletedByOther,
                 Scene = dto.Scene.Translate(),
-                LocationSet = dto.LocationSet.Translate(),
+                CallsheetSceneID = dto.CallsheetSceneID
             };
         }
         public static ShootingDaySceneViewModel Translate(this ShootingDaySceneDto dto)
@@ -41,10 +43,10 @@ namespace Raccord.API.ViewModels.ShootingDays.Scenes
                 ID = dto.ID,
                 PageLength = dto.PageLength,
                 Timings = dto.Timings,
-                CompletesScene = dto.CompletesScene,
+                Completion = dto.Completion,
                 ShootingDayID = dto.ShootingDayID,
                 SceneID = dto.SceneID,
-                LocationSetID = dto.LocationSetID,
+                CallsheetSceneID = dto.CallsheetSceneID
             };
         }
         public static ShootingDaySceneDto Translate(this ShootingDaySceneViewModel vm)
@@ -54,10 +56,10 @@ namespace Raccord.API.ViewModels.ShootingDays.Scenes
                 ID = vm.ID,
                 PageLength = vm.PageLength,
                 Timings = vm.Timings,
-                CompletesScene = vm.CompletesScene,
+                Completion = vm.Completion,
                 ShootingDayID = vm.ShootingDayID,
                 SceneID = vm.SceneID,
-                LocationSetID = vm.LocationSetID,
+                CallsheetSceneID = vm.CallsheetSceneID
             };
         }
         public static BaseShootingDaySceneViewModel Translate(this BaseShootingDaySceneDto dto)
@@ -67,7 +69,8 @@ namespace Raccord.API.ViewModels.ShootingDays.Scenes
                 ID = dto.ID,
                 PageLength = dto.PageLength,
                 Timings = dto.Timings,
-                CompletesScene = dto.CompletesScene,
+                Completion = dto.Completion,
+                CallsheetSceneID = dto.CallsheetSceneID
             };
         }
     }
