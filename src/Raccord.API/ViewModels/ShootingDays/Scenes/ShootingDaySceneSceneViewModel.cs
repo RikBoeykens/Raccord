@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Raccord.API.ViewModels.Locations.LocationSets;
 using Raccord.API.ViewModels.Scenes;
 
@@ -8,6 +9,8 @@ namespace Raccord.API.ViewModels.ShootingDays.Scenes
     public class ShootingDaySceneSceneViewModel : BaseShootingDaySceneViewModel
     {
         private SceneSummaryViewModel _scene;
+        private LocationSetLocationViewModel _locationSet;
+        private IEnumerable<LocationSetLocationViewModel> _availableLocationSets;
 
         public int ScenePageLength { get; set; }
 
@@ -35,6 +38,32 @@ namespace Raccord.API.ViewModels.ShootingDays.Scenes
             set
             {
                 _scene = value;
+            }
+        }
+
+        // Linked location set
+        public LocationSetLocationViewModel LocationSet
+        {
+            get
+            {
+                return _locationSet ?? (_locationSet = new LocationSetLocationViewModel()); 
+            }
+            set
+            {
+                _locationSet = value;
+            }
+        }
+
+        // Linked location set
+        public IEnumerable<LocationSetLocationViewModel> AvailableLocationSets
+        {
+            get
+            {
+                return _availableLocationSets ?? (_availableLocationSets = new List<LocationSetLocationViewModel>()); 
+            }
+            set
+            {
+                _availableLocationSets = value;
             }
         }
     }

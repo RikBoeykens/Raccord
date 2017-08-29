@@ -1,3 +1,4 @@
+using System.Linq;
 using Raccord.API.ViewModels.Locations.LocationSets;
 using Raccord.API.ViewModels.Scenes;
 using Raccord.Application.Core.Services.ShootingDays.Scenes;
@@ -33,7 +34,9 @@ namespace Raccord.API.ViewModels.ShootingDays.Scenes
                 PlannedPageLength = dto.PlannedPageLength,
                 CompletedByOther = dto.CompletedByOther,
                 Scene = dto.Scene.Translate(),
-                CallsheetSceneID = dto.CallsheetSceneID
+                CallsheetSceneID = dto.CallsheetSceneID,
+                LocationSet = dto.LocationSet.Translate(),
+                AvailableLocationSets = dto.AvailableLocationSets.Select(als=> als.Translate())
             };
         }
         public static ShootingDaySceneViewModel Translate(this ShootingDaySceneDto dto)
@@ -46,7 +49,8 @@ namespace Raccord.API.ViewModels.ShootingDays.Scenes
                 Completion = dto.Completion,
                 ShootingDayID = dto.ShootingDayID,
                 SceneID = dto.SceneID,
-                CallsheetSceneID = dto.CallsheetSceneID
+                CallsheetSceneID = dto.CallsheetSceneID,
+                LocationSetID = dto.LocationSetID
             };
         }
         public static ShootingDaySceneDto Translate(this ShootingDaySceneViewModel vm)
@@ -59,7 +63,8 @@ namespace Raccord.API.ViewModels.ShootingDays.Scenes
                 Completion = vm.Completion,
                 ShootingDayID = vm.ShootingDayID,
                 SceneID = vm.SceneID,
-                CallsheetSceneID = vm.CallsheetSceneID
+                CallsheetSceneID = vm.CallsheetSceneID,
+                LocationSetID = vm.LocationSetID,
             };
         }
         public static BaseShootingDaySceneViewModel Translate(this BaseShootingDaySceneDto dto)

@@ -13,12 +13,14 @@ export class ShootingDayScene extends BaseShootingDayScene {
                         shootingDayID: number,
                         sceneID: number,
                         completion: Completion,
-                        callsheetSceneID: number
+                        callsheetSceneID: number,
+                        locationSetID?: number
                     }){
         super(obj);
         if(obj){
             this.shootingDayID = obj.shootingDayID;
             this.sceneID = obj.sceneID;
+            this.locationSetID = obj.locationSetID;
         }
     }
 }

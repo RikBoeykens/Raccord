@@ -1,6 +1,6 @@
 import { BaseShootingDayScene } from "./base-shooting-day-scene.model";
 import { SceneSummary } from "../../../scenes/model/scene-summary.model";
-import { LocationSetSummary } from "../../../locations/index";
+import { LocationSetLocation } from "../../../locations/index";
 import { Completion } from "../../../../../shared/enums/completion.enum";
 
 export class ShootingDaySceneScene extends BaseShootingDayScene {
@@ -11,6 +11,8 @@ export class ShootingDaySceneScene extends BaseShootingDayScene {
     plannedPageLength: number;
     completedByOther: boolean;
     scene: SceneSummary;
+    locationSet: LocationSetLocation;
+    availableLocationSets: LocationSetLocation[];
 
     constructor(obj?: {
                         id: number,
@@ -24,7 +26,9 @@ export class ShootingDaySceneScene extends BaseShootingDayScene {
                         completedByOther: boolean,
                         scene: SceneSummary,
                         completion: Completion,
-                        callsheetSceneID: number
+                        callsheetSceneID: number,
+                        locationSet: LocationSetLocation,
+                        availableLocationSets: LocationSetLocation[];
                     }){
         super(obj);
         if(obj){
@@ -35,6 +39,8 @@ export class ShootingDaySceneScene extends BaseShootingDayScene {
             this.plannedPageLength = obj.plannedPageLength;
             this.completedByOther = obj.completedByOther;
             this.scene = obj.scene;
+            this.locationSet = obj.locationSet;
+            this.availableLocationSets = obj.availableLocationSets;
         }
     }
 }
