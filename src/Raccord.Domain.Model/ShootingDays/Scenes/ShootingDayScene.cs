@@ -35,5 +35,9 @@ namespace Raccord.Domain.Model.ShootingDays.Scenes
         public long? CallsheetSceneID { get; set; }
 
         public virtual CallsheetScene CallsheetScene { get; set; }
+
+        public long? LocationSetID { get; set; }
+
+        public virtual LocationSet LocationSet { get; set; }
     }
 }

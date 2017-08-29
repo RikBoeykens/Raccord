@@ -75,12 +75,17 @@ namespace Raccord.Application.Services.ShootingDays
 
         public long PrepareForCompletion(long ID)
         {
-            var shootingDay = _shootingDayRepository.GetSingle(ID);
+            var shootingDay = _shootingDayRepository.GetFull(ID);
             var callsheet = _callsheetRepository.GetSummary(shootingDay.CallsheetID.Value);
 
             shootingDay.Start = callsheet.Start;
             shootingDay.End = callsheet.End;
             shootingDay.Completed = true;
+            foreach(var scene in shootingDay.ShootingDayScenes)
+            {
+                scene.LocationSetID = scene.CallsheetScene.LocationSetID;
+            }
+
             _shootingDayRepository.Edit(shootingDay);
             _shootingDayRepository.Commit();
             return shootingDay.ID;

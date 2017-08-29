@@ -27,7 +27,9 @@ namespace Raccord.Application.Services.ShootingDays.Scenes
                 PlannedPageLength = shootingDayScene.CallsheetSceneID.HasValue ? shootingDayScene.CallsheetScene.PageLength : 0,
                 CompletedByOther = shootingDayScene.Scene.ShootingDayScenes.Any(sds=> sds.Completion==Completion.Completed && sds.ID != shootingDayScene.ID),
                 Scene = shootingDayScene.Scene.TranslateSummary(),
-                CallsheetSceneID = shootingDayScene.CallsheetSceneID
+                CallsheetSceneID = shootingDayScene.CallsheetSceneID,
+                LocationSet = shootingDayScene.LocationSet.TranslateLocation(),
+                AvailableLocationSets = shootingDayScene.Scene.ScriptLocation.LocationSets.Select(ls=> ls.TranslateLocation()),
             };
         }
         public static ShootingDaySceneDayDto TranslateDay(this ShootingDayScene shootingDayScene)
@@ -52,7 +54,8 @@ namespace Raccord.Application.Services.ShootingDays.Scenes
                 Completion = shootingDayScene.Completion,
                 ShootingDayID = shootingDayScene.ShootingDayID,
                 SceneID = shootingDayScene.SceneID,
-                CallsheetSceneID = shootingDayScene.CallsheetSceneID
+                CallsheetSceneID = shootingDayScene.CallsheetSceneID,
+                LocationSetID = shootingDayScene.LocationSetID,
             };
         }
     }

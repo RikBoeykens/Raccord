@@ -9,9 +9,10 @@ using Raccord.Core.Enums;
 namespace Raccord.Data.EntityFramework.Migrations
 {
     [DbContext(typeof(RaccordDBContext))]
-    partial class RaccordDBContextModelSnapshot : ModelSnapshot
+    [Migration("20170828184824_shooting-day-location-set")]
+    partial class shootingdaylocationset
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.0.3");
