@@ -63,8 +63,8 @@ namespace Raccord.Application.Services.ShootingDays
         public FullShootingDayDto GetFull(long ID)
         {
             var shootingDay = _shootingDayRepository.GetFull(ID);
-            var previousShootingDayScenes = _shootingDaySceneRepository.GetAllBeforeDate(shootingDay.Date);
-            return shootingDay.TranslateFull(previousShootingDayScenes);
+            var previousShootingDays = _shootingDayRepository.GetAllBeforeDate(shootingDay.ProjectID, shootingDay.Date);
+            return shootingDay.TranslateFull(previousShootingDays);
         }
 
         public ShootingDaySummaryDto GetSummary(long ID)

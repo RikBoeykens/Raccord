@@ -5,6 +5,7 @@ export class ShootingDaySummary extends ShootingDay{
     completedScenes: number;
     totalPageCount: number;
     totalTimings: string;
+    totalSetups: number;
 
     constructor(obj?: {
                         id: number,
@@ -21,7 +22,8 @@ export class ShootingDaySummary extends ShootingDay{
                         totalScenes: number,
                         completedScenes: number,
                         totalPageCount: number,
-                        totalTimings: string
+                        totalTimings: string,
+                        totalSetups: number
                     }){
         super(obj);
         if(obj){
@@ -29,6 +31,7 @@ export class ShootingDaySummary extends ShootingDay{
             this.completedScenes = obj.completedScenes;
             this.totalPageCount = obj.totalPageCount;
             this.totalTimings = obj.totalTimings;
+            this.totalSetups = obj.totalSetups;
         }
     }
 }

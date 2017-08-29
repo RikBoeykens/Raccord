@@ -25,6 +25,7 @@
                 <th>Scenes Completed</th>
                 <th>Page Length Completed</th>
                 <th>Timings Completed</th>
+                <th>Setups Completed</th>
                 <th>Overtime</th>
             </tr>
         </thead>
@@ -46,13 +47,16 @@
                     {{day.totalTimings}}
                 </td>
                 <td>
+                    {{day.totalSetups}}
+                </td>
+                <td>
                     <span *ngIf="day.overTime!=='00:00:00'">
                         +{{day.overTime}}
                     </span>
                 </td>
             </tr>
         </tbody>
-        <tfoot>
+        <tfoot class="table-summary">
             <tr>
                 <td colspan="2">
                 </td>
@@ -60,13 +64,18 @@
                     {{getTotalCompletedScenes()}}
                 </td>
                 <td>
-                    {{getTotalPageCount()}}
+                    {{getTotalPageCount() | pagelength}}
                 </td>
                 <td>
                     {{getTotalTimings() | timespan}}
                 </td>
                 <td>
-                    +{{getTotalOvertime() | timespan}}
+                    {{getTotalSetups()}}
+                </td>
+                <td>
+                    <span *ngIf="getTotalOvertime()!==0">
+                        +{{getTotalOvertime() | timespan}}
+                    </span>
                 </td>
             </tr>
         </tfoot>

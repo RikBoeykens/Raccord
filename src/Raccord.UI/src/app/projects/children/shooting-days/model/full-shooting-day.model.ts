@@ -6,6 +6,7 @@ export class FullShootingDay extends ShootingDay{
     previouslyCompletedSceneCount: number;
     previouslyCompletedScenePageCount: number;
     previouslyCompletedTimingsCount: string;
+    previousSetupCount: number;
     scenes: ShootingDaySceneScene[];
     slates: SlateSummary[];
     cameraRolls: string[];
@@ -26,6 +27,7 @@ export class FullShootingDay extends ShootingDay{
                         previouslyCompletedSceneCount: number,
                         previouslyCompletedScenePageCount: number,
                         previouslyCompletedTimingsCount: string,
+                        previousSetupCount: number,
                         scenes: ShootingDaySceneScene[],
                         slates: SlateSummary[],
                         cameraRolls: string[],
@@ -36,6 +38,7 @@ export class FullShootingDay extends ShootingDay{
             this.previouslyCompletedSceneCount = obj.previouslyCompletedSceneCount;
             this.previouslyCompletedScenePageCount = obj.previouslyCompletedScenePageCount;
             this.previouslyCompletedTimingsCount = obj.previouslyCompletedTimingsCount;
+            this.previousSetupCount = obj.previousSetupCount;
             this.scenes = obj.scenes;
             this.slates = obj.slates;
             this.cameraRolls = obj.cameraRolls;

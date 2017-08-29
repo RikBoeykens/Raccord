@@ -25,6 +25,7 @@ namespace Raccord.API.ViewModels.ShootingDays
                 PreviouslyCompletedSceneCount = dto.PreviouslyCompletedSceneCount,
                 PreviouslyCompletedScenePageCount = dto.PreviouslyCompletedScenePageCount,
                 PreviouslyCompletedTimingsCount = dto.PreviouslyCompletedTimingsCount,
+                PreviousSetupCount = dto.PreviousSetupCount,
                 Scenes = dto.Scenes.Select(s=> s.Translate()),
                 Slates = dto.Slates.Select(s=> s.Translate()),
                 CameraRolls = dto.CameraRolls,
@@ -50,6 +51,7 @@ namespace Raccord.API.ViewModels.ShootingDays
                 CompletedScenes = dto.CompletedScenes,
                 TotalPageCount = dto.TotalPageCount,
                 TotalTimings = dto.TotalTimings,
+                TotalSetups = dto.TotalSetups,
             };
         }
         public static ShootingDayViewModel Translate(this ShootingDayDto dto)

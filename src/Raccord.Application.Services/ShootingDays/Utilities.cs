@@ -12,7 +12,7 @@ namespace Raccord.Application.Services.ShootingDays
 {
     public static class Utilities
     {
-        public static FullShootingDayDto TranslateFull(this ShootingDay shootingDay, IEnumerable<ShootingDayScene> previousScenes)
+        public static FullShootingDayDto TranslateFull(this ShootingDay shootingDay, IEnumerable<ShootingDay> previousDays)
         {
             return new FullShootingDayDto
             {
@@ -27,11 +27,12 @@ namespace Raccord.Application.Services.ShootingDays
                 ScheduleDayID = shootingDay.ScheduleDayID,
                 CallsheetID = shootingDay.CallsheetID,
                 ProjectID = shootingDay.ProjectID,
-                PreviouslyCompletedSceneCount = previousScenes.Count(pcs=> pcs.Completion == Completion.Completed),
-                PreviouslyCompletedScenePageCount = previousScenes.Sum(pcs=> pcs.PageLength),
-                PreviouslyCompletedTimingsCount = new TimeSpan(previousScenes.Sum(pcs=> pcs.Timings.Ticks)),
+                PreviouslyCompletedSceneCount = previousDays.SelectMany(sd=> sd.ShootingDayScenes).Count(pcs=> pcs.Completion == Completion.Completed),
+                PreviouslyCompletedScenePageCount = previousDays.SelectMany(sd=> sd.ShootingDayScenes).Sum(pcs=> pcs.PageLength),
+                PreviouslyCompletedTimingsCount = new TimeSpan(previousDays.SelectMany(sd=> sd.ShootingDayScenes).Sum(pcs=> pcs.Timings.Ticks)),
                 Scenes = shootingDay.ShootingDayScenes.Select(s=> s.TranslateScene()),
-                Slates = shootingDay.Slates.Select(s=> s.TranslateSummary()),
+                PreviousSetupCount = previousDays.Sum(sd=> sd.Slates.Count()),
+                Slates = shootingDay.Slates.OrderBy(s=> s.SortingOrder).Select(s=> s.TranslateSummary()),
                 CameraRolls = shootingDay.Slates.SelectMany(s=> s.Takes.Select(t=> t.CameraRoll)).Distinct(),
                 SoundRolls = shootingDay.Slates.SelectMany(s=> s.Takes.Select(t=> t.SoundRoll)).Distinct(),
             };
@@ -55,6 +56,7 @@ namespace Raccord.Application.Services.ShootingDays
                 CompletedScenes = shootingDay.ShootingDayScenes.Count(sds=> sds.Completion == Completion.Completed),
                 TotalPageCount = shootingDay.ShootingDayScenes.Sum(sds=> sds.PageLength),
                 TotalTimings = new TimeSpan(shootingDay.ShootingDayScenes.Sum(sds=> sds.Timings.Ticks)),
+                TotalSetups = shootingDay.Slates.Count(),
             };
         }
         public static ShootingDayDto Translate(this ShootingDay shootingDay)

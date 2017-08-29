@@ -2,6 +2,7 @@ using Raccord.Domain.Model.ShootingDays;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using System;
 
 namespace Raccord.Data.EntityFramework.Repositories.ShootingDays
 {
@@ -17,6 +18,13 @@ namespace Raccord.Data.EntityFramework.Repositories.ShootingDays
             var query = GetIncludedSummary();
 
             return query.Where(d=> d.ProjectID == projectID);
+        }
+
+        public IEnumerable<ShootingDay> GetAllBeforeDate(long projectID, DateTime date)
+        {
+            var query = GetIncludedSummary();
+
+            return query.Where(d=> d.ProjectID == projectID && d.Date < date);
         }
 
         public ShootingDay GetFull(long ID)
@@ -80,6 +88,8 @@ namespace Raccord.Data.EntityFramework.Repositories.ShootingDays
                         .Include(sds=> sds.Slates)
                         .ThenInclude(s=> s.Scene)
                         .ThenInclude(s=> s.DayNight)
+                        .Include(sds=> sds.Slates)
+                        .ThenInclude(sds=> sds.Takes)
                         .Include(sd=> sd.ShootingDayScenes)
                         .ThenInclude(sds=> sds.LocationSet)
                         .ThenInclude(ls=> ls.Location);
@@ -89,7 +99,8 @@ namespace Raccord.Data.EntityFramework.Repositories.ShootingDays
         {
             IQueryable<ShootingDay> query = _context.Set<ShootingDay>();
 
-            return query.Include(sd=> sd.ShootingDayScenes);
+            return query.Include(sd=> sd.ShootingDayScenes)
+                        .Include(sd=> sd.Slates);
         }
 
         private IQueryable<ShootingDay> GetIncluded()

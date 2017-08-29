@@ -22,6 +22,9 @@ namespace Raccord.Application.Core.Services.ShootingDays
         // Total count of previously completed timespans
         public TimeSpan PreviouslyCompletedTimingsCount { get; set; }
 
+        // Total count of previous setups
+        public int PreviousSetupCount { get; set; }
+
         // Scenes on the shooting day scene
         public IEnumerable<ShootingDaySceneSceneDto> Scenes
         {

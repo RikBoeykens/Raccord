@@ -16,5 +16,8 @@ namespace Raccord.Application.Core.Services.ShootingDays
 
         // Total timings
         public TimeSpan TotalTimings { get; set; }
+
+        // Total setups
+        public int TotalSetups { get; set; }
     }
 }
