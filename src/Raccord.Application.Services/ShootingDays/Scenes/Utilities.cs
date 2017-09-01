@@ -28,7 +28,7 @@ namespace Raccord.Application.Services.ShootingDays.Scenes
                 CompletedByOther = shootingDayScene.Scene.ShootingDayScenes.Any(sds=> sds.Completion==Completion.Completed && sds.ID != shootingDayScene.ID),
                 Scene = shootingDayScene.Scene.TranslateSummary(),
                 CallsheetSceneID = shootingDayScene.CallsheetSceneID,
-                LocationSet = shootingDayScene.LocationSet.TranslateLocation(),
+                LocationSet = shootingDayScene.LocationSetID.HasValue ? shootingDayScene.LocationSet.TranslateLocation() : null,
                 AvailableLocationSets = shootingDayScene.Scene.ScriptLocation.LocationSets.Select(ls=> ls.TranslateLocation()),
             };
         }
