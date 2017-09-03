@@ -39,7 +39,8 @@ import {
   CallsheetWizardStep3Component,
   CallsheetWizardStep4Component,
   SlatesListComponent,
-  SlateLandingComponent
+  SlateLandingComponent,
+  ChartLandingComponent
 } from './projects';
 import { ScenePropertiesLandingComponent } from './projects';
 import { LoginComponent } from "./security";
@@ -557,6 +558,18 @@ export const ROUTES: Routes = [
                   shootingDays: ShootingDaysResolve
                 }
               }
+            ]
+          },
+          {
+            path: 'charts',
+            children:[
+              {
+                path: '',
+                component: ChartLandingComponent,
+                resolve:{
+                  project: ProjectSummaryResolve,
+                }
+              },
             ]
           },
         ],

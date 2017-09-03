@@ -182,4 +182,8 @@ export {
     SlateImagesComponent
  } from "./children/shots";
 
+ export{
+    ChartLandingComponent
+ } from "./children/charts";
+
 export { ScenePropertiesLandingComponent } from './children/scene-properties/component/scene-properties-landing/scene-properties-landing.component';

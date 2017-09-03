@@ -107,7 +107,8 @@ import {
   SlatesListComponent,
   SlateLandingComponent,
   SlateImagesComponent,
-  ChooseShootingDayDialog
+  ChooseShootingDayDialog,
+  ChartLandingComponent
 } from './projects';
 import { ScenePropertiesLandingComponent } from './projects';
 import { SelectEntityComponent } from './shared';
@@ -199,6 +200,7 @@ const COMPONENTS =[
   SlatesListComponent,
   SlateLandingComponent,
   SlateImagesComponent,
+  ChartLandingComponent,
   ScenePropertiesLandingComponent,
   SelectEntityComponent,
   LoginComponent,
@@ -435,6 +437,7 @@ const PIPES = [
 import { DragulaModule } from 'ng2-dragula';
 import { MaterialModule } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { Ng2HighchartsModule } from "ng2-highcharts";
 
 import '../styles/styles.scss';
 import '../styles/headings.css';
@@ -463,6 +466,7 @@ import '../styles/headings.css';
     DragulaModule,
     MaterialModule,
     FlexLayoutModule,
+    Ng2HighchartsModule,
     RouterModule.forRoot(ROUTES, { preloadingStrategy: PreloadAllModules })
   ],
   providers: [ // expose our Services and Providers into Angular's dependency injection
