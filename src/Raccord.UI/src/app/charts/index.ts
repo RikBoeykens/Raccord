@@ -1,0 +1,1 @@
+export { RaccordChartComponent } from "./component/raccord-chart/raccord-chart.component";

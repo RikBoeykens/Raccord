@@ -11,33 +11,7 @@ import { PageLengthHelpers } from "../../../../../shared/helpers/page-length.hel
 })
 export class ChartLandingComponent {
 
-    project: ProjectSummary;  
-    chartData = {
-        chart: {
-            type: 'column'
-        },
-        xAxis: {
-            categories: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-        },
-        yAxis:{
-            labels:{
-                formatter: function(){
-                    return PageLengthHelpers.getPageLengthString(this.value);
-                }
-            }
-        },
-        series: [
-            {
-            name: 'Page lengths',
-            data: [4, 9, 12, 3, 6, 7, 5, 8, 31, 14, 2]
-            },
-        ],
-        tooltip:{
-            formatter: function(){
-                return PageLengthHelpers.getPageLengthString(this.y);
-            }
-        }
-    };
+    project: ProjectSummary;
 
     constructor(
         private _loadingService: LoadingService,

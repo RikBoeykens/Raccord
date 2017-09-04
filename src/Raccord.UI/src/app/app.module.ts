@@ -123,6 +123,9 @@ import {
   AdminAddUserComponent,
   AdminUserLandingComponent
 } from "./admin";
+import{
+  RaccordChartComponent
+} from "./charts";
 
 const COMPONENTS =[
   AppComponent,
@@ -211,7 +214,8 @@ const COMPONENTS =[
   AdminProjectSettingsComponent,
   AdminUsersListComponent,
   AdminAddUserComponent,
-  AdminUserLandingComponent
+  AdminUserLandingComponent,
+  RaccordChartComponent
 ];
 
 const ENTRY_COMPONENTS = [
