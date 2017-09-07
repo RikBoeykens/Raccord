@@ -1,107 +1,155 @@
-import { Component } from "@angular/core";
+import { Component, OnInit, Input } from "@angular/core";
 import { PageLengthHelpers } from "../../../shared/helpers/page-length.helpers";
+import { ChartType } from "../../enum/chart-type.enum";
+import { ChartInfo } from "../../model/chart-info.model";
+import { ChartDataType } from "../../enum/chart-data-type.enum";
+import { TimespanHelpers } from "../../../shared/helpers/timespan.helpers";
+import { ChartSeriesData } from "../../model/chart-series-data.model";
 
 @Component({
     templateUrl: 'raccord-chart.component.html',
     selector: "raccord-chart"
 })
-export class RaccordChartComponent {
-    columnData = {
-        chart: {
-            type: 'column'
-        },
-        title: {
-            text: 'Completed by pagelength'
-        },
-        xAxis: {
-            categories: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-        },
-        yAxis:{
-            labels:{
-                formatter: function(){
-                    return PageLengthHelpers.getPageLengthString(this.value);
-                }
-            }
-        },
-        series: [
-            {
-            name: 'Page lengths',
-            data: [4, 9, 12, 3, 6, 7, 5, 8, 31, 14, 2]
-            },
-        ],
-        tooltip:{
-            formatter: function(){
-                return PageLengthHelpers.getPageLengthString(this.y);
-            }
-        }
-    };
-    areaData = {
-        chart: {
-            type: 'area'
-        },
-        title: {
-            text: 'Burndown by pagelength'
-        },
-        xAxis: {
-            categories: ["SD 1", "SD 2", "SD 3", "SD 4", "SD 5", "SD 6", "SD 6", "SD 8", "SD 9", "SD 10", "SD 11", "SD 12", "SD 13", "SD 14", "SD 15"]
-        },
-        yAxis:{
-            labels:{
-                formatter: function(){
-                    return PageLengthHelpers.getPageLengthString(this.value);
-                }
-            }
-        },
-        series: [
-            {
-            name: 'Page lengths',
-            data: [174, 169, 152, 148, 100, 89, 72, 65, 51, 49, null, null, null, null, null]
-            },
-        ],
-        tooltip:{
-            formatter: function(){
-                return PageLengthHelpers.getPageLengthString(this.y);
-            }
-        }
-    };
+export class RaccordChartComponent implements OnInit {
+    @Input() chartObjectData: ChartInfo;
+    chartData: any;
 
-    pieData={
-        chart: {
-            type: 'pie'
-        },
-        title: {
-            text: 'Completed by pagelength'
-        },
-        tooltip: {
-            formatter: function(){
-                return PageLengthHelpers.getPageLengthString(this.y);
+    ngOnInit(){
+        this.chartData = this.getChartData();
+    }
+
+    getChartData(){
+        return this.parseChartInfo(this.chartObjectData);
+    }
+
+    parseChartInfo(chartInfo: ChartInfo){
+        return this.getChartType(chartInfo);
+    }
+
+    getChartType(chartInfo: ChartInfo){
+        switch(chartInfo.chartType){
+            case ChartType.pie:{
+                return this.getPieData(chartInfo);
             }
-        },
-        plotOptions: {
-            pie: {
-                allowPointSelect: true,
-                cursor: 'pointer',
-                dataLabels: {
-                    enabled: true,
-                    formatter: function(){
-                        return PageLengthHelpers.getPageLengthString(this.value);
-                    } 
+            case ChartType.area:{
+                return this.getAreaOrColumnData(chartInfo, "area");
+            }
+            case ChartType.column:{
+                return this.getAreaOrColumnData(chartInfo, "column");
+            }
+        }
+    }
+    
+    getAreaOrColumnData(chartInfo: ChartInfo, type: string){
+        return {
+            title:{
+                text: chartInfo.title
+            },
+            chart: {
+                type: type
+            },
+            tooltip: {
+                formatter: this.getTooltipFormatter(chartInfo.dataType),
+            },
+            xAxis: {
+                categories: chartInfo.baseData
+            },
+            yAxis:{
+                labels:{
+                    formatter: this.getYaxisLabelFormatter(chartInfo.dataType)
                 }
+            },
+            series: chartInfo.seriesData.map((seriesData: ChartSeriesData)=>{
+                return {
+                    name: seriesData.name, 
+                    data: seriesData.data.map((dataPoint)=>{
+                        if(chartInfo.dataType===ChartDataType.timespan){
+                            dataPoint = TimespanHelpers.getTimespanNumber(dataPoint);
+                        }
+                        return dataPoint;
+                    })
+                };
+            }),
+        };
+    }
+
+    getPieData(chartInfo: ChartInfo){
+        let pieSeriesData= [];
+        for(let i =0; i< chartInfo.baseData.length; i++){
+            let seriesDataPoint = chartInfo.seriesData[0].data[i];
+            if(chartInfo.dataType===ChartDataType.timespan){
+                seriesDataPoint = TimespanHelpers.getTimespanNumber(seriesDataPoint);
             }
-        },
-        series: [{
-            name: 'Types',
-            colorByPoint: true,
-            data: [{
-                name: 'Not Scheduled',
-                y: 32
-            }, {
-                name: 'Scheduled but not shot',
-                y: 21
-            }, {
-                name: 'Shot',
-                y: 45
-            }]
-        }]
-    };
+            pieSeriesData.push({name: chartInfo.baseData[i], y: seriesDataPoint});
+        }
+
+        return {
+            title:{
+                text: chartInfo.title
+            },
+            chart: {
+                type: "pie"
+            },        
+            series: [{
+                colorByPoint: true,
+                data: pieSeriesData
+            }],
+            tooltip: {
+                formatter: this.getTooltipFormatter(chartInfo.dataType),
+            },
+        };
+    }
+
+    getTooltipFormatter(dataType: ChartDataType){
+        switch(dataType){
+            case ChartDataType.number:{
+                return tooltipNumberFormatter;
+            }
+            case ChartDataType.pagelength:{
+                return tooltipPageLengthFormatter;
+            }
+            case ChartDataType.timespan:{
+                return tooltipTimespanFormatter;
+            }
+        }
+    }
+
+    getYaxisLabelFormatter(dataType: ChartDataType){
+        switch(dataType){
+            case ChartDataType.number:{
+                return yAxisLabelNumberFormatter;
+            }
+            case ChartDataType.pagelength:{
+                return yAxisLabelPageLengthFormatter;
+            }
+            case ChartDataType.timespan:{
+                return yAxisLabelTimespanFormatter;
+            }
+        }
+    }
+}
+
+function tooltipNumberFormatter(){
+    return this.y;
+}
+
+function tooltipPageLengthFormatter(){
+    return PageLengthHelpers.getPageLengthString(this.y);
+}
+
+function tooltipTimespanFormatter(){
+    return TimespanHelpers.getTimespanString(this.y);
+}
+
+
+function yAxisLabelNumberFormatter(){
+    return this.value;
+}
+
+function yAxisLabelPageLengthFormatter(){
+    return PageLengthHelpers.getPageLengthString(this.value);
+}
+
+function yAxisLabelTimespanFormatter(){
+    return TimespanHelpers.getTimespanString(this.value);
 }

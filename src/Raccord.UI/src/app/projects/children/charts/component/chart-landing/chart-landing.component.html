@@ -4,4 +4,6 @@
         <a routerLink="/projects/{{project.id}}" class="breadcrumb">{{project.title}}</a>
         <span class="breadcrumb">Charts</span>
 </md-card>
-<raccord-chart></raccord-chart>
+<raccord-chart [chartObjectData]="columnObjectData"></raccord-chart>
+<raccord-chart [chartObjectData]="areaObjectData"></raccord-chart>
+<raccord-chart [chartObjectData]="pieObjectData"></raccord-chart>
