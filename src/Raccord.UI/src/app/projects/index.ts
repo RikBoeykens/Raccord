@@ -145,6 +145,8 @@ export {
     ChooseShootingDayDialog,
     ShootingDayReportsListComponent,
     ShootingDayReportLandingComponent,
+    ShootingDaySceneListItem,
+    EditShootingDaySceneDialog,
     ShootingDayHttpService,
     AvailableCallsheetShootingDaysResolve,
     AvailableCompletionShootingDaysResolve,

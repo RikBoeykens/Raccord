@@ -72,7 +72,7 @@ namespace Raccord.Application.Services.Scheduling.ScheduleScenes
             shootingDayScene.PageLength = dto.PageLength;
             shootingDayScene.Timings= dto.Timings;
             shootingDayScene.Completion = dto.Completion;
-            shootingDayScene.LocationSetID = dto.LocationSetID;
+            shootingDayScene.LocationSetID = dto.LocationSetID!=default(long) ? dto.LocationSetID : null;
 
             _shootingDaySceneRepository.Edit(shootingDayScene);
             _shootingDaySceneRepository.Commit();

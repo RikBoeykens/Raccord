@@ -10,6 +10,10 @@ import { EntityType } from "../../../../../shared/enums/entity-type.enum";
 import { ShootingDaySceneHttpService } from "../../scenes/service/shooting-day-scene-http.service";
 import { SelectedEntity } from "../../../../../shared/model/selected-entity.model";
 import { ShootingDayScene } from "../../scenes/model/shooting-day-scene.model";
+import { ShootingDaySceneScene } from "../../scenes/model/shooting-day-scene-scene.model";
+import { Completion } from "../../../../../shared/enums/completion.enum";
+import { MdDialog } from "@angular/material";
+import { EditShootingDaySceneDialog } from "../../scenes/component/edit-shooting-day-scene-dialog/edit-shooting-day-scene-dialog.component";
 
 @Component({
     templateUrl: 'shooting-day-report-landing.component.html',
@@ -26,7 +30,8 @@ export class ShootingDayReportLandingComponent {
         private _loadingService: LoadingService,
         private _dialogService: DialogService,
         private _route: ActivatedRoute,
-        private _router: Router
+        private _router: Router,
+        private _dialog: MdDialog
     ){
     }
 
@@ -78,14 +83,73 @@ export class ShootingDayReportLandingComponent {
         });
     }
 
+    getNotStartedScenes(){
+        return this.shootingDay.scenes.filter((scene: ShootingDaySceneScene)=>{ return scene.completion == Completion.notStarted });
+    }
+    
+    getPartCompletedScenes(){
+        return this.shootingDay.scenes.filter((scene: ShootingDaySceneScene)=>{ return scene.completion == Completion.partCompleted });
+    }
+    
+    getCompletedScenes(){
+        return this.shootingDay.scenes.filter((scene: ShootingDaySceneScene)=>{ return scene.completion == Completion.completed });
+    }
+
     addShootingDayScene(scene: SelectedEntity){
         let loadingId = this._loadingService.startLoading();
 
         let newShootingDayScene = new ShootingDayScene();
         newShootingDayScene.sceneID = scene.entityId;
         newShootingDayScene.shootingDayID = this.shootingDay.id;
+        newShootingDayScene.completion = Completion.partCompleted;
 
         this._shootingDaySceneHttpService.post(newShootingDayScene).then(data=>{
+            if(typeof(data)=='string'){
+                this._dialogService.error(data);
+            }else{
+                this.getScenes();
+            }
+        }).catch()
+        .then(()=>
+            this._loadingService.endLoading(loadingId)
+        );
+    }
+
+    editShootingDayScene(scene: ShootingDaySceneScene){
+        let sceneDialog = this._dialog.open(EditShootingDaySceneDialog, {data: scene});
+        sceneDialog.afterClosed().subscribe(scene=> {
+            if(scene){
+                this.updateShootingDayScene(scene);
+            }
+        });
+    }
+    
+    updateShootingDayScene(scene: ShootingDaySceneScene){
+        let loadingId = this._loadingService.startLoading();
+
+        let shootingDayScene = new ShootingDayScene();
+        shootingDayScene.id = scene.id;
+        shootingDayScene.completion = scene.completion;
+        shootingDayScene.locationSetID = scene.locationSet.id;
+        shootingDayScene.pageLength = scene.pageLength;
+        shootingDayScene.timings = scene.timings;
+
+        this._shootingDaySceneHttpService.post(shootingDayScene).then(data=>{
+            if(typeof(data)=='string'){
+                this._dialogService.error(data);
+            }else{
+                this.getScenes();
+            }
+        }).catch()
+        .then(()=>
+            this._loadingService.endLoading(loadingId)
+        );
+    }
+    
+    removeShootingDayScene(scene: ShootingDaySceneScene){
+        let loadingId = this._loadingService.startLoading();
+
+        this._shootingDaySceneHttpService.delete(scene.id).then(data=>{
             if(typeof(data)=='string'){
                 this._dialogService.error(data);
             }else{

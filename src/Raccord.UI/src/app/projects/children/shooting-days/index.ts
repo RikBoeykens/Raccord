@@ -4,6 +4,9 @@ export { ChooseShootingDayDialog } from "./component/choose-shooting-day-dialog/
 export { ShootingDayReportsListComponent } from "./component/shooting-day-reports-list/shooting-day-reports-list.component";
 export { ShootingDayReportLandingComponent } from "./component/shooting-day-report-landing/shooting-day-report-landing.component";
 
+export { ShootingDaySceneListItem } from "./scenes/component/shooting-day-scene-list-item/shooting-day-scene-list-item.component";
+export { EditShootingDaySceneDialog } from "./scenes/component/edit-shooting-day-scene-dialog/edit-shooting-day-scene-dialog.component";
+
 export { ShootingDayHttpService } from "./service/shooting-day-http.service";
 export { AvailableCallsheetShootingDaysResolve } from "./service/available-callsheet-shooting-days-resolve.service";
 export { AvailableCompletionShootingDaysResolve } from "./service/available-completion-shooting-days-resolve.service";
