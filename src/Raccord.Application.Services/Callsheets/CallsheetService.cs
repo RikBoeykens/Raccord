@@ -8,6 +8,7 @@ using Raccord.Data.EntityFramework.Repositories.Scheduling.ScheduleDays;
 using Raccord.Data.EntityFramework.Repositories.ShootingDays;
 using Raccord.Domain.Model.Callsheets;
 using Raccord.Domain.Model.Callsheets.Scenes;
+using Raccord.Domain.Model.ShootingDays.Scenes;
 
 namespace Raccord.Application.Services.Callsheets
 {
@@ -97,6 +98,11 @@ namespace Raccord.Application.Services.Callsheets
                     {
                         CharacterSceneID = cs.CharacterSceneID,
                     }).ToList(),
+                    ShootingDayScene = new ShootingDayScene
+                    {
+                        ShootingDayID = linkedShootingDay.ID,
+                        SceneID = scheduleScene.SceneID,
+                    }
                 });
             }
 

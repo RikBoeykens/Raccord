@@ -16,4 +16,8 @@
     <PackageReference Include="OpenIddict.Mvc" Version="1.0.0-*" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Raccord.Core\Raccord.Core.csproj" />
+  </ItemGroup>
+
 </Project>

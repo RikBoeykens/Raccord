@@ -1,0 +1,10 @@
+<md-list-item>
+    <show-image *ngIf="shootingDayScene.scene.primaryImage.id!=0" [image]="shootingDayScene.scene.primaryImage" [listAvatar]="true"></show-image>
+    <span>{{shootingDayScene.scene.number}}. {{shootingDayScene.scene.intExt.name}} {{shootingDayScene.scene.scriptLocation.name}} {{shootingDayScene.scene.dayNight.name}} - {{shootingDayScene.scene.summary}}</span>
+    <span *ngIf="!shootingDayNotStarted()">
+        <span><b>Pagelength:</b> {{shootingDayScene.pageLength | pagelength}}</span>
+        <span><b>Timings:</b> {{shootingDayScene.timings}}</span>
+    </span>
+    <button md-button (click)="doEdit()"><md-icon>edit</md-icon></button>
+    <button md-button (click)="doRemove()" *ngIf="shootingDayScene.callsheetId!==null"><md-icon>delete</md-icon></button>    
+</md-list-item>

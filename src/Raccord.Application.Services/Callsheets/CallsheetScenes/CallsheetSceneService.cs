@@ -7,6 +7,9 @@ using Raccord.Data.EntityFramework.Repositories.Callsheets.Scenes;
 using Raccord.Data.EntityFramework.Repositories.CharacterScenes;
 using Raccord.Domain.Model.Images;
 using Raccord.Application.Core.Common.Sorting;
+using Raccord.Data.EntityFramework.Repositories.Callsheets;
+using Raccord.Domain.Model.ShootingDays.Scenes;
+using Raccord.Data.EntityFramework.Repositories.ShootingDays.Scenes;
 
 namespace Raccord.Application.Services.Callsheets.CallsheetScenes
 {
@@ -15,18 +18,28 @@ namespace Raccord.Application.Services.Callsheets.CallsheetScenes
     {
         private readonly ICallsheetSceneRepository _callsheetSceneRepository;
         private readonly ICharacterSceneRepository _characterSceneRepository;
+        private readonly ICallsheetRepository _callsheetRepository;
+        private readonly IShootingDaySceneRepository _shootingDaySceneRepository;
 
         // Initialises a new CallsheetSceneService
         public CallsheetSceneService(ICallsheetSceneRepository callsheetSceneRepository,
-                                    ICharacterSceneRepository characterSceneRepository)
+                                    ICharacterSceneRepository characterSceneRepository,
+                                    ICallsheetRepository callsheetRepository,
+                                    IShootingDaySceneRepository shootingDaySceneRepository)
         {
             if(callsheetSceneRepository == null)
                 throw new ArgumentNullException(nameof(callsheetSceneRepository));
             if(characterSceneRepository == null)
                 throw new ArgumentNullException(nameof(characterSceneRepository));
+            if(callsheetRepository == null)
+                throw new ArgumentNullException(nameof(callsheetRepository));
+            if(shootingDaySceneRepository == null)
+                throw new ArgumentNullException(nameof(shootingDaySceneRepository));
             
             _callsheetSceneRepository = callsheetSceneRepository;
             _characterSceneRepository = characterSceneRepository;
+            _callsheetRepository = callsheetRepository;
+            _shootingDaySceneRepository = shootingDaySceneRepository;
         }
 
         // Gets all callsheet scenes for a scene
@@ -82,12 +95,19 @@ namespace Raccord.Application.Services.Callsheets.CallsheetScenes
         // Adds a callsheet scene
         public long Add(CallsheetSceneDto dto)
         {
+            var callsheet = _callsheetRepository.GetSingle(dto.CallsheetID);
+
             var callsheetScene = new CallsheetScene
             {
                 PageLength = dto.PageLength,
                 CallsheetID = dto.CallsheetID,
                 SceneID = dto.SceneID,
                 LocationSetID = dto.LocationSetID,
+                ShootingDayScene = new ShootingDayScene
+                {
+                    ShootingDayID = callsheet.ShootingDayID,
+                    SceneID = dto.SceneID,
+                },
             };
 
             // add all characters in the scene by default

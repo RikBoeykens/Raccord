@@ -39,7 +39,9 @@ import {
   CallsheetWizardStep3Component,
   CallsheetWizardStep4Component,
   SlatesListComponent,
-  SlateLandingComponent
+  SlateLandingComponent,
+  ShootingDayReportsListComponent,
+  ShootingDayReportLandingComponent
 } from './projects';
 import { ScenePropertiesLandingComponent } from './projects';
 import { LoginComponent } from "./security";
@@ -82,8 +84,11 @@ import {
   LocationResolve,
   LocationSetResolve,
   SceneLocationSetsResolve,
-  AvailableShootingDaysResolve,
+  AvailableCallsheetShootingDaysResolve,
+  AvailableCompletionShootingDaysResolve,
+  CompletedShootingDaysResolve,
   ShootingDaysResolve,
+  ShootingDayResolve,
   CallsheetsResolve,
   CallsheetResolve,
   CallsheetSummaryResolve,
@@ -483,7 +488,7 @@ export const ROUTES: Routes = [
                 component: NewCallsheetComponent,
                 resolve:{
                   project: ProjectSummaryResolve,
-                  availableDays: AvailableShootingDaysResolve
+                  availableDays: AvailableCallsheetShootingDaysResolve
                 }
               },
               {
@@ -555,6 +560,28 @@ export const ROUTES: Routes = [
                   slate: SlateResolve,
                   scenes: ScenesResolve,
                   shootingDays: ShootingDaysResolve
+                }
+              }
+            ]
+          },
+          {
+            path: 'shootingdays',
+            children:[
+              {
+                path: '',
+                component: ShootingDayReportsListComponent,
+                resolve:{
+                  project: ProjectSummaryResolve,
+                  shootingDays: CompletedShootingDaysResolve,
+                  availableDays: AvailableCompletionShootingDaysResolve
+                }
+              },
+              {
+                path: ':shootingDayId',
+                component: ShootingDayReportLandingComponent,
+                resolve:{
+                  project: ProjectSummaryResolve,
+                  shootingDay: ShootingDayResolve
                 }
               }
             ]

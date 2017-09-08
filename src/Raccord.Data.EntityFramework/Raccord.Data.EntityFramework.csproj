@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <ProjectReference Include="../Raccord.Domain.Model/Raccord.Domain.Model.csproj" />
+    <ProjectReference Include="..\Raccord.Core\Raccord.Core.csproj" />
   </ItemGroup>
 
   <ItemGroup>
