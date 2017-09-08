@@ -142,10 +142,18 @@ export {
  } from "./children/locations";
 
  export {
-     ChooseShootingDayDialog,
+    ChooseShootingDayDialog,
+    ShootingDayReportsListComponent,
+    ShootingDayReportLandingComponent,
+    ShootingDaySceneListItem,
+    EditShootingDaySceneDialog,
     ShootingDayHttpService,
-    AvailableShootingDaysResolve,
-    ShootingDaysResolve
+    AvailableCallsheetShootingDaysResolve,
+    AvailableCompletionShootingDaysResolve,
+    CompletedShootingDaysResolve,
+    ShootingDaysResolve,
+    ShootingDayResolve,
+    ShootingDaySceneHttpService
  } from "./children/shooting-days";
 
  export{

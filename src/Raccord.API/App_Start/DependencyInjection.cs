@@ -94,6 +94,9 @@ using Raccord.Application.Services.Shots.Takes;
 using Raccord.Application.Core.Services.ImageSlates;
 using Raccord.Application.Services.ImageSlates;
 using Raccord.Data.EntityFramework.Repositories.ImageSlates;
+using Raccord.Data.EntityFramework.Repositories.ShootingDays.Scenes;
+using Raccord.Application.Core.Services.ShootingDays.Scenes;
+using Raccord.Application.Services.ShootingDays.Scenes;
 
 namespace Raccord.API
 {
@@ -213,7 +216,10 @@ namespace Raccord.API
             services.AddTransient<IImageSlateService, ImageSlateService>();
 
             services.AddTransient<ITakeRepository, TakeRepository>(); 
-            services.AddTransient<ITakeService, TakeService>();   
+            services.AddTransient<ITakeService, TakeService>(); 
+
+            services.AddTransient<IShootingDaySceneRepository, ShootingDaySceneRepository>();   
+            services.AddTransient<IShootingDaySceneService, ShootingDaySceneService>();   
         }
     }
 }

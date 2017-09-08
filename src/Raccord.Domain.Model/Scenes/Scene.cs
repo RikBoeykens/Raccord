@@ -9,6 +9,7 @@ using Raccord.Domain.Model.Scheduling;
 using Raccord.Domain.Model.Callsheets.Scenes;
 using Raccord.Domain.Model.Shots;
 using System;
+using Raccord.Domain.Model.ShootingDays.Scenes;
 
 namespace Raccord.Domain.Model.Scenes
 {
@@ -21,6 +22,7 @@ namespace Raccord.Domain.Model.Scenes
         private ICollection<ScheduleScene> _scheduleScenes;
         private ICollection<CallsheetScene> _callsheetScenes;
         private ICollection<Slate> _slates;
+        private ICollection<ShootingDayScene> _shootingDayScenes;
 
         // Number of the scene
         public string Number { get; set; }
@@ -136,6 +138,19 @@ namespace Raccord.Domain.Model.Scenes
             set
             {
                 _slates = value;
+            }
+        }
+
+        // Linked shooting day scenes
+        public virtual ICollection<ShootingDayScene> ShootingDayScenes
+        {
+            get
+            {
+                return _shootingDayScenes ?? (_shootingDayScenes = new List<ShootingDayScene>());
+            }
+            set
+            {
+                _shootingDayScenes = value;
             }
         }
     }

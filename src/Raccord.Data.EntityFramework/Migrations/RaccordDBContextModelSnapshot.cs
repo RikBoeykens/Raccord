@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Raccord.Data.EntityFramework;
+using Raccord.Core.Enums;
 
 namespace Raccord.Data.EntityFramework.Migrations
 {
@@ -375,6 +376,8 @@ namespace Raccord.Data.EntityFramework.Migrations
                     b.Property<int>("PageLength");
 
                     b.Property<long>("SceneID");
+
+                    b.Property<long>("ShootingDaySceneID");
 
                     b.Property<int>("SortingOrder");
 
@@ -829,6 +832,39 @@ namespace Raccord.Data.EntityFramework.Migrations
                     b.ToTable("ScriptLocations");
                 });
 
+            modelBuilder.Entity("Raccord.Domain.Model.ShootingDays.Scenes.ShootingDayScene", b =>
+                {
+                    b.Property<long>("ID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<long?>("CallsheetSceneID");
+
+                    b.Property<int>("Completion");
+
+                    b.Property<long?>("LocationSetID");
+
+                    b.Property<int>("PageLength");
+
+                    b.Property<long>("SceneID");
+
+                    b.Property<long>("ShootingDayID");
+
+                    b.Property<TimeSpan>("Timings");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("CallsheetSceneID")
+                        .IsUnique();
+
+                    b.HasIndex("LocationSetID");
+
+                    b.HasIndex("SceneID");
+
+                    b.HasIndex("ShootingDayID");
+
+                    b.ToTable("ShootingDayScene");
+                });
+
             modelBuilder.Entity("Raccord.Domain.Model.ShootingDays.ShootingDay", b =>
                 {
                     b.Property<long>("ID")
@@ -836,13 +872,23 @@ namespace Raccord.Data.EntityFramework.Migrations
 
                     b.Property<long?>("CallsheetID");
 
+                    b.Property<bool>("Completed");
+
                     b.Property<DateTime>("Date");
 
+                    b.Property<DateTime>("End");
+
                     b.Property<string>("Number");
+
+                    b.Property<TimeSpan>("OverTime");
 
                     b.Property<long>("ProjectID");
 
                     b.Property<long?>("ScheduleDayID");
+
+                    b.Property<DateTime>("Start");
+
+                    b.Property<DateTime>("Turn");
 
                     b.HasKey("ID");
 
@@ -1342,6 +1388,28 @@ namespace Raccord.Data.EntityFramework.Migrations
                     b.HasOne("Raccord.Domain.Model.Projects.Project", "Project")
                         .WithMany()
                         .HasForeignKey("ProjectID")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Raccord.Domain.Model.ShootingDays.Scenes.ShootingDayScene", b =>
+                {
+                    b.HasOne("Raccord.Domain.Model.Callsheets.Scenes.CallsheetScene", "CallsheetScene")
+                        .WithOne("ShootingDayScene")
+                        .HasForeignKey("Raccord.Domain.Model.ShootingDays.Scenes.ShootingDayScene", "CallsheetSceneID")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Raccord.Domain.Model.Locations.LocationSets.LocationSet", "LocationSet")
+                        .WithMany("ShootingDayScenes")
+                        .HasForeignKey("LocationSetID");
+
+                    b.HasOne("Raccord.Domain.Model.Scenes.Scene", "Scene")
+                        .WithMany("ShootingDayScenes")
+                        .HasForeignKey("SceneID")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Raccord.Domain.Model.ShootingDays.ShootingDay", "ShootingDay")
+                        .WithMany("ShootingDayScenes")
+                        .HasForeignKey("ShootingDayID")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

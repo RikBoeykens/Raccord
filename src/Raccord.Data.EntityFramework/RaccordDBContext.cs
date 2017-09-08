@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Raccord.Domain.Model.Users;
 using Raccord.Domain.Model.Callsheets.CallTypes;
+using Raccord.Domain.Model.Callsheets.Scenes;
 
 namespace Raccord.Data.EntityFramework
 {
@@ -43,6 +44,11 @@ namespace Raccord.Data.EntityFramework
                         .HasOne(s => s.DayNight)
                         .WithMany(l => l.Scenes)
                         .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<CallsheetScene>()
+                        .HasOne(cs=> cs.ShootingDayScene)
+                        .WithOne(sds=> sds.CallsheetScene)
+                        .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

@@ -108,7 +108,11 @@ import {
   SlateLandingComponent,
   SlateImagesComponent,
   ChooseShootingDayDialog,
-  ChartLandingComponent
+  ChartLandingComponent,
+  ShootingDayReportsListComponent,
+  ShootingDayReportLandingComponent,
+  ShootingDaySceneListItem,
+  EditShootingDaySceneDialog
 } from './projects';
 import { ScenePropertiesLandingComponent } from './projects';
 import { SelectEntityComponent } from './shared';
@@ -204,6 +208,9 @@ const COMPONENTS =[
   SlateLandingComponent,
   SlateImagesComponent,
   ChartLandingComponent,
+  ShootingDayReportsListComponent,
+  ShootingDayReportLandingComponent,
+  ShootingDaySceneListItem,
   ScenePropertiesLandingComponent,
   SelectEntityComponent,
   LoginComponent,
@@ -220,7 +227,8 @@ const COMPONENTS =[
 
 const ENTRY_COMPONENTS = [
   ChooseSceneDialog,
-  ChooseShootingDayDialog
+  ChooseShootingDayDialog,
+  EditShootingDaySceneDialog
 ];
 
 // Services
@@ -282,8 +290,12 @@ import {
   LocationSetResolve,
   SceneLocationSetsResolve,
   ShootingDayHttpService,
-  AvailableShootingDaysResolve,
+  AvailableCallsheetShootingDaysResolve,
+  AvailableCompletionShootingDaysResolve,
+  CompletedShootingDaysResolve,
   ShootingDaysResolve,
+  ShootingDayResolve,
+  ShootingDaySceneHttpService,
   CallsheetHttpService,
   CallsheetsResolve,
   CallsheetResolve,
@@ -386,8 +398,12 @@ const APP_PROVIDERS = [
   AuthGuard,
   AccountHttpService,
   ShootingDayHttpService,
-  AvailableShootingDaysResolve,
+  AvailableCallsheetShootingDaysResolve,
+  AvailableCompletionShootingDaysResolve,
+  CompletedShootingDaysResolve,
   ShootingDaysResolve,
+  ShootingDayResolve,
+  ShootingDaySceneHttpService,
   CallsheetHttpService,
   CallsheetsResolve,
   CallsheetResolve,

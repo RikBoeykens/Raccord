@@ -40,7 +40,9 @@ import {
   CallsheetWizardStep4Component,
   SlatesListComponent,
   SlateLandingComponent,
-  ChartLandingComponent
+  ChartLandingComponent,
+  ShootingDayReportsListComponent,
+  ShootingDayReportLandingComponent
 } from './projects';
 import { ScenePropertiesLandingComponent } from './projects';
 import { LoginComponent } from "./security";
@@ -83,8 +85,11 @@ import {
   LocationResolve,
   LocationSetResolve,
   SceneLocationSetsResolve,
-  AvailableShootingDaysResolve,
+  AvailableCallsheetShootingDaysResolve,
+  AvailableCompletionShootingDaysResolve,
+  CompletedShootingDaysResolve,
   ShootingDaysResolve,
+  ShootingDayResolve,
   CallsheetsResolve,
   CallsheetResolve,
   CallsheetSummaryResolve,
@@ -484,7 +489,7 @@ export const ROUTES: Routes = [
                 component: NewCallsheetComponent,
                 resolve:{
                   project: ProjectSummaryResolve,
-                  availableDays: AvailableShootingDaysResolve
+                  availableDays: AvailableCallsheetShootingDaysResolve
                 }
               },
               {
@@ -569,7 +574,29 @@ export const ROUTES: Routes = [
                 resolve:{
                   project: ProjectSummaryResolve,
                 }
+              }
+            ],
+          },
+          {
+            path: 'shootingdays',
+            children:[
+              {
+                path: '',
+                component: ShootingDayReportsListComponent,
+                resolve:{
+                  project: ProjectSummaryResolve,
+                  shootingDays: CompletedShootingDaysResolve,
+                  availableDays: AvailableCompletionShootingDaysResolve
+                }
               },
+              {
+                path: ':shootingDayId',
+                component: ShootingDayReportLandingComponent,
+                resolve:{
+                  project: ProjectSummaryResolve,
+                  shootingDay: ShootingDayResolve
+                }
+              }
             ]
           },
         ],

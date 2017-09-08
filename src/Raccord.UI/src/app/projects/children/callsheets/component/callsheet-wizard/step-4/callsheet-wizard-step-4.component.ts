@@ -10,6 +10,7 @@ import { CallsheetSummary } from "../../../";
 import { CallsheetCharacterCharacter } from "../../../";
 import { CharacterCallCallType } from "../../../";
 import { LinkedCharacter } from "../../../..//characters/model/linked-character.model";
+import { TimeHelpers } from "../../../../../../shared/helpers/time.helpers";
 
 @Component({
     templateUrl: 'callsheet-wizard-step-4.component.html',
@@ -59,7 +60,7 @@ export class CallsheetWizardStep4Component implements OnInit {
         
         console.log(`call time before: ${call.callTime}`);
         console.log(`call time string before: ${call.callTimeString}`);
-        call.callTime = getTime(call.callTimeString);
+        call.callTime = TimeHelpers.getTime(call.callTimeString);
         console.log(`call time after: ${call.callTime}`);
 
         this._characterCallHttpService.post(call).then(data=>{
@@ -76,9 +77,9 @@ export class CallsheetWizardStep4Component implements OnInit {
     goToNextStep(){
          let loadingId = this._loadingService.startLoading();
 
-         this.callsheet.start = getTime(this.callsheet.startString);
-         this.callsheet.end = getTime(this.callsheet.endString);
-         this.callsheet.crewCall = getTime(this.callsheet.crewCallString);
+         this.callsheet.start = TimeHelpers.getTime(this.callsheet.startString);
+         this.callsheet.end = TimeHelpers.getTime(this.callsheet.endString);
+         this.callsheet.crewCall = TimeHelpers.getTime(this.callsheet.crewCallString);
 
         this._callsheetHttpService.post(this.callsheet).then(data=>{
             if(typeof(data)=='string'){
@@ -99,9 +100,9 @@ export class CallsheetWrapper extends CallsheetSummary{
     crewCallString: string;
     constructor(obj: CallsheetSummary){
         super(obj);
-        this.startString = getTimeString(obj.start);
-        this.endString = getTimeString(obj.end);
-        this.crewCallString = getTimeString(obj.crewCall);
+        this.startString = TimeHelpers.getTimeString(obj.start);
+        this.endString = TimeHelpers.getTimeString(obj.end);
+        this.crewCallString = TimeHelpers.getTimeString(obj.crewCall);
     }    
 }
 
@@ -119,28 +120,7 @@ export class CharacterCallWrapper extends CharacterCallCallType{
     
     constructor(obj: CharacterCallCallType){
         super(obj);
-        this.callTimeString = getTimeString(obj.callTime);
+        this.callTimeString = TimeHelpers.getTimeString(obj.callTime);
     }
 }
 
-function getTimeString(time: Date){
-    let timeString = "00:00";
-    if(time){
-        time = new Date(time);
-        let h = time.getHours();
-        let hourString = h.toString();
-        if(h<10) hourString = `0${h}`;
-        let m = time.getMinutes();
-        let minuteString = m.toString();
-        if(m<10) minuteString = `0${m}`;
-        timeString = `${hourString}:${minuteString}`;
-    }
-    return timeString;
-}
-
-function getTime(time: string): Date{
-    let timeParts = time.split(":");
-    let hours = parseInt(timeParts[0]);
-    let minutes = parseInt(timeParts[1]);
-    return new Date(0, 0, 0, hours, minutes);
-}
