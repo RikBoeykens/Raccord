@@ -14,6 +14,7 @@ import { ShootingDaySceneScene } from "../../scenes/model/shooting-day-scene-sce
 import { Completion } from "../../../../../shared/enums/completion.enum";
 import { MdDialog } from "@angular/material";
 import { EditShootingDaySceneDialog } from "../../scenes/component/edit-shooting-day-scene-dialog/edit-shooting-day-scene-dialog.component";
+import { TimespanHelpers } from "../../../../../shared/helpers/timespan.helpers";
 
 @Component({
     templateUrl: 'shooting-day-report-landing.component.html',
@@ -93,6 +94,34 @@ export class ShootingDayReportLandingComponent {
     
     getCompletedScenes(){
         return this.shootingDay.scenes.filter((scene: ShootingDaySceneScene)=>{ return scene.completion == Completion.completed });
+    }
+    
+    getTodayScenesCount(){
+        return this.getCompletedScenes().length;
+    }
+    
+    getTodayScenePageCount(){
+        let result = 0;
+        this.shootingDay.scenes.forEach((shootingDayScene: ShootingDaySceneScene)=>{
+            result += shootingDayScene.pageLength;
+        });
+        return result;
+    }
+    
+    getTodayTimingsCount(){
+        let result = 0;
+        this.shootingDay.scenes.forEach((shootingDayScene: ShootingDaySceneScene)=>{
+            result += TimespanHelpers.getTimespanNumber(shootingDayScene.timings);
+        });
+        return result;
+    }
+    
+    getTotalTimingsCount(){
+        let result = TimespanHelpers.getTimespanNumber(this.shootingDay.previouslyCompletedTimingsCount);
+        this.shootingDay.scenes.forEach((shootingDayScene: ShootingDaySceneScene)=>{
+            result += TimespanHelpers.getTimespanNumber(shootingDayScene.timings);
+        });
+        return result;
     }
 
     addShootingDayScene(scene: SelectedEntity){
