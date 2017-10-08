@@ -76,5 +76,36 @@ namespace Raccord.Application.Services.ShootingDays
                 ProjectID = shootingDay.ProjectID
             };
         }
+
+        public static ShootingDayInfoDto TranslateSceneInfo(this ShootingDay shootingDay, long sceneID)
+        {
+            var dto = new ShootingDayInfoDto
+            {
+                Number = shootingDay.Number,
+                Date = shootingDay.Date
+            };
+
+            if(shootingDay.Completed && shootingDay.ShootingDayScenes.Any(sds=> sds.SceneID == sceneID))
+            {
+                dto.ID = shootingDay.ID;
+                dto.Type = ShootingDayType.Shot;
+            } else if (shootingDay.Completed){
+                dto.ID = shootingDay.CallsheetID.Value;
+                dto.Type = ShootingDayType.CallsheetNotShot;
+            } else if (shootingDay.CallsheetID.HasValue && shootingDay.Callsheet.CallsheetScenes.Any(css=> css.SceneID == sceneID)){
+                dto.ID = shootingDay.CallsheetID.Value;
+                dto.Type = ShootingDayType.Callsheet;
+            } else if (shootingDay.CallsheetID.HasValue)
+            {
+                dto.ID = shootingDay.ScheduleDayID.Value;
+                dto.Type = ShootingDayType.ScheduledNotOnCallsheet;
+            } else
+            {
+                dto.ID = shootingDay.ScheduleDayID.Value;
+                dto.Type = ShootingDayType.Scheduled;
+            }
+
+            return dto;
+        }
     }
 }

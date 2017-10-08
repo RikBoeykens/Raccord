@@ -12,6 +12,7 @@ using Raccord.Domain.Model.SceneProperties;
 using Raccord.Domain.Model.ScriptLocations;
 using Raccord.Application.Core.Common.Sorting;
 using Raccord.Data.EntityFramework.Repositories.Images;
+using Raccord.Data.EntityFramework.Repositories.ShootingDays;
 
 namespace Raccord.Application.Services.Scenes
 {
@@ -22,13 +23,15 @@ namespace Raccord.Application.Services.Scenes
         private readonly IIntExtRepository _intExtRepository;
         private readonly IDayNightRepository _dayNightRepository;
         private readonly IScriptLocationRepository _scriptLocationRepository;
+        private readonly IShootingDayRepository _shootingDayRepository;
 
         // Initialises a new SceneService
         public SceneService(
             ISceneRepository sceneRepository,
             IIntExtRepository intExtRepository,
             IDayNightRepository dayNightRepository,
-            IScriptLocationRepository scriptLocationRepository
+            IScriptLocationRepository scriptLocationRepository,
+            IShootingDayRepository shootingDayRepository
             )
         {
             if(sceneRepository == null)
@@ -39,11 +42,14 @@ namespace Raccord.Application.Services.Scenes
                 throw new ArgumentNullException(nameof(dayNightRepository));
             if(scriptLocationRepository == null)
                 throw new ArgumentNullException(nameof(scriptLocationRepository));
+            if(shootingDayRepository == null)
+                throw new ArgumentNullException(nameof(shootingDayRepository));
             
             _sceneRepository = sceneRepository;
             _intExtRepository = intExtRepository;
             _dayNightRepository = dayNightRepository;
             _scriptLocationRepository = scriptLocationRepository;
+            _shootingDayRepository = shootingDayRepository;
         }
 
         // Gets all scene for a project
@@ -60,8 +66,9 @@ namespace Raccord.Application.Services.Scenes
         public FullSceneDto Get(Int64 ID)
         {
             var scene = _sceneRepository.GetFull(ID);
+            var shootingDays = _shootingDayRepository.GetAllForScene(ID);
 
-            var dto = scene.TranslateFull();
+            var dto = scene.TranslateFull(shootingDays);
 
             return dto;
         }

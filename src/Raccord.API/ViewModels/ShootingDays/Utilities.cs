@@ -88,5 +88,15 @@ namespace Raccord.API.ViewModels.ShootingDays
                 ProjectID = vm.ProjectID,
             };
         }
+        public static ShootingDayInfoViewModel Translate(this ShootingDayInfoDto dto)
+        {
+            return new ShootingDayInfoViewModel
+            {
+                ID = dto.ID,
+                Number = dto.Number,
+                Date = dto.Date,
+                Type = dto.Type
+            };
+        }
     }
 }

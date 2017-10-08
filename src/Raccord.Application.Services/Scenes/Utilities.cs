@@ -14,13 +14,16 @@ using Raccord.Domain.Model.Breakdowns.BreakdownItems;
 using Raccord.Application.Services.Scheduling.ScheduleScenes;
 using Raccord.Domain.Model.Scheduling;
 using Raccord.Application.Services.Shots.Slates;
+using System.Collections.Generic;
+using Raccord.Domain.Model.ShootingDays;
+using Raccord.Application.Services.ShootingDays;
 
 namespace Raccord.Application.Services.Scenes
 {
     // Utilities and helper methods for Scenes
     public static class Utilities
     {
-        public static FullSceneDto TranslateFull(this Scene scene)
+        public static FullSceneDto TranslateFull(this Scene scene, IEnumerable<ShootingDay> shootingDays)
         {
             var dto = new FullSceneDto
             {
@@ -35,7 +38,7 @@ namespace Raccord.Application.Services.Scenes
                 Images = scene.ImageScenes.Select(i=> i.TranslateImage()),
                 Characters = scene.CharacterScenes.Select(i=> i.TranslateCharacter()),
                 BreakdownItems = scene.BreakdownItemScenes.Select(bis=> bis.TranslateBreakdownItem()),
-                ScheduleDays = scene.ScheduleScenes.Select(ss=> ss.TranslateDay()),
+                ShootingDays = shootingDays.Select(sd=> sd.TranslateSceneInfo(scene.ID)),
                 Slates = scene.Slates.Select(s=> s.TranslateSummary()),
                 ProjectID = scene.ProjectID,
             };
