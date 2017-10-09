@@ -38,7 +38,7 @@ namespace Raccord.Application.Services.Scenes
                 Images = scene.ImageScenes.Select(i=> i.TranslateImage()),
                 Characters = scene.CharacterScenes.Select(i=> i.TranslateCharacter()),
                 BreakdownItems = scene.BreakdownItemScenes.Select(bis=> bis.TranslateBreakdownItem()),
-                ShootingDays = shootingDays.Select(sd=> sd.TranslateSceneInfo(scene.ID)),
+                ShootingDays = shootingDays.Select(sd=> sd.TranslateSceneInfo(scene.ID)).OrderBy(sd=> sd.Type).ThenBy(sd=> sd.Date),
                 Slates = scene.Slates.Select(s=> s.TranslateSummary()),
                 ProjectID = scene.ProjectID,
             };
