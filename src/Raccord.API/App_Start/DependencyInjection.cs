@@ -97,6 +97,8 @@ using Raccord.Data.EntityFramework.Repositories.ImageSlates;
 using Raccord.Data.EntityFramework.Repositories.ShootingDays.Scenes;
 using Raccord.Application.Core.Services.ShootingDays.Scenes;
 using Raccord.Application.Services.ShootingDays.Scenes;
+using Raccord.Application.Core.Services.Charts;
+using Raccord.Application.Services.Charts;
 
 namespace Raccord.API
 {
@@ -220,6 +222,8 @@ namespace Raccord.API
 
             services.AddTransient<IShootingDaySceneRepository, ShootingDaySceneRepository>();   
             services.AddTransient<IShootingDaySceneService, ShootingDaySceneService>();   
+
+            services.AddTransient<IChartService, ChartService>();   
         }
     }
 }
