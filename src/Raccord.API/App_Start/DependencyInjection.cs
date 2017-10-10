@@ -99,6 +99,8 @@ using Raccord.Application.Core.Services.ShootingDays.Scenes;
 using Raccord.Application.Services.ShootingDays.Scenes;
 using Raccord.Application.Core.Services.Charts;
 using Raccord.Application.Services.Charts;
+using Raccord.Application.Core.Services.Charts.ChartBuilders;
+using Raccord.Application.Services.Charts.ChartBuilders;
 
 namespace Raccord.API
 {
@@ -224,6 +226,9 @@ namespace Raccord.API
             services.AddTransient<IShootingDaySceneService, ShootingDaySceneService>();   
 
             services.AddTransient<IChartService, ChartService>();   
+            services.AddTransient<IBurndownByPagelengthChartBuilder, BurndownByPagelengthChartBuilder>();   
+            services.AddTransient<ICompletedByPagelengthChartBuilder, CompletedByPagelengthChartBuilder>();   
+            services.AddTransient<IPageLengthByDayChartBuilder, PageLengthByDayChartBuilder>();   
         }
     }
 }
