@@ -19,7 +19,7 @@ export { SceneImagesComponent } from './children/scenes/component/scene-images/s
 export { SceneCharactersComponent } from './children/scenes/component/scene-characters/scene-characters.component';
 export { SceneBreakdownItemsComponent } from './children/scenes/component/scene-breakdown-items/scene-breakdown-items.component';
 export { 
-    SceneSchedulingComponent,
+    SceneShootingDaysComponent,
     SceneSlatesComponent,
     SceneTimingsComponent,
     ChooseSceneDialog

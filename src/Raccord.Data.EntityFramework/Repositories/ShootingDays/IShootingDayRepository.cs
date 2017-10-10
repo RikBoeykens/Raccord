@@ -13,5 +13,6 @@ namespace Raccord.Data.EntityFramework.Repositories.ShootingDays
         ShootingDay GetSummary(long ID);
         int SearchCount(string searchText, long? projectID);
         IEnumerable<ShootingDay> Search(string searchText, long? projectID);
+        IEnumerable<ShootingDay> GetAllForScene(long sceneID);
     }
 }

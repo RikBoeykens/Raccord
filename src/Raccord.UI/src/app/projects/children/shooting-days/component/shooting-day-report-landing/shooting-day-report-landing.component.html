@@ -97,3 +97,59 @@
         </select-entity>
     </div>
 </md-card>
+<md-card>
+    <table>
+        <thead>
+            <tr>
+                <th></th>
+                <th>Completed Scenes</th>
+                <th>Page Length</th>
+                <th>Timings</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    Previous
+                </td>
+                <td>
+                    {{shootingDay.previouslyCompletedSceneCount}}
+                </td>
+                <td>
+                    {{shootingDay.previouslyCompletedScenePageCount | pagelength}}
+                </td>
+                <td>
+                    {{shootingDay.previouslyCompletedTimingsCount}}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Today
+                </td>
+                <td>
+                    {{getTodayScenesCount()}}
+                </td>
+                <td>
+                    {{getTodayScenePageCount() | pagelength}}
+                </td>
+                <td>
+                    {{getTodayTimingsCount() | timespan}}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Total
+                </td>
+                <td>
+                    {{shootingDay.previouslyCompletedSceneCount + getTodayScenesCount()}}
+                </td>
+                <td>
+                    {{shootingDay.previouslyCompletedScenePageCount + getTodayScenePageCount() | pagelength}}
+                </td>
+                <td>
+                    {{getTotalTimingsCount() | timespan}}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</md-card>
