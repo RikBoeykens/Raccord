@@ -7,6 +7,7 @@ using System.Linq;
 using Raccord.API.ViewModels.Breakdowns.BreakdownItems;
 using Raccord.API.ViewModels.Scheduling.ScheduleScenes;
 using Raccord.API.ViewModels.Shots.Slates;
+using Raccord.API.ViewModels.ShootingDays;
 
 namespace Raccord.API.ViewModels.Scenes
 {
@@ -28,7 +29,7 @@ namespace Raccord.API.ViewModels.Scenes
                 Images = dto.Images.Select(i=> i.Translate()),
                 Characters = dto.Characters.Select(i=> i.Translate()),
                 BreakdownItems = dto.BreakdownItems.Select(bi=> bi.Translate()),
-                ScheduleDays = dto.ScheduleDays.Select(sd=> sd.Translate()),
+                ShootingDays = dto.ShootingDays.Select(sd=> sd.Translate()),
                 Slates = dto.Slates.Select(s=> s.Translate()),
                 ProjectID = dto.ProjectID,
             };

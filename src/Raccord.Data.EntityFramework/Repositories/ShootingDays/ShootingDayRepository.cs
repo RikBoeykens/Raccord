@@ -41,6 +41,19 @@ namespace Raccord.Data.EntityFramework.Repositories.ShootingDays
             return query.FirstOrDefault(d => d.ID == ID);
         }
 
+        public IEnumerable<ShootingDay> GetAllForScene(long sceneID)
+        {
+            var query = GetIncludedScene();
+
+            return query.Where(sd => sd.ShootingDayScenes.Any(sds=> sds.SceneID == sceneID)
+                                    ||
+                                    sd.CallsheetID.HasValue && sd.Callsheet.CallsheetScenes.Any(cs=> cs.SceneID==sceneID)
+                                    ||
+                                    sd.ScheduleDayID.HasValue && sd.ScheduleDay.ScheduleScenes.Any(ss=> ss.SceneID == sceneID)
+                                    );
+        }
+
+
         public int SearchCount(string searchText, long? projectID)
         {
             var query = GetSearchQuery(searchText, projectID);
@@ -110,7 +123,6 @@ namespace Raccord.Data.EntityFramework.Repositories.ShootingDays
             return query;
         }
 
-
         private IQueryable<ShootingDay> GetSearchQuery(string searchText, long? projectID)
         {
             IQueryable<ShootingDay> query = _context.Set<ShootingDay>();
@@ -121,6 +133,17 @@ namespace Raccord.Data.EntityFramework.Repositories.ShootingDays
                 query = query.Where(l=> l.ProjectID==projectID.Value);
 
             return query;
+        }
+
+        private IQueryable<ShootingDay> GetIncludedScene()
+        {
+            IQueryable<ShootingDay> query = _context.Set<ShootingDay>();
+
+            return query.Include(sd=> sd.ShootingDayScenes)
+                        .Include(sd=> sd.ScheduleDay)
+                        .ThenInclude(sd=> sd.ScheduleScenes)
+                        .Include(sd=> sd.Callsheet)
+                        .ThenInclude(cs=> cs.CallsheetScenes);
         }
     }
 }

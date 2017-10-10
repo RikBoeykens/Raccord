@@ -42,7 +42,7 @@ import { SceneImagesComponent } from './projects';
 import { SceneCharactersComponent } from './projects';
 import { SceneBreakdownItemsComponent } from './projects';
 import { 
-  SceneSchedulingComponent,
+  SceneShootingDaysComponent,
   SceneSlatesComponent,
   SceneTimingsComponent,
   ChooseSceneDialog
@@ -145,7 +145,7 @@ const COMPONENTS =[
   SceneImagesComponent,
   SceneCharactersComponent,
   SceneBreakdownItemsComponent,
-  SceneSchedulingComponent,
+  SceneShootingDaysComponent,
   SceneSlatesComponent,
   SceneTimingsComponent,
   ScriptLocationsListComponent,

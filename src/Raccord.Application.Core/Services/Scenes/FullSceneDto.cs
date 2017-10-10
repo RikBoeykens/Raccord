@@ -2,8 +2,8 @@ using Raccord.Application.Core.Services.Images;
 using System.Collections.Generic;
 using Raccord.Application.Core.Services.Characters;
 using Raccord.Application.Core.Services.Breakdowns.BreakdownItems;
-using Raccord.Application.Core.Services.Scheduling.ScheduleScenes;
 using Raccord.Application.Core.Services.Shots.Slates;
+using Raccord.Application.Core.Services.ShootingDays;
 
 namespace Raccord.Application.Core.Services.Scenes
 {
@@ -13,7 +13,7 @@ namespace Raccord.Application.Core.Services.Scenes
         private IEnumerable<LinkedImageDto> _images;
         private IEnumerable<LinkedCharacterDto> _characters;
         private IEnumerable<LinkedBreakdownItemDto> _items;
-        private IEnumerable<ScheduleSceneDayDto> _scheduleDays;
+        private IEnumerable<ShootingDayInfoDto> _shootingDays;
         private IEnumerable<SlateSummaryDto> _slates;
 
         // Images linked to the scene
@@ -56,15 +56,15 @@ namespace Raccord.Application.Core.Services.Scenes
         }
 
         // Days the scene is scheduled for
-        public IEnumerable<ScheduleSceneDayDto> ScheduleDays
+        public IEnumerable<ShootingDayInfoDto> ShootingDays
         {
             get
             {
-                return _scheduleDays ?? (_scheduleDays = new List<ScheduleSceneDayDto>());
+                return _shootingDays ?? (_shootingDays = new List<ShootingDayInfoDto>());
             }
             set
             {
-                _scheduleDays = value;
+                _shootingDays = value;
             }
         }
 
