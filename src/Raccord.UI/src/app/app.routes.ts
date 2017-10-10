@@ -113,6 +113,7 @@ import {
 
 import { CanDeactivateGuard } from './shared/service/can-deactivate-guard.service';
 import { AuthGuard } from "./security";
+import { ProjectChartsResolve } from './charts/index';
 
 export const ROUTES: Routes = [
   { path: '',      component: DashboardComponent, canActivate: [AuthGuard] },
@@ -573,6 +574,7 @@ export const ROUTES: Routes = [
                 component: ChartLandingComponent,
                 resolve:{
                   project: ProjectSummaryResolve,
+                  charts: ProjectChartsResolve
                 }
               }
             ],

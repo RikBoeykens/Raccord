@@ -4,6 +4,4 @@
         <a routerLink="/projects/{{project.id}}" class="breadcrumb">{{project.title}}</a>
         <span class="breadcrumb">Charts</span>
 </md-card>
-<raccord-chart [chartObjectData]="columnObjectData"></raccord-chart>
-<raccord-chart [chartObjectData]="areaObjectData"></raccord-chart>
-<raccord-chart [chartObjectData]="pieObjectData"></raccord-chart>
+<raccord-chart *ngFor="let chart of charts" [chartObjectData]="chart"></raccord-chart>

@@ -15,6 +15,7 @@ import { ChartDataType } from "../../../../../charts/enum/chart-data-type.enum";
 export class ChartLandingComponent {
 
     project: ProjectSummary;
+    charts: ChartInfo[];
     columnObjectData = new ChartInfo({
         title: "Pagelength by day",
         chartType: ChartType.column,
@@ -46,8 +47,9 @@ export class ChartLandingComponent {
     }
 
     ngOnInit() {
-        this._route.data.subscribe((data: { project: ProjectSummary }) => {
+        this._route.data.subscribe((data: { project: ProjectSummary, charts: ChartInfo[] }) => {
             this.project = data.project;
+            this.charts = data.charts;
         });
     }
 }
