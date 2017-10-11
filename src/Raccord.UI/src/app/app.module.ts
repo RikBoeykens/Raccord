@@ -339,6 +339,11 @@ import {
   AdminSearchEngineService
 } from "./admin";
 
+import {
+  ChartHttpService,
+  ProjectChartsResolve
+} from "./charts";
+
 const APP_PROVIDERS = [
   LoadingService,
   CanDeactivateGuard,
@@ -432,7 +437,9 @@ const APP_PROVIDERS = [
   AdminCrewHttpService,
   AdminProjectCrewResolve,
   AdminUserProjectsResolve,
-  AdminSearchEngineService
+  AdminSearchEngineService,
+  ChartHttpService,
+  ProjectChartsResolve
 ];
 
 // Directives
