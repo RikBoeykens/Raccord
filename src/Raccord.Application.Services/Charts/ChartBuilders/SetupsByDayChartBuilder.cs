@@ -6,14 +6,15 @@ using Raccord.Application.Core.Services.Charts.ChartBuilders;
 using Raccord.Core.Enums;
 using Raccord.Data.EntityFramework.Repositories.Scenes;
 using Raccord.Data.EntityFramework.Repositories.ShootingDays;
+using Raccord.Data.EntityFramework.Repositories.ShootingDays.Scenes;
 
 namespace Raccord.Application.Services.Charts.ChartBuilders
 {
-    public class CompletedByPagelengthChartBuilder: ICompletedByPagelengthChartBuilder
+    public class SetupsByDayChartBuilder: ISetupsByDayChartBuilder
     {
         private ISceneRepository _sceneRepository;
         private IShootingDayRepository _shootingDayRepository;
-        public CompletedByPagelengthChartBuilder(
+        public SetupsByDayChartBuilder(
             ISceneRepository sceneRepository,
             IShootingDayRepository shootingDayRepository
         )
@@ -23,36 +24,37 @@ namespace Raccord.Application.Services.Charts.ChartBuilders
             if(shootingDayRepository==null)
                 throw new ArgumentNullException(nameof(shootingDayRepository));
 
-            _sceneRepository = sceneRepository;
-            _shootingDayRepository = shootingDayRepository;
+                _sceneRepository = sceneRepository;
+                _shootingDayRepository = shootingDayRepository;
         }
 
         public new ChartInfoType GetType()
         {
-            return ChartInfoType.CompletedByPagelength;
+            return ChartInfoType.SetupsByDay;
         }
 
         public ChartInfoDto GetChartInfo(ChartRequestDto request)
         {
-            // Get full pagelength
-            var scenes = _sceneRepository.GetAllForProject(request.ProjectID);
-            var totalPagelength = scenes.Sum(s=> s.PageLength);
+            var baseData = new List<object>();
+            var seriesData = new List<object>();
 
-            var shootingDays = _shootingDayRepository.GetAllForProject(request.ProjectID);
-            var shotPagelength = shootingDays.Sum(sd=> sd.ShootingDayScenes.Sum(sds=> sds.PageLength));
-            
-            var baseData = new List<object>{ "Shot", "Not Shot"};
-            var seriesData = new List<object>{ shotPagelength, totalPagelength - shotPagelength };
-            
+            var shootingDays = _shootingDayRepository.GetAllForProject(request.ProjectID).OrderBy(sd=> sd.Date);
+            foreach(var shootingDay in shootingDays)
+            {
+                baseData.Add($"SD {shootingDay.Number}");
+                var totalSetups = shootingDay.Slates.Count();
+                seriesData.Add(shootingDay.Completed ? totalSetups : (int?)null);
+            }
+
             return new ChartInfoDto
             {
-                Title = "Completed by pagelength",
-                ChartType = ChartType.Pie,
-                DataType = ChartDataType.Pagelength,
+                Title = "Setups by day",
+                ChartType = ChartType.Column,
+                DataType = ChartDataType.Number,
                 BaseData = baseData,
                 SeriesData = new List<ChartSeriesDataDto>
                 {
-                    new ChartSeriesDataDto{ Name = "", Data = seriesData}
+                    new ChartSeriesDataDto{ Name = "Setups", Data = seriesData}
                 }
             };
         }

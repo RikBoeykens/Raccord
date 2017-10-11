@@ -11,25 +11,50 @@ namespace Raccord.Application.Services.Charts
     public class ChartService : IChartService
     {
         private readonly IBurndownByPagelengthChartBuilder _burndownByPagelengthChartBuilder;
+        private readonly IBurndownBySceneChartBuilder _burndownBySceneChartBuilder;
         private readonly ICompletedByPagelengthChartBuilder _completedByPagelengthChartBuilder;
+        private readonly ICompletedBySceneChartBuilder _completedBySceneChartBuilder;
         private readonly IPageLengthByDayChartBuilder _pagelengthByDayChartBuilder;
+        private readonly ICumulativeTimingsByDayChartBuilder _cumulativeTimingsByDayChartBuilder;
+        private readonly ICumulativeSetupsByDayChartBuilder _cumulativeSetupsByDayChartBuilder;
+        private readonly ISetupsByDayChartBuilder _setupsByDayChartBuilder;
         // Initialises a new ChartService
         public ChartService(
             IBurndownByPagelengthChartBuilder burndownByPagelengthChartBuilder,
+            IBurndownBySceneChartBuilder burndownBySceneChartBuilder,
             ICompletedByPagelengthChartBuilder completedByPagelengthChartBuilder,
-            IPageLengthByDayChartBuilder pagelengthByDayChartBuilder
+            ICompletedBySceneChartBuilder completedBySceneChartBuilder,
+            IPageLengthByDayChartBuilder pagelengthByDayChartBuilder,
+            ICumulativeTimingsByDayChartBuilder cumulativeTimingsByDayChartBuilder,
+            ICumulativeSetupsByDayChartBuilder cumulativeSetupsByDayChartBuilder,
+            ISetupsByDayChartBuilder setupsByDayChartBuilder
             )
         {
             if(burndownByPagelengthChartBuilder==null)
                 throw new ArgumentNullException(nameof(burndownByPagelengthChartBuilder));
+            if(burndownBySceneChartBuilder==null)
+                throw new ArgumentNullException(nameof(burndownBySceneChartBuilder));
             if(completedByPagelengthChartBuilder==null)
                 throw new ArgumentNullException(nameof(completedByPagelengthChartBuilder));
+            if(completedBySceneChartBuilder==null)
+                throw new ArgumentNullException(nameof(completedBySceneChartBuilder));
             if(pagelengthByDayChartBuilder==null)
                 throw new ArgumentNullException(nameof(pagelengthByDayChartBuilder));
+            if(cumulativeTimingsByDayChartBuilder==null)
+                throw new ArgumentNullException(nameof(cumulativeTimingsByDayChartBuilder));
+            if(cumulativeSetupsByDayChartBuilder==null)
+                throw new ArgumentNullException(nameof(cumulativeSetupsByDayChartBuilder));
+            if(setupsByDayChartBuilder==null)
+                throw new ArgumentNullException(nameof(setupsByDayChartBuilder));
 
             _burndownByPagelengthChartBuilder = burndownByPagelengthChartBuilder;
+            _burndownBySceneChartBuilder = burndownBySceneChartBuilder;
             _completedByPagelengthChartBuilder = completedByPagelengthChartBuilder;
+            _completedBySceneChartBuilder = completedBySceneChartBuilder;
             _pagelengthByDayChartBuilder = pagelengthByDayChartBuilder;
+            _cumulativeTimingsByDayChartBuilder = cumulativeTimingsByDayChartBuilder;
+            _cumulativeSetupsByDayChartBuilder = cumulativeSetupsByDayChartBuilder;
+            _setupsByDayChartBuilder = setupsByDayChartBuilder;
         }
 
         // Gets all characters for a project
@@ -51,8 +76,13 @@ namespace Raccord.Application.Services.Charts
             var services = new List<IChartBuilder>
             {
                 _burndownByPagelengthChartBuilder,
+                _burndownBySceneChartBuilder,
                 _completedByPagelengthChartBuilder,
-                _pagelengthByDayChartBuilder
+                _completedBySceneChartBuilder,
+                _pagelengthByDayChartBuilder,
+                _cumulativeTimingsByDayChartBuilder,
+                _cumulativeSetupsByDayChartBuilder,
+                _setupsByDayChartBuilder
             };
 
             return services;

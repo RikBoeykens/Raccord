@@ -1,13 +1,31 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using Raccord.Application.Core.Services.Charts;
 using Raccord.Application.Core.Services.Charts.ChartBuilders;
 using Raccord.Core.Enums;
+using Raccord.Data.EntityFramework.Repositories.Scenes;
+using Raccord.Data.EntityFramework.Repositories.ShootingDays;
 
 namespace Raccord.Application.Services.Charts.ChartBuilders
 {
     public class PageLengthByDayChartBuilder: IPageLengthByDayChartBuilder
     {
-        public PageLengthByDayChartBuilder(){}
+        private ISceneRepository _sceneRepository;
+        private IShootingDayRepository _shootingDayRepository;
+        public PageLengthByDayChartBuilder(
+            ISceneRepository sceneRepository,
+            IShootingDayRepository shootingDayRepository
+        )
+        {
+            if(sceneRepository==null)
+                throw new ArgumentNullException(nameof(sceneRepository));
+            if(shootingDayRepository==null)
+                throw new ArgumentNullException(nameof(shootingDayRepository));
+
+            _sceneRepository = sceneRepository;
+            _shootingDayRepository = shootingDayRepository;
+        }
 
         public new ChartInfoType GetType()
         {
@@ -15,16 +33,26 @@ namespace Raccord.Application.Services.Charts.ChartBuilders
         }
 
         public ChartInfoDto GetChartInfo(ChartRequestDto request)
-        {
+        {            
+            var baseData = new List<object>();
+            var seriesData = new List<object>();
+
+            var shootingDays = _shootingDayRepository.GetAllForProject(request.ProjectID).OrderBy(sd=> sd.Date);
+            foreach(var shootingDay in shootingDays)
+            {
+                baseData.Add($"SD {shootingDay.Number}");
+                var pageLengthSum = shootingDay.ShootingDayScenes.Sum(sds=> sds.PageLength);
+                seriesData.Add(shootingDay.Completed ? (int?)pageLengthSum : null);
+            }
             return new ChartInfoDto
             {
                 Title = "Pagelength by day",
                 ChartType = ChartType.Column,
                 DataType = ChartDataType.Pagelength,
-                BaseData = new List<object>{"SD 1", "SD2", "SD 3", "SD 4", "SD 5", "SD 6", "SD 6", "SD 8", "SD 9", "SD 10", "SD 11", "SD 12", "SD 13", "SD 14", "SD 15"},
+                BaseData = baseData,
                 SeriesData = new List<ChartSeriesDataDto>
                 {
-                    new ChartSeriesDataDto{ Name = "Pagelength", Data = new List<object>{23, 69, 22, 48, 10, 76, 64, 65, 50, 49, null, null, null, null, null}}
+                    new ChartSeriesDataDto{ Name = "Pagelength", Data = seriesData}
                 }
             };
         }

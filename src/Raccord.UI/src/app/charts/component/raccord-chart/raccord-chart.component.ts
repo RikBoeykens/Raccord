@@ -64,7 +64,7 @@ export class RaccordChartComponent implements OnInit {
                     name: seriesData.name, 
                     data: seriesData.data.map((dataPoint)=>{
                         if(chartInfo.dataType===ChartDataType.timespan){
-                            dataPoint = TimespanHelpers.getTimespanNumber(dataPoint);
+                            dataPoint = dataPoint ? TimespanHelpers.getTimespanNumber(dataPoint) : null;
                         }
                         return dataPoint;
                     })
