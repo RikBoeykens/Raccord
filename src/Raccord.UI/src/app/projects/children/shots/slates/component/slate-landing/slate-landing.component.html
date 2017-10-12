@@ -46,6 +46,9 @@
         <md-input-container fxFlex="33%">
             <input mdInput type="text" placeholder="Sound" required [(ngModel)]="viewSlate.sound" name="slate_sound" (blur)="updateSlate()" />
         </md-input-container>
+        <md-checkbox [(ngModel)]="take.isVfx" name="slate_isVfx" (change)="updateSlate()">
+            VFX
+        </md-checkbox>
     </div>
 </md-card>
 <md-card>

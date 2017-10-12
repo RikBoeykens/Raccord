@@ -33,6 +33,9 @@ namespace Raccord.Domain.Model.Shots
         // Sound used
         public string Sound { get; set; }
 
+        // Indicates if the slate is VFX
+        public bool IsVfx { get; set; }
+
         // Sorting order
         public int SortingOrder { get; set; }
 

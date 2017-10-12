@@ -226,9 +226,14 @@ namespace Raccord.API
             services.AddTransient<IShootingDaySceneService, ShootingDaySceneService>();   
 
             services.AddTransient<IChartService, ChartService>();   
-            services.AddTransient<IBurndownByPagelengthChartBuilder, BurndownByPagelengthChartBuilder>();   
+            services.AddTransient<IBurndownByPagelengthChartBuilder, BurndownByPagelengthChartBuilder>(); 
+            services.AddTransient<IBurndownBySceneChartBuilder, BurndownBySceneChartBuilder>();
             services.AddTransient<ICompletedByPagelengthChartBuilder, CompletedByPagelengthChartBuilder>();   
-            services.AddTransient<IPageLengthByDayChartBuilder, PageLengthByDayChartBuilder>();   
+            services.AddTransient<ICompletedBySceneChartBuilder, CompletedBySceneChartBuilder>();   
+            services.AddTransient<IPageLengthByDayChartBuilder, PageLengthByDayChartBuilder>();
+            services.AddTransient<ICumulativeTimingsByDayChartBuilder, CumulativeTimingsByDayChartBuilder>();
+            services.AddTransient<ICumulativeSetupsByDayChartBuilder, CumulativeSetupsByDayChartBuilder>();
+            services.AddTransient<ISetupsByDayChartBuilder, SetupsByDayChartBuilder>();
         }
     }
 }

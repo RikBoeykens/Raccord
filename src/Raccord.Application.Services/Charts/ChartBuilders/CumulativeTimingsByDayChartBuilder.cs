@@ -10,11 +10,11 @@ using Raccord.Data.EntityFramework.Repositories.ShootingDays.Scenes;
 
 namespace Raccord.Application.Services.Charts.ChartBuilders
 {
-    public class BurndownByPagelengthChartBuilder: IBurndownByPagelengthChartBuilder
+    public class CumulativeTimingsByDayChartBuilder: ICumulativeTimingsByDayChartBuilder
     {
         private ISceneRepository _sceneRepository;
         private IShootingDayRepository _shootingDayRepository;
-        public BurndownByPagelengthChartBuilder(
+        public CumulativeTimingsByDayChartBuilder(
             ISceneRepository sceneRepository,
             IShootingDayRepository shootingDayRepository
         )
@@ -30,36 +30,34 @@ namespace Raccord.Application.Services.Charts.ChartBuilders
 
         public new ChartInfoType GetType()
         {
-            return ChartInfoType.BurndownByPagelength;
+            return ChartInfoType.CumulativeTimingsByDay;
         }
 
         public ChartInfoDto GetChartInfo(ChartRequestDto request)
         {
             var baseData = new List<object>();
             var seriesData = new List<object>();
-
-            // Get full pagelength
-            var scenes = _sceneRepository.GetAllForProject(request.ProjectID);
-            var totalPagelength = scenes.Sum(s=> s.PageLength);
+            
+            var timings = new TimeSpan();
 
             var shootingDays = _shootingDayRepository.GetAllForProject(request.ProjectID).OrderBy(sd=> sd.Date);
             foreach(var shootingDay in shootingDays)
             {
                 baseData.Add($"SD {shootingDay.Number}");
-                var pageLengthSum = shootingDay.ShootingDayScenes.Sum(sds=> sds.PageLength);
-                totalPagelength -= pageLengthSum;
-                seriesData.Add(shootingDay.Completed ? (int?)totalPagelength : null);
+                var completedTimings = new TimeSpan(shootingDay.ShootingDayScenes.Sum(sds=> sds.Timings.Ticks));
+                timings = timings.Add(completedTimings);
+                seriesData.Add(shootingDay.Completed ? timings : (TimeSpan?)null);
             }
 
             return new ChartInfoDto
             {
-                Title = "Burndown by pagelength",
+                Title = "Cumulative timings",
                 ChartType = ChartType.Area,
-                DataType = ChartDataType.Pagelength,
+                DataType = ChartDataType.Timespan,
                 BaseData = baseData,
                 SeriesData = new List<ChartSeriesDataDto>
                 {
-                    new ChartSeriesDataDto{ Name = "Burndown", Data = seriesData}
+                    new ChartSeriesDataDto{ Name = "Timings", Data = seriesData}
                 }
             };
         }

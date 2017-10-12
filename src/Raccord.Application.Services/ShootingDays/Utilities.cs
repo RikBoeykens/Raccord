@@ -85,7 +85,7 @@ namespace Raccord.Application.Services.ShootingDays
                 Date = shootingDay.Date
             };
 
-            if(shootingDay.Completed && shootingDay.ShootingDayScenes.Any(sds=> sds.SceneID == sceneID))
+            if(shootingDay.Completed && shootingDay.ShootingDayScenes.Where(sds=> sds.SceneID == sceneID).Any(sds=> sds.Completion == Completion.Completed || sds.Completion == Completion.PartCompleted))
             {
                 dto.ID = shootingDay.ID;
                 dto.Type = ShootingDayType.Shot;

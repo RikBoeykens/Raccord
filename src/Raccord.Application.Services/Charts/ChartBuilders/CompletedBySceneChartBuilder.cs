@@ -9,11 +9,11 @@ using Raccord.Data.EntityFramework.Repositories.ShootingDays;
 
 namespace Raccord.Application.Services.Charts.ChartBuilders
 {
-    public class CompletedByPagelengthChartBuilder: ICompletedByPagelengthChartBuilder
+    public class CompletedBySceneChartBuilder: ICompletedBySceneChartBuilder
     {
         private ISceneRepository _sceneRepository;
         private IShootingDayRepository _shootingDayRepository;
-        public CompletedByPagelengthChartBuilder(
+        public CompletedBySceneChartBuilder(
             ISceneRepository sceneRepository,
             IShootingDayRepository shootingDayRepository
         )
@@ -29,26 +29,26 @@ namespace Raccord.Application.Services.Charts.ChartBuilders
 
         public new ChartInfoType GetType()
         {
-            return ChartInfoType.CompletedByPagelength;
+            return ChartInfoType.CompletedByScene;
         }
 
         public ChartInfoDto GetChartInfo(ChartRequestDto request)
         {
-            // Get full pagelength
+            // Get full scene count
             var scenes = _sceneRepository.GetAllForProject(request.ProjectID);
-            var totalPagelength = scenes.Sum(s=> s.PageLength);
+            var totalScenes = scenes.Count();
 
             var shootingDays = _shootingDayRepository.GetAllForProject(request.ProjectID);
-            var shotPagelength = shootingDays.Sum(sd=> sd.ShootingDayScenes.Sum(sds=> sds.PageLength));
+            var scenesCompleted = shootingDays.Sum(sd=> sd.ShootingDayScenes.Count(sds=> sds.Completion == Completion.Completed));
             
             var baseData = new List<object>{ "Shot", "Not Shot"};
-            var seriesData = new List<object>{ shotPagelength, totalPagelength - shotPagelength };
+            var seriesData = new List<object>{ scenesCompleted, totalScenes - scenesCompleted };
             
             return new ChartInfoDto
             {
-                Title = "Completed by pagelength",
+                Title = "Completed by scene",
                 ChartType = ChartType.Pie,
-                DataType = ChartDataType.Pagelength,
+                DataType = ChartDataType.Number,
                 BaseData = baseData,
                 SeriesData = new List<ChartSeriesDataDto>
                 {
