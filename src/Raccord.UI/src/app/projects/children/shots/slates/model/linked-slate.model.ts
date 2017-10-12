@@ -14,6 +14,7 @@ export class LinkedSlate extends Slate {
                         aperture: string,
                         filters: string,
                         sound: string,
+                        isVfx: boolean,
                         projectID: number,
                         scene?: Scene,
                         shootingDay?: ShootingDay,

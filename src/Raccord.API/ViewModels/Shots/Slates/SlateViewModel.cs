@@ -31,6 +31,9 @@ namespace Raccord.API.ViewModels.Shots.Slates
         // Sound used
         public string Sound { get; set; }
 
+        // Indicates if the slate is a vfx slate
+        public bool IsVfx { get; set; }
+
         // Project ID
         public long ProjectID { get; set; }
 
