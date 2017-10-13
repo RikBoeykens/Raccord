@@ -234,6 +234,7 @@ namespace Raccord.API
             services.AddTransient<ICumulativeTimingsByDayChartBuilder, CumulativeTimingsByDayChartBuilder>();
             services.AddTransient<ICumulativeSetupsByDayChartBuilder, CumulativeSetupsByDayChartBuilder>();
             services.AddTransient<ISetupsByDayChartBuilder, SetupsByDayChartBuilder>();
+            services.AddTransient<IVfxSetupsChartBuilder, VfxSetupsChartBuilder>();
         }
     }
 }

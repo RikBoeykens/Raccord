@@ -18,6 +18,7 @@ namespace Raccord.Application.Services.Charts
         private readonly ICumulativeTimingsByDayChartBuilder _cumulativeTimingsByDayChartBuilder;
         private readonly ICumulativeSetupsByDayChartBuilder _cumulativeSetupsByDayChartBuilder;
         private readonly ISetupsByDayChartBuilder _setupsByDayChartBuilder;
+        private readonly IVfxSetupsChartBuilder _vfxSetupsChartBuilder;
         // Initialises a new ChartService
         public ChartService(
             IBurndownByPagelengthChartBuilder burndownByPagelengthChartBuilder,
@@ -27,7 +28,8 @@ namespace Raccord.Application.Services.Charts
             IPageLengthByDayChartBuilder pagelengthByDayChartBuilder,
             ICumulativeTimingsByDayChartBuilder cumulativeTimingsByDayChartBuilder,
             ICumulativeSetupsByDayChartBuilder cumulativeSetupsByDayChartBuilder,
-            ISetupsByDayChartBuilder setupsByDayChartBuilder
+            ISetupsByDayChartBuilder setupsByDayChartBuilder,
+            IVfxSetupsChartBuilder vfxSetupsChartBuilder
             )
         {
             if(burndownByPagelengthChartBuilder==null)
@@ -46,6 +48,8 @@ namespace Raccord.Application.Services.Charts
                 throw new ArgumentNullException(nameof(cumulativeSetupsByDayChartBuilder));
             if(setupsByDayChartBuilder==null)
                 throw new ArgumentNullException(nameof(setupsByDayChartBuilder));
+            if(vfxSetupsChartBuilder==null)
+                throw new ArgumentNullException(nameof(vfxSetupsChartBuilder));
 
             _burndownByPagelengthChartBuilder = burndownByPagelengthChartBuilder;
             _burndownBySceneChartBuilder = burndownBySceneChartBuilder;
@@ -55,6 +59,7 @@ namespace Raccord.Application.Services.Charts
             _cumulativeTimingsByDayChartBuilder = cumulativeTimingsByDayChartBuilder;
             _cumulativeSetupsByDayChartBuilder = cumulativeSetupsByDayChartBuilder;
             _setupsByDayChartBuilder = setupsByDayChartBuilder;
+            _vfxSetupsChartBuilder = vfxSetupsChartBuilder;
         }
 
         // Gets all characters for a project
@@ -82,7 +87,8 @@ namespace Raccord.Application.Services.Charts
                 _pagelengthByDayChartBuilder,
                 _cumulativeTimingsByDayChartBuilder,
                 _cumulativeSetupsByDayChartBuilder,
-                _setupsByDayChartBuilder
+                _setupsByDayChartBuilder,
+                _vfxSetupsChartBuilder
             };
 
             return services;
