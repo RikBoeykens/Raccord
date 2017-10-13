@@ -10,6 +10,7 @@ namespace Raccord.Core.Enums
         BurndownByScene = 4,
         CumulativeTimingsByDay = 5,
         CumulativeSetupsByDay = 6,
-        SetupsByDay = 7
+        SetupsByDay = 7,
+        VfxSetups = 8
     }
 }
