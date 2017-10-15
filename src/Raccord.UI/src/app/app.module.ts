@@ -108,6 +108,7 @@ import {
   SlateLandingComponent,
   SlateImagesComponent,
   ChooseShootingDayDialog,
+  ChartLandingComponent,
   ShootingDayReportsListComponent,
   ShootingDayReportLandingComponent,
   ShootingDaySceneListItem,
@@ -126,6 +127,9 @@ import {
   AdminAddUserComponent,
   AdminUserLandingComponent
 } from "./admin";
+import{
+  RaccordChartComponent
+} from "./charts";
 
 const COMPONENTS =[
   AppComponent,
@@ -203,6 +207,7 @@ const COMPONENTS =[
   SlatesListComponent,
   SlateLandingComponent,
   SlateImagesComponent,
+  ChartLandingComponent,
   ShootingDayReportsListComponent,
   ShootingDayReportLandingComponent,
   ShootingDaySceneListItem,
@@ -216,7 +221,8 @@ const COMPONENTS =[
   AdminProjectSettingsComponent,
   AdminUsersListComponent,
   AdminAddUserComponent,
-  AdminUserLandingComponent
+  AdminUserLandingComponent,
+  RaccordChartComponent
 ];
 
 const ENTRY_COMPONENTS = [
@@ -333,6 +339,11 @@ import {
   AdminSearchEngineService
 } from "./admin";
 
+import {
+  ChartHttpService,
+  ProjectChartsResolve
+} from "./charts";
+
 const APP_PROVIDERS = [
   LoadingService,
   CanDeactivateGuard,
@@ -426,7 +437,9 @@ const APP_PROVIDERS = [
   AdminCrewHttpService,
   AdminProjectCrewResolve,
   AdminUserProjectsResolve,
-  AdminSearchEngineService
+  AdminSearchEngineService,
+  ChartHttpService,
+  ProjectChartsResolve
 ];
 
 // Directives
@@ -451,6 +464,7 @@ const PIPES = [
 import { DragulaModule } from 'ng2-dragula';
 import { MaterialModule } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { Ng2HighchartsModule } from "ng2-highcharts";
 
 import '../styles/styles.scss';
 import '../styles/headings.css';
@@ -479,6 +493,7 @@ import '../styles/headings.css';
     DragulaModule,
     MaterialModule,
     FlexLayoutModule,
+    Ng2HighchartsModule,
     RouterModule.forRoot(ROUTES, { preloadingStrategy: PreloadAllModules })
   ],
   providers: [ // expose our Services and Providers into Angular's dependency injection

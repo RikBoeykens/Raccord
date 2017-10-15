@@ -65,6 +65,7 @@ namespace Raccord.Application.Services.Shots.Slates
                 Aperture = dto.Aperture,
                 Filters = dto.Filters,
                 Sound = dto.Sound,
+                IsVfx = dto.IsVfx,
                 SortingOrder = previousSlate != null ? previousSlate.SortingOrder + 1 : 1,
                 SceneID = dto.Scene.ID!=default(long) ? dto.Scene.ID : (long?)null,
                 ShootingDayID = dto.ShootingDay.ID!=default(long) ? dto.ShootingDay.ID : (long?)null,
@@ -89,6 +90,7 @@ namespace Raccord.Application.Services.Shots.Slates
             slate.Aperture = dto.Aperture;
             slate.Filters = dto.Filters;
             slate.Sound = dto.Sound;
+            slate.IsVfx = dto.IsVfx;
             slate.SceneID = dto.Scene.ID!=default(long) ? dto.Scene.ID : (long?)null;
             slate.ShootingDayID = dto.ShootingDay.ID!=default(long) ? dto.ShootingDay.ID : (long?)null;
 

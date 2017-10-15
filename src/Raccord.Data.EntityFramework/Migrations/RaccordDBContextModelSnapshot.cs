@@ -916,6 +916,8 @@ namespace Raccord.Data.EntityFramework.Migrations
 
                     b.Property<string>("Filters");
 
+                    b.Property<bool>("IsVfx");
+
                     b.Property<string>("Lens");
 
                     b.Property<string>("Number");

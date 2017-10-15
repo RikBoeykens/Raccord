@@ -97,6 +97,10 @@ using Raccord.Data.EntityFramework.Repositories.ImageSlates;
 using Raccord.Data.EntityFramework.Repositories.ShootingDays.Scenes;
 using Raccord.Application.Core.Services.ShootingDays.Scenes;
 using Raccord.Application.Services.ShootingDays.Scenes;
+using Raccord.Application.Core.Services.Charts;
+using Raccord.Application.Services.Charts;
+using Raccord.Application.Core.Services.Charts.ChartBuilders;
+using Raccord.Application.Services.Charts.ChartBuilders;
 
 namespace Raccord.API
 {
@@ -220,6 +224,17 @@ namespace Raccord.API
 
             services.AddTransient<IShootingDaySceneRepository, ShootingDaySceneRepository>();   
             services.AddTransient<IShootingDaySceneService, ShootingDaySceneService>();   
+
+            services.AddTransient<IChartService, ChartService>();   
+            services.AddTransient<IBurndownByPagelengthChartBuilder, BurndownByPagelengthChartBuilder>(); 
+            services.AddTransient<IBurndownBySceneChartBuilder, BurndownBySceneChartBuilder>();
+            services.AddTransient<ICompletedByPagelengthChartBuilder, CompletedByPagelengthChartBuilder>();   
+            services.AddTransient<ICompletedBySceneChartBuilder, CompletedBySceneChartBuilder>();   
+            services.AddTransient<IPageLengthByDayChartBuilder, PageLengthByDayChartBuilder>();
+            services.AddTransient<ICumulativeTimingsByDayChartBuilder, CumulativeTimingsByDayChartBuilder>();
+            services.AddTransient<ICumulativeSetupsByDayChartBuilder, CumulativeSetupsByDayChartBuilder>();
+            services.AddTransient<ISetupsByDayChartBuilder, SetupsByDayChartBuilder>();
+            services.AddTransient<IVfxSetupsChartBuilder, VfxSetupsChartBuilder>();
         }
     }
 }

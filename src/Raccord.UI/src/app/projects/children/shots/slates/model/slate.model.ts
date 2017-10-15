@@ -11,6 +11,7 @@ export class Slate extends BaseModel{
     aperture: string;
     filters: string;
     sound: string;
+    isVfx: boolean;
     projectID: number;
     scene? : Scene;
     shootingDay?: ShootingDay;
@@ -24,6 +25,7 @@ export class Slate extends BaseModel{
                         aperture: string,
                         filters: string,
                         sound: string,
+                        isVfx: boolean,
                         projectID: number,
                         scene?: Scene,
                         shootingDay?: ShootingDay
@@ -38,6 +40,7 @@ export class Slate extends BaseModel{
             this.aperture = obj.aperture;
             this.filters = obj.filters;
             this.sound = obj.sound;
+            this.isVfx = obj.isVfx;
             this.projectID = obj.projectID;
             this.scene = obj.scene;
             this.shootingDay = obj.shootingDay;
