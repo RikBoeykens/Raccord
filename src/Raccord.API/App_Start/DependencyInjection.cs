@@ -82,7 +82,6 @@ using Raccord.Application.Services.Callsheets.CharacterCalls;
 using Raccord.Application.Core.Services.Users;
 using Raccord.Application.Services.Users;
 using Raccord.Data.EntityFramework.Repositories.Users;
-using Raccord.Data.EntityFramework.Repositories.Crew;
 using Raccord.Application.Core.Services.Crew;
 using Raccord.Application.Services.Crew;
 using Raccord.Data.EntityFramework.Repositories.Shots.Slates;
@@ -101,6 +100,7 @@ using Raccord.Application.Core.Services.Charts;
 using Raccord.Application.Services.Charts;
 using Raccord.Application.Core.Services.Charts.ChartBuilders;
 using Raccord.Application.Services.Charts.ChartBuilders;
+using Raccord.Data.EntityFramework.Repositories.Users.Projects;
 
 namespace Raccord.API
 {
@@ -209,7 +209,7 @@ namespace Raccord.API
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<IUserService, UserService>();
 
-            services.AddTransient<ICrewRepository, CrewRepository>();            
+            services.AddTransient<IProjectUserRepository, ProjectUserRepository>();            
             services.AddTransient<ICrewService, CrewService>();    
 
             services.AddTransient<ISlateRepository, SlateRepository>();

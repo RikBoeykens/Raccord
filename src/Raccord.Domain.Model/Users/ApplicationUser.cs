@@ -1,23 +1,22 @@
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Raccord.Domain.Model.Crew;
 
 namespace Raccord.Domain.Model.Users
 {
     public class ApplicationUser : IdentityUser
     {
-        private ICollection<CrewUser> _crew;
+        private ICollection<ProjectUser> _projectUsers;
 
-        // Crew associated with the project
-        public virtual ICollection<CrewUser> Crew
+        // Projects associated with the user
+        public virtual ICollection<ProjectUser> ProjectUsers
         {
             get
             {
-                return _crew ?? (_crew = new List<CrewUser>());
+                return _projectUsers ?? (_projectUsers = new List<ProjectUser>());
             }
             set
             {
-                _crew = value;
+                _projectUsers = value;
             }
         }
     }

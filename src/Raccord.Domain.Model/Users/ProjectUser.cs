@@ -1,9 +1,9 @@
 using Raccord.Domain.Model.Projects;
 using Raccord.Domain.Model.Users;
 
-namespace Raccord.Domain.Model.Crew
+namespace Raccord.Domain.Model.Users
 {
-    public class CrewUser : Entity
+    public class ProjectUser : Entity
     {
         // ID of the linked project
         public long ProjectID { get; set; }

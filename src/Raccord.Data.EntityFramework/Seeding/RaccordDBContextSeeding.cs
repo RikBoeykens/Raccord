@@ -12,7 +12,6 @@ using System.Threading.Tasks;
 using System;
 using Raccord.Domain.Model.Callsheets.CallTypes;
 using Microsoft.EntityFrameworkCore;
-using Raccord.Domain.Model.Crew;
 
 namespace Raccord.Data.EntityFramework.Seeding
 {
@@ -273,7 +272,7 @@ namespace Raccord.Data.EntityFramework.Seeding
                 {
                     if(!project.Crew.Any())
                     {
-                        project.Crew.Add(new CrewUser
+                        project.Crew.Add(new ProjectUser
                         {
                             UserID = adminUser.Id
                         });
