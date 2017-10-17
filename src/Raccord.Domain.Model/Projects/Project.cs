@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Raccord.Domain.Model.Breakdowns.BreakdownTypes;
 using Raccord.Domain.Model.Callsheets.CallTypes;
+using Raccord.Domain.Model.Crew.Departments;
 using Raccord.Domain.Model.Images;
 using Raccord.Domain.Model.Users;
 
@@ -13,6 +14,7 @@ namespace Raccord.Domain.Model.Projects
         private ICollection<BreakdownType> _breakdownTypes;
         private ICollection<ProjectUser> _projectUsers;
         private ICollection<CallType> _callTypes;
+        private ICollection<CrewDepartment> _crewDepartments;
 
         /// Title of the project
         public string Title { get; set; }
@@ -44,7 +46,7 @@ namespace Raccord.Domain.Model.Projects
         }
 
         // Crew associated with the project
-        public virtual ICollection<ProjectUser> Crew
+        public virtual ICollection<ProjectUser> ProjectUsers
         {
             get
             {
@@ -67,6 +69,19 @@ namespace Raccord.Domain.Model.Projects
             set
             {
                 _callTypes = value;
+            }
+        }
+        
+        // Crew department types associated with the project
+        public virtual ICollection<CrewDepartment> CrewDepartments
+        {
+            get
+            {
+                return _crewDepartments ?? (_crewDepartments = new List<CrewDepartment>());
+            }
+            set
+            {
+                _crewDepartments = value;
             }
         }
     }

@@ -113,7 +113,7 @@ namespace Raccord.Data.EntityFramework.Repositories.Scenes
                          .Include(s => s.ScriptLocation)
                          .Include(s => s.DayNight)
                          .Include(s=> s.Project)
-                         .ThenInclude(p=> p.Crew);
+                         .ThenInclude(p=> p.ProjectUsers);
         }
 
         private IQueryable<Scene> GetSearchQuery(string searchText, long? projectID, string userID, bool isAdmin)
@@ -127,7 +127,7 @@ namespace Raccord.Data.EntityFramework.Repositories.Scenes
                 query = query.Where(s=> s.ProjectID==projectID.Value);
 
             if(!isAdmin)
-                query = query.Where(s=> s.Project.Crew.Any(c=> c.UserID == userID));
+                query = query.Where(s=> s.Project.ProjectUsers.Any(c=> c.UserID == userID));
 
             return query;
         }

@@ -23,7 +23,7 @@ namespace Raccord.Data.EntityFramework.Repositories.Projects
         {
             var query = GetIncludedSummary();
 
-            return query.Where(p=> p.Crew.Any(c=> c.UserID == userID));
+            return query.Where(p=> p.ProjectUsers.Any(c=> c.UserID == userID));
         }
 
         public Project GetFull(long ID)
@@ -64,7 +64,7 @@ namespace Raccord.Data.EntityFramework.Repositories.Projects
             IQueryable<Project> query = _context.Set<Project>();
 
             return query.Include(l=> l.Images)
-                        .Include(p=> p.Crew)
+                        .Include(p=> p.ProjectUsers)
                         .ThenInclude(p=> p.User);
         }
 
@@ -78,7 +78,7 @@ namespace Raccord.Data.EntityFramework.Repositories.Projects
         {
             IQueryable<Project> query = _context.Set<Project>();
 
-            return query.Include(p=> p.Crew)
+            return query.Include(p=> p.ProjectUsers)
                         .ThenInclude(p=> p.User);
         }
 
@@ -89,7 +89,7 @@ namespace Raccord.Data.EntityFramework.Repositories.Projects
             query = query.Where(p=> p.Title.ToLower().Contains(searchText.ToLower()));
 
             if(!isAdminSearch)
-                query = query.Where(p=> p.Crew.Any(c=> c.UserID==userId));
+                query = query.Where(p=> p.ProjectUsers.Any(c=> c.UserID==userId));
 
             return query;
         }

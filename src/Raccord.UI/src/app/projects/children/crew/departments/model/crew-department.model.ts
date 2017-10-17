@@ -1,25 +1,22 @@
-import { BaseModel } from '../../../../shared/model/base.model';
+import { BaseModel } from "../../../../../shared/index";
 
-export class Image extends BaseModel{
+export class CrewDepartment extends BaseModel {
     id: number;
-    title: string;
+    name: string;
     description: string;
-    fileName: string;
     projectId: number;
 
     constructor(obj?: {
-                        id: number, 
-                        title: string, 
+                        id: number,
+                        name: string,
                         description: string,
-                        fileName: string,
                         projectId: number
                     }) {
         super();
         if (obj) {
             this.id = obj.id;
-            this.title = obj.title;
+            this.name = obj.name;
             this.description = obj.description;
-            this.fileName = obj.fileName;
             this.projectId = obj.projectId;
         }
         else {

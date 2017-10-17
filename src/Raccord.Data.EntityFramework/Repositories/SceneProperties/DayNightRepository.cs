@@ -75,7 +75,7 @@ namespace Raccord.Data.EntityFramework.Repositories.SceneProperties
             IQueryable<DayNight> query = _context.Set<DayNight>();
 
             return query.Include(d=> d.Project)
-                        .ThenInclude(p=> p.Crew);
+                        .ThenInclude(p=> p.ProjectUsers);
         }
 
 
@@ -89,7 +89,7 @@ namespace Raccord.Data.EntityFramework.Repositories.SceneProperties
                 query = query.Where(l=> l.ProjectID==projectID.Value);
 
             if(!isAdmin)
-                query = query.Where(l=> l.Project.Crew.Any(c=> c.UserID == userID));
+                query = query.Where(l=> l.Project.ProjectUsers.Any(c=> c.UserID == userID));
 
             return query;
         }

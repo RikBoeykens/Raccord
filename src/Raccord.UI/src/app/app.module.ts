@@ -112,7 +112,8 @@ import {
   ShootingDayReportsListComponent,
   ShootingDayReportLandingComponent,
   ShootingDaySceneListItem,
-  EditShootingDaySceneDialog
+  EditShootingDaySceneDialog,
+  CrewLandingComponent
 } from './projects';
 import { ScenePropertiesLandingComponent } from './projects';
 import { SelectEntityComponent } from './shared';
@@ -211,6 +212,7 @@ const COMPONENTS =[
   ShootingDayReportsListComponent,
   ShootingDayReportLandingComponent,
   ShootingDaySceneListItem,
+  CrewLandingComponent,
   ScenePropertiesLandingComponent,
   SelectEntityComponent,
   LoginComponent,
@@ -313,7 +315,9 @@ import {
   ImageSlateHttpService,
   TakeHttpService,
   TakeResolve,
-  TakesResolve
+  TakesResolve,
+  CrewDepartmentHttpService,
+  CrewDepartmentsResolve
 } from './projects';
 
 import {
@@ -439,14 +443,16 @@ const APP_PROVIDERS = [
   AdminUserProjectsResolve,
   AdminSearchEngineService,
   ChartHttpService,
-  ProjectChartsResolve
+  ProjectChartsResolve,
+  CrewDepartmentHttpService,
+  CrewDepartmentsResolve
 ];
 
 // Directives
 import { HighlightDirective } from './shared/directives/highlight.directive';
 import { FocusDirective } from './shared/directives/focus.directive';
 
-const DIRECTIVES =[
+const DIRECTIVES = [
   HighlightDirective,
   FocusDirective
 ];

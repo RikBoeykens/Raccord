@@ -103,6 +103,9 @@ using Raccord.Application.Services.Charts.ChartBuilders;
 using Raccord.Data.EntityFramework.Repositories.Users.Projects;
 using Raccord.Application.Services.Users.Projects;
 using Raccord.Application.Core.Services.Users.Project;
+using Raccord.Data.EntityFramework.Repositories.Crew.Departments;
+using Raccord.Application.Core.Services.Crew.Departments;
+using Raccord.Application.Services.Crew.Departments;
 
 namespace Raccord.API
 {
@@ -213,7 +216,6 @@ namespace Raccord.API
 
             services.AddTransient<IProjectUserRepository, ProjectUserRepository>();            
             services.AddTransient<IProjectUserService, ProjectUserService>();            
-            services.AddTransient<ICrewService, CrewService>();    
 
             services.AddTransient<ISlateRepository, SlateRepository>();
             services.AddTransient<ISlateService, SlateService>();
@@ -238,6 +240,10 @@ namespace Raccord.API
             services.AddTransient<ICumulativeSetupsByDayChartBuilder, CumulativeSetupsByDayChartBuilder>();
             services.AddTransient<ISetupsByDayChartBuilder, SetupsByDayChartBuilder>();
             services.AddTransient<IVfxSetupsChartBuilder, VfxSetupsChartBuilder>();
+
+            services.AddTransient<ICrewDepartmentDefinitionRepository, CrewDepartmentDefinitionRepository>(); 
+            services.AddTransient<ICrewDepartmentRepository, CrewDepartmentRepository>();  
+            services.AddTransient<ICrewDepartmentService, CrewDepartmentService>(); 
         }
     }
 }

@@ -95,7 +95,7 @@ namespace Raccord.Data.EntityFramework.Repositories.Locations.Locations
             IQueryable<Location> query = _context.Set<Location>();
 
             return query.Include(l=> l.Project)
-                        .ThenInclude(p=> p.Crew);
+                        .ThenInclude(p=> p.ProjectUsers);
         }
 
         private IQueryable<Location> GetSearchQuery(string searchText, long? projectID, string userID, bool isAdmin)
@@ -108,7 +108,7 @@ namespace Raccord.Data.EntityFramework.Repositories.Locations.Locations
                 query = query.Where(l=> l.ProjectID==projectID.Value);
 
             if(!isAdmin)
-                query = query.Where(l=> l.Project.Crew.Any(c=> c.UserID == userID));
+                query = query.Where(l=> l.Project.ProjectUsers.Any(c=> c.UserID == userID));
 
             return query;
         }
