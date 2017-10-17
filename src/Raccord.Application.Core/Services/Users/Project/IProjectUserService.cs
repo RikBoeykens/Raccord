@@ -3,7 +3,7 @@ using System.Collections.Generic;
 namespace Raccord.Application.Core.Services.Users.Project
 {
     // Interface for location functionality
-    public interface ICProjectUserService
+    public interface IProjectUserService
     {
         IEnumerable<ProjectUserProjectDto> GetProjects(string userID);
 

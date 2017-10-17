@@ -1,6 +1,6 @@
 import { BaseModel } from '../../../shared/model/base.model';
 
-export class CrewUser extends BaseModel{
+export class ProjectUser extends BaseModel{
     id: number;
     projectID: number;
     userID: string;

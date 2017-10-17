@@ -333,8 +333,8 @@ import {
   AdminUserHttpService,
   AdminUsersResolve,
   AdminUserResolve,
-  AdminCrewHttpService,
-  AdminProjectCrewResolve,
+  AdminProjectUserHttpService,
+  AdminProjectUsersResolve,
   AdminUserProjectsResolve,
   AdminSearchEngineService
 } from "./admin";
@@ -434,8 +434,8 @@ const APP_PROVIDERS = [
   AdminUserHttpService,
   AdminUsersResolve,
   AdminUserResolve,
-  AdminCrewHttpService,
-  AdminProjectCrewResolve,
+  AdminProjectUserHttpService,
+  AdminProjectUsersResolve,
   AdminUserProjectsResolve,
   AdminSearchEngineService,
   ChartHttpService,

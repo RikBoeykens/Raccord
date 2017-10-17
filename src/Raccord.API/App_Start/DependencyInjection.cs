@@ -101,6 +101,8 @@ using Raccord.Application.Services.Charts;
 using Raccord.Application.Core.Services.Charts.ChartBuilders;
 using Raccord.Application.Services.Charts.ChartBuilders;
 using Raccord.Data.EntityFramework.Repositories.Users.Projects;
+using Raccord.Application.Services.Users.Projects;
+using Raccord.Application.Core.Services.Users.Project;
 
 namespace Raccord.API
 {
@@ -210,6 +212,7 @@ namespace Raccord.API
             services.AddTransient<IUserService, UserService>();
 
             services.AddTransient<IProjectUserRepository, ProjectUserRepository>();            
+            services.AddTransient<IProjectUserService, ProjectUserService>();            
             services.AddTransient<ICrewService, CrewService>();    
 
             services.AddTransient<ISlateRepository, SlateRepository>();

@@ -3,59 +3,59 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Raccord.API.ViewModels.Core;
-using Raccord.API.ViewModels.Crew;
-using Raccord.Application.Core.Services.Crew;
+using Raccord.API.ViewModels.Users.Projects;
+using Raccord.Application.Core.Services.Users.Project;
 
 namespace Raccord.API.Controllers.Admin
 {
-    public class CrewController : AbstractAdminController
+    public class ProjectUsersController : AbstractAdminController
     {
-        private readonly ICrewService _crewService;
+        private readonly IProjectUserService _projectUserService;
 
-        public CrewController(ICrewService crewService)
+        public ProjectUsersController(IProjectUserService projectUserService)
         {
-            if (crewService == null)
-                throw new ArgumentNullException(nameof(crewService));
+            if (projectUserService == null)
+                throw new ArgumentNullException(nameof(projectUserService));
 
-            _crewService = crewService;
+            _projectUserService = projectUserService;
         }
 
-        // GET: api/crew/1/projects
+        // GET: api/projectusers/1/projects
         [HttpGet("{userID}/projects")]
-        public IEnumerable<CrewUserProjectViewModel> GetProjects(string userID)
+        public IEnumerable<ProjectUserProjectViewModel> GetProjects(string userID)
         {
-            var dtos = _crewService.GetProjects(userID);
+            var dtos = _projectUserService.GetProjects(userID);
 
             var vms = dtos.Select(p => p.Translate());
 
             return vms;
         }
 
-        // GET: api/crew/1/users
+        // GET: api/projectusers/1/users
         [HttpGet("{projectID}/users")]
-        public IEnumerable<CrewUserUserViewModel> GetUsers(long projectID)
+        public IEnumerable<ProjectUserUserViewModel> GetUsers(long projectID)
         {
-            var dtos = _crewService.GetUsers(projectID);
+            var dtos = _projectUserService.GetUsers(projectID);
 
             var vms = dtos.Select(p => p.Translate());
 
             return vms;
         }
 
-        // GET api/crew/5
+        // GET api/projectusers/5
         [HttpGet("{id}")]
-        public FullCrewUserViewModel Get(long id)
+        public FullProjectUserViewModel Get(long id)
         {
-            var dto = _crewService.Get(id);
+            var dto = _projectUserService.Get(id);
 
             var vm = dto.Translate();
 
             return vm;
         }
 
-        // POST api/crew
+        // POST api/projectusers
         [HttpPost]
-        public JsonResult Post([FromBody]CrewUserViewModel vm)
+        public JsonResult Post([FromBody]ProjectUserViewModel vm)
         {
             var response = new JsonResponse();
 
@@ -67,11 +67,11 @@ namespace Raccord.API.Controllers.Admin
 
                 if (dto.ID == default(long))
                 {
-                    id = _crewService.Add(dto);
+                    id = _projectUserService.Add(dto);
                 }
                 else
                 {
-                    id = _crewService.Update(dto);
+                    id = _projectUserService.Update(dto);
                 }
 
                 response = new JsonResponse
@@ -85,14 +85,14 @@ namespace Raccord.API.Controllers.Admin
                 response = new JsonResponse
                 {
                     ok = false,
-                    message = "Something went wrong while attempting to update crew",
+                    message = "Something went wrong while attempting to update project users",
                 };
             }
 
             return new JsonResult(response);
         }
 
-        // DELETE api/crew/5
+        // DELETE api/projectusers/5
         [HttpDelete("{id}")]
         public JsonResult Delete(long id)
         {
@@ -100,7 +100,7 @@ namespace Raccord.API.Controllers.Admin
 
             try
             {
-                _crewService.Delete(id);
+                _projectUserService.Delete(id);
 
                 response = new JsonResponse
                 {
@@ -112,7 +112,7 @@ namespace Raccord.API.Controllers.Admin
                 response = new JsonResponse
                 {
                     ok = false,
-                    message = "Something went wrong while attempting to delete crew.",
+                    message = "Something went wrong while attempting to delete project users.",
                 };
             }
 

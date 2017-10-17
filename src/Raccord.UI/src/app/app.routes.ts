@@ -107,7 +107,7 @@ import {
   AdminGuard,
   AdminUsersResolve,
   AdminUserResolve,
-  AdminProjectCrewResolve,
+  AdminProjectUsersResolve,
   AdminUserProjectsResolve
 } from "./admin";
 
@@ -147,7 +147,7 @@ export const ROUTES: Routes = [
                 component: AdminProjectLandingComponent,
                 resolve:{
                   project: AdminProjectResolve,
-                  crew: AdminProjectCrewResolve
+                  projectUsers: AdminProjectUsersResolve
                 }               
               },
               {
