@@ -38,14 +38,14 @@ namespace Raccord.Data.EntityFramework.Repositories.Crew.Departments
         {
             IQueryable<CrewDepartment> query = _context.Set<CrewDepartment>();
 
-            return query;
+            return query.Include(cd=> cd.Crew);
         }
 
         private IQueryable<CrewDepartment> GetIncludedSummary()
         {
             IQueryable<CrewDepartment> query = _context.Set<CrewDepartment>();
 
-            return query;
+            return query.Include(cd=> cd.Crew);
         }
 
         private IQueryable<CrewDepartment> GetIncluded()
