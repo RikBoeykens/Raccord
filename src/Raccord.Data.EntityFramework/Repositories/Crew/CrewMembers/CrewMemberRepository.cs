@@ -33,6 +33,18 @@ namespace Raccord.Data.EntityFramework.Repositories.Crew.CrewMembers
             return query.FirstOrDefault(l => l.ID == ID);
         }
 
+        public int SearchCount(string searchText, long? projectID, string userID, bool isAdmin)
+        {
+            var query = GetSearchQuery(searchText, projectID, userID, isAdmin);
+
+            return query.Count();            
+        }
+
+        public IEnumerable<CrewMember> Search(string searchText, long? projectID, string userID, bool isAdmin)
+        {
+            return GetSearchQuery(searchText, projectID, userID, isAdmin);
+        }
+
         private IQueryable<CrewMember> GetIncludedFull()
         {
             IQueryable<CrewMember> query = _context.Set<CrewMember>();
@@ -50,6 +62,35 @@ namespace Raccord.Data.EntityFramework.Repositories.Crew.CrewMembers
         private IQueryable<CrewMember> GetIncluded()
         {
             IQueryable<CrewMember> query = _context.Set<CrewMember>();
+
+            return query;
+        }
+
+        private IQueryable<CrewMember> GetIncludedSearch()
+        {
+            IQueryable<CrewMember> query = _context.Set<CrewMember>();
+
+            return query.Include(cm=> cm.Department)
+                         .ThenInclude(s=> s.Project)
+                         .ThenInclude(p=> p.ProjectUsers);
+        }
+
+        private IQueryable<CrewMember> GetSearchQuery(string searchText, long? projectID, string userID, bool isAdmin)
+        {
+            var query = GetIncludedSearch();
+
+            query = query.Where(s=> s.FirstName.ToLower().Contains(searchText.ToLower()) 
+                                    ||
+                                    s.LastName.ToLower().Contains(searchText.ToLower())
+                                    ||
+                                    s.Department.Name.ToLower().Contains(searchText.ToLower())
+            );
+
+            if(projectID.HasValue)
+                query = query.Where(s=> s.Department.ProjectID==projectID.Value);
+
+            if(!isAdmin)
+                query = query.Where(s=> s.Department.Project.ProjectUsers.Any(c=> c.UserID == userID));
 
             return query;
         }
