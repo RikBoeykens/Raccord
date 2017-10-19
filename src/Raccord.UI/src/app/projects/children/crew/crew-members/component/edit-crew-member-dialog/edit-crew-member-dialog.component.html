@@ -1,0 +1,34 @@
+<h1 md-dialog-title>
+    Crew Member
+</h1>
+<md-dialog-content>
+    <div fxLayout="row">
+        <md-select fxFlex="50%" mdInput placeholder="Department" [(ngModel)]="crewMember.department.id" #department="ngModel" name="crewmember_department">
+            <md-option [value]="">---</md-option>
+            <md-option *ngFor="let department of availableDepartments" [value]="department.id">{{ department.name }}</md-option>
+        </md-select>
+        <md-input-container fxFlex="50%">
+            <input mdInput placeholder="Job title" id="crewmember_department" [(ngModel)]="crewMember.jobTitle" #jobtitle="ngModel" name="crewmember_department">
+        </md-input-container>
+    </div>
+    <div fxLayout="row">
+        <md-input-container fxFlex="50%">
+            <input mdInput placeholder="First name" id="crewmember_firstname" [(ngModel)]="crewMember.firstName" #firstname="ngModel" name="crewmember_firstname">
+        </md-input-container>
+        <md-input-container fxFlex="50%">
+            <input mdInput placeholder="Last name" id="crewmember_lastname" [(ngModel)]="crewMember.lastName" #lastname="ngModel" name="crewmember_lastname">
+        </md-input-container>
+    </div>
+    <div fxLayout="row">
+        <md-input-container fxFlex="50%">
+            <input mdInput placeholder="Email" id="crewmember_email" [(ngModel)]="crewMember.email" #email="ngModel" name="crewmember_email">
+        </md-input-container>
+        <md-input-container fxFlex="50%">
+            <input mdInput placeholder="Telephone" id="crewmember_telephone" [(ngModel)]="crewMember.telephone" #telephone="ngModel" name="crewmember_telephone">
+        </md-input-container>
+    </div>
+</md-dialog-content>
+<md-dialog-actions>
+    <button md-button md-dialog-close>Cancel</button>
+    <button md-button (click)="submit()">Save</button>
+</md-dialog-actions>

@@ -9,9 +9,10 @@ using Raccord.Core.Enums;
 namespace Raccord.Data.EntityFramework.Migrations
 {
     [DbContext(typeof(RaccordDBContext))]
-    partial class RaccordDBContextModelSnapshot : ModelSnapshot
+    [Migration("20171019065914_link-crewmember-projectuser")]
+    partial class linkcrewmemberprojectuser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.0.3");
@@ -505,6 +506,8 @@ namespace Raccord.Data.EntityFramework.Migrations
                     b.Property<string>("JobTitle");
 
                     b.Property<string>("LastName");
+
+                    b.Property<long?>("ProjectUserID");
 
                     b.Property<string>("Telephone");
 
@@ -1110,11 +1113,16 @@ namespace Raccord.Data.EntityFramework.Migrations
                     b.Property<long>("ID")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<long?>("CrewMemberID");
+
                     b.Property<long>("ProjectID");
 
                     b.Property<string>("UserID");
 
                     b.HasKey("ID");
+
+                    b.HasIndex("CrewMemberID")
+                        .IsUnique();
 
                     b.HasIndex("ProjectID");
 
@@ -1566,6 +1574,10 @@ namespace Raccord.Data.EntityFramework.Migrations
 
             modelBuilder.Entity("Raccord.Domain.Model.Users.ProjectUser", b =>
                 {
+                    b.HasOne("Raccord.Domain.Model.Crew.CrewMembers.CrewMember", "CrewMember")
+                        .WithOne("ProjectUser")
+                        .HasForeignKey("Raccord.Domain.Model.Users.ProjectUser", "CrewMemberID");
+
                     b.HasOne("Raccord.Domain.Model.Projects.Project", "Project")
                         .WithMany("ProjectUsers")
                         .HasForeignKey("ProjectID")

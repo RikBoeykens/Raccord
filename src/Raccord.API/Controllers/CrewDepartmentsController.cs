@@ -27,7 +27,7 @@ namespace Raccord.API.Controllers
 
         // GET: api/crewdepartments/1/project
         [HttpGet("{id}/project")]
-        public IEnumerable<CrewDepartmentViewModel> GetAllForProject(long id)
+        public IEnumerable<FullCrewDepartmentViewModel> GetAllForProject(long id)
         {
             var dtos = _crewDepartmentService.GetAllForProject(id);
 

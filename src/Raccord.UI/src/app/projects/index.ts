@@ -199,5 +199,9 @@ export { ScenePropertiesLandingComponent } from './children/scene-properties/com
 export{
     CrewDepartmentHttpService,
     CrewDepartmentsResolve,
-    CrewLandingComponent
+    CrewMemberHttpService,
+    CrewMemberResolve,
+    CrewMembersResolve,
+    CrewLandingComponent,
+    EditCrewMemberDialog
 } from './children/crew';

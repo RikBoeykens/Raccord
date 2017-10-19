@@ -1,9 +1,9 @@
 import { Injectable }             from '@angular/core';
 import { Router, Resolve, ActivatedRouteSnapshot } from '@angular/router';
-import { CrewDepartment } from '../model/crew-department.model';
+import { FullCrewDepartment } from '../model/full-crew-department.model';
 import { CrewDepartmentHttpService } from './crew-department-http.service';
 @Injectable()
-export class CrewDepartmentsResolve implements Resolve<CrewDepartment[]> {
+export class CrewDepartmentsResolve implements Resolve<FullCrewDepartment[]> {
 
   constructor(
     private _crewDepartmentHttpService: CrewDepartmentHttpService,

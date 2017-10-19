@@ -1,4 +1,4 @@
-namespace Raccord.Application.Core.Services.Crew.Departments
+namespace Raccord.API.ViewModels.Crew.Departments
 {
     public class CrewDepartmentViewModel
     {

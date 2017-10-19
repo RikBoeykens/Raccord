@@ -4,110 +4,99 @@ using System.Linq;
 using Raccord.Domain.Model.Shots;
 using Raccord.Application.Core.Services.Crew.CrewMembers;
 using Raccord.Data.EntityFramework.Repositories.Crew.CrewMembers;
+using Raccord.Domain.Model.Crew.CrewMembers;
 
 namespace Raccord.Application.Services.Crew.CrewMembers
 {
-    // Service used for slate functionality
-    public class SlateService : ISlateService
+    // Service used for crew member functionality
+    public class CrewMemberService : ICrewMemberService
     {
-        private readonly ISlateRepository _slateRepository;
+        private readonly ICrewMemberRepository _crewMemberRepository;
 
         // Initialises a new DayNightService
-        public SlateService(ISlateRepository slateRepository)
+        public CrewMemberService(ICrewMemberRepository crewMemberRepository)
         {
-            if(slateRepository == null)
-                throw new ArgumentNullException(nameof(slateRepository));
+            if(crewMemberRepository == null)
+                throw new ArgumentNullException(nameof(crewMemberRepository));
             
-            _slateRepository = slateRepository;
+            _crewMemberRepository = crewMemberRepository;
         }
 
-        // Gets all slates for a project
-        public IEnumerable<SlateSummaryDto> GetAllForParent(long projectID)
+        // Gets all crew members for a project
+        public IEnumerable<CrewMemberSummaryDto> GetAllForParent(long departmentID)
         {
-            var slates = _slateRepository.GetAllForProject(projectID);
+            var crewMembers = _crewMemberRepository.GetAllForDepartment(departmentID);
 
-            var dtos = slates.Select(l => l.TranslateSummary());
+            var dtos = crewMembers.Select(l => l.TranslateSummary());
 
             return dtos;
         }
 
-        // Gets a single slate by id
-        public FullSlateDto Get(Int64 ID)
+        // Gets a single crew member by id
+        public FullCrewMemberDto Get(long ID)
         {
-            var slate = _slateRepository.GetFull(ID);
+            var crewMember = _crewMemberRepository.GetFull(ID);
 
-            var dto = slate.TranslateFull();
+            var dto = crewMember.TranslateFull();
 
             return dto;
         }
 
-        // Gets a summary of a single day/night
-        public SlateSummaryDto GetSummary(Int64 ID)
+        // Gets a summary of a single crew member
+        public CrewMemberSummaryDto GetSummary(long ID)
         {
-            var slate = _slateRepository.GetSummary(ID);
+            var crewMember = _crewMemberRepository.GetSummary(ID);
 
-            var dto = slate.TranslateSummary();
+            var dto = crewMember.TranslateSummary();
 
             return dto;
         }
 
-        // Adds a day/night
-        public long Add(SlateDto dto)
+        // Adds a crew member
+        public long Add(CrewMemberDto dto)
         {
-            var previousSlate = _slateRepository.GetAllForProject(dto.ProjectID).OrderByDescending(s=> s.SortingOrder).FirstOrDefault();
-
-            var slate = new Slate
+            var crewMember = new CrewMember
             {
-                Number = dto.Number,
-                Description = dto.Description,
-                Lens = dto.Lens,
-                Distance = dto.Distance,
-                Aperture = dto.Aperture,
-                Filters = dto.Filters,
-                Sound = dto.Sound,
-                IsVfx = dto.IsVfx,
-                SortingOrder = previousSlate != null ? previousSlate.SortingOrder + 1 : 1,
-                SceneID = dto.Scene.ID!=default(long) ? dto.Scene.ID : (long?)null,
-                ShootingDayID = dto.ShootingDay.ID!=default(long) ? dto.ShootingDay.ID : (long?)null,
-                ProjectID = dto.ProjectID
+                FirstName = dto.FirstName,
+                LastName = dto.LastName,
+                JobTitle = dto.JobTitle,
+                Email = dto.Email,
+                Telephone = dto.Telephone,
+                DepartmentID = dto.Department.ID,
             };
 
-            _slateRepository.Add(slate);
-            _slateRepository.Commit();
+            _crewMemberRepository.Add(crewMember);
+            _crewMemberRepository.Commit();
 
-            return slate.ID;
+            return crewMember.ID;
         }
 
-        // Updates a slate
-        public long Update(SlateDto dto)
+        // Updates a crew member
+        public long Update(CrewMemberDto dto)
         {
-            var slate = _slateRepository.GetSingle(dto.ID);
+            var crewMember = _crewMemberRepository.GetSingle(dto.ID);
 
-            slate.Number = dto.Number;
-            slate.Description = dto.Description;
-            slate.Lens = dto.Lens;
-            slate.Distance = dto.Distance;
-            slate.Aperture = dto.Aperture;
-            slate.Filters = dto.Filters;
-            slate.Sound = dto.Sound;
-            slate.IsVfx = dto.IsVfx;
-            slate.SceneID = dto.Scene.ID!=default(long) ? dto.Scene.ID : (long?)null;
-            slate.ShootingDayID = dto.ShootingDay.ID!=default(long) ? dto.ShootingDay.ID : (long?)null;
+            crewMember.FirstName = dto.FirstName;
+            crewMember.LastName = dto.LastName;
+            crewMember.JobTitle = dto.JobTitle;
+            crewMember.Email = dto.Email;
+            crewMember.Telephone = dto.Telephone;
+            crewMember.DepartmentID = dto.Department.ID;
 
-            _slateRepository.Edit(slate);
-            _slateRepository.Commit();
+            _crewMemberRepository.Edit(crewMember);
+            _crewMemberRepository.Commit();
 
-            return slate.ID;
+            return crewMember.ID;
         }
 
-        // Deletes a day/night
+        // Deletes a crew member
         public void Delete(long ID)
         {
-            var slate = _slateRepository.GetSingle(ID);
+            var crewMember = _crewMemberRepository.GetSingle(ID);
 
-            _slateRepository.Delete(slate);
+            _crewMemberRepository.Delete(crewMember);
 
-            _slateRepository.Commit();
+            _crewMemberRepository.Commit();
         }
     }
 }

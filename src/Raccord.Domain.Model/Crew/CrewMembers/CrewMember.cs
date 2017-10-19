@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Raccord.Domain.Model.Breakdowns.BreakdownTypes;
 using Raccord.Domain.Model.Crew.Departments;
 using Raccord.Domain.Model.Images;
+using Raccord.Domain.Model.Users;
 
 namespace Raccord.Domain.Model.Crew.CrewMembers
 {

@@ -8,5 +8,6 @@ export enum EntityType{
     character = 6,
     breakdownItem = 7,
     location = 8,
-    slate = 9
+    slate = 9,
+    crewMember = 10
 }

@@ -1,3 +1,4 @@
+using Raccord.Domain.Model.Crew.CrewMembers;
 using Raccord.Domain.Model.Projects;
 using Raccord.Domain.Model.Users;
 

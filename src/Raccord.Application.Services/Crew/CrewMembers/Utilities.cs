@@ -4,6 +4,7 @@ using Raccord.Application.Core.Services.Crew.CrewMembers;
 using Raccord.Application.Services.Crew.CrewMembers;
 using Raccord.Core.Enums;
 using Raccord.Domain.Model.Crew.CrewMembers;
+using Raccord.Application.Services.Crew.Departments;
 
 namespace Raccord.Application.Services.Crew.CrewMembers
 {
@@ -13,90 +14,57 @@ namespace Raccord.Application.Services.Crew.CrewMembers
         {
             return new FullCrewMemberDto
             {
-                ID = slate.ID,
-                Number = slate.Number,
-                Description = slate.Description,
-                Lens = slate.Lens,
-                Distance = slate.Distance,
-                Aperture = slate.Aperture,
-                Filters = slate.Filters,
-                Sound = slate.Sound,
-                IsVfx = slate.IsVfx,
-                ProjectID = slate.ProjectID,
-                Scene = slate.SceneID.HasValue ? slate.Scene.Translate() : null,
-                ShootingDay = slate.ShootingDayID.HasValue ? slate.ShootingDay.Translate() : null,
-                Takes = slate.Takes.Select(t=> t.Translate()),
-                Images = slate.ImageSlates.Select(s=> s.TranslateImage()),
+                ID = crewMember.ID,
+                FirstName = crewMember.FirstName,
+                LastName = crewMember.LastName,
+                JobTitle = crewMember.JobTitle,
+                Telephone = crewMember.Telephone,
+                Email = crewMember.Email,
+                Department = crewMember.Department.Translate(),
             };
         }
-        public static SlateSummaryDto TranslateSummary(this Slate slate)
+        public static CrewMemberSummaryDto TranslateSummary(this CrewMember crewMember)
         {
-            return new SlateSummaryDto
+            return new CrewMemberSummaryDto
             {
-                ID = slate.ID,
-                Number = slate.Number,
-                Description = slate.Description,
-                Lens = slate.Lens,
-                Distance = slate.Distance,
-                Aperture = slate.Aperture,
-                Filters = slate.Filters,
-                Sound = slate.Sound,
-                IsVfx = slate.IsVfx,
-                ProjectID = slate.ProjectID,
-                Scene = slate.SceneID.HasValue ? slate.Scene.Translate() : null,
-                ShootingDay = slate.ShootingDayID.HasValue ? slate.ShootingDay.Translate() : null,
-                TakeCount = slate.Takes.Count(),
-                PrimaryImage = slate.ImageSlates.FirstOrDefault(il=> il.IsPrimaryImage)?.Image.Translate(),
+                ID = crewMember.ID,
+                FirstName = crewMember.FirstName,
+                LastName = crewMember.LastName,
+                JobTitle = crewMember.JobTitle,
+                Telephone = crewMember.Telephone,
+                Email = crewMember.Email,
+                Department = crewMember.Department.Translate(),
             };
         }
-        public static SlateDto Translate(this Slate slate)
+        public static CrewMemberDto Translate(this CrewMember crewMember)
         {
-            return new SlateDto
+            return new CrewMemberDto
             {
-                ID = slate.ID,
-                Number = slate.Number,
-                Description = slate.Description,
-                Lens = slate.Lens,
-                Distance = slate.Distance,
-                Aperture = slate.Aperture,
-                Filters = slate.Filters,
-                Sound = slate.Sound,
-                IsVfx = slate.IsVfx,
-                ProjectID = slate.ProjectID,
-                Scene = slate.SceneID.HasValue ? slate.Scene.Translate() : null,
-                ShootingDay = slate.ShootingDayID.HasValue ? slate.ShootingDay.Translate() : null,
-            };
-        }
-        public static LinkedSlateDto TranslateSlate(this ImageSlate imageSlate)
-        {
-            return new LinkedSlateDto
-            {
-                ID = imageSlate.Slate.ID,
-                Number = imageSlate.Slate.Number,
-                Description = imageSlate.Slate.Description,
-                Lens = imageSlate.Slate.Lens,
-                Distance = imageSlate.Slate.Distance,
-                Aperture = imageSlate.Slate.Aperture,
-                Filters = imageSlate.Slate.Filters,
-                Sound = imageSlate.Slate.Sound,
-                IsVfx = imageSlate.Slate.IsVfx,
-                ProjectID = imageSlate.Slate.ProjectID,
-                Scene = imageSlate.Slate.SceneID.HasValue ? imageSlate.Slate.Scene.Translate() : null,
-                ShootingDay = imageSlate.Slate.ShootingDayID.HasValue ? imageSlate.Slate.ShootingDay.Translate() : null,
-                LinkID = imageSlate.ID,
+                ID = crewMember.ID,
+                FirstName = crewMember.FirstName,
+                LastName = crewMember.LastName,
+                JobTitle = crewMember.JobTitle,
+                Telephone = crewMember.Telephone,
+                Email = crewMember.Email,
+                Department = crewMember.Department.Translate(),
             };
         }
 
-        public static SearchResultDto TranslateToSearchResult(this Slate slate)
+        public static SearchResultDto TranslateToSearchResult(this CrewMember crewMember)
         {
             return new SearchResultDto
             {
-                ID = slate.ID,
-                RouteIDs = new long[]{slate.ProjectID, slate.ID},
-                DisplayName = slate.Number,
-                Info = $"Project: {slate.Project.Title}",
-                Type = EntityType.Slate,  
+                ID = crewMember.ID,
+                RouteIDs = new long[]{crewMember.Department.ProjectID, crewMember.DepartmentID, crewMember.ID},
+                DisplayName = $"{crewMember.GetDisplayName()} - {crewMember.Department.Name}",
+                Info = $"Project: {crewMember.Department.Project.Title}",
+                Type = EntityType.CrewMember,  
             };
+        }
+
+        public static string GetDisplayName(this CrewMember crewMember)
+        {
+            return $"{crewMember.FirstName} {crewMember.LastName}";
         }
     }
 }

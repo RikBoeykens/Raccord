@@ -113,7 +113,8 @@ import {
   ShootingDayReportLandingComponent,
   ShootingDaySceneListItem,
   EditShootingDaySceneDialog,
-  CrewLandingComponent
+  CrewLandingComponent,
+  EditCrewMemberDialog
 } from './projects';
 import { ScenePropertiesLandingComponent } from './projects';
 import { SelectEntityComponent } from './shared';
@@ -224,13 +225,14 @@ const COMPONENTS =[
   AdminUsersListComponent,
   AdminAddUserComponent,
   AdminUserLandingComponent,
-  RaccordChartComponent
+  RaccordChartComponent,
 ];
 
 const ENTRY_COMPONENTS = [
   ChooseSceneDialog,
   ChooseShootingDayDialog,
-  EditShootingDaySceneDialog
+  EditShootingDaySceneDialog,
+  EditCrewMemberDialog
 ];
 
 // Services
@@ -317,7 +319,10 @@ import {
   TakeResolve,
   TakesResolve,
   CrewDepartmentHttpService,
-  CrewDepartmentsResolve
+  CrewDepartmentsResolve,
+  CrewMemberHttpService,
+  CrewMemberResolve,
+  CrewMembersResolve
 } from './projects';
 
 import {
@@ -445,7 +450,10 @@ const APP_PROVIDERS = [
   ChartHttpService,
   ProjectChartsResolve,
   CrewDepartmentHttpService,
-  CrewDepartmentsResolve
+  CrewDepartmentsResolve,
+  CrewMemberHttpService,
+  CrewMemberResolve,
+  CrewMembersResolve
 ];
 
 // Directives

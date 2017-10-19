@@ -23,10 +23,10 @@ namespace Raccord.Application.Services.Crew.Departments
         }
 
         // Gets all callsheet scenes for a scene
-        public IEnumerable<CrewDepartmentDto> GetAllForProject(long projectID)
+        public IEnumerable<FullCrewDepartmentDto> GetAllForProject(long projectID)
         {
             var departments = _crewDepartmentRepository.GetAllForProject(projectID);
-            return departments.Select(d=> d.Translate());
+            return departments.Select(d=> d.TranslateFull());
         }
     }
 }
