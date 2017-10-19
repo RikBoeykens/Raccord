@@ -127,17 +127,23 @@ namespace Raccord.Data.EntityFramework.Migrations
                 {
                     b.Property<string>("Id");
 
-                    b.Property<string>("ClientId");
+                    b.Property<string>("ClientId")
+                        .IsRequired();
 
                     b.Property<string>("ClientSecret");
 
                     b.Property<string>("DisplayName");
 
-                    b.Property<string>("LogoutRedirectUri");
+                    b.Property<string>("PostLogoutRedirectUris");
 
-                    b.Property<string>("RedirectUri");
+                    b.Property<string>("RedirectUris");
 
-                    b.Property<string>("Type");
+                    b.Property<byte[]>("Timestamp")
+                        .IsConcurrencyToken()
+                        .ValueGeneratedOnAddOrUpdate();
+
+                    b.Property<string>("Type")
+                        .IsRequired();
 
                     b.HasKey("Id");
 
@@ -153,9 +159,20 @@ namespace Raccord.Data.EntityFramework.Migrations
 
                     b.Property<string>("ApplicationId");
 
-                    b.Property<string>("Scope");
+                    b.Property<string>("Scopes");
 
-                    b.Property<string>("Subject");
+                    b.Property<string>("Status")
+                        .IsRequired();
+
+                    b.Property<string>("Subject")
+                        .IsRequired();
+
+                    b.Property<byte[]>("Timestamp")
+                        .IsConcurrencyToken()
+                        .ValueGeneratedOnAddOrUpdate();
+
+                    b.Property<string>("Type")
+                        .IsRequired();
 
                     b.HasKey("Id");
 
@@ -170,6 +187,13 @@ namespace Raccord.Data.EntityFramework.Migrations
 
                     b.Property<string>("Description");
 
+                    b.Property<string>("Name")
+                        .IsRequired();
+
+                    b.Property<byte[]>("Timestamp")
+                        .IsConcurrencyToken()
+                        .ValueGeneratedOnAddOrUpdate();
+
                     b.HasKey("Id");
 
                     b.ToTable("OpenIddictScopes");
@@ -183,15 +207,34 @@ namespace Raccord.Data.EntityFramework.Migrations
 
                     b.Property<string>("AuthorizationId");
 
-                    b.Property<string>("Subject");
+                    b.Property<string>("Ciphertext");
 
-                    b.Property<string>("Type");
+                    b.Property<DateTimeOffset?>("CreationDate");
+
+                    b.Property<DateTimeOffset?>("ExpirationDate");
+
+                    b.Property<string>("Hash");
+
+                    b.Property<string>("Status");
+
+                    b.Property<string>("Subject")
+                        .IsRequired();
+
+                    b.Property<byte[]>("Timestamp")
+                        .IsConcurrencyToken()
+                        .ValueGeneratedOnAddOrUpdate();
+
+                    b.Property<string>("Type")
+                        .IsRequired();
 
                     b.HasKey("Id");
 
                     b.HasIndex("ApplicationId");
 
                     b.HasIndex("AuthorizationId");
+
+                    b.HasIndex("Hash")
+                        .IsUnique();
 
                     b.ToTable("OpenIddictTokens");
                 });
@@ -448,22 +491,64 @@ namespace Raccord.Data.EntityFramework.Migrations
                     b.ToTable("CharacterScene");
                 });
 
-            modelBuilder.Entity("Raccord.Domain.Model.Crew.CrewUser", b =>
+            modelBuilder.Entity("Raccord.Domain.Model.Crew.CrewMembers.CrewMember", b =>
                 {
                     b.Property<long>("ID")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<long>("DepartmentID");
+
+                    b.Property<string>("Email");
+
+                    b.Property<string>("FirstName");
+
+                    b.Property<string>("JobTitle");
+
+                    b.Property<string>("LastName");
+
+                    b.Property<string>("Telephone");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("DepartmentID");
+
+                    b.ToTable("CrewMember");
+                });
+
+            modelBuilder.Entity("Raccord.Domain.Model.Crew.Departments.CrewDepartment", b =>
+                {
+                    b.Property<long>("ID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Description");
+
+                    b.Property<string>("Name");
+
                     b.Property<long>("ProjectID");
 
-                    b.Property<string>("UserID");
+                    b.Property<int>("SortingOrder");
 
                     b.HasKey("ID");
 
                     b.HasIndex("ProjectID");
 
-                    b.HasIndex("UserID");
+                    b.ToTable("CrewDepartment");
+                });
 
-                    b.ToTable("CrewUser");
+            modelBuilder.Entity("Raccord.Domain.Model.Crew.Departments.CrewDepartmentDefinition", b =>
+                {
+                    b.Property<long>("ID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Description");
+
+                    b.Property<string>("Name");
+
+                    b.Property<int>("SortingOrder");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("CrewDepartmentDefinitions");
                 });
 
             modelBuilder.Entity("Raccord.Domain.Model.Images.Image", b =>
@@ -1020,6 +1105,24 @@ namespace Raccord.Data.EntityFramework.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
+            modelBuilder.Entity("Raccord.Domain.Model.Users.ProjectUser", b =>
+                {
+                    b.Property<long>("ID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<long>("ProjectID");
+
+                    b.Property<string>("UserID");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("ProjectID");
+
+                    b.HasIndex("UserID");
+
+                    b.ToTable("ProjectUser");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRole")
@@ -1068,11 +1171,13 @@ namespace Raccord.Data.EntityFramework.Migrations
                 {
                     b.HasOne("OpenIddict.Models.OpenIddictApplication", "Application")
                         .WithMany("Tokens")
-                        .HasForeignKey("ApplicationId");
+                        .HasForeignKey("ApplicationId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("OpenIddict.Models.OpenIddictAuthorization", "Authorization")
                         .WithMany("Tokens")
-                        .HasForeignKey("AuthorizationId");
+                        .HasForeignKey("AuthorizationId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Raccord.Domain.Model.Breakdowns.BreakdownItems.BreakdownItem", b =>
@@ -1197,16 +1302,20 @@ namespace Raccord.Data.EntityFramework.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("Raccord.Domain.Model.Crew.CrewUser", b =>
+            modelBuilder.Entity("Raccord.Domain.Model.Crew.CrewMembers.CrewMember", b =>
+                {
+                    b.HasOne("Raccord.Domain.Model.Crew.Departments.CrewDepartment", "Department")
+                        .WithMany("Crew")
+                        .HasForeignKey("DepartmentID")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Raccord.Domain.Model.Crew.Departments.CrewDepartment", b =>
                 {
                     b.HasOne("Raccord.Domain.Model.Projects.Project", "Project")
-                        .WithMany("Crew")
+                        .WithMany("CrewDepartments")
                         .HasForeignKey("ProjectID")
                         .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("Raccord.Domain.Model.Users.ApplicationUser", "User")
-                        .WithMany("Crew")
-                        .HasForeignKey("UserID");
                 });
 
             modelBuilder.Entity("Raccord.Domain.Model.Images.Image", b =>
@@ -1453,6 +1562,18 @@ namespace Raccord.Data.EntityFramework.Migrations
                         .WithMany("Takes")
                         .HasForeignKey("SlateID")
                         .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Raccord.Domain.Model.Users.ProjectUser", b =>
+                {
+                    b.HasOne("Raccord.Domain.Model.Projects.Project", "Project")
+                        .WithMany("ProjectUsers")
+                        .HasForeignKey("ProjectID")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Raccord.Domain.Model.Users.ApplicationUser", "User")
+                        .WithMany("ProjectUsers")
+                        .HasForeignKey("UserID");
                 });
         }
     }

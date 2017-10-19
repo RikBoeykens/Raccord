@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Raccord.Domain.Model.Users;
 using Raccord.Domain.Model.Callsheets.CallTypes;
 using Raccord.Domain.Model.Callsheets.Scenes;
+using Raccord.Domain.Model.Crew.Departments;
 
 namespace Raccord.Data.EntityFramework
 {
@@ -25,6 +26,7 @@ namespace Raccord.Data.EntityFramework
         public DbSet<DayNight> DayNights { get; set; }
         public DbSet<BreakdownTypeDefinition> BreakdownTypeDefinitions { get; set; }
         public DbSet<CallTypeDefinition> CallTypeDefinitions { get; set; }
+        public DbSet<CrewDepartmentDefinition> CrewDepartmentDefinitions { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

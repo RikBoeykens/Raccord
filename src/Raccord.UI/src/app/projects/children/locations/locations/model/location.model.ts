@@ -11,7 +11,7 @@ export class Location extends BaseModel{
     projectId: number;
 
     constructor(obj?: {
-                        id: number, 
+                        id: number,
                         name: string,
                         description: string,
                         address: Address,

@@ -42,7 +42,8 @@ import {
   SlateLandingComponent,
   ChartLandingComponent,
   ShootingDayReportsListComponent,
-  ShootingDayReportLandingComponent
+  ShootingDayReportLandingComponent,
+  CrewLandingComponent
 } from './projects';
 import { ScenePropertiesLandingComponent } from './projects';
 import { LoginComponent } from "./security";
@@ -99,7 +100,8 @@ import {
   SlateResolve,
   SlatesResolve,
   TakeResolve,
-  TakesResolve
+  TakesResolve,
+  CrewDepartmentsResolve
 } from './projects';
 import { 
   AdminProjectsResolve,
@@ -107,7 +109,7 @@ import {
   AdminGuard,
   AdminUsersResolve,
   AdminUserResolve,
-  AdminProjectCrewResolve,
+  AdminProjectUsersResolve,
   AdminUserProjectsResolve
 } from "./admin";
 
@@ -147,7 +149,7 @@ export const ROUTES: Routes = [
                 component: AdminProjectLandingComponent,
                 resolve:{
                   project: AdminProjectResolve,
-                  crew: AdminProjectCrewResolve
+                  projectUsers: AdminProjectUsersResolve
                 }               
               },
               {
@@ -597,6 +599,19 @@ export const ROUTES: Routes = [
                 resolve:{
                   project: ProjectSummaryResolve,
                   shootingDay: ShootingDayResolve
+                }
+              }
+            ]
+          },
+          {
+            path: 'crew',
+            children: [
+              {
+                path: '',
+                component: CrewLandingComponent,
+                resolve: {
+                  project: ProjectSummaryResolve,
+                  departments: CrewDepartmentsResolve
                 }
               }
             ]

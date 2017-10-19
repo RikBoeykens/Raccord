@@ -80,7 +80,7 @@ namespace Raccord.Data.EntityFramework.Repositories.ScriptLocations
             IQueryable<ScriptLocation> query = _context.Set<ScriptLocation>();
 
             return query.Include(l=> l.Project)
-                        .ThenInclude(p=> p.Crew);
+                        .ThenInclude(p=> p.ProjectUsers);
         }
 
         private IQueryable<ScriptLocation> GetSearchQuery(string searchText, long? projectID, string userID, bool isAdmin)
@@ -93,7 +93,7 @@ namespace Raccord.Data.EntityFramework.Repositories.ScriptLocations
                 query = query.Where(l=> l.ProjectID==projectID.Value);
 
             if(!isAdmin)
-                query = query.Where(l=> l.Project.Crew.Any(c=> c.UserID == userID));
+                query = query.Where(l=> l.Project.ProjectUsers.Any(c=> c.UserID == userID));
 
             return query;
         }

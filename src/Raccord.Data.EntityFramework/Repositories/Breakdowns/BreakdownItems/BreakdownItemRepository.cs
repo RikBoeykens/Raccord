@@ -86,7 +86,7 @@ namespace Raccord.Data.EntityFramework.Repositories.Breakdowns.BreakdownItems
 
             return query.Include(bi=> bi.BreakdownType)
                         .ThenInclude(bt=> bt.Project)
-                        .ThenInclude(p=> p.Crew);
+                        .ThenInclude(p=> p.ProjectUsers);
         }
 
         private IQueryable<BreakdownItem> GetSearchQuery(string searchText, long? projectID, long? typeID, string userID, bool isAdmin)
@@ -102,7 +102,7 @@ namespace Raccord.Data.EntityFramework.Repositories.Breakdowns.BreakdownItems
                 query = query.Where(bi=> bi.BreakdownTypeID==typeID.Value);
 
             if(!isAdmin)
-                query = query.Where(bi=> bi.BreakdownType.Project.Crew.Any(c=> c.UserID == userID));
+                query = query.Where(bi=> bi.BreakdownType.Project.ProjectUsers.Any(c=> c.UserID == userID));
 
             return query;
         }

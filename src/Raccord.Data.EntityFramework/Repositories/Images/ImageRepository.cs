@@ -101,7 +101,7 @@ namespace Raccord.Data.EntityFramework.Repositories.Images
             IQueryable<Image> query = _context.Set<Image>();
 
             return query.Include(i=> i.Project)
-                        .ThenInclude(p=> p.Crew);
+                        .ThenInclude(p=> p.ProjectUsers);
         }
 
         private IQueryable<Image> GetSearchQuery(string searchText, long? projectID, string userID, bool isAdmin)
@@ -114,7 +114,7 @@ namespace Raccord.Data.EntityFramework.Repositories.Images
                 query = query.Where(i=> i.ProjectID==projectID.Value);
 
             if(!isAdmin)
-                query = query.Where(l=> l.Project.Crew.Any(c=> c.UserID == userID));
+                query = query.Where(l=> l.Project.ProjectUsers.Any(c=> c.UserID == userID));
 
             return query;
         }

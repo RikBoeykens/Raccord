@@ -112,7 +112,9 @@ import {
   ShootingDayReportsListComponent,
   ShootingDayReportLandingComponent,
   ShootingDaySceneListItem,
-  EditShootingDaySceneDialog
+  EditShootingDaySceneDialog,
+  CrewLandingComponent,
+  EditCrewMemberDialog
 } from './projects';
 import { ScenePropertiesLandingComponent } from './projects';
 import { SelectEntityComponent } from './shared';
@@ -211,6 +213,7 @@ const COMPONENTS =[
   ShootingDayReportsListComponent,
   ShootingDayReportLandingComponent,
   ShootingDaySceneListItem,
+  CrewLandingComponent,
   ScenePropertiesLandingComponent,
   SelectEntityComponent,
   LoginComponent,
@@ -222,13 +225,14 @@ const COMPONENTS =[
   AdminUsersListComponent,
   AdminAddUserComponent,
   AdminUserLandingComponent,
-  RaccordChartComponent
+  RaccordChartComponent,
 ];
 
 const ENTRY_COMPONENTS = [
   ChooseSceneDialog,
   ChooseShootingDayDialog,
-  EditShootingDaySceneDialog
+  EditShootingDaySceneDialog,
+  EditCrewMemberDialog
 ];
 
 // Services
@@ -313,7 +317,12 @@ import {
   ImageSlateHttpService,
   TakeHttpService,
   TakeResolve,
-  TakesResolve
+  TakesResolve,
+  CrewDepartmentHttpService,
+  CrewDepartmentsResolve,
+  CrewMemberHttpService,
+  CrewMemberResolve,
+  CrewMembersResolve
 } from './projects';
 
 import {
@@ -333,8 +342,8 @@ import {
   AdminUserHttpService,
   AdminUsersResolve,
   AdminUserResolve,
-  AdminCrewHttpService,
-  AdminProjectCrewResolve,
+  AdminProjectUserHttpService,
+  AdminProjectUsersResolve,
   AdminUserProjectsResolve,
   AdminSearchEngineService
 } from "./admin";
@@ -434,19 +443,24 @@ const APP_PROVIDERS = [
   AdminUserHttpService,
   AdminUsersResolve,
   AdminUserResolve,
-  AdminCrewHttpService,
-  AdminProjectCrewResolve,
+  AdminProjectUserHttpService,
+  AdminProjectUsersResolve,
   AdminUserProjectsResolve,
   AdminSearchEngineService,
   ChartHttpService,
-  ProjectChartsResolve
+  ProjectChartsResolve,
+  CrewDepartmentHttpService,
+  CrewDepartmentsResolve,
+  CrewMemberHttpService,
+  CrewMemberResolve,
+  CrewMembersResolve
 ];
 
 // Directives
 import { HighlightDirective } from './shared/directives/highlight.directive';
 import { FocusDirective } from './shared/directives/focus.directive';
 
-const DIRECTIVES =[
+const DIRECTIVES = [
   HighlightDirective,
   FocusDirective
 ];

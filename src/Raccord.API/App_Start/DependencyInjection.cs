@@ -82,7 +82,6 @@ using Raccord.Application.Services.Callsheets.CharacterCalls;
 using Raccord.Application.Core.Services.Users;
 using Raccord.Application.Services.Users;
 using Raccord.Data.EntityFramework.Repositories.Users;
-using Raccord.Data.EntityFramework.Repositories.Crew;
 using Raccord.Application.Core.Services.Crew;
 using Raccord.Application.Services.Crew;
 using Raccord.Data.EntityFramework.Repositories.Shots.Slates;
@@ -101,6 +100,15 @@ using Raccord.Application.Core.Services.Charts;
 using Raccord.Application.Services.Charts;
 using Raccord.Application.Core.Services.Charts.ChartBuilders;
 using Raccord.Application.Services.Charts.ChartBuilders;
+using Raccord.Data.EntityFramework.Repositories.Users.Projects;
+using Raccord.Application.Services.Users.Projects;
+using Raccord.Application.Core.Services.Users.Project;
+using Raccord.Data.EntityFramework.Repositories.Crew.Departments;
+using Raccord.Application.Core.Services.Crew.Departments;
+using Raccord.Application.Services.Crew.Departments;
+using Raccord.Data.EntityFramework.Repositories.Crew.CrewMembers;
+using Raccord.Application.Services.Crew.CrewMembers;
+using Raccord.Application.Core.Services.Crew.CrewMembers;
 
 namespace Raccord.API
 {
@@ -209,8 +217,8 @@ namespace Raccord.API
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<IUserService, UserService>();
 
-            services.AddTransient<ICrewRepository, CrewRepository>();            
-            services.AddTransient<ICrewService, CrewService>();    
+            services.AddTransient<IProjectUserRepository, ProjectUserRepository>();            
+            services.AddTransient<IProjectUserService, ProjectUserService>();            
 
             services.AddTransient<ISlateRepository, SlateRepository>();
             services.AddTransient<ISlateService, SlateService>();
@@ -235,6 +243,14 @@ namespace Raccord.API
             services.AddTransient<ICumulativeSetupsByDayChartBuilder, CumulativeSetupsByDayChartBuilder>();
             services.AddTransient<ISetupsByDayChartBuilder, SetupsByDayChartBuilder>();
             services.AddTransient<IVfxSetupsChartBuilder, VfxSetupsChartBuilder>();
+
+            services.AddTransient<ICrewDepartmentDefinitionRepository, CrewDepartmentDefinitionRepository>(); 
+            services.AddTransient<ICrewDepartmentRepository, CrewDepartmentRepository>();  
+            services.AddTransient<ICrewDepartmentService, CrewDepartmentService>(); 
+             
+            services.AddTransient<ICrewMemberRepository, CrewMemberRepository>();
+            services.AddTransient<ICrewMemberService, CrewMemberService>();
+            services.AddTransient<ICrewMemberSearchEngineService, CrewMemberSearchEngineService>();
         }
     }
 }

@@ -7,9 +7,9 @@ export { AdminUserHttpService } from "./users/service/admin-user-http.service";
 export { AdminUsersResolve } from "./users/service/admin-users-resolve.service";
 export { AdminUserResolve } from "./users/service/admin-user-resolve.service";
 
-export { AdminCrewHttpService } from "./crew/service/admin-crew-http.service";
-export { AdminProjectCrewResolve } from "./crew/service/admin-project-crew-resolve.service";
-export { AdminUserProjectsResolve } from "./crew/service/admin-user-projects-resolve.service";
+export { AdminProjectUserHttpService } from "./project-users/service/admin-project-user-http.service";
+export { AdminProjectUsersResolve } from "./project-users/service/admin-project-users-resolve.service";
+export { AdminUserProjectsResolve } from "./project-users/service/admin-user-projects-resolve.service";
 
 export { AdminSearchEngineService } from "./search/service/admin-search-engine.service";
 

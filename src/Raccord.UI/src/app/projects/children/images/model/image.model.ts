@@ -13,16 +13,16 @@ export class Image extends BaseModel{
                         description: string,
                         fileName: string,
                         projectId: number
-                    }){
+                    }) {
         super();
-        if(obj){
+        if (obj) {
             this.id = obj.id;
             this.title = obj.title;
             this.description = obj.description;
             this.fileName = obj.fileName;
             this.projectId = obj.projectId;
         }
-        else{
+        else {
             this.id = 0;
         }
     }

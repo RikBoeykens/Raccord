@@ -195,3 +195,13 @@ export {
  } from "./children/charts";
 
 export { ScenePropertiesLandingComponent } from './children/scene-properties/component/scene-properties-landing/scene-properties-landing.component';
+
+export{
+    CrewDepartmentHttpService,
+    CrewDepartmentsResolve,
+    CrewMemberHttpService,
+    CrewMemberResolve,
+    CrewMembersResolve,
+    CrewLandingComponent,
+    EditCrewMemberDialog
+} from './children/crew';

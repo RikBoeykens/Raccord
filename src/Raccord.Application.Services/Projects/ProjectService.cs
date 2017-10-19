@@ -8,6 +8,8 @@ using Raccord.Data.EntityFramework.Repositories.Breakdowns.BreakdownTypes;
 using Raccord.Domain.Model.Breakdowns.BreakdownTypes;
 using Raccord.Data.EntityFramework.Repositories.Callsheets.CallTypes;
 using Raccord.Domain.Model.Callsheets.CallTypes;
+using Raccord.Data.EntityFramework.Repositories.Crew.Departments;
+using Raccord.Domain.Model.Crew.Departments;
 
 namespace Raccord.Application.Services.Projects
 {
@@ -17,12 +19,14 @@ namespace Raccord.Application.Services.Projects
         private readonly IProjectRepository _projectRepository;
         private readonly IBreakdownTypeDefinitionRepository _breakdownTypeDefinitionRepository;
         private readonly ICallTypeDefinitionRepository _callTypeDefinitionRepository;
+        private readonly ICrewDepartmentDefinitionRepository _crewDepartmentDefinitionRepository;
 
         // Initialises a new ProjectService
         public ProjectService(
             IProjectRepository projectRepository,
             IBreakdownTypeDefinitionRepository breakdownTypeDefinitionRepository,
-            ICallTypeDefinitionRepository callTypeDefinitionRepository
+            ICallTypeDefinitionRepository callTypeDefinitionRepository,
+            ICrewDepartmentDefinitionRepository crewDepartmentDefinitionRepository
             )
         {
             if(projectRepository == null)
@@ -31,10 +35,13 @@ namespace Raccord.Application.Services.Projects
                 throw new ArgumentNullException(nameof(breakdownTypeDefinitionRepository));
             if(callTypeDefinitionRepository == null)
                 throw new ArgumentNullException(nameof(callTypeDefinitionRepository));
+            if(crewDepartmentDefinitionRepository == null)
+                throw new ArgumentNullException(nameof(crewDepartmentDefinitionRepository));
             
             _projectRepository = projectRepository;
             _breakdownTypeDefinitionRepository = breakdownTypeDefinitionRepository;
             _callTypeDefinitionRepository = callTypeDefinitionRepository;
+            _crewDepartmentDefinitionRepository = crewDepartmentDefinitionRepository;
         }
 
         // Gets all projects
@@ -100,6 +107,17 @@ namespace Raccord.Application.Services.Projects
                 project.CallTypes.Add(new CallType
                 {
                     ShortName = definition.ShortName,
+                    Name = definition.Name,
+                    Description = definition.Description,
+                    SortingOrder = definition.SortingOrder,
+                });
+            }
+
+            var departmentDefinitions = _crewDepartmentDefinitionRepository.GetAll();
+            foreach(var definition in departmentDefinitions)
+            {
+                project.CrewDepartments.Add(new CrewDepartment
+                {
                     Name = definition.Name,
                     Description = definition.Description,
                     SortingOrder = definition.SortingOrder,

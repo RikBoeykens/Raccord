@@ -1,0 +1,34 @@
+<md-card>      
+    <a routerLink="/" class="breadcrumb">Dashboard</a>
+    <a routerLink="/projects" class="breadcrumb">Projects</a>
+    <a routerLink="/projects/{{project.id}}" class="breadcrumb">{{project.title}}</a>
+    <span class="breadcrumb">Unit List</span>
+</md-card>
+<md-card *ngFor="let department of departments">
+    <md-card-title>
+        {{department.name}}
+        <button md-mini-fab (click)="addCrewMember(department.id)"><md-icon>add</md-icon></button>
+    </md-card-title>
+    <md-card-content>
+        <div class="row">
+            <table class="col s12">
+                <tbody>
+                    <tr *ngFor="let crewMember of department.crewMembers">
+                        <td>
+                            <!--show-image *ngIf="crewMember.primaryImage.id!=0" [image]="rewMember.primaryImage.primaryImage" [listAvatar]="true"></show-image-->
+                        </td>
+                        <td><em>{{crewMember.jobTitle}}</em></td>
+                        <td>{{crewMember.firstName}} {{crewMember.lastName}}</td>
+                        <td>{{crewMember.email}}</td>
+                        <td>{{crewMember.telephone}}</td>
+                        <td>                
+                            <button md-button (click)="editCrewMember(crewMember)"><md-icon>edit</md-icon></button>
+                            <button md-button (click)="removeCrewMember(crewMember)"><md-icon>delete</md-icon></button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </md-card-content>
+</md-card>
+<button md-fab (click)="addCrewMember()"><md-icon>add</md-icon></button>

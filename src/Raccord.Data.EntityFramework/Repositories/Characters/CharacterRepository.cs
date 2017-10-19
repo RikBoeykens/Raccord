@@ -122,7 +122,7 @@ namespace Raccord.Data.EntityFramework.Repositories.Characters
             IQueryable<Character> query = _context.Set<Character>();
 
             return query.Include(i=> i.Project)
-                        .ThenInclude(p=> p.Crew);
+                        .ThenInclude(p=> p.ProjectUsers);
         }
 
         private IQueryable<Character> GetSearchQuery(string searchText, long? projectID, string userID, bool isAdmin)
@@ -135,7 +135,7 @@ namespace Raccord.Data.EntityFramework.Repositories.Characters
                 query = query.Where(i=> i.ProjectID==projectID.Value);
 
             if(!isAdmin)
-                query = query.Where(l=> l.Project.Crew.Any(c=> c.UserID == userID));
+                query = query.Where(l=> l.Project.ProjectUsers.Any(c=> c.UserID == userID));
 
             return query;
         }

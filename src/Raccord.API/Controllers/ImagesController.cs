@@ -94,7 +94,7 @@ namespace Raccord.API.Controllers
                     ok = true,
                 };
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 response = new JsonResponse
                 {

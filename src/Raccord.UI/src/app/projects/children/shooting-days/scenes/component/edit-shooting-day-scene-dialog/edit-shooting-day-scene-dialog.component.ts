@@ -20,8 +20,6 @@ export class EditShootingDaySceneDialog {
 
     submit(){
         this.shootingDayScene.pageLength = PageLengthHelpers.getPageLengthNumber(this.shootingDayScene.pageLengthString);
-        console.log(this.shootingDayScene.pageLength);
-        console.log(this.shootingDayScene.pageLengthString);
         this._dialogRef.close(new ShootingDaySceneScene(this.shootingDayScene));
     }
 }

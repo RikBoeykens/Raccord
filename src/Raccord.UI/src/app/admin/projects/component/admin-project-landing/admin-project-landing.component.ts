@@ -2,10 +2,10 @@ import { Component } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AdminProjectHttpService } from '../../service/admin-project-http.service';
 import { FullProject } from '../../../../projects';
-import { CrewUserUser } from "../../../crew/model/crew-user-user.model";
-import { AdminCrewHttpService } from "../../../crew/service/admin-crew-http.service";
 import { LoadingService } from "../../../../loading/service/loading.service";
 import { DialogService } from "../../../../shared/service/dialog.service";
+import { ProjectUserUser } from '../../../project-users/model/project-user-user.model';
+import { AdminProjectUserHttpService } from '../../../index';
 
 @Component({
     templateUrl: 'admin-project-landing.component.html',
@@ -13,11 +13,11 @@ import { DialogService } from "../../../../shared/service/dialog.service";
 export class AdminProjectLandingComponent {
 
     project: FullProject;
-    crew: CrewUserUser[] = [];
+    projectUsers: ProjectUserUser[] = [];
 
     constructor(
         private _projectHttpService: AdminProjectHttpService,
-        private _crewHttpService: AdminCrewHttpService,
+        private _projectUserHttpService: AdminProjectUserHttpService,
         private _loadingService: LoadingService,
         private _dialogService: DialogService,
         private route: ActivatedRoute,
@@ -26,20 +26,20 @@ export class AdminProjectLandingComponent {
     }
 
     ngOnInit() {
-        this.route.data.subscribe((data: { project: FullProject, crew: CrewUserUser[] }) => {
+        this.route.data.subscribe((data: { project: FullProject, projectUsers: ProjectUserUser[] }) => {
             this.project = data.project;
-            this.crew = data.crew;
+            this.projectUsers = data.projectUsers;
         });
     }
 
-    getCrewMembers(){
+    getProjectUsers(){
         let loadingId = this._loadingService.startLoading();
 
-        this._crewHttpService.getUsers(this.project.id).then(data=>{
+        this._projectUserHttpService.getUsers(this.project.id).then(data=>{
             if(typeof(data)=='string'){
                 this._dialogService.error(data);
             }else{
-                this.crew = data;
+                this.projectUsers = data;
             }
         }).catch()
         .then(()=>
@@ -47,15 +47,15 @@ export class AdminProjectLandingComponent {
         );
     }
 
-    removeCrewMember(crewUser: CrewUserUser){
+    removeProjectUser(projectUser: ProjectUserUser){
         let loadingId = this._loadingService.startLoading();
 
-        this._crewHttpService.delete(crewUser.id).then(data=>{
+        this._projectUserHttpService.delete(projectUser.id).then(data=>{
             if(typeof(data)=='string'){
                 this._dialogService.error(data);
             }else{
-                this._dialogService.success("Successfully removed crew member.");
-                this.getCrewMembers();
+                this._dialogService.success("Successfully removed project user.");
+                this.getProjectUsers();
             }
         }).catch()
         .then(()=>

@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 using System;
 using Raccord.Domain.Model.Callsheets.CallTypes;
 using Microsoft.EntityFrameworkCore;
-using Raccord.Domain.Model.Crew;
+using Raccord.Domain.Model.Crew.Departments;
 
 namespace Raccord.Data.EntityFramework.Seeding
 {
@@ -44,6 +44,7 @@ namespace Raccord.Data.EntityFramework.Seeding
         {
             SeedBreakdownTypeDefinitions();
             SeedCallTypeDefinitions();
+            SeedDepartmentDefinitions();
             SeedRolesAndAdminUser();
         }
 
@@ -81,6 +82,25 @@ namespace Raccord.Data.EntityFramework.Seeding
                 _context.SaveChanges();
             }
         }
+        
+        public void SeedDepartmentDefinitions()
+        {
+            if(!_context.CrewDepartmentDefinitions.Any())
+            {
+                var definitions = new List<CrewDepartmentDefinition>
+                {
+                    new CrewDepartmentDefinition{ SortingOrder = 1, Name = "Directorial Department" },
+                    new CrewDepartmentDefinition{ SortingOrder = 2, Name = "Camera Department" },
+                    new CrewDepartmentDefinition{ SortingOrder = 3, Name = "Sound Department" },
+                    new CrewDepartmentDefinition{ SortingOrder = 4, Name = "Hair and Make Up Department" },
+                    new CrewDepartmentDefinition{ SortingOrder = 5, Name = "Costume Department" },
+                };
+
+                _context.CrewDepartmentDefinitions.AddRange(definitions);
+
+                _context.SaveChanges();
+            }
+        }
 
         private void SeedRolesAndAdminUser()
         {
@@ -111,6 +131,7 @@ namespace Raccord.Data.EntityFramework.Seeding
             SeedScenes();
             SeedBreakdownTypes();
             SeedCallTypes();
+            SeedCrewDepartments();
             SeedCrew();
         }
 
@@ -263,17 +284,40 @@ namespace Raccord.Data.EntityFramework.Seeding
             _context.SaveChanges();
         }
 
+        private void SeedCrewDepartments()
+        {
+            var definitions = _context.CrewDepartmentDefinitions.ToArray();
+
+            foreach(var project in _context.Projects.Include(p=> p.CrewDepartments))
+            {
+                if(!project.CrewDepartments.Any())
+                {
+                    foreach(var definition in definitions)
+                    {
+                        project.CrewDepartments.Add(new CrewDepartment
+                        {
+                            Name = definition.Name,
+                            Description = definition.Description,
+                            SortingOrder = definition.SortingOrder,
+                        });
+                    }
+                }
+            }
+
+            _context.SaveChanges();
+        }
+
         private void SeedCrew()
         {
             var adminUser = _context.Users.FirstOrDefault(u=> u.Email == adminEmail);
 
             if(adminUser!= null)
             {
-                foreach(var project in _context.Projects.Include(p=> p.Crew).ThenInclude(c=> c.User))
+                foreach(var project in _context.Projects.Include(p=> p.ProjectUsers).ThenInclude(c=> c.User))
                 {
-                    if(!project.Crew.Any())
+                    if(!project.ProjectUsers.Any())
                     {
-                        project.Crew.Add(new CrewUser
+                        project.ProjectUsers.Add(new ProjectUser
                         {
                             UserID = adminUser.Id
                         });

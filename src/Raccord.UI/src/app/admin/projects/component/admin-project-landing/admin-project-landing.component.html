@@ -6,8 +6,8 @@
     </div>
 </div>
 <a md-button [routerLink]="['settings']"><md-icon>settings</md-icon></a>
-<h3>Crew</h3>
-<div class="row" *ngIf="crew.length">
+<h3>Project Users</h3>
+<div class="row" *ngIf="projectUsers.length">
     <table class="col s12">
         <thead>
             <tr>
@@ -16,12 +16,12 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let crewMember of crew">
+            <tr *ngFor="let projectUser of projectUsers">
                 <td>
-                    {{crewMember.user.email}}
+                    {{projectUser.user.email}}
                 </td>
                 <td>
-                    <button md-button (click)="removeCrewMember(crewMember)"><md-icon>delete</md-icon></button>
+                    <button md-button (click)="removeProjectUser(projectUser)"><md-icon>delete</md-icon></button>
                 </td>
             </tr>
         </tbody>

@@ -12,6 +12,7 @@ using Raccord.Core.Enums;
 using Raccord.Application.Core.Services.Characters;
 using Raccord.Application.Core.Services.Locations.Locations;
 using Raccord.Application.Core.Services.Shots.Slates;
+using Raccord.Application.Core.Services.Crew.CrewMembers;
 
 namespace Raccord.Application.Services.SearchEngine
 {
@@ -28,6 +29,7 @@ namespace Raccord.Application.Services.SearchEngine
         private IBreakdownItemSearchEngineService _breakdownItemSearchEngineService;
         private ILocationSearchEngineService _locationSearchEngineService;
         private ISlateSearchEngineService _slateSearchEngineService;
+        private ICrewMemberSearchEngineService _crewMemberSearchEngineService;
 
         public SearchEngineServiceWrapper(
             IProjectSearchEngineService projectSearchEngineService,
@@ -39,7 +41,8 @@ namespace Raccord.Application.Services.SearchEngine
             ICharacterSearchEngineService characterSearchEngineService,
             IBreakdownItemSearchEngineService breakdownItemSearchEngineService,
             ILocationSearchEngineService locationSearchEngineService,
-            ISlateSearchEngineService slateSearchEngineService
+            ISlateSearchEngineService slateSearchEngineService,
+            ICrewMemberSearchEngineService crewMemberSearchEngineService
         )
         {
             if(projectSearchEngineService==null)
@@ -62,6 +65,8 @@ namespace Raccord.Application.Services.SearchEngine
                 throw new ArgumentNullException(nameof(locationSearchEngineService));
             if(slateSearchEngineService==null)
                 throw new ArgumentNullException(nameof(slateSearchEngineService));
+            if(crewMemberSearchEngineService==null)
+                throw new ArgumentNullException(nameof(crewMemberSearchEngineService));
 
             _projectSearchEngineService = projectSearchEngineService;
             _sceneSearchEngineService = sceneSearchEngineService;
@@ -73,6 +78,7 @@ namespace Raccord.Application.Services.SearchEngine
             _breakdownItemSearchEngineService = breakdownItemSearchEngineService;
             _locationSearchEngineService = locationSearchEngineService;
             _slateSearchEngineService = slateSearchEngineService;
+            _crewMemberSearchEngineService = crewMemberSearchEngineService;
         }
         public IEnumerable<SearchTypeResultDto> GetResults(SearchRequestDto request)
         {
@@ -100,7 +106,8 @@ namespace Raccord.Application.Services.SearchEngine
                 _characterSearchEngineService,
                 _breakdownItemSearchEngineService,
                 _locationSearchEngineService,
-                _slateSearchEngineService
+                _slateSearchEngineService,
+                _crewMemberSearchEngineService
             };
 
             if(includeTypes.Any())
