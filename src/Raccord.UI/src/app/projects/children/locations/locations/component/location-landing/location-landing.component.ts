@@ -6,6 +6,7 @@ import { DialogService } from '../../../../../../shared/service/dialog.service';
 import { FullLocation } from '../../model/full-location.model';
 import { Location } from '../../model/location.model';
 import { ProjectSummary } from '../../../../../model/project-summary.model';
+import { AppSettings } from '../../../../../../app.settings';
 
 @Component({
     templateUrl: 'location-landing.component.html',
@@ -15,6 +16,7 @@ export class LocationLandingComponent {
     location: FullLocation;
     viewLocation: Location;
     project: ProjectSummary;
+    zoom: number = AppSettings.MAP_DEFAULT_ZOOM;
 
     constructor(
         private _locationHttpService: LocationHttpService,

@@ -97,6 +97,24 @@ export class LocationsListComponent implements OnInit {
         );
     }
 
+    public remove(location: LocationSummary){
+        if(this._dialogService.confirm(`Are you sure you want to remove location ${location.name}?`)){
+            let loadingId = this._loadingService.startLoading();
+
+            this._locationHttpService.delete(location.id).then(data=> {
+                if (typeof(data)== 'string') {
+                    this._dialogService.error(data);
+                    this.getLocations();
+                }else {
+                    this._dialogService.success('The location was successfully removed');
+                }
+            }).catch()
+            .then(() => this._loadingService.endLoading(loadingId));
+        }else {
+            this.getLocations();
+        }
+    }
+
     private onLocationDrag(args) {
         let draggedElement = args[0];
         if(draggedElement && HtmlClassHelpers.hasClass(draggedElement, 'can-delete'))
@@ -120,26 +138,5 @@ export class LocationsListComponent implements OnInit {
     private onOut(args) {
         let [e, el, container] = args;
         HtmlClassHelpers.removeClass(el, 'hovering');
-    }
-
-    remove(location: LocationSummary){
-
-        if(this._dialogService.confirm(`Are you sure you want to remove location ${location.name}?`)){
-
-            let loadingId = this._loadingService.startLoading();
-
-            this._locationHttpService.delete(location.id).then(data=>{
-                if(typeof(data)== 'string'){
-                    this._dialogService.error(data);
-                    this.getLocations();
-                }else{
-                    this._dialogService.success('The location was successfully removed');
-                }
-            }).catch()
-            .then(()=> this._loadingService.endLoading(loadingId));
-        }else{
-            this.getLocations();
-        }
-
     }
 }

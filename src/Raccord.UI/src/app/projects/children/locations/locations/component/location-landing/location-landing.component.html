@@ -11,15 +11,18 @@
     <edit-location [location]="viewLocation" (submitLocation)="updateLocation()"></edit-location>
 </div>
 <md-tab-group>
-  <md-tab label="Overview">
-  </md-tab>
-  <md-tab label="Sets">
-    <location-location-sets [sets]="location.sets" [locationId]="location.id" [projectId]="project.id"></location-location-sets>
-  </md-tab>
-  <!--md-tab label="Pictures">
-      <screenplay-location-images [images]="scriptLocation.images" [scriptLocationId]="scriptLocation.id" [projectId]="project.id"></screenplay-location-images>
-  </md-tab-->
-  <md-tab label="Schedule">
-      <location-schedule [scheduleDays]="location.scheduleDays" [locationId]="location.id" [projectId]="project.id"></location-schedule>
-  </md-tab>
+    <md-tab label="Overview">
+        <agm-map *ngIf="viewLocation.latLng.hasLatLng" [zoom]="zoom" [latitude]="viewLocation.latLng.latitude" [longitude]="viewLocation.latLng.longitude">
+            <agm-marker [latitude]="viewLocation.latLng.latitude" [longitude]="viewLocation.latLng.longitude"></agm-marker>
+        </agm-map>
+    </md-tab>
+    <md-tab label="Sets">
+        <location-location-sets [sets]="location.sets" [locationId]="location.id" [projectId]="project.id"></location-location-sets>
+    </md-tab>
+    <!--md-tab label="Pictures">
+        <screenplay-location-images [images]="scriptLocation.images" [scriptLocationId]="scriptLocation.id" [projectId]="project.id"></screenplay-location-images>
+    </md-tab-->
+    <md-tab label="Schedule">
+        <location-schedule [scheduleDays]="location.scheduleDays" [locationId]="location.id" [projectId]="project.id"></location-schedule>
+    </md-tab>
 </md-tab-group>
