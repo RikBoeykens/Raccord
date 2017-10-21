@@ -8,6 +8,7 @@ import { LoadingService } from '../../../../../../loading/service/loading.servic
 import { DialogService } from '../../../../../../shared/service/dialog.service';
 import { DragulaService } from 'ng2-dragula';
 import { HtmlClassHelpers } from '../../../../../../shared/helpers/html-class.helpers';
+import { LatLng } from '../../../../../../shared/index';
 
 @Component({
     templateUrl: 'locations-list.component.html',
@@ -20,6 +21,8 @@ export class LocationsListComponent implements OnInit {
     viewNewLocation: Location;
     newLocation: Location;
     draggingToDelete: boolean;
+    markerLocations: LocationSummary[] = [];
+    bounds: any;
 
     constructor(
         private _locationHttpService: LocationHttpService,
@@ -58,6 +61,7 @@ export class LocationsListComponent implements OnInit {
     ngOnInit() {
         this._route.data.subscribe((data: { locations: LocationSummary[], project: ProjectSummary }) => {
             this.locations = data.locations;
+            this.setBounds();
             this.project = data.project;
             this.resetNewLocation();
         });
@@ -112,6 +116,28 @@ export class LocationsListComponent implements OnInit {
             .then(() => this._loadingService.endLoading(loadingId));
         }else {
             this.getLocations();
+        }
+    }
+
+    public setBounds(){
+        this.markerLocations = this.locations.filter(l=> l.latLng.hasLatLng);
+        if(this.markerLocations.length){
+            let north = this.markerLocations[0].latLng.latitude + 0.01;
+            let west = this.markerLocations[0].latLng.longitude + 0.01;
+            let south = this.markerLocations[0].latLng.latitude - 0.01;
+            let east = this.markerLocations[0].latLng.longitude - 0.01;
+            this.markerLocations.forEach(marker=>{
+                if(north > marker.latLng.latitude) north = marker.latLng.latitude;
+                if(west > marker.latLng.longitude) west = marker.latLng.longitude;
+                if(south < marker.latLng.latitude) south = marker.latLng.latitude;
+                if(east < marker.latLng.longitude) east = marker.latLng.longitude;
+            });
+            this.bounds = {
+                east: east,
+                north: north,
+                south: south,
+                west: west
+            };
         }
     }
 
