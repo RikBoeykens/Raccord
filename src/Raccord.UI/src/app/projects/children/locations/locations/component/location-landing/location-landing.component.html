@@ -21,7 +21,7 @@
                     Location: {{viewLocation.name}}
                 </agm-info-window>
             </agm-marker>
-            <agm-marker *ngFor="let locationSet of location.sets"
+            <agm-marker *ngFor="let locationSet of locationSetMarkers"
                         [latitude]="locationSet.latLng.latitude" 
                         [longitude]="locationSet.latLng.longitude"
                         [label]="'S'">
