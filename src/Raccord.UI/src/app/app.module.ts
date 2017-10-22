@@ -478,7 +478,8 @@ const PIPES = [
 import { DragulaModule } from 'ng2-dragula';
 import { MaterialModule } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { Ng2HighchartsModule } from "ng2-highcharts";
+import { Ng2HighchartsModule } from 'ng2-highcharts';
+import { AgmCoreModule } from '@agm/core';
 
 import '../styles/styles.scss';
 import '../styles/headings.css';
@@ -508,6 +509,9 @@ import '../styles/headings.css';
     MaterialModule,
     FlexLayoutModule,
     Ng2HighchartsModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyAHVRCUkTtP9FDacHfHoEJDeWQu0sRA7-U'
+    }),
     RouterModule.forRoot(ROUTES, { preloadingStrategy: PreloadAllModules })
   ],
   providers: [ // expose our Services and Providers into Angular's dependency injection

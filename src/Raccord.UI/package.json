@@ -68,6 +68,7 @@
     "webpack": "webpack"
   },
   "dependencies": {
+    "@agm/core": "^1.0.0-beta.1",
     "@angular/animations": "^4.2.4",
     "@angular/common": "^4.2.4",
     "@angular/compiler": "^4.2.4",
@@ -94,7 +95,7 @@
     "ng2-highcharts": "^1.0.0",
     "reflect-metadata": "^0.1.9",
     "rxjs": "~5.0.2",
-    "zone.js": "~0.8.4"
+    "zone.js": "^0.8.18"
   },
   "devDependencies": {
     "@angular/compiler-cli": "^4.2.4",

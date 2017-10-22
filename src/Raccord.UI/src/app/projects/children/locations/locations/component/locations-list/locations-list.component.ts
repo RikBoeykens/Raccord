@@ -8,6 +8,8 @@ import { LoadingService } from '../../../../../../loading/service/loading.servic
 import { DialogService } from '../../../../../../shared/service/dialog.service';
 import { DragulaService } from 'ng2-dragula';
 import { HtmlClassHelpers } from '../../../../../../shared/helpers/html-class.helpers';
+import { LatLng } from '../../../../../../shared/index';
+import { MapsHelpers } from '../../../../../../shared/helpers/maps.helpers';
 
 @Component({
     templateUrl: 'locations-list.component.html',
@@ -20,6 +22,8 @@ export class LocationsListComponent implements OnInit {
     viewNewLocation: Location;
     newLocation: Location;
     draggingToDelete: boolean;
+    markerLocations: LocationSummary[] = [];
+    bounds: any;
 
     constructor(
         private _locationHttpService: LocationHttpService,
@@ -58,6 +62,7 @@ export class LocationsListComponent implements OnInit {
     ngOnInit() {
         this._route.data.subscribe((data: { locations: LocationSummary[], project: ProjectSummary }) => {
             this.locations = data.locations;
+            this.setBounds();
             this.project = data.project;
             this.resetNewLocation();
         });
@@ -97,6 +102,31 @@ export class LocationsListComponent implements OnInit {
         );
     }
 
+    public remove(location: LocationSummary){
+        if(this._dialogService.confirm(`Are you sure you want to remove location ${location.name}?`)){
+            let loadingId = this._loadingService.startLoading();
+
+            this._locationHttpService.delete(location.id).then(data=> {
+                if (typeof(data)== 'string') {
+                    this._dialogService.error(data);
+                    this.getLocations();
+                }else {
+                    this._dialogService.success('The location was successfully removed');
+                }
+            }).catch()
+            .then(() => this._loadingService.endLoading(loadingId));
+        }else {
+            this.getLocations();
+        }
+    }
+
+    public setBounds(){
+        this.markerLocations = this.locations.filter(l=> l.latLng.hasLatLng);
+        if(this.markerLocations.length){
+            this.bounds = MapsHelpers.getBounds(this.markerLocations.map((location)=> location.latLng));
+        }
+    }
+
     private onLocationDrag(args) {
         let draggedElement = args[0];
         if(draggedElement && HtmlClassHelpers.hasClass(draggedElement, 'can-delete'))
@@ -120,26 +150,5 @@ export class LocationsListComponent implements OnInit {
     private onOut(args) {
         let [e, el, container] = args;
         HtmlClassHelpers.removeClass(el, 'hovering');
-    }
-
-    remove(location: LocationSummary){
-
-        if(this._dialogService.confirm(`Are you sure you want to remove location ${location.name}?`)){
-
-            let loadingId = this._loadingService.startLoading();
-
-            this._locationHttpService.delete(location.id).then(data=>{
-                if(typeof(data)== 'string'){
-                    this._dialogService.error(data);
-                    this.getLocations();
-                }else{
-                    this._dialogService.success('The location was successfully removed');
-                }
-            }).catch()
-            .then(()=> this._loadingService.endLoading(loadingId));
-        }else{
-            this.getLocations();
-        }
-
     }
 }

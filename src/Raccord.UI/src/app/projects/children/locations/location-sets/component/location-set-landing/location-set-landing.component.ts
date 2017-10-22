@@ -6,6 +6,8 @@ import { DialogService } from '../../../../../../shared/service/dialog.service';
 import { FullLocationSet } from '../../model/full-location-set.model';
 import { LocationSet } from '../../model/location-set.model';
 import { ProjectSummary } from '../../../../../model/project-summary.model';
+import { AppSettings } from '../../../../../../app.settings';
+import { MapsHelpers } from '../../../../../../shared/helpers/maps.helpers';
 
 @Component({
     templateUrl: 'location-set-landing.component.html',
@@ -15,6 +17,7 @@ export class LocationSetLandingComponent {
     locationSet: FullLocationSet;
     viewLocationSet: LocationSet;
     project: ProjectSummary;
+    bounds: any;
 
     constructor(
         private _locationHttpService: LocationSetHttpService,
@@ -36,6 +39,7 @@ export class LocationSetLandingComponent {
                 locationId: data.locationSet.location.id,
                 scriptLocationId: data.locationSet.scriptLocation.id
             });
+            this.setBounds();
             this.project = data.project;
         });
     }
@@ -70,5 +74,11 @@ export class LocationSetLandingComponent {
         .then(()=>
             this._loadingService.endLoading(loadingId)
         );
+    }
+    
+    public setBounds(){
+        if(this.locationSet.location.latLng.hasLatLng && this.locationSet.latLng.hasLatLng){
+            this.bounds = MapsHelpers.getBounds([this.locationSet.location.latLng, this.locationSet.latLng]);
+        }
     }
 }

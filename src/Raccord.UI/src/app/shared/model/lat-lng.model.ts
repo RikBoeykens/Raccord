@@ -1,14 +1,17 @@
-export class LatLng{
-    latitude?: number;
-    longitude?: number;
+export class LatLng {
+    public latitude?: number;
+    public longitude?: number;
+    public hasLatLng: boolean;
 
     constructor(obj?: {
         latitude?: number,
         longitude?: number,
-    }){
-        if(obj){
+        hasLatLng: boolean
+    }) {
+        if (obj) {
             this.latitude = obj.latitude;
             this.longitude = obj.longitude;
+            this.hasLatLng = obj.hasLatLng;
         }
     }
 }

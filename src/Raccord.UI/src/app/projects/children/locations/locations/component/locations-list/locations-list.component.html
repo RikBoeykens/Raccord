@@ -23,6 +23,13 @@
         </a>
     </md-nav-list>
 </div>
+<agm-map *ngIf="markerLocations.length" [fitBounds]="bounds">
+    <agm-marker *ngFor="let marker of markerLocations" [latitude]="marker.latLng.latitude" [longitude]="marker.latLng.longitude">
+        <agm-info-window>
+            <a [routerLink]="[marker.id]">{{marker.name}}</a>
+        </agm-info-window>
+    </agm-marker>
+</agm-map>
 <div class="delete-location drop-container drop-delete-container" 
      [dragula]="'location-bag'" 
      *ngIf="draggingToDelete" 

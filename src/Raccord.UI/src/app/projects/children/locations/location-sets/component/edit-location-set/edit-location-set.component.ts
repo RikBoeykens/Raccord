@@ -14,7 +14,7 @@ export class EditLocationSetComponent{
     ){
     }
 
-    doLocationSubmit(){
+    doLocationSetSubmit(){
         this.submitLocationSet.emit();
     }
 }

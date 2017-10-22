@@ -6,6 +6,9 @@ import { DialogService } from '../../../../../../shared/service/dialog.service';
 import { FullLocation } from '../../model/full-location.model';
 import { Location } from '../../model/location.model';
 import { ProjectSummary } from '../../../../../model/project-summary.model';
+import { AppSettings } from '../../../../../../app.settings';
+import { LocationSetScriptLocation } from '../../../index';
+import { MapsHelpers } from '../../../../../../shared/helpers/maps.helpers';
 
 @Component({
     templateUrl: 'location-landing.component.html',
@@ -15,6 +18,9 @@ export class LocationLandingComponent {
     location: FullLocation;
     viewLocation: Location;
     project: ProjectSummary;
+    zoom: number = AppSettings.MAP_DEFAULT_ZOOM;
+    bounds: any;
+    locationSetMarkers: LocationSetScriptLocation[] = [];
 
     constructor(
         private _locationHttpService: LocationHttpService,
@@ -29,6 +35,7 @@ export class LocationLandingComponent {
         this._route.data.subscribe((data: { location: FullLocation, project: ProjectSummary }) => {
             this.location = data.location;
             this.viewLocation = new Location(data.location);
+            this.setBounds();
             this.project = data.project;
         });
     }
@@ -56,5 +63,14 @@ export class LocationLandingComponent {
         .then(()=>
             this._loadingService.endLoading(loadingId)
         );
+    }
+    
+    public setBounds(){
+        if(this.location.latLng.hasLatLng){
+            this.locationSetMarkers = this.location.sets.filter(set=> set.latLng.hasLatLng);
+            let latLngs = this.locationSetMarkers.map(set=> set.latLng);
+            latLngs.push(this.location.latLng);
+            this.bounds = MapsHelpers.getBounds(latLngs);
+        }
     }
 }

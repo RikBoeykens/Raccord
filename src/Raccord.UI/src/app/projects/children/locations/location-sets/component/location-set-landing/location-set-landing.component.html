@@ -19,6 +19,24 @@
       <div>
           Location: <a routerLink="/projects/{{project.id}}/locations/{{locationSet.location.id}}">{{locationSet.location.name}}</a>
       </div>
+      <agm-map *ngIf="locationSet.location.latLng.hasLatLng && locationSet.latLng.hasLatLng" [fitBounds]="bounds">
+          <agm-marker 
+                    [latitude]="locationSet.location.latLng.latitude" 
+                    [longitude]="locationSet.location.latLng.longitude"
+                    [label]="'L'">
+            <agm-info-window>
+                Location: {{locationSet.location.name}}
+            </agm-info-window>
+          </agm-marker>
+          <agm-marker 
+                    [latitude]="locationSet.latLng.latitude" 
+                    [longitude]="locationSet.latLng.longitude"
+                    [label]="'S'">
+            <agm-info-window>
+                Set: {{locationSet.name}}
+            </agm-info-window>
+          </agm-marker>
+      </agm-map>
   </md-tab>
   <!--md-tab label="Pictures">
       <location-set-images [images]="scriptLocation.images" [scriptLocationId]="scriptLocation.id" [projectId]="project.id"></screenplay-location-images>
