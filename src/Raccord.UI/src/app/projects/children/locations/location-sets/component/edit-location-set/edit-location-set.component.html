@@ -10,6 +10,14 @@
             <input mdInput placeholder="Description" id="location_set_description" [(ngModel)]="locationSet.description" #description="ngModel" name="location_set_description">
         </md-input-container>
     </div>
+    <div fxLayout="row" fxLayoutGap="10px">
+        <md-input-container fxFlex="50%">
+            <input mdInput placeholder="Latitude" id="location_set_lat" [(ngModel)]="locationSet.latLng.latitude" #lat="ngModel" name="location_set_lat">
+        </md-input-container>
+        <md-input-container fxFlex="50%">
+            <input mdInput placeholder="Longitude" id="location_set_lng" [(ngModel)]="locationSet.latLng.longitude" #lng="ngModel" name="location_set_lng">
+        </md-input-container>
+    </div>
     <div fxLayout="row">
         <div class="col s12">
             <button md-raised-button type="submit"[disabled]="!locationSetForm.form.valid">Save</button>
