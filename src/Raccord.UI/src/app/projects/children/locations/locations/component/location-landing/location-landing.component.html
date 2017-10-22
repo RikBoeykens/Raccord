@@ -12,8 +12,23 @@
 </div>
 <md-tab-group>
     <md-tab label="Overview">
-        <agm-map *ngIf="viewLocation.latLng.hasLatLng" [zoom]="zoom" [latitude]="viewLocation.latLng.latitude" [longitude]="viewLocation.latLng.longitude">
-            <agm-marker [latitude]="viewLocation.latLng.latitude" [longitude]="viewLocation.latLng.longitude"></agm-marker>
+        <agm-map *ngIf="viewLocation.latLng.hasLatLng" [fitBounds]="bounds">
+            <agm-marker 
+                        [latitude]="viewLocation.latLng.latitude" 
+                        [longitude]="viewLocation.latLng.longitude"
+                        [label]="'L'">
+                <agm-info-window>
+                    Location: {{viewLocation.name}}
+                </agm-info-window>
+            </agm-marker>
+            <agm-marker *ngFor="let locationSet of location.sets"
+                        [latitude]="locationSet.latLng.latitude" 
+                        [longitude]="locationSet.latLng.longitude"
+                        [label]="'S'">
+                <agm-info-window>
+                    Set: <a routerLink="/projects/{{project.id}}/locationsets/{{locationSet.id}}">{{locationSet.name}}</a>
+                </agm-info-window>
+            </agm-marker>
         </agm-map>
     </md-tab>
     <md-tab label="Sets">
