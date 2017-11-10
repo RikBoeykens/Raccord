@@ -43,12 +43,12 @@ namespace Raccord.Application.Services.Callsheets
             _callsheetSceneCharacterRepository = callsheetSceneCharacterRepository;
         }
 
-        // Gets all characters for a project
+        // Gets all callsheets for a project
         public IEnumerable<CallsheetSummaryDto> GetAllForParent(long projectID)
         {
-            var characters = _callsheetRepository.GetAllForProject(projectID);
+            var callsheets = _callsheetRepository.GetAllForProject(projectID);
 
-            var dtos = characters.Select(l => l.TranslateSummary());
+            var dtos = callsheets.Select(l => l.TranslateSummary());
 
             return dtos;
         }
@@ -56,24 +56,24 @@ namespace Raccord.Application.Services.Callsheets
         // Gets a single character by id
         public FullCallsheetDto Get(Int64 ID)
         {
-            var character = _callsheetRepository.GetFull(ID);
+            var callsheet = _callsheetRepository.GetFull(ID);
 
-            var dto = character.TranslateFull();
+            var dto = callsheet.TranslateFull();
 
             return dto;
         }
 
-        // Gets a summary of a single character
+        // Gets a summary of a single callsheet
         public CallsheetSummaryDto GetSummary(Int64 ID)
         {
-            var character = _callsheetRepository.GetSummary(ID);
+            var callsheet = _callsheetRepository.GetSummary(ID);
 
-            var dto = character.TranslateSummary();
+            var dto = callsheet.TranslateSummary();
 
             return dto;
         }
 
-        // Adds a character
+        // Adds a callsheet
         public long Add(CallsheetDto dto)
         {
             var linkedShootingDay = _shootingDayRepository.GetSingle(dto.ShootingDay.ID);

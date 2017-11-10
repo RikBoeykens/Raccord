@@ -22,8 +22,8 @@
         <div class="row">
             <div class="col s12">
                 <div class="row"
-                    *ngFor="let location of getLocations(); let i = index">
-                    <p><strong>Location {{i + 1}}:</strong> 
+                    *ngFor="let location of callsheet.locations">
+                    <p><strong>Location {{location.number}}:</strong> 
                         <a routerLink="/projects/{{project.id}}/locations/{{location.id}}">{{location.name}}</a>
                     </p>
                     <p>{{location.address.address1}}</p>
@@ -33,6 +33,16 @@
                 </div>
             </div>
         </div>
+        <agm-map *ngIf="markerLocations.length" [fitBounds]="bounds">
+            <agm-marker *ngFor="let marker of markerLocations" 
+                        [latitude]="marker.latLng.latitude" 
+                        [longitude]="marker.latLng.longitude"
+                        [label]="marker.number">
+                <agm-info-window>
+                    <a routerLink="/projects/{{project.id}}/locations/{{marker.id}}">{{marker.name}}</a>
+                </agm-info-window>
+            </agm-marker>
+        </agm-map>
     </md-card-content>
 </md-card>
 <md-card>

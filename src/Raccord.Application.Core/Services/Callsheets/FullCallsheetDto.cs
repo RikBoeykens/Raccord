@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Raccord.Application.Core.Services.Locations.LocationSets;
 using Raccord.Application.Core.Services.Callsheets.CallsheetScenes;
 using Raccord.Application.Core.Services.Callsheets.Characters;
+using Raccord.Application.Core.Services.Locations.Locations;
 
 namespace Raccord.Application.Core.Services.Callsheets
 {
@@ -12,6 +13,7 @@ namespace Raccord.Application.Core.Services.Callsheets
     {
         private IEnumerable<CallsheetSceneSceneDto> _scenes;
         private IEnumerable<CallsheetCharacterCharacterDto> _characters;
+        private IEnumerable<CallsheetLocationDto> _locations;
 
         // Scenes scheduled for the day
         public IEnumerable<CallsheetSceneSceneDto> Scenes
@@ -36,6 +38,19 @@ namespace Raccord.Application.Core.Services.Callsheets
             set
             {
                 _characters = value;
+            }
+        }
+
+        // Locations for the day
+        public IEnumerable<CallsheetLocationDto> Locations
+        {
+            get
+            {
+                return _locations ?? (_locations = new List<CallsheetLocationDto>());
+            }
+            set
+            {
+                _locations = value;
             }
         }
     }
