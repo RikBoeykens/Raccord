@@ -10,6 +10,7 @@ using Raccord.Data.EntityFramework.Seeding;
 using Raccord.Domain.Model.Users;
 using AspNet.Security.OpenIdConnect.Primitives;
 using Microsoft.AspNetCore.Identity;
+using Swashbuckle.AspNetCore.Swagger;
 
 namespace Raccord.API
 {
@@ -78,6 +79,16 @@ namespace Raccord.API
                 .DisableHttpsRequirement();
 
             DependencyInjection.ConfigureServices(services);
+
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new Info { Title = "Raccord", Version = "v1" });
+            });
+
+            services.ConfigureSwaggerGen(options=>
+            {
+                options.CustomSchemaIds(x=> x.FullName);
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -111,6 +122,14 @@ namespace Raccord.API
             );
 
             app.UseOpenIddict();
+
+                app.UseSwagger();
+
+            // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.), specifying the Swagger JSON endpoint.
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Raccord V1");
+            });
 
             using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
             {
