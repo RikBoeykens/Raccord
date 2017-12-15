@@ -109,6 +109,8 @@ using Raccord.Application.Services.Crew.Departments;
 using Raccord.Data.EntityFramework.Repositories.Crew.CrewMembers;
 using Raccord.Application.Services.Crew.CrewMembers;
 using Raccord.Application.Core.Services.Crew.CrewMembers;
+using Raccord.Application.Core.Services.ScriptUpload;
+using Raccord.Application.Services.ScriptUpload;
 
 namespace Raccord.API
 {
@@ -251,6 +253,8 @@ namespace Raccord.API
             services.AddTransient<ICrewMemberRepository, CrewMemberRepository>();
             services.AddTransient<ICrewMemberService, CrewMemberService>();
             services.AddTransient<ICrewMemberSearchEngineService, CrewMemberSearchEngineService>();
+
+            services.AddTransient<IScriptUploadService, ScriptUploadService>();
         }
     }
 }

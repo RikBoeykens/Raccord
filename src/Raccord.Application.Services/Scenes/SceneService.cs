@@ -157,47 +157,73 @@ namespace Raccord.Application.Services.Scenes
         {
             if(scene.IntExt.ID == default(long))
             {
-                var intExt = new IntExt
+                var existingIntExt = _intExtRepository.FindBy(i=> i.Name.ToLower() == scene.IntExt.Name.ToLower());
+                if(existingIntExt.Any())
                 {
-                    Name = scene.IntExt.Name,
-                    Description = scene.IntExt.Description,
-                    ProjectID = scene.IntExt.ProjectID,
-                };
+                    scene.IntExt.ID = existingIntExt.FirstOrDefault().ID;
+                }
+                else
+                {
+                    var intExt = new IntExt
+                    {
+                        Name = scene.IntExt.Name,
+                        Description = scene.IntExt.Description,
+                        ProjectID = scene.IntExt.ProjectID,
+                    };
 
-                _intExtRepository.Add(intExt);
-                _intExtRepository.Commit();
+                    _intExtRepository.Add(intExt);
+                    _intExtRepository.Commit();
 
-                scene.IntExt.ID = intExt.ID;
+                    scene.IntExt.ID = intExt.ID;
+                }
             }
 
             if(scene.DayNight.ID == default(long))
             {
-                var dayNight = new DayNight
+                var existingDayNight = _dayNightRepository.FindBy(i=> i.Name.ToLower() == scene.DayNight.Name.ToLower());
+
+                if(existingDayNight.Any())
                 {
-                    Name = scene.DayNight.Name,
-                    Description = scene.DayNight.Description,
-                    ProjectID = scene.DayNight.ProjectID,
-                };
+                    scene.DayNight.ID = existingDayNight.FirstOrDefault().ID;
+                }
+                else
+                {
+                    var dayNight = new DayNight
+                    {
+                        Name = scene.DayNight.Name,
+                        Description = scene.DayNight.Description,
+                        ProjectID = scene.DayNight.ProjectID,
+                    };
 
-                _dayNightRepository.Add(dayNight);
-                _dayNightRepository.Commit();
+                    _dayNightRepository.Add(dayNight);
+                    _dayNightRepository.Commit();
 
-                scene.DayNight.ID = dayNight.ID;
+                    scene.DayNight.ID = dayNight.ID;
+                }
             }
 
             if(scene.ScriptLocation.ID == default(long))
             {
-                var scriptLocation = new ScriptLocation
+                var existingScriptLocation = _scriptLocationRepository.FindBy(i=> i.Name.ToLower() == scene.ScriptLocation.Name.ToLower());
+
+                if(existingScriptLocation.Any())
                 {
-                    Name = scene.ScriptLocation.Name,
-                    Description = scene.ScriptLocation.Description,
-                    ProjectID = scene.ScriptLocation.ProjectID,
-                };
+                    scene.ScriptLocation.ID = existingScriptLocation.FirstOrDefault().ID;
+                }
+                else
+                {
+                    var scriptLocation = new ScriptLocation
+                    {
+                        Name = scene.ScriptLocation.Name,
+                        Description = scene.ScriptLocation.Description,
+                        ProjectID = scene.ScriptLocation.ProjectID,
+                    };
 
-                _scriptLocationRepository.Add(scriptLocation);
-                _scriptLocationRepository.Commit();
+                    _scriptLocationRepository.Add(scriptLocation);
+                    _scriptLocationRepository.Commit();
 
-                scene.ScriptLocation.ID = scriptLocation.ID;
+                    scene.ScriptLocation.ID = scriptLocation.ID;
+                }
             }
         }
 
