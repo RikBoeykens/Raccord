@@ -22,7 +22,6 @@ namespace Raccord.API
                 .UseConfiguration(config)
                 .UseKestrel()
                 .UseContentRoot(Directory.GetCurrentDirectory())
-                .UseUrls("http://localhost:5001")
                 .UseIISIntegration()
                 .UseStartup<Startup>()
                 .Build();

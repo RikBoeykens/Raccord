@@ -1,13 +1,4 @@
-FROM microsoft/dotnet:latest
-
-COPY . /app
-
+FROM microsoft/aspnetcore:1.0
 WORKDIR /app
-
-RUN ["dotnet", "restore"]
-
-RUN ["dotnet", "build"]
-
-EXPOSE 5000/tcp
-
-CMD ["dotnet", "run", "--server.urls", "http://*:5000"]
+COPY . .
+CMD ASPNETCORE_URLS=http://*:$PORT dotnet raccord.ui.dll

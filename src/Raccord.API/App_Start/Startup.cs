@@ -11,6 +11,7 @@ using Raccord.Domain.Model.Users;
 using AspNet.Security.OpenIdConnect.Primitives;
 using Microsoft.AspNetCore.Identity;
 using Swashbuckle.AspNetCore.Swagger;
+using System.Linq;
 
 namespace Raccord.API
 {
@@ -36,7 +37,21 @@ namespace Raccord.API
             
             services.AddMvc();
 
-            var connectionString = Configuration["DbContextSettings:ConnectionString"];
+                        //Get Database Connection 
+            string _connectionString = Configuration["DATABASE_URL"];
+            _connectionString.Replace("//", "");
+
+            char[] delimiterChars = { '/', ':', '@', '?' };
+            string[] strConn = _connectionString.Split(delimiterChars);
+            strConn = strConn.Where(x => !string.IsNullOrEmpty(x)).ToArray();
+
+            var user = strConn[1];
+            var pass = strConn[2];
+            var server = strConn[3];
+            var database = strConn[5];
+            var port = strConn[4];
+            var connectionString = "host=" + server + ";port=" + port + ";database=" + database + ";uid=" + user + ";pwd=" + pass + ";sslmode=Require;Trust Server Certificate=true;Timeout=1000";
+
             services.AddDbContext<RaccordDBContext>(opts =>{ 
                 opts.UseNpgsql(connectionString);
                 
@@ -116,7 +131,7 @@ namespace Raccord.API
             // });
 
             app.UseCors(builder =>
-                builder.WithOrigins("http://localhost:5000", "http://localhost:3000")
+                builder.WithOrigins("http://localhost:5000", "http://localhost:3000", "http://raccord-ui-poc.herokuapp.com")
                        .AllowAnyMethod()
                        .AllowAnyHeader()
             );
