@@ -1,6 +1,6 @@
 <form autocomplete="off">
     <md-input-container class="search-input-container">
-        <input mdInput placeholder="Search" [(ngModel)]="searchText" name="searchText" (keyup)="doSearch()">
+        <input mdInput placeholder="Search" [(ngModel)]="searchText" name="searchText" (keyup)="doSearch()" autocomplete="off">
     </md-input-container>
     <div class="search-result-container" *ngIf="showSearchResults">
         <div class="search-type-result" *ngFor="let typeResult of searchTypeResults">

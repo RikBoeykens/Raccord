@@ -1,0 +1,15 @@
+<md-card>      
+  <a routerLink="/" class="breadcrumb">Dashboard</a>
+  <a routerLink="/projects" class="breadcrumb">Projects</a>
+  <a routerLink="/projects/{{project.id}}" class="breadcrumb">{{project.title}}</a>
+  <span class="breadcrumb">Script Upload</span>
+</md-card>
+<div class="script-text" style="font: courier">
+    <div *ngFor="let sceneText of sceneTexts">
+        <scene-header [scene]="sceneText.scene" [projectID]="project.id"></scene-header>
+        <div *ngFor="let sceneComponent of getSceneComponents(sceneText)">
+          <scene-action [sceneAction]="sceneComponent" *ngIf="sceneComponent.type==='action'"></scene-action>
+          <scene-dialogue [sceneDialogue]="sceneComponent" [projectID]="project.id" *ngIf="sceneComponent.type==='dialogue'"></scene-dialogue>
+        </div>
+      </div>
+</div>

@@ -15,6 +15,11 @@ namespace Raccord.Application.Services.ScriptLocations
     {
         public static FullScriptLocationDto TranslateFull(this ScriptLocation location)
         {
+            if(location == null)
+            {
+                return null;
+            }
+            
             var dto = new FullScriptLocationDto
             {
                 ID = location.ID,
@@ -30,6 +35,11 @@ namespace Raccord.Application.Services.ScriptLocations
         }
         public static ScriptLocationSummaryDto TranslateSummary(this ScriptLocation location)
         {
+            if(location == null)
+            {
+                return null;
+            }
+            
             var dto = new ScriptLocationSummaryDto
             {
                 ID = location.ID,
@@ -45,6 +55,11 @@ namespace Raccord.Application.Services.ScriptLocations
 
         public static ScriptLocationDto Translate(this ScriptLocation location)
         {
+            if(location == null)
+            {
+                return null;
+            }
+            
             var dto = new ScriptLocationDto
             {
                 ID = location.ID,
@@ -58,6 +73,11 @@ namespace Raccord.Application.Services.ScriptLocations
 
         public static LinkedScriptLocationDto TranslateLocation(this ImageScriptLocation imageLocation)
         {
+            if(imageLocation == null)
+            {
+                return null;
+            }
+            
             var dto = new LinkedScriptLocationDto
             {
                 ID = imageLocation.ScriptLocation.ID,
@@ -72,6 +92,11 @@ namespace Raccord.Application.Services.ScriptLocations
 
         public static SearchResultDto TranslateToSearchResult(this ScriptLocation scriptLocation)
         {
+            if(scriptLocation == null)
+            {
+                return null;
+            }
+            
             var dto = new SearchResultDto
             {
                 ID = scriptLocation.ID,

@@ -8,6 +8,7 @@ import { Image } from '../model/image.model';
 import { LinkImage } from '../model/link-image.model';
 import { JsonResponse } from '../../../../shared/model/json-response.model';
 import { SelectedEntity } from '../../../../shared/model/selected-entity.model';
+import { Base64Image } from '../model/base-64-image.model';
 
 @Injectable()
 export class ImageHttpService extends BaseHttpService {
@@ -34,6 +35,13 @@ export class ImageHttpService extends BaseHttpService {
     getSummary(id: Number): Promise<ImageSummary> {
 
         var uri = `${this._baseUri}/${id}/summary`;
+
+        return this.doGet(uri);
+    }
+
+    getBase64(id: Number): Promise<Base64Image> {
+
+        var uri = `${this._baseUri}/${id}/base64`;
 
         return this.doGet(uri);
     }

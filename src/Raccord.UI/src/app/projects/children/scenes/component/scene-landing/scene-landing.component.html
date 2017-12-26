@@ -12,6 +12,7 @@
 </div>
 <md-tab-group>
   <md-tab label="Overview">
+    <a routerLink="/projects/{{project.id}}/scripttext" fragment="scene-{{scene.id}}">Script</a>
   </md-tab>
   <md-tab label="Characters">
       <scene-characters [characters]="scene.characters" [sceneId]="scene.id" [projectId]="project.id"></scene-characters>

@@ -118,7 +118,7 @@ namespace Raccord.Data.EntityFramework.Seeding
 
             if (!_context.Users.Any())
             {
-                _userManager.CreateAsync(new ApplicationUser { UserName = adminEmail, Email = adminEmail, EmailConfirmed = true }, adminEmail).Result.ToString();
+                _userManager.CreateAsync(new ApplicationUser { UserName = adminEmail, Email = adminEmail, EmailConfirmed = true }, adminPassword).Result.ToString();
                 _userManager.AddToRoleAsync(_userManager.FindByNameAsync(adminEmail).GetAwaiter().GetResult(), "admin").Result.ToString();
             }
         }
