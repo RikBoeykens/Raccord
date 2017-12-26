@@ -132,15 +132,14 @@ namespace Raccord.Data.EntityFramework.Migrations
 
                     b.Property<string>("ClientSecret");
 
+                    b.Property<string>("ConcurrencyToken")
+                        .IsConcurrencyToken();
+
                     b.Property<string>("DisplayName");
 
                     b.Property<string>("PostLogoutRedirectUris");
 
                     b.Property<string>("RedirectUris");
-
-                    b.Property<byte[]>("Timestamp")
-                        .IsConcurrencyToken()
-                        .ValueGeneratedOnAddOrUpdate();
 
                     b.Property<string>("Type")
                         .IsRequired();
@@ -159,6 +158,9 @@ namespace Raccord.Data.EntityFramework.Migrations
 
                     b.Property<string>("ApplicationId");
 
+                    b.Property<string>("ConcurrencyToken")
+                        .IsConcurrencyToken();
+
                     b.Property<string>("Scopes");
 
                     b.Property<string>("Status")
@@ -166,10 +168,6 @@ namespace Raccord.Data.EntityFramework.Migrations
 
                     b.Property<string>("Subject")
                         .IsRequired();
-
-                    b.Property<byte[]>("Timestamp")
-                        .IsConcurrencyToken()
-                        .ValueGeneratedOnAddOrUpdate();
 
                     b.Property<string>("Type")
                         .IsRequired();
@@ -185,14 +183,13 @@ namespace Raccord.Data.EntityFramework.Migrations
                 {
                     b.Property<string>("Id");
 
+                    b.Property<string>("ConcurrencyToken")
+                        .IsConcurrencyToken();
+
                     b.Property<string>("Description");
 
                     b.Property<string>("Name")
                         .IsRequired();
-
-                    b.Property<byte[]>("Timestamp")
-                        .IsConcurrencyToken()
-                        .ValueGeneratedOnAddOrUpdate();
 
                     b.HasKey("Id");
 
@@ -207,22 +204,21 @@ namespace Raccord.Data.EntityFramework.Migrations
 
                     b.Property<string>("AuthorizationId");
 
-                    b.Property<string>("Ciphertext");
+                    b.Property<string>("ConcurrencyToken")
+                        .IsConcurrencyToken();
 
                     b.Property<DateTimeOffset?>("CreationDate");
 
                     b.Property<DateTimeOffset?>("ExpirationDate");
 
-                    b.Property<string>("Hash");
+                    b.Property<string>("Payload");
+
+                    b.Property<string>("ReferenceId");
 
                     b.Property<string>("Status");
 
                     b.Property<string>("Subject")
                         .IsRequired();
-
-                    b.Property<byte[]>("Timestamp")
-                        .IsConcurrencyToken()
-                        .ValueGeneratedOnAddOrUpdate();
 
                     b.Property<string>("Type")
                         .IsRequired();
@@ -233,7 +229,7 @@ namespace Raccord.Data.EntityFramework.Migrations
 
                     b.HasIndex("AuthorizationId");
 
-                    b.HasIndex("Hash")
+                    b.HasIndex("ReferenceId")
                         .IsUnique();
 
                     b.ToTable("OpenIddictTokens");
@@ -466,9 +462,13 @@ namespace Raccord.Data.EntityFramework.Migrations
 
                     b.Property<long>("ProjectID");
 
+                    b.Property<long?>("ScriptUploadID");
+
                     b.HasKey("ID");
 
                     b.HasIndex("ProjectID");
+
+                    b.HasIndex("ScriptUploadID");
 
                     b.ToTable("Character");
                 });
@@ -754,9 +754,13 @@ namespace Raccord.Data.EntityFramework.Migrations
 
                     b.Property<long>("ProjectID");
 
+                    b.Property<long?>("ScriptUploadID");
+
                     b.HasKey("ID");
 
                     b.HasIndex("ProjectID");
+
+                    b.HasIndex("ScriptUploadID");
 
                     b.ToTable("DayNights");
                 });
@@ -772,11 +776,55 @@ namespace Raccord.Data.EntityFramework.Migrations
 
                     b.Property<long>("ProjectID");
 
+                    b.Property<long?>("ScriptUploadID");
+
                     b.HasKey("ID");
 
                     b.HasIndex("ProjectID");
 
+                    b.HasIndex("ScriptUploadID");
+
                     b.ToTable("IntExts");
+                });
+
+            modelBuilder.Entity("Raccord.Domain.Model.Scenes.Actions.SceneAction", b =>
+                {
+                    b.Property<long>("ID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("Order");
+
+                    b.Property<long>("SceneID");
+
+                    b.Property<string>("Text");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("SceneID");
+
+                    b.ToTable("SceneAction");
+                });
+
+            modelBuilder.Entity("Raccord.Domain.Model.Scenes.Dialogues.SceneDialogue", b =>
+                {
+                    b.Property<long>("ID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<long>("CharacterID");
+
+                    b.Property<int>("Order");
+
+                    b.Property<long>("SceneID");
+
+                    b.Property<string>("Text");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("CharacterID");
+
+                    b.HasIndex("SceneID");
+
+                    b.ToTable("SceneDialogue");
                 });
 
             modelBuilder.Entity("Raccord.Domain.Model.Scenes.Scene", b =>
@@ -784,9 +832,9 @@ namespace Raccord.Data.EntityFramework.Migrations
                     b.Property<long>("ID")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<long>("DayNightID");
+                    b.Property<long?>("DayNightID");
 
-                    b.Property<long>("IntExtID");
+                    b.Property<long?>("IntExtID");
 
                     b.Property<string>("Number");
 
@@ -794,7 +842,9 @@ namespace Raccord.Data.EntityFramework.Migrations
 
                     b.Property<long>("ProjectID");
 
-                    b.Property<long>("ScriptLocationID");
+                    b.Property<long?>("ScriptLocationID");
+
+                    b.Property<long?>("ScriptUploadID");
 
                     b.Property<int>("SortingOrder");
 
@@ -811,6 +861,8 @@ namespace Raccord.Data.EntityFramework.Migrations
                     b.HasIndex("ProjectID");
 
                     b.HasIndex("ScriptLocationID");
+
+                    b.HasIndex("ScriptUploadID");
 
                     b.ToTable("Scenes");
                 });
@@ -910,11 +962,35 @@ namespace Raccord.Data.EntityFramework.Migrations
 
                     b.Property<long>("ProjectID");
 
+                    b.Property<long?>("ScriptUploadID");
+
                     b.HasKey("ID");
 
                     b.HasIndex("ProjectID");
 
+                    b.HasIndex("ScriptUploadID");
+
                     b.ToTable("ScriptLocations");
+                });
+
+            modelBuilder.Entity("Raccord.Domain.Model.ScriptUploads.ScriptUpload", b =>
+                {
+                    b.Property<long>("ID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime?>("End");
+
+                    b.Property<string>("FileName");
+
+                    b.Property<long>("ProjectID");
+
+                    b.Property<DateTime>("Start");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("ProjectID");
+
+                    b.ToTable("ScriptUpload");
                 });
 
             modelBuilder.Entity("Raccord.Domain.Model.ShootingDays.Scenes.ShootingDayScene", b =>
@@ -1171,13 +1247,11 @@ namespace Raccord.Data.EntityFramework.Migrations
                 {
                     b.HasOne("OpenIddict.Models.OpenIddictApplication", "Application")
                         .WithMany("Tokens")
-                        .HasForeignKey("ApplicationId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("ApplicationId");
 
                     b.HasOne("OpenIddict.Models.OpenIddictAuthorization", "Authorization")
                         .WithMany("Tokens")
-                        .HasForeignKey("AuthorizationId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("AuthorizationId");
                 });
 
             modelBuilder.Entity("Raccord.Domain.Model.Breakdowns.BreakdownItems.BreakdownItem", b =>
@@ -1287,6 +1361,10 @@ namespace Raccord.Data.EntityFramework.Migrations
                         .WithMany()
                         .HasForeignKey("ProjectID")
                         .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Raccord.Domain.Model.ScriptUploads.ScriptUpload", "ScriptUpload")
+                        .WithMany("Characters")
+                        .HasForeignKey("ScriptUploadID");
                 });
 
             modelBuilder.Entity("Raccord.Domain.Model.Characters.CharacterScene", b =>
@@ -1418,6 +1496,10 @@ namespace Raccord.Data.EntityFramework.Migrations
                         .WithMany()
                         .HasForeignKey("ProjectID")
                         .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Raccord.Domain.Model.ScriptUploads.ScriptUpload", "ScriptUpload")
+                        .WithMany()
+                        .HasForeignKey("ScriptUploadID");
                 });
 
             modelBuilder.Entity("Raccord.Domain.Model.SceneProperties.IntExt", b =>
@@ -1425,6 +1507,31 @@ namespace Raccord.Data.EntityFramework.Migrations
                     b.HasOne("Raccord.Domain.Model.Projects.Project", "Project")
                         .WithMany()
                         .HasForeignKey("ProjectID")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Raccord.Domain.Model.ScriptUploads.ScriptUpload", "ScriptUpload")
+                        .WithMany()
+                        .HasForeignKey("ScriptUploadID");
+                });
+
+            modelBuilder.Entity("Raccord.Domain.Model.Scenes.Actions.SceneAction", b =>
+                {
+                    b.HasOne("Raccord.Domain.Model.Scenes.Scene", "Scene")
+                        .WithMany("Actions")
+                        .HasForeignKey("SceneID")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Raccord.Domain.Model.Scenes.Dialogues.SceneDialogue", b =>
+                {
+                    b.HasOne("Raccord.Domain.Model.Characters.Character", "Character")
+                        .WithMany("Dialogues")
+                        .HasForeignKey("CharacterID")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Raccord.Domain.Model.Scenes.Scene", "Scene")
+                        .WithMany("Dialogues")
+                        .HasForeignKey("SceneID")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
@@ -1446,6 +1553,10 @@ namespace Raccord.Data.EntityFramework.Migrations
                     b.HasOne("Raccord.Domain.Model.ScriptLocations.ScriptLocation", "ScriptLocation")
                         .WithMany("Scenes")
                         .HasForeignKey("ScriptLocationID");
+
+                    b.HasOne("Raccord.Domain.Model.ScriptUploads.ScriptUpload", "ScriptUpload")
+                        .WithMany("Scenes")
+                        .HasForeignKey("ScriptUploadID");
                 });
 
             modelBuilder.Entity("Raccord.Domain.Model.Scheduling.ScheduleCharacter", b =>
@@ -1495,6 +1606,18 @@ namespace Raccord.Data.EntityFramework.Migrations
                 });
 
             modelBuilder.Entity("Raccord.Domain.Model.ScriptLocations.ScriptLocation", b =>
+                {
+                    b.HasOne("Raccord.Domain.Model.Projects.Project", "Project")
+                        .WithMany()
+                        .HasForeignKey("ProjectID")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Raccord.Domain.Model.ScriptUploads.ScriptUpload", "ScriptUpload")
+                        .WithMany("ScriptLocations")
+                        .HasForeignKey("ScriptUploadID");
+                });
+
+            modelBuilder.Entity("Raccord.Domain.Model.ScriptUploads.ScriptUpload", b =>
                 {
                     b.HasOne("Raccord.Domain.Model.Projects.Project", "Project")
                         .WithMany()

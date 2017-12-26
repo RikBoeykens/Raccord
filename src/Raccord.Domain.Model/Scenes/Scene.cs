@@ -10,6 +10,9 @@ using Raccord.Domain.Model.Callsheets.Scenes;
 using Raccord.Domain.Model.Shots;
 using System;
 using Raccord.Domain.Model.ShootingDays.Scenes;
+using Raccord.Domain.Model.ScriptUploads;
+using Raccord.Domain.Model.Scenes.Actions;
+using Raccord.Domain.Model.Scenes.Dialogues;
 
 namespace Raccord.Domain.Model.Scenes
 {
@@ -23,6 +26,8 @@ namespace Raccord.Domain.Model.Scenes
         private ICollection<CallsheetScene> _callsheetScenes;
         private ICollection<Slate> _slates;
         private ICollection<ShootingDayScene> _shootingDayScenes;
+        private ICollection<SceneAction> _actions;
+        private ICollection<SceneDialogue> _dialogues;
 
         // Number of the scene
         public string Number { get; set; }
@@ -46,22 +51,28 @@ namespace Raccord.Domain.Model.Scenes
         public virtual Project Project { get; set; }
 
         // ID of the linked int/ext
-        public long IntExtID { get; set; }
+        public long? IntExtID { get; set; }
 
         // Linked int/ext
         public virtual IntExt IntExt { get; set; }
 
         // ID of the linked day/night
-        public long DayNightID { get; set; }
+        public long? DayNightID { get; set; }
 
         // Linked day/night
         public virtual DayNight DayNight { get; set; }
 
         // ID of the linked day/night
-        public long ScriptLocationID { get; set; }
+        public long? ScriptLocationID { get; set; }
 
         // Linked day/night
         public virtual ScriptLocation ScriptLocation { get; set; }
+
+        // ID of the linked script upload
+        public long? ScriptUploadID { get; set; }
+
+        // Linked script upload
+        public virtual ScriptUpload ScriptUpload { get; set; }
 
         // Linked images
         public virtual ICollection<ImageScene> ImageScenes
@@ -151,6 +162,32 @@ namespace Raccord.Domain.Model.Scenes
             set
             {
                 _shootingDayScenes = value;
+            }
+        }
+
+        // Actions on a scene
+        public virtual ICollection<SceneAction> Actions
+        {
+            get
+            {
+                return _actions ?? (_actions = new List<SceneAction>());
+            }
+            set
+            {
+                _actions = value;
+            }
+        }
+
+        // Dialogues on a scene
+        public virtual ICollection<SceneDialogue> Dialogues
+        {
+            get
+            {
+                return _dialogues ?? (_dialogues = new List<SceneDialogue>());
+            }
+            set
+            {
+                _dialogues = value;
             }
         }
     }

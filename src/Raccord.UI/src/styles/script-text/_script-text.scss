@@ -1,0 +1,34 @@
+@font-face {
+  font-family: 'Courier New';
+  src: url('../assets/fonts/cour.ttf');
+}
+
+$top-bottom-offset: 10px;
+$heading-offset: 20px;
+$script-offset: 40px;
+$dialogue-offset: 200px;
+$character-offset: 300px;
+
+.script-text{
+  font-family: 'Courier New';
+
+  .scene-header{
+    .scene-header-info{
+      margin: $top-bottom-offset 0px $top-bottom-offset $heading-offset;
+    }
+  }
+
+  .scene-action{
+    margin: $top-bottom-offset 0px $top-bottom-offset $script-offset;
+  }
+
+  .scene-dialogue{
+    .character-heading{
+      margin: $top-bottom-offset 0px $top-bottom-offset $character-offset;
+    }
+
+    .dialogue-text{
+      margin: $top-bottom-offset 0px $top-bottom-offset $dialogue-offset;
+    }
+  }
+}

@@ -1,6 +1,6 @@
 <div class="search-container">
     <md-input-container class="search-input-container">
-        <input mdInput placeholder="Int/Ext" id="scene_int_ext" required [(ngModel)]="sceneIntExt.name" #intext="ngModel" name="scene_int_ext"  (keyup)="doSearch()" (blur)="clearSearch()" />
+        <input mdInput placeholder="Int/Ext" id="scene_int_ext" [(ngModel)]="sceneIntExt.name" #intext="ngModel" name="scene_int_ext"  (keyup)="doSearch()" (blur)="clearSearch()" />
     </md-input-container>
     <ul class="autocomplete-content" *ngIf="searchResults.length>0">
         <li (mousedown)="setResult(result)"*ngFor="let result of searchResults">

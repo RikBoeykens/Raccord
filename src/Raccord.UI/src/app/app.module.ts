@@ -45,6 +45,7 @@ import {
   SceneShootingDaysComponent,
   SceneSlatesComponent,
   SceneTimingsComponent,
+  SceneSummaryComponent,
   ChooseSceneDialog
 } from './projects';
 import { ScriptLocationsListComponent } from './projects';
@@ -114,7 +115,13 @@ import {
   ShootingDaySceneListItem,
   EditShootingDaySceneDialog,
   CrewLandingComponent,
-  EditCrewMemberDialog
+  EditCrewMemberDialog,
+  ScriptUploadComponent,
+  ScriptUploadLandingComponent,
+  ScriptTextComponent,
+  SceneHeaderComponent,
+  SceneActionComponent,
+  SceneDialogueComponent
 } from './projects';
 import { ScenePropertiesLandingComponent } from './projects';
 import { SelectEntityComponent } from './shared';
@@ -154,6 +161,7 @@ const COMPONENTS =[
   SceneShootingDaysComponent,
   SceneSlatesComponent,
   SceneTimingsComponent,
+  SceneSummaryComponent,
   ScriptLocationsListComponent,
   EditScriptLocationComponent,
   ScriptLocationLandingComponent,
@@ -214,6 +222,12 @@ const COMPONENTS =[
   ShootingDayReportLandingComponent,
   ShootingDaySceneListItem,
   CrewLandingComponent,
+  ScriptUploadComponent,
+  ScriptUploadLandingComponent,
+  ScriptTextComponent,
+  SceneHeaderComponent,
+  SceneActionComponent,
+  SceneDialogueComponent,
   ScenePropertiesLandingComponent,
   SelectEntityComponent,
   LoginComponent,
@@ -322,7 +336,11 @@ import {
   CrewDepartmentsResolve,
   CrewMemberHttpService,
   CrewMemberResolve,
-  CrewMembersResolve
+  CrewMembersResolve,
+  ScriptUploadHttpService,
+  ScriptUploadResolve,
+  ScriptTextHttpService,
+  ScriptTextResolve
 } from './projects';
 
 import {
@@ -453,7 +471,11 @@ const APP_PROVIDERS = [
   CrewDepartmentsResolve,
   CrewMemberHttpService,
   CrewMemberResolve,
-  CrewMembersResolve
+  CrewMembersResolve,
+  ScriptUploadHttpService,
+  ScriptUploadResolve,
+  ScriptTextHttpService,
+  ScriptTextResolve
 ];
 
 // Directives
