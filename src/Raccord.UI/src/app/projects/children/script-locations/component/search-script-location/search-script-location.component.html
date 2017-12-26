@@ -1,6 +1,6 @@
 <div class="search-container">
     <md-input-container class="search-input-container">
-        <input mdInput placeholder="Loc" id="scene_location" [(ngModel)]="sceneScriptLocation.name" #location="ngModel" name="scene_location"  (keyup)="doSearch()" (blur)="clearSearch()" />
+        <input mdInput placeholder="Loc" id="scene_location" [(ngModel)]="sceneScriptLocation.name" #location="ngModel" name="scene_location"  (keyup)="doSearch()" (blur)="clearSearch()" autocomplete="off" />
     </md-input-container>
     <ul class="autocomplete-content" *ngIf="searchResults.length>0">
         <li (mousedown)="setResult(result)"*ngFor="let result of searchResults">

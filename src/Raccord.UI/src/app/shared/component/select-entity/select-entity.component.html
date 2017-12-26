@@ -1,6 +1,6 @@
 <div class="search-container">
     <md-input-container class="search-input-container">
-        <input mdInput placeholder="Search" id="entity_search" [(ngModel)]="searchText" name="entity_search" (keyup)="doSearch()" (blur)="clearSearch()" />
+        <input mdInput placeholder="Search" id="entity_search" [(ngModel)]="searchText" name="entity_search" (keyup)="doSearch()" (blur)="clearSearch()" autocomplete="off" />
     </md-input-container>
     <div class="search-result-container">
         <div class="search-type-result" *ngFor="let typeResult of searchTypeResults">
