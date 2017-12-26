@@ -19,6 +19,17 @@ export class HeaderHelpers {
         header.append('Authorization', `Bearer ${TokenHelpers.getAcessToken()}`);
         return header;
     }
+
+    public static FormDataHeaders(): Headers{
+        let header = new Headers();
+        return header;
+    }
+
+    public static AuthFormDataHeaders(): Headers{
+        let header = new Headers();
+        header.append('Authorization', `Bearer ${TokenHelpers.getAcessToken()}`);
+        return header;
+    }
  
     // for requesting unsecured data using json
     public static JsonHeaders():Headers {

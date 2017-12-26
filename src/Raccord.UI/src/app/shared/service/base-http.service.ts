@@ -74,9 +74,11 @@ export abstract class BaseHttpService{
         for(var property in object){
             formData.append(property, object[property]);
         }
-        console.log(formData);
-        let headers = useAuthToken ? HeaderHelpers.AuthFormHeaders() : HeaderHelpers.ContentHeaders();
-        let options = new RequestOptions({ headers: headers });
+        
+        let headers = useAuthToken ?
+                        HeaderHelpers.AuthFormDataHeaders() :
+                        HeaderHelpers.FormDataHeaders();
+        let options = new RequestOptions({ headers });
 
         return this._http.post(uri, formData, options)
             .toPromise()

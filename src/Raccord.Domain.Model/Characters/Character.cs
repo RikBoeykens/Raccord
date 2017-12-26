@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using Raccord.Domain.Model.Projects;
 using Raccord.Domain.Model.Images;
+using Raccord.Domain.Model.ScriptUploads;
+using Raccord.Domain.Model.Scenes.Dialogues;
 
 namespace Raccord.Domain.Model.Characters
 {
@@ -9,6 +11,7 @@ namespace Raccord.Domain.Model.Characters
     {
         private ICollection<CharacterScene> _scenes;
         private ICollection<ImageCharacter> _images;
+        private ICollection<SceneDialogue> _dialogues;
 
         // Number for the character
         public int Number { get; set; }
@@ -24,6 +27,12 @@ namespace Raccord.Domain.Model.Characters
 
         // Linked project
         public virtual Project Project { get; set; }
+
+        // ID of the linked script upload
+        public long? ScriptUploadID { get; set; }
+
+        // Linked script upload
+        public virtual ScriptUpload ScriptUpload { get; set; }
 
         // Linked scenes
         public virtual ICollection<CharacterScene> CharacterScenes
@@ -48,6 +57,19 @@ namespace Raccord.Domain.Model.Characters
             set
             {
                 _images = value;
+            }
+        }
+
+        // Linked scene dialogues
+        public virtual ICollection<SceneDialogue> Dialogues
+        {
+            get
+            {
+                return _dialogues ?? (_dialogues = new List<SceneDialogue>());
+            }
+            set
+            {
+                _dialogues = value;
             }
         }
     }

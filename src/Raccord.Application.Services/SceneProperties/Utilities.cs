@@ -12,6 +12,11 @@ namespace Raccord.Application.Services.SceneProperties
     {
         public static FullIntExtDto TranslateFull(this IntExt intExt)
         {
+            if(intExt == null)
+            {
+                return null;
+            }
+
             var dto = new FullIntExtDto
             {
                 ID = intExt.ID,
@@ -25,6 +30,11 @@ namespace Raccord.Application.Services.SceneProperties
         }
         public static IntExtSummaryDto TranslateSummary(this IntExt intExt)
         {
+            if(intExt == null)
+            {
+                return null;
+            }
+            
             var dto = new IntExtSummaryDto
             {
                 ID = intExt.ID,
@@ -38,6 +48,11 @@ namespace Raccord.Application.Services.SceneProperties
         }
         public static IntExtDto Translate(this IntExt intExt)
         {
+            if(intExt == null)
+            {
+                return null;
+            }
+            
             var dto = new IntExtDto
             {
                 ID = intExt.ID,
@@ -51,6 +66,11 @@ namespace Raccord.Application.Services.SceneProperties
 
         public static SearchResultDto TranslateToSearchResult(this IntExt intExt)
         {
+            if(intExt == null)
+            {
+                return null;
+            }
+            
             var dto = new SearchResultDto
             {
                 ID = intExt.ID,
@@ -64,6 +84,11 @@ namespace Raccord.Application.Services.SceneProperties
 
         public static FullDayNightDto TranslateFull(this DayNight dayNight)
         {
+            if(dayNight == null)
+            {
+                return null;
+            }
+            
             var dto = new FullDayNightDto
             {
                 ID = dayNight.ID,
@@ -77,6 +102,11 @@ namespace Raccord.Application.Services.SceneProperties
         }
         public static DayNightSummaryDto TranslateSummary(this DayNight dayNight)
         {
+            if(dayNight == null)
+            {
+                return null;
+            }
+            
             var dto = new DayNightSummaryDto
             {
                 ID = dayNight.ID,
@@ -90,6 +120,11 @@ namespace Raccord.Application.Services.SceneProperties
         }
         public static DayNightDto Translate(this DayNight dayNight)
         {
+            if(dayNight == null)
+            {
+                return null;
+            }
+            
             var dto = new DayNightDto
             {
                 ID = dayNight.ID,
@@ -103,6 +138,11 @@ namespace Raccord.Application.Services.SceneProperties
 
         public static SearchResultDto TranslateToSearchResult(this DayNight dayNight)
         {
+            if(dayNight == null)
+            {
+                return null;
+            }
+            
             var dto = new SearchResultDto
             {
                 ID = dayNight.ID,

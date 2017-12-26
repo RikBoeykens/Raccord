@@ -11,6 +11,11 @@ namespace Raccord.API.ViewModels.ScriptLocations
         // Translates a location dto to a location viewmodel
         public static FullScriptLocationViewModel Translate(this FullScriptLocationDto dto)
         {
+            if(dto == null)
+            {
+                return null;
+            }
+
             return new FullScriptLocationViewModel
             {
                 ID = dto.ID,
@@ -26,6 +31,11 @@ namespace Raccord.API.ViewModels.ScriptLocations
         // Translates a location dto to a location viewmodel
         public static ScriptLocationSummaryViewModel Translate(this ScriptLocationSummaryDto dto)
         {
+            if(dto == null)
+            {
+                return null;
+            }
+
             return new ScriptLocationSummaryViewModel
             {
                 ID = dto.ID,
@@ -40,6 +50,11 @@ namespace Raccord.API.ViewModels.ScriptLocations
         // Translates a location dto to a location viewmodel
         public static ScriptLocationViewModel Translate(this ScriptLocationDto dto)
         {
+            if(dto == null)
+            {
+                return null;
+            }
+
             return new ScriptLocationSummaryViewModel
             {
                 ID = dto.ID,
@@ -52,6 +67,11 @@ namespace Raccord.API.ViewModels.ScriptLocations
         // Translates a location dto to a location viewmodel
         public static LinkedScriptLocationViewModel Translate(this LinkedScriptLocationDto dto)
         {
+            if(dto == null)
+            {
+                return null;
+            }
+
             return new LinkedScriptLocationViewModel
             {
                 ID = dto.ID,
@@ -65,6 +85,11 @@ namespace Raccord.API.ViewModels.ScriptLocations
         // Translates a location viewmodel to a dto
         public static ScriptLocationDto Translate(this ScriptLocationViewModel vm)
         {
+            if(vm == null)
+            {
+                return null;
+            }
+
             return new ScriptLocationDto
             {
                 ID = vm.ID,

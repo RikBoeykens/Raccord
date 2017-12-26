@@ -43,7 +43,9 @@ import {
   ChartLandingComponent,
   ShootingDayReportsListComponent,
   ShootingDayReportLandingComponent,
-  CrewLandingComponent
+  CrewLandingComponent,
+  ScriptUploadComponent,
+  ScriptUploadLandingComponent
 } from './projects';
 import { ScenePropertiesLandingComponent } from './projects';
 import { LoginComponent } from "./security";
@@ -101,7 +103,8 @@ import {
   SlatesResolve,
   TakeResolve,
   TakesResolve,
-  CrewDepartmentsResolve
+  CrewDepartmentsResolve,
+  ScriptUploadResolve
 } from './projects';
 import { 
   AdminProjectsResolve,
@@ -116,6 +119,8 @@ import {
 import { CanDeactivateGuard } from './shared/service/can-deactivate-guard.service';
 import { AuthGuard } from "./security";
 import { ProjectChartsResolve } from './charts/index';
+import { ScriptTextComponent } from './projects/children/script-texts/component/script-text/script-text.component';
+import { ScriptTextResolve } from './projects/children/script-texts/service/script-text-resolve.service';
 
 export const ROUTES: Routes = [
   { path: '',      component: DashboardComponent, canActivate: [AuthGuard] },
@@ -615,6 +620,39 @@ export const ROUTES: Routes = [
                 }
               }
             ]
+          },
+          {
+            path: 'scriptuploads',
+            children:[
+              {
+                path: '',
+                component: ScriptUploadComponent,
+                resolve:{
+                  project: ProjectSummaryResolve
+                }
+              },
+              {
+                path: ':scriptUploadId',
+                component: ScriptUploadLandingComponent,
+                resolve:{
+                  project: ProjectSummaryResolve,
+                  scriptUpload: ScriptUploadResolve
+                }
+              }
+            ],
+          },
+          {
+            path: 'scripttext',
+            children:[
+              {
+                path: '',
+                component: ScriptTextComponent,
+                resolve:{
+                  project: ProjectSummaryResolve,
+                  sceneTexts: ScriptTextResolve
+                }
+              }
+            ],
           },
         ],
       },

@@ -3,6 +3,7 @@ using Raccord.Domain.Model.Projects;
 using Raccord.Domain.Model.Scenes;
 using Raccord.Domain.Model.Images;
 using Raccord.Domain.Model.Locations.LocationSets;
+using Raccord.Domain.Model.ScriptUploads;
 
 namespace Raccord.Domain.Model.ScriptLocations
 {
@@ -24,6 +25,12 @@ namespace Raccord.Domain.Model.ScriptLocations
 
         // Linked project
         public virtual Project Project { get; set; }
+
+        // ID of the linked script upload
+        public long? ScriptUploadID { get; set; }
+
+        // Linked script upload
+        public virtual ScriptUpload ScriptUpload { get; set; }
 
         // Linked scenes
         public virtual ICollection<Scene> Scenes

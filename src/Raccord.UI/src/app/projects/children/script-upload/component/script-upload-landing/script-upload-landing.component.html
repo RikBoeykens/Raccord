@@ -1,0 +1,50 @@
+<md-card>      
+  <a routerLink="/" class="breadcrumb">Dashboard</a>
+  <a routerLink="/projects" class="breadcrumb">Projects</a>
+  <a routerLink="/projects/{{project.id}}" class="breadcrumb">{{project.title}}</a>
+  <span class="breadcrumb">Script Upload</span>
+</md-card>
+<md-card>
+    <md-card-title>Summary</md-card-title>
+    <md-card-content>
+        <b>File name:</b> {{scriptUpload.fileName}} <br />
+        <b>Start:</b> {{scriptUpload.start | date: 'medium'}} <br />
+        <b>End:</b> {{scriptUpload.end | date: 'medium'}}
+    </md-card-content>
+</md-card>
+<md-card>
+  <md-card-title>Scenes ({{scriptUpload.scenes.length}})</md-card-title>
+  <md-card-content>
+    <md-nav-list>
+        <a md-list-item 
+            routerLink="/projects/{{project.id}}/scenes/{{scene.id}}" 
+            *ngFor="let scene of scriptUpload.scenes">
+            <scene-summary [scene]="scene"></scene-summary>
+        </a>
+    </md-nav-list>
+  </md-card-content>
+</md-card>
+<md-card>
+  <md-card-title>Characters ({{scriptUpload.characters.length}})</md-card-title>
+  <md-card-content>
+    <md-nav-list>
+        <a md-list-item 
+            routerLink="/projects/{{project.id}}/characters/{{character.id}}" 
+            *ngFor="let character of scriptUpload.characters">
+            {{character.name}}
+        </a>
+    </md-nav-list>
+  </md-card-content>
+</md-card>
+<md-card>
+  <md-card-title>Script Locations ({{scriptUpload.scriptLocations.length}})</md-card-title>
+  <md-card-content>
+    <md-nav-list>
+        <a md-list-item 
+            routerLink="/projects/{{project.id}}/scriptlocations/{{scriptLocation.id}}" 
+            *ngFor="let scriptLocation of scriptUpload.scriptLocations">
+            {{scriptLocation.name}}
+        </a>
+    </md-nav-list>
+  </md-card-content>
+</md-card>
