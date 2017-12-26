@@ -1,1 +1,4 @@
-<img [attr.md-card-image]="cardImage" [attr.md-list-avatar]="listAvatar" src="{{getImageUrl(image)}}" title="image.title" />
+<span>
+    <md-spinner *ngIf="loadingImage"></md-spinner>
+    <img [attr.md-card-image]="cardImage" [attr.md-list-avatar]="listAvatar" [src]="getImageUrl()" title="image.title" *ngIf="hasImage" />
+</span>

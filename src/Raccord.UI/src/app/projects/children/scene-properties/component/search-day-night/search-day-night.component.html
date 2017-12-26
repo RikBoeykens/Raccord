@@ -1,6 +1,6 @@
 <div class="search-container">
     <md-input-container class="search-input-container">
-        <input mdInput placeholder="Day/Night" id="scene_day_night" required [(ngModel)]="sceneDayNight.name" #daynight="ngModel" name="scene_day_night"  (keyup)="doSearch()" (blur)="clearSearch()" />
+        <input mdInput placeholder="Day/Night" id="scene_day_night" [(ngModel)]="sceneDayNight.name" #daynight="ngModel" name="scene_day_night"  (keyup)="doSearch()" (blur)="clearSearch()" />
     </md-input-container>
     <ul class="autocomplete-content" *ngIf="searchResults.length>0">
         <li (mousedown)="setResult(result)"*ngFor="let result of searchResults">

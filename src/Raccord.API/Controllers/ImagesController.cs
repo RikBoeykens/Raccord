@@ -184,6 +184,34 @@ namespace Raccord.API.Controllers
 
             }
         }
+
+        [HttpGet("{id}/base64")]
+        public Base64ImageViewModel GetAsBase64(long id)
+        {   
+            try
+            {
+                var file = _imageService.GetContent(id);
+
+                if (file.FileContent == null)
+                    return new Base64ImageViewModel
+                    {
+                        HasContent = false
+                    };
+
+                return new Base64ImageViewModel
+                {
+                    Content = Convert.ToBase64String(file.FileContent),
+                    HasContent = true
+                };
+            }
+            catch
+            {
+                return new Base64ImageViewModel
+                {
+                    HasContent = false
+                };
+            }
+        }
         
         // POST api/images/5/setprimary
         [HttpPost("{id}/setprimary")]

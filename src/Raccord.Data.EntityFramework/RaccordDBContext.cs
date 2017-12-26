@@ -31,21 +31,6 @@ namespace Raccord.Data.EntityFramework
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            
-            modelBuilder.Entity<Scene>()
-                        .HasOne(s => s.ScriptLocation)
-                        .WithMany(l => l.Scenes)
-                        .OnDelete(DeleteBehavior.Restrict);
-
-            modelBuilder.Entity<Scene>()
-                        .HasOne(s => s.IntExt)
-                        .WithMany(l => l.Scenes)
-                        .OnDelete(DeleteBehavior.Restrict);
-
-            modelBuilder.Entity<Scene>()
-                        .HasOne(s => s.DayNight)
-                        .WithMany(l => l.Scenes)
-                        .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<CallsheetScene>()
                         .HasOne(cs=> cs.ShootingDayScene)

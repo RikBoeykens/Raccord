@@ -46,6 +46,20 @@ namespace Raccord.Data.EntityFramework.Repositories.Scenes
             return GetSearchQuery(searchText, projectID, userID, isAdmin);
         }
 
+        public IEnumerable<Scene> GetScriptForProject(long projectID)
+        {
+            var query = GetIncludedScript();
+
+            return query.Where(s=> s.ProjectID == projectID).OrderBy(s=> s.SortingOrder);
+        }
+
+        public Scene GetScript(long ID)
+        {
+            var query = GetIncludedScript();
+
+            return query.FirstOrDefault(s=> s.ID == ID);
+        }
+
         private IQueryable<Scene> GetIncludedFull()
         {
             IQueryable<Scene> query = _context.Set<Scene>();
@@ -130,6 +144,20 @@ namespace Raccord.Data.EntityFramework.Repositories.Scenes
                 query = query.Where(s=> s.Project.ProjectUsers.Any(c=> c.UserID == userID));
 
             return query;
+        }
+
+        private IQueryable<Scene> GetIncludedScript()
+        {
+            IQueryable<Scene> query = _context.Set<Scene>();
+
+            return query.Include(s => s.IntExt)
+                         .Include(s => s.ScriptLocation)
+                         .Include(s => s.DayNight)
+                         .Include(s=> s.ImageScenes)
+                         .ThenInclude(i=> i.Image)
+                         .Include(s => s.Actions)
+                         .Include(s=> s.Dialogues)
+                         .ThenInclude(d=> d.Character);
         }
     }
 }

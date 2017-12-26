@@ -11,5 +11,8 @@ namespace Raccord.Data.EntityFramework.Repositories.Scenes
         Scene GetSummary(long ID);
         int SearchCount(string searchText, long? projectID, string userID, bool isAdmin);
         IEnumerable<Scene> Search(string searchText, long? projectID, string userID, bool isAdmin);
+
+        IEnumerable<Scene>GetScriptForProject(long projectID);
+        Scene GetScript(long ID);
     }
 }

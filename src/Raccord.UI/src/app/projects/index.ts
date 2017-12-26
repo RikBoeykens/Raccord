@@ -22,6 +22,7 @@ export {
     SceneShootingDaysComponent,
     SceneSlatesComponent,
     SceneTimingsComponent,
+    SceneSummaryComponent,
     ChooseSceneDialog
 } from './children/scenes';
 export { SceneHttpService } from './children/scenes/service/scene-http.service';
@@ -205,3 +206,19 @@ export{
     CrewLandingComponent,
     EditCrewMemberDialog
 } from './children/crew';
+
+export{
+    ScriptUploadHttpService,
+    ScriptUploadResolve,
+    ScriptUploadComponent,
+    ScriptUploadLandingComponent
+} from './children/script-upload';
+
+export{
+    ScriptTextHttpService,
+    ScriptTextResolve,
+    ScriptTextComponent,
+    SceneHeaderComponent,
+    SceneActionComponent,
+    SceneDialogueComponent
+} from './children/script-texts';
