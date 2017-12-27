@@ -51,6 +51,22 @@ namespace Raccord.API.ViewModels.Locations.Locations
             };
         }
 
+        // Translates a scene dto to a scene viewmodel
+        public static CallsheetLocationViewModel Translate(this CallsheetLocationDto dto)
+        {
+            return new CallsheetLocationViewModel
+            {
+                ID = dto.ID,
+                Name = dto.Name,
+                Description = dto.Description,
+                Address = dto.Address.Translate(),
+                LatLng = dto.LatLng.Translate(),
+                ProjectID = dto.ProjectID,
+                Number = dto.Number,
+                Sets = dto.Sets.Select(s=> s.Translate())
+            };
+        }
+
         // Translates a scene summary viewmodel to a dto
         public static LocationDto Translate(this LocationViewModel vm)
         {

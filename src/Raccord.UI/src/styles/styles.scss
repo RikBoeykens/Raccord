@@ -184,3 +184,14 @@ tfoot.table-summary{
 agm-map {
   height: 300px;
 }
+
+// comma separated list
+.comma-separated:not(:last-of-type):after {
+  content: ",";
+}
+.comma-separated:nth-last-of-type(2):before {
+  content: none;
+}
+.comma-separated:nth-last-of-type(2):after {
+  content: " and ";
+}

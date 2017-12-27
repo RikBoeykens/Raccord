@@ -1,6 +1,7 @@
 using Raccord.Application.Core.Services.Breakdowns.BreakdownTypes;
 using System.Linq;
 using Raccord.API.ViewModels.Breakdowns.BreakdownItems;
+using Raccord.API.ViewModels.Breakdowns.BreakdownItemScenes;
 
 namespace Raccord.API.ViewModels.Breakdowns.BreakdownTypes
 {
@@ -29,6 +30,24 @@ namespace Raccord.API.ViewModels.Breakdowns.BreakdownTypes
                 Description = dto.Description,
                 ProjectID = dto.ProjectID,
                 ItemCount = dto.ItemCount,
+            };
+        }
+
+        // Translates a breakdown type dto to a breakdown type viewmodel
+        public static CallsheetBreakdownTypeViewModel Translate(this CallsheetBreakdownTypeDto dto)
+        {
+            if(dto == null)
+            {
+                return null;
+            }
+            
+            return new CallsheetBreakdownTypeViewModel
+            {
+                ID = dto.ID,
+                Name = dto.Name,
+                Description = dto.Description,
+                ProjectID = dto.ProjectID,
+                Scenes = dto.Scenes.Select(s=> s.Translate()),
             };
         }
 
