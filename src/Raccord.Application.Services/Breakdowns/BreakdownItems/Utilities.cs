@@ -96,5 +96,17 @@ namespace Raccord.Application.Services.Breakdowns.BreakdownItems
 
             return dto;
         }
+
+        public static CallsheetBreakdownItemDto TranslateCallsheet(this BreakdownItem breakdownItem)
+        {
+            var dto = new CallsheetBreakdownItemDto
+            {
+                ID = breakdownItem.ID,
+                Name = breakdownItem.Name,
+                Description = breakdownItem.Description,
+            };
+
+            return dto;
+        }
     }
 }

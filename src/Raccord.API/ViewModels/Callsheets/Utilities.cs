@@ -1,4 +1,5 @@
 using System.Linq;
+using Raccord.API.ViewModels.Breakdowns.BreakdownTypes;
 using Raccord.API.ViewModels.Callsheets.CallsheetScenes;
 using Raccord.API.ViewModels.Callsheets.Characters;
 using Raccord.API.ViewModels.Locations.Locations;
@@ -21,7 +22,8 @@ namespace Raccord.API.ViewModels.Callsheets
                 ShootingDay = dto.ShootingDay.Translate(),
                 Scenes = dto.Scenes.Select(s=> s.Translate()),
                 Characters = dto.Characters.Select(c=> c.Translate()),
-                Locations = dto.Locations.Select(l=> l.Translate())
+                Locations = dto.Locations.Select(l=> l.Translate()),
+                BreakdownTypes = dto.BreakdownTypes.Select(bt=> bt.Translate()),
             };
         }
         public static CallsheetSummaryViewModel Translate(this CallsheetSummaryDto dto)

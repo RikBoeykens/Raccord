@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Raccord.Application.Core.Services.Callsheets;
+using Raccord.Data.EntityFramework.Repositories.Breakdowns.BreakdownTypes;
 using Raccord.Data.EntityFramework.Repositories.Callsheets;
 using Raccord.Data.EntityFramework.Repositories.Callsheets.Scenes;
 using Raccord.Data.EntityFramework.Repositories.Scheduling.ScheduleDays;
@@ -19,13 +20,15 @@ namespace Raccord.Application.Services.Callsheets
         private readonly IShootingDayRepository _shootingDayRepository;
         private readonly IScheduleDayRepository _scheduleDayRepository;
         private readonly ICallsheetSceneCharacterRepository _callsheetSceneCharacterRepository;
+        private readonly IBreakdownTypeRepository _breakdownTypeRepository;
 
         // Initialises a new CharacterService
         public CallsheetService(
             ICallsheetRepository callsheetRepository,
             IShootingDayRepository shootingDayRepository,
             IScheduleDayRepository scheduleDayRepository,
-            ICallsheetSceneCharacterRepository callsheetSceneCharacterRepository
+            ICallsheetSceneCharacterRepository callsheetSceneCharacterRepository,
+            IBreakdownTypeRepository breakdownTypeRepository
             )
         {
             if(callsheetRepository == null)
@@ -36,11 +39,14 @@ namespace Raccord.Application.Services.Callsheets
                 throw new ArgumentNullException(nameof(scheduleDayRepository));
             if(callsheetSceneCharacterRepository == null)
                 throw new ArgumentNullException(nameof(callsheetSceneCharacterRepository));
+            if(breakdownTypeRepository == null)
+                throw new ArgumentNullException(nameof(breakdownTypeRepository));
             
             _callsheetRepository = callsheetRepository;
             _shootingDayRepository = shootingDayRepository;
             _scheduleDayRepository = scheduleDayRepository;
             _callsheetSceneCharacterRepository = callsheetSceneCharacterRepository;
+            _breakdownTypeRepository = breakdownTypeRepository;
         }
 
         // Gets all callsheets for a project
@@ -58,7 +64,9 @@ namespace Raccord.Application.Services.Callsheets
         {
             var callsheet = _callsheetRepository.GetFull(ID);
 
-            var dto = callsheet.TranslateFull();
+            var breakdownTypes = _breakdownTypeRepository.GetAllForProject(callsheet.ProjectID);
+
+            var dto = callsheet.TranslateFull(breakdownTypes);
 
             return dto;
         }

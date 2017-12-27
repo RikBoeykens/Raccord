@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using System.Linq;
+using Raccord.Application.Core.Services.Breakdowns.BreakdownItemScenes;
 using Raccord.Application.Core.Services.Breakdowns.BreakdownTypes;
 using Raccord.Application.Services.Breakdowns.BreakdownItems;
 using Raccord.Domain.Model.Breakdowns.BreakdownTypes;
@@ -43,6 +45,25 @@ namespace Raccord.Application.Services.Breakdowns.BreakdownTypes
                 Name = breakdownType.Name,
                 Description = breakdownType.Description,
                 ProjectID = breakdownType.ProjectID,
+            };
+
+            return dto;
+        }
+
+        public static CallsheetBreakdownTypeDto TranslateCallsheet(this BreakdownType breakdownType, IEnumerable<CallsheetBreakdownItemSceneDto> scenes)
+        {
+            if(breakdownType == null)
+            {
+                return null;
+            }
+
+            var dto = new CallsheetBreakdownTypeDto
+            {
+                ID = breakdownType.ID,
+                Name = breakdownType.Name,
+                Description = breakdownType.Description,
+                ProjectID = breakdownType.ProjectID,
+                Scenes = scenes
             };
 
             return dto;

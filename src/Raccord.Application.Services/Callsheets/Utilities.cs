@@ -1,15 +1,21 @@
 using System.Collections.Generic;
 using System.Linq;
+using Raccord.Application.Core.Services.Breakdowns.BreakdownItemScenes;
+using Raccord.Application.Core.Services.Breakdowns.BreakdownTypes;
 using Raccord.Application.Core.Services.Callsheets;
 using Raccord.Application.Core.Services.Locations.Locations;
 using Raccord.Application.Core.Services.Locations.LocationSets;
 using Raccord.Application.Core.Services.Scenes;
+using Raccord.Application.Services.Breakdowns.BreakdownItems;
+using Raccord.Application.Services.Breakdowns.BreakdownItemScenes;
+using Raccord.Application.Services.Breakdowns.BreakdownTypes;
 using Raccord.Application.Services.Callsheets.CallsheetScenes;
 using Raccord.Application.Services.Callsheets.Characters;
 using Raccord.Application.Services.Locations.Locations;
 using Raccord.Application.Services.Locations.LocationSets;
 using Raccord.Application.Services.Scenes;
 using Raccord.Application.Services.ShootingDays;
+using Raccord.Domain.Model.Breakdowns.BreakdownTypes;
 using Raccord.Domain.Model.Callsheets;
 using Raccord.Domain.Model.Scenes;
 
@@ -18,7 +24,7 @@ namespace Raccord.Application.Services.Callsheets
     // Utilities and helper methods for callsheets
     public static class Utilities
     {
-        public static FullCallsheetDto TranslateFull(this Callsheet callsheet)
+        public static FullCallsheetDto TranslateFull(this Callsheet callsheet, IEnumerable<BreakdownType> breakdownTypes)
         {
             var scenes = callsheet.CallsheetScenes.OrderBy(cs=> cs.SortingOrder);
             var locations = new List<CallsheetLocationDto>();
@@ -52,6 +58,20 @@ namespace Raccord.Application.Services.Callsheets
                 locations.Add(currentLocation.TranslateCallsheet(locationSets, $"{locations.Count() +1}"));
             }
 
+            var breakdownTypeDtos = new List<CallsheetBreakdownTypeDto>();
+            foreach(var breakdownType in breakdownTypes)
+            {
+                var breakdownSceneDtos = new List<CallsheetBreakdownItemSceneDto>();
+                foreach(var scene in scenes)
+                {
+                    var items = scene.Scene.BreakdownItemScenes.Where(bis=> bis.BreakdownItem.BreakdownTypeID == breakdownType.ID).Select(bis=> bis.BreakdownItem.TranslateCallsheet());
+                    if(items.Any())
+                    {
+                        breakdownSceneDtos.Add(scene.TranslateCallsheet(items));
+                    }
+                }
+                breakdownTypeDtos.Add(breakdownType.TranslateCallsheet(breakdownSceneDtos));
+            }
 
             var dto = new FullCallsheetDto
             {
@@ -63,7 +83,8 @@ namespace Raccord.Application.Services.Callsheets
                 ShootingDay = callsheet.ShootingDay.Translate(),
                 Scenes = scenes.Select(cs=> cs.TranslateScene()),
                 Characters = callsheet.CallsheetCharacters.Select(cc=> cc.TranslateCharacter()),
-                Locations = locations
+                Locations = locations,
+                BreakdownTypes = breakdownTypeDtos
             };
 
             return dto;

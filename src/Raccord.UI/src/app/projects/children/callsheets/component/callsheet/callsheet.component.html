@@ -68,9 +68,9 @@
                         </td>
                         <td>
                             <div>{{callsheetScene.scene.intExt.name}}. <a routerLink="/projects/{{project.id}}/scriptlocations/{{callsheetScene.scene.scriptLocation.id}}">{{callsheetScene.scene.scriptLocation.name}}</a></div>
-                            <div><a routerLink="/projects/{{project.id}}/scenes/{{callsheetScene.scene.id}}">{{callsheetScene.scene.summary}}</a></div>
+                            <div>{{callsheetScene.scene.summary}}</div>
                         </td>
-                        <td>{{callsheetScene.scene.number}}</td>
+                        <td><a routerLink="/projects/{{project.id}}/scenes/{{callsheetScene.scene.id}}">{{callsheetScene.scene.number}}</a></td>
                         <td>{{callsheetScene.scene.dayNight.name}}</td>
                         <td>{{callsheetScene.pageLength | pagelength}}</td>
                         <td>
@@ -110,6 +110,20 @@
                     </tr>
                 <tbody>
             </table>
+        </div>
+    </md-card-content>
+</md-card>
+<md-card>
+    <md-card-title>Breakdown</md-card-title>
+    <md-card-content>
+        <div *ngFor="let breakdownType of callsheet.breakdownTypes">
+            <div><b>{{breakdownType.name}}</b></div>
+            <div *ngFor="let breakdownItemScene of breakdownType.scenes">
+                <em>Sc {{breakdownItemScene.sceneNumber}}:</em>
+                <span class="comma-separated" *ngFor="let item of breakdownItemScene.items">
+                    <a routerLink="/projects/{{project.id}}/breakdown/items/{{item.id}}">{{item.name}}</a>
+                </span>
+            </div>
         </div>
     </md-card-content>
 </md-card>
