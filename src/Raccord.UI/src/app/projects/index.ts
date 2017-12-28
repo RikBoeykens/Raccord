@@ -175,7 +175,8 @@ export {
     CallsheetWizardStep1Component,
     CallsheetWizardStep2Component,
     CallsheetWizardStep3Component,
-    CallsheetWizardStep4Component
+    CallsheetWizardStep4Component,
+    ScriptTextCallsheetComponent
  } from "./children/callsheets";
 
  export{
@@ -217,6 +218,8 @@ export{
 export{
     ScriptTextHttpService,
     ScriptTextResolve,
+    ScriptTextCallsheetResolve,
+    ScriptTextLandingComponent,
     ScriptTextComponent,
     SceneHeaderComponent,
     SceneActionComponent,

@@ -38,6 +38,7 @@ import {
   CallsheetWizardStep2Component,
   CallsheetWizardStep3Component,
   CallsheetWizardStep4Component,
+  ScriptTextCallsheetComponent,
   SlatesListComponent,
   SlateLandingComponent,
   ChartLandingComponent,
@@ -45,7 +46,8 @@ import {
   ShootingDayReportLandingComponent,
   CrewLandingComponent,
   ScriptUploadComponent,
-  ScriptUploadLandingComponent
+  ScriptUploadLandingComponent,
+  ScriptTextLandingComponent
 } from './projects';
 import { ScenePropertiesLandingComponent } from './projects';
 import { LoginComponent } from "./security";
@@ -104,7 +106,9 @@ import {
   TakeResolve,
   TakesResolve,
   CrewDepartmentsResolve,
-  ScriptUploadResolve
+  ScriptUploadResolve,
+  ScriptTextResolve,
+  ScriptTextCallsheetResolve
 } from './projects';
 import { 
   AdminProjectsResolve,
@@ -119,8 +123,6 @@ import {
 import { CanDeactivateGuard } from './shared/service/can-deactivate-guard.service';
 import { AuthGuard } from "./security";
 import { ProjectChartsResolve } from './charts/index';
-import { ScriptTextComponent } from './projects/children/script-texts/component/script-text/script-text.component';
-import { ScriptTextResolve } from './projects/children/script-texts/service/script-text-resolve.service';
 
 export const ROUTES: Routes = [
   { path: '',      component: DashboardComponent, canActivate: [AuthGuard] },
@@ -646,10 +648,19 @@ export const ROUTES: Routes = [
             children:[
               {
                 path: '',
-                component: ScriptTextComponent,
+                component: ScriptTextLandingComponent,
                 resolve:{
                   project: ProjectSummaryResolve,
                   sceneTexts: ScriptTextResolve
+                }
+              },
+              {
+                path: ':callsheetId/callsheet',
+                component: ScriptTextCallsheetComponent,
+                resolve:{
+                  project: ProjectSummaryResolve,
+                  callsheet: CallsheetSummaryResolve,
+                  sceneTexts: ScriptTextCallsheetResolve
                 }
               }
             ],

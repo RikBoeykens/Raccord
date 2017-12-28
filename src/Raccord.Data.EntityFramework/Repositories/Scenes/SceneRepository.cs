@@ -53,6 +53,13 @@ namespace Raccord.Data.EntityFramework.Repositories.Scenes
             return query.Where(s=> s.ProjectID == projectID).OrderBy(s=> s.SortingOrder);
         }
 
+        public IEnumerable<Scene> GetScriptForCallsheet(long callsheetID)
+        {
+            var query = GetIncludedScript();
+
+            return query.Where(s=> s.CallsheetScenes.Any(cs=> cs.CallsheetID == callsheetID)).OrderBy(s=> s.SortingOrder);
+        }
+
         public Scene GetScript(long ID)
         {
             var query = GetIncludedScript();
