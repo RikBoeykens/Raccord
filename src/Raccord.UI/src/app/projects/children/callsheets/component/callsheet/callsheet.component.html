@@ -22,8 +22,8 @@
         <div class="row">
             <div class="col s12">
                 <div class="row"
-                    *ngFor="let location of getLocations(); let i = index">
-                    <p><strong>Location {{i + 1}}:</strong> 
+                    *ngFor="let location of callsheet.locations">
+                    <p><strong>Location {{location.number}}:</strong> 
                         <a routerLink="/projects/{{project.id}}/locations/{{location.id}}">{{location.name}}</a>
                     </p>
                     <p>{{location.address.address1}}</p>
@@ -33,6 +33,26 @@
                 </div>
             </div>
         </div>
+        <agm-map *ngIf="markerLocations.length" [fitBounds]="bounds">
+            <agm-marker *ngFor="let marker of markerLocations" 
+                        [latitude]="marker.latLng.latitude" 
+                        [longitude]="marker.latLng.longitude"
+                        [label]="marker.number">
+                <agm-info-window>
+                    <a routerLink="/projects/{{project.id}}/locations/{{marker.id}}">{{marker.name}}</a>
+                </agm-info-window>
+            </agm-marker>
+            <agm-marker *ngFor="let marker of markerLocationSets"
+                        [latitude]="marker.latLng.latitude" 
+                        [longitude]="marker.latLng.longitude">
+                <agm-info-window>
+                    <div><a routerLink="/projects/{{project.id}}/locationsets/{{marker.id}}">{{marker.name}}</a></div>
+                    <div *ngFor="let scene of marker.scenes">
+                        <a routerLink="/projects/{{project.id}}/scenes/{{scene.id}}">Sc. {{scene.number}}</a>
+                    </div>
+                </agm-info-window>
+            </agm-marker>
+        </agm-map>
     </md-card-content>
 </md-card>
 <md-card>
@@ -58,9 +78,9 @@
                         </td>
                         <td>
                             <div>{{callsheetScene.scene.intExt.name}}. <a routerLink="/projects/{{project.id}}/scriptlocations/{{callsheetScene.scene.scriptLocation.id}}">{{callsheetScene.scene.scriptLocation.name}}</a></div>
-                            <div><a routerLink="/projects/{{project.id}}/scenes/{{callsheetScene.scene.id}}">{{callsheetScene.scene.summary}}</a></div>
+                            <div>{{callsheetScene.scene.summary}}</div>
                         </td>
-                        <td>{{callsheetScene.scene.number}}</td>
+                        <td><a routerLink="/projects/{{project.id}}/scenes/{{callsheetScene.scene.id}}">{{callsheetScene.scene.number}}</a></td>
                         <td>{{callsheetScene.scene.dayNight.name}}</td>
                         <td>{{callsheetScene.pageLength | pagelength}}</td>
                         <td>
@@ -102,4 +122,23 @@
             </table>
         </div>
     </md-card-content>
+</md-card>
+<md-card>
+    <md-card-title>Breakdown</md-card-title>
+    <md-card-content>
+        <div *ngFor="let breakdownType of callsheet.breakdownTypes">
+            <div><b>{{breakdownType.name}}</b></div>
+            <div *ngFor="let breakdownItemScene of breakdownType.scenes">
+                <em>Sc {{breakdownItemScene.sceneNumber}}:</em>
+                <span class="comma-separated" *ngFor="let item of breakdownItemScene.items">
+                    <a routerLink="/projects/{{project.id}}/breakdown/items/{{item.id}}">{{item.name}}</a>
+                </span>
+            </div>
+        </div>
+    </md-card-content>
+</md-card>
+<md-card>
+    <md-card-title>
+        <a routerLink="/projects/{{project.id}}/scripttext/{{callsheet.id}}/callsheet">Sides</a>
+    </md-card-title>
 </md-card>

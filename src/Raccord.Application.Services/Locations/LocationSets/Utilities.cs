@@ -12,6 +12,8 @@ using Raccord.Domain.Model.Locations.LocationSets;
 using Raccord.Application.Services.Common.Locations;
 using Raccord.Application.Services.ScriptLocations;
 using Raccord.Application.Services.Scheduling.ScheduleDays;
+using System.Collections.Generic;
+using Raccord.Domain.Model.Scenes;
 
 namespace Raccord.Application.Services.Locations.LocationSets
 {
@@ -84,6 +86,20 @@ namespace Raccord.Application.Services.Locations.LocationSets
                 LatLng = LocationUtilities.TranslateLatLng(location.Latitude, location.Longitude),
                 Location = location.Location.TranslateSummary(),
                 ScriptLocation = location.ScriptLocation.TranslateSummary(),
+            };
+
+            return dto;
+        }
+        public static CallsheetLocationSetDto TranslateCallsheet(this LocationSet location, IEnumerable<Scene> scenes)
+        {
+            var dto = new CallsheetLocationSetDto
+            {
+                ID = location.ID,
+                Name = location.Name,
+                Description = location.Description,
+                LatLng = LocationUtilities.TranslateLatLng(location.Latitude, location.Longitude),
+                ScriptLocation = location.ScriptLocation.TranslateSummary(),
+                Scenes = scenes.Select(s=> s.TranslateSummary()).ToList()
             };
 
             return dto;

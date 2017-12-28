@@ -58,7 +58,7 @@ namespace Raccord.API.Controllers
                     data = uploadScriptID
                 };
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 response = new JsonResponse
                 {

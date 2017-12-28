@@ -1,6 +1,7 @@
 using System.Linq;
 using Raccord.API.ViewModels.Common.Location;
 using Raccord.API.ViewModels.Locations.Locations;
+using Raccord.API.ViewModels.Scenes;
 using Raccord.API.ViewModels.Scheduling.ScheduleDays;
 using Raccord.API.ViewModels.ScriptLocations;
 using Raccord.Application.Core.Services.Locations.LocationSets;
@@ -87,6 +88,19 @@ namespace Raccord.API.ViewModels.Locations.LocationSets
                 Location = dto.Location.Translate(),
                 ScriptLocation = dto.ScriptLocation.Translate(),
                 LinkID = dto.LinkID,
+            };
+        }
+        // Translates a scene dto to a scene viewmodel
+        public static CallsheetLocationSetViewModel Translate(this CallsheetLocationSetDto dto)
+        {
+            return new CallsheetLocationSetViewModel
+            {
+                ID = dto.ID,
+                Name = dto.Name,
+                Description = dto.Description,
+                LatLng = dto.LatLng.Translate(),
+                ScriptLocation = dto.ScriptLocation.Translate(),
+                Scenes = dto.Scenes.Select(s=> s.Translate()),
             };
         }
 

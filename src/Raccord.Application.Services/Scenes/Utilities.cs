@@ -178,6 +178,10 @@ namespace Raccord.Application.Services.Scenes
 
         public static string GetDisplaySummary(this Scene scene)
         {
+            if(!scene.IntExtID.HasValue || !scene.ScriptLocationID.HasValue || !scene.DayNightID.HasValue)
+            {
+                return $"{scene.Number}. {scene.Summary}";
+            }
             return $"{scene.Number}. {scene.IntExt.Name} {scene.ScriptLocation.Name} {scene.DayNight.Name} - {scene.Summary}";
         }
     }

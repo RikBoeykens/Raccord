@@ -49,6 +49,17 @@ namespace Raccord.API.ViewModels.Breakdowns.BreakdownItems
         }
 
         // Translates a breakdown item dto to a breakdown item viewmodel
+        public static CallsheetBreakdownItemViewModel Translate(this CallsheetBreakdownItemDto dto)
+        {
+            return new CallsheetBreakdownItemViewModel
+            {
+                ID = dto.ID,
+                Name = dto.Name,
+                Description = dto.Description,
+            };
+        }
+
+        // Translates a breakdown item dto to a breakdown item viewmodel
         public static LinkedBreakdownItemViewModel Translate(this LinkedBreakdownItemDto dto)
         {
             return new LinkedBreakdownItemViewModel

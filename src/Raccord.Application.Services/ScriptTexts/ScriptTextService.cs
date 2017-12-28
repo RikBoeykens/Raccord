@@ -22,6 +22,13 @@ namespace Raccord.Application.Services.ScriptTexts
       return scenes.Select(s=> s.TranslateScript());
     }
 
+    public IEnumerable<SceneTextDto> GetForCallsheet(long callsheetID)
+    {
+      var scenes = _sceneRepository.GetScriptForCallsheet(callsheetID);
+
+      return scenes.Select(s=> s.TranslateScript());
+    }
+
     public SceneTextDto GetForScene(long sceneID)
     {
       var scene = _sceneRepository.GetScript(sceneID);

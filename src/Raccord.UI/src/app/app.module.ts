@@ -105,6 +105,7 @@ import {
   CallsheetWizardStep2Component,
   CallsheetWizardStep3Component,
   CallsheetWizardStep4Component,
+  ScriptTextCallsheetComponent,
   SlatesListComponent,
   SlateLandingComponent,
   SlateImagesComponent,
@@ -118,6 +119,7 @@ import {
   EditCrewMemberDialog,
   ScriptUploadComponent,
   ScriptUploadLandingComponent,
+  ScriptTextLandingComponent,
   ScriptTextComponent,
   SceneHeaderComponent,
   SceneActionComponent,
@@ -214,6 +216,7 @@ const COMPONENTS =[
   CallsheetWizardStep2Component,
   CallsheetWizardStep3Component,
   CallsheetWizardStep4Component,
+  ScriptTextCallsheetComponent,
   SlatesListComponent,
   SlateLandingComponent,
   SlateImagesComponent,
@@ -224,6 +227,7 @@ const COMPONENTS =[
   CrewLandingComponent,
   ScriptUploadComponent,
   ScriptUploadLandingComponent,
+  ScriptTextLandingComponent,
   ScriptTextComponent,
   SceneHeaderComponent,
   SceneActionComponent,
@@ -340,7 +344,8 @@ import {
   ScriptUploadHttpService,
   ScriptUploadResolve,
   ScriptTextHttpService,
-  ScriptTextResolve
+  ScriptTextResolve,
+  ScriptTextCallsheetResolve
 } from './projects';
 
 import {
@@ -475,7 +480,8 @@ const APP_PROVIDERS = [
   ScriptUploadHttpService,
   ScriptUploadResolve,
   ScriptTextHttpService,
-  ScriptTextResolve
+  ScriptTextResolve,
+  ScriptTextCallsheetResolve
 ];
 
 // Directives
@@ -505,7 +511,6 @@ import { AgmCoreModule } from '@agm/core';
 
 import '../styles/styles.scss';
 import '../styles/headings.css';
-
 
 
 /**
