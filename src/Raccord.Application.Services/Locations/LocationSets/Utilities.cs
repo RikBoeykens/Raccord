@@ -99,7 +99,7 @@ namespace Raccord.Application.Services.Locations.LocationSets
                 Description = location.Description,
                 LatLng = LocationUtilities.TranslateLatLng(location.Latitude, location.Longitude),
                 ScriptLocation = location.ScriptLocation.TranslateSummary(),
-                Scenes = scenes.Select(s=> s.TranslateSummary())
+                Scenes = scenes.Select(s=> s.TranslateSummary()).ToList()
             };
 
             return dto;
