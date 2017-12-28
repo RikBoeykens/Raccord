@@ -49,12 +49,13 @@ namespace Raccord.Application.Services.Callsheets
 
                         if(currentLocation.ID != currentLocationSet.LocationID)
                         {
+                            locationSets.Add(currentLocationSet.TranslateCallsheet(locationScenes));
                             locations.Add(currentLocation.TranslateCallsheet(locationSets, $"{locations.Count() +1}"));
                             currentLocation = currentLocationSet.Location;
                         }
                     }
                 }
-                
+                locationSets.Add(currentLocationSet.TranslateCallsheet(locationScenes));
                 locations.Add(currentLocation.TranslateCallsheet(locationSets, $"{locations.Count() +1}"));
             }
 
