@@ -32,6 +32,18 @@ namespace Raccord.API.Controllers
 
             return vms;
         }
+
+        // GET: api/scripttexts/1/callsheet
+        [HttpGet("{id}/callsheet")]
+        public IEnumerable<SceneTextViewModel> GetAllForCallsheet(long id)
+        {
+            var dtos = _scriptTextService.GetForCallsheet(id);
+
+            var vms = dtos.Select(p => p.Translate());
+
+            return vms;
+        }
+
         // GET api/scripttexts/5
         [HttpGet("{id}")]
         public SceneTextViewModel Get(long id)
