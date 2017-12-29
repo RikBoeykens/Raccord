@@ -56,7 +56,9 @@ namespace Raccord.Application.Services.Users
                 UserName = dto.Email,
                 Email = dto.Email,
                 EmailConfirmed = true,
-                PreferredEmail = dto.Email
+                PreferredEmail = dto.Email,
+                FirstName = dto.FirstName,
+                LastName = dto.LastName
             };
             var result = await _userManager.CreateAsync(user, dto.Password);
 
@@ -67,6 +69,9 @@ namespace Raccord.Application.Services.Users
         {
             var user = _userRepository.Get(dto.ID);
             
+            user.FirstName = dto.FirstName;
+            user.LastName = dto.LastName;
+
             await _userManager.UpdateAsync(user);
 
             return user.Id;

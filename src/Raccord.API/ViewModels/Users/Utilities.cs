@@ -11,6 +11,8 @@ namespace Raccord.API.ViewModels.Users
             {
                 ID = vm.ID,
                 Email = vm.Email,
+                FirstName = vm.FirstName,
+                LastName = vm.LastName,
                 Password = vm.Password
             };
         }
@@ -21,6 +23,8 @@ namespace Raccord.API.ViewModels.Users
             {
                 ID = dto.ID,
                 Email = dto.Email,
+                FirstName = dto.FirstName,
+                LastName = dto.LastName,
             };
         }
 
@@ -30,6 +34,8 @@ namespace Raccord.API.ViewModels.Users
             {
                 ID = dto.ID,
                 Email = dto.Email,
+                FirstName = dto.FirstName,
+                LastName = dto.LastName
             };
         }
 
@@ -39,6 +45,8 @@ namespace Raccord.API.ViewModels.Users
             {
                 ID = dto.ID,
                 Email = dto.Email,
+                FirstName = dto.FirstName,
+                LastName = dto.LastName
             };
         }
 
@@ -48,6 +56,8 @@ namespace Raccord.API.ViewModels.Users
             {
                 ID = vm.ID,
                 Email = vm.Email,
+                FirstName = vm.FirstName,
+                LastName = vm.LastName
             };
         }
     }

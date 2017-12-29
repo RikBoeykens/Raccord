@@ -8,5 +8,17 @@ namespace Raccord.Application.Core.Services.Users
 
         // Email of the user
         public string Email { get; set; }
+
+        /// <summary>
+        /// First name of the user
+        /// </summary>
+        /// <returns></returns>
+        public string FirstName { get; set; }
+
+        /// <summary>
+        /// Last name of the user
+        /// </summary>
+        /// <returns></returns>
+        public string LastName { get; set; }
     }
 }

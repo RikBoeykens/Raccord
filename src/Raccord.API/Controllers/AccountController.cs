@@ -25,6 +25,8 @@ namespace Raccord.API.Controllers
             {
                 Email = user.Email,
                 IsAdmin = isAdmin,
+                FirstName = user.FirstName,
+                LastName = user.LastName
             };
 
             return vm;
