@@ -60,6 +60,9 @@ import {
   AdminAddUserComponent,
   AdminUserLandingComponent
 } from "./admin";
+import{
+  UserProfileLandingComponent
+} from './profile';
 
 import { ProjectResolve } from './projects';
 import { ProjectSummaryResolve } from './projects';
@@ -123,6 +126,7 @@ import {
 import { CanDeactivateGuard } from './shared/service/can-deactivate-guard.service';
 import { AuthGuard } from "./security";
 import { ProjectChartsResolve } from './charts/index';
+import { UserProfileResolve } from './profile';
 
 export const ROUTES: Routes = [
   { path: '',      component: DashboardComponent, canActivate: [AuthGuard] },
@@ -668,6 +672,19 @@ export const ROUTES: Routes = [
         ],
       },
     ],
+  },
+  {
+    path: 'profile',
+    canActivate: [AuthGuard],
+    children: [
+      {
+        path: '',
+        component: UserProfileLandingComponent,
+        resolve:{
+          userProfile: UserProfileResolve
+        }
+      }
+    ]
   },
   { path: '**',    component: NoContentComponent },
 ];

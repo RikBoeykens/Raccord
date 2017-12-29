@@ -141,6 +141,10 @@ import {
 import{
   RaccordChartComponent
 } from "./charts";
+import {
+  UserProfileLandingComponent,
+  EditUserProfileDialog
+} from './profile';
 
 const COMPONENTS =[
   AppComponent,
@@ -244,13 +248,15 @@ const COMPONENTS =[
   AdminAddUserComponent,
   AdminUserLandingComponent,
   RaccordChartComponent,
+  UserProfileLandingComponent
 ];
 
 const ENTRY_COMPONENTS = [
   ChooseSceneDialog,
   ChooseShootingDayDialog,
   EditShootingDaySceneDialog,
-  EditCrewMemberDialog
+  EditCrewMemberDialog,
+  EditUserProfileDialog
 ];
 
 // Services
@@ -376,6 +382,11 @@ import {
   ProjectChartsResolve
 } from "./charts";
 
+import {
+  UserProfileHttpService,
+  UserProfileResolve
+} from './profile';
+
 const APP_PROVIDERS = [
   LoadingService,
   CanDeactivateGuard,
@@ -481,7 +492,9 @@ const APP_PROVIDERS = [
   ScriptUploadResolve,
   ScriptTextHttpService,
   ScriptTextResolve,
-  ScriptTextCallsheetResolve
+  ScriptTextCallsheetResolve,
+  UserProfileHttpService,
+  UserProfileResolve
 ];
 
 // Directives

@@ -6,6 +6,10 @@ export class AccountHelpers {
     sessionStorage.setItem('user_is_admin', userSummary.isAdmin.toString());
   }
 
+  public static setName(firstName: string, lastName: string) {
+    sessionStorage.setItem('user_name', `${firstName} ${lastName}`);
+  }
+
   public static getName(): string {
     return sessionStorage.getItem('user_name');
   }
