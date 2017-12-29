@@ -11,12 +11,16 @@
     <table class="col s12">
         <thead>
             <tr>
+                <th>Name</th>
                 <th>Email</th>
                 <th></th>
             </tr>
         </thead>
         <tbody>
             <tr *ngFor="let projectUser of projectUsers">
+                <td>
+                    {{projectUser.user.firstName}} {{projectUser.user.lastName}}
+                </td>
                 <td>
                     {{projectUser.user.email}}
                 </td>
