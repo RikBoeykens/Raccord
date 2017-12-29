@@ -116,6 +116,8 @@ using Raccord.Data.EntityFramework.Repositories.Scenes.Dialogues;
 using Raccord.Data.EntityFramework.Repositories.Scenes.Actions;
 using Raccord.Application.Core.Services.ScriptTexts;
 using Raccord.Application.Services.ScriptTexts;
+using Raccord.Application.Core.Services.Profile;
+using Raccord.Application.Services.Profile;
 
 namespace Raccord.API
 {
@@ -266,6 +268,8 @@ namespace Raccord.API
             services.AddTransient<ISceneDialogueRepository, SceneDialogueRepository>();
 
             services.AddTransient<IScriptTextService, ScriptTextService>();
+
+            services.AddTransient<IUserProfileService, UserProfileService>();
         }
     }
 }
