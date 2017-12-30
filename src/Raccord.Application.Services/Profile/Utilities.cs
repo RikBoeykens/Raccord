@@ -18,7 +18,8 @@ namespace Raccord.Application.Services.Profile
         FirstName = user.FirstName,
         LastName = user.LastName,
         Telephone = user.Telephone,
-        PreferredEmail = user.PreferredEmail
+        PreferredEmail = user.PreferredEmail,
+        HasImage = user.ImageContent != null
       };
     }
   }

@@ -1,6 +1,7 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Raccord.Application.Core.Services.Profile;
+using Raccord.Application.Services.Images;
 using Raccord.Data.EntityFramework.Repositories.Users;
 using Raccord.Domain.Model.Users;
 
@@ -38,6 +39,35 @@ namespace Raccord.Application.Services.Profile
       await _userManager.UpdateAsync(user);
 
       return user.Translate();
+    }
+
+    public ProfileImageContentDto GetProfileImage(string ID)
+    {
+      var user = _userRepository.Get(ID);
+      return new ProfileImageContentDto
+      {
+        FileContent = user.ImageContent
+      };
+    }
+
+    public async Task AddProfileImage(AddProfileImageDto dto)
+    {
+      var user = _userRepository.Get(dto.ID);
+      using(var imageContent = dto.FileContent)
+      {
+        user.ImageContent = imageContent.GetBytes();
+
+        await _userManager.UpdateAsync(user);
+      }
+    }
+
+    public async Task RemoveProfileImage(string ID)
+    {
+      var user = _userRepository.Get(ID);
+      
+      user.ImageContent = null;
+
+      await _userManager.UpdateAsync(user);
     }
   }
 }

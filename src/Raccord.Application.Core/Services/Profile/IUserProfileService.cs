@@ -6,5 +6,8 @@ namespace Raccord.Application.Core.Services.Profile
   {
     UserProfileDto GetProfile(string ID);
     Task<UserProfileDto> UpdateProfile(UserProfileDto dto);
+    ProfileImageContentDto GetProfileImage(string ID);
+    Task AddProfileImage(AddProfileImageDto dto);
+    Task RemoveProfileImage(string ID);
   }
 }

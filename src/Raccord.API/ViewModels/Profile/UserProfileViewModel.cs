@@ -25,5 +25,11 @@ namespace Raccord.API.ViewModels.Profile
     /// </summary>
     /// <returns></returns>
     public string PreferredEmail { get; set; }
+
+    /// <summary>
+    /// Indicates if the user has an image
+    /// </summary>
+    /// <returns></returns>
+    public bool HasImage { get; set; }
   }
 }

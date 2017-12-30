@@ -16,7 +16,8 @@ namespace Raccord.API.ViewModels.Profile
         FirstName = dto.FirstName,
         LastName = dto.LastName,
         Telephone = dto.Telephone,
-        PreferredEmail = dto.PreferredEmail
+        PreferredEmail = dto.PreferredEmail,
+        HasImage = dto.HasImage
       };
     }
 
@@ -33,7 +34,8 @@ namespace Raccord.API.ViewModels.Profile
         FirstName = vm.FirstName,
         LastName = vm.LastName,
         Telephone = vm.Telephone,
-        PreferredEmail = vm.PreferredEmail
+        PreferredEmail = vm.PreferredEmail,
+        HasImage = vm.HasImage
       };
     }
   }
