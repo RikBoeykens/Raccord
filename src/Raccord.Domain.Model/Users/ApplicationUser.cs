@@ -37,6 +37,8 @@ namespace Raccord.Domain.Model.Users
         /// <returns></returns>
         public byte[] ImageContent { get; set; }
 
+        public string ImageName { get; set; }
+
         // Projects associated with the user
         public virtual ICollection<ProjectUser> ProjectUsers
         {

@@ -11,6 +11,12 @@ namespace Raccord.Application.Core.Services.Profile
     public string ID { get; set; }
 
     /// <summary>
+    /// Filename
+    /// </summary>
+    /// <returns></returns>
+    public string FileName { get; set; }
+
+    /// <summary>
     /// Contents of the image
     /// </summary>
     /// <returns></returns>

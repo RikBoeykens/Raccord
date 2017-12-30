@@ -13,6 +13,7 @@ namespace Raccord.API.ViewModels.Profile
 
       return new UserProfileViewModel
       {
+        ID = dto.ID,
         FirstName = dto.FirstName,
         LastName = dto.LastName,
         Telephone = dto.Telephone,
@@ -21,7 +22,7 @@ namespace Raccord.API.ViewModels.Profile
       };
     }
 
-    public static UserProfileDto Translate(this UserProfileViewModel vm, string ID)
+    public static UserProfileDto Translate(this UserProfileViewModel vm)
     {
       if(vm == null)
       {
@@ -30,7 +31,7 @@ namespace Raccord.API.ViewModels.Profile
 
       return new UserProfileDto
       {
-        ID = ID,
+        ID = vm.ID,
         FirstName = vm.FirstName,
         LastName = vm.LastName,
         Telephone = vm.Telephone,

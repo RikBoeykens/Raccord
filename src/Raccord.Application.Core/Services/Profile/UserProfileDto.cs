@@ -1,25 +1,7 @@
 namespace Raccord.Application.Core.Services.Profile
 {
-  public class UserProfileDto
+  public class UserProfileDto : UserProfileSummaryDto
   {
-    /// <summary>
-    /// ID of the user
-    /// </summary>
-    /// <returns></returns>
-    public string ID { get; set; }
-
-    /// <summary>
-    /// First name of the user
-    /// </summary>
-    /// <returns></returns>
-    public string FirstName { get; set; }
-
-    /// <summary>
-    /// Last name of the user
-    /// </summary>
-    /// <returns></returns>
-    public string LastName { get; set; }
-
     /// <summary>
     /// Telephone number for the user
     /// </summary>
@@ -31,11 +13,5 @@ namespace Raccord.Application.Core.Services.Profile
     /// </summary>
     /// <returns></returns>
     public string PreferredEmail { get; set; }
-
-    /// <summary>
-    /// Indicates if the user has an image
-    /// </summary>
-    /// <returns></returns>
-    public bool HasImage { get; set; }
   }
 }

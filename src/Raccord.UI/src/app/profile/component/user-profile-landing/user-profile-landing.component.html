@@ -5,3 +5,17 @@
   <div><b>Preferred email: </b> {{userProfile.preferredEmail}}</div>
   <button md-button (click)="updateProfile()"><md-icon>edit</md-icon></button>
 </md-card>
+<md-card>
+  <md-card-title>Profile Image</md-card-title>
+  <md-card-content>
+    <div>
+        <input type="file"
+          (change)="uploadImage($event)"
+          multiple />
+    </div>
+    <div *ngIf="userProfile.hasImage">
+        <show-profile-image [user]="userProfile"></show-profile-image>
+        <button md-button (click)="removeImage()"><md-icon>delete</md-icon></button>
+    </div>
+  </md-card-content>
+</md-card>

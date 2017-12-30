@@ -3,6 +3,7 @@ import { BaseHttpService } from "../../shared/service/base-http.service";
 import { Http } from "@angular/http";
 import { AppSettings } from "../../app.settings";
 import { UserProfile } from "../model/user-profile.model";
+import { Base64Image } from "../../shared/model/base-64-image.model";
 
 @Injectable()
 export class UserProfileHttpService extends BaseHttpService {
@@ -23,5 +24,24 @@ export class UserProfileHttpService extends BaseHttpService {
     let uri = this._baseUri;
 
     return this.doPost(profile, uri);
+  }
+
+  public uploadImage(files: File[]) {
+    let uri = `${this._baseUri}/image`;
+
+    return this.doFilePost(files, null, uri);
+  }
+
+  public removeImage() {
+    let uri = `${this._baseUri}/image`;
+
+    return this.doDelete(uri);
+  }
+
+  getBase64(userId: string): Promise<Base64Image> {
+
+    let uri = `${this._baseUri}/image/${userId}/base64`;
+
+    return this.doGet(uri);
   }
 }

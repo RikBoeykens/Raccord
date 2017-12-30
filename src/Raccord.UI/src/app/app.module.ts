@@ -143,7 +143,8 @@ import{
 } from "./charts";
 import {
   UserProfileLandingComponent,
-  EditUserProfileDialog
+  EditUserProfileDialog,
+  ShowProfileImageComponent
 } from './profile';
 
 const COMPONENTS =[
@@ -248,7 +249,8 @@ const COMPONENTS =[
   AdminAddUserComponent,
   AdminUserLandingComponent,
   RaccordChartComponent,
-  UserProfileLandingComponent
+  UserProfileLandingComponent,
+  ShowProfileImageComponent
 ];
 
 const ENTRY_COMPONENTS = [

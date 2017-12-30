@@ -44,6 +44,38 @@ export class UserProfileLandingComponent {
     });
   }
 
+  uploadImage(fileInput: any){
+    let loadingId = this._loadingService.startLoading();
+
+    let files = <Array<File>>fileInput.target.files;
+
+    this._userProfileHttpService.uploadImage(files).then(data=>{
+        if (typeof(data) === 'string') {
+            this._dialogService.error(data);
+        }else {
+            this.userProfile.hasImage = true;
+            fileInput.target.value = "";
+        }
+    }).catch()
+    .then(()=>
+        this._loadingService.endLoading(loadingId)
+    );
+  }
+
+  removeImage() {
+    let loadingId = this._loadingService.startLoading();
+    this._userProfileHttpService.removeImage().then((data) => {
+        if (typeof(data) === 'string') {
+            this._dialogService.error(data);
+        }else{
+          this.userProfile.hasImage = false;
+        }
+    }).catch()
+    .then(() =>
+        this._loadingService.endLoading(loadingId)
+    );
+  }
+
   private postUserProfile(userProfile: UserProfile) {
       let loadingId = this._loadingService.startLoading();
       this._userProfileHttpService.post(userProfile).then((data) => {

@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Net.Http.Headers;
+using Raccord.API.ViewModels.Common.Images;
 using Raccord.API.ViewModels.Core;
 using Raccord.API.ViewModels.Images;
 using Raccord.API.ViewModels.Profile;
@@ -44,9 +46,9 @@ namespace Raccord.API.Controllers
 
         try
         {
-            var dto = vm.Translate(GetUserId());
+            var dto = vm.Translate();
 
-            var updatedDto = await _userProfileService.UpdateProfile(dto);
+            var updatedDto = await _userProfileService.UpdateProfile(dto, GetUserId());
 
             response = new JsonResponse
             {
@@ -66,22 +68,25 @@ namespace Raccord.API.Controllers
         return new JsonResult(response);
     }
 
-    // GET api/userprofile/image/base64
-    [HttpGet("image/base64")]
-    public Base64ImageViewModel GetAsBase64([FromQuery]string userId = null)
+    // GET api/userprofile/image/abc-user-id/base64
+    [HttpGet("image/{userId}/base64")]
+    public Base64ImageViewModel GetAsBase64([FromRoute]string userId)
     {   
         try
         {
-            var file = _userProfileService.GetProfileImage(userId ?? GetUserId());
+            var file = _userProfileService.GetProfileImage(userId);
 
             if (file.FileContent == null)
+            {
                 return new Base64ImageViewModel
                 {
                     HasContent = false
                 };
+            }
 
             return new Base64ImageViewModel
             {
+                FileName = file.FileName,
                 Content = Convert.ToBase64String(file.FileContent),
                 HasContent = true
             };
@@ -109,6 +114,7 @@ namespace Raccord.API.Controllers
             _userProfileService.AddProfileImage(new AddProfileImageDto
             {
                 ID = GetUserId(),
+                FileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"'),
                 FileContent = file.OpenReadStream()
             });
 
