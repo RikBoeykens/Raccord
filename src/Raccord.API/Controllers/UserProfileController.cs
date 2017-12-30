@@ -40,7 +40,7 @@ namespace Raccord.API.Controllers
 
     // POST api/userprofile
     [HttpPost]
-    public async Task<JsonResult> Post([FromBody]UserProfileViewModel vm)
+    public JsonResult Post([FromBody]UserProfileViewModel vm)
     {
         var response = new JsonResponse();
 
@@ -48,7 +48,7 @@ namespace Raccord.API.Controllers
         {
             var dto = vm.Translate();
 
-            var updatedDto = await _userProfileService.UpdateProfile(dto, GetUserId());
+            var updatedDto = _userProfileService.UpdateProfile(dto, GetUserId());
 
             response = new JsonResponse
             {
@@ -56,7 +56,7 @@ namespace Raccord.API.Controllers
                 data = updatedDto,
             };
         }
-        catch (Exception)
+        catch
         {
             response = new JsonResponse
             {

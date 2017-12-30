@@ -1,5 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Raccord.Domain.Model.Users;
 
 namespace Raccord.Data.EntityFramework.Repositories.Users
@@ -39,6 +41,17 @@ namespace Raccord.Data.EntityFramework.Repositories.Users
             var query = GetIncludedSummary();
 
             return query;
+        }
+
+        public virtual void Edit(ApplicationUser user)
+        {
+            EntityEntry dbEntityEntry = _context.Entry<ApplicationUser>(user);
+            dbEntityEntry.State = EntityState.Modified;
+        }
+        
+        public virtual void Commit()
+        {
+            _context.SaveChanges();
         }
 
         private IQueryable<ApplicationUser> GetIncluded()

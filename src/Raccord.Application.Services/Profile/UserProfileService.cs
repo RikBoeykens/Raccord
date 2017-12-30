@@ -27,7 +27,7 @@ namespace Raccord.Application.Services.Profile
       return user.Translate();
     }
 
-    public async Task<UserProfileDto> UpdateProfile(UserProfileDto dto, string ID)
+    public UserProfileDto UpdateProfile(UserProfileDto dto, string ID)
     {
       var user = _userRepository.Get(ID);
       
@@ -36,7 +36,8 @@ namespace Raccord.Application.Services.Profile
       user.Telephone = dto.Telephone;
       user.PreferredEmail = dto.PreferredEmail;
 
-      await _userManager.UpdateAsync(user);
+      _userRepository.Edit(user);
+      _userRepository.Commit();
 
       return user.Translate();
     }
@@ -51,7 +52,7 @@ namespace Raccord.Application.Services.Profile
       };
     }
 
-    public async Task AddProfileImage(AddProfileImageDto dto)
+    public void AddProfileImage(AddProfileImageDto dto)
     {
       var user = _userRepository.Get(dto.ID);
       using(var imageContent = dto.FileContent)
@@ -59,18 +60,20 @@ namespace Raccord.Application.Services.Profile
         user.ImageName = dto.FileName;
         user.ImageContent = imageContent.GetBytes();
 
-        await _userManager.UpdateAsync(user);
+        _userRepository.Edit(user);
+        _userRepository.Commit();
       }
     }
 
-    public async Task RemoveProfileImage(string ID)
+    public void RemoveProfileImage(string ID)
     {
       var user = _userRepository.Get(ID);
       
       user.ImageContent = null;
       user.ImageName = null;
 
-      await _userManager.UpdateAsync(user);
+      _userRepository.Edit(user);
+      _userRepository.Commit();
     }
   }
 }
