@@ -223,4 +223,8 @@ $placeholder-font-size: 20px;
   line-height: 50px;
   color: $inverted-text-color;
   font-size: $placeholder-font-size;
+  -webkit-user-select: none; /* Safari */        
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE10+/Edge */
+  user-select: none; /* Standard */
 }

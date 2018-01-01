@@ -8,6 +8,7 @@
     <table class="col s12">
         <thead>
             <tr>
+                <th></th>
                 <th>Name</th>
                 <th>Email</th>
                 <th></th>
@@ -15,6 +16,9 @@
         </thead>
         <tbody>
             <tr *ngFor="let user of users">
+                <td>
+                    <user-avatar [userId]="user.id" [fullName]="getFullName(user)" [hasImage]="user.hasImage"></user-avatar>
+                </td>
                 <td>
                     <a [routerLink]="[user.id]">{{user.firstName}} {{user.lastName}}</a>
                 </td>

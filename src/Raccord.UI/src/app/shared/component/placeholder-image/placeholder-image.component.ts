@@ -8,6 +8,8 @@ import { OnInit } from '@angular/core/src/metadata/lifecycle_hooks';
 export class PlaceholderImageComponent implements OnInit{
 
     @Input() value: string;
+    @Input() cardImage;
+    @Input() listAvatar;
     text: string;
     bgColour: string;
     private availableColours: string[] =
@@ -38,7 +40,8 @@ export class PlaceholderImageComponent implements OnInit{
 
     private setColours() {
       let colourValue = this.getColourValue();
-      let colourIndex = (this.availableColours.length % colourValue) - 1;
+      let colourIndex = (colourValue % this.availableColours.length) - 1;
+      colourIndex = colourIndex < 0 || colourIndex > (this.availableColours.length -1) ? 0 : colourIndex;
       this.bgColour = this.availableColours[colourIndex];
     }
 

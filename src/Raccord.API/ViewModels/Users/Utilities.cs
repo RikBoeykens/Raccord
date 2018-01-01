@@ -35,7 +35,8 @@ namespace Raccord.API.ViewModels.Users
                 ID = dto.ID,
                 Email = dto.Email,
                 FirstName = dto.FirstName,
-                LastName = dto.LastName
+                LastName = dto.LastName,
+                HasImage = dto.HasImage
             };
         }
 

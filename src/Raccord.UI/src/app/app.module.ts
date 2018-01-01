@@ -31,17 +31,18 @@ import { LoadingComponent } from './loading/component';
 import { NavbarComponent } from './navbar';
 import { SearchComponent } from './search/component';
 import { SearchResultComponent } from './search/component';
-import { AddProjectComponent } from './projects';
-import { EditProjectComponent } from './projects';
-import { ProjectLandingComponent } from './projects';
-import { ProjectsListComponent } from './projects';
-import { ScenesListComponent } from './projects';
-import { EditSceneComponent } from './projects';
-import { SceneLandingComponent } from './projects';
-import { SceneImagesComponent } from './projects';
-import { SceneCharactersComponent } from './projects';
-import { SceneBreakdownItemsComponent } from './projects';
 import { 
+  AddProjectComponent,
+  EditProjectComponent,
+  ProjectLandingComponent,
+  ProjectsListComponent,
+  ProjectAvatarComponent,
+  ScenesListComponent,
+  EditSceneComponent,
+  SceneLandingComponent,
+  SceneImagesComponent,
+  SceneCharactersComponent,
+  SceneBreakdownItemsComponent,
   SceneShootingDaysComponent,
   SceneSlatesComponent,
   SceneTimingsComponent,
@@ -163,6 +164,7 @@ const COMPONENTS =[
   EditProjectComponent,
   ProjectLandingComponent,
   ProjectsListComponent,
+  ProjectAvatarComponent,
   ScenesListComponent,
   EditSceneComponent,
   SceneLandingComponent,

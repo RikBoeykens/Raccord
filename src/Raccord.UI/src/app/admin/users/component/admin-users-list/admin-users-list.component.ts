@@ -56,4 +56,8 @@ export class AdminUsersListComponent implements OnInit {
         }
 
     }
+
+    public getFullName(user: UserSummary) {
+        return `${user.firstName} ${user.lastName}`;
+    }
 }

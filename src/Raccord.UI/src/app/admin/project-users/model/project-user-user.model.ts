@@ -1,13 +1,13 @@
 import { BaseModel } from '../../../shared/model/base.model';
-import { User } from "../../users/model/user.model";
+import { UserSummary } from "../../users/model/user-summary.model";
 
 export class ProjectUserUser extends BaseModel{
     id: number;
-    user: User;
+    user: UserSummary;
 
     constructor(obj?: {
         id: number, 
-        user: User
+        user: UserSummary
     }){
         super();
         if(obj){

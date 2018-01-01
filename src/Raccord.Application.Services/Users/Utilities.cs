@@ -23,7 +23,8 @@ namespace Raccord.Application.Services.Users
                 ID = user.Id,
                 Email = user.Email,
                 FirstName = user.FirstName,
-                LastName = user.LastName
+                LastName = user.LastName,
+                HasImage = user.ImageContent != null
             };
         }
 

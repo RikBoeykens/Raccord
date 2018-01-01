@@ -13,6 +13,8 @@ import { UserProfileSummary } from '../../model/user-profile-summary.model';
 export class ShowProfileImageComponent implements OnInit{
 
     @Input() user: UserProfileSummary;
+    @Input() userId: string;
+    @Input() fullName: string;
     @Input() cardImage;
     @Input() listAvatar;
 
@@ -26,15 +28,27 @@ export class ShowProfileImageComponent implements OnInit{
     }
 
     ngOnInit(){
-      this._userProfileHttpService.getBase64(this.user.id).then(data => {
-        this.loadingImage = false;
-        if (data.hasContent){
-            this.base64Image = data;
-        }
-      });
+        let id = this.noUserDefined() ? this.userId : this.user.id;
+        this._userProfileHttpService.getBase64(id).then(data => {
+            this.loadingImage = false;
+            if (data.hasContent){
+                this.base64Image = data;
+            }
+        });
     }
 
     getImageUrl(){
         return this._sanitizer.bypassSecurityTrustUrl(ImageHelpers.getBase64Url(this.base64Image));
+    }
+
+    getTitle(): string{
+        if (!this.noUserDefined()) {
+            return `${this.user.firstName} ${this.user.lastName}`;
+        }
+        return this.fullName;
+    }
+
+    private noUserDefined(): boolean {
+        return this.user === null || typeof this.user === 'undefined';
     }
 }

@@ -8,8 +8,25 @@ import { UserProfileSummary } from '../../model/user-profile-summary.model';
 export class UserAvatarComponent{
 
     @Input() user: UserProfileSummary;
+    @Input() userId: string;
+    @Input() fullName: string;
+    @Input() hasImage: boolean;
 
     getUserName(): string {
-        return `${this.user.firstName} ${this.user.lastName}`;
+        if (!this.noUserDefined()) {
+            return `${this.user.firstName} ${this.user.lastName}`;
+        }
+        return this.fullName;
+    }
+
+    getHasImage(): boolean {
+        if (!this.noUserDefined()) {
+            return this.user.hasImage;
+        }
+        return this.hasImage;
+    }
+
+    private noUserDefined(): boolean {
+        return this.user === null || typeof this.user === 'undefined';
     }
 }

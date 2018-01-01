@@ -24,7 +24,7 @@ namespace Raccord.Application.Services.Users.Projects
             return new ProjectUserUserDto
             {
                 ID = projectUser.ID,
-                User = projectUser.User.Translate(),
+                User = projectUser.User.TranslateSummary(),
             };
         }
         public static ProjectUserProjectDto TranslateProject(this ProjectUser projectUser)
@@ -32,7 +32,7 @@ namespace Raccord.Application.Services.Users.Projects
             return new ProjectUserProjectDto
             {
                 ID = projectUser.ID,
-                Project = projectUser.Project.Translate(),
+                Project = projectUser.Project.TranslateSummary(),
             };
         }
         public static ProjectUserDto Translate(this ProjectUser projectUser)
