@@ -48,6 +48,7 @@ export class UserProfileLandingComponent {
     let loadingId = this._loadingService.startLoading();
 
     let files = <Array<File>>fileInput.target.files;
+    this.userProfile.hasImage = false;
 
     this._userProfileHttpService.uploadImage(files).then(data=>{
         if (typeof(data) === 'string') {

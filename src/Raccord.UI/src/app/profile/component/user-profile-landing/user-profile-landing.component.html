@@ -13,8 +13,8 @@
           (change)="uploadImage($event)"
           multiple />
     </div>
+    <user-avatar [user]="userProfile"></user-avatar>
     <div *ngIf="userProfile.hasImage">
-        <show-profile-image [user]="userProfile"></show-profile-image>
         <button md-button (click)="removeImage()"><md-icon>delete</md-icon></button>
     </div>
   </md-card-content>

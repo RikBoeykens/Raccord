@@ -21,6 +21,21 @@ namespace Raccord.API.ViewModels.Profile
         HasImage = dto.HasImage
       };
     }
+    public static UserProfileSummaryViewModel Translate(this UserProfileSummaryDto dto)
+    {
+      if(dto == null)
+      {
+        return null;
+      }
+
+      return new UserProfileViewModel
+      {
+        ID = dto.ID,
+        FirstName = dto.FirstName,
+        LastName = dto.LastName,
+        HasImage = dto.HasImage
+      };
+    }
 
     public static UserProfileDto Translate(this UserProfileViewModel vm)
     {

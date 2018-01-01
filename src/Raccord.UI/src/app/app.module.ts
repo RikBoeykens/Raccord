@@ -126,7 +126,10 @@ import {
   SceneDialogueComponent
 } from './projects';
 import { ScenePropertiesLandingComponent } from './projects';
-import { SelectEntityComponent } from './shared';
+import { 
+  SelectEntityComponent,
+  PlaceholderImageComponent
+} from './shared';
 import { LoginComponent } from "./security";
 import { 
   AdminSearchProjectComponent,
@@ -144,7 +147,8 @@ import{
 import {
   UserProfileLandingComponent,
   EditUserProfileDialog,
-  ShowProfileImageComponent
+  ShowProfileImageComponent,
+  UserAvatarComponent
 } from './profile';
 
 const COMPONENTS =[
@@ -239,6 +243,7 @@ const COMPONENTS =[
   SceneDialogueComponent,
   ScenePropertiesLandingComponent,
   SelectEntityComponent,
+  PlaceholderImageComponent,
   LoginComponent,
   AdminSearchProjectComponent,
   AdminProjectsListComponent,
@@ -250,7 +255,8 @@ const COMPONENTS =[
   AdminUserLandingComponent,
   RaccordChartComponent,
   UserProfileLandingComponent,
-  ShowProfileImageComponent
+  ShowProfileImageComponent,
+  UserAvatarComponent
 ];
 
 const ENTRY_COMPONENTS = [
