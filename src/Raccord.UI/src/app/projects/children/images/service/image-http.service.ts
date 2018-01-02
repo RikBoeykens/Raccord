@@ -8,7 +8,7 @@ import { Image } from '../model/image.model';
 import { LinkImage } from '../model/link-image.model';
 import { JsonResponse } from '../../../../shared/model/json-response.model';
 import { SelectedEntity } from '../../../../shared/model/selected-entity.model';
-import { Base64Image } from '../model/base-64-image.model';
+import { Base64Image } from '../../../../shared/model/base-64-image.model';
 
 @Injectable()
 export class ImageHttpService extends BaseHttpService {

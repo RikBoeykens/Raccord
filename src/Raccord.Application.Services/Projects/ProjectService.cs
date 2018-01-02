@@ -10,6 +10,8 @@ using Raccord.Data.EntityFramework.Repositories.Callsheets.CallTypes;
 using Raccord.Domain.Model.Callsheets.CallTypes;
 using Raccord.Data.EntityFramework.Repositories.Crew.Departments;
 using Raccord.Domain.Model.Crew.Departments;
+using Raccord.Data.EntityFramework.Repositories.Users;
+using Raccord.Application.Services.Crew.CrewMembers;
 
 namespace Raccord.Application.Services.Projects
 {
@@ -20,13 +22,15 @@ namespace Raccord.Application.Services.Projects
         private readonly IBreakdownTypeDefinitionRepository _breakdownTypeDefinitionRepository;
         private readonly ICallTypeDefinitionRepository _callTypeDefinitionRepository;
         private readonly ICrewDepartmentDefinitionRepository _crewDepartmentDefinitionRepository;
+        private readonly IUserRepository _userRepository;
 
         // Initialises a new ProjectService
         public ProjectService(
             IProjectRepository projectRepository,
             IBreakdownTypeDefinitionRepository breakdownTypeDefinitionRepository,
             ICallTypeDefinitionRepository callTypeDefinitionRepository,
-            ICrewDepartmentDefinitionRepository crewDepartmentDefinitionRepository
+            ICrewDepartmentDefinitionRepository crewDepartmentDefinitionRepository,
+            IUserRepository userRepository
             )
         {
             if(projectRepository == null)
@@ -42,6 +46,7 @@ namespace Raccord.Application.Services.Projects
             _breakdownTypeDefinitionRepository = breakdownTypeDefinitionRepository;
             _callTypeDefinitionRepository = callTypeDefinitionRepository;
             _crewDepartmentDefinitionRepository = crewDepartmentDefinitionRepository;
+            _userRepository = userRepository;
         }
 
         // Gets all projects
@@ -59,6 +64,24 @@ namespace Raccord.Application.Services.Projects
             var projects = _projectRepository.GetAllForUser(userId);
 
             var projectDtos = projects.Select(p => p.TranslateSummary());
+
+            return projectDtos;
+        }
+
+        public IEnumerable<UserProjectDto> GetFullForUser(string userId)
+        {
+            var projects = _projectRepository.GetAllForUser(userId);
+
+            var user = _userRepository.GetFull(userId);
+
+            var projectDtos = projects.Select(p => 
+            {
+                var crewMembers = user.ProjectUsers.Where(pu=> pu.ProjectID == p.ID)
+                                    .SelectMany(pu=> pu.CrewMembers)
+                                    .Select(cm=> cm.Translate()).ToList();
+
+                return p.TranslateUser(crewMembers);
+            });
 
             return projectDtos;
         }

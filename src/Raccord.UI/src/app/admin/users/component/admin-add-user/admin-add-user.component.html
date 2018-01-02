@@ -9,6 +9,16 @@
     <form id="user-form" class="col offset-s2 s8"
           #userForm = "ngForm"
           (ngSubmit)="addUser()">
+          <div class="row">
+              <md-input-container>
+                  <input mdInput placeholder="First name" id="user_first_name" required [(ngModel)]="viewUser.firstName" #firstname="ngModel" name="user_first_name">
+              </md-input-container>
+          </div>
+          <div class="row">
+              <md-input-container>
+                  <input mdInput placeholder="Last name" id="user_last_name" required [(ngModel)]="viewUser.lastName" #lastname="ngModel" name="user_last_name">
+              </md-input-container>
+          </div>
         <div class="row">
             <md-input-container>
                 <input mdInput placeholder="Email" id="user_email" required [(ngModel)]="viewUser.email" #email="ngModel" name="user_email">

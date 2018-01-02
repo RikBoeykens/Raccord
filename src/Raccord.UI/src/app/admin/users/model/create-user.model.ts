@@ -6,7 +6,9 @@ export class CreateUser extends User{
     constructor(obj?: {
                         id: string,
                         email: string,
-                        password: string
+                        password: string,
+                        firstName: string,
+                        lastName: string
                     }){
         super(obj);
         if(obj){

@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using Raccord.Application.Core.Services.Crew.CrewMembers;
 using Raccord.Application.Core.Services.Projects;
 using Raccord.Application.Core.Services.Users;
 
@@ -7,6 +9,7 @@ namespace Raccord.Application.Core.Services.Users.Project
     {
         private UserDto _user;
         private ProjectDto _project;
+        private IEnumerable<CrewMemberDto> _crewMembers;
         // ID of the project user
         public long ID { get; set; }
 
@@ -33,6 +36,22 @@ namespace Raccord.Application.Core.Services.Users.Project
             set
             {
                 _user = value;
+            }
+        }
+
+        /// <summary>
+        /// Crew members linked to the project user
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<CrewMemberDto> CrewMembers
+        {
+            get
+            {
+                return _crewMembers ?? (_crewMembers = new List<CrewMemberDto>());
+            }
+            set
+            {
+                _crewMembers = value;
             }
         }
     }

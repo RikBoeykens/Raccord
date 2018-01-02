@@ -506,11 +506,15 @@ namespace Raccord.Data.EntityFramework.Migrations
 
                     b.Property<string>("LastName");
 
+                    b.Property<long?>("ProjectUserID");
+
                     b.Property<string>("Telephone");
 
                     b.HasKey("ID");
 
                     b.HasIndex("DepartmentID");
+
+                    b.HasIndex("ProjectUserID");
 
                     b.ToTable("CrewMember");
                 });
@@ -1146,6 +1150,14 @@ namespace Raccord.Data.EntityFramework.Migrations
 
                     b.Property<bool>("EmailConfirmed");
 
+                    b.Property<string>("FirstName");
+
+                    b.Property<byte[]>("ImageContent");
+
+                    b.Property<string>("ImageName");
+
+                    b.Property<string>("LastName");
+
                     b.Property<bool>("LockoutEnabled");
 
                     b.Property<DateTimeOffset?>("LockoutEnd");
@@ -1162,7 +1174,11 @@ namespace Raccord.Data.EntityFramework.Migrations
 
                     b.Property<bool>("PhoneNumberConfirmed");
 
+                    b.Property<string>("PreferredEmail");
+
                     b.Property<string>("SecurityStamp");
+
+                    b.Property<string>("Telephone");
 
                     b.Property<bool>("TwoFactorEnabled");
 
@@ -1386,6 +1402,10 @@ namespace Raccord.Data.EntityFramework.Migrations
                         .WithMany("Crew")
                         .HasForeignKey("DepartmentID")
                         .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Raccord.Domain.Model.Users.ProjectUser", "ProjectUser")
+                        .WithMany("CrewMembers")
+                        .HasForeignKey("ProjectUserID");
                 });
 
             modelBuilder.Entity("Raccord.Domain.Model.Crew.Departments.CrewDepartment", b =>

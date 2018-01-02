@@ -39,7 +39,9 @@ namespace Raccord.Data.EntityFramework.Repositories.Users.Projects
 
             return query.Include(cs=> cs.User)
                         .Include(cu=> cu.Project)
-                        .ThenInclude(p=> p.Images);
+                        .ThenInclude(p=> p.Images)
+                        .Include(pu=> pu.CrewMembers)
+                        .ThenInclude(cm=> cm.Department);
         }
 
         private IQueryable<ProjectUser> GetIncludedUser()

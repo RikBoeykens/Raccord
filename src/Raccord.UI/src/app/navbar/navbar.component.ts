@@ -25,7 +25,7 @@ export class NavbarComponent {
     }
 
     getUserName(): string{
-        return AccountHelpers.getEmail();
+        return AccountHelpers.getName();
     }
 
     logOff(){

@@ -5,6 +5,8 @@ import { OnInit } from '@angular/core/src/metadata/lifecycle_hooks';
 import { ImageHttpService } from '../../service/image-http.service';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ImageExtensionHelpers } from '../../helpers/image-extension.helpers';
+import { ImageHelpers } from '../../../../../shared/helpers/image.helpers';
+import { Base64Image } from '../../../../../shared/model/base-64-image.model';
 
 @Component({
     selector: 'show-image',
@@ -15,9 +17,9 @@ export class ShowImageComponent implements OnInit{
     @Input() image: Image;
     @Input() cardImage;
     @Input() listAvatar;
+    @Input() cardAvatar;
 
-    base64Image: string;
-    hasImage: boolean;
+    base64Image: Base64Image = new Base64Image();
     loadingImage: boolean = true;
 
     constructor(
@@ -29,16 +31,13 @@ export class ShowImageComponent implements OnInit{
     ngOnInit(){
         this._imageHttpService.getBase64(this.image.id).then(data => {
             this.loadingImage = false;
-            this.hasImage = data.hasContent;
             if(data.hasContent){
-                this.base64Image = data.content;
+                this.base64Image = data;
             }
         });
     }
 
     getImageUrl(){
-        let extension = ImageExtensionHelpers.getExtension(this.image);
-
-        return this._sanitizer.bypassSecurityTrustUrl(`data:image/${extension};base64,${this.base64Image}`);
+        return this._sanitizer.bypassSecurityTrustUrl(ImageHelpers.getBase64Url(this.base64Image));
     }
 }

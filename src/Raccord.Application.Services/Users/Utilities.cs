@@ -11,6 +11,8 @@ namespace Raccord.Application.Services.Users
             {
                 ID = user.Id,
                 Email = user.Email,
+                FirstName = user.FirstName,
+                LastName = user.LastName
             };
         }
 
@@ -20,6 +22,9 @@ namespace Raccord.Application.Services.Users
             {
                 ID = user.Id,
                 Email = user.Email,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                HasImage = user.ImageContent != null
             };
         }
 
@@ -29,6 +34,8 @@ namespace Raccord.Application.Services.Users
             {
                 ID = user.Id,
                 Email = user.Email,
+                FirstName = user.FirstName,
+                LastName = user.LastName
             };
         }
     }

@@ -15,12 +15,14 @@ namespace Raccord.Application.Services.Crew.CrewMembers
             return new FullCrewMemberDto
             {
                 ID = crewMember.ID,
-                FirstName = crewMember.FirstName,
-                LastName = crewMember.LastName,
+                FirstName = crewMember.GetFirstName(),
+                LastName = crewMember.GetLastName(),
                 JobTitle = crewMember.JobTitle,
-                Telephone = crewMember.Telephone,
-                Email = crewMember.Email,
+                Telephone = crewMember.GetTelephone(),
+                Email = crewMember.GetEmail(),
                 Department = crewMember.Department.Translate(),
+                UserID = crewMember.ProjectUserID.HasValue ? crewMember.ProjectUser.UserID : string.Empty,
+                HasImage = crewMember.ProjectUserID.HasValue ? crewMember.ProjectUser.User.ImageContent != null : false,
             };
         }
         public static CrewMemberSummaryDto TranslateSummary(this CrewMember crewMember)
@@ -28,12 +30,14 @@ namespace Raccord.Application.Services.Crew.CrewMembers
             return new CrewMemberSummaryDto
             {
                 ID = crewMember.ID,
-                FirstName = crewMember.FirstName,
-                LastName = crewMember.LastName,
+                FirstName = crewMember.GetFirstName(),
+                LastName = crewMember.GetLastName(),
                 JobTitle = crewMember.JobTitle,
-                Telephone = crewMember.Telephone,
-                Email = crewMember.Email,
+                Telephone = crewMember.GetTelephone(),
+                Email = crewMember.GetEmail(),
                 Department = crewMember.Department.Translate(),
+                UserID = crewMember.ProjectUserID.HasValue ? crewMember.ProjectUser.UserID : string.Empty,
+                HasImage = crewMember.ProjectUserID.HasValue ? crewMember.ProjectUser.User.ImageContent != null : false,
             };
         }
         public static CrewMemberDto Translate(this CrewMember crewMember)
@@ -41,11 +45,11 @@ namespace Raccord.Application.Services.Crew.CrewMembers
             return new CrewMemberDto
             {
                 ID = crewMember.ID,
-                FirstName = crewMember.FirstName,
-                LastName = crewMember.LastName,
+                FirstName = crewMember.GetFirstName(),
+                LastName = crewMember.GetLastName(),
                 JobTitle = crewMember.JobTitle,
-                Telephone = crewMember.Telephone,
-                Email = crewMember.Email,
+                Telephone = crewMember.GetTelephone(),
+                Email = crewMember.GetEmail(),
                 Department = crewMember.Department.Translate(),
             };
         }
@@ -64,7 +68,43 @@ namespace Raccord.Application.Services.Crew.CrewMembers
 
         public static string GetDisplayName(this CrewMember crewMember)
         {
-            return $"{crewMember.FirstName} {crewMember.LastName}";
+            return $"{crewMember.GetFirstName()} {crewMember.GetLastName()}";
+        }
+
+        private static string GetFirstName(this CrewMember crewMember)
+        {
+            if(crewMember.ProjectUserID.HasValue)
+            {
+                return crewMember.ProjectUser.User.FirstName;
+            }
+            return crewMember.FirstName;
+        }
+
+        private static string GetLastName(this CrewMember crewMember)
+        {
+            if(crewMember.ProjectUserID.HasValue)
+            {
+                return crewMember.ProjectUser.User.LastName;
+            }
+            return crewMember.LastName;
+        }
+
+        private static string GetTelephone(this CrewMember crewMember)
+        {
+            if(crewMember.ProjectUserID.HasValue)
+            {
+                return crewMember.ProjectUser.User.Telephone;
+            }
+            return crewMember.Telephone;
+        }
+
+        private static string GetEmail(this CrewMember crewMember)
+        {
+            if(crewMember.ProjectUserID.HasValue)
+            {
+                return crewMember.ProjectUser.User.PreferredEmail;
+            }
+            return crewMember.Email;
         }
     }
 }

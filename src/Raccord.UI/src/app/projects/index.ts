@@ -6,6 +6,7 @@ export { AddProjectComponent } from './component/add-project/add-project.compone
 export { EditProjectComponent } from './component/edit-project/edit-project.component';
 export { ProjectLandingComponent } from './component/project-landing/project-landing.component';
 export { ProjectsListComponent } from './component/projects-list/projects-list.component';
+export { ProjectAvatarComponent } from './component/project-avatar/project-avatar.component';
 
 export { ProjectHttpService } from './service/project-http.service';
 export { ProjectResolve } from './service/project-resolve.service';

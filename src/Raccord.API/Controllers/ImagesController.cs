@@ -11,6 +11,7 @@ using Raccord.Core.Utilities;
 using Raccord.API.ViewModels.Common.SelectedEntity;
 using Microsoft.AspNetCore.Identity;
 using Raccord.Domain.Model.Users;
+using Raccord.API.ViewModels.Common.Images;
 
 namespace Raccord.API.Controllers
 {
@@ -193,14 +194,17 @@ namespace Raccord.API.Controllers
                 var file = _imageService.GetContent(id);
 
                 if (file.FileContent == null)
+                {
                     return new Base64ImageViewModel
                     {
                         HasContent = false
                     };
+                }
 
                 return new Base64ImageViewModel
                 {
                     Content = Convert.ToBase64String(file.FileContent),
+                    FileName = file.FileName,
                     HasContent = true
                 };
             }

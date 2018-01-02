@@ -1,0 +1,44 @@
+<md-card>      
+  <a routerLink="/" class="breadcrumb">Dashboard</a>
+  <a routerLink="/admin/users" class="breadcrumb">Users</a>
+  <a routerLink="/admin/users/{{projectUser.user.id}}" class="breadcrumb">{{projectUser.user.firstName}} {{projectUser.user.lastName}}</a>
+  <a routerLink="/admin/projectusers/{{projectUser.id}}" class="breadcrumb">{{projectUser.project.title}}</a>
+  <span class="breadcrumb">Add</span>
+</md-card>
+<md-card *ngIf="departments.length">
+  <md-card-title>Add New Crew Member</md-card-title>
+  <md-card-content>
+    <form id="crew-form" class="col offset-s2 s8"
+        #crewForm = "ngForm"
+        (ngSubmit)="addNewCrewMember()">
+        <div fxLayout="row">
+            <md-input-container fxFlex="50%" >
+                <input mdInput placeholder="Job Title" id="crew_job_title" required [(ngModel)]="newCrewMember.jobTitle" #jobtitle="ngModel" name="crew_job_title">
+            </md-input-container>
+            <md-select fxFlex="50%" mdInput placeholder="Department" [(ngModel)]="newCrewMember.departmentId" #department="ngModel" name="crew_department_id">
+                <md-option [value]="">---</md-option>
+                <md-option *ngFor="let department of departments" [value]="department.id">{{ department.name }}</md-option>
+            </md-select>
+        </div>
+        <div fxLayout="row">
+            <div fxFlex="50%">
+                <button md-raised-button type="submit" [disabled]="!crewForm.form.valid">Save</button>
+            </div>
+        </div>
+    </form>
+  </md-card-content>
+</md-card>
+<md-card *ngIf="getDepartments().length">
+    <md-card-title>Link Existing Crew Member</md-card-title>
+    <md-card-content>
+        <md-list>
+            <div *ngFor="let department of getDepartments()">
+                <h3 sub-header>{{department.name}}</h3>
+                <md-list-item *ngFor="let crewMember of getCrew(department)">
+                    {{crewMember.firstName}} {{crewMember.lastName}} - {{crewMember.jobTitle}}
+                    <button md-mini-fab (click)="linkCrewMember(crewMember)"><md-icon>add</md-icon></button>
+                </md-list-item>
+            </div>
+        </md-list>
+    </md-card-content>
+</md-card>

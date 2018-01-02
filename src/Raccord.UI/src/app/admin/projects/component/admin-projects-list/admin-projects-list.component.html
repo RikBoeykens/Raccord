@@ -7,7 +7,7 @@
 <div class="row">
     <div class='md-padding' layout="row" layout-wrap>
         <md-card class="project-card" *ngFor="let project of projects">
-            <show-image *ngIf="project.primaryImage.id!=0" [image]="project.primaryImage" [cardImage]="true"></show-image>
+            <project-avatar [project]="project" [cardImage]="true"></project-avatar>
             <md-card-header>
                 <md-card-title><a [routerLink]="[project.id]" class="card-title">{{project.title}}</a></md-card-title>
             </md-card-header>

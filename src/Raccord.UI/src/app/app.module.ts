@@ -31,17 +31,18 @@ import { LoadingComponent } from './loading/component';
 import { NavbarComponent } from './navbar';
 import { SearchComponent } from './search/component';
 import { SearchResultComponent } from './search/component';
-import { AddProjectComponent } from './projects';
-import { EditProjectComponent } from './projects';
-import { ProjectLandingComponent } from './projects';
-import { ProjectsListComponent } from './projects';
-import { ScenesListComponent } from './projects';
-import { EditSceneComponent } from './projects';
-import { SceneLandingComponent } from './projects';
-import { SceneImagesComponent } from './projects';
-import { SceneCharactersComponent } from './projects';
-import { SceneBreakdownItemsComponent } from './projects';
 import { 
+  AddProjectComponent,
+  EditProjectComponent,
+  ProjectLandingComponent,
+  ProjectsListComponent,
+  ProjectAvatarComponent,
+  ScenesListComponent,
+  EditSceneComponent,
+  SceneLandingComponent,
+  SceneImagesComponent,
+  SceneCharactersComponent,
+  SceneBreakdownItemsComponent,
   SceneShootingDaysComponent,
   SceneSlatesComponent,
   SceneTimingsComponent,
@@ -126,7 +127,10 @@ import {
   SceneDialogueComponent
 } from './projects';
 import { ScenePropertiesLandingComponent } from './projects';
-import { SelectEntityComponent } from './shared';
+import { 
+  SelectEntityComponent,
+  PlaceholderImageComponent
+} from './shared';
 import { LoginComponent } from "./security";
 import { 
   AdminSearchProjectComponent,
@@ -136,11 +140,20 @@ import {
   AdminProjectSettingsComponent,
   AdminUsersListComponent,
   AdminAddUserComponent,
-  AdminUserLandingComponent
+  AdminUserLandingComponent,
+  AdminProjectUserLandingComponent,
+  AdminProjectUserAddCrewMemberComponent,
+  AdminEditCrewMemberDialog
 } from "./admin";
 import{
   RaccordChartComponent
 } from "./charts";
+import {
+  UserProfileLandingComponent,
+  EditUserProfileDialog,
+  ShowProfileImageComponent,
+  UserAvatarComponent
+} from './profile';
 
 const COMPONENTS =[
   AppComponent,
@@ -154,6 +167,7 @@ const COMPONENTS =[
   EditProjectComponent,
   ProjectLandingComponent,
   ProjectsListComponent,
+  ProjectAvatarComponent,
   ScenesListComponent,
   EditSceneComponent,
   SceneLandingComponent,
@@ -234,6 +248,7 @@ const COMPONENTS =[
   SceneDialogueComponent,
   ScenePropertiesLandingComponent,
   SelectEntityComponent,
+  PlaceholderImageComponent,
   LoginComponent,
   AdminSearchProjectComponent,
   AdminProjectsListComponent,
@@ -243,14 +258,21 @@ const COMPONENTS =[
   AdminUsersListComponent,
   AdminAddUserComponent,
   AdminUserLandingComponent,
+  AdminProjectUserLandingComponent,
+  AdminProjectUserAddCrewMemberComponent,
   RaccordChartComponent,
+  UserProfileLandingComponent,
+  ShowProfileImageComponent,
+  UserAvatarComponent
 ];
 
 const ENTRY_COMPONENTS = [
   ChooseSceneDialog,
   ChooseShootingDayDialog,
   EditShootingDaySceneDialog,
-  EditCrewMemberDialog
+  EditCrewMemberDialog,
+  EditUserProfileDialog,
+  AdminEditCrewMemberDialog
 ];
 
 // Services
@@ -366,7 +388,9 @@ import {
   AdminUsersResolve,
   AdminUserResolve,
   AdminProjectUserHttpService,
+  AdminProjectUserCrewHttpService,
   AdminProjectUsersResolve,
+  AdminProjectUserResolve,
   AdminUserProjectsResolve,
   AdminSearchEngineService
 } from "./admin";
@@ -375,6 +399,11 @@ import {
   ChartHttpService,
   ProjectChartsResolve
 } from "./charts";
+
+import {
+  UserProfileHttpService,
+  UserProfileResolve
+} from './profile';
 
 const APP_PROVIDERS = [
   LoadingService,
@@ -467,7 +496,9 @@ const APP_PROVIDERS = [
   AdminUsersResolve,
   AdminUserResolve,
   AdminProjectUserHttpService,
+  AdminProjectUserCrewHttpService,
   AdminProjectUsersResolve,
+  AdminProjectUserResolve,
   AdminUserProjectsResolve,
   AdminSearchEngineService,
   ChartHttpService,
@@ -481,7 +512,9 @@ const APP_PROVIDERS = [
   ScriptUploadResolve,
   ScriptTextHttpService,
   ScriptTextResolve,
-  ScriptTextCallsheetResolve
+  ScriptTextCallsheetResolve,
+  UserProfileHttpService,
+  UserProfileResolve
 ];
 
 // Directives
@@ -511,7 +544,6 @@ import { AgmCoreModule } from '@agm/core';
 
 import '../styles/styles.scss';
 import '../styles/headings.css';
-
 
 /**
  * `AppModule` is the main entry point into Angular2's bootstraping process

@@ -11,6 +11,8 @@
     <table class="col s12">
         <thead>
             <tr>
+                <th></th>
+                <th>Name</th>
                 <th>Email</th>
                 <th></th>
             </tr>
@@ -18,7 +20,13 @@
         <tbody>
             <tr *ngFor="let projectUser of projectUsers">
                 <td>
-                    {{projectUser.user.email}}
+                    <user-avatar [userId]="projectUser.user.id" [fullName]="getFullName(projectUser)" [hasImage]="projectUser.user.hasImage"></user-avatar>
+                </td>
+                <td>
+                    <a routerLink="/admin/users/{{projectUser.user.id}}">{{projectUser.user.firstName}} {{projectUser.user.lastName}}</a>
+                </td>
+                <td>
+                    <a routerLink="/admin/users/{{projectUser.user.id}}">{{projectUser.user.email}}</a>
                 </td>
                 <td>
                     <button md-button (click)="removeProjectUser(projectUser)"><md-icon>delete</md-icon></button>

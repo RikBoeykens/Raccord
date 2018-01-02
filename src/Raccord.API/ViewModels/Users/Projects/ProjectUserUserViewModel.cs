@@ -5,17 +5,17 @@ namespace Raccord.API.ViewModels.Users.Projects
     // vm to represent a crew user
     public class ProjectUserUserViewModel
     {
-        private UserViewModel _user;
+        private UserSummaryViewModel _user;
 
         // ID of the crew user
         public long ID { get; set; }
 
         // Linked user
-        public UserViewModel User
+        public UserSummaryViewModel User
         {
             get
             {
-                return _user ?? (_user = new UserViewModel());
+                return _user ?? (_user = new UserSummaryViewModel());
             }
             set
             {

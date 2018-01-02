@@ -1,5 +1,6 @@
 using System.Linq;
 using Raccord.Application.Core.Services.Users.Project;
+using Raccord.Application.Services.Crew.CrewMembers;
 using Raccord.Application.Services.Projects;
 using Raccord.Application.Services.Users;
 using Raccord.Core.Enums;
@@ -17,6 +18,7 @@ namespace Raccord.Application.Services.Users.Projects
                 ID = projectUser.ID,
                 User = projectUser.User.Translate(),
                 Project = projectUser.Project.Translate(),
+                CrewMembers = projectUser.CrewMembers.Select(cm => cm.Translate()),
             };
         }
         public static ProjectUserUserDto TranslateUser(this ProjectUser projectUser)
@@ -24,7 +26,7 @@ namespace Raccord.Application.Services.Users.Projects
             return new ProjectUserUserDto
             {
                 ID = projectUser.ID,
-                User = projectUser.User.Translate(),
+                User = projectUser.User.TranslateSummary(),
             };
         }
         public static ProjectUserProjectDto TranslateProject(this ProjectUser projectUser)
@@ -32,7 +34,7 @@ namespace Raccord.Application.Services.Users.Projects
             return new ProjectUserProjectDto
             {
                 ID = projectUser.ID,
-                Project = projectUser.Project.Translate(),
+                Project = projectUser.Project.TranslateSummary()
             };
         }
         public static ProjectUserDto Translate(this ProjectUser projectUser)
