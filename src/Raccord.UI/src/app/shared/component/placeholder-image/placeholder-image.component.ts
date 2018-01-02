@@ -10,6 +10,7 @@ export class PlaceholderImageComponent implements OnInit{
     @Input() value: string;
     @Input() cardImage;
     @Input() listAvatar;
+    @Input() cardAvatar;
     text: string;
     bgColour: string;
     private availableColours: string[] =

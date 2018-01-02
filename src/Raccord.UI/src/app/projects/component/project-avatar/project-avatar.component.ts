@@ -10,4 +10,5 @@ export class ProjectAvatarComponent{
     @Input() project: ProjectSummary;
     @Input() cardImage;
     @Input() listAvatar;
+    @Input() cardAvatar;
 }

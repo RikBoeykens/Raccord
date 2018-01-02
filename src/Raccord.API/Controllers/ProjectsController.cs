@@ -28,7 +28,18 @@ namespace Raccord.API.Controllers
 
         // GET: api/projects
         [HttpGet]
-        public IEnumerable<ProjectSummaryViewModel> Get()
+        public IEnumerable<UserProjectViewModel> Get()
+        {
+            var projectDtos = _projectService.GetFullForUser(GetUserId());
+
+            var projectVms = projectDtos.Select(p => p.Translate());
+
+            return projectVms;
+        }
+
+        // GET: api/projects/summary
+        [HttpGet("summary")]
+        public IEnumerable<ProjectSummaryViewModel> GetSummaries()
         {
             var projectDtos = _projectService.GetAllForUser(GetUserId());
 

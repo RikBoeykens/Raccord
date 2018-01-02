@@ -17,6 +17,7 @@ export class ShowImageComponent implements OnInit{
     @Input() image: Image;
     @Input() cardImage;
     @Input() listAvatar;
+    @Input() cardAvatar;
 
     base64Image: Base64Image = new Base64Image();
     loadingImage: boolean = true;
