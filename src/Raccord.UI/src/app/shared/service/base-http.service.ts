@@ -67,7 +67,6 @@ export abstract class BaseHttpService{
 
     protected doFilePost(files: File[], object: any, uri: string, useAuthToken: Boolean = true){
         let formData = new FormData();
-        console.log(files);
         for (let i = 0; i < files.length; i++) {
             formData.append("files", files[i], files[i].name);
         }

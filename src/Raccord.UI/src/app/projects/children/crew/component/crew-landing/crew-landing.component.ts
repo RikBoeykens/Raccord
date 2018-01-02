@@ -76,6 +76,10 @@ export class CrewLandingComponent implements OnInit {
         }
     }
 
+    public getFullName(crewMember: CrewMember) {
+        return `${crewMember.firstName} ${crewMember.lastName}`;
+    }
+
     private showCrewMemberDialog(crewMember: CrewMember) {
         let crewMemberDialog = this._dialog.open(EditCrewMemberDialog, {data:
             {

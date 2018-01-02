@@ -58,10 +58,7 @@ export class CallsheetWizardStep4Component implements OnInit {
     updateCall(call: CharacterCallWrapper){
         let loadingId = this._loadingService.startLoading();
         
-        console.log(`call time before: ${call.callTime}`);
-        console.log(`call time string before: ${call.callTimeString}`);
         call.callTime = TimeHelpers.getTime(call.callTimeString);
-        console.log(`call time after: ${call.callTime}`);
 
         this._characterCallHttpService.post(call).then(data=>{
             if(typeof(data)=='string'){

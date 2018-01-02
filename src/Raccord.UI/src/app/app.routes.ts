@@ -58,7 +58,9 @@ import {
   AdminProjectSettingsComponent,
   AdminUsersListComponent,
   AdminAddUserComponent,
-  AdminUserLandingComponent
+  AdminUserLandingComponent,
+  AdminProjectUserLandingComponent,
+  AdminProjectUserAddCrewMemberComponent
 } from "./admin";
 import{
   UserProfileLandingComponent
@@ -120,7 +122,8 @@ import {
   AdminUsersResolve,
   AdminUserResolve,
   AdminProjectUsersResolve,
-  AdminUserProjectsResolve
+  AdminUserProjectsResolve,
+  AdminProjectUserResolve
 } from "./admin";
 
 import { CanDeactivateGuard } from './shared/service/can-deactivate-guard.service';
@@ -161,7 +164,7 @@ export const ROUTES: Routes = [
                 resolve:{
                   project: AdminProjectResolve,
                   projectUsers: AdminProjectUsersResolve
-                }               
+                }
               },
               {
                 path: 'settings',
@@ -203,6 +206,26 @@ export const ROUTES: Routes = [
               },
             ]
           }
+        ]
+      },
+      {
+        path: 'projectusers',
+        children:[
+          {
+            path: ':projectUserId',
+            component: AdminProjectUserLandingComponent,
+            resolve:{
+              projectUser: AdminProjectUserResolve
+            }
+          },
+          {
+            path: ':projectUserId/add/:projectId',
+            component: AdminProjectUserAddCrewMemberComponent,
+            resolve:{
+              projectUser: AdminProjectUserResolve,
+              departments: CrewDepartmentsResolve
+            }
+          },
         ]
       }
     ]

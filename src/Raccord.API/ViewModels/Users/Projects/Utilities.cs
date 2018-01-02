@@ -1,3 +1,5 @@
+using System.Linq;
+using Raccord.API.ViewModels.Crew.CrewMembers;
 using Raccord.API.ViewModels.Projects;
 using Raccord.API.ViewModels.Users;
 using Raccord.Application.Core.Services.Users.Project;
@@ -13,6 +15,7 @@ namespace Raccord.API.ViewModels.Users.Projects
                 ID = dto.ID,
                 Project = dto.Project.Translate(),
                 User = dto.User.Translate(),
+                CrewMembers = dto.CrewMembers.Select(cm=> cm.Translate()),
             };
         }
         public static ProjectUserProjectViewModel Translate(this ProjectUserProjectDto dto)
@@ -28,7 +31,7 @@ namespace Raccord.API.ViewModels.Users.Projects
             return new ProjectUserUserViewModel
             {
                 ID = dto.ID,
-                User = dto.User.Translate(),
+                User = dto.User.Translate()
             };
         }
         public static ProjectUserViewModel Translate(this ProjectUserDto dto)

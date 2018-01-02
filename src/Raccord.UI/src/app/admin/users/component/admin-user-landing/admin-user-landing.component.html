@@ -26,12 +26,12 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let crew of projects">
+            <tr *ngFor="let projectUser of projects">
                 <td>
-                    {{crew.project.title}}
+                    <a routerLink="/admin/projectusers/{{projectUser.id}}">{{projectUser.project.title}}</a>
                 </td>
                 <td>
-                    <button md-button (click)="removeProject(crew)"><md-icon>delete</md-icon></button>
+                    <button md-button (click)="removeProject(projectUser)"><md-icon>delete</md-icon></button>
                 </td>
             </tr>
         </tbody>

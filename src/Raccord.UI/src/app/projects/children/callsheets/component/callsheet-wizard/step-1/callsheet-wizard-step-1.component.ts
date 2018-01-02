@@ -37,7 +37,6 @@ export class CallsheetWizardStep1Component implements OnInit {
     ) {
         dragulaService.drag.subscribe((value) => {
             this.onSceneDrag();
-            console.log("dragging started");
         });
         dragulaService.dragend.subscribe(() => {
             this.onSceneDragEnd();

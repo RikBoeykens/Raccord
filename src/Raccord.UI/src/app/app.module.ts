@@ -140,7 +140,10 @@ import {
   AdminProjectSettingsComponent,
   AdminUsersListComponent,
   AdminAddUserComponent,
-  AdminUserLandingComponent
+  AdminUserLandingComponent,
+  AdminProjectUserLandingComponent,
+  AdminProjectUserAddCrewMemberComponent,
+  AdminEditCrewMemberDialog
 } from "./admin";
 import{
   RaccordChartComponent
@@ -255,6 +258,8 @@ const COMPONENTS =[
   AdminUsersListComponent,
   AdminAddUserComponent,
   AdminUserLandingComponent,
+  AdminProjectUserLandingComponent,
+  AdminProjectUserAddCrewMemberComponent,
   RaccordChartComponent,
   UserProfileLandingComponent,
   ShowProfileImageComponent,
@@ -266,7 +271,8 @@ const ENTRY_COMPONENTS = [
   ChooseShootingDayDialog,
   EditShootingDaySceneDialog,
   EditCrewMemberDialog,
-  EditUserProfileDialog
+  EditUserProfileDialog,
+  AdminEditCrewMemberDialog
 ];
 
 // Services
@@ -382,7 +388,9 @@ import {
   AdminUsersResolve,
   AdminUserResolve,
   AdminProjectUserHttpService,
+  AdminProjectUserCrewHttpService,
   AdminProjectUsersResolve,
+  AdminProjectUserResolve,
   AdminUserProjectsResolve,
   AdminSearchEngineService
 } from "./admin";
@@ -488,7 +496,9 @@ const APP_PROVIDERS = [
   AdminUsersResolve,
   AdminUserResolve,
   AdminProjectUserHttpService,
+  AdminProjectUserCrewHttpService,
   AdminProjectUsersResolve,
+  AdminProjectUserResolve,
   AdminUserProjectsResolve,
   AdminSearchEngineService,
   ChartHttpService,
@@ -534,7 +544,6 @@ import { AgmCoreModule } from '@agm/core';
 
 import '../styles/styles.scss';
 import '../styles/headings.css';
-
 
 /**
  * `AppModule` is the main entry point into Angular2's bootstraping process
