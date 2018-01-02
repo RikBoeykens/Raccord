@@ -4,6 +4,8 @@ using Raccord.Application.Core.Services.SearchEngine;
 using Raccord.Core.Enums;
 using System.Linq;
 using Raccord.Application.Services.Images;
+using System.Collections.Generic;
+using Raccord.Application.Core.Services.Crew.CrewMembers;
 
 namespace Raccord.Application.Services.Projects
 {
@@ -28,6 +30,18 @@ namespace Raccord.Application.Services.Projects
                 ID = project.ID,
                 Title = project.Title,
                 PrimaryImage = project.Images.FirstOrDefault(i=> i.IsPrimaryImage)?.Translate(),
+            };
+
+            return dto;
+        }
+        public static UserProjectDto TranslateUser(this Project project, IEnumerable<CrewMemberDto> crewMembers)
+        {
+            var dto = new UserProjectDto
+            {
+                ID = project.ID,
+                Title = project.Title,
+                PrimaryImage = project.Images.FirstOrDefault(i=> i.IsPrimaryImage)?.Translate(),
+                CrewMembers = crewMembers
             };
 
             return dto;

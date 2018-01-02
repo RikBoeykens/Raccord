@@ -6,5 +6,6 @@ namespace Raccord.Application.Core.Services.Projects
     public interface IProjectService : IService<ProjectDto, ProjectSummaryDto, FullProjectDto>, IAllService<ProjectSummaryDto>
     {
         IEnumerable<ProjectSummaryDto> GetAllForUser(string userId);
+        IEnumerable<UserProjectDto> GetFullForUser(string userId);
     }
 }

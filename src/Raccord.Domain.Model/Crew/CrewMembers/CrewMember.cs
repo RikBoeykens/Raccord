@@ -29,5 +29,17 @@ namespace Raccord.Domain.Model.Crew.CrewMembers
 
         // Linked crew department
         public virtual CrewDepartment Department { get; set; }
+
+        /// <summary>
+        /// Id of the linked Project User (if applicable)
+        /// </summary>
+        /// <returns></returns>
+        public long? ProjectUserID { get; set; }
+
+        /// <summary>
+        /// Linked project user (if applicable)
+        /// </summary>
+        /// <returns></returns>
+        public virtual ProjectUser ProjectUser { get; set; }
     }
 }

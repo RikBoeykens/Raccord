@@ -9,7 +9,10 @@ export { AdminUserResolve } from "./users/service/admin-user-resolve.service";
 
 export { AdminProjectUserHttpService } from "./project-users/service/admin-project-user-http.service";
 export { AdminProjectUsersResolve } from "./project-users/service/admin-project-users-resolve.service";
+export { AdminProjectUserResolve } from "./project-users/service/admin-project-user-resolve.service";
 export { AdminUserProjectsResolve } from "./project-users/service/admin-user-projects-resolve.service";
+
+export { AdminProjectUserCrewHttpService } from "./project-users/service/admin-project-user-crew-http.service";
 
 export { AdminSearchEngineService } from "./search/service/admin-search-engine.service";
 
@@ -22,3 +25,7 @@ export { AdminProjectSettingsComponent } from "./projects/component/admin-projec
 export { AdminUsersListComponent } from "./users/component/admin-users-list/admin-users-list.component";
 export { AdminAddUserComponent } from "./users/component/admin-add-user/admin-add-user.component";
 export { AdminUserLandingComponent } from "./users/component/admin-user-landing/admin-user-landing.component";
+
+export { AdminProjectUserLandingComponent } from "./project-users/component/admin-project-user-landing/admin-project-user-landing.component";
+export { AdminProjectUserAddCrewMemberComponent } from "./project-users/component/admin-project-user-add-crew-member/admin-project-user-add-crew-member.component";
+export { AdminEditCrewMemberDialog } from "./project-users/component/admin-edit-crew-member-dialog/admin-edit-crew-member-dialog.component";

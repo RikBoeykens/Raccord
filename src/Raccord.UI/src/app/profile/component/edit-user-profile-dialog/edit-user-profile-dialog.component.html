@@ -1,0 +1,27 @@
+<h1 md-dialog-title>
+  Profile
+</h1>
+<md-dialog-content>
+  <div fxLayout="row">
+      <md-input-container fxFlex="50%">
+          <input mdInput placeholder="First name" id="user_profile_firstname" [(ngModel)]="userProfile.firstName" #firstname="ngModel" name="user_profile_firstname">
+      </md-input-container>
+      <md-input-container fxFlex="50%">
+          <input mdInput placeholder="Last name" id="user_profile_lastname" [(ngModel)]="userProfile.lastName" #lastname="ngModel" name="user_profile_lastname">
+      </md-input-container>
+  </div>
+  <div fxLayout="row">
+      <md-input-container fxFlex="100%">
+          <input mdInput placeholder="Telephone" id="user_profile_telephone" [(ngModel)]="userProfile.telephone" #telephone="ngModel" name="user_profile_telephone">
+      </md-input-container>
+  </div>
+  <div fxLayout="row">
+    <md-input-container fxFlex="100%">
+        <input mdInput placeholder="Preferred Email" id="user_profile_email" [(ngModel)]="userProfile.preferredEmail" #email="ngModel" name="user_profile_email">
+    </md-input-container>
+  </div>
+</md-dialog-content>
+<md-dialog-actions>
+  <button md-button md-dialog-close>Cancel</button>
+  <button md-button (click)="submit()">Save</button>
+</md-dialog-actions>

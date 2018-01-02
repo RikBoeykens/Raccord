@@ -195,3 +195,36 @@ agm-map {
 .comma-separated:nth-last-of-type(2):after {
   content: " and ";
 }
+
+// user avatar image
+$avatar-height: 50px;
+$avatar-border-radius: 15px;
+.user-avatar{
+  .user-avatar-profile-image{
+    img{
+      height: $avatar-height;
+      border-radius: $avatar-border-radius;
+    }
+  }
+
+  .user-avatar-placeholder{
+    .placeholder-image{
+      border-radius: $avatar-border-radius;
+    }
+  }
+}
+
+$placeholder-font-size: 20px;
+
+.placeholder-image{
+  height: 50px;
+  width: 50px;
+  text-align: center;
+  line-height: 50px;
+  color: $inverted-text-color;
+  font-size: $placeholder-font-size;
+  -webkit-user-select: none; /* Safari */        
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE10+/Edge */
+  user-select: none; /* Standard */
+}

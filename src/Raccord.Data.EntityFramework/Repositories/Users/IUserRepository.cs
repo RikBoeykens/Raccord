@@ -9,5 +9,7 @@ namespace Raccord.Data.EntityFramework.Repositories.Users
         ApplicationUser GetSummary(string id);
         ApplicationUser GetFull(string id);
         IEnumerable<ApplicationUser> GetAll();
+        void Edit(ApplicationUser entity);
+        void Commit();
     }
 }

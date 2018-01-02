@@ -62,4 +62,8 @@ export class AdminProjectLandingComponent {
             this._loadingService.endLoading(loadingId)
         );
     }
+
+    public getFullName(projectUser: ProjectUserUser) {
+        return `${projectUser.user.firstName} ${projectUser.user.lastName}`;
+    }
 }

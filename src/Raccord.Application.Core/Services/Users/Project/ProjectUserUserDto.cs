@@ -4,16 +4,16 @@ namespace Raccord.Application.Core.Services.Users.Project
 {
     public class ProjectUserUserDto
     {
-        private UserDto _user;
+        private UserSummaryDto _user;
         // ID of the crew user
         public long ID { get; set; }
 
         // Linked user
-        public UserDto User
+        public UserSummaryDto User
         {
             get
             {
-                return _user ?? (_user = new UserDto());
+                return _user ?? (_user = new UserSummaryDto());
             }
             set
             {

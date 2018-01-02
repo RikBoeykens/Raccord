@@ -14,7 +14,7 @@
     <span *ngIf="loggedIn()">
         <button md-button [mdMenuTriggerFor]="navMenu">{{getUserName()}}</button>
         <md-menu #navMenu="mdMenu">
-            <button md-menu-item>Account</button>
+            <a routerLink="/profile" md-menu-item>Profile</a>
             <button md-menu-item (click)="logOff()">Log out</button>
         </md-menu>
     </span>

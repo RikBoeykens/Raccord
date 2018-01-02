@@ -6,6 +6,7 @@ import { FullProject } from '../model/full-project.model';
 import { ProjectSummary } from '../model/project-summary.model';
 import { Project } from '../model/project.model';
 import { JsonResponse } from '../../shared/model/json-response.model';
+import { UserProject } from '../model/user-project.model';
 
 @Injectable()
 export class ProjectHttpService extends BaseHttpService {
@@ -15,9 +16,16 @@ export class ProjectHttpService extends BaseHttpService {
         this._baseUri = `${AppSettings.API_ENDPOINT}/projects`;
     }
 
-    getAll(): Promise<ProjectSummary[]> {
+    getAll(): Promise<UserProject[]> {
 
         var uri = this._baseUri;
+
+        return this.doGetArray(uri);
+    }
+
+    getSummaries(): Promise<ProjectSummary[]> {
+
+        var uri = `${this._baseUri}/summary`;
 
         return this.doGetArray(uri);
     }
