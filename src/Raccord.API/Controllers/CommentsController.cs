@@ -28,6 +28,10 @@ namespace Raccord.API.Controllers
         [HttpGet]
         public IEnumerable<CommentViewModel> GetForProject([FromQuery]long? projectId = null, [FromQuery]long? commentId = null)
         {
+            if(!projectId.HasValue && !commentId.HasValue)
+            {
+                throw new NullReferenceException();
+            }
             var dtos = _commentService.GetForParent(new GetCommentDto
             {
                 ProjectID = projectId,

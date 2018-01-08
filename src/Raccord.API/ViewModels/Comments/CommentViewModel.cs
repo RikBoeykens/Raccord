@@ -6,7 +6,7 @@ namespace Raccord.API.ViewModels.Comments
   public class CommentViewModel : BaseCommentViewModel
   {
     private IEnumerable<CommentViewModel> _comments;
-    private UserProfileViewModel _user;
+    private UserProfileSummaryViewModel _user;
 
     /// <summary>
     /// Comments linked to the comment
@@ -28,11 +28,11 @@ namespace Raccord.API.ViewModels.Comments
     /// User who made the comment
     /// </summary>
     /// <returns></returns>
-    public UserProfileViewModel User
+    public UserProfileSummaryViewModel User
     {
       get
       {
-        return _user ?? (_user = new UserProfileViewModel());
+        return _user ?? (_user = new UserProfileSummaryViewModel());
       }
       set
       {

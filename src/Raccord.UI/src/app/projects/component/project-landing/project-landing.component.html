@@ -100,3 +100,9 @@
         </md-card>
     </div>
 </div>
+<md-card>
+    <md-card-header>Comments</md-card-header>
+    <md-card-content>
+        <edit-comment [projectId]="project.id" (submittedComment)="onCommentSubmit($event)"></edit-comment>
+    </md-card-content>
+</md-card>

@@ -22,4 +22,8 @@ export class ProjectLandingComponent {
             this.project = data.project;
         });
     }
+
+    onCommentSubmit(id: number) {
+        console.log(id);
+    }
 }

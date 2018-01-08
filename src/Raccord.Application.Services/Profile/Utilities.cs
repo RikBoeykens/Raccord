@@ -22,5 +22,20 @@ namespace Raccord.Application.Services.Profile
         HasImage = user.ImageContent != null
       };
     }
+    public static UserProfileSummaryDto TranslateSummary(this ApplicationUser user)
+    {
+      if(user == null)
+      {
+        return null;
+      }
+
+      return new UserProfileSummaryDto
+      {
+        ID = user.Id,
+        FirstName = user.FirstName,
+        LastName = user.LastName,
+        HasImage = user.ImageContent != null
+      };
+    }
   }
 }

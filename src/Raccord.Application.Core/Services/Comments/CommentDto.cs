@@ -9,7 +9,7 @@ namespace Raccord.Application.Core.Services.Comments
   public class CommentDto : BaseCommentDto
   {
     private IEnumerable<CommentDto> _comments;
-    private UserProfileDto _user;
+    private UserProfileSummaryDto _user;
 
     /// <summary>
     /// Comments linked to the comment
@@ -31,11 +31,11 @@ namespace Raccord.Application.Core.Services.Comments
     /// User who made the comment
     /// </summary>
     /// <returns></returns>
-    public UserProfileDto User
+    public UserProfileSummaryDto User
     {
       get
       {
-        return _user ?? (_user = new UserProfileDto());
+        return _user ?? (_user = new UserProfileSummaryDto());
       }
       set
       {
