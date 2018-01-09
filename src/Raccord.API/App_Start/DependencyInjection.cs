@@ -120,6 +120,9 @@ using Raccord.Application.Core.Services.Profile;
 using Raccord.Application.Services.Profile;
 using Raccord.Application.Services.Users.Project.Crew;
 using Raccord.Application.Core.Services.Users.Project.Crew;
+using Raccord.Data.EntityFramework.Repositories.Comments;
+using Raccord.Application.Core.Services.Comments;
+using Raccord.Application.Services.Comments;
 
 namespace Raccord.API
 {
@@ -274,6 +277,9 @@ namespace Raccord.API
             services.AddTransient<IUserProfileService, UserProfileService>();
 
             services.AddTransient<IProjectUserCrewService, ProjectUserCrewService>();
+
+            services.AddTransient<ICommentRepository, CommentRepository>();
+            services.AddTransient<ICommentService, CommentService>();
         }
     }
 }

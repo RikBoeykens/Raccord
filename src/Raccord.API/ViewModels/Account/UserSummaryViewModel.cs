@@ -2,6 +2,11 @@ namespace Raccord.API.ViewModels.Account
 {
     public class UserSummaryViewModel
     {
+        /// <summary>
+        /// ID of the user
+        /// </summary>
+        /// <returns></returns>
+        public string ID { get; set; }
         // Email of the user
         public string Email { get; set; }
 

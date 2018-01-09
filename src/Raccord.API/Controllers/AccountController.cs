@@ -23,6 +23,7 @@ namespace Raccord.API.Controllers
 
             var vm = new UserSummaryViewModel
             {
+                ID = user.Id,
                 Email = user.Email,
                 IsAdmin = isAdmin,
                 FirstName = user.FirstName,
