@@ -124,7 +124,9 @@ import {
   ScriptTextComponent,
   SceneHeaderComponent,
   SceneActionComponent,
-  SceneDialogueComponent
+  SceneDialogueComponent,
+  EditCommentComponent,
+  ShowCommentComponent
 } from './projects';
 import { ScenePropertiesLandingComponent } from './projects';
 import { 
@@ -246,6 +248,8 @@ const COMPONENTS =[
   SceneHeaderComponent,
   SceneActionComponent,
   SceneDialogueComponent,
+  EditCommentComponent,
+  ShowCommentComponent,
   ScenePropertiesLandingComponent,
   SelectEntityComponent,
   PlaceholderImageComponent,
@@ -367,7 +371,8 @@ import {
   ScriptUploadResolve,
   ScriptTextHttpService,
   ScriptTextResolve,
-  ScriptTextCallsheetResolve
+  ScriptTextCallsheetResolve,
+  CommentHttpService
 } from './projects';
 
 import {
@@ -488,6 +493,7 @@ const APP_PROVIDERS = [
   TakeHttpService,
   TakeResolve,
   TakesResolve,
+  CommentHttpService,
   AdminProjectHttpService,
   AdminProjectsResolve,
   AdminProjectResolve,

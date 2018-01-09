@@ -226,3 +226,9 @@ export{
     SceneActionComponent,
     SceneDialogueComponent
 } from './children/script-texts';
+
+export {
+    CommentHttpService,
+    EditCommentComponent,
+    ShowCommentComponent
+} from './children/comments';

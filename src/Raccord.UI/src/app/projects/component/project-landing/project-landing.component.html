@@ -100,3 +100,10 @@
         </md-card>
     </div>
 </div>
+<md-card>
+    <md-card-header>Comments</md-card-header>
+    <md-card-content>
+        <edit-comment [projectId]="project.id" (submittedComment)="onCommentSubmit($event)"></edit-comment>
+        <show-comment *ngFor="let comment of project.comments" [comment]="comment" (removedComment)="onRemovedComment()"></show-comment>
+    </md-card-content>
+</md-card>

@@ -56,7 +56,9 @@ namespace Raccord.Data.EntityFramework.Repositories.Projects
         {
             IQueryable<Project> query = _context.Set<Project>();
 
-            return query.Include(l=> l.Images);
+            return query.Include(l=> l.Images)
+                        .Include(p=> p.Comments)
+                        .ThenInclude(c=> c.User);
         }
 
         private IQueryable<Project> GetIncludedSummary()

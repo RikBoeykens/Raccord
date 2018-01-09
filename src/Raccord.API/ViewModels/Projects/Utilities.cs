@@ -1,4 +1,5 @@
 using System.Linq;
+using Raccord.API.ViewModels.Comments;
 using Raccord.API.ViewModels.Crew.CrewMembers;
 using Raccord.API.ViewModels.Images;
 using Raccord.Application.Core.Services.Projects;
@@ -15,6 +16,7 @@ namespace Raccord.API.ViewModels.Projects
                 ID = dto.ID,
                 Title = dto.Title,
                 PrimaryImage = dto.PrimaryImage.Translate(),
+                Comments = dto.Comments.Select(c=> c.Translate()),
             };
         }
         // Translates a project summary dto to a project summary viewmodel

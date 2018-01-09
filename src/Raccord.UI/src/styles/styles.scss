@@ -217,6 +217,7 @@ $avatar-border-radius: 15px;
 $placeholder-font-size: 20px;
 
 .placeholder-image{
+  display: inline-block;
   height: 50px;
   width: 50px;
   text-align: center;
@@ -227,4 +228,13 @@ $placeholder-font-size: 20px;
   -moz-user-select: none; /* Firefox */
   -ms-user-select: none; /* IE10+/Edge */
   user-select: none; /* Standard */
+}
+.comment{
+  .child-comments{
+    margin-left: 10px;
+  }
+  
+  .comment-action{
+    color: mat-color($accent);
+  }
 }

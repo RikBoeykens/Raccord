@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using Raccord.API.ViewModels.Comments;
 using Raccord.API.ViewModels.Images;
 
 namespace Raccord.API.ViewModels.Projects
@@ -6,6 +8,7 @@ namespace Raccord.API.ViewModels.Projects
     public class FullProjectViewModel : ProjectViewModel
     {
         private ImageViewModel _primaryImage;
+        private IEnumerable<CommentViewModel> _comments;
 
         // Primary image linked to the project
         public ImageViewModel PrimaryImage
@@ -17,6 +20,19 @@ namespace Raccord.API.ViewModels.Projects
             set
             {
                 _primaryImage = value;
+            }
+        }
+
+        // Comments linked to the project
+        public IEnumerable<CommentViewModel> Comments
+        {
+            get
+            {
+                return _comments ?? (_comments = new List<CommentViewModel>());
+            }
+            set
+            {
+                _comments = value;
             }
         }
     }
