@@ -229,5 +229,6 @@ export{
 
 export {
     CommentHttpService,
-    EditCommentComponent
+    EditCommentComponent,
+    ShowCommentComponent
 } from './children/comments';

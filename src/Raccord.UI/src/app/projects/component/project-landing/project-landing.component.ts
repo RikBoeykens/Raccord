@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { ProjectHttpService } from '../../service/project-http.service';
 import { FullProject } from '../../model/full-project.model';
+import { CommentHttpService } from '../../children/comments/service/comment-http.service';
 
 @Component({
     templateUrl: 'project-landing.component.html',
@@ -11,7 +11,7 @@ export class ProjectLandingComponent {
     project: FullProject;
 
     constructor(
-        private _projectHttpService: ProjectHttpService,
+        private _commentHttpService: CommentHttpService,
         private route: ActivatedRoute,
         private router: Router
     ){
@@ -23,7 +23,15 @@ export class ProjectLandingComponent {
         });
     }
 
+    getComments() {
+        this._commentHttpService.getAll(this.project.id, null).then((comments)=> this.project.comments = comments);
+    }
+
     onCommentSubmit(id: number) {
-        console.log(id);
+        this.getComments();
+    }
+
+    onRemovedComment() {
+        this.getComments();
     }
 }

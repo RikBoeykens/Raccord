@@ -41,6 +41,15 @@ namespace Raccord.API.Controllers
             return dtos.Select(c=> c.Translate());
         }
 
+        // GET: api/comments
+        [HttpGet("{id}")]
+        public CommentViewModel Get([FromRoute]long id)
+        {
+            var dto = _commentService.Get(id);
+
+            return dto.Translate();
+        }
+
         // POST api/comments
         [HttpPost]
         public JsonResult Post([FromBody]PostCommentViewModel vm)

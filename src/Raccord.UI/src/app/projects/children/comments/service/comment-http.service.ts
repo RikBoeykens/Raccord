@@ -20,6 +20,13 @@ export class CommentHttpService extends BaseHttpService {
         return this.doGetArray(uri);
     }
 
+    get(id: number): Promise<Comment> {
+
+        var uri = `${this._baseUri}/${id}`;
+
+        return this.doGet(uri);
+    }
+
     post(comment: PostComment): Promise<number> {
         var uri = this._baseUri;
 

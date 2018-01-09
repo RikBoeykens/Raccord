@@ -12,6 +12,13 @@ namespace Raccord.Data.EntityFramework.Repositories.Comments
         {
         }
 
+        public Comment GetFull(long ID)
+        {
+            var query = GetIncluded();
+
+            return query.FirstOrDefault(c=> c.ID == ID);
+        }
+
         public IEnumerable<Comment> GetForParent(long? projectID, long? commentID)
         {
           var query = GetIncluded();
@@ -20,11 +27,27 @@ namespace Raccord.Data.EntityFramework.Repositories.Comments
                                 c.ParentCommentID == commentID);
         }
 
+        public void RemoveComment(long ID)
+        {
+            var query = GetIncluded();
+
+            var comment = query.FirstOrDefault(c=> c.ID == ID);
+
+            foreach(var childCommentId in comment.Comments.ToList().Select(c=>c.ID))
+            {
+                RemoveComment(childCommentId);
+            }
+
+            _context.Remove(comment);
+            Commit();
+        }
+
         private IQueryable<Comment> GetIncluded()
         {
             IQueryable<Comment> query = _context.Set<Comment>();
 
-            return query.Include(c=> c.User);
+            return query.Include(c=> c.User)
+                        .Include(c=> c.Comments);
         }
     }
 }

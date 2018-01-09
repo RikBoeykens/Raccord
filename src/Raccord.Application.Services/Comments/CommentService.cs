@@ -21,6 +21,12 @@ namespace Raccord.Application.Services.Comments
 
       return comments.Select(c=> c.Translate());
     }
+    public CommentDto Get(long ID)
+    {
+      var comment = _commentRepository.GetFull(ID);
+
+      return comment.Translate();
+    }
 
     public long Add(PostCommentDto dto)
     {
@@ -52,10 +58,7 @@ namespace Raccord.Application.Services.Comments
 
     public void Remove(long ID)
     {
-      var comment = _commentRepository.GetSingle(ID);
-
-      _commentRepository.Delete(comment);
-      _commentRepository.Commit();
+      _commentRepository.RemoveComment(ID);
     }
   }
 }
