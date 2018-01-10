@@ -13,6 +13,8 @@ using System;
 using Raccord.Domain.Model.Callsheets.CallTypes;
 using Microsoft.EntityFrameworkCore;
 using Raccord.Domain.Model.Crew.Departments;
+using Raccord.Domain.Model.Users.ProjectRoles;
+using Raccord.Core.Enums;
 
 namespace Raccord.Data.EntityFramework.Seeding
 {
@@ -46,6 +48,7 @@ namespace Raccord.Data.EntityFramework.Seeding
             SeedCallTypeDefinitions();
             SeedDepartmentDefinitions();
             SeedRolesAndAdminUser();
+            SeedProjectRolesAndPermissions();
         }
 
         private void SeedBreakdownTypeDefinitions()
@@ -121,6 +124,77 @@ namespace Raccord.Data.EntityFramework.Seeding
                 _userManager.CreateAsync(new ApplicationUser { UserName = adminEmail, Email = adminEmail, EmailConfirmed = true }, adminPassword).Result.ToString();
                 _userManager.AddToRoleAsync(_userManager.FindByNameAsync(adminEmail).GetAwaiter().GetResult(), "admin").Result.ToString();
             }
+        }
+        private void SeedProjectRolesAndPermissions()
+        {
+            var permissionsToAdd = new List<ProjectPermissionDefinition>
+            {
+                new ProjectPermissionDefinition{ Permission = ProjectPermissionEnum.CanEditUsers, Name = "Can Edit Users"},
+                new ProjectPermissionDefinition{ Permission = ProjectPermissionEnum.CanEditGeneral, Name = "Can Edit"},
+                new ProjectPermissionDefinition{ Permission = ProjectPermissionEnum.CanReadGeneral, Name = "Can Read"},
+                new ProjectPermissionDefinition{ Permission = ProjectPermissionEnum.CanReadCallsheet, Name = "Can Read Callsheet"},
+            };
+            foreach(var permission in permissionsToAdd)
+            {
+                if(!_context.ProjectPermissionDefinitions.Any(p=> p.Permission == permission.Permission))
+                {
+                    _context.Add(permission);
+                }
+            }
+
+            var projectRolesToAdd = new List<ProjectRoleDefinition>
+            {
+                new ProjectRoleDefinition{ Role = ProjectRoleEnum.Admin, Name = "Project Admin", },
+                new ProjectRoleDefinition{ Role = ProjectRoleEnum.Editor, Name = "Editor", },
+                new ProjectRoleDefinition{ Role = ProjectRoleEnum.User, Name = "User", },
+                new ProjectRoleDefinition{ Role = ProjectRoleEnum.CallsheetUser, Name = "Callsheet User", },
+            };
+            
+            foreach(var projectRole in projectRolesToAdd)
+            {
+                if(!_context.ProjectRoleDefinitions.Any(p=> p.Role == projectRole.Role))
+                {
+                    _context.Add(projectRole);
+                }
+            }
+
+            var canEditUserPermissionId = _context.ProjectPermissionDefinitions.Single(p=> p.Permission == ProjectPermissionEnum.CanEditUsers).ID;
+            var canEditGeneralPermissionId = _context.ProjectPermissionDefinitions.Single(p=> p.Permission == ProjectPermissionEnum.CanEditGeneral).ID;
+            var canReadGeneralPermissionId = _context.ProjectPermissionDefinitions.Single(p=> p.Permission == ProjectPermissionEnum.CanReadGeneral).ID;
+            var canReadCallsheetPermissionId = _context.ProjectPermissionDefinitions.Single(p=> p.Permission == ProjectPermissionEnum.CanReadCallsheet).ID;
+
+            var projectAdminRoleId = _context.ProjectRoleDefinitions.Single(p=> p.Role == ProjectRoleEnum.Admin).ID;
+            var editorRoleId = _context.ProjectRoleDefinitions.Single(p=> p.Role == ProjectRoleEnum.Editor).ID;
+            var userRoleId = _context.ProjectRoleDefinitions.Single(p=> p.Role == ProjectRoleEnum.User).ID;
+            var callsheetUserRoleId = _context.ProjectRoleDefinitions.Single(p=> p.Role == ProjectRoleEnum.CallsheetUser).ID;
+
+            var permissionRoles = new List<ProjectPermissionRoleDefinition>
+            {
+                // Project Admin
+                new ProjectPermissionRoleDefinition { RoleID = projectAdminRoleId, PermissionID = canEditUserPermissionId },
+                new ProjectPermissionRoleDefinition { RoleID = projectAdminRoleId, PermissionID = canEditGeneralPermissionId },
+                new ProjectPermissionRoleDefinition { RoleID = projectAdminRoleId, PermissionID = canReadGeneralPermissionId },
+                new ProjectPermissionRoleDefinition { RoleID = projectAdminRoleId, PermissionID = canReadCallsheetPermissionId },
+                // Editor
+                new ProjectPermissionRoleDefinition { RoleID = editorRoleId, PermissionID = canEditGeneralPermissionId },
+                new ProjectPermissionRoleDefinition { RoleID = editorRoleId, PermissionID = canReadGeneralPermissionId },
+                new ProjectPermissionRoleDefinition { RoleID = editorRoleId, PermissionID = canReadCallsheetPermissionId },
+                // User
+                new ProjectPermissionRoleDefinition { RoleID = userRoleId, PermissionID = canReadGeneralPermissionId },
+                new ProjectPermissionRoleDefinition { RoleID = userRoleId, PermissionID = canReadCallsheetPermissionId },
+                // CallsheetUser
+                new ProjectPermissionRoleDefinition { RoleID = callsheetUserRoleId, PermissionID = canReadGeneralPermissionId },
+            };
+            
+            foreach(var permissionRole in permissionRoles)
+            {
+                if(!_context.ProjectPermissionRoleDefinitions.Any(p=> p.RoleID == permissionRole.RoleID && p.PermissionID == permissionRole.PermissionID))
+                {
+                    _context.Add(permissionRole);
+                }
+            }
+
+            _context.SaveChanges();
         }
         private void TestSeeding()
         {
