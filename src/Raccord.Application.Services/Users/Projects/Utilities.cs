@@ -3,6 +3,7 @@ using Raccord.Application.Core.Services.Users.Project;
 using Raccord.Application.Services.Crew.CrewMembers;
 using Raccord.Application.Services.Projects;
 using Raccord.Application.Services.Users;
+using Raccord.Application.Services.Users.ProjectRoles;
 using Raccord.Core.Enums;
 using Raccord.Domain.Model.Users;
 
@@ -19,6 +20,7 @@ namespace Raccord.Application.Services.Users.Projects
                 User = projectUser.User.Translate(),
                 Project = projectUser.Project.Translate(),
                 CrewMembers = projectUser.CrewMembers.Select(cm => cm.Translate()),
+                ProjectRole = projectUser.Role.Translate(),
             };
         }
         public static ProjectUserUserDto TranslateUser(this ProjectUser projectUser)

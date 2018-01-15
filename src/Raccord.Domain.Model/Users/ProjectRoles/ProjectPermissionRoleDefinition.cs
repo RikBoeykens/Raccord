@@ -8,7 +8,7 @@ namespace Raccord.Domain.Model.Users.ProjectRoles
     /// ID of the linked role
     /// </summary>
     /// <returns></returns>
-    public long RoleID { get; set; }
+    public long ProjectRoleID { get; set; }
 
     /// <summary>
     /// Linked role
@@ -20,7 +20,7 @@ namespace Raccord.Domain.Model.Users.ProjectRoles
     /// ID of the linked permission
     /// </summary>
     /// <returns></returns>
-    public long PermissionID { get; set; }
+    public long ProjectPermissionID { get; set; }
 
     /// <summary>
     /// Linked Permission

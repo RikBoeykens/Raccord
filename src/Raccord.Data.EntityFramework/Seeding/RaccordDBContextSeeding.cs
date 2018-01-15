@@ -157,6 +157,8 @@ namespace Raccord.Data.EntityFramework.Seeding
                     _context.Add(projectRole);
                 }
             }
+            
+            _context.SaveChanges();
 
             var canEditUserPermissionId = _context.ProjectPermissionDefinitions.Single(p=> p.Permission == ProjectPermissionEnum.CanEditUsers).ID;
             var canEditGeneralPermissionId = _context.ProjectPermissionDefinitions.Single(p=> p.Permission == ProjectPermissionEnum.CanEditGeneral).ID;
@@ -171,24 +173,24 @@ namespace Raccord.Data.EntityFramework.Seeding
             var permissionRoles = new List<ProjectPermissionRoleDefinition>
             {
                 // Project Admin
-                new ProjectPermissionRoleDefinition { RoleID = projectAdminRoleId, PermissionID = canEditUserPermissionId },
-                new ProjectPermissionRoleDefinition { RoleID = projectAdminRoleId, PermissionID = canEditGeneralPermissionId },
-                new ProjectPermissionRoleDefinition { RoleID = projectAdminRoleId, PermissionID = canReadGeneralPermissionId },
-                new ProjectPermissionRoleDefinition { RoleID = projectAdminRoleId, PermissionID = canReadCallsheetPermissionId },
+                new ProjectPermissionRoleDefinition { ProjectRoleID = projectAdminRoleId, ProjectPermissionID = canEditUserPermissionId },
+                new ProjectPermissionRoleDefinition { ProjectRoleID = projectAdminRoleId, ProjectPermissionID = canEditGeneralPermissionId },
+                new ProjectPermissionRoleDefinition { ProjectRoleID = projectAdminRoleId, ProjectPermissionID = canReadGeneralPermissionId },
+                new ProjectPermissionRoleDefinition { ProjectRoleID = projectAdminRoleId, ProjectPermissionID = canReadCallsheetPermissionId },
                 // Editor
-                new ProjectPermissionRoleDefinition { RoleID = editorRoleId, PermissionID = canEditGeneralPermissionId },
-                new ProjectPermissionRoleDefinition { RoleID = editorRoleId, PermissionID = canReadGeneralPermissionId },
-                new ProjectPermissionRoleDefinition { RoleID = editorRoleId, PermissionID = canReadCallsheetPermissionId },
+                new ProjectPermissionRoleDefinition { ProjectRoleID = editorRoleId, ProjectPermissionID = canEditGeneralPermissionId },
+                new ProjectPermissionRoleDefinition { ProjectRoleID = editorRoleId, ProjectPermissionID = canReadGeneralPermissionId },
+                new ProjectPermissionRoleDefinition { ProjectRoleID = editorRoleId, ProjectPermissionID = canReadCallsheetPermissionId },
                 // User
-                new ProjectPermissionRoleDefinition { RoleID = userRoleId, PermissionID = canReadGeneralPermissionId },
-                new ProjectPermissionRoleDefinition { RoleID = userRoleId, PermissionID = canReadCallsheetPermissionId },
+                new ProjectPermissionRoleDefinition { ProjectRoleID = userRoleId, ProjectPermissionID = canReadGeneralPermissionId },
+                new ProjectPermissionRoleDefinition { ProjectRoleID = userRoleId, ProjectPermissionID = canReadCallsheetPermissionId },
                 // CallsheetUser
-                new ProjectPermissionRoleDefinition { RoleID = callsheetUserRoleId, PermissionID = canReadGeneralPermissionId },
+                new ProjectPermissionRoleDefinition { ProjectRoleID = callsheetUserRoleId, ProjectPermissionID = canReadCallsheetPermissionId },
             };
             
             foreach(var permissionRole in permissionRoles)
             {
-                if(!_context.ProjectPermissionRoleDefinitions.Any(p=> p.RoleID == permissionRole.RoleID && p.PermissionID == permissionRole.PermissionID))
+                if(!_context.ProjectPermissionRoleDefinitions.Any(p=> p.ProjectRoleID == permissionRole.ProjectRoleID && p.ProjectPermissionID == permissionRole.ProjectPermissionID))
                 {
                     _context.Add(permissionRole);
                 }

@@ -6,6 +6,7 @@ namespace Raccord.Domain.Model.Users.ProjectRoles
   public class ProjectRoleDefinition : Entity
   {
     private ICollection<ProjectPermissionRoleDefinition> _permissions;
+    private ICollection<ProjectUser> _projectUsers;
 
     /// <summary>
     /// Name of the role
@@ -38,6 +39,22 @@ namespace Raccord.Domain.Model.Users.ProjectRoles
       set
       {
         _permissions = value;
+      }
+    }
+
+    /// <summary>
+    /// Users linked to the role
+    /// </summary>
+    /// <returns></returns>
+    public ICollection<ProjectUser> ProjectUsers
+    {
+      get
+      {
+        return _projectUsers ?? (_projectUsers = new List<ProjectUser>());
+      }
+      set
+      {
+        _projectUsers = value;
       }
     }
   }

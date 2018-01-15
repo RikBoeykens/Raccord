@@ -1,36 +1,38 @@
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Raccord.API.ViewModels.Account;
+using Raccord.API.ViewModels.Users.ProjectRoles;
+using Raccord.Application.Core.Services.Users.ProjectRoles;
 using Raccord.Domain.Model.Users;
 
 namespace Raccord.API.Controllers
 {
     public class AccountController : AbstractApiAuthController
-    { 
+    {
+        private readonly IProjectPermissionService _permissionService;
         public AccountController(
+            IProjectPermissionService permissionService,
             UserManager<ApplicationUser> userManager)
             : base(userManager)
         {
+            _permissionService = permissionService;
         }
 
-        // GET: api/account/sumary
-        [HttpGet("summary")]
-        public async Task<UserSummaryViewModel> GetSummary()
+        // GET: api/account/permissions
+        [HttpGet("permissions")]
+        public UserPermissionSummaryViewModel GetPermissions()
         {
-            var user = await _userManager.GetUserAsync(this.User);
             var isAdmin = this.User.IsInRole("admin");
+            var projectPermissions = _permissionService.GetProjectPermissions(GetUserId());
 
-            var vm = new UserSummaryViewModel
+            return new UserPermissionSummaryViewModel
             {
-                ID = user.Id,
-                Email = user.Email,
                 IsAdmin = isAdmin,
-                FirstName = user.FirstName,
-                LastName = user.LastName
+                ProjectPermissions = projectPermissions.Select(pp=> pp.Translate()),
             };
-
-            return vm;
         }
     }
 }

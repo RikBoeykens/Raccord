@@ -4,6 +4,7 @@ import { Http } from "@angular/http";
 import { AppSettings } from "../../app.settings";
 import { UserProfile } from "../model/user-profile.model";
 import { Base64Image } from "../../shared/model/base-64-image.model";
+import { UserProfileSummary } from "../model/user-profile-summary.model";
 
 @Injectable()
 export class UserProfileHttpService extends BaseHttpService {
@@ -16,6 +17,13 @@ export class UserProfileHttpService extends BaseHttpService {
   get(): Promise<UserProfile>{
 
     let uri = `${this._baseUri}`;
+
+    return this.doGet(uri);
+  }
+
+  getSummary(): Promise<UserProfileSummary>{
+
+    let uri = `${this._baseUri}/summary`;
 
     return this.doGet(uri);
   }

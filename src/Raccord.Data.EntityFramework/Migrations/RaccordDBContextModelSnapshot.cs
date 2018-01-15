@@ -1242,13 +1242,9 @@ namespace Raccord.Data.EntityFramework.Migrations
                     b.Property<long>("ID")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<long>("PermissionID");
+                    b.Property<long>("ProjectPermissionID");
 
-                    b.Property<long?>("ProjectPermissionID");
-
-                    b.Property<long?>("ProjectRoleID");
-
-                    b.Property<long>("RoleID");
+                    b.Property<long>("ProjectRoleID");
 
                     b.HasKey("ID");
 
@@ -1282,11 +1278,15 @@ namespace Raccord.Data.EntityFramework.Migrations
 
                     b.Property<long>("ProjectID");
 
+                    b.Property<long?>("RoleID");
+
                     b.Property<string>("UserID");
 
                     b.HasKey("ID");
 
                     b.HasIndex("ProjectID");
+
+                    b.HasIndex("RoleID");
 
                     b.HasIndex("UserID");
 
@@ -1804,11 +1804,13 @@ namespace Raccord.Data.EntityFramework.Migrations
                 {
                     b.HasOne("Raccord.Domain.Model.Users.ProjectRoles.ProjectPermissionDefinition", "ProjectPermission")
                         .WithMany("PermissionRoles")
-                        .HasForeignKey("ProjectPermissionID");
+                        .HasForeignKey("ProjectPermissionID")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("Raccord.Domain.Model.Users.ProjectRoles.ProjectRoleDefinition", "ProjectRole")
                         .WithMany("PermissionRoles")
-                        .HasForeignKey("ProjectRoleID");
+                        .HasForeignKey("ProjectRoleID")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Raccord.Domain.Model.Users.ProjectUser", b =>
@@ -1817,6 +1819,10 @@ namespace Raccord.Data.EntityFramework.Migrations
                         .WithMany("ProjectUsers")
                         .HasForeignKey("ProjectID")
                         .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Raccord.Domain.Model.Users.ProjectRoles.ProjectRoleDefinition", "Role")
+                        .WithMany("ProjectUsers")
+                        .HasForeignKey("RoleID");
 
                     b.HasOne("Raccord.Domain.Model.Users.ApplicationUser", "User")
                         .WithMany("ProjectUsers")
