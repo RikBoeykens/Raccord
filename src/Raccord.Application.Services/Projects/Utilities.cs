@@ -6,7 +6,6 @@ using System.Linq;
 using Raccord.Application.Services.Images;
 using System.Collections.Generic;
 using Raccord.Application.Core.Services.Crew.CrewMembers;
-using Raccord.Application.Services.Comments;
 
 namespace Raccord.Application.Services.Projects
 {
@@ -20,7 +19,6 @@ namespace Raccord.Application.Services.Projects
                 ID = project.ID,
                 Title = project.Title,
                 PrimaryImage = project.Images.FirstOrDefault(i=> i.IsPrimaryImage)?.Translate(),
-                Comments = project.Comments.Select(c => c.Translate())
             };
 
             return dto;

@@ -126,7 +126,8 @@ import {
   SceneActionComponent,
   SceneDialogueComponent,
   EditCommentComponent,
-  ShowCommentComponent
+  ShowCommentComponent,
+  CommentContainerComponent
 } from './projects';
 import { ScenePropertiesLandingComponent } from './projects';
 import { 
@@ -250,6 +251,7 @@ const COMPONENTS =[
   SceneDialogueComponent,
   EditCommentComponent,
   ShowCommentComponent,
+  CommentContainerComponent,
   ScenePropertiesLandingComponent,
   SelectEntityComponent,
   PlaceholderImageComponent,

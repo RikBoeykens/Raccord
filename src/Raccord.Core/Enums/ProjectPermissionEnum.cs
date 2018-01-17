@@ -6,6 +6,7 @@ namespace Raccord.Core.Enums
         CanEditUsers = 0,
         CanEditGeneral = 1,
         CanReadGeneral = 2,
-        CanReadCallsheet = 3
+        CanReadCallsheet = 3,
+        CanComment = 4
     }
 }

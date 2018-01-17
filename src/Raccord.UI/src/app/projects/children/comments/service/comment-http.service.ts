@@ -1,40 +1,39 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
-import { BaseHttpService } from '../../../../shared/service/base-http.service';
 import { AppSettings } from '../../../../app.settings';
 import { Comment } from '../model/comment.model';
 import { PostComment } from '../model/post-comment.model';
+import { BaseProjectHttpService } from '../../../shared/service/base-project-http.service';
 
 @Injectable()
-export class CommentHttpService extends BaseHttpService {
+export class CommentHttpService extends BaseProjectHttpService {
 
     constructor(protected _http: Http) { 
-        super(_http);
-        this._baseUri = `${AppSettings.API_ENDPOINT}/comments`;
+        super(_http, 'comments');
     }
 
-    getAll(projectId?: number, commentId?: number): Promise<Comment[]> {
+    getAll(authProjectId: number, parentProjectId?: number, parentCommentId?: number): Promise<Comment[]> {
 
-        var uri = `${this._baseUri}?projectId=${projectId}&commentId=${commentId}`;
+        var uri = `${this.getUri(authProjectId)}?parentProjectId=${parentProjectId}&parentCommentId=${parentCommentId}`;
 
         return this.doGetArray(uri);
     }
 
-    get(id: number): Promise<Comment> {
+    get(authProjectId: number, id: number): Promise<Comment> {
 
-        var uri = `${this._baseUri}/${id}`;
+        var uri = `${this.getUri(authProjectId)}/${id}`;
 
         return this.doGet(uri);
     }
 
-    post(comment: PostComment): Promise<number> {
-        var uri = this._baseUri;
+    post(authProjectId: number, comment: PostComment): Promise<number> {
+        var uri = this.getUri(authProjectId);
 
         return this.doPost(comment, uri);
     }
 
-    delete(id: Number): Promise<any> {
-        var uri = `${this._baseUri}/${id}`;
+    delete(authProjectId: number, id: Number): Promise<any> {
+        var uri = `${this.getUri(authProjectId)}/${id}`;
 
         return this.doDelete(uri);
     }

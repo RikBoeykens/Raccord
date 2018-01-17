@@ -33,15 +33,11 @@ export class ProjectLandingComponent {
         return AccountHelpers.hasProjectPermission(this.project.id, ProjectPermissionEnum.canReadCallsheet);
     }
 
+    getCanComment() {
+        return AccountHelpers.hasProjectPermission(this.project.id, ProjectPermissionEnum.CanComment);
+    }
+
     getComments() {
-        this._commentHttpService.getAll(this.project.id, null).then((comments)=> this.project.comments = comments);
-    }
-
-    onCommentSubmit(id: number) {
-        this.getComments();
-    }
-
-    onRemovedComment() {
-        this.getComments();
+        this._commentHttpService.getAll(this.project.id, this.project.id, null).then((comments)=> this.project.comments = comments);
     }
 }
