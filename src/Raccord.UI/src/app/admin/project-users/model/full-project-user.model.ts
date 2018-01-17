@@ -2,18 +2,21 @@ import { BaseModel } from '../../../shared/model/base.model';
 import { Project } from "../../../projects/index";
 import { User } from "../../users/model/user.model";
 import { CrewMember } from '../../../projects/children/crew/crew-members/model/crew-member.model';
+import { ProjectRole } from '../../project-roles/model/project-role.model';
 
 export class FullProjectUser extends BaseModel{
     id: number;
     project: Project;
     user: User;
     crewMembers: CrewMember[];
+    projectRole: ProjectRole;
 
     constructor(obj?: {
         id: number, 
         project: Project,
         user: User,
-        crewMembers: CrewMember[]
+        crewMembers: CrewMember[],
+        projectRole: ProjectRole
     }){
         super();
         if(obj){
@@ -21,6 +24,7 @@ export class FullProjectUser extends BaseModel{
             this.project = obj.project;
             this.user = obj.user;
             this.crewMembers = obj.crewMembers;
+            this.projectRole = obj.projectRole;
         }
     }
 }

@@ -7,12 +7,16 @@ using Raccord.Domain.Model.Users;
 using Raccord.API.ViewModels.Comments;
 using Raccord.Application.Core.Services.Comments;
 using Raccord.API.ViewModels.Core;
+using Raccord.API.Filters;
+using Raccord.Core.Enums;
 
-namespace Raccord.API.Controllers
+namespace Raccord.API.Controllers.Projects
 {
-    public class CommentsController : AbstractApiAuthController
+    [ProjectPermissionFilter(ProjectPermissionEnum.CanComment)]
+    public class CommentsController : AbstractProjectsController
     {
         private readonly ICommentService _commentService;
+
         public CommentsController(
             ICommentService commentService,
             UserManager<ApplicationUser> userManager
@@ -26,16 +30,16 @@ namespace Raccord.API.Controllers
 
         // GET: api/comments
         [HttpGet]
-        public IEnumerable<CommentViewModel> GetForProject([FromQuery]long? projectId = null, [FromQuery]long? commentId = null)
+        public IEnumerable<CommentViewModel> GetForProject([FromQuery]long? parentProjectId = null, [FromQuery]long? parentCommentId = null)
         {
-            if(!projectId.HasValue && !commentId.HasValue)
+            if(!parentProjectId.HasValue && !parentCommentId.HasValue)
             {
                 throw new NullReferenceException();
             }
             var dtos = _commentService.GetForParent(new GetCommentDto
             {
-                ProjectID = projectId,
-                CommentID = commentId
+                ProjectID = parentProjectId,
+                CommentID = parentCommentId
             });
 
             return dtos.Select(c=> c.Translate());

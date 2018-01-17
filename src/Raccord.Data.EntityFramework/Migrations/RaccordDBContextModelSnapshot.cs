@@ -1221,6 +1221,56 @@ namespace Raccord.Data.EntityFramework.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
+            modelBuilder.Entity("Raccord.Domain.Model.Users.ProjectRoles.ProjectPermissionDefinition", b =>
+                {
+                    b.Property<long>("ID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Description");
+
+                    b.Property<string>("Name");
+
+                    b.Property<int>("Permission");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("ProjectPermissionDefinitions");
+                });
+
+            modelBuilder.Entity("Raccord.Domain.Model.Users.ProjectRoles.ProjectPermissionRoleDefinition", b =>
+                {
+                    b.Property<long>("ID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<long>("ProjectPermissionID");
+
+                    b.Property<long>("ProjectRoleID");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("ProjectPermissionID");
+
+                    b.HasIndex("ProjectRoleID");
+
+                    b.ToTable("ProjectPermissionRoleDefinitions");
+                });
+
+            modelBuilder.Entity("Raccord.Domain.Model.Users.ProjectRoles.ProjectRoleDefinition", b =>
+                {
+                    b.Property<long>("ID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Description");
+
+                    b.Property<string>("Name");
+
+                    b.Property<int>("Role");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("ProjectRoleDefinitions");
+                });
+
             modelBuilder.Entity("Raccord.Domain.Model.Users.ProjectUser", b =>
                 {
                     b.Property<long>("ID")
@@ -1228,11 +1278,15 @@ namespace Raccord.Data.EntityFramework.Migrations
 
                     b.Property<long>("ProjectID");
 
+                    b.Property<long?>("RoleID");
+
                     b.Property<string>("UserID");
 
                     b.HasKey("ID");
 
                     b.HasIndex("ProjectID");
+
+                    b.HasIndex("RoleID");
 
                     b.HasIndex("UserID");
 
@@ -1746,12 +1800,29 @@ namespace Raccord.Data.EntityFramework.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
+            modelBuilder.Entity("Raccord.Domain.Model.Users.ProjectRoles.ProjectPermissionRoleDefinition", b =>
+                {
+                    b.HasOne("Raccord.Domain.Model.Users.ProjectRoles.ProjectPermissionDefinition", "ProjectPermission")
+                        .WithMany("PermissionRoles")
+                        .HasForeignKey("ProjectPermissionID")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Raccord.Domain.Model.Users.ProjectRoles.ProjectRoleDefinition", "ProjectRole")
+                        .WithMany("PermissionRoles")
+                        .HasForeignKey("ProjectRoleID")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
             modelBuilder.Entity("Raccord.Domain.Model.Users.ProjectUser", b =>
                 {
                     b.HasOne("Raccord.Domain.Model.Projects.Project", "Project")
                         .WithMany("ProjectUsers")
                         .HasForeignKey("ProjectID")
                         .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Raccord.Domain.Model.Users.ProjectRoles.ProjectRoleDefinition", "Role")
+                        .WithMany("ProjectUsers")
+                        .HasForeignKey("RoleID");
 
                     b.HasOne("Raccord.Domain.Model.Users.ApplicationUser", "User")
                         .WithMany("ProjectUsers")

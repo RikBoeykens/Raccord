@@ -11,5 +11,11 @@ namespace Raccord.API.ViewModels.Users.Projects
 
         // ID of the linked user
         public string UserID { get; set; }
+
+        /// <summary>
+        /// Role ID
+        /// </summary>
+        /// <returns></returns>
+        public long? RoleID { get; set; }
     }
 }

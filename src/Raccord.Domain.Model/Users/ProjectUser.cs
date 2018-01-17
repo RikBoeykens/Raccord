@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Raccord.Domain.Model.Crew.CrewMembers;
 using Raccord.Domain.Model.Projects;
 using Raccord.Domain.Model.Users;
+using Raccord.Domain.Model.Users.ProjectRoles;
 
 namespace Raccord.Domain.Model.Users
 {
@@ -18,6 +19,18 @@ namespace Raccord.Domain.Model.Users
         public string UserID { get; set; }
         // linked user
         public virtual ApplicationUser User { get; set; }
+
+        /// <summary>
+        /// Role associated with the user
+        /// </summary>
+        /// <returns></returns>
+        public long? RoleID { get; set; }
+
+        /// <summary>
+        /// Role associated with the user
+        /// </summary>
+        /// <returns></returns>
+        public virtual ProjectRoleDefinition Role { get; set; }
 
         // Crew Members associated with the user
         public virtual ICollection<CrewMember> CrewMembers

@@ -11,8 +11,6 @@ export class TokenHelpers {
   }
 
   public static removeTokens(){
-    sessionStorage.removeItem('access_token');
-    sessionStorage.removeItem('bearer_token');
-    sessionStorage.removeItem('expires_in');
+    sessionStorage.clear();
   }
 }

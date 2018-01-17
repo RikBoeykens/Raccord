@@ -4,6 +4,22 @@
   <a routerLink="/admin/users/{{projectUser.user.id}}" class="breadcrumb">{{projectUser.user.firstName}} {{projectUser.user.lastName}}</a>
   <span class="breadcrumb">{{projectUser.project.title}}</span>
 </md-card>
+<md-card>
+    <md-card-title>Role</md-card-title>
+    <md-card-content>
+        <div fxLayout="row">
+            <md-select fxFlex="50%" 
+                        mdInput placeholder="Role" 
+                        [(ngModel)]="projectUser.projectRole.id" 
+                        #projectRole="ngModel" 
+                        name="user_role_id"
+                        (change)="updateProjectUser()">
+                <md-option [value]="">---</md-option>
+                <md-option *ngFor="let projectRole of projectRoles" [value]="projectRole.id">{{ projectRole.name }}</md-option>
+            </md-select>
+        </div>
+    </md-card-content>
+</md-card>
 <md-card *ngIf="projectUser.crewMembers.length">
   <md-card-title>Linked crew</md-card-title>
   <md-card-content>

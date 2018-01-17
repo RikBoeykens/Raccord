@@ -126,7 +126,8 @@ import {
   SceneActionComponent,
   SceneDialogueComponent,
   EditCommentComponent,
-  ShowCommentComponent
+  ShowCommentComponent,
+  CommentContainerComponent
 } from './projects';
 import { ScenePropertiesLandingComponent } from './projects';
 import { 
@@ -250,6 +251,7 @@ const COMPONENTS =[
   SceneDialogueComponent,
   EditCommentComponent,
   ShowCommentComponent,
+  CommentContainerComponent,
   ScenePropertiesLandingComponent,
   SelectEntityComponent,
   PlaceholderImageComponent,
@@ -381,7 +383,11 @@ import {
 } from "./security";
 
 import {
-  AccountHttpService
+  AccountHttpService,
+  CanEditGeneralProjectPermissionGuard,
+  CanEditUsersProjectPermissionGuard,
+  CanReadCallsheetProjectPermissionGuard,
+  CanReadGeneralProjectPermissionGuard
 } from "./account";
 
 import {
@@ -397,7 +403,9 @@ import {
   AdminProjectUsersResolve,
   AdminProjectUserResolve,
   AdminUserProjectsResolve,
-  AdminSearchEngineService
+  AdminSearchEngineService,
+  AdminProjectRoleHttpService,
+  AdminProjectRolesResolve
 } from "./admin";
 
 import {
@@ -468,6 +476,10 @@ const APP_PROVIDERS = [
   AuthService,
   AuthGuard,
   AccountHttpService,
+  CanEditGeneralProjectPermissionGuard,
+  CanEditUsersProjectPermissionGuard,
+  CanReadCallsheetProjectPermissionGuard,
+  CanReadGeneralProjectPermissionGuard,
   ShootingDayHttpService,
   AvailableCallsheetShootingDaysResolve,
   AvailableCompletionShootingDaysResolve,
@@ -505,6 +517,8 @@ const APP_PROVIDERS = [
   AdminProjectUserCrewHttpService,
   AdminProjectUsersResolve,
   AdminProjectUserResolve,
+  AdminProjectRoleHttpService,
+  AdminProjectRolesResolve,
   AdminUserProjectsResolve,
   AdminSearchEngineService,
   ChartHttpService,

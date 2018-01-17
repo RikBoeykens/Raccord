@@ -36,7 +36,14 @@ namespace Raccord.API.Controllers
         return dto.Translate();
     }
 
+    // GET: api/userprofile/summary
+    [HttpGet("summary")]
+    public UserProfileSummaryViewModel GetSummary()
+    {
+        var dto = _userProfileService.GetProfileSummary(GetUserId());
 
+        return dto.Translate();
+    }
 
     // POST api/userprofile
     [HttpPost]

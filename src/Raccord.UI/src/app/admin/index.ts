@@ -14,6 +14,9 @@ export { AdminUserProjectsResolve } from "./project-users/service/admin-user-pro
 
 export { AdminProjectUserCrewHttpService } from "./project-users/service/admin-project-user-crew-http.service";
 
+export { AdminProjectRoleHttpService } from "./project-roles/service/admin-project-role-http.service";
+export { AdminProjectRolesResolve } from "./project-roles/service/admin-project-roles-resolve.service";
+
 export { AdminSearchEngineService } from "./search/service/admin-search-engine.service";
 
 export { AdminSearchProjectComponent } from "./projects/component/admin-search-project/admin-search-project.component";

@@ -14,8 +14,9 @@ export class EditCommentComponent implements OnInit{
 
     @Output() submittedComment = new EventEmitter();
     @Input() comment: Comment;
-    @Input() projectId?: number;
-    @Input() commentId?: number;
+    @Input() projectId: number;
+    @Input() parentProjectId?: number;
+    @Input() parentCommentId?: number;
     postComment: PostComment;
 
     constructor(
@@ -33,15 +34,15 @@ export class EditCommentComponent implements OnInit{
         this.postComment = new PostComment({
             id: this.comment != null ? this.comment.id : 0,
             text: this.comment != null ? this.comment.text : '',
-            projectID: this.projectId,
-            commentID: this.commentId
+            projectID: this.parentProjectId,
+            commentID: this.parentCommentId
           });
     }
 
     doCommentSubmit(){
       let loadingId = this._loadingService.startLoading();
 
-      this._commentHttpService.post(this.postComment).then(data=>{
+      this._commentHttpService.post(this.projectId, this.postComment).then(data=>{
           if(typeof(data)=='string'){
               this._dialogService.error(data);
           }else{

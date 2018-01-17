@@ -10,6 +10,8 @@ import { CrewMember } from "../../../../projects/children/crew/crew-members/mode
 import { CrewMemberHttpService } from "../../../../projects/children/crew/crew-members/service/crew-member-http.service";
 import { MdDialog } from "@angular/material";
 import { AdminEditCrewMemberDialog } from "../admin-edit-crew-member-dialog/admin-edit-crew-member-dialog.component";
+import { ProjectRole } from "../../../project-roles/model/project-role.model";
+import { ProjectUser } from "../../model/project-user.model";
 
 @Component({
   templateUrl: 'admin-project-user-landing.component.html',
@@ -17,6 +19,7 @@ import { AdminEditCrewMemberDialog } from "../admin-edit-crew-member-dialog/admi
 export class AdminProjectUserLandingComponent implements OnInit  {
 
   projectUser: FullProjectUser;
+  projectRoles: ProjectRole[];
 
   constructor(
       private _projectUserHttpService: AdminProjectUserHttpService,
@@ -30,8 +33,9 @@ export class AdminProjectUserLandingComponent implements OnInit  {
   }
 
   ngOnInit() {
-      this.route.data.subscribe((data: { projectUser: FullProjectUser }) => {
+      this.route.data.subscribe((data: { projectUser: FullProjectUser, projectRoles: ProjectRole[] }) => {
           this.projectUser = data.projectUser;
+          this.projectRoles = data.projectRoles;
       });
   }
 
@@ -46,6 +50,27 @@ export class AdminProjectUserLandingComponent implements OnInit  {
         }
     }).catch()
     .then(()=>
+        this._loadingService.endLoading(loadingId)
+    );
+  }
+
+  public updateProjectUser() {
+    let loadingId = this._loadingService.startLoading();
+    let toUpdate = new ProjectUser({ 
+        id: this.projectUser.id, 
+        projectID: this.projectUser.project.id,
+        userID: this.projectUser.user.id,
+        roleID: this.projectUser.projectRole !== null ?
+                    this.projectUser.projectRole.id !== 0 ?
+                        this.projectUser.projectRole.id : null : null
+    });
+
+    this._projectUserHttpService.post(toUpdate).then((data) => {
+        if (typeof(data) === 'string') {
+            this._dialogService.error(data);
+        }
+    }).catch()
+    .then(() =>
         this._loadingService.endLoading(loadingId)
     );
   }
@@ -69,8 +94,6 @@ export class AdminProjectUserLandingComponent implements OnInit  {
         this._loadingService.endLoading(loadingId)
     );
   }
-
-
 
     public editCrewMember(crewMember: CrewMember) {
         let crewMemberDialog = this._dialog.open(AdminEditCrewMemberDialog, {data:

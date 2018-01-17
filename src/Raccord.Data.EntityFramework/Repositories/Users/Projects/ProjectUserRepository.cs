@@ -33,6 +33,13 @@ namespace Raccord.Data.EntityFramework.Repositories.Users.Projects
             return query.FirstOrDefault(cu=> cu.ID == ID);
         }
 
+        public ProjectUser GetForPermissions(long projectID, string userID)
+        {
+            var query = GetIncludedPermissions();
+
+            return query.FirstOrDefault(cu=> cu.ProjectID == projectID && cu.UserID == userID);
+        }
+
         private IQueryable<ProjectUser> GetIncludedFull()
         {
             IQueryable<ProjectUser> query = _context.Set<ProjectUser>();
@@ -41,7 +48,10 @@ namespace Raccord.Data.EntityFramework.Repositories.Users.Projects
                         .Include(cu=> cu.Project)
                         .ThenInclude(p=> p.Images)
                         .Include(pu=> pu.CrewMembers)
-                        .ThenInclude(cm=> cm.Department);
+                        .ThenInclude(cm=> cm.Department)
+                        .Include(pu=> pu.Role)
+                        .ThenInclude(r=> r.PermissionRoles)
+                        .ThenInclude(pr => pr.ProjectPermission);
         }
 
         private IQueryable<ProjectUser> GetIncludedUser()
@@ -57,6 +67,15 @@ namespace Raccord.Data.EntityFramework.Repositories.Users.Projects
 
             return query.Include(cs=> cs.Project)
                         .ThenInclude(p=> p.Images);
+        }
+
+        private IQueryable<ProjectUser> GetIncludedPermissions()
+        {
+            IQueryable<ProjectUser> query = _context.Set<ProjectUser>();
+
+            return query.Include(pu=> pu.Role)
+                        .ThenInclude(r=> r.PermissionRoles)
+                        .ThenInclude(pr=> pr.ProjectPermission);
         }
     }
 }

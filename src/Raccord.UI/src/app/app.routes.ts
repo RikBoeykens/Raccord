@@ -123,8 +123,16 @@ import {
   AdminUserResolve,
   AdminProjectUsersResolve,
   AdminUserProjectsResolve,
-  AdminProjectUserResolve
+  AdminProjectUserResolve,
+  AdminProjectRolesResolve
 } from "./admin";
+
+import {
+  CanEditGeneralProjectPermissionGuard,
+  CanEditUsersProjectPermissionGuard,
+  CanReadCallsheetProjectPermissionGuard,
+  CanReadGeneralProjectPermissionGuard
+} from './account';
 
 import { CanDeactivateGuard } from './shared/service/can-deactivate-guard.service';
 import { AuthGuard } from "./security";
@@ -136,7 +144,7 @@ export const ROUTES: Routes = [
   { path: 'dashboard',  component: DashboardComponent, canActivate: [AuthGuard] },
   { path: 'login',  component: LoginComponent },
   { path: 'search',  component: SearchComponent, canActivate: [AuthGuard] },
-  { 
+  {
     path: 'admin',
     canActivate: [AdminGuard],
     children:[
@@ -215,7 +223,8 @@ export const ROUTES: Routes = [
             path: ':projectUserId',
             component: AdminProjectUserLandingComponent,
             resolve:{
-              projectUser: AdminProjectUserResolve
+              projectUser: AdminProjectUserResolve,
+              projectRoles: AdminProjectRolesResolve
             }
           },
           {
@@ -262,10 +271,11 @@ export const ROUTES: Routes = [
             component: ProjectLandingComponent,
             resolve:{
               project: ProjectResolve
-            }               
+            }
           },
           {
             path: 'scenes',
+            canActivate: [CanReadGeneralProjectPermissionGuard],
             children:[
               {
                 path: '',
@@ -296,6 +306,7 @@ export const ROUTES: Routes = [
           },
           {
             path: 'scriptlocations',
+            canActivate: [CanReadGeneralProjectPermissionGuard],
             children:[
               {
                 path: '',
@@ -317,6 +328,7 @@ export const ROUTES: Routes = [
           },
           {
             path: 'sceneproperties',
+            canActivate: [CanReadGeneralProjectPermissionGuard],
             component: ScenePropertiesLandingComponent,
             resolve:{
               project: ProjectSummaryResolve,
@@ -324,6 +336,7 @@ export const ROUTES: Routes = [
           },
           {
             path: 'daynights',
+            canActivate: [CanReadGeneralProjectPermissionGuard],
             children:[
               {
                 path: '',
@@ -345,6 +358,7 @@ export const ROUTES: Routes = [
           },
           {
             path: 'intexts',
+            canActivate: [CanReadGeneralProjectPermissionGuard],
             children:[
               {
                 path: '',
@@ -366,6 +380,7 @@ export const ROUTES: Routes = [
           },
           {
             path: 'images',
+            canActivate: [CanReadGeneralProjectPermissionGuard],
             children:[
               {
                 path: '',
@@ -387,6 +402,7 @@ export const ROUTES: Routes = [
           },
           {
             path: 'characters',
+            canActivate: [CanReadGeneralProjectPermissionGuard],
             children:[
               {
                 path: '',
@@ -408,6 +424,7 @@ export const ROUTES: Routes = [
           },
           {
             path: 'breakdown',
+            canActivate: [CanReadGeneralProjectPermissionGuard],
             children:[
               {
                 path: '',
@@ -455,6 +472,7 @@ export const ROUTES: Routes = [
           },
           {
             path: 'scheduling',
+            canActivate: [CanReadGeneralProjectPermissionGuard],
             children:[
               {
                 path: '',
@@ -478,6 +496,7 @@ export const ROUTES: Routes = [
           },
           {
             path: "locations",
+            canActivate: [CanReadGeneralProjectPermissionGuard],
             children:[
               {
                 path: "",
@@ -499,6 +518,7 @@ export const ROUTES: Routes = [
           },
           {
             path: "locationsets",
+            canActivate: [CanReadGeneralProjectPermissionGuard],
             children:[
               {
                 path: ":locationSetId",
@@ -512,6 +532,7 @@ export const ROUTES: Routes = [
           },
           {
             path: "callsheets",
+            canActivate: [CanReadCallsheetProjectPermissionGuard],
             children:[
               {
                 path: "",
@@ -524,6 +545,7 @@ export const ROUTES: Routes = [
               {
                 path: "new",
                 component: NewCallsheetComponent,
+                canActivate: [CanEditGeneralProjectPermissionGuard],
                 resolve:{
                   project: ProjectSummaryResolve,
                   availableDays: AvailableCallsheetShootingDaysResolve
@@ -539,6 +561,7 @@ export const ROUTES: Routes = [
               },
               {
                 path: ":callsheetId/wizard",
+                canActivate: [CanEditGeneralProjectPermissionGuard],
                 children:[
                   {
                     path: "1",                
@@ -581,6 +604,7 @@ export const ROUTES: Routes = [
           },
           {
             path: 'slates',
+            canActivate: [CanReadGeneralProjectPermissionGuard],
             children:[
               {
                 path: '',
@@ -604,6 +628,7 @@ export const ROUTES: Routes = [
           },
           {
             path: 'charts',
+            canActivate: [CanReadGeneralProjectPermissionGuard],
             children:[
               {
                 path: '',
@@ -617,6 +642,7 @@ export const ROUTES: Routes = [
           },
           {
             path: 'shootingdays',
+            canActivate: [CanReadGeneralProjectPermissionGuard],
             children:[
               {
                 path: '',
@@ -639,6 +665,7 @@ export const ROUTES: Routes = [
           },
           {
             path: 'crew',
+            canActivate: [CanReadGeneralProjectPermissionGuard],
             children: [
               {
                 path: '',
@@ -652,6 +679,7 @@ export const ROUTES: Routes = [
           },
           {
             path: 'scriptuploads',
+            canActivate: [CanEditGeneralProjectPermissionGuard],
             children:[
               {
                 path: '',
@@ -672,6 +700,7 @@ export const ROUTES: Routes = [
           },
           {
             path: 'scripttext',
+            canActivate: [CanReadGeneralProjectPermissionGuard],
             children:[
               {
                 path: '',
