@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Character } from '../../model/character.model';
 import { SearchEngineService } from '../../../../../search/service/search-engine.service';
 import { LoadingService } from '../../../../../loading/service/loading.service';
@@ -12,6 +12,7 @@ import { DialogService } from '../../../../../shared/service/dialog.service';
 })
 export class SearchCharacterComponent{
 
+    @Output() public setCharacter = new EventEmitter();
     @Input() searchCharacter: Character;
     searchResults: SearchResult[] = [];
 
@@ -53,5 +54,6 @@ export class SearchCharacterComponent{
         this.searchCharacter.name = result.displayName;
         this.searchCharacter.id = result.id;
         this.clearSearch();
+        this.setCharacter.emit();
     }
 }

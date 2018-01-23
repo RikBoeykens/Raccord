@@ -166,6 +166,30 @@ namespace Raccord.Application.Services.Scenes
             _sceneRepository.Commit();
         }
 
+        public IEnumerable<SceneSummaryDto> Filter(SceneFilterRequestDto filter)
+        {
+            var scenes = _sceneRepository.Filter(
+                filter.ProjectID,
+                filter.IntExtIDs,
+                filter.ScriptLocationIDs,
+                filter.DayNightIDs,
+                filter.LocationSetIDs,
+                filter.LocationIDs,
+                filter.CharacterIDs,
+                filter.BreakdownItemIDs,
+                filter.ScheduleDayIDs,
+                filter.ScheduleSceneShootingDayIDs,
+                filter.CallsheetIDs,
+                filter.CallsheetSceneShootingDayIDs,
+                filter.ShootingDayIDs,
+                filter.SearchText,
+                filter.MinPageLength,
+                filter.MaxPageLength
+            );
+
+            return scenes.Select(s => s.TranslateSummary()).ToList();
+        }
+
         private void CreatePropertiesIfNecessary(SceneDto scene, long? scriptUploadID = null)
         {
             if(scene.IntExt.ID == default(long) && !string.IsNullOrEmpty(scene.IntExt.Name))

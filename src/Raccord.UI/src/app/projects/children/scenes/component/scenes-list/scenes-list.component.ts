@@ -8,6 +8,7 @@ import { LoadingService } from '../../../../../loading/service/loading.service';
 import { DialogService } from '../../../../../shared/service/dialog.service';
 import { DragulaService } from 'ng2-dragula';
 import { HtmlClassHelpers } from '../../../../../shared/helpers/html-class.helpers';
+import { SceneFilterRequest } from '../../model/scene-filter-request.model';
 
 @Component({
     templateUrl: 'scenes-list.component.html',
@@ -20,6 +21,7 @@ export class ScenesListComponent implements OnInit {
     viewNewScene: Scene;
     newScene: Scene;
     draggingScene: boolean;
+    sceneFilter: SceneFilterRequest = new SceneFilterRequest();
 
     constructor(
         private _sceneHttpService: SceneHttpService,
@@ -59,6 +61,7 @@ export class ScenesListComponent implements OnInit {
             this.scenes = data.scenes;
             this.project = data.project;
             this.resetNewScene();
+            this.sceneFilter.projectID = this.project.id;
         });
     }
 
@@ -76,6 +79,14 @@ export class ScenesListComponent implements OnInit {
         let loadingId = this._loadingService.startLoading();
 
         this._sceneHttpService.getAll(this.project.id).then(data => {
+            this.scenes = data;
+            this._loadingService.endLoading(loadingId);
+        });
+    }
+
+    filterScenes() {
+        let loadingId = this._loadingService.startLoading();
+        this._sceneHttpService.filter(this.sceneFilter).then(data => {
             this.scenes = data;
             this._loadingService.endLoading(loadingId);
         });

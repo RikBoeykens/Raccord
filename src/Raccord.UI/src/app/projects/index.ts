@@ -24,6 +24,7 @@ export {
     SceneSlatesComponent,
     SceneTimingsComponent,
     SceneSummaryComponent,
+    FilterScenesComponent,
     ChooseSceneDialog
 } from './children/scenes';
 export { SceneHttpService } from './children/scenes/service/scene-http.service';
@@ -79,7 +80,9 @@ export { CharacterLandingComponent } from './children/characters/component/chara
 export { CharacterImagesComponent } from './children/characters/component/character-images/character-images.component';
 export { CharacterScenesComponent } from './children/characters/component/character-scenes/character-scenes.component';
 export {
-    CharacterScheduleComponent
+    CharacterScheduleComponent,
+    CharacterSummaryComponent,
+    SearchCharactersCollectionComponent
 } from "./children/characters";
 export { CharacterHttpService } from './children/characters/service/character-http.service';
 export { ImageCharacterHttpService } from './children/characters/service/image-character-http.service';

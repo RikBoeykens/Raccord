@@ -1,0 +1,14 @@
+<div>
+    <div fxLayout="row" fxLayoutGap="10px">
+        <md-input-container fxFlex="50%">
+            <input mdInput placeholder="Search" [(ngModel)]="sceneFilter.searchText" name="scene_search_text" (change)="doFilter()">
+        </md-input-container>
+        <md-input-container fxFlex="25%">
+            <input mdInput placeholder="Min" [(ngModel)]="minPageLengthString" name="scene_min_pagelength" (change)="filterPagelengths()">
+        </md-input-container>
+        <md-input-container fxFlex="25%">
+            <input mdInput placeholder="Max" [(ngModel)]="maxPageLengthString" name="scene_max_pagelength" (change)="filterPagelengths()">
+        </md-input-container>
+    </div>
+    <search-characters-collection [projectID]="projectID" (onChange)="filterCharacters($event)"></search-characters-collection>
+  </div>

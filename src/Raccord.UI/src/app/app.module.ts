@@ -47,6 +47,7 @@ import {
   SceneSlatesComponent,
   SceneTimingsComponent,
   SceneSummaryComponent,
+  FilterScenesComponent,
   ChooseSceneDialog
 } from './projects';
 import { ScriptLocationsListComponent } from './projects';
@@ -77,7 +78,9 @@ import {
   CharacterImagesComponent,
   CharacterScenesComponent,
   CharacterScheduleComponent,
-  SearchCharacterComponent 
+  SearchCharacterComponent,
+  CharacterSummaryComponent,
+  SearchCharactersCollectionComponent
 } from './projects';
 import { BreakdownLandingComponent } from './projects';
 import { BreakdownTypeSettingsComponent } from './projects';
@@ -181,6 +184,7 @@ const COMPONENTS =[
   SceneSlatesComponent,
   SceneTimingsComponent,
   SceneSummaryComponent,
+  FilterScenesComponent,
   ScriptLocationsListComponent,
   EditScriptLocationComponent,
   ScriptLocationLandingComponent,
@@ -207,6 +211,8 @@ const COMPONENTS =[
   CharacterScenesComponent,
   CharacterScheduleComponent,
   SearchCharacterComponent,
+  CharacterSummaryComponent,
+  SearchCharactersCollectionComponent,
   BreakdownLandingComponent,
   BreakdownTypeSettingsComponent,
   EditBreakdownTypeComponent,

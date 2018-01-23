@@ -153,5 +153,34 @@ namespace Raccord.API.Controllers
 
             return new JsonResult(response);
         }
+
+        // POST api/filter
+        [HttpPost("filter")]
+        public JsonResult Filter([FromBody]SceneFilterRequestViewModel vm)
+        {
+            var response = new JsonResponse();
+
+            try
+            {
+                var requestDto = vm.Translate();
+                var results = _sceneService.Filter(requestDto);
+
+                response = new JsonResponse
+                {
+                    ok = true,
+                    data = results.Select(r=> r.Translate()),
+                };
+            }
+            catch (Exception)
+            {
+                response = new JsonResponse
+                {
+                    ok = false,
+                    message = "Something went wrong while trying to get search results.",
+                };
+            }
+
+            return new JsonResult(response);
+        }
     }
 }
