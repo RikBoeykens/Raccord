@@ -55,6 +55,9 @@ export { IntExtLandingComponent } from './children/scene-properties/component/in
 export { IntExtHttpService } from './children/scene-properties/service/int-ext-http.service';
 export { IntExtResolve } from './children/scene-properties/service/int-ext-resolve.service';
 export { IntExtsResolve } from './children/scene-properties/service/int-exts-resolve.service';
+export {
+    SearchIntExtsCollectionComponent
+} from './children/scene-properties';
 
 export { DayNightListComponent } from './children/scene-properties/component/day-night-list/day-night-list.component';
 export { SearchDayNightComponent } from './children/scene-properties/component/search-day-night/search-day-night.component';

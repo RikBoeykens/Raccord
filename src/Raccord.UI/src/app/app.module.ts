@@ -58,10 +58,13 @@ import {
   ScriptLocationSetsComponent 
 } from './projects';
 import { SearchScriptLocationComponent } from './projects';
-import { IntExtListComponent } from './projects';
-import { EditIntExtComponent } from './projects';
-import { IntExtLandingComponent } from './projects';
-import { SearchIntExtComponent } from './projects';
+import { 
+  IntExtListComponent,
+  EditIntExtComponent,
+  IntExtLandingComponent,
+  SearchIntExtComponent,
+  SearchIntExtsCollectionComponent
+} from './projects';
 import { DayNightListComponent } from './projects';
 import { EditDayNightComponent } from './projects';
 import { DayNightLandingComponent } from './projects';
@@ -195,6 +198,7 @@ const COMPONENTS =[
   EditIntExtComponent,
   IntExtLandingComponent,
   SearchIntExtComponent,
+  SearchIntExtsCollectionComponent,
   SearchDayNightComponent,
   DayNightListComponent,
   EditDayNightComponent,

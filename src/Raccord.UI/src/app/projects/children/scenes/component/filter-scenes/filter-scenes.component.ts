@@ -2,6 +2,7 @@ import { Component, Input, Output, EventEmitter, OnChanges } from "@angular/core
 import { SceneFilterRequest } from "../../model/scene-filter-request.model";
 import { PageLengthHelpers } from "../../../../../shared/helpers/page-length.helpers";
 import { Character } from "../../../characters/model/character.model";
+import { IntExt } from "../../../scene-properties/model/int-ext.model";
 
 @Component({
   selector: 'filter-scenes',
@@ -28,9 +29,13 @@ export class FilterScenesComponent implements OnChanges {
     this.doFilter();
   }
 
+  public filterIntExts(intExts: IntExt[]) {
+    this.sceneFilter.intExtIDs = intExts.map((intExt: IntExt) => intExt.id);
+    this.doFilter();
+  }
+
   public filterCharacters(characters: Character[]) {
     this.sceneFilter.characterIDs = characters.map((character: Character) => character.id);
-    console.log(this.sceneFilter.characterIDs);
     this.doFilter();
   }
 

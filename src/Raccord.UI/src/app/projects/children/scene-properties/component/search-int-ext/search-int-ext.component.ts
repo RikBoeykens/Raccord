@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { IntExt } from '../../model/int-ext.model';
 import { SearchEngineService } from '../../../../../search/service/search-engine.service';
 import { LoadingService } from '../../../../../loading/service/loading.service';
@@ -12,6 +12,7 @@ import { DialogService } from '../../../../../shared/service/dialog.service';
 })
 export class SearchIntExtComponent{
 
+    @Output() public setIntExt = new EventEmitter();
     @Input() sceneIntExt: IntExt;
     searchResults: SearchResult[] = [];
 
@@ -53,5 +54,6 @@ export class SearchIntExtComponent{
         this.sceneIntExt.name = result.displayName;
         this.sceneIntExt.id = result.id;
         this.clearSearch();
+        this.setIntExt.emit();
     }
 }

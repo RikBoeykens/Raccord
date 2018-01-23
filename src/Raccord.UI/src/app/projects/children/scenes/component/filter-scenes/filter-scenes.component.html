@@ -10,5 +10,6 @@
             <input mdInput placeholder="Max" [(ngModel)]="maxPageLengthString" name="scene_max_pagelength" (change)="filterPagelengths()">
         </md-input-container>
     </div>
+    <search-int-exts-collection [projectID]="projectID" (onChange)="filterIntExts($event)"></search-int-exts-collection>
     <search-characters-collection [projectID]="projectID" (onChange)="filterCharacters($event)"></search-characters-collection>
   </div>

@@ -1,0 +1,1 @@
+export { SearchIntExtsCollectionComponent } from './component/search-int-exts-collection/search-int-exts-collection.component';
