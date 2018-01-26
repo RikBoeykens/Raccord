@@ -35,8 +35,13 @@ export class AdminSearchProjectComponent{
         }
 
         let loadingId = this._loadingService.startLoading();
-        
-        this._searchEngineService.search({ searchText: this.searchProject.title, includeTypes: [EntityType.project], excludeTypes: []}).then(results=>{
+
+        this._searchEngineService.search({ 
+                searchText: this.searchProject.title, 
+                includeTypes: [EntityType.project], 
+                excludeTypes: [],
+                excludeTypeIDs: []
+            }).then(results=>{
             if(typeof(results)=='string'){
                 this._dialogService.error(results);
             }

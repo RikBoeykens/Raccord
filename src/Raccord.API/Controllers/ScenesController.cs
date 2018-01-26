@@ -6,9 +6,11 @@ using Raccord.API.ViewModels.Scenes;
 using Raccord.API.ViewModels.Core;
 using Raccord.Application.Core.Services.Scenes;
 using Raccord.API.ViewModels.Common.Sorting;
-using Raccord.API.ViewModels.Images;
 using Microsoft.AspNetCore.Identity;
 using Raccord.Domain.Model.Users;
+using PaginationUtilities = Raccord.API.ViewModels.Common.Paging.Utilities;
+using SceneUtilities = Raccord.API.ViewModels.Scenes.Utilities;
+using Raccord.API.ViewModels.Common.Paging;
 
 namespace Raccord.API.Controllers
 {
@@ -156,19 +158,20 @@ namespace Raccord.API.Controllers
 
         // POST api/filter
         [HttpPost("filter")]
-        public JsonResult Filter([FromBody]SceneFilterRequestViewModel vm)
+        public JsonResult Filter([FromBody]SceneFilterRequestViewModel vm, [FromQuery]int? pageSize = null, [FromQuery]int? page = null, [FromQuery]bool full = true)
         {
             var response = new JsonResponse();
 
             try
             {
+                var paginationRequest = PaginationUtilities.ConstructRequest(pageSize, pageSize, full);
                 var requestDto = vm.Translate();
-                var results = _sceneService.Filter(requestDto);
+                var paginationResult = _sceneService.Filter(requestDto, paginationRequest);
 
                 response = new JsonResponse
                 {
                     ok = true,
-                    data = results.Select(r=> r.Translate()),
+                    data = paginationResult.Translate<SceneSummaryViewModel, SceneSummaryDto>(SceneUtilities.Translate),
                 };
             }
             catch (Exception)

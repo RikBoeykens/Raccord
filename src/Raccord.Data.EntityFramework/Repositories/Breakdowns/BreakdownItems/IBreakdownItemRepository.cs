@@ -9,7 +9,7 @@ namespace Raccord.Data.EntityFramework.Repositories.Breakdowns.BreakdownItems
         IEnumerable<BreakdownItem> GetAllForType(long typeID);
         BreakdownItem GetFull(long ID);
         BreakdownItem GetSummary(long ID);
-        int SearchCount(string searchText, long? projectID, long? typeID, string userID, bool isAdmin);
-        IEnumerable<BreakdownItem> Search(string searchText, long? projectID, long? typeID, string userID, bool isAdmin);
+        int SearchCount(string searchText, long? projectID, long? typeID, string userID, bool isAdmin, long[] excludeIds);
+        IEnumerable<BreakdownItem> Search(string searchText, long? projectID, long? typeID, string userID, bool isAdmin, long[] excludeIds);
     }
 }

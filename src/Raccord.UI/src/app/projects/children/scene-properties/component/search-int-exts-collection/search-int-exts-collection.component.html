@@ -1,5 +1,5 @@
 <div fxLayout="row" fxLayoutGap="10px">
-    <search-int-ext fxFlex="25%" [sceneIntExt]="searchEntity" (setIntExt)="addEntity()"></search-int-ext>
+    <search-int-ext fxFlex="25%" [sceneIntExt]="searchEntity" (setIntExt)="addEntity()" [excludeIntExts]="entities"></search-int-ext>
     <md-chip-list fxFlex="75%" md-line>
         <a *ngFor="let entity of entities">
             <md-chip>

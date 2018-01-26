@@ -4,12 +4,14 @@ using Raccord.Application.Core.Services.Images;
 using Raccord.Application.Core.Services.SearchEngine;
 using Raccord.Data.EntityFramework.Repositories.Images;
 using Raccord.Core.Enums;
+using Raccord.Application.Services.SearchEngine;
 
 namespace Raccord.Application.Services.Images
 {
     // Service to search for images
     public class ImageSearchEngineService : IImageSearchEngineService
     {
+        private readonly EntityType _type = EntityType.Image;
         private readonly IImageRepository _imageRepository;
 
         // Initialises a new ImageSearchEngineService
@@ -23,13 +25,14 @@ namespace Raccord.Application.Services.Images
 
         public new EntityType GetType()
         {
-            return EntityType.Image;
+            return _type;
         }
 
         public SearchTypeResultDto GetResults(SearchRequestDto request)
         {
-            var imageCount = _imageRepository.SearchCount(request.SearchText, request.ProjectID, request.UserID, request.IsAdminSearch);
-            var images = _imageRepository.Search(request.SearchText, request.ProjectID, request.UserID, request.IsAdminSearch);
+            var excludeIds = request.GetExcludeIDs(_type);
+            var imageCount = _imageRepository.SearchCount(request.SearchText, request.ProjectID, request.UserID, request.IsAdminSearch, excludeIds);
+            var images = _imageRepository.Search(request.SearchText, request.ProjectID, request.UserID, request.IsAdminSearch, excludeIds);
 
             return new SearchTypeResultDto
             {

@@ -14,6 +14,7 @@ using Raccord.Application.Core.Common.Sorting;
 using Raccord.Data.EntityFramework.Repositories.Images;
 using Raccord.Data.EntityFramework.Repositories.ShootingDays;
 using Raccord.Core.Utilities;
+using Raccord.Application.Core.Common.Paging;
 
 namespace Raccord.Application.Services.Scenes
 {
@@ -166,7 +167,7 @@ namespace Raccord.Application.Services.Scenes
             _sceneRepository.Commit();
         }
 
-        public IEnumerable<SceneSummaryDto> Filter(SceneFilterRequestDto filter)
+        public PagedDataDto<SceneSummaryDto> Filter(SceneFilterRequestDto filter, PaginationRequestDto requestDto)
         {
             var scenes = _sceneRepository.Filter(
                 filter.ProjectID,
@@ -186,8 +187,7 @@ namespace Raccord.Application.Services.Scenes
                 filter.MinPageLength,
                 filter.MaxPageLength
             );
-
-            return scenes.Select(s => s.TranslateSummary()).ToList();
+            return scenes.GetPaged<Scene, SceneSummaryDto>(requestDto, Utilities.TranslateSummary);
         }
 
         private void CreatePropertiesIfNecessary(SceneDto scene, long? scriptUploadID = null)

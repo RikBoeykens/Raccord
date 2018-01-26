@@ -40,16 +40,16 @@ namespace Raccord.Data.EntityFramework.Repositories.Projects
             return query.FirstOrDefault(l => l.ID == ID);
         }
 
-        public int SearchCount(string searchText, string userID, bool isAdmin)
+        public int SearchCount(string searchText, string userID, bool isAdmin, long[] excludeIds)
         {
-            var query = GetSearchQuery(searchText, userID, isAdmin);
+            var query = GetSearchQuery(searchText, userID, isAdmin, excludeIds);
 
             return query.Count();        
         }
 
-        public IEnumerable<Project> Search(string searchText, string userID, bool isAdmin)
+        public IEnumerable<Project> Search(string searchText, string userID, bool isAdmin, long[] excludeIds)
         {
-            return GetSearchQuery(searchText, userID, isAdmin);
+            return GetSearchQuery(searchText, userID, isAdmin, excludeIds);
         }
 
         private IQueryable<Project> GetIncludedFull()
@@ -84,7 +84,7 @@ namespace Raccord.Data.EntityFramework.Repositories.Projects
                         .ThenInclude(p=> p.User);
         }
 
-        private IQueryable<Project> GetSearchQuery(string searchText, string userId, bool isAdminSearch)
+        private IQueryable<Project> GetSearchQuery(string searchText, string userId, bool isAdminSearch, long[] excludeIds)
         {
             var query = GetIncludedSearch();
 
@@ -92,6 +92,11 @@ namespace Raccord.Data.EntityFramework.Repositories.Projects
 
             if(!isAdminSearch)
                 query = query.Where(p=> p.ProjectUsers.Any(c=> c.UserID==userId));
+
+            if(excludeIds.Any())
+            {
+                query = query.Where(c=> !excludeIds.Any(id=> id == c.ID));
+            }
 
             return query;
         }

@@ -16,7 +16,7 @@
     <edit-scene [scene]="viewNewScene" (submitScene)="addScene()"></edit-scene>
 </md-card>
 <md-card>
-    <filter-scenes [sceneFilter]="sceneFilter" (filterScenes)="filterScenes()" [projectID]="project.id"></filter-scenes>
+    <filter-scenes [sceneFilter]="sceneFilter" (filterScenes)="filterScenes()" [projectID]="project.id" [breakdownTypes]="breakdownTypes"></filter-scenes>
 </md-card>
 <md-card *ngIf="scenes.length">
     <a routerLink="/projects/{{project.id}}/scripttext">Script text</a>

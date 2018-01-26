@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { ScriptLocation } from '../../model/script-location.model';
 import { SearchEngineService } from '../../../../../search/service/search-engine.service';
 import { LoadingService } from '../../../../../loading/service/loading.service';
@@ -12,7 +12,9 @@ import { DialogService } from '../../../../../shared/service/dialog.service';
 })
 export class SearchScriptLocationComponent{
 
+    @Output() public setScriptLocation = new EventEmitter();
     @Input() sceneScriptLocation: ScriptLocation;
+    @Input() public excludeScriptLocations: ScriptLocation[] =  [];
     searchResults: SearchResult[] = [];
 
     constructor(
@@ -34,7 +36,16 @@ export class SearchScriptLocationComponent{
         }
 
         let loadingId = this._loadingService.startLoading();
-        this._searchEngineService.search({ searchText: this.sceneScriptLocation.name, includeTypes: [EntityType.scriptLocation], excludeTypes: [], projectId: this.sceneScriptLocation.projectID}).then(results=>{
+        this._searchEngineService.search({ 
+                searchText: this.sceneScriptLocation.name, 
+                includeTypes: [EntityType.scriptLocation], 
+                excludeTypes: [], 
+                projectId: this.sceneScriptLocation.projectID,
+                excludeTypeIDs: [{
+                    type: EntityType.scriptLocation,
+                    ids: this.excludeScriptLocations.map((scriptLocation: ScriptLocation) => scriptLocation.id)
+                }]
+            }).then(results=>{
             if(typeof(results)=='string'){
                 this._dialogService.error(results);
             }
@@ -52,5 +63,6 @@ export class SearchScriptLocationComponent{
         this.sceneScriptLocation.name = result.displayName;
         this.sceneScriptLocation.id = result.id;
         this.clearSearch();
+        this.setScriptLocation.emit();
     }
 }

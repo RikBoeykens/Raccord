@@ -83,5 +83,16 @@ namespace Raccord.API.ViewModels.Breakdowns.BreakdownItems
                 Type = vm.Type.Translate(),
             };
         }
+
+        public static SearchBreakdownItemRequestDto Translate(this SearchBreakdownItemRequestViewModel vm, string userID)
+        {
+            return new SearchBreakdownItemRequestDto
+            {
+                SearchText = vm.SearchText,
+                TypeID = vm.TypeID,
+                UserID = userID,
+                ExcludeIDs = vm.ExcludeIDs
+            };
+        }
     }
 }

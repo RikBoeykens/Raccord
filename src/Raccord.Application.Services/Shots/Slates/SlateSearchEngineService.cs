@@ -4,12 +4,14 @@ using Raccord.Application.Core.Services.Shots.Slates;
 using Raccord.Application.Core.Services.SearchEngine;
 using Raccord.Data.EntityFramework.Repositories.Shots.Slates;
 using Raccord.Core.Enums;
+using Raccord.Application.Services.SearchEngine;
 
 namespace Raccord.Application.Services.Shots.Slates
 {
     // Service to search for slates
     public class SlateSearchEngineService : ISlateSearchEngineService
     {
+        private readonly EntityType _type = EntityType.Slate;
         private readonly ISlateRepository _slateRepository;
 
         // Initialises a new LocationSearchEngineService
@@ -23,13 +25,14 @@ namespace Raccord.Application.Services.Shots.Slates
 
         public new EntityType GetType()
         {
-            return EntityType.Slate;
+            return _type;
         }
 
         public SearchTypeResultDto GetResults(SearchRequestDto request)
         {
-            var slateCount = _slateRepository.SearchCount(request.SearchText, request.ProjectID, request.UserID, request.IsAdminSearch);
-            var slates = _slateRepository.Search(request.SearchText, request.ProjectID, request.UserID, request.IsAdminSearch);
+            var excludeIds = request.GetExcludeIDs(_type);
+            var slateCount = _slateRepository.SearchCount(request.SearchText, request.ProjectID, request.UserID, request.IsAdminSearch, excludeIds);
+            var slates = _slateRepository.Search(request.SearchText, request.ProjectID, request.UserID, request.IsAdminSearch, excludeIds);
 
             return new SearchTypeResultDto
             {

@@ -55,7 +55,8 @@ import { EditScriptLocationComponent } from './projects';
 import { ScriptLocationLandingComponent } from './projects';
 import { 
   ScriptLocationImagesComponent,
-  ScriptLocationSetsComponent 
+  ScriptLocationSetsComponent,
+  SearchScriptLocationsCollectionComponent
 } from './projects';
 import { SearchScriptLocationComponent } from './projects';
 import { 
@@ -63,12 +64,13 @@ import {
   EditIntExtComponent,
   IntExtLandingComponent,
   SearchIntExtComponent,
-  SearchIntExtsCollectionComponent
+  SearchIntExtsCollectionComponent,
+  DayNightListComponent,
+  EditDayNightComponent,
+  DayNightLandingComponent,
+  SearchDayNightComponent,
+  SearchDayNightsCollectionComponent
 } from './projects';
-import { DayNightListComponent } from './projects';
-import { EditDayNightComponent } from './projects';
-import { DayNightLandingComponent } from './projects';
-import { SearchDayNightComponent } from './projects';
 import { ImagesListComponent } from './projects';
 import { EditImageComponent } from './projects';
 import { ImageLandingComponent } from './projects';
@@ -94,7 +96,8 @@ import { EditBreakdownItemComponent } from './projects';
 import { SearchBreakdownItemComponent } from './projects';
 import { BreakdownItemImagesComponent } from './projects';
 import { BreakdownItemScenesComponent } from './projects';
-import { 
+import {
+  SearchBreakdownCollectionComponent,
   ScheduleLandingComponent,
   ScheduleSceneLandingComponent,
   LocationsListComponent,
@@ -105,6 +108,8 @@ import {
   EditLocationSetComponent,
   LocationSetLandingComponent,
   LocationSetScheduleComponent,
+  SearchLocationComponent,
+  SearchLocationsCollectionComponent,
   CallsheetsListComponent,
   NewCallsheetComponent,
   CallsheetComponent,
@@ -194,6 +199,7 @@ const COMPONENTS =[
   ScriptLocationImagesComponent,
   ScriptLocationSetsComponent,
   SearchScriptLocationComponent,
+  SearchScriptLocationsCollectionComponent,
   IntExtListComponent,
   EditIntExtComponent,
   IntExtLandingComponent,
@@ -203,6 +209,7 @@ const COMPONENTS =[
   DayNightListComponent,
   EditDayNightComponent,
   DayNightLandingComponent,
+  SearchDayNightsCollectionComponent,
   ImagesListComponent,
   ImageLandingComponent,
   EditImageComponent,
@@ -226,6 +233,7 @@ const COMPONENTS =[
   SearchBreakdownItemComponent,
   BreakdownItemImagesComponent,
   BreakdownItemScenesComponent,
+  SearchBreakdownCollectionComponent,
   ScheduleLandingComponent,
   ScheduleSceneLandingComponent,
   LocationsListComponent,
@@ -236,6 +244,8 @@ const COMPONENTS =[
   EditLocationSetComponent,
   LocationSetLandingComponent,
   LocationSetScheduleComponent,
+  SearchLocationComponent,
+  SearchLocationsCollectionComponent,
   CallsheetsListComponent,
   NewCallsheetComponent,
   CallsheetComponent,

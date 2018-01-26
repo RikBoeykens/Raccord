@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Raccord.Application.Core.Common.Paging;
 using Raccord.Application.Core.Common.Sorting;
 
 namespace Raccord.Application.Core.Services.Scenes
@@ -8,6 +9,6 @@ namespace Raccord.Application.Core.Services.Scenes
     {
         long AddByScriptUpload(SceneDto dto, long scriptUploadID);
         void Sort(SortOrderDto order);
-        IEnumerable<SceneSummaryDto> Filter(SceneFilterRequestDto dto);
+        PagedDataDto<SceneSummaryDto> Filter(SceneFilterRequestDto dto, PaginationRequestDto requestDto);
     }
 }

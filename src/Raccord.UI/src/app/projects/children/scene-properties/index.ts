@@ -1,1 +1,2 @@
 export { SearchIntExtsCollectionComponent } from './component/search-int-exts-collection/search-int-exts-collection.component';
+export { SearchDayNightsCollectionComponent } from './component/search-day-nights-collection/search-day-nights-collection.component';

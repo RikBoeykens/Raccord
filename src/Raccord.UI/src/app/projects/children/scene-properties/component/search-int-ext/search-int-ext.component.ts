@@ -13,7 +13,8 @@ import { DialogService } from '../../../../../shared/service/dialog.service';
 export class SearchIntExtComponent{
 
     @Output() public setIntExt = new EventEmitter();
-    @Input() sceneIntExt: IntExt;
+    @Input() public sceneIntExt: IntExt;
+    @Input() public excludeIntExts: IntExt[] =  [];
     searchResults: SearchResult[] = [];
 
     constructor(
@@ -36,7 +37,15 @@ export class SearchIntExtComponent{
 
         let loadingId = this._loadingService.startLoading();
         
-        this._searchEngineService.search({ searchText: this.sceneIntExt.name, includeTypes: [EntityType.intExt], excludeTypes: [], projectId: this.sceneIntExt.projectId}).then(results=>{
+        this._searchEngineService.search({
+            searchText: this.sceneIntExt.name,
+            includeTypes: [EntityType.intExt],
+            excludeTypes: [],
+            projectId: this.sceneIntExt.projectId,
+            excludeTypeIDs: [{
+                type: EntityType.intExt,
+                ids: this.excludeIntExts.map((intExt: IntExt) => intExt.id)
+            }]}).then(results=>{
             if(typeof(results)=='string'){
                 this._dialogService.error(results);
             }

@@ -42,6 +42,7 @@ export{
     ScriptLocationLandingComponent,
     ScriptLocationImagesComponent,
     ScriptLocationSetsComponent,
+    SearchScriptLocationsCollectionComponent,
     ScriptLocationHttpService,
     ImageScriptLocationHttpService,
     ScriptLocationResolve,
@@ -56,7 +57,8 @@ export { IntExtHttpService } from './children/scene-properties/service/int-ext-h
 export { IntExtResolve } from './children/scene-properties/service/int-ext-resolve.service';
 export { IntExtsResolve } from './children/scene-properties/service/int-exts-resolve.service';
 export {
-    SearchIntExtsCollectionComponent
+    SearchIntExtsCollectionComponent,
+    SearchDayNightsCollectionComponent
 } from './children/scene-properties';
 
 export { DayNightListComponent } from './children/scene-properties/component/day-night-list/day-night-list.component';
@@ -112,6 +114,10 @@ export { ImageBreakdownItemHttpService } from './children/breakdowns/breakdown-i
 export { BreakdownItemResolve } from './children/breakdowns/breakdown-items/service/breakdown-item-resolve.service';
 export { BreakdownItemsResolve } from './children/breakdowns/breakdown-items/service/breakdown-items-resolve.service';
 
+export {
+    SearchBreakdownCollectionComponent
+} from './children/breakdowns';
+
 export { ScheduleLandingComponent } from './children/scheduling/component/schedule-landing/schedule-landing.component';
 
 export { ScheduleDayHttpService } from './children/scheduling/schedule-days/service/schedule-day-http.service';
@@ -146,7 +152,9 @@ export {
     SceneLocationSetsResolve,
     EditLocationSetComponent,
     LocationSetLandingComponent,
-    LocationSetScheduleComponent
+    LocationSetScheduleComponent,
+    SearchLocationComponent,
+    SearchLocationsCollectionComponent
  } from "./children/locations";
 
  export {

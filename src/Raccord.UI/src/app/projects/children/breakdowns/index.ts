@@ -1,0 +1,1 @@
+export { SearchBreakdownCollectionComponent } from './breakdown-items/component/search-breakdown-collection/search-breakdown-collection.component';

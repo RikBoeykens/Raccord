@@ -34,16 +34,16 @@ namespace Raccord.Data.EntityFramework.Repositories.Scenes
         }
 
 
-        public int SearchCount(string searchText, long? projectID, string userID, bool isAdmin)
+        public int SearchCount(string searchText, long? projectID, string userID, bool isAdmin, long[] excludeIds)
         {
-            var query = GetSearchQuery(searchText, projectID, userID, isAdmin);
+            var query = GetSearchQuery(searchText, projectID, userID, isAdmin, excludeIds);
 
             return query.Count();            
         }
 
-        public IEnumerable<Scene> Search(string searchText, long? projectID, string userID, bool isAdmin)
+        public IEnumerable<Scene> Search(string searchText, long? projectID, string userID, bool isAdmin, long[] excludeIds)
         {
-            return GetSearchQuery(searchText, projectID, userID, isAdmin);
+            return GetSearchQuery(searchText, projectID, userID, isAdmin, excludeIds);
         }
 
         public IEnumerable<Scene> GetScriptForProject(long projectID)
@@ -259,7 +259,7 @@ namespace Raccord.Data.EntityFramework.Repositories.Scenes
                          .ThenInclude(i=> i.Image);
         }
 
-        private IQueryable<Scene> GetSearchQuery(string searchText, long? projectID, string userID, bool isAdmin)
+        private IQueryable<Scene> GetSearchQuery(string searchText, long? projectID, string userID, bool isAdmin, long[] excludeIds)
         {
             var query = GetIncludedSearch();
 
@@ -273,6 +273,11 @@ namespace Raccord.Data.EntityFramework.Repositories.Scenes
 
             if(!isAdmin)
                 query = query.Where(s=> s.Project.ProjectUsers.Any(c=> c.UserID == userID));
+
+            if(excludeIds.Any())
+            {
+                query = query.Where(c=> !excludeIds.Any(id=> id == c.ID));
+            }
 
             return query;
         }

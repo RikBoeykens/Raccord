@@ -9,6 +9,7 @@ import { DialogService } from '../../../../../shared/service/dialog.service';
 import { DragulaService } from 'ng2-dragula';
 import { HtmlClassHelpers } from '../../../../../shared/helpers/html-class.helpers';
 import { SceneFilterRequest } from '../../model/scene-filter-request.model';
+import { BreakdownTypeSummary } from '../../../breakdowns/breakdown-types/model/breakdown-type-summary.model';
 
 @Component({
     templateUrl: 'scenes-list.component.html',
@@ -22,6 +23,7 @@ export class ScenesListComponent implements OnInit {
     newScene: Scene;
     draggingScene: boolean;
     sceneFilter: SceneFilterRequest = new SceneFilterRequest();
+    breakdownTypes: BreakdownTypeSummary[];
 
     constructor(
         private _sceneHttpService: SceneHttpService,
@@ -57,11 +59,12 @@ export class ScenesListComponent implements OnInit {
     }
 
     ngOnInit() {
-        this._route.data.subscribe((data: { scenes: SceneSummary[], project: ProjectSummary }) => {
+        this._route.data.subscribe((data: { scenes: SceneSummary[], project: ProjectSummary, breakdownTypes: BreakdownTypeSummary[] }) => {
             this.scenes = data.scenes;
             this.project = data.project;
             this.resetNewScene();
             this.sceneFilter.projectID = this.project.id;
+            this.breakdownTypes = data.breakdownTypes;
         });
     }
 

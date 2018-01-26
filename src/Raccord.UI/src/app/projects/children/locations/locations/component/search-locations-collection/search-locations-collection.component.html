@@ -1,0 +1,11 @@
+<div fxLayout="row" fxLayoutGap="10px">
+    <search-location fxFlex="25%" [searchLocation]="searchEntity" (setLocation)="addEntity()" [excludeLocations]="entities"></search-location>
+    <md-chip-list fxFlex="75%" md-line>
+        <a *ngFor="let entity of entities">
+            <md-chip>
+                {{entity.name}}
+                <md-icon (click)="removeEntity(entity)">cancel</md-icon>
+            </md-chip>
+        </a>
+    </md-chip-list>
+</div>

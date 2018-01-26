@@ -8,6 +8,7 @@ namespace Raccord.Application.Core.Services.SearchEngine
     {
         private IEnumerable<EntityType> _includeTypes { get; set; }
         private IEnumerable<EntityType> _excludeTypes { get; set; }
+        private IEnumerable<ExcludeTypeIDsDto> _excludeTypeIDs { get; set; }
         // Text to search on
         public string SearchText { get; set; }
 
@@ -45,5 +46,18 @@ namespace Raccord.Application.Core.Services.SearchEngine
 
         // Search regardless of user id
         public bool IsAdminSearch { get; set; }
+
+        // Type IDs to exclude (if applicable)
+        public IEnumerable<ExcludeTypeIDsDto> ExcludeTypeIDs
+        {
+            get
+            {
+                return _excludeTypeIDs ?? (_excludeTypeIDs = new List<ExcludeTypeIDsDto>());
+            }
+            set
+            {
+                _excludeTypeIDs = value;
+            }
+        }
     }
 }

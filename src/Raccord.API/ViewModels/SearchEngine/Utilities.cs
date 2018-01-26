@@ -14,6 +14,7 @@ namespace Raccord.API.ViewModels.SearchEngine
                 ProjectID = vm.ProjectID,
                 IncludeTypes = vm.IncludeTypes,
                 ExcludeTypes = vm.ExcludeTypes,
+                ExcludeTypeIDs = vm.ExcludeTypeIDs.Select(e=> e.Translate())
             };
         }
 
@@ -38,6 +39,20 @@ namespace Raccord.API.ViewModels.SearchEngine
                 Count = dto.Count,
                 Type = dto.Type,
                 Results = dto.Results.Select(r=> r.Translate()),
+            };
+        }
+
+        public static ExcludeTypeIDsDto Translate(this ExcludeTypeIDsViewModel vm)
+        {
+            if(vm == null)
+            {
+                return null;
+            }
+
+            return new ExcludeTypeIDsDto
+            {
+                Type = vm.Type,
+                IDs = vm.IDs
             };
         }
     }

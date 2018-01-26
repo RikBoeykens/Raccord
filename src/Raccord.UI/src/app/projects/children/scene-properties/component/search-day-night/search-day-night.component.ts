@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, EventEmitter, Output } from '@angular/core';
 import { DayNight } from '../../model/day-night.model';
 import { SearchEngineService } from '../../../../../search/service/search-engine.service';
 import { LoadingService } from '../../../../../loading/service/loading.service';
@@ -12,7 +12,9 @@ import { DialogService } from '../../../../../shared/service/dialog.service';
 })
 export class SearchDayNightComponent{
 
-    @Input() sceneDayNight: DayNight;
+    @Output() public setDayNight = new EventEmitter();
+    @Input() public sceneDayNight: DayNight;
+    @Input() public excludeDayNights: DayNight[] =  [];
     searchResults: SearchResult[] = [];
 
     constructor(
@@ -35,7 +37,16 @@ export class SearchDayNightComponent{
 
         let loadingId = this._loadingService.startLoading();
         
-        this._searchEngineService.search({ searchText: this.sceneDayNight.name, includeTypes: [EntityType.dayNight], excludeTypes: [], projectId: this.sceneDayNight.projectId}).then(results=>{
+        this._searchEngineService.search({
+            searchText: this.sceneDayNight.name,
+            includeTypes: [EntityType.dayNight],
+            excludeTypes: [],
+            projectId: this.sceneDayNight.projectId,
+            excludeTypeIDs: [{
+                type: EntityType.dayNight,
+                ids: this.excludeDayNights.map((dayNight: DayNight) => dayNight.id)
+            }]
+        }).then(results=>{
             if(typeof(results)=='string'){
                 this._dialogService.error(results);
             }
@@ -53,5 +64,6 @@ export class SearchDayNightComponent{
         this.sceneDayNight.name = result.displayName;
         this.sceneDayNight.id = result.id;
         this.clearSearch();
+        this.setDayNight.emit();
     }
 }

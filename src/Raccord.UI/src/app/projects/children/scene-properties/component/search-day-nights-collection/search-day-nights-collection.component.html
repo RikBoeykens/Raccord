@@ -1,0 +1,11 @@
+<div fxLayout="row" fxLayoutGap="10px">
+    <search-day-night fxFlex="25%" [sceneDayNight]="searchEntity" (setDayNight)="addEntity()" [excludeDayNights]="entities"></search-day-night>
+    <md-chip-list fxFlex="75%" md-line>
+        <a *ngFor="let entity of entities">
+            <md-chip>
+                {{entity.name}}
+                <md-icon (click)="removeEntity(entity)">cancel</md-icon>
+            </md-chip>
+        </a>
+    </md-chip-list>
+</div>

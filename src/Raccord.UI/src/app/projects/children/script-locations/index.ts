@@ -4,6 +4,7 @@ export { EditScriptLocationComponent } from './component/edit-script-location/ed
 export { ScriptLocationLandingComponent } from './component/script-location-landing/script-location-landing.component';
 export { ScriptLocationImagesComponent } from './component/script-location-images/script-location-images.component';
 export { ScriptLocationSetsComponent } from './component/script-location-sets/script-location-sets.component';
+export { SearchScriptLocationsCollectionComponent } from './component/search-script-locations-collection/search-script-locations-collection.component';
 export { ScriptLocationHttpService } from './service/script-location-http.service';
 export { ImageScriptLocationHttpService } from './service/image-script-location-http.service';
 export { ScriptLocationResolve } from './service/script-location-resolve.service';
