@@ -164,7 +164,7 @@ namespace Raccord.API.Controllers
 
             try
             {
-                var paginationRequest = PaginationUtilities.ConstructRequest(pageSize, pageSize, full);
+                var paginationRequest = PaginationUtilities.ConstructRequest(pageSize, page, full);
                 var requestDto = vm.Translate();
                 var paginationResult = _sceneService.Filter(requestDto, paginationRequest);
 
