@@ -24,6 +24,7 @@ export {
     SceneSlatesComponent,
     SceneTimingsComponent,
     SceneSummaryComponent,
+    FilterScenesComponent,
     ChooseSceneDialog
 } from './children/scenes';
 export { SceneHttpService } from './children/scenes/service/scene-http.service';
@@ -41,6 +42,7 @@ export{
     ScriptLocationLandingComponent,
     ScriptLocationImagesComponent,
     ScriptLocationSetsComponent,
+    SearchScriptLocationsCollectionComponent,
     ScriptLocationHttpService,
     ImageScriptLocationHttpService,
     ScriptLocationResolve,
@@ -54,6 +56,10 @@ export { IntExtLandingComponent } from './children/scene-properties/component/in
 export { IntExtHttpService } from './children/scene-properties/service/int-ext-http.service';
 export { IntExtResolve } from './children/scene-properties/service/int-ext-resolve.service';
 export { IntExtsResolve } from './children/scene-properties/service/int-exts-resolve.service';
+export {
+    SearchIntExtsCollectionComponent,
+    SearchDayNightsCollectionComponent
+} from './children/scene-properties';
 
 export { DayNightListComponent } from './children/scene-properties/component/day-night-list/day-night-list.component';
 export { SearchDayNightComponent } from './children/scene-properties/component/search-day-night/search-day-night.component';
@@ -79,7 +85,9 @@ export { CharacterLandingComponent } from './children/characters/component/chara
 export { CharacterImagesComponent } from './children/characters/component/character-images/character-images.component';
 export { CharacterScenesComponent } from './children/characters/component/character-scenes/character-scenes.component';
 export {
-    CharacterScheduleComponent
+    CharacterScheduleComponent,
+    CharacterSummaryComponent,
+    SearchCharactersCollectionComponent
 } from "./children/characters";
 export { CharacterHttpService } from './children/characters/service/character-http.service';
 export { ImageCharacterHttpService } from './children/characters/service/image-character-http.service';
@@ -105,6 +113,10 @@ export { BreakdownItemHttpService } from './children/breakdowns/breakdown-items/
 export { ImageBreakdownItemHttpService } from './children/breakdowns/breakdown-items/service/image-breakdown-item-http.service';
 export { BreakdownItemResolve } from './children/breakdowns/breakdown-items/service/breakdown-item-resolve.service';
 export { BreakdownItemsResolve } from './children/breakdowns/breakdown-items/service/breakdown-items-resolve.service';
+
+export {
+    SearchBreakdownCollectionComponent
+} from './children/breakdowns';
 
 export { ScheduleLandingComponent } from './children/scheduling/component/schedule-landing/schedule-landing.component';
 
@@ -140,7 +152,9 @@ export {
     SceneLocationSetsResolve,
     EditLocationSetComponent,
     LocationSetLandingComponent,
-    LocationSetScheduleComponent
+    LocationSetScheduleComponent,
+    SearchLocationComponent,
+    SearchLocationsCollectionComponent
  } from "./children/locations";
 
  export {

@@ -67,7 +67,7 @@
                             <md-chip-list md-line>
                                 <a *ngFor="let character of scheduleScene.characters"
                                     routerLink="/projects/{{project.id}}/characters/{{character.id}}">
-                                    <md-chip >{{character.number}}. {{character.name}}</md-chip>
+                                    <md-chip><character-summary [character]="character"></character-summary></md-chip>
                                 </a>
                             </md-chip-list>
                         </md-list-item>

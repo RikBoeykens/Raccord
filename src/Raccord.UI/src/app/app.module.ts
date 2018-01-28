@@ -47,6 +47,7 @@ import {
   SceneSlatesComponent,
   SceneTimingsComponent,
   SceneSummaryComponent,
+  FilterScenesComponent,
   ChooseSceneDialog
 } from './projects';
 import { ScriptLocationsListComponent } from './projects';
@@ -54,17 +55,22 @@ import { EditScriptLocationComponent } from './projects';
 import { ScriptLocationLandingComponent } from './projects';
 import { 
   ScriptLocationImagesComponent,
-  ScriptLocationSetsComponent 
+  ScriptLocationSetsComponent,
+  SearchScriptLocationsCollectionComponent
 } from './projects';
 import { SearchScriptLocationComponent } from './projects';
-import { IntExtListComponent } from './projects';
-import { EditIntExtComponent } from './projects';
-import { IntExtLandingComponent } from './projects';
-import { SearchIntExtComponent } from './projects';
-import { DayNightListComponent } from './projects';
-import { EditDayNightComponent } from './projects';
-import { DayNightLandingComponent } from './projects';
-import { SearchDayNightComponent } from './projects';
+import { 
+  IntExtListComponent,
+  EditIntExtComponent,
+  IntExtLandingComponent,
+  SearchIntExtComponent,
+  SearchIntExtsCollectionComponent,
+  DayNightListComponent,
+  EditDayNightComponent,
+  DayNightLandingComponent,
+  SearchDayNightComponent,
+  SearchDayNightsCollectionComponent
+} from './projects';
 import { ImagesListComponent } from './projects';
 import { EditImageComponent } from './projects';
 import { ImageLandingComponent } from './projects';
@@ -77,7 +83,9 @@ import {
   CharacterImagesComponent,
   CharacterScenesComponent,
   CharacterScheduleComponent,
-  SearchCharacterComponent 
+  SearchCharacterComponent,
+  CharacterSummaryComponent,
+  SearchCharactersCollectionComponent
 } from './projects';
 import { BreakdownLandingComponent } from './projects';
 import { BreakdownTypeSettingsComponent } from './projects';
@@ -88,7 +96,8 @@ import { EditBreakdownItemComponent } from './projects';
 import { SearchBreakdownItemComponent } from './projects';
 import { BreakdownItemImagesComponent } from './projects';
 import { BreakdownItemScenesComponent } from './projects';
-import { 
+import {
+  SearchBreakdownCollectionComponent,
   ScheduleLandingComponent,
   ScheduleSceneLandingComponent,
   LocationsListComponent,
@@ -99,6 +108,8 @@ import {
   EditLocationSetComponent,
   LocationSetLandingComponent,
   LocationSetScheduleComponent,
+  SearchLocationComponent,
+  SearchLocationsCollectionComponent,
   CallsheetsListComponent,
   NewCallsheetComponent,
   CallsheetComponent,
@@ -181,20 +192,24 @@ const COMPONENTS =[
   SceneSlatesComponent,
   SceneTimingsComponent,
   SceneSummaryComponent,
+  FilterScenesComponent,
   ScriptLocationsListComponent,
   EditScriptLocationComponent,
   ScriptLocationLandingComponent,
   ScriptLocationImagesComponent,
   ScriptLocationSetsComponent,
   SearchScriptLocationComponent,
+  SearchScriptLocationsCollectionComponent,
   IntExtListComponent,
   EditIntExtComponent,
   IntExtLandingComponent,
   SearchIntExtComponent,
+  SearchIntExtsCollectionComponent,
   SearchDayNightComponent,
   DayNightListComponent,
   EditDayNightComponent,
   DayNightLandingComponent,
+  SearchDayNightsCollectionComponent,
   ImagesListComponent,
   ImageLandingComponent,
   EditImageComponent,
@@ -207,6 +222,8 @@ const COMPONENTS =[
   CharacterScenesComponent,
   CharacterScheduleComponent,
   SearchCharacterComponent,
+  CharacterSummaryComponent,
+  SearchCharactersCollectionComponent,
   BreakdownLandingComponent,
   BreakdownTypeSettingsComponent,
   EditBreakdownTypeComponent,
@@ -216,6 +233,7 @@ const COMPONENTS =[
   SearchBreakdownItemComponent,
   BreakdownItemImagesComponent,
   BreakdownItemScenesComponent,
+  SearchBreakdownCollectionComponent,
   ScheduleLandingComponent,
   ScheduleSceneLandingComponent,
   LocationsListComponent,
@@ -226,6 +244,8 @@ const COMPONENTS =[
   EditLocationSetComponent,
   LocationSetLandingComponent,
   LocationSetScheduleComponent,
+  SearchLocationComponent,
+  SearchLocationsCollectionComponent,
   CallsheetsListComponent,
   NewCallsheetComponent,
   CallsheetComponent,

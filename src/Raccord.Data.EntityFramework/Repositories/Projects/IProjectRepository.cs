@@ -7,9 +7,9 @@ namespace Raccord.Data.EntityFramework.Repositories.Projects
     public interface IProjectRepository : IBaseRepository<Project>
     {
         IEnumerable<Project> GetAllForUser(string userID);
-        int SearchCount(string searchText, string userID, bool isAdmin);
+        int SearchCount(string searchText, string userID, bool isAdmin, long[] excludeIds);
         Project GetFull(long ID);
         Project GetSummary(long ID);
-        IEnumerable<Project> Search(string searchText, string userID, bool isAdmin);
+        IEnumerable<Project> Search(string searchText, string userID, bool isAdmin, long[] excludeIds);
     }
 }

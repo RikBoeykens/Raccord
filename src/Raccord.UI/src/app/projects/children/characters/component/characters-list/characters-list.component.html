@@ -18,7 +18,7 @@
            class="drag-element drag-delete drag-merge">
            <md-icon class=drag-handle>drag_handle</md-icon>
             <show-image *ngIf="characterWrapper.character.primaryImage.id!=0" [image]="characterWrapper.character.primaryImage" [listAvatar]="true"></show-image>
-            {{characterWrapper.character.number}}. {{characterWrapper.character.name}} ({{characterWrapper.character.sceneCount}})
+            <character-summary [character]="characterWrapper.character"></character-summary> ({{characterWrapper.character.sceneCount}})
             <span class="drop-container drop-merge-container"
                   [dragula]='"character-bag"' 
                   [dragulaModel]='characterWrapper.dropCharacters'

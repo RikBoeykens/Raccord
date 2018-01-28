@@ -282,7 +282,8 @@ export const ROUTES: Routes = [
                 component: ScenesListComponent,
                 resolve:{
                   project: ProjectSummaryResolve,
-                  scenes: ScenesResolve
+                  scenes: ScenesResolve,
+                  breakdownTypes: BreakdownTypesResolve
                 },
               },
               {

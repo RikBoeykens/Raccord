@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { IntExt } from '../../model/int-ext.model';
 import { SearchEngineService } from '../../../../../search/service/search-engine.service';
 import { LoadingService } from '../../../../../loading/service/loading.service';
@@ -12,7 +12,9 @@ import { DialogService } from '../../../../../shared/service/dialog.service';
 })
 export class SearchIntExtComponent{
 
-    @Input() sceneIntExt: IntExt;
+    @Output() public setIntExt = new EventEmitter();
+    @Input() public sceneIntExt: IntExt;
+    @Input() public excludeIntExts: IntExt[] =  [];
     searchResults: SearchResult[] = [];
 
     constructor(
@@ -35,7 +37,15 @@ export class SearchIntExtComponent{
 
         let loadingId = this._loadingService.startLoading();
         
-        this._searchEngineService.search({ searchText: this.sceneIntExt.name, includeTypes: [EntityType.intExt], excludeTypes: [], projectId: this.sceneIntExt.projectId}).then(results=>{
+        this._searchEngineService.search({
+            searchText: this.sceneIntExt.name,
+            includeTypes: [EntityType.intExt],
+            excludeTypes: [],
+            projectId: this.sceneIntExt.projectId,
+            excludeTypeIDs: [{
+                type: EntityType.intExt,
+                ids: this.excludeIntExts.map((intExt: IntExt) => intExt.id)
+            }]}).then(results=>{
             if(typeof(results)=='string'){
                 this._dialogService.error(results);
             }
@@ -53,5 +63,6 @@ export class SearchIntExtComponent{
         this.sceneIntExt.name = result.displayName;
         this.sceneIntExt.id = result.id;
         this.clearSearch();
+        this.setIntExt.emit();
     }
 }

@@ -35,7 +35,7 @@ export class SearchComponent {
 
         let loadingId = this._loadingService.startLoading();
         
-        this._searchEngineService.search({ searchText: this.searchText, includeTypes: [], excludeTypes: [EntityType.dayNight, EntityType.intExt]}).then(results=>{
+        this._searchEngineService.search({ searchText: this.searchText, includeTypes: [], excludeTypes: [EntityType.dayNight, EntityType.intExt], excludeTypeIDs: []}).then(results=>{
             if(typeof(results)=='string'){
                 this._dialogService.error(results);
             }

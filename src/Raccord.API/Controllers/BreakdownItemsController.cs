@@ -150,15 +150,33 @@ namespace Raccord.API.Controllers
             return new JsonResult(response);
         }
 
-        // GET: api/breakdownitems/search/text/type/4
-        [HttpGet("search/{searchText}/type/{typeID}")]
-        public IEnumerable<BreakdownItemViewModel> SearchByType(string searchText, long typeID)
+        // POST: api/breakdownitems/search
+        [HttpPost("search")]
+        public JsonResult Post([FromBody]SearchBreakdownItemRequestViewModel vm)
         {
-            var dtos = _breakdownItemService.SearchByType(searchText, typeID, GetUserId(), false);
+            var response = new JsonResponse();
 
-            var vms = dtos.Select(p => p.Translate());
+            try
+            {
+                var requestDto = vm.Translate(GetUserId());
+                var results = _breakdownItemService.SearchByType(requestDto);
 
-            return vms;
+                response = new JsonResponse
+                {
+                    ok = true,
+                    data = results.Select(r=> r.Translate()),
+                };
+            }
+            catch (Exception)
+            {
+                response = new JsonResponse
+                {
+                    ok = false,
+                    message = "Something went wrong while trying to get search results.",
+                };
+            }
+
+            return new JsonResult(response);
         }
     }
 }

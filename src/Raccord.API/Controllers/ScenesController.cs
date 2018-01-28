@@ -6,9 +6,11 @@ using Raccord.API.ViewModels.Scenes;
 using Raccord.API.ViewModels.Core;
 using Raccord.Application.Core.Services.Scenes;
 using Raccord.API.ViewModels.Common.Sorting;
-using Raccord.API.ViewModels.Images;
 using Microsoft.AspNetCore.Identity;
 using Raccord.Domain.Model.Users;
+using PaginationUtilities = Raccord.API.ViewModels.Common.Paging.Utilities;
+using SceneUtilities = Raccord.API.ViewModels.Scenes.Utilities;
+using Raccord.API.ViewModels.Common.Paging;
 
 namespace Raccord.API.Controllers
 {
@@ -148,6 +150,36 @@ namespace Raccord.API.Controllers
                 {
                     ok = false,
                     message = "Something went wrong while attempting to sort scenes",
+                };
+            }
+
+            return new JsonResult(response);
+        }
+
+        // POST api/filter
+        [HttpPost("filter")]
+        public JsonResult Filter([FromBody]SceneFilterRequestViewModel vm, [FromQuery]int? pageSize = null, [FromQuery]int? page = null, [FromQuery]bool full = true)
+        {
+            var response = new JsonResponse();
+
+            try
+            {
+                var paginationRequest = PaginationUtilities.ConstructRequest(pageSize, page, full);
+                var requestDto = vm.Translate();
+                var paginationResult = _sceneService.Filter(requestDto, paginationRequest);
+
+                response = new JsonResponse
+                {
+                    ok = true,
+                    data = paginationResult.Translate<SceneSummaryViewModel, SceneSummaryDto>(SceneUtilities.Translate),
+                };
+            }
+            catch (Exception)
+            {
+                response = new JsonResponse
+                {
+                    ok = false,
+                    message = "Something went wrong while trying to get search results.",
                 };
             }
 

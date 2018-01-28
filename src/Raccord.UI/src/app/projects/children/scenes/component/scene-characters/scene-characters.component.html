@@ -15,7 +15,7 @@
            *ngFor="let character of characters">
             <show-image *ngIf="character.primaryImage.id!=0" [image]="character.primaryImage" [listAvatar]="true"></show-image>
             <a routerLink="/projects/{{projectId}}/characters/{{character.id}}">
-                {{character.number}}. {{character.name}}
+                <character-summary [character]="character"></character-summary>
             </a>
             <button md-button (click)="removeLink(character)"><md-icon>delete</md-icon></button>
         </md-list-item>

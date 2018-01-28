@@ -33,16 +33,16 @@ namespace Raccord.Data.EntityFramework.Repositories.Breakdowns.BreakdownItems
             return query.FirstOrDefault(l => l.ID == ID);
         }
 
-        public int SearchCount(string searchText, long? projectID, long? typeID, string userID, bool isAdmin)
+        public int SearchCount(string searchText, long? projectID, long? typeID, string userID, bool isAdmin, long[] excludeIds)
         {
-            var query = GetSearchQuery(searchText, projectID, typeID, userID, isAdmin);
+            var query = GetSearchQuery(searchText, projectID, typeID, userID, isAdmin, excludeIds);
 
             return query.Count();            
         }
 
-        public IEnumerable<BreakdownItem> Search(string searchText, long? projectID, long? typeID, string userID, bool isAdmin)
+        public IEnumerable<BreakdownItem> Search(string searchText, long? projectID, long? typeID, string userID, bool isAdmin, long[] excludeIds)
         {
-            return GetSearchQuery(searchText, projectID, typeID, userID, isAdmin);
+            return GetSearchQuery(searchText, projectID, typeID, userID, isAdmin, excludeIds);
         }
 
         private IQueryable<BreakdownItem> GetIncludedFull()
@@ -89,7 +89,7 @@ namespace Raccord.Data.EntityFramework.Repositories.Breakdowns.BreakdownItems
                         .ThenInclude(p=> p.ProjectUsers);
         }
 
-        private IQueryable<BreakdownItem> GetSearchQuery(string searchText, long? projectID, long? typeID, string userID, bool isAdmin)
+        private IQueryable<BreakdownItem> GetSearchQuery(string searchText, long? projectID, long? typeID, string userID, bool isAdmin, long[] excludeIds)
         {
             var query = GetIncludedSearch();
 
@@ -103,6 +103,11 @@ namespace Raccord.Data.EntityFramework.Repositories.Breakdowns.BreakdownItems
 
             if(!isAdmin)
                 query = query.Where(bi=> bi.BreakdownType.Project.ProjectUsers.Any(c=> c.UserID == userID));
+
+            if(excludeIds.Any())
+            {
+                query = query.Where(c=> !excludeIds.Any(id=> id == c.ID));
+            }
 
             return query;
         }

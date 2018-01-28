@@ -6,6 +6,7 @@ import { FullBreakdownItem } from '../model/full-breakdown-item.model';
 import { BreakdownItemSummary } from '../model/breakdown-item-summary.model';
 import { BreakdownItem } from '../model/breakdown-item.model';
 import { JsonResponse } from '../../../../shared/model/json-response.model';
+import { SearchBreakdownItemRequest } from '../model/search-breakdown-item-request.model';
 
 @Injectable()
 export class BreakdownItemHttpService extends BaseHttpService {
@@ -54,10 +55,10 @@ export class BreakdownItemHttpService extends BaseHttpService {
         return this.doPost(null, uri);
     }
 
-    searchByType(searchText: string, typeId: number): Promise<BreakdownItem[]> {
+    searchByType(request: SearchBreakdownItemRequest): Promise<BreakdownItem[]> {
 
-        var uri = `${this._baseUri}/search/${searchText}/type/${typeId}`;
+        var uri = `${this._baseUri}/search`;
 
-        return this.doGetArray(uri);
+        return this.doPost(request, uri);
     }
 }

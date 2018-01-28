@@ -36,8 +36,4 @@ export class ProjectLandingComponent {
     getCanComment() {
         return AccountHelpers.hasProjectPermission(this.project.id, ProjectPermissionEnum.CanComment);
     }
-
-    getComments() {
-        this._commentHttpService.getAll(this.project.id, this.project.id, null).then((comments)=> this.project.comments = comments);
-    }
 }

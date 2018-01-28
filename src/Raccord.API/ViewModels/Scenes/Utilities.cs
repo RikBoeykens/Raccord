@@ -102,5 +102,33 @@ namespace Raccord.API.ViewModels.Scenes
                 ProjectID = vm.ProjectID,
             };
         }
+
+        public static SceneFilterRequestDto Translate(this SceneFilterRequestViewModel vm)
+        {
+            if(vm == null)
+            {
+                return null;
+            }
+
+            return new SceneFilterRequestDto
+            {
+                ProjectID = vm.ProjectID,
+                IntExtIDs = vm.IntExtIDs,
+                ScriptLocationIDs = vm.ScriptLocationIDs,
+                DayNightIDs = vm.DayNightIDs,
+                LocationSetIDs = vm.LocationSetIDs,
+                LocationIDs = vm.LocationIDs,
+                CharacterIDs = vm.CharacterIDs,
+                BreakdownItemIDs = vm.BreakdownItemIDs,
+                ScheduleDayIDs = vm.ScheduleDayIDs,
+                ScheduleSceneShootingDayIDs = vm.ScheduleSceneShootingDayIDs,
+                CallsheetIDs = vm.CallsheetIDs,
+                CallsheetSceneShootingDayIDs = vm.CallsheetSceneShootingDayIDs,
+                ShootingDayIDs = vm.ShootingDayIDs,
+                SearchText = vm.SearchText,
+                MinPageLength = vm.MinPageLength,
+                MaxPageLength = vm.MaxPageLength
+            };
+        }
     }
 }

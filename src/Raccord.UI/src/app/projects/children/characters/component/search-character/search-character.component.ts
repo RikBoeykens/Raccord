@@ -1,10 +1,11 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Character } from '../../model/character.model';
 import { SearchEngineService } from '../../../../../search/service/search-engine.service';
 import { LoadingService } from '../../../../../loading/service/loading.service';
 import { SearchResult } from '../../../../../search/model/search-result.model';
 import { EntityType } from '../../../../../shared/enums/entity-type.enum';
 import { DialogService } from '../../../../../shared/service/dialog.service';
+import { ExcludeTypeIDs } from '../../../../../search/model/exclude-type-ids.model';
 
 @Component({
     selector: 'search-character',
@@ -12,7 +13,9 @@ import { DialogService } from '../../../../../shared/service/dialog.service';
 })
 export class SearchCharacterComponent{
 
-    @Input() searchCharacter: Character;
+    @Output() public setCharacter = new EventEmitter();
+    @Input() public searchCharacter: Character;
+    @Input() public excludeCharacters: Character[] =  [];
     searchResults: SearchResult[] = [];
 
     constructor(
@@ -35,7 +38,16 @@ export class SearchCharacterComponent{
 
         let loadingId = this._loadingService.startLoading();
         
-        this._searchEngineService.search({ searchText: this.searchCharacter.name, includeTypes: [EntityType.character], excludeTypes: [], projectId: this.searchCharacter.projectId}).then(results=>{
+        this._searchEngineService.search({
+                searchText: this.searchCharacter.name,
+                includeTypes: [EntityType.character],
+                excludeTypes: [],
+                projectId: this.searchCharacter.projectId,
+                excludeTypeIDs: [{
+                    type: EntityType.character,
+                    ids: this.excludeCharacters.map((character: Character) => character.id)
+                }]
+            }).then(results=>{
             if(typeof(results)=='string'){
                 this._dialogService.error(results);
             }
@@ -53,5 +65,6 @@ export class SearchCharacterComponent{
         this.searchCharacter.name = result.displayName;
         this.searchCharacter.id = result.id;
         this.clearSearch();
+        this.setCharacter.emit();
     }
 }

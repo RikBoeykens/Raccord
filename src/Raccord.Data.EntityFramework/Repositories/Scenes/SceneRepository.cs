@@ -34,16 +34,16 @@ namespace Raccord.Data.EntityFramework.Repositories.Scenes
         }
 
 
-        public int SearchCount(string searchText, long? projectID, string userID, bool isAdmin)
+        public int SearchCount(string searchText, long? projectID, string userID, bool isAdmin, long[] excludeIds)
         {
-            var query = GetSearchQuery(searchText, projectID, userID, isAdmin);
+            var query = GetSearchQuery(searchText, projectID, userID, isAdmin, excludeIds);
 
             return query.Count();            
         }
 
-        public IEnumerable<Scene> Search(string searchText, long? projectID, string userID, bool isAdmin)
+        public IEnumerable<Scene> Search(string searchText, long? projectID, string userID, bool isAdmin, long[] excludeIds)
         {
-            return GetSearchQuery(searchText, projectID, userID, isAdmin);
+            return GetSearchQuery(searchText, projectID, userID, isAdmin, excludeIds);
         }
 
         public IEnumerable<Scene> GetScriptForProject(long projectID)
@@ -65,6 +65,109 @@ namespace Raccord.Data.EntityFramework.Repositories.Scenes
             var query = GetIncludedScript();
 
             return query.FirstOrDefault(s=> s.ID == ID);
+        }
+
+        public IEnumerable<Scene> Filter(
+            long projectID, 
+            IEnumerable<long> intExtIDs, 
+            IEnumerable<long> scriptLocationIDs, 
+            IEnumerable<long> dayNightIDs,
+            IEnumerable<long> locationSetIDs,
+            IEnumerable<long> locationIDs,
+            IEnumerable<long> characterIDs,
+            IEnumerable<long> breakdownItemIDs,
+            IEnumerable<long> scheduleDayIDs,
+            IEnumerable<long> scheduleSceneShootingDayIDs,
+            IEnumerable<long> callsheetIDs,
+            IEnumerable<long> callsheetSceneShootingDayIDs,
+            IEnumerable<long> shootingDayIDs,
+            string searchText,
+            int? minPageLength,
+            int? maxPageLength
+        )
+        {
+            var query = GetIncludedFilter();
+
+            query = query.Where(s=> s.ProjectID == projectID);
+
+            if(intExtIDs.Any())
+            {
+                query = query.Where(s => intExtIDs.Any(id=> id == s.IntExtID));
+            }
+
+            if(scriptLocationIDs.Any())
+            {
+                query = query.Where(s => scriptLocationIDs.Any(id=> id == s.ScriptLocationID));
+            }
+
+            if(dayNightIDs.Any())
+            {
+                query = query.Where(s => dayNightIDs.Any(id=> id == s.DayNightID));
+            }
+
+            if(locationSetIDs.Any())
+            {
+                query = query.Where(s => locationSetIDs.All(id=> s.ScriptLocation.LocationSets.Any(ls=> ls.ID == id)));
+            }
+
+            if(locationIDs.Any())
+            {
+                query = query.Where(s => locationIDs.All(id=> s.ScriptLocation.LocationSets.Any(ls=> ls.LocationID == id)));
+            }
+
+            if(characterIDs.Any())
+            {
+                query = query.Where(s => characterIDs.All(id=> s.CharacterScenes.Any(cs=> cs.CharacterID == id)));
+            }
+
+            if(breakdownItemIDs.Any())
+            {
+                query = query.Where(s => breakdownItemIDs.All(id=> s.BreakdownItemScenes.Any(bis=> bis.BreakdownItemID == id)));
+            }
+
+            if(scheduleDayIDs.Any())
+            {
+                query = query.Where(s => scheduleDayIDs.All(id=> s.ScheduleScenes.Any(ss=> ss.ScheduleDayID == id)));
+            }
+
+            if(scheduleSceneShootingDayIDs.Any())
+            {
+                query = query.Where(s => scheduleSceneShootingDayIDs.All(id=> s.ScheduleScenes.Any(ss=> ss.ScheduleDay.ShootingDayID == id)));
+            }
+
+            if(callsheetIDs.Any())
+            {
+                query = query.Where(s => callsheetIDs.All(id=> s.CallsheetScenes.Any(ss=> ss.CallsheetID == id)));
+            }
+
+            if(callsheetSceneShootingDayIDs.Any())
+            {
+                query = query.Where(s => callsheetSceneShootingDayIDs.All(id=> s.CallsheetScenes.Any(ss=> ss.Callsheet.ShootingDayID == id)));
+            }
+
+            if(shootingDayIDs.Any())
+            {
+                query = query.Where(s => shootingDayIDs.All(id=> s.ShootingDayScenes.Any(ss=> ss.ShootingDayID == id)));
+            }
+
+            if(!string.IsNullOrEmpty(searchText))
+            {
+                query = query.Where(s => s.Summary.ToLower().Contains(searchText.ToLower()) ||
+                                        s.Number.ToLower().Contains(searchText.ToLower())
+                                    );
+            }
+
+            if(minPageLength.HasValue)
+            {
+                query = query.Where(s=> s.PageLength >= minPageLength);
+            }
+
+            if(maxPageLength.HasValue)
+            {
+                query = query.Where(s=> s.PageLength <= maxPageLength);
+            }
+
+            return query.OrderBy(s=> s.SortingOrder);
         }
 
         private IQueryable<Scene> GetIncludedFull()
@@ -137,18 +240,44 @@ namespace Raccord.Data.EntityFramework.Repositories.Scenes
                          .ThenInclude(p=> p.ProjectUsers);
         }
 
-        private IQueryable<Scene> GetSearchQuery(string searchText, long? projectID, string userID, bool isAdmin)
+        private IQueryable<Scene> GetIncludedFilter()
+        {
+            IQueryable<Scene> query = _context.Set<Scene>();
+
+            return query.Include(s => s.IntExt)
+                         .Include(s => s.ScriptLocation)
+                            .ThenInclude(sl=> sl.LocationSets)
+                                .ThenInclude(ls=> ls.Location)
+                         .Include(s => s.DayNight)
+                         .Include(s => s.CharacterScenes)
+                         .Include(s => s.BreakdownItemScenes)
+                         .Include(s => s.ScheduleScenes)
+                            .ThenInclude(ss=> ss.ScheduleDay)
+                         .Include(s => s.CallsheetScenes)
+                            .ThenInclude(cs=> cs.Callsheet)
+                         .Include(s=> s.ImageScenes)
+                         .ThenInclude(i=> i.Image);
+        }
+
+        private IQueryable<Scene> GetSearchQuery(string searchText, long? projectID, string userID, bool isAdmin, long[] excludeIds)
         {
             var query = GetIncludedSearch();
 
-            query = query.Where(s=> s.Summary.ToLower().Contains(searchText.ToLower()) || 
-                                    s.Number.ToLower().Contains(searchText.ToLower()));
+            query = query.Where(s=> 
+                s.Summary.ToLower().Contains(searchText.ToLower()) ||
+                s.Number.ToLower().Contains(searchText.ToLower())
+            );
 
             if(projectID.HasValue)
                 query = query.Where(s=> s.ProjectID==projectID.Value);
 
             if(!isAdmin)
                 query = query.Where(s=> s.Project.ProjectUsers.Any(c=> c.UserID == userID));
+
+            if(excludeIds.Any())
+            {
+                query = query.Where(c=> !excludeIds.Any(id=> id == c.ID));
+            }
 
             return query;
         }

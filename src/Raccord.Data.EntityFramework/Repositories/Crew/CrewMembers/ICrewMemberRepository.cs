@@ -9,7 +9,7 @@ namespace Raccord.Data.EntityFramework.Repositories.Crew.CrewMembers
         IEnumerable<CrewMember> GetAllForDepartment(long departmentID);
         CrewMember GetFull(long ID);
         CrewMember GetSummary(long ID);
-        int SearchCount(string searchText, long? projectID, string userID, bool isAdmin);
-        IEnumerable<CrewMember> Search(string searchText, long? projectID, string userID, bool isAdmin);
+        int SearchCount(string searchText, long? projectID, string userID, bool isAdmin, long[] excludeIds);
+        IEnumerable<CrewMember> Search(string searchText, long? projectID, string userID, bool isAdmin, long[] excludeIds);
     }
 }

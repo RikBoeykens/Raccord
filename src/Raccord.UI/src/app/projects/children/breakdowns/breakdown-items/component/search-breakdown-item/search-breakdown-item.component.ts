@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { BreakdownItem } from '../../model/breakdown-item.model';
 import { BreakdownItemHttpService } from '../../service/breakdown-item-http.service';
 import { LoadingService } from '../../../../../../loading/service/loading.service';
@@ -10,7 +10,10 @@ import { DialogService } from '../../../../../../shared/service/dialog.service';
 })
 export class SearchBreakdownItemComponent{
 
+
+    @Output() public setItem = new EventEmitter();
     @Input() searchBreakdownItem: BreakdownItem;
+    @Input() public excludedItems: BreakdownItem[] = [];
     @Input() typeId: number;
     searchResults: BreakdownItem[] = [];
 
@@ -33,8 +36,12 @@ export class SearchBreakdownItemComponent{
         }
 
         let loadingId = this._loadingService.startLoading();
-        
-        this._breakdownItemHttpService.searchByType(this.searchBreakdownItem.name, this.typeId).then(results=>{
+
+        this._breakdownItemHttpService.searchByType({
+            searchText: this.searchBreakdownItem.name, 
+            typeID: this.typeId, 
+            excludeIDs: this.excludedItems.map((item: BreakdownItem) => item.id)
+        }).then(results=>{
             if(typeof(results)=='string'){
                 this._dialogService.error(results);
             }
@@ -52,5 +59,6 @@ export class SearchBreakdownItemComponent{
         this.searchBreakdownItem.name = result.name;
         this.searchBreakdownItem.id = result.id;
         this.clearSearch();
+        this.setItem.emit();
     }
 }
