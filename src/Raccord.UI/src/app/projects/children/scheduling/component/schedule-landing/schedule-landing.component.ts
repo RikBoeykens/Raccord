@@ -15,6 +15,12 @@ import { DialogService } from '../../../../../shared/service/dialog.service';
 import { ProjectSummary } from '../../../../model/project-summary.model';
 import { SelectedEntity } from '../../../../../shared/model/selected-entity.model';
 import { EntityType } from '../../../../../shared/enums/entity-type.enum';
+import { SceneFilterRequest } from '../../../scenes/model/scene-filter-request.model';
+import { BreakdownTypeSummary } from '../../../breakdowns/breakdown-types/model/breakdown-type-summary.model';
+import { SceneHttpService } from '../../../scenes/service/scene-http.service';
+import { PageRequest } from '../../../../../shared/children/paging/model/page-request.model';
+import { AppSettings } from '../../../../../app.settings';
+import { SceneSummary } from '../../../scenes/model/scene-summary.model';
 
 @Component({
     templateUrl: 'schedule-landing.component.html',
@@ -26,12 +32,22 @@ export class ScheduleLandingComponent implements OnInit {
     viewNewScheduleDay: ScheduleDay;
     newScheduleDay: ScheduleDay;
     sceneType: EntityType[] = [EntityType.scene];
+    filteredScenes: SceneSummary[] = [];
+    sceneFilter: SceneFilterRequest = new SceneFilterRequest();
+    breakdownTypes: BreakdownTypeSummary[];
+    currentPage: PageRequest = new PageRequest({
+        page: 1,
+        pageSize: AppSettings.MAP_DEFAULT_PAGE_SIZE,
+        full: false
+    });
+    totalScenes: number;
 
     constructor(
         private _scheduleDayHttpService: ScheduleDayHttpService,
         private _scheduleDayNoteHttpService: ScheduleDayNoteHttpService,
         private _scheduleSceneHttpService: ScheduleSceneHttpService,
         private _callsheetHttpService: CallsheetHttpService,
+        private _sceneHttpService: SceneHttpService,
         private _loadingService: LoadingService,
         private _dialogService: DialogService,
         private _route: ActivatedRoute,
@@ -41,9 +57,15 @@ export class ScheduleLandingComponent implements OnInit {
     }
 
     ngOnInit() {
-        this._route.data.subscribe((data: { scheduleDays: FullScheduleDay[], project: ProjectSummary }) => {
+        this._route.data.subscribe((data: {
+            scheduleDays: FullScheduleDay[],
+            project: ProjectSummary,
+            breakdownTypes: BreakdownTypeSummary[]
+        }) => {
             this.scheduleDays = data.scheduleDays;
             this.project = data.project;
+            this.sceneFilter.projectID = this.project.id;
+            this.breakdownTypes = data.breakdownTypes;
         });
         this.resetNewScheduleDay();
     }
@@ -155,5 +177,31 @@ export class ScheduleLandingComponent implements OnInit {
         .then(()=>
             this._loadingService.endLoading(loadingId)
         );
+    }
+
+    public filterScenes() {
+        this.filteredScenes = [];
+        this.currentPage = new PageRequest({
+            page: 1,
+            pageSize: AppSettings.MAP_DEFAULT_PAGE_SIZE,
+            full: false
+        });
+        this.totalScenes = 0;
+        let loadingId = this._loadingService.startLoading();
+        this._sceneHttpService.filter(this.sceneFilter, this.currentPage).then(pagedData => {
+            this.filteredScenes = pagedData.data;
+            this.totalScenes = pagedData.pageInfo.total;
+            this._loadingService.endLoading(loadingId);
+        });
+    }
+
+    public getNextScenes() {
+        this.currentPage.page++;
+        let loadingId = this._loadingService.startLoading();
+        this._sceneHttpService.filter(this.sceneFilter, this.currentPage).then(pagedData => {
+            this.filteredScenes = this.filteredScenes.concat(pagedData.data);
+            this.totalScenes = pagedData.pageInfo.total;
+            this._loadingService.endLoading(loadingId);
+        });
     }
 }

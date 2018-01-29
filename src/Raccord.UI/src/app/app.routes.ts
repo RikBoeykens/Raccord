@@ -481,6 +481,7 @@ export const ROUTES: Routes = [
                 resolve:{
                   project: ProjectSummaryResolve,
                   scheduleDays: ScheduleDaysResolve,
+                  breakdownTypes: BreakdownTypesResolve
                 }
               },
               {

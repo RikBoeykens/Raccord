@@ -89,7 +89,7 @@ export class ScenesListComponent implements OnInit {
 
     filterScenes() {
         let loadingId = this._loadingService.startLoading();
-        this._sceneHttpService.filter(this.sceneFilter).then(pagedData => {
+        this._sceneHttpService.filter(this.sceneFilter, null).then(pagedData => {
             this.scenes = pagedData.data;
             this._loadingService.endLoading(loadingId);
         });
