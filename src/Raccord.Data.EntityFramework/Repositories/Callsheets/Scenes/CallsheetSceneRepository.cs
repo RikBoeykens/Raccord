@@ -17,7 +17,8 @@ namespace Raccord.Data.EntityFramework.Repositories.Callsheets.Scenes
         {
             var query = GetIncludedSummary();
 
-            return query.Where(sd=> sd.CallsheetID == callsheetID).OrderBy(sd=> sd.SortingOrder);
+            return query.Where(sd=> sd.CallsheetID == callsheetID).OrderBy(t=> t.SortingOrder.HasValue)
+                                                                    .ThenBy(t => t.SortingOrder);
         }
 
         public IEnumerable<CallsheetScene> GetAllForScene(long sceneID)
@@ -45,14 +46,16 @@ namespace Raccord.Data.EntityFramework.Repositories.Callsheets.Scenes
         {
             var query = GetIncludedLocation();
 
-            return query.Where(sd=> sd.CallsheetID == callsheetID).OrderBy(sd=> sd.SortingOrder);
+            return query.Where(sd=> sd.CallsheetID == callsheetID).OrderBy(t=> t.SortingOrder.HasValue)
+                                                                    .ThenBy(t => t.SortingOrder);
         }
 
         public IEnumerable<CallsheetScene> GetAllForCallsheetWithCharacters(long callsheetID)
         {
             var query = GetIncludedCharacters();
 
-            return query.Where(sd=> sd.CallsheetID == callsheetID).OrderBy(sd=> sd.SortingOrder);
+            return query.Where(sd=> sd.CallsheetID == callsheetID).OrderBy(t=> t.SortingOrder.HasValue)
+                                                                    .ThenBy(t => t.SortingOrder);
         }
 
         private IQueryable<CallsheetScene> GetIncludedFull()

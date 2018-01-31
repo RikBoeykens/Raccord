@@ -238,3 +238,16 @@ $placeholder-font-size: 20px;
     color: mat-color($accent);
   }
 }
+
+.schedule-day-container{
+  .add-new-scene-container{
+    background-color: mat-color($primary);
+
+    .new-scene {
+      color: transparent;
+    }
+  }
+  .add-new-scene-container.hovering {
+    background-color: mat-color($accent);
+  }
+}

@@ -118,25 +118,20 @@ export {
     SearchBreakdownCollectionComponent
 } from './children/breakdowns';
 
-export { ScheduleLandingComponent } from './children/scheduling/component/schedule-landing/schedule-landing.component';
-
-export { ScheduleDayHttpService } from './children/scheduling/schedule-days/service/schedule-day-http.service';
-export { ScheduleDayResolve } from './children/scheduling/schedule-days/service/schedule-day-resolve.service';
-export { ScheduleDaysResolve } from './children/scheduling/schedule-days/service/schedule-days-resolve.service';
-
-export { ScheduleDayNoteHttpService } from './children/scheduling/schedule-day-notes/service/schedule-day-note-http.service';
-export { ScheduleDayNoteResolve } from './children/scheduling/schedule-day-notes/service/schedule-day-note-resolve.service';
-export { ScheduleDayNotesResolve } from './children/scheduling/schedule-day-notes/service/schedule-day-notes-resolve.service';
-
-export { 
+export {
+    EditScheduleComponent,
+    ScheduleLandingComponent,
     ScheduleSceneLandingComponent,
+    ScheduleDayHttpService,
+    ScheduleDayResolve,
+    ScheduleDaysResolve,
+    ScheduleDayNoteHttpService,
+    ScheduleDayNoteResolve,
+    ScheduleDayNotesResolve,
     ScheduleSceneHttpService,
-    ScheduleSceneResolve
- } from './children/scheduling/schedule-scenes';
-
- export{
+    ScheduleSceneResolve,
     ScheduleCharacterHttpService
- } from "./children/scheduling/schedule-characters"
+} from './children/scheduling';
 
  export{
     LocationHttpService,
@@ -155,7 +150,7 @@ export {
     LocationSetScheduleComponent,
     SearchLocationComponent,
     SearchLocationsCollectionComponent
- } from "./children/locations";
+ } from './children/locations';
 
  export {
     ChooseShootingDayDialog,

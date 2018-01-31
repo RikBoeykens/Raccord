@@ -7,6 +7,7 @@ import { ScheduleSceneDay } from '../model/schedule-scene-day.model';
 import { ScheduleSceneScene } from '../model/schedule-scene-scene.model';
 import { ScheduleScene } from '../model/schedule-scene.model';
 import { JsonResponse } from '../../../../../shared/model/json-response.model';
+import { SortOrder } from '../../../../../shared/model/sort-order.model';
 
 @Injectable()
 export class ScheduleSceneHttpService extends BaseHttpService {
@@ -16,36 +17,44 @@ export class ScheduleSceneHttpService extends BaseHttpService {
         this._baseUri = `${AppSettings.API_ENDPOINT}/schedulescenes`;
     }
 
-    getScenes(id): Promise<ScheduleSceneScene[]> {
+    public getScenes(id): Promise<ScheduleSceneScene[]> {
 
-        var uri = `${this._baseUri}/${id}/day`;
-
-        return this.doGetArray(uri);
-    }
-
-    getDays(id): Promise<ScheduleSceneDay[]> {
-
-        var uri = `${this._baseUri}/${id}/scene`;
+        let uri = `${this._baseUri}/${id}/day`;
 
         return this.doGetArray(uri);
     }
 
-    get(id: number): Promise<FullScheduleScene>{
+    public getDays(id): Promise<ScheduleSceneDay[]> {
 
-        var uri = `${this._baseUri}/${id}`;
+        let uri = `${this._baseUri}/${id}/scene`;
+
+        return this.doGetArray(uri);
+    }
+
+    public get(id: number): Promise<FullScheduleScene>{
+
+        let uri = `${this._baseUri}/${id}`;
 
         return this.doGet(uri);
     }
 
-    post(scheduleScene: ScheduleScene): Promise<number> {
-        var uri = this._baseUri;
+    public post(scheduleScene: ScheduleScene): Promise<number> {
+        let uri = this._baseUri;
 
         return this.doPost(scheduleScene, uri);
     }
 
-    delete(id: Number): Promise<any> {
-        var uri = `${this._baseUri}/${id}`;
+    public delete(id: Number): Promise<any> {
+        let uri = `${this._baseUri}/${id}`;
 
         return this.doDelete(uri);
+    }
+
+    public sort(id: number, sortIds: number[]): Promise<any>{
+        let uri = `${this._baseUri}/sort`;
+
+        let sortOrder = new SortOrder({parentId: id, sortIds});
+
+        return this.doSort(sortOrder, uri);
     }
 }

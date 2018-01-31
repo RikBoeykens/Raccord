@@ -20,6 +20,13 @@ namespace Raccord.Data.EntityFramework.Repositories.Scheduling.ScheduleScenes
             return query.Where(sd=> sd.ScheduleDayID == dayID);
         }
 
+        public IEnumerable<ScheduleScene> GetAllForScheduleDaySort(long dayID)
+        {
+            var query = GetIncludedSort();
+
+            return query.Where(sd=> sd.ScheduleDayID == dayID);
+        }
+
         public IEnumerable<ScheduleScene> GetAllForScheduleDate(DateTime date)
         {
             var query = GetIncludedSummary();
@@ -97,6 +104,13 @@ namespace Raccord.Data.EntityFramework.Repositories.Scheduling.ScheduleScenes
         }
 
         private IQueryable<ScheduleScene> GetIncluded()
+        {
+            IQueryable<ScheduleScene> query = _context.Set<ScheduleScene>();
+
+            return query;
+        }
+
+        private IQueryable<ScheduleScene> GetIncludedSort()
         {
             IQueryable<ScheduleScene> query = _context.Set<ScheduleScene>();
 

@@ -7,7 +7,7 @@ namespace Raccord.Domain.Model.Scheduling
         public string Content { get; set; }
 
         // The sorting order of the scene within the project
-        public int SortingOrder { get; set; }
+        public int? SortingOrder { get; set; }
 
         // ID of the linked schedule day
         public long ScheduleDayID { get; set; }

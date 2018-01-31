@@ -14,7 +14,9 @@ namespace Raccord.Application.Services.Callsheets.Characters
             {
                 ID = callsheetCharacter.ID,
                 Character = callsheetCharacter.Character.TranslateSummary(),
-                Calls = callsheetCharacter.CharacterCalls.OrderBy(cc=> cc.CallType.SortingOrder).Select(c=> c.TranslateCallType())
+                Calls = callsheetCharacter.CharacterCalls.OrderBy(t=> t.CallType.SortingOrder.HasValue)
+                                    .ThenBy(t => t.CallType.SortingOrder)
+                                    .Select(c=> c.TranslateCallType())
             };
         }
     }

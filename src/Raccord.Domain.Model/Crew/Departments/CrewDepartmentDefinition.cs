@@ -12,6 +12,6 @@ namespace Raccord.Domain.Model.Crew.Departments
         public string Description { get; set; }
 
         // Sorting order for the department
-        public int SortingOrder { get; set; }
+        public int? SortingOrder { get; set; }
     }
 }

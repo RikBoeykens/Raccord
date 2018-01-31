@@ -25,5 +25,6 @@ namespace Raccord.Data.EntityFramework.Repositories
         void Delete(T entity);
         void Edit(T entity);
         void Commit();
+        Task CommitAsync();
     }
 }

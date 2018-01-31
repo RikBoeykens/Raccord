@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using System.Threading.Tasks;
+using Raccord.Application.Core.Common.Sorting;
 
 namespace Raccord.Application.Core.Services.Scheduling.ScheduleScenes
 {
@@ -16,5 +18,6 @@ namespace Raccord.Application.Core.Services.Scheduling.ScheduleScenes
         long Update(ScheduleSceneDto dto);
 
         void Delete(long ID);
+        Task SortAsync(SortOrderDto order);
     }
 }

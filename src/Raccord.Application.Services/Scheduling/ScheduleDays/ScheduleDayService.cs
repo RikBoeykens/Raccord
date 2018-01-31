@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Raccord.Application.Core.Services.Scheduling.ScheduleDays;
+using Raccord.Data.EntityFramework.Repositories.Projects;
 using Raccord.Data.EntityFramework.Repositories.Scheduling.ScheduleDays;
 using Raccord.Data.EntityFramework.Repositories.ShootingDays;
 using Raccord.Domain.Model.Scheduling;
@@ -14,20 +15,25 @@ namespace Raccord.Application.Services.Scheduling.ScheduleDays
     {
         private readonly IScheduleDayRepository _scheduleDayRepository;
         private readonly IShootingDayRepository _shootingDayRepository;
+        private readonly IProjectRepository _projectRepository;
 
         // Initialises a new ScheduleDayService
         public ScheduleDayService(
             IScheduleDayRepository scheduleDayRepository,
-            IShootingDayRepository shootingDayRepository
+            IShootingDayRepository shootingDayRepository,
+            IProjectRepository projectRepository
             )
         {
             if(scheduleDayRepository == null)
                 throw new ArgumentNullException(nameof(scheduleDayRepository));
             if(shootingDayRepository == null)
                 throw new ArgumentNullException(nameof(shootingDayRepository));
+            if(projectRepository == null)
+                throw new ArgumentNullException(nameof(projectRepository));
             
             _scheduleDayRepository = scheduleDayRepository;
             _shootingDayRepository = shootingDayRepository;
+            _projectRepository = projectRepository;
         }
 
         // Gets all schedule days
@@ -125,6 +131,10 @@ namespace Raccord.Application.Services.Scheduling.ScheduleDays
                     _scheduleDayRepository.Commit();
                 }
             }
+            var project = _projectRepository.GetSingle(projectID);
+            project.PublishedSchedule = true;
+            _projectRepository.Edit(project);
+            _projectRepository.Commit();
         }
     }
 }

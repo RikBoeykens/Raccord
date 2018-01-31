@@ -16,7 +16,8 @@ namespace Raccord.Data.EntityFramework.Repositories.Shots.Slates
         {
             var query = GetIncludedSummary();
 
-            return query.Where(s=> s.ProjectID == projectID).OrderBy(s=> s.SortingOrder);
+            return query.Where(s=> s.ProjectID == projectID).OrderBy(t=> t.SortingOrder.HasValue)
+                                                            .ThenBy(t => t.SortingOrder);
         }
 
         public Slate GetFull(long ID)

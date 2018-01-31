@@ -26,7 +26,8 @@ namespace Raccord.Application.Services.Callsheets
     {
         public static FullCallsheetDto TranslateFull(this Callsheet callsheet, IEnumerable<BreakdownType> breakdownTypes)
         {
-            var scenes = callsheet.CallsheetScenes.OrderBy(cs=> cs.SortingOrder);
+            var scenes = callsheet.CallsheetScenes.OrderBy(t=> t.SortingOrder.HasValue)
+                                                    .ThenBy(t => t.SortingOrder);
             var locations = new List<CallsheetLocationDto>();
             if(scenes.Count(s=> s.LocationSetID.HasValue)>=1)
             {

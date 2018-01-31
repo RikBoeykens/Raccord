@@ -117,5 +117,10 @@ namespace Raccord.Data.EntityFramework.Repositories
         {
             _context.SaveChanges();
         }
+
+        public virtual async Task CommitAsync()
+        {
+            await _context.SaveChangesAsync();
+        }
     }
 }

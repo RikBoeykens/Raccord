@@ -8,6 +8,12 @@ namespace Raccord.API.ViewModels.Projects
     {
         private ImageViewModel _primaryImage;
 
+        /// <summary>
+        /// Indicates if the schedule has been published
+        /// </summary>
+        /// <returns></returns>
+        public bool PublishedSchedule { get; set; }
+
         // Primary image linked to the project
         public ImageViewModel PrimaryImage
         {

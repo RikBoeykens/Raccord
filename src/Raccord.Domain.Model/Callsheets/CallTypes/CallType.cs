@@ -19,7 +19,7 @@ namespace Raccord.Domain.Model.Callsheets.CallTypes
         public string Description { get; set; }
 
         // The sorting order of the call type
-        public int SortingOrder { get; set; }
+        public int? SortingOrder { get; set; }
 
         // ID of the project
         public long ProjectID { get; set; }
