@@ -9,37 +9,41 @@ import { LinkedCharacter } from '../../../characters/model/linked-character.mode
 import { LinkedScheduleScene } from '../../schedule-scenes/model/linked-schedule-scene.model';
 import { JsonResponse } from '../../../../shared/model/json-response.model';
 import { SortOrder } from '../../../../shared/model/sort-order.model';
+import { BaseProjectHttpService } from '../../../../shared/service/base-project-http.service';
 
 @Injectable()
-export class ScheduleCharacterHttpService extends BaseHttpService {
+export class ScheduleCharacterHttpService extends BaseProjectHttpService {
 
-    constructor(protected _http: Http) { 
-        super(_http);
-        this._baseUri = `${AppSettings.API_ENDPOINT}/schedulecharacters`;
+    constructor(protected _http: Http) {
+        super(_http, 'schedulecharacters');
     }
 
-    getCharacters(sceneId): Promise<LinkedCharacter[]> {
+    public getCharacters(authProjectId: number, sceneId): Promise<LinkedCharacter[]> {
 
-        var uri = `${this._baseUri}/${sceneId}/characters`;
+        let uri = `${this.getUri(authProjectId)}/${sceneId}/characters`;
 
         return this.doGetArray(uri);
     }
 
-    getScenes(characterId): Promise<LinkedScheduleScene[]> {
+    public getScenes(authProjectId: number, characterId): Promise<LinkedScheduleScene[]> {
 
-        var uri = `${this._baseUri}/${characterId}/schedulescenes`;
+        let uri = `${this.getUri(authProjectId)}/${characterId}/schedulescenes`;
 
         return this.doGetArray(uri);
     }
 
-    addLink(scheduleSceneId: number, characterSceneId: number): Promise<any>{
-        var uri = `${this._baseUri}/${scheduleSceneId}/${characterSceneId}/addlink`;
+    public addLink(
+        authProjectId: number,
+        scheduleSceneId: number,
+        characterSceneId: number
+    ): Promise<any> {
+        let uri = `${this.getUri(authProjectId)}/${scheduleSceneId}/${characterSceneId}/addlink`;
 
         return this.doPost(null, uri);
     }
 
-    removeLink(linkID: number): Promise<any>{
-        var uri = `${this._baseUri}/${linkID}/removelink`;
+    public removeLink(authProjectId: number, linkID: number): Promise<any> {
+        let uri = `${this.getUri(authProjectId)}/${linkID}/removelink`;
 
         return this.doPost(null, uri);
     }

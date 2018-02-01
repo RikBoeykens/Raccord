@@ -19,8 +19,7 @@ namespace Raccord.Application.Services.ScriptUploads
         FileName = scriptUpload.FileName,
         Start = scriptUpload.Start,
         End = scriptUpload.End,
-        Scenes = scriptUpload.Scenes.OrderBy(t=> t.SortingOrder.HasValue)
-                                    .ThenBy(t => t.SortingOrder)
+        Scenes = scriptUpload.Scenes.OrderBy(t=> t.SortingOrder)
                                     .Select(s=> s.Translate()),
         Characters = scriptUpload.Characters.Select(c=> c.Translate()),
         ScriptLocations = scriptUpload.ScriptLocations.Select(sl=> sl.Translate()),

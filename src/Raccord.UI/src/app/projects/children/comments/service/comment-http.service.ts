@@ -8,32 +8,39 @@ import { BaseProjectHttpService } from '../../../shared/service/base-project-htt
 @Injectable()
 export class CommentHttpService extends BaseProjectHttpService {
 
-    constructor(protected _http: Http) { 
+    constructor(protected _http: Http) {
         super(_http, 'comments');
     }
 
-    getAll(authProjectId: number, parentProjectId?: number, parentCommentId?: number): Promise<Comment[]> {
+    public getAll(
+        authProjectId: number,
+        parentProjectId?: number,
+        parentCommentId?: number
+    ): Promise<Comment[]> {
 
-        var uri = `${this.getUri(authProjectId)}?parentProjectId=${parentProjectId}&parentCommentId=${parentCommentId}`;
+        let uri =
+            `${this.getUri(authProjectId)}` +
+                `?parentProjectId=${parentProjectId}` +
+                `&parentCommentId=${parentCommentId}`;
 
         return this.doGetArray(uri);
     }
 
-    get(authProjectId: number, id: number): Promise<Comment> {
+    public get(authProjectId: number, id: number): Promise<Comment> {
 
-        var uri = `${this.getUri(authProjectId)}/${id}`;
+        let uri = `${this.getUri(authProjectId)}/${id}`;
 
         return this.doGet(uri);
     }
 
-    post(authProjectId: number, comment: PostComment): Promise<number> {
-        var uri = this.getUri(authProjectId);
+    public post(authProjectId: number, comment: PostComment): Promise<number> {
+        let uri = this.getUri(authProjectId);
 
         return this.doPost(comment, uri);
     }
 
-    delete(authProjectId: number, id: Number): Promise<any> {
-        var uri = `${this.getUri(authProjectId)}/${id}`;
+    public delete(authProjectId: number, id: Number): Promise<any> {
+        let uri = `${this.getUri(authProjectId)}/${id}`;
 
         return this.doDelete(uri);
     }

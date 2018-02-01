@@ -8,3 +8,5 @@ export { Address } from './model/address.model';
 export { LatLng } from './model/lat-lng.model';
 // Directives
 export { MatchHeightDirective } from './directives/match-height.directive';
+// Services
+export { LoadingWrapperService } from './service/loading-wrapper.service';

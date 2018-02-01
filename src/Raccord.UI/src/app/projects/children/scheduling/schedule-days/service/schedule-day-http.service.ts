@@ -6,50 +6,50 @@ import { FullScheduleDay } from '../model/full-schedule-day.model';
 import { ScheduleDaySummary } from '../model/schedule-day-summary.model';
 import { ScheduleDay } from '../model/schedule-day.model';
 import { JsonResponse } from '../../../../../shared/model/json-response.model';
+import { BaseProjectHttpService } from '../../../../shared/service/base-project-http.service';
 
 @Injectable()
-export class ScheduleDayHttpService extends BaseHttpService {
+export class ScheduleDayHttpService extends BaseProjectHttpService {
 
-    constructor(protected _http: Http) { 
-        super(_http);
-        this._baseUri = `${AppSettings.API_ENDPOINT}/scheduledays`;
+    constructor(protected _http: Http) {
+        super(_http, 'scheduledays');
     }
 
-    getAll(projectId): Promise<FullScheduleDay[]> {
+    public getAll(authProjectId: number): Promise<FullScheduleDay[]> {
 
-        var uri = `${this._baseUri}/${projectId}/project`;
+        let uri = `${this.getUri(authProjectId)}/project`;
 
         return this.doGetArray(uri);
     }
 
-    get(id: number): Promise<FullScheduleDay>{
+    public get(authProjectId: number, id: number): Promise<FullScheduleDay> {
 
-        var uri = `${this._baseUri}/${id}`;
-
-        return this.doGet(uri);
-    }
-
-    getSummary(id: Number): Promise<ScheduleDaySummary> {
-
-        var uri = `${this._baseUri}/${id}/summary`;
+        let uri = `${this.getUri(authProjectId)}/${id}`;
 
         return this.doGet(uri);
     }
 
-    post(scheduleDay: ScheduleDay): Promise<number> {
-        var uri = this._baseUri;
+    public getSummary(authProjectId: number, id: Number): Promise<ScheduleDaySummary> {
+
+        let uri = `${this.getUri(authProjectId)}/${id}/summary`;
+
+        return this.doGet(uri);
+    }
+
+    public post(authProjectId: number, scheduleDay: ScheduleDay): Promise<number> {
+        let uri = this.getUri(authProjectId);
 
         return this.doPost(scheduleDay, uri);
     }
 
-    delete(id: Number): Promise<any> {
-        var uri = `${this._baseUri}/${id}`;
+    public delete(authProjectId: number, id: Number): Promise<any> {
+        let uri = `${this.getUri(authProjectId)}/${id}`;
 
         return this.doDelete(uri);
     }
 
-    publish(projectId: number): Promise<any>{
-        var uri = `${this._baseUri}/${projectId}/publish`;
+    public publish(authProjectId: number): Promise<any> {
+        let uri = `${this.getUri(authProjectId)}/publish`;
 
         return this.doPost(null, uri);
     }

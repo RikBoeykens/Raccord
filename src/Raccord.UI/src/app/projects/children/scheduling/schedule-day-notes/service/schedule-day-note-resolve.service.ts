@@ -6,18 +6,18 @@ import { FullScheduleDayNote } from '../model/full-schedule-day-note.model';
 export class ScheduleDayNoteResolve implements Resolve<FullScheduleDayNote> {
 
   constructor(
-      private scheduleDayNoteHttpService: ScheduleDayNoteHttpService, 
+      private scheduleDayNoteHttpService: ScheduleDayNoteHttpService,
       private router: Router
   ) {}
 
-  resolve(route: ActivatedRouteSnapshot) {
+  public resolve(route: ActivatedRouteSnapshot) {
     let scheduleDayNoteId = route.params['scheduleDayNoteId'];
+    let projectId = route.params['projectId'];
 
-    return this.scheduleDayNoteHttpService.get(scheduleDayNoteId).then(note => {
+    return this.scheduleDayNoteHttpService.get(projectId, scheduleDayNoteId).then((note) => {
         if (note) {
             return note;
         } else { // id not found
-            let projectId = route.params['projectId'];
             this.router.navigate(['/projects', projectId]);
             return false;
         }

@@ -5,36 +5,44 @@ import { ScheduleScene } from '../../model/schedule-scene.model';
 import { LinkedCharacter } from '../../../../../children/characters/model/linked-character.model';
 import { LocationSetSummary } from '../../../../locations';
 import { ScheduleSceneHttpService } from '../../service/schedule-scene-http.service';
-import { ScheduleCharacterHttpService } from '../../../schedule-characters/service/schedule-character-http.service';
+import { ScheduleCharacterHttpService }
+    from '../../../schedule-characters/service/schedule-character-http.service';
 import { LoadingService } from '../../../../../../loading/service/loading.service';
 import { DialogService } from '../../../../../../shared/service/dialog.service';
 import { ProjectSummary } from '../../../../../model/project-summary.model';
 import { PageLengthHelpers } from '../../../../../../shared/helpers/page-length.helpers';
+import { LoadingWrapperService } from '../../../../../../shared/service/loading-wrapper.service';
 
 @Component({
     templateUrl: 'schedule-scene-landing.component.html',
 })
-export class ScheduleSceneLandingComponent implements OnInit, OnChanges{
+export class ScheduleSceneLandingComponent implements OnInit, OnChanges {
 
-    scheduleScene: FullScheduleScene;
-    project: ProjectSummary;
-    stringPageLength: string;
-    characters: LinkedCharacter[] = [];
-    scheduleCharacters: ScheduleCharacterWrapper[] = [];
-    locationSets: LocationSetSummary[] = [];
+    public scheduleScene: FullScheduleScene;
+    public project: ProjectSummary;
+    public stringPageLength: string;
+    public characters: LinkedCharacter[] = [];
+    public scheduleCharacters: ScheduleCharacterWrapper[] = [];
+    public locationSets: LocationSetSummary[] = [];
 
     constructor(
         private _scheduleSceneHttpService: ScheduleSceneHttpService,
         private _scheduleCharacterHttpService: ScheduleCharacterHttpService,
         private _loadingService: LoadingService,
         private _dialogService: DialogService,
+        private _loadingWrapperService: LoadingWrapperService,
         private _route: ActivatedRoute,
         private _router: Router,
     ) {
     }
 
-    ngOnInit() {
-        this._route.data.subscribe((data: { scheduleScene: FullScheduleScene, project: ProjectSummary, characters: LinkedCharacter[], locationSets: LocationSetSummary[] }) => {
+    public ngOnInit() {
+        this._route.data.subscribe((data: {
+            scheduleScene: FullScheduleScene,
+            project: ProjectSummary,
+            characters: LinkedCharacter[],
+            locationSets: LocationSetSummary[]
+        }) => {
             this.scheduleScene = data.scheduleScene;
             this.setStringPageLength();
             this.project = data.project;
@@ -44,94 +52,88 @@ export class ScheduleSceneLandingComponent implements OnInit, OnChanges{
         });
     }
 
-    ngOnChanges(){
+    public ngOnChanges() {
         this.setStringPageLength();
     }
 
-    setStringPageLength(){
-        this.stringPageLength = PageLengthHelpers.getPageLengthString(this.scheduleScene.pageLength);
+    public setStringPageLength() {
+        this.stringPageLength =
+            PageLengthHelpers.getPageLengthString(this.scheduleScene.pageLength);
     }
 
-    getScheduleScene(){
-        
+    public getScheduleScene() {
+
         let loadingId = this._loadingService.startLoading();
 
-        this._scheduleSceneHttpService.get(this.scheduleScene.id).then(data => {
+        this._scheduleSceneHttpService.get(this.project.id, this.scheduleScene.id).then((data) => {
             this.scheduleScene = data;
             this.setScheduleCharacterWrappers();
             this._loadingService.endLoading(loadingId);
         });
     }
 
-    updateScheduleScene(){
-        let loadingId = this._loadingService.startLoading();
-
+    public updateScheduleScene() {
         let updatedScheduleScene = new ScheduleScene({
-            id: this.scheduleScene.id, 
+            id: this.scheduleScene.id,
             pageLength: PageLengthHelpers.getPageLengthNumber(this.stringPageLength),
             sceneId: this.scheduleScene.scene.id,
             scheduleDayId: this.scheduleScene.scheduleDay.id
         });
-        if(this.scheduleScene.locationSet.id!==0){
+        if (this.scheduleScene.locationSet.id !== 0) {
             updatedScheduleScene.locationSetId = this.scheduleScene.locationSet.id;
         }
-        this._scheduleSceneHttpService.post(updatedScheduleScene).then(data=>{
-            if(typeof(data)=='string'){
-                this._dialogService.error(data);
-            }else{
+
+        this._loadingWrapperService.Load(
+            this._scheduleSceneHttpService.post(this.project.id, updatedScheduleScene),
+            () => {
                 this.getScheduleScene();
+            },
+            () => {
+                this.updateScheduleCharacters();
             }
-        }).catch()
-        .then(()=>{
-            this._loadingService.endLoading(loadingId);
-            this.updateScheduleCharacters();
-        });
-    }
-
-    updateScheduleCharacters(){
-        let linksToRemove = this.scheduleCharacters.filter((character)=>!character.isLinked&&character.scheduleCharacterId);
-        let linksToAdd = this.scheduleCharacters.filter((character)=> character.isLinked&&!character.scheduleCharacterId);
-        
-        linksToRemove.forEach((character)=> this.removeScheduleCharacterLink(character));
-        linksToAdd.forEach((character)=> this.addScheduleCharacterLink(character));
-    }
-
-    removeScheduleCharacterLink(character: ScheduleCharacterWrapper){
-        let loadingId = this._loadingService.startLoading();
-
-        this._scheduleCharacterHttpService.removeLink(character.scheduleCharacterId).then(data=>{
-            if(typeof(data)=='string'){
-                this._dialogService.error(data);
-            }else{
-                this.getScheduleScene();
-            }
-        }).catch()
-        .then(()=>
-            this._loadingService.endLoading(loadingId)
         );
     }
 
-    addScheduleCharacterLink(character: ScheduleCharacterWrapper){
-        let loadingId = this._loadingService.startLoading();
+    public updateScheduleCharacters() {
+        let linksToRemove =
+            this.scheduleCharacters.filter((character) =>
+                !character.isLinked && character.scheduleCharacterId);
+        let linksToAdd =
+            this.scheduleCharacters.filter((character) =>
+            character.isLinked && !character.scheduleCharacterId);
 
-        this._scheduleCharacterHttpService.addLink(this.scheduleScene.id, character.linkID).then(data=>{
-            if(typeof(data)=='string'){
-                this._dialogService.error(data);
-            }else{
-                this.getScheduleScene();
-            }
-        }).catch()
-        .then(()=>
-            this._loadingService.endLoading(loadingId)
+        linksToRemove.forEach((character) => this.removeScheduleCharacterLink(character));
+        linksToAdd.forEach((character) => this.addScheduleCharacterLink(character));
+    }
+
+    public removeScheduleCharacterLink(character: ScheduleCharacterWrapper) {
+        this._loadingWrapperService.Load(
+            this._scheduleCharacterHttpService.removeLink(
+                this.project.id,
+                character.scheduleCharacterId
+            ),
+            () => { this.getScheduleScene(); }
         );
     }
 
-    setScheduleCharacterWrappers(){
+    public addScheduleCharacterLink(character: ScheduleCharacterWrapper) {
+        this._loadingWrapperService.Load(
+            this._scheduleCharacterHttpService.addLink(
+                this.project.id,
+                this.scheduleScene.id,
+                character.linkID),
+            () => { this.getScheduleScene(); }
+        );
+    }
+
+    public setScheduleCharacterWrappers() {
         let characters = [];
-        for(let sceneCharacter of this.characters){
+        for (let sceneCharacter of this.characters){
             let newCharacter = new ScheduleCharacterWrapper(sceneCharacter);
-            let existingScheduleCharacters = this.scheduleScene.characters.filter((scheduleCharacter)=> scheduleCharacter.id===sceneCharacter.id);
-            if(existingScheduleCharacters.length>0){
+            let existingScheduleCharacters =
+                this.scheduleScene.characters
+                    .filter((scheduleCharacter) => scheduleCharacter.id === sceneCharacter.id);
+            if (existingScheduleCharacters.length > 0) {
                 newCharacter.isLinked = true;
                 newCharacter.scheduleCharacterId = existingScheduleCharacters[0].linkID;
             }
@@ -141,11 +143,12 @@ export class ScheduleSceneLandingComponent implements OnInit, OnChanges{
     }
 }
 
-export class ScheduleCharacterWrapper extends LinkedCharacter{
-    isLinked: boolean;
-    scheduleCharacterId: number;
-    
-    constructor(obj){
+// tslint:disable-next-line:max-classes-per-file
+export class ScheduleCharacterWrapper extends LinkedCharacter {
+    public isLinked: boolean;
+    public scheduleCharacterId: number;
+
+    constructor(obj) {
         super(obj);
     }
 }

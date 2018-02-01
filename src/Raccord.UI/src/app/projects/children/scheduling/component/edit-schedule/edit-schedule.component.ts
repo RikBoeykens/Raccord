@@ -27,6 +27,7 @@ import { SceneSummary } from '../../../scenes/model/scene-summary.model';
 import { DragulaService } from 'ng2-dragula';
 import { HtmlClassHelpers } from '../../../../../shared/helpers/html-class.helpers';
 import { Element } from '@angular/compiler';
+import { LoadingWrapperService } from '../../../../../shared/service/loading-wrapper.service';
 
 @Component({
     templateUrl: 'edit-schedule.component.html',
@@ -60,6 +61,7 @@ export class EditScheduleComponent implements OnInit {
         private _sceneHttpService: SceneHttpService,
         private _loadingService: LoadingService,
         private _dialogService: DialogService,
+        private _loadingWrapperService: LoadingWrapperService,
         private _route: ActivatedRoute,
         private _router: Router,
         private _dragulaService: DragulaService
@@ -141,7 +143,7 @@ export class EditScheduleComponent implements OnInit {
 
         this.newScheduleDay = this.viewNewScheduleDay;
 
-        this._scheduleDayHttpService.post(this.newScheduleDay).then((data) => {
+        this._scheduleDayHttpService.post(this.project.id, this.newScheduleDay).then((data) => {
             if (typeof(data) === 'string') {
                 this._dialogService.error(data);
             }else {
@@ -168,7 +170,7 @@ export class EditScheduleComponent implements OnInit {
         newScheduleScene.sceneId = scene.id;
         newScheduleScene.scheduleDayId = scheduleDay.id;
 
-        this._scheduleSceneHttpService.post(newScheduleScene).then((data) => {
+        this._scheduleSceneHttpService.post(this.project.id, newScheduleScene).then((data) => {
             if (typeof(data) === 'string') {
                 this._dialogService.error(data);
             }else {
@@ -209,7 +211,7 @@ export class EditScheduleComponent implements OnInit {
         event.stopPropagation();
         let loadingId = this._loadingService.startLoading();
 
-        this._scheduleSceneHttpService.delete(scheduleScene.id).then((data) => {
+        this._scheduleSceneHttpService.delete(this.project.id, scheduleScene.id).then((data) => {
             if (typeof(data) === 'string') {
                 this._dialogService.error(data);
             }else {
@@ -326,7 +328,7 @@ export class EditScheduleComponent implements OnInit {
                 if (scene.locationSet.id !== 0) {
                     postScene.locationSetId = scene.locationSet.id;
                 }
-                this._scheduleSceneHttpService.post(postScene).then((data) => {
+                this._scheduleSceneHttpService.post(this.project.id, postScene).then((data) => {
                     if (typeof(data) === 'string') {
                         this._dialogService.error(data);
                     }else {
@@ -351,9 +353,24 @@ export class EditScheduleComponent implements OnInit {
     }
 
     private sortScenes(scheduleDay: ScheduleDayDragSceneWrapper, onSorted) {
+
+        this._loadingWrapperService.Load(
+            this._scheduleSceneHttpService.sort(
+                this.project.id,
+                scheduleDay.id,
+                this.getSortedOrder(scheduleDay)
+            ),
+            () => {
+                if (onSorted) {
+                    onSorted();
+                }
+            }
+        );
+        /*
         let loadingId = this._loadingService.startLoading();
 
         this._scheduleSceneHttpService.sort(
+            this.project.id,
             scheduleDay.id,
             this.getSortedOrder(scheduleDay)
         ).then((data) => {
@@ -367,7 +384,7 @@ export class EditScheduleComponent implements OnInit {
         }).catch()
         .then(() =>
             this._loadingService.endLoading(loadingId)
-        );
+        );*/
     }
 
     private getSortedOrder(scheduleDay: ScheduleDayDragSceneWrapper): number[] {
