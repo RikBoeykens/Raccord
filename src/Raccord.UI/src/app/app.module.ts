@@ -98,6 +98,7 @@ import { BreakdownItemImagesComponent } from './projects';
 import { BreakdownItemScenesComponent } from './projects';
 import {
   SearchBreakdownCollectionComponent,
+  EditScheduleComponent,
   ScheduleLandingComponent,
   ScheduleSceneLandingComponent,
   LocationsListComponent,
@@ -234,6 +235,7 @@ const COMPONENTS =[
   BreakdownItemImagesComponent,
   BreakdownItemScenesComponent,
   SearchBreakdownCollectionComponent,
+  EditScheduleComponent,
   ScheduleLandingComponent,
   ScheduleSceneLandingComponent,
   LocationsListComponent,
@@ -349,7 +351,7 @@ import { ScheduleDaysResolve } from './projects';
 import { ScheduleDayNoteHttpService } from './projects';
 import { ScheduleDayNoteResolve } from './projects';
 import { ScheduleDayNotesResolve } from './projects';
-import { 
+import {
   ScheduleSceneHttpService,
   ScheduleSceneResolve,
   ScheduleCharacterHttpService,
@@ -560,10 +562,12 @@ const APP_PROVIDERS = [
 // Directives
 import { HighlightDirective } from './shared/directives/highlight.directive';
 import { FocusDirective } from './shared/directives/focus.directive';
+import { MatchHeightDirective } from './shared';
 
 const DIRECTIVES = [
   HighlightDirective,
-  FocusDirective
+  FocusDirective,
+  MatchHeightDirective
 ];
 
 // Pipes

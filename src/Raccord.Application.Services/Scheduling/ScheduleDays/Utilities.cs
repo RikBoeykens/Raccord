@@ -28,7 +28,9 @@ namespace Raccord.Application.Services.Scheduling.ScheduleDays
                 Date = scheduleDay.Date,
                 Start = scheduleDay.Start,
                 End = scheduleDay.End,
-                Scenes = scheduleDay.ScheduleScenes.OrderBy(s=> s.SortingOrder).Select(s=> s.TranslateScene()),
+                Scenes = scheduleDay.ScheduleScenes.OrderBy(t=> t.SortingOrder.HasValue)
+                                                    .ThenBy(t => t.SortingOrder)
+                                                    .Select(s=> s.TranslateScene()),
                 ShootingDay = scheduleDay.ShootingDayID.HasValue ? scheduleDay.ShootingDay.Translate() : new ShootingDayDto(),
                 ProjectID = scheduleDay.ProjectID,
             };

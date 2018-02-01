@@ -16,7 +16,7 @@ namespace Raccord.Domain.Model.Crew.Departments
         public string Description { get; set; }
 
         // Sorting order for the department
-        public int SortingOrder { get; set; }
+        public int? SortingOrder { get; set; }
 
         // ID of the linked project
         public long ProjectID { get; set; }

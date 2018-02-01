@@ -112,7 +112,7 @@ namespace Raccord.Application.Services.Scenes
                 DayNightID = dto.DayNight.ID.GetValueOrNull(),
                 ScriptUploadID = scriptUploadID,
                 ProjectID = dto.ProjectID,
-                SortingOrder = GetNextSceneOrder(dto.ProjectID),
+                SortingOrder = (int?)null,
             };
 
             _sceneRepository.Add(scene);
@@ -160,7 +160,7 @@ namespace Raccord.Application.Services.Scenes
             foreach(var scene in scenes)
             {
                 var orderedIndex = Array.IndexOf(order.SortIDs, scene.ID);
-                scene.SortingOrder = orderedIndex != -1 ? orderedIndex : scenes.Count();
+                scene.SortingOrder = orderedIndex != -1 ? orderedIndex : (int?)null;
                 _sceneRepository.Edit(scene);
             }
 
@@ -265,12 +265,6 @@ namespace Raccord.Application.Services.Scenes
                     scene.ScriptLocation.ID = scriptLocation.ID;
                 }
             }
-        }
-
-        private int GetNextSceneOrder(long projectID)
-        {
-            var scenes = _sceneRepository.GetAllForProject(projectID);
-            return scenes.Count();
         }
     }
 }

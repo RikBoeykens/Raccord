@@ -56,40 +56,26 @@
                 </md-card-title>
             </md-card-header>
         </md-card>
-        <md-card class="project-landing-card" *ngIf="getCanRead()">
-            <md-card-header>
-                <md-card-title>
-                    <a routerLink="/projects/{{project.id}}/scheduling" class="card-title">Schedule</a>
-                </md-card-title>
-            </md-card-header>
-        </md-card>
         <md-card class="project-landing-card" *ngIf="getCanReadCallsheet()">
-            <md-card-header>
-                <md-card-title>
-                    <a routerLink="/projects/{{project.id}}/callsheets" class="card-title">Callsheets</a>
-                </md-card-title>
-            </md-card-header>
-        </md-card>
-        <md-card class="project-landing-card" *ngIf="getCanRead()">
-            <md-card-header>
-                <md-card-title>
-                    <a routerLink="/projects/{{project.id}}/slates" class="card-title">Slates</a>
-                </md-card-title>
-            </md-card-header>
-        </md-card>
-        <md-card class="project-landing-card" *ngIf="getCanRead()">
-            <md-card-header>
-                <md-card-title>
-                    <a routerLink="/projects/{{project.id}}/shootingdays" class="card-title">Shooting Day Reports</a>
-                </md-card-title>
-            </md-card-header>
-        </md-card>
-        <md-card class="project-landing-card" *ngIf="getCanRead()">
-            <md-card-header>
-                <md-card-title>
-                    <a routerLink="/projects/{{project.id}}/charts" class="card-title">Charts</a>
-                </md-card-title>
-            </md-card-header>
+            <md-card-title>Scheduling</md-card-title>
+            <md-card-content>
+                <md-nav-list>
+                    <a md-list-item
+                        routerLink="/projects/{{project.id}}/scheduling/edit"
+                        *ngIf="getCanEdit()&&!project.publishedSchedule">
+                        Edit Schedule
+                    </a>
+                    <a md-list-item
+                        routerLink="/projects/{{project.id}}/scheduling"
+                        *ngIf="getCanRead()&&project.publishedSchedule">
+                        View Schedule
+                    </a>
+                    <a md-list-item
+                        routerLink="/projects/{{project.id}}/callsheets">
+                        View Callsheets
+                    </a>
+                </md-nav-list>
+            </md-card-content>
         </md-card>
         <md-card class="project-landing-card" *ngIf="getCanRead()">
             <md-card-header>

@@ -1,15 +1,19 @@
-import { Project } from './project.model'
+import { Project } from './project.model';
 import { Image } from '../children/images/model/image.model';
 
 export class ProjectSummary extends Project {
-    primaryImage: Image;
+    public primaryImage: Image;
+    public publishedSchedule: boolean;
 
-    constructor(obj?: {id: number, 
+    constructor(obj?: {id: number,
                        title: string,
-                       primaryImage: Image}){
+                       primaryImage: Image,
+                       publishedSchedule: boolean
+                    }) {
         super(obj);
-        if(obj){
+        if (obj) {
             this.primaryImage = obj.primaryImage;
+            this.publishedSchedule = obj.publishedSchedule;
         }
     }
 }

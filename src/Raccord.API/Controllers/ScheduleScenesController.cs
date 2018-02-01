@@ -7,6 +7,8 @@ using Raccord.API.ViewModels.Core;
 using Raccord.Application.Core.Services.Scheduling.ScheduleScenes;
 using Microsoft.AspNetCore.Identity;
 using Raccord.Domain.Model.Users;
+using Raccord.API.ViewModels.Common.Sorting;
+using System.Threading.Tasks;
 
 namespace Raccord.API.Controllers
 {
@@ -118,6 +120,35 @@ namespace Raccord.API.Controllers
                 {
                     ok = false,
                     message = "Something went wrong while attempting to delete schedule scene.",
+                };
+            }
+
+            return new JsonResult(response);
+        }
+
+        // POST api/sort
+        [HttpPost("sort")]
+        public async Task<JsonResult> Sort([FromBody]SortOrderViewModel vm)
+        {
+            var response = new JsonResponse();
+
+            try
+            {
+                var dto = vm.Translate();
+
+                await _scheduleSceneService.SortAsync(dto);
+
+                response = new JsonResponse
+                {
+                    ok = true,
+                };
+            }
+            catch (Exception)
+            {
+                response = new JsonResponse
+                {
+                    ok = false,
+                    message = "Something went wrong while attempting to sort scenes",
                 };
             }
 

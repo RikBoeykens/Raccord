@@ -69,9 +69,9 @@ export class SceneHttpService extends BaseHttpService {
         return this.doSort(sortOrder, uri);
     }
 
-    filter(request: SceneFilterRequest): Promise<PagedData<SceneSummary>> {
+    filter(request: SceneFilterRequest, pageRequest: PageRequest): Promise<PagedData<SceneSummary>> {
 
-        let uri = `${this._baseUri}/filter`;
+        let uri = `${this._baseUri}/filter?${PageRequestHelpers.ConstructParams(pageRequest)}`;
 
         return this.doPost(request, uri);
     }

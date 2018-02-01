@@ -39,7 +39,7 @@ namespace Raccord.Domain.Model.Scenes
         public int PageLength { get; set; }
 
         // The sorting order of the scene within the project
-        public int SortingOrder { get; set; }
+        public int? SortingOrder { get; set; }
 
         // Timing length
         public TimeSpan Timing { get; set; }

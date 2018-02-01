@@ -21,7 +21,9 @@ namespace Raccord.Application.Services.Breakdowns.BreakdownItems
                 Name = breakdownItem.Name,
                 Description = breakdownItem.Description,
                 Type = breakdownItem.BreakdownType.Translate(),
-                Scenes = breakdownItem.BreakdownItemScenes.OrderBy(s=> s.Scene.SortingOrder).Select(s=> s.TranslateScene()),
+                Scenes = breakdownItem.BreakdownItemScenes.OrderBy(s=> s.Scene.SortingOrder.HasValue)
+                                                            .ThenBy(s => s.Scene.SortingOrder)
+                                                            .Select(s=> s.TranslateScene()),
                 Images = breakdownItem.ImageBreakdownItems.Select(s=> s.TranslateImage()),
             };
 

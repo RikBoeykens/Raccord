@@ -6,6 +6,8 @@ using Raccord.Application.Core.Services.Scheduling.ScheduleScenes;
 using Raccord.Data.EntityFramework.Repositories.Scheduling.ScheduleScenes;
 using Raccord.Data.EntityFramework.Repositories.CharacterScenes;
 using Raccord.Domain.Model.Images;
+using Raccord.Application.Core.Common.Sorting;
+using System.Threading.Tasks;
 
 namespace Raccord.Application.Services.Scheduling.ScheduleScenes
 {
@@ -92,6 +94,7 @@ namespace Raccord.Application.Services.Scheduling.ScheduleScenes
 
             scheduleScene.PageLength = dto.PageLength;
             scheduleScene.LocationSetID = dto.LocationSetID;
+            scheduleScene.ScheduleDayID = dto.ScheduleDayID;
 
             _scheduleSceneRepository.Edit(scheduleScene);
             _scheduleSceneRepository.Commit();
@@ -107,6 +110,21 @@ namespace Raccord.Application.Services.Scheduling.ScheduleScenes
             _scheduleSceneRepository.Delete(scheduleScene);
 
             _scheduleSceneRepository.Commit();
+        }
+
+        // Sorts scenes
+        public async Task SortAsync(SortOrderDto order)
+        {
+            var scenes = _scheduleSceneRepository.GetAllForScheduleDaySort(order.ParentID);
+
+            foreach(var scene in scenes)
+            {
+                var orderedIndex = Array.IndexOf(order.SortIDs, scene.ID);
+                scene.SortingOrder = orderedIndex != -1 ? orderedIndex : (int?)null;
+                _scheduleSceneRepository.Edit(scene);
+            }
+
+            await _scheduleSceneRepository.CommitAsync();
         }
     }
 }

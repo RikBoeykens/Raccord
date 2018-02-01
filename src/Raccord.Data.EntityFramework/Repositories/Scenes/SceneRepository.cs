@@ -16,7 +16,8 @@ namespace Raccord.Data.EntityFramework.Repositories.Scenes
         {
             var query = GetIncludedSummary();
 
-            return query.Where(s=> s.ProjectID == projectID).OrderBy(s=> s.SortingOrder);
+            return query.Where(s=> s.ProjectID == projectID).OrderBy(t=> t.SortingOrder.HasValue)
+                                                            .ThenBy(t => t.SortingOrder);
         }
 
         public Scene GetFull(long ID)
@@ -50,14 +51,17 @@ namespace Raccord.Data.EntityFramework.Repositories.Scenes
         {
             var query = GetIncludedScript();
 
-            return query.Where(s=> s.ProjectID == projectID).OrderBy(s=> s.SortingOrder);
+            return query.Where(s=> s.ProjectID == projectID).OrderBy(t=> t.SortingOrder.HasValue)
+                                                            .ThenBy(t => t.SortingOrder);
         }
 
         public IEnumerable<Scene> GetScriptForCallsheet(long callsheetID)
         {
             var query = GetIncludedScript();
 
-            return query.Where(s=> s.CallsheetScenes.Any(cs=> cs.CallsheetID == callsheetID)).OrderBy(s=> s.SortingOrder);
+            return query.Where(s=> s.CallsheetScenes.Any(cs=> cs.CallsheetID == callsheetID))
+                        .OrderBy(t=> t.SortingOrder.HasValue)
+                        .ThenBy(t => t.SortingOrder);
         }
 
         public Scene GetScript(long ID)
@@ -167,7 +171,8 @@ namespace Raccord.Data.EntityFramework.Repositories.Scenes
                 query = query.Where(s=> s.PageLength <= maxPageLength);
             }
 
-            return query.OrderBy(s=> s.SortingOrder);
+            return query.OrderBy(t=> t.SortingOrder.HasValue)
+                        .ThenBy(t => t.SortingOrder);
         }
 
         private IQueryable<Scene> GetIncludedFull()

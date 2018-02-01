@@ -25,7 +25,8 @@ import { BreakdownLandingComponent } from './projects';
 import { BreakdownTypeSettingsComponent } from './projects';
 import { BreakdownTypeLandingComponent } from './projects';
 import { BreakdownItemLandingComponent } from './projects';
-import { 
+import {
+  EditScheduleComponent,
   ScheduleLandingComponent,
   ScheduleSceneLandingComponent,
   LocationsListComponent,
@@ -474,24 +475,39 @@ export const ROUTES: Routes = [
           {
             path: 'scheduling',
             canActivate: [CanReadGeneralProjectPermissionGuard],
-            children:[
+            children: [
               {
                 path: '',
                 component: ScheduleLandingComponent,
-                resolve:{
+                resolve: {
                   project: ProjectSummaryResolve,
                   scheduleDays: ScheduleDaysResolve,
                 }
               },
               {
-                path: ':sceneId/scene/:scheduleSceneId',
-                component: ScheduleSceneLandingComponent,
-                resolve:{
-                  project: ProjectSummaryResolve,
-                  scheduleScene: ScheduleSceneResolve,
-                  characters: SceneCharactersResolve,
-                  locationSets: SceneLocationSetsResolve
-                }
+                path: 'edit',
+                canActivate: [CanEditGeneralProjectPermissionGuard],
+                children: [
+                  {
+                    path: '',
+                    component: EditScheduleComponent,
+                    resolve: {
+                      project: ProjectSummaryResolve,
+                      scheduleDays: ScheduleDaysResolve,
+                      breakdownTypes: BreakdownTypesResolve
+                    }
+                  },
+                  {
+                    path: ':sceneId/scene/:scheduleSceneId',
+                    component: ScheduleSceneLandingComponent,
+                    resolve: {
+                      project: ProjectSummaryResolve,
+                      scheduleScene: ScheduleSceneResolve,
+                      characters: SceneCharactersResolve,
+                      locationSets: SceneLocationSetsResolve
+                    }
+                  }
+                ]
               },
             ]
           },
