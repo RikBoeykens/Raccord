@@ -6,32 +6,54 @@
     </div>
 </div>
 <div class="row">
-    <div class='md-padding' layout="row" layout-wrap>
-        <md-card class="project-landing-card" *ngIf="getCanRead()">
-            <md-card-header>
-                <md-card-title>
-                    <a routerLink="/projects/{{project.id}}/scenes" class="card-title">Scenes</a>
-                </md-card-title>
-            </md-card-header>
+    <div>
+        <md-card *ngIf="false">
         </md-card>
         <md-card class="project-landing-card" *ngIf="getCanRead()">
-            <md-card-header>
-                <md-card-title>
-                    <a routerLink="/projects/{{project.id}}/scriptlocations" class="card-title">Script Locations</a>
-                </md-card-title>
-            </md-card-header>
+            <md-card-title>Script</md-card-title>
+            <md-card-content>
+                <md-nav-list>
+                    <a md-list-item
+                        routerLink="/projects/{{project.id}}/scripttext">
+                        View Script
+                    </a>
+                    <h3 mdSubheader>Scenes</h3>
+                    <a md-list-item
+                        routerLink="/projects/{{project.id}}/scenes/edit"
+                        *ngIf="getCanEdit()">
+                        Edit Scenes
+                    </a>
+                    <a md-list-item
+                        routerLink="/projects/{{project.id}}/scenes">
+                        View Scenes
+                    </a>
+                    <h3 mdSubheader>Timings</h3>
+                    <a md-list-item
+                        routerLink="/projects/{{project.id}}/scenes/timings">
+                        Timings
+                    </a>
+                    <h3 mdSubheader>Script Locations</h3>
+                    <a md-list-item
+                        routerLink="/projects/{{project.id}}/scriptlocations/edit"
+                        *ngIf="getCanEdit()">
+                        Edit Locations
+                    </a>
+                    <a md-list-item
+                        routerLink="/projects/{{project.id}}/scriptlocations">
+                        View Locations
+                    </a>
+                    <h3 mdSubheader>Settings</h3>
+                    <a md-list-item
+                        routerLink="/projects/{{project.id}}/sceneproperties">
+                        Scene Properties
+                    </a>
+                </md-nav-list>
+            </md-card-content>
         </md-card>
         <md-card class="project-landing-card" *ngIf="getCanRead()">
             <md-card-header>
                 <md-card-title>
                     <a routerLink="/projects/{{project.id}}/locations" class="card-title">Locations</a>
-                </md-card-title>
-            </md-card-header>
-        </md-card>
-        <md-card class="project-landing-card" *ngIf="getCanRead()">
-            <md-card-header>
-                <md-card-title>
-                    <a routerLink="/projects/{{project.id}}/sceneproperties" class="card-title">Scene Properties</a>
                 </md-card-title>
             </md-card-header>
         </md-card>
@@ -62,7 +84,7 @@
                 <md-nav-list>
                     <a md-list-item
                         routerLink="/projects/{{project.id}}/scheduling/edit"
-                        *ngIf="getCanEdit()&&!project.publishedSchedule">
+                        *ngIf="getCanEdit()">
                         Edit Schedule
                     </a>
                     <a md-list-item

@@ -38,6 +38,7 @@ import {
   ProjectsListComponent,
   ProjectAvatarComponent,
   ScenesListComponent,
+  EditScenesListComponent,
   EditSceneComponent,
   SceneLandingComponent,
   SceneImagesComponent,
@@ -48,24 +49,23 @@ import {
   SceneTimingsComponent,
   SceneSummaryComponent,
   FilterScenesComponent,
-  ChooseSceneDialog
-} from './projects';
-import { ScriptLocationsListComponent } from './projects';
-import { EditScriptLocationComponent } from './projects';
-import { ScriptLocationLandingComponent } from './projects';
-import {
+  ChooseSceneDialog,
+  ScriptLocationsListComponent,
+  EditScriptLocationsListComponent,
+  EditScriptLocationComponent,
+  ScriptLocationLandingComponent,
   ScriptLocationImagesComponent,
   ScriptLocationSetsComponent,
-  SearchScriptLocationsCollectionComponent
-} from './projects';
-import { SearchScriptLocationComponent } from './projects';
-import {
+  SearchScriptLocationsCollectionComponent,
+  SearchScriptLocationComponent,
   IntExtListComponent,
+  EditIntExtListComponent,
   EditIntExtComponent,
   IntExtLandingComponent,
   SearchIntExtComponent,
   SearchIntExtsCollectionComponent,
   DayNightListComponent,
+  EditDayNightListComponent,
   EditDayNightComponent,
   DayNightLandingComponent,
   SearchDayNightComponent,
@@ -184,6 +184,7 @@ const COMPONENTS = [
   ProjectsListComponent,
   ProjectAvatarComponent,
   ScenesListComponent,
+  EditScenesListComponent,
   EditSceneComponent,
   SceneLandingComponent,
   SceneImagesComponent,
@@ -195,6 +196,7 @@ const COMPONENTS = [
   SceneSummaryComponent,
   FilterScenesComponent,
   ScriptLocationsListComponent,
+  EditScriptLocationsListComponent,
   EditScriptLocationComponent,
   ScriptLocationLandingComponent,
   ScriptLocationImagesComponent,
@@ -202,12 +204,14 @@ const COMPONENTS = [
   SearchScriptLocationComponent,
   SearchScriptLocationsCollectionComponent,
   IntExtListComponent,
+  EditIntExtListComponent,
   EditIntExtComponent,
   IntExtLandingComponent,
   SearchIntExtComponent,
   SearchIntExtsCollectionComponent,
   SearchDayNightComponent,
   DayNightListComponent,
+  EditDayNightListComponent,
   EditDayNightComponent,
   DayNightLandingComponent,
   SearchDayNightsCollectionComponent,

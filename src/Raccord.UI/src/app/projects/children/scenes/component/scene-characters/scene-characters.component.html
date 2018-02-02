@@ -1,4 +1,4 @@
-<div class="row">
+<md-card *ngIf="getCanEdit()">
     <form class="col s12"
             id="character_form"
             #characterForm = "ngForm"
@@ -8,16 +8,17 @@
             <button fxFlex="50%" md-raised-button type="submit"[disabled]="!characterForm.form.valid">Add</button>            
         </div>
     </form>
-</div>
-<div class="row">
-    <md-nav-list>
+</md-card>
+<md-card>
+    <md-nav-list *ngIf="characters.length">
         <md-list-item 
            *ngFor="let character of characters">
             <show-image *ngIf="character.primaryImage.id!=0" [image]="character.primaryImage" [listAvatar]="true"></show-image>
             <a routerLink="/projects/{{projectId}}/characters/{{character.id}}">
                 <character-summary [character]="character"></character-summary>
             </a>
-            <button md-button (click)="removeLink(character)"><md-icon>delete</md-icon></button>
+            <button md-button (click)="removeLink(character)" *ngIf="getCanEdit()"><md-icon>delete</md-icon></button>
         </md-list-item>
     </md-nav-list>
-</div>
+    <span *ngIf="!characters.length">No characters linked to scene</span>
+</md-card>

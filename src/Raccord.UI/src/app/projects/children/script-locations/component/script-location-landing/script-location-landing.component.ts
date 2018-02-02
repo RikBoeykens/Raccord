@@ -6,6 +6,8 @@ import { DialogService } from '../../../../../shared/service/dialog.service';
 import { FullScriptLocation } from '../../model/full-script-location.model';
 import { ScriptLocation } from '../../model/script-location.model';
 import { ProjectSummary } from '../../../../model/project-summary.model';
+import { AccountHelpers } from '../../../../../account/helpers/account.helper';
+import { ProjectPermissionEnum } from '../../../../../shared/children/users/project-roles/enums/project-permission.enum';
 
 @Component({
     templateUrl: 'script-location-landing.component.html',
@@ -55,6 +57,13 @@ export class ScriptLocationLandingComponent {
         }).catch()
         .then(()=>
             this._loadingService.endLoading(loadingId)
+        );
+    }
+
+    public getCanEdit() {
+        return AccountHelpers.hasProjectPermission(
+            this.project.id,
+            ProjectPermissionEnum.canEditGeneral
         );
     }
 }

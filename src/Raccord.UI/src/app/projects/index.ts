@@ -19,7 +19,8 @@ export { SceneLandingComponent } from './children/scenes/component/scene-landing
 export { SceneImagesComponent } from './children/scenes/component/scene-images/scene-images.component';
 export { SceneCharactersComponent } from './children/scenes/component/scene-characters/scene-characters.component';
 export { SceneBreakdownItemsComponent } from './children/scenes/component/scene-breakdown-items/scene-breakdown-items.component';
-export { 
+export {
+    EditScenesListComponent,
     SceneShootingDaysComponent,
     SceneSlatesComponent,
     SceneTimingsComponent,
@@ -37,6 +38,7 @@ export { SceneCharactersResolve } from './children/scenes';
 
 export{
     ScriptLocationsListComponent,
+    EditScriptLocationsListComponent,
     SearchScriptLocationComponent,
     EditScriptLocationComponent,
     ScriptLocationLandingComponent,
@@ -49,7 +51,6 @@ export{
     ScriptLocationsResolve
 }from "./children/script-locations";
 
-export { IntExtListComponent } from './children/scene-properties/component/int-ext-list/int-ext-list.component';
 export { SearchIntExtComponent } from './children/scene-properties/component/search-int-ext/search-int-ext.component';
 export { EditIntExtComponent } from './children/scene-properties/component/edit-int-ext/edit-int-ext.component';
 export { IntExtLandingComponent } from './children/scene-properties/component/int-ext-landing/int-ext-landing.component';
@@ -57,11 +58,14 @@ export { IntExtHttpService } from './children/scene-properties/service/int-ext-h
 export { IntExtResolve } from './children/scene-properties/service/int-ext-resolve.service';
 export { IntExtsResolve } from './children/scene-properties/service/int-exts-resolve.service';
 export {
+    IntExtListComponent,
+    EditIntExtListComponent,
+    DayNightListComponent,
+    EditDayNightListComponent,
     SearchIntExtsCollectionComponent,
     SearchDayNightsCollectionComponent
 } from './children/scene-properties';
 
-export { DayNightListComponent } from './children/scene-properties/component/day-night-list/day-night-list.component';
 export { SearchDayNightComponent } from './children/scene-properties/component/search-day-night/search-day-night.component';
 export { EditDayNightComponent } from './children/scene-properties/component/edit-day-night/edit-day-night.component';
 export { DayNightLandingComponent } from './children/scene-properties/component/day-night-landing/day-night-landing.component';

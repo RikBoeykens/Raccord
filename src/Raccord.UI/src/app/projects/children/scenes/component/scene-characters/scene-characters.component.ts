@@ -7,6 +7,8 @@ import { LoadingService } from '../../../../../loading/service/loading.service';
 import { DialogService } from '../../../../../shared/service/dialog.service';
 import { SelectedEntity } from '../../../../../shared/model/selected-entity.model';
 import { EntityType } from '../../../../../shared/enums/entity-type.enum';
+import { AccountHelpers } from '../../../../../account/helpers/account.helper';
+import { ProjectPermissionEnum } from '../../../../../shared/children/users/project-roles/enums/project-permission.enum';
 
 @Component({
     selector: 'scene-characters',
@@ -103,6 +105,13 @@ export class SceneCharactersComponent implements OnInit{
         }).catch()
         .then(()=>
             this._loadingService.endLoading(loadingId)
+        );
+    }
+
+    public getCanEdit() {
+        return AccountHelpers.hasProjectPermission(
+            this.projectId,
+            ProjectPermissionEnum.canEditGeneral
         );
     }
 }

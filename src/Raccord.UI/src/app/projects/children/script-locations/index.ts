@@ -1,4 +1,5 @@
 export { ScriptLocationsListComponent } from './component/script-locations-list/script-locations-list.component';
+export { EditScriptLocationsListComponent } from './component/edit-script-locations-list/edit-script-locations-list.component';
 export { SearchScriptLocationComponent } from './component/search-script-location/search-script-location.component';
 export { EditScriptLocationComponent } from './component/edit-script-location/edit-script-location.component';
 export { ScriptLocationLandingComponent } from './component/script-location-landing/script-location-landing.component';
