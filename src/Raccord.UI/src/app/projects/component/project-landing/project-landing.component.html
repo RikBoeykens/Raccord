@@ -105,11 +105,15 @@
             </md-card-content>
         </md-card>
         <md-card class="project-landing-card" *ngIf="getCanRead()">
-            <md-card-header>
-                <md-card-title>
-                    <a routerLink="/projects/{{project.id}}/crew" class="card-title">Unit List</a>
-                </md-card-title>
-            </md-card-header>
+            <md-card-title>Crew</md-card-title>
+            <md-card-content>
+                <md-nav-list>
+                    <a md-list-item
+                        routerLink="/projects/{{project.id}}/crew">
+                        Unit List
+                    </a>
+                </md-nav-list>
+            </md-card-content>
         </md-card>
     </div>
 </div>

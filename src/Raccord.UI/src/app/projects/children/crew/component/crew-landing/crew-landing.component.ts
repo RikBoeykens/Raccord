@@ -10,6 +10,8 @@ import { CrewDepartmentHttpService } from '../../departments/service/crew-depart
 import { CrewMemberHttpService } from '../../crew-members/service/crew-member-http.service';
 import { CrewMember } from '../../crew-members/model/crew-member.model';
 import { CrewDepartment } from '../../departments/model/crew-department.model';
+import { AccountHelpers } from '../../../../../account/helpers/account.helper';
+import { ProjectPermissionEnum } from '../../../../../shared/children/users/project-roles/enums/project-permission.enum';
 
 @Component({
     templateUrl: 'crew-landing.component.html',
@@ -78,6 +80,13 @@ export class CrewLandingComponent implements OnInit {
 
     public getFullName(crewMember: CrewMember) {
         return `${crewMember.firstName} ${crewMember.lastName}`;
+    }
+
+    public getCanEdit() {
+        return AccountHelpers.hasProjectPermission(
+            this.project.id,
+            ProjectPermissionEnum.canEditGeneral
+        );
     }
 
     private showCrewMemberDialog(crewMember: CrewMember) {
