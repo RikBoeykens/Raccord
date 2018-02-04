@@ -214,7 +214,8 @@ export const ROUTES: Routes = [
                 component: AdminUserLandingComponent,
                 resolve: {
                   user: AdminUserResolve,
-                  projects: AdminUserProjectsResolve
+                  projects: AdminUserProjectsResolve,
+                  projectRoles: AdminProjectRolesResolve
                 }
               },
             ]
@@ -625,7 +626,7 @@ export const ROUTES: Routes = [
                     }
                   },
                   {
-                    path: "3",                
+                    path: "3",
                     component: CallsheetWizardStep3Component,
                     resolve:{
                       project: ProjectSummaryResolve,
@@ -634,9 +635,9 @@ export const ROUTES: Routes = [
                     }
                   },
                   {
-                    path: "4",                
+                    path: "4",
                     component: CallsheetWizardStep4Component,
-                    resolve:{
+                    resolve: {
                       project: ProjectSummaryResolve,
                       callsheet: CallsheetSummaryResolve,
                       characters: CallsheetCharactersCharactersResolve
