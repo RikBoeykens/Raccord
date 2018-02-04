@@ -724,18 +724,18 @@ export const ROUTES: Routes = [
           {
             path: 'scriptuploads',
             canActivate: [CanEditGeneralProjectPermissionGuard],
-            children:[
+            children: [
               {
                 path: '',
                 component: ScriptUploadComponent,
-                resolve:{
+                resolve: {
                   project: ProjectSummaryResolve
                 }
               },
               {
                 path: ':scriptUploadId',
                 component: ScriptUploadLandingComponent,
-                resolve:{
+                resolve: {
                   project: ProjectSummaryResolve,
                   scriptUpload: ScriptUploadResolve
                 }
@@ -745,11 +745,11 @@ export const ROUTES: Routes = [
           {
             path: 'scripttext',
             canActivate: [CanReadGeneralProjectPermissionGuard],
-            children:[
+            children: [
               {
                 path: '',
                 component: ScriptTextLandingComponent,
-                resolve:{
+                resolve: {
                   project: ProjectSummaryResolve,
                   sceneTexts: ScriptTextResolve
                 }
@@ -757,7 +757,7 @@ export const ROUTES: Routes = [
               {
                 path: ':callsheetId/callsheet',
                 component: ScriptTextCallsheetComponent,
-                resolve:{
+                resolve: {
                   project: ProjectSummaryResolve,
                   callsheet: CallsheetSummaryResolve,
                   sceneTexts: ScriptTextCallsheetResolve

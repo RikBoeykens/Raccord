@@ -17,6 +17,11 @@
                         routerLink="/projects/{{project.id}}/scripttext">
                         View Script
                     </a>
+                    <a md-list-item
+                        routerLink="/projects/{{project.id}}/scriptuploads"
+                        *ngIf="getCanEdit()">
+                        Upload Script
+                    </a>
                     <h3 mdSubheader>Scenes</h3>
                     <a md-list-item
                         routerLink="/projects/{{project.id}}/scenes/edit"

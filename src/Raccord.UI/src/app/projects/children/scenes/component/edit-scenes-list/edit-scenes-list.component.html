@@ -4,9 +4,6 @@
     <a routerLink="/projects/{{project.id}}" class="breadcrumb">{{project.title}}</a>
     <span class="breadcrumb">Edit Scenes</span>
 </md-card>
-<md-card *ngIf="!scenes.length">
-    You can add scenes by uploading a final draft .fdx file by going <a routerLink="/projects/{{project.id}}/scriptuploads">here</a>.
-</md-card>
 <md-card>
     <edit-scene [scene]="viewNewScene" (submitScene)="addScene()"></edit-scene>
 </md-card>
