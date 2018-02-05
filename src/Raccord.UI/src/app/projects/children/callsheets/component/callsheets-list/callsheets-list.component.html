@@ -6,7 +6,7 @@
         <span class="breadcrumb">Callsheets</span>
     </div>
 </div>
-<div class="row">
+<div class="row" *ngIf="getCanEdit()">
     <div class="col s12">
         <a routerLink="/projects/{{project.id}}/callsheets/new">New Callsheet</a>
     </div>

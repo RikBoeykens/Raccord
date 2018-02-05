@@ -6,18 +6,18 @@ import { FullScheduleScene } from '../model/full-schedule-scene.model';
 export class ScheduleSceneResolve implements Resolve<FullScheduleScene> {
 
   constructor(
-      private scheduleSceneHttpService: ScheduleSceneHttpService, 
+      private scheduleSceneHttpService: ScheduleSceneHttpService,
       private router: Router
   ) {}
 
-  resolve(route: ActivatedRouteSnapshot) {
+  public resolve(route: ActivatedRouteSnapshot) {
     let scheduleSceneId = route.params['scheduleSceneId'];
+    let projectId = route.params['projectId'];
 
-    return this.scheduleSceneHttpService.get(scheduleSceneId).then(scheduleScene => {
+    return this.scheduleSceneHttpService.get(projectId, scheduleSceneId).then((scheduleScene) => {
         if (scheduleScene) {
             return scheduleScene;
         } else { // id not found
-            let projectId = route.params['projectId'];
             this.router.navigate(['/projects', projectId]);
             return false;
         }

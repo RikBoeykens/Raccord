@@ -1,28 +1,17 @@
-<div class="row">      
-    <div class="col s12">
-        <a routerLink="/" class="breadcrumb">Dashboard</a>
-        <a routerLink="/projects" class="breadcrumb">Projects</a>
-        <a routerLink="/projects/{{project.id}}" class="breadcrumb">{{project.title}}</a>
-        <span class="breadcrumb">Locations</span>
-    </div>
-</div>
-<div class="row">
-    <edit-location [location]="viewNewLocation" (submitLocation)="addLocation()"></edit-location>
-</div>
-<div class="row">
-    <md-nav-list [dragula]='"location-bag"' 
-                 [dragulaModel]='locations'>
+<md-card>      
+    <a routerLink="/" class="breadcrumb">Dashboard</a>
+    <a routerLink="/projects" class="breadcrumb">Projects</a>
+    <a routerLink="/projects/{{project.id}}" class="breadcrumb">{{project.title}}</a>
+    <span class="breadcrumb">Locations</span>
+</md-card>
+<md-card>
+    <md-nav-list>
         <a md-list-item [routerLink]="[location.id]" 
-           *ngFor="let location of locations"
-           [ngClass]="{'can-delete': location.setCount==0}"
-           class="drag-element drag-delete drag-merge">
-           <md-icon class=drag-handle>drag_handle</md-icon>
-           <!-- TODO add images to locations -->
-            <!--show-image *ngIf="location.primaryImage.id!=0" [image]="location.primaryImage" [listAvatar]="true"></show-image-->
+           *ngFor="let location of locations">
             {{location.name}} ({{location.setCount}} sets)
         </a>
     </md-nav-list>
-</div>
+</md-card>
 <agm-map *ngIf="markerLocations.length" [fitBounds]="bounds">
     <agm-marker *ngFor="let marker of markerLocations" [latitude]="marker.latLng.latitude" [longitude]="marker.latLng.longitude">
         <agm-info-window>
@@ -30,9 +19,3 @@
         </agm-info-window>
     </agm-marker>
 </agm-map>
-<div class="delete-location drop-container drop-delete-container" 
-     [dragula]="'location-bag'" 
-     *ngIf="draggingToDelete" 
-     [dragulaModel]='deleteLocations'>
-    <md-icon>delete</md-icon>
-</div>

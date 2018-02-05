@@ -7,10 +7,13 @@ using Raccord.API.ViewModels.Core;
 using Raccord.Application.Core.Services.Scheduling.ScheduleDays;
 using Microsoft.AspNetCore.Identity;
 using Raccord.Domain.Model.Users;
+using Raccord.API.Filters;
+using Raccord.Core.Enums;
 
-namespace Raccord.API.Controllers
+namespace Raccord.API.Controllers.Projects
 {
-    public class ScheduleDaysController : AbstractApiAuthController
+    [ProjectPermissionFilter(ProjectPermissionEnum.CanReadGeneral)]
+    public class ScheduleDaysController : AbstractProjectsController
     {
         private readonly IScheduleDayService _scheduleDayService;
 
@@ -26,10 +29,10 @@ namespace Raccord.API.Controllers
         }
 
         // GET: api/scheduledays/1/project
-        [HttpGet("{id}/project")]
-        public IEnumerable<FullScheduleDayViewModel> GetAll(long id)
+        [HttpGet("project")]
+        public IEnumerable<FullScheduleDayViewModel> GetAll(long authProjectId)
         {
-            var dtos = _scheduleDayService.GetAllForParent(id);
+            var dtos = _scheduleDayService.GetAllForParent(authProjectId);
 
             var vms = dtos.Select(p => p.Translate());
 
@@ -59,6 +62,7 @@ namespace Raccord.API.Controllers
 
         // POST api/scheduledays
         [HttpPost]
+        [ProjectPermissionFilter(ProjectPermissionEnum.CanEditGeneral)]
         public JsonResult Post([FromBody]ScheduleDayViewModel vm)
         {
             var response = new JsonResponse();
@@ -98,6 +102,7 @@ namespace Raccord.API.Controllers
 
         // DELETE api/scheduledays/5
         [HttpDelete("{id}")]
+        [ProjectPermissionFilter(ProjectPermissionEnum.CanEditGeneral)]
         public JsonResult Delete(long id)
         {
             var response = new JsonResponse();
@@ -124,14 +129,15 @@ namespace Raccord.API.Controllers
         }
 
         // POST api/scheduledays/5/publish
-        [HttpPost("{projectID}/publish")]
-        public JsonResult Publish(long projectID)
+        [HttpPost("publish")]
+        [ProjectPermissionFilter(ProjectPermissionEnum.CanEditGeneral)]
+        public JsonResult Publish(long authProjectId)
         {
             var response = new JsonResponse();
 
             try
             {
-                _scheduleDayService.PublishDays(projectID);
+                _scheduleDayService.PublishDays(authProjectId);
 
                 response = new JsonResponse
                 {

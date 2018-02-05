@@ -7,6 +7,8 @@ import { FullScene } from '../../model/full-scene.model';
 import { Scene } from '../../model/scene.model';
 import { ProjectSummary } from '../../../../model/project-summary.model';
 import { BreakdownTypeSummary } from '../../../breakdowns/breakdown-types/model/breakdown-type-summary.model';
+import { AccountHelpers } from '../../../../../account/helpers/account.helper';
+import { ProjectPermissionEnum } from '../../../../../shared/children/users/project-roles/enums/project-permission.enum';
 
 @Component({
     templateUrl: 'scene-landing.component.html',
@@ -36,7 +38,7 @@ export class SceneLandingComponent {
         });
     }
 
-    getScene(){
+    getScene() {
         let loadingId = this._loadingService.startLoading();
 
         this._sceneHttpService.get(this.scene.id).then(data => {
@@ -46,7 +48,7 @@ export class SceneLandingComponent {
         });
     }
 
-    updateScene(){
+    updateScene() {
         let loadingId = this._loadingService.startLoading();
 
         this._sceneHttpService.post(this.viewScene).then(data=>{
@@ -58,6 +60,13 @@ export class SceneLandingComponent {
         }).catch()
         .then(()=>
             this._loadingService.endLoading(loadingId)
+        );
+    }
+
+    public getCanEdit() {
+        return AccountHelpers.hasProjectPermission(
+            this.project.id,
+            ProjectPermissionEnum.canEditGeneral
         );
     }
 }

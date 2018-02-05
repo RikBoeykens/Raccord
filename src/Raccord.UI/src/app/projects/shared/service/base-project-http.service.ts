@@ -7,7 +7,7 @@ import { AppSettings } from '../../../app.settings';
 export class BaseProjectHttpService extends BaseHttpService {
   protected controllerName: string;
 
-  constructor(protected _http: Http, controllerName: string) { 
+  constructor(protected _http: Http, controllerName: string) {
       super(_http);
       this._baseUri = `${AppSettings.API_PROJECT_ENDPOINT}`;
       this.controllerName = controllerName;

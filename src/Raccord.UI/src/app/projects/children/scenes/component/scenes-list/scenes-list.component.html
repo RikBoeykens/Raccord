@@ -2,35 +2,24 @@
     <a routerLink="/" class="breadcrumb">Dashboard</a>
     <a routerLink="/projects" class="breadcrumb">Projects</a>
     <a routerLink="/projects/{{project.id}}" class="breadcrumb">{{project.title}}</a>
-    <span class="breadcrumb">Script Upload</span>
-</md-card>
-<md-card *ngIf="!scenes.length">
-    You can add scenes by uploading a final draft .fdx file by going <a routerLink="/projects/{{project.id}}/scriptuploads">here</a>.
-</md-card>
-<md-card *ngIf="scenes.length">
-    <div class="row">
-        <a routerLink="/projects/{{project.id}}/scenes/timings" class="breadcrumb">Timings</a>
-    </div>
+    <span class="breadcrumb">Scenes</span>
 </md-card>
 <md-card>
-    <edit-scene [scene]="viewNewScene" (submitScene)="addScene()"></edit-scene>
-</md-card>
-<md-card>
-    <filter-scenes [sceneFilter]="sceneFilter" (filterScenes)="filterScenes()" [projectID]="project.id" [breakdownTypes]="breakdownTypes"></filter-scenes>
+    <md-card-title>Filter Scenes</md-card-title>
+    <md-card-content>
+        <filter-scenes [sceneFilter]="sceneFilter" (filterScenes)="filterScenes()" [projectID]="project.id" [breakdownTypes]="breakdownTypes"></filter-scenes>
+    </md-card-content>
 </md-card>
 <md-card *ngIf="scenes.length">
-    <a routerLink="/projects/{{project.id}}/scripttext">Script text</a>
-    <md-nav-list [dragula]='"scene-bag"' [dragulaModel]='scenes' class="drag-sort-container">
+    <md-nav-list>
         <a md-list-item 
            [routerLink]="[scene.id]" 
-           *ngFor="let scene of scenes"
-           class="drag-element drag-delete drag-sort">
-           <md-icon class=drag-handle>drag_handle</md-icon>
+           *ngFor="let scene of scenes">
             <show-image *ngIf="scene.primaryImage.id!=0" [image]="scene.primaryImage" [listAvatar]="true"></show-image>
             <scene-summary [scene]="scene"></scene-summary>
         </a>
     </md-nav-list>
 </md-card>
-<div class="delete-scene drop-container drop-delete-container" [dragula]="'scene-bag'" *ngIf="draggingScene" [dragulaModel]='deleteScenes'>
-    <md-icon>delete</md-icon>
-</div>
+<md-card *ngIf="!scenes.length">
+    No scenes added
+</md-card>

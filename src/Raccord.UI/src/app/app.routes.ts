@@ -6,30 +6,34 @@ import { AddProjectComponent } from './projects';
 import { EditProjectComponent } from './projects';
 import { ProjectLandingComponent } from './projects';
 import { ProjectsListComponent } from './projects';
-import { 
+import {
   ScenesListComponent,
+  EditScenesListComponent,
   SceneLandingComponent,
   SceneTimingsComponent,
   ScriptLocationsListComponent,
-  ScriptLocationLandingComponent
- } from './projects';
-import { IntExtListComponent } from './projects';
-import { IntExtLandingComponent } from './projects';
-import { DayNightListComponent } from './projects';
-import { DayNightLandingComponent } from './projects';
-import { ImagesListComponent } from './projects';
-import { ImageLandingComponent } from './projects';
-import { CharactersListComponent } from './projects';
-import { CharacterLandingComponent } from './projects';
-import { BreakdownLandingComponent } from './projects';
-import { BreakdownTypeSettingsComponent } from './projects';
-import { BreakdownTypeLandingComponent } from './projects';
-import { BreakdownItemLandingComponent } from './projects';
-import {
+  EditScriptLocationsListComponent,
+  ScriptLocationLandingComponent,
+  IntExtListComponent,
+  EditIntExtListComponent,
+  IntExtLandingComponent,
+  DayNightListComponent,
+  EditDayNightListComponent,
+  DayNightLandingComponent,
+  ImagesListComponent,
+  ImageLandingComponent,
+  CharactersListComponent,
+  EditCharactersListComponent,
+  CharacterLandingComponent,
+  BreakdownLandingComponent,
+  BreakdownTypeSettingsComponent,
+  BreakdownTypeLandingComponent,
+  BreakdownItemLandingComponent,
   EditScheduleComponent,
   ScheduleLandingComponent,
   ScheduleSceneLandingComponent,
   LocationsListComponent,
+  EditLocationsListComponent,
   LocationLandingComponent,
   LocationSetLandingComponent,
   CallsheetsListComponent,
@@ -51,8 +55,8 @@ import {
   ScriptTextLandingComponent
 } from './projects';
 import { ScenePropertiesLandingComponent } from './projects';
-import { LoginComponent } from "./security";
-import { 
+import { LoginComponent } from './security';
+import {
   AdminProjectsListComponent,
   AdminAddProjectComponent,
   AdminProjectLandingComponent,
@@ -62,7 +66,7 @@ import {
   AdminUserLandingComponent,
   AdminProjectUserLandingComponent,
   AdminProjectUserAddCrewMemberComponent
-} from "./admin";
+} from './admin';
 import{
   UserProfileLandingComponent
 } from './profile';
@@ -70,7 +74,7 @@ import{
 import { ProjectResolve } from './projects';
 import { ProjectSummaryResolve } from './projects';
 import { ProjectsResolve } from './projects';
-import { 
+import {
   SceneResolve,
   ScenesResolve,
   SceneCharactersResolve,
@@ -89,7 +93,7 @@ import { BreakdownTypeResolve } from './projects';
 import { BreakdownTypesResolve } from './projects';
 import { BreakdownItemResolve } from './projects';
 import { BreakdownItemsResolve } from './projects';
-import { 
+import {
   ScheduleDaysResolve,
   ScheduleSceneResolve,
   LocationsResolve,
@@ -116,7 +120,7 @@ import {
   ScriptTextResolve,
   ScriptTextCallsheetResolve
 } from './projects';
-import { 
+import {
   AdminProjectsResolve,
   AdminProjectResolve,
   AdminGuard,
@@ -126,7 +130,7 @@ import {
   AdminUserProjectsResolve,
   AdminProjectUserResolve,
   AdminProjectRolesResolve
-} from "./admin";
+} from './admin';
 
 import {
   CanEditGeneralProjectPermissionGuard,
@@ -136,7 +140,7 @@ import {
 } from './account';
 
 import { CanDeactivateGuard } from './shared/service/can-deactivate-guard.service';
-import { AuthGuard } from "./security";
+import { AuthGuard } from './security';
 import { ProjectChartsResolve } from './charts/index';
 import { UserProfileResolve } from './profile';
 
@@ -148,14 +152,14 @@ export const ROUTES: Routes = [
   {
     path: 'admin',
     canActivate: [AdminGuard],
-    children:[
+    children: [
       {
         path: 'projects',
-        children:[
+        children: [
           {
             path: '',
             component: AdminProjectsListComponent,
-            resolve:{
+            resolve: {
               projects: AdminProjectsResolve
             }
           },
@@ -166,11 +170,11 @@ export const ROUTES: Routes = [
           },
           {
             path: ':projectId',
-            children:[
+            children: [
               {
                 path: '',
                 component: AdminProjectLandingComponent,
-                resolve:{
+                resolve: {
                   project: AdminProjectResolve,
                   projectUsers: AdminProjectUsersResolve
                 }
@@ -178,7 +182,7 @@ export const ROUTES: Routes = [
               {
                 path: 'settings',
                 component: AdminProjectSettingsComponent,
-                resolve:{
+                resolve: {
                   project: AdminProjectResolve
                 },
                 canDeactivate: [CanDeactivateGuard],
@@ -189,11 +193,11 @@ export const ROUTES: Routes = [
       },
       {
         path: 'users',
-        children:[
+        children: [
           {
             path: '',
             component: AdminUsersListComponent,
-            resolve:{
+            resolve: {
               users: AdminUsersResolve
             }
           },
@@ -204,14 +208,15 @@ export const ROUTES: Routes = [
           },
           {
             path: ':userId',
-            children:[
+            children: [
               {
                 path: '',
                 component: AdminUserLandingComponent,
-                resolve:{
+                resolve: {
                   user: AdminUserResolve,
-                  projects: AdminUserProjectsResolve
-                }               
+                  projects: AdminUserProjectsResolve,
+                  projectRoles: AdminProjectRolesResolve
+                }
               },
             ]
           }
@@ -219,11 +224,11 @@ export const ROUTES: Routes = [
       },
       {
         path: 'projectusers',
-        children:[
+        children: [
           {
             path: ':projectUserId',
             component: AdminProjectUserLandingComponent,
-            resolve:{
+            resolve: {
               projectUser: AdminProjectUserResolve,
               projectRoles: AdminProjectRolesResolve
             }
@@ -231,7 +236,7 @@ export const ROUTES: Routes = [
           {
             path: ':projectUserId/add/:projectId',
             component: AdminProjectUserAddCrewMemberComponent,
-            resolve:{
+            resolve: {
               projectUser: AdminProjectUserResolve,
               departments: CrewDepartmentsResolve
             }
@@ -243,54 +248,50 @@ export const ROUTES: Routes = [
   {
     path: 'projects',
     canActivate: [AuthGuard],
-    children:[
+    children: [
       {
-        path:'',
+        path: '',
         component: ProjectsListComponent,
-        resolve:{
+        resolve: {
           projects: ProjectsResolve
         }
       },
-      /*{
-        path: 'add',
-        component: AddProjectComponent,
-        canDeactivate: [CanDeactivateGuard],
-      },*/
       {
         path: ':projectId',
-        children:[
-          /*{
-            path: 'edit',
-            component: EditProjectComponent,
-            resolve:{
-              project: ProjectSummaryResolve
-            },
-            canDeactivate: [CanDeactivateGuard],
-          },*/
+        children: [
           {
             path: '',
             component: ProjectLandingComponent,
-            resolve:{
+            resolve: {
               project: ProjectResolve
             }
           },
           {
             path: 'scenes',
             canActivate: [CanReadGeneralProjectPermissionGuard],
-            children:[
+            children: [
               {
                 path: '',
                 component: ScenesListComponent,
-                resolve:{
+                resolve: {
                   project: ProjectSummaryResolve,
                   scenes: ScenesResolve,
                   breakdownTypes: BreakdownTypesResolve
                 },
               },
               {
+                path: 'edit',
+                canActivate: [CanEditGeneralProjectPermissionGuard],
+                component: EditScenesListComponent,
+                resolve: {
+                  project: ProjectSummaryResolve,
+                  scenes: ScenesResolve
+                },
+              },
+              {
                 path: 'timings',
                 component: SceneTimingsComponent,
-                resolve:{
+                resolve: {
                   project: ProjectSummaryResolve,
                   scenes: ScenesResolve
                 },
@@ -298,7 +299,7 @@ export const ROUTES: Routes = [
               {
                 path: ':sceneId',
                 component: SceneLandingComponent,
-                resolve:{
+                resolve: {
                   project: ProjectSummaryResolve,
                   scene: SceneResolve,
                   breakdownTypes: BreakdownTypesResolve
@@ -309,11 +310,20 @@ export const ROUTES: Routes = [
           {
             path: 'scriptlocations',
             canActivate: [CanReadGeneralProjectPermissionGuard],
-            children:[
+            children: [
               {
                 path: '',
                 component: ScriptLocationsListComponent,
-                resolve:{
+                resolve: {
+                  project: ProjectSummaryResolve,
+                  scriptLocations: ScriptLocationsResolve
+                },
+              },
+              {
+                path: 'edit',
+                canActivate: [CanEditGeneralProjectPermissionGuard],
+                component: EditScriptLocationsListComponent,
+                resolve: {
                   project: ProjectSummaryResolve,
                   scriptLocations: ScriptLocationsResolve
                 },
@@ -321,7 +331,7 @@ export const ROUTES: Routes = [
               {
                 path: ':scriptLocationId',
                 component: ScriptLocationLandingComponent,
-                resolve:{
+                resolve: {
                   project: ProjectSummaryResolve,
                   scriptLocation: ScriptLocationResolve
                 },
@@ -332,18 +342,27 @@ export const ROUTES: Routes = [
             path: 'sceneproperties',
             canActivate: [CanReadGeneralProjectPermissionGuard],
             component: ScenePropertiesLandingComponent,
-            resolve:{
+            resolve: {
               project: ProjectSummaryResolve,
             }
           },
           {
             path: 'daynights',
             canActivate: [CanReadGeneralProjectPermissionGuard],
-            children:[
+            children: [
               {
                 path: '',
                 component: DayNightListComponent,
-                resolve:{
+                resolve: {
+                  project: ProjectSummaryResolve,
+                  dayNights: DayNightsResolve
+                },
+              },
+              {
+                path: 'edit',
+                canActivate: [CanEditGeneralProjectPermissionGuard],
+                component: EditDayNightListComponent,
+                resolve: {
                   project: ProjectSummaryResolve,
                   dayNights: DayNightsResolve
                 },
@@ -351,7 +370,7 @@ export const ROUTES: Routes = [
               {
                 path: ':dayNightId',
                 component: DayNightLandingComponent,
-                resolve:{
+                resolve: {
                   project: ProjectSummaryResolve,
                   dayNight: DayNightResolve
                 },
@@ -361,11 +380,20 @@ export const ROUTES: Routes = [
           {
             path: 'intexts',
             canActivate: [CanReadGeneralProjectPermissionGuard],
-            children:[
+            children: [
               {
                 path: '',
                 component: IntExtListComponent,
-                resolve:{
+                resolve: {
+                  project: ProjectSummaryResolve,
+                  intExts: IntExtsResolve
+                },
+              },
+              {
+                path: 'edit',
+                canActivate: [CanEditGeneralProjectPermissionGuard],
+                component: EditIntExtListComponent,
+                resolve: {
                   project: ProjectSummaryResolve,
                   intExts: IntExtsResolve
                 },
@@ -373,7 +401,7 @@ export const ROUTES: Routes = [
               {
                 path: ':intExtId',
                 component: IntExtLandingComponent,
-                resolve:{
+                resolve: {
                   project: ProjectSummaryResolve,
                   intExt: IntExtResolve
                 },
@@ -383,11 +411,11 @@ export const ROUTES: Routes = [
           {
             path: 'images',
             canActivate: [CanReadGeneralProjectPermissionGuard],
-            children:[
+            children: [
               {
                 path: '',
                 component: ImagesListComponent,
-                resolve:{
+                resolve: {
                   project: ProjectSummaryResolve,
                   images: ImagesResolve
                 },
@@ -395,7 +423,7 @@ export const ROUTES: Routes = [
               {
                 path: ':imageId',
                 component: ImageLandingComponent,
-                resolve:{
+                resolve: {
                   project: ProjectSummaryResolve,
                   image: ImageResolve
                 },
@@ -405,11 +433,20 @@ export const ROUTES: Routes = [
           {
             path: 'characters',
             canActivate: [CanReadGeneralProjectPermissionGuard],
-            children:[
+            children: [
               {
                 path: '',
                 component: CharactersListComponent,
-                resolve:{
+                resolve: {
+                  project: ProjectSummaryResolve,
+                  characters: CharactersResolve
+                },
+              },
+              {
+                path: 'edit',
+                canActivate: [CanEditGeneralProjectPermissionGuard],
+                component: EditCharactersListComponent,
+                resolve: {
                   project: ProjectSummaryResolve,
                   characters: CharactersResolve
                 },
@@ -417,7 +454,7 @@ export const ROUTES: Routes = [
               {
                 path: ':characterId',
                 component: CharacterLandingComponent,
-                resolve:{
+                resolve: {
                   project: ProjectSummaryResolve,
                   character: CharacterResolve
                 },
@@ -427,11 +464,11 @@ export const ROUTES: Routes = [
           {
             path: 'breakdown',
             canActivate: [CanReadGeneralProjectPermissionGuard],
-            children:[
+            children: [
               {
                 path: '',
                 component: BreakdownLandingComponent,
-                resolve:{
+                resolve: {
                   project: ProjectSummaryResolve,
                   breakdownTypes: BreakdownTypesResolve
                 },
@@ -439,18 +476,18 @@ export const ROUTES: Routes = [
               {
                 path: 'settings',
                 component: BreakdownTypeSettingsComponent,
-                resolve:{
+                resolve: {
                   project: ProjectSummaryResolve,
                   breakdownTypes: BreakdownTypesResolve
                 },
               },
               {
                 path: 'types/:breakdownTypeId',
-                children:[
+                children: [
                   {
                     path: '',
                     component: BreakdownTypeLandingComponent,
-                    resolve:{
+                    resolve: {
                       project: ProjectSummaryResolve,
                       breakdownType: BreakdownTypeResolve
                     }
@@ -459,11 +496,11 @@ export const ROUTES: Routes = [
               },
               {
                 path: 'items/:breakdownItemId',
-                children:[
+                children: [
                   {
                     path: '',
                     component: BreakdownItemLandingComponent,
-                    resolve:{
+                    resolve: {
                       project: ProjectSummaryResolve,
                       breakdownItem: BreakdownItemResolve
                     }
@@ -512,21 +549,30 @@ export const ROUTES: Routes = [
             ]
           },
           {
-            path: "locations",
+            path: 'locations',
             canActivate: [CanReadGeneralProjectPermissionGuard],
-            children:[
+            children: [
               {
-                path: "",
+                path: '',
                 component: LocationsListComponent,
-                resolve:{
+                resolve: {
                   project: ProjectSummaryResolve,
                   locations: LocationsResolve
                 }
               },
               {
-                path: ":locationId",
+                path: 'edit',
+                component: EditLocationsListComponent,
+                canActivate: [CanEditGeneralProjectPermissionGuard],
+                resolve: {
+                  project: ProjectSummaryResolve,
+                  locations: LocationsResolve
+                }
+              },
+              {
+                path: ':locationId',
                 component: LocationLandingComponent,
-                resolve:{
+                resolve: {
                   project: ProjectSummaryResolve,
                   location: LocationResolve
                 }
@@ -534,11 +580,11 @@ export const ROUTES: Routes = [
             ]
           },
           {
-            path: "locationsets",
+            path: 'locationsets',
             canActivate: [CanReadGeneralProjectPermissionGuard],
-            children:[
+            children: [
               {
-                path: ":locationSetId",
+                path: ':locationSetId',
                 component: LocationSetLandingComponent,
                 resolve:{
                   project: ProjectSummaryResolve,
@@ -550,7 +596,7 @@ export const ROUTES: Routes = [
           {
             path: "callsheets",
             canActivate: [CanReadCallsheetProjectPermissionGuard],
-            children:[
+            children: [
               {
                 path: "",
                 component: CallsheetsListComponent,
@@ -598,7 +644,7 @@ export const ROUTES: Routes = [
                     }
                   },
                   {
-                    path: "3",                
+                    path: "3",
                     component: CallsheetWizardStep3Component,
                     resolve:{
                       project: ProjectSummaryResolve,
@@ -607,9 +653,9 @@ export const ROUTES: Routes = [
                     }
                   },
                   {
-                    path: "4",                
+                    path: "4",
                     component: CallsheetWizardStep4Component,
-                    resolve:{
+                    resolve: {
                       project: ProjectSummaryResolve,
                       callsheet: CallsheetSummaryResolve,
                       characters: CallsheetCharactersCharactersResolve
@@ -697,18 +743,18 @@ export const ROUTES: Routes = [
           {
             path: 'scriptuploads',
             canActivate: [CanEditGeneralProjectPermissionGuard],
-            children:[
+            children: [
               {
                 path: '',
                 component: ScriptUploadComponent,
-                resolve:{
+                resolve: {
                   project: ProjectSummaryResolve
                 }
               },
               {
                 path: ':scriptUploadId',
                 component: ScriptUploadLandingComponent,
-                resolve:{
+                resolve: {
                   project: ProjectSummaryResolve,
                   scriptUpload: ScriptUploadResolve
                 }
@@ -718,11 +764,11 @@ export const ROUTES: Routes = [
           {
             path: 'scripttext',
             canActivate: [CanReadGeneralProjectPermissionGuard],
-            children:[
+            children: [
               {
                 path: '',
                 component: ScriptTextLandingComponent,
-                resolve:{
+                resolve: {
                   project: ProjectSummaryResolve,
                   sceneTexts: ScriptTextResolve
                 }
@@ -730,7 +776,7 @@ export const ROUTES: Routes = [
               {
                 path: ':callsheetId/callsheet',
                 component: ScriptTextCallsheetComponent,
-                resolve:{
+                resolve: {
                   project: ProjectSummaryResolve,
                   callsheet: CallsheetSummaryResolve,
                   sceneTexts: ScriptTextCallsheetResolve

@@ -58,7 +58,7 @@ namespace Raccord.Application.Services.Scenes
                 IntExt = scene.IntExt.Translate(),
                 ScriptLocation = scene.ScriptLocation.Translate(),
                 DayNight = scene.DayNight.Translate(),
-                PrimaryImage = scene.ImageScenes.FirstOrDefault(i=> i.IsPrimaryImage)?.Image.Translate(),
+                /*PrimaryImage = scene.ImageScenes.FirstOrDefault(i=> i.IsPrimaryImage)?.Image.Translate(),*/
                 ProjectID = scene.ProjectID,
             };
 

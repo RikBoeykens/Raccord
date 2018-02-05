@@ -32,8 +32,7 @@ namespace Raccord.Application.Services.ShootingDays
                 PreviouslyCompletedTimingsCount = new TimeSpan(previousDays.SelectMany(sd=> sd.ShootingDayScenes).Sum(pcs=> pcs.Timings.Ticks)),
                 Scenes = shootingDay.ShootingDayScenes.Select(s=> s.TranslateScene()),
                 PreviousSetupCount = previousDays.Sum(sd=> sd.Slates.Count()),
-                Slates = shootingDay.Slates.OrderBy(t=> t.SortingOrder.HasValue)
-                                           .ThenBy(t => t.SortingOrder)
+                Slates = shootingDay.Slates.OrderBy(t=> t.SortingOrder)
                                            .Select(s=> s.TranslateSummary()),
                 CameraRolls = shootingDay.Slates.SelectMany(s=> s.Takes.Select(t=> t.CameraRoll)).Distinct(),
                 SoundRolls = shootingDay.Slates.SelectMany(s=> s.Takes.Select(t=> t.SoundRoll)).Distinct(),

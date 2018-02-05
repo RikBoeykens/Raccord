@@ -4,7 +4,7 @@
     <a routerLink="/projects/{{project.id}}" class="breadcrumb">{{project.title}}</a>
     <span class="breadcrumb">Edit Schedule</span>
 </md-card>
-<div *ngIf="!project.publishedSchedule">
+<div>
     <md-card>
         <button md-raised-button type="button" (click)="publishDays()">Publish</button>
     </md-card>
@@ -80,6 +80,3 @@
         </md-card-content>
     </md-card>
 </div>
-<md-card *ngIf="project.publishedSchedule">
-    Schedule days have been published. Unable to make changes.
-</md-card>

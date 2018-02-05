@@ -8,6 +8,7 @@ import { DialogService } from "../../../../shared/service/dialog.service";
 import { ProjectUserProject } from '../../../project-users/model/project-user-project.model';
 import { AdminProjectUserHttpService } from '../../../index';
 import { ProjectUser } from '../../../project-users/model/project-user.model';
+import { ProjectRole } from "../../../project-roles/model/project-role.model";
 
 @Component({
     templateUrl: 'admin-user-landing.component.html',
@@ -16,6 +17,8 @@ export class AdminUserLandingComponent {
 
     user: FullUser;
     projects: ProjectUserProject[] = [];
+    availableRoles: ProjectRole[] = [];
+    chosenRoleId: number;
     searchProject: Project;
 
     constructor(
@@ -29,9 +32,10 @@ export class AdminUserLandingComponent {
     }
 
     ngOnInit() {
-        this.route.data.subscribe((data: { user: FullUser, projects: ProjectUserProject[] }) => {
+        this.route.data.subscribe((data: { user: FullUser, projects: ProjectUserProject[], projectRoles: ProjectRole[] }) => {
             this.user = data.user;
             this.projects = data.projects;
+            this.availableRoles = data.projectRoles;
         });
         this.resetSearchProject();
     }
@@ -61,6 +65,9 @@ export class AdminUserLandingComponent {
         let newProjectUser = new ProjectUser();
         newProjectUser.projectID = this.searchProject.id;
         newProjectUser.userID = this.user.id;
+        if (this.chosenRoleId) {
+            newProjectUser.roleID = this.chosenRoleId;
+        }
         this._projectUserHttpService.post(newProjectUser).then(data=>{
             if(typeof(data)=='string'){
                 this._dialogService.error(data);

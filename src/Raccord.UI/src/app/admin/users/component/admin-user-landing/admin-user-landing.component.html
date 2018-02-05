@@ -12,8 +12,16 @@
             #projectSearchFrom = "ngForm"
             (ngSubmit)="addProject()">
         <div fxLayout="row" fxLayoutGap="10px">
-            <admin-search-project fxFlex="50%" [searchProject]="searchProject"></admin-search-project>
-            <button fxFlex="50%" md-raised-button type="submit"[disabled]="!projectSearchFrom.form.valid">Add</button>            
+            <admin-search-project fxFlex="33%" [searchProject]="searchProject"></admin-search-project>
+            <md-select fxFlex="33%" 
+                        mdInput placeholder="Role" 
+                        [(ngModel)]="chosenRoleId" 
+                        #projectRole="ngModel" 
+                        name="user_role_id">
+                <md-option [value]="">---</md-option>
+                <md-option *ngFor="let projectRole of availableRoles" [value]="projectRole.id">{{ projectRole.name }}</md-option>
+            </md-select>
+            <button fxFlex="33%" md-raised-button type="submit"[disabled]="!projectSearchFrom.form.valid">Add</button>            
         </div>
     </form>
 </div>

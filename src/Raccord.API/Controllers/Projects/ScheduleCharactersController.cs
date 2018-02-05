@@ -12,10 +12,13 @@ using Raccord.Application.Core.Services.Scheduling.ScheduleCharacters;
 using Raccord.API.ViewModels.Scheduling.ScheduleScenes;
 using Microsoft.AspNetCore.Identity;
 using Raccord.Domain.Model.Users;
+using Raccord.API.Filters;
+using Raccord.Core.Enums;
 
-namespace Raccord.API.Controllers
+namespace Raccord.API.Controllers.Projects
 {
-    public class ScheduleCharactersController : AbstractApiAuthController
+    [ProjectPermissionFilter(ProjectPermissionEnum.CanReadGeneral)]
+    public class ScheduleCharactersController : AbstractProjectsController
     {
         private readonly IScheduleCharacterService _scheduleCharacterService;
 
@@ -53,6 +56,7 @@ namespace Raccord.API.Controllers
         }
 
         // POST api/schedulecharacters/5/1/link
+        [ProjectPermissionFilter(ProjectPermissionEnum.CanEditGeneral)]
         [HttpPost("{scheduleSceneId}/{characterSceneId}/addlink")]
         public JsonResult AddLink(long scheduleSceneId, long characterSceneId)
         {
@@ -80,6 +84,7 @@ namespace Raccord.API.Controllers
         }
 
         // POST api/schedulecharacters/5/removelink
+        [ProjectPermissionFilter(ProjectPermissionEnum.CanEditGeneral)]
         [HttpPost("{id}/removelink")]
         public JsonResult RemoveLink(long id)
         {

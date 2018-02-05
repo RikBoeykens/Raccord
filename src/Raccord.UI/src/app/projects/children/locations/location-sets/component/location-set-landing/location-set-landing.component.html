@@ -1,16 +1,14 @@
-<div class="row">      
-    <div class="col s12">
-        <a routerLink="/" class="breadcrumb">Dashboard</a>
-        <a routerLink="/projects" class="breadcrumb">Projects</a>
-        <a routerLink="/projects/{{project.id}}" class="breadcrumb">{{project.title}}</a>
-        <a routerLink="/projects/{{project.id}}/locations" class="breadcrumb">Locations</a>
-        <a routerLink="/projects/{{project.id}}/locations/{{locationSet.location.id}}" class="breadcrumb">{{locationSet.location.name}}</a>
-        <span class="breadcrumb">{{locationSet.name}}</span>
-    </div>
-</div>
-<div class="row">
+<md-card>      
+    <a routerLink="/" class="breadcrumb">Dashboard</a>
+    <a routerLink="/projects" class="breadcrumb">Projects</a>
+    <a routerLink="/projects/{{project.id}}" class="breadcrumb">{{project.title}}</a>
+    <a routerLink="/projects/{{project.id}}/locations" class="breadcrumb">Locations</a>
+    <a routerLink="/projects/{{project.id}}/locations/{{locationSet.location.id}}" class="breadcrumb">{{locationSet.location.name}}</a>
+    <span class="breadcrumb">{{locationSet.name}}</span>
+</md-card>
+<md-card *ngIf="getCanEdit()">
     <edit-location-set [locationSet]="viewLocationSet" (submitLocationSet)="updateLocationSet()"></edit-location-set>
-</div>
+</md-card>
 <md-tab-group>
   <md-tab label="Overview">
       <div>

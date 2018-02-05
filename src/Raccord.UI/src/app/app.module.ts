@@ -31,13 +31,14 @@ import { LoadingComponent } from './loading/component';
 import { NavbarComponent } from './navbar';
 import { SearchComponent } from './search/component';
 import { SearchResultComponent } from './search/component';
-import { 
+import {
   AddProjectComponent,
   EditProjectComponent,
   ProjectLandingComponent,
   ProjectsListComponent,
   ProjectAvatarComponent,
   ScenesListComponent,
+  EditScenesListComponent,
   EditSceneComponent,
   SceneLandingComponent,
   SceneImagesComponent,
@@ -48,24 +49,23 @@ import {
   SceneTimingsComponent,
   SceneSummaryComponent,
   FilterScenesComponent,
-  ChooseSceneDialog
-} from './projects';
-import { ScriptLocationsListComponent } from './projects';
-import { EditScriptLocationComponent } from './projects';
-import { ScriptLocationLandingComponent } from './projects';
-import { 
+  ChooseSceneDialog,
+  ScriptLocationsListComponent,
+  EditScriptLocationsListComponent,
+  EditScriptLocationComponent,
+  ScriptLocationLandingComponent,
   ScriptLocationImagesComponent,
   ScriptLocationSetsComponent,
-  SearchScriptLocationsCollectionComponent
-} from './projects';
-import { SearchScriptLocationComponent } from './projects';
-import { 
+  SearchScriptLocationsCollectionComponent,
+  SearchScriptLocationComponent,
   IntExtListComponent,
+  EditIntExtListComponent,
   EditIntExtComponent,
   IntExtLandingComponent,
   SearchIntExtComponent,
   SearchIntExtsCollectionComponent,
   DayNightListComponent,
+  EditDayNightListComponent,
   EditDayNightComponent,
   DayNightLandingComponent,
   SearchDayNightComponent,
@@ -76,8 +76,9 @@ import { EditImageComponent } from './projects';
 import { ImageLandingComponent } from './projects';
 import { UploadImageComponent } from './projects';
 import { ShowImageComponent } from './projects';
-import { 
+import {
   CharactersListComponent,
+  EditCharactersListComponent,
   EditCharacterComponent,
   CharacterLandingComponent,
   CharacterImagesComponent,
@@ -102,6 +103,7 @@ import {
   ScheduleLandingComponent,
   ScheduleSceneLandingComponent,
   LocationsListComponent,
+  EditLocationsListComponent,
   EditLocationComponent,
   LocationLandingComponent,
   LocationLocationSetsComponent,
@@ -142,12 +144,12 @@ import {
   CommentContainerComponent
 } from './projects';
 import { ScenePropertiesLandingComponent } from './projects';
-import { 
+import {
   SelectEntityComponent,
   PlaceholderImageComponent
 } from './shared';
-import { LoginComponent } from "./security";
-import { 
+import { LoginComponent } from './security';
+import {
   AdminSearchProjectComponent,
   AdminProjectsListComponent,
   AdminAddProjectComponent,
@@ -159,10 +161,10 @@ import {
   AdminProjectUserLandingComponent,
   AdminProjectUserAddCrewMemberComponent,
   AdminEditCrewMemberDialog
-} from "./admin";
+} from './admin';
 import{
   RaccordChartComponent
-} from "./charts";
+} from './charts';
 import {
   UserProfileLandingComponent,
   EditUserProfileDialog,
@@ -170,7 +172,7 @@ import {
   UserAvatarComponent
 } from './profile';
 
-const COMPONENTS =[
+const COMPONENTS = [
   AppComponent,
   NoContentComponent,
   DashboardComponent,
@@ -184,6 +186,7 @@ const COMPONENTS =[
   ProjectsListComponent,
   ProjectAvatarComponent,
   ScenesListComponent,
+  EditScenesListComponent,
   EditSceneComponent,
   SceneLandingComponent,
   SceneImagesComponent,
@@ -195,6 +198,7 @@ const COMPONENTS =[
   SceneSummaryComponent,
   FilterScenesComponent,
   ScriptLocationsListComponent,
+  EditScriptLocationsListComponent,
   EditScriptLocationComponent,
   ScriptLocationLandingComponent,
   ScriptLocationImagesComponent,
@@ -202,12 +206,14 @@ const COMPONENTS =[
   SearchScriptLocationComponent,
   SearchScriptLocationsCollectionComponent,
   IntExtListComponent,
+  EditIntExtListComponent,
   EditIntExtComponent,
   IntExtLandingComponent,
   SearchIntExtComponent,
   SearchIntExtsCollectionComponent,
   SearchDayNightComponent,
   DayNightListComponent,
+  EditDayNightListComponent,
   EditDayNightComponent,
   DayNightLandingComponent,
   SearchDayNightsCollectionComponent,
@@ -217,6 +223,7 @@ const COMPONENTS =[
   UploadImageComponent,
   ShowImageComponent,
   CharactersListComponent,
+  EditCharactersListComponent,
   EditCharacterComponent,
   CharacterLandingComponent,
   CharacterImagesComponent,
@@ -239,6 +246,7 @@ const COMPONENTS =[
   ScheduleLandingComponent,
   ScheduleSceneLandingComponent,
   LocationsListComponent,
+  EditLocationsListComponent,
   EditLocationComponent,
   LocationLandingComponent,
   LocationLocationSetsComponent,
@@ -307,6 +315,9 @@ const ENTRY_COMPONENTS = [
 import { LoadingService } from './loading/service/loading.service';
 import { CanDeactivateGuard } from './shared/service/can-deactivate-guard.service';
 import { DialogService } from './shared/service/dialog.service';
+import {
+  LoadingWrapperService
+} from './shared';
 import { SearchEngineService } from './search/service/search-engine.service';
 import { ProjectHttpService } from './projects';
 import { ProjectResolve } from './projects';
@@ -315,10 +326,10 @@ import { ProjectsResolve } from './projects';
 import { SceneHttpService } from './projects';
 import { ImageSceneHttpService } from './projects';
 import { CharacterSceneHttpService } from './projects';
-import { 
+import {
   SceneResolve,
   ScenesResolve,
-  SceneCharactersResolve 
+  SceneCharactersResolve
 } from './projects';
 import { ScriptLocationHttpService } from './projects';
 import { ImageScriptLocationHttpService } from './projects';
@@ -402,7 +413,7 @@ import {
 import {
   AuthService,
   AuthGuard
-} from "./security";
+} from './security';
 
 import {
   AccountHttpService,
@@ -410,7 +421,7 @@ import {
   CanEditUsersProjectPermissionGuard,
   CanReadCallsheetProjectPermissionGuard,
   CanReadGeneralProjectPermissionGuard
-} from "./account";
+} from './account';
 
 import {
   AdminProjectHttpService,
@@ -428,12 +439,12 @@ import {
   AdminSearchEngineService,
   AdminProjectRoleHttpService,
   AdminProjectRolesResolve
-} from "./admin";
+} from './admin';
 
 import {
   ChartHttpService,
   ProjectChartsResolve
-} from "./charts";
+} from './charts';
 
 import {
   UserProfileHttpService,
@@ -444,6 +455,7 @@ const APP_PROVIDERS = [
   LoadingService,
   CanDeactivateGuard,
   DialogService,
+  LoadingWrapperService,
   SearchEngineService,
   ProjectHttpService,
   ProjectResolve,
@@ -600,7 +612,7 @@ import '../styles/headings.css';
     DIRECTIVES,
     PIPES
   ],
-  entryComponents:[
+  entryComponents: [
     ENTRY_COMPONENTS
   ],
   imports: [ // import Angular's modules

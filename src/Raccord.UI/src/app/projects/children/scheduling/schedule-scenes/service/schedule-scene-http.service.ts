@@ -8,50 +8,50 @@ import { ScheduleSceneScene } from '../model/schedule-scene-scene.model';
 import { ScheduleScene } from '../model/schedule-scene.model';
 import { JsonResponse } from '../../../../../shared/model/json-response.model';
 import { SortOrder } from '../../../../../shared/model/sort-order.model';
+import { BaseProjectHttpService } from '../../../../shared/service/base-project-http.service';
 
 @Injectable()
-export class ScheduleSceneHttpService extends BaseHttpService {
+export class ScheduleSceneHttpService extends BaseProjectHttpService {
 
-    constructor(protected _http: Http) { 
-        super(_http);
-        this._baseUri = `${AppSettings.API_ENDPOINT}/schedulescenes`;
+    constructor(protected _http: Http) {
+        super(_http, 'schedulescenes');
     }
 
-    public getScenes(id): Promise<ScheduleSceneScene[]> {
+    public getScenes(authProjectId: number, scheduleDayId: number): Promise<ScheduleSceneScene[]> {
 
-        let uri = `${this._baseUri}/${id}/day`;
+        let uri = `${this.getUri(authProjectId)}/${scheduleDayId}/day`;
 
         return this.doGetArray(uri);
     }
 
-    public getDays(id): Promise<ScheduleSceneDay[]> {
+    public getDays(authProjectId: number, sceneId: number): Promise<ScheduleSceneDay[]> {
 
-        let uri = `${this._baseUri}/${id}/scene`;
+        let uri = `${this.getUri(authProjectId)}/${sceneId}/scene`;
 
         return this.doGetArray(uri);
     }
 
-    public get(id: number): Promise<FullScheduleScene>{
+    public get(authProjectId: number, id: number): Promise<FullScheduleScene> {
 
-        let uri = `${this._baseUri}/${id}`;
+        let uri = `${this.getUri(authProjectId)}/${id}`;
 
         return this.doGet(uri);
     }
 
-    public post(scheduleScene: ScheduleScene): Promise<number> {
-        let uri = this._baseUri;
+    public post(authProjectId: number, scheduleScene: ScheduleScene): Promise<number> {
+        let uri = this.getUri(authProjectId);
 
         return this.doPost(scheduleScene, uri);
     }
 
-    public delete(id: Number): Promise<any> {
-        let uri = `${this._baseUri}/${id}`;
+    public delete(authProjectId: number, id: Number): Promise<any> {
+        let uri = `${this.getUri(authProjectId)}/${id}`;
 
         return this.doDelete(uri);
     }
 
-    public sort(id: number, sortIds: number[]): Promise<any>{
-        let uri = `${this._baseUri}/sort`;
+    public sort(authProjectId: number, id: number, sortIds: number[]): Promise<any> {
+        let uri = `${this.getUri(authProjectId)}/sort`;
 
         let sortOrder = new SortOrder({parentId: id, sortIds});
 

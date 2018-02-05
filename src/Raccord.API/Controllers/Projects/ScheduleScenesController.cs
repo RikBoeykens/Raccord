@@ -9,10 +9,13 @@ using Microsoft.AspNetCore.Identity;
 using Raccord.Domain.Model.Users;
 using Raccord.API.ViewModels.Common.Sorting;
 using System.Threading.Tasks;
+using Raccord.API.Filters;
+using Raccord.Core.Enums;
 
-namespace Raccord.API.Controllers
+namespace Raccord.API.Controllers.Projects
 {
-    public class ScheduleScenesController : AbstractApiAuthController
+    [ProjectPermissionFilter(ProjectPermissionEnum.CanReadGeneral)]
+    public class ScheduleScenesController : AbstractProjectsController
     {
         private readonly IScheduleSceneService _scheduleSceneService;
 
@@ -62,6 +65,7 @@ namespace Raccord.API.Controllers
 
         // POST api/schedulescenes
         [HttpPost]
+        [ProjectPermissionFilter(ProjectPermissionEnum.CanEditGeneral)]
         public JsonResult Post([FromBody]ScheduleSceneViewModel vm)
         {
             var response = new JsonResponse();
@@ -101,6 +105,7 @@ namespace Raccord.API.Controllers
 
         // DELETE api/schedulescenes/5
         [HttpDelete("{id}")]
+        [ProjectPermissionFilter(ProjectPermissionEnum.CanEditGeneral)]
         public JsonResult Delete(long id)
         {
             var response = new JsonResponse();
@@ -128,6 +133,7 @@ namespace Raccord.API.Controllers
 
         // POST api/sort
         [HttpPost("sort")]
+        [ProjectPermissionFilter(ProjectPermissionEnum.CanEditGeneral)]
         public async Task<JsonResult> Sort([FromBody]SortOrderViewModel vm)
         {
             var response = new JsonResponse();

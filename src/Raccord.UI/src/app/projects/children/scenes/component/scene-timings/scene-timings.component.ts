@@ -9,6 +9,8 @@ import { DialogService } from '../../../../../shared/service/dialog.service';
 import { DragulaService } from 'ng2-dragula';
 import { HtmlClassHelpers } from '../../../../../shared/helpers/html-class.helpers';
 import { TimespanHelpers } from "../../../../../shared/helpers/timespan.helpers";
+import { ProjectPermissionEnum } from '../../../../../shared/children/users/project-roles/enums/project-permission.enum';
+import { AccountHelpers } from '../../../../../account/helpers/account.helper';
 
 @Component({
     templateUrl: 'scene-timings.component.html',
@@ -60,9 +62,16 @@ export class SceneTimingsComponent implements OnInit {
 
     getTotalTimings(){
         let count = 0;
-        this.scenes.forEach((scene: SceneSummary)=>{
+        this.scenes.forEach((scene: SceneSummary) => {
             count += TimespanHelpers.getTimespanNumber(scene.timing);
         });
         return count;
+    }
+
+    public getCanEdit() {
+        return AccountHelpers.hasProjectPermission(
+            this.project.id,
+            ProjectPermissionEnum.canEditGeneral
+        );
     }
 }

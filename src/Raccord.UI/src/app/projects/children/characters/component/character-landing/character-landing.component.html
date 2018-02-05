@@ -1,18 +1,14 @@
-<div class="row">      
-    <div class="col s12">
-        <a routerLink="/" class="breadcrumb">Dashboard</a>
-        <a routerLink="/projects" class="breadcrumb">Projects</a>
-        <a routerLink="/projects/{{project.id}}" class="breadcrumb">{{project.title}}</a>
-        <a routerLink="/projects/{{project.id}}/characters" class="breadcrumb">Characters</a>
-        <span class="breadcrumb">{{character.name}}</span>
-    </div>
-</div>
-<div class="row">
+<md-card>
+    <a routerLink="/" class="breadcrumb">Dashboard</a>
+    <a routerLink="/projects" class="breadcrumb">Projects</a>
+    <a routerLink="/projects/{{project.id}}" class="breadcrumb">{{project.title}}</a>
+    <a routerLink="/projects/{{project.id}}/characters" class="breadcrumb">Characters</a>
+    <span class="breadcrumb">{{character.name}}</span>
+</md-card>
+<md-card *ngIf="getCanEdit()">
     <edit-character [character]="viewCharacter" (submitCharacter)="updateCharacter()"></edit-character>
-</div>
+</md-card>
 <md-tab-group>
-  <md-tab label="Overview">
-  </md-tab>
   <md-tab label="Scenes">
       <character-scenes [scenes]="character.scenes" [characterId]="character.id" [projectId]="project.id"></character-scenes>
   </md-tab>

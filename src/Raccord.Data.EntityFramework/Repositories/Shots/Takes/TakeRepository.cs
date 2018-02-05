@@ -16,8 +16,7 @@ namespace Raccord.Data.EntityFramework.Repositories.Shots.Takes
         {
             var query = GetIncludedSummary();
 
-            return query.Where(s=> s.SlateID == slateID).OrderBy(t=> t.SortingOrder.HasValue)
-                                                        .ThenBy(t => t.SortingOrder);
+            return query.Where(s=> s.SlateID == slateID).OrderBy(t=> t.SortingOrder);
         }
 
         public Take GetFull(long ID)

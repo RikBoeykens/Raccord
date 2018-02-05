@@ -1,3 +1,4 @@
+export { EditScenesListComponent } from './component/edit-scenes-list/edit-scenes-list.component';
 export {SceneShootingDaysComponent} from "./component/scene-shooting-days/scene-shooting-days.component";
 export {SceneSlatesComponent} from "./component/scene-slates/scene-slates.component";
 export {SceneTimingsComponent} from "./component/scene-timings/scene-timings.component";

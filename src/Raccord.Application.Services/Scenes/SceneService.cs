@@ -59,7 +59,7 @@ namespace Raccord.Application.Services.Scenes
         {
             var scenes = _sceneRepository.GetAllForProject(projectID);
 
-            var dtos = scenes.Select(l => l.TranslateSummary());
+            var dtos = scenes.Select(l => l.TranslateSummary()).ToList();
 
             return dtos;
         }

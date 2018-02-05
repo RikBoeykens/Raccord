@@ -5,7 +5,6 @@ using Raccord.Domain.Model.Users;
 
 namespace Raccord.API.Controllers.Projects
 {
-    [Authorize(Roles="admin")]
     [Route("api/projects/{authProjectId}/[controller]")]
     public abstract class AbstractProjectsController : AbstractApiAuthController 
     {

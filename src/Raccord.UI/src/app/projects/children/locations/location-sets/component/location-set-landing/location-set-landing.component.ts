@@ -8,6 +8,8 @@ import { LocationSet } from '../../model/location-set.model';
 import { ProjectSummary } from '../../../../../model/project-summary.model';
 import { AppSettings } from '../../../../../../app.settings';
 import { MapsHelpers } from '../../../../../../shared/helpers/maps.helpers';
+import { AccountHelpers } from '../../../../../../account/helpers/account.helper';
+import { ProjectPermissionEnum } from '../../../../../../shared/children/users/project-roles/enums/project-permission.enum';
 
 @Component({
     templateUrl: 'location-set-landing.component.html',
@@ -80,5 +82,12 @@ export class LocationSetLandingComponent {
         if(this.locationSet.location.latLng.hasLatLng && this.locationSet.latLng.hasLatLng){
             this.bounds = MapsHelpers.getBounds([this.locationSet.location.latLng, this.locationSet.latLng]);
         }
+    }
+
+    public getCanEdit() {
+        return AccountHelpers.hasProjectPermission(
+            this.project.id,
+            ProjectPermissionEnum.canEditGeneral
+        );
     }
 }

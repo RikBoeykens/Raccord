@@ -7,6 +7,8 @@ import { Location } from "../../../locations/locations/model/location.model";
 import { CallsheetLocation } from '../../../locations/locations/model/callsheet-location.model';
 import { MapsHelpers } from '../../../../../shared/helpers/maps.helpers';
 import { CallsheetLocationSet } from '../../../locations/location-sets/model/callsheet-location-set.model';
+import { AccountHelpers } from '../../../../../account/helpers/account.helper';
+import { ProjectPermissionEnum } from '../../../../../shared/children/users/project-roles/enums/project-permission.enum';
 
 @Component({
     templateUrl: 'callsheet.component.html',
@@ -55,5 +57,12 @@ export class CallsheetComponent implements OnInit {
             latLngs = latLngs.concat(this.markerLocationSets.map((locationSet) => locationSet.latLng));
             this.bounds = MapsHelpers.getBounds(latLngs);
         }
+    }
+
+    public getCanEdit() {
+        return AccountHelpers.hasProjectPermission(
+            this.project.id,
+            ProjectPermissionEnum.canEditGeneral
+        );
     }
 }

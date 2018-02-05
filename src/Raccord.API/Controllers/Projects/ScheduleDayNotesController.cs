@@ -7,10 +7,13 @@ using Raccord.API.ViewModels.Core;
 using Raccord.Application.Core.Services.Scheduling.ScheduleDayNotes;
 using Microsoft.AspNetCore.Identity;
 using Raccord.Domain.Model.Users;
+using Raccord.API.Filters;
+using Raccord.Core.Enums;
 
-namespace Raccord.API.Controllers
+namespace Raccord.API.Controllers.Projects
 {
-    public class ScheduleDayNotesController : AbstractApiAuthController
+    [ProjectPermissionFilter(ProjectPermissionEnum.CanReadGeneral)]
+    public class ScheduleDayNotesController : AbstractProjectsController
     {
         private readonly IScheduleDayNoteService _scheduleDayNoteService;
 
@@ -58,6 +61,7 @@ namespace Raccord.API.Controllers
         }
 
         // POST api/scheduledaynotes
+        [ProjectPermissionFilter(ProjectPermissionEnum.CanEditGeneral)]
         [HttpPost]
         public JsonResult Post([FromBody]ScheduleDayNoteViewModel vm)
         {
@@ -96,6 +100,7 @@ namespace Raccord.API.Controllers
             return new JsonResult(response);
         }
 
+        [ProjectPermissionFilter(ProjectPermissionEnum.CanEditGeneral)]
         // DELETE api/scheduledaynotes/5
         [HttpDelete("{id}")]
         public JsonResult Delete(long id)
