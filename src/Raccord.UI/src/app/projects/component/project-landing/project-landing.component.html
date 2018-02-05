@@ -56,32 +56,58 @@
             </md-card-content>
         </md-card>
         <md-card class="project-landing-card" *ngIf="getCanRead()">
-            <md-card-header>
-                <md-card-title>
-                    <a routerLink="/projects/{{project.id}}/locations" class="card-title">Locations</a>
-                </md-card-title>
-            </md-card-header>
+            <md-card-title>Characters</md-card-title>
+            <md-card-content>
+                <md-nav-list>
+                    <a md-list-item
+                        routerLink="/projects/{{project.id}}/characters/edit"
+                        *ngIf="getCanEdit()">
+                        Edit Characters
+                    </a>
+                    <a md-list-item
+                        routerLink="/projects/{{project.id}}/characters">
+                        View Characters
+                    </a>
+                </md-nav-list>
+            </md-card-content>
         </md-card>
         <md-card class="project-landing-card" *ngIf="getCanRead()">
-            <md-card-header>
-                <md-card-title>
-                    <a routerLink="/projects/{{project.id}}/images" class="card-title">Images</a>
-                </md-card-title>
-            </md-card-header>
+            <md-card-title>Locations</md-card-title>
+            <md-card-content>
+                <md-nav-list>
+                    <a md-list-item
+                        routerLink="/projects/{{project.id}}/locations/edit"
+                        *ngIf="getCanEdit()">
+                        Edit Locations
+                    </a>
+                    <a md-list-item
+                        routerLink="/projects/{{project.id}}/locations">
+                        View Locations
+                    </a>
+                </md-nav-list>
+            </md-card-content>
         </md-card>
         <md-card class="project-landing-card" *ngIf="getCanRead()">
-            <md-card-header>
-                <md-card-title>
-                    <a routerLink="/projects/{{project.id}}/characters" class="card-title">Characters</a>
-                </md-card-title>
-            </md-card-header>
+            <md-card-title>Breakdown</md-card-title>
+            <md-card-content>
+                <md-nav-list>
+                    <a md-list-item
+                        routerLink="/projects/{{project.id}}/breakdown">
+                        View Breakdown
+                    </a>
+                </md-nav-list>
+            </md-card-content>
         </md-card>
         <md-card class="project-landing-card" *ngIf="getCanRead()">
-            <md-card-header>
-                <md-card-title>
-                    <a routerLink="/projects/{{project.id}}/breakdown" class="card-title">Breakdown</a>
-                </md-card-title>
-            </md-card-header>
+            <md-card-title>Images</md-card-title>
+            <md-card-content>
+                <md-nav-list>
+                    <a md-list-item
+                        routerLink="/projects/{{project.id}}/images">
+                        View Images
+                    </a>
+                </md-nav-list>
+            </md-card-content>
         </md-card>
         <md-card class="project-landing-card" *ngIf="getCanReadCallsheet()">
             <md-card-title>Scheduling</md-card-title>

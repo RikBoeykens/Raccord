@@ -78,6 +78,7 @@ import { UploadImageComponent } from './projects';
 import { ShowImageComponent } from './projects';
 import {
   CharactersListComponent,
+  EditCharactersListComponent,
   EditCharacterComponent,
   CharacterLandingComponent,
   CharacterImagesComponent,
@@ -102,6 +103,7 @@ import {
   ScheduleLandingComponent,
   ScheduleSceneLandingComponent,
   LocationsListComponent,
+  EditLocationsListComponent,
   EditLocationComponent,
   LocationLandingComponent,
   LocationLocationSetsComponent,
@@ -221,6 +223,7 @@ const COMPONENTS = [
   UploadImageComponent,
   ShowImageComponent,
   CharactersListComponent,
+  EditCharactersListComponent,
   EditCharacterComponent,
   CharacterLandingComponent,
   CharacterImagesComponent,
@@ -243,6 +246,7 @@ const COMPONENTS = [
   ScheduleLandingComponent,
   ScheduleSceneLandingComponent,
   LocationsListComponent,
+  EditLocationsListComponent,
   EditLocationComponent,
   LocationLandingComponent,
   LocationLocationSetsComponent,

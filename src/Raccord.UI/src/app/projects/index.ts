@@ -82,13 +82,14 @@ export { ImageHttpService } from './children/images/service/image-http.service';
 export { ImageResolve } from './children/images/service/image-resolve.service';
 export { ImagesResolve } from './children/images/service/images-resolve.service';
 
-export { CharactersListComponent } from './children/characters/component/characters-list/characters-list.component';
 export { SearchCharacterComponent } from './children/characters/component/search-character/search-character.component';
 export { EditCharacterComponent } from './children/characters/component/edit-character/edit-character.component';
 export { CharacterLandingComponent } from './children/characters/component/character-landing/character-landing.component';
 export { CharacterImagesComponent } from './children/characters/component/character-images/character-images.component';
 export { CharacterScenesComponent } from './children/characters/component/character-scenes/character-scenes.component';
 export {
+    CharactersListComponent,
+    EditCharactersListComponent,
     CharacterScheduleComponent,
     CharacterSummaryComponent,
     SearchCharactersCollectionComponent
@@ -142,6 +143,7 @@ export {
     LocationResolve,
     LocationsResolve,
     LocationsListComponent,
+    EditLocationsListComponent,
     EditLocationComponent,
     LocationLandingComponent,
     LocationLocationSetsComponent,

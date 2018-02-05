@@ -9,6 +9,8 @@ import { ProjectSummary } from '../../../../../model/project-summary.model';
 import { AppSettings } from '../../../../../../app.settings';
 import { LocationSetScriptLocation } from '../../../index';
 import { MapsHelpers } from '../../../../../../shared/helpers/maps.helpers';
+import { AccountHelpers } from '../../../../../../account/helpers/account.helper';
+import { ProjectPermissionEnum } from '../../../../../../shared/children/users/project-roles/enums/project-permission.enum';
 
 @Component({
     templateUrl: 'location-landing.component.html',
@@ -72,5 +74,12 @@ export class LocationLandingComponent {
             latLngs.push(this.location.latLng);
             this.bounds = MapsHelpers.getBounds(latLngs);
         }
+    }
+
+    public getCanEdit() {
+        return AccountHelpers.hasProjectPermission(
+            this.project.id,
+            ProjectPermissionEnum.canEditGeneral
+        );
     }
 }

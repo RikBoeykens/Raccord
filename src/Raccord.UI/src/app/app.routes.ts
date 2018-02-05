@@ -19,21 +19,21 @@ import {
   IntExtLandingComponent,
   DayNightListComponent,
   EditDayNightListComponent,
-  DayNightLandingComponent
-} from './projects';
-import { ImagesListComponent } from './projects';
-import { ImageLandingComponent } from './projects';
-import { CharactersListComponent } from './projects';
-import { CharacterLandingComponent } from './projects';
-import { BreakdownLandingComponent } from './projects';
-import { BreakdownTypeSettingsComponent } from './projects';
-import { BreakdownTypeLandingComponent } from './projects';
-import { BreakdownItemLandingComponent } from './projects';
-import {
+  DayNightLandingComponent,
+  ImagesListComponent,
+  ImageLandingComponent,
+  CharactersListComponent,
+  EditCharactersListComponent,
+  CharacterLandingComponent,
+  BreakdownLandingComponent,
+  BreakdownTypeSettingsComponent,
+  BreakdownTypeLandingComponent,
+  BreakdownItemLandingComponent,
   EditScheduleComponent,
   ScheduleLandingComponent,
   ScheduleSceneLandingComponent,
   LocationsListComponent,
+  EditLocationsListComponent,
   LocationLandingComponent,
   LocationSetLandingComponent,
   CallsheetsListComponent,
@@ -443,6 +443,15 @@ export const ROUTES: Routes = [
                 },
               },
               {
+                path: 'edit',
+                canActivate: [CanEditGeneralProjectPermissionGuard],
+                component: EditCharactersListComponent,
+                resolve: {
+                  project: ProjectSummaryResolve,
+                  characters: CharactersResolve
+                },
+              },
+              {
                 path: ':characterId',
                 component: CharacterLandingComponent,
                 resolve: {
@@ -540,21 +549,30 @@ export const ROUTES: Routes = [
             ]
           },
           {
-            path: "locations",
+            path: 'locations',
             canActivate: [CanReadGeneralProjectPermissionGuard],
-            children:[
+            children: [
               {
-                path: "",
+                path: '',
                 component: LocationsListComponent,
-                resolve:{
+                resolve: {
                   project: ProjectSummaryResolve,
                   locations: LocationsResolve
                 }
               },
               {
-                path: ":locationId",
+                path: 'edit',
+                component: EditLocationsListComponent,
+                canActivate: [CanEditGeneralProjectPermissionGuard],
+                resolve: {
+                  project: ProjectSummaryResolve,
+                  locations: LocationsResolve
+                }
+              },
+              {
+                path: ':locationId',
                 component: LocationLandingComponent,
-                resolve:{
+                resolve: {
                   project: ProjectSummaryResolve,
                   location: LocationResolve
                 }
@@ -562,11 +580,11 @@ export const ROUTES: Routes = [
             ]
           },
           {
-            path: "locationsets",
+            path: 'locationsets',
             canActivate: [CanReadGeneralProjectPermissionGuard],
-            children:[
+            children: [
               {
-                path: ":locationSetId",
+                path: ':locationSetId',
                 component: LocationSetLandingComponent,
                 resolve:{
                   project: ProjectSummaryResolve,
@@ -578,7 +596,7 @@ export const ROUTES: Routes = [
           {
             path: "callsheets",
             canActivate: [CanReadCallsheetProjectPermissionGuard],
-            children:[
+            children: [
               {
                 path: "",
                 component: CallsheetsListComponent,
