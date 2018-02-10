@@ -17,7 +17,7 @@
         <md-list-item 
            *ngFor="let breakdownItem of breakdownItems">
             <show-image *ngIf="breakdownItem.primaryImage.id!=0" [image]="breakdownItem.primaryImage" [listAvatar]="true"></show-image>
-            <a routerLink="/projects/{{projectId}}/breakdown/items/{{breakdownItem.id}}">
+            <a routerLink="/projects/{{projectId}}/breakdowns/items/{{breakdownItem.id}}">
                 {{breakdownItem.name}} ({{breakdownItem.type.name}})
             </a>
             <button md-button (click)="removeLink(breakdownItem)"><md-icon>delete</md-icon></button>

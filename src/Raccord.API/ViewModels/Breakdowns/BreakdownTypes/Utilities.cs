@@ -15,7 +15,7 @@ namespace Raccord.API.ViewModels.Breakdowns.BreakdownTypes
                 ID = dto.ID,
                 Name = dto.Name,
                 Description = dto.Description,
-                ProjectID = dto.ProjectID,
+                Breakdown = dto.Breakdown.Translate(),
                 BreakdownItems = dto.BreakdownItems.Select(bi=> bi.Translate()),
             };
         }
@@ -28,7 +28,7 @@ namespace Raccord.API.ViewModels.Breakdowns.BreakdownTypes
                 ID = dto.ID,
                 Name = dto.Name,
                 Description = dto.Description,
-                ProjectID = dto.ProjectID,
+                BreakdownID = dto.BreakdownID,
                 ItemCount = dto.ItemCount,
             };
         }
@@ -46,7 +46,6 @@ namespace Raccord.API.ViewModels.Breakdowns.BreakdownTypes
                 ID = dto.ID,
                 Name = dto.Name,
                 Description = dto.Description,
-                ProjectID = dto.ProjectID,
                 Scenes = dto.Scenes.Select(s=> s.Translate()),
             };
         }
@@ -59,7 +58,7 @@ namespace Raccord.API.ViewModels.Breakdowns.BreakdownTypes
                 ID = dto.ID,
                 Name = dto.Name,
                 Description = dto.Description,
-                ProjectID = dto.ProjectID,
+                BreakdownID = dto.BreakdownID,
             };
         }
 
@@ -71,7 +70,7 @@ namespace Raccord.API.ViewModels.Breakdowns.BreakdownTypes
                 ID = vm.ID,
                 Name = vm.Name,
                 Description = vm.Description,
-                ProjectID = vm.ProjectID,
+                BreakdownID = vm.BreakdownID,
             };
         }
     }

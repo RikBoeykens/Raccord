@@ -143,7 +143,7 @@
             <div *ngFor="let breakdownItemScene of breakdownType.scenes">
                 <em>Sc {{breakdownItemScene.sceneNumber}}:</em>
                 <span class="comma-separated" *ngFor="let item of breakdownItemScene.items">
-                    <a routerLink="/projects/{{project.id}}/breakdown/items/{{item.id}}">{{item.name}}</a>
+                    <a routerLink="/projects/{{project.id}}/breakdowns/items/{{item.id}}">{{item.name}}</a>
                 </span>
             </div>
         </div>

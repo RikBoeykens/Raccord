@@ -2,11 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Raccord.Application.Core.Services.Callsheets;
-using Raccord.Data.EntityFramework.Repositories.Breakdowns.BreakdownTypes;
+using Raccord.Data.EntityFramework.Repositories.Breakdowns;
 using Raccord.Data.EntityFramework.Repositories.Callsheets;
 using Raccord.Data.EntityFramework.Repositories.Callsheets.Scenes;
 using Raccord.Data.EntityFramework.Repositories.Scheduling.ScheduleDays;
 using Raccord.Data.EntityFramework.Repositories.ShootingDays;
+using Raccord.Domain.Model.Breakdowns.BreakdownTypes;
 using Raccord.Domain.Model.Callsheets;
 using Raccord.Domain.Model.Callsheets.Scenes;
 using Raccord.Domain.Model.ShootingDays.Scenes;
@@ -20,7 +21,7 @@ namespace Raccord.Application.Services.Callsheets
         private readonly IShootingDayRepository _shootingDayRepository;
         private readonly IScheduleDayRepository _scheduleDayRepository;
         private readonly ICallsheetSceneCharacterRepository _callsheetSceneCharacterRepository;
-        private readonly IBreakdownTypeRepository _breakdownTypeRepository;
+        private readonly IBreakdownRepository _breakdownRepository;
 
         // Initialises a new CharacterService
         public CallsheetService(
@@ -28,7 +29,7 @@ namespace Raccord.Application.Services.Callsheets
             IShootingDayRepository shootingDayRepository,
             IScheduleDayRepository scheduleDayRepository,
             ICallsheetSceneCharacterRepository callsheetSceneCharacterRepository,
-            IBreakdownTypeRepository breakdownTypeRepository
+            IBreakdownRepository breakdownRepository
             )
         {
             if(callsheetRepository == null)
@@ -39,14 +40,14 @@ namespace Raccord.Application.Services.Callsheets
                 throw new ArgumentNullException(nameof(scheduleDayRepository));
             if(callsheetSceneCharacterRepository == null)
                 throw new ArgumentNullException(nameof(callsheetSceneCharacterRepository));
-            if(breakdownTypeRepository == null)
-                throw new ArgumentNullException(nameof(breakdownTypeRepository));
+            if(breakdownRepository == null)
+                throw new ArgumentNullException(nameof(breakdownRepository));
             
             _callsheetRepository = callsheetRepository;
             _shootingDayRepository = shootingDayRepository;
             _scheduleDayRepository = scheduleDayRepository;
             _callsheetSceneCharacterRepository = callsheetSceneCharacterRepository;
-            _breakdownTypeRepository = breakdownTypeRepository;
+            _breakdownRepository = breakdownRepository;
         }
 
         // Gets all callsheets for a project
@@ -59,12 +60,22 @@ namespace Raccord.Application.Services.Callsheets
             return dtos;
         }
 
-        // Gets a single character by id
-        public FullCallsheetDto Get(Int64 ID)
+        // Gets a single callsheet by id
+        public FullCallsheetDto Get(long ID, string userID)
         {
             var callsheet = _callsheetRepository.GetFull(ID);
 
-            var breakdownTypes = _breakdownTypeRepository.GetAllForProject(callsheet.ProjectID);
+            var breakdownTypes = new List<BreakdownType>();
+            if(_breakdownRepository.ProjectUserHasSelected(callsheet.ProjectID, userID))
+            {
+                var breakdown = _breakdownRepository.GetProjectUserSelected(callsheet.ProjectID, userID);
+                breakdownTypes = breakdown.Types.ToList();
+            }
+            else if (_breakdownRepository.ProjectHasDefault(callsheet.ProjectID))
+            {
+                var breakdown = _breakdownRepository.GetDefaultProject(callsheet.ProjectID);
+                breakdownTypes = breakdown.Types.ToList();
+            }
 
             var dto = callsheet.TranslateFull(breakdownTypes);
 

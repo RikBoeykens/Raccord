@@ -100,27 +100,33 @@ export { CharacterResolve } from './children/characters/service/character-resolv
 export { CharactersResolve } from './children/characters/service/characters-resolve.service';
 
 export { BreakdownLandingComponent } from './children/breakdowns/component/breakdown-landing/breakdown-landing.component';
-export { BreakdownTypeSettingsComponent } from './children/breakdowns/breakdown-types/component/breakdown-type-settings/breakdown-type-settings.component';
-export { EditBreakdownTypeComponent } from './children/breakdowns/breakdown-types/component/edit-breakdown-type/edit-breakdown-type.component';
-export { BreakdownTypeLandingComponent } from './children/breakdowns/breakdown-types/component/breakdown-type-landing/breakdown-type-landing.component';
+export { EditBreakdownTypeComponent } from './children/breakdowns/children/breakdown-types/component/edit-breakdown-type/edit-breakdown-type.component';
+export { BreakdownTypeLandingComponent } from './children/breakdowns/children/breakdown-types/component/breakdown-type-landing/breakdown-type-landing.component';
 
-export { BreakdownItemLandingComponent } from './children/breakdowns/breakdown-items/component/breakdown-item-landing/breakdown-item-landing.component';
-export { EditBreakdownItemComponent } from './children/breakdowns/breakdown-items/component/edit-breakdown-item/edit-breakdown-item.component';
-export { BreakdownItemImagesComponent } from './children/breakdowns/breakdown-items/component/breakdown-item-images/breakdown-item-images.component';
-export { BreakdownItemScenesComponent } from './children/breakdowns/breakdown-items/component/breakdown-item-scenes/breakdown-item-scenes.component';
-export { SearchBreakdownItemComponent } from './children/breakdowns/breakdown-items/component/search-breakdown-item/search-breakdown-item.component';
+export { BreakdownItemLandingComponent } from './children/breakdowns/children/breakdown-items/component/breakdown-item-landing/breakdown-item-landing.component';
+export { EditBreakdownItemComponent } from './children/breakdowns/children/breakdown-items/component/edit-breakdown-item/edit-breakdown-item.component';
+export { BreakdownItemImagesComponent } from './children/breakdowns/children/breakdown-items/component/breakdown-item-images/breakdown-item-images.component';
+export { BreakdownItemScenesComponent } from './children/breakdowns/children/breakdown-items/component/breakdown-item-scenes/breakdown-item-scenes.component';
+export { SearchBreakdownItemComponent } from './children/breakdowns/children/breakdown-items/component/search-breakdown-item/search-breakdown-item.component';
 
-export { BreakdownTypeHttpService } from './children/breakdowns/breakdown-types/service/breakdown-type-http.service';
-export { BreakdownTypeResolve } from './children/breakdowns/breakdown-types/service/breakdown-type-resolve.service';
-export { BreakdownTypesResolve } from './children/breakdowns/breakdown-types/service/breakdown-types-resolve.service';
+export { BreakdownTypeHttpService } from './children/breakdowns/children/breakdown-types/service/breakdown-type-http.service';
+export { BreakdownTypeResolve } from './children/breakdowns/children/breakdown-types/service/breakdown-type-resolve.service';
+export { BreakdownTypesResolve } from './children/breakdowns/children/breakdown-types/service/breakdown-types-resolve.service';
 
-export { BreakdownItemHttpService } from './children/breakdowns/breakdown-items/service/breakdown-item-http.service';
-export { ImageBreakdownItemHttpService } from './children/breakdowns/breakdown-items/service/image-breakdown-item-http.service';
-export { BreakdownItemResolve } from './children/breakdowns/breakdown-items/service/breakdown-item-resolve.service';
-export { BreakdownItemsResolve } from './children/breakdowns/breakdown-items/service/breakdown-items-resolve.service';
+export { BreakdownItemHttpService } from './children/breakdowns/children/breakdown-items/service/breakdown-item-http.service';
+export { ImageBreakdownItemHttpService } from './children/breakdowns/children/breakdown-items/service/image-breakdown-item-http.service';
+export { BreakdownItemResolve } from './children/breakdowns/children/breakdown-items/service/breakdown-item-resolve.service';
+export { BreakdownItemsResolve } from './children/breakdowns/children/breakdown-items/service/breakdown-items-resolve.service';
 
 export {
-    SearchBreakdownCollectionComponent
+    SearchBreakdownCollectionComponent,
+    BreakdownsListComponent,
+    EditBreakdownComponent,
+    BreakdownSettingsComponent,
+    BreakdownHttpService,
+    BreakdownResolve,
+    BreakdownsResolve,
+    BreakdownSummaryResolve
 } from './children/breakdowns';
 
 export {

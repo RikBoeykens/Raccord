@@ -18,8 +18,6 @@ import { ProjectSummary } from '../../../../model/project-summary.model';
 import { SelectedEntity } from '../../../../../shared/model/selected-entity.model';
 import { EntityType } from '../../../../../shared/enums/entity-type.enum';
 import { SceneFilterRequest } from '../../../scenes/model/scene-filter-request.model';
-import { BreakdownTypeSummary } from
-    '../../../breakdowns/breakdown-types/model/breakdown-type-summary.model';
 import { SceneHttpService } from '../../../scenes/service/scene-http.service';
 import { PageRequest } from '../../../../../shared/children/paging/model/page-request.model';
 import { AppSettings } from '../../../../../app.settings';
@@ -28,6 +26,8 @@ import { DragulaService } from 'ng2-dragula';
 import { HtmlClassHelpers } from '../../../../../shared/helpers/html-class.helpers';
 import { Element } from '@angular/compiler';
 import { LoadingWrapperService } from '../../../../../shared/service/loading-wrapper.service';
+import { BreakdownTypeSummary } from
+    '../../../breakdowns/children/breakdown-types/model/breakdown-type-summary.model';
 
 @Component({
     templateUrl: 'edit-schedule.component.html',

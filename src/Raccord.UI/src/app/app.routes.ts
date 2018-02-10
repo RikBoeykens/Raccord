@@ -25,8 +25,9 @@ import {
   CharactersListComponent,
   EditCharactersListComponent,
   CharacterLandingComponent,
+  BreakdownsListComponent,
   BreakdownLandingComponent,
-  BreakdownTypeSettingsComponent,
+  BreakdownSettingsComponent,
   BreakdownTypeLandingComponent,
   BreakdownItemLandingComponent,
   EditScheduleComponent,
@@ -89,11 +90,14 @@ import { ImageResolve } from './projects';
 import { ImagesResolve } from './projects';
 import { CharacterResolve } from './projects';
 import { CharactersResolve } from './projects';
-import { BreakdownTypeResolve } from './projects';
-import { BreakdownTypesResolve } from './projects';
-import { BreakdownItemResolve } from './projects';
-import { BreakdownItemsResolve } from './projects';
 import {
+  BreakdownsResolve,
+  BreakdownResolve,
+  BreakdownSummaryResolve,
+  BreakdownTypeResolve,
+  BreakdownTypesResolve,
+  BreakdownItemResolve,
+  BreakdownItemsResolve,
   ScheduleDaysResolve,
   ScheduleSceneResolve,
   LocationsResolve,
@@ -462,48 +466,61 @@ export const ROUTES: Routes = [
             ]
           },
           {
-            path: 'breakdown',
+            path: 'breakdowns',
             canActivate: [CanReadGeneralProjectPermissionGuard],
             children: [
               {
                 path: '',
-                component: BreakdownLandingComponent,
+                component: BreakdownsListComponent,
                 resolve: {
                   project: ProjectSummaryResolve,
-                  breakdownTypes: BreakdownTypesResolve
+                  breakdowns: BreakdownsResolve
                 },
               },
               {
-                path: 'settings',
-                component: BreakdownTypeSettingsComponent,
-                resolve: {
-                  project: ProjectSummaryResolve,
-                  breakdownTypes: BreakdownTypesResolve
-                },
-              },
-              {
-                path: 'types/:breakdownTypeId',
+                path: ':breakdownId',
                 children: [
                   {
                     path: '',
-                    component: BreakdownTypeLandingComponent,
+                    component: BreakdownLandingComponent,
                     resolve: {
                       project: ProjectSummaryResolve,
-                      breakdownType: BreakdownTypeResolve
-                    }
-                  }
-                ]
-              },
-              {
-                path: 'items/:breakdownItemId',
-                children: [
+                      breakdown: BreakdownResolve
+                    },
+                  },
                   {
-                    path: '',
-                    component: BreakdownItemLandingComponent,
+                    path: 'settings',
+                    component: BreakdownSettingsComponent,
                     resolve: {
                       project: ProjectSummaryResolve,
-                      breakdownItem: BreakdownItemResolve
-                    }
+                      breakdown: BreakdownResolve
+                    },
+                  },
+                  {
+                    path: 'types/:breakdownTypeId',
+                    children: [
+                      {
+                        path: '',
+                        component: BreakdownTypeLandingComponent,
+                        resolve: {
+                          project: ProjectSummaryResolve,
+                          breakdownType: BreakdownTypeResolve
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    path: 'items/:breakdownItemId',
+                    children: [
+                      {
+                        path: '',
+                        component: BreakdownItemLandingComponent,
+                        resolve: {
+                          project: ProjectSummaryResolve,
+                          breakdownItem: BreakdownItemResolve
+                        }
+                      }
+                    ]
                   }
                 ]
               }

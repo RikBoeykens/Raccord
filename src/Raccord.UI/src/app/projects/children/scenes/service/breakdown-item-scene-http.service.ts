@@ -5,7 +5,7 @@ import { AppSettings } from '../../../../app.settings';
 import { FullScene } from '../model/full-scene.model';
 import { SceneSummary } from '../model/scene-summary.model';
 import { Scene } from '../model/scene.model';
-import { LinkedBreakdownItem } from '../../breakdowns/breakdown-items/model/linked-breakdown-item.model';
+import { LinkedBreakdownItem } from '../../breakdowns/children/breakdown-items/model/linked-breakdown-item.model';
 import { LinkedScene } from '..//model/linked-scene.model';
 import { JsonResponse } from '../../../../shared/model/json-response.model';
 import { SortOrder } from '../../../../shared/model/sort-order.model';

@@ -6,7 +6,7 @@ import { ProjectSummary } from '../../../../model/project-summary.model';
 import { LoadingService } from '../../../../../loading/service/loading.service';
 import { SceneFilterRequest } from '../../model/scene-filter-request.model';
 import { BreakdownTypeSummary } from
-    '../../../breakdowns/breakdown-types/model/breakdown-type-summary.model';
+    '../../../breakdowns/children/breakdown-types/model/breakdown-type-summary.model';
 
 @Component({
     templateUrl: 'scenes-list.component.html',

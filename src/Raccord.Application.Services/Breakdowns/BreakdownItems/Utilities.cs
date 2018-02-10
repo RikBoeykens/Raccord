@@ -21,6 +21,7 @@ namespace Raccord.Application.Services.Breakdowns.BreakdownItems
                 Name = breakdownItem.Name,
                 Description = breakdownItem.Description,
                 Type = breakdownItem.BreakdownType.Translate(),
+                Breakdown = breakdownItem.Breakdown.TranslateSummary(),
                 Scenes = breakdownItem.BreakdownItemScenes.OrderBy(s=> s.Scene.SortingOrder)
                                                             .Select(s=> s.TranslateScene()),
                 Images = breakdownItem.ImageBreakdownItems.Select(s=> s.TranslateImage()),
@@ -35,7 +36,8 @@ namespace Raccord.Application.Services.Breakdowns.BreakdownItems
                 ID = breakdownItem.ID,
                 Name = breakdownItem.Name,
                 Description = breakdownItem.Description,
-                Type = breakdownItem.BreakdownType.Translate(),
+                BreakdownID = breakdownItem.BreakdownID,
+                BreakdownTypeID = breakdownItem.BreakdownTypeID,
                 SceneCount = breakdownItem.BreakdownItemScenes.Count(),
                 PrimaryImage = breakdownItem.ImageBreakdownItems.FirstOrDefault(il=> il.IsPrimaryImage)?.Image.Translate(),
             };
@@ -50,7 +52,8 @@ namespace Raccord.Application.Services.Breakdowns.BreakdownItems
                 ID = breakdownItem.ID,
                 Name = breakdownItem.Name,
                 Description = breakdownItem.Description,
-                Type = breakdownItem.BreakdownType.Translate(),
+                BreakdownID = breakdownItem.BreakdownID,
+                BreakdownTypeID = breakdownItem.BreakdownTypeID,
             };
 
             return dto;
@@ -78,7 +81,7 @@ namespace Raccord.Application.Services.Breakdowns.BreakdownItems
                 Name = breakdownItemScene.BreakdownItem.Name,
                 Description = breakdownItemScene.BreakdownItem.Description,
                 Type = breakdownItemScene.BreakdownItem.BreakdownType.Translate(),
-                LinkID = breakdownItemScene.ID
+                LinkID = breakdownItemScene.ID,
             };
 
             return dto;
@@ -89,9 +92,9 @@ namespace Raccord.Application.Services.Breakdowns.BreakdownItems
             var dto = new SearchResultDto
             {
                 ID = breakdownItem.ID,
-                RouteIDs = new long[]{breakdownItem.BreakdownType.ProjectID, breakdownItem.ID},
+                RouteIDs = new long[]{breakdownItem.BreakdownType.Breakdown.ProjectID, breakdownItem.BreakdownTypeID, breakdownItem.ID},
                 DisplayName = $"{breakdownItem.Name} ({breakdownItem.BreakdownType.Name})",
-                Info = $"Project: {breakdownItem.BreakdownType.Project.Title}",
+                Info = $"Project: {breakdownItem.BreakdownType.Breakdown.Project.Title}",
                 Type = EntityType.BreakdownItem,
             };
 

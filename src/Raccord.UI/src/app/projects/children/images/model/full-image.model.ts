@@ -2,7 +2,7 @@ import { Image } from './image.model';
 import { LinkedScene } from '../../scenes/model/linked-scene.model';
 import { LinkedScriptLocation } from '../../script-locations/model/linked-script-location.model';
 import { LinkedCharacter } from '../../characters/model/linked-character.model';
-import { LinkedBreakdownItem } from '../../breakdowns/breakdown-items/model/linked-breakdown-item.model';
+import { LinkedBreakdownItem } from '../../breakdowns/children/breakdown-items/model/linked-breakdown-item.model';
 import { LinkedSlate } from "../../shots/slates/model/linked-slate.model";
 
 export class FullImage extends Image{

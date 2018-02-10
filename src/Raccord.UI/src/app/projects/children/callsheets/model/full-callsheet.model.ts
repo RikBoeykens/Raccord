@@ -3,7 +3,7 @@ import { ShootingDay } from "../../shooting-days";
 import { CallsheetSceneScene } from "../";
 import { CallsheetCharacterCharacter } from "../";
 import { CallsheetLocation } from '../../locations/locations/model/callsheet-location.model';
-import { CallsheetBreakdownType } from '../../breakdowns/breakdown-types/model/callsheet-breakdown-type.model';
+import { CallsheetBreakdownType } from '../../breakdowns/children/breakdown-types/model/callsheet-breakdown-type.model';
 
 export class FullCallsheet extends Callsheet{
     scenes: CallsheetSceneScene[];

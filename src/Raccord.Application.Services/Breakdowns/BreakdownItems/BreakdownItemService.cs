@@ -59,7 +59,8 @@ namespace Raccord.Application.Services.Breakdowns.BreakdownItems
             {
                 Name = dto.Name,
                 Description = dto.Description,
-                BreakdownTypeID = dto.Type.ID
+                BreakdownID = dto.BreakdownID,
+                BreakdownTypeID = dto.BreakdownTypeID
             };
 
             _breakdownItemRepository.Add(item);

@@ -3,30 +3,18 @@ using Raccord.API.ViewModels.Breakdowns.BreakdownTypes;
 namespace Raccord.API.ViewModels.Breakdowns.BreakdownItems
 {
     // Viewmodel to represents a breakdown item
-    public class BreakdownItemViewModel
+    public class BreakdownItemViewModel : BaseBreakdownItemViewModel
     {
-        private BreakdownTypeViewModel _type;
+        /// <summary>
+        /// ID of the linked breakdown
+        /// </summary>
+        /// <returns></returns>
+        public long BreakdownID { get; set; }
 
-        // ID of the location
-        public long ID { get; set; }
-
-        /// Name of the location
-        public string Name { get; set; }
-
-        /// Description of the location
-        public string Description { get; set; }
-
-        // Linked type
-        public BreakdownTypeViewModel Type
-        {
-            get
-            {
-                return _type ?? (_type = new BreakdownTypeViewModel());
-            }
-            set
-            {
-                _type = value;
-            }
-        }
+        /// <summary>
+        /// ID of the linked breakdown type
+        /// </summary>
+        /// <returns></returns>
+        public long BreakdownTypeID { get; set; }
     }
 }

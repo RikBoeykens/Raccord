@@ -1,6 +1,6 @@
-export abstract class BaseModel{
+export abstract class BaseModel {
 
-    equals(obj: any){
-        return JSON.stringify(this)==JSON.stringify(obj);
+    public equals(obj: any) {
+        return JSON.stringify(this) === JSON.stringify(obj);
     }
 }

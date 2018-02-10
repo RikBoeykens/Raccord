@@ -50,6 +50,8 @@ namespace Raccord.Data.EntityFramework.Repositories.Breakdowns.BreakdownItems
             IQueryable<BreakdownItem> query = _context.Set<BreakdownItem>();
 
             return query.Include(bi=> bi.BreakdownType)
+                        .Include(bi => bi.Breakdown)
+                            .ThenInclude(b => b.User)
                         .Include(bi=> bi.BreakdownItemScenes)
                         .ThenInclude(s=> s.Scene)
                         .ThenInclude(s=> s.IntExt)
@@ -85,6 +87,7 @@ namespace Raccord.Data.EntityFramework.Repositories.Breakdowns.BreakdownItems
             IQueryable<BreakdownItem> query = _context.Set<BreakdownItem>();
 
             return query.Include(bi=> bi.BreakdownType)
+                        .Include(bt=> bt.Breakdown)
                         .ThenInclude(bt=> bt.Project)
                         .ThenInclude(p=> p.ProjectUsers);
         }
@@ -96,13 +99,13 @@ namespace Raccord.Data.EntityFramework.Repositories.Breakdowns.BreakdownItems
             query = query.Where(bi=> bi.Name.ToLower().Contains(searchText.ToLower()));
 
             if(projectID.HasValue)
-                query = query.Where(bi=> bi.BreakdownType.ProjectID==projectID.Value);
+                query = query.Where(bi=> bi.Breakdown.ProjectID==projectID.Value);
 
             if(typeID.HasValue)
                 query = query.Where(bi=> bi.BreakdownTypeID==typeID.Value);
 
             if(!isAdmin)
-                query = query.Where(bi=> bi.BreakdownType.Project.ProjectUsers.Any(c=> c.UserID == userID));
+                query = query.Where(bi=> bi.Breakdown.Project.ProjectUsers.Any(c=> c.UserID == userID));
 
             if(excludeIds.Any())
             {

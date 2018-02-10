@@ -137,7 +137,11 @@ namespace Raccord.Data.EntityFramework.Migrations
 
                     b.Property<string>("DisplayName");
 
+                    b.Property<string>("Permissions");
+
                     b.Property<string>("PostLogoutRedirectUris");
+
+                    b.Property<string>("Properties");
 
                     b.Property<string>("RedirectUris");
 
@@ -160,6 +164,8 @@ namespace Raccord.Data.EntityFramework.Migrations
 
                     b.Property<string>("ConcurrencyToken")
                         .IsConcurrencyToken();
+
+                    b.Property<string>("Properties");
 
                     b.Property<string>("Scopes");
 
@@ -191,6 +197,8 @@ namespace Raccord.Data.EntityFramework.Migrations
                     b.Property<string>("Name")
                         .IsRequired();
 
+                    b.Property<string>("Properties");
+
                     b.HasKey("Id");
 
                     b.ToTable("OpenIddictScopes");
@@ -212,6 +220,8 @@ namespace Raccord.Data.EntityFramework.Migrations
                     b.Property<DateTimeOffset?>("ExpirationDate");
 
                     b.Property<string>("Payload");
+
+                    b.Property<string>("Properties");
 
                     b.Property<string>("ReferenceId");
 
@@ -235,10 +245,38 @@ namespace Raccord.Data.EntityFramework.Migrations
                     b.ToTable("OpenIddictTokens");
                 });
 
+            modelBuilder.Entity("Raccord.Domain.Model.Breakdowns.Breakdown", b =>
+                {
+                    b.Property<long>("ID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Description");
+
+                    b.Property<bool>("IsDefaultProjectBreakdown");
+
+                    b.Property<bool>("IsPublished");
+
+                    b.Property<string>("Name");
+
+                    b.Property<long>("ProjectID");
+
+                    b.Property<string>("UserID");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("ProjectID");
+
+                    b.HasIndex("UserID");
+
+                    b.ToTable("Breakdown");
+                });
+
             modelBuilder.Entity("Raccord.Domain.Model.Breakdowns.BreakdownItems.BreakdownItem", b =>
                 {
                     b.Property<long>("ID")
                         .ValueGeneratedOnAdd();
+
+                    b.Property<long>("BreakdownID");
 
                     b.Property<long>("BreakdownTypeID");
 
@@ -247,6 +285,8 @@ namespace Raccord.Data.EntityFramework.Migrations
                     b.Property<string>("Name");
 
                     b.HasKey("ID");
+
+                    b.HasIndex("BreakdownID");
 
                     b.HasIndex("BreakdownTypeID");
 
@@ -276,15 +316,15 @@ namespace Raccord.Data.EntityFramework.Migrations
                     b.Property<long>("ID")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<long>("BreakdownID");
+
                     b.Property<string>("Description");
 
                     b.Property<string>("Name");
 
-                    b.Property<long>("ProjectID");
-
                     b.HasKey("ID");
 
-                    b.HasIndex("ProjectID");
+                    b.HasIndex("BreakdownID");
 
                     b.ToTable("BreakdownType");
                 });
@@ -1282,6 +1322,8 @@ namespace Raccord.Data.EntityFramework.Migrations
 
                     b.Property<long?>("RoleID");
 
+                    b.Property<long?>("SelectedBreakdownID");
+
                     b.Property<string>("UserID");
 
                     b.HasKey("ID");
@@ -1289,6 +1331,8 @@ namespace Raccord.Data.EntityFramework.Migrations
                     b.HasIndex("ProjectID");
 
                     b.HasIndex("RoleID");
+
+                    b.HasIndex("SelectedBreakdownID");
 
                     b.HasIndex("UserID");
 
@@ -1350,8 +1394,25 @@ namespace Raccord.Data.EntityFramework.Migrations
                         .HasForeignKey("AuthorizationId");
                 });
 
+            modelBuilder.Entity("Raccord.Domain.Model.Breakdowns.Breakdown", b =>
+                {
+                    b.HasOne("Raccord.Domain.Model.Projects.Project", "Project")
+                        .WithMany("Breakdowns")
+                        .HasForeignKey("ProjectID")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Raccord.Domain.Model.Users.ApplicationUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserID");
+                });
+
             modelBuilder.Entity("Raccord.Domain.Model.Breakdowns.BreakdownItems.BreakdownItem", b =>
                 {
+                    b.HasOne("Raccord.Domain.Model.Breakdowns.Breakdown", "Breakdown")
+                        .WithMany("Items")
+                        .HasForeignKey("BreakdownID")
+                        .OnDelete(DeleteBehavior.Cascade);
+
                     b.HasOne("Raccord.Domain.Model.Breakdowns.BreakdownTypes.BreakdownType", "BreakdownType")
                         .WithMany("BreakdownItems")
                         .HasForeignKey("BreakdownTypeID")
@@ -1373,9 +1434,9 @@ namespace Raccord.Data.EntityFramework.Migrations
 
             modelBuilder.Entity("Raccord.Domain.Model.Breakdowns.BreakdownTypes.BreakdownType", b =>
                 {
-                    b.HasOne("Raccord.Domain.Model.Projects.Project", "Project")
-                        .WithMany("BreakdownTypes")
-                        .HasForeignKey("ProjectID")
+                    b.HasOne("Raccord.Domain.Model.Breakdowns.Breakdown", "Breakdown")
+                        .WithMany("Types")
+                        .HasForeignKey("BreakdownID")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
@@ -1825,6 +1886,10 @@ namespace Raccord.Data.EntityFramework.Migrations
                     b.HasOne("Raccord.Domain.Model.Users.ProjectRoles.ProjectRoleDefinition", "Role")
                         .WithMany("ProjectUsers")
                         .HasForeignKey("RoleID");
+
+                    b.HasOne("Raccord.Domain.Model.Breakdowns.Breakdown", "SelectedBreakdown")
+                        .WithMany("SelectedByUsers")
+                        .HasForeignKey("SelectedBreakdownID");
 
                     b.HasOne("Raccord.Domain.Model.Users.ApplicationUser", "User")
                         .WithMany("ProjectUsers")

@@ -4,7 +4,7 @@ import { DayNight } from '../../scene-properties/model/day-night.model';
 import { ScriptLocation } from '../../script-locations/model/script-location.model';
 import { LinkedImage } from '../../images/model/linked-image.model';
 import { LinkedCharacter } from '../../characters/model/linked-character.model';
-import { LinkedBreakdownItem } from '../../breakdowns/breakdown-items/model/linked-breakdown-item.model';
+import { LinkedBreakdownItem } from '../../breakdowns/children/breakdown-items/model/linked-breakdown-item.model';
 import { SlateSummary } from "../../shots/slates/model/slate-summary.model";
 import { ShootingDayInfo } from '../../shooting-days/model/shooting-day-info';
 

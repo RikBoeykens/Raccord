@@ -4,7 +4,7 @@ import { ImageHttpService } from '../../service/image-http.service';
 import { ImageSceneHttpService } from '../../../scenes/service/image-scene-http.service';
 import { ImageScriptLocationHttpService } from '../../../script-locations/service/image-script-location-http.service';
 import { ImageCharacterHttpService } from '../../../characters/service/image-character-http.service';
-import { ImageBreakdownItemHttpService } from '../../../breakdowns/breakdown-items/service/image-breakdown-item-http.service';
+import { ImageBreakdownItemHttpService } from '../../../breakdowns/children/breakdown-items/service/image-breakdown-item-http.service';
 import { ImageSlateHttpService } from '../../../shots/slates/service/image-slate-http.service';
 import { LoadingService } from '../../../../../loading/service/loading.service';
 import { DialogService } from '../../../../../shared/service/dialog.service';
@@ -15,10 +15,10 @@ import { ProjectSummary } from '../../../../model/project-summary.model';
 import { LinkedScene } from '../../../scenes/model/linked-scene.model';
 import { LinkedScriptLocation } from '../../../script-locations/model/linked-script-location.model';
 import { LinkedCharacter } from '../../../characters/model/linked-character.model';
-import { LinkedBreakdownItem } from '../../../breakdowns/breakdown-items/model/linked-breakdown-item.model';
 import { EntityType } from '../../../../../shared/enums/entity-type.enum';
 import { SelectedEntity } from '../../../../../shared/model/selected-entity.model';
 import { LinkedSlate } from "../../../shots/slates/model/linked-slate.model";
+import { LinkedBreakdownItem } from '../../../breakdowns/children/breakdown-items/model/linked-breakdown-item.model';
 
 @Component({
     templateUrl: 'image-landing.component.html',

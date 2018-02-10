@@ -5,8 +5,8 @@ import { Character } from "../../../characters/model/character.model";
 import { IntExt } from "../../../scene-properties/model/int-ext.model";
 import { DayNight } from "../../../scene-properties/model/day-night.model";
 import { ScriptLocation } from "../../../script-locations/model/script-location.model";
-import { BreakdownTypeSummary } from "../../../breakdowns/breakdown-types/model/breakdown-type-summary.model";
-import { BreakdownItem } from "../../../breakdowns/breakdown-items/model/breakdown-item.model";
+import { BreakdownTypeSummary } from "../../../breakdowns/children/breakdown-types/model/breakdown-type-summary.model";
+import { BreakdownItem } from "../../../breakdowns/children/breakdown-items/model/breakdown-item.model";
 import { Location } from "../../../locations/locations/model/location.model";
 
 @Component({

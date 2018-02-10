@@ -1,0 +1,18 @@
+<md-card>      
+  <a routerLink="/" class="breadcrumb">Dashboard</a>
+  <a routerLink="/projects" class="breadcrumb">Projects</a>
+  <a routerLink="/projects/{{project.id}}" class="breadcrumb">{{project.title}}</a>
+  <span class="breadcrumb">Breakdowns</span>
+</md-card>
+<md-card>
+  <span *ngIf="!breakdowns.length">No breakdowns set up</span>
+  <md-list *ngIf="breakdowns.length">
+      <md-list-item 
+         *ngFor="let breakdown of breakdowns">
+         <a [routerLink]="[breakdown.id]">{{breakdown.name}}</a>
+         <a md-button routerLink="/projects/{{project.id}}/breakdowns/{{breakdown.id}}/settings" *ngIf="userCreated(breakdown)"><md-icon>settings</md-icon></a>
+         <button md-button (click)="removeBreakdown(breakdown)" *ngIf="userCreated(breakdown)"><md-icon>delete</md-icon></button>
+      </md-list-item>
+  </md-list>
+</md-card>
+<button md-fab (click)="addBreakdown()"><md-icon>add</md-icon></button>

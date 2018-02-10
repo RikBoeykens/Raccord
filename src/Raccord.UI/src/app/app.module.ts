@@ -86,18 +86,18 @@ import {
   CharacterScheduleComponent,
   SearchCharacterComponent,
   CharacterSummaryComponent,
-  SearchCharactersCollectionComponent
-} from './projects';
-import { BreakdownLandingComponent } from './projects';
-import { BreakdownTypeSettingsComponent } from './projects';
-import { EditBreakdownTypeComponent } from './projects';
-import { BreakdownTypeLandingComponent } from './projects';
-import { BreakdownItemLandingComponent } from './projects';
-import { EditBreakdownItemComponent } from './projects';
-import { SearchBreakdownItemComponent } from './projects';
-import { BreakdownItemImagesComponent } from './projects';
-import { BreakdownItemScenesComponent } from './projects';
-import {
+  SearchCharactersCollectionComponent,
+  BreakdownsListComponent,
+  BreakdownLandingComponent,
+  BreakdownSettingsComponent,
+  EditBreakdownComponent,
+  EditBreakdownTypeComponent,
+  BreakdownTypeLandingComponent,
+  BreakdownItemLandingComponent,
+  EditBreakdownItemComponent,
+  SearchBreakdownItemComponent,
+  BreakdownItemImagesComponent,
+  BreakdownItemScenesComponent,
   SearchBreakdownCollectionComponent,
   EditScheduleComponent,
   ScheduleLandingComponent,
@@ -232,8 +232,10 @@ const COMPONENTS = [
   SearchCharacterComponent,
   CharacterSummaryComponent,
   SearchCharactersCollectionComponent,
+  BreakdownsListComponent,
   BreakdownLandingComponent,
-  BreakdownTypeSettingsComponent,
+  BreakdownSettingsComponent,
+  EditBreakdownComponent,
   EditBreakdownTypeComponent,
   BreakdownTypeLandingComponent,
   BreakdownItemLandingComponent,
@@ -348,14 +350,20 @@ import { CharacterHttpService } from './projects';
 import { ImageCharacterHttpService } from './projects';
 import { CharacterResolve } from './projects';
 import { CharactersResolve } from './projects';
-import { BreakdownTypeHttpService } from './projects';
-import { BreakdownTypeResolve } from './projects';
-import { BreakdownTypesResolve } from './projects';
-import { BreakdownItemHttpService } from './projects';
-import { ImageBreakdownItemHttpService } from './projects';
-import { BreakdownItemSceneHttpService } from './projects';
-import { BreakdownItemResolve } from './projects';
-import { BreakdownItemsResolve } from './projects';
+import {
+  BreakdownHttpService,
+  BreakdownResolve,
+  BreakdownsResolve,
+  BreakdownSummaryResolve,
+  BreakdownTypeHttpService,
+  BreakdownTypeResolve,
+  BreakdownTypesResolve,
+  BreakdownItemHttpService,
+  ImageBreakdownItemHttpService,
+  BreakdownItemSceneHttpService,
+  BreakdownItemResolve,
+  BreakdownItemsResolve
+} from './projects';
 import { ScheduleDayHttpService } from './projects';
 import { ScheduleDayResolve } from './projects';
 import { ScheduleDaysResolve } from './projects';
@@ -484,6 +492,10 @@ const APP_PROVIDERS = [
   ImageCharacterHttpService,
   CharacterResolve,
   CharactersResolve,
+  BreakdownHttpService,
+  BreakdownsResolve,
+  BreakdownResolve,
+  BreakdownSummaryResolve,
   BreakdownTypeHttpService,
   BreakdownTypeResolve,
   BreakdownTypesResolve,

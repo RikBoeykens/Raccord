@@ -8,9 +8,9 @@ export class Comment extends BaseComment{
                         id: number,
                         text: string,
                         user: UserProfileSummary
-                    }){
+                    }) {
         super(obj);
-        if(obj){
+        if (obj) {
             this.user = obj.user;
         }
     }

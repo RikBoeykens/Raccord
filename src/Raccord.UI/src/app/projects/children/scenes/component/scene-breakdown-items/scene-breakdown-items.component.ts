@@ -1,19 +1,23 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { LinkedBreakdownItem } from '../../../breakdowns/breakdown-items/model/linked-breakdown-item.model';
-import { BreakdownItem } from '../../../breakdowns/breakdown-items/model/breakdown-item.model';
-import { BreakdownType } from '../../../breakdowns/breakdown-types/model/breakdown-type.model';
 import { BreakdownItemSceneHttpService } from '../../service/breakdown-item-scene-http.service';
-import { BreakdownItemHttpService } from '../../../breakdowns/breakdown-items/service/breakdown-item-http.service';
 import { LoadingService } from '../../../../../loading/service/loading.service';
 import { DialogService } from '../../../../../shared/service/dialog.service';
 import { SelectedEntity } from '../../../../../shared/model/selected-entity.model';
 import { EntityType } from '../../../../../shared/enums/entity-type.enum';
+import { BreakdownItemHttpService } from
+    '../../../breakdowns/children/breakdown-items/service/breakdown-item-http.service';
+import { LinkedBreakdownItem } from
+    '../../../breakdowns/children/breakdown-items/model/linked-breakdown-item.model';
+import { BreakdownType } from
+    '../../../breakdowns/children/breakdown-types/model/breakdown-type.model';
+import { BreakdownItem } from
+    '../../../breakdowns/children/breakdown-items/model/breakdown-item.model';
 
 @Component({
     selector: 'scene-breakdown-items',
     templateUrl: 'scene-breakdown-items.component.html'
 })
-export class SceneBreakdownItemsComponent implements OnInit{
+export class SceneBreakdownItemsComponent implements OnInit {
 
     @Input() sceneId: number;
     @Input() projectId: number;
@@ -50,7 +54,6 @@ export class SceneBreakdownItemsComponent implements OnInit{
 
     resetNewBreakdownItem(){
         this.viewNewBreakdownItem = new BreakdownItem();
-        this.viewNewBreakdownItem.type = new BreakdownType();
         this.newBreakdownItem = null;
     }
 
@@ -62,7 +65,7 @@ export class SceneBreakdownItemsComponent implements OnInit{
             // first create breakdown item, then link it
             let loadingId = this._loadingService.startLoading();
 
-            this.viewNewBreakdownItem.type.id = this.selectedTypeId;
+            this.viewNewBreakdownItem.breakdownTypeID = this.selectedTypeId;
             this.newBreakdownItem = this.viewNewBreakdownItem;
 
             this._breakdownItemHttpService.post(this.newBreakdownItem).then(data=>{

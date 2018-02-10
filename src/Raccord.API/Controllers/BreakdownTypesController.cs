@@ -25,8 +25,8 @@ namespace Raccord.API.Controllers
             _breakdownTypeService = breakdownTypeService;
         }
 
-        // GET: api/breakdowntypes/1/project
-        [HttpGet("{id}/project")]
+        // GET: api/breakdowntypes/1/breakdown
+        [HttpGet("{id}/breakdown")]
         public IEnumerable<BreakdownTypeSummaryViewModel> GetAll(long id)
         {
             var dtos = _breakdownTypeService.GetAllForParent(id);
