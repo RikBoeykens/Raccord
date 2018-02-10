@@ -9,3 +9,5 @@ export { BreakdownsListComponent } from './component/breakdowns-list/breakdowns-
 export { BreakdownSettingsComponent } from
   './component/breakdown-settings/breakdown-settings.component';
 export { EditBreakdownComponent } from './component/edit-breakdown/edit-breakdown.component';
+export { EditBreakdownTypeDialogComponent } from
+  './children/breakdown-types/component/edit-breakdown-type-dialog/edit-breakdown-type-dialog.component';

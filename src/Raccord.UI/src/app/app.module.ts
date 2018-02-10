@@ -91,7 +91,7 @@ import {
   BreakdownLandingComponent,
   BreakdownSettingsComponent,
   EditBreakdownComponent,
-  EditBreakdownTypeComponent,
+  EditBreakdownTypeDialogComponent,
   BreakdownTypeLandingComponent,
   BreakdownItemLandingComponent,
   EditBreakdownItemComponent,
@@ -236,7 +236,6 @@ const COMPONENTS = [
   BreakdownLandingComponent,
   BreakdownSettingsComponent,
   EditBreakdownComponent,
-  EditBreakdownTypeComponent,
   BreakdownTypeLandingComponent,
   BreakdownItemLandingComponent,
   EditBreakdownItemComponent,
@@ -310,7 +309,8 @@ const ENTRY_COMPONENTS = [
   EditShootingDaySceneDialog,
   EditCrewMemberDialog,
   EditUserProfileDialog,
-  AdminEditCrewMemberDialog
+  AdminEditCrewMemberDialog,
+  EditBreakdownTypeDialogComponent
 ];
 
 // Services

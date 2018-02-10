@@ -100,7 +100,6 @@ export { CharacterResolve } from './children/characters/service/character-resolv
 export { CharactersResolve } from './children/characters/service/characters-resolve.service';
 
 export { BreakdownLandingComponent } from './children/breakdowns/component/breakdown-landing/breakdown-landing.component';
-export { EditBreakdownTypeComponent } from './children/breakdowns/children/breakdown-types/component/edit-breakdown-type/edit-breakdown-type.component';
 export { BreakdownTypeLandingComponent } from './children/breakdowns/children/breakdown-types/component/breakdown-type-landing/breakdown-type-landing.component';
 
 export { BreakdownItemLandingComponent } from './children/breakdowns/children/breakdown-items/component/breakdown-item-landing/breakdown-item-landing.component';
@@ -122,6 +121,7 @@ export {
     SearchBreakdownCollectionComponent,
     BreakdownsListComponent,
     EditBreakdownComponent,
+    EditBreakdownTypeDialogComponent,
     BreakdownSettingsComponent,
     BreakdownHttpService,
     BreakdownResolve,

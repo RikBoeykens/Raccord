@@ -11,6 +11,8 @@ import { BreakdownTypeSummary } from '../../children/breakdown-types/model/break
 import { BreakdownHttpService } from '../../service/breakdown-http.service';
 import { LoadingWrapperService } from '../../../../../shared/service/loading-wrapper.service';
 import { Breakdown } from '../../model/breakdown.model';
+import { MdDialog } from '@angular/material';
+import { EditBreakdownTypeDialogComponent } from '../../children/breakdown-types/component/edit-breakdown-type-dialog/edit-breakdown-type-dialog.component';
 
 @Component({
     templateUrl: 'breakdown-settings.component.html',
@@ -22,12 +24,6 @@ export class BreakdownSettingsComponent implements OnInit {
     public project: ProjectSummary;
     public showAddType: boolean = true;
 
-    public viewNewBreakdownType: BreakdownType;
-    public newBreakdownType: BreakdownType;
-
-    public viewEditBreakdownType: BreakdownType;
-    public editBreakdownType: BreakdownType;
-
     constructor(
         private _breakdownHttpService: BreakdownHttpService,
         private _breakdownTypeHttpService: BreakdownTypeHttpService,
@@ -36,8 +32,8 @@ export class BreakdownSettingsComponent implements OnInit {
         private _dialogService: DialogService,
         private _route: ActivatedRoute,
         private _router: Router,
+        private _dialog: MdDialog
     ) {
-        this.viewNewBreakdownType = new BreakdownType();
     }
 
     public ngOnInit() {
@@ -48,7 +44,6 @@ export class BreakdownSettingsComponent implements OnInit {
             this.breakdown = data.breakdown;
             this.editBreakdown = new Breakdown(data.breakdown);
             this.project = data.project;
-            this.resetNewBreakdownType();
         });
     }
 
@@ -71,10 +66,10 @@ export class BreakdownSettingsComponent implements OnInit {
         );
     }
 
-    public resetNewBreakdownType() {
-        this.viewNewBreakdownType = new BreakdownType();
-        this.viewNewBreakdownType.breakdownID = this.breakdown.id;
-        this.newBreakdownType = null;
+    public getNewBreakdownType(): BreakdownType {
+        let newBreakdownType = new BreakdownType();
+        newBreakdownType.breakdownID = this.breakdown.id;
+        return newBreakdownType;
     }
 
     public getBreakdownTypes() {
@@ -86,21 +81,32 @@ export class BreakdownSettingsComponent implements OnInit {
         });
     }
 
-    public addBreakdownType(){
-        let loadingId = this._loadingService.startLoading();
-
-        this.newBreakdownType = this.viewNewBreakdownType;
-
-        this._breakdownTypeHttpService.post(this.newBreakdownType).then(data=>{
-            if(typeof(data) === 'string'){
-                this._dialogService.error(data);
-            }else{
-                this.getBreakdownTypes();
-                this.resetNewBreakdownType();
+    public showAddBreakdownType() {
+        let editBreakdownTypeDialog = this._dialog.open(EditBreakdownTypeDialogComponent, {
+            data: this.getNewBreakdownType()
+        });
+        editBreakdownTypeDialog.afterClosed().subscribe((breakdownType: BreakdownType) => {
+            if (breakdownType) {
+                this.postBreakdownType(breakdownType);
             }
-        }).catch()
-        .then(()=>
-            this._loadingService.endLoading(loadingId)
+        });
+    }
+
+    public showEditBreakdownType(breakdownType: BreakdownTypeSummary) {
+        let editBreakdownTypeDialog = this._dialog.open(EditBreakdownTypeDialogComponent, {
+            data: new BreakdownType(breakdownType)
+        });
+        editBreakdownTypeDialog.afterClosed().subscribe((updateBreakdownType: BreakdownType) => {
+            if (updateBreakdownType) {
+                this.postBreakdownType(updateBreakdownType);
+            }
+        });
+    }
+
+    public postBreakdownType(breakdownType: BreakdownType) {
+        this._loadingWrapperService.Load(
+            this._breakdownTypeHttpService.post(breakdownType),
+            () => this.getBreakdownTypes()
         );
     }
 
@@ -122,29 +128,4 @@ export class BreakdownSettingsComponent implements OnInit {
         }
 
     }
-
-    toggleEditBreakdownType(breakdownType: BreakdownTypeSummary){
-        this.viewEditBreakdownType = new BreakdownType(breakdownType);
-        this.showAddType = false;
-    }
-
-    updateBreakdownType(){
-        let loadingId = this._loadingService.startLoading();
-
-        this.editBreakdownType = this.viewEditBreakdownType;
-
-        this._breakdownTypeHttpService.post(this.editBreakdownType).then(data=>{
-            if(typeof(data)=='string'){
-                this._dialogService.error(data);
-            }else{
-                this.getBreakdownTypes();
-                this.resetNewBreakdownType();
-                this.showAddType = true;
-            }
-        }).catch()
-        .then(()=>
-            this._loadingService.endLoading(loadingId)
-        );
-    }
-
 }
