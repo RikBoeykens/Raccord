@@ -137,5 +137,26 @@ namespace Raccord.Application.Services.Breakdowns
       _breakdownRepository.Edit(breakdown);
       _breakdownRepository.Commit();
     }
+
+    // Updates a breakdown
+    public void SetDefaultProjectBreakdown(long projectID, long breakdownID)
+    {
+      var breakdowns = _breakdownRepository.GetAllForParent(projectID);
+
+      foreach(var bd in breakdowns)
+      {
+        bd.IsDefaultProjectBreakdown = false;
+        _breakdownRepository.Edit(bd);
+      }
+
+      _breakdownRepository.Commit();
+
+      var breakdown = _breakdownRepository.GetSingle(breakdownID);
+
+      breakdown.IsDefaultProjectBreakdown = true;
+
+      _breakdownRepository.Edit(breakdown);
+      _breakdownRepository.Commit();
+    }
   }
 }

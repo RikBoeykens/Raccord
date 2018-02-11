@@ -60,4 +60,10 @@ export class BreakdownHttpService extends BaseProjectHttpService {
             publish
         }), uri);
     }
+
+    public setDefault(authProjectId: number, id: Number): Promise<any> {
+        let uri = `${this.getUri(authProjectId)}/${id}/default`;
+
+        return this.doPost(null, uri);
+    }
 }

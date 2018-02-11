@@ -13,6 +13,13 @@ namespace Raccord.Data.EntityFramework.Repositories.Breakdowns
         }
 
 
+        public IEnumerable<Breakdown> GetAllForParent(long projectID)
+        {
+            var query = GetIncludedSummary();
+
+            return query.Where(b=> b.ProjectID == projectID);
+        }
+
         public IEnumerable<Breakdown> GetAllForParent(long projectID, string userID)
         {
             var query = GetIncludedSummary();

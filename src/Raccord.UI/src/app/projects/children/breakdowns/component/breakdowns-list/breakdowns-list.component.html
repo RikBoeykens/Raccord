@@ -9,7 +9,14 @@
   <md-list *ngIf="breakdowns.length">
       <md-list-item 
          *ngFor="let breakdown of breakdowns">
-        <a [routerLink]="[breakdown.id]">{{breakdown.name}}</a>
+        <a [routerLink]="[breakdown.id]" [style.font-weight]="breakdown.selected ? 'bold' : ''">{{breakdown.name}}</a>
+        <button 
+          md-icon-button
+          (click)="setDefault(breakdown)"
+          *ngIf="getCanEdit() && !breakdown.isDefault"
+          mdTooltip="set default">
+          <md-icon>flash_on</md-icon>
+        </button>
         <button 
           md-icon-button
           (click)="togglePublish(breakdown)"

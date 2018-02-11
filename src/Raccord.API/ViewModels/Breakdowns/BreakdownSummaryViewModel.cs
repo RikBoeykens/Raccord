@@ -13,6 +13,7 @@ namespace Raccord.API.ViewModels.Breakdowns
     public bool Selected { get; set; }
 
     public bool IsPublished { get; set; }
+    public bool IsDefault { get; set; }
 
     public UserProfileSummaryViewModel CreatedBy
     {

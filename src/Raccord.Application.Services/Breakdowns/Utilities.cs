@@ -39,7 +39,8 @@ namespace Raccord.Application.Services.Breakdowns
         CreatedBy = breakdown.User.TranslateSummary(),
         ProjectID = breakdown.ProjectID,
         Selected = breakdown.SelectedByUsers.Any(sbu=> sbu.UserID == userID),
-        IsPublished = breakdown.IsPublished
+        IsPublished = breakdown.IsPublished,
+        IsDefault = breakdown.IsDefaultProjectBreakdown
       };
     }
     public static BreakdownDto Translate(this Breakdown breakdown)

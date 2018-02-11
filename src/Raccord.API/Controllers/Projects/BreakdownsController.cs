@@ -128,7 +128,7 @@ namespace Raccord.API.Controllers.Projects
 
         // POST api/breakdowns/5/select
         [HttpPost("{breakdownId}/select")]
-        public JsonResult Publish(long authProjectId, long breakdownId)
+        public JsonResult Select(long authProjectId, long breakdownId)
         {
             var response = new JsonResponse();
 
@@ -180,6 +180,33 @@ namespace Raccord.API.Controllers.Projects
                 {
                     ok = false,
                     message = "Something went wrong while attempting to publish breakdown.",
+                };
+            }
+
+            return new JsonResult(response);
+        }
+
+        // POST api/breakdowns/5/default
+        [HttpPost("{breakdownId}/default")]
+        public JsonResult Default(long authProjectId, long breakdownId)
+        {
+            var response = new JsonResponse();
+
+            try
+            {
+                _breakdownService.SetDefaultProjectBreakdown(authProjectId, breakdownId);
+
+                response = new JsonResponse
+                {
+                    ok = true,
+                };
+            }
+            catch (Exception)
+            {
+                response = new JsonResponse
+                {
+                    ok = false,
+                    message = "Something went wrong while attempting to set breakdown as default.",
                 };
             }
 

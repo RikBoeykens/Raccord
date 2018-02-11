@@ -71,6 +71,13 @@ export class BreakdownsListComponent implements OnInit {
     );
   }
 
+  public setDefault(breakdown: BreakdownSummary) {
+    this._loadingWrapperService.Load(
+      this._breakdownService.setDefault(this.project.id, breakdown.id),
+      () => this.getBreakdowns()
+    );
+  }
+
   public userCreated(breakdown: BreakdownSummary) {
     return breakdown.createdBy.id === AccountHelpers.getUserId();
   }

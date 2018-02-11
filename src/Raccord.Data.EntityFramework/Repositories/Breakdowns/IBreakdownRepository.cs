@@ -6,6 +6,7 @@ namespace Raccord.Data.EntityFramework.Repositories.Breakdowns
     // Interface defining a repository for Breakdown
     public interface IBreakdownRepository : IBaseRepository<Breakdown>
     {
+        IEnumerable<Breakdown> GetAllForParent(long projectID);
         IEnumerable<Breakdown> GetAllForParent(long projectID, string userID);
         Breakdown GetFull(long ID);
         Breakdown GetSummary(long ID);
