@@ -152,5 +152,38 @@ namespace Raccord.API.Controllers.Projects
 
             return new JsonResult(response);
         }
+
+        // POST api/breakdowns/5/publish
+        [HttpPost("{breakdownId}/publish")]
+        public JsonResult Publish(long authProjectId, long breakdownId, [FromBody] PublishBreakdownViewModel vm)
+        {
+            var response = new JsonResponse();
+
+            try
+            {
+                _breakdownService.TogglePublishBreakdown(
+                    new PublishBreakdownDto
+                    {
+                        BreakdownID = breakdownId,
+                        Publish = vm.Publish
+                    }
+                );
+
+                response = new JsonResponse
+                {
+                    ok = true,
+                };
+            }
+            catch (Exception)
+            {
+                response = new JsonResponse
+                {
+                    ok = false,
+                    message = "Something went wrong while attempting to publish breakdown.",
+                };
+            }
+
+            return new JsonResult(response);
+        }
     }
 }

@@ -12,6 +12,8 @@ namespace Raccord.Application.Core.Services.Breakdowns
     /// <returns></returns>
     public bool Selected { get; set; }
 
+    public bool IsPublished { get; set; }
+
     public UserProfileSummaryDto CreatedBy
     {
       get

@@ -126,5 +126,16 @@ namespace Raccord.Application.Services.Breakdowns
         _projectUserRepository.Commit();
       }
     }
+
+    // Updates a breakdown
+    public void TogglePublishBreakdown(PublishBreakdownDto dto)
+    {
+      var breakdown = _breakdownRepository.GetSingle(dto.BreakdownID);
+
+      breakdown.IsPublished = dto.Publish;
+
+      _breakdownRepository.Edit(breakdown);
+      _breakdownRepository.Commit();
+    }
   }
 }

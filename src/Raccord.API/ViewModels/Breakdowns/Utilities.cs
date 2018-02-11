@@ -37,7 +37,8 @@ namespace Raccord.API.ViewModels.Breakdowns
         Description = dto.Description,
         ProjectID = dto.ProjectID,
         CreatedBy = dto.CreatedBy.Translate(),
-        Selected = dto.Selected
+        Selected = dto.Selected,
+        IsPublished = dto.IsPublished
       };
     }
     public static BreakdownViewModel Translate(this BreakdownDto dto)

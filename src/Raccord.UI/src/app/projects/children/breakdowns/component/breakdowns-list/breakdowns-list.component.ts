@@ -64,6 +64,13 @@ export class BreakdownsListComponent implements OnInit {
     );
   }
 
+  public togglePublish(breakdown: BreakdownSummary) {
+    this._loadingWrapperService.Load(
+      this._breakdownService.togglePublish(this.project.id, breakdown.id, !breakdown.isPublished),
+      () => this.getBreakdowns()
+    );
+  }
+
   public userCreated(breakdown: BreakdownSummary) {
     return breakdown.createdBy.id === AccountHelpers.getUserId();
   }
@@ -80,6 +87,6 @@ export class BreakdownsListComponent implements OnInit {
       this._breakdownService.getAll(this.project.id),
       (data) => this.breakdowns = data
     );
-    this._breakdownService.getAll(this.project.id).then((data)=> this.breakdowns = data);
+    this._breakdownService.getAll(this.project.id).then((data) => this.breakdowns = data);
   }
 }

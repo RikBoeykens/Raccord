@@ -9,10 +9,36 @@
   <md-list *ngIf="breakdowns.length">
       <md-list-item 
          *ngFor="let breakdown of breakdowns">
-         <a [routerLink]="[breakdown.id]">{{breakdown.name}}</a>
-         <button md-icon-button (click)="select(breakdown)" *ngIf="!breakdown.selected"><md-icon>favorite</md-icon></button>
-         <a md-icon-button routerLink="/projects/{{project.id}}/breakdowns/{{breakdown.id}}/settings" *ngIf="userCreated(breakdown)"><md-icon>settings</md-icon></a>
-         <button md-icon-button (click)="removeBreakdown(breakdown)" *ngIf="userCreated(breakdown)"><md-icon>delete</md-icon></button>
+        <a [routerLink]="[breakdown.id]">{{breakdown.name}}</a>
+        <button 
+          md-icon-button
+          (click)="togglePublish(breakdown)"
+          *ngIf="userCreated(breakdown)"
+          mdTooltip="{{breakdown.isPublished ? 'unpublish' : 'publish'}}">
+          <md-icon *ngIf="breakdown.isPublished">public</md-icon>
+          <md-icon *ngIf="!breakdown.isPublished">publish</md-icon>
+        </button>
+        <button
+          md-icon-button
+          (click)="select(breakdown)"
+          *ngIf="!breakdown.selected"
+          mdTooltip="select">
+          <md-icon>favorite</md-icon>
+        </button>
+        <a 
+          md-icon-button
+          routerLink="/projects/{{project.id}}/breakdowns/{{breakdown.id}}/settings"
+          *ngIf="userCreated(breakdown)"
+          mdTooltip="settings">
+          <md-icon>settings</md-icon>
+        </a>
+        <button
+          md-icon-button
+          (click)="removeBreakdown(breakdown)"
+          *ngIf="userCreated(breakdown)"
+          mdTooltip="delete">
+          <md-icon>delete</md-icon>
+        </button>
       </md-list-item>
   </md-list>
 </md-card>

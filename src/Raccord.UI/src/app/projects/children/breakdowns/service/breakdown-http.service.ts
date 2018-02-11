@@ -5,6 +5,7 @@ import { BaseProjectHttpService } from '../../../shared/service/base-project-htt
 import { BreakdownSummary } from '../model/breakdown-summary.model';
 import { FullBreakdown } from '../model/full-breakdown.model';
 import { Breakdown } from '../model/breakdown.model';
+import { PublishBreakdown } from '../model/publish-breakdown.model';
 
 @Injectable()
 export class BreakdownHttpService extends BaseProjectHttpService {
@@ -50,5 +51,13 @@ export class BreakdownHttpService extends BaseProjectHttpService {
         let uri = `${this.getUri(authProjectId)}/${id}/select`;
 
         return this.doPost(null, uri);
+    }
+
+    public togglePublish(authProjectId: number, id: Number, publish: boolean): Promise<any> {
+        let uri = `${this.getUri(authProjectId)}/${id}/publish`;
+
+        return this.doPost(new PublishBreakdown({
+            publish
+        }), uri);
     }
 }
