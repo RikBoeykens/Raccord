@@ -6,6 +6,7 @@ using Raccord.Application.Core.Services.Breakdowns;
 using Raccord.Data.EntityFramework.Repositories.Breakdowns;
 using Raccord.Data.EntityFramework.Repositories.Breakdowns.BreakdownTypes;
 using Raccord.Domain.Model.Breakdowns.BreakdownTypes;
+using Raccord.Data.EntityFramework.Repositories.Users.Projects;
 
 namespace Raccord.Application.Services.Breakdowns
 {
@@ -14,20 +15,25 @@ namespace Raccord.Application.Services.Breakdowns
   {
     private readonly IBreakdownRepository _breakdownRepository;
     private readonly IBreakdownTypeDefinitionRepository _breakdownTypeDefinitionRepository;
+    private readonly IProjectUserRepository _projectUserRepository;
 
     // Initialises a new BreakdownService
     public BreakdownService(
       IBreakdownRepository breakdownRepository,
-      IBreakdownTypeDefinitionRepository breakdownTypeDefinitionRepository
+      IBreakdownTypeDefinitionRepository breakdownTypeDefinitionRepository,
+      IProjectUserRepository projectUserRepository
       )
     {
       if(breakdownRepository == null)
         throw new ArgumentNullException(nameof(breakdownRepository));
       if(breakdownTypeDefinitionRepository == null)
         throw new ArgumentNullException(nameof(breakdownTypeDefinitionRepository));
+      if(projectUserRepository == null)
+        throw new ArgumentNullException(nameof(projectUserRepository));
       
       _breakdownRepository = breakdownRepository;
       _breakdownTypeDefinitionRepository = breakdownTypeDefinitionRepository;
+      _projectUserRepository = projectUserRepository;
     }
 
     // Gets all breakdowns for a project
@@ -35,7 +41,7 @@ namespace Raccord.Application.Services.Breakdowns
     {
       var breakdowns = _breakdownRepository.GetAllForParent(projectID, userID);
 
-      var dtos = breakdowns.Select(l => l.TranslateSummary());
+      var dtos = breakdowns.Select(l => l.TranslateSummary(userID));
 
       return dtos;
     }
@@ -106,6 +112,19 @@ namespace Raccord.Application.Services.Breakdowns
       _breakdownRepository.Delete(breakdown);
 
       _breakdownRepository.Commit();
+    }
+
+    public void SelectBreakdown(long projectID, string userID, long breakdownID)
+    {
+      var projectUser = _projectUserRepository.Get(projectID, userID);
+
+      if(projectUser != null)
+      {
+        projectUser.SelectedBreakdownID = breakdownID;
+
+        _projectUserRepository.Edit(projectUser);
+        _projectUserRepository.Commit();
+      }
     }
   }
 }

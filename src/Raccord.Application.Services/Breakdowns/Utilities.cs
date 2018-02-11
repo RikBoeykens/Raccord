@@ -24,7 +24,7 @@ namespace Raccord.Application.Services.Breakdowns
         Types = breakdown.Types.Select(t => t.TranslateSummary())
       };
     }
-    public static BreakdownSummaryDto TranslateSummary(this Breakdown breakdown)
+    public static BreakdownSummaryDto TranslateSummary(this Breakdown breakdown, string userID = null)
     {
       if(breakdown == null)
       {
@@ -37,7 +37,8 @@ namespace Raccord.Application.Services.Breakdowns
         Name = breakdown.Name,
         Description = breakdown.Description,
         CreatedBy = breakdown.User.TranslateSummary(),
-        ProjectID = breakdown.ProjectID
+        ProjectID = breakdown.ProjectID,
+        Selected = breakdown.SelectedByUsers.Any(sbu=> sbu.UserID == userID)
       };
     }
     public static BreakdownDto Translate(this Breakdown breakdown)

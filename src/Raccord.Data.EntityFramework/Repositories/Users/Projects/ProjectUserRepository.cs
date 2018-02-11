@@ -33,6 +33,13 @@ namespace Raccord.Data.EntityFramework.Repositories.Users.Projects
             return query.FirstOrDefault(cu=> cu.ID == ID);
         }
 
+        public ProjectUser Get(long projectID, string userID)
+        {
+            var query = GetIncluded();
+
+            return query.FirstOrDefault(pu => pu.ProjectID == projectID && pu.UserID == userID);
+        }
+
         public ProjectUser GetForPermissions(long projectID, string userID)
         {
             var query = GetIncludedPermissions();
@@ -52,6 +59,13 @@ namespace Raccord.Data.EntityFramework.Repositories.Users.Projects
                         .Include(pu=> pu.Role)
                         .ThenInclude(r=> r.PermissionRoles)
                         .ThenInclude(pr => pr.ProjectPermission);
+        }
+
+        private IQueryable<ProjectUser> GetIncluded()
+        {
+            IQueryable<ProjectUser> query = _context.Set<ProjectUser>();
+
+            return query;
         }
 
         private IQueryable<ProjectUser> GetIncludedUser()

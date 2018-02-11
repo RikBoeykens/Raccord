@@ -125,5 +125,32 @@ namespace Raccord.API.Controllers.Projects
 
             return new JsonResult(response);
         }
+
+        // POST api/breakdowns/5/select
+        [HttpPost("{breakdownId}/select")]
+        public JsonResult Publish(long authProjectId, long breakdownId)
+        {
+            var response = new JsonResponse();
+
+            try
+            {
+                _breakdownService.SelectBreakdown(authProjectId, GetUserId(), breakdownId);
+
+                response = new JsonResponse
+                {
+                    ok = true,
+                };
+            }
+            catch (Exception)
+            {
+                response = new JsonResponse
+                {
+                    ok = false,
+                    message = "Something went wrong while attempting to select breakdown.",
+                };
+            }
+
+            return new JsonResult(response);
+        }
     }
 }

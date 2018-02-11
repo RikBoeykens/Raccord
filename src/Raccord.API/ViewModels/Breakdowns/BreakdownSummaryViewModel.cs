@@ -6,6 +6,12 @@ namespace Raccord.API.ViewModels.Breakdowns
   {
     private UserProfileSummaryViewModel _createdBy;
 
+    /// <summary>
+    /// Indicates if the user has selected this breakdown
+    /// </summary>
+    /// <returns></returns>
+    public bool Selected { get; set; }
+
     public UserProfileSummaryViewModel CreatedBy
     {
       get

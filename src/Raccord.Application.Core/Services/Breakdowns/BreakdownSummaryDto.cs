@@ -6,6 +6,12 @@ namespace Raccord.Application.Core.Services.Breakdowns
   {
     private UserProfileSummaryDto _createdBy;
 
+    /// <summary>
+    /// Indicates if the user has selected this breakdown
+    /// </summary>
+    /// <returns></returns>
+    public bool Selected { get; set; }
+
     public UserProfileSummaryDto CreatedBy
     {
       get

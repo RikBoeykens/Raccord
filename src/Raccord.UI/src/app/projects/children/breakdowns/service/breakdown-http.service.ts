@@ -45,4 +45,10 @@ export class BreakdownHttpService extends BaseProjectHttpService {
 
         return this.doDelete(uri);
     }
+
+    public select(authProjectId: number, id: Number): Promise<any> {
+        let uri = `${this.getUri(authProjectId)}/${id}/select`;
+
+        return this.doPost(null, uri);
+    }
 }
