@@ -6,12 +6,14 @@ import { SelectedEntity } from '../../../../../shared/model/selected-entity.mode
 import { EntityType } from '../../../../../shared/enums/entity-type.enum';
 import { BreakdownItemHttpService } from
     '../../../breakdowns/children/breakdown-items/service/breakdown-item-http.service';
-import { LinkedBreakdownItem } from
-    '../../../breakdowns/children/breakdown-items/model/linked-breakdown-item.model';
 import { BreakdownType } from
     '../../../breakdowns/children/breakdown-types/model/breakdown-type.model';
 import { BreakdownItem } from
     '../../../breakdowns/children/breakdown-items/model/breakdown-item.model';
+import { LinkedBreakdown } from '../../../breakdowns/model/linked-breakdown.model';
+import { LinkedBreakdownItem } from
+    '../../../breakdowns/children/breakdown-items/model/linked-breakdown-item.model';
+import { AccountHelpers } from '../../../../../account/helpers/account.helper';
 
 @Component({
     selector: 'scene-breakdown-items',
@@ -19,98 +21,105 @@ import { BreakdownItem } from
 })
 export class SceneBreakdownItemsComponent implements OnInit {
 
-    @Input() sceneId: number;
-    @Input() projectId: number;
-    @Input() breakdownItems: LinkedBreakdownItem[];
-    @Input() breakdownTypes: BreakdownType[];
+    @Input() public sceneId: number;
+    @Input() public projectId: number;
+    @Input() public breakdown: LinkedBreakdown;
 
-    viewNewBreakdownItem: BreakdownItem;
-    newBreakdownItem: BreakdownItem;
-    selectedTypeId: number;
-
+    public viewNewBreakdownItem: BreakdownItem;
+    public newBreakdownItem: BreakdownItem;
+    public selectedTypeId: number;
 
     constructor(
         private _breakdownItemSceneHttpService: BreakdownItemSceneHttpService,
         private _breakdownItemHttpService: BreakdownItemHttpService,
         private _loadingService: LoadingService,
         private _dialogService: DialogService,
-    ){
+    ) {
         this.viewNewBreakdownItem = new BreakdownItem();
     }
 
-    ngOnInit(){
-        this.selectedTypeId = this.breakdownTypes[0].id;
+    public ngOnInit() {
         this.resetNewBreakdownItem();
     }
 
-    getBreakdownItems(){
+    public getBreakdownItems() {
         let loadingId = this._loadingService.startLoading();
 
-        this._breakdownItemSceneHttpService.getBreakdownItems(this.sceneId).then(data => {
-            this.breakdownItems = data;
+        this._breakdownItemSceneHttpService.getBreakdownItems(
+            this.sceneId,
+            this.breakdown.id
+        ).then((data) => {
+            this.breakdown.items = data;
             this._loadingService.endLoading(loadingId);
         });
     }
 
-    resetNewBreakdownItem(){
+    public resetNewBreakdownItem() {
         this.viewNewBreakdownItem = new BreakdownItem();
         this.newBreakdownItem = null;
     }
 
-    addLink(){
-        if(this.viewNewBreakdownItem.id!==0){
+    public addLink() {
+        if (this.viewNewBreakdownItem.id !== 0) {
             this.addBreakdownItemLink(this.viewNewBreakdownItem.id);
-        }
-        else{
+        } else {
             // first create breakdown item, then link it
             let loadingId = this._loadingService.startLoading();
 
             this.viewNewBreakdownItem.breakdownTypeID = this.selectedTypeId;
             this.newBreakdownItem = this.viewNewBreakdownItem;
 
-            this._breakdownItemHttpService.post(this.newBreakdownItem).then(data=>{
-                if(typeof(data)=='string'){
+            this._breakdownItemHttpService.post(this.newBreakdownItem).then((data) => {
+                if (typeof(data) === 'string') {
                     this._dialogService.error(data);
-                }else{
+                }else {
                     this.addBreakdownItemLink(data);
                 }
             }).catch()
-            .then(()=>
+            .then(() =>
                 this._loadingService.endLoading(loadingId)
             );
         }
     }
 
-    addBreakdownItemLink(breakdownItemId: number){
+    public addBreakdownItemLink(breakdownItemId: number) {
         let loadingId = this._loadingService.startLoading();
 
-        this._breakdownItemSceneHttpService.addLink(breakdownItemId, this.sceneId).then(data=>{
-            if(typeof(data)=='string'){
+        this._breakdownItemSceneHttpService.addLink(breakdownItemId, this.sceneId).then((data) => {
+            if (typeof(data) === 'string') {
                 this._dialogService.error(data);
-            }else{
+            }else {
                 this.getBreakdownItems();
                 this.resetNewBreakdownItem();
-                this._dialogService.success("Successfully added link between breakdown item and scene.");
+                this._dialogService.success(
+                    'Successfully added link between breakdown item and scene.'
+                );
             }
         }).catch()
-        .then(()=>
+        .then(() =>
             this._loadingService.endLoading(loadingId)
         );
     }
 
-    removeLink(breakdownItem: LinkedBreakdownItem){
+    public removeLink(breakdownItem: LinkedBreakdownItem) {
         let loadingId = this._loadingService.startLoading();
 
-        this._breakdownItemSceneHttpService.removeLink(breakdownItem.linkID).then(data=>{
-            if(typeof(data)=='string'){
+        this._breakdownItemSceneHttpService.removeLink(breakdownItem.linkID).then((data) => {
+            if (typeof(data) === 'string') {
                 this._dialogService.error(data);
-            }else{
+            }else {
                 this.getBreakdownItems();
-                this._dialogService.success("Successfully removed link between breakdown item and scene.");
+                this._dialogService.success(
+                    'Successfully removed link between breakdown item and scene.'
+                );
             }
         }).catch()
-        .then(()=>
+        .then(() =>
             this._loadingService.endLoading(loadingId)
         );
+    }
+
+    public getCanEdit() {
+        return this.breakdown.userID === AccountHelpers.getUserId();
     }
 }

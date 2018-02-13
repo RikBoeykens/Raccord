@@ -1,4 +1,5 @@
 using System.Linq;
+using Raccord.API.ViewModels.Breakdowns.BreakdownItems;
 using Raccord.API.ViewModels.Breakdowns.BreakdownTypes;
 using Raccord.API.ViewModels.Profile;
 using Raccord.Application.Core.Services.Breakdowns;
@@ -55,6 +56,24 @@ namespace Raccord.API.ViewModels.Breakdowns
         Name = dto.Name,
         Description = dto.Description,
         ProjectID = dto.ProjectID,
+      };
+    }
+    public static LinkedBreakdownViewModel Translate(this LinkedBreakdownDto dto)
+    {
+      if(dto==null)
+      {
+        return null;
+      }
+
+      return new LinkedBreakdownViewModel
+      {
+        ID = dto.ID,
+        Name = dto.Name,
+        Description = dto.Description,
+        ProjectID = dto.ProjectID,
+        UserID = dto.UserID,
+        Items = dto.Items.Select(i=> i.Translate()),
+        Types = dto.Types.Select(t=> t.Translate())
       };
     }
     public static BreakdownDto Translate(this BreakdownViewModel vm, string userID)

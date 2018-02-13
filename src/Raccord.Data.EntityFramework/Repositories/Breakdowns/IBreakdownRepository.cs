@@ -10,6 +10,7 @@ namespace Raccord.Data.EntityFramework.Repositories.Breakdowns
         IEnumerable<Breakdown> GetAllForParent(long projectID, string userID);
         Breakdown GetFull(long ID);
         Breakdown GetSummary(long ID);
+        Breakdown GetForProjectUser(long projectID, string userID);
         bool ProjectUserHasSelected(long projectID, string userID);
         Breakdown GetProjectUserSelected(long projectID, string userID);
         bool ProjectHasDefault(long projectID);

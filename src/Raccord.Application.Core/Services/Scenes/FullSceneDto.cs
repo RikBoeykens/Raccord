@@ -4,6 +4,7 @@ using Raccord.Application.Core.Services.Characters;
 using Raccord.Application.Core.Services.Breakdowns.BreakdownItems;
 using Raccord.Application.Core.Services.Shots.Slates;
 using Raccord.Application.Core.Services.ShootingDays;
+using Raccord.Application.Core.Services.Breakdowns;
 
 namespace Raccord.Application.Core.Services.Scenes
 {
@@ -12,7 +13,7 @@ namespace Raccord.Application.Core.Services.Scenes
     {
         private IEnumerable<LinkedImageDto> _images;
         private IEnumerable<LinkedCharacterDto> _characters;
-        private IEnumerable<LinkedBreakdownItemDto> _items;
+        private LinkedBreakdownDto _breakdownInfo;
         private IEnumerable<ShootingDayInfoDto> _shootingDays;
         private IEnumerable<SlateSummaryDto> _slates;
 
@@ -43,15 +44,15 @@ namespace Raccord.Application.Core.Services.Scenes
         }
 
         // Breakdown items linked to the scene
-        public IEnumerable<LinkedBreakdownItemDto> BreakdownItems
+        public LinkedBreakdownDto BreakdownInfo
         {
             get
             {
-                return _items ?? (_items = new List<LinkedBreakdownItemDto>());
+                return _breakdownInfo ?? (_breakdownInfo = new LinkedBreakdownDto());
             }
             set
             {
-                _items = value;
+                _breakdownInfo = value;
             }
         }
 

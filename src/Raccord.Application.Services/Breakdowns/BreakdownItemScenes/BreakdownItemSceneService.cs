@@ -26,9 +26,9 @@ namespace Raccord.Application.Services.Breakdowns.BreakdownItemScenes
         }
 
         // Gets all breakdown items for a scene
-        public IEnumerable<LinkedBreakdownItemDto> GetItems(long ID)
+        public IEnumerable<LinkedBreakdownItemDto> GetItems(long ID, long breakdownId)
         {
-            var itemScenes = _itemSceneRepository.GetAllForScene(ID);
+            var itemScenes = _itemSceneRepository.GetAllForScene(ID, breakdownId);
 
             var dtos = itemScenes.Select(i=> i.TranslateBreakdownItem());
 

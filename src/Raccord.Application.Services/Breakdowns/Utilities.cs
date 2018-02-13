@@ -1,5 +1,7 @@
+using System.Collections.Generic;
 using System.Linq;
 using Raccord.Application.Core.Services.Breakdowns;
+using Raccord.Application.Core.Services.Breakdowns.BreakdownItems;
 using Raccord.Application.Services.Breakdowns.BreakdownTypes;
 using Raccord.Application.Services.Profile;
 using Raccord.Domain.Model.Breakdowns;
@@ -55,7 +57,25 @@ namespace Raccord.Application.Services.Breakdowns
         ID = breakdown.ID,
         Name = breakdown.Name,
         Description = breakdown.Description,
-        ProjectID = breakdown.ProjectID
+        ProjectID = breakdown.ProjectID,
+      };
+    }
+    public static LinkedBreakdownDto TranslateLinked(this Breakdown breakdown, IEnumerable<LinkedBreakdownItemDto> items)
+    {
+      if(breakdown == null)
+      {
+        return null;
+      }
+
+      return new LinkedBreakdownDto
+      {
+        ID = breakdown.ID,
+        Name = breakdown.Name,
+        Description = breakdown.Description,
+        ProjectID = breakdown.ProjectID,
+        UserID = breakdown.UserID,
+        Items = items,
+        Types = breakdown.Types.Select(t=> t.Translate())
       };
     }
   }

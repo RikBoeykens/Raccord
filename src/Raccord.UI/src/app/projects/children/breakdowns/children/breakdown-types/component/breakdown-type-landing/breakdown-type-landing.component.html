@@ -1,17 +1,15 @@
-<div class="row">      
-    <div class="col s12">
-        <a routerLink="/" class="breadcrumb">Dashboard</a>
-        <a routerLink="/projects" class="breadcrumb">Projects</a>
-        <a routerLink="/projects/{{project.id}}" class="breadcrumb">{{project.title}}</a>
-        <a routerLink="/projects/{{project.id}}/breakdowns" class="breadcrumb">Breakdown</a>
-        <a routerLink="/projects/{{project.id}}/breakdowns/{{breakdownType.id}}" class="breadcrumb">{{breakdownType.breakdown.name}}</a>
-        <span class="breadcrumb">{{breakdownType.name}}</span>
-    </div>
-</div>
-<div class="row" *ngIf="userCanEdit()">
+<md-card>
+    <a routerLink="/" class="breadcrumb">Dashboard</a>
+    <a routerLink="/projects" class="breadcrumb">Projects</a>
+    <a routerLink="/projects/{{project.id}}" class="breadcrumb">{{project.title}}</a>
+    <a routerLink="/projects/{{project.id}}/breakdowns" class="breadcrumb">Breakdown</a>
+    <a routerLink="/projects/{{project.id}}/breakdowns/{{breakdownType.breakdown.id}}" class="breadcrumb">{{breakdownType.breakdown.name}}</a>
+    <span class="breadcrumb">{{breakdownType.name}}</span>
+</md-card>
+<md-card *ngIf="userCanEdit()">
     <edit-breakdown-item [breakdownItem]="viewNewBreakdownItem" (submitBreakdownItem)="addBreakdownItem()"></edit-breakdown-item>
-</div>
-<div class="row">
+</md-card>
+<md-card>
     <md-nav-list [dragula]='"breakdown-item-bag"' 
                  [dragulaModel]='breakdownItems'>
         <a md-list-item routerLink="/projects/{{project.id}}/breakdowns/{{breakdownType.breakdown.id}}/items/{{breakdownItemWrapper.breakdownItem.id}}" 
@@ -29,7 +27,7 @@
             </span>
         </a>
     </md-nav-list>
-</div>
+</md-card>
 <div class="delete-breakdown-item drop-container drop-delete-container" 
      [dragula]='"breakdown-item-bag"'
      *ngIf="draggingToDelete" 

@@ -46,6 +46,15 @@ namespace Raccord.Data.EntityFramework.Repositories.Breakdowns
             return query.FirstOrDefault(l => l.ID == ID);
         }
 
+        public Breakdown GetForProjectUser(long projectID, string userID)
+        {
+            if(ProjectUserHasSelected(projectID, userID))
+            {
+                return GetProjectUserSelected(projectID, userID);
+            }
+            return GetDefaultProject(projectID);
+        }
+
         public bool ProjectUserHasSelected(long projectID, string userID)
         {
             var query = GetIncludedProjectUser();

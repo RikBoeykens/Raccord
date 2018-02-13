@@ -92,8 +92,8 @@ namespace Raccord.Application.Services.Breakdowns.BreakdownItems
             var dto = new SearchResultDto
             {
                 ID = breakdownItem.ID,
-                RouteIDs = new long[]{breakdownItem.BreakdownType.Breakdown.ProjectID, breakdownItem.BreakdownTypeID, breakdownItem.ID},
-                DisplayName = $"{breakdownItem.Name} ({breakdownItem.BreakdownType.Name})",
+                RouteIDs = new long[]{breakdownItem.BreakdownType.Breakdown.ProjectID, breakdownItem.BreakdownID, breakdownItem.ID},
+                DisplayName = $"{breakdownItem.Name} ({breakdownItem.Breakdown.Name} - {breakdownItem.BreakdownType.Name})",
                 Info = $"Project: {breakdownItem.BreakdownType.Breakdown.Project.Title}",
                 Type = EntityType.BreakdownItem,
             };

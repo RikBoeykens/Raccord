@@ -29,7 +29,7 @@ export class SearchResultComponent {
         if(this.result.type==EntityType.character)
             this.router.navigate(['projects', this.result.routeIDs[0], 'characters', this.result.routeIDs[1]]);
         if(this.result.type==EntityType.breakdownItem)
-            this.router.navigate(['projects', this.result.routeIDs[0], 'breakdowns', 'breakdownItems', this.result.routeIDs[1]]);
+            this.router.navigate(['projects', this.result.routeIDs[0], 'breakdowns', this.result.routeIDs[1], 'breakdownItems', this.result.routeIDs[2]]);
         if(this.result.type==EntityType.location)
             this.router.navigate(['projects', this.result.routeIDs[0], 'locations', this.result.routeIDs[1]]);
         if(this.result.type==EntityType.slate)

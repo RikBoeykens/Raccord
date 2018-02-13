@@ -28,11 +28,11 @@ namespace Raccord.API.Controllers
             _breakdownItemSceneService = breakdownItemSceneService;
         }
 
-        // GET: api/breakdownitemscenes/1/items
-        [HttpGet("{id}/items")]
-        public IEnumerable<LinkedBreakdownItemViewModel> GetItems(long id)
+        // GET: api/breakdownitemscenes/1/items/5
+        [HttpGet("{id}/items/{breakdownId}")]
+        public IEnumerable<LinkedBreakdownItemViewModel> GetItems(long id, long breakdownId)
         {
-            var dtos = _breakdownItemSceneService.GetItems(id);
+            var dtos = _breakdownItemSceneService.GetItems(id, breakdownId);
 
             var vms = dtos.Select(p => p.Translate());
 

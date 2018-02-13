@@ -7,7 +7,7 @@ namespace Raccord.Application.Core.Services.Breakdowns.BreakdownItemScenes
     // Interface for breakdown item scene functionality
     public interface IBreakdownItemSceneService
     {
-        IEnumerable<LinkedBreakdownItemDto> GetItems(long ID);
+        IEnumerable<LinkedBreakdownItemDto> GetItems(long ID, long breakdownID);
         IEnumerable<LinkedSceneDto> GetScenes(long ID);
 
         // Links a breakdown item to a scene

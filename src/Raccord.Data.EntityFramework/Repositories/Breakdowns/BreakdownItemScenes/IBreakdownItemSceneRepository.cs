@@ -6,7 +6,7 @@ namespace Raccord.Data.EntityFramework.Repositories.Breakdowns.BreakdownItemScen
     // Interface defining a repository for character scenes
     public interface IBreakdownItemSceneRepository : IBaseRepository<BreakdownItemScene>
     {
-        IEnumerable<BreakdownItemScene> GetAllForScene(long sceneID);
+        IEnumerable<BreakdownItemScene> GetAllForScene(long sceneID, long breakdownID);
         IEnumerable<BreakdownItemScene> GetAllForBreakdownItem(long itemID);
     }
 }
