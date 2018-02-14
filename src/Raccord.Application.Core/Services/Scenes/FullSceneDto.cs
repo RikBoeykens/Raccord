@@ -13,7 +13,7 @@ namespace Raccord.Application.Core.Services.Scenes
     {
         private IEnumerable<LinkedImageDto> _images;
         private IEnumerable<LinkedCharacterDto> _characters;
-        private LinkedBreakdownDto _breakdownInfo;
+        private SceneBreakdownDto _breakdownInfo;
         private IEnumerable<ShootingDayInfoDto> _shootingDays;
         private IEnumerable<SlateSummaryDto> _slates;
 
@@ -44,11 +44,11 @@ namespace Raccord.Application.Core.Services.Scenes
         }
 
         // Breakdown items linked to the scene
-        public LinkedBreakdownDto BreakdownInfo
+        public SceneBreakdownDto BreakdownInfo
         {
             get
             {
-                return _breakdownInfo ?? (_breakdownInfo = new LinkedBreakdownDto());
+                return _breakdownInfo ?? (_breakdownInfo = new SceneBreakdownDto());
             }
             set
             {

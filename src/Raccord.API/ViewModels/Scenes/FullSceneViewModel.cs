@@ -14,7 +14,7 @@ namespace Raccord.API.ViewModels.Scenes
     {
         private IEnumerable<LinkedImageViewModel> _images;
         private IEnumerable<LinkedCharacterViewModel> _characters;
-        private LinkedBreakdownViewModel _breakdownInfo;
+        private SceneBreakdownViewModel _breakdownInfo;
         private IEnumerable<ShootingDayInfoViewModel> _shootingDays;
         private IEnumerable<SlateSummaryViewModel> _slates;
 
@@ -45,11 +45,11 @@ namespace Raccord.API.ViewModels.Scenes
         }
 
         // Breakdown items linked to the scene
-        public LinkedBreakdownViewModel BreakdownInfo
+        public SceneBreakdownViewModel BreakdownInfo
         {
             get
             {
-                return _breakdownInfo ?? (_breakdownInfo = new LinkedBreakdownViewModel());
+                return _breakdownInfo ?? (_breakdownInfo = new SceneBreakdownViewModel());
             }
             set
             {

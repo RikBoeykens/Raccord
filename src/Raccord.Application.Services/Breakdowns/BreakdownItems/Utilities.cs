@@ -67,15 +67,16 @@ namespace Raccord.Application.Services.Breakdowns.BreakdownItems
                 Name = imageBreakdownItem.BreakdownItem.Name,
                 Description = imageBreakdownItem.BreakdownItem.Description,
                 Type = imageBreakdownItem.BreakdownItem.BreakdownType.Translate(),
+                Breakdown = imageBreakdownItem.BreakdownItem.Breakdown.Translate(),
                 LinkID = imageBreakdownItem.ID
             };
 
             return dto;
         }
 
-        public static LinkedBreakdownItemDto TranslateBreakdownItem(this BreakdownItemScene breakdownItemScene)
+        public static SceneBreakdownItemDto TranslateBreakdownItem(this BreakdownItemScene breakdownItemScene)
         {
-            var dto = new LinkedBreakdownItemDto
+            var dto = new SceneBreakdownItemDto
             {
                 ID = breakdownItemScene.BreakdownItem.ID,
                 Name = breakdownItemScene.BreakdownItem.Name,

@@ -30,7 +30,7 @@ namespace Raccord.API.Controllers
 
         // GET: api/breakdownitemscenes/1/items/5
         [HttpGet("{id}/items/{breakdownId}")]
-        public IEnumerable<LinkedBreakdownItemViewModel> GetItems(long id, long breakdownId)
+        public IEnumerable<SceneBreakdownItemViewModel> GetItems(long id, long breakdownId)
         {
             var dtos = _breakdownItemSceneService.GetItems(id, breakdownId);
 

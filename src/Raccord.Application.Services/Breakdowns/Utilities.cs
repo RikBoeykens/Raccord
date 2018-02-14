@@ -61,14 +61,14 @@ namespace Raccord.Application.Services.Breakdowns
         ProjectID = breakdown.ProjectID,
       };
     }
-    public static LinkedBreakdownDto TranslateLinked(this Breakdown breakdown, IEnumerable<LinkedBreakdownItemDto> items)
+    public static SceneBreakdownDto TranslateScene(this Breakdown breakdown, IEnumerable<SceneBreakdownItemDto> items)
     {
       if(breakdown == null)
       {
         return null;
       }
 
-      return new LinkedBreakdownDto
+      return new SceneBreakdownDto
       {
         ID = breakdown.ID,
         Name = breakdown.Name,

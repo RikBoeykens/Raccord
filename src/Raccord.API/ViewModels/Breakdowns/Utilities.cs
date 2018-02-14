@@ -58,14 +58,14 @@ namespace Raccord.API.ViewModels.Breakdowns
         ProjectID = dto.ProjectID,
       };
     }
-    public static LinkedBreakdownViewModel Translate(this LinkedBreakdownDto dto)
+    public static SceneBreakdownViewModel Translate(this SceneBreakdownDto dto)
     {
       if(dto==null)
       {
         return null;
       }
 
-      return new LinkedBreakdownViewModel
+      return new SceneBreakdownViewModel
       {
         ID = dto.ID,
         Name = dto.Name,

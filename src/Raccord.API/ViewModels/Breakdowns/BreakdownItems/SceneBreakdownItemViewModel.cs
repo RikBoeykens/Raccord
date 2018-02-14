@@ -4,10 +4,9 @@ using Raccord.API.ViewModels.Images;
 namespace Raccord.API.ViewModels.Breakdowns.BreakdownItems
 {
     // ViewModel to represent a summary of a breakdown item
-    public class LinkedBreakdownItemViewModel : BaseBreakdownItemViewModel
+    public class SceneBreakdownItemViewModel : BaseBreakdownItemViewModel
     {
         private BreakdownTypeViewModel _type;
-        private BreakdownViewModel _breakdown;
         private ImageViewModel _primaryImage;
         
         // ID of the link
@@ -26,22 +25,6 @@ namespace Raccord.API.ViewModels.Breakdowns.BreakdownItems
             set
             {
                 _type = value;
-            }
-        }
-        
-        /// <summary>
-        /// Breakdown linked to the item
-        /// </summary>
-        /// <returns></returns>
-        public BreakdownViewModel Breakdown
-        {
-            get
-            {
-                return _breakdown ?? (_breakdown = new BreakdownViewModel());
-            }
-            set
-            {
-                _breakdown = value;
             }
         }
 

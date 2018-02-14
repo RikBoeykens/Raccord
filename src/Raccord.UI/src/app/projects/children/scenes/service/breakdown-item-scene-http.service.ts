@@ -5,11 +5,9 @@ import { AppSettings } from '../../../../app.settings';
 import { FullScene } from '../model/full-scene.model';
 import { SceneSummary } from '../model/scene-summary.model';
 import { Scene } from '../model/scene.model';
-import { LinkedBreakdownItem } from
-    '../../breakdowns/children/breakdown-items/model/linked-breakdown-item.model';
+import { SceneBreakdownItem } from
+    '../../breakdowns/children/breakdown-items/model/scene-breakdown-item.model';
 import { LinkedScene } from '..//model/linked-scene.model';
-import { JsonResponse } from '../../../../shared/model/json-response.model';
-import { SortOrder } from '../../../../shared/model/sort-order.model';
 
 @Injectable()
 export class BreakdownItemSceneHttpService extends BaseHttpService {
@@ -19,7 +17,7 @@ export class BreakdownItemSceneHttpService extends BaseHttpService {
         this._baseUri = `${AppSettings.API_ENDPOINT}/breakdownitemscenes`;
     }
 
-    public getBreakdownItems(sceneId: number, breakdownId: number): Promise<LinkedBreakdownItem[]> {
+    public getBreakdownItems(sceneId: number, breakdownId: number): Promise<SceneBreakdownItem[]> {
 
         let uri = `${this._baseUri}/${sceneId}/items/${breakdownId}`;
 

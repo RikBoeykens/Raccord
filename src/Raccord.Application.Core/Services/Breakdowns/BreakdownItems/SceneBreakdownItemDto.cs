@@ -4,10 +4,9 @@ using Raccord.Application.Core.Services.Images;
 namespace Raccord.Application.Core.Services.Breakdowns.BreakdownItems
 {
     // Dto to represent a breakdown item that's linked to something
-    public class LinkedBreakdownItemDto: BaseBreakdownItemDto
+    public class SceneBreakdownItemDto: BaseBreakdownItemDto
     {
         private BreakdownTypeDto _type;
-        private BreakdownDto _breakdown;
         private ImageDto _primaryImage;
         
         // ID of the link
@@ -26,22 +25,6 @@ namespace Raccord.Application.Core.Services.Breakdowns.BreakdownItems
             set
             {
                 _type = value;
-            }
-        }
-        
-        /// <summary>
-        /// Breakdown linked to the item
-        /// </summary>
-        /// <returns></returns>
-        public BreakdownDto Breakdown
-        {
-            get
-            {
-                return _breakdown ?? (_breakdown = new BreakdownDto());
-            }
-            set
-            {
-                _breakdown = value;
             }
         }
 

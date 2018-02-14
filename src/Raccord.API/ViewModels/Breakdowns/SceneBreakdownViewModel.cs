@@ -4,18 +4,18 @@ using Raccord.API.ViewModels.Breakdowns.BreakdownTypes;
 
 namespace Raccord.API.ViewModels.Breakdowns
 {
-  public class LinkedBreakdownViewModel : BaseBreakdownViewModel
+  public class SceneBreakdownViewModel : BaseBreakdownViewModel
   {
-    private IEnumerable<LinkedBreakdownItemViewModel> _items;
+    private IEnumerable<SceneBreakdownItemViewModel> _items;
     private IEnumerable<BreakdownTypeViewModel> _types;
 
     public string UserID { get; set; }
 
-    public IEnumerable<LinkedBreakdownItemViewModel> Items
+    public IEnumerable<SceneBreakdownItemViewModel> Items
     {
       get
       {
-        return _items ?? (_items = new List<LinkedBreakdownItemViewModel>());
+        return _items ?? (_items = new List<SceneBreakdownItemViewModel>());
       }
       set
       {

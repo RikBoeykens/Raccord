@@ -71,6 +71,20 @@ namespace Raccord.API.ViewModels.Breakdowns.BreakdownItems
                 Name = dto.Name,
                 Description = dto.Description,
                 Type = dto.Type.Translate(),
+                Breakdown = dto.Breakdown.Translate(),
+                LinkID = dto.LinkID,
+            };
+        }
+
+        // Translates a breakdown item dto to a breakdown item viewmodel
+        public static SceneBreakdownItemViewModel Translate(this SceneBreakdownItemDto dto)
+        {
+            return new SceneBreakdownItemViewModel
+            {
+                ID = dto.ID,
+                Name = dto.Name,
+                Description = dto.Description,
+                Type = dto.Type.Translate(),
                 LinkID = dto.LinkID
             };
         }

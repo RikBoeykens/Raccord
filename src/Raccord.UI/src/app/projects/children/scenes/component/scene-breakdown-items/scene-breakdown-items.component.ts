@@ -10,9 +10,9 @@ import { BreakdownType } from
     '../../../breakdowns/children/breakdown-types/model/breakdown-type.model';
 import { BreakdownItem } from
     '../../../breakdowns/children/breakdown-items/model/breakdown-item.model';
-import { LinkedBreakdown } from '../../../breakdowns/model/linked-breakdown.model';
-import { LinkedBreakdownItem } from
-    '../../../breakdowns/children/breakdown-items/model/linked-breakdown-item.model';
+import { SceneBreakdown } from '../../../breakdowns/model/scene-breakdown.model';
+import { SceneBreakdownItem } from
+    '../../../breakdowns/children/breakdown-items/model/scene-breakdown-item.model';
 import { AccountHelpers } from '../../../../../account/helpers/account.helper';
 
 @Component({
@@ -23,7 +23,7 @@ export class SceneBreakdownItemsComponent implements OnInit {
 
     @Input() public sceneId: number;
     @Input() public projectId: number;
-    @Input() public breakdown: LinkedBreakdown;
+    @Input() public breakdown: SceneBreakdown;
 
     public viewNewBreakdownItem: BreakdownItem;
     public newBreakdownItem: BreakdownItem;
@@ -101,7 +101,7 @@ export class SceneBreakdownItemsComponent implements OnInit {
         );
     }
 
-    public removeLink(breakdownItem: LinkedBreakdownItem) {
+    public removeLink(breakdownItem: SceneBreakdownItem) {
         let loadingId = this._loadingService.startLoading();
 
         this._breakdownItemSceneHttpService.removeLink(breakdownItem.linkID).then((data) => {

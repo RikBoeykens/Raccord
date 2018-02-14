@@ -28,10 +28,10 @@ namespace Raccord.Application.Services.Scenes
     {
         public static FullSceneDto TranslateFull(this Scene scene, IEnumerable<ShootingDay> shootingDays, Breakdown breakdown)
         {
-            LinkedBreakdownDto breakdownDto = null;
+            SceneBreakdownDto breakdownDto = null;
             if(breakdown!=null)
             {
-                breakdownDto = breakdown.TranslateLinked(
+                breakdownDto = breakdown.TranslateScene(
                     scene.BreakdownItemScenes
                         .Where(bis=> bis.BreakdownItem.BreakdownID == breakdown.ID).ToList()
                         .Select(bis=> bis.TranslateBreakdownItem())

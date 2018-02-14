@@ -6,12 +6,12 @@ import { LinkedImage } from '../../images/model/linked-image.model';
 import { LinkedCharacter } from '../../characters/model/linked-character.model';
 import { SlateSummary } from '../../shots/slates/model/slate-summary.model';
 import { ShootingDayInfo } from '../../shooting-days/model/shooting-day-info';
-import { LinkedBreakdown } from '../../breakdowns/model/linked-breakdown.model';
+import { SceneBreakdown } from '../../breakdowns/model/scene-breakdown.model';
 
 export class FullScene extends Scene {
     public images: LinkedImage[];
     public characters: LinkedCharacter[];
-    public breakdownInfo: LinkedBreakdown;
+    public breakdownInfo: SceneBreakdown;
     public shootingDays: ShootingDayInfo[];
     public slates: SlateSummary[];
 
@@ -27,7 +27,7 @@ export class FullScene extends Scene {
                         projectId: number,
                         images: LinkedImage[],
                         characters: LinkedCharacter[],
-                        breakdownInfo: LinkedBreakdown,
+                        breakdownInfo: SceneBreakdown,
                         shootingDays: ShootingDayInfo[],
                         slates: SlateSummary[]
                     }) {

@@ -1,10 +1,10 @@
 import { Breakdown } from './breakdown.model';
-import { LinkedBreakdownItem } from '../children/breakdown-items/model/linked-breakdown-item.model';
+import { SceneBreakdownItem } from '../children/breakdown-items/model/scene-breakdown-item.model';
 import { BreakdownType } from '../children/breakdown-types/model/breakdown-type.model';
 
-export class LinkedBreakdown extends Breakdown {
+export class SceneBreakdown extends Breakdown {
   public userID: string;
-  public items: LinkedBreakdownItem[];
+  public items: SceneBreakdownItem[];
   public types: BreakdownType[];
 
   constructor(obj?: {
@@ -13,7 +13,7 @@ export class LinkedBreakdown extends Breakdown {
                       description: string,
                       projectID: number,
                       userID: string,
-                      items: LinkedBreakdownItem[],
+                      items: SceneBreakdownItem[],
                       types: BreakdownType[]
                   }) {
       super();

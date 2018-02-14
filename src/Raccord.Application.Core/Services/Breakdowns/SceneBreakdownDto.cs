@@ -4,17 +4,17 @@ using Raccord.Application.Core.Services.Breakdowns.BreakdownTypes;
 
 namespace Raccord.Application.Core.Services.Breakdowns
 {
-  public class LinkedBreakdownDto : BaseBreakdownDto
+  public class SceneBreakdownDto : BaseBreakdownDto
   {
-    private IEnumerable<LinkedBreakdownItemDto> _items;
+    private IEnumerable<SceneBreakdownItemDto> _items;
     private IEnumerable<BreakdownTypeDto> _types;
     public string UserID { get; set; }
 
-    public IEnumerable<LinkedBreakdownItemDto> Items
+    public IEnumerable<SceneBreakdownItemDto> Items
     {
       get
       {
-        return _items ?? (_items = new List<LinkedBreakdownItemDto>());
+        return _items ?? (_items = new List<SceneBreakdownItemDto>());
       }
       set
       {
