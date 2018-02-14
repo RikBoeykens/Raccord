@@ -14,35 +14,35 @@ export class BreakdownTypeHttpService extends BaseHttpService {
         this._baseUri = `${AppSettings.API_ENDPOINT}/breakdowntypes`;
     }
 
-    getAllForBreakdown(breakdownId): Promise<BreakdownTypeSummary[]> {
+    public getAllForBreakdown(breakdownId): Promise<BreakdownTypeSummary[]> {
 
-        var uri = `${this._baseUri}/${breakdownId}/breakdown`;
+        let uri = `${this._baseUri}/${breakdownId}/breakdown`;
 
         return this.doGetArray(uri);
     }
 
-    get(id: number): Promise<FullBreakdownType>{
+    public get(id: number): Promise<FullBreakdownType> {
 
-        var uri = `${this._baseUri}/${id}`;
-
-        return this.doGet(uri);
-    }
-
-    getSummary(id: Number): Promise<BreakdownTypeSummary> {
-
-        var uri = `${this._baseUri}/${id}/summary`;
+        let uri = `${this._baseUri}/${id}`;
 
         return this.doGet(uri);
     }
 
-    post(breakdownType: BreakdownType): Promise<number> {
-        var uri = this._baseUri;
+    public getSummary(id: Number): Promise<BreakdownTypeSummary> {
+
+        let uri = `${this._baseUri}/${id}/summary`;
+
+        return this.doGet(uri);
+    }
+
+    public post(breakdownType: BreakdownType): Promise<number> {
+        let uri = this._baseUri;
 
         return this.doPost(breakdownType, uri);
     }
 
-    delete(id: Number): Promise<any> {
-        var uri = `${this._baseUri}/${id}`;
+    public delete(id: Number): Promise<any> {
+        let uri = `${this._baseUri}/${id}`;
 
         return this.doDelete(uri);
     }

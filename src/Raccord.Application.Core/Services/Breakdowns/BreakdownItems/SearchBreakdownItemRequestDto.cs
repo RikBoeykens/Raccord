@@ -10,6 +10,7 @@ namespace Raccord.Application.Core.Services.Breakdowns.BreakdownItems
     public string SearchText { get; set; }
 
     public long TypeID { get; set; }
+    public long BreakdownID { get; set; }
 
     public string UserID { get; set; }
 

@@ -8,29 +8,29 @@ import { DialogService } from '../../../../../../../shared/service/dialog.servic
     selector: 'search-breakdown-item',
     templateUrl: 'search-breakdown-item.component.html'
 })
-export class SearchBreakdownItemComponent{
-
+export class SearchBreakdownItemComponent {
 
     @Output() public setItem = new EventEmitter();
-    @Input() searchBreakdownItem: BreakdownItem;
+    @Input() public searchBreakdownItem: BreakdownItem;
     @Input() public excludedItems: BreakdownItem[] = [];
-    @Input() typeId: number;
-    searchResults: BreakdownItem[] = [];
+    @Input() public typeId: number;
+    @Input() public breakdownId: number;
+    public searchResults: BreakdownItem[] = [];
 
     constructor(
         private _breakdownItemHttpService: BreakdownItemHttpService,
         private _loadingService: LoadingService,
         private _dialogService: DialogService,
-    ){
+    ) {
     }
 
-    clearSearch(){
+    public clearSearch() {
         this.searchResults = [];
     }
 
-    doSearch(){
+    public doSearch() {
         this.searchBreakdownItem.id = 0;
-        if(!this.searchBreakdownItem.name || this.searchBreakdownItem.name ===''){
+        if (!this.searchBreakdownItem.name || this.searchBreakdownItem.name === '') {
             this.clearSearch();
             return;
         }
@@ -38,24 +38,26 @@ export class SearchBreakdownItemComponent{
         let loadingId = this._loadingService.startLoading();
 
         this._breakdownItemHttpService.searchByType({
-            searchText: this.searchBreakdownItem.name, 
-            typeID: this.typeId, 
+            searchText: this.searchBreakdownItem.name,
+            typeID: this.typeId,
+            breakdownID: this.breakdownId,
             excludeIDs: this.excludedItems.map((item: BreakdownItem) => item.id)
-        }).then(results=>{
-            if(typeof(results)=='string'){
+        }).then((results) => {
+            if (typeof(results) === 'string') {
                 this._dialogService.error(results);
-            }
-            else{
+            } else {
                 this.searchResults = results;
-                var exactResult = this.searchResults.find(result=> result.name.toLowerCase()==this.searchBreakdownItem.name.toLowerCase());
-                if(exactResult)
+                let exactResult = this.searchResults.find((result) =>
+                    result.name.toLowerCase() === this.searchBreakdownItem.name.toLowerCase());
+                if (exactResult) {
                     this.searchBreakdownItem.id = exactResult.id;
+                }
             }
         }).catch()
-        .then(()=> this._loadingService.endLoading(loadingId));
+        .then(() => this._loadingService.endLoading(loadingId));
     }
 
-    setResult(result: BreakdownItem){
+    public setResult(result: BreakdownItem) {
         this.searchBreakdownItem.name = result.name;
         this.searchBreakdownItem.id = result.id;
         this.clearSearch();

@@ -6,6 +6,7 @@ import { BreakdownSummary } from '../model/breakdown-summary.model';
 import { FullBreakdown } from '../model/full-breakdown.model';
 import { Breakdown } from '../model/breakdown.model';
 import { PublishBreakdown } from '../model/publish-breakdown.model';
+import { SelectedBreakdown } from '../model/selected-breakdown.model';
 
 @Injectable()
 export class BreakdownHttpService extends BaseProjectHttpService {
@@ -31,6 +32,13 @@ export class BreakdownHttpService extends BaseProjectHttpService {
     public getSummary(authProjectId: number, id: Number): Promise<BreakdownSummary> {
 
         let uri = `${this.getUri(authProjectId)}/${id}/summary`;
+
+        return this.doGet(uri);
+    }
+
+    public getSelected(authProjectId: number): Promise<SelectedBreakdown> {
+
+        let uri = `${this.getUri(authProjectId)}/selected`;
 
         return this.doGet(uri);
     }

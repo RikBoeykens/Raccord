@@ -108,6 +108,7 @@ namespace Raccord.API.ViewModels.Breakdowns.BreakdownItems
             {
                 SearchText = vm.SearchText,
                 TypeID = vm.TypeID,
+                BreakdownID = vm.BreakdownID,
                 UserID = userID,
                 ExcludeIDs = vm.ExcludeIDs
             };

@@ -95,5 +95,21 @@ namespace Raccord.Application.Services.Breakdowns
         Types = types
       };
     }
+    public static SelectedBreakdownDto TranslateSelected(this Breakdown breakdown)
+    {
+      if(breakdown == null)
+      {
+        return null;
+      }
+
+      return new SelectedBreakdownDto
+      {
+        ID = breakdown.ID,
+        Name = breakdown.Name,
+        Description = breakdown.Description,
+        ProjectID = breakdown.ProjectID,
+        Types = breakdown.Types.Select(t => t.TranslateSummary())
+      };
+    }
   }
 }

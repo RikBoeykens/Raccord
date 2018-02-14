@@ -1,24 +1,25 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { BreakdownType } from '../../../breakdown-types/model/breakdown-type.model';
 import { BreakdownItem } from '../../model/breakdown-item.model';
+import { FullBreakdown } from '../../../../model/full-breakdown.model';
 
 @Component({
     selector: 'search-breakdown-collection',
     templateUrl: 'search-breakdown-collection.component.html'
 })
-export class SearchBreakdownCollectionComponent{
+export class SearchBreakdownCollectionComponent implements OnInit {
 
     @Output() public onChange = new EventEmitter();
     @Input() public projectID: number;
-    @Input() public breakdownTypes: BreakdownType[] = [];
+    @Input() public breakdown: FullBreakdown;
     public selectedType: number;
     public searchEntity: BreakdownItem = new BreakdownItem();
     public entities: BreakdownItem[] = [];
 
     public ngOnInit () {
         this.resetSearchEntity();
-        if (this.breakdownTypes.length) {
-            this.selectedType = this.breakdownTypes[0].id;
+        if (this.breakdown.types.length) {
+            this.selectedType = this.breakdown.types[0].id;
         }
     }
 

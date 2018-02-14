@@ -18,6 +18,10 @@
     <search-locations-collection [projectID]="projectID" (onChange)="filterLocations($event)"></search-locations-collection>
     <h3>Characters</h3>
     <search-characters-collection [projectID]="projectID" (onChange)="filterCharacters($event)"></search-characters-collection>
-    <h3>Breakdown</h3>
-    <search-breakdown-collection [projectID]="projectID" (onChange)="filterBreakdowns($event)" [breakdownTypes]="breakdownTypes"></search-breakdown-collection>
+    <h3 *ngIf="breakdown.id!==0">
+        <span>Breakdown</span>
+        &nbsp;
+        <a routerLink="/projects/{{projectID}}/breakdowns/{{breakdown.id}}">{{breakdown.name}}</a>
+    </h3>
+    <search-breakdown-collection [projectID]="projectID" (onChange)="filterBreakdowns($event)" [breakdown]="breakdown" *ngIf="breakdown.id!==0"></search-breakdown-collection>
   </div>

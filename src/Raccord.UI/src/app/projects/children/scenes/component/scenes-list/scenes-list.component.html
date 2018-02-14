@@ -7,7 +7,7 @@
 <md-card>
     <md-card-title>Filter Scenes</md-card-title>
     <md-card-content>
-        <filter-scenes [sceneFilter]="sceneFilter" (filterScenes)="filterScenes()" [projectID]="project.id" [breakdownTypes]="breakdownTypes"></filter-scenes>
+        <filter-scenes [sceneFilter]="sceneFilter" (filterScenes)="filterScenes()" [projectID]="project.id" [breakdown]="breakdown"></filter-scenes>
     </md-card-content>
 </md-card>
 <md-card *ngIf="scenes.length">

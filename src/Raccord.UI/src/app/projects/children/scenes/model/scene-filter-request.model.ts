@@ -1,25 +1,25 @@
-import { BaseModel } from "../../../../shared/model/base.model";
+import { BaseModel } from '../../../../shared/model/base.model';
 
 export class SceneFilterRequest extends BaseModel {
-  projectID: number;
-  searchText: string;
-  minPageLength?: number;
-  maxPageLength?: number;
-  intExtIDs: number[] = [];
-  scriptLocationIDs: number[] = [];
-  dayNightIDs: number[] = [];
-  locationSetIDs: number[] = [];
-  locationIDs: number[] = [];
-  characterIDs: number[] = [];
-  breakdownItemIDs: number[] = [];
-  scheduleDayIDs: number[] = [];
-  scheduleSceneShootingDayIDs: number[] = [];
-  callsheetIDs: number[] = [];
-  callsheetSceneShootingDayIDs: number[] = [];
-  shootingDayIDs: number[] = [];
+  public projectID: number;
+  public searchText: string;
+  public minPageLength?: number;
+  public maxPageLength?: number;
+  public intExtIDs: number[] = [];
+  public scriptLocationIDs: number[] = [];
+  public dayNightIDs: number[] = [];
+  public locationSetIDs: number[] = [];
+  public locationIDs: number[] = [];
+  public characterIDs: number[] = [];
+  public breakdownItemIDs: number[] = [];
+  public scheduleDayIDs: number[] = [];
+  public scheduleSceneShootingDayIDs: number[] = [];
+  public callsheetIDs: number[] = [];
+  public callsheetSceneShootingDayIDs: number[] = [];
+  public shootingDayIDs: number[] = [];
 
   constructor(
-    obj?:{
+    obj?: {
       projectID: number,
       searchText: string,
       minPageLength?: number,
@@ -37,7 +37,7 @@ export class SceneFilterRequest extends BaseModel {
       callsheetSceneShootingDayIDs: number[],
       shootingDayIDs: number[]
     }
-  ){
+  ) {
     super();
     if (obj) {
       this.projectID = obj.projectID;

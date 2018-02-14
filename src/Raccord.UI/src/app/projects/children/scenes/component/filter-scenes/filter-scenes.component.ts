@@ -1,13 +1,14 @@
-import { Component, Input, Output, EventEmitter, OnChanges } from "@angular/core";
-import { SceneFilterRequest } from "../../model/scene-filter-request.model";
-import { PageLengthHelpers } from "../../../../../shared/helpers/page-length.helpers";
-import { Character } from "../../../characters/model/character.model";
-import { IntExt } from "../../../scene-properties/model/int-ext.model";
-import { DayNight } from "../../../scene-properties/model/day-night.model";
-import { ScriptLocation } from "../../../script-locations/model/script-location.model";
-import { BreakdownTypeSummary } from "../../../breakdowns/children/breakdown-types/model/breakdown-type-summary.model";
-import { BreakdownItem } from "../../../breakdowns/children/breakdown-items/model/breakdown-item.model";
-import { Location } from "../../../locations/locations/model/location.model";
+import { Component, Input, Output, EventEmitter, OnChanges } from '@angular/core';
+import { SceneFilterRequest } from '../../model/scene-filter-request.model';
+import { PageLengthHelpers } from '../../../../../shared/helpers/page-length.helpers';
+import { Character } from '../../../characters/model/character.model';
+import { IntExt } from '../../../scene-properties/model/int-ext.model';
+import { DayNight } from '../../../scene-properties/model/day-night.model';
+import { ScriptLocation } from '../../../script-locations/model/script-location.model';
+import { BreakdownItem } from
+  '../../../breakdowns/children/breakdown-items/model/breakdown-item.model';
+import { Location } from '../../../locations/locations/model/location.model';
+import { SelectedBreakdown } from '../../../breakdowns/model/selected-breakdown.model';
 
 @Component({
   selector: 'filter-scenes',
@@ -18,7 +19,7 @@ export class FilterScenesComponent implements OnChanges {
   @Output() public filterScenes = new EventEmitter();
   @Input() public sceneFilter: SceneFilterRequest;
   @Input() public projectID: number;
-  @Input() public breakdownTypes: BreakdownTypeSummary[];
+  @Input() public breakdown: SelectedBreakdown;
   public minPageLengthString: string;
   public maxPageLengthString: string;
 

@@ -66,6 +66,16 @@ namespace Raccord.Application.Services.Breakdowns
       return dto;
     }
 
+    // Gets a single breakdown by id
+    public SelectedBreakdownDto GetForProjectUser(long projectID, string userID)
+    {
+      var breakdown = _breakdownRepository.GetForProjectUser(projectID, userID);
+
+      var dto = breakdown.TranslateSelected();
+
+      return dto;
+    }
+
     // Adds a breakdown
     public long Add(BreakdownDto dto)
     {

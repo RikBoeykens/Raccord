@@ -60,6 +60,17 @@ namespace Raccord.API.Controllers.Projects
             return vm;
         }
 
+        // GET api/breakdowns/selected
+        [HttpGet("selected")]
+        public SelectedBreakdownViewModel GetForProjectUser(long authProjectId)
+        {
+            var dto = _breakdownService.GetForProjectUser(authProjectId, GetUserId());
+
+            var vm = dto.Translate();
+
+            return vm;
+        }
+
         // POST api/breakdowns
         [HttpPost]
         public JsonResult Post([FromBody]BreakdownViewModel vm)

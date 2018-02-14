@@ -94,6 +94,7 @@ import {
   BreakdownsResolve,
   BreakdownResolve,
   BreakdownSummaryResolve,
+  SelectedBreakdownResolve,
   BreakdownTypeResolve,
   BreakdownTypesResolve,
   BreakdownItemResolve,
@@ -280,7 +281,7 @@ export const ROUTES: Routes = [
                 resolve: {
                   project: ProjectSummaryResolve,
                   scenes: ScenesResolve,
-                  breakdownTypes: BreakdownTypesResolve
+                  breakdown: SelectedBreakdownResolve
                 },
               },
               {
@@ -547,7 +548,7 @@ export const ROUTES: Routes = [
                     resolve: {
                       project: ProjectSummaryResolve,
                       scheduleDays: ScheduleDaysResolve,
-                      breakdownTypes: BreakdownTypesResolve
+                      breakdown: SelectedBreakdownResolve
                     }
                   },
                   {
