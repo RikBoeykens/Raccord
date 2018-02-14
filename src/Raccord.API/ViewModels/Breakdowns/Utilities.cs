@@ -76,6 +76,22 @@ namespace Raccord.API.ViewModels.Breakdowns
         Types = dto.Types.Select(t=> t.Translate())
       };
     }
+    public static CallsheetBreakdownViewModel Translate(this CallsheetBreakdownDto dto)
+    {
+      if(dto==null)
+      {
+        return null;
+      }
+
+      return new CallsheetBreakdownViewModel
+      {
+        ID = dto.ID,
+        Name = dto.Name,
+        Description = dto.Description,
+        ProjectID = dto.ProjectID,
+        Types = dto.Types.Select(t=> t.Translate())
+      };
+    }
     public static BreakdownDto Translate(this BreakdownViewModel vm, string userID)
     {
       if(vm==null)

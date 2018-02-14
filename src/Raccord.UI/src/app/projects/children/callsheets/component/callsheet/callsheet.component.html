@@ -135,10 +135,15 @@
         <a [routerLink]="['wizard', 3]">Edit</a>
     </md-card-footer>
 </md-card>
-<md-card>
-    <md-card-title>Breakdown</md-card-title>
+<md-card *ngIf="callsheet.breakdownInfo.id!==0">
+    <md-card-title>
+        <span class="breakdown-card-title">Breakdown&nbsp;</span>
+        <a routerLink="/projects/{{project.id}}/breakdowns/{{callsheet.breakdownInfo.id}}">
+            ({{callsheet.breakdownInfo.name}})
+        </a>
+    </md-card-title>
     <md-card-content>
-        <div *ngFor="let breakdownType of callsheet.breakdownTypes">
+        <div *ngFor="let breakdownType of callsheet.breakdownInfo.types">
             <div><b>{{breakdownType.name}}</b></div>
             <div *ngFor="let breakdownItemScene of breakdownType.scenes">
                 <em>Sc {{breakdownItemScene.sceneNumber}}:</em>

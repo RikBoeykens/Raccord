@@ -65,19 +65,9 @@ namespace Raccord.Application.Services.Callsheets
         {
             var callsheet = _callsheetRepository.GetFull(ID);
 
-            var breakdownTypes = new List<BreakdownType>();
-            if(_breakdownRepository.ProjectUserHasSelected(callsheet.ProjectID, userID))
-            {
-                var breakdown = _breakdownRepository.GetProjectUserSelected(callsheet.ProjectID, userID);
-                breakdownTypes = breakdown.Types.ToList();
-            }
-            else if (_breakdownRepository.ProjectHasDefault(callsheet.ProjectID))
-            {
-                var breakdown = _breakdownRepository.GetDefaultProject(callsheet.ProjectID);
-                breakdownTypes = breakdown.Types.ToList();
-            }
+            var breakdown = _breakdownRepository.GetForProjectUser(callsheet.ProjectID, userID);
 
-            var dto = callsheet.TranslateFull(breakdownTypes);
+            var dto = callsheet.TranslateFull(breakdown);
 
             return dto;
         }

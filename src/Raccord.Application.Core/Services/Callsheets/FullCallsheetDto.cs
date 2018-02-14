@@ -6,6 +6,7 @@ using Raccord.Application.Core.Services.Callsheets.CallsheetScenes;
 using Raccord.Application.Core.Services.Callsheets.Characters;
 using Raccord.Application.Core.Services.Locations.Locations;
 using Raccord.Application.Core.Services.Breakdowns.BreakdownTypes;
+using Raccord.Application.Core.Services.Breakdowns;
 
 namespace Raccord.Application.Core.Services.Callsheets
 {
@@ -15,7 +16,7 @@ namespace Raccord.Application.Core.Services.Callsheets
         private IEnumerable<CallsheetSceneSceneDto> _scenes;
         private IEnumerable<CallsheetCharacterCharacterDto> _characters;
         private IEnumerable<CallsheetLocationDto> _locations;
-        private IEnumerable<CallsheetBreakdownTypeDto> _breakdownTypes;
+        private CallsheetBreakdownDto _breakdownInfo;
 
         // Scenes scheduled for the day
         public IEnumerable<CallsheetSceneSceneDto> Scenes
@@ -57,15 +58,15 @@ namespace Raccord.Application.Core.Services.Callsheets
         }
 
         // Breakdown types on the day
-        public IEnumerable<CallsheetBreakdownTypeDto> BreakdownTypes
+        public CallsheetBreakdownDto BreakdownInfo
         {
             get
             {
-                return _breakdownTypes ?? (_breakdownTypes = new List<CallsheetBreakdownTypeDto>());
+                return _breakdownInfo ?? (_breakdownInfo = new CallsheetBreakdownDto());
             }
             set
             {
-                _breakdownTypes = value;
+                _breakdownInfo = value;
             }
         }
     }

@@ -1,15 +1,15 @@
 import { Callsheet } from './callsheet.model';
-import { ShootingDay } from "../../shooting-days";
-import { CallsheetSceneScene } from "../";
-import { CallsheetCharacterCharacter } from "../";
+import { ShootingDay } from '../../shooting-days';
+import { CallsheetSceneScene } from '../';
+import { CallsheetCharacterCharacter } from '../';
 import { CallsheetLocation } from '../../locations/locations/model/callsheet-location.model';
-import { CallsheetBreakdownType } from '../../breakdowns/children/breakdown-types/model/callsheet-breakdown-type.model';
+import { CallsheetBreakdown } from '../../breakdowns/model/callsheet-breakdown.model';
 
-export class FullCallsheet extends Callsheet{
-    scenes: CallsheetSceneScene[];
-    characters: CallsheetCharacterCharacter[];
-    locations: CallsheetLocation[];
-    breakdownTypes: CallsheetBreakdownType[];
+export class FullCallsheet extends Callsheet {
+    public scenes: CallsheetSceneScene[];
+    public characters: CallsheetCharacterCharacter[];
+    public locations: CallsheetLocation[];
+    public breakdownInfo: CallsheetBreakdown;
 
     constructor(obj?: {
                         id: number,
@@ -21,14 +21,14 @@ export class FullCallsheet extends Callsheet{
                         characters: CallsheetCharacterCharacter[],
                         projectId: number,
                         locations: CallsheetLocation[],
-                        breakdownTypes: CallsheetBreakdownType[]
-                    }){
+                        breakdownInfo: CallsheetBreakdown
+                    }) {
         super(obj);
-        if(obj){
+        if (obj) {
             this.scenes = obj.scenes;
             this.characters = obj.characters;
             this.locations = obj.locations;
-            this.breakdownTypes = obj.breakdownTypes;
+            this.breakdownInfo = obj.breakdownInfo;
         }
     }
 }
