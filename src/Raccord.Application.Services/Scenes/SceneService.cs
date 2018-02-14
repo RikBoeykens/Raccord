@@ -15,6 +15,7 @@ using Raccord.Data.EntityFramework.Repositories.Images;
 using Raccord.Data.EntityFramework.Repositories.ShootingDays;
 using Raccord.Core.Utilities;
 using Raccord.Application.Core.Common.Paging;
+using Raccord.Data.EntityFramework.Repositories.Breakdowns;
 
 namespace Raccord.Application.Services.Scenes
 {
@@ -26,6 +27,7 @@ namespace Raccord.Application.Services.Scenes
         private readonly IDayNightRepository _dayNightRepository;
         private readonly IScriptLocationRepository _scriptLocationRepository;
         private readonly IShootingDayRepository _shootingDayRepository;
+        private readonly IBreakdownRepository _breakdownRepository;
 
         // Initialises a new SceneService
         public SceneService(
@@ -33,7 +35,8 @@ namespace Raccord.Application.Services.Scenes
             IIntExtRepository intExtRepository,
             IDayNightRepository dayNightRepository,
             IScriptLocationRepository scriptLocationRepository,
-            IShootingDayRepository shootingDayRepository
+            IShootingDayRepository shootingDayRepository,
+            IBreakdownRepository breakdownRepository
             )
         {
             if(sceneRepository == null)
@@ -46,12 +49,15 @@ namespace Raccord.Application.Services.Scenes
                 throw new ArgumentNullException(nameof(scriptLocationRepository));
             if(shootingDayRepository == null)
                 throw new ArgumentNullException(nameof(shootingDayRepository));
+            if(breakdownRepository == null)
+                throw new ArgumentNullException(nameof(breakdownRepository));
             
             _sceneRepository = sceneRepository;
             _intExtRepository = intExtRepository;
             _dayNightRepository = dayNightRepository;
             _scriptLocationRepository = scriptLocationRepository;
             _shootingDayRepository = shootingDayRepository;
+            _breakdownRepository = breakdownRepository;
         }
 
         // Gets all scene for a project
@@ -65,12 +71,13 @@ namespace Raccord.Application.Services.Scenes
         }
 
         // Gets a single scene by id
-        public FullSceneDto Get(Int64 ID)
+        public FullSceneDto Get(Int64 ID, string userID)
         {
             var scene = _sceneRepository.GetFull(ID);
             var shootingDays = _shootingDayRepository.GetAllForScene(ID);
+            var breakdown = _breakdownRepository.GetForProjectUser(scene.ProjectID, userID);
 
-            var dto = scene.TranslateFull(shootingDays);
+            var dto = scene.TranslateFull(shootingDays, breakdown);
 
             return dto;
         }

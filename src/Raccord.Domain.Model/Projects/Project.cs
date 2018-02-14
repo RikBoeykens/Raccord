@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using Raccord.Domain.Model.Breakdowns.BreakdownTypes;
+using Raccord.Domain.Model.Breakdowns;
 using Raccord.Domain.Model.Callsheets.CallTypes;
 using Raccord.Domain.Model.Comments;
 using Raccord.Domain.Model.Crew.Departments;
@@ -12,11 +12,12 @@ namespace Raccord.Domain.Model.Projects
     public class Project : Entity
     {
         private ICollection<Image> _images;
-        private ICollection<BreakdownType> _breakdownTypes;
         private ICollection<ProjectUser> _projectUsers;
         private ICollection<CallType> _callTypes;
         private ICollection<CrewDepartment> _crewDepartments;
         private ICollection<Comment> _comments;
+        private ICollection<Breakdown> _breakdowns;
+
 
         /// Title of the project
         public string Title { get; set; }
@@ -37,19 +38,6 @@ namespace Raccord.Domain.Model.Projects
             set
             {
                 _images = value;
-            }
-        }
-
-        // Breakdown types associated with the project
-        public virtual ICollection<BreakdownType> BreakdownTypes
-        {
-            get
-            {
-                return _breakdownTypes ?? (_breakdownTypes = new List<BreakdownType>());
-            }
-            set
-            {
-                _breakdownTypes = value;
             }
         }
 
@@ -103,6 +91,19 @@ namespace Raccord.Domain.Model.Projects
             set
             {
                 _comments = value;
+            }
+        }
+
+        // Breakdowns associated with the project
+        public virtual ICollection<Breakdown> Breakdowns
+        {
+            get
+            {
+                return _breakdowns ?? (_breakdowns = new List<Breakdown>());
+            }
+            set
+            {
+                _breakdowns = value;
             }
         }
     }

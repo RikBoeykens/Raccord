@@ -15,7 +15,8 @@
       <scene-characters [characters]="scene.characters" [sceneId]="scene.id" [projectId]="project.id"></scene-characters>
   </md-tab>
   <md-tab label="Breakdown">
-      <scene-breakdown-items [breakdownItems]="scene.breakdownItems" [sceneId]="scene.id" [projectId]="project.id" [breakdownTypes]="breakdownTypes"></scene-breakdown-items>
+      <i *ngIf="scene.breakdownInfo.id===0">No breakdown selected</i>
+      <scene-breakdown-items *ngIf="scene.breakdownInfo.id!==0" [breakdown]="scene.breakdownInfo" [sceneId]="scene.id" [projectId]="project.id"></scene-breakdown-items>
   </md-tab>
   <md-tab label="Pictures">
       <scene-images [images]="scene.images" [sceneId]="scene.id" [projectId]="project.id"></scene-images>

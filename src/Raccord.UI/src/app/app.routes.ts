@@ -25,8 +25,9 @@ import {
   CharactersListComponent,
   EditCharactersListComponent,
   CharacterLandingComponent,
+  BreakdownsListComponent,
   BreakdownLandingComponent,
-  BreakdownTypeSettingsComponent,
+  BreakdownSettingsComponent,
   BreakdownTypeLandingComponent,
   BreakdownItemLandingComponent,
   EditScheduleComponent,
@@ -89,11 +90,15 @@ import { ImageResolve } from './projects';
 import { ImagesResolve } from './projects';
 import { CharacterResolve } from './projects';
 import { CharactersResolve } from './projects';
-import { BreakdownTypeResolve } from './projects';
-import { BreakdownTypesResolve } from './projects';
-import { BreakdownItemResolve } from './projects';
-import { BreakdownItemsResolve } from './projects';
 import {
+  BreakdownsResolve,
+  BreakdownResolve,
+  BreakdownSummaryResolve,
+  SelectedBreakdownResolve,
+  BreakdownTypeResolve,
+  BreakdownTypesResolve,
+  BreakdownItemResolve,
+  BreakdownItemsResolve,
   ScheduleDaysResolve,
   ScheduleSceneResolve,
   LocationsResolve,
@@ -276,7 +281,7 @@ export const ROUTES: Routes = [
                 resolve: {
                   project: ProjectSummaryResolve,
                   scenes: ScenesResolve,
-                  breakdownTypes: BreakdownTypesResolve
+                  breakdown: SelectedBreakdownResolve
                 },
               },
               {
@@ -301,8 +306,7 @@ export const ROUTES: Routes = [
                 component: SceneLandingComponent,
                 resolve: {
                   project: ProjectSummaryResolve,
-                  scene: SceneResolve,
-                  breakdownTypes: BreakdownTypesResolve
+                  scene: SceneResolve
                 }
               }
             ]
@@ -462,48 +466,61 @@ export const ROUTES: Routes = [
             ]
           },
           {
-            path: 'breakdown',
+            path: 'breakdowns',
             canActivate: [CanReadGeneralProjectPermissionGuard],
             children: [
               {
                 path: '',
-                component: BreakdownLandingComponent,
+                component: BreakdownsListComponent,
                 resolve: {
                   project: ProjectSummaryResolve,
-                  breakdownTypes: BreakdownTypesResolve
+                  breakdowns: BreakdownsResolve
                 },
               },
               {
-                path: 'settings',
-                component: BreakdownTypeSettingsComponent,
-                resolve: {
-                  project: ProjectSummaryResolve,
-                  breakdownTypes: BreakdownTypesResolve
-                },
-              },
-              {
-                path: 'types/:breakdownTypeId',
+                path: ':breakdownId',
                 children: [
                   {
                     path: '',
-                    component: BreakdownTypeLandingComponent,
+                    component: BreakdownLandingComponent,
                     resolve: {
                       project: ProjectSummaryResolve,
-                      breakdownType: BreakdownTypeResolve
-                    }
-                  }
-                ]
-              },
-              {
-                path: 'items/:breakdownItemId',
-                children: [
+                      breakdown: BreakdownResolve
+                    },
+                  },
                   {
-                    path: '',
-                    component: BreakdownItemLandingComponent,
+                    path: 'settings',
+                    component: BreakdownSettingsComponent,
                     resolve: {
                       project: ProjectSummaryResolve,
-                      breakdownItem: BreakdownItemResolve
-                    }
+                      breakdown: BreakdownResolve
+                    },
+                  },
+                  {
+                    path: 'types/:breakdownTypeId',
+                    children: [
+                      {
+                        path: '',
+                        component: BreakdownTypeLandingComponent,
+                        resolve: {
+                          project: ProjectSummaryResolve,
+                          breakdownType: BreakdownTypeResolve
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    path: 'items/:breakdownItemId',
+                    children: [
+                      {
+                        path: '',
+                        component: BreakdownItemLandingComponent,
+                        resolve: {
+                          project: ProjectSummaryResolve,
+                          breakdownItem: BreakdownItemResolve
+                        }
+                      }
+                    ]
                   }
                 ]
               }
@@ -531,7 +548,7 @@ export const ROUTES: Routes = [
                     resolve: {
                       project: ProjectSummaryResolve,
                       scheduleDays: ScheduleDaysResolve,
-                      breakdownTypes: BreakdownTypesResolve
+                      breakdown: SelectedBreakdownResolve
                     }
                   },
                   {
@@ -586,7 +603,7 @@ export const ROUTES: Routes = [
               {
                 path: ':locationSetId',
                 component: LocationSetLandingComponent,
-                resolve:{
+                resolve: {
                   project: ProjectSummaryResolve,
                   locationSet: LocationSetResolve
                 }
@@ -594,66 +611,66 @@ export const ROUTES: Routes = [
             ]
           },
           {
-            path: "callsheets",
+            path: 'callsheets',
             canActivate: [CanReadCallsheetProjectPermissionGuard],
             children: [
               {
-                path: "",
+                path: '',
                 component: CallsheetsListComponent,
-                resolve:{
+                resolve: {
                   project: ProjectSummaryResolve,
                   callsheets:  CallsheetsResolve
                 }
               },
               {
-                path: "new",
+                path: 'new',
                 component: NewCallsheetComponent,
                 canActivate: [CanEditGeneralProjectPermissionGuard],
-                resolve:{
+                resolve: {
                   project: ProjectSummaryResolve,
                   availableDays: AvailableCallsheetShootingDaysResolve
                 }
               },
               {
-                path: ":callsheetId",
+                path: ':callsheetId',
                 component: CallsheetComponent,
-                resolve:{
+                resolve: {
                   project: ProjectSummaryResolve,
                   callsheet: CallsheetResolve
                 }
               },
               {
-                path: ":callsheetId/wizard",
+                path: ':callsheetId/wizard',
                 canActivate: [CanEditGeneralProjectPermissionGuard],
-                children:[
+                children: [
                   {
-                    path: "1",                
+                    path: '1',
                     component: CallsheetWizardStep1Component,
-                    resolve:{
+                    resolve: {
                       project: ProjectSummaryResolve,
                       callsheet: CallsheetResolve
                     }
                   },
                   {
-                    path: "2",                
+                    path: '2',
                     component: CallsheetWizardStep2Component,
-                    resolve:{
+                    resolve: {
                       project: ProjectSummaryResolve,
                       callsheet: CallsheetSummaryResolve,
                       scenes: CallsheetSceneLocationsResolve
                     }
                   },
                   {
-                    path: "3",
+                    path: '3',
                     component: CallsheetWizardStep3Component,
-                    resolve:{
+                    resolve: {
                       project: ProjectSummaryResolve,
                       callsheet: CallsheetSummaryResolve,
                       scenes: CallsheetSceneCharactersResolve
                     }
                   },
                   {
-                    path: "4",
+                    path: '4',
                     component: CallsheetWizardStep4Component,
                     resolve: {
                       project: ProjectSummaryResolve,
@@ -668,11 +685,11 @@ export const ROUTES: Routes = [
           {
             path: 'slates',
             canActivate: [CanReadGeneralProjectPermissionGuard],
-            children:[
+            children: [
               {
                 path: '',
                 component: SlatesListComponent,
-                resolve:{
+                resolve: {
                   project: ProjectSummaryResolve,
                   slates: SlatesResolve,
                 }
@@ -680,7 +697,7 @@ export const ROUTES: Routes = [
               {
                 path: ':slateId',
                 component: SlateLandingComponent,
-                resolve:{
+                resolve: {
                   project: ProjectSummaryResolve,
                   slate: SlateResolve,
                   scenes: ScenesResolve,
@@ -692,11 +709,11 @@ export const ROUTES: Routes = [
           {
             path: 'charts',
             canActivate: [CanReadGeneralProjectPermissionGuard],
-            children:[
+            children: [
               {
                 path: '',
                 component: ChartLandingComponent,
-                resolve:{
+                resolve: {
                   project: ProjectSummaryResolve,
                   charts: ProjectChartsResolve
                 }
@@ -706,11 +723,11 @@ export const ROUTES: Routes = [
           {
             path: 'shootingdays',
             canActivate: [CanReadGeneralProjectPermissionGuard],
-            children:[
+            children: [
               {
                 path: '',
                 component: ShootingDayReportsListComponent,
-                resolve:{
+                resolve: {
                   project: ProjectSummaryResolve,
                   shootingDays: CompletedShootingDaysResolve,
                   availableDays: AvailableCompletionShootingDaysResolve
@@ -719,7 +736,7 @@ export const ROUTES: Routes = [
               {
                 path: ':shootingDayId',
                 component: ShootingDayReportLandingComponent,
-                resolve:{
+                resolve: {
                   project: ProjectSummaryResolve,
                   shootingDay: ShootingDayResolve
                 }
@@ -795,7 +812,7 @@ export const ROUTES: Routes = [
       {
         path: '',
         component: UserProfileLandingComponent,
-        resolve:{
+        resolve: {
           userProfile: UserProfileResolve
         }
       }

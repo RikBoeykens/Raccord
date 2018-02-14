@@ -12,11 +12,11 @@ namespace Raccord.Data.EntityFramework.Repositories.Breakdowns.BreakdownItemScen
         {
         }
 
-        public IEnumerable<BreakdownItemScene> GetAllForScene(long sceneID)
+        public IEnumerable<BreakdownItemScene> GetAllForScene(long sceneID, long breakdownID)
         {
             var query = GetIncludedBreakdownItem();
 
-            return query.Where(bis=> bis.SceneID == sceneID);
+            return query.Where(bis=> bis.SceneID == sceneID && bis.BreakdownItem.BreakdownID == breakdownID);
         }
 
         public IEnumerable<BreakdownItemScene> GetAllForBreakdownItem(long itemID)

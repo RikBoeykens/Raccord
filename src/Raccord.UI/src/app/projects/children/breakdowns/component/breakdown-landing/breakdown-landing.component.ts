@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { BreakdownTypeSummary } from '../../breakdown-types/model/breakdown-type-summary.model';
 import { ProjectSummary } from '../../../../model/project-summary.model';
+import { FullBreakdown } from '../../model/full-breakdown.model';
 
 @Component({
     templateUrl: 'breakdown-landing.component.html',
 })
 export class BreakdownLandingComponent implements OnInit {
 
-    breakdownTypes: BreakdownTypeSummary[] = [];
-    project: ProjectSummary;
+    public breakdown: FullBreakdown;
+    public project: ProjectSummary;
 
     constructor(
         private _route: ActivatedRoute,
@@ -17,9 +17,12 @@ export class BreakdownLandingComponent implements OnInit {
     ) {
     }
 
-    ngOnInit() {
-        this._route.data.subscribe((data: { breakdownTypes: BreakdownTypeSummary[], project: ProjectSummary }) => {
-            this.breakdownTypes = data.breakdownTypes;
+    public ngOnInit() {
+        this._route.data.subscribe((data: {
+            breakdown: FullBreakdown,
+            project: ProjectSummary
+        }) => {
+            this.breakdown = data.breakdown;
             this.project = data.project;
         });
     }

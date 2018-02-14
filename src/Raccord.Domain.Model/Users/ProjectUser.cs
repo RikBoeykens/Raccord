@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Raccord.Domain.Model.Breakdowns;
 using Raccord.Domain.Model.Crew.CrewMembers;
 using Raccord.Domain.Model.Projects;
 using Raccord.Domain.Model.Users;
@@ -31,6 +32,10 @@ namespace Raccord.Domain.Model.Users
         /// </summary>
         /// <returns></returns>
         public virtual ProjectRoleDefinition Role { get; set; }
+
+        public long? SelectedBreakdownID { get; set; }
+
+        public virtual Breakdown SelectedBreakdown { get; set; }
 
         // Crew Members associated with the user
         public virtual ICollection<CrewMember> CrewMembers

@@ -18,8 +18,6 @@ import { ProjectSummary } from '../../../../model/project-summary.model';
 import { SelectedEntity } from '../../../../../shared/model/selected-entity.model';
 import { EntityType } from '../../../../../shared/enums/entity-type.enum';
 import { SceneFilterRequest } from '../../../scenes/model/scene-filter-request.model';
-import { BreakdownTypeSummary } from
-    '../../../breakdowns/breakdown-types/model/breakdown-type-summary.model';
 import { SceneHttpService } from '../../../scenes/service/scene-http.service';
 import { PageRequest } from '../../../../../shared/children/paging/model/page-request.model';
 import { AppSettings } from '../../../../../app.settings';
@@ -28,6 +26,7 @@ import { DragulaService } from 'ng2-dragula';
 import { HtmlClassHelpers } from '../../../../../shared/helpers/html-class.helpers';
 import { Element } from '@angular/compiler';
 import { LoadingWrapperService } from '../../../../../shared/service/loading-wrapper.service';
+import { SelectedBreakdown } from '../../../breakdowns/model/selected-breakdown.model';
 
 @Component({
     templateUrl: 'edit-schedule.component.html',
@@ -41,7 +40,7 @@ export class EditScheduleComponent implements OnInit {
     public sceneType: EntityType[] = [EntityType.scene];
     public filteredScenes: SceneSummary[] = [];
     public sceneFilter: SceneFilterRequest = new SceneFilterRequest();
-    public breakdownTypes: BreakdownTypeSummary[];
+    public breakdown: SelectedBreakdown;
     public currentPage: PageRequest = new PageRequest({
         page: 1,
         pageSize: AppSettings.MAP_DEFAULT_PAGE_SIZE,
@@ -108,14 +107,14 @@ export class EditScheduleComponent implements OnInit {
         this._route.data.subscribe((data: {
             scheduleDays: FullScheduleDay[],
             project: ProjectSummary,
-            breakdownTypes: BreakdownTypeSummary[]
+            breakdown: SelectedBreakdown
         }) => {
             this.scheduleDays = data.scheduleDays.map((scheduleDay) => {
                 return new ScheduleDayDragSceneWrapper(scheduleDay);
             });
             this.project = data.project;
             this.sceneFilter.projectID = this.project.id;
-            this.breakdownTypes = data.breakdownTypes;
+            this.breakdown = data.breakdown;
         });
         this.resetNewScheduleDay();
     }

@@ -23,7 +23,11 @@ namespace Raccord.Data.EntityFramework.Repositories.ImageBreakdownItems
         {
             IQueryable<ImageBreakdownItem> query = _context.Set<ImageBreakdownItem>();
 
-            return query.Include(i=> i.Image);
+            return query.Include(i=> i.Image)
+                        .Include(i=> i.BreakdownItem)
+                            .ThenInclude(i=>i.BreakdownType)
+                        .Include(i => i.BreakdownItem)
+                            .ThenInclude(i=> i.Breakdown);
         }
     }
 }

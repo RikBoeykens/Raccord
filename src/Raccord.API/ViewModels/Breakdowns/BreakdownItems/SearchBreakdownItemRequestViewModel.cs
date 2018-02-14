@@ -11,6 +11,8 @@ namespace Raccord.API.ViewModels.Breakdowns.BreakdownItems
 
     public long TypeID { get; set; }
 
+    public long BreakdownID { get; set; }
+
     public IEnumerable<long> ExcludeIDs 
     {
       get

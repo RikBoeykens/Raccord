@@ -15,6 +15,7 @@ using Microsoft.EntityFrameworkCore;
 using Raccord.Domain.Model.Crew.Departments;
 using Raccord.Domain.Model.Users.ProjectRoles;
 using Raccord.Core.Enums;
+using Raccord.Domain.Model.Breakdowns;
 
 namespace Raccord.Data.EntityFramework.Seeding
 {
@@ -121,7 +122,7 @@ namespace Raccord.Data.EntityFramework.Seeding
 
             if (!_context.Users.Any())
             {
-                _userManager.CreateAsync(new ApplicationUser { UserName = adminEmail, Email = adminEmail, EmailConfirmed = true }, adminPassword).Result.ToString();
+                _userManager.CreateAsync(new ApplicationUser { UserName = adminEmail, Email = adminEmail, EmailConfirmed = true, FirstName = "Rik", LastName = "Boeykens" }, adminPassword).Result.ToString();
                 _userManager.AddToRoleAsync(_userManager.FindByNameAsync(adminEmail).GetAwaiter().GetResult(), "admin").Result.ToString();
             }
         }
@@ -210,7 +211,6 @@ namespace Raccord.Data.EntityFramework.Seeding
             SeedDayNights();
             SeedScriptLocations();
             SeedScenes();
-            SeedBreakdownTypes();
             SeedCallTypes();
             SeedCrewDepartments();
             SeedCrew();
@@ -317,28 +317,6 @@ namespace Raccord.Data.EntityFramework.Seeding
 
                 _context.SaveChanges();
             }
-        }
-
-        private void SeedBreakdownTypes()
-        {
-            var definitions = _context.BreakdownTypeDefinitions.ToArray();
-
-            foreach(var project in _context.Projects.Include(p=> p.BreakdownTypes))
-            {
-                if(!project.BreakdownTypes.Any())
-                {
-                    foreach(var definition in definitions)
-                    {
-                        project.BreakdownTypes.Add(new BreakdownType
-                        {
-                            Name = definition.Name,
-                            Description = definition.Description,
-                        });
-                    }
-                }
-            }
-
-            _context.SaveChanges();
         }
 
         private void SeedCallTypes()

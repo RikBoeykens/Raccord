@@ -114,16 +114,6 @@ namespace Raccord.Application.Services.Projects
                 Title = dto.Title,
             };
 
-            var breakdownTypeDefinitions = _breakdownTypeDefinitionRepository.GetAll();
-            foreach(var definition in breakdownTypeDefinitions)
-            {
-                project.BreakdownTypes.Add(new BreakdownType
-                {
-                    Name = definition.Name,
-                    Description = definition.Description,
-                });
-            }
-
             var callTypeDefinitions = _callTypeDefinitionRepository.GetAll();
             foreach(var definition in callTypeDefinitions)
             {

@@ -1,11 +1,13 @@
 using System.Collections.Generic;
 using System.Linq;
+using Raccord.Application.Core.Services.Breakdowns;
 using Raccord.Application.Core.Services.Breakdowns.BreakdownItemScenes;
 using Raccord.Application.Core.Services.Breakdowns.BreakdownTypes;
 using Raccord.Application.Core.Services.Callsheets;
 using Raccord.Application.Core.Services.Locations.Locations;
 using Raccord.Application.Core.Services.Locations.LocationSets;
 using Raccord.Application.Core.Services.Scenes;
+using Raccord.Application.Services.Breakdowns;
 using Raccord.Application.Services.Breakdowns.BreakdownItems;
 using Raccord.Application.Services.Breakdowns.BreakdownItemScenes;
 using Raccord.Application.Services.Breakdowns.BreakdownTypes;
@@ -15,6 +17,7 @@ using Raccord.Application.Services.Locations.Locations;
 using Raccord.Application.Services.Locations.LocationSets;
 using Raccord.Application.Services.Scenes;
 using Raccord.Application.Services.ShootingDays;
+using Raccord.Domain.Model.Breakdowns;
 using Raccord.Domain.Model.Breakdowns.BreakdownTypes;
 using Raccord.Domain.Model.Callsheets;
 using Raccord.Domain.Model.Scenes;
@@ -24,7 +27,7 @@ namespace Raccord.Application.Services.Callsheets
     // Utilities and helper methods for callsheets
     public static class Utilities
     {
-        public static FullCallsheetDto TranslateFull(this Callsheet callsheet, IEnumerable<BreakdownType> breakdownTypes)
+        public static FullCallsheetDto TranslateFull(this Callsheet callsheet, Breakdown breakdown)
         {
             var scenes = callsheet.CallsheetScenes.OrderBy(t=> t.SortingOrder);
             var locations = new List<CallsheetLocationDto>();
@@ -58,21 +61,26 @@ namespace Raccord.Application.Services.Callsheets
                 locationSets.Add(currentLocationSet.TranslateCallsheet(locationScenes));
                 locations.Add(currentLocation.TranslateCallsheet(locationSets, $"{locations.Count() +1}"));
             }
-
-            var breakdownTypeDtos = new List<CallsheetBreakdownTypeDto>();
-            foreach(var breakdownType in breakdownTypes)
+            CallsheetBreakdownDto breakdownInfo = null;
+            if(breakdown!= null)
             {
-                var breakdownSceneDtos = new List<CallsheetBreakdownItemSceneDto>();
-                foreach(var scene in scenes)
+                var breakdownTypeDtos = new List<CallsheetBreakdownTypeDto>();
+                foreach(var breakdownType in breakdown.Types.ToList())
                 {
-                    var items = scene.Scene.BreakdownItemScenes.Where(bis=> bis.BreakdownItem.BreakdownTypeID == breakdownType.ID).Select(bis=> bis.BreakdownItem.TranslateCallsheet());
-                    if(items.Any())
+                    var breakdownSceneDtos = new List<CallsheetBreakdownItemSceneDto>();
+                    foreach(var scene in scenes)
                     {
-                        breakdownSceneDtos.Add(scene.TranslateCallsheet(items));
+                        var items = scene.Scene.BreakdownItemScenes.Where(bis=> bis.BreakdownItem.BreakdownTypeID == breakdownType.ID).Select(bis=> bis.BreakdownItem.TranslateCallsheet());
+                        if(items.Any())
+                        {
+                            breakdownSceneDtos.Add(scene.TranslateCallsheet(items));
+                        }
                     }
+                    breakdownTypeDtos.Add(breakdownType.TranslateCallsheet(breakdownSceneDtos));
                 }
-                breakdownTypeDtos.Add(breakdownType.TranslateCallsheet(breakdownSceneDtos));
+                breakdownInfo = breakdown.TranslateCallsheet(breakdownTypeDtos);
             }
+
 
             var dto = new FullCallsheetDto
             {
@@ -85,7 +93,7 @@ namespace Raccord.Application.Services.Callsheets
                 Scenes = scenes.Select(cs=> cs.TranslateScene()),
                 Characters = callsheet.CallsheetCharacters.Select(cc=> cc.TranslateCharacter()),
                 Locations = locations,
-                BreakdownTypes = breakdownTypeDtos
+                BreakdownInfo = breakdownInfo
             };
 
             return dto;

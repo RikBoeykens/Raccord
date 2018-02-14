@@ -5,6 +5,7 @@ using Raccord.API.ViewModels.Breakdowns.BreakdownItems;
 using Raccord.API.ViewModels.Scheduling.ScheduleScenes;
 using Raccord.API.ViewModels.Shots.Slates;
 using Raccord.API.ViewModels.ShootingDays;
+using Raccord.API.ViewModels.Breakdowns;
 
 namespace Raccord.API.ViewModels.Scenes
 {
@@ -13,7 +14,7 @@ namespace Raccord.API.ViewModels.Scenes
     {
         private IEnumerable<LinkedImageViewModel> _images;
         private IEnumerable<LinkedCharacterViewModel> _characters;
-        private IEnumerable<LinkedBreakdownItemViewModel> _breakdownItems;
+        private SceneBreakdownViewModel _breakdownInfo;
         private IEnumerable<ShootingDayInfoViewModel> _shootingDays;
         private IEnumerable<SlateSummaryViewModel> _slates;
 
@@ -44,15 +45,15 @@ namespace Raccord.API.ViewModels.Scenes
         }
 
         // Breakdown items linked to the scene
-        public IEnumerable<LinkedBreakdownItemViewModel> BreakdownItems
+        public SceneBreakdownViewModel BreakdownInfo
         {
             get
             {
-                return _breakdownItems ?? (_breakdownItems = new List<LinkedBreakdownItemViewModel>());
+                return _breakdownInfo ?? (_breakdownInfo = new SceneBreakdownViewModel());
             }
             set
             {
-                _breakdownItems = value;
+                _breakdownInfo = value;
             }
         }
 

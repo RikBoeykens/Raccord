@@ -1,26 +1,30 @@
-<div class="row">
+<div>
+    <em>Breakdown: </em>
+    <a routerLink="/projects/{{projectId}}/breakdowns/{{breakdown.id}}">{{breakdown.name}}</a>
+</div>
+<div class="row" *ngIf="getCanEdit()">
     <form class="col s12"
             id="breakdown_item_form"
             #breakdownItemForm = "ngForm"
             (ngSubmit)="addLink()">
         <div fxLayout="row" fxLayoutGap="10px">
             <md-select placeholder="Type" [(ngModel)]="selectedTypeId" name="select_type">
-                <md-option *ngFor="let type of breakdownTypes" [value]="type.id">{{ type.name }}</md-option>
+                <md-option *ngFor="let type of breakdown.types" [value]="type.id">{{ type.name }}</md-option>
             </md-select>
-            <search-breakdown-item fxFlex="33%" [searchBreakdownItem]="viewNewBreakdownItem" [typeId]="selectedTypeId"></search-breakdown-item>
+            <search-breakdown-item fxFlex="33%" [searchBreakdownItem]="viewNewBreakdownItem" [typeId]="selectedTypeId" [breakdownId]="breakdown.id"></search-breakdown-item>
             <button fxFlex="33%" md-raised-button type="submit"[disabled]="!breakdownItemForm.form.valid">Add</button>            
         </div>
     </form>
 </div>
 <div class="row">
-    <md-nav-list>
+    <md-list>
         <md-list-item 
-           *ngFor="let breakdownItem of breakdownItems">
+           *ngFor="let breakdownItem of breakdown.items">
             <show-image *ngIf="breakdownItem.primaryImage.id!=0" [image]="breakdownItem.primaryImage" [listAvatar]="true"></show-image>
-            <a routerLink="/projects/{{projectId}}/breakdown/items/{{breakdownItem.id}}">
+            <a routerLink="/projects/{{projectId}}/breakdowns/{{breakdown.id}}/items/{{breakdownItem.id}}">
                 {{breakdownItem.name}} ({{breakdownItem.type.name}})
             </a>
-            <button md-button (click)="removeLink(breakdownItem)"><md-icon>delete</md-icon></button>
+            <button md-icon-button (click)="removeLink(breakdownItem)" *ngIf="getCanEdit()"><md-icon>delete</md-icon></button>
         </md-list-item>
-    </md-nav-list>
+    </md-list>
 </div>

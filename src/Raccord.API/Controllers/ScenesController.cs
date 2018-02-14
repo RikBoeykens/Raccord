@@ -43,7 +43,7 @@ namespace Raccord.API.Controllers
         [HttpGet("{id}")]
         public FullSceneViewModel Get(long id)
         {
-            var dto = _sceneService.Get(id);
+            var dto = _sceneService.Get(id, GetUserId());
 
             var vm = dto.Translate();
 

@@ -39,7 +39,7 @@ namespace Raccord.API.Controllers
         [HttpGet("{id}")]
         public FullCallsheetViewModel Get(long id)
         {
-            var dto = _callsheetService.Get(id);
+            var dto = _callsheetService.Get(id, GetUserId());
 
             var vm = dto.Translate();
 

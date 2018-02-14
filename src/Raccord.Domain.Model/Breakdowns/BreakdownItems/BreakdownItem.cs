@@ -22,6 +22,12 @@ namespace Raccord.Domain.Model.Breakdowns.BreakdownItems
         // Linked breakdown type
         public virtual BreakdownType BreakdownType { get; set; }
 
+        // ID of the linked breakdown
+        public long BreakdownID { get; set; }
+
+        // Linked breakdown type
+        public virtual Breakdown Breakdown { get; set; }
+
         // Linked scenes
         public virtual ICollection<BreakdownItemScene> BreakdownItemScenes
         {

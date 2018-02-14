@@ -17,7 +17,7 @@ namespace Raccord.Application.Services.Breakdowns.BreakdownTypes
                 ID = breakdownType.ID,
                 Name = breakdownType.Name,
                 Description = breakdownType.Description,
-                ProjectID = breakdownType.ProjectID,
+                Breakdown = breakdownType.Breakdown.TranslateSummary(),
                 BreakdownItems = breakdownType.BreakdownItems.Select(bi=> bi.TranslateSummary())
             };
 
@@ -30,7 +30,7 @@ namespace Raccord.Application.Services.Breakdowns.BreakdownTypes
                 ID = breakdownType.ID,
                 Name = breakdownType.Name,
                 Description = breakdownType.Description,
-                ProjectID = breakdownType.ProjectID,
+                BreakdownID = breakdownType.BreakdownID,
                 ItemCount = breakdownType.BreakdownItems.Count(),
             };
 
@@ -44,7 +44,7 @@ namespace Raccord.Application.Services.Breakdowns.BreakdownTypes
                 ID = breakdownType.ID,
                 Name = breakdownType.Name,
                 Description = breakdownType.Description,
-                ProjectID = breakdownType.ProjectID,
+                BreakdownID = breakdownType.BreakdownID,
             };
 
             return dto;
@@ -62,7 +62,6 @@ namespace Raccord.Application.Services.Breakdowns.BreakdownTypes
                 ID = breakdownType.ID,
                 Name = breakdownType.Name,
                 Description = breakdownType.Description,
-                ProjectID = breakdownType.ProjectID,
                 Scenes = scenes
             };
 

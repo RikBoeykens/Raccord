@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using Raccord.API.ViewModels.Breakdowns.BreakdownTypes;
+using Raccord.API.ViewModels.Breakdowns;
 using Raccord.API.ViewModels.Callsheets.CallsheetScenes;
 using Raccord.API.ViewModels.Callsheets.Characters;
 using Raccord.API.ViewModels.Locations.Locations;
@@ -12,7 +12,7 @@ namespace Raccord.API.ViewModels.Callsheets
         private IEnumerable<CallsheetSceneSceneViewModel> _scenes;
         private IEnumerable<CallsheetCharacterCharacterViewModel> _characters;
         private IEnumerable<CallsheetLocationViewModel> _locations;
-        private IEnumerable<CallsheetBreakdownTypeViewModel> _breakdownTypes;
+        private CallsheetBreakdownViewModel _breakdownInfo;
 
         // Scenes scheduled for the day
         public IEnumerable<CallsheetSceneSceneViewModel> Scenes
@@ -54,15 +54,15 @@ namespace Raccord.API.ViewModels.Callsheets
         }
 
         // Breakdown types for the day
-        public IEnumerable<CallsheetBreakdownTypeViewModel> BreakdownTypes
+        public CallsheetBreakdownViewModel BreakdownInfo
         {
             get
             {
-                return _breakdownTypes ?? (_breakdownTypes = new List<CallsheetBreakdownTypeViewModel>());
+                return _breakdownInfo ?? (_breakdownInfo = new CallsheetBreakdownViewModel());
             }
             set
             {
-                _breakdownTypes = value;
+                _breakdownInfo = value;
             }
         }
     }

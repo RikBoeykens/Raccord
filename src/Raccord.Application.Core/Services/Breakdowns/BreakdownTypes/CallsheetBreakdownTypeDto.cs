@@ -4,7 +4,7 @@ using Raccord.Application.Core.Services.Breakdowns.BreakdownItemScenes;
 namespace Raccord.Application.Core.Services.Breakdowns.BreakdownTypes
 {
     // Dto to represent a breakdown type on a callsheet
-    public class CallsheetBreakdownTypeDto : BreakdownTypeDto
+    public class CallsheetBreakdownTypeDto : BaseBreakdownTypeDto
     {
       private IEnumerable<CallsheetBreakdownItemSceneDto> _scenes;
       

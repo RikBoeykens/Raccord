@@ -17,14 +17,27 @@ using Raccord.Application.Services.Shots.Slates;
 using System.Collections.Generic;
 using Raccord.Domain.Model.ShootingDays;
 using Raccord.Application.Services.ShootingDays;
+using Raccord.Domain.Model.Breakdowns;
+using Raccord.Application.Core.Services.Breakdowns;
+using Raccord.Application.Services.Breakdowns;
 
 namespace Raccord.Application.Services.Scenes
 {
     // Utilities and helper methods for Scenes
     public static class Utilities
     {
-        public static FullSceneDto TranslateFull(this Scene scene, IEnumerable<ShootingDay> shootingDays)
+        public static FullSceneDto TranslateFull(this Scene scene, IEnumerable<ShootingDay> shootingDays, Breakdown breakdown)
         {
+            SceneBreakdownDto breakdownDto = null;
+            if(breakdown!=null)
+            {
+                breakdownDto = breakdown.TranslateScene(
+                    scene.BreakdownItemScenes
+                        .Where(bis=> bis.BreakdownItem.BreakdownID == breakdown.ID).ToList()
+                        .Select(bis=> bis.TranslateBreakdownItem())
+                    );
+            }
+
             var dto = new FullSceneDto
             {
                 ID = scene.ID,
@@ -37,7 +50,7 @@ namespace Raccord.Application.Services.Scenes
                 DayNight = scene.DayNight.Translate(),
                 Images = scene.ImageScenes.Select(i=> i.TranslateImage()),
                 Characters = scene.CharacterScenes.Select(i=> i.TranslateCharacter()),
-                BreakdownItems = scene.BreakdownItemScenes.Select(bis=> bis.TranslateBreakdownItem()),
+                BreakdownInfo = breakdownDto,
                 ShootingDays = shootingDays.Select(sd=> sd.TranslateSceneInfo(scene.ID)).OrderBy(sd=> sd.Type).ThenBy(sd=> sd.Date),
                 Slates = scene.Slates.Select(s=> s.TranslateSummary()),
                 ProjectID = scene.ProjectID,

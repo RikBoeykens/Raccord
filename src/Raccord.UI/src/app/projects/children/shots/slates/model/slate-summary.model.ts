@@ -1,11 +1,11 @@
-import { Slate } from "./slate.model";
-import { Scene } from "../../../scenes/model/scene.model";
-import { ShootingDay } from "../../../shooting-days/index";
-import { Image } from "../../../images/model/image.model";
+import { Slate } from './slate.model';
+import { Scene } from '../../../scenes/model/scene.model';
+import { ShootingDay } from '../../../shooting-days/index';
+import { Image } from '../../../images/model/image.model';
 
 export class SlateSummary extends Slate {
-    takeCount: number;
-    primaryImage: Image;
+    public takeCount: number;
+    public primaryImage: Image;
 
     constructor(obj?: {
                         id: number,
@@ -22,13 +22,12 @@ export class SlateSummary extends Slate {
                         shootingDay?: ShootingDay,
                         takeCount: number,
                         primaryImage: Image
-                    }){
+                    }) {
         super(obj);
-        if(obj){
+        if (obj) {
             this.takeCount = obj.takeCount;
             this.primaryImage = obj.primaryImage;
-        }
-        else{
+        } else {
             this.id = 0;
         }
     }

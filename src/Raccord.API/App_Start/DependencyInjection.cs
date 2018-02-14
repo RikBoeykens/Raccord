@@ -126,6 +126,9 @@ using Raccord.Application.Services.Comments;
 using Raccord.Data.EntityFramework.Repositories.Users.ProjectRoles;
 using Raccord.Application.Core.Services.Users.ProjectRoles;
 using Raccord.Application.Services.User.ProjectRoles;
+using Raccord.Data.EntityFramework.Repositories.Breakdowns;
+using Raccord.Application.Core.Services.Breakdowns;
+using Raccord.Application.Services.Breakdowns;
 
 namespace Raccord.API
 {
@@ -287,6 +290,9 @@ namespace Raccord.API
             services.AddTransient<IProjectRoleDefinitionRepository, ProjectRoleDefinitionRepository>();
             services.AddTransient<IProjectRoleService, ProjectRoleService>();
             services.AddTransient<IProjectPermissionService, ProjectPermissionService>();
+
+            services.AddTransient<IBreakdownRepository, BreakdownRepository>();
+            services.AddTransient<IBreakdownService, BreakdownService>();
         }
     }
 }

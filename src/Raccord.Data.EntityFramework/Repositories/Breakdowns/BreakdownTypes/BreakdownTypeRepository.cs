@@ -13,11 +13,11 @@ namespace Raccord.Data.EntityFramework.Repositories.Breakdowns.BreakdownTypes
         }
 
 
-        public IEnumerable<BreakdownType> GetAllForProject(long projectID)
+        public IEnumerable<BreakdownType> GetAllForBreakdown(long breakdownID)
         {
             var query = GetIncludedSummary();
 
-            return query.Where(l=> l.ProjectID == projectID);
+            return query.Where(l=> l.BreakdownID == breakdownID);
         }
 
         public BreakdownType GetFull(long ID)
@@ -38,7 +38,9 @@ namespace Raccord.Data.EntityFramework.Repositories.Breakdowns.BreakdownTypes
         {
             IQueryable<BreakdownType> query = _context.Set<BreakdownType>();
 
-            return query.Include(bt=> bt.BreakdownItems)
+            return query.Include(bt => bt.Breakdown)
+                            .ThenInclude(b => b.User)
+                        .Include(bt=> bt.BreakdownItems)
                         .ThenInclude(bi=> bi.ImageBreakdownItems)
                         .ThenInclude(ibi=> ibi.Image)
                         .Include(bt=> bt.BreakdownItems)

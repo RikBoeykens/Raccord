@@ -1,12 +1,12 @@
-import { Slate } from "./slate.model";
-import { Scene } from "../../../scenes/model/scene.model";
-import { ShootingDay } from "../../../shooting-days/index";
-import { Take } from "../../takes/model/take.model";
-import { LinkedImage } from "../../../images/model/linked-image.model";
+import { Slate } from './slate.model';
+import { Scene } from '../../../scenes/model/scene.model';
+import { ShootingDay } from '../../../shooting-days/index';
+import { Take } from '../../takes/model/take.model';
+import { LinkedImage } from '../../../images/model/linked-image.model';
 
 export class FullSlate extends Slate {
-    takes: Take[];
-    images: LinkedImage[];
+    public takes: Take[];
+    public images: LinkedImage[];
 
     constructor(obj?: {
                         id: number,
@@ -23,13 +23,12 @@ export class FullSlate extends Slate {
                         shootingDay?: ShootingDay,
                         takes: Take[],
                         images: LinkedImage[],
-                    }){
+                    }) {
         super(obj);
-        if(obj){
+        if (obj) {
             this.takes = obj.takes;
             this.images = obj.images;
-        }
-        else{
+        } else {
             this.id = 0;
         }
     }

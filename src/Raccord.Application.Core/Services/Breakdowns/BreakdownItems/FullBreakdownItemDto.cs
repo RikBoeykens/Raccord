@@ -1,12 +1,15 @@
 using Raccord.Application.Core.Services.Scenes;
 using Raccord.Application.Core.Services.Images;
 using System.Collections.Generic;
+using Raccord.Application.Core.Services.Breakdowns.BreakdownTypes;
 
 namespace Raccord.Application.Core.Services.Breakdowns.BreakdownItems
 {
     // Dto to represent a full breakdown item
-    public class FullBreakdownItemDto: BreakdownItemDto
+    public class FullBreakdownItemDto: BaseBreakdownItemDto
     {
+        private BreakdownSummaryDto _breakdown;
+        private BreakdownTypeDto _type;
         private IEnumerable<LinkedSceneDto> _scenes;
         private IEnumerable<LinkedImageDto> _images;
 
@@ -33,6 +36,38 @@ namespace Raccord.Application.Core.Services.Breakdowns.BreakdownItems
             set
             {
                 _images = value;
+            }
+        }
+
+        /// <summary>
+        /// Breakdown linked to the item
+        /// </summary>
+        /// <returns></returns>
+        public BreakdownSummaryDto Breakdown
+        {
+            get
+            {
+                return _breakdown ?? (_breakdown = new BreakdownSummaryDto());
+            }
+            set
+            {
+                _breakdown = value;
+            }
+        }
+
+        /// <summary>
+        /// Breakdown type linked to the item
+        /// </summary>
+        /// <returns></returns>
+        public BreakdownTypeDto Type
+        {
+            get
+            {
+                return _type ?? (_type = new BreakdownTypeDto());
+            }
+            set
+            {
+                _type = value;
             }
         }
     }
