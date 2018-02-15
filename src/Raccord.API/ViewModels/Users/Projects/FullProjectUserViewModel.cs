@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Raccord.API.ViewModels.Characters;
 using Raccord.API.ViewModels.Crew.CrewMembers;
 using Raccord.API.ViewModels.Projects;
 using Raccord.API.ViewModels.Users;
@@ -12,6 +13,7 @@ namespace Raccord.API.ViewModels.Users.Projects
         private ProjectViewModel _project;
         private UserViewModel _user;
         private IEnumerable<CrewMemberViewModel> _crewMembers;
+        private IEnumerable<CharacterViewModel> _characters;
         private ProjectRoleViewModel _projectRole;
 
         // ID of the crew user
@@ -56,6 +58,22 @@ namespace Raccord.API.ViewModels.Users.Projects
             set
             {
                 _crewMembers = value;
+            }
+        }
+
+        /// <summary>
+        /// Crew members linked to the project user
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<CharacterViewModel> Characters
+        {
+            get
+            {
+                return _characters ?? (_characters = new List<CharacterViewModel>());
+            }
+            set
+            {
+                _characters = value;
             }
         }
 

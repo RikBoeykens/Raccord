@@ -13,6 +13,7 @@ using Raccord.Application.Core.Services.Scheduling.ScheduleDays;
 using Raccord.Application.Core.Services.Scenes;
 using Raccord.Application.Services.Scheduling.ScheduleDays;
 using Raccord.Domain.Model.Callsheets.Scenes;
+using Raccord.Application.Services.Profile;
 
 namespace Raccord.Application.Services.Characters
 {
@@ -30,6 +31,7 @@ namespace Raccord.Application.Services.Characters
                 Images = character.ImageCharacters.Select(i=> i.TranslateImage()),
                 Scenes = character.CharacterScenes.OrderBy(s=> s.Scene.Number).Select(s=> s.TranslateScene()),
                 ScheduleDays = character.GetCharacterScheduleDays(),
+                User = character.ProjectUser.User.Translate(),
                 ProjectID = character.ProjectID,
             };
 

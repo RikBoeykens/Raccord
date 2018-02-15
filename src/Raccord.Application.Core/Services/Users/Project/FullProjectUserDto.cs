@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Raccord.Application.Core.Services.Characters;
 using Raccord.Application.Core.Services.Crew.CrewMembers;
 using Raccord.Application.Core.Services.Projects;
 using Raccord.Application.Core.Services.Users;
@@ -11,6 +12,7 @@ namespace Raccord.Application.Core.Services.Users.Project
         private UserDto _user;
         private ProjectDto _project;
         private IEnumerable<CrewMemberDto> _crewMembers;
+        private IEnumerable<CharacterDto> _characters;
         private ProjectRoleDto _role;
         // ID of the project user
         public long ID { get; set; }
@@ -54,6 +56,22 @@ namespace Raccord.Application.Core.Services.Users.Project
             set
             {
                 _crewMembers = value;
+            }
+        }
+
+        /// <summary>
+        /// Crew members linked to the project user
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<CharacterDto> Characters
+        {
+            get
+            {
+                return _characters ?? (_characters = new List<CharacterDto>());
+            }
+            set
+            {
+                _characters = value;
             }
         }
 

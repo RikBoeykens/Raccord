@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Raccord.Domain.Model.Breakdowns;
+using Raccord.Domain.Model.Characters;
 using Raccord.Domain.Model.Crew.CrewMembers;
 using Raccord.Domain.Model.Projects;
 using Raccord.Domain.Model.Users;
@@ -10,6 +11,7 @@ namespace Raccord.Domain.Model.Users
     public class ProjectUser : Entity
     {
         private ICollection<CrewMember> _crewMembers;
+        private ICollection<Character> _characters;
 
         // ID of the linked project
         public long ProjectID { get; set; }
@@ -47,6 +49,18 @@ namespace Raccord.Domain.Model.Users
             set
             {
                 _crewMembers = value;
+            }
+        }
+
+        public virtual ICollection<Character> Characters
+        {
+            get
+            {
+                return _characters ?? (_characters = new List<Character>());
+            }
+            set
+            {
+                _characters = value;
             }
         }
     }
