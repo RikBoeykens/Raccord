@@ -160,7 +160,8 @@ import {
   AdminUserLandingComponent,
   AdminProjectUserLandingComponent,
   AdminProjectUserAddCrewMemberComponent,
-  AdminEditCrewMemberDialog
+  AdminEditCrewMemberDialog,
+  AdminAddCastDialogComponent
 } from './admin';
 import{
   RaccordChartComponent
@@ -310,6 +311,7 @@ const ENTRY_COMPONENTS = [
   EditCrewMemberDialog,
   EditUserProfileDialog,
   AdminEditCrewMemberDialog,
+  AdminAddCastDialogComponent,
   EditBreakdownTypeDialogComponent
 ];
 
@@ -442,6 +444,7 @@ import {
   AdminUserResolve,
   AdminProjectUserHttpService,
   AdminProjectUserCrewHttpService,
+  AdminProjectUserCastHttpService,
   AdminProjectUsersResolve,
   AdminProjectUserResolve,
   AdminUserProjectsResolve,
@@ -563,6 +566,7 @@ const APP_PROVIDERS = [
   AdminUserResolve,
   AdminProjectUserHttpService,
   AdminProjectUserCrewHttpService,
+  AdminProjectUserCastHttpService,
   AdminProjectUsersResolve,
   AdminProjectUserResolve,
   AdminProjectRoleHttpService,

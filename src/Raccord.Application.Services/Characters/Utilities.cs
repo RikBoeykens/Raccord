@@ -31,7 +31,7 @@ namespace Raccord.Application.Services.Characters
                 Images = character.ImageCharacters.Select(i=> i.TranslateImage()),
                 Scenes = character.CharacterScenes.OrderBy(s=> s.Scene.Number).Select(s=> s.TranslateScene()),
                 ScheduleDays = character.GetCharacterScheduleDays(),
-                User = character.ProjectUser.User.Translate(),
+                User = character.ProjectUser?.User.Translate(),
                 ProjectID = character.ProjectID,
             };
 

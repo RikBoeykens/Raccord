@@ -235,7 +235,8 @@ export const ROUTES: Routes = [
             component: AdminProjectUserLandingComponent,
             resolve: {
               projectUser: AdminProjectUserResolve,
-              projectRoles: AdminProjectRolesResolve
+              projectRoles: AdminProjectRolesResolve,
+              characters: CharacterResolve
             }
           },
           {

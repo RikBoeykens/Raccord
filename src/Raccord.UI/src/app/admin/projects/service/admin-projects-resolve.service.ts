@@ -6,12 +6,12 @@ import { ProjectSummary } from '../../../projects';
 export class AdminProjectsResolve implements Resolve<ProjectSummary[]> {
 
   constructor(
-    private _projectHttpService: AdminProjectHttpService, 
+    private _projectHttpService: AdminProjectHttpService,
     private router: Router
   ) {}
 
-  resolve(route: ActivatedRouteSnapshot) {
-    return this._projectHttpService.getAll().then(data => {
+  public resolve(route: ActivatedRouteSnapshot) {
+    return this._projectHttpService.getAll().then((data) => {
       return data;
     });
   }

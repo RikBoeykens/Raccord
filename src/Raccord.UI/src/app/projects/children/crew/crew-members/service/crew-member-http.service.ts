@@ -9,40 +9,40 @@ import { FullCrewMember } from '../model/full-crew-member.model';
 @Injectable()
 export class CrewMemberHttpService extends BaseHttpService {
 
-    constructor(protected _http: Http) { 
+    constructor(protected _http: Http) {
         super(_http);
         this._baseUri = `${AppSettings.API_ENDPOINT}/crewmembers`;
     }
 
-    getAll(slateId): Promise<CrewMemberSummary[]> {
+    public getAll(slateId): Promise<CrewMemberSummary[]> {
 
-        var uri = `${this._baseUri}/${slateId}/slate`;
+        let uri = `${this._baseUri}/${slateId}/slate`;
 
         return this.doGetArray(uri);
     }
 
-    get(id: number): Promise<FullCrewMember>{
+    public get(id: number): Promise<FullCrewMember> {
 
-        var uri = `${this._baseUri}/${id}`;
-
-        return this.doGet(uri);
-    }
-
-    getSummary(id: Number): Promise<CrewMemberSummary> {
-
-        var uri = `${this._baseUri}/${id}/summary`;
+        let uri = `${this._baseUri}/${id}`;
 
         return this.doGet(uri);
     }
 
-    post(take: CrewMember): Promise<number> {
-        var uri = this._baseUri;
+    public getSummary(id: Number): Promise<CrewMemberSummary> {
+
+        let uri = `${this._baseUri}/${id}/summary`;
+
+        return this.doGet(uri);
+    }
+
+    public post(take: CrewMember): Promise<number> {
+        let uri = this._baseUri;
 
         return this.doPost(take, uri);
     }
 
-    delete(id: Number): Promise<any> {
-        var uri = `${this._baseUri}/${id}`;
+    public delete(id: Number): Promise<any> {
+        let uri = `${this._baseUri}/${id}`;
 
         return this.doDelete(uri);
     }

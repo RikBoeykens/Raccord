@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { AppSettings } from '../../../app.settings';
-import { BaseHttpService } from "../../../shared/service/base-http.service";
+import { BaseHttpService } from '../../../shared/service/base-http.service';
 import { CreateUserCrewMember } from '../model/create-user-crew-member.model';
 
 @Injectable()
 export class AdminProjectUserCrewHttpService extends BaseHttpService {
 
-    constructor(protected _http: Http) { 
+    constructor(protected _http: Http) {
         super(_http);
         this._baseUri = `${AppSettings.API_ADMIN_ENDPOINT}/projectusercrew`;
     }
