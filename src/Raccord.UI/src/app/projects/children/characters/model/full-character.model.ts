@@ -3,13 +3,13 @@ import { LinkedScene } from '../../scenes/model/linked-scene.model';
 import { LinkedImage } from '../../images/model/linked-image.model';
 import { ScheduleDaySceneCollection } from
     '../../scheduling/schedule-days/model/schedule-day-scene-collection.model';
-import { UserProfileSummary } from '../../../../profile/model/user-profile-summary.model';
+import { CastMemberSummary } from '../../cast/model/cast-member-summary.model';
 
 export class FullCharacter extends Character {
     public scenes: LinkedScene[];
     public images: LinkedImage[];
     public scheduleDays: ScheduleDaySceneCollection[];
-    public user: UserProfileSummary;
+    public castMember: CastMemberSummary;
 
     constructor(obj?: {
                         id: number,
@@ -20,14 +20,14 @@ export class FullCharacter extends Character {
                         scenes: LinkedScene[],
                         images: LinkedImage[],
                         scheduleDays: ScheduleDaySceneCollection[],
-                        user: UserProfileSummary
+                        castMember: CastMemberSummary
                     }) {
         super(obj);
         if (obj) {
             this.scenes = obj.scenes;
             this.images = obj.images;
             this.scheduleDays = obj.scheduleDays;
-            this.user = obj.user;
+            this.castMember = obj.castMember;
         }
     }
 }

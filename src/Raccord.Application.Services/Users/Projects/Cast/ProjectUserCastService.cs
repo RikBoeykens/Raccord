@@ -1,5 +1,6 @@
 using System.Linq;
 using Raccord.Application.Core.Services.Users.Project.Cast;
+using Raccord.Data.EntityFramework.Repositories.Cast;
 using Raccord.Data.EntityFramework.Repositories.Characters;
 using Raccord.Data.EntityFramework.Repositories.Users.Projects;
 
@@ -8,32 +9,49 @@ namespace Raccord.Application.Services.Users.Project.Cast
     // Service for project user cast functionality
     public class ProjectUserCastService : IProjectUserCastService
     {
-      private readonly ICharacterRepository _characterRepository;
+      private readonly ICastMemberRepository _castMemberRepository;
+      private readonly IProjectUserRepository _projectUserRepository;
 
       public ProjectUserCastService(
-        ICharacterRepository crewMemberRepository
+        ICastMemberRepository castMemberRepository,
+        IProjectUserRepository projectUserRepository
       ){
-        _characterRepository = crewMemberRepository;
+        _castMemberRepository = castMemberRepository;
+        _projectUserRepository = projectUserRepository;
       }
 
-      public void Link(long projectUserID, long characterID)
+      public void Link(long projectUserID, long castMemberID)
       {
-        var character = _characterRepository.GetSingle(characterID);
-        character.ProjectUserID = projectUserID;
+        var castMember = _castMemberRepository.GetSingle(castMemberID);
+        castMember.ProjectUserID = projectUserID;
 
-        _characterRepository.Edit(character);
-        _characterRepository.Commit();
+        _castMemberRepository.Edit(castMember);
+        _castMemberRepository.Commit();
+
+        var projectUser = _projectUserRepository.GetSingle(projectUserID);
+        projectUser.CastMemberID = castMemberID;
+
+        _projectUserRepository.Edit(projectUser);
+        _projectUserRepository.Commit();
       }
 
-      public void RemoveLink(long projectUserID, long characterID)
+      public void RemoveLink(long projectUserID, long castMemberID)
       {
-        var crewMember = _characterRepository.FindBy(cm=> cm.ID == characterID && cm.ProjectUserID == projectUserID).FirstOrDefault();
-        if(crewMember!= null)
+        var castMember = _castMemberRepository.FindBy(cm=> cm.ID == castMemberID && cm.ProjectUserID == projectUserID).FirstOrDefault();
+        if(castMember!= null)
         {
-          crewMember.ProjectUserID = null;
+          castMember.ProjectUserID = null;
 
-          _characterRepository.Edit(crewMember);
-          _characterRepository.Commit();
+          _castMemberRepository.Edit(castMember);
+          _castMemberRepository.Commit();
+        }
+        var projectUser = _projectUserRepository.FindBy(cm=> cm.ID == projectUserID && cm.CastMemberID == castMemberID).FirstOrDefault();
+        if(projectUser!= null)
+        {
+          projectUser.CastMemberID = null;
+
+          _projectUserRepository.Edit(projectUser);
+          _projectUserRepository.Commit();
         }
       }
     }

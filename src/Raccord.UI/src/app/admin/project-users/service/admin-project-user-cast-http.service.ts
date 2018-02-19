@@ -11,14 +11,14 @@ export class AdminProjectUserCastHttpService extends BaseHttpService {
         this._baseUri = `${AppSettings.API_ADMIN_ENDPOINT}/projectusercast`;
     }
 
-    public addLink(projectUserId: number, characterId: number): Promise<any> {
-        let uri = `${this._baseUri}/${projectUserId}/${characterId}/addlink`;
+    public addLink(projectUserId: number, castMemberId: number): Promise<any> {
+        let uri = `${this._baseUri}/${projectUserId}/${castMemberId}/addlink`;
 
         return this.doPost(null, uri);
     }
 
-    public removeLink(projectUserId: number, characterId: number): Promise<any> {
-        let uri = `${this._baseUri}/${projectUserId}/${characterId}/removelink`;
+    public removeLink(projectUserId: number, castMemberId: number): Promise<any> {
+        let uri = `${this._baseUri}/${projectUserId}/${castMemberId}/removelink`;
 
         return this.doPost(null, uri);
     }

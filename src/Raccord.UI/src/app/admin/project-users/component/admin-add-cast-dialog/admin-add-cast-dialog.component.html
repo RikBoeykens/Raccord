@@ -1,11 +1,11 @@
 <h1 md-dialog-title>
-    Choose a Character
+    Choose a Cast Member
 </h1>
 <md-dialog-content>
     <md-list>
-        <md-list-item *ngFor="let character of characters"
-                        (click)="chooseCharacter(character)">
-            {{character.name}}
+        <md-list-item *ngFor="let castMember of castMembers"
+                        (click)="chooseCastMember(castMember)">
+            {{castMember.firstName}} {{castMember.lastName}}
         </md-list-item>
     </md-list>
 </md-dialog-content>

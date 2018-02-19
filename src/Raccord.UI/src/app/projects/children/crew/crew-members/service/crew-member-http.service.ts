@@ -14,9 +14,9 @@ export class CrewMemberHttpService extends BaseHttpService {
         this._baseUri = `${AppSettings.API_ENDPOINT}/crewmembers`;
     }
 
-    public getAll(slateId): Promise<CrewMemberSummary[]> {
+    public getAll(departmentId): Promise<CrewMemberSummary[]> {
 
-        let uri = `${this._baseUri}/${slateId}/slate`;
+        let uri = `${this._baseUri}/${departmentId}/department`;
 
         return this.doGetArray(uri);
     }

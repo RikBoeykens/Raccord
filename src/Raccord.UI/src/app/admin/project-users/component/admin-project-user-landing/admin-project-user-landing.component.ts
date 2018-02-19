@@ -23,8 +23,11 @@ import { LoadingWrapperService } from '../../../../shared/service/loading-wrappe
 import { Character } from '../../../../projects/children/characters/model/character.model';
 import { AdminProjectUserCastHttpService } from
     '../../service/admin-project-user-cast-http.service';
-import { CharacterSummary } from
-    '../../../../projects/children/characters/model/character-summary.model';
+import { CastMemberSummary } from
+    '../../../../projects/children/cast/model/cast-member-summary.model';
+import { CastMemberHttpService }
+    from '../../../../projects/children/cast/service/cast-member-http.service';
+import { CastMember } from '../../../../projects/children/cast/model/cast-member.model';
 
 @Component({
   templateUrl: 'admin-project-user-landing.component.html',
@@ -33,13 +36,13 @@ export class AdminProjectUserLandingComponent implements OnInit  {
 
   public projectUser: FullProjectUser;
   public projectRoles: ProjectRole[];
-  public availableCharacters: CharacterSummary[];
 
   constructor(
       private _projectUserHttpService: AdminProjectUserHttpService,
       private _projectUserCastHttpService: AdminProjectUserCastHttpService,
       private _projectUserCrewHttpService: AdminProjectUserCrewHttpService,
       private _crewMemberHttpService: CrewMemberHttpService,
+      private _castMemberHttpService: CastMemberHttpService,
       private _loadingWrapperService: LoadingWrapperService,
       private _loadingService: LoadingService,
       private _dialogService: DialogService,
@@ -52,11 +55,9 @@ export class AdminProjectUserLandingComponent implements OnInit  {
       this.route.data.subscribe((data: {
           projectUser: FullProjectUser,
           projectRoles: ProjectRole[],
-          characters: CharacterSummary[]
         }) => {
           this.projectUser = data.projectUser;
           this.projectRoles = data.projectRoles;
-          this.availableCharacters = data.characters;
       });
   }
 
@@ -123,17 +124,23 @@ export class AdminProjectUserLandingComponent implements OnInit  {
     );
   }
 
-  public showAddCast() {
-      let crewMemberDialog = this._dialog.open(AdminAddCastDialogComponent, {data:
-          {
-              characters: this.availableCharacters
-                            .filter((character: CharacterSummary) => character.user.id)
-          }});
-      crewMemberDialog.afterClosed().subscribe((returnedCharacter: CharacterSummary) => {
-          if (returnedCharacter) {
-              this.addCastLink(returnedCharacter);
-          }
-      });
+  public showAddCastMember() {
+    this._loadingWrapperService.Load(
+        this._castMemberHttpService.getAll(this.projectUser.project.id),
+        (data: CastMemberSummary[]) => {
+            let castMemberDialog = this._dialog.open(AdminAddCastDialogComponent, {data:
+                {
+                    castMembers: data.filter((cast: CastMemberSummary) => cast.userID === '')
+                }});
+            castMemberDialog.afterClosed().subscribe((returnedCastMember: CastMemberSummary) => {
+                console.log(returnedCastMember);
+                if (returnedCastMember) {
+                    this.addCastLink(returnedCastMember);
+                }
+            });
+        }
+    );
+
   }
 
     public editCrewMember(crewMember: CrewMember) {
@@ -148,10 +155,16 @@ export class AdminProjectUserLandingComponent implements OnInit  {
         });
     }
 
-    private addCastLink(character: Character) {
+    public getFullName(castMember: CastMember) {
+        return `${castMember.firstName} ${castMember.lastName}`;
+    }
+
+    private addCastLink(castMember: CastMemberSummary) {
         this._loadingWrapperService.Load(
-            this._projectUserCastHttpService.addLink(this.projectUser.id, character.id),
-            () => this.getProjectUser()
+            this._projectUserCastHttpService.addLink(this.projectUser.id, castMember.id),
+            () => {
+                this.getProjectUser();
+            }
         );
     }
 

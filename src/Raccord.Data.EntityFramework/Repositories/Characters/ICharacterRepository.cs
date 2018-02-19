@@ -7,6 +7,7 @@ namespace Raccord.Data.EntityFramework.Repositories.Characters
     public interface ICharacterRepository : IBaseRepository<Character>
     {
         IEnumerable<Character> GetAllForProject(long projectID);
+        IEnumerable<Character> GetAllForCastMember(long castMemberID);
         Character GetFull(long ID);
         Character GetSummary(long ID);
         int SearchCount(string searchText, long? projectID, string userID, bool isAdmin, long[] excludeIds);

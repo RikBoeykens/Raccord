@@ -19,6 +19,13 @@ namespace Raccord.Data.EntityFramework.Repositories.Characters
             return query.Where(i=> i.ProjectID == projectID);
         }
 
+        public IEnumerable<Character> GetAllForCastMember(long castMemberID)
+        {
+            var query = GetIncludedSummary();
+
+            return query.Where(i=> i.CastMemberID == castMemberID);
+        }
+
         public Character GetFull(long ID)
         {
             var query = GetIncludedFull();
@@ -99,8 +106,9 @@ namespace Raccord.Data.EntityFramework.Repositories.Characters
                                 .ThenInclude(sd=> sd.ScheduleScene)
                                     .ThenInclude(ss=> ss.ScheduleDay)
                                         .ThenInclude(sd=> sd.ShootingDay)
-                        .Include(c=> c.ProjectUser)
-                            .ThenInclude(pu => pu.User);
+                        .Include(c => c.CastMember)
+                            .ThenInclude(c=> c.ProjectUser)
+                                .ThenInclude(pu => pu.User);
         }
 
         private IQueryable<Character> GetIncludedSummary()

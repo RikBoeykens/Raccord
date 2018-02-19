@@ -22,14 +22,14 @@ namespace Raccord.API.Controllers.Admin
         }
 
         // POST api/projectusercast/5/1/addlink
-        [HttpPost("{projectUserId}/{characterId}/addlink")]
-        public JsonResult AddLink(long projectUserId, long characterId)
+        [HttpPost("{projectUserId}/{castMemberId}/addlink")]
+        public JsonResult AddLink(long projectUserId, long castMemberId)
         {
             var response = new JsonResponse();
 
             try
             {
-                _projectUserCastService.Link(projectUserId, characterId);
+                _projectUserCastService.Link(projectUserId, castMemberId);
 
                 response = new JsonResponse
                 {
@@ -49,14 +49,14 @@ namespace Raccord.API.Controllers.Admin
         }
 
         // POST api/projectusercast/5/1/removelink
-        [HttpPost("{projectUserId}/{characterId}/removelink")]
-        public JsonResult RemoveLink(long projectUserId, long characterId)
+        [HttpPost("{projectUserId}/{castMemberId}/removelink")]
+        public JsonResult RemoveLink(long projectUserId, long castMemberId)
         {
             var response = new JsonResponse();
 
             try
             {
-                _projectUserCastService.RemoveLink(projectUserId, characterId);
+                _projectUserCastService.RemoveLink(projectUserId, castMemberId);
 
                 response = new JsonResponse
                 {

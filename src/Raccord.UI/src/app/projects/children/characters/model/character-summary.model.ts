@@ -5,7 +5,6 @@ import { UserProfile } from '../../../../profile/model/user-profile.model';
 export class CharacterSummary extends Character {
     public sceneCount: number;
     public primaryImage: Image;
-    public user: UserProfile;
 
     constructor(obj?: {
                         id: number,
@@ -15,13 +14,11 @@ export class CharacterSummary extends Character {
                         projectId: number,
                         sceneCount: number,
                         primaryImage: Image,
-                        user: UserProfile
                     }) {
         super(obj);
         if (obj) {
             this.sceneCount = obj.sceneCount;
             this.primaryImage = obj.primaryImage;
-            this.user = obj.user;
         }
     }
 }

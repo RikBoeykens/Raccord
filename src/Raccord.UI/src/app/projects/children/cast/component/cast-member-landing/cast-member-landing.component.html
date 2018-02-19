@@ -1,0 +1,16 @@
+<md-card>
+    <a routerLink="/" class="breadcrumb">Dashboard</a>
+    <a routerLink="/projects" class="breadcrumb">Projects</a>
+    <a routerLink="/projects/{{project.id}}" class="breadcrumb">{{project.title}}</a>
+    <a routerLink="/projects/{{project.id}}/cast" class="breadcrumb">Cast</a>
+    <span class="breadcrumb">{{getFullName(castMember)}} </span>
+</md-card>
+<md-tab-group>
+  <md-tab label="Characters">
+      <cast-member-characters [characters]="castMember.characters" [castMemberId]="castMember.id" [projectId]="project.id"></cast-member-characters>
+  </md-tab>
+  <md-tab label="Scenes">
+      <cast-member-scenes [scenes]="castMember.scenes" [projectId]="project.id"></cast-member-scenes>
+  </md-tab>
+</md-tab-group>
+<button md-fab (click)="updateCastMember()" *ngIf="getCanEdit()"><md-icon>settings</md-icon></button>

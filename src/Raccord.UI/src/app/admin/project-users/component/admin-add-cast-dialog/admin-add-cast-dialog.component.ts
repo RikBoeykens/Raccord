@@ -1,7 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { MD_DIALOG_DATA, MdDialogRef } from '@angular/material';
-import { CharacterSummary } from
-    '../../../../projects/children/characters/model/character-summary.model';
+import { CastMemberSummary } from
+    '../../../../projects/children/cast/model/cast-member-summary.model';
 
 @Component({
     selector: 'admin-add-cast-dialog',
@@ -10,18 +10,18 @@ import { CharacterSummary } from
 
 export class AdminAddCastDialogComponent {
 
-    public characters: CharacterSummary[];
+    public castMembers: CastMemberSummary[];
 
     constructor(
         private _dialogRef: MdDialogRef<AdminAddCastDialogComponent>,
         @Inject(MD_DIALOG_DATA) private data: {
-            characters: CharacterSummary[]
+            castMembers: CastMemberSummary[]
         }
     ) {
-        this.characters = data.characters;
+        this.castMembers = data.castMembers;
     }
 
-    public chooseCharacter(character: CharacterSummary) {
+    public chooseCastMember(character: CastMemberSummary) {
         this._dialogRef.close(character);
     }
 }

@@ -38,6 +38,16 @@ namespace Raccord.Application.Services.Characters
             return dtos;
         }
 
+        // Gets all characters for a project
+        public IEnumerable<CharacterSummaryDto> GetAllForCastMember(long castMemberID)
+        {
+            var characters = _characterRepository.GetAllForCastMember(castMemberID);
+
+            var dtos = characters.Select(l => l.TranslateSummary());
+
+            return dtos;
+        }
+
         // Gets a single character by id
         public FullCharacterDto Get(Int64 ID)
         {

@@ -87,6 +87,7 @@ import {
   SearchCharacterComponent,
   CharacterSummaryComponent,
   SearchCharactersCollectionComponent,
+  CharacterCastMemberComponent,
   BreakdownsListComponent,
   BreakdownLandingComponent,
   BreakdownSettingsComponent,
@@ -141,7 +142,13 @@ import {
   SceneDialogueComponent,
   EditCommentComponent,
   ShowCommentComponent,
-  CommentContainerComponent
+  CommentContainerComponent,
+  CastMemberCharactersComponent,
+  CastMemberLandingComponent,
+  CastMemberScenesComponent,
+  CastMembersListComponent,
+  EditCastMemberDialogComponent,
+  EditCastMembersListComponent
 } from './projects';
 import { ScenePropertiesLandingComponent } from './projects';
 import {
@@ -233,6 +240,7 @@ const COMPONENTS = [
   SearchCharacterComponent,
   CharacterSummaryComponent,
   SearchCharactersCollectionComponent,
+  CharacterCastMemberComponent,
   BreakdownsListComponent,
   BreakdownLandingComponent,
   BreakdownSettingsComponent,
@@ -284,6 +292,11 @@ const COMPONENTS = [
   EditCommentComponent,
   ShowCommentComponent,
   CommentContainerComponent,
+  CastMemberCharactersComponent,
+  CastMemberLandingComponent,
+  CastMemberScenesComponent,
+  CastMembersListComponent,
+  EditCastMembersListComponent,
   ScenePropertiesLandingComponent,
   SelectEntityComponent,
   PlaceholderImageComponent,
@@ -312,7 +325,8 @@ const ENTRY_COMPONENTS = [
   EditUserProfileDialog,
   AdminEditCrewMemberDialog,
   AdminAddCastDialogComponent,
-  EditBreakdownTypeDialogComponent
+  EditBreakdownTypeDialogComponent,
+  EditCastMemberDialogComponent
 ];
 
 // Services
@@ -418,7 +432,10 @@ import {
   ScriptTextHttpService,
   ScriptTextResolve,
   ScriptTextCallsheetResolve,
-  CommentHttpService
+  CommentHttpService,
+  CastMemberHttpService,
+  CastMemberResolve,
+  CastMembersResolve
 } from './projects';
 
 import {
@@ -586,7 +603,10 @@ const APP_PROVIDERS = [
   ScriptTextResolve,
   ScriptTextCallsheetResolve,
   UserProfileHttpService,
-  UserProfileResolve
+  UserProfileResolve,
+  CastMemberHttpService,
+  CastMemberResolve,
+  CastMembersResolve
 ];
 
 // Directives

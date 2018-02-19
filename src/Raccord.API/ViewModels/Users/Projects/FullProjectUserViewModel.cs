@@ -4,6 +4,7 @@ using Raccord.API.ViewModels.Crew.CrewMembers;
 using Raccord.API.ViewModels.Projects;
 using Raccord.API.ViewModels.Users;
 using Raccord.API.ViewModels.Users.ProjectRoles;
+using Raccord.API.ViewModels.Cast;
 
 namespace Raccord.API.ViewModels.Users.Projects
 {
@@ -13,7 +14,7 @@ namespace Raccord.API.ViewModels.Users.Projects
         private ProjectViewModel _project;
         private UserViewModel _user;
         private IEnumerable<CrewMemberViewModel> _crewMembers;
-        private IEnumerable<CharacterViewModel> _characters;
+        private CastMemberViewModel _castMember;
         private ProjectRoleViewModel _projectRole;
 
         // ID of the crew user
@@ -65,15 +66,15 @@ namespace Raccord.API.ViewModels.Users.Projects
         /// Crew members linked to the project user
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<CharacterViewModel> Characters
+        public CastMemberViewModel CastMember
         {
             get
             {
-                return _characters ?? (_characters = new List<CharacterViewModel>());
+                return _castMember ?? (_castMember = new CastMemberViewModel());
             }
             set
             {
-                _characters = value;
+                _castMember = value;
             }
         }
 

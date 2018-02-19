@@ -23,14 +23,9 @@
 <md-card>
     <md-card-title>Linked cast</md-card-title>
     <md-card-content>
-        <md-list *ngIf="projectUser.characters.length">
-            <md-list-item *ngFor="let character of projectUser.characters">
-                {{character.name}}
-                <button md-button (click)="removeCastLink(character)"><md-icon>delete</md-icon></button>
-            </md-list-item>
-        </md-list>
-        <i *ngIf="!projectUser.characters.length">No cast linked</i>
-        <button md-fab (click)="showAddCastMember()"><md-icon>add</md-icon></button>
+        <a *ngIf="projectUser.castMember.id!==0" routerLink="/projects/{{projectUser.project.id}}/cast/{{projectUser.castMember.id}}">{{getFullName(projectUser.castMember)}}</a>
+        <i *ngIf="projectUser.castMember.id===0">No cast linked</i>
+        <button *ngIf="projectUser.castMember.id===0" md-fab (click)="showAddCastMember()"><md-icon>add</md-icon></button>
     </md-card-content>
 </md-card>
 <md-card>
