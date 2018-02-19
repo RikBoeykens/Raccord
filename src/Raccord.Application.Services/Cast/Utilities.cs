@@ -70,7 +70,6 @@ namespace Raccord.Application.Services.Cast
     {
       if(castMember.ProjectUserID.HasValue)
       {
-        return castMember.FirstName;
         return castMember.ProjectUser.User.FirstName;
       }
       return castMember.FirstName;
@@ -80,7 +79,6 @@ namespace Raccord.Application.Services.Cast
     {
       if(castMember.ProjectUserID.HasValue)
       {
-        return castMember.LastName;
         return castMember.ProjectUser.User.LastName;
       }
       return castMember.LastName;
@@ -90,7 +88,6 @@ namespace Raccord.Application.Services.Cast
     {
       if(castMember.ProjectUserID.HasValue)
       {
-      return castMember.Telephone;
         return castMember.ProjectUser.User.Telephone;
       }
       return castMember.Telephone;
@@ -100,7 +97,6 @@ namespace Raccord.Application.Services.Cast
     {
       if(castMember.ProjectUserID.HasValue)
       {
-      return castMember.Email;
         return castMember.ProjectUser.User.PreferredEmail;
       }
       return castMember.Email;
@@ -110,7 +106,6 @@ namespace Raccord.Application.Services.Cast
     {
       if(castMember.ProjectUserID.HasValue)
       {
-      return string.Empty;
         return castMember.ProjectUser.UserID;
       }
       return string.Empty;
@@ -120,7 +115,6 @@ namespace Raccord.Application.Services.Cast
     {
       if(castMember.ProjectUserID.HasValue)
       {
-      return false;
         return castMember.ProjectUser.User.ImageContent != null;
       }
       return false;
