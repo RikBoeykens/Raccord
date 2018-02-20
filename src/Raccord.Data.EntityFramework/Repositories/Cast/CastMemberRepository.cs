@@ -33,6 +33,18 @@ namespace Raccord.Data.EntityFramework.Repositories.Cast
             return query.FirstOrDefault(i => i.ID == ID);
         }
 
+        public int SearchCount(string searchText, long? projectID, string userID, bool isAdmin, long[] excludeIds)
+        {
+            var query = GetSearchQuery(searchText, projectID, userID, isAdmin, excludeIds);
+
+            return query.Count();            
+        }
+
+        public IEnumerable<CastMember> Search(string searchText, long? projectID, string userID, bool isAdmin, long[] excludeIds)
+        {
+            return GetSearchQuery(searchText, projectID, userID, isAdmin, excludeIds);
+        }
+
         private IQueryable<CastMember> GetIncludedFull()
         {
             IQueryable<CastMember> query = _context.Set<CastMember>();
@@ -76,6 +88,39 @@ namespace Raccord.Data.EntityFramework.Repositories.Cast
         {
             IQueryable<CastMember> query = _context.Set<CastMember>();
 
+            return query;
+        }
+
+        private IQueryable<CastMember> GetIncludedSearch()
+        {
+            IQueryable<CastMember> query = _context.Set<CastMember>();
+
+            return query.Include(s=> s.Project)
+                            .ThenInclude(p=> p.ProjectUsers)
+                        .Include(cm=> cm.ProjectUser)
+                            .ThenInclude(pu=> pu.User);
+        }
+
+        private IQueryable<CastMember> GetSearchQuery(string searchText, long? projectID, string userID, bool isAdmin, long[] excludeIds)
+        {
+            var query = GetIncludedSearch();
+
+            query = query.Where(s=>
+                                    (s.FirstName.ToLower().Contains(searchText.ToLower()) 
+                                    ||
+                                    s.LastName.ToLower().Contains(searchText.ToLower()))
+            );
+
+            if(projectID.HasValue)
+                query = query.Where(s=> s.ProjectID==projectID.Value);
+
+            if(!isAdmin)
+                query = query.Where(s=> s.Project.ProjectUsers.Any(c=> c.UserID == userID));
+
+            if(excludeIds.Any())
+            {
+                query = query.Where(c=> !excludeIds.Any(id=> id == c.ID));
+            }
             return query;
         }
     }

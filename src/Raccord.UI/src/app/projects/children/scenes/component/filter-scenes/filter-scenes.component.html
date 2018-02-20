@@ -16,8 +16,9 @@
     <search-day-nights-collection [projectID]="projectID" (onChange)="filterDayNights($event)"></search-day-nights-collection>
     <h3>Locations</h3>
     <search-locations-collection [projectID]="projectID" (onChange)="filterLocations($event)"></search-locations-collection>
-    <h3>Characters</h3>
+    <h3>Cast</h3>
     <search-characters-collection [projectID]="projectID" (onChange)="filterCharacters($event)"></search-characters-collection>
+    <search-entities-collection [projectID]="projectID" (onChange)="filterCastMembers($event)" [entityType]="getCastMemberType()" [entityTypeName]="'Cast Member'"></search-entities-collection>
     <h3 *ngIf="breakdown.id!==0">
         <span>Breakdown</span>
         &nbsp;

@@ -9,5 +9,7 @@ namespace Raccord.Data.EntityFramework.Repositories.Cast
         IEnumerable<CastMember> GetAllForProject(long projectID);
         CastMember GetFull(long ID);
         CastMember GetSummary(long ID);
+        int SearchCount(string searchText, long? projectID, string userID, bool isAdmin, long[] excludeIds);
+        IEnumerable<CastMember> Search(string searchText, long? projectID, string userID, bool isAdmin, long[] excludeIds);
     }
 }

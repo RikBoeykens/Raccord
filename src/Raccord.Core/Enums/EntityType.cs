@@ -13,6 +13,7 @@ namespace Raccord.Core.Enums
         BreakdownItem = 7,
         Location = 8,
         Slate = 9,
-        CrewMember = 10
+        CrewMember = 10,
+        CastMember = 11
     }
 }

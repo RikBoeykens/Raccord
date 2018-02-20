@@ -303,6 +303,7 @@ namespace Raccord.API
 
             services.AddTransient<ICastMemberRepository, CastMemberRepository>();
             services.AddTransient<ICastMemberService, CastMemberService>();
+            services.AddTransient<ICastMemberSearchEngineService, CastMemberSearchEngineService>();
         }
     }
 }

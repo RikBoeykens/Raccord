@@ -29,8 +29,12 @@ import { NoContentComponent } from './no-content';
 import { DashboardComponent } from './dashboard';
 import { LoadingComponent } from './loading/component';
 import { NavbarComponent } from './navbar';
-import { SearchComponent } from './search/component';
-import { SearchResultComponent } from './search/component';
+import {
+  SearchComponent,
+  SearchResultComponent,
+  SearchEntitiesCollectionComponent,
+  SearchEntityComponent
+} from './search/component';
 import {
   AddProjectComponent,
   EditProjectComponent,
@@ -188,6 +192,8 @@ const COMPONENTS = [
   NavbarComponent,
   SearchComponent,
   SearchResultComponent,
+  SearchEntitiesCollectionComponent,
+  SearchEntityComponent,
   AddProjectComponent,
   EditProjectComponent,
   ProjectLandingComponent,

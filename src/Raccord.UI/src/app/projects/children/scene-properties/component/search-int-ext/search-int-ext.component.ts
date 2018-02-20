@@ -10,33 +10,33 @@ import { DialogService } from '../../../../../shared/service/dialog.service';
     selector: 'search-int-ext',
     templateUrl: 'search-int-ext.component.html'
 })
-export class SearchIntExtComponent{
+export class SearchIntExtComponent {
 
     @Output() public setIntExt = new EventEmitter();
     @Input() public sceneIntExt: IntExt;
     @Input() public excludeIntExts: IntExt[] =  [];
-    searchResults: SearchResult[] = [];
+    public searchResults: SearchResult[] = [];
 
     constructor(
         private _searchEngineService: SearchEngineService,
         private _loadingService: LoadingService,
         private _dialogService: DialogService,
-    ){
+    ) {
     }
 
-    clearSearch(){
+    public clearSearch() {
         this.searchResults = [];
     }
 
-    doSearch(){
+    public doSearch() {
         this.sceneIntExt.id = 0;
-        if(!this.sceneIntExt.name || this.sceneIntExt.name ===''){
+        if (!this.sceneIntExt.name || this.sceneIntExt.name === '') {
             this.clearSearch();
             return;
         }
 
         let loadingId = this._loadingService.startLoading();
-        
+
         this._searchEngineService.search({
             searchText: this.sceneIntExt.name,
             includeTypes: [EntityType.intExt],

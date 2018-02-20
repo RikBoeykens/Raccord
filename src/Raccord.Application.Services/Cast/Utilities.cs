@@ -1,7 +1,9 @@
 using System.Linq;
 using Raccord.Application.Core.Services.Cast;
+using Raccord.Application.Core.Services.SearchEngine;
 using Raccord.Application.Services.Characters;
 using Raccord.Application.Services.Scenes;
+using Raccord.Core.Enums;
 using Raccord.Domain.Model.Cast;
 
 namespace Raccord.Application.Services.Cast
@@ -64,6 +66,23 @@ namespace Raccord.Application.Services.Cast
         Email = castMember.GetEmail(),
         ProjectID = castMember.ProjectID,
       };
+    }
+
+    public static SearchResultDto TranslateToSearchResult(this CastMember castMember)
+    {
+      return new SearchResultDto
+      {
+        ID = castMember.ID,
+        RouteIDs = new long[]{castMember.ProjectID, castMember.ID},
+        DisplayName = $"{castMember.GetDisplayName()}",
+        Info = $"Project: {castMember.Project.Title}",
+        Type = EntityType.CastMember,  
+      };
+    }
+
+    public static string GetDisplayName(this CastMember castMember)
+    {
+      return $"{castMember.GetFirstName()} {castMember.GetLastName()}";
     }
 
     private static string GetFirstName(this CastMember castMember)
