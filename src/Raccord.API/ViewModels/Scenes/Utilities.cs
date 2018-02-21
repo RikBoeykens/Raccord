@@ -119,6 +119,7 @@ namespace Raccord.API.ViewModels.Scenes
                 LocationSetIDs = vm.LocationSetIDs,
                 LocationIDs = vm.LocationIDs,
                 CharacterIDs = vm.CharacterIDs,
+                CastMemberIDs = vm.CastMemberIDs,
                 BreakdownItemIDs = vm.BreakdownItemIDs,
                 ScheduleDayIDs = vm.ScheduleDayIDs,
                 ScheduleSceneShootingDayIDs = vm.ScheduleSceneShootingDayIDs,

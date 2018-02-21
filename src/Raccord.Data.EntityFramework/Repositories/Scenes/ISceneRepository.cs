@@ -23,6 +23,7 @@ namespace Raccord.Data.EntityFramework.Repositories.Scenes
             IEnumerable<long> locationSetIDs,
             IEnumerable<long> locationIDs,
             IEnumerable<long> characterIDs,
+            IEnumerable<long> castMemberIDs,
             IEnumerable<long> breakdownItemIDs,
             IEnumerable<long> scheduleDayIDs,
             IEnumerable<long> scheduleSceneShootingDayIDs,

@@ -16,6 +16,7 @@ namespace Raccord.Application.Core.Services.Scenes
     private IEnumerable<long> _scheduleDayIDs;
     private IEnumerable<long> _scheduleSceneShootingDayIDs;
     private IEnumerable<long> _callsheetIDs;
+    private IEnumerable<long> _castMemberIDs;
     private IEnumerable<long> _callsheetSceneShootingDayIDs;
     private IEnumerable<long> _shootingDayIDs;
 
@@ -96,6 +97,18 @@ namespace Raccord.Application.Core.Services.Scenes
       set
       {
         _characterIDs = value;
+      }
+    }
+    
+    public IEnumerable<long> CastMemberIDs
+    {
+      get
+      {
+        return _castMemberIDs ?? (_castMemberIDs = new List<long>());
+      }
+      set
+      {
+        _castMemberIDs = value;
       }
     }
     

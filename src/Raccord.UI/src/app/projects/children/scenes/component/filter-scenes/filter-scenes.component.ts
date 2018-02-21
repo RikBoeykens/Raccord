@@ -69,8 +69,7 @@ export class FilterScenesComponent implements OnChanges {
   }
 
   public filterCastMembers(entities: SearchEntity[]) {
-    // this.sceneFilter.characterIDs = characters.map((character: Character) => character.id);
-    console.log(entities);
+    this.sceneFilter.characterIDs = entities.map((entity: SearchEntity) => entity.id);
     this.doFilter();
   }
 

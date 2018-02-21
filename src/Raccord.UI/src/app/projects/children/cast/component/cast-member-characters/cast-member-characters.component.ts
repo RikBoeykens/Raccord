@@ -20,7 +20,6 @@ export class CastMemberCharactersComponent {
     @Input() public castMemberId: number;
     @Input() public characters: CharacterSummary[];
 
-
     constructor(
         private _castMemberHttpService: CastMemberHttpService,
         private _characterHttpService: CharacterHttpService,
