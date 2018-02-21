@@ -6,11 +6,25 @@
     <span class="breadcrumb">{{getFullName(castMember)}} </span>
 </md-card>
 <md-tab-group>
-  <md-tab label="Characters">
-      <cast-member-characters [characters]="castMember.characters" [castMemberId]="castMember.id" [projectId]="project.id"></cast-member-characters>
-  </md-tab>
-  <md-tab label="Scenes">
-      <cast-member-scenes [scenes]="castMember.scenes" [projectId]="project.id"></cast-member-scenes>
-  </md-tab>
+    <md-tab label="Info">
+    <div>
+        <user-avatar [userId]="castMember.userID" [fullName]="getFullName(castMember)" [hasImage]="castMember.hasImage"></user-avatar>        
+    </div>
+    <div>
+        <b>{{getFullName(castMember)}}</b>
+    </div>
+    <div>
+        <i>Email</i>: {{castMember.email}}
+    </div>
+    <div>
+        <i>Telephone</i>: {{castMember.telephone}}
+    </div>
+    </md-tab>
+    <md-tab label="Characters">
+        <cast-member-characters [characters]="castMember.characters" [castMemberId]="castMember.id" [projectId]="project.id"></cast-member-characters>
+    </md-tab>
+    <md-tab label="Scenes">
+        <cast-member-scenes [scenes]="castMember.scenes" [projectId]="project.id"></cast-member-scenes>
+    </md-tab>
 </md-tab-group>
-<button md-fab (click)="updateCastMember()" *ngIf="getCanEdit()"><md-icon>settings</md-icon></button>
+<button md-fab (click)="updateCastMember()" *ngIf="getCanEdit()&&castMember.userID===''"><md-icon>settings</md-icon></button>
