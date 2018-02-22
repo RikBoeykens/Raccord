@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Raccord.Application.Core.Services.Callsheets.CharacterCalls;
+using Raccord.Application.Core.Services.Cast;
 using Raccord.Application.Core.Services.Characters;
 
 namespace Raccord.Application.Core.Services.Callsheets.Characters
@@ -8,6 +9,7 @@ namespace Raccord.Application.Core.Services.Callsheets.Characters
     public class CallsheetCharacterCharacterDto
     {
         private CharacterSummaryDto _character;
+        private CastMemberSummaryDto _castMember;
         private IEnumerable<CharacterCallCallTypeDto> _calls;
 
         // ID of the callsheet character
@@ -23,6 +25,19 @@ namespace Raccord.Application.Core.Services.Callsheets.Characters
             set
             {
                 _character = value;
+            }
+        }
+
+        // linked character
+        public CastMemberSummaryDto CastMember
+        {
+            get
+            {
+                return _castMember ?? (_castMember = new CastMemberSummaryDto());
+            }
+            set
+            {
+                _castMember = value;
             }
         }
 

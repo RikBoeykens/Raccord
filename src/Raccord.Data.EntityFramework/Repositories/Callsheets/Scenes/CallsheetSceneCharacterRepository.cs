@@ -40,7 +40,12 @@ namespace Raccord.Data.EntityFramework.Repositories.Callsheets.Scenes
             return query.Include(sc=> sc.CharacterScene)
                         .ThenInclude(cs=> cs.Character)
                         .ThenInclude(c=> c.ImageCharacters)
-                        .ThenInclude(ic=> ic.Image);
+                        .ThenInclude(ic=> ic.Image)
+                        .Include(cs=> cs.CharacterScene)
+                        .ThenInclude(cc=> cc.Character)
+                        .ThenInclude(cc => cc.CastMember)
+                        .ThenInclude(cm => cm.ProjectUser)
+                        .ThenInclude(cm => cm.User);
         }
 
         private IQueryable<CallsheetSceneCharacter> GetIncludedCallsheetScene()
@@ -74,7 +79,12 @@ namespace Raccord.Data.EntityFramework.Repositories.Callsheets.Scenes
                         .Include(sc=> sc.CharacterScene)
                         .ThenInclude(cs=> cs.Character)
                         .ThenInclude(c=> c.ImageCharacters)
-                        .ThenInclude(ic=> ic.Image);
+                        .ThenInclude(ic=> ic.Image)
+                        .Include(cs=> cs.CharacterScene)
+                        .ThenInclude(cc=> cc.Character)
+                        .ThenInclude(cc => cc.CastMember)
+                        .ThenInclude(cm => cm.ProjectUser)
+                        .ThenInclude(cm => cm.User);
         }
     }
 }

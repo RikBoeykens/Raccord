@@ -109,7 +109,7 @@
             <table class="col s12">
                 <thead *ngIf="callsheet.characters.length">
                     <tr>
-                        <th colspan="2"></th>
+                        <th colspan="3"></th>
                         <th *ngFor="let call of callsheet.characters[0].calls">
                             {{call.callType.shortName}}
                         </th>
@@ -118,10 +118,16 @@
                 <tbody>
                     <tr *ngFor="let callsheetCharacter of callsheet.characters">
                         <td>
-                            <show-image *ngIf="callsheetCharacter.character.primaryImage.id!=0" [image]="callsheetCharacter.character.primaryImage" [listAvatar]="true"></show-image>
+                            <show-image *ngIf="showCharacterImage(callsheetCharacter)" [image]="callsheetCharacter.character.primaryImage" [listAvatar]="true"></show-image>
+                            <user-avatar *ngIf="showUserImage(callsheetCharacter)" [userId]="callsheetCharacter.castMember.userID" [fullName]="getFullName(callsheetCharacter.castMember)" [hasImage]="callsheetCharacter.castMember.hasImage"></user-avatar>
                         </td>
                         <td>
                             <a routerLink="/projects/{{project.id}}/characters/{{callsheetCharacter.character.id}}">{{callsheetCharacter.character.number}}. {{callsheetCharacter.character.name}}</a>
+                        </td>
+                        <td>
+                            <span *ngIf="callsheetCharacter.castMember.id!==0">
+                                <a routerLink="/projects/{{project.id}}/cast/{{callsheetCharacter.castMember.id}}">{{getFullName(callsheetCharacter.castMember)}}</a>
+                            </span>
                         </td>
                         <td *ngFor="let characterCall of callsheetCharacter.calls">
                             {{characterCall.callTime | date:'shortTime'}}
