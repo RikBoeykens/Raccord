@@ -4,7 +4,6 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Raccord.Data.EntityFramework;
-using Raccord.Core.Enums;
 
 namespace Raccord.Data.EntityFramework.Migrations
 {
@@ -135,6 +134,8 @@ namespace Raccord.Data.EntityFramework.Migrations
                     b.Property<string>("ConcurrencyToken")
                         .IsConcurrencyToken();
 
+                    b.Property<string>("ConsentType");
+
                     b.Property<string>("DisplayName");
 
                     b.Property<string>("Permissions");
@@ -194,12 +195,19 @@ namespace Raccord.Data.EntityFramework.Migrations
 
                     b.Property<string>("Description");
 
+                    b.Property<string>("DisplayName");
+
                     b.Property<string>("Name")
                         .IsRequired();
 
                     b.Property<string>("Properties");
 
+                    b.Property<string>("Resources");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("Name")
+                        .IsUnique();
 
                     b.ToTable("OpenIddictScopes");
                 });
@@ -489,10 +497,36 @@ namespace Raccord.Data.EntityFramework.Migrations
                     b.ToTable("CallsheetSceneCharacter");
                 });
 
+            modelBuilder.Entity("Raccord.Domain.Model.Cast.CastMember", b =>
+                {
+                    b.Property<long>("ID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Email");
+
+                    b.Property<string>("FirstName");
+
+                    b.Property<string>("LastName");
+
+                    b.Property<long>("ProjectID");
+
+                    b.Property<long?>("ProjectUserID");
+
+                    b.Property<string>("Telephone");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("ProjectID");
+
+                    b.ToTable("CastMember");
+                });
+
             modelBuilder.Entity("Raccord.Domain.Model.Characters.Character", b =>
                 {
                     b.Property<long>("ID")
                         .ValueGeneratedOnAdd();
+
+                    b.Property<long?>("CastMemberID");
 
                     b.Property<string>("Description");
 
@@ -505,6 +539,8 @@ namespace Raccord.Data.EntityFramework.Migrations
                     b.Property<long?>("ScriptUploadID");
 
                     b.HasKey("ID");
+
+                    b.HasIndex("CastMemberID");
 
                     b.HasIndex("ProjectID");
 
@@ -1318,6 +1354,8 @@ namespace Raccord.Data.EntityFramework.Migrations
                     b.Property<long>("ID")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<long?>("CastMemberID");
+
                     b.Property<long>("ProjectID");
 
                     b.Property<long?>("RoleID");
@@ -1327,6 +1365,9 @@ namespace Raccord.Data.EntityFramework.Migrations
                     b.Property<string>("UserID");
 
                     b.HasKey("ID");
+
+                    b.HasIndex("CastMemberID")
+                        .IsUnique();
 
                     b.HasIndex("ProjectID");
 
@@ -1512,8 +1553,20 @@ namespace Raccord.Data.EntityFramework.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
+            modelBuilder.Entity("Raccord.Domain.Model.Cast.CastMember", b =>
+                {
+                    b.HasOne("Raccord.Domain.Model.Projects.Project", "Project")
+                        .WithMany()
+                        .HasForeignKey("ProjectID")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
             modelBuilder.Entity("Raccord.Domain.Model.Characters.Character", b =>
                 {
+                    b.HasOne("Raccord.Domain.Model.Cast.CastMember", "CastMember")
+                        .WithMany("Characters")
+                        .HasForeignKey("CastMemberID");
+
                     b.HasOne("Raccord.Domain.Model.Projects.Project", "Project")
                         .WithMany()
                         .HasForeignKey("ProjectID")
@@ -1878,6 +1931,10 @@ namespace Raccord.Data.EntityFramework.Migrations
 
             modelBuilder.Entity("Raccord.Domain.Model.Users.ProjectUser", b =>
                 {
+                    b.HasOne("Raccord.Domain.Model.Cast.CastMember", "CastMember")
+                        .WithOne("ProjectUser")
+                        .HasForeignKey("Raccord.Domain.Model.Users.ProjectUser", "CastMemberID");
+
                     b.HasOne("Raccord.Domain.Model.Projects.Project", "Project")
                         .WithMany("ProjectUsers")
                         .HasForeignKey("ProjectID")

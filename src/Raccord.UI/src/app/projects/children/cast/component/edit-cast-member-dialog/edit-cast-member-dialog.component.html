@@ -1,0 +1,25 @@
+<h1 md-dialog-title>
+    Cast Member
+</h1>
+<md-dialog-content>
+    <div fxLayout="row">
+        <md-input-container fxFlex="50%">
+            <input mdInput placeholder="First name" id="castmember_firstname" [(ngModel)]="castMember.firstName" #firstname="ngModel" name="castmember_firstname">
+        </md-input-container>
+        <md-input-container fxFlex="50%">
+            <input mdInput placeholder="Last name" id="castmember_lastname" [(ngModel)]="castMember.lastName" #lastname="ngModel" name="castmember_lastname">
+        </md-input-container>
+    </div>
+    <div fxLayout="row">
+        <md-input-container fxFlex="50%">
+            <input mdInput placeholder="Email" id="castmember_email" [(ngModel)]="castMember.email" #email="ngModel" name="castmember_email">
+        </md-input-container>
+        <md-input-container fxFlex="50%">
+            <input mdInput placeholder="Telephone" id="castmember_telephone" [(ngModel)]="castMember.telephone" #telephone="ngModel" name="castmember_telephone">
+        </md-input-container>
+    </div>
+</md-dialog-content>
+<md-dialog-actions>
+    <button md-button md-dialog-close>Cancel</button>
+    <button md-button (click)="submit()">Save</button>
+</md-dialog-actions>

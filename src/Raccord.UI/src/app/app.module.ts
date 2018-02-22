@@ -29,8 +29,12 @@ import { NoContentComponent } from './no-content';
 import { DashboardComponent } from './dashboard';
 import { LoadingComponent } from './loading/component';
 import { NavbarComponent } from './navbar';
-import { SearchComponent } from './search/component';
-import { SearchResultComponent } from './search/component';
+import {
+  SearchComponent,
+  SearchResultComponent,
+  SearchEntitiesCollectionComponent,
+  SearchEntityComponent
+} from './search/component';
 import {
   AddProjectComponent,
   EditProjectComponent,
@@ -87,6 +91,7 @@ import {
   SearchCharacterComponent,
   CharacterSummaryComponent,
   SearchCharactersCollectionComponent,
+  CharacterCastMemberComponent,
   BreakdownsListComponent,
   BreakdownLandingComponent,
   BreakdownSettingsComponent,
@@ -141,7 +146,13 @@ import {
   SceneDialogueComponent,
   EditCommentComponent,
   ShowCommentComponent,
-  CommentContainerComponent
+  CommentContainerComponent,
+  CastMemberCharactersComponent,
+  CastMemberLandingComponent,
+  CastMemberScenesComponent,
+  CastMembersListComponent,
+  EditCastMemberDialogComponent,
+  EditCastMembersListComponent
 } from './projects';
 import { ScenePropertiesLandingComponent } from './projects';
 import {
@@ -160,7 +171,8 @@ import {
   AdminUserLandingComponent,
   AdminProjectUserLandingComponent,
   AdminProjectUserAddCrewMemberComponent,
-  AdminEditCrewMemberDialog
+  AdminEditCrewMemberDialog,
+  AdminAddCastDialogComponent
 } from './admin';
 import{
   RaccordChartComponent
@@ -180,6 +192,8 @@ const COMPONENTS = [
   NavbarComponent,
   SearchComponent,
   SearchResultComponent,
+  SearchEntitiesCollectionComponent,
+  SearchEntityComponent,
   AddProjectComponent,
   EditProjectComponent,
   ProjectLandingComponent,
@@ -232,6 +246,7 @@ const COMPONENTS = [
   SearchCharacterComponent,
   CharacterSummaryComponent,
   SearchCharactersCollectionComponent,
+  CharacterCastMemberComponent,
   BreakdownsListComponent,
   BreakdownLandingComponent,
   BreakdownSettingsComponent,
@@ -283,6 +298,11 @@ const COMPONENTS = [
   EditCommentComponent,
   ShowCommentComponent,
   CommentContainerComponent,
+  CastMemberCharactersComponent,
+  CastMemberLandingComponent,
+  CastMemberScenesComponent,
+  CastMembersListComponent,
+  EditCastMembersListComponent,
   ScenePropertiesLandingComponent,
   SelectEntityComponent,
   PlaceholderImageComponent,
@@ -310,7 +330,9 @@ const ENTRY_COMPONENTS = [
   EditCrewMemberDialog,
   EditUserProfileDialog,
   AdminEditCrewMemberDialog,
-  EditBreakdownTypeDialogComponent
+  AdminAddCastDialogComponent,
+  EditBreakdownTypeDialogComponent,
+  EditCastMemberDialogComponent
 ];
 
 // Services
@@ -416,7 +438,10 @@ import {
   ScriptTextHttpService,
   ScriptTextResolve,
   ScriptTextCallsheetResolve,
-  CommentHttpService
+  CommentHttpService,
+  CastMemberHttpService,
+  CastMemberResolve,
+  CastMembersResolve
 } from './projects';
 
 import {
@@ -442,6 +467,7 @@ import {
   AdminUserResolve,
   AdminProjectUserHttpService,
   AdminProjectUserCrewHttpService,
+  AdminProjectUserCastHttpService,
   AdminProjectUsersResolve,
   AdminProjectUserResolve,
   AdminUserProjectsResolve,
@@ -563,6 +589,7 @@ const APP_PROVIDERS = [
   AdminUserResolve,
   AdminProjectUserHttpService,
   AdminProjectUserCrewHttpService,
+  AdminProjectUserCastHttpService,
   AdminProjectUsersResolve,
   AdminProjectUserResolve,
   AdminProjectRoleHttpService,
@@ -582,7 +609,10 @@ const APP_PROVIDERS = [
   ScriptTextResolve,
   ScriptTextCallsheetResolve,
   UserProfileHttpService,
-  UserProfileResolve
+  UserProfileResolve,
+  CastMemberHttpService,
+  CastMemberResolve,
+  CastMembersResolve
 ];
 
 // Directives

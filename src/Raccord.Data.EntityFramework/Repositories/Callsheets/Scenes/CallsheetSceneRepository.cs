@@ -77,6 +77,12 @@ namespace Raccord.Data.EntityFramework.Repositories.Callsheets.Scenes
                         .ThenInclude(cs=> cs.Character)
                         .ThenInclude(c=> c.ImageCharacters)
                         .ThenInclude(ic=> ic.Image)
+                        .Include(cs=> cs.Characters)
+                        .ThenInclude(c => c.CharacterScene)
+                        .ThenInclude(cc=> cc.Character)
+                        .ThenInclude(cc => cc.CastMember)
+                        .ThenInclude(cm => cm.ProjectUser)
+                        .ThenInclude(cm => cm.User)
                         .Include(ss=> ss.LocationSet)
                         .ThenInclude(ls=> ls.Location);
         }
@@ -101,6 +107,12 @@ namespace Raccord.Data.EntityFramework.Repositories.Callsheets.Scenes
                         .ThenInclude(cs=> cs.Character)
                         .ThenInclude(c=> c.ImageCharacters)
                         .ThenInclude(ic=> ic.Image)
+                        .Include(cs=> cs.Characters)
+                        .ThenInclude(c => c.CharacterScene)
+                        .ThenInclude(cc=> cc.Character)
+                        .ThenInclude(cc => cc.CastMember)
+                        .ThenInclude(cm => cm.ProjectUser)
+                        .ThenInclude(cm => cm.User)
                         .Include(cs=> cs.LocationSet)
                         .ThenInclude(ls=> ls.Location);
         }

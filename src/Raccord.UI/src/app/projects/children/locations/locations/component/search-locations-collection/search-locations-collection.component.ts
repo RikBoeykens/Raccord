@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { Location } from '../../model/location.model';
 import { SearchResult } from '../../../../../search/model/search-result.model';
 
@@ -6,13 +6,12 @@ import { SearchResult } from '../../../../../search/model/search-result.model';
     selector: 'search-locations-collection',
     templateUrl: 'search-locations-collection.component.html'
 })
-export class SearchLocationsCollectionComponent{
+export class SearchLocationsCollectionComponent implements OnInit {
 
     @Output() public onChange = new EventEmitter();
     @Input() public projectID: number;
     public searchEntity: Location = new Location();
     public entities: Location[] = [];
-
 
     public ngOnInit () {
         this.resetSearchEntity();

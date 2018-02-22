@@ -9,6 +9,8 @@ import { BreakdownItem } from
   '../../../breakdowns/children/breakdown-items/model/breakdown-item.model';
 import { Location } from '../../../locations/locations/model/location.model';
 import { SelectedBreakdown } from '../../../breakdowns/model/selected-breakdown.model';
+import { EntityType } from '../../../../../shared/enums/entity-type.enum';
+import { SearchEntity } from '../../../../../search/model/search-entity.model';
 
 @Component({
   selector: 'filter-scenes',
@@ -59,6 +61,15 @@ export class FilterScenesComponent implements OnChanges {
 
   public filterCharacters(characters: Character[]) {
     this.sceneFilter.characterIDs = characters.map((character: Character) => character.id);
+    this.doFilter();
+  }
+
+  public getCastMemberType() {
+    return EntityType.castMember;
+  }
+
+  public filterCastMembers(entities: SearchEntity[]) {
+    this.sceneFilter.characterIDs = entities.map((entity: SearchEntity) => entity.id);
     this.doFilter();
   }
 

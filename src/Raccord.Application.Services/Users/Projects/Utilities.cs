@@ -1,6 +1,8 @@
 using System.Linq;
 using Raccord.Application.Core.Services.Users.Project;
+using Raccord.Application.Services.Characters;
 using Raccord.Application.Services.Crew.CrewMembers;
+using Raccord.Application.Services.Cast;
 using Raccord.Application.Services.Projects;
 using Raccord.Application.Services.Users;
 using Raccord.Application.Services.Users.ProjectRoles;
@@ -20,6 +22,7 @@ namespace Raccord.Application.Services.Users.Projects
                 User = projectUser.User.Translate(),
                 Project = projectUser.Project.Translate(),
                 CrewMembers = projectUser.CrewMembers.Select(cm => cm.Translate()),
+                CastMember = projectUser.CastMember.Translate(),
                 ProjectRole = projectUser.Role.Translate(),
             };
         }

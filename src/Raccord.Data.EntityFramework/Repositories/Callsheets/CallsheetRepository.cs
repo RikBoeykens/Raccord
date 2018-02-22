@@ -86,7 +86,12 @@ namespace Raccord.Data.EntityFramework.Repositories.Callsheets
                         .ThenInclude(ic=>ic.Image)
                         .Include(cs=> cs.CallsheetCharacters)
                         .ThenInclude(cc=> cc.CharacterCalls)
-                        .ThenInclude(cc=> cc.CallType);
+                        .ThenInclude(cc=> cc.CallType)
+                        .Include(cs=> cs.CallsheetCharacters)
+                        .ThenInclude(cc=> cc.Character)
+                        .ThenInclude(cc => cc.CastMember)
+                        .ThenInclude(cm => cm.ProjectUser)
+                        .ThenInclude(cm => cm.User);
         }
 
         private IQueryable<Callsheet> GetIncludedSummary()

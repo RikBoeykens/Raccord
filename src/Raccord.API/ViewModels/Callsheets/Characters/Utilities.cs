@@ -1,5 +1,6 @@
 using System.Linq;
 using Raccord.API.ViewModels.Callsheets.CharacterCalls;
+using Raccord.API.ViewModels.Cast;
 using Raccord.API.ViewModels.Characters;
 using Raccord.Application.Core.Services.Callsheets.Characters;
 
@@ -13,6 +14,7 @@ namespace Raccord.API.ViewModels.Callsheets.Characters
             {
                 ID = dto.ID,
                 Character = dto.Character.Translate(),
+                CastMember = dto.CastMember.Translate(),
                 Calls = dto.Calls.Select(c=> c.Translate()),
             };
         }

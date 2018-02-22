@@ -76,6 +76,7 @@ namespace Raccord.Data.EntityFramework.Repositories.Scenes
             IEnumerable<long> locationSetIDs,
             IEnumerable<long> locationIDs,
             IEnumerable<long> characterIDs,
+            IEnumerable<long> castMemberIDs,
             IEnumerable<long> breakdownItemIDs,
             IEnumerable<long> scheduleDayIDs,
             IEnumerable<long> scheduleSceneShootingDayIDs,
@@ -119,6 +120,11 @@ namespace Raccord.Data.EntityFramework.Repositories.Scenes
             if(characterIDs.Any())
             {
                 query = query.Where(s => characterIDs.All(id=> s.CharacterScenes.Any(cs=> cs.CharacterID == id)));
+            }
+
+            if(castMemberIDs.Any())
+            {
+                query = query.Where(s => castMemberIDs.All(id=> s.CharacterScenes.Any(cs=> cs.Character.CastMemberID == id)));
             }
 
             if(breakdownItemIDs.Any())
@@ -248,6 +254,7 @@ namespace Raccord.Data.EntityFramework.Repositories.Scenes
                                 .ThenInclude(ls=> ls.Location)
                          .Include(s => s.DayNight)
                          .Include(s => s.CharacterScenes)
+                            .ThenInclude(cs => cs.Character)
                          .Include(s => s.BreakdownItemScenes)
                          .Include(s => s.ScheduleScenes)
                             .ThenInclude(ss=> ss.ScheduleDay)

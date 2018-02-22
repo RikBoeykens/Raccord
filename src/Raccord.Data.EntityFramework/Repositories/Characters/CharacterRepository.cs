@@ -19,6 +19,13 @@ namespace Raccord.Data.EntityFramework.Repositories.Characters
             return query.Where(i=> i.ProjectID == projectID);
         }
 
+        public IEnumerable<Character> GetAllForCastMember(long castMemberID)
+        {
+            var query = GetIncludedSummary();
+
+            return query.Where(i=> i.CastMemberID == castMemberID);
+        }
+
         public Character GetFull(long ID)
         {
             var query = GetIncludedFull();
@@ -50,55 +57,58 @@ namespace Raccord.Data.EntityFramework.Repositories.Characters
             IQueryable<Character> query = _context.Set<Character>();
 
             return query.Include(i=> i.CharacterScenes)
-                        .ThenInclude(i=> i.Scene)
-                        .ThenInclude(s=> s.IntExt)
+                            .ThenInclude(i=> i.Scene)
+                                .ThenInclude(s=> s.IntExt)
                         .Include(i=> i.CharacterScenes)
-                        .ThenInclude(i=> i.Scene)
-                        .ThenInclude(s=> s.DayNight)
+                            .ThenInclude(i=> i.Scene)
+                                .ThenInclude(s=> s.DayNight)
                         .Include(i=> i.CharacterScenes)
-                        .ThenInclude(i=> i.Scene)
-                        .ThenInclude(s=> s.ScriptLocation)
+                            .ThenInclude(i=> i.Scene)
+                                .ThenInclude(s=> s.ScriptLocation)
                         .Include(i=> i.CharacterScenes)
-                        .ThenInclude(i=> i.Scene)
-                        .ThenInclude(s=> s.ImageScenes)
-                        .ThenInclude(i=> i.Image)
+                            .ThenInclude(i=> i.Scene)
+                                .ThenInclude(s=> s.ImageScenes)
+                                    .ThenInclude(i=> i.Image)
                         .Include(i=> i.CharacterScenes)
-                        .ThenInclude(cs=> cs.ScheduleDays)
-                        .ThenInclude(sd=> sd.ScheduleScene)
-                        .ThenInclude(ss=> ss.ScheduleDay)
+                            .ThenInclude(cs=> cs.ScheduleDays)
+                                .ThenInclude(sd=> sd.ScheduleScene)
+                                    .ThenInclude(ss=> ss.ScheduleDay)
                         .Include(i=> i.CharacterScenes)
-                        .ThenInclude(cs=> cs.ScheduleDays)
-                        .ThenInclude(sd=> sd.ScheduleScene)
-                        .ThenInclude(ss=> ss.Scene)
-                        .ThenInclude(s=> s.IntExt)
+                            .ThenInclude(cs=> cs.ScheduleDays)
+                                .ThenInclude(sd=> sd.ScheduleScene)
+                                    .ThenInclude(ss=> ss.Scene)
+                                        .ThenInclude(s=> s.IntExt)
                         .Include(i=> i.CharacterScenes)
-                        .ThenInclude(cs=> cs.ScheduleDays)
-                        .ThenInclude(sd=> sd.ScheduleScene)
-                        .ThenInclude(ss=> ss.Scene)
-                        .ThenInclude(s=> s.DayNight)
+                            .ThenInclude(cs=> cs.ScheduleDays)
+                                .ThenInclude(sd=> sd.ScheduleScene)
+                                    .ThenInclude(ss=> ss.Scene)
+                                        .ThenInclude(s=> s.DayNight)
                         .Include(i=> i.CharacterScenes)
-                        .ThenInclude(cs=> cs.ScheduleDays)
-                        .ThenInclude(sd=> sd.ScheduleScene)
-                        .ThenInclude(ss=> ss.Scene)
-                        .ThenInclude(s=> s.ScriptLocation)
+                            .ThenInclude(cs=> cs.ScheduleDays)
+                                .ThenInclude(sd=> sd.ScheduleScene)
+                                    .ThenInclude(ss=> ss.Scene)
+                                        .ThenInclude(s=> s.ScriptLocation)
                         .Include(i=> i.CharacterScenes)
-                        .ThenInclude(cs=> cs.ScheduleDays)
-                        .ThenInclude(sd=> sd.ScheduleScene)
-                        .ThenInclude(ss=> ss.LocationSet)
-                        .ThenInclude(ls=> ls.Location)
+                            .ThenInclude(cs=> cs.ScheduleDays)
+                                .ThenInclude(sd=> sd.ScheduleScene)
+                                    .ThenInclude(ss=> ss.LocationSet)
+                                        .ThenInclude(ls=> ls.Location)
                         .Include(i=> i.CharacterScenes)
-                        .ThenInclude(cs=> cs.ScheduleDays)
-                        .ThenInclude(sd=> sd.ScheduleScene)
-                        .ThenInclude(ss=> ss.Scene)
-                        .ThenInclude(s=> s.ImageScenes)
-                        .ThenInclude(s=> s.Image)
+                            .ThenInclude(cs=> cs.ScheduleDays)
+                                .ThenInclude(sd=> sd.ScheduleScene)
+                                    .ThenInclude(ss=> ss.Scene)
+                                        .ThenInclude(s=> s.ImageScenes)
+                                            .ThenInclude(s=> s.Image)
                         .Include(i=> i.ImageCharacters)
-                        .ThenInclude(ic=> ic.Image)
+                            .ThenInclude(ic=> ic.Image)
                         .Include(i=> i.CharacterScenes)
-                        .ThenInclude(cs=> cs.ScheduleDays)
-                        .ThenInclude(sd=> sd.ScheduleScene)
-                        .ThenInclude(ss=> ss.ScheduleDay)
-                        .ThenInclude(sd=> sd.ShootingDay);
+                            .ThenInclude(cs=> cs.ScheduleDays)
+                                .ThenInclude(sd=> sd.ScheduleScene)
+                                    .ThenInclude(ss=> ss.ScheduleDay)
+                                        .ThenInclude(sd=> sd.ShootingDay)
+                        .Include(c => c.CastMember)
+                            .ThenInclude(c=> c.ProjectUser)
+                                .ThenInclude(pu => pu.User);
         }
 
         private IQueryable<Character> GetIncludedSummary()
@@ -107,7 +117,7 @@ namespace Raccord.Data.EntityFramework.Repositories.Characters
 
             return query.Include(i=> i.CharacterScenes)
                         .Include(i=> i.ImageCharacters)
-                        .ThenInclude(ic=> ic.Image);
+                            .ThenInclude(ic=> ic.Image);
         }
 
         private IQueryable<Character> GetIncluded()

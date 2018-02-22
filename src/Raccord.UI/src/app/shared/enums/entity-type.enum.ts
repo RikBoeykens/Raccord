@@ -1,4 +1,4 @@
-export enum EntityType{
+export enum EntityType {
     project = 0,
     scene = 1,
     intExt = 2,
@@ -9,5 +9,6 @@ export enum EntityType{
     breakdownItem = 7,
     location = 8,
     slate = 9,
-    crewMember = 10
+    crewMember = 10,
+    castMember = 11
 }

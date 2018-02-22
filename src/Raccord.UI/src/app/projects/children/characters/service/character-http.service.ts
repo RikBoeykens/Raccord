@@ -15,41 +15,48 @@ export class CharacterHttpService extends BaseHttpService {
         this._baseUri = `${AppSettings.API_ENDPOINT}/characters`;
     }
 
-    getAll(projectId): Promise<CharacterSummary[]> {
+    public getAll(projectId): Promise<CharacterSummary[]> {
 
-        var uri = `${this._baseUri}/${projectId}/project`;
+        let uri = `${this._baseUri}/${projectId}/project`;
 
         return this.doGetArray(uri);
     }
 
-    get(id: number): Promise<FullCharacter>{
+    public getAllForCastMember(castMemberId): Promise<CharacterSummary[]> {
 
-        var uri = `${this._baseUri}/${id}`;
+        let uri = `${this._baseUri}/${castMemberId}/castmember`;
+
+        return this.doGetArray(uri);
+    }
+
+    public get(id: number): Promise<FullCharacter>{
+
+        let uri = `${this._baseUri}/${id}`;
 
         return this.doGet(uri);
     }
 
-    getSummary(id: Number): Promise<CharacterSummary> {
+    public getSummary(id: Number): Promise<CharacterSummary> {
 
-        var uri = `${this._baseUri}/${id}/summary`;
+        let uri = `${this._baseUri}/${id}/summary`;
 
         return this.doGet(uri);
     }
 
-    post(character: Character): Promise<number> {
-        var uri = this._baseUri;
+    public post(character: Character): Promise<number> {
+        let uri = this._baseUri;
 
         return this.doPost(character, uri);
     }
 
-    delete(id: Number): Promise<any> {
-        var uri = `${this._baseUri}/${id}`;
+    public delete(id: Number): Promise<any> {
+        let uri = `${this._baseUri}/${id}`;
 
         return this.doDelete(uri);
     }
 
-    merge(toId: Number, mergeId): Promise<any> {
-        var uri = `${this._baseUri}/merge/${toId}/${mergeId}`;
+    public merge(toId: Number, mergeId): Promise<any> {
+        let uri = `${this._baseUri}/merge/${toId}/${mergeId}`;
 
         return this.doPost(null, uri);
     }

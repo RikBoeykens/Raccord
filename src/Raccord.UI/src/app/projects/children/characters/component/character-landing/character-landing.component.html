@@ -12,6 +12,9 @@
   <md-tab label="Scenes">
       <character-scenes [scenes]="character.scenes" [characterId]="character.id" [projectId]="project.id"></character-scenes>
   </md-tab>
+  <md-tab label="Cast">
+      <character-cast-member [castMember]="character.castMember" [characterId]="character.id" [projectId]="project.id"></character-cast-member>
+  </md-tab>
   <md-tab label="Pictures">
       <character-images [images]="character.images" [characterId]="character.id" [projectId]="project.id"></character-images>
   </md-tab>

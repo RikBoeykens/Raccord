@@ -129,6 +129,11 @@ using Raccord.Application.Services.User.ProjectRoles;
 using Raccord.Data.EntityFramework.Repositories.Breakdowns;
 using Raccord.Application.Core.Services.Breakdowns;
 using Raccord.Application.Services.Breakdowns;
+using Raccord.Application.Services.Users.Project.Cast;
+using Raccord.Application.Core.Services.Users.Project.Cast;
+using Raccord.Data.EntityFramework.Repositories.Cast;
+using Raccord.Application.Core.Services.Cast;
+using Raccord.Application.Services.Cast;
 
 namespace Raccord.API
 {
@@ -293,6 +298,12 @@ namespace Raccord.API
 
             services.AddTransient<IBreakdownRepository, BreakdownRepository>();
             services.AddTransient<IBreakdownService, BreakdownService>();
+
+            services.AddTransient<IProjectUserCastService, ProjectUserCastService>();
+
+            services.AddTransient<ICastMemberRepository, CastMemberRepository>();
+            services.AddTransient<ICastMemberService, CastMemberService>();
+            services.AddTransient<ICastMemberSearchEngineService, CastMemberSearchEngineService>();
         }
     }
 }

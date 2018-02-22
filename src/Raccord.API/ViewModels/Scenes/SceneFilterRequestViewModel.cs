@@ -12,6 +12,7 @@ namespace Raccord.API.ViewModels.Scenes
     private IEnumerable<long> _locationSetIDs;
     private IEnumerable<long> _locationIDs;
     private IEnumerable<long> _characterIDs;
+    private IEnumerable<long> _castMemberIDs;
     private IEnumerable<long> _breakdownItemIDs;
     private IEnumerable<long> _scheduleDayIDs;
     private IEnumerable<long> _scheduleSceneShootingDayIDs;
@@ -96,6 +97,18 @@ namespace Raccord.API.ViewModels.Scenes
       set
       {
         _characterIDs = value;
+      }
+    }
+    
+    public IEnumerable<long> CastMemberIDs
+    {
+      get
+      {
+        return _castMemberIDs ?? (_castMemberIDs = new List<long>());
+      }
+      set
+      {
+        _castMemberIDs = value;
       }
     }
     

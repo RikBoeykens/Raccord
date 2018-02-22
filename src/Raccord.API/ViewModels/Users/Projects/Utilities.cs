@@ -1,4 +1,6 @@
 using System.Linq;
+using Raccord.API.ViewModels.Cast;
+using Raccord.API.ViewModels.Characters;
 using Raccord.API.ViewModels.Crew.CrewMembers;
 using Raccord.API.ViewModels.Projects;
 using Raccord.API.ViewModels.Users;
@@ -17,6 +19,7 @@ namespace Raccord.API.ViewModels.Users.Projects
                 Project = dto.Project.Translate(),
                 User = dto.User.Translate(),
                 CrewMembers = dto.CrewMembers.Select(cm=> cm.Translate()),
+                CastMember = dto.CastMember.Translate(),
                 ProjectRole = dto.ProjectRole.Translate()
             };
         }

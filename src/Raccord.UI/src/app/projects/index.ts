@@ -110,7 +110,8 @@ export {
     EditCharactersListComponent,
     CharacterScheduleComponent,
     CharacterSummaryComponent,
-    SearchCharactersCollectionComponent
+    SearchCharactersCollectionComponent,
+    CharacterCastMemberComponent
 } from './children/characters';
 export { CharacterHttpService } from './children/characters/service/character-http.service';
 export { ImageCharacterHttpService } from
@@ -276,3 +277,15 @@ export {
     ShowCommentComponent,
     CommentContainerComponent
 } from './children/comments';
+
+export {
+    CastMemberHttpService,
+    CastMemberResolve,
+    CastMembersResolve,
+    CastMemberCharactersComponent,
+    CastMemberLandingComponent,
+    CastMemberScenesComponent,
+    CastMembersListComponent,
+    EditCastMemberDialogComponent,
+    EditCastMembersListComponent
+} from './children/cast';

@@ -37,6 +37,16 @@ namespace Raccord.API.Controllers
 
             return vms;
         }
+        // GET: api/characters/1/castmember
+        [HttpGet("{castMemberId}/castmember")]
+        public IEnumerable<CharacterSummaryViewModel> GetAllForCastMember(long castMemberId)
+        {
+            var dtos = _characterService.GetAllForCastMember(castMemberId);
+
+            var vms = dtos.Select(p => p.Translate());
+
+            return vms;
+        }
         // GET api/characters/5
         [HttpGet("{id}")]
         public FullCharacterViewModel Get(long id)

@@ -11,6 +11,7 @@ export class SceneFilterRequest extends BaseModel {
   public locationSetIDs: number[] = [];
   public locationIDs: number[] = [];
   public characterIDs: number[] = [];
+  public castMemberIDs: number[] = [];
   public breakdownItemIDs: number[] = [];
   public scheduleDayIDs: number[] = [];
   public scheduleSceneShootingDayIDs: number[] = [];
@@ -30,6 +31,7 @@ export class SceneFilterRequest extends BaseModel {
       locationSetIDs: number[],
       locationIDs: number[],
       characterIDs: number[],
+      castMemberIDs: number[],
       breakdownItemIDs: number[],
       scheduleDayIDs: number[],
       scheduleSceneShootingDayIDs: number[],
@@ -50,6 +52,7 @@ export class SceneFilterRequest extends BaseModel {
       this.locationSetIDs = obj.locationSetIDs;
       this.locationIDs = obj.locationIDs;
       this.characterIDs = obj.characterIDs;
+      this.castMemberIDs = obj.castMemberIDs;
       this.breakdownItemIDs = obj.breakdownItemIDs;
       this.scheduleDayIDs = obj.scheduleDayIDs;
       this.scheduleSceneShootingDayIDs = obj.scheduleSceneShootingDayIDs;

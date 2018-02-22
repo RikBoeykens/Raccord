@@ -20,10 +20,18 @@
         </div>
     </md-card-content>
 </md-card>
-<md-card *ngIf="projectUser.crewMembers.length">
+<md-card>
+    <md-card-title>Linked cast</md-card-title>
+    <md-card-content>
+        <a *ngIf="projectUser.castMember.id!==0" routerLink="/projects/{{projectUser.project.id}}/cast/{{projectUser.castMember.id}}">{{getFullName(projectUser.castMember)}}</a>
+        <i *ngIf="projectUser.castMember.id===0">No cast linked</i>
+        <button *ngIf="projectUser.castMember.id===0" md-fab (click)="showAddCastMember()"><md-icon>add</md-icon></button>
+    </md-card-content>
+</md-card>
+<md-card>
   <md-card-title>Linked crew</md-card-title>
   <md-card-content>
-      <table class="col s12">
+      <table class="col s12" *ngIf="projectUser.crewMembers.length">
           <thead>
               <tr>
                   <th>Department</th>
@@ -41,13 +49,12 @@
                   </td>
                   <td>
                       <button md-button (click)="editCrewMember(crewMember)"><md-icon>edit</md-icon></button>
-                      <button md-button (click)="removeLink(crewMember)"><md-icon>delete</md-icon></button>
+                      <button md-button (click)="removeCrewMemberLink(crewMember)"><md-icon>delete</md-icon></button>
                   </td>
               </tr>
           </tbody>
       </table>
+      <i *ngIf="!projectUser.crewMembers.length">No crew linked</i>
+      <a md-fab [routerLink]="['add', projectUser.project.id]"><md-icon>add</md-icon></a>
   </md-card-content>
 </md-card>
-<div class="row">
-    <a md-fab [routerLink]="['add', projectUser.project.id]"><md-icon>add</md-icon></a>
-</div>

@@ -188,6 +188,7 @@ namespace Raccord.Application.Services.Scenes
                 filter.ScheduleDayIDs,
                 filter.ScheduleSceneShootingDayIDs,
                 filter.CallsheetIDs,
+                filter.CastMemberIDs,
                 filter.CallsheetSceneShootingDayIDs,
                 filter.ShootingDayIDs,
                 filter.SearchText,

@@ -53,7 +53,10 @@ import {
   CrewLandingComponent,
   ScriptUploadComponent,
   ScriptUploadLandingComponent,
-  ScriptTextLandingComponent
+  ScriptTextLandingComponent,
+  CastMembersListComponent,
+  EditCastMembersListComponent,
+  CastMemberLandingComponent
 } from './projects';
 import { ScenePropertiesLandingComponent } from './projects';
 import { LoginComponent } from './security';
@@ -123,7 +126,9 @@ import {
   CrewDepartmentsResolve,
   ScriptUploadResolve,
   ScriptTextResolve,
-  ScriptTextCallsheetResolve
+  ScriptTextCallsheetResolve,
+  CastMemberResolve,
+  CastMembersResolve
 } from './projects';
 import {
   AdminProjectsResolve,
@@ -235,7 +240,7 @@ export const ROUTES: Routes = [
             component: AdminProjectUserLandingComponent,
             resolve: {
               projectUser: AdminProjectUserResolve,
-              projectRoles: AdminProjectRolesResolve
+              projectRoles: AdminProjectRolesResolve,
             }
           },
           {
@@ -461,6 +466,37 @@ export const ROUTES: Routes = [
                 resolve: {
                   project: ProjectSummaryResolve,
                   character: CharacterResolve
+                },
+              }
+            ]
+          },
+          {
+            path: 'cast',
+            canActivate: [CanReadGeneralProjectPermissionGuard],
+            children: [
+              {
+                path: '',
+                component: CastMembersListComponent,
+                resolve: {
+                  project: ProjectSummaryResolve,
+                  castMembers: CastMembersResolve
+                },
+              },
+              {
+                path: 'edit',
+                canActivate: [CanEditGeneralProjectPermissionGuard],
+                component: EditCastMembersListComponent,
+                resolve: {
+                  project: ProjectSummaryResolve,
+                  castMembers: CastMembersResolve
+                },
+              },
+              {
+                path: ':castMemberId',
+                component: CastMemberLandingComponent,
+                resolve: {
+                  project: ProjectSummaryResolve,
+                  castMember: CastMemberResolve
                 },
               }
             ]
