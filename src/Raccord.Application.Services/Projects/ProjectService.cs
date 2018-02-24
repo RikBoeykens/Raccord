@@ -12,6 +12,7 @@ using Raccord.Data.EntityFramework.Repositories.Crew.Departments;
 using Raccord.Domain.Model.Crew.Departments;
 using Raccord.Data.EntityFramework.Repositories.Users;
 using Raccord.Application.Services.Crew.CrewMembers;
+using Raccord.Domain.Model.Crew.CrewUnits;
 
 namespace Raccord.Application.Services.Projects
 {
@@ -136,6 +137,12 @@ namespace Raccord.Application.Services.Projects
                     SortingOrder = definition.SortingOrder,
                 });
             }
+
+            project.CrewUnits.Add(new CrewUnit
+            {
+                Name = "Main Unit",
+                Description = string.Empty
+            });
 
             _projectRepository.Add(project);
             _projectRepository.Commit();

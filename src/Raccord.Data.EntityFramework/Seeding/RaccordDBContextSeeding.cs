@@ -16,6 +16,7 @@ using Raccord.Domain.Model.Crew.Departments;
 using Raccord.Domain.Model.Users.ProjectRoles;
 using Raccord.Core.Enums;
 using Raccord.Domain.Model.Breakdowns;
+using Raccord.Domain.Model.Crew.CrewUnits;
 
 namespace Raccord.Data.EntityFramework.Seeding
 {
@@ -214,6 +215,7 @@ namespace Raccord.Data.EntityFramework.Seeding
             SeedCallTypes();
             SeedCrewDepartments();
             SeedCrew();
+            SeedCrewUnits();
         }
 
         private void SeedProjects()
@@ -384,6 +386,23 @@ namespace Raccord.Data.EntityFramework.Seeding
                 }
             }
 
+
+            _context.SaveChanges();
+        }
+
+        private void SeedCrewUnits()
+        {
+            foreach(var project in _context.Projects.Include(p=> p.CrewUnits))
+            {
+                if(!project.CrewUnits.Any())
+                {
+                    project.CrewUnits.Add(new CrewUnit
+                    {
+                        Name = "Main Unit",
+                        Description = string.Empty,
+                    });
+                }
+            }
 
             _context.SaveChanges();
         }
