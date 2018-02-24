@@ -1,0 +1,29 @@
+<md-card>      
+  <a routerLink="/" class="breadcrumb">Dashboard</a>
+  <a routerLink="/projects" class="breadcrumb">Projects</a>
+  <a routerLink="/projects/{{project.id}}" class="breadcrumb">{{project.title}}</a>
+  <span class="breadcrumb">Units</span>
+</md-card>
+<md-card>
+  <md-list>
+      <md-list-item 
+         *ngFor="let crewUnit of crewUnits">
+        <span>{{crewUnit.name}}</span>
+        <button
+          md-icon-button
+          (click)="editCrewUnit(crewUnit)"
+          *ngIf="getCanEdit()"
+          mdTooltip="settings">
+          <md-icon>settings</md-icon>
+        </button>
+        <button
+          md-icon-button
+          (click)="removeCrewUnit(crewUnit)"
+          *ngIf="getCanEdit()&&crewUnits.length > 1"
+          mdTooltip="delete">
+          <md-icon>delete</md-icon>
+        </button>
+      </md-list-item>
+  </md-list>
+</md-card>
+<button md-fab (click)="addCrewUnit()"><md-icon>add</md-icon></button>

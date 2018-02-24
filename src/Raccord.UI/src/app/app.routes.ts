@@ -51,6 +51,7 @@ import {
   ShootingDayReportsListComponent,
   ShootingDayReportLandingComponent,
   CrewLandingComponent,
+  CrewUnitsListComponent,
   ScriptUploadComponent,
   ScriptUploadLandingComponent,
   ScriptTextLandingComponent,
@@ -124,6 +125,9 @@ import {
   TakeResolve,
   TakesResolve,
   CrewDepartmentsResolve,
+  CrewUnitResolve,
+  CrewUnitSummaryResolve,
+  CrewUnitsResolve,
   ScriptUploadResolve,
   ScriptTextResolve,
   ScriptTextCallsheetResolve,
@@ -775,6 +779,20 @@ export const ROUTES: Routes = [
                 resolve: {
                   project: ProjectSummaryResolve,
                   shootingDay: ShootingDayResolve
+                }
+              }
+            ]
+          },
+          {
+            path: 'units',
+            canActivate: [CanReadGeneralProjectPermissionGuard],
+            children: [
+              {
+                path: '',
+                component: CrewUnitsListComponent,
+                resolve: {
+                  project: ProjectSummaryResolve,
+                  departments: CrewUnitsResolve
                 }
               }
             ]

@@ -250,7 +250,12 @@ export{
     CrewMemberResolve,
     CrewMembersResolve,
     CrewLandingComponent,
-    EditCrewMemberDialog
+    EditCrewMemberDialog,
+    CrewUnitHttpService,
+    CrewUnitResolve,
+    CrewUnitsResolve,
+    CrewUnitSummaryResolve,
+    CrewUnitsListComponent
 } from './children/crew';
 
 export{
