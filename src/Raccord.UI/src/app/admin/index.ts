@@ -54,5 +54,18 @@ export { AdminProjectUserAddCrewMemberComponent } from
   './project-users/component/admin-project-user-add-crew-member/admin-project-user-add-crew-member.component';
 export { AdminEditCrewMemberDialog } from
   './project-users/component/admin-edit-crew-member-dialog/admin-edit-crew-member-dialog.component';
-  export { AdminAddCastDialogComponent } from
+export { AdminAddCastDialogComponent } from
     './project-users/component/admin-add-cast-dialog/admin-add-cast-dialog.component';
+export { AdminChooseProjectUserDialogComponent } from
+  // tslint:disable-next-line:max-line-length
+  './project-users/component/admin-choose-project-user-dialog/admin-choose-project-user-dialog.component';
+
+export { AdminCrewUnitHttpService } from './crew-units/service/admin-crew-unit-http.service';
+export { AdminCrewUnitMemberHttpService } from
+  './crew-units/service/admin-crew-unit-member-http.service';
+export { AdminCrewUnitResolve } from './crew-units/service/admin-crew-unit-resolve.service';
+
+export { AdminCrewUnitLandingComponent } from
+  './crew-units/component/admin-crew-unit-landing/admin-crew-unit-landing.component';
+export { AdminCrewUnitsListComponent } from
+  './crew-units/component/admin-crew-units-list/admin-crew-units-list.component';

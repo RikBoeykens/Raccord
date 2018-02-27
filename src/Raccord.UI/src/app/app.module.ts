@@ -138,6 +138,8 @@ import {
   CrewLandingComponent,
   EditCrewMemberDialog,
   CrewUnitsListComponent,
+  EditCrewUnitDialogComponent,
+  ChooseCrewUnitDialogComponent,
   ScriptUploadComponent,
   ScriptUploadLandingComponent,
   ScriptTextLandingComponent,
@@ -173,7 +175,10 @@ import {
   AdminProjectUserLandingComponent,
   AdminProjectUserAddCrewMemberComponent,
   AdminEditCrewMemberDialog,
-  AdminAddCastDialogComponent
+  AdminAddCastDialogComponent,
+  AdminChooseProjectUserDialogComponent,
+  AdminCrewUnitLandingComponent,
+  AdminCrewUnitsListComponent
 } from './admin';
 import{
   RaccordChartComponent
@@ -319,6 +324,8 @@ const COMPONENTS = [
   AdminUserLandingComponent,
   AdminProjectUserLandingComponent,
   AdminProjectUserAddCrewMemberComponent,
+  AdminCrewUnitLandingComponent,
+  AdminCrewUnitsListComponent,
   RaccordChartComponent,
   UserProfileLandingComponent,
   ShowProfileImageComponent,
@@ -330,9 +337,12 @@ const ENTRY_COMPONENTS = [
   ChooseShootingDayDialog,
   EditShootingDaySceneDialog,
   EditCrewMemberDialog,
+  EditCrewUnitDialogComponent,
+  ChooseCrewUnitDialogComponent,
   EditUserProfileDialog,
   AdminEditCrewMemberDialog,
   AdminAddCastDialogComponent,
+  AdminChooseProjectUserDialogComponent,
   EditBreakdownTypeDialogComponent,
   EditCastMemberDialogComponent
 ];
@@ -479,7 +489,10 @@ import {
   AdminUserProjectsResolve,
   AdminSearchEngineService,
   AdminProjectRoleHttpService,
-  AdminProjectRolesResolve
+  AdminProjectRolesResolve,
+  AdminCrewUnitHttpService,
+  AdminCrewUnitMemberHttpService,
+  AdminCrewUnitResolve
 } from './admin';
 
 import {
@@ -602,6 +615,9 @@ const APP_PROVIDERS = [
   AdminProjectRolesResolve,
   AdminUserProjectsResolve,
   AdminSearchEngineService,
+  AdminCrewUnitHttpService,
+  AdminCrewUnitMemberHttpService,
+  AdminCrewUnitResolve,
   ChartHttpService,
   ProjectChartsResolve,
   CrewDepartmentHttpService,

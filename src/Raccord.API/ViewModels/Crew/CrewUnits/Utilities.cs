@@ -1,3 +1,5 @@
+using System.Linq;
+using Raccord.API.ViewModels.Users.Projects;
 using Raccord.Application.Core.Services.Crew.CrewUnits;
 
 namespace Raccord.API.ViewModels.Crew.CrewUnits
@@ -17,6 +19,22 @@ namespace Raccord.API.ViewModels.Crew.CrewUnits
         Name = dto.Name,
         Description = dto.Description,
         ProjectID = dto.ProjectID
+      };
+    }
+    public static FullAdminCrewUnitViewModel Translate(this FullAdminCrewUnitDto dto)
+    {
+      if(dto == null)
+      {
+        return null;
+      }
+
+      return new FullAdminCrewUnitViewModel
+      {
+        ID = dto.ID,
+        Name = dto.Name,
+        Description = dto.Description,
+        ProjectID = dto.ProjectID,
+        ProjectUsers = dto.ProjectUsers.Select(p => p.Translate())
       };
     }
     public static CrewUnitSummaryViewModel Translate(this CrewUnitSummaryDto dto)
@@ -47,6 +65,22 @@ namespace Raccord.API.ViewModels.Crew.CrewUnits
         Name = dto.Name,
         Description = dto.Description,
         ProjectID = dto.ProjectID
+      };
+    }
+    public static LinkedCrewUnitViewModel Translate(this LinkedCrewUnitDto dto)
+    {
+      if(dto == null)
+      {
+        return null;
+      }
+
+      return new LinkedCrewUnitViewModel
+      {
+        ID = dto.ID,
+        Name = dto.Name,
+        Description = dto.Description,
+        ProjectID = dto.ProjectID,
+        LinkID = dto.LinkID,
       };
     }
     public static CrewUnitDto Translate(this CrewUnitViewModel vm)

@@ -4,6 +4,7 @@ import { User } from '../../users/model/user.model';
 import { CrewMember } from '../../../projects/children/crew/crew-members/model/crew-member.model';
 import { ProjectRole } from '../../project-roles/model/project-role.model';
 import { CastMember } from '../../../projects/children/cast/model/cast-member.model';
+import { LinkedCrewUnit } from '../../../projects/children/crew/crew-units/model/linked-crew-unit.model';
 
 export class FullProjectUser extends BaseModel {
     public id: number;
@@ -12,6 +13,7 @@ export class FullProjectUser extends BaseModel {
     public crewMembers: CrewMember[];
     public castMember: CastMember;
     public projectRole: ProjectRole;
+    public crewUnits: LinkedCrewUnit[];
 
     constructor(obj?: {
         id: number,
@@ -19,7 +21,8 @@ export class FullProjectUser extends BaseModel {
         user: User,
         crewMembers: CrewMember[],
         castMember: CastMember,
-        projectRole: ProjectRole
+        projectRole: ProjectRole,
+        crewUnits: LinkedCrewUnit[]
     }) {
         super();
         if (obj) {
@@ -29,6 +32,7 @@ export class FullProjectUser extends BaseModel {
             this.crewMembers = obj.crewMembers;
             this.castMember = obj.castMember;
             this.projectRole = obj.projectRole;
+            this.crewUnits = obj.crewUnits;
         }
     }
 }

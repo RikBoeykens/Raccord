@@ -44,6 +44,16 @@ namespace Raccord.Application.Services.Crew.CrewUnits
             return dto;
         }
 
+        // Gets a single crew unit by id
+        public FullAdminCrewUnitDto GetForAdmin(long ID)
+        {
+            var crewUnit = _crewUnitRepository.GetFullAdmin(ID);
+
+            var dto = crewUnit.TranslateFullAdmin();
+
+            return dto;
+        }
+
         // Gets a summary of a single crew unit
         public CrewUnitSummaryDto GetSummary(long ID)
         {

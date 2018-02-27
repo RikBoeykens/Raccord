@@ -70,7 +70,9 @@ import {
   AdminAddUserComponent,
   AdminUserLandingComponent,
   AdminProjectUserLandingComponent,
-  AdminProjectUserAddCrewMemberComponent
+  AdminProjectUserAddCrewMemberComponent,
+  AdminCrewUnitLandingComponent,
+  AdminCrewUnitsListComponent,
 } from './admin';
 import{
   UserProfileLandingComponent
@@ -143,7 +145,8 @@ import {
   AdminProjectUsersResolve,
   AdminUserProjectsResolve,
   AdminProjectUserResolve,
-  AdminProjectRolesResolve
+  AdminProjectRolesResolve,
+  AdminCrewUnitResolve
 } from './admin';
 
 import {
@@ -200,6 +203,27 @@ export const ROUTES: Routes = [
                   project: AdminProjectResolve
                 },
                 canDeactivate: [CanDeactivateGuard],
+              },
+              {
+                path: 'units',
+                children: [
+                  {
+                    path: '',
+                    component: AdminCrewUnitsListComponent,
+                    resolve: {
+                      project: ProjectSummaryResolve,
+                      crewUnits: CrewUnitsResolve
+                    }
+                  },
+                  {
+                    path: ':crewUnitId',
+                    component: AdminCrewUnitLandingComponent,
+                    resolve: {
+                      project: ProjectSummaryResolve,
+                      crewUnit: AdminCrewUnitResolve
+                    }
+                  }
+                ]
               },
             ]
           }
@@ -792,7 +816,7 @@ export const ROUTES: Routes = [
                 component: CrewUnitsListComponent,
                 resolve: {
                   project: ProjectSummaryResolve,
-                  departments: CrewUnitsResolve
+                  crewUnits: CrewUnitsResolve
                 }
               }
             ]

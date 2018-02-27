@@ -1,0 +1,12 @@
+<h1 md-dialog-title>
+    Choose a Unit
+</h1>
+<md-dialog-content>
+    <md-nav-list *ngIf="crewUnits.length">
+        <md-list-item *ngFor="let crewUnit of crewUnits"
+                      (click)="chooseCrewUnit(crewUnit)">
+            {{crewUnit.name}}
+        </md-list-item>
+    </md-nav-list>
+    <i *ngIf="!crewUnits.length">No crew units available</i>
+</md-dialog-content>

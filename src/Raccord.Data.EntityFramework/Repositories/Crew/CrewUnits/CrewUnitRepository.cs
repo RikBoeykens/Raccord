@@ -18,10 +18,16 @@ namespace Raccord.Data.EntityFramework.Repositories.Crew.CrewUnits
 
             return query.Where(s=> s.ProjectID == projectID);
         }
-
         public CrewUnit GetFull(long ID)
         {
             var query = GetIncludedFull();
+
+            return query.FirstOrDefault(l => l.ID == ID);
+        }
+
+        public CrewUnit GetFullAdmin(long ID)
+        {
+            var query = GetIncludedFullAdmin();
 
             return query.FirstOrDefault(l => l.ID == ID);
         }
@@ -38,6 +44,15 @@ namespace Raccord.Data.EntityFramework.Repositories.Crew.CrewUnits
             IQueryable<CrewUnit> query = _context.Set<CrewUnit>();
 
             return query;
+        }
+
+        private IQueryable<CrewUnit> GetIncludedFullAdmin()
+        {
+            IQueryable<CrewUnit> query = _context.Set<CrewUnit>();
+
+            return query.Include(cu => cu.CrewUnitMembers)
+                            .ThenInclude(cum => cum.ProjectUser)
+                                .ThenInclude(pu=> pu.User);
         }
 
         private IQueryable<CrewUnit> GetIncludedSummary()

@@ -8,6 +8,7 @@ namespace Raccord.Data.EntityFramework.Repositories.Crew.CrewUnits
     {
         IEnumerable<CrewUnit> GetAllForProject(long projectID);
         CrewUnit GetFull(long ID);
+        CrewUnit GetFullAdmin(long ID);
         CrewUnit GetSummary(long ID);
     }
 }

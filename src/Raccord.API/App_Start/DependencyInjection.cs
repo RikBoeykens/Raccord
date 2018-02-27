@@ -137,6 +137,9 @@ using Raccord.Application.Services.Cast;
 using Raccord.Data.EntityFramework.Repositories.Crew.CrewUnits;
 using Raccord.Application.Core.Services.Crew.CrewUnits;
 using Raccord.Application.Services.Crew.CrewUnits;
+using Raccord.Data.EntityFramework.Repositories.Crew.CrewUnits.Members;
+using Raccord.Application.Core.Services.Crew.CrewUnits.Members;
+using Raccord.Application.Services.Crew.CrewUnits.Members;
 
 namespace Raccord.API
 {
@@ -310,6 +313,9 @@ namespace Raccord.API
 
             services.AddTransient<ICrewUnitRepository, CrewUnitRepository>();
             services.AddTransient<ICrewUnitService, CrewUnitService>();
+
+            services.AddTransient<ICrewUnitMemberRepository, CrewUnitMemberRepository>();
+            services.AddTransient<ICrewUnitMemberService, CrewUnitMemberService>();
         }
     }
 }

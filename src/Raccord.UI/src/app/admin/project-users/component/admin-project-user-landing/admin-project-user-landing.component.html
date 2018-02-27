@@ -58,3 +58,22 @@
       <a md-fab [routerLink]="['add', projectUser.project.id]"><md-icon>add</md-icon></a>
   </md-card-content>
 </md-card>
+<md-card>
+<md-card-title>Linked Units</md-card-title>
+  <md-card-content>
+      <md-list>
+          <md-list-item 
+             *ngFor="let crewUnit of projectUser.crewUnits">
+            <a routerLink="/admin/projects/{{projectUser.project.id}}/units/{{crewUnit.id}}">{{crewUnit.name}}</a>
+            <button
+              md-icon-button
+              (click)="removeUnitMemberLink(crewUnit)"
+              mdTooltip="delete">
+              <md-icon>delete</md-icon>
+            </button>
+          </md-list-item>
+      </md-list>
+      <i *ngIf="!projectUser.crewUnits.length">No units linked</i>
+      <button md-fab (click)="showAddCrewUnitMember()"><md-icon>add</md-icon></button>
+  </md-card-content>
+</md-card>

@@ -620,7 +620,7 @@ namespace Raccord.Data.EntityFramework.Migrations
                     b.ToTable("CrewMember");
                 });
 
-            modelBuilder.Entity("Raccord.Domain.Model.Crew.CrewUnit.CrewUnit", b =>
+            modelBuilder.Entity("Raccord.Domain.Model.Crew.CrewUnits.CrewUnit", b =>
                 {
                     b.Property<long>("ID")
                         .ValueGeneratedOnAdd();
@@ -636,6 +636,24 @@ namespace Raccord.Data.EntityFramework.Migrations
                     b.HasIndex("ProjectID");
 
                     b.ToTable("CrewUnit");
+                });
+
+            modelBuilder.Entity("Raccord.Domain.Model.Crew.CrewUnits.CrewUnitMember", b =>
+                {
+                    b.Property<long>("ID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<long>("CrewUnitID");
+
+                    b.Property<long>("ProjectUserID");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("CrewUnitID");
+
+                    b.HasIndex("ProjectUserID");
+
+                    b.ToTable("CrewUnitMember");
                 });
 
             modelBuilder.Entity("Raccord.Domain.Model.Crew.Departments.CrewDepartment", b =>
@@ -1636,11 +1654,24 @@ namespace Raccord.Data.EntityFramework.Migrations
                         .HasForeignKey("ProjectUserID");
                 });
 
-            modelBuilder.Entity("Raccord.Domain.Model.Crew.CrewUnit.CrewUnit", b =>
+            modelBuilder.Entity("Raccord.Domain.Model.Crew.CrewUnits.CrewUnit", b =>
                 {
                     b.HasOne("Raccord.Domain.Model.Projects.Project", "Project")
                         .WithMany("CrewUnits")
                         .HasForeignKey("ProjectID")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Raccord.Domain.Model.Crew.CrewUnits.CrewUnitMember", b =>
+                {
+                    b.HasOne("Raccord.Domain.Model.Crew.CrewUnits.CrewUnit", "CrewUnit")
+                        .WithMany("CrewUnitMembers")
+                        .HasForeignKey("CrewUnitID")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Raccord.Domain.Model.Users.ProjectUser", "ProjectUser")
+                        .WithMany("CrewUnitMembers")
+                        .HasForeignKey("ProjectUserID")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
