@@ -2,7 +2,8 @@
     <a routerLink="/" class="breadcrumb">Dashboard</a>
     <a routerLink="/projects" class="breadcrumb">Projects</a>
     <a routerLink="/projects/{{project.id}}" class="breadcrumb">{{project.title}}</a>
-    <span class="breadcrumb">Unit List</span>
+    <a routerLink="/projects/{{project.id}}/unitlists" class="breadcrumb">Unit Lists</a>
+    <span class="breadcrumb">{{crewUnit.name}}</span>
 </md-card>
 <md-card *ngFor="let department of departments">
     <md-card-title>

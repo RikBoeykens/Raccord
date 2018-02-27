@@ -15,7 +15,7 @@ namespace Raccord.Application.Services.Crew.Departments
                 ID = crewDepartment.ID,
                 Name = crewDepartment.Name,
                 Description = crewDepartment.Description,
-                ProjectID = crewDepartment.ProjectID,
+                CrewUnitID = crewDepartment.CrewUnitID,
                 CrewMembers = crewDepartment.Crew.Select(c=> c.TranslateSummary())
             };
         }
@@ -26,7 +26,7 @@ namespace Raccord.Application.Services.Crew.Departments
                 ID = crewDepartment.ID,
                 Name = crewDepartment.Name,
                 Description = crewDepartment.Description,
-                ProjectID = crewDepartment.ProjectID,
+                CrewUnitID = crewDepartment.CrewUnitID,
             };
         }
     }

@@ -25,11 +25,11 @@ namespace Raccord.API.Controllers
             _crewDepartmentService = crewDepartmentService;
         }
 
-        // GET: api/crewdepartments/1/project
-        [HttpGet("{id}/project")]
-        public IEnumerable<FullCrewDepartmentViewModel> GetAllForProject(long id)
+        // GET: api/crewdepartments/1/unit
+        [HttpGet("{id}/unit")]
+        public IEnumerable<FullCrewDepartmentViewModel> GetAllForUnit(long id)
         {
-            var dtos = _crewDepartmentService.GetAllForProject(id);
+            var dtos = _crewDepartmentService.GetAllForUnit(id);
 
             return dtos.Select(p => p.Translate());
         }

@@ -15,6 +15,8 @@ export { CrewUnitsResolve } from './crew-units/service/crew-units-resolve.servic
 
 export { CrewUnitsListComponent } from
   './crew-units/component/crew-units-list/crew-units-list.component';
+export { CrewUnitsNavListComponent } from
+  './crew-units/component/crew-units-nav-list/crew-units-nav-list.component';
 export { EditCrewUnitDialogComponent } from
   './crew-units/component/edit-crew-unit-dialog/edit-crew-unit-dialog.component';
   export { ChooseCrewUnitDialogComponent } from

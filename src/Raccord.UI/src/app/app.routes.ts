@@ -52,6 +52,7 @@ import {
   ShootingDayReportLandingComponent,
   CrewLandingComponent,
   CrewUnitsListComponent,
+  CrewUnitsNavListComponent,
   ScriptUploadComponent,
   ScriptUploadLandingComponent,
   ScriptTextLandingComponent,
@@ -818,18 +819,27 @@ export const ROUTES: Routes = [
                   project: ProjectSummaryResolve,
                   crewUnits: CrewUnitsResolve
                 }
+              },
+              {
+                path: 'nav/:navType',
+                component: CrewUnitsNavListComponent,
+                resolve: {
+                  project: ProjectSummaryResolve,
+                  crewUnits: CrewUnitsResolve
+                }
               }
             ]
           },
           {
-            path: 'crew',
+            path: 'unitlists',
             canActivate: [CanReadGeneralProjectPermissionGuard],
             children: [
               {
-                path: '',
+                path: ':crewUnitId',
                 component: CrewLandingComponent,
                 resolve: {
                   project: ProjectSummaryResolve,
+                  crewUnit: CrewUnitSummaryResolve,
                   departments: CrewDepartmentsResolve
                 }
               }

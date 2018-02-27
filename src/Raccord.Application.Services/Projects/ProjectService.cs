@@ -128,20 +128,16 @@ namespace Raccord.Application.Services.Projects
             }
 
             var departmentDefinitions = _crewDepartmentDefinitionRepository.GetAll();
-            foreach(var definition in departmentDefinitions)
+            project.CrewUnits.Add(new CrewUnit
             {
-                project.CrewDepartments.Add(new CrewDepartment
+                Name = "Main Unit",
+                Description = string.Empty,
+                CrewDepartments = departmentDefinitions.Select(definition => new CrewDepartment
                 {
                     Name = definition.Name,
                     Description = definition.Description,
                     SortingOrder = definition.SortingOrder,
-                });
-            }
-
-            project.CrewUnits.Add(new CrewUnit
-            {
-                Name = "Main Unit",
-                Description = string.Empty
+                }).ToList()
             });
 
             _projectRepository.Add(project);

@@ -13,11 +13,11 @@ namespace Raccord.Data.EntityFramework.Repositories.Crew.Departments
         }
 
 
-        public IEnumerable<CrewDepartment> GetAllForProject(long projectID)
+        public IEnumerable<CrewDepartment> GetAllForUnit(long crewUnitID)
         {
             var query = GetIncludedSummary();
 
-            return query.Where(l=> l.ProjectID == projectID);
+            return query.Where(l=> l.CrewUnitID == crewUnitID);
         }
 
         public CrewDepartment GetFull(long ID)

@@ -16,7 +16,7 @@ namespace Raccord.API.ViewModels.Crew.Departments
                 ID = dto.ID,
                 Name = dto.Name,
                 Description = dto.Description,
-                ProjectID = dto.ProjectID,
+                CrewUnitID = dto.CrewUnitID,
                 CrewMembers = dto.CrewMembers.Select(cm=> cm.Translate())
             };
         }
@@ -27,7 +27,7 @@ namespace Raccord.API.ViewModels.Crew.Departments
                 ID = dto.ID,
                 Name = dto.Name,
                 Description = dto.Description,
-                ProjectID = dto.ProjectID,
+                CrewUnitID = dto.CrewUnitID,
             };
         }
         public static CrewDepartmentDto Translate(this CrewDepartmentViewModel vm)
@@ -37,7 +37,7 @@ namespace Raccord.API.ViewModels.Crew.Departments
                 ID = vm.ID,
                 Name = vm.Name,
                 Description = vm.Description,
-                ProjectID = vm.ProjectID,
+                CrewUnitID = vm.CrewUnitID,
             };
         }
     }

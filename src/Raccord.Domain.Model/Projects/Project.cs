@@ -15,7 +15,6 @@ namespace Raccord.Domain.Model.Projects
         private ICollection<Image> _images;
         private ICollection<ProjectUser> _projectUsers;
         private ICollection<CallType> _callTypes;
-        private ICollection<CrewDepartment> _crewDepartments;
         private ICollection<Comment> _comments;
         private ICollection<Breakdown> _breakdowns;
         private ICollection<CrewUnit> _crewUnits;
@@ -67,19 +66,6 @@ namespace Raccord.Domain.Model.Projects
             set
             {
                 _callTypes = value;
-            }
-        }
-        
-        // Crew department types associated with the project
-        public virtual ICollection<CrewDepartment> CrewDepartments
-        {
-            get
-            {
-                return _crewDepartments ?? (_crewDepartments = new List<CrewDepartment>());
-            }
-            set
-            {
-                _crewDepartments = value;
             }
         }
         

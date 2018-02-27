@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Raccord.Domain.Model.Crew.Departments;
 using Raccord.Domain.Model.Projects;
 
 namespace Raccord.Domain.Model.Crew.CrewUnits
@@ -7,6 +8,7 @@ namespace Raccord.Domain.Model.Crew.CrewUnits
     public class CrewUnit : Entity
     {
       private ICollection<CrewUnitMember> _members;
+      private ICollection<CrewDepartment> _departments;
       public string Name { get;set;}
 
       public string Description { get;set; }
@@ -24,6 +26,18 @@ namespace Raccord.Domain.Model.Crew.CrewUnits
         set
         {
           _members = value;
+        }
+      }
+
+      public virtual ICollection<CrewDepartment> CrewDepartments
+      {
+        get
+        {
+          return _departments ?? (_departments = new List<CrewDepartment>());
+        }
+        set
+        {
+          _departments = value;
         }
       }
     }

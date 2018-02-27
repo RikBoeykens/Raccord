@@ -59,9 +59,15 @@ namespace Raccord.Application.Services.Crew.CrewMembers
             return new SearchResultDto
             {
                 ID = crewMember.ID,
-                RouteIDs = new long[]{crewMember.Department.ProjectID, crewMember.DepartmentID, crewMember.ID},
+                RouteIDs = new long[]
+                {
+                    crewMember.Department.CrewUnit.ProjectID,
+                    crewMember.Department.CrewUnitID,
+                    crewMember.DepartmentID,
+                    crewMember.ID
+                },
                 DisplayName = $"{crewMember.GetDisplayName()} - {crewMember.Department.Name}",
-                Info = $"Project: {crewMember.Department.Project.Title}",
+                Info = $"Project: {crewMember.Department.CrewUnit.Project.Title}",
                 Type = EntityType.CrewMember,  
             };
         }

@@ -5,6 +5,6 @@ namespace Raccord.Application.Core.Services.Crew.Departments
     // Interface for crew department functionality
     public interface ICrewDepartmentService
     {
-        IEnumerable<FullCrewDepartmentDto> GetAllForProject(long projectID);
+        IEnumerable<FullCrewDepartmentDto> GetAllForUnit(long unitID);
     }
 }

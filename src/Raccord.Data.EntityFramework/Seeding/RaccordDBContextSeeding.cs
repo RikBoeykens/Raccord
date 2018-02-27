@@ -213,7 +213,6 @@ namespace Raccord.Data.EntityFramework.Seeding
             SeedScriptLocations();
             SeedScenes();
             SeedCallTypes();
-            SeedCrewDepartments();
             SeedCrew();
             SeedCrewUnits();
         }
@@ -345,29 +344,6 @@ namespace Raccord.Data.EntityFramework.Seeding
             _context.SaveChanges();
         }
 
-        private void SeedCrewDepartments()
-        {
-            var definitions = _context.CrewDepartmentDefinitions.ToArray();
-
-            foreach(var project in _context.Projects.Include(p=> p.CrewDepartments))
-            {
-                if(!project.CrewDepartments.Any())
-                {
-                    foreach(var definition in definitions)
-                    {
-                        project.CrewDepartments.Add(new CrewDepartment
-                        {
-                            Name = definition.Name,
-                            Description = definition.Description,
-                            SortingOrder = definition.SortingOrder,
-                        });
-                    }
-                }
-            }
-
-            _context.SaveChanges();
-        }
-
         private void SeedCrew()
         {
             var adminUser = _context.Users.FirstOrDefault(u=> u.Email == adminEmail);
@@ -392,6 +368,7 @@ namespace Raccord.Data.EntityFramework.Seeding
 
         private void SeedCrewUnits()
         {
+            var definitions = _context.CrewDepartmentDefinitions.ToArray();
             foreach(var project in _context.Projects.Include(p=> p.CrewUnits))
             {
                 if(!project.CrewUnits.Any())
@@ -400,6 +377,12 @@ namespace Raccord.Data.EntityFramework.Seeding
                     {
                         Name = "Main Unit",
                         Description = string.Empty,
+                        CrewDepartments = definitions.Select(definition => new CrewDepartment
+                        {
+                            Name = definition.Name,
+                            Description = definition.Description,
+                            SortingOrder = definition.SortingOrder,
+                        }).ToList()
                     });
                 }
             }

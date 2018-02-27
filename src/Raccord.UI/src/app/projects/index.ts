@@ -256,6 +256,7 @@ export{
     CrewUnitsResolve,
     CrewUnitSummaryResolve,
     CrewUnitsListComponent,
+    CrewUnitsNavListComponent,
     EditCrewUnitDialogComponent,
     ChooseCrewUnitDialogComponent
 } from './children/crew';

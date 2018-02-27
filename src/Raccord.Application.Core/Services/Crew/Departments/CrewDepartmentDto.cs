@@ -12,6 +12,6 @@ namespace Raccord.Application.Core.Services.Crew.Departments
         public string Description { get; set; }
 
         // Linked project
-        public long ProjectID { get; set; }
+        public long CrewUnitID { get; set; }
     }
 }

@@ -12,6 +12,7 @@ import { CrewMember } from '../../crew-members/model/crew-member.model';
 import { CrewDepartment } from '../../departments/model/crew-department.model';
 import { AccountHelpers } from '../../../../../account/helpers/account.helper';
 import { ProjectPermissionEnum } from '../../../../../shared/children/users/project-roles/enums/project-permission.enum';
+import { CrewUnitSummary } from '../../crew-units/model/crew-unit-summary.model';
 
 @Component({
     templateUrl: 'crew-landing.component.html',
@@ -20,6 +21,7 @@ export class CrewLandingComponent implements OnInit {
 
     public departments: FullCrewDepartment[];
     public project: ProjectSummary;
+    public crewUnit: CrewUnitSummary;
 
     constructor(
         private _crewDepartmentHttpService: CrewDepartmentHttpService,
@@ -36,10 +38,12 @@ export class CrewLandingComponent implements OnInit {
         this._route.data.subscribe((data:
             {
                 departments: FullCrewDepartment[],
-                project: ProjectSummary
+                project: ProjectSummary,
+                crewUnit: CrewUnitSummary
             }) => {
             this.departments = data.departments;
             this.project = data.project;
+            this.crewUnit = data.crewUnit;
         });
     }
 
