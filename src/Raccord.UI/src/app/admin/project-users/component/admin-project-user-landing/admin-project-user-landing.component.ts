@@ -34,9 +34,18 @@ import { AdminCrewUnitMemberHttpService } from
 import { LinkedProjectUserUser } from '../../model/linked-project-user-user.model';
 import { CrewUnitHttpService } from
     '../../../../projects/children/crew/crew-units/service/crew-unit-http.service';
-import { CrewUnitSummary } from '../../../../projects/children/crew/crew-units/model/crew-unit-summary.model';
-import { ChooseCrewUnitDialogComponent } from '../../../../projects';
-import { LinkedCrewUnit } from '../../../../projects/children/crew/crew-units/model/linked-crew-unit.model';
+import { CrewUnitSummary }
+    from '../../../../projects/children/crew/crew-units/model/crew-unit-summary.model';
+import { ChooseCrewUnitDialogComponent, CrewDepartmentHttpService } from '../../../../projects';
+import { LinkedCrewUnit }
+    from '../../../../projects/children/crew/crew-units/model/linked-crew-unit.model';
+import { ProjectUserCrewUnit } from
+    '../../../../projects/children/crew/crew-units/model/project-user-crew-unit.model';
+import { AdminUnitCrewMembersHttpService } from
+    '../../../crew-units/service/admin-unit-crew-members-http.service';
+import { CrewDepartment } from '../../../../projects/children/crew/departments/model/crew-department.model';
+import { CreateUnitCrewMember } from '../../../crew-units/model/create-unit-crew-member.model';
+import { AdminAddCrewMemberDialogComponent } from '../../..';
 
 @Component({
   templateUrl: 'admin-project-user-landing.component.html',
@@ -49,11 +58,12 @@ export class AdminProjectUserLandingComponent implements OnInit  {
   constructor(
       private _projectUserHttpService: AdminProjectUserHttpService,
       private _projectUserCastHttpService: AdminProjectUserCastHttpService,
-      private _projectUserCrewHttpService: AdminProjectUserCrewHttpService,
+      private _unitCrewMembersHttpService: AdminUnitCrewMembersHttpService,
       private _crewMemberHttpService: CrewMemberHttpService,
       private _castMemberHttpService: CastMemberHttpService,
       private _crewUnitMemberHttpService: AdminCrewUnitMemberHttpService,
       private _crewUnitHttpService: CrewUnitHttpService,
+      private _crewDepartmentHttpService: CrewDepartmentHttpService,
       private _loadingWrapperService: LoadingWrapperService,
       private _loadingService: LoadingService,
       private _dialogService: DialogService,
@@ -115,10 +125,10 @@ export class AdminProjectUserLandingComponent implements OnInit  {
     );
   }
 
-  public removeCrewMemberLink(crewMember: CrewMember) {
+  public removeCrewMemberLink(crewUnit: ProjectUserCrewUnit, crewMember: CrewMember) {
     let loadingId = this._loadingService.startLoading();
 
-    this._projectUserCrewHttpService.removeLink(this.projectUser.id, crewMember.id).then((data) => {
+    this._unitCrewMembersHttpService.removeLink(crewUnit.linkID, crewMember.id).then((data) => {
         if (typeof(data) === 'string') {
             this._dialogService.error(data);
         }else {
@@ -144,9 +154,29 @@ export class AdminProjectUserLandingComponent implements OnInit  {
                     castMembers: data.filter((cast: CastMemberSummary) => cast.userID === '')
                 }});
             castMemberDialog.afterClosed().subscribe((returnedCastMember: CastMemberSummary) => {
-                console.log(returnedCastMember);
                 if (returnedCastMember) {
                     this.addCastLink(returnedCastMember);
+                }
+            });
+        }
+    );
+
+  }
+
+  public showAddCrewMember(crewUnit: ProjectUserCrewUnit) {
+    this._loadingWrapperService.Load(
+        this._crewDepartmentHttpService.getAll(crewUnit.id),
+        (data: CrewDepartment[]) => {
+            let newCrewMember = new CreateUnitCrewMember();
+            newCrewMember.crewUnitMemberID = crewUnit.linkID;
+            let crewMemberDialog = this._dialog.open(AdminAddCrewMemberDialogComponent, {data:
+                {
+                    crewMember: newCrewMember,
+                    departments: data
+                }});
+            crewMemberDialog.afterClosed().subscribe((returnedCrewMember: CreateUnitCrewMember) => {
+                if (returnedCrewMember) {
+                    this.addCrewMember(returnedCrewMember);
                 }
             });
         }
@@ -176,7 +206,7 @@ export class AdminProjectUserLandingComponent implements OnInit  {
           (data: CrewUnitSummary[]) => {
               let availableCrewUnits = data.filter((crewUnit: CrewUnitSummary) =>
                 this.projectUser.crewUnits.findIndex(
-                    (existingCrewUnit: LinkedCrewUnit) =>
+                    (existingCrewUnit: ProjectUserCrewUnit) =>
                     existingCrewUnit.id === crewUnit.id) === -1);
               let crewUnitDialog = this._dialog.open(
                   ChooseCrewUnitDialogComponent, {data:
@@ -192,7 +222,7 @@ export class AdminProjectUserLandingComponent implements OnInit  {
       );
     }
 
-    public removeUnitMemberLink(crewUnit: LinkedCrewUnit) {
+    public removeUnitMemberLink(crewUnit: ProjectUserCrewUnit) {
         this._loadingWrapperService.Load(
             this._crewUnitMemberHttpService.removeLink(crewUnit.linkID),
             () => {
@@ -237,6 +267,15 @@ export class AdminProjectUserLandingComponent implements OnInit  {
         this._loadingWrapperService.Load(
             this._crewUnitMemberHttpService.getCrewUnits(this.projectUser.id),
             (data) => this.projectUser.crewUnits = data
+        );
+    }
+
+    private addCrewMember(crewMember: CreateUnitCrewMember) {
+        this._loadingWrapperService.Load(
+            this._unitCrewMembersHttpService.post(crewMember),
+            () => {
+                this.getUnits();
+            }
         );
     }
 }

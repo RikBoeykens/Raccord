@@ -12,7 +12,6 @@ namespace Raccord.Domain.Model.Users
 {
     public class ProjectUser : Entity
     {
-        private ICollection<CrewMember> _crewMembers;
         private ICollection<CrewUnitMember> _crewUnitMembers;
 
         // ID of the linked project
@@ -43,19 +42,6 @@ namespace Raccord.Domain.Model.Users
 
         public long? CastMemberID { get; set; }
         public virtual CastMember CastMember { get;set; }
-
-        // Crew Members associated with the user
-        public virtual ICollection<CrewMember> CrewMembers
-        {
-            get
-            {
-                return _crewMembers ?? (_crewMembers = new List<CrewMember>());
-            }
-            set
-            {
-                _crewMembers = value;
-            }
-        }
 
         // Crew Unit Members associated with the user
         public virtual ICollection<CrewUnitMember> CrewUnitMembers

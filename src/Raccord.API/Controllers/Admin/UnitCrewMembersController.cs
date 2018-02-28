@@ -3,35 +3,34 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Raccord.API.ViewModels.Core;
-using Raccord.API.ViewModels.Users.Project.Crew;
+using Raccord.API.ViewModels.Crew.CrewUnits.Members;
 using Raccord.API.ViewModels.Users.Projects;
-using Raccord.Application.Core.Services.Users.Project;
-using Raccord.Application.Core.Services.Users.Project.Crew;
+using Raccord.Application.Core.Services.Crew.CrewUnits.Members;
 
 namespace Raccord.API.Controllers.Admin
 {
-    public class ProjectUserCrewController : AbstractAdminController
+    public class UnitCrewMembersController : AbstractAdminController
     {
-        private readonly IProjectUserCrewService _projectUserCrewService;
+        private readonly IUnitCrewMemberService _unitCrewMemberService;
 
-        public ProjectUserCrewController(IProjectUserCrewService projectUserCrewService)
+        public UnitCrewMembersController(IUnitCrewMemberService unitCrewMemberService)
         {
-            if (projectUserCrewService == null)
-                throw new ArgumentNullException(nameof(projectUserCrewService));
+            if (unitCrewMemberService == null)
+                throw new ArgumentNullException(nameof(unitCrewMemberService));
 
-            _projectUserCrewService = projectUserCrewService;
+            _unitCrewMemberService = unitCrewMemberService;
         }
 
-        // POST api/projectusercrew
+        // POST api/unitcrewmembers
         [HttpPost]
-        public JsonResult Post([FromBody]CreateUserCrewMemberViewModel vm)
+        public JsonResult Post([FromBody]CreateUnitCrewMemberViewModel vm)
         {
             var response = new JsonResponse();
 
             try
             {
                 var dto = vm.Translate();
-                _projectUserCrewService.Create(dto);
+                _unitCrewMemberService.Create(dto);
 
                 response = new JsonResponse
                 {
@@ -50,15 +49,15 @@ namespace Raccord.API.Controllers.Admin
             return new JsonResult(response);
         }
 
-        // POST api/projectusercrew/5/1/addlink
-        [HttpPost("{projectUserId}/{crewMemberId}/addlink")]
-        public JsonResult AddLink(long projectUserId, long crewMemberId)
+        // POST api/unitcrewmembers/5/1/addlink
+        [HttpPost("{crewUnitMemberId}/{crewMemberId}/addlink")]
+        public JsonResult AddLink(long crewUnitMemberId, long crewMemberId)
         {
             var response = new JsonResponse();
 
             try
             {
-                _projectUserCrewService.LinkExisting(projectUserId, crewMemberId);
+                _unitCrewMemberService.LinkExisting(crewUnitMemberId, crewMemberId);
 
                 response = new JsonResponse
                 {
@@ -77,15 +76,15 @@ namespace Raccord.API.Controllers.Admin
             return new JsonResult(response);
         }
 
-        // POST api/projectusercrew/5/1/removelink
-        [HttpPost("{projectUserId}/{crewMemberId}/removelink")]
-        public JsonResult RemoveLink(long projectUserId, long crewMemberId)
+        // POST api/unitcrewmembers/5/1/removelink
+        [HttpPost("{crewUnitMemberId}/{crewMemberId}/removelink")]
+        public JsonResult RemoveLink(long crewUnitMemberId, long crewMemberId)
         {
             var response = new JsonResponse();
 
             try
             {
-                _projectUserCrewService.RemoveLink(projectUserId, crewMemberId);
+                _unitCrewMemberService.RemoveLink(crewUnitMemberId, crewMemberId);
 
                 response = new JsonResponse
                 {

@@ -12,10 +12,9 @@ namespace Raccord.Application.Core.Services.Users.Project
     {
         private UserDto _user;
         private ProjectDto _project;
-        private IEnumerable<CrewMemberDto> _crewMembers;
         private CastMemberDto _castMember;
         private ProjectRoleDto _role;
-        private IEnumerable<LinkedCrewUnitDto> _crewUnits;
+        private IEnumerable<ProjectUserCrewUnitDto> _crewUnits;
         // ID of the project user
         public long ID { get; set; }
 
@@ -42,22 +41,6 @@ namespace Raccord.Application.Core.Services.Users.Project
             set
             {
                 _user = value;
-            }
-        }
-
-        /// <summary>
-        /// Crew members linked to the project user
-        /// </summary>
-        /// <returns></returns>
-        public IEnumerable<CrewMemberDto> CrewMembers
-        {
-            get
-            {
-                return _crewMembers ?? (_crewMembers = new List<CrewMemberDto>());
-            }
-            set
-            {
-                _crewMembers = value;
             }
         }
 
@@ -97,11 +80,11 @@ namespace Raccord.Application.Core.Services.Users.Project
         /// Crew Units of the user
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<LinkedCrewUnitDto> CrewUnits
+        public IEnumerable<ProjectUserCrewUnitDto> CrewUnits
         {
             get
             {
-                return _crewUnits ?? new List<LinkedCrewUnitDto>();
+                return _crewUnits ?? new List<ProjectUserCrewUnitDto>();
             }
             set
             {

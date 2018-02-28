@@ -1,13 +1,13 @@
-namespace Raccord.Application.Core.Services.Users.Project.Crew
+namespace Raccord.API.ViewModels.Crew.CrewUnits.Members
 {
     // Creates a new crew member and links it to a user
-    public class CreateUserCrewMemberDto
+    public class CreateUnitCrewMemberViewModel
     {
       /// <summary>
       /// ID of the project user
       /// </summary>
       /// <returns></returns>
-      public long ProjectUserID { get; set; }
+      public long CrewUnitMemberID { get; set; }
 
       /// <summary>
       /// Job title of the crew member

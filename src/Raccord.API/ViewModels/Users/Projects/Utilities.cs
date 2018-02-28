@@ -19,7 +19,6 @@ namespace Raccord.API.ViewModels.Users.Projects
                 ID = dto.ID,
                 Project = dto.Project.Translate(),
                 User = dto.User.Translate(),
-                CrewMembers = dto.CrewMembers.Select(cm=> cm.Translate()),
                 CastMember = dto.CastMember.Translate(),
                 ProjectRole = dto.ProjectRole.Translate(),
                 CrewUnits = dto.CrewUnits.Select(cu => cu.Translate())

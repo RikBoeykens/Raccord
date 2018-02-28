@@ -1,29 +1,29 @@
 using System.Linq;
-using Raccord.Application.Core.Services.Users.Project.Crew;
+using Raccord.Application.Core.Services.Crew.CrewUnits.Members;
 using Raccord.Data.EntityFramework.Repositories.Crew.CrewMembers;
 using Raccord.Data.EntityFramework.Repositories.Users.Projects;
 using Raccord.Domain.Model.Crew.CrewMembers;
 
-namespace Raccord.Application.Services.Users.Project.Crew
+namespace Raccord.Application.Services.Crew.CrewUnits.Members
 {
     // Service for project user crew functionality
-    public class ProjectUserCrewService : IProjectUserCrewService
+    public class UnitCrewMemberService : IUnitCrewMemberService
     {
       private readonly ICrewMemberRepository _crewMemberRepository;
 
-      public ProjectUserCrewService(
+      public UnitCrewMemberService(
         ICrewMemberRepository crewMemberRepository
       ){
         _crewMemberRepository = crewMemberRepository;
       }
 
-      public long Create(CreateUserCrewMemberDto dto)
+      public long Create(CreateUnitCrewMemberDto dto)
       {
         var newCrewMember = new CrewMember
         {
           JobTitle = dto.JobTitle,
           DepartmentID = dto.DepartmentID,
-          ProjectUserID = dto.ProjectUserID
+          CrewUnitMemberID = dto.CrewUnitMemberID
         };
 
         _crewMemberRepository.Add(newCrewMember);
@@ -32,21 +32,21 @@ namespace Raccord.Application.Services.Users.Project.Crew
         return newCrewMember.ID;
       }
 
-      public void LinkExisting(long projectUserID, long crewMemberID)
+      public void LinkExisting(long crewUnitMemberID, long crewMemberID)
       {
         var crewMember = _crewMemberRepository.GetSingle(crewMemberID);
-        crewMember.ProjectUserID = projectUserID;
+        crewMember.CrewUnitMemberID = crewUnitMemberID;
 
         _crewMemberRepository.Edit(crewMember);
         _crewMemberRepository.Commit();
       }
 
-      public void RemoveLink(long projectUserID, long crewMemberID)
+      public void RemoveLink(long crewUnitMemberID, long crewMemberID)
       {
-        var crewMember = _crewMemberRepository.FindBy(cm=> cm.ID == crewMemberID && cm.ProjectUserID == projectUserID).FirstOrDefault();
+        var crewMember = _crewMemberRepository.FindBy(cm=> cm.ID == crewMemberID && cm.CrewUnitMemberID == crewUnitMemberID).FirstOrDefault();
         if(crewMember!= null)
         {
-          crewMember.ProjectUserID = null;
+          crewMember.CrewUnitMemberID = null;
 
           _crewMemberRepository.Edit(crewMember);
           _crewMemberRepository.Commit();

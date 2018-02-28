@@ -23,7 +23,6 @@ namespace Raccord.Application.Services.Users.Projects
                 ID = projectUser.ID,
                 User = projectUser.User.Translate(),
                 Project = projectUser.Project.Translate(),
-                CrewMembers = projectUser.CrewMembers.Select(cm => cm.Translate()),
                 CastMember = projectUser.CastMember.Translate(),
                 ProjectRole = projectUser.Role.Translate(),
                 CrewUnits = projectUser.CrewUnitMembers.Select(cum => cum.TranslateCrewUnit())

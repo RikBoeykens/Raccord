@@ -81,9 +81,6 @@ namespace Raccord.Data.EntityFramework.Repositories.Users
             IQueryable<ApplicationUser> query = _context.Set<ApplicationUser>();
 
             return query.Include(u=> u.ProjectUsers)
-                        .ThenInclude(pu=> pu.CrewMembers)
-                        .ThenInclude(cm=> cm.Department)
-                        .Include(u=> u.ProjectUsers)
                         .ThenInclude(pu=> pu.Role)
                         .ThenInclude(pu=> pu.PermissionRoles)
                         .ThenInclude(pr=> pr.ProjectPermission);

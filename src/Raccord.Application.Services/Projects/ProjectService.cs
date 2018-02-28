@@ -78,8 +78,9 @@ namespace Raccord.Application.Services.Projects
             var projectDtos = projects.Select(p => 
             {
                 var crewMembers = user.ProjectUsers.Where(pu=> pu.ProjectID == p.ID)
-                                    .SelectMany(pu=> pu.CrewMembers)
-                                    .Select(cm=> cm.Translate()).ToList();
+                                    .SelectMany(pu=> pu.CrewUnitMembers)
+                                    .SelectMany(cum => cum.CrewMembers)
+                                    .Select(cm=> cm.TranslateUnit()).ToList();
 
                 return p.TranslateUser(crewMembers);
             });

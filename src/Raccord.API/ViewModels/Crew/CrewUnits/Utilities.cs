@@ -1,4 +1,5 @@
 using System.Linq;
+using Raccord.API.ViewModels.Crew.CrewMembers;
 using Raccord.API.ViewModels.Users.Projects;
 using Raccord.Application.Core.Services.Crew.CrewUnits;
 
@@ -67,20 +68,21 @@ namespace Raccord.API.ViewModels.Crew.CrewUnits
         ProjectID = dto.ProjectID
       };
     }
-    public static LinkedCrewUnitViewModel Translate(this LinkedCrewUnitDto dto)
+    public static ProjectUserCrewUnitViewModel Translate(this ProjectUserCrewUnitDto dto)
     {
       if(dto == null)
       {
         return null;
       }
 
-      return new LinkedCrewUnitViewModel
+      return new ProjectUserCrewUnitViewModel
       {
         ID = dto.ID,
         Name = dto.Name,
         Description = dto.Description,
         ProjectID = dto.ProjectID,
         LinkID = dto.LinkID,
+        CrewMembers = dto.CrewMembers.Select(c => c.Translate())
       };
     }
     public static CrewUnitDto Translate(this CrewUnitViewModel vm)

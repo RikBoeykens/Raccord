@@ -36,7 +36,7 @@ namespace Raccord.Application.Services.Projects
 
             return dto;
         }
-        public static UserProjectDto TranslateUser(this Project project, IEnumerable<CrewMemberDto> crewMembers)
+        public static UserProjectDto TranslateUser(this Project project, IEnumerable<CrewMemberUnitDto> crewMembers)
         {
             var dto = new UserProjectDto
             {

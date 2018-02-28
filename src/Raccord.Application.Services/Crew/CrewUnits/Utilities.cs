@@ -1,5 +1,6 @@
 using System.Linq;
 using Raccord.Application.Core.Services.Crew.CrewUnits;
+using Raccord.Application.Services.Crew.CrewMembers;
 using Raccord.Application.Services.Users.Projects;
 using Raccord.Domain.Model.Crew.CrewUnits;
 
@@ -71,20 +72,21 @@ namespace Raccord.Application.Services.Crew.CrewUnits
       };
     }
 
-    public static LinkedCrewUnitDto TranslateCrewUnit(this CrewUnitMember crewUnitMember)
+    public static ProjectUserCrewUnitDto TranslateCrewUnit(this CrewUnitMember crewUnitMember)
     {
       if(crewUnitMember == null || crewUnitMember.CrewUnit == null)
       {
         return null;
       }
 
-      return new LinkedCrewUnitDto
+      return new ProjectUserCrewUnitDto
       {
         ID = crewUnitMember.CrewUnit.ID,
         Name = crewUnitMember.CrewUnit.Name,
         Description = crewUnitMember.CrewUnit.Description,
         ProjectID = crewUnitMember.CrewUnit.ProjectID,
-        LinkID = crewUnitMember.ID
+        LinkID = crewUnitMember.ID,
+        CrewMembers = crewUnitMember.CrewMembers.Select(c => c.Translate())
       };
     }
   }

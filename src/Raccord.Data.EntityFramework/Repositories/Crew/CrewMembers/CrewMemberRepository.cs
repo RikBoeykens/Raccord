@@ -50,8 +50,9 @@ namespace Raccord.Data.EntityFramework.Repositories.Crew.CrewMembers
             IQueryable<CrewMember> query = _context.Set<CrewMember>();
 
             return query.Include(t => t.Department)
-                        .Include(cm=> cm.ProjectUser)
-                        .ThenInclude(pu=> pu.User);
+                        .Include(cm => cm.CrewUnitMember)
+                            .ThenInclude(cm=> cm.ProjectUser)
+                                .ThenInclude(pu=> pu.User);
         }
 
         private IQueryable<CrewMember> GetIncludedSummary()
@@ -59,8 +60,9 @@ namespace Raccord.Data.EntityFramework.Repositories.Crew.CrewMembers
             IQueryable<CrewMember> query = _context.Set<CrewMember>();
 
             return query.Include(t => t.Department)
-                        .Include(cm=> cm.ProjectUser)
-                        .ThenInclude(pu=> pu.User);
+                        .Include(cm => cm.CrewUnitMember)
+                            .ThenInclude(cm=> cm.ProjectUser)
+                                .ThenInclude(pu=> pu.User);
         }
 
         private IQueryable<CrewMember> GetIncluded()
@@ -78,8 +80,9 @@ namespace Raccord.Data.EntityFramework.Repositories.Crew.CrewMembers
                          .ThenInclude(s => s.CrewUnit)
                          .ThenInclude(s=> s.Project)
                          .ThenInclude(p=> p.ProjectUsers)
-                        .Include(cm=> cm.ProjectUser)
-                        .ThenInclude(pu=> pu.User);
+                        .Include(cm => cm.CrewUnitMember)
+                            .ThenInclude(cm=> cm.ProjectUser)
+                                .ThenInclude(pu=> pu.User);
         }
 
         private IQueryable<CrewMember> GetSearchQuery(string searchText, long? projectID, string userID, bool isAdmin, long[] excludeIds)

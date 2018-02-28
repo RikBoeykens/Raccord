@@ -16,8 +16,6 @@ export { AdminProjectUserResolve } from
 export { AdminUserProjectsResolve } from
   './project-users/service/admin-user-projects-resolve.service';
 
-export { AdminProjectUserCrewHttpService } from
-  './project-users/service/admin-project-user-crew-http.service';
 export { AdminProjectUserCastHttpService } from
   './project-users/service/admin-project-user-cast-http.service';
 
@@ -49,11 +47,10 @@ export { AdminUserLandingComponent } from
 
 export { AdminProjectUserLandingComponent } from
   './project-users/component/admin-project-user-landing/admin-project-user-landing.component';
-export { AdminProjectUserAddCrewMemberComponent } from
-  // tslint:disable-next-line:max-line-length
-  './project-users/component/admin-project-user-add-crew-member/admin-project-user-add-crew-member.component';
 export { AdminEditCrewMemberDialog } from
   './project-users/component/admin-edit-crew-member-dialog/admin-edit-crew-member-dialog.component';
+  export { AdminAddCrewMemberDialogComponent } from
+    './project-users/component/admin-add-crew-member-dialog/admin-add-crew-member-dialog.component';
 export { AdminAddCastDialogComponent } from
     './project-users/component/admin-add-cast-dialog/admin-add-cast-dialog.component';
 export { AdminChooseProjectUserDialogComponent } from
@@ -63,6 +60,8 @@ export { AdminChooseProjectUserDialogComponent } from
 export { AdminCrewUnitHttpService } from './crew-units/service/admin-crew-unit-http.service';
 export { AdminCrewUnitMemberHttpService } from
   './crew-units/service/admin-crew-unit-member-http.service';
+export { AdminUnitCrewMembersHttpService } from
+  './crew-units/service/admin-unit-crew-members-http.service';
 export { AdminCrewUnitResolve } from './crew-units/service/admin-crew-unit-resolve.service';
 
 export { AdminCrewUnitLandingComponent } from

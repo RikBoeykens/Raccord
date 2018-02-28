@@ -71,7 +71,6 @@ import {
   AdminAddUserComponent,
   AdminUserLandingComponent,
   AdminProjectUserLandingComponent,
-  AdminProjectUserAddCrewMemberComponent,
   AdminCrewUnitLandingComponent,
   AdminCrewUnitsListComponent,
 } from './admin';
@@ -270,14 +269,6 @@ export const ROUTES: Routes = [
             resolve: {
               projectUser: AdminProjectUserResolve,
               projectRoles: AdminProjectRolesResolve,
-            }
-          },
-          {
-            path: ':projectUserId/add/:projectId',
-            component: AdminProjectUserAddCrewMemberComponent,
-            resolve: {
-              projectUser: AdminProjectUserResolve,
-              departments: CrewDepartmentsResolve
             }
           },
         ]

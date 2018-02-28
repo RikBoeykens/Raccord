@@ -1,6 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { MD_DIALOG_DATA, MdDialogRef } from '@angular/material';
-import { CrewMember } from '../../../../projects/children/crew/crew-members/model/crew-member.model';
+import { CrewMember }
+    from '../../../../projects/children/crew/crew-members/model/crew-member.model';
 
 @Component({
     selector: 'admin-edit-crew-member-dialog',

@@ -29,51 +29,34 @@
     </md-card-content>
 </md-card>
 <md-card>
-  <md-card-title>Linked crew</md-card-title>
-  <md-card-content>
-      <table class="col s12" *ngIf="projectUser.crewMembers.length">
-          <thead>
-              <tr>
-                  <th>Department</th>
-                  <th>Job Title</th>
-                  <th></th>
-              </tr>
-          </thead>
-          <tbody>
-              <tr *ngFor="let crewMember of projectUser.crewMembers">
-                  <td>
-                    {{crewMember.department.name}}
-                  </td>
-                  <td>
-                    {{crewMember.jobTitle}}
-                  </td>
-                  <td>
-                      <button md-button (click)="editCrewMember(crewMember)"><md-icon>edit</md-icon></button>
-                      <button md-button (click)="removeCrewMemberLink(crewMember)"><md-icon>delete</md-icon></button>
-                  </td>
-              </tr>
-          </tbody>
-      </table>
-      <i *ngIf="!projectUser.crewMembers.length">No crew linked</i>
-      <a md-fab [routerLink]="['add', projectUser.project.id]"><md-icon>add</md-icon></a>
-  </md-card-content>
-</md-card>
-<md-card>
 <md-card-title>Linked Units</md-card-title>
-  <md-card-content>
-      <md-list>
-          <md-list-item 
-             *ngFor="let crewUnit of projectUser.crewUnits">
-            <a routerLink="/admin/projects/{{projectUser.project.id}}/units/{{crewUnit.id}}">{{crewUnit.name}}</a>
-            <button
-              md-icon-button
-              (click)="removeUnitMemberLink(crewUnit)"
-              mdTooltip="delete">
-              <md-icon>delete</md-icon>
-            </button>
-          </md-list-item>
-      </md-list>
-      <i *ngIf="!projectUser.crewUnits.length">No units linked</i>
-      <button md-fab (click)="showAddCrewUnitMember()"><md-icon>add</md-icon></button>
-  </md-card-content>
+    <md-card-content>
+        <md-list>
+            <div *ngFor="let crewUnit of projectUser.crewUnits">
+                <h3 sub-header>
+                    <a routerLink="/admin/projects/{{projectUser.project.id}}/units/{{crewUnit.id}}">{{crewUnit.name}}</a>
+                    <button
+                        md-icon-button
+                        (click)="showAddCrewMember(crewUnit)"
+                        mdTooltip="add crew member">
+                        <md-icon>add</md-icon>
+                    </button>
+                    <button
+                        md-icon-button
+                        (click)="removeUnitMemberLink(crewUnit)"
+                        mdTooltip="delete">
+                        <md-icon>delete</md-icon>
+                    </button>
+                </h3>
+                <md-list-item 
+                    *ngFor="let crewMember of crewUnit.crewMembers">
+                    <span>{{crewMember.department.name}} - {{crewMember.jobTitle}}</span>
+                    <button md-icon-button (click)="editCrewMember(crewMember)"><md-icon>edit</md-icon></button>
+                    <button md-icon-button (click)="removeCrewMemberLink(crewUnit, crewMember)"><md-icon>delete</md-icon></button>
+                </md-list-item>
+            </div>
+        </md-list>
+        <i *ngIf="!projectUser.crewUnits.length">No units linked</i>
+        <button md-fab (click)="showAddCrewUnitMember()"><md-icon>add</md-icon></button>
+    </md-card-content>
 </md-card>

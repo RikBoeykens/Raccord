@@ -23,9 +23,9 @@ namespace Raccord.API.Controllers.Admin
             _crewUnitMemberService = crewUnitMemberService;
         }
 
-        // GET: api/crewunitmembers/1/characters
+        // GET: api/crewunitmembers/1/crewunits
         [HttpGet("{id}/crewunits")]
-        public IEnumerable<LinkedCrewUnitViewModel> GetCrewUnits(long id)
+        public IEnumerable<ProjectUserCrewUnitViewModel> GetCrewUnits(long id)
         {
             var dtos = _crewUnitMemberService.GetCrewUnits(id);
 
