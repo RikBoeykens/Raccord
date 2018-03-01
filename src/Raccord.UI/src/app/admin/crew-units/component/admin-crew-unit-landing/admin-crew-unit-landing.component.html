@@ -1,0 +1,26 @@
+<md-card>      
+    <a routerLink="/" class="breadcrumb">Dashboard</a>
+    <a routerLink="/admin/projects" class="breadcrumb">Projects</a>
+    <a routerLink="/admin/projects/{{project.id}}" class="breadcrumb">{{project.title}}</a>
+    <a routerLink="/admin/projects/{{project.id}}/units" class="breadcrumb">Units</a>
+    <span class="breadcrumb">{{crewUnit.name}}</span>
+</md-card>
+<md-card>
+  <md-card-title>Linked Users</md-card-title>
+  <md-card-content>
+      <md-list>
+          <md-list-item 
+             *ngFor="let projectUser of crewUnit.projectUsers">
+            <a routerLink="/admin/users/{{projectUser.user.id}}">{{getFullName(projectUser)}}</a>
+            <button
+              md-icon-button
+              (click)="removeUnitMemberLink(projectUser)"
+              mdTooltip="delete">
+              <md-icon>delete</md-icon>
+            </button>
+          </md-list-item>
+      </md-list>
+      <i *ngIf="!crewUnit.projectUsers.length">No project users linked</i>
+      <button md-fab (click)="showAddCrewUnitMember()"><md-icon>add</md-icon></button>
+  </md-card-content>
+</md-card>

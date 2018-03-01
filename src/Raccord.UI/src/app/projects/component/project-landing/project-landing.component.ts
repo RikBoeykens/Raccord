@@ -5,6 +5,7 @@ import { CommentHttpService } from '../../children/comments/service/comment-http
 import { AccountHelpers } from '../../../account/helpers/account.helper';
 import { ProjectPermissionEnum } from
     '../../../shared/children/users/project-roles/enums/project-permission.enum';
+import { CrewUnitNavEnum } from '../../children/crew/crew-units/enum/crew-unit-nav.enum';
 
 @Component({
     templateUrl: 'project-landing.component.html',
@@ -52,5 +53,17 @@ export class ProjectLandingComponent implements OnInit {
             this.project.id,
             ProjectPermissionEnum.CanComment
         );
+    }
+
+    public getUnitListNavType() {
+        return CrewUnitNavEnum.unitLists;
+    }
+
+    public getScheduleEditNavType() {
+        return CrewUnitNavEnum.scheduleEdit;
+    }
+
+    public getScheduleReadNavType() {
+        return CrewUnitNavEnum.scheduleRead;
     }
 }

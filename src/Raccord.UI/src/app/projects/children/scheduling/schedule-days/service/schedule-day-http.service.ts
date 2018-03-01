@@ -15,9 +15,9 @@ export class ScheduleDayHttpService extends BaseProjectHttpService {
         super(_http, 'scheduledays');
     }
 
-    public getAll(authProjectId: number): Promise<FullScheduleDay[]> {
+    public getAll(authProjectId: number, crewUnitId: number): Promise<FullScheduleDay[]> {
 
-        let uri = `${this.getUri(authProjectId)}/project`;
+        let uri = `${this.getUri(authProjectId)}/${crewUnitId}/crewunit`;
 
         return this.doGetArray(uri);
     }

@@ -12,11 +12,18 @@ namespace Raccord.Data.EntityFramework.Repositories.Callsheets
         {
         }
 
-        public IEnumerable<Callsheet> GetAllForProject(long projectID)
+        public IEnumerable<Callsheet> GetAllForCrewUnit(long crewUnitID)
+        {
+            var query = GetIncludedCrewUnit();
+
+            return query.Where(d=> d.CrewUnitID == crewUnitID);
+        }
+
+        public IEnumerable<Callsheet> GetAllForProject(long crewUnitID)
         {
             var query = GetIncludedSummary();
 
-            return query.Where(d=> d.ProjectID == projectID);
+            return query.Where(d=> d.CrewUnitID == crewUnitID);
         }
 
         public Callsheet GetFull(long ID)
@@ -91,7 +98,8 @@ namespace Raccord.Data.EntityFramework.Repositories.Callsheets
                         .ThenInclude(cc=> cc.Character)
                         .ThenInclude(cc => cc.CastMember)
                         .ThenInclude(cm => cm.ProjectUser)
-                        .ThenInclude(cm => cm.User);
+                        .ThenInclude(cm => cm.User)
+                        .Include(cs => cs.CrewUnit);
         }
 
         private IQueryable<Callsheet> GetIncludedSummary()
@@ -101,6 +109,14 @@ namespace Raccord.Data.EntityFramework.Repositories.Callsheets
             return query.Include(cs=> cs.ShootingDay);
         }
 
+        private IQueryable<Callsheet> GetIncludedCrewUnit()
+        {
+            IQueryable<Callsheet> query = _context.Set<Callsheet>();
+
+            return query.Include(cs=> cs.ShootingDay)
+                        .Include(sd => sd.CrewUnit);
+        }
+
         private IQueryable<Callsheet> GetIncluded()
         {
             IQueryable<Callsheet> query = _context.Set<Callsheet>();
@@ -108,15 +124,23 @@ namespace Raccord.Data.EntityFramework.Repositories.Callsheets
             return query.Include(cs=> cs.ShootingDay);
         }
 
+        private IQueryable<Callsheet> GetIncludedSearch()
+        {
+            IQueryable<Callsheet> query = _context.Set<Callsheet>();
+
+            return query.Include(cs=> cs.ShootingDay)
+                        .Include(cs => cs.CrewUnit);
+        }
+
 
         private IQueryable<Callsheet> GetSearchQuery(string searchText, long? projectID)
         {
-            IQueryable<Callsheet> query = _context.Set<Callsheet>().Include(cs=> cs.ShootingDay);
+            var query = GetIncludedSearch();
 
             query = query.Where(l=> l.ShootingDay.Number.ToLower().Contains(searchText.ToLower()));
 
             if(projectID.HasValue)
-                query = query.Where(l=> l.ProjectID==projectID.Value);
+                query = query.Where(l=> l.CrewUnit.ProjectID==projectID.Value);
 
             return query;
         }

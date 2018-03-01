@@ -12,9 +12,9 @@ export class CrewDepartmentHttpService extends BaseHttpService {
         this._baseUri = `${AppSettings.API_ENDPOINT}/crewdepartments`;
     }
 
-    public getAll(projectId): Promise<FullCrewDepartment[]> {
+    public getAll(crewUnitId): Promise<FullCrewDepartment[]> {
 
-        const uri = `${this._baseUri}/${projectId}/project`;
+        const uri = `${this._baseUri}/${crewUnitId}/unit`;
 
         return this.doGetArray(uri);
     }

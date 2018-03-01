@@ -27,6 +27,8 @@ import { HtmlClassHelpers } from '../../../../../shared/helpers/html-class.helpe
 import { Element } from '@angular/compiler';
 import { LoadingWrapperService } from '../../../../../shared/service/loading-wrapper.service';
 import { SelectedBreakdown } from '../../../breakdowns/model/selected-breakdown.model';
+import { CrewUnitNavEnum } from '../../../crew/crew-units/enum/crew-unit-nav.enum';
+import { CrewUnitSummary } from '../../../crew/crew-units/model/crew-unit-summary.model';
 
 @Component({
     templateUrl: 'edit-schedule.component.html',
@@ -35,6 +37,7 @@ export class EditScheduleComponent implements OnInit {
 
     public scheduleDays: ScheduleDayDragSceneWrapper[] = [];
     public project: ProjectSummary;
+    public crewUnit: CrewUnitSummary;
     public viewNewScheduleDay: ScheduleDay;
     public newScheduleDay: ScheduleDay;
     public sceneType: EntityType[] = [EntityType.scene];
@@ -107,12 +110,14 @@ export class EditScheduleComponent implements OnInit {
         this._route.data.subscribe((data: {
             scheduleDays: FullScheduleDay[],
             project: ProjectSummary,
+            crewUnit: CrewUnitSummary,
             breakdown: SelectedBreakdown
         }) => {
             this.scheduleDays = data.scheduleDays.map((scheduleDay) => {
                 return new ScheduleDayDragSceneWrapper(scheduleDay);
             });
             this.project = data.project;
+            this.crewUnit = data.crewUnit;
             this.sceneFilter.projectID = this.project.id;
             this.breakdown = data.breakdown;
         });
@@ -123,7 +128,7 @@ export class EditScheduleComponent implements OnInit {
 
         let loadingId = this._loadingService.startLoading();
 
-        this._scheduleDayHttpService.getAll(this.project.id).then((data) => {
+        this._scheduleDayHttpService.getAll(this.project.id, this.crewUnit.id).then((data) => {
             this.scheduleDays = data.map((scheduleDay) => {
                 return new ScheduleDayDragSceneWrapper(scheduleDay);
             });
@@ -133,7 +138,7 @@ export class EditScheduleComponent implements OnInit {
 
     public resetNewScheduleDay() {
         this.viewNewScheduleDay = new ScheduleDay();
-        this.viewNewScheduleDay.projectId = this.project.id;
+        this.viewNewScheduleDay.crewUnitID = this.crewUnit.id;
         this.newScheduleDay = null;
     }
 
@@ -185,7 +190,7 @@ export class EditScheduleComponent implements OnInit {
         let callsheet = new Callsheet();
         callsheet.shootingDay = new ShootingDay();
         callsheet.shootingDay.id = scheduleDay.shootingDay.id;
-        callsheet.projectId = this.project.id;
+        callsheet.crewUnitID = this.crewUnit.id;
 
         let loadingId = this._loadingService.startLoading();
 
@@ -261,6 +266,10 @@ export class EditScheduleComponent implements OnInit {
             this.totalScenes = pagedData.pageInfo.total;
             this._loadingService.endLoading(loadingId);
         });
+    }
+
+    public getScheduleEditNavType() {
+        return CrewUnitNavEnum.scheduleEdit;
     }
 
     private onSceneDrag(bag: string) {
@@ -365,25 +374,6 @@ export class EditScheduleComponent implements OnInit {
                 }
             }
         );
-        /*
-        let loadingId = this._loadingService.startLoading();
-
-        this._scheduleSceneHttpService.sort(
-            this.project.id,
-            scheduleDay.id,
-            this.getSortedOrder(scheduleDay)
-        ).then((data) => {
-            if (typeof(data) === 'string') {
-                this._dialogService.error(data);
-            }else {
-                if (onSorted) {
-                    onSorted();
-                }
-            }
-        }).catch()
-        .then(() =>
-            this._loadingService.endLoading(loadingId)
-        );*/
     }
 
     private getSortedOrder(scheduleDay: ScheduleDayDragSceneWrapper): number[] {

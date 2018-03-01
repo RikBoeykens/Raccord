@@ -1,7 +1,8 @@
-import { Callsheet } from './callsheet.model';
-import { ShootingDay } from "../../shooting-days";
+import { BaseCallsheet } from './base-callsheet.model';
+import { ShootingDay } from '../../shooting-days';
 
-export class CallsheetSummary extends Callsheet{
+export class CallsheetSummary extends BaseCallsheet {
+    public crewUnitID: number;
 
     constructor(obj?: {
                         id: number,
@@ -9,8 +10,11 @@ export class CallsheetSummary extends Callsheet{
                         end: Date,
                         crewCall: Date,
                         shootingDay: ShootingDay,
-                        projectId: number,
-                    }){
+                        crewUnitID: number,
+                    }) {
         super(obj);
+        if (obj) {
+            this.crewUnitID = obj.crewUnitID;
+        }
     }
 }

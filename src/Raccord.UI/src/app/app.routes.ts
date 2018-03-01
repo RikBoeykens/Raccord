@@ -38,7 +38,6 @@ import {
   LocationLandingComponent,
   LocationSetLandingComponent,
   CallsheetsListComponent,
-  NewCallsheetComponent,
   CallsheetComponent,
   CallsheetWizardStep1Component,
   CallsheetWizardStep2Component,
@@ -51,6 +50,8 @@ import {
   ShootingDayReportsListComponent,
   ShootingDayReportLandingComponent,
   CrewLandingComponent,
+  CrewUnitsListComponent,
+  CrewUnitsNavListComponent,
   ScriptUploadComponent,
   ScriptUploadLandingComponent,
   ScriptTextLandingComponent,
@@ -69,7 +70,8 @@ import {
   AdminAddUserComponent,
   AdminUserLandingComponent,
   AdminProjectUserLandingComponent,
-  AdminProjectUserAddCrewMemberComponent
+  AdminCrewUnitLandingComponent,
+  AdminCrewUnitsListComponent,
 } from './admin';
 import{
   UserProfileLandingComponent
@@ -124,6 +126,9 @@ import {
   TakeResolve,
   TakesResolve,
   CrewDepartmentsResolve,
+  CrewUnitResolve,
+  CrewUnitSummaryResolve,
+  CrewUnitsResolve,
   ScriptUploadResolve,
   ScriptTextResolve,
   ScriptTextCallsheetResolve,
@@ -139,7 +144,8 @@ import {
   AdminProjectUsersResolve,
   AdminUserProjectsResolve,
   AdminProjectUserResolve,
-  AdminProjectRolesResolve
+  AdminProjectRolesResolve,
+  AdminCrewUnitResolve
 } from './admin';
 
 import {
@@ -197,6 +203,27 @@ export const ROUTES: Routes = [
                 },
                 canDeactivate: [CanDeactivateGuard],
               },
+              {
+                path: 'units',
+                children: [
+                  {
+                    path: '',
+                    component: AdminCrewUnitsListComponent,
+                    resolve: {
+                      project: ProjectSummaryResolve,
+                      crewUnits: CrewUnitsResolve
+                    }
+                  },
+                  {
+                    path: ':crewUnitId',
+                    component: AdminCrewUnitLandingComponent,
+                    resolve: {
+                      project: ProjectSummaryResolve,
+                      crewUnit: AdminCrewUnitResolve
+                    }
+                  }
+                ]
+              },
             ]
           }
         ]
@@ -241,14 +268,6 @@ export const ROUTES: Routes = [
             resolve: {
               projectUser: AdminProjectUserResolve,
               projectRoles: AdminProjectRolesResolve,
-            }
-          },
-          {
-            path: ':projectUserId/add/:projectId',
-            component: AdminProjectUserAddCrewMemberComponent,
-            resolve: {
-              projectUser: AdminProjectUserResolve,
-              departments: CrewDepartmentsResolve
             }
           },
         ]
@@ -563,7 +582,7 @@ export const ROUTES: Routes = [
             ]
           },
           {
-            path: 'scheduling',
+            path: 'scheduling/:crewUnitId',
             canActivate: [CanReadGeneralProjectPermissionGuard],
             children: [
               {
@@ -571,6 +590,7 @@ export const ROUTES: Routes = [
                 component: ScheduleLandingComponent,
                 resolve: {
                   project: ProjectSummaryResolve,
+                  crewUnit: CrewUnitSummaryResolve,
                   scheduleDays: ScheduleDaysResolve,
                 }
               },
@@ -583,6 +603,7 @@ export const ROUTES: Routes = [
                     component: EditScheduleComponent,
                     resolve: {
                       project: ProjectSummaryResolve,
+                      crewUnit: CrewUnitSummaryResolve,
                       scheduleDays: ScheduleDaysResolve,
                       breakdown: SelectedBreakdownResolve
                     }
@@ -592,6 +613,7 @@ export const ROUTES: Routes = [
                     component: ScheduleSceneLandingComponent,
                     resolve: {
                       project: ProjectSummaryResolve,
+                      crewUnit: CrewUnitSummaryResolve,
                       scheduleScene: ScheduleSceneResolve,
                       characters: SceneCharactersResolve,
                       locationSets: SceneLocationSetsResolve
@@ -656,15 +678,6 @@ export const ROUTES: Routes = [
                 resolve: {
                   project: ProjectSummaryResolve,
                   callsheets:  CallsheetsResolve
-                }
-              },
-              {
-                path: 'new',
-                component: NewCallsheetComponent,
-                canActivate: [CanEditGeneralProjectPermissionGuard],
-                resolve: {
-                  project: ProjectSummaryResolve,
-                  availableDays: AvailableCallsheetShootingDaysResolve
                 }
               },
               {
@@ -780,14 +793,37 @@ export const ROUTES: Routes = [
             ]
           },
           {
-            path: 'crew',
+            path: 'units',
             canActivate: [CanReadGeneralProjectPermissionGuard],
             children: [
               {
                 path: '',
+                component: CrewUnitsListComponent,
+                resolve: {
+                  project: ProjectSummaryResolve,
+                  crewUnits: CrewUnitsResolve
+                }
+              },
+              {
+                path: 'nav/:navType',
+                component: CrewUnitsNavListComponent,
+                resolve: {
+                  project: ProjectSummaryResolve,
+                  crewUnits: CrewUnitsResolve
+                }
+              }
+            ]
+          },
+          {
+            path: 'unitlists',
+            canActivate: [CanReadGeneralProjectPermissionGuard],
+            children: [
+              {
+                path: ':crewUnitId',
                 component: CrewLandingComponent,
                 resolve: {
                   project: ProjectSummaryResolve,
+                  crewUnit: CrewUnitSummaryResolve,
                   departments: CrewDepartmentsResolve
                 }
               }

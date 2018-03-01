@@ -13,6 +13,7 @@ using Raccord.Application.Services.Breakdowns.BreakdownItemScenes;
 using Raccord.Application.Services.Breakdowns.BreakdownTypes;
 using Raccord.Application.Services.Callsheets.CallsheetScenes;
 using Raccord.Application.Services.Callsheets.Characters;
+using Raccord.Application.Services.Crew.CrewUnits;
 using Raccord.Application.Services.Locations.Locations;
 using Raccord.Application.Services.Locations.LocationSets;
 using Raccord.Application.Services.Scenes;
@@ -88,7 +89,7 @@ namespace Raccord.Application.Services.Callsheets
                 Start = callsheet.Start,
                 End = callsheet.End,
                 CrewCall = callsheet.CrewCall,
-                ProjectID = callsheet.ProjectID,
+                CrewUnit = callsheet.CrewUnit.Translate(),
                 ShootingDay = callsheet.ShootingDay.Translate(),
                 Scenes = scenes.Select(cs=> cs.TranslateScene()),
                 Characters = callsheet.CallsheetCharacters.Select(cc=> cc.TranslateCharacter()),
@@ -107,7 +108,22 @@ namespace Raccord.Application.Services.Callsheets
                 Start = callsheet.Start,
                 End = callsheet.End,
                 CrewCall = callsheet.CrewCall,
-                ProjectID = callsheet.ProjectID,
+                CrewUnitID = callsheet.CrewUnitID,
+                ShootingDay = callsheet.ShootingDay.Translate(),
+            };
+
+            return dto;
+        }
+
+        public static CallsheetCrewUnitDto TranslateCrewUnit(this Callsheet callsheet)
+        {
+            var dto = new CallsheetCrewUnitDto
+            {
+                ID = callsheet.ID,
+                Start = callsheet.Start,
+                End = callsheet.End,
+                CrewCall = callsheet.CrewCall,
+                CrewUnit = callsheet.CrewUnit.Translate(),
                 ShootingDay = callsheet.ShootingDay.Translate(),
             };
 
@@ -122,7 +138,7 @@ namespace Raccord.Application.Services.Callsheets
                 Start = callsheet.Start,
                 End = callsheet.End,
                 CrewCall = callsheet.CrewCall,
-                ProjectID = callsheet.ProjectID,
+                CrewUnitID = callsheet.CrewUnitID,
                 ShootingDay = callsheet.ShootingDay.Translate(),
             };
 

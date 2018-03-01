@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace Raccord.Application.Core.Services.Callsheets
 {
     // Interface for location functionality
@@ -17,5 +19,6 @@ namespace Raccord.Application.Core.Services.Callsheets
 
         // Deletes a single instance
         void Delete(long ID);
+        IEnumerable<CallsheetCrewUnitDto> GetForProject(long projectID);
     }
 }

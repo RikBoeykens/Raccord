@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Raccord.Domain.Model.Breakdowns;
 using Raccord.Domain.Model.Callsheets.CallTypes;
 using Raccord.Domain.Model.Comments;
+using Raccord.Domain.Model.Crew.CrewUnits;
 using Raccord.Domain.Model.Crew.Departments;
 using Raccord.Domain.Model.Images;
 using Raccord.Domain.Model.Users;
@@ -14,19 +15,13 @@ namespace Raccord.Domain.Model.Projects
         private ICollection<Image> _images;
         private ICollection<ProjectUser> _projectUsers;
         private ICollection<CallType> _callTypes;
-        private ICollection<CrewDepartment> _crewDepartments;
         private ICollection<Comment> _comments;
         private ICollection<Breakdown> _breakdowns;
+        private ICollection<CrewUnit> _crewUnits;
 
 
         /// Title of the project
         public string Title { get; set; }
-
-        /// <summary>
-        /// Indicates if the schedule has been published
-        /// </summary>
-        /// <returns></returns>
-        public bool PublishedSchedule { get; set; }
 
         // Images associated with the project
         public virtual ICollection<Image> Images
@@ -68,19 +63,6 @@ namespace Raccord.Domain.Model.Projects
             }
         }
         
-        // Crew department types associated with the project
-        public virtual ICollection<CrewDepartment> CrewDepartments
-        {
-            get
-            {
-                return _crewDepartments ?? (_crewDepartments = new List<CrewDepartment>());
-            }
-            set
-            {
-                _crewDepartments = value;
-            }
-        }
-        
         // Comments made to the project
         public virtual ICollection<Comment> Comments
         {
@@ -104,6 +86,19 @@ namespace Raccord.Domain.Model.Projects
             set
             {
                 _breakdowns = value;
+            }
+        }
+
+        // Breakdowns associated with the project
+        public virtual ICollection<CrewUnit> CrewUnits
+        {
+            get
+            {
+                return _crewUnits ?? (_crewUnits = new List<CrewUnit>());
+            }
+            set
+            {
+                _crewUnits = value;
             }
         }
     }

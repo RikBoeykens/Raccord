@@ -7,12 +7,6 @@ namespace Raccord.Application.Core.Services.Projects
     {
         private ImageDto _primaryImage;
 
-        /// <summary>
-        /// Indicates if the schedule has been published
-        /// </summary>
-        /// <returns></returns>
-        public bool PublishedSchedule { get; set; }
-
         // Image for the project
         public ImageDto PrimaryImage
         {

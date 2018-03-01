@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Raccord.Domain.Model.Crew.CrewMembers;
+using Raccord.Domain.Model.Crew.CrewUnits;
 using Raccord.Domain.Model.Projects;
 
 namespace Raccord.Domain.Model.Crew.Departments
@@ -18,10 +19,10 @@ namespace Raccord.Domain.Model.Crew.Departments
         // Sorting order for the department
         public int? SortingOrder { get; set; }
 
-        // ID of the linked project
-        public long ProjectID { get; set; }
+        // ID of the linked crew unit
+        public long CrewUnitID { get; set; }
         // Linked project
-        public virtual Project Project { get; set; }
+        public virtual CrewUnit CrewUnit { get; set; }
 
         // Crew linked to the department
         public virtual ICollection<CrewMember> Crew

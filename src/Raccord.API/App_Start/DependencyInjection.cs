@@ -118,8 +118,6 @@ using Raccord.Application.Core.Services.ScriptTexts;
 using Raccord.Application.Services.ScriptTexts;
 using Raccord.Application.Core.Services.Profile;
 using Raccord.Application.Services.Profile;
-using Raccord.Application.Services.Users.Project.Crew;
-using Raccord.Application.Core.Services.Users.Project.Crew;
 using Raccord.Data.EntityFramework.Repositories.Comments;
 using Raccord.Application.Core.Services.Comments;
 using Raccord.Application.Services.Comments;
@@ -134,6 +132,12 @@ using Raccord.Application.Core.Services.Users.Project.Cast;
 using Raccord.Data.EntityFramework.Repositories.Cast;
 using Raccord.Application.Core.Services.Cast;
 using Raccord.Application.Services.Cast;
+using Raccord.Data.EntityFramework.Repositories.Crew.CrewUnits;
+using Raccord.Application.Core.Services.Crew.CrewUnits;
+using Raccord.Application.Services.Crew.CrewUnits;
+using Raccord.Data.EntityFramework.Repositories.Crew.CrewUnits.Members;
+using Raccord.Application.Core.Services.Crew.CrewUnits.Members;
+using Raccord.Application.Services.Crew.CrewUnits.Members;
 
 namespace Raccord.API
 {
@@ -287,8 +291,6 @@ namespace Raccord.API
 
             services.AddTransient<IUserProfileService, UserProfileService>();
 
-            services.AddTransient<IProjectUserCrewService, ProjectUserCrewService>();
-
             services.AddTransient<ICommentRepository, CommentRepository>();
             services.AddTransient<ICommentService, CommentService>();
 
@@ -304,6 +306,13 @@ namespace Raccord.API
             services.AddTransient<ICastMemberRepository, CastMemberRepository>();
             services.AddTransient<ICastMemberService, CastMemberService>();
             services.AddTransient<ICastMemberSearchEngineService, CastMemberSearchEngineService>();
+
+            services.AddTransient<ICrewUnitRepository, CrewUnitRepository>();
+            services.AddTransient<ICrewUnitService, CrewUnitService>();
+
+            services.AddTransient<ICrewUnitMemberRepository, CrewUnitMemberRepository>();
+            services.AddTransient<ICrewUnitMemberService, CrewUnitMemberService>();
+            services.AddTransient<IUnitCrewMemberService, UnitCrewMemberService>();
         }
     }
 }

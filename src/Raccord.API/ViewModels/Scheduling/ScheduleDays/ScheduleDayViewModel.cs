@@ -18,6 +18,6 @@ namespace Raccord.API.ViewModels.Scheduling.ScheduleDays
         public DateTime? End { get; set; }
 
         // ID of the project
-        public long ProjectID { get; set; }
+        public long CrewUnitID { get; set; }
     }
 }

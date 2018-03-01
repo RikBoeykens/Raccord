@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Raccord.Application.Core.Services.Cast;
 using Raccord.Application.Core.Services.Crew.CrewMembers;
+using Raccord.Application.Core.Services.Crew.CrewUnits;
 using Raccord.Application.Core.Services.Projects;
 using Raccord.Application.Core.Services.Users;
 using Raccord.Application.Core.Services.Users.ProjectRoles;
@@ -11,9 +12,9 @@ namespace Raccord.Application.Core.Services.Users.Project
     {
         private UserDto _user;
         private ProjectDto _project;
-        private IEnumerable<CrewMemberDto> _crewMembers;
         private CastMemberDto _castMember;
         private ProjectRoleDto _role;
+        private IEnumerable<ProjectUserCrewUnitDto> _crewUnits;
         // ID of the project user
         public long ID { get; set; }
 
@@ -40,22 +41,6 @@ namespace Raccord.Application.Core.Services.Users.Project
             set
             {
                 _user = value;
-            }
-        }
-
-        /// <summary>
-        /// Crew members linked to the project user
-        /// </summary>
-        /// <returns></returns>
-        public IEnumerable<CrewMemberDto> CrewMembers
-        {
-            get
-            {
-                return _crewMembers ?? (_crewMembers = new List<CrewMemberDto>());
-            }
-            set
-            {
-                _crewMembers = value;
             }
         }
 
@@ -88,6 +73,22 @@ namespace Raccord.Application.Core.Services.Users.Project
             set
             {
                 _role = value;
+            }
+        }
+
+        /// <summary>
+        /// Crew Units of the user
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<ProjectUserCrewUnitDto> CrewUnits
+        {
+            get
+            {
+                return _crewUnits ?? new List<ProjectUserCrewUnitDto>();
+            }
+            set
+            {
+                _crewUnits = value;
             }
         }
     }

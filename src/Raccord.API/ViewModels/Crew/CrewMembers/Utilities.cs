@@ -1,3 +1,4 @@
+using Raccord.API.ViewModels.Crew.CrewUnits;
 using Raccord.API.ViewModels.Crew.Departments;
 using Raccord.Application.Core.Services.Crew.CrewMembers;
 
@@ -18,6 +19,7 @@ namespace Raccord.API.ViewModels.Crew.CrewMembers
                 Department = dto.Department.Translate(),
                 UserID = dto.UserID,
                 HasImage = dto.HasImage,
+                CrewUnit = dto.CrewUnit.Translate(),
             };
         }
 
@@ -34,6 +36,21 @@ namespace Raccord.API.ViewModels.Crew.CrewMembers
                 Department = dto.Department.Translate(),
                 UserID = dto.UserID,
                 HasImage = dto.HasImage,
+            };
+        }
+
+        public static CrewMemberUnitViewModel Translate(this CrewMemberUnitDto dto)
+        {
+            return new CrewMemberUnitViewModel
+            {
+                ID = dto.ID,
+                FirstName = dto.FirstName,
+                LastName = dto.LastName,
+                JobTitle = dto.JobTitle,
+                Email = dto.Email,
+                Telephone = dto.Telephone,
+                Department = dto.Department.Translate(),
+                CrewUnit = dto.CrewUnit.Translate(),
             };
         }
 

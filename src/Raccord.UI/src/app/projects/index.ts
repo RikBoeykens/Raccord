@@ -189,6 +189,7 @@ export {
 
  export {
     ChooseShootingDayDialog,
+    ChooseShootingDayCrewUnitDialogComponent,
     ShootingDayReportsListComponent,
     ShootingDayReportLandingComponent,
     ShootingDaySceneListItem,
@@ -215,7 +216,6 @@ export {
     CallsheetCharactersCharactersResolve,
     CharacterCallHttpService,
     CallsheetsListComponent,
-    NewCallsheetComponent,
     CallsheetComponent,
     CallsheetWizardStep1Component,
     CallsheetWizardStep2Component,
@@ -250,7 +250,15 @@ export{
     CrewMemberResolve,
     CrewMembersResolve,
     CrewLandingComponent,
-    EditCrewMemberDialog
+    EditCrewMemberDialog,
+    CrewUnitHttpService,
+    CrewUnitResolve,
+    CrewUnitsResolve,
+    CrewUnitSummaryResolve,
+    CrewUnitsListComponent,
+    CrewUnitsNavListComponent,
+    EditCrewUnitDialogComponent,
+    ChooseCrewUnitDialogComponent
 } from './children/crew';
 
 export{

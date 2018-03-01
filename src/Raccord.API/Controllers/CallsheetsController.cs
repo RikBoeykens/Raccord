@@ -25,11 +25,22 @@ namespace Raccord.API.Controllers
             _callsheetService = callsheetService;
         }
 
-        // GET: api/callsheets/1/project
-        [HttpGet("{id}/project")]
+        // GET: api/callsheets/1/crewunit
+        [HttpGet("{id}/crewunit")]
         public IEnumerable<CallsheetSummaryViewModel> GetAll(long id)
         {
             var dtos = _callsheetService.GetAllForParent(id);
+
+            var vms = dtos.Select(p => p.Translate());
+
+            return vms;
+        }
+
+        // GET: api/callsheets/1/project
+        [HttpGet("{id}/project")]
+        public IEnumerable<CallsheetCrewUnitViewModel> GetAllForProject(long id)
+        {
+            var dtos = _callsheetService.GetForProject(id);
 
             var vms = dtos.Select(p => p.Translate());
 

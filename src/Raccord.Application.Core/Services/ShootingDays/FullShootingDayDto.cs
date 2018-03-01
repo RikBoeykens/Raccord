@@ -1,17 +1,19 @@
 using System;
 using System.Collections.Generic;
+using Raccord.Application.Core.Services.Crew.CrewUnits;
 using Raccord.Application.Core.Services.ShootingDays.Scenes;
 using Raccord.Application.Core.Services.Shots.Slates;
 
 namespace Raccord.Application.Core.Services.ShootingDays
 {
     // Dto to represent a full shooting day
-    public class FullShootingDayDto : ShootingDayDto
+    public class FullShootingDayDto : BaseShootingDayDto
     {
         private IEnumerable<ShootingDaySceneSceneDto> _scenes;
         private IEnumerable<SlateSummaryDto> _slates;
         private IEnumerable<String> _cameraRolls;
         private IEnumerable<String> _soundRolls;
+        private CrewUnitDto _crewUnit;
 
         // Total count of previously completed scenes
         public int PreviouslyCompletedSceneCount { get; set; }
@@ -74,6 +76,18 @@ namespace Raccord.Application.Core.Services.ShootingDays
             set
             {
                 _soundRolls = value;
+            }
+        }
+
+        public CrewUnitDto CrewUnit
+        {
+            get
+            {
+                return _crewUnit ?? new CrewUnitDto();
+            }
+            set
+            {
+                _crewUnit = value;
             }
         }
     }

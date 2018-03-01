@@ -1,18 +1,18 @@
 import { Injectable }             from '@angular/core';
 import { Router, Resolve, ActivatedRouteSnapshot } from '@angular/router';
 import { ShootingDayHttpService } from './shooting-day-http.service';
-import { ShootingDay } from '../model/shooting-day.model';
+import { ShootingDayCrewUnit } from '../model/shooting-day-crew-unit.model';
 @Injectable()
-export class AvailableCallsheetShootingDaysResolve implements Resolve<ShootingDay[]> {
+export class AvailableCallsheetShootingDaysResolve implements Resolve<ShootingDayCrewUnit[]> {
 
   constructor(
-    private shootingDayHttpService: ShootingDayHttpService, 
+    private shootingDayHttpService: ShootingDayHttpService,
     private router: Router
   ) {}
 
-    resolve(route: ActivatedRouteSnapshot) {
+    public resolve(route: ActivatedRouteSnapshot) {
         let projectId = route.params['projectId'];
-        return this.shootingDayHttpService.getAvailableForCallsheet(projectId).then(data => {
+        return this.shootingDayHttpService.getAvailableForCallsheet(projectId).then((data) => {
             return data;
         });
     }

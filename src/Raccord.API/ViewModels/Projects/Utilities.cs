@@ -15,7 +15,6 @@ namespace Raccord.API.ViewModels.Projects
                 ID = dto.ID,
                 Title = dto.Title,
                 PrimaryImage = dto.PrimaryImage.Translate(),
-                PublishedSchedule = dto.PublishedSchedule
             };
         }
         // Translates a project summary dto to a project summary viewmodel
@@ -26,7 +25,6 @@ namespace Raccord.API.ViewModels.Projects
                 ID = dto.ID,
                 Title = dto.Title,
                 PrimaryImage = dto.PrimaryImage.Translate(),
-                PublishedSchedule = dto.PublishedSchedule
             };
         }
         // Translates a project summary dto to a project summary viewmodel

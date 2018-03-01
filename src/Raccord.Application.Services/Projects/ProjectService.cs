@@ -12,6 +12,7 @@ using Raccord.Data.EntityFramework.Repositories.Crew.Departments;
 using Raccord.Domain.Model.Crew.Departments;
 using Raccord.Data.EntityFramework.Repositories.Users;
 using Raccord.Application.Services.Crew.CrewMembers;
+using Raccord.Domain.Model.Crew.CrewUnits;
 
 namespace Raccord.Application.Services.Projects
 {
@@ -77,8 +78,9 @@ namespace Raccord.Application.Services.Projects
             var projectDtos = projects.Select(p => 
             {
                 var crewMembers = user.ProjectUsers.Where(pu=> pu.ProjectID == p.ID)
-                                    .SelectMany(pu=> pu.CrewMembers)
-                                    .Select(cm=> cm.Translate()).ToList();
+                                    .SelectMany(pu=> pu.CrewUnitMembers)
+                                    .SelectMany(cum => cum.CrewMembers)
+                                    .Select(cm=> cm.TranslateUnit()).ToList();
 
                 return p.TranslateUser(crewMembers);
             });
@@ -127,15 +129,17 @@ namespace Raccord.Application.Services.Projects
             }
 
             var departmentDefinitions = _crewDepartmentDefinitionRepository.GetAll();
-            foreach(var definition in departmentDefinitions)
+            project.CrewUnits.Add(new CrewUnit
             {
-                project.CrewDepartments.Add(new CrewDepartment
+                Name = "Main Unit",
+                Description = string.Empty,
+                CrewDepartments = departmentDefinitions.Select(definition => new CrewDepartment
                 {
                     Name = definition.Name,
                     Description = definition.Description,
                     SortingOrder = definition.SortingOrder,
-                });
-            }
+                }).ToList()
+            });
 
             _projectRepository.Add(project);
             _projectRepository.Commit();

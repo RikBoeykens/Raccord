@@ -38,7 +38,8 @@ namespace Raccord.Application.Services.Charts.ChartBuilders
             var scenes = _sceneRepository.GetAllForProject(request.ProjectID);
             var totalPagelength = scenes.Sum(s=> s.PageLength);
 
-            var shootingDays = _shootingDayRepository.GetAllForProject(request.ProjectID);
+            // TODO implement for crew unit
+            var shootingDays = _shootingDayRepository.GetAllForCrewUnit(request.ProjectID);
             var shotPagelength = shootingDays.Sum(sd=> sd.ShootingDayScenes.Sum(sds=> sds.PageLength));
             
             var baseData = new List<object>{ "Shot", "Not Shot"};

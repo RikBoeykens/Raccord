@@ -4,9 +4,9 @@ namespace Raccord.Application.Core.Services.ShootingDays
 {
     public interface IShootingDayService
     {
-        IEnumerable<ShootingDayDto> GetAvailableForCallsheet(long projectID);
-        IEnumerable<ShootingDayDto> GetAvailableForCompletion(long projectID);
-        IEnumerable<ShootingDaySummaryDto> GetCompleted(long projectID);
+        IEnumerable<ShootingDayCrewUnitDto> GetAvailableForCallsheet(long projectID);
+        IEnumerable<ShootingDayCrewUnitDto> GetAvailableForCompletion(long projectID);
+        IEnumerable<ShootingDaySummaryDto> GetCompleted(long crewUnitID);
         IEnumerable<ShootingDayDto> GetAll(long projectID);
         FullShootingDayDto GetFull(long ID);
         ShootingDaySummaryDto GetSummary(long ID);
