@@ -8,7 +8,6 @@ export class UserProject extends ProjectSummary {
     constructor(obj?: {id: number,
                        title: string,
                        primaryImage: Image,
-                       publishedSchedule: boolean
                        crewMembers: CrewMemberUnit[]
                     }) {
         super(obj);

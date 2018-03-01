@@ -12,18 +12,18 @@ namespace Raccord.Data.EntityFramework.Repositories.Scheduling.ScheduleDays
         {
         }
 
-        public IEnumerable<ScheduleDay> GetAllForProject(long projectID)
+        public IEnumerable<ScheduleDay> GetAllForCrewUnit(long crewUnitID)
         {
             var query = GetIncludedFull();
 
-            return query.Where(sd=> sd.ProjectID == projectID);
+            return query.Where(sd=> sd.CrewUnitID == crewUnitID);
         }
 
-        public IEnumerable<ScheduleDay> GetAllWithScenesForProject(long projectID)
+        public IEnumerable<ScheduleDay> GetAllWithScenesForCrewUnit(long crewUnitID)
         {
             var query = GetIncludedSummary();
 
-            return query.Where(sd=> sd.ProjectID == projectID && sd.ScheduleScenes.Any());
+            return query.Where(sd=> sd.CrewUnitID == crewUnitID && sd.ScheduleScenes.Any());
         }
 
         public ScheduleDay GetFull(long ID)

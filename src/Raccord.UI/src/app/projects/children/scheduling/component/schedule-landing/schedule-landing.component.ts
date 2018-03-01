@@ -30,6 +30,8 @@ import { HtmlClassHelpers } from '../../../../../shared/helpers/html-class.helpe
 import { AccountHelpers } from '../../../../../account/helpers/account.helper';
 import { ProjectPermissionEnum } from
     '../../../../../shared/children/users/project-roles/enums/project-permission.enum';
+import { CrewUnitNavEnum } from '../../../crew/crew-units/enum/crew-unit-nav.enum';
+import { CrewUnitSummary } from '../../../crew/crew-units/model/crew-unit-summary.model';
 
 @Component({
     templateUrl: 'schedule-landing.component.html',
@@ -38,6 +40,7 @@ export class ScheduleLandingComponent implements OnInit {
 
     public scheduleDays: FullScheduleDay[] = [];
     public project: ProjectSummary;
+    public crewUnit: CrewUnitSummary;
 
     constructor(
         private _callsheetHttpService: CallsheetHttpService,
@@ -52,17 +55,12 @@ export class ScheduleLandingComponent implements OnInit {
         this._route.data.subscribe((data: {
             scheduleDays: FullScheduleDay[],
             project: ProjectSummary,
+            crewUnit: CrewUnitSummary
         }) => {
             this.scheduleDays = data.scheduleDays;
             this.project = data.project;
+            this.crewUnit = data.crewUnit;
         });
-    }
-
-    public getCanEdit() {
-        return AccountHelpers.hasProjectPermission(
-            this.project.id,
-            ProjectPermissionEnum.canEditGeneral
-        );
     }
 
     public getScheduledPageLength(scheduleDay: FullScheduleDay) {
@@ -72,28 +70,7 @@ export class ScheduleLandingComponent implements OnInit {
         return sum;
     }
 
-    public addCallsheet(scheduleDay: FullScheduleDay) {
-        let callsheet = new Callsheet();
-        callsheet.shootingDay = new ShootingDay();
-        callsheet.shootingDay.id = scheduleDay.shootingDay.id;
-        callsheet.projectId = this.project.id;
-
-        let loadingId = this._loadingService.startLoading();
-
-        this._callsheetHttpService.post(callsheet).then((data) => {
-            if (typeof(data) === 'string') {
-                this._dialogService.error(data);
-            }else {
-                this._router.navigate([
-                    'projects',
-                    this.project.id,
-                    'callsheets',
-                    data,
-                    'wizard',
-                    1
-                ]);
-            }
-        }).catch()
-        .then(() => this._loadingService.endLoading(loadingId));
+    public getScheduleReadNavType() {
+        return CrewUnitNavEnum.scheduleRead;
     }
 }

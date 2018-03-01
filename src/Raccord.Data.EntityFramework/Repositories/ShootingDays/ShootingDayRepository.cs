@@ -13,18 +13,25 @@ namespace Raccord.Data.EntityFramework.Repositories.ShootingDays
         {
         }
 
-        public IEnumerable<ShootingDay> GetAllForProject(long projectID)
+        public IEnumerable<ShootingDay> GetAllForCrewUnit(long crewUnitID)
         {
             var query = GetIncludedSummary();
 
-            return query.Where(d=> d.ProjectID == projectID);
+            return query.Where(d=> d.CrewUnitID == crewUnitID);
         }
 
-        public IEnumerable<ShootingDay> GetAllBeforeDate(long projectID, DateTime date)
+        public IEnumerable<ShootingDay> GetAllForProject(long projectID)
+        {
+            var query = GetIncludedProject();
+
+            return query.Where(d=> d.CrewUnit.ProjectID == projectID);
+        }
+
+        public IEnumerable<ShootingDay> GetAllBeforeDate(long crewUnitID, DateTime date)
         {
             var query = GetIncludedSummary();
 
-            return query.Where(d=> d.ProjectID == projectID && d.Date < date);
+            return query.Where(d=> d.CrewUnitID == crewUnitID && d.Date < date);
         }
 
         public ShootingDay GetFull(long ID)
@@ -105,7 +112,8 @@ namespace Raccord.Data.EntityFramework.Repositories.ShootingDays
                         .ThenInclude(sds=> sds.Takes)
                         .Include(sd=> sd.ShootingDayScenes)
                         .ThenInclude(sds=> sds.LocationSet)
-                        .ThenInclude(ls=> ls.Location);
+                        .ThenInclude(ls=> ls.Location)
+                        .Include(sd => sd.CrewUnit);
         }
 
         private IQueryable<ShootingDay> GetIncludedSummary()
@@ -123,14 +131,28 @@ namespace Raccord.Data.EntityFramework.Repositories.ShootingDays
             return query;
         }
 
-        private IQueryable<ShootingDay> GetSearchQuery(string searchText, long? projectID)
+        private IQueryable<ShootingDay> GetIncludedProject()
         {
             IQueryable<ShootingDay> query = _context.Set<ShootingDay>();
+
+            return query.Include(sd => sd.CrewUnit);
+        }
+
+        private IQueryable<ShootingDay> GetIncludedSearch()
+        {
+            IQueryable<ShootingDay> query = _context.Set<ShootingDay>();
+
+            return query.Include(sd => sd.CrewUnit);
+        }
+
+        private IQueryable<ShootingDay> GetSearchQuery(string searchText, long? projectID)
+        {
+            var query = GetIncludedSearch();
 
             query = query.Where(l=> l.Number.ToLower().Contains(searchText.ToLower()));
 
             if(projectID.HasValue)
-                query = query.Where(l=> l.ProjectID==projectID.Value);
+                query = query.Where(l=> l.CrewUnit.ProjectID==projectID.Value);
 
             return query;
         }

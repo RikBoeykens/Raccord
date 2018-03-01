@@ -31,7 +31,7 @@ namespace Raccord.Application.Services.Scheduling.ScheduleDays
                 Scenes = scheduleDay.ScheduleScenes.OrderBy(t=> t.SortingOrder)
                                                     .Select(s=> s.TranslateScene()),
                 ShootingDay = scheduleDay.ShootingDayID.HasValue ? scheduleDay.ShootingDay.Translate() : new ShootingDayDto(),
-                ProjectID = scheduleDay.ProjectID,
+                CrewUnitID = scheduleDay.CrewUnitID,
             };
 
             return dto;
@@ -47,7 +47,7 @@ namespace Raccord.Application.Services.Scheduling.ScheduleDays
                 SceneCount = scheduleDay.ScheduleScenes.Count(),
                 PageLength = scheduleDay.ScheduleScenes.Sum(ss=> ss.PageLength),
                 ShootingDay = scheduleDay.ShootingDayID.HasValue ? scheduleDay.ShootingDay.Translate() : new ShootingDayDto(),
-                ProjectID = scheduleDay.ProjectID,
+                CrewUnitID = scheduleDay.CrewUnitID,
             };
 
             return dto;
@@ -61,7 +61,7 @@ namespace Raccord.Application.Services.Scheduling.ScheduleDays
                 Date = scheduleDay.Date,
                 Start = scheduleDay.Start,
                 End = scheduleDay.End,
-                ProjectID = scheduleDay.ProjectID,
+                CrewUnitID = scheduleDay.CrewUnitID,
             };
 
             return dto;
@@ -75,7 +75,7 @@ namespace Raccord.Application.Services.Scheduling.ScheduleDays
                 Date = scheduleDay.Date,
                 Start = scheduleDay.Start,
                 End = scheduleDay.End,
-                ProjectID = scheduleDay.ProjectID,
+                CrewUnitID = scheduleDay.CrewUnitID,
                 Scenes = scenes.Select(s=> s.TranslateScene()),
                 ShootingDay = scheduleDay.ShootingDayID.HasValue ? scheduleDay.ShootingDay.Translate() : new ShootingDayDto(),
              });
@@ -91,7 +91,7 @@ namespace Raccord.Application.Services.Scheduling.ScheduleDays
                 Date = scheduleDay.Date,
                 Start = scheduleDay.Start,
                 End = scheduleDay.End,
-                ProjectID = scheduleDay.ProjectID,
+                CrewUnitID = scheduleDay.CrewUnitID,
                 Scenes = scenes.Select(s=> s.TranslateScene()),
                 ShootingDay = scheduleDay.ShootingDayID.HasValue ? scheduleDay.ShootingDay.Translate() : new ShootingDayDto(),
              }));
@@ -107,7 +107,7 @@ namespace Raccord.Application.Services.Scheduling.ScheduleDays
                 Date = scheduleDay.Date,
                 Start = scheduleDay.Start,
                 End = scheduleDay.End,
-                ProjectID = scheduleDay.ProjectID,
+                CrewUnitID = scheduleDay.CrewUnitID,
                 Scenes = scenes.Select(s=> s.TranslateScene()),
                 ShootingDay = scheduleDay.ShootingDayID.HasValue ? scheduleDay.ShootingDay.Translate() : new ShootingDayDto(),
              });

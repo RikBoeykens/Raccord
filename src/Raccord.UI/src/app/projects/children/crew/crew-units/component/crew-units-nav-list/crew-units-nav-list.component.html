@@ -9,7 +9,7 @@
 <md-card>
   <md-nav-list>
       <a md-list-item
-         routerLink="/projects/{{project.id}}/{{getUrlType()}}/{{crewUnit.id}}"
+         routerLink="/projects/{{project.id}}/{{getUrl(crewUnit)}}"
          *ngFor="let crewUnit of crewUnits">
         {{crewUnit.name}}
       </a>

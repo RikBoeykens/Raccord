@@ -19,10 +19,10 @@
     <h3>Cast</h3>
     <search-characters-collection [projectID]="projectID" (onChange)="filterCharacters($event)"></search-characters-collection>
     <search-entities-collection [projectID]="projectID" (onChange)="filterCastMembers($event)" [entityType]="getCastMemberType()" [entityTypeName]="'Cast Member'"></search-entities-collection>
-    <h3 *ngIf="breakdown.id!==0">
+    <h3 *ngIf="breakdown">
         <span>Breakdown</span>
         &nbsp;
         <a routerLink="/projects/{{projectID}}/breakdowns/{{breakdown.id}}">{{breakdown.name}}</a>
     </h3>
-    <search-breakdown-collection [projectID]="projectID" (onChange)="filterBreakdowns($event)" [breakdown]="breakdown" *ngIf="breakdown.id!==0"></search-breakdown-collection>
+    <search-breakdown-collection [projectID]="projectID" (onChange)="filterBreakdowns($event)" [breakdown]="breakdown" *ngIf="breakdown"></search-breakdown-collection>
   </div>

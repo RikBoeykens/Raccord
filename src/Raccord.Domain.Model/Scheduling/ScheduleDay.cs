@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Raccord.Domain.Model.Crew.CrewUnits;
 using Raccord.Domain.Model.Projects;
 using Raccord.Domain.Model.ShootingDays;
 
@@ -21,10 +22,10 @@ namespace Raccord.Domain.Model.Scheduling
         public DateTime? End { get; set; }
 
         // ID of the linked project
-        public long ProjectID { get; set; }
+        public long CrewUnitID { get; set; }
 
         // Linked project
-        public virtual Project Project { get; set; }
+        public virtual CrewUnit CrewUnit { get; set; }
 
         // ID of the linked shooting day
         public long? ShootingDayID { get; set; }

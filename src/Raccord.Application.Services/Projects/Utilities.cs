@@ -19,7 +19,6 @@ namespace Raccord.Application.Services.Projects
                 ID = project.ID,
                 Title = project.Title,
                 PrimaryImage = project.Images.FirstOrDefault(i=> i.IsPrimaryImage)?.Translate(),
-                PublishedSchedule = project.PublishedSchedule
             };
 
             return dto;
@@ -31,7 +30,6 @@ namespace Raccord.Application.Services.Projects
                 ID = project.ID,
                 Title = project.Title,
                 PrimaryImage = project.Images.FirstOrDefault(i=> i.IsPrimaryImage)?.Translate(),
-                PublishedSchedule = project.PublishedSchedule
             };
 
             return dto;

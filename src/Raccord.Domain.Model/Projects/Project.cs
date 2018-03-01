@@ -23,12 +23,6 @@ namespace Raccord.Domain.Model.Projects
         /// Title of the project
         public string Title { get; set; }
 
-        /// <summary>
-        /// Indicates if the schedule has been published
-        /// </summary>
-        /// <returns></returns>
-        public bool PublishedSchedule { get; set; }
-
         // Images associated with the project
         public virtual ICollection<Image> Images
         {

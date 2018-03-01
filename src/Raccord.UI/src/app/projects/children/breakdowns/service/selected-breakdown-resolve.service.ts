@@ -16,9 +16,6 @@ export class SelectedBreakdownResolve implements Resolve<SelectedBreakdown> {
     return this.breakdownHttpService.getSelected(projectId).then((breakdown) => {
         if (breakdown) {
             return breakdown;
-        } else { // id not found
-            this.router.navigate(['/projects', projectId]);
-            return false;
         }
     });
   }

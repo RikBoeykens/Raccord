@@ -2,7 +2,8 @@
     <a routerLink="/" class="breadcrumb">Dashboard</a>
     <a routerLink="/projects" class="breadcrumb">Projects</a>
     <a routerLink="/projects/{{project.id}}" class="breadcrumb">{{project.title}}</a>
-    <span class="breadcrumb">Edit Schedule</span>
+    <a routerLink="/projects/{{project.id}}/units/nav/{{getScheduleEditNavType()}}" class="breadcrumb">Edit Schedules</a>
+    <span class="breadcrumb">{{crewUnit.name}}</span>
 </md-card>
 <div>
     <md-card>

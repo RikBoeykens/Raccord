@@ -38,7 +38,6 @@ import {
   LocationLandingComponent,
   LocationSetLandingComponent,
   CallsheetsListComponent,
-  NewCallsheetComponent,
   CallsheetComponent,
   CallsheetWizardStep1Component,
   CallsheetWizardStep2Component,
@@ -583,7 +582,7 @@ export const ROUTES: Routes = [
             ]
           },
           {
-            path: 'scheduling',
+            path: 'scheduling/:crewUnitId',
             canActivate: [CanReadGeneralProjectPermissionGuard],
             children: [
               {
@@ -591,6 +590,7 @@ export const ROUTES: Routes = [
                 component: ScheduleLandingComponent,
                 resolve: {
                   project: ProjectSummaryResolve,
+                  crewUnit: CrewUnitSummaryResolve,
                   scheduleDays: ScheduleDaysResolve,
                 }
               },
@@ -603,6 +603,7 @@ export const ROUTES: Routes = [
                     component: EditScheduleComponent,
                     resolve: {
                       project: ProjectSummaryResolve,
+                      crewUnit: CrewUnitSummaryResolve,
                       scheduleDays: ScheduleDaysResolve,
                       breakdown: SelectedBreakdownResolve
                     }
@@ -612,6 +613,7 @@ export const ROUTES: Routes = [
                     component: ScheduleSceneLandingComponent,
                     resolve: {
                       project: ProjectSummaryResolve,
+                      crewUnit: CrewUnitSummaryResolve,
                       scheduleScene: ScheduleSceneResolve,
                       characters: SceneCharactersResolve,
                       locationSets: SceneLocationSetsResolve
@@ -676,15 +678,6 @@ export const ROUTES: Routes = [
                 resolve: {
                   project: ProjectSummaryResolve,
                   callsheets:  CallsheetsResolve
-                }
-              },
-              {
-                path: 'new',
-                component: NewCallsheetComponent,
-                canActivate: [CanEditGeneralProjectPermissionGuard],
-                resolve: {
-                  project: ProjectSummaryResolve,
-                  availableDays: AvailableCallsheetShootingDaysResolve
                 }
               },
               {

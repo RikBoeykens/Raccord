@@ -36,10 +36,14 @@ export class CrewUnitsNavListComponent implements OnInit {
     });
   }
 
-  public getUrlType() {
+  public getUrl(crewUnit: CrewUnitSummary) {
     switch (CrewUnitNavEnum[this.crewUnitNav]) {
       case(CrewUnitNavEnum[CrewUnitNavEnum.unitLists]):
-        return 'unitlists';
+        return `unitlists/${crewUnit.id}`;
+      case(CrewUnitNavEnum[CrewUnitNavEnum.scheduleEdit]):
+        return `scheduling/${crewUnit.id}/edit`;
+      case(CrewUnitNavEnum[CrewUnitNavEnum.scheduleRead]):
+        return `scheduling/${crewUnit.id}`;
       default:
         return '';
     }
@@ -49,6 +53,10 @@ export class CrewUnitsNavListComponent implements OnInit {
     switch (CrewUnitNavEnum[this.crewUnitNav]) {
       case(CrewUnitNavEnum[CrewUnitNavEnum.unitLists]):
         return 'Unit Lists';
+      case(CrewUnitNavEnum[CrewUnitNavEnum.scheduleEdit]):
+        return 'Edit Schedules';
+      case(CrewUnitNavEnum[CrewUnitNavEnum.scheduleRead]):
+        return 'Schedules';
       default:
         return 'Not found';
     }

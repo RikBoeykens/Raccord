@@ -359,9 +359,9 @@ namespace Raccord.Data.EntityFramework.Migrations
 
                     b.Property<DateTime>("CrewCall");
 
-                    b.Property<DateTime>("End");
+                    b.Property<long>("CrewUnitID");
 
-                    b.Property<long>("ProjectID");
+                    b.Property<DateTime>("End");
 
                     b.Property<long>("ShootingDayID");
 
@@ -369,7 +369,7 @@ namespace Raccord.Data.EntityFramework.Migrations
 
                     b.HasKey("ID");
 
-                    b.HasIndex("ProjectID");
+                    b.HasIndex("CrewUnitID");
 
                     b.ToTable("Callsheet");
                 });
@@ -877,8 +877,6 @@ namespace Raccord.Data.EntityFramework.Migrations
                     b.Property<long>("ID")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<bool>("PublishedSchedule");
-
                     b.Property<string>("Title");
 
                     b.HasKey("ID");
@@ -1033,11 +1031,11 @@ namespace Raccord.Data.EntityFramework.Migrations
                     b.Property<long>("ID")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<long>("CrewUnitID");
+
                     b.Property<DateTime>("Date");
 
                     b.Property<DateTime?>("End");
-
-                    b.Property<long>("ProjectID");
 
                     b.Property<long?>("ShootingDayID");
 
@@ -1045,7 +1043,7 @@ namespace Raccord.Data.EntityFramework.Migrations
 
                     b.HasKey("ID");
 
-                    b.HasIndex("ProjectID");
+                    b.HasIndex("CrewUnitID");
 
                     b.ToTable("ScheduleDay");
                 });
@@ -1178,6 +1176,8 @@ namespace Raccord.Data.EntityFramework.Migrations
 
                     b.Property<bool>("Completed");
 
+                    b.Property<long>("CrewUnitID");
+
                     b.Property<DateTime>("Date");
 
                     b.Property<DateTime>("End");
@@ -1185,8 +1185,6 @@ namespace Raccord.Data.EntityFramework.Migrations
                     b.Property<string>("Number");
 
                     b.Property<TimeSpan>("OverTime");
-
-                    b.Property<long>("ProjectID");
 
                     b.Property<long?>("ScheduleDayID");
 
@@ -1199,7 +1197,7 @@ namespace Raccord.Data.EntityFramework.Migrations
                     b.HasIndex("CallsheetID")
                         .IsUnique();
 
-                    b.HasIndex("ProjectID");
+                    b.HasIndex("CrewUnitID");
 
                     b.HasIndex("ScheduleDayID")
                         .IsUnique();
@@ -1520,9 +1518,9 @@ namespace Raccord.Data.EntityFramework.Migrations
 
             modelBuilder.Entity("Raccord.Domain.Model.Callsheets.Callsheet", b =>
                 {
-                    b.HasOne("Raccord.Domain.Model.Projects.Project", "Project")
+                    b.HasOne("Raccord.Domain.Model.Crew.CrewUnits.CrewUnit", "CrewUnit")
                         .WithMany()
-                        .HasForeignKey("ProjectID")
+                        .HasForeignKey("CrewUnitID")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
@@ -1861,9 +1859,9 @@ namespace Raccord.Data.EntityFramework.Migrations
 
             modelBuilder.Entity("Raccord.Domain.Model.Scheduling.ScheduleDay", b =>
                 {
-                    b.HasOne("Raccord.Domain.Model.Projects.Project", "Project")
+                    b.HasOne("Raccord.Domain.Model.Crew.CrewUnits.CrewUnit", "CrewUnit")
                         .WithMany()
-                        .HasForeignKey("ProjectID")
+                        .HasForeignKey("CrewUnitID")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
@@ -1940,9 +1938,9 @@ namespace Raccord.Data.EntityFramework.Migrations
                         .WithOne("ShootingDay")
                         .HasForeignKey("Raccord.Domain.Model.ShootingDays.ShootingDay", "CallsheetID");
 
-                    b.HasOne("Raccord.Domain.Model.Projects.Project", "Project")
+                    b.HasOne("Raccord.Domain.Model.Crew.CrewUnits.CrewUnit", "CrewUnit")
                         .WithMany()
-                        .HasForeignKey("ProjectID")
+                        .HasForeignKey("CrewUnitID")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("Raccord.Domain.Model.Scheduling.ScheduleDay", "ScheduleDay")

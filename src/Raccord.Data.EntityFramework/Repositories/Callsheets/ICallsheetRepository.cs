@@ -6,6 +6,7 @@ namespace Raccord.Data.EntityFramework.Repositories.Callsheets
     // Interface defining a repository for Int/Ext
     public interface ICallsheetRepository : IBaseRepository<Callsheet>
     {
+        IEnumerable<Callsheet> GetAllForCrewUnit(long crewUnitID);
         IEnumerable<Callsheet> GetAllForProject(long projectID);
         Callsheet GetFull(long ID);
         Callsheet GetSummary(long ID);

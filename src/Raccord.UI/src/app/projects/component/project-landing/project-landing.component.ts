@@ -58,4 +58,12 @@ export class ProjectLandingComponent implements OnInit {
     public getUnitListNavType() {
         return CrewUnitNavEnum.unitLists;
     }
+
+    public getScheduleEditNavType() {
+        return CrewUnitNavEnum.scheduleEdit;
+    }
+
+    public getScheduleReadNavType() {
+        return CrewUnitNavEnum.scheduleRead;
+    }
 }

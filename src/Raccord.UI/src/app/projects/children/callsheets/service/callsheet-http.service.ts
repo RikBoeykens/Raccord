@@ -6,44 +6,52 @@ import { FullCallsheet } from '../';
 import { CallsheetSummary } from '../';
 import { Callsheet } from '../';
 import { JsonResponse } from '../../../../shared/model/json-response.model';
+import { CallsheetCrewUnit } from '../model/callsheet-crew-unit.model';
 
 @Injectable()
 export class CallsheetHttpService extends BaseHttpService {
 
-    constructor(protected _http: Http) { 
+    constructor(protected _http: Http) {
         super(_http);
         this._baseUri = `${AppSettings.API_ENDPOINT}/callsheets`;
     }
 
-    getAll(projectId): Promise<CallsheetSummary[]> {
+    public getAll(crewUnitId): Promise<CallsheetSummary[]> {
 
-        var uri = `${this._baseUri}/${projectId}/project`;
+        let uri = `${this._baseUri}/${crewUnitId}/crewUnit`;
 
         return this.doGetArray(uri);
     }
 
-    get(id: number): Promise<FullCallsheet>{
+    public getAllForProject(projectId): Promise<CallsheetCrewUnit[]> {
 
-        var uri = `${this._baseUri}/${id}`;
+        let uri = `${this._baseUri}/${projectId}/project`;
+
+        return this.doGetArray(uri);
+    }
+
+    public get(id: number): Promise<FullCallsheet> {
+
+        let uri = `${this._baseUri}/${id}`;
 
         return this.doGet(uri);
     }
 
-    getSummary(id: Number): Promise<CallsheetSummary> {
+    public getSummary(id: Number): Promise<CallsheetSummary> {
 
-        var uri = `${this._baseUri}/${id}/summary`;
+        let uri = `${this._baseUri}/${id}/summary`;
 
         return this.doGet(uri);
     }
 
-    post(callsheet: Callsheet): Promise<number> {
-        var uri = this._baseUri;
+    public post(callsheet: Callsheet): Promise<number> {
+        let uri = this._baseUri;
 
         return this.doPost(callsheet, uri);
     }
 
-    delete(id: Number): Promise<any> {
-        var uri = `${this._baseUri}/${id}`;
+    public delete(id: Number): Promise<any> {
+        let uri = `${this._baseUri}/${id}`;
 
         return this.doDelete(uri);
     }

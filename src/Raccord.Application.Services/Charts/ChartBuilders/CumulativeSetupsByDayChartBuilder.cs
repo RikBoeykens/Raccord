@@ -40,7 +40,8 @@ namespace Raccord.Application.Services.Charts.ChartBuilders
             
             var setups = 0;
 
-            var shootingDays = _shootingDayRepository.GetAllForProject(request.ProjectID).OrderBy(sd=> sd.Date);
+            // TODO implement for crew unit
+            var shootingDays = _shootingDayRepository.GetAllForCrewUnit(request.ProjectID).OrderBy(sd=> sd.Date);
             foreach(var shootingDay in shootingDays)
             {
                 baseData.Add($"SD {shootingDay.Number}");

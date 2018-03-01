@@ -1,15 +1,17 @@
-import { Callsheet } from './callsheet.model';
+import { BaseCallsheet } from './base-callsheet.model';
 import { ShootingDay } from '../../shooting-days';
 import { CallsheetSceneScene } from '../';
 import { CallsheetCharacterCharacter } from '../';
 import { CallsheetLocation } from '../../locations/locations/model/callsheet-location.model';
 import { CallsheetBreakdown } from '../../breakdowns/model/callsheet-breakdown.model';
+import { CrewUnit } from '../../crew/crew-units/model/crew-unit.model';
 
-export class FullCallsheet extends Callsheet {
+export class FullCallsheet extends BaseCallsheet {
     public scenes: CallsheetSceneScene[];
     public characters: CallsheetCharacterCharacter[];
     public locations: CallsheetLocation[];
     public breakdownInfo: CallsheetBreakdown;
+    public crewUnit: CrewUnit;
 
     constructor(obj?: {
                         id: number,
@@ -19,7 +21,7 @@ export class FullCallsheet extends Callsheet {
                         shootingDay: ShootingDay,
                         scenes: CallsheetSceneScene[],
                         characters: CallsheetCharacterCharacter[],
-                        projectId: number,
+                        crewUnit: CrewUnit,
                         locations: CallsheetLocation[],
                         breakdownInfo: CallsheetBreakdown
                     }) {
@@ -29,6 +31,7 @@ export class FullCallsheet extends Callsheet {
             this.characters = obj.characters;
             this.locations = obj.locations;
             this.breakdownInfo = obj.breakdownInfo;
+            this.crewUnit = obj.crewUnit;
         }
     }
 }

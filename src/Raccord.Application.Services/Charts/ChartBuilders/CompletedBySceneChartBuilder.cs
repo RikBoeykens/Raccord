@@ -38,7 +38,8 @@ namespace Raccord.Application.Services.Charts.ChartBuilders
             var scenes = _sceneRepository.GetAllForProject(request.ProjectID);
             var totalScenes = scenes.Count();
 
-            var shootingDays = _shootingDayRepository.GetAllForProject(request.ProjectID);
+            // TODO implement for crew unit
+            var shootingDays = _shootingDayRepository.GetAllForCrewUnit(request.ProjectID);
             var scenesCompleted = shootingDays.Sum(sd=> sd.ShootingDayScenes.Count(sds=> sds.Completion == Completion.Completed));
             
             var baseData = new List<object>{ "Shot", "Not Shot"};

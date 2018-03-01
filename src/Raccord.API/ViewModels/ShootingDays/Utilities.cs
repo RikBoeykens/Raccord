@@ -2,6 +2,7 @@ using System.Linq;
 using Raccord.Application.Core.Services.ShootingDays;
 using Raccord.API.ViewModels.ShootingDays.Scenes;
 using Raccord.API.ViewModels.Shots.Slates;
+using Raccord.API.ViewModels.Crew.CrewUnits;
 
 namespace Raccord.API.ViewModels.ShootingDays
 {
@@ -21,7 +22,7 @@ namespace Raccord.API.ViewModels.ShootingDays
                 Completed = dto.Completed,
                 ScheduleDayID = dto.ScheduleDayID,
                 CallsheetID = dto.CallsheetID,
-                ProjectID = dto.ProjectID,
+                CrewUnit = dto.CrewUnit.Translate(),
                 PreviouslyCompletedSceneCount = dto.PreviouslyCompletedSceneCount,
                 PreviouslyCompletedScenePageCount = dto.PreviouslyCompletedScenePageCount,
                 PreviouslyCompletedTimingsCount = dto.PreviouslyCompletedTimingsCount,
@@ -46,12 +47,29 @@ namespace Raccord.API.ViewModels.ShootingDays
                 Completed = dto.Completed,
                 ScheduleDayID = dto.ScheduleDayID,
                 CallsheetID = dto.CallsheetID,
-                ProjectID = dto.ProjectID,
+                CrewUnitID = dto.CrewUnitID,
                 TotalScenes = dto.TotalScenes,
                 CompletedScenes = dto.CompletedScenes,
                 TotalPageCount = dto.TotalPageCount,
                 TotalTimings = dto.TotalTimings,
                 TotalSetups = dto.TotalSetups,
+            };
+        }
+        public static ShootingDayCrewUnitViewModel Translate(this ShootingDayCrewUnitDto dto)
+        {
+            return new ShootingDayCrewUnitViewModel
+            {
+                ID = dto.ID,
+                Number = dto.Number,
+                Date = dto.Date,
+                Start = dto.Start,
+                Turn = dto.Turn,
+                End = dto.End,
+                OverTime = dto.OverTime,
+                Completed = dto.Completed,
+                ScheduleDayID = dto.ScheduleDayID,
+                CallsheetID = dto.CallsheetID,
+                CrewUnit = dto.CrewUnit.Translate(),
             };
         }
         public static ShootingDayViewModel Translate(this ShootingDayDto dto)
@@ -68,7 +86,7 @@ namespace Raccord.API.ViewModels.ShootingDays
                 Completed = dto.Completed,
                 ScheduleDayID = dto.ScheduleDayID,
                 CallsheetID = dto.CallsheetID,
-                ProjectID = dto.ProjectID,
+                CrewUnitID = dto.CrewUnitID,
             };
         }
         public static ShootingDayDto Translate(this ShootingDayViewModel vm)
@@ -85,7 +103,7 @@ namespace Raccord.API.ViewModels.ShootingDays
                 Completed = vm.Completed,
                 ScheduleDayID = vm.ScheduleDayID,
                 CallsheetID = vm.CallsheetID,
-                ProjectID = vm.ProjectID,
+                CrewUnitID = vm.CrewUnitID,
             };
         }
         public static ShootingDayInfoViewModel Translate(this ShootingDayInfoDto dto)

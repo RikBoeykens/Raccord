@@ -189,6 +189,7 @@ export {
 
  export {
     ChooseShootingDayDialog,
+    ChooseShootingDayCrewUnitDialogComponent,
     ShootingDayReportsListComponent,
     ShootingDayReportLandingComponent,
     ShootingDaySceneListItem,
@@ -215,7 +216,6 @@ export {
     CallsheetCharactersCharactersResolve,
     CharacterCallHttpService,
     CallsheetsListComponent,
-    NewCallsheetComponent,
     CallsheetComponent,
     CallsheetWizardStep1Component,
     CallsheetWizardStep2Component,

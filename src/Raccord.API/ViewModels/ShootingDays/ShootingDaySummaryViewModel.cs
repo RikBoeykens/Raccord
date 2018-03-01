@@ -3,7 +3,7 @@ using System;
 namespace Raccord.API.ViewModels.ShootingDays
 {
     // Dto to represent a shooting day
-    public class ShootingDaySummaryViewModel : ShootingDayViewModel
+    public class ShootingDaySummaryViewModel : BaseShootingDayViewModel
     {
         // Total count of scenes
         public int TotalScenes { get; set; }
@@ -19,5 +19,6 @@ namespace Raccord.API.ViewModels.ShootingDays
 
         // Total setups
         public int TotalSetups { get; set; }
+        public long CrewUnitID { get; set; }
     }
 }

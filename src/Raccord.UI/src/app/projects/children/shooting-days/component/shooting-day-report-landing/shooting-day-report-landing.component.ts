@@ -15,6 +15,7 @@ import { Completion } from "../../../../../shared/enums/completion.enum";
 import { MdDialog } from "@angular/material";
 import { EditShootingDaySceneDialog } from "../../scenes/component/edit-shooting-day-scene-dialog/edit-shooting-day-scene-dialog.component";
 import { TimespanHelpers } from "../../../../../shared/helpers/timespan.helpers";
+import { ShootingDay } from '../..';
 
 @Component({
     templateUrl: 'shooting-day-report-landing.component.html',
@@ -57,7 +58,19 @@ export class ShootingDayReportLandingComponent {
 
         this.setTimes(this.shootingDay);
 
-        this._shootingDayHttpService.post(this.shootingDay).then(data=>{
+        this._shootingDayHttpService.post(new ShootingDay({
+            id: this.shootingDay.id,
+            number: this.shootingDay.number,
+            date: this.shootingDay.date,
+            start: this.shootingDay.start,
+            end: this.shootingDay.end,
+            turn: this.shootingDay.turn,
+            overTime: this.shootingDay.overTime,
+            completed: this.shootingDay.completed,
+            scheduleDayID: this.shootingDay.scheduleDayID,
+            callsheetID: this.shootingDay.callsheetID,
+            crewUnitID: this.shootingDay.crewUnit.id
+        })).then(data=>{
             if(typeof(data)=='string'){
                 this._dialogService.error(data);
                 this.getShootingDay();

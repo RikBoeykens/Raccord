@@ -50,12 +50,22 @@ namespace Raccord.Application.Services.Callsheets
             _breakdownRepository = breakdownRepository;
         }
 
-        // Gets all callsheets for a project
-        public IEnumerable<CallsheetSummaryDto> GetAllForParent(long projectID)
+        // Gets all callsheets for a crew unit
+        public IEnumerable<CallsheetSummaryDto> GetAllForParent(long crewUnit)
+        {
+            var callsheets = _callsheetRepository.GetAllForCrewUnit(crewUnit);
+
+            var dtos = callsheets.Select(l => l.TranslateSummary());
+
+            return dtos;
+        }
+
+        // Gets all callsheets for a crew unit
+        public IEnumerable<CallsheetCrewUnitDto> GetForProject(long projectID)
         {
             var callsheets = _callsheetRepository.GetAllForProject(projectID);
 
-            var dtos = callsheets.Select(l => l.TranslateSummary());
+            var dtos = callsheets.Select(l => l.TranslateCrewUnit());
 
             return dtos;
         }
@@ -65,7 +75,7 @@ namespace Raccord.Application.Services.Callsheets
         {
             var callsheet = _callsheetRepository.GetFull(ID);
 
-            var breakdown = _breakdownRepository.GetForProjectUser(callsheet.ProjectID, userID);
+            var breakdown = _breakdownRepository.GetForProjectUser(callsheet.CrewUnitID, userID);
 
             var dto = callsheet.TranslateFull(breakdown);
 
@@ -93,7 +103,7 @@ namespace Raccord.Application.Services.Callsheets
                 Start = linkedScheduleDay.Start ?? default(DateTime),
                 End = linkedScheduleDay.End ?? default(DateTime),
                 ShootingDayID = dto.ShootingDay.ID,
-                ProjectID = dto.ProjectID,
+                CrewUnitID = dto.CrewUnitID,
             };
 
             foreach(var scheduleScene in linkedScheduleDay.ScheduleScenes)

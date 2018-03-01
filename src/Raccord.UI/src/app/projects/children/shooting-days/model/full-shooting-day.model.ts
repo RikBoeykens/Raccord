@@ -1,20 +1,22 @@
-import { ShootingDay } from "./shooting-day.model";
-import { SlateSummary } from "../../shots/slates/model/slate-summary.model";
-import { ShootingDaySceneScene } from "../scenes/model/shooting-day-scene-scene.model";
+import { BaseShootingDay } from './base-shooting-day.model';
+import { SlateSummary } from '../../shots/slates/model/slate-summary.model';
+import { ShootingDaySceneScene } from '../scenes/model/shooting-day-scene-scene.model';
+import { CrewUnit } from '../../crew/crew-units/model/crew-unit.model';
 
-export class FullShootingDay extends ShootingDay{
-    previouslyCompletedSceneCount: number;
-    previouslyCompletedScenePageCount: number;
-    previouslyCompletedTimingsCount: string;
-    previousSetupCount: number;
-    scenes: ShootingDaySceneScene[];
-    slates: SlateSummary[];
-    cameraRolls: string[];
-    soundRolls: string[];
+export class FullShootingDay extends BaseShootingDay {
+    public crewUnit: CrewUnit;
+    public previouslyCompletedSceneCount: number;
+    public previouslyCompletedScenePageCount: number;
+    public previouslyCompletedTimingsCount: string;
+    public previousSetupCount: number;
+    public scenes: ShootingDaySceneScene[];
+    public slates: SlateSummary[];
+    public cameraRolls: string[];
+    public soundRolls: string[];
 
     constructor(obj?: {
                         id: number,
-                        number: string, 
+                        number: string,
                         date: Date,
                         start: Date,
                         turn: Date,
@@ -23,7 +25,7 @@ export class FullShootingDay extends ShootingDay{
                         completed: boolean,
                         scheduleDayID?: number,
                         callsheetID?: number,
-                        projectID: number,
+                        crewUnit: CrewUnit,
                         previouslyCompletedSceneCount: number,
                         previouslyCompletedScenePageCount: number,
                         previouslyCompletedTimingsCount: string,
@@ -32,9 +34,10 @@ export class FullShootingDay extends ShootingDay{
                         slates: SlateSummary[],
                         cameraRolls: string[],
                         soundRolls: string[]
-                    }){
+                    }) {
         super(obj);
-        if(obj){
+        if (obj) {
+            this.crewUnit = obj.crewUnit;
             this.previouslyCompletedSceneCount = obj.previouslyCompletedSceneCount;
             this.previouslyCompletedScenePageCount = obj.previouslyCompletedScenePageCount;
             this.previouslyCompletedTimingsCount = obj.previouslyCompletedTimingsCount;
