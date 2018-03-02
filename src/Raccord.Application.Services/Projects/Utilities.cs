@@ -6,6 +6,9 @@ using System.Linq;
 using Raccord.Application.Services.Images;
 using System.Collections.Generic;
 using Raccord.Application.Core.Services.Crew.CrewMembers;
+using Raccord.Domain.Model.Users;
+using Raccord.Application.Services.Crew.CrewMembers;
+using Raccord.Application.Services.Characters;
 
 namespace Raccord.Application.Services.Projects
 {
@@ -34,14 +37,47 @@ namespace Raccord.Application.Services.Projects
 
             return dto;
         }
-        public static UserProjectDto TranslateUser(this Project project, IEnumerable<CrewMemberUnitDto> crewMembers)
+        public static UserProjectDto TranslateUser(this Project project, ApplicationUser user)
         {
+            var crewMembers = user.ProjectUsers.Where(pu=> pu.ProjectID == project.ID)
+                    .SelectMany(pu=> pu.CrewUnitMembers)
+                    .SelectMany(cum => cum.CrewMembers)
+                    .Select(cm=> cm.TranslateUnit()).ToList();
+            
+            var characters = user.ProjectUsers.Where(pu=> pu.ProjectID == project.ID && pu.CastMemberID.HasValue)
+                    .Select(pu => pu.CastMember)
+                    .SelectMany(cm => cm.Characters)
+                    .Select(c => c.Translate()).ToList();
+
             var dto = new UserProjectDto
             {
                 ID = project.ID,
                 Title = project.Title,
                 PrimaryImage = project.Images.FirstOrDefault(i=> i.IsPrimaryImage)?.Translate(),
-                CrewMembers = crewMembers
+                CrewMembers = crewMembers,
+                Characters = characters
+            };
+
+            return dto;
+        }
+        public static UserProjectSummaryDto TranslateUserSummary(this Project project, ApplicationUser user)
+        {
+            var hasCrew = user.ProjectUsers.Where(pu=> pu.ProjectID == project.ID)
+                    .Any(pu=> pu.CrewUnitMembers.Any());
+            var hasCast = user.ProjectUsers.Where(pu=> pu.ProjectID == project.ID && pu.CastMemberID.HasValue)
+                    .Any(pu=> pu.CastMember.Characters.Any());
+            
+            var characters = user.ProjectUsers.Where(pu=> pu.ProjectID == project.ID && pu.CastMemberID.HasValue)
+                    .Select(pu => pu.CastMember)
+                    .SelectMany(cm => cm.Characters)
+                    .Select(c => c.Translate()).ToList();
+            var dto = new UserProjectSummaryDto
+            {
+                ID = project.ID,
+                Title = project.Title,
+                PrimaryImage = project.Images.FirstOrDefault(i=> i.IsPrimaryImage)?.Translate(),
+                HasCrew = hasCrew,
+                HasCast = hasCast
             };
 
             return dto;

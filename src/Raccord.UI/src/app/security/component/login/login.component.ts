@@ -5,8 +5,9 @@ import { LoadingService } from '../../../loading/service/loading.service';
 import { AccountHttpService } from '../../../account/service/account-http.service';
 import { DialogService } from '../../../shared/service/dialog.service';
 import { Login } from '../../';
-import { AccountHelpers } from "../../../account/helpers/account.helper";
+import { AccountHelpers } from '../../../account/helpers/account.helper';
 import { UserProfileHttpService } from '../../../profile/service/user-profile-http.service';
+import { ProjectHttpService } from '../../../projects';
 
 @Component({
     templateUrl: 'login.component.html',
@@ -21,6 +22,7 @@ export class LoginComponent implements OnInit  {
         private _loadingService: LoadingService,
         private _accountService: AccountHttpService,
         private _userProfileHttpService: UserProfileHttpService,
+        private _projectHttpService: ProjectHttpService,
         private _dialogService: DialogService,
         private _route: ActivatedRoute,
         private _router: Router
@@ -36,15 +38,18 @@ export class LoginComponent implements OnInit  {
     doLogin(){
         let loadingId = this._loadingService.startLoading();
 
-        this._authService.login(this.login).then(data=>{
+        this._authService.login(this.login).then((data) => {
             this._router.navigateByUrl(this.returnUrl);
-            this._userProfileHttpService.getSummary().then(data =>{
-                AccountHelpers.setUser(data);
+            this._userProfileHttpService.getSummary().then((profileData) => {
+                AccountHelpers.setUser(profileData);
             });
-            this._accountService.getProjectPermissions().then(data => {
-                AccountHelpers.setPermissions(data);
+            this._accountService.getProjectPermissions().then((permissionData) => {
+                AccountHelpers.setPermissions(permissionData);
+            });
+            this._projectHttpService.getSummaries().then((projectSummaries) => {
+                AccountHelpers.setUserProjects(projectSummaries);
             });
         }).catch()
-        .then(()=> this._loadingService.endLoading(loadingId));
+        .then(() => this._loadingService.endLoading(loadingId));
     }
 }

@@ -60,11 +60,13 @@ namespace Raccord.Application.Services.Projects
             return projectDtos;
         }
 
-        public IEnumerable<ProjectSummaryDto> GetAllForUser(string userId)
+        public IEnumerable<UserProjectSummaryDto> GetAllForUser(string userId)
         {
             var projects = _projectRepository.GetAllForUser(userId);
 
-            var projectDtos = projects.Select(p => p.TranslateSummary());
+            var user = _userRepository.GetFull(userId);
+
+            var projectDtos = projects.Select(p => p.TranslateUserSummary(user));
 
             return projectDtos;
         }
@@ -75,15 +77,7 @@ namespace Raccord.Application.Services.Projects
 
             var user = _userRepository.GetFull(userId);
 
-            var projectDtos = projects.Select(p => 
-            {
-                var crewMembers = user.ProjectUsers.Where(pu=> pu.ProjectID == p.ID)
-                                    .SelectMany(pu=> pu.CrewUnitMembers)
-                                    .SelectMany(cum => cum.CrewMembers)
-                                    .Select(cm=> cm.TranslateUnit()).ToList();
-
-                return p.TranslateUser(crewMembers);
-            });
+            var projectDtos = projects.Select(p => p.TranslateUser(user));
 
             return projectDtos;
         }

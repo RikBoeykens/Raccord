@@ -18,6 +18,10 @@
                         View Script
                     </a>
                     <a md-list-item
+                        routerLink="/projects/{{project.id}}/scripttext">
+                        View My Script
+                    </a>
+                    <a md-list-item
                         routerLink="/projects/{{project.id}}/scriptuploads"
                         *ngIf="getCanEdit()">
                         Upload Script

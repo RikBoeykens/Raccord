@@ -1,22 +1,21 @@
 import { Image } from '../children/images/model/image.model';
 import { ProjectSummary } from './project-summary.model';
 import { CrewMemberUnit } from '../children/crew/crew-members/model/crew-member-unit.model';
-import { Character } from '../children/characters/model/character.model';
 
-export class UserProject extends ProjectSummary {
-    public crewMembers: CrewMemberUnit[];
-    public characters: Character[];
+export class UserProjectSummary extends ProjectSummary {
+    public hasCrew: boolean;
+    public hasCast: boolean;
 
     constructor(obj?: {id: number,
                        title: string,
                        primaryImage: Image,
-                       crewMembers: CrewMemberUnit[],
-                       characters: Character[]
+                       hasCrew: boolean,
+                       hasCast: boolean
                     }) {
         super(obj);
         if (obj) {
-            this.crewMembers = obj.crewMembers;
-            this.characters = obj.characters;
+            this.hasCrew = obj.hasCrew;
+            this.hasCast = obj.hasCast;
         }
     }
 }
