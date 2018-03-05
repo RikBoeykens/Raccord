@@ -201,7 +201,7 @@ export {
     ShootingDaysResolve,
     ShootingDayResolve,
     ShootingDaySceneHttpService
- } from "./children/shooting-days";
+ } from './children/shooting-days';
 
  export{
     CallsheetHttpService,
@@ -271,8 +271,10 @@ export{
 export{
     ScriptTextHttpService,
     ScriptTextResolve,
+    ScriptTextUserResolve,
     ScriptTextCallsheetResolve,
     ScriptTextLandingComponent,
+    ScriptTextUserComponent,
     ScriptTextComponent,
     SceneHeaderComponent,
     SceneActionComponent,

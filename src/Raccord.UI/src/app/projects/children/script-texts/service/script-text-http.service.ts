@@ -26,6 +26,13 @@ export class ScriptTextHttpService extends BaseHttpService {
     return this.doGetArray(uri);
   }
 
+  public getForUser(projectId: number): Promise<SceneText[]> {
+
+    let uri = `${this._baseUri}/${projectId}/user`;
+
+    return this.doGetArray(uri);
+  }
+
   public get(id: number): Promise<SceneText> {
 
     let uri = `${this._baseUri}/${id}`;

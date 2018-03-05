@@ -61,6 +61,13 @@ namespace Raccord.Data.EntityFramework.Repositories.Scenes
                         .OrderBy(t=> t.SortingOrder);
         }
 
+        public IEnumerable<Scene> GetScriptForCharacters(long[] characterIDs)
+        {
+            var query = GetIncludedScript();
+
+            return query.Where(s=> s.CharacterScenes.Any(c => characterIDs.Any())).OrderBy(t=> t.SortingOrder);
+        }
+
         public Scene GetScript(long ID)
         {
             var query = GetIncludedScript();

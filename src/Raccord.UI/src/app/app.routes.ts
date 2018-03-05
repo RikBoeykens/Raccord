@@ -55,6 +55,7 @@ import {
   ScriptUploadComponent,
   ScriptUploadLandingComponent,
   ScriptTextLandingComponent,
+  ScriptTextUserComponent,
   CastMembersListComponent,
   EditCastMembersListComponent,
   CastMemberLandingComponent
@@ -132,6 +133,7 @@ import {
   ScriptUploadResolve,
   ScriptTextResolve,
   ScriptTextCallsheetResolve,
+  ScriptTextUserResolve,
   CastMemberResolve,
   CastMembersResolve
 } from './projects';
@@ -860,6 +862,14 @@ export const ROUTES: Routes = [
                 resolve: {
                   project: ProjectSummaryResolve,
                   sceneTexts: ScriptTextResolve
+                }
+              },
+              {
+                path: 'user',
+                component: ScriptTextUserComponent,
+                resolve: {
+                  project: ProjectSummaryResolve,
+                  sceneTexts: ScriptTextUserResolve
                 }
               },
               {

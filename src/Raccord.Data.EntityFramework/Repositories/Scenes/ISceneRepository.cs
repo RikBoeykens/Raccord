@@ -12,8 +12,9 @@ namespace Raccord.Data.EntityFramework.Repositories.Scenes
         int SearchCount(string searchText, long? projectID, string userID, bool isAdmin, long[] excludeIds);
         IEnumerable<Scene> Search(string searchText, long? projectID, string userID, bool isAdmin, long[] excludeIds);
 
-        IEnumerable<Scene>GetScriptForProject(long projectID);
-        IEnumerable<Scene>GetScriptForCallsheet(long projectID);
+        IEnumerable<Scene> GetScriptForProject(long projectID);
+        IEnumerable<Scene> GetScriptForCallsheet(long projectID);
+        IEnumerable<Scene> GetScriptForCharacters(long[] characterIDs);
         Scene GetScript(long ID);
         IEnumerable<Scene> Filter(
             long projectID, 
