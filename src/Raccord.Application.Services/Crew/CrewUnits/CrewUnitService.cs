@@ -34,6 +34,16 @@ namespace Raccord.Application.Services.Crew.CrewUnits
             return dtos;
         }
 
+        // Gets all crew units for a project
+        public IEnumerable<CrewUnitSummaryDto> GetAllForUser(long projectID, string userID)
+        {
+            var crewUnits = _crewUnitRepository.GetAllForUser(projectID, userID);
+
+            var dtos = crewUnits.Select(l => l.TranslateSummary());
+
+            return dtos;
+        }
+
         // Gets a single crew unit by id
         public FullCrewUnitDto Get(long ID)
         {

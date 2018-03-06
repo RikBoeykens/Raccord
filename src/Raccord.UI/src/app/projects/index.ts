@@ -254,8 +254,10 @@ export{
     CrewUnitHttpService,
     CrewUnitResolve,
     CrewUnitsResolve,
+    UserCrewUnitsResolve,
     CrewUnitSummaryResolve,
     CrewUnitsListComponent,
+    MyCrewUnitsListComponent,
     CrewUnitsNavListComponent,
     EditCrewUnitDialogComponent,
     ChooseCrewUnitDialogComponent

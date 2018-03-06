@@ -72,4 +72,10 @@ export class ProjectLandingComponent implements OnInit {
             this.project.id
         );
     }
+
+    public getHasCrew() {
+        return AccountHelpers.hasCrew(
+            this.project.id
+        );
+    }
 }

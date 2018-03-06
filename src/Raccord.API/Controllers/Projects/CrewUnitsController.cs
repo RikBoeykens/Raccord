@@ -38,6 +38,17 @@ namespace Raccord.API.Controllers.Projects
 
             return vms;
         }
+
+        // GET: api/crewunits/1/user
+        [HttpGet("user")]
+        public IEnumerable<CrewUnitSummaryViewModel> GetAllForUser(long authProjectId)
+        {
+            var dtos = _crewUnitService.GetAllForUser(authProjectId, GetUserId());
+
+            var vms = dtos.Select(p => p.Translate());
+
+            return vms;
+        }
         // GET api/crewunits/5
         [HttpGet("{id}")]
         public FullCrewUnitViewModel Get(long id)

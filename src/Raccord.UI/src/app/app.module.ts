@@ -73,7 +73,8 @@ import {
   EditDayNightComponent,
   DayNightLandingComponent,
   SearchDayNightComponent,
-  SearchDayNightsCollectionComponent
+  SearchDayNightsCollectionComponent,
+  MyCrewUnitsListComponent
 } from './projects';
 import { ImagesListComponent } from './projects';
 import { EditImageComponent } from './projects';
@@ -296,6 +297,7 @@ const COMPONENTS = [
   ShootingDaySceneListItem,
   CrewLandingComponent,
   CrewUnitsListComponent,
+  MyCrewUnitsListComponent,
   CrewUnitsNavListComponent,
   ScriptUploadComponent,
   ScriptUploadLandingComponent,
@@ -453,6 +455,7 @@ import {
   CrewUnitResolve,
   CrewUnitSummaryResolve,
   CrewUnitsResolve,
+  UserCrewUnitsResolve,
   ScriptUploadHttpService,
   ScriptUploadResolve,
   ScriptTextHttpService,
@@ -634,6 +637,7 @@ const APP_PROVIDERS = [
   CrewUnitResolve,
   CrewUnitSummaryResolve,
   CrewUnitsResolve,
+  UserCrewUnitsResolve,
   ScriptUploadHttpService,
   ScriptUploadResolve,
   ScriptTextHttpService,

@@ -20,6 +20,13 @@ export class CrewUnitHttpService extends BaseProjectHttpService {
         return this.doGetArray(uri);
     }
 
+    public getAllForUser(authProjectId: number): Promise<CrewUnitSummary[]> {
+
+        let uri = `${this.getUri(authProjectId)}/user`;
+
+        return this.doGetArray(uri);
+    }
+
     public get(authProjectId: number, id: number): Promise<FullCrewUnit> {
 
         let uri = `${this.getUri(authProjectId)}/${id}`;

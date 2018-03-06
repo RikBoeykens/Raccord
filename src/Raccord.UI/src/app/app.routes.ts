@@ -51,6 +51,7 @@ import {
   ShootingDayReportLandingComponent,
   CrewLandingComponent,
   CrewUnitsListComponent,
+  MyCrewUnitsListComponent,
   CrewUnitsNavListComponent,
   ScriptUploadComponent,
   ScriptUploadLandingComponent,
@@ -130,6 +131,7 @@ import {
   CrewUnitResolve,
   CrewUnitSummaryResolve,
   CrewUnitsResolve,
+  UserCrewUnitsResolve,
   ScriptUploadResolve,
   ScriptTextResolve,
   ScriptTextCallsheetResolve,
@@ -805,6 +807,19 @@ export const ROUTES: Routes = [
                   project: ProjectSummaryResolve,
                   crewUnits: CrewUnitsResolve
                 }
+              },
+              {
+                path: 'user',
+                children: [
+                  {
+                    path: '',
+                    component: MyCrewUnitsListComponent,
+                    resolve: {
+                      project: ProjectSummaryResolve,
+                      crewUnits: UserCrewUnitsResolve
+                    }
+                  }
+                ]
               },
               {
                 path: 'nav/:navType',

@@ -1,10 +1,8 @@
-<div class="row">      
-    <div class="col s12">
-        <a routerLink="/" class="breadcrumb">Dashboard</a>
-        <a routerLink="/projects" class="breadcrumb">Projects</a>
-        <span class="breadcrumb">{{project.title}}</span>
-    </div>
-</div>
+<md-card>
+    <a routerLink="/" class="breadcrumb">Dashboard</a>
+    <a routerLink="/projects" class="breadcrumb">Projects</a>
+    <span class="breadcrumb">{{project.title}}</span>
+</md-card>
 <div class="row">
     <div>
         <md-card *ngIf="false">
@@ -155,8 +153,11 @@
                         <span *ngIf="!getCanEdit()">View&nbsp;</span>
                         Units
                     </a>
-                </md-nav-list>
-                <md-nav-list>
+                    <a md-list-item
+                        *ngIf="getHasCrew()"
+                        routerLink="/projects/{{project.id}}/units/user">
+                        My Units
+                    </a>
                     <a md-list-item
                         routerLink="/projects/{{project.id}}/units/nav/{{getUnitListNavType()}}">
                         Unit Lists

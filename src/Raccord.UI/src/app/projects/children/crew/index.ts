@@ -12,9 +12,12 @@ export { CrewUnitHttpService } from './crew-units/service/crew-unit-http.service
 export { CrewUnitResolve } from './crew-units/service/crew-unit-resolve.service';
 export { CrewUnitSummaryResolve } from './crew-units/service/crew-unit-summary-resolve.service';
 export { CrewUnitsResolve } from './crew-units/service/crew-units-resolve.service';
+export { UserCrewUnitsResolve } from './crew-units/service/user-crew-units-resolve.service';
 
 export { CrewUnitsListComponent } from
   './crew-units/component/crew-units-list/crew-units-list.component';
+  export { MyCrewUnitsListComponent } from
+    './crew-units/component/my-crew-units-list/my-crew-units-list.component';
 export { CrewUnitsNavListComponent } from
   './crew-units/component/crew-units-nav-list/crew-units-nav-list.component';
 export { EditCrewUnitDialogComponent } from
