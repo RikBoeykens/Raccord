@@ -132,6 +132,11 @@
                         Edit Schedules
                     </a>
                     <a md-list-item
+                    routerLink="/projects/{{project.id}}/units/user/nav/{{getScheduleReadNavType()}}"
+                        *ngIf="getCanRead() && getHasCrew()">
+                        View My Schedules
+                    </a>
+                    <a md-list-item
                     routerLink="/projects/{{project.id}}/units/nav/{{getScheduleReadNavType()}}"
                         *ngIf="getCanRead()">
                         View Schedules
@@ -148,6 +153,11 @@
             <md-card-content>
                 <md-nav-list>
                     <a md-list-item
+                        *ngIf="getHasCrew()"
+                        routerLink="/projects/{{project.id}}/units/user">
+                        My Units
+                    </a>
+                    <a md-list-item
                         routerLink="/projects/{{project.id}}/units">
                         <span *ngIf="getCanEdit()">Edit&nbsp;</span>
                         <span *ngIf="!getCanEdit()">View&nbsp;</span>
@@ -155,8 +165,8 @@
                     </a>
                     <a md-list-item
                         *ngIf="getHasCrew()"
-                        routerLink="/projects/{{project.id}}/units/user">
-                        My Units
+                        routerLink="/projects/{{project.id}}/units/user/nav/{{getUnitListNavType()}}">
+                        My Unit Lists
                     </a>
                     <a md-list-item
                         routerLink="/projects/{{project.id}}/units/nav/{{getUnitListNavType()}}">

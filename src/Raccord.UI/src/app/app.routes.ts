@@ -818,6 +818,14 @@ export const ROUTES: Routes = [
                       project: ProjectSummaryResolve,
                       crewUnits: UserCrewUnitsResolve
                     }
+                  },
+                  {
+                    path: 'nav/:navType',
+                    component: CrewUnitsNavListComponent,
+                    resolve: {
+                      project: ProjectSummaryResolve,
+                      crewUnits: UserCrewUnitsResolve
+                    }
                   }
                 ]
               },
