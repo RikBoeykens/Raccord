@@ -155,10 +155,12 @@ export {
 export {
     EditScheduleComponent,
     ScheduleLandingComponent,
+    MyScheduleLandingComponent,
     ScheduleSceneLandingComponent,
     ScheduleDayHttpService,
     ScheduleDayResolve,
     ScheduleDaysResolve,
+    ScheduleDayUsersResolve,
     ScheduleDayNoteHttpService,
     ScheduleDayNoteResolve,
     ScheduleDayNotesResolve,
@@ -239,9 +241,11 @@ export {
 
  export{
     ChartLandingComponent
- } from "./children/charts";
+ } from './children/charts';
 
-export { ScenePropertiesLandingComponent } from './children/scene-properties/component/scene-properties-landing/scene-properties-landing.component';
+export { ScenePropertiesLandingComponent } from
+    // tslint:disable-next-line:max-line-length
+    './children/scene-properties/component/scene-properties-landing/scene-properties-landing.component';
 
 export{
     CrewDepartmentHttpService,

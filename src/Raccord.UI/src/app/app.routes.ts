@@ -32,6 +32,7 @@ import {
   BreakdownItemLandingComponent,
   EditScheduleComponent,
   ScheduleLandingComponent,
+  MyScheduleLandingComponent,
   ScheduleSceneLandingComponent,
   LocationsListComponent,
   EditLocationsListComponent,
@@ -107,6 +108,7 @@ import {
   BreakdownItemResolve,
   BreakdownItemsResolve,
   ScheduleDaysResolve,
+  ScheduleDayUsersResolve,
   ScheduleSceneResolve,
   LocationsResolve,
   LocationResolve,
@@ -586,43 +588,57 @@ export const ROUTES: Routes = [
             ]
           },
           {
-            path: 'scheduling/:crewUnitId',
+            path: 'scheduling',
             canActivate: [CanReadGeneralProjectPermissionGuard],
             children: [
               {
-                path: '',
-                component: ScheduleLandingComponent,
+                path: 'user',
+                component: MyScheduleLandingComponent,
                 resolve: {
                   project: ProjectSummaryResolve,
-                  crewUnit: CrewUnitSummaryResolve,
-                  scheduleDays: ScheduleDaysResolve,
+                  scheduleDays: ScheduleDayUsersResolve
                 }
               },
               {
-                path: 'edit',
-                canActivate: [CanEditGeneralProjectPermissionGuard],
+                path: ':crewUnitId',
+                canActivate: [CanReadGeneralProjectPermissionGuard],
                 children: [
                   {
                     path: '',
-                    component: EditScheduleComponent,
+                    component: ScheduleLandingComponent,
                     resolve: {
                       project: ProjectSummaryResolve,
                       crewUnit: CrewUnitSummaryResolve,
                       scheduleDays: ScheduleDaysResolve,
-                      breakdown: SelectedBreakdownResolve
                     }
                   },
                   {
-                    path: ':sceneId/scene/:scheduleSceneId',
-                    component: ScheduleSceneLandingComponent,
-                    resolve: {
-                      project: ProjectSummaryResolve,
-                      crewUnit: CrewUnitSummaryResolve,
-                      scheduleScene: ScheduleSceneResolve,
-                      characters: SceneCharactersResolve,
-                      locationSets: SceneLocationSetsResolve
-                    }
-                  }
+                    path: 'edit',
+                    canActivate: [CanEditGeneralProjectPermissionGuard],
+                    children: [
+                      {
+                        path: '',
+                        component: EditScheduleComponent,
+                        resolve: {
+                          project: ProjectSummaryResolve,
+                          crewUnit: CrewUnitSummaryResolve,
+                          scheduleDays: ScheduleDaysResolve,
+                          breakdown: SelectedBreakdownResolve
+                        }
+                      },
+                      {
+                        path: ':sceneId/scene/:scheduleSceneId',
+                        component: ScheduleSceneLandingComponent,
+                        resolve: {
+                          project: ProjectSummaryResolve,
+                          crewUnit: CrewUnitSummaryResolve,
+                          scheduleScene: ScheduleSceneResolve,
+                          characters: SceneCharactersResolve,
+                          locationSets: SceneLocationSetsResolve
+                        }
+                      }
+                    ]
+                  },
                 ]
               },
             ]

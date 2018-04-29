@@ -5,6 +5,7 @@ using Raccord.Application.Core.Services.Scheduling.ScheduleDays;
 using Raccord.Data.EntityFramework.Repositories.Projects;
 using Raccord.Data.EntityFramework.Repositories.Scheduling.ScheduleDays;
 using Raccord.Data.EntityFramework.Repositories.ShootingDays;
+using Raccord.Data.EntityFramework.Repositories.Users;
 using Raccord.Domain.Model.Scheduling;
 using Raccord.Domain.Model.ShootingDays;
 
@@ -15,20 +16,18 @@ namespace Raccord.Application.Services.Scheduling.ScheduleDays
     {
         private readonly IScheduleDayRepository _scheduleDayRepository;
         private readonly IShootingDayRepository _shootingDayRepository;
+        private readonly IUserRepository _userRepository;
 
         // Initialises a new ScheduleDayService
         public ScheduleDayService(
             IScheduleDayRepository scheduleDayRepository,
-            IShootingDayRepository shootingDayRepository
+            IShootingDayRepository shootingDayRepository,
+            IUserRepository userRepository
             )
         {
-            if(scheduleDayRepository == null)
-                throw new ArgumentNullException(nameof(scheduleDayRepository));
-            if(shootingDayRepository == null)
-                throw new ArgumentNullException(nameof(shootingDayRepository));
-            
             _scheduleDayRepository = scheduleDayRepository;
             _shootingDayRepository = shootingDayRepository;
+            _userRepository = userRepository;
         }
 
         // Gets all schedule days
@@ -37,6 +36,31 @@ namespace Raccord.Application.Services.Scheduling.ScheduleDays
             var scheduleDays = _scheduleDayRepository.GetAllForCrewUnit(crewUnitID);
 
             var dtos = scheduleDays.Select(l => l.TranslateFull());
+
+            return dtos;
+        }
+
+        // Gets all schedule days
+        public IEnumerable<FullScheduleDayCrewUnitDto> GetForProjectUser(long projectID, string userID)
+        {
+            var user = _userRepository.GetFull(userID);
+            var projectUser = user.ProjectUsers.FirstOrDefault(u => u.ProjectID == projectID);
+            if(projectUser == null)
+            {
+                return new List<FullScheduleDayCrewUnitDto>();
+            }
+            var scheduleDays = new List<ScheduleDay>();
+
+            var crewUnitIDs = projectUser.CrewUnitMembers.Select(cum => cum.CrewUnitID).ToList();
+            foreach(var crewUnitID in crewUnitIDs)
+            {
+                scheduleDays.AddRange(_scheduleDayRepository.GetAllForCrewUnit(projectID));
+            }
+
+            var characterIds = projectUser.CastMember.Characters.Select(c => c.ID).ToArray();
+            scheduleDays.AddRange(_scheduleDayRepository.GetAllForCharacters(characterIds));
+
+            var dtos = scheduleDays.Distinct().Select(l => l.TranslateFullCrewUnit());
 
             return dtos;
         }

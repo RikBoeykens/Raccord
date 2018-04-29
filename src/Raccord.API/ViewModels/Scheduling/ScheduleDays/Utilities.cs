@@ -4,6 +4,7 @@ using Raccord.API.ViewModels.Scheduling.ScheduleDayNotes;
 using Raccord.API.ViewModels.Scheduling.ScheduleScenes;
 using Raccord.Application.Core.Services.Scheduling.ScheduleDays;
 using Raccord.API.ViewModels.ShootingDays;
+using Raccord.API.ViewModels.Crew.CrewUnits;
 
 namespace Raccord.API.ViewModels.Scheduling.ScheduleDays
 {
@@ -19,6 +20,21 @@ namespace Raccord.API.ViewModels.Scheduling.ScheduleDays
                 Start = dto.Start,
                 End = dto.End,
                 CrewUnitID = dto.CrewUnitID,
+                Scenes = dto.Scenes.Select(s=> s.Translate()),
+                Notes = dto.Notes.Select(n=> n.Translate()),
+                ShootingDay = dto.ShootingDay.Translate(),
+            };
+        }
+        // Translates a scene dto to a scene viewmodel
+        public static FullScheduleDayCrewUnitViewModel Translate(this FullScheduleDayCrewUnitDto dto)
+        {
+            return new FullScheduleDayCrewUnitViewModel
+            {
+                ID = dto.ID,
+                Date = dto.Date,
+                Start = dto.Start,
+                End = dto.End,
+                CrewUnit = dto.CrewUnit.Translate(),
                 Scenes = dto.Scenes.Select(s=> s.Translate()),
                 Notes = dto.Notes.Select(n=> n.Translate()),
                 ShootingDay = dto.ShootingDay.Translate(),

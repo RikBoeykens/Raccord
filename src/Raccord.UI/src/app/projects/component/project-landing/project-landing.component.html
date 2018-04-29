@@ -16,7 +16,8 @@
                         View Script
                     </a>
                     <a md-list-item
-                        routerLink="/projects/{{project.id}}/scripttext/user">
+                        routerLink="/projects/{{project.id}}/scripttext/user"
+                        *ngIf="getHasCast()">
                         View My Script
                     </a>
                     <a md-list-item
@@ -133,7 +134,12 @@
                     </a>
                     <a md-list-item
                     routerLink="/projects/{{project.id}}/units/user/nav/{{getScheduleReadNavType()}}"
-                        *ngIf="getCanRead() && getHasCrew()">
+                        *ngIf="getCanRead() && getHasCrew() && !getHasCast()">
+                        View My Schedules
+                    </a>
+                    <a md-list-item
+                    routerLink="/projects/{{project.id}}/scheduling/user"
+                        *ngIf="getCanRead() && getHasCast()">
                         View My Schedules
                     </a>
                     <a md-list-item

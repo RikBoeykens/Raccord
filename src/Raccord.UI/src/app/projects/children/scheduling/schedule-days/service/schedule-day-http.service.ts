@@ -7,6 +7,7 @@ import { ScheduleDaySummary } from '../model/schedule-day-summary.model';
 import { ScheduleDay } from '../model/schedule-day.model';
 import { JsonResponse } from '../../../../../shared/model/json-response.model';
 import { BaseProjectHttpService } from '../../../../shared/service/base-project-http.service';
+import { FullScheduleDayCrewUnit } from '../model/full-schedule-day-crew-unit.model';
 
 @Injectable()
 export class ScheduleDayHttpService extends BaseProjectHttpService {
@@ -18,6 +19,13 @@ export class ScheduleDayHttpService extends BaseProjectHttpService {
     public getAll(authProjectId: number, crewUnitId: number): Promise<FullScheduleDay[]> {
 
         let uri = `${this.getUri(authProjectId)}/${crewUnitId}/crewunit`;
+
+        return this.doGetArray(uri);
+    }
+
+    public getAllUser(authProjectId: number): Promise<FullScheduleDayCrewUnit[]> {
+
+        let uri = `${this.getUri(authProjectId)}/user`;
 
         return this.doGetArray(uri);
     }

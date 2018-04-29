@@ -1,10 +1,6 @@
-import { BaseModel } from '../../../../../shared/model/base.model';
+import { BaseScheduleDay } from './base-schedule-day.model';
 
-export class ScheduleDay extends BaseModel {
-    public id: number;
-    public date: Date;
-    public start?: Date;
-    public end?: Date;
+export class ScheduleDay extends BaseScheduleDay {
     public crewUnitID: number;
 
     constructor(obj?: {
@@ -14,15 +10,9 @@ export class ScheduleDay extends BaseModel {
                         end?: Date,
                         crewUnitID: number
                     }) {
-        super();
+        super(obj);
         if (obj) {
-            this.id = obj.id;
-            this.date = obj.date;
-            this.start = obj.start;
-            this.end = obj.end;
             this.crewUnitID = obj.crewUnitID;
-        } else {
-            this.id = 0;
         }
     }
 }

@@ -107,6 +107,7 @@ import {
   SearchBreakdownCollectionComponent,
   EditScheduleComponent,
   ScheduleLandingComponent,
+  MyScheduleLandingComponent,
   ScheduleSceneLandingComponent,
   LocationsListComponent,
   EditLocationsListComponent,
@@ -269,6 +270,7 @@ const COMPONENTS = [
   SearchBreakdownCollectionComponent,
   EditScheduleComponent,
   ScheduleLandingComponent,
+  MyScheduleLandingComponent,
   ScheduleSceneLandingComponent,
   LocationsListComponent,
   EditLocationsListComponent,
@@ -403,15 +405,14 @@ import {
   ImageBreakdownItemHttpService,
   BreakdownItemSceneHttpService,
   BreakdownItemResolve,
-  BreakdownItemsResolve
-} from './projects';
-import { ScheduleDayHttpService } from './projects';
-import { ScheduleDayResolve } from './projects';
-import { ScheduleDaysResolve } from './projects';
-import { ScheduleDayNoteHttpService } from './projects';
-import { ScheduleDayNoteResolve } from './projects';
-import { ScheduleDayNotesResolve } from './projects';
-import {
+  BreakdownItemsResolve,
+  ScheduleDayHttpService,
+  ScheduleDayResolve,
+  ScheduleDaysResolve,
+  ScheduleDayUsersResolve,
+  ScheduleDayNoteHttpService,
+  ScheduleDayNoteResolve,
+  ScheduleDayNotesResolve,
   ScheduleSceneHttpService,
   ScheduleSceneResolve,
   ScheduleCharacterHttpService,
@@ -562,6 +563,7 @@ const APP_PROVIDERS = [
   ScheduleDayHttpService,
   ScheduleDayResolve,
   ScheduleDaysResolve,
+  ScheduleDayUsersResolve,
   ScheduleDayNoteHttpService,
   ScheduleDayNoteResolve,
   ScheduleDayNotesResolve,

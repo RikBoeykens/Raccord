@@ -19,11 +19,11 @@ namespace Raccord.Data.EntityFramework.Repositories.Callsheets
             return query.Where(d=> d.CrewUnitID == crewUnitID);
         }
 
-        public IEnumerable<Callsheet> GetAllForProject(long crewUnitID)
+        public IEnumerable<Callsheet> GetAllForProject(long projectID)
         {
-            var query = GetIncludedSummary();
+            var query = GetIncludedCrewUnit();
 
-            return query.Where(d=> d.CrewUnitID == crewUnitID);
+            return query.Where(d=> d.CrewUnit.ProjectID == projectID);
         }
 
         public Callsheet GetFull(long ID)
