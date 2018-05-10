@@ -57,8 +57,11 @@ namespace Raccord.Application.Services.Scheduling.ScheduleDays
                 scheduleDays.AddRange(_scheduleDayRepository.GetAllForCrewUnit(projectID));
             }
 
-            var characterIds = projectUser.CastMember.Characters.Select(c => c.ID).ToArray();
-            scheduleDays.AddRange(_scheduleDayRepository.GetAllForCharacters(characterIds));
+            if(projectUser.CastMemberID.HasValue)
+            {
+                var characterIds = projectUser.CastMember.Characters.Select(c => c.ID).ToArray();
+                scheduleDays.AddRange(_scheduleDayRepository.GetAllForCharacters(characterIds));
+            }
 
             var dtos = scheduleDays.Distinct().Select(l => l.TranslateFullCrewUnit());
 
