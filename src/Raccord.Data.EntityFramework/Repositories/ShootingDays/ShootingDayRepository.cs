@@ -74,6 +74,30 @@ namespace Raccord.Data.EntityFramework.Repositories.ShootingDays
 
         }
 
+        public IEnumerable<ShootingDay> GetAllForCrewUnitCalendar(long[] crewUnitIDs, DateTime start, DateTime end){
+            var query = GetIncludedCalendarCrewUnit();
+
+            return query.Where(sd => 
+                (sd.Date >= start && sd.Date < end)
+                &&
+                crewUnitIDs.Any(cid => cid == sd.CrewUnitID)
+                );
+        }
+
+        public IEnumerable<ShootingDay> GetAllForCharacterCalendar(long[] characterIds, DateTime start, DateTime end){
+            var query = GetIncludedCalendarCharacter();
+
+            return query.Where(sd => 
+                (sd.Date >= start && sd.Date < end)
+                &&
+                (
+                    characterIds.Any(cid => sd.Callsheet.CallsheetScenes.Any(cs => cs.Characters.Any(c => c.CharacterScene.CharacterID == cid)))
+                    ||
+                    characterIds.Any(cid => sd.ScheduleDay.ScheduleScenes.Any(ss => ss.Characters.Any(c => c.CharacterScene.CharacterID == cid)))
+                )
+                );
+        }
+
         private IQueryable<ShootingDay> GetIncludedFull()
         {
             IQueryable<ShootingDay> query = _context.Set<ShootingDay>();
@@ -166,6 +190,33 @@ namespace Raccord.Data.EntityFramework.Repositories.ShootingDays
                         .ThenInclude(sd=> sd.ScheduleScenes)
                         .Include(sd=> sd.Callsheet)
                         .ThenInclude(cs=> cs.CallsheetScenes);
+        }
+
+        private IQueryable<ShootingDay> GetIncludedCalendarCrewUnit()
+        {
+            IQueryable<ShootingDay> query = _context.Set<ShootingDay>();
+
+            return query.Include(sd => sd.CrewUnit)
+                            .ThenInclude(sd => sd.Project)
+                        .Include(sd => sd.Callsheet)
+                        .Include(sd => sd.ScheduleDay)
+                            .ThenInclude(sd => sd.ScheduleScenes)
+                                .ThenInclude(ss => ss.Characters);
+        }
+
+        private IQueryable<ShootingDay> GetIncludedCalendarCharacter()
+        {
+            IQueryable<ShootingDay> query = _context.Set<ShootingDay>();
+
+            return query.Include(sd => sd.CrewUnit)
+                            .ThenInclude(sd => sd.Project)
+                        .Include(sd => sd.ShootingDayScenes)
+                        .Include(sd => sd.Callsheet)
+                            .ThenInclude(c => c.CallsheetScenes)
+                                .ThenInclude(cs => cs.Characters)
+                        .Include(sd => sd.ScheduleDay)
+                            .ThenInclude(sd => sd.ScheduleScenes)
+                                .ThenInclude(ss => ss.Characters);
         }
     }
 }

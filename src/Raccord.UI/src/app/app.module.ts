@@ -15,6 +15,7 @@ import {
   PreloadAllModules
 } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CalendarModule } from 'angular-calendar';
 
 /*
  * Platform and Environment providers/directives/pipes
@@ -26,7 +27,10 @@ import { ROUTES } from './app.routes';
 import { AppComponent } from './app.component';
 import { NoContentComponent } from './no-content';
 
-import { DashboardComponent } from './dashboard';
+import {
+  DashboardComponent,
+  DashboardCalendarComponent
+} from './dashboard';
 import { LoadingComponent } from './loading/component';
 import { NavbarComponent } from './navbar';
 import {
@@ -198,6 +202,7 @@ const COMPONENTS = [
   AppComponent,
   NoContentComponent,
   DashboardComponent,
+  DashboardCalendarComponent,
   LoadingComponent,
   NavbarComponent,
   SearchComponent,
@@ -514,6 +519,10 @@ import {
   UserProfileResolve
 } from './profile';
 
+import {
+  CalendarHttpService
+} from './calendar';
+
 const APP_PROVIDERS = [
   LoadingService,
   CanDeactivateGuard,
@@ -650,7 +659,8 @@ const APP_PROVIDERS = [
   UserProfileResolve,
   CastMemberHttpService,
   CastMemberResolve,
-  CastMembersResolve
+  CastMembersResolve,
+  CalendarHttpService
 ];
 
 // Directives
@@ -709,6 +719,7 @@ import '../styles/headings.css';
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyAHVRCUkTtP9FDacHfHoEJDeWQu0sRA7-U'
     }),
+    CalendarModule.forRoot(),
     RouterModule.forRoot(ROUTES, { preloadingStrategy: PreloadAllModules })
   ],
   providers: [ // expose our Services and Providers into Angular's dependency injection

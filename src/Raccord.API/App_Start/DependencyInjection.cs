@@ -138,6 +138,8 @@ using Raccord.Application.Services.Crew.CrewUnits;
 using Raccord.Data.EntityFramework.Repositories.Crew.CrewUnits.Members;
 using Raccord.Application.Core.Services.Crew.CrewUnits.Members;
 using Raccord.Application.Services.Crew.CrewUnits.Members;
+using Raccord.Application.Core.Services.Calendar;
+using Raccord.Application.Services.Calendar;
 
 namespace Raccord.API
 {
@@ -313,6 +315,8 @@ namespace Raccord.API
             services.AddTransient<ICrewUnitMemberRepository, CrewUnitMemberRepository>();
             services.AddTransient<ICrewUnitMemberService, CrewUnitMemberService>();
             services.AddTransient<IUnitCrewMemberService, UnitCrewMemberService>();
+
+            services.AddTransient<ICalendarService, CalendarService>();
         }
     }
 }

@@ -1,4 +1,4 @@
-import { Routes } from '@angular/router';
+import { Routes, RouterState } from '@angular/router';
 import { DashboardComponent } from './dashboard';
 import { NoContentComponent } from './no-content';
 import { SearchComponent } from './search/component';
@@ -165,18 +165,19 @@ import { CanDeactivateGuard } from './shared/service/can-deactivate-guard.servic
 import { AuthGuard } from './security';
 import { ProjectChartsResolve } from './charts/index';
 import { UserProfileResolve } from './profile';
+import { RouteSettings } from './shared/settings/route.settings';
 
 export const ROUTES: Routes = [
   { path: '',      component: DashboardComponent, canActivate: [AuthGuard] },
-  { path: 'dashboard',  component: DashboardComponent, canActivate: [AuthGuard] },
-  { path: 'login',  component: LoginComponent },
-  { path: 'search',  component: SearchComponent, canActivate: [AuthGuard] },
+  { path: RouteSettings.DASHBOARD,  component: DashboardComponent, canActivate: [AuthGuard] },
+  { path: RouteSettings.LOGIN,  component: LoginComponent },
+  { path: RouteSettings.SEARCH,  component: SearchComponent, canActivate: [AuthGuard] },
   {
-    path: 'admin',
+    path: RouteSettings.ADMIN,
     canActivate: [AdminGuard],
     children: [
       {
-        path: 'projects',
+        path: RouteSettings.PROJECTS,
         children: [
           {
             path: '',
@@ -186,7 +187,7 @@ export const ROUTES: Routes = [
             }
           },
           {
-            path: 'add',
+            path: RouteSettings.ADD,
             component: AdminAddProjectComponent,
             canDeactivate: [CanDeactivateGuard],
           },
@@ -202,7 +203,7 @@ export const ROUTES: Routes = [
                 }
               },
               {
-                path: 'settings',
+                path: RouteSettings.SETTINGS,
                 component: AdminProjectSettingsComponent,
                 resolve: {
                   project: AdminProjectResolve
@@ -210,7 +211,7 @@ export const ROUTES: Routes = [
                 canDeactivate: [CanDeactivateGuard],
               },
               {
-                path: 'units',
+                path: RouteSettings.UNITS,
                 children: [
                   {
                     path: '',
@@ -235,7 +236,7 @@ export const ROUTES: Routes = [
         ]
       },
       {
-        path: 'users',
+        path: RouteSettings.USERS,
         children: [
           {
             path: '',
@@ -245,7 +246,7 @@ export const ROUTES: Routes = [
             }
           },
           {
-            path: 'add',
+            path: RouteSettings.ADD,
             component: AdminAddUserComponent,
             canDeactivate: [CanDeactivateGuard],
           },
@@ -266,7 +267,7 @@ export const ROUTES: Routes = [
         ]
       },
       {
-        path: 'projectusers',
+        path: RouteSettings.PROJECTUSERS,
         children: [
           {
             path: ':projectUserId',
@@ -281,7 +282,7 @@ export const ROUTES: Routes = [
     ]
   },
   {
-    path: 'projects',
+    path: RouteSettings.PROJECTS,
     canActivate: [AuthGuard],
     children: [
       {
@@ -302,7 +303,7 @@ export const ROUTES: Routes = [
             }
           },
           {
-            path: 'scenes',
+            path: RouteSettings.SCENES,
             canActivate: [CanReadGeneralProjectPermissionGuard],
             children: [
               {
@@ -315,7 +316,7 @@ export const ROUTES: Routes = [
                 },
               },
               {
-                path: 'edit',
+                path: RouteSettings.EDIT,
                 canActivate: [CanEditGeneralProjectPermissionGuard],
                 component: EditScenesListComponent,
                 resolve: {
@@ -324,7 +325,7 @@ export const ROUTES: Routes = [
                 },
               },
               {
-                path: 'timings',
+                path: RouteSettings.TIMINGS,
                 component: SceneTimingsComponent,
                 resolve: {
                   project: ProjectSummaryResolve,
@@ -342,7 +343,7 @@ export const ROUTES: Routes = [
             ]
           },
           {
-            path: 'scriptlocations',
+            path: RouteSettings.SCRIPTLOCATIONS,
             canActivate: [CanReadGeneralProjectPermissionGuard],
             children: [
               {
@@ -354,7 +355,7 @@ export const ROUTES: Routes = [
                 },
               },
               {
-                path: 'edit',
+                path: RouteSettings.EDIT,
                 canActivate: [CanEditGeneralProjectPermissionGuard],
                 component: EditScriptLocationsListComponent,
                 resolve: {
@@ -373,7 +374,7 @@ export const ROUTES: Routes = [
             ]
           },
           {
-            path: 'sceneproperties',
+            path: RouteSettings.SCENEPROPERTIES,
             canActivate: [CanReadGeneralProjectPermissionGuard],
             component: ScenePropertiesLandingComponent,
             resolve: {
@@ -381,7 +382,7 @@ export const ROUTES: Routes = [
             }
           },
           {
-            path: 'daynights',
+            path: RouteSettings.DAYNIGHTS,
             canActivate: [CanReadGeneralProjectPermissionGuard],
             children: [
               {
@@ -393,7 +394,7 @@ export const ROUTES: Routes = [
                 },
               },
               {
-                path: 'edit',
+                path: RouteSettings.EDIT,
                 canActivate: [CanEditGeneralProjectPermissionGuard],
                 component: EditDayNightListComponent,
                 resolve: {
@@ -412,7 +413,7 @@ export const ROUTES: Routes = [
             ]
           },
           {
-            path: 'intexts',
+            path: RouteSettings.INTEXTS,
             canActivate: [CanReadGeneralProjectPermissionGuard],
             children: [
               {
@@ -424,7 +425,7 @@ export const ROUTES: Routes = [
                 },
               },
               {
-                path: 'edit',
+                path: RouteSettings.EDIT,
                 canActivate: [CanEditGeneralProjectPermissionGuard],
                 component: EditIntExtListComponent,
                 resolve: {
@@ -443,7 +444,7 @@ export const ROUTES: Routes = [
             ]
           },
           {
-            path: 'images',
+            path: RouteSettings.IMAGES,
             canActivate: [CanReadGeneralProjectPermissionGuard],
             children: [
               {
@@ -465,7 +466,7 @@ export const ROUTES: Routes = [
             ]
           },
           {
-            path: 'characters',
+            path: RouteSettings.CHARACTERS,
             canActivate: [CanReadGeneralProjectPermissionGuard],
             children: [
               {
@@ -477,7 +478,7 @@ export const ROUTES: Routes = [
                 },
               },
               {
-                path: 'edit',
+                path: RouteSettings.EDIT,
                 canActivate: [CanEditGeneralProjectPermissionGuard],
                 component: EditCharactersListComponent,
                 resolve: {
@@ -496,7 +497,7 @@ export const ROUTES: Routes = [
             ]
           },
           {
-            path: 'cast',
+            path: RouteSettings.CAST,
             canActivate: [CanReadGeneralProjectPermissionGuard],
             children: [
               {
@@ -508,7 +509,7 @@ export const ROUTES: Routes = [
                 },
               },
               {
-                path: 'edit',
+                path: RouteSettings.EDIT,
                 canActivate: [CanEditGeneralProjectPermissionGuard],
                 component: EditCastMembersListComponent,
                 resolve: {
@@ -527,7 +528,7 @@ export const ROUTES: Routes = [
             ]
           },
           {
-            path: 'breakdowns',
+            path: RouteSettings.BREAKDOWNS,
             canActivate: [CanReadGeneralProjectPermissionGuard],
             children: [
               {
@@ -550,7 +551,7 @@ export const ROUTES: Routes = [
                     },
                   },
                   {
-                    path: 'settings',
+                    path: RouteSettings.SETTINGS,
                     component: BreakdownSettingsComponent,
                     resolve: {
                       project: ProjectSummaryResolve,
@@ -558,7 +559,7 @@ export const ROUTES: Routes = [
                     },
                   },
                   {
-                    path: 'types/:breakdownTypeId',
+                    path: `${RouteSettings.TYPES}/:breakdownTypeId`,
                     children: [
                       {
                         path: '',
@@ -571,7 +572,7 @@ export const ROUTES: Routes = [
                     ]
                   },
                   {
-                    path: 'items/:breakdownItemId',
+                    path: `${RouteSettings.ITEMS}/:breakdownItemId`,
                     children: [
                       {
                         path: '',
@@ -588,11 +589,11 @@ export const ROUTES: Routes = [
             ]
           },
           {
-            path: 'scheduling',
+            path: RouteSettings.SCHEDULING,
             canActivate: [CanReadGeneralProjectPermissionGuard],
             children: [
               {
-                path: 'user',
+                path: RouteSettings.USER,
                 component: MyScheduleLandingComponent,
                 resolve: {
                   project: ProjectSummaryResolve,
@@ -613,7 +614,7 @@ export const ROUTES: Routes = [
                     }
                   },
                   {
-                    path: 'edit',
+                    path: RouteSettings.EDIT,
                     canActivate: [CanEditGeneralProjectPermissionGuard],
                     children: [
                       {
@@ -627,7 +628,7 @@ export const ROUTES: Routes = [
                         }
                       },
                       {
-                        path: ':sceneId/scene/:scheduleSceneId',
+                        path: `:sceneId/${RouteSettings.SCENE}/:scheduleSceneId`,
                         component: ScheduleSceneLandingComponent,
                         resolve: {
                           project: ProjectSummaryResolve,
@@ -644,7 +645,7 @@ export const ROUTES: Routes = [
             ]
           },
           {
-            path: 'locations',
+            path: RouteSettings.LOCATIONS,
             canActivate: [CanReadGeneralProjectPermissionGuard],
             children: [
               {
@@ -656,7 +657,7 @@ export const ROUTES: Routes = [
                 }
               },
               {
-                path: 'edit',
+                path: RouteSettings.EDIT,
                 component: EditLocationsListComponent,
                 canActivate: [CanEditGeneralProjectPermissionGuard],
                 resolve: {
@@ -675,7 +676,7 @@ export const ROUTES: Routes = [
             ]
           },
           {
-            path: 'locationsets',
+            path: RouteSettings.LOCATIONSETS,
             canActivate: [CanReadGeneralProjectPermissionGuard],
             children: [
               {
@@ -689,7 +690,7 @@ export const ROUTES: Routes = [
             ]
           },
           {
-            path: 'callsheets',
+            path: RouteSettings.CALLSHEETS,
             canActivate: [CanReadCallsheetProjectPermissionGuard],
             children: [
               {
@@ -709,7 +710,7 @@ export const ROUTES: Routes = [
                 }
               },
               {
-                path: ':callsheetId/wizard',
+                path: `:callsheetId/${RouteSettings.WIZARD}`,
                 canActivate: [CanEditGeneralProjectPermissionGuard],
                 children: [
                   {
@@ -752,7 +753,7 @@ export const ROUTES: Routes = [
             ]
           },
           {
-            path: 'slates',
+            path: RouteSettings.SLATES,
             canActivate: [CanReadGeneralProjectPermissionGuard],
             children: [
               {
@@ -776,7 +777,7 @@ export const ROUTES: Routes = [
             ]
           },
           {
-            path: 'charts',
+            path: RouteSettings.CHARTS,
             canActivate: [CanReadGeneralProjectPermissionGuard],
             children: [
               {
@@ -790,7 +791,7 @@ export const ROUTES: Routes = [
             ],
           },
           {
-            path: 'shootingdays',
+            path: RouteSettings.SHOOTINGDAYS,
             canActivate: [CanReadGeneralProjectPermissionGuard],
             children: [
               {
@@ -813,7 +814,7 @@ export const ROUTES: Routes = [
             ]
           },
           {
-            path: 'units',
+            path: RouteSettings.UNITS,
             canActivate: [CanReadGeneralProjectPermissionGuard],
             children: [
               {
@@ -825,7 +826,7 @@ export const ROUTES: Routes = [
                 }
               },
               {
-                path: 'user',
+                path: RouteSettings.USER,
                 children: [
                   {
                     path: '',
@@ -836,7 +837,7 @@ export const ROUTES: Routes = [
                     }
                   },
                   {
-                    path: 'nav/:navType',
+                    path: `${RouteSettings.NAV}/:navType`,
                     component: CrewUnitsNavListComponent,
                     resolve: {
                       project: ProjectSummaryResolve,
@@ -846,7 +847,7 @@ export const ROUTES: Routes = [
                 ]
               },
               {
-                path: 'nav/:navType',
+                path: `${RouteSettings.NAV}/:navType`,
                 component: CrewUnitsNavListComponent,
                 resolve: {
                   project: ProjectSummaryResolve,
@@ -856,7 +857,7 @@ export const ROUTES: Routes = [
             ]
           },
           {
-            path: 'unitlists',
+            path: RouteSettings.UNITLISTS,
             canActivate: [CanReadGeneralProjectPermissionGuard],
             children: [
               {
@@ -871,7 +872,7 @@ export const ROUTES: Routes = [
             ]
           },
           {
-            path: 'scriptuploads',
+            path: RouteSettings.SCRIPTUPLOADS,
             canActivate: [CanEditGeneralProjectPermissionGuard],
             children: [
               {
@@ -892,7 +893,7 @@ export const ROUTES: Routes = [
             ],
           },
           {
-            path: 'scripttext',
+            path: RouteSettings.SCRIPTTEXT,
             canActivate: [CanReadGeneralProjectPermissionGuard],
             children: [
               {
@@ -904,7 +905,7 @@ export const ROUTES: Routes = [
                 }
               },
               {
-                path: 'user',
+                path: RouteSettings.USER,
                 component: ScriptTextUserComponent,
                 resolve: {
                   project: ProjectSummaryResolve,
@@ -912,7 +913,7 @@ export const ROUTES: Routes = [
                 }
               },
               {
-                path: ':callsheetId/callsheet',
+                path: `:callsheetId/${RouteSettings.CALLSHEET}`,
                 component: ScriptTextCallsheetComponent,
                 resolve: {
                   project: ProjectSummaryResolve,
@@ -927,7 +928,7 @@ export const ROUTES: Routes = [
     ],
   },
   {
-    path: 'profile',
+    path: RouteSettings.PROFILE,
     canActivate: [AuthGuard],
     children: [
       {

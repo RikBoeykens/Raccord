@@ -12,32 +12,35 @@ import {
     endOfDay,
     format
   } from 'date-fns';
-import { RouteInfo } from '../shared/model/route-info.model';
-import { EntityType } from '../shared/enums/entity-type.enum';
-import { RouteHelpers } from '../shared/helpers/route.helpers';
+import { RouteInfo } from '../../shared/model/route-info.model';
+import { EntityType } from '../../shared/enums/entity-type.enum';
+import { RouteHelpers } from '../../shared/helpers/route.helpers';
+import { CalendarHelpers } from '../../calendar/helpers/calendar.helpers';
+import { CalendarHttpService } from '../../calendar';
+import { CalendarItem } from '../../calendar/model/calendar-item';
+import { LoadingWrapperService } from '../../shared';
 
 @Component({
-    templateUrl: 'dashboard.component.html',
+  selector: 'dashboard-calendar',
+  templateUrl: 'dashboard-calendar.component.html',
 })
-export class DashboardComponent implements OnInit {
+export class DashboardCalendarComponent implements OnInit {
     public viewDate: Date = new Date();
     public activeDayIsOpen: boolean = false;
     public events: Array<CalendarEvent<{ routeInfo: RouteInfo }>> =
         new Array<CalendarEvent<{routeInfo: RouteInfo}>>();
 
-    constructor(private _router: Router) {}
+    constructor(
+      private _router: Router,
+      private _calendarHttpService: CalendarHttpService,
+      private _loadingWrapperService: LoadingWrapperService
+    ) {}
 
     public ngOnInit() {
-        let routeInfo = new RouteInfo({type: EntityType.project, routeIDs: [1]});
-        this.events.push({
-            title: 'Bla',
-            start: new Date(),
-            color: {
-                primary: '#ad2121',
-                secondary: '#FAE3E3'
-            },
-            meta: { routeInfo }
-        });
+      this._loadingWrapperService.Load(
+        this._calendarHttpService.getCalendarItems(new Date(2018, 4, 1), new Date(2018, 5, 1)),
+        (data) => this.setEvents(data)
+      );
     }
 
     public dayClicked({
@@ -63,5 +66,16 @@ export class DashboardComponent implements OnInit {
     public eventClicked(event: CalendarEvent<{ routeInfo: RouteInfo }>): void {
         let routeArray = RouteHelpers.getRouteArray(event.meta.routeInfo);
         this._router.navigate(routeArray);
+    }
+
+    private setEvents(items: CalendarItem[]) {
+      this.events = items.map((item: CalendarItem) => {
+        return {
+          title: item.label,
+          start: new Date(item.date),
+          color: CalendarHelpers.getColour(item.routeInfo.type),
+          meta: { routeInfo: item.routeInfo }
+        };
+      });
     }
 }
