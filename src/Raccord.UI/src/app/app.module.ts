@@ -15,6 +15,7 @@ import {
   PreloadAllModules
 } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CalendarModule } from 'angular-calendar';
 
 /*
  * Platform and Environment providers/directives/pipes
@@ -26,7 +27,10 @@ import { ROUTES } from './app.routes';
 import { AppComponent } from './app.component';
 import { NoContentComponent } from './no-content';
 
-import { DashboardComponent } from './dashboard';
+import {
+  DashboardComponent,
+  DashboardCalendarComponent
+} from './dashboard';
 import { LoadingComponent } from './loading/component';
 import { NavbarComponent } from './navbar';
 import {
@@ -73,7 +77,8 @@ import {
   EditDayNightComponent,
   DayNightLandingComponent,
   SearchDayNightComponent,
-  SearchDayNightsCollectionComponent
+  SearchDayNightsCollectionComponent,
+  MyCrewUnitsListComponent
 } from './projects';
 import { ImagesListComponent } from './projects';
 import { EditImageComponent } from './projects';
@@ -106,6 +111,7 @@ import {
   SearchBreakdownCollectionComponent,
   EditScheduleComponent,
   ScheduleLandingComponent,
+  MyScheduleLandingComponent,
   ScheduleSceneLandingComponent,
   LocationsListComponent,
   EditLocationsListComponent,
@@ -144,6 +150,7 @@ import {
   ScriptUploadComponent,
   ScriptUploadLandingComponent,
   ScriptTextLandingComponent,
+  ScriptTextUserComponent,
   ScriptTextComponent,
   SceneHeaderComponent,
   SceneActionComponent,
@@ -156,7 +163,8 @@ import {
   CastMemberScenesComponent,
   CastMembersListComponent,
   EditCastMemberDialogComponent,
-  EditCastMembersListComponent
+  EditCastMembersListComponent,
+  ProjectCalendarComponent
 } from './projects';
 import { ScenePropertiesLandingComponent } from './projects';
 import {
@@ -190,11 +198,16 @@ import {
   ShowProfileImageComponent,
   UserAvatarComponent
 } from './profile';
+import {
+  CalendarComponent,
+  CalendarHeaderComponent
+} from './calendar';
 
 const COMPONENTS = [
   AppComponent,
   NoContentComponent,
   DashboardComponent,
+  DashboardCalendarComponent,
   LoadingComponent,
   NavbarComponent,
   SearchComponent,
@@ -267,6 +280,7 @@ const COMPONENTS = [
   SearchBreakdownCollectionComponent,
   EditScheduleComponent,
   ScheduleLandingComponent,
+  MyScheduleLandingComponent,
   ScheduleSceneLandingComponent,
   LocationsListComponent,
   EditLocationsListComponent,
@@ -295,10 +309,12 @@ const COMPONENTS = [
   ShootingDaySceneListItem,
   CrewLandingComponent,
   CrewUnitsListComponent,
+  MyCrewUnitsListComponent,
   CrewUnitsNavListComponent,
   ScriptUploadComponent,
   ScriptUploadLandingComponent,
   ScriptTextLandingComponent,
+  ScriptTextUserComponent,
   ScriptTextComponent,
   SceneHeaderComponent,
   SceneActionComponent,
@@ -312,6 +328,7 @@ const COMPONENTS = [
   CastMembersListComponent,
   EditCastMembersListComponent,
   ScenePropertiesLandingComponent,
+  ProjectCalendarComponent,
   SelectEntityComponent,
   PlaceholderImageComponent,
   LoginComponent,
@@ -329,7 +346,9 @@ const COMPONENTS = [
   RaccordChartComponent,
   UserProfileLandingComponent,
   ShowProfileImageComponent,
-  UserAvatarComponent
+  UserAvatarComponent,
+  CalendarComponent,
+  CalendarHeaderComponent
 ];
 
 const ENTRY_COMPONENTS = [
@@ -399,15 +418,14 @@ import {
   ImageBreakdownItemHttpService,
   BreakdownItemSceneHttpService,
   BreakdownItemResolve,
-  BreakdownItemsResolve
-} from './projects';
-import { ScheduleDayHttpService } from './projects';
-import { ScheduleDayResolve } from './projects';
-import { ScheduleDaysResolve } from './projects';
-import { ScheduleDayNoteHttpService } from './projects';
-import { ScheduleDayNoteResolve } from './projects';
-import { ScheduleDayNotesResolve } from './projects';
-import {
+  BreakdownItemsResolve,
+  ScheduleDayHttpService,
+  ScheduleDayResolve,
+  ScheduleDaysResolve,
+  ScheduleDayUsersResolve,
+  ScheduleDayNoteHttpService,
+  ScheduleDayNoteResolve,
+  ScheduleDayNotesResolve,
   ScheduleSceneHttpService,
   ScheduleSceneResolve,
   ScheduleCharacterHttpService,
@@ -451,15 +469,18 @@ import {
   CrewUnitResolve,
   CrewUnitSummaryResolve,
   CrewUnitsResolve,
+  UserCrewUnitsResolve,
   ScriptUploadHttpService,
   ScriptUploadResolve,
   ScriptTextHttpService,
   ScriptTextResolve,
   ScriptTextCallsheetResolve,
+  ScriptTextUserResolve,
   CommentHttpService,
   CastMemberHttpService,
   CastMemberResolve,
-  CastMembersResolve
+  CastMembersResolve,
+  ProjectCalendarHttpService
 } from './projects';
 
 import {
@@ -506,6 +527,10 @@ import {
   UserProfileHttpService,
   UserProfileResolve
 } from './profile';
+
+import {
+  CalendarHttpService
+} from './calendar';
 
 const APP_PROVIDERS = [
   LoadingService,
@@ -556,6 +581,7 @@ const APP_PROVIDERS = [
   ScheduleDayHttpService,
   ScheduleDayResolve,
   ScheduleDaysResolve,
+  ScheduleDayUsersResolve,
   ScheduleDayNoteHttpService,
   ScheduleDayNoteResolve,
   ScheduleDayNotesResolve,
@@ -631,16 +657,20 @@ const APP_PROVIDERS = [
   CrewUnitResolve,
   CrewUnitSummaryResolve,
   CrewUnitsResolve,
+  UserCrewUnitsResolve,
   ScriptUploadHttpService,
   ScriptUploadResolve,
   ScriptTextHttpService,
   ScriptTextResolve,
   ScriptTextCallsheetResolve,
+  ScriptTextUserResolve,
   UserProfileHttpService,
   UserProfileResolve,
   CastMemberHttpService,
   CastMemberResolve,
-  CastMembersResolve
+  CastMembersResolve,
+  ProjectCalendarHttpService,
+  CalendarHttpService
 ];
 
 // Directives
@@ -699,6 +729,7 @@ import '../styles/headings.css';
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyAHVRCUkTtP9FDacHfHoEJDeWQu0sRA7-U'
     }),
+    CalendarModule.forRoot(),
     RouterModule.forRoot(ROUTES, { preloadingStrategy: PreloadAllModules })
   ],
   providers: [ // expose our Services and Providers into Angular's dependency injection

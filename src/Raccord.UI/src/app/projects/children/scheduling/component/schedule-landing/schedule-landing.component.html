@@ -9,11 +9,10 @@
     <md-card-title>
         <span *ngIf="scheduleDay.shootingDay.id!==0">#{{scheduleDay.shootingDay.number}} </span>
         {{scheduleDay.date | date}}
-        <a routerLink="/projects/{{project.id}}/callsheets/{{scheduleDay.shootingDay.callsheetID}}" *ngIf="scheduleDay.shootingDay.id!==0&&scheduleDay.shootingDay.callsheetID!==0">(Callsheet)</a>
+        <a routerLink="/projects/{{project.id}}/callsheets/{{scheduleDay.shootingDay.callsheetID}}" *ngIf="scheduleDay.shootingDay.id!==0&&scheduleDay.shootingDay.callsheetID">(Callsheet)</a>
     </md-card-title>
     <md-card-content>
-        <md-list 
-            *ngIf="!draggingNewScene"
+        <md-list
             class="schedule-scene-container">
             <md-list-item 
                 *ngFor="let scheduleScene of scheduleDay.scenes">

@@ -14,6 +14,7 @@ using Raccord.Domain.Model.Locations.Locations;
 using Raccord.Domain.Model.Locations.LocationSets;
 using Raccord.Application.Core.Services.ShootingDays;
 using Raccord.Application.Services.ShootingDays;
+using Raccord.Application.Services.Crew.CrewUnits;
 
 namespace Raccord.Application.Services.Scheduling.ScheduleDays
 {
@@ -32,6 +33,22 @@ namespace Raccord.Application.Services.Scheduling.ScheduleDays
                                                     .Select(s=> s.TranslateScene()),
                 ShootingDay = scheduleDay.ShootingDayID.HasValue ? scheduleDay.ShootingDay.Translate() : new ShootingDayDto(),
                 CrewUnitID = scheduleDay.CrewUnitID,
+            };
+
+            return dto;
+        }
+        public static FullScheduleDayCrewUnitDto TranslateFullCrewUnit(this ScheduleDay scheduleDay)
+        {
+            var dto = new FullScheduleDayCrewUnitDto
+            {
+                ID = scheduleDay.ID,
+                Date = scheduleDay.Date,
+                Start = scheduleDay.Start,
+                End = scheduleDay.End,
+                Scenes = scheduleDay.ScheduleScenes.OrderBy(t=> t.SortingOrder)
+                                                    .Select(s=> s.TranslateScene()),
+                ShootingDay = scheduleDay.ShootingDayID.HasValue ? scheduleDay.ShootingDay.Translate() : new ShootingDayDto(),
+                CrewUnit = scheduleDay.CrewUnit.Translate(),
             };
 
             return dto;

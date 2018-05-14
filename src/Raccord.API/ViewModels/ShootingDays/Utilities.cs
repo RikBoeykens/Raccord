@@ -113,7 +113,8 @@ namespace Raccord.API.ViewModels.ShootingDays
                 ID = dto.ID,
                 Number = dto.Number,
                 Date = dto.Date,
-                Type = dto.Type
+                Type = dto.Type,
+                CrewUnit = dto.CrewUnit.Translate()
             };
         }
     }

@@ -73,7 +73,15 @@ namespace Raccord.Data.EntityFramework.Repositories.Users
             IQueryable<ApplicationUser> query = _context.Set<ApplicationUser>();
 
             return query.Include(u=> u.ProjectUsers)
-                        .ThenInclude(pu=> pu.Role);
+                            .ThenInclude(pu=> pu.Role)
+                        .Include(u => u.ProjectUsers)
+                            .ThenInclude(pu => pu.CrewUnitMembers)
+                                .ThenInclude(cum => cum.CrewMembers)
+                                    .ThenInclude(cm => cm.Department)
+                                        .ThenInclude(d => d.CrewUnit)
+                        .Include(u => u.ProjectUsers)
+                            .ThenInclude(pu => pu.CastMember)
+                                .ThenInclude(cm => cm.Characters);
         }
 
         private IQueryable<ApplicationUser> GetIncludedPermissions()

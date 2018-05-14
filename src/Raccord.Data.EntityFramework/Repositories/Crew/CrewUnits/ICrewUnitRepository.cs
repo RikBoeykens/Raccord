@@ -7,6 +7,7 @@ namespace Raccord.Data.EntityFramework.Repositories.Crew.CrewUnits
     public interface ICrewUnitRepository : IBaseRepository<CrewUnit>
     {
         IEnumerable<CrewUnit> GetAllForProject(long projectID);
+        IEnumerable<CrewUnit> GetAllForUser(long projectID, string userID);
         CrewUnit GetFull(long ID);
         CrewUnit GetFullAdmin(long ID);
         CrewUnit GetSummary(long ID);

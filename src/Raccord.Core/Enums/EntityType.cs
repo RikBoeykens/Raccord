@@ -14,6 +14,9 @@ namespace Raccord.Core.Enums
         Location = 8,
         Slate = 9,
         CrewMember = 10,
-        CastMember = 11
+        CastMember = 11,
+        ScheduleDay = 12,
+        Callsheet = 13,
+        ShootingDay = 14
     }
 }

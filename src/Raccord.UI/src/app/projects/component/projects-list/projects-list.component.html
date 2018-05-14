@@ -14,7 +14,10 @@
             <md-card-content>
                 <md-chip-list md-line>
                     <span *ngFor="let crewMember of project.crewMembers">
-                        <md-chip>{{crewMember.department.name}} - {{crewMember.jobTitle}}</md-chip>
+                        <md-chip>{{crewMember.department.name}} - {{crewMember.jobTitle}} ({{crewMember.crewUnit.name}})</md-chip>
+                    </span>
+                    <span *ngFor="let character of project.characters">
+                        <md-chip><character-summary [character]="character"></character-summary></md-chip>
                     </span>
                 </md-chip-list>
             </md-card-content>

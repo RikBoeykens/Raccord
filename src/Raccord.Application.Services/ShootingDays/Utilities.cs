@@ -101,7 +101,8 @@ namespace Raccord.Application.Services.ShootingDays
             var dto = new ShootingDayInfoDto
             {
                 Number = shootingDay.Number,
-                Date = shootingDay.Date
+                Date = shootingDay.Date,
+                CrewUnit = shootingDay.CrewUnit.Translate(),
             };
 
             if(shootingDay.Completed && shootingDay.ShootingDayScenes.Where(sds=> sds.SceneID == sceneID).Any(sds=> sds.Completion == Completion.Completed || sds.Completion == Completion.PartCompleted))

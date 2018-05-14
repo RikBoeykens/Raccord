@@ -7,51 +7,52 @@ import { ProjectSummary } from '../model/project-summary.model';
 import { Project } from '../model/project.model';
 import { JsonResponse } from '../../shared/model/json-response.model';
 import { UserProject } from '../model/user-project.model';
+import { UserProjectSummary } from '../model/user-project-summary.model';
 
 @Injectable()
 export class ProjectHttpService extends BaseHttpService {
 
-    constructor(protected _http: Http) { 
+    constructor(protected _http: Http) {
         super(_http);
         this._baseUri = `${AppSettings.API_ENDPOINT}/projects`;
     }
 
-    getAll(): Promise<UserProject[]> {
+    public getAll(): Promise<UserProject[]> {
 
-        var uri = this._baseUri;
-
-        return this.doGetArray(uri);
-    }
-
-    getSummaries(): Promise<ProjectSummary[]> {
-
-        var uri = `${this._baseUri}/summary`;
+        let uri = this._baseUri;
 
         return this.doGetArray(uri);
     }
 
-    get(id: number): Promise<FullProject>{
+    public getSummaries(): Promise<UserProjectSummary[]> {
 
-        var uri = `${this._baseUri}/${id}`;
+        let uri = `${this._baseUri}/summary`;
+
+        return this.doGetArray(uri);
+    }
+
+    public get(id: number): Promise<FullProject>{
+
+        let uri = `${this._baseUri}/${id}`;
 
         return this.doGet(uri);
     }
 
-    getSummary(id: Number): Promise<ProjectSummary> {
+    public getSummary(id: Number): Promise<ProjectSummary> {
 
-        var uri = `${this._baseUri}/${id}/summary`;
+        let uri = `${this._baseUri}/${id}/summary`;
 
         return this.doGet(uri);
     }
 
-    post(project: Project): Promise<Number> {
-        var uri = this._baseUri;
+    public post(project: Project): Promise<Number> {
+        let uri = this._baseUri;
 
         return this.doPost(project, uri);
     }
 
-    delete(id: Number): Promise<any> {
-        var uri = `${this._baseUri}/${id}`;
+    public delete(id: Number): Promise<any> {
+        let uri = `${this._baseUri}/${id}`;
 
         return this.doDelete(uri);
     }

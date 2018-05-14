@@ -33,7 +33,9 @@ namespace Raccord.Application.Services.Characters
         {
             var characters = _characterRepository.GetAllForProject(projectID);
 
-            var dtos = characters.Select(l => l.TranslateSummary());
+            var dtos = characters.Select(l => l.TranslateSummary())
+                                .OrderBy(c => c.Number==0)
+                                .ThenBy(c => c.Number).ThenBy(c  => c.SceneCount);
 
             return dtos;
         }

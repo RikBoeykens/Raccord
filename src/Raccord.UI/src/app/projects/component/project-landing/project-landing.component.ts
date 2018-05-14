@@ -66,4 +66,16 @@ export class ProjectLandingComponent implements OnInit {
     public getScheduleReadNavType() {
         return CrewUnitNavEnum.scheduleRead;
     }
+
+    public getHasCast() {
+        return AccountHelpers.hasCast(
+            this.project.id
+        );
+    }
+
+    public getHasCrew() {
+        return AccountHelpers.hasCrew(
+            this.project.id
+        );
+    }
 }

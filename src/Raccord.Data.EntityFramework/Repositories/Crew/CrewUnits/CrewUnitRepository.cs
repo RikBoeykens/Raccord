@@ -18,6 +18,16 @@ namespace Raccord.Data.EntityFramework.Repositories.Crew.CrewUnits
 
             return query.Where(s=> s.ProjectID == projectID);
         }
+
+        public IEnumerable<CrewUnit> GetAllForUser(long projectID, string userID)
+        {
+            var query = GetIncludedUserSummary();
+
+            return query.Where(cu=> cu.ProjectID == projectID && 
+                                    cu.CrewUnitMembers.Any(cum => 
+                                        cum.ProjectUser.ProjectID == projectID && 
+                                        cum.ProjectUser.UserID == userID));
+        }
         public CrewUnit GetFull(long ID)
         {
             var query = GetIncludedFull();
@@ -60,6 +70,14 @@ namespace Raccord.Data.EntityFramework.Repositories.Crew.CrewUnits
             IQueryable<CrewUnit> query = _context.Set<CrewUnit>();
 
             return query;
+        }
+
+        private IQueryable<CrewUnit> GetIncludedUserSummary()
+        {
+            IQueryable<CrewUnit> query = _context.Set<CrewUnit>();
+
+            return query.Include(cu=> cu.CrewUnitMembers)
+                            .ThenInclude(cum => cum.ProjectUser);
         }
 
         private IQueryable<CrewUnit> GetIncluded()

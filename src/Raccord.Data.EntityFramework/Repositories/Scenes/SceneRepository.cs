@@ -61,6 +61,13 @@ namespace Raccord.Data.EntityFramework.Repositories.Scenes
                         .OrderBy(t=> t.SortingOrder);
         }
 
+        public IEnumerable<Scene> GetScriptForCharacters(long[] characterIDs)
+        {
+            var query = GetIncludedScript();
+
+            return query.Where(s=> s.CharacterScenes.Any(c => characterIDs.Any())).OrderBy(t=> t.SortingOrder);
+        }
+
         public Scene GetScript(long ID)
         {
             var query = GetIncludedScript();
@@ -198,14 +205,15 @@ namespace Raccord.Data.EntityFramework.Repositories.Scenes
                          .ThenInclude(bi=> bi.ImageBreakdownItems)
                          .ThenInclude(ibi=> ibi.Image)
                          .Include(s => s.ScheduleScenes)
-                         .ThenInclude(ss=> ss.ScheduleDay)
-                         .ThenInclude(sd=> sd.ScheduleScenes)
+                            .ThenInclude(ss=> ss.ScheduleDay)
+                                .ThenInclude(sd=> sd.ScheduleScenes)
                          .Include(s => s.ScheduleScenes)
-                         .ThenInclude(ss=> ss.ScheduleDay)
-                         .ThenInclude(sd=> sd.ShootingDay)
+                            .ThenInclude(ss=> ss.ScheduleDay)
+                                .ThenInclude(sd=> sd.ShootingDay)
+                                    .ThenInclude(sd => sd.CrewUnit)
                          .Include(s => s.ScheduleScenes)
-                         .ThenInclude(ss=> ss.LocationSet)
-                         .ThenInclude(ls=> ls.Location)
+                            .ThenInclude(ss=> ss.LocationSet)
+                                .ThenInclude(ls=> ls.Location)
                          .Include(s=> s.Slates)
                          .ThenInclude(s=> s.ImageSlates)
                          .ThenInclude(s=> s.Image)

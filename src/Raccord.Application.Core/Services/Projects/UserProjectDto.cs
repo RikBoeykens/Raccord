@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Raccord.Application.Core.Services.Characters;
 using Raccord.Application.Core.Services.Crew.CrewMembers;
 
 namespace Raccord.Application.Core.Services.Projects
@@ -7,6 +8,7 @@ namespace Raccord.Application.Core.Services.Projects
     public class UserProjectDto : ProjectSummaryDto
     {
         private IEnumerable<CrewMemberUnitDto> _crewMembers;
+        private IEnumerable<CharacterDto> _characters;
         
         /// <summary>
         /// Crew members linked to the user
@@ -21,6 +23,18 @@ namespace Raccord.Application.Core.Services.Projects
             set
             {
                 _crewMembers = value;
+            }
+        }
+
+        public IEnumerable<CharacterDto> Characters
+        {
+            get
+            {
+                return _characters ?? new List<CharacterDto>();
+            }
+            set
+            {
+                _characters = value;
             }
         }
     }

@@ -28,6 +28,17 @@ namespace Raccord.API.Controllers.Projects
             _scheduleDayService = scheduleDayService;
         }
 
+        // GET: api/scheduledays/user
+        [HttpGet("user")]
+        public IEnumerable<FullScheduleDayCrewUnitViewModel> GetAllForUser(long authProjectId)
+        {
+            var dtos = _scheduleDayService.GetForProjectUser(authProjectId, GetUserId());
+
+            var vms = dtos.Select(p => p.Translate());
+
+            return vms;
+        }
+
         // GET: api/scheduledays/1/crewunit
         [HttpGet("{crewUnitId}/crewunit")]
         public IEnumerable<FullScheduleDayViewModel> GetAll(long crewUnitId)

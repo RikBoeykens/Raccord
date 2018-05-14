@@ -2,6 +2,6 @@
   <a routerLink="/" class="breadcrumb">Dashboard</a>
   <a routerLink="/projects" class="breadcrumb">Projects</a>
   <a routerLink="/projects/{{project.id}}" class="breadcrumb">{{project.title}}</a>
-  <span class="breadcrumb">Script Text</span>
+  <span class="breadcrumb">Script</span>
 </md-card>
 <screenplay-text [sceneTexts]="sceneTexts" [projectID]="project.id"></screenplay-text>

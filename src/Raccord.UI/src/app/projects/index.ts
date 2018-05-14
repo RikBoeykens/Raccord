@@ -155,10 +155,12 @@ export {
 export {
     EditScheduleComponent,
     ScheduleLandingComponent,
+    MyScheduleLandingComponent,
     ScheduleSceneLandingComponent,
     ScheduleDayHttpService,
     ScheduleDayResolve,
     ScheduleDaysResolve,
+    ScheduleDayUsersResolve,
     ScheduleDayNoteHttpService,
     ScheduleDayNoteResolve,
     ScheduleDayNotesResolve,
@@ -201,7 +203,7 @@ export {
     ShootingDaysResolve,
     ShootingDayResolve,
     ShootingDaySceneHttpService
- } from "./children/shooting-days";
+ } from './children/shooting-days';
 
  export{
     CallsheetHttpService,
@@ -239,9 +241,11 @@ export {
 
  export{
     ChartLandingComponent
- } from "./children/charts";
+ } from './children/charts';
 
-export { ScenePropertiesLandingComponent } from './children/scene-properties/component/scene-properties-landing/scene-properties-landing.component';
+export { ScenePropertiesLandingComponent } from
+    // tslint:disable-next-line:max-line-length
+    './children/scene-properties/component/scene-properties-landing/scene-properties-landing.component';
 
 export{
     CrewDepartmentHttpService,
@@ -254,8 +258,10 @@ export{
     CrewUnitHttpService,
     CrewUnitResolve,
     CrewUnitsResolve,
+    UserCrewUnitsResolve,
     CrewUnitSummaryResolve,
     CrewUnitsListComponent,
+    MyCrewUnitsListComponent,
     CrewUnitsNavListComponent,
     EditCrewUnitDialogComponent,
     ChooseCrewUnitDialogComponent
@@ -271,8 +277,10 @@ export{
 export{
     ScriptTextHttpService,
     ScriptTextResolve,
+    ScriptTextUserResolve,
     ScriptTextCallsheetResolve,
     ScriptTextLandingComponent,
+    ScriptTextUserComponent,
     ScriptTextComponent,
     SceneHeaderComponent,
     SceneActionComponent,
@@ -297,3 +305,8 @@ export {
     EditCastMemberDialogComponent,
     EditCastMembersListComponent
 } from './children/cast';
+
+export {
+    ProjectCalendarComponent,
+    ProjectCalendarHttpService
+} from './children/calendar';

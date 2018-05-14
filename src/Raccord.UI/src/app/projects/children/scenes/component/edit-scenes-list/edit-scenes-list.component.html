@@ -11,7 +11,7 @@
     <a routerLink="/projects/{{project.id}}/scripttext">Script text</a>
     <md-nav-list [dragula]='"scene-bag"' [dragulaModel]='scenes' class="drag-sort-container">
         <a md-list-item 
-           [routerLink]="[scene.id]" 
+        routerLink="/projects/{{project.id}}/scenes/{{scene.id}}"
            *ngFor="let scene of scenes"
            class="drag-element drag-delete drag-sort">
            <md-icon class=drag-handle>drag_handle</md-icon>

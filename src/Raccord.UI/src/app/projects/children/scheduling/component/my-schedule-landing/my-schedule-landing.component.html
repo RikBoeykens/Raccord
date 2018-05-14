@@ -1,0 +1,32 @@
+<md-card>      
+    <a routerLink="/" class="breadcrumb">Dashboard</a>
+    <a routerLink="/projects" class="breadcrumb">Projects</a>
+    <a routerLink="/projects/{{project.id}}" class="breadcrumb">{{project.title}}</a>
+    <a routerLink="/projects/{{project.id}}/units/nav/{{getScheduleReadNavType()}}" class="breadcrumb">Schedules</a>
+    <span class="breadcrumb">My Schedule</span>
+</md-card>
+<md-card *ngFor="let scheduleDay of scheduleDays" class="schedule-day-container">
+    <md-card-title>
+        <span *ngIf="scheduleDay.shootingDay.id!==0">#{{scheduleDay.shootingDay.number}} </span>
+        {{scheduleDay.date | date}} - {{scheduleDay.crewUnit.name}}
+        <a routerLink="/projects/{{project.id}}/callsheets/{{scheduleDay.shootingDay.callsheetID}}" *ngIf="scheduleDay.shootingDay.id!==0&&scheduleDay.shootingDay.callsheetID!==0">(Callsheet)</a>
+    </md-card-title>
+    <md-card-content>
+        <md-list
+            class="schedule-scene-container">
+            <md-list-item 
+                *ngFor="let scheduleScene of scheduleDay.scenes">
+                <div md-line>
+                    <show-image *ngIf="scheduleScene.scene.primaryImage.id!=0" [image]="scheduleScene.scene.primaryImage" [listAvatar]="true"></show-image>
+                    <a routerLink="/projects/{{project.id}}/scenes/{{scheduleScene.scene.id}}"><scene-summary [scene]="scheduleScene.scene"></scene-summary></a> ({{scheduleScene.pageLength | pagelength}})
+                </div>
+                <md-chip-list md-line>
+                    <a *ngFor="let character of scheduleScene.characters"
+                        routerLink="/projects/{{project.id}}/characters/{{character.id}}">
+                        <md-chip><character-summary [character]="character"></character-summary></md-chip>
+                    </a>
+                </md-chip-list>
+            </md-list-item>
+        </md-list>
+    </md-card-content>
+</md-card>

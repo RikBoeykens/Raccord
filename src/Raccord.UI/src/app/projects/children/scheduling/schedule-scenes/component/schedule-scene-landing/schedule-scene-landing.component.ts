@@ -12,6 +12,8 @@ import { DialogService } from '../../../../../../shared/service/dialog.service';
 import { ProjectSummary } from '../../../../../model/project-summary.model';
 import { PageLengthHelpers } from '../../../../../../shared/helpers/page-length.helpers';
 import { LoadingWrapperService } from '../../../../../../shared/service/loading-wrapper.service';
+import { CrewUnitNavEnum } from '../../../../crew/crew-units/enum/crew-unit-nav.enum';
+import { CrewUnit } from '../../../../crew/crew-units/model/crew-unit.model';
 
 @Component({
     templateUrl: 'schedule-scene-landing.component.html',
@@ -20,6 +22,7 @@ export class ScheduleSceneLandingComponent implements OnInit, OnChanges {
 
     public scheduleScene: FullScheduleScene;
     public project: ProjectSummary;
+    public crewUnit: CrewUnit;
     public stringPageLength: string;
     public characters: LinkedCharacter[] = [];
     public scheduleCharacters: ScheduleCharacterWrapper[] = [];
@@ -40,12 +43,14 @@ export class ScheduleSceneLandingComponent implements OnInit, OnChanges {
         this._route.data.subscribe((data: {
             scheduleScene: FullScheduleScene,
             project: ProjectSummary,
+            crewUnit: CrewUnit,
             characters: LinkedCharacter[],
             locationSets: LocationSetSummary[]
         }) => {
             this.scheduleScene = data.scheduleScene;
             this.setStringPageLength();
             this.project = data.project;
+            this.crewUnit = data.crewUnit;
             this.characters = data.characters;
             this.locationSets = data.locationSets;
             this.setScheduleCharacterWrappers();
@@ -140,6 +145,10 @@ export class ScheduleSceneLandingComponent implements OnInit, OnChanges {
             characters.push(newCharacter);
         }
         this.scheduleCharacters = characters;
+    }
+
+    public getScheduleEditNavType() {
+        return CrewUnitNavEnum.scheduleEdit;
     }
 }
 

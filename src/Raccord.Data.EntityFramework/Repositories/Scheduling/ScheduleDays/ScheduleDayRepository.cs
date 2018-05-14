@@ -26,6 +26,13 @@ namespace Raccord.Data.EntityFramework.Repositories.Scheduling.ScheduleDays
             return query.Where(sd=> sd.CrewUnitID == crewUnitID && sd.ScheduleScenes.Any());
         }
 
+        public IEnumerable<ScheduleDay> GetAllForCharacters(long[] characterIds)
+        {
+            var query = GetIncludedFull();
+
+            return query.Where(sd=> sd.ScheduleScenes.Any(ss => ss.Characters.Any(c => characterIds.Any(cId => c.ID == cId))));
+        }
+
         public ScheduleDay GetFull(long ID)
         {
             var query = GetIncludedFull();
