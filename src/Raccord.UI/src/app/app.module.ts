@@ -163,7 +163,8 @@ import {
   CastMemberScenesComponent,
   CastMembersListComponent,
   EditCastMemberDialogComponent,
-  EditCastMembersListComponent
+  EditCastMembersListComponent,
+  ProjectCalendarComponent
 } from './projects';
 import { ScenePropertiesLandingComponent } from './projects';
 import {
@@ -197,6 +198,10 @@ import {
   ShowProfileImageComponent,
   UserAvatarComponent
 } from './profile';
+import {
+  CalendarComponent,
+  CalendarHeaderComponent
+} from './calendar';
 
 const COMPONENTS = [
   AppComponent,
@@ -323,6 +328,7 @@ const COMPONENTS = [
   CastMembersListComponent,
   EditCastMembersListComponent,
   ScenePropertiesLandingComponent,
+  ProjectCalendarComponent,
   SelectEntityComponent,
   PlaceholderImageComponent,
   LoginComponent,
@@ -340,7 +346,9 @@ const COMPONENTS = [
   RaccordChartComponent,
   UserProfileLandingComponent,
   ShowProfileImageComponent,
-  UserAvatarComponent
+  UserAvatarComponent,
+  CalendarComponent,
+  CalendarHeaderComponent
 ];
 
 const ENTRY_COMPONENTS = [
@@ -471,7 +479,8 @@ import {
   CommentHttpService,
   CastMemberHttpService,
   CastMemberResolve,
-  CastMembersResolve
+  CastMembersResolve,
+  ProjectCalendarHttpService
 } from './projects';
 
 import {
@@ -660,6 +669,7 @@ const APP_PROVIDERS = [
   CastMemberHttpService,
   CastMemberResolve,
   CastMembersResolve,
+  ProjectCalendarHttpService,
   CalendarHttpService
 ];
 

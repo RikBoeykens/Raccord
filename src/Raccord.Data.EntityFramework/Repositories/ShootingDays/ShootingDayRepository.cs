@@ -98,6 +98,30 @@ namespace Raccord.Data.EntityFramework.Repositories.ShootingDays
                 );
         }
 
+        public IEnumerable<ShootingDay> GetAllForCrewUnitCalendarScenes(long[] crewUnitIDs, DateTime start, DateTime end){
+            var query = GetIncludedCalendarCrewUnitScenes();
+
+            return query.Where(sd =>
+                (sd.Date >= start && sd.Date < end)
+                &&
+                crewUnitIDs.Any(cid => cid == sd.CrewUnitID)
+                );
+        }
+
+        public IEnumerable<ShootingDay> GetAllForCharacterCalendarScenes(long[] characterIds, DateTime start, DateTime end){
+            var query = GetIncludedCalendarCharacterScenes();
+
+            return query.Where(sd =>
+                (sd.Date >= start && sd.Date < end)
+                &&
+                (
+                    characterIds.Any(cid => sd.Callsheet.CallsheetScenes.Any(cs => cs.Characters.Any(c => c.CharacterScene.CharacterID == cid)))
+                    ||
+                    characterIds.Any(cid => sd.ScheduleDay.ScheduleScenes.Any(ss => ss.Characters.Any(c => c.CharacterScene.CharacterID == cid)))
+                )
+                );
+        }
+
         private IQueryable<ShootingDay> GetIncludedFull()
         {
             IQueryable<ShootingDay> query = _context.Set<ShootingDay>();
@@ -199,9 +223,7 @@ namespace Raccord.Data.EntityFramework.Repositories.ShootingDays
             return query.Include(sd => sd.CrewUnit)
                             .ThenInclude(sd => sd.Project)
                         .Include(sd => sd.Callsheet)
-                        .Include(sd => sd.ScheduleDay)
-                            .ThenInclude(sd => sd.ScheduleScenes)
-                                .ThenInclude(ss => ss.Characters);
+                        .Include(sd => sd.ScheduleDay);
         }
 
         private IQueryable<ShootingDay> GetIncludedCalendarCharacter()
@@ -217,6 +239,94 @@ namespace Raccord.Data.EntityFramework.Repositories.ShootingDays
                         .Include(sd => sd.ScheduleDay)
                             .ThenInclude(sd => sd.ScheduleScenes)
                                 .ThenInclude(ss => ss.Characters);
+        }
+
+        private IQueryable<ShootingDay> GetIncludedCalendarCrewUnitScenes()
+        {
+            IQueryable<ShootingDay> query = _context.Set<ShootingDay>();
+
+            return query.Include(sd => sd.CrewUnit)
+                            .ThenInclude(sd => sd.Project)
+                        .Include(sd => sd.ShootingDayScenes)
+                            .ThenInclude(sds => sds.Scene)
+                                .ThenInclude(s => s.IntExt)
+                        .Include(sd => sd.ShootingDayScenes)
+                            .ThenInclude(sds => sds.Scene)
+                                .ThenInclude(s => s.ScriptLocation)
+                        .Include(sd => sd.ShootingDayScenes)
+                            .ThenInclude(sds => sds.Scene)
+                                .ThenInclude(s => s.DayNight)
+                        .Include(sd => sd.Callsheet)
+                            .ThenInclude(cs => cs.CallsheetScenes)
+                                .ThenInclude(cs => cs.Scene)
+                                    .ThenInclude(s => s.IntExt)
+                        .Include(sd => sd.Callsheet)
+                            .ThenInclude(cs => cs.CallsheetScenes)
+                                .ThenInclude(cs => cs.Scene)
+                                    .ThenInclude(s => s.ScriptLocation)
+                        .Include(sd => sd.Callsheet)
+                            .ThenInclude(cs => cs.CallsheetScenes)
+                                .ThenInclude(cs => cs.Scene)
+                                    .ThenInclude(s => s.DayNight)
+                        .Include(sd => sd.ScheduleDay)
+                            .ThenInclude(sd => sd.ScheduleScenes)
+                                .ThenInclude(ss => ss.Scene)
+                                    .ThenInclude(s => s.IntExt)
+                        .Include(sd => sd.ScheduleDay)
+                            .ThenInclude(sd => sd.ScheduleScenes)
+                                .ThenInclude(ss => ss.Scene)
+                                    .ThenInclude(s => s.ScriptLocation)
+                        .Include(sd => sd.ScheduleDay)
+                            .ThenInclude(sd => sd.ScheduleScenes)
+                                .ThenInclude(ss => ss.Scene)
+                                    .ThenInclude(s => s.DayNight);
+        }
+
+        private IQueryable<ShootingDay> GetIncludedCalendarCharacterScenes()
+        {
+            IQueryable<ShootingDay> query = _context.Set<ShootingDay>();
+
+            return query.Include(sd => sd.CrewUnit)
+                            .ThenInclude(sd => sd.Project)
+                        .Include(sd => sd.ShootingDayScenes)
+                            .ThenInclude(sds => sds.Scene)
+                                .ThenInclude(s => s.IntExt)
+                        .Include(sd => sd.ShootingDayScenes)
+                            .ThenInclude(sds => sds.Scene)
+                                .ThenInclude(s => s.ScriptLocation)
+                        .Include(sd => sd.ShootingDayScenes)
+                            .ThenInclude(sds => sds.Scene)
+                                .ThenInclude(s => s.DayNight)
+                        .Include(sd => sd.Callsheet)
+                            .ThenInclude(c => c.CallsheetScenes)
+                                .ThenInclude(cs => cs.Characters)
+                        .Include(sd => sd.Callsheet)
+                            .ThenInclude(cs => cs.CallsheetScenes)
+                                .ThenInclude(cs => cs.Scene)
+                                    .ThenInclude(s => s.IntExt)
+                        .Include(sd => sd.Callsheet)
+                            .ThenInclude(cs => cs.CallsheetScenes)
+                                .ThenInclude(cs => cs.Scene)
+                                    .ThenInclude(s => s.ScriptLocation)
+                        .Include(sd => sd.Callsheet)
+                            .ThenInclude(cs => cs.CallsheetScenes)
+                                .ThenInclude(cs => cs.Scene)
+                                    .ThenInclude(s => s.DayNight)
+                        .Include(sd => sd.ScheduleDay)
+                            .ThenInclude(sd => sd.ScheduleScenes)
+                                .ThenInclude(ss => ss.Characters)
+                        .Include(sd => sd.ScheduleDay)
+                            .ThenInclude(sd => sd.ScheduleScenes)
+                                .ThenInclude(ss => ss.Scene)
+                                    .ThenInclude(s => s.IntExt)
+                        .Include(sd => sd.ScheduleDay)
+                            .ThenInclude(sd => sd.ScheduleScenes)
+                                .ThenInclude(ss => ss.Scene)
+                                    .ThenInclude(s => s.ScriptLocation)
+                        .Include(sd => sd.ScheduleDay)
+                            .ThenInclude(sd => sd.ScheduleScenes)
+                                .ThenInclude(ss => ss.Scene)
+                                    .ThenInclude(s => s.DayNight);
         }
     }
 }

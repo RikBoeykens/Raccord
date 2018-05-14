@@ -4,6 +4,13 @@
     <span class="breadcrumb">{{project.title}}</span>
 </md-card>
 <div class="row">
+    <md-card *ngIf="false">
+    </md-card>
+    <md-card *ngIf="getCanRead()">
+        <project-calendar [projectId]="project.id"></project-calendar>
+    </md-card>
+</div>
+<div class="row">
     <div>
         <md-card *ngIf="false">
         </md-card>

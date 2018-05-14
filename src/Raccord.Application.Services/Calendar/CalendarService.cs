@@ -39,5 +39,27 @@ namespace Raccord.Application.Services.Calendar
 
       return shootingDays.Distinct().Select(sd => sd.TranslateToCalendarItem());
     }
+
+    public IEnumerable<CalendarItemDto> GetCalendarItemScenes(string userID, long projectID, DateTime start, DateTime end)
+    {
+      var user = _userRepository.GetFull(userID);
+
+      var shootingDays = new List<ShootingDay>();
+
+      var projectUsers = user.ProjectUsers.Where(pu => pu.ProjectID == projectID);
+
+      if(projectUsers.Any(pu => pu.CrewUnitMembers.Any()))
+      {
+        var crewUnitIDs = projectUsers.SelectMany(pu => pu.CrewUnitMembers.Select(cum => cum.CrewUnitID)).ToArray();
+        shootingDays.AddRange(_shootingDayRepository.GetAllForCrewUnitCalendarScenes(crewUnitIDs, start, end));
+      }
+      if(projectUsers.Any(pu=> pu.CastMemberID.HasValue))
+      {
+        var characterIDs = projectUsers.Where(pu => pu.CastMemberID.HasValue).SelectMany(pu => pu.CastMember.Characters.Select(c => c.ID)).ToArray();
+        shootingDays.AddRange(_shootingDayRepository.GetAllForCharacterCalendarScenes(characterIDs, start, end));
+      }
+
+      return shootingDays.Distinct().SelectMany(sd => sd.TranslateToCalendarItemScenes());
+    }
   }
 }

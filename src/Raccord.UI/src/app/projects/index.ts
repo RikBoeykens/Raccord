@@ -305,3 +305,8 @@ export {
     EditCastMemberDialogComponent,
     EditCastMembersListComponent
 } from './children/cast';
+
+export {
+    ProjectCalendarComponent,
+    ProjectCalendarHttpService
+} from './children/calendar';

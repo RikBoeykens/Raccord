@@ -1,30 +1,30 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { CalendarEvent } from 'angular-calendar';
-import { RouteInfo } from '../../shared/model/route-info.model';
-import { EntityType } from '../../shared/enums/entity-type.enum';
-import { CalendarHelpers } from '../../calendar/helpers/calendar.helpers';
-import { CalendarItem } from '../../calendar/model/calendar-item';
-import { CalendarHttpService } from '../../calendar/service/calendar-http.service';
-import { LoadingWrapperService } from '../../shared/service/loading-wrapper.service';
+import { RouteInfo } from '../../../../../shared/model/route-info.model';
+import { LoadingWrapperService } from '../../../../../shared/service/loading-wrapper.service';
+import { CalendarItem } from '../../../../../calendar/model/calendar-item';
+import { CalendarHelpers } from '../../../../../calendar/helpers/calendar.helpers';
+import { ProjectCalendarHttpService } from '../../service/project-calendar-http.service';
 
 @Component({
-  selector: 'dashboard-calendar',
-  templateUrl: 'dashboard-calendar.component.html',
+  selector: 'project-calendar',
+  templateUrl: 'project-calendar.component.html',
 })
-export class DashboardCalendarComponent {
+export class ProjectCalendarComponent {
+  @Input() public projectId: number;
     public events: Array<CalendarEvent<{ routeInfo: RouteInfo }>> =
         new Array<CalendarEvent<{routeInfo: RouteInfo}>>();
 
     constructor(
       private _router: Router,
-      private _calendarHttpService: CalendarHttpService,
+      private _projectCalendarHttpService: ProjectCalendarHttpService,
       private _loadingWrapperService: LoadingWrapperService
     ) {}
 
     public getCalendarItems(dates: {start: Date, end: Date}) {
       this._loadingWrapperService.Load(
-        this._calendarHttpService.getCalendarItems(dates.start, dates.end),
+        this._projectCalendarHttpService.getAll(this.projectId, dates.start, dates.end),
         (data) => this.setEvents(data)
       );
     }
