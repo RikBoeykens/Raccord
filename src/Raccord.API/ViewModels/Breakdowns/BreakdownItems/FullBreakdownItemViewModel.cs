@@ -1,12 +1,15 @@
 using Raccord.API.ViewModels.Scenes;
 using Raccord.API.ViewModels.Images;
 using System.Collections.Generic;
+using Raccord.API.ViewModels.Breakdowns.BreakdownTypes;
 
 namespace Raccord.API.ViewModels.Breakdowns.BreakdownItems
 {
     // ViewModel to represent a breakdown items
-    public class FullBreakdownItemViewModel : BreakdownItemViewModel
+    public class FullBreakdownItemViewModel : BaseBreakdownItemViewModel
     {
+        private BreakdownSummaryViewModel _breakdown;
+        private BreakdownTypeViewModel _type;
         private IEnumerable<LinkedSceneViewModel> _scenes;
         private IEnumerable<LinkedImageViewModel> _images;
 
@@ -33,6 +36,38 @@ namespace Raccord.API.ViewModels.Breakdowns.BreakdownItems
             set
             {
                 _images = value;
+            }
+        }
+
+        /// <summary>
+        /// Breakdown linked to the item
+        /// </summary>
+        /// <returns></returns>
+        public BreakdownSummaryViewModel Breakdown
+        {
+            get
+            {
+                return _breakdown ?? (_breakdown = new BreakdownSummaryViewModel());
+            }
+            set
+            {
+                _breakdown = value;
+            }
+        }
+
+        /// <summary>
+        /// Breakdown type linked to the item
+        /// </summary>
+        /// <returns></returns>
+        public BreakdownTypeViewModel Type
+        {
+            get
+            {
+                return _type ?? (_type = new BreakdownTypeViewModel());
+            }
+            set
+            {
+                _type = value;
             }
         }
     }

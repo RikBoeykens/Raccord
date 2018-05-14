@@ -3,6 +3,8 @@ using Raccord.Domain.Model.Projects;
 using Raccord.Domain.Model.Images;
 using Raccord.Domain.Model.ScriptUploads;
 using Raccord.Domain.Model.Scenes.Dialogues;
+using Raccord.Domain.Model.Users;
+using Raccord.Domain.Model.Cast;
 
 namespace Raccord.Domain.Model.Characters
 {
@@ -33,6 +35,12 @@ namespace Raccord.Domain.Model.Characters
 
         // Linked script upload
         public virtual ScriptUpload ScriptUpload { get; set; }
+
+        // ID of the linked project user
+        public long? CastMemberID { get; set; }
+
+        // Linked project user
+        public virtual CastMember CastMember { get; set; }
 
         // Linked scenes
         public virtual ICollection<CharacterScene> CharacterScenes

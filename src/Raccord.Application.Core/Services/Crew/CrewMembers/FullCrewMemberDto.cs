@@ -1,7 +1,11 @@
+using Raccord.Application.Core.Services.Crew.CrewUnits;
+
 namespace Raccord.Application.Core.Services.Crew.CrewMembers
 {
     public class FullCrewMemberDto : CrewMemberDto
     {
+        private CrewUnitDto _crewUnit;
+
         /// <summary>
         /// Linked user ID (if applicable)
         /// </summary>
@@ -13,5 +17,17 @@ namespace Raccord.Application.Core.Services.Crew.CrewMembers
         /// </summary>
         /// <returns></returns>
         public bool HasImage { get; set; }
+
+        public CrewUnitDto CrewUnit
+        {
+            get
+            {
+                return _crewUnit ?? new CrewUnitDto();
+            }
+            set
+            {
+                _crewUnit = value;
+            }
+        }
     }
 }

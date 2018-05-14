@@ -1,9 +1,11 @@
 import { CrewDepartment } from '../../departments/model/crew-department.model';
 import { CrewMember } from './crew-member.model';
+import { CrewUnit } from '../../crew-units/model/crew-unit.model';
 
 export class FullCrewMember extends CrewMember {
-    userID: string;
-    hasImage: boolean;
+    public userID: string;
+    public hasImage: boolean;
+    public crewUnit: CrewUnit;
 
     constructor(obj?: {
                         id: number,
@@ -14,10 +16,12 @@ export class FullCrewMember extends CrewMember {
                         telephone: string,
                         department: CrewDepartment,
                         userID: string,
-                        hasImage: boolean
+                        hasImage: boolean,
+                        crewUnit: CrewUnit
                     }) {
         super(obj);
         this.userID = obj.userID;
         this.hasImage = obj.hasImage;
+        this.crewUnit = obj.crewUnit;
     }
 }

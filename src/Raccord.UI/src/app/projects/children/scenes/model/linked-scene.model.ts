@@ -4,8 +4,8 @@ import { DayNight } from '../../scene-properties/model/day-night.model';
 import { ScriptLocation } from '../../script-locations/model/script-location.model';
 import { Image } from '../../images/model/image.model';
 
-export class LinkedScene extends SceneSummary{
-    linkID: number;
+export class LinkedScene extends SceneSummary {
+    public linkID: number;
 
     constructor(obj?: {
                         id: number,
@@ -19,9 +19,9 @@ export class LinkedScene extends SceneSummary{
                         projectId: number,
                         primaryImage: Image,
                         linkID: number
-                    }){
+                    }) {
         super(obj);
-        if(obj){
+        if (obj) {
             this.linkID = obj.linkID;
         }
     }

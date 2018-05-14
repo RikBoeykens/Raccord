@@ -6,7 +6,7 @@
             <a routerLink="/projects/{{projectId}}/scenes/{{scene.id}}">
                 {{scene.number}}. {{scene.intExt.name}} {{scene.scriptLocation.name}} {{scene.dayNight.name}} - {{scene.summary}}
             </a>
-            <button md-button (click)="removeLink(scene)"><md-icon>delete</md-icon></button>
+            <button md-button (click)="removeLink(scene)" *ngIf="getCanEdit()"><md-icon>delete</md-icon></button>
         </md-list-item>
     </md-nav-list>
 </div>

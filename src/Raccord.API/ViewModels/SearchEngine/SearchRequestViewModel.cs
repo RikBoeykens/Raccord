@@ -8,6 +8,7 @@ namespace Raccord.API.ViewModels.SearchEngine
     {
         private IEnumerable<EntityType> _includeTypes { get; set; }
         private IEnumerable<EntityType> _excludeTypes { get; set; }
+        private IEnumerable<ExcludeTypeIDsViewModel> _excludeTypeIDs { get; set; }
         // Text to search on
         public string SearchText { get; set; }
 
@@ -24,7 +25,7 @@ namespace Raccord.API.ViewModels.SearchEngine
             }
         }
 
-        // Types to exclude (if applicable)
+        // Types to search for (if applicable)
         public IEnumerable<EntityType> ExcludeTypes
         {
             get
@@ -39,5 +40,18 @@ namespace Raccord.API.ViewModels.SearchEngine
 
         // ProjectID of the project to search in (if applicable)
         public long? ProjectID { get; set; }
+
+        // Types to exclude (if applicable)
+        public IEnumerable<ExcludeTypeIDsViewModel> ExcludeTypeIDs
+        {
+            get
+            {
+                return _excludeTypeIDs ?? (_excludeTypeIDs = new List<ExcludeTypeIDsViewModel>());
+            }
+            set
+            {
+                _excludeTypeIDs = value;
+            }
+        }
     }
 }

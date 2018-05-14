@@ -1,0 +1,28 @@
+<div>
+    <h3>Scene Header</h3>
+    <div fxLayout="row" fxLayoutGap="10px">
+        <md-input-container fxFlex="50%">
+            <input mdInput placeholder="Search" [(ngModel)]="sceneFilter.searchText" name="scene_search_text" (change)="doFilter()">
+        </md-input-container>
+        <md-input-container fxFlex="25%">
+            <input mdInput placeholder="Min" [(ngModel)]="minPageLengthString" name="scene_min_pagelength" (change)="filterPagelengths()">
+        </md-input-container>
+        <md-input-container fxFlex="25%">
+            <input mdInput placeholder="Max" [(ngModel)]="maxPageLengthString" name="scene_max_pagelength" (change)="filterPagelengths()">
+        </md-input-container>
+    </div>
+    <search-int-exts-collection [projectID]="projectID" (onChange)="filterIntExts($event)"></search-int-exts-collection>
+    <search-script-locations-collection [projectID]="projectID" (onChange)="filterScriptLocations($event)"></search-script-locations-collection>
+    <search-day-nights-collection [projectID]="projectID" (onChange)="filterDayNights($event)"></search-day-nights-collection>
+    <h3>Locations</h3>
+    <search-locations-collection [projectID]="projectID" (onChange)="filterLocations($event)"></search-locations-collection>
+    <h3>Cast</h3>
+    <search-characters-collection [projectID]="projectID" (onChange)="filterCharacters($event)"></search-characters-collection>
+    <search-entities-collection [projectID]="projectID" (onChange)="filterCastMembers($event)" [entityType]="getCastMemberType()" [entityTypeName]="'Cast Member'"></search-entities-collection>
+    <h3 *ngIf="breakdown">
+        <span>Breakdown</span>
+        &nbsp;
+        <a routerLink="/projects/{{projectID}}/breakdowns/{{breakdown.id}}">{{breakdown.name}}</a>
+    </h3>
+    <search-breakdown-collection [projectID]="projectID" (onChange)="filterBreakdowns($event)" [breakdown]="breakdown" *ngIf="breakdown"></search-breakdown-collection>
+  </div>

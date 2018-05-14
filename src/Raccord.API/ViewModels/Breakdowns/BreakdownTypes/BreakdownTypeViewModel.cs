@@ -12,7 +12,7 @@ namespace Raccord.API.ViewModels.Breakdowns.BreakdownTypes
         /// Description of the breakdown type
         public string Description { get; set; }
 
-        // ID of the project
-        public long ProjectID { get; set; }
+        // ID of the breakdown
+        public long BreakdownID { get; set; }
     }
 }

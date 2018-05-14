@@ -4,12 +4,14 @@ using Raccord.Application.Core.Services.Projects;
 using Raccord.Application.Core.Services.SearchEngine;
 using Raccord.Data.EntityFramework.Repositories.Projects;
 using Raccord.Core.Enums;
+using Raccord.Application.Services.SearchEngine;
 
 namespace Raccord.Application.Services.Projects
 {
     // Service to search for projects
     public class ProjectSearchEngineService : IProjectSearchEngineService
     {
+        private readonly EntityType _type = EntityType.Project;
         private readonly IProjectRepository _projectRepository;
 
         // Initialises a new ProjectSearchEngineService
@@ -23,13 +25,14 @@ namespace Raccord.Application.Services.Projects
 
         public new EntityType GetType()
         {
-            return EntityType.Project;
+            return _type;
         }
 
         public SearchTypeResultDto GetResults(SearchRequestDto request)
         {
-            var projectCount = _projectRepository.SearchCount(request.SearchText, request.UserID, request.IsAdminSearch);
-            var projects = _projectRepository.Search(request.SearchText, request.UserID, request.IsAdminSearch);
+            var excludeIds = request.GetExcludeIDs(_type);
+            var projectCount = _projectRepository.SearchCount(request.SearchText, request.UserID, request.IsAdminSearch, excludeIds);
+            var projects = _projectRepository.Search(request.SearchText, request.UserID, request.IsAdminSearch, excludeIds);
 
             return new SearchTypeResultDto
             {

@@ -3,25 +3,25 @@ import { Subject }    from 'rxjs/Subject';
 @Injectable()
 export class LoadingService {
 
-  private toggleLoadingSource = new Subject<boolean>();
+  public toggleLoadingSource = new Subject<boolean>();
+  public toggleLoading$ = this.toggleLoadingSource.asObservable();
   private loadingIds: string[] = [];
 
-  toggleLoading$ = this.toggleLoadingSource.asObservable();
-
-  startLoading(): string{
+  public startLoading(): string {
     let id = this.generateId();
     this.loadingIds.push(id);
     this.toggleLoadingSource.next(true);
     return id;
   }
 
-  endLoading(id: string){
+  public endLoading(id: string) {
     this.loadingIds.splice(this.loadingIds.indexOf(id));
-    if(!this.loadingIds.length)
+    if (!this.loadingIds.length) {
       this.toggleLoadingSource.next(false);
+    }
   }
 
-  private generateId(): string{
-    return Math.round(Math.random()*1000).toString();
+  private generateId(): string {
+    return Math.round(Math.random() * 1000).toString();
   }
 }

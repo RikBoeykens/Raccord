@@ -10,5 +10,7 @@ namespace Raccord.Data.EntityFramework.Repositories.Users.Projects
         IEnumerable<ProjectUser> GetAllForProject(long projectID);
         IEnumerable<ProjectUser> GetAllForUser(string userID);
         ProjectUser GetFull(long ID);
+        ProjectUser Get(long projectID, string userID);
+        ProjectUser GetForPermissions(long projectID, string userID);
     }
 }

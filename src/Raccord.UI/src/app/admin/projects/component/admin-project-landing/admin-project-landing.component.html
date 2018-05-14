@@ -23,7 +23,7 @@
                     <user-avatar [userId]="projectUser.user.id" [fullName]="getFullName(projectUser)" [hasImage]="projectUser.user.hasImage"></user-avatar>
                 </td>
                 <td>
-                    <a routerLink="/admin/users/{{projectUser.user.id}}">{{projectUser.user.firstName}} {{projectUser.user.lastName}}</a>
+                    <a routerLink="/admin/users/{{projectUser.user.id}}">{{getFullName(projectUser)}}</a>
                 </td>
                 <td>
                     <a routerLink="/admin/users/{{projectUser.user.id}}">{{projectUser.user.email}}</a>
@@ -35,3 +35,4 @@
         </tbody>
     </table>
 </div>
+<h3><a routerLink="/admin/projects/{{project.id}}/units">Units</a></h3>

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Raccord.API.ViewModels.Callsheets.CharacterCalls;
+using Raccord.API.ViewModels.Cast;
 using Raccord.API.ViewModels.Characters;
 
 namespace Raccord.API.ViewModels.Callsheets.Characters
@@ -8,6 +9,7 @@ namespace Raccord.API.ViewModels.Callsheets.Characters
     public class CallsheetCharacterCharacterViewModel
     {
         private CharacterSummaryViewModel _character;
+        private CastMemberSummaryViewModel _castMember;
         private IEnumerable<CharacterCallCallTypeViewModel> _calls;
 
         // ID of the callsheet character
@@ -23,6 +25,19 @@ namespace Raccord.API.ViewModels.Callsheets.Characters
             set
             {
                 _character = value;
+            }
+        }
+
+        // linked character
+        public CastMemberSummaryViewModel CastMember
+        {
+            get
+            {
+                return _castMember ?? (_castMember = new CastMemberSummaryViewModel());
+            }
+            set
+            {
+                _castMember = value;
             }
         }
 

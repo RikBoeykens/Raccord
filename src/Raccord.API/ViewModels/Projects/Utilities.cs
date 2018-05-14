@@ -1,5 +1,5 @@
 using System.Linq;
-using Raccord.API.ViewModels.Comments;
+using Raccord.API.ViewModels.Characters;
 using Raccord.API.ViewModels.Crew.CrewMembers;
 using Raccord.API.ViewModels.Images;
 using Raccord.Application.Core.Services.Projects;
@@ -16,7 +16,6 @@ namespace Raccord.API.ViewModels.Projects
                 ID = dto.ID,
                 Title = dto.Title,
                 PrimaryImage = dto.PrimaryImage.Translate(),
-                Comments = dto.Comments.Select(c=> c.Translate()),
             };
         }
         // Translates a project summary dto to a project summary viewmodel
@@ -38,6 +37,19 @@ namespace Raccord.API.ViewModels.Projects
                 Title = dto.Title,
                 PrimaryImage = dto.PrimaryImage.Translate(),
                 CrewMembers = dto.CrewMembers.Select(cm=> cm.Translate()),
+                Characters = dto.Characters.Select(c => c.Translate())
+            };
+        }
+        // Translates a project summary dto to a project summary viewmodel
+        public static UserProjectSummaryViewModel Translate(this UserProjectSummaryDto dto)
+        {
+            return new UserProjectSummaryViewModel
+            {
+                ID = dto.ID,
+                Title = dto.Title,
+                PrimaryImage = dto.PrimaryImage.Translate(),
+                HasCrew = dto.HasCrew,
+                HasCast = dto.HasCast
             };
         }
 

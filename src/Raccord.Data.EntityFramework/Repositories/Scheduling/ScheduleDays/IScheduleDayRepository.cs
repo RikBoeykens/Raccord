@@ -6,8 +6,9 @@ namespace Raccord.Data.EntityFramework.Repositories.Scheduling.ScheduleDays
     // Interface defining a repository for Int/Ext
     public interface IScheduleDayRepository : IBaseRepository<ScheduleDay>
     {
-        IEnumerable<ScheduleDay> GetAllForProject(long projectID);
-        IEnumerable<ScheduleDay> GetAllWithScenesForProject(long projectID);
+        IEnumerable<ScheduleDay> GetAllForCrewUnit(long crewUnitID);
+        IEnumerable<ScheduleDay> GetAllForCharacters(long[] characterIds);
+        IEnumerable<ScheduleDay> GetAllWithScenesForCrewUnit(long crewUnitID);
         ScheduleDay GetFull(long ID);
         ScheduleDay GetSummary(long ID);
     }

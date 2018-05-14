@@ -3,7 +3,8 @@
         <a routerLink="/" class="breadcrumb">Dashboard</a>
         <a routerLink="/projects" class="breadcrumb">Projects</a>
         <a routerLink="/projects/{{project.id}}" class="breadcrumb">{{project.title}}</a>
-        <a routerLink="/projects/{{project.id}}/scheduling" class="breadcrumb">Schedule</a>
+        <a routerLink="/projects/{{project.id}}/units/nav/{{getScheduleEditNavType()}}" class="breadcrumb">Edit Schedules</a>
+        <a routerLink="/projects/{{project.id}}/scheduling/{{crewUnit.id}}/edit" class="breadcrumb">{{crewUnit.name}}</a>
         <span class="breadcrumb">{{scheduleScene.scene.number}}. {{scheduleScene.scene.intExt.name}} {{scheduleScene.scene.scriptLocation.name}} {{scheduleScene.scene.dayNight.name}} - {{scheduleScene.scene.summary}}</span>
     </div>
 </div>

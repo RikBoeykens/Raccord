@@ -3,6 +3,8 @@ using Raccord.API.ViewModels.Images;
 using System.Collections.Generic;
 using Raccord.API.ViewModels.Scheduling.ScheduleScenes;
 using Raccord.API.ViewModels.Scheduling.ScheduleDays;
+using Raccord.API.ViewModels.Profile;
+using Raccord.API.ViewModels.Cast;
 
 namespace Raccord.API.ViewModels.Characters
 {
@@ -12,6 +14,7 @@ namespace Raccord.API.ViewModels.Characters
         private IEnumerable<LinkedSceneViewModel> _scenes;
         private IEnumerable<LinkedImageViewModel> _images;
         private IEnumerable<ScheduleDaySceneCollectionViewModel> _scheduleDays;
+        private CastMemberSummaryViewModel _castMember;
 
         // Scenes linked to the character
         public IEnumerable<LinkedSceneViewModel> Scenes
@@ -49,6 +52,18 @@ namespace Raccord.API.ViewModels.Characters
             set
             {
                 _scheduleDays = value;
+            }
+        }
+
+        public CastMemberSummaryViewModel CastMember
+        {
+            get
+            {
+                return _castMember ?? (_castMember = new CastMemberSummaryViewModel());
+            }
+            set
+            {
+                _castMember = value;
             }
         }
     }

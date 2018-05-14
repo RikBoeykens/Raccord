@@ -1,10 +1,13 @@
 // Locations
 // component
 export { LocationsListComponent } from "./locations/component/locations-list/locations-list.component";
+export { EditLocationsListComponent } from "./locations/component/edit-locations-list/edit-locations-list.component";
 export { EditLocationComponent } from "./locations/component/edit-location/edit-location.component";
 export { LocationLandingComponent } from "./locations/component/location-landing/location-landing.component";
 export { LocationLocationSetsComponent } from "./locations/component/location-location-sets/location-location-sets.component";
 export { LocationScheduleComponent } from "./locations/component/location-schedule/location-schedule.component";
+export { SearchLocationComponent } from "./locations/component/search-location/search-location.component";
+export { SearchLocationsCollectionComponent } from "./locations/component/search-locations-collection/search-locations-collection.component";
 
 // models
 export { Location } from "./locations/model/location.model";

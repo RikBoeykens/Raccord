@@ -6,13 +6,13 @@ import { ShootingDay } from '../model/shooting-day.model';
 export class ShootingDaysResolve implements Resolve<ShootingDay[]> {
 
   constructor(
-    private shootingDayHttpService: ShootingDayHttpService, 
+    private shootingDayHttpService: ShootingDayHttpService,
     private router: Router
   ) {}
 
-    resolve(route: ActivatedRouteSnapshot) {
-        let projectId = route.params['projectId'];
-        return this.shootingDayHttpService.getAll(projectId).then(data => {
+    public resolve(route: ActivatedRouteSnapshot) {
+        let crewUnitId = route.params['crewUnitId'];
+        return this.shootingDayHttpService.getAll(crewUnitId).then((data) => {
             return data;
         });
     }

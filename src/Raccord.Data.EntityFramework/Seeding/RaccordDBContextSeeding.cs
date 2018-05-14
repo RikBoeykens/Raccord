@@ -13,6 +13,10 @@ using System;
 using Raccord.Domain.Model.Callsheets.CallTypes;
 using Microsoft.EntityFrameworkCore;
 using Raccord.Domain.Model.Crew.Departments;
+using Raccord.Domain.Model.Users.ProjectRoles;
+using Raccord.Core.Enums;
+using Raccord.Domain.Model.Breakdowns;
+using Raccord.Domain.Model.Crew.CrewUnits;
 
 namespace Raccord.Data.EntityFramework.Seeding
 {
@@ -46,6 +50,7 @@ namespace Raccord.Data.EntityFramework.Seeding
             SeedCallTypeDefinitions();
             SeedDepartmentDefinitions();
             SeedRolesAndAdminUser();
+            SeedProjectRolesAndPermissions();
         }
 
         private void SeedBreakdownTypeDefinitions()
@@ -118,9 +123,87 @@ namespace Raccord.Data.EntityFramework.Seeding
 
             if (!_context.Users.Any())
             {
-                _userManager.CreateAsync(new ApplicationUser { UserName = adminEmail, Email = adminEmail, EmailConfirmed = true }, adminPassword).Result.ToString();
+                _userManager.CreateAsync(new ApplicationUser { UserName = adminEmail, Email = adminEmail, EmailConfirmed = true, FirstName = "Rik", LastName = "Boeykens" }, adminPassword).Result.ToString();
                 _userManager.AddToRoleAsync(_userManager.FindByNameAsync(adminEmail).GetAwaiter().GetResult(), "admin").Result.ToString();
             }
+        }
+        private void SeedProjectRolesAndPermissions()
+        {
+            var permissionsToAdd = new List<ProjectPermissionDefinition>
+            {
+                new ProjectPermissionDefinition{ Permission = ProjectPermissionEnum.CanEditUsers, Name = "Can Edit Users"},
+                new ProjectPermissionDefinition{ Permission = ProjectPermissionEnum.CanEditGeneral, Name = "Can Edit"},
+                new ProjectPermissionDefinition{ Permission = ProjectPermissionEnum.CanReadGeneral, Name = "Can Read"},
+                new ProjectPermissionDefinition{ Permission = ProjectPermissionEnum.CanReadCallsheet, Name = "Can Read Callsheet"},
+                new ProjectPermissionDefinition{ Permission = ProjectPermissionEnum.CanComment, Name = "Can Comment"},
+            };
+            foreach(var permission in permissionsToAdd)
+            {
+                if(!_context.ProjectPermissionDefinitions.Any(p=> p.Permission == permission.Permission))
+                {
+                    _context.Add(permission);
+                }
+            }
+
+            var projectRolesToAdd = new List<ProjectRoleDefinition>
+            {
+                new ProjectRoleDefinition{ Role = ProjectRoleEnum.Admin, Name = "Project Admin", },
+                new ProjectRoleDefinition{ Role = ProjectRoleEnum.Editor, Name = "Editor", },
+                new ProjectRoleDefinition{ Role = ProjectRoleEnum.User, Name = "User", },
+                new ProjectRoleDefinition{ Role = ProjectRoleEnum.CallsheetUser, Name = "Callsheet User", },
+            };
+            
+            foreach(var projectRole in projectRolesToAdd)
+            {
+                if(!_context.ProjectRoleDefinitions.Any(p=> p.Role == projectRole.Role))
+                {
+                    _context.Add(projectRole);
+                }
+            }
+            
+            _context.SaveChanges();
+
+            var canEditUserPermissionId = _context.ProjectPermissionDefinitions.Single(p=> p.Permission == ProjectPermissionEnum.CanEditUsers).ID;
+            var canEditGeneralPermissionId = _context.ProjectPermissionDefinitions.Single(p=> p.Permission == ProjectPermissionEnum.CanEditGeneral).ID;
+            var canReadGeneralPermissionId = _context.ProjectPermissionDefinitions.Single(p=> p.Permission == ProjectPermissionEnum.CanReadGeneral).ID;
+            var canReadCallsheetPermissionId = _context.ProjectPermissionDefinitions.Single(p=> p.Permission == ProjectPermissionEnum.CanReadCallsheet).ID;
+            var canCommentPermissionId = _context.ProjectPermissionDefinitions.Single(p=> p.Permission == ProjectPermissionEnum.CanComment).ID;
+
+            var projectAdminRoleId = _context.ProjectRoleDefinitions.Single(p=> p.Role == ProjectRoleEnum.Admin).ID;
+            var editorRoleId = _context.ProjectRoleDefinitions.Single(p=> p.Role == ProjectRoleEnum.Editor).ID;
+            var userRoleId = _context.ProjectRoleDefinitions.Single(p=> p.Role == ProjectRoleEnum.User).ID;
+            var callsheetUserRoleId = _context.ProjectRoleDefinitions.Single(p=> p.Role == ProjectRoleEnum.CallsheetUser).ID;
+
+            var permissionRoles = new List<ProjectPermissionRoleDefinition>
+            {
+                // Project Admin
+                new ProjectPermissionRoleDefinition { ProjectRoleID = projectAdminRoleId, ProjectPermissionID = canEditUserPermissionId },
+                new ProjectPermissionRoleDefinition { ProjectRoleID = projectAdminRoleId, ProjectPermissionID = canEditGeneralPermissionId },
+                new ProjectPermissionRoleDefinition { ProjectRoleID = projectAdminRoleId, ProjectPermissionID = canReadGeneralPermissionId },
+                new ProjectPermissionRoleDefinition { ProjectRoleID = projectAdminRoleId, ProjectPermissionID = canReadCallsheetPermissionId },
+                new ProjectPermissionRoleDefinition { ProjectRoleID = projectAdminRoleId, ProjectPermissionID = canCommentPermissionId },
+                // Editor
+                new ProjectPermissionRoleDefinition { ProjectRoleID = editorRoleId, ProjectPermissionID = canEditGeneralPermissionId },
+                new ProjectPermissionRoleDefinition { ProjectRoleID = editorRoleId, ProjectPermissionID = canReadGeneralPermissionId },
+                new ProjectPermissionRoleDefinition { ProjectRoleID = editorRoleId, ProjectPermissionID = canReadCallsheetPermissionId },
+                new ProjectPermissionRoleDefinition { ProjectRoleID = editorRoleId, ProjectPermissionID = canCommentPermissionId },
+                // User
+                new ProjectPermissionRoleDefinition { ProjectRoleID = userRoleId, ProjectPermissionID = canReadGeneralPermissionId },
+                new ProjectPermissionRoleDefinition { ProjectRoleID = userRoleId, ProjectPermissionID = canReadCallsheetPermissionId },
+                new ProjectPermissionRoleDefinition { ProjectRoleID = userRoleId, ProjectPermissionID = canCommentPermissionId },
+                // CallsheetUser
+                new ProjectPermissionRoleDefinition { ProjectRoleID = callsheetUserRoleId, ProjectPermissionID = canReadCallsheetPermissionId },
+            };
+            
+            foreach(var permissionRole in permissionRoles)
+            {
+                if(!_context.ProjectPermissionRoleDefinitions.Any(p=> p.ProjectRoleID == permissionRole.ProjectRoleID && p.ProjectPermissionID == permissionRole.ProjectPermissionID))
+                {
+                    _context.Add(permissionRole);
+                }
+            }
+
+            _context.SaveChanges();
         }
         private void TestSeeding()
         {
@@ -129,10 +212,9 @@ namespace Raccord.Data.EntityFramework.Seeding
             SeedDayNights();
             SeedScriptLocations();
             SeedScenes();
-            SeedBreakdownTypes();
             SeedCallTypes();
-            SeedCrewDepartments();
             SeedCrew();
+            SeedCrewUnits();
         }
 
         private void SeedProjects()
@@ -238,28 +320,6 @@ namespace Raccord.Data.EntityFramework.Seeding
             }
         }
 
-        private void SeedBreakdownTypes()
-        {
-            var definitions = _context.BreakdownTypeDefinitions.ToArray();
-
-            foreach(var project in _context.Projects.Include(p=> p.BreakdownTypes))
-            {
-                if(!project.BreakdownTypes.Any())
-                {
-                    foreach(var definition in definitions)
-                    {
-                        project.BreakdownTypes.Add(new BreakdownType
-                        {
-                            Name = definition.Name,
-                            Description = definition.Description,
-                        });
-                    }
-                }
-            }
-
-            _context.SaveChanges();
-        }
-
         private void SeedCallTypes()
         {
             var definitions = _context.CallTypeDefinitions.ToArray();
@@ -273,29 +333,6 @@ namespace Raccord.Data.EntityFramework.Seeding
                         project.CallTypes.Add(new CallType
                         {
                             ShortName = definition.ShortName,
-                            Name = definition.Name,
-                            Description = definition.Description,
-                            SortingOrder = definition.SortingOrder,
-                        });
-                    }
-                }
-            }
-
-            _context.SaveChanges();
-        }
-
-        private void SeedCrewDepartments()
-        {
-            var definitions = _context.CrewDepartmentDefinitions.ToArray();
-
-            foreach(var project in _context.Projects.Include(p=> p.CrewDepartments))
-            {
-                if(!project.CrewDepartments.Any())
-                {
-                    foreach(var definition in definitions)
-                    {
-                        project.CrewDepartments.Add(new CrewDepartment
-                        {
                             Name = definition.Name,
                             Description = definition.Description,
                             SortingOrder = definition.SortingOrder,
@@ -325,6 +362,30 @@ namespace Raccord.Data.EntityFramework.Seeding
                 }
             }
 
+
+            _context.SaveChanges();
+        }
+
+        private void SeedCrewUnits()
+        {
+            var definitions = _context.CrewDepartmentDefinitions.ToArray();
+            foreach(var project in _context.Projects.Include(p=> p.CrewUnits))
+            {
+                if(!project.CrewUnits.Any())
+                {
+                    project.CrewUnits.Add(new CrewUnit
+                    {
+                        Name = "Main Unit",
+                        Description = string.Empty,
+                        CrewDepartments = definitions.Select(definition => new CrewDepartment
+                        {
+                            Name = definition.Name,
+                            Description = definition.Description,
+                            SortingOrder = definition.SortingOrder,
+                        }).ToList()
+                    });
+                }
+            }
 
             _context.SaveChanges();
         }

@@ -37,7 +37,7 @@ namespace Raccord.Domain.Model.Shots
         public bool IsVfx { get; set; }
 
         // Sorting order
-        public int SortingOrder { get; set; }
+        public int? SortingOrder { get; set; }
 
         // ID of the linked scene
         public long? SceneID { get; set; }

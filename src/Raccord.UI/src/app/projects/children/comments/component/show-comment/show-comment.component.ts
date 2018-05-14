@@ -13,6 +13,7 @@ export class ShowCommentComponent implements OnInit{
 
     @Output() removedComment = new EventEmitter();
     @Input() comment: Comment;
+    @Input() projectId: number;
     childComments: Comment[] = [];
     showAddComment: boolean = false;
     showEditComment: boolean = false;
@@ -29,11 +30,11 @@ export class ShowCommentComponent implements OnInit{
     }
 
     getComment() {
-        this._commentHttpService.get(this.comment.id).then((comment)=> this.comment = comment);
+        this._commentHttpService.get(this.projectId, this.comment.id).then((comment)=> this.comment = comment);
     }
 
     getChildComments() {
-        this._commentHttpService.getAll(null, this.comment.id).then((comments)=> this.childComments = comments);
+        this._commentHttpService.getAll(this.projectId, null, this.comment.id).then((comments)=> this.childComments = comments);
     }
 
     getFullName() {
@@ -65,7 +66,7 @@ export class ShowCommentComponent implements OnInit{
     removeComment() {
         let loadingId = this._loadingService.startLoading();
 
-        this._commentHttpService.delete(this.comment.id).then(data=>{
+        this._commentHttpService.delete(this.projectId, this.comment.id).then(data=>{
             if(typeof(data)=='string'){
                 this._dialogService.error(data);
             }else{

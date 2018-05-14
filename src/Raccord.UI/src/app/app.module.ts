@@ -15,6 +15,7 @@ import {
   PreloadAllModules
 } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CalendarModule } from 'angular-calendar';
 
 /*
  * Platform and Environment providers/directives/pipes
@@ -26,18 +27,26 @@ import { ROUTES } from './app.routes';
 import { AppComponent } from './app.component';
 import { NoContentComponent } from './no-content';
 
-import { DashboardComponent } from './dashboard';
+import {
+  DashboardComponent,
+  DashboardCalendarComponent
+} from './dashboard';
 import { LoadingComponent } from './loading/component';
 import { NavbarComponent } from './navbar';
-import { SearchComponent } from './search/component';
-import { SearchResultComponent } from './search/component';
-import { 
+import {
+  SearchComponent,
+  SearchResultComponent,
+  SearchEntitiesCollectionComponent,
+  SearchEntityComponent
+} from './search/component';
+import {
   AddProjectComponent,
   EditProjectComponent,
   ProjectLandingComponent,
   ProjectsListComponent,
   ProjectAvatarComponent,
   ScenesListComponent,
+  EditScenesListComponent,
   EditSceneComponent,
   SceneLandingComponent,
   SceneImagesComponent,
@@ -47,51 +56,65 @@ import {
   SceneSlatesComponent,
   SceneTimingsComponent,
   SceneSummaryComponent,
-  ChooseSceneDialog
-} from './projects';
-import { ScriptLocationsListComponent } from './projects';
-import { EditScriptLocationComponent } from './projects';
-import { ScriptLocationLandingComponent } from './projects';
-import { 
+  FilterScenesComponent,
+  ChooseSceneDialog,
+  ScriptLocationsListComponent,
+  EditScriptLocationsListComponent,
+  EditScriptLocationComponent,
+  ScriptLocationLandingComponent,
   ScriptLocationImagesComponent,
-  ScriptLocationSetsComponent 
+  ScriptLocationSetsComponent,
+  SearchScriptLocationsCollectionComponent,
+  SearchScriptLocationComponent,
+  IntExtListComponent,
+  EditIntExtListComponent,
+  EditIntExtComponent,
+  IntExtLandingComponent,
+  SearchIntExtComponent,
+  SearchIntExtsCollectionComponent,
+  DayNightListComponent,
+  EditDayNightListComponent,
+  EditDayNightComponent,
+  DayNightLandingComponent,
+  SearchDayNightComponent,
+  SearchDayNightsCollectionComponent,
+  MyCrewUnitsListComponent
 } from './projects';
-import { SearchScriptLocationComponent } from './projects';
-import { IntExtListComponent } from './projects';
-import { EditIntExtComponent } from './projects';
-import { IntExtLandingComponent } from './projects';
-import { SearchIntExtComponent } from './projects';
-import { DayNightListComponent } from './projects';
-import { EditDayNightComponent } from './projects';
-import { DayNightLandingComponent } from './projects';
-import { SearchDayNightComponent } from './projects';
 import { ImagesListComponent } from './projects';
 import { EditImageComponent } from './projects';
 import { ImageLandingComponent } from './projects';
 import { UploadImageComponent } from './projects';
 import { ShowImageComponent } from './projects';
-import { 
+import {
   CharactersListComponent,
+  EditCharactersListComponent,
   EditCharacterComponent,
   CharacterLandingComponent,
   CharacterImagesComponent,
   CharacterScenesComponent,
   CharacterScheduleComponent,
-  SearchCharacterComponent 
-} from './projects';
-import { BreakdownLandingComponent } from './projects';
-import { BreakdownTypeSettingsComponent } from './projects';
-import { EditBreakdownTypeComponent } from './projects';
-import { BreakdownTypeLandingComponent } from './projects';
-import { BreakdownItemLandingComponent } from './projects';
-import { EditBreakdownItemComponent } from './projects';
-import { SearchBreakdownItemComponent } from './projects';
-import { BreakdownItemImagesComponent } from './projects';
-import { BreakdownItemScenesComponent } from './projects';
-import { 
+  SearchCharacterComponent,
+  CharacterSummaryComponent,
+  SearchCharactersCollectionComponent,
+  CharacterCastMemberComponent,
+  BreakdownsListComponent,
+  BreakdownLandingComponent,
+  BreakdownSettingsComponent,
+  EditBreakdownComponent,
+  EditBreakdownTypeDialogComponent,
+  BreakdownTypeLandingComponent,
+  BreakdownItemLandingComponent,
+  EditBreakdownItemComponent,
+  SearchBreakdownItemComponent,
+  BreakdownItemImagesComponent,
+  BreakdownItemScenesComponent,
+  SearchBreakdownCollectionComponent,
+  EditScheduleComponent,
   ScheduleLandingComponent,
+  MyScheduleLandingComponent,
   ScheduleSceneLandingComponent,
   LocationsListComponent,
+  EditLocationsListComponent,
   EditLocationComponent,
   LocationLandingComponent,
   LocationLocationSetsComponent,
@@ -99,8 +122,9 @@ import {
   EditLocationSetComponent,
   LocationSetLandingComponent,
   LocationSetScheduleComponent,
+  SearchLocationComponent,
+  SearchLocationsCollectionComponent,
   CallsheetsListComponent,
-  NewCallsheetComponent,
   CallsheetComponent,
   CallsheetWizardStep1Component,
   CallsheetWizardStep2Component,
@@ -111,6 +135,7 @@ import {
   SlateLandingComponent,
   SlateImagesComponent,
   ChooseShootingDayDialog,
+  ChooseShootingDayCrewUnitDialogComponent,
   ChartLandingComponent,
   ShootingDayReportsListComponent,
   ShootingDayReportLandingComponent,
@@ -118,23 +143,36 @@ import {
   EditShootingDaySceneDialog,
   CrewLandingComponent,
   EditCrewMemberDialog,
+  CrewUnitsListComponent,
+  CrewUnitsNavListComponent,
+  EditCrewUnitDialogComponent,
+  ChooseCrewUnitDialogComponent,
   ScriptUploadComponent,
   ScriptUploadLandingComponent,
   ScriptTextLandingComponent,
+  ScriptTextUserComponent,
   ScriptTextComponent,
   SceneHeaderComponent,
   SceneActionComponent,
   SceneDialogueComponent,
   EditCommentComponent,
-  ShowCommentComponent
+  ShowCommentComponent,
+  CommentContainerComponent,
+  CastMemberCharactersComponent,
+  CastMemberLandingComponent,
+  CastMemberScenesComponent,
+  CastMembersListComponent,
+  EditCastMemberDialogComponent,
+  EditCastMembersListComponent,
+  ProjectCalendarComponent
 } from './projects';
 import { ScenePropertiesLandingComponent } from './projects';
-import { 
+import {
   SelectEntityComponent,
   PlaceholderImageComponent
 } from './shared';
-import { LoginComponent } from "./security";
-import { 
+import { LoginComponent } from './security';
+import {
   AdminSearchProjectComponent,
   AdminProjectsListComponent,
   AdminAddProjectComponent,
@@ -144,33 +182,45 @@ import {
   AdminAddUserComponent,
   AdminUserLandingComponent,
   AdminProjectUserLandingComponent,
-  AdminProjectUserAddCrewMemberComponent,
-  AdminEditCrewMemberDialog
-} from "./admin";
+  AdminEditCrewMemberDialog,
+  AdminAddCrewMemberDialogComponent,
+  AdminAddCastDialogComponent,
+  AdminChooseProjectUserDialogComponent,
+  AdminCrewUnitLandingComponent,
+  AdminCrewUnitsListComponent
+} from './admin';
 import{
   RaccordChartComponent
-} from "./charts";
+} from './charts';
 import {
   UserProfileLandingComponent,
   EditUserProfileDialog,
   ShowProfileImageComponent,
   UserAvatarComponent
 } from './profile';
+import {
+  CalendarComponent,
+  CalendarHeaderComponent
+} from './calendar';
 
-const COMPONENTS =[
+const COMPONENTS = [
   AppComponent,
   NoContentComponent,
   DashboardComponent,
+  DashboardCalendarComponent,
   LoadingComponent,
   NavbarComponent,
   SearchComponent,
   SearchResultComponent,
+  SearchEntitiesCollectionComponent,
+  SearchEntityComponent,
   AddProjectComponent,
   EditProjectComponent,
   ProjectLandingComponent,
   ProjectsListComponent,
   ProjectAvatarComponent,
   ScenesListComponent,
+  EditScenesListComponent,
   EditSceneComponent,
   SceneLandingComponent,
   SceneImagesComponent,
@@ -180,44 +230,60 @@ const COMPONENTS =[
   SceneSlatesComponent,
   SceneTimingsComponent,
   SceneSummaryComponent,
+  FilterScenesComponent,
   ScriptLocationsListComponent,
+  EditScriptLocationsListComponent,
   EditScriptLocationComponent,
   ScriptLocationLandingComponent,
   ScriptLocationImagesComponent,
   ScriptLocationSetsComponent,
   SearchScriptLocationComponent,
+  SearchScriptLocationsCollectionComponent,
   IntExtListComponent,
+  EditIntExtListComponent,
   EditIntExtComponent,
   IntExtLandingComponent,
   SearchIntExtComponent,
+  SearchIntExtsCollectionComponent,
   SearchDayNightComponent,
   DayNightListComponent,
+  EditDayNightListComponent,
   EditDayNightComponent,
   DayNightLandingComponent,
+  SearchDayNightsCollectionComponent,
   ImagesListComponent,
   ImageLandingComponent,
   EditImageComponent,
   UploadImageComponent,
   ShowImageComponent,
   CharactersListComponent,
+  EditCharactersListComponent,
   EditCharacterComponent,
   CharacterLandingComponent,
   CharacterImagesComponent,
   CharacterScenesComponent,
   CharacterScheduleComponent,
   SearchCharacterComponent,
+  CharacterSummaryComponent,
+  SearchCharactersCollectionComponent,
+  CharacterCastMemberComponent,
+  BreakdownsListComponent,
   BreakdownLandingComponent,
-  BreakdownTypeSettingsComponent,
-  EditBreakdownTypeComponent,
+  BreakdownSettingsComponent,
+  EditBreakdownComponent,
   BreakdownTypeLandingComponent,
   BreakdownItemLandingComponent,
   EditBreakdownItemComponent,
   SearchBreakdownItemComponent,
   BreakdownItemImagesComponent,
   BreakdownItemScenesComponent,
+  SearchBreakdownCollectionComponent,
+  EditScheduleComponent,
   ScheduleLandingComponent,
+  MyScheduleLandingComponent,
   ScheduleSceneLandingComponent,
   LocationsListComponent,
+  EditLocationsListComponent,
   EditLocationComponent,
   LocationLandingComponent,
   LocationLocationSetsComponent,
@@ -225,8 +291,9 @@ const COMPONENTS =[
   EditLocationSetComponent,
   LocationSetLandingComponent,
   LocationSetScheduleComponent,
+  SearchLocationComponent,
+  SearchLocationsCollectionComponent,
   CallsheetsListComponent,
-  NewCallsheetComponent,
   CallsheetComponent,
   CallsheetWizardStep1Component,
   CallsheetWizardStep2Component,
@@ -241,16 +308,27 @@ const COMPONENTS =[
   ShootingDayReportLandingComponent,
   ShootingDaySceneListItem,
   CrewLandingComponent,
+  CrewUnitsListComponent,
+  MyCrewUnitsListComponent,
+  CrewUnitsNavListComponent,
   ScriptUploadComponent,
   ScriptUploadLandingComponent,
   ScriptTextLandingComponent,
+  ScriptTextUserComponent,
   ScriptTextComponent,
   SceneHeaderComponent,
   SceneActionComponent,
   SceneDialogueComponent,
   EditCommentComponent,
   ShowCommentComponent,
+  CommentContainerComponent,
+  CastMemberCharactersComponent,
+  CastMemberLandingComponent,
+  CastMemberScenesComponent,
+  CastMembersListComponent,
+  EditCastMembersListComponent,
   ScenePropertiesLandingComponent,
+  ProjectCalendarComponent,
   SelectEntityComponent,
   PlaceholderImageComponent,
   LoginComponent,
@@ -263,26 +341,40 @@ const COMPONENTS =[
   AdminAddUserComponent,
   AdminUserLandingComponent,
   AdminProjectUserLandingComponent,
-  AdminProjectUserAddCrewMemberComponent,
+  AdminCrewUnitLandingComponent,
+  AdminCrewUnitsListComponent,
   RaccordChartComponent,
   UserProfileLandingComponent,
   ShowProfileImageComponent,
-  UserAvatarComponent
+  UserAvatarComponent,
+  CalendarComponent,
+  CalendarHeaderComponent
 ];
 
 const ENTRY_COMPONENTS = [
   ChooseSceneDialog,
   ChooseShootingDayDialog,
+  ChooseShootingDayCrewUnitDialogComponent,
   EditShootingDaySceneDialog,
   EditCrewMemberDialog,
+  EditCrewUnitDialogComponent,
+  ChooseCrewUnitDialogComponent,
   EditUserProfileDialog,
-  AdminEditCrewMemberDialog
+  AdminEditCrewMemberDialog,
+  AdminAddCrewMemberDialogComponent,
+  AdminAddCastDialogComponent,
+  AdminChooseProjectUserDialogComponent,
+  EditBreakdownTypeDialogComponent,
+  EditCastMemberDialogComponent
 ];
 
 // Services
 import { LoadingService } from './loading/service/loading.service';
 import { CanDeactivateGuard } from './shared/service/can-deactivate-guard.service';
 import { DialogService } from './shared/service/dialog.service';
+import {
+  LoadingWrapperService
+} from './shared';
 import { SearchEngineService } from './search/service/search-engine.service';
 import { ProjectHttpService } from './projects';
 import { ProjectResolve } from './projects';
@@ -291,10 +383,10 @@ import { ProjectsResolve } from './projects';
 import { SceneHttpService } from './projects';
 import { ImageSceneHttpService } from './projects';
 import { CharacterSceneHttpService } from './projects';
-import { 
+import {
   SceneResolve,
   ScenesResolve,
-  SceneCharactersResolve 
+  SceneCharactersResolve
 } from './projects';
 import { ScriptLocationHttpService } from './projects';
 import { ImageScriptLocationHttpService } from './projects';
@@ -313,21 +405,27 @@ import { CharacterHttpService } from './projects';
 import { ImageCharacterHttpService } from './projects';
 import { CharacterResolve } from './projects';
 import { CharactersResolve } from './projects';
-import { BreakdownTypeHttpService } from './projects';
-import { BreakdownTypeResolve } from './projects';
-import { BreakdownTypesResolve } from './projects';
-import { BreakdownItemHttpService } from './projects';
-import { ImageBreakdownItemHttpService } from './projects';
-import { BreakdownItemSceneHttpService } from './projects';
-import { BreakdownItemResolve } from './projects';
-import { BreakdownItemsResolve } from './projects';
-import { ScheduleDayHttpService } from './projects';
-import { ScheduleDayResolve } from './projects';
-import { ScheduleDaysResolve } from './projects';
-import { ScheduleDayNoteHttpService } from './projects';
-import { ScheduleDayNoteResolve } from './projects';
-import { ScheduleDayNotesResolve } from './projects';
-import { 
+import {
+  BreakdownHttpService,
+  BreakdownResolve,
+  BreakdownsResolve,
+  BreakdownSummaryResolve,
+  SelectedBreakdownResolve,
+  BreakdownTypeHttpService,
+  BreakdownTypeResolve,
+  BreakdownTypesResolve,
+  BreakdownItemHttpService,
+  ImageBreakdownItemHttpService,
+  BreakdownItemSceneHttpService,
+  BreakdownItemResolve,
+  BreakdownItemsResolve,
+  ScheduleDayHttpService,
+  ScheduleDayResolve,
+  ScheduleDaysResolve,
+  ScheduleDayUsersResolve,
+  ScheduleDayNoteHttpService,
+  ScheduleDayNoteResolve,
+  ScheduleDayNotesResolve,
   ScheduleSceneHttpService,
   ScheduleSceneResolve,
   ScheduleCharacterHttpService,
@@ -367,22 +465,36 @@ import {
   CrewMemberHttpService,
   CrewMemberResolve,
   CrewMembersResolve,
+  CrewUnitHttpService,
+  CrewUnitResolve,
+  CrewUnitSummaryResolve,
+  CrewUnitsResolve,
+  UserCrewUnitsResolve,
   ScriptUploadHttpService,
   ScriptUploadResolve,
   ScriptTextHttpService,
   ScriptTextResolve,
   ScriptTextCallsheetResolve,
-  CommentHttpService
+  ScriptTextUserResolve,
+  CommentHttpService,
+  CastMemberHttpService,
+  CastMemberResolve,
+  CastMembersResolve,
+  ProjectCalendarHttpService
 } from './projects';
 
 import {
   AuthService,
   AuthGuard
-} from "./security";
+} from './security';
 
 import {
-  AccountHttpService
-} from "./account";
+  AccountHttpService,
+  CanEditGeneralProjectPermissionGuard,
+  CanEditUsersProjectPermissionGuard,
+  CanReadCallsheetProjectPermissionGuard,
+  CanReadGeneralProjectPermissionGuard
+} from './account';
 
 import {
   AdminProjectHttpService,
@@ -393,27 +505,38 @@ import {
   AdminUsersResolve,
   AdminUserResolve,
   AdminProjectUserHttpService,
-  AdminProjectUserCrewHttpService,
+  AdminUnitCrewMembersHttpService,
+  AdminProjectUserCastHttpService,
   AdminProjectUsersResolve,
   AdminProjectUserResolve,
   AdminUserProjectsResolve,
-  AdminSearchEngineService
-} from "./admin";
+  AdminSearchEngineService,
+  AdminProjectRoleHttpService,
+  AdminProjectRolesResolve,
+  AdminCrewUnitHttpService,
+  AdminCrewUnitMemberHttpService,
+  AdminCrewUnitResolve
+} from './admin';
 
 import {
   ChartHttpService,
   ProjectChartsResolve
-} from "./charts";
+} from './charts';
 
 import {
   UserProfileHttpService,
   UserProfileResolve
 } from './profile';
 
+import {
+  CalendarHttpService
+} from './calendar';
+
 const APP_PROVIDERS = [
   LoadingService,
   CanDeactivateGuard,
   DialogService,
+  LoadingWrapperService,
   SearchEngineService,
   ProjectHttpService,
   ProjectResolve,
@@ -442,6 +565,11 @@ const APP_PROVIDERS = [
   ImageCharacterHttpService,
   CharacterResolve,
   CharactersResolve,
+  BreakdownHttpService,
+  BreakdownsResolve,
+  BreakdownResolve,
+  BreakdownSummaryResolve,
+  SelectedBreakdownResolve,
   BreakdownTypeHttpService,
   BreakdownTypeResolve,
   BreakdownTypesResolve,
@@ -453,6 +581,7 @@ const APP_PROVIDERS = [
   ScheduleDayHttpService,
   ScheduleDayResolve,
   ScheduleDaysResolve,
+  ScheduleDayUsersResolve,
   ScheduleDayNoteHttpService,
   ScheduleDayNoteResolve,
   ScheduleDayNotesResolve,
@@ -468,6 +597,10 @@ const APP_PROVIDERS = [
   AuthService,
   AuthGuard,
   AccountHttpService,
+  CanEditGeneralProjectPermissionGuard,
+  CanEditUsersProjectPermissionGuard,
+  CanReadCallsheetProjectPermissionGuard,
+  CanReadGeneralProjectPermissionGuard,
   ShootingDayHttpService,
   AvailableCallsheetShootingDaysResolve,
   AvailableCompletionShootingDaysResolve,
@@ -502,11 +635,17 @@ const APP_PROVIDERS = [
   AdminUsersResolve,
   AdminUserResolve,
   AdminProjectUserHttpService,
-  AdminProjectUserCrewHttpService,
+  AdminUnitCrewMembersHttpService,
+  AdminProjectUserCastHttpService,
   AdminProjectUsersResolve,
   AdminProjectUserResolve,
+  AdminProjectRoleHttpService,
+  AdminProjectRolesResolve,
   AdminUserProjectsResolve,
   AdminSearchEngineService,
+  AdminCrewUnitHttpService,
+  AdminCrewUnitMemberHttpService,
+  AdminCrewUnitResolve,
   ChartHttpService,
   ProjectChartsResolve,
   CrewDepartmentHttpService,
@@ -514,22 +653,35 @@ const APP_PROVIDERS = [
   CrewMemberHttpService,
   CrewMemberResolve,
   CrewMembersResolve,
+  CrewUnitHttpService,
+  CrewUnitResolve,
+  CrewUnitSummaryResolve,
+  CrewUnitsResolve,
+  UserCrewUnitsResolve,
   ScriptUploadHttpService,
   ScriptUploadResolve,
   ScriptTextHttpService,
   ScriptTextResolve,
   ScriptTextCallsheetResolve,
+  ScriptTextUserResolve,
   UserProfileHttpService,
-  UserProfileResolve
+  UserProfileResolve,
+  CastMemberHttpService,
+  CastMemberResolve,
+  CastMembersResolve,
+  ProjectCalendarHttpService,
+  CalendarHttpService
 ];
 
 // Directives
 import { HighlightDirective } from './shared/directives/highlight.directive';
 import { FocusDirective } from './shared/directives/focus.directive';
+import { MatchHeightDirective } from './shared';
 
 const DIRECTIVES = [
   HighlightDirective,
-  FocusDirective
+  FocusDirective,
+  MatchHeightDirective
 ];
 
 // Pipes
@@ -562,7 +714,7 @@ import '../styles/headings.css';
     DIRECTIVES,
     PIPES
   ],
-  entryComponents:[
+  entryComponents: [
     ENTRY_COMPONENTS
   ],
   imports: [ // import Angular's modules
@@ -577,6 +729,7 @@ import '../styles/headings.css';
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyAHVRCUkTtP9FDacHfHoEJDeWQu0sRA7-U'
     }),
+    CalendarModule.forRoot(),
     RouterModule.forRoot(ROUTES, { preloadingStrategy: PreloadAllModules })
   ],
   providers: [ // expose our Services and Providers into Angular's dependency injection

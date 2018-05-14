@@ -8,6 +8,7 @@ namespace Raccord.Data.EntityFramework.Repositories.Scheduling.ScheduleScenes
     public interface IScheduleSceneRepository : IBaseRepository<ScheduleScene>
     {
         IEnumerable<ScheduleScene> GetAllForScheduleDay(long dayID);
+        IEnumerable<ScheduleScene> GetAllForScheduleDaySort(long dayID);
         IEnumerable<ScheduleScene> GetAllForScheduleDate(DateTime date);
         IEnumerable<ScheduleScene> GetAllForScene(long sceneID);
         ScheduleScene GetFull(long ID);

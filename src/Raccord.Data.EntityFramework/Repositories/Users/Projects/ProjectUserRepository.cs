@@ -33,15 +33,44 @@ namespace Raccord.Data.EntityFramework.Repositories.Users.Projects
             return query.FirstOrDefault(cu=> cu.ID == ID);
         }
 
+        public ProjectUser Get(long projectID, string userID)
+        {
+            var query = GetIncluded();
+
+            return query.FirstOrDefault(pu => pu.ProjectID == projectID && pu.UserID == userID);
+        }
+
+        public ProjectUser GetForPermissions(long projectID, string userID)
+        {
+            var query = GetIncludedPermissions();
+
+            return query.FirstOrDefault(cu=> cu.ProjectID == projectID && cu.UserID == userID);
+        }
+
         private IQueryable<ProjectUser> GetIncludedFull()
         {
             IQueryable<ProjectUser> query = _context.Set<ProjectUser>();
 
             return query.Include(cs=> cs.User)
                         .Include(cu=> cu.Project)
-                        .ThenInclude(p=> p.Images)
-                        .Include(pu=> pu.CrewMembers)
-                        .ThenInclude(cm=> cm.Department);
+                            .ThenInclude(p=> p.Images)
+                        .Include(pu=> pu.Role)
+                            .ThenInclude(r=> r.PermissionRoles)
+                                .ThenInclude(pr => pr.ProjectPermission)
+                        .Include(pu => pu.CastMember)
+                            .ThenInclude(cm => cm.Characters)
+                        .Include(pu => pu.CrewUnitMembers)
+                            .ThenInclude(pu => pu.CrewUnit)
+                        .Include(pu => pu.CrewUnitMembers)
+                            .ThenInclude(pu => pu.CrewMembers)
+                                .ThenInclude(cm => cm.Department);
+        }
+
+        private IQueryable<ProjectUser> GetIncluded()
+        {
+            IQueryable<ProjectUser> query = _context.Set<ProjectUser>();
+
+            return query;
         }
 
         private IQueryable<ProjectUser> GetIncludedUser()
@@ -57,6 +86,15 @@ namespace Raccord.Data.EntityFramework.Repositories.Users.Projects
 
             return query.Include(cs=> cs.Project)
                         .ThenInclude(p=> p.Images);
+        }
+
+        private IQueryable<ProjectUser> GetIncludedPermissions()
+        {
+            IQueryable<ProjectUser> query = _context.Set<ProjectUser>();
+
+            return query.Include(pu=> pu.Role)
+                        .ThenInclude(r=> r.PermissionRoles)
+                        .ThenInclude(pr=> pr.ProjectPermission);
         }
     }
 }

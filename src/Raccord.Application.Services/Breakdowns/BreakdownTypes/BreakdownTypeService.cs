@@ -22,9 +22,9 @@ namespace Raccord.Application.Services.Breakdowns.BreakdownTypes
         }
 
         // Gets all breakdown types
-        public IEnumerable<BreakdownTypeSummaryDto> GetAllForParent(long projectID)
+        public IEnumerable<BreakdownTypeSummaryDto> GetAllForParent(long breakdownID)
         {
-            var breakdownTypes = _breakdownTypeRepository.GetAllForProject(projectID);
+            var breakdownTypes = _breakdownTypeRepository.GetAllForBreakdown(breakdownID);
 
             var dtos = breakdownTypes.Select(l => l.TranslateSummary());
 
@@ -58,7 +58,7 @@ namespace Raccord.Application.Services.Breakdowns.BreakdownTypes
             {
                 Name = dto.Name,
                 Description = dto.Description,
-                ProjectID = dto.ProjectID
+                BreakdownID = dto.BreakdownID
             };
 
             _breakdownTypeRepository.Add(breakdownType);

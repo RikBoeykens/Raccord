@@ -1,18 +1,20 @@
 using System.Collections.Generic;
-using Raccord.API.ViewModels.Breakdowns.BreakdownTypes;
+using Raccord.API.ViewModels.Breakdowns;
 using Raccord.API.ViewModels.Callsheets.CallsheetScenes;
 using Raccord.API.ViewModels.Callsheets.Characters;
+using Raccord.API.ViewModels.Crew.CrewUnits;
 using Raccord.API.ViewModels.Locations.Locations;
 
 namespace Raccord.API.ViewModels.Callsheets
 {
     // Dto to represent a full callsheet
-    public class FullCallsheetViewModel: CallsheetViewModel
+    public class FullCallsheetViewModel: BaseCallsheetViewModel
     {
         private IEnumerable<CallsheetSceneSceneViewModel> _scenes;
         private IEnumerable<CallsheetCharacterCharacterViewModel> _characters;
         private IEnumerable<CallsheetLocationViewModel> _locations;
-        private IEnumerable<CallsheetBreakdownTypeViewModel> _breakdownTypes;
+        private CallsheetBreakdownViewModel _breakdownInfo;
+        private CrewUnitViewModel _crewUnit;
 
         // Scenes scheduled for the day
         public IEnumerable<CallsheetSceneSceneViewModel> Scenes
@@ -54,15 +56,26 @@ namespace Raccord.API.ViewModels.Callsheets
         }
 
         // Breakdown types for the day
-        public IEnumerable<CallsheetBreakdownTypeViewModel> BreakdownTypes
+        public CallsheetBreakdownViewModel BreakdownInfo
         {
             get
             {
-                return _breakdownTypes ?? (_breakdownTypes = new List<CallsheetBreakdownTypeViewModel>());
+                return _breakdownInfo ?? (_breakdownInfo = new CallsheetBreakdownViewModel());
             }
             set
             {
-                _breakdownTypes = value;
+                _breakdownInfo = value;
+            }
+        }
+        public CrewUnitViewModel CrewUnit
+        {
+            get
+            {
+                return _crewUnit ?? new CrewUnitViewModel();
+            }
+            set
+            {
+                _crewUnit = value;
             }
         }
     }

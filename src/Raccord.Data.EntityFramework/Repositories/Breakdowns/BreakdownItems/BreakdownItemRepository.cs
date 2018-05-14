@@ -33,16 +33,16 @@ namespace Raccord.Data.EntityFramework.Repositories.Breakdowns.BreakdownItems
             return query.FirstOrDefault(l => l.ID == ID);
         }
 
-        public int SearchCount(string searchText, long? projectID, long? typeID, string userID, bool isAdmin)
+        public int SearchCount(string searchText, long? projectID, long? typeID, string userID, bool isAdmin, long[] excludeIds)
         {
-            var query = GetSearchQuery(searchText, projectID, typeID, userID, isAdmin);
+            var query = GetSearchQuery(searchText, projectID, typeID, userID, isAdmin, excludeIds);
 
             return query.Count();            
         }
 
-        public IEnumerable<BreakdownItem> Search(string searchText, long? projectID, long? typeID, string userID, bool isAdmin)
+        public IEnumerable<BreakdownItem> Search(string searchText, long? projectID, long? typeID, string userID, bool isAdmin, long[] excludeIds)
         {
-            return GetSearchQuery(searchText, projectID, typeID, userID, isAdmin);
+            return GetSearchQuery(searchText, projectID, typeID, userID, isAdmin, excludeIds);
         }
 
         private IQueryable<BreakdownItem> GetIncludedFull()
@@ -50,6 +50,8 @@ namespace Raccord.Data.EntityFramework.Repositories.Breakdowns.BreakdownItems
             IQueryable<BreakdownItem> query = _context.Set<BreakdownItem>();
 
             return query.Include(bi=> bi.BreakdownType)
+                        .Include(bi => bi.Breakdown)
+                            .ThenInclude(b => b.User)
                         .Include(bi=> bi.BreakdownItemScenes)
                         .ThenInclude(s=> s.Scene)
                         .ThenInclude(s=> s.IntExt)
@@ -85,24 +87,30 @@ namespace Raccord.Data.EntityFramework.Repositories.Breakdowns.BreakdownItems
             IQueryable<BreakdownItem> query = _context.Set<BreakdownItem>();
 
             return query.Include(bi=> bi.BreakdownType)
+                        .Include(bt=> bt.Breakdown)
                         .ThenInclude(bt=> bt.Project)
                         .ThenInclude(p=> p.ProjectUsers);
         }
 
-        private IQueryable<BreakdownItem> GetSearchQuery(string searchText, long? projectID, long? typeID, string userID, bool isAdmin)
+        private IQueryable<BreakdownItem> GetSearchQuery(string searchText, long? projectID, long? typeID, string userID, bool isAdmin, long[] excludeIds)
         {
             var query = GetIncludedSearch();
 
             query = query.Where(bi=> bi.Name.ToLower().Contains(searchText.ToLower()));
 
             if(projectID.HasValue)
-                query = query.Where(bi=> bi.BreakdownType.ProjectID==projectID.Value);
+                query = query.Where(bi=> bi.Breakdown.ProjectID==projectID.Value);
 
             if(typeID.HasValue)
                 query = query.Where(bi=> bi.BreakdownTypeID==typeID.Value);
 
             if(!isAdmin)
-                query = query.Where(bi=> bi.BreakdownType.Project.ProjectUsers.Any(c=> c.UserID == userID));
+                query = query.Where(bi=> bi.Breakdown.Project.ProjectUsers.Any(c=> c.UserID == userID));
+
+            if(excludeIds.Any())
+            {
+                query = query.Where(c=> !excludeIds.Any(id=> id == c.ID));
+            }
 
             return query;
         }

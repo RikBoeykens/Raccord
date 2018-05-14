@@ -8,34 +8,67 @@ import { EntityType } from '../../../shared/enums/entity-type.enum';
     templateUrl: 'search-result.component.html',
 })
 export class SearchResultComponent {
-    @Output() resetSearchBar = new EventEmitter();
-    @Input() result: SearchResult;
-    @Input() searchText: string;
-    
+    @Output() public resetSearchBar = new EventEmitter();
+    @Input() public result: SearchResult;
+    @Input() public searchText: string;
+
     constructor(
         private router: Router
-    ){
+    ) {
     }
 
-    navigateToResult(){
-        if(this.result.type==EntityType.project)
+    public navigateToResult() {
+        if (this.result.type === EntityType.project) {
             this.router.navigate(['projects', this.result.routeIDs[0]]);
-        if(this.result.type==EntityType.scene)
-            this.router.navigate(['projects', this.result.routeIDs[0], 'scenes', this.result.routeIDs[1]]);
-        if(this.result.type==EntityType.scriptLocation)
-            this.router.navigate(['projects', this.result.routeIDs[0], 'scriptlocations', this.result.routeIDs[1]]);
-        if(this.result.type==EntityType.image)
-            this.router.navigate(['projects', this.result.routeIDs[0], 'images', this.result.routeIDs[1]]);
-        if(this.result.type==EntityType.character)
-            this.router.navigate(['projects', this.result.routeIDs[0], 'characters', this.result.routeIDs[1]]);
-        if(this.result.type==EntityType.breakdownItem)
-            this.router.navigate(['projects', this.result.routeIDs[0], 'breakdowns', 'breakdownItems', this.result.routeIDs[1]]);
-        if(this.result.type==EntityType.location)
-            this.router.navigate(['projects', this.result.routeIDs[0], 'locations', this.result.routeIDs[1]]);
-        if(this.result.type==EntityType.slate)
-            this.router.navigate(['projects', this.result.routeIDs[0], 'slates', this.result.routeIDs[1]]);
-        if(this.result.type==EntityType.crewMember)
+        }
+        if (this.result.type === EntityType.scene) {
+            this.router.navigate(
+                ['projects', this.result.routeIDs[0], 'scenes', this.result.routeIDs[1]]
+            );
+        }
+        if (this.result.type === EntityType.scriptLocation) {
+            this.router.navigate(
+                ['projects', this.result.routeIDs[0], 'scriptlocations', this.result.routeIDs[1]]
+            );
+        }
+        if (this.result.type === EntityType.image) {
+            this.router.navigate(
+                ['projects', this.result.routeIDs[0], 'images', this.result.routeIDs[1]]
+            );
+        }
+        if (this.result.type === EntityType.character) {
+            this.router.navigate(
+                ['projects', this.result.routeIDs[0], 'characters', this.result.routeIDs[1]]
+            );
+        }
+        if (this.result.type === EntityType.breakdownItem) {
+            this.router.navigate([
+                'projects',
+                this.result.routeIDs[0],
+                'breakdowns',
+                this.result.routeIDs[1],
+                'breakdownItems',
+                this.result.routeIDs[2]
+            ]);
+        }
+        if (this.result.type === EntityType.location) {
+            this.router.navigate(
+                ['projects', this.result.routeIDs[0], 'locations', this.result.routeIDs[1]]
+            );
+        }
+        if (this.result.type === EntityType.slate) {
+            this.router.navigate(
+                ['projects', this.result.routeIDs[0], 'slates', this.result.routeIDs[1]]
+            );
+        }
+        if (this.result.type === EntityType.crewMember) {
             this.router.navigate(['projects', this.result.routeIDs[0], 'crew']);
+        }
+        if (this.result.type === EntityType.castMember) {
+            this.router.navigate(
+                ['projects', this.result.routeIDs[0], 'cast', this.result.routeIDs[1]]
+            );
+        }
         this.resetSearchBar.emit();
     }
 }

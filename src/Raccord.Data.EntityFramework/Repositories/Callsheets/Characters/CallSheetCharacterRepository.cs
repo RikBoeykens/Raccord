@@ -27,7 +27,11 @@ namespace Raccord.Data.EntityFramework.Repositories.Callsheets.Characters
                         .ThenInclude(cc=> cc.CallType)
                         .Include(cc=> cc.Character)
                         .ThenInclude(c=> c.ImageCharacters)
-                        .ThenInclude(ic=> ic.Image);
+                        .ThenInclude(ic=> ic.Image)
+                        .Include(c => c.Character)
+                        .ThenInclude(cc => cc.CastMember)
+                        .ThenInclude(cm => cm.ProjectUser)
+                        .ThenInclude(cm => cm.User);
         }
     }
 }

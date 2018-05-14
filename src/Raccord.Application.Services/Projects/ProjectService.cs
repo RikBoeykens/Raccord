@@ -12,6 +12,7 @@ using Raccord.Data.EntityFramework.Repositories.Crew.Departments;
 using Raccord.Domain.Model.Crew.Departments;
 using Raccord.Data.EntityFramework.Repositories.Users;
 using Raccord.Application.Services.Crew.CrewMembers;
+using Raccord.Domain.Model.Crew.CrewUnits;
 
 namespace Raccord.Application.Services.Projects
 {
@@ -59,11 +60,13 @@ namespace Raccord.Application.Services.Projects
             return projectDtos;
         }
 
-        public IEnumerable<ProjectSummaryDto> GetAllForUser(string userId)
+        public IEnumerable<UserProjectSummaryDto> GetAllForUser(string userId)
         {
             var projects = _projectRepository.GetAllForUser(userId);
 
-            var projectDtos = projects.Select(p => p.TranslateSummary());
+            var user = _userRepository.GetFull(userId);
+
+            var projectDtos = projects.Select(p => p.TranslateUserSummary(user));
 
             return projectDtos;
         }
@@ -74,14 +77,7 @@ namespace Raccord.Application.Services.Projects
 
             var user = _userRepository.GetFull(userId);
 
-            var projectDtos = projects.Select(p => 
-            {
-                var crewMembers = user.ProjectUsers.Where(pu=> pu.ProjectID == p.ID)
-                                    .SelectMany(pu=> pu.CrewMembers)
-                                    .Select(cm=> cm.Translate()).ToList();
-
-                return p.TranslateUser(crewMembers);
-            });
+            var projectDtos = projects.Select(p => p.TranslateUser(user));
 
             return projectDtos;
         }
@@ -114,16 +110,6 @@ namespace Raccord.Application.Services.Projects
                 Title = dto.Title,
             };
 
-            var breakdownTypeDefinitions = _breakdownTypeDefinitionRepository.GetAll();
-            foreach(var definition in breakdownTypeDefinitions)
-            {
-                project.BreakdownTypes.Add(new BreakdownType
-                {
-                    Name = definition.Name,
-                    Description = definition.Description,
-                });
-            }
-
             var callTypeDefinitions = _callTypeDefinitionRepository.GetAll();
             foreach(var definition in callTypeDefinitions)
             {
@@ -137,15 +123,17 @@ namespace Raccord.Application.Services.Projects
             }
 
             var departmentDefinitions = _crewDepartmentDefinitionRepository.GetAll();
-            foreach(var definition in departmentDefinitions)
+            project.CrewUnits.Add(new CrewUnit
             {
-                project.CrewDepartments.Add(new CrewDepartment
+                Name = "Main Unit",
+                Description = string.Empty,
+                CrewDepartments = departmentDefinitions.Select(definition => new CrewDepartment
                 {
                     Name = definition.Name,
                     Description = definition.Description,
                     SortingOrder = definition.SortingOrder,
-                });
-            }
+                }).ToList()
+            });
 
             _projectRepository.Add(project);
             _projectRepository.Commit();

@@ -1,37 +1,81 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FullProject } from '../../model/full-project.model';
 import { CommentHttpService } from '../../children/comments/service/comment-http.service';
+import { AccountHelpers } from '../../../account/helpers/account.helper';
+import { ProjectPermissionEnum } from
+    '../../../shared/children/users/project-roles/enums/project-permission.enum';
+import { CrewUnitNavEnum } from '../../children/crew/crew-units/enum/crew-unit-nav.enum';
 
 @Component({
     templateUrl: 'project-landing.component.html',
 })
-export class ProjectLandingComponent {
+export class ProjectLandingComponent implements OnInit {
 
-    project: FullProject;
+    public project: FullProject;
 
     constructor(
         private _commentHttpService: CommentHttpService,
         private route: ActivatedRoute,
         private router: Router
-    ){
+    ) {
     }
 
-    ngOnInit() {
+    public ngOnInit() {
         this.route.data.subscribe((data: { project: FullProject }) => {
             this.project = data.project;
         });
     }
 
-    getComments() {
-        this._commentHttpService.getAll(this.project.id, null).then((comments)=> this.project.comments = comments);
+    public getCanEdit() {
+        return AccountHelpers.hasProjectPermission(
+            this.project.id,
+            ProjectPermissionEnum.canEditGeneral
+        );
     }
 
-    onCommentSubmit(id: number) {
-        this.getComments();
+    public getCanRead() {
+        return AccountHelpers.hasProjectPermission(
+            this.project.id,
+            ProjectPermissionEnum.canReadGeneral
+        );
     }
 
-    onRemovedComment() {
-        this.getComments();
+    public getCanReadCallsheet() {
+        return AccountHelpers.hasProjectPermission(
+            this.project.id,
+            ProjectPermissionEnum.canReadCallsheet
+        );
+    }
+
+    public getCanComment() {
+        return AccountHelpers.hasProjectPermission(
+            this.project.id,
+            ProjectPermissionEnum.CanComment
+        );
+    }
+
+    public getUnitListNavType() {
+        return CrewUnitNavEnum.unitLists;
+    }
+
+    public getScheduleEditNavType() {
+        return CrewUnitNavEnum.scheduleEdit;
+    }
+
+    public getScheduleReadNavType() {
+        return CrewUnitNavEnum.scheduleRead;
+    }
+
+    public getHasCast() {
+        return AccountHelpers.hasCast(
+            this.project.id
+        );
+    }
+
+    public getHasCrew() {
+        return AccountHelpers.hasCrew(
+            this.project.id
+        );
     }
 }

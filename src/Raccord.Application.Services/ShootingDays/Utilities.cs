@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Raccord.Application.Core.Services.ShootingDays;
+using Raccord.Application.Services.Crew.CrewUnits;
 using Raccord.Application.Services.ShootingDays.Scenes;
 using Raccord.Application.Services.Shots.Slates;
 using Raccord.Core.Enums;
@@ -26,13 +27,14 @@ namespace Raccord.Application.Services.ShootingDays
                 Completed = shootingDay.Completed,
                 ScheduleDayID = shootingDay.ScheduleDayID,
                 CallsheetID = shootingDay.CallsheetID,
-                ProjectID = shootingDay.ProjectID,
+                CrewUnit = shootingDay.CrewUnit.Translate(),
                 PreviouslyCompletedSceneCount = previousDays.SelectMany(sd=> sd.ShootingDayScenes).Count(pcs=> pcs.Completion == Completion.Completed),
                 PreviouslyCompletedScenePageCount = previousDays.SelectMany(sd=> sd.ShootingDayScenes).Sum(pcs=> pcs.PageLength),
                 PreviouslyCompletedTimingsCount = new TimeSpan(previousDays.SelectMany(sd=> sd.ShootingDayScenes).Sum(pcs=> pcs.Timings.Ticks)),
                 Scenes = shootingDay.ShootingDayScenes.Select(s=> s.TranslateScene()),
                 PreviousSetupCount = previousDays.Sum(sd=> sd.Slates.Count()),
-                Slates = shootingDay.Slates.OrderBy(s=> s.SortingOrder).Select(s=> s.TranslateSummary()),
+                Slates = shootingDay.Slates.OrderBy(t=> t.SortingOrder)
+                                           .Select(s=> s.TranslateSummary()),
                 CameraRolls = shootingDay.Slates.SelectMany(s=> s.Takes.Select(t=> t.CameraRoll)).Distinct(),
                 SoundRolls = shootingDay.Slates.SelectMany(s=> s.Takes.Select(t=> t.SoundRoll)).Distinct(),
             };
@@ -51,7 +53,7 @@ namespace Raccord.Application.Services.ShootingDays
                 Completed = shootingDay.Completed,
                 ScheduleDayID = shootingDay.ScheduleDayID,
                 CallsheetID = shootingDay.CallsheetID,
-                ProjectID = shootingDay.ProjectID,
+                CrewUnitID = shootingDay.CrewUnitID,
                 TotalScenes = shootingDay.ShootingDayScenes.Count,
                 CompletedScenes = shootingDay.ShootingDayScenes.Count(sds=> sds.Completion == Completion.Completed),
                 TotalPageCount = shootingDay.ShootingDayScenes.Sum(sds=> sds.PageLength),
@@ -73,7 +75,24 @@ namespace Raccord.Application.Services.ShootingDays
                 Completed = shootingDay.Completed,
                 ScheduleDayID = shootingDay.ScheduleDayID,
                 CallsheetID = shootingDay.CallsheetID,
-                ProjectID = shootingDay.ProjectID
+                CrewUnitID = shootingDay.CrewUnitID
+            };
+        }
+        public static ShootingDayCrewUnitDto TranslateCrewUnit(this ShootingDay shootingDay)
+        {
+            return new ShootingDayCrewUnitDto
+            {
+                ID = shootingDay.ID,
+                Number = shootingDay.Number,
+                Date = shootingDay.Date,
+                Start = shootingDay.Start,
+                Turn = shootingDay.Turn,
+                End = shootingDay.End,
+                OverTime = shootingDay.OverTime,
+                Completed = shootingDay.Completed,
+                ScheduleDayID = shootingDay.ScheduleDayID,
+                CallsheetID = shootingDay.CallsheetID,
+                CrewUnit = shootingDay.CrewUnit.Translate()
             };
         }
 
@@ -82,7 +101,8 @@ namespace Raccord.Application.Services.ShootingDays
             var dto = new ShootingDayInfoDto
             {
                 Number = shootingDay.Number,
-                Date = shootingDay.Date
+                Date = shootingDay.Date,
+                CrewUnit = shootingDay.CrewUnit.Translate(),
             };
 
             if(shootingDay.Completed && shootingDay.ShootingDayScenes.Where(sds=> sds.SceneID == sceneID).Any(sds=> sds.Completion == Completion.Completed || sds.Completion == Completion.PartCompleted))

@@ -4,7 +4,7 @@ using Raccord.API.ViewModels.SceneProperties;
 using Raccord.API.ViewModels.Images;
 using Raccord.API.ViewModels.Characters;
 using System.Linq;
-using Raccord.API.ViewModels.Breakdowns.BreakdownItems;
+using Raccord.API.ViewModels.Breakdowns;
 using Raccord.API.ViewModels.Scheduling.ScheduleScenes;
 using Raccord.API.ViewModels.Shots.Slates;
 using Raccord.API.ViewModels.ShootingDays;
@@ -28,7 +28,7 @@ namespace Raccord.API.ViewModels.Scenes
                 DayNight = dto.DayNight.Translate(),
                 Images = dto.Images.Select(i=> i.Translate()),
                 Characters = dto.Characters.Select(i=> i.Translate()),
-                BreakdownItems = dto.BreakdownItems.Select(bi=> bi.Translate()),
+                BreakdownInfo = dto.BreakdownInfo.Translate(),
                 ShootingDays = dto.ShootingDays.Select(sd=> sd.Translate()),
                 Slates = dto.Slates.Select(s=> s.Translate()),
                 ProjectID = dto.ProjectID,
@@ -100,6 +100,35 @@ namespace Raccord.API.ViewModels.Scenes
                 ScriptLocation = vm.ScriptLocation.Translate(),
                 DayNight = vm.DayNight.Translate(),
                 ProjectID = vm.ProjectID,
+            };
+        }
+
+        public static SceneFilterRequestDto Translate(this SceneFilterRequestViewModel vm)
+        {
+            if(vm == null)
+            {
+                return null;
+            }
+
+            return new SceneFilterRequestDto
+            {
+                ProjectID = vm.ProjectID,
+                IntExtIDs = vm.IntExtIDs,
+                ScriptLocationIDs = vm.ScriptLocationIDs,
+                DayNightIDs = vm.DayNightIDs,
+                LocationSetIDs = vm.LocationSetIDs,
+                LocationIDs = vm.LocationIDs,
+                CharacterIDs = vm.CharacterIDs,
+                CastMemberIDs = vm.CastMemberIDs,
+                BreakdownItemIDs = vm.BreakdownItemIDs,
+                ScheduleDayIDs = vm.ScheduleDayIDs,
+                ScheduleSceneShootingDayIDs = vm.ScheduleSceneShootingDayIDs,
+                CallsheetIDs = vm.CallsheetIDs,
+                CallsheetSceneShootingDayIDs = vm.CallsheetSceneShootingDayIDs,
+                ShootingDayIDs = vm.ShootingDayIDs,
+                SearchText = vm.SearchText,
+                MinPageLength = vm.MinPageLength,
+                MaxPageLength = vm.MaxPageLength
             };
         }
     }

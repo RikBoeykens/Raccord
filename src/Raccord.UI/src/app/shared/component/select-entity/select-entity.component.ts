@@ -40,7 +40,7 @@ export class SelectEntityComponent{
 
         let loadingId = this._loadingService.startLoading();
         
-        this._searchEngineService.search({ searchText: this.searchText, includeTypes: this.includeTypes, excludeTypes: this.excludeTypes, projectId: this.projectId}).then(results=>{
+        this._searchEngineService.search({ searchText: this.searchText, includeTypes: this.includeTypes, excludeTypes: this.excludeTypes, projectId: this.projectId, excludeTypeIDs: []}).then(results=>{
             if(typeof(results)=='string'){
                 this._dialogService.error(results);
             }

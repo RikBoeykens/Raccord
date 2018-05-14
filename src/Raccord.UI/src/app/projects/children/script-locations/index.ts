@@ -1,9 +1,11 @@
 export { ScriptLocationsListComponent } from './component/script-locations-list/script-locations-list.component';
+export { EditScriptLocationsListComponent } from './component/edit-script-locations-list/edit-script-locations-list.component';
 export { SearchScriptLocationComponent } from './component/search-script-location/search-script-location.component';
 export { EditScriptLocationComponent } from './component/edit-script-location/edit-script-location.component';
 export { ScriptLocationLandingComponent } from './component/script-location-landing/script-location-landing.component';
 export { ScriptLocationImagesComponent } from './component/script-location-images/script-location-images.component';
 export { ScriptLocationSetsComponent } from './component/script-location-sets/script-location-sets.component';
+export { SearchScriptLocationsCollectionComponent } from './component/search-script-locations-collection/search-script-locations-collection.component';
 export { ScriptLocationHttpService } from './service/script-location-http.service';
 export { ImageScriptLocationHttpService } from './service/image-script-location-http.service';
 export { ScriptLocationResolve } from './service/script-location-resolve.service';

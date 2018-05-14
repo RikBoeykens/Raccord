@@ -1,6 +1,8 @@
 export { ShootingDay } from "./model/shooting-day.model";
 
 export { ChooseShootingDayDialog } from "./component/choose-shooting-day-dialog/choose-shooting-day-dialog.component";
+export { ChooseShootingDayCrewUnitDialogComponent } from
+  "./component/choose-shooting-day-crew-unit-dialog/choose-shooting-day-crew-unit-dialog.component";
 export { ShootingDayReportsListComponent } from "./component/shooting-day-reports-list/shooting-day-reports-list.component";
 export { ShootingDayReportLandingComponent } from "./component/shooting-day-report-landing/shooting-day-report-landing.component";
 

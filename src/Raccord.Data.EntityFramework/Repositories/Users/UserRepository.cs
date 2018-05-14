@@ -36,6 +36,13 @@ namespace Raccord.Data.EntityFramework.Repositories.Users
             return query.FirstOrDefault(u => u.Id == ID);
         }
 
+        public ApplicationUser GetForPermissions(string ID)
+        {
+            var query = GetIncludedPermissions();
+
+            return query.FirstOrDefault(u => u.Id == ID);
+        }
+
         public IEnumerable<ApplicationUser> GetAll()
         {
             var query = GetIncludedSummary();
@@ -66,8 +73,25 @@ namespace Raccord.Data.EntityFramework.Repositories.Users
             IQueryable<ApplicationUser> query = _context.Set<ApplicationUser>();
 
             return query.Include(u=> u.ProjectUsers)
-                        .ThenInclude(pu=> pu.CrewMembers)
-                        .ThenInclude(cm=> cm.Department);
+                            .ThenInclude(pu=> pu.Role)
+                        .Include(u => u.ProjectUsers)
+                            .ThenInclude(pu => pu.CrewUnitMembers)
+                                .ThenInclude(cum => cum.CrewMembers)
+                                    .ThenInclude(cm => cm.Department)
+                                        .ThenInclude(d => d.CrewUnit)
+                        .Include(u => u.ProjectUsers)
+                            .ThenInclude(pu => pu.CastMember)
+                                .ThenInclude(cm => cm.Characters);
+        }
+
+        private IQueryable<ApplicationUser> GetIncludedPermissions()
+        {
+            IQueryable<ApplicationUser> query = _context.Set<ApplicationUser>();
+
+            return query.Include(u=> u.ProjectUsers)
+                        .ThenInclude(pu=> pu.Role)
+                        .ThenInclude(pu=> pu.PermissionRoles)
+                        .ThenInclude(pr=> pr.ProjectPermission);
         }
 
         private IQueryable<ApplicationUser> GetIncludedSummary()

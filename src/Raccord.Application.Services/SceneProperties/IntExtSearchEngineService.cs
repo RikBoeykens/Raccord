@@ -4,12 +4,14 @@ using Raccord.Application.Core.Services.SceneProperties;
 using Raccord.Application.Core.Services.SearchEngine;
 using Raccord.Data.EntityFramework.Repositories.SceneProperties;
 using Raccord.Core.Enums;
+using Raccord.Application.Services.SearchEngine;
 
 namespace Raccord.Application.Services.SceneProperties
 {
     // Service to search for int/ext
     public class IntExtSearchEngineService : IIntExtSearchEngineService
     {
+        private readonly EntityType _type = EntityType.IntExt;
         private readonly IIntExtRepository _intExtRepository;
 
         // Initialises a new IntExtSearchEngineService
@@ -23,13 +25,14 @@ namespace Raccord.Application.Services.SceneProperties
 
         public new EntityType GetType()
         {
-            return EntityType.IntExt;
+            return _type;
         }
 
         public SearchTypeResultDto GetResults(SearchRequestDto request)
         {
-            var intExtCount = _intExtRepository.SearchCount(request.SearchText, request.ProjectID, request.UserID, request.IsAdminSearch);
-            var intExts = _intExtRepository.Search(request.SearchText, request.ProjectID, request.UserID, request.IsAdminSearch);
+            var excludeIds = request.GetExcludeIDs(_type);
+            var intExtCount = _intExtRepository.SearchCount(request.SearchText, request.ProjectID, request.UserID, request.IsAdminSearch, excludeIds);
+            var intExts = _intExtRepository.Search(request.SearchText, request.ProjectID, request.UserID, request.IsAdminSearch, excludeIds);
 
             return new SearchTypeResultDto
             {

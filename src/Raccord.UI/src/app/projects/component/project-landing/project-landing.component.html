@@ -1,109 +1,198 @@
-<div class="row">      
-    <div class="col s12">
-        <a routerLink="/" class="breadcrumb">Dashboard</a>
-        <a routerLink="/projects" class="breadcrumb">Projects</a>
-        <span class="breadcrumb">{{project.title}}</span>
-    </div>
+<md-card>
+    <a routerLink="/" class="breadcrumb">Dashboard</a>
+    <a routerLink="/projects" class="breadcrumb">Projects</a>
+    <span class="breadcrumb">{{project.title}}</span>
+</md-card>
+<div class="row">
+    <md-card *ngIf="false">
+    </md-card>
+    <md-card *ngIf="getCanRead()">
+        <project-calendar [projectId]="project.id"></project-calendar>
+    </md-card>
 </div>
 <div class="row">
-    <div class='md-padding' layout="row" layout-wrap>
-        <md-card class="project-landing-card">
-            <md-card-header>
-                <md-card-title>
-                    <a routerLink="/projects/{{project.id}}/scenes" class="card-title">Scenes</a>
-                </md-card-title>
-            </md-card-header>
+    <div>
+        <md-card *ngIf="false">
         </md-card>
-        <md-card class="project-landing-card">
-            <md-card-header>
-                <md-card-title>
-                    <a routerLink="/projects/{{project.id}}/scriptlocations" class="card-title">Script Locations</a>
-                </md-card-title>
-            </md-card-header>
+        <md-card class="project-landing-card" *ngIf="getCanRead()">
+            <md-card-title>Script</md-card-title>
+            <md-card-content>
+                <md-nav-list>
+                    <a md-list-item
+                        routerLink="/projects/{{project.id}}/scripttext">
+                        View Script
+                    </a>
+                    <a md-list-item
+                        routerLink="/projects/{{project.id}}/scripttext/user"
+                        *ngIf="getHasCast()">
+                        View My Script
+                    </a>
+                    <a md-list-item
+                        routerLink="/projects/{{project.id}}/scriptuploads"
+                        *ngIf="getCanEdit()">
+                        Upload Script
+                    </a>
+                    <h3 mdSubheader>Scenes</h3>
+                    <a md-list-item
+                        routerLink="/projects/{{project.id}}/scenes/edit"
+                        *ngIf="getCanEdit()">
+                        Edit Scenes
+                    </a>
+                    <a md-list-item
+                        routerLink="/projects/{{project.id}}/scenes">
+                        View Scenes
+                    </a>
+                    <h3 mdSubheader>Timings</h3>
+                    <a md-list-item
+                        routerLink="/projects/{{project.id}}/scenes/timings">
+                        Timings
+                    </a>
+                    <h3 mdSubheader>Script Locations</h3>
+                    <a md-list-item
+                        routerLink="/projects/{{project.id}}/scriptlocations/edit"
+                        *ngIf="getCanEdit()">
+                        Edit Locations
+                    </a>
+                    <a md-list-item
+                        routerLink="/projects/{{project.id}}/scriptlocations">
+                        View Locations
+                    </a>
+                    <h3 mdSubheader>Settings</h3>
+                    <a md-list-item
+                        routerLink="/projects/{{project.id}}/sceneproperties">
+                        Scene Properties
+                    </a>
+                </md-nav-list>
+            </md-card-content>
         </md-card>
-        <md-card class="project-landing-card">
-            <md-card-header>
-                <md-card-title>
-                    <a routerLink="/projects/{{project.id}}/locations" class="card-title">Locations</a>
-                </md-card-title>
-            </md-card-header>
+        <md-card class="project-landing-card" *ngIf="getCanRead()">
+            <md-card-title>Cast</md-card-title>
+            <md-card-content>
+                <md-nav-list>
+                    <h3 mdSubheader>Characters</h3>
+                    <a md-list-item
+                        routerLink="/projects/{{project.id}}/characters/edit"
+                        *ngIf="getCanEdit()">
+                        Edit Characters
+                    </a>
+                    <a md-list-item
+                        routerLink="/projects/{{project.id}}/characters">
+                        View Characters
+                    </a>
+                    <h3 mdSubheader>Cast</h3>
+                    <a md-list-item
+                        routerLink="/projects/{{project.id}}/cast/edit"
+                        *ngIf="getCanEdit()">
+                        Edit Cast
+                    </a>
+                    <a md-list-item
+                        routerLink="/projects/{{project.id}}/cast">
+                        View Cast
+                    </a>
+                </md-nav-list>
+            </md-card-content>
         </md-card>
-        <md-card class="project-landing-card">
-            <md-card-header>
-                <md-card-title>
-                    <a routerLink="/projects/{{project.id}}/sceneproperties" class="card-title">Scene Properties</a>
-                </md-card-title>
-            </md-card-header>
+        <md-card class="project-landing-card" *ngIf="getCanRead()">
+            <md-card-title>Locations</md-card-title>
+            <md-card-content>
+                <md-nav-list>
+                    <a md-list-item
+                        routerLink="/projects/{{project.id}}/locations/edit"
+                        *ngIf="getCanEdit()">
+                        Edit Locations
+                    </a>
+                    <a md-list-item
+                        routerLink="/projects/{{project.id}}/locations">
+                        View Locations
+                    </a>
+                </md-nav-list>
+            </md-card-content>
         </md-card>
-        <md-card class="project-landing-card">
-            <md-card-header>
-                <md-card-title>
-                    <a routerLink="/projects/{{project.id}}/images" class="card-title">Images</a>
-                </md-card-title>
-            </md-card-header>
+        <md-card class="project-landing-card" *ngIf="getCanRead()">
+            <md-card-title>Breakdown</md-card-title>
+            <md-card-content>
+                <md-nav-list>
+                    <a md-list-item
+                        routerLink="/projects/{{project.id}}/breakdowns">
+                        View Breakdown
+                    </a>
+                </md-nav-list>
+            </md-card-content>
         </md-card>
-        <md-card class="project-landing-card">
-            <md-card-header>
-                <md-card-title>
-                    <a routerLink="/projects/{{project.id}}/characters" class="card-title">Characters</a>
-                </md-card-title>
-            </md-card-header>
+        <md-card class="project-landing-card" *ngIf="getCanRead()">
+            <md-card-title>Images</md-card-title>
+            <md-card-content>
+                <md-nav-list>
+                    <a md-list-item
+                        routerLink="/projects/{{project.id}}/images">
+                        View Images
+                    </a>
+                </md-nav-list>
+            </md-card-content>
         </md-card>
-        <md-card class="project-landing-card">
-            <md-card-header>
-                <md-card-title>
-                    <a routerLink="/projects/{{project.id}}/breakdown" class="card-title">Breakdown</a>
-                </md-card-title>
-            </md-card-header>
+        <md-card class="project-landing-card" *ngIf="getCanReadCallsheet()">
+            <md-card-title>Scheduling</md-card-title>
+            <md-card-content>
+                <md-nav-list>
+                    <a md-list-item
+                    routerLink="/projects/{{project.id}}/units/nav/{{getScheduleEditNavType()}}"
+                        *ngIf="getCanEdit()">
+                        Edit Schedules
+                    </a>
+                    <a md-list-item
+                    routerLink="/projects/{{project.id}}/units/user/nav/{{getScheduleReadNavType()}}"
+                        *ngIf="getCanRead() && getHasCrew() && !getHasCast()">
+                        View My Schedules
+                    </a>
+                    <a md-list-item
+                    routerLink="/projects/{{project.id}}/scheduling/user"
+                        *ngIf="getCanRead() && getHasCast()">
+                        View My Schedules
+                    </a>
+                    <a md-list-item
+                    routerLink="/projects/{{project.id}}/units/nav/{{getScheduleReadNavType()}}"
+                        *ngIf="getCanRead()">
+                        View Schedules
+                    </a>
+                    <a md-list-item
+                        routerLink="/projects/{{project.id}}/callsheets">
+                        View Callsheets
+                    </a>
+                </md-nav-list>
+            </md-card-content>
         </md-card>
-        <md-card class="project-landing-card">
-            <md-card-header>
-                <md-card-title>
-                    <a routerLink="/projects/{{project.id}}/scheduling" class="card-title">Schedule</a>
-                </md-card-title>
-            </md-card-header>
-        </md-card>
-        <md-card class="project-landing-card">
-            <md-card-header>
-                <md-card-title>
-                    <a routerLink="/projects/{{project.id}}/callsheets" class="card-title">Callsheets</a>
-                </md-card-title>
-            </md-card-header>
-        </md-card>
-        <md-card class="project-landing-card">
-            <md-card-header>
-                <md-card-title>
-                    <a routerLink="/projects/{{project.id}}/slates" class="card-title">Slates</a>
-                </md-card-title>
-            </md-card-header>
-        </md-card>
-        <md-card class="project-landing-card">
-            <md-card-header>
-                <md-card-title>
-                    <a routerLink="/projects/{{project.id}}/shootingdays" class="card-title">Shooting Day Reports</a>
-                </md-card-title>
-            </md-card-header>
-        </md-card>
-        <md-card class="project-landing-card">
-            <md-card-header>
-                <md-card-title>
-                    <a routerLink="/projects/{{project.id}}/charts" class="card-title">Charts</a>
-                </md-card-title>
-            </md-card-header>
-        </md-card>
-        <md-card class="project-landing-card">
-            <md-card-header>
-                <md-card-title>
-                    <a routerLink="/projects/{{project.id}}/crew" class="card-title">Unit List</a>
-                </md-card-title>
-            </md-card-header>
+        <md-card class="project-landing-card" *ngIf="getCanRead()">
+            <md-card-title>Crew</md-card-title>
+            <md-card-content>
+                <md-nav-list>
+                    <a md-list-item
+                        *ngIf="getHasCrew()"
+                        routerLink="/projects/{{project.id}}/units/user">
+                        My Units
+                    </a>
+                    <a md-list-item
+                        routerLink="/projects/{{project.id}}/units">
+                        <span *ngIf="getCanEdit()">Edit&nbsp;</span>
+                        <span *ngIf="!getCanEdit()">View&nbsp;</span>
+                        Units
+                    </a>
+                    <a md-list-item
+                        *ngIf="getHasCrew()"
+                        routerLink="/projects/{{project.id}}/units/user/nav/{{getUnitListNavType()}}">
+                        My Unit Lists
+                    </a>
+                    <a md-list-item
+                        routerLink="/projects/{{project.id}}/units/nav/{{getUnitListNavType()}}">
+                        Unit Lists
+                    </a>
+                </md-nav-list>
+            </md-card-content>
         </md-card>
     </div>
 </div>
-<md-card>
+<md-card *ngIf="getCanComment()">
     <md-card-header>Comments</md-card-header>
     <md-card-content>
-        <edit-comment [projectId]="project.id" (submittedComment)="onCommentSubmit($event)"></edit-comment>
-        <show-comment *ngFor="let comment of project.comments" [comment]="comment" (removedComment)="onRemovedComment()"></show-comment>
+        <comment-container [projectId]="project.id" [parentProjectId]="project.id"></comment-container>
     </md-card-content>
 </md-card>

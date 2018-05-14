@@ -1,0 +1,16 @@
+<div fxLayout="row" fxLayoutGap="10px">
+    <md-select fxFlex="33%" placeholder="Type" [(ngModel)]="selectedTypeId" name="select_type">
+        <md-option *ngFor="let type of breakdown.types" [value]="type.id">{{ type.name }}</md-option>
+    </md-select>
+    <search-breakdown-item fxFlex="33%" [searchBreakdownItem]="searchEntity" [typeId]="selectedTypeId" [breakdownId]="breakdown.id" (setItem)="addEntity()" [excludedItems]="entities"></search-breakdown-item>
+</div>
+<div fxLayout="row" fxLayoutGap="10px">
+    <md-chip-list fxFlex="100%" md-line>
+        <a *ngFor="let entity of entities">
+            <md-chip>
+                {{entity.name}}
+                <md-icon (click)="removeEntity(entity)">cancel</md-icon>
+            </md-chip>
+        </a>
+    </md-chip-list>
+</div>

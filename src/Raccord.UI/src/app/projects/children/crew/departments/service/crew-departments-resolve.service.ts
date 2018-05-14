@@ -11,8 +11,8 @@ export class CrewDepartmentsResolve implements Resolve<FullCrewDepartment[]> {
   ) {}
 
     public resolve(route: ActivatedRouteSnapshot) {
-        let projectId = route.params['projectId'];
-        return this._crewDepartmentHttpService.getAll(projectId).then((data) => {
+        let crewUnitId = route.params['crewUnitId'];
+        return this._crewDepartmentHttpService.getAll(crewUnitId).then((data) => {
             return data;
         });
     }

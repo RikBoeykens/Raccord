@@ -8,6 +8,10 @@ import { Scene } from '../model/scene.model';
 import { LinkedImage } from '../../images/model/linked-image.model';
 import { JsonResponse } from '../../../../shared/model/json-response.model';
 import { SortOrder } from '../../../../shared/model/sort-order.model';
+import { SceneFilterRequest } from '../model/scene-filter-request.model';
+import { PagedData } from '../../../../shared/children/paging/model/paged-data.model';
+import { PageRequest } from '../../../../shared/children/paging/model/page-request.model';
+import { PageRequestHelpers } from '../../../../shared/children/paging/helpers/page-request-helpers';
 
 @Injectable()
 export class SceneHttpService extends BaseHttpService {
@@ -63,5 +67,12 @@ export class SceneHttpService extends BaseHttpService {
         var sortOrder = new SortOrder({parentId: id, sortIds: sortIds});
 
         return this.doSort(sortOrder, uri);
+    }
+
+    filter(request: SceneFilterRequest, pageRequest: PageRequest): Promise<PagedData<SceneSummary>> {
+
+        let uri = `${this._baseUri}/filter?${PageRequestHelpers.ConstructParams(pageRequest)}`;
+
+        return this.doPost(request, uri);
     }
 }

@@ -10,6 +10,11 @@ import { CrewDepartmentHttpService } from '../../departments/service/crew-depart
 import { CrewMemberHttpService } from '../../crew-members/service/crew-member-http.service';
 import { CrewMember } from '../../crew-members/model/crew-member.model';
 import { CrewDepartment } from '../../departments/model/crew-department.model';
+import { AccountHelpers } from '../../../../../account/helpers/account.helper';
+import { ProjectPermissionEnum } from
+    '../../../../../shared/children/users/project-roles/enums/project-permission.enum';
+import { CrewUnitSummary } from '../../crew-units/model/crew-unit-summary.model';
+import { CrewUnitNavEnum } from '../../crew-units/enum/crew-unit-nav.enum';
 
 @Component({
     templateUrl: 'crew-landing.component.html',
@@ -18,6 +23,7 @@ export class CrewLandingComponent implements OnInit {
 
     public departments: FullCrewDepartment[];
     public project: ProjectSummary;
+    public crewUnit: CrewUnitSummary;
 
     constructor(
         private _crewDepartmentHttpService: CrewDepartmentHttpService,
@@ -34,16 +40,18 @@ export class CrewLandingComponent implements OnInit {
         this._route.data.subscribe((data:
             {
                 departments: FullCrewDepartment[],
-                project: ProjectSummary
+                project: ProjectSummary,
+                crewUnit: CrewUnitSummary
             }) => {
             this.departments = data.departments;
             this.project = data.project;
+            this.crewUnit = data.crewUnit;
         });
     }
 
     public getDepartments() {
         let loadingId = this._loadingService.startLoading();
-        this._crewDepartmentHttpService.getAll(this.project.id).then(data => {
+        this._crewDepartmentHttpService.getAll(this.project.id).then((data) => {
             this.departments = data;
             this._loadingService.endLoading(loadingId);
         });
@@ -61,7 +69,10 @@ export class CrewLandingComponent implements OnInit {
     }
 
     public removeCrewMember(crewMember: CrewMember) {
-        if(this._dialogService.confirm(`Are you sure you want to remove character ${crewMember.firstName} ${crewMember.lastName}?`)) {
+        if (this._dialogService.confirm(
+            // tslint:disable-next-line:max-line-length
+            `Are you sure you want to remove character ${crewMember.firstName} ${crewMember.lastName}?`
+        )) {
             let loadingId = this._loadingService.startLoading();
             this._crewMemberHttpService.delete(crewMember.id).then((data) => {
                 if (typeof(data) === 'string') {
@@ -80,15 +91,26 @@ export class CrewLandingComponent implements OnInit {
         return `${crewMember.firstName} ${crewMember.lastName}`;
     }
 
+    public getCanEdit() {
+        return AccountHelpers.hasProjectPermission(
+            this.project.id,
+            ProjectPermissionEnum.canEditGeneral
+        );
+    }
+
+    public getUnitListNavType() {
+        return CrewUnitNavEnum.unitLists;
+    }
+
     private showCrewMemberDialog(crewMember: CrewMember) {
         let crewMemberDialog = this._dialog.open(EditCrewMemberDialog, {data:
             {
                 crewMember,
                 availableDepartments: this.getAvailableDepartments()
             }});
-        crewMemberDialog.afterClosed().subscribe((crewMember: CrewMember) => {
-            if (crewMember) {
-                this.postCrewMember(crewMember);
+        crewMemberDialog.afterClosed().subscribe((returnedCrewMember: CrewMember) => {
+            if (returnedCrewMember) {
+                this.postCrewMember(returnedCrewMember);
             }
         });
     }

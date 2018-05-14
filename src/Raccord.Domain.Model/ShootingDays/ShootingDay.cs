@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Raccord.Domain.Model.Callsheets;
+using Raccord.Domain.Model.Crew.CrewUnits;
 using Raccord.Domain.Model.Projects;
 using Raccord.Domain.Model.Scheduling;
 using Raccord.Domain.Model.ShootingDays;
@@ -31,10 +32,10 @@ namespace Raccord.Domain.Model.ShootingDays
         public bool Completed { get; set; }
 
         // ID of the linked project
-        public long ProjectID { get; set; }
+        public long CrewUnitID { get; set; }
 
         // Linked project
-        public virtual Project Project { get; set; }
+        public virtual CrewUnit CrewUnit { get; set; }
 
         public long? ScheduleDayID { get; set; }
 

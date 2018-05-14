@@ -28,7 +28,7 @@ namespace Raccord.API.Controllers
         
         // GET: api/shootingdays/1/available/callsheet
         [HttpGet("{projectID}/available/callsheet")]
-        public IEnumerable<ShootingDayViewModel> GetAvailableCallsheet(long projectID)
+        public IEnumerable<ShootingDayCrewUnitViewModel> GetAvailableCallsheet(long projectID)
         {
             var availableDays = _shootingDayService.GetAvailableForCallsheet(projectID);
 
@@ -37,7 +37,7 @@ namespace Raccord.API.Controllers
 
         // GET: api/shootingdays/1/available/completion
         [HttpGet("{projectID}/available/completion")]
-        public IEnumerable<ShootingDayViewModel> GetAvailableCompletion(long projectID)
+        public IEnumerable<ShootingDayCrewUnitViewModel> GetAvailableCompletion(long projectID)
         {
             var availableDays = _shootingDayService.GetAvailableForCompletion(projectID);
 
@@ -54,11 +54,11 @@ namespace Raccord.API.Controllers
         }
 
         
-        // GET: api/shootingdays/1/project
-        [HttpGet("{projectID}/project")]
-        public IEnumerable<ShootingDayViewModel> GetAll(long projectID)
+        // GET: api/shootingdays/1/crewunit
+        [HttpGet("{crewUnitId}/crewunit")]
+        public IEnumerable<ShootingDayViewModel> GetAll(long crewUnitId)
         {
-            var availableDays = _shootingDayService.GetAll(projectID);
+            var availableDays = _shootingDayService.GetAll(crewUnitId);
 
             return availableDays.Select(ad=> ad.Translate());
         }

@@ -3,7 +3,7 @@ using System;
 namespace Raccord.Application.Core.Services.ShootingDays
 {
     // Dto to represent a shooting day
-    public class ShootingDaySummaryDto : ShootingDayDto
+    public class ShootingDaySummaryDto : BaseShootingDayDto
     {
         // Total count of scenes
         public int TotalScenes { get; set; }
@@ -19,5 +19,6 @@ namespace Raccord.Application.Core.Services.ShootingDays
 
         // Total setups
         public int TotalSetups { get; set; }
+        public long CrewUnitID { get; set; }
     }
 }

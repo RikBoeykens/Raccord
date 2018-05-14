@@ -1,10 +1,15 @@
 using System.Linq;
 using Raccord.Application.Core.Services.Users.Project;
+using Raccord.Application.Services.Characters;
 using Raccord.Application.Services.Crew.CrewMembers;
+using Raccord.Application.Services.Cast;
 using Raccord.Application.Services.Projects;
 using Raccord.Application.Services.Users;
+using Raccord.Application.Services.Users.ProjectRoles;
 using Raccord.Core.Enums;
 using Raccord.Domain.Model.Users;
+using Raccord.Domain.Model.Crew.CrewUnits;
+using Raccord.Application.Services.Crew.CrewUnits;
 
 namespace Raccord.Application.Services.Users.Projects
 {
@@ -18,7 +23,9 @@ namespace Raccord.Application.Services.Users.Projects
                 ID = projectUser.ID,
                 User = projectUser.User.Translate(),
                 Project = projectUser.Project.Translate(),
-                CrewMembers = projectUser.CrewMembers.Select(cm => cm.Translate()),
+                CastMember = projectUser.CastMember.Translate(),
+                ProjectRole = projectUser.Role.Translate(),
+                CrewUnits = projectUser.CrewUnitMembers.Select(cum => cum.TranslateCrewUnit())
             };
         }
         public static ProjectUserUserDto TranslateUser(this ProjectUser projectUser)
@@ -27,6 +34,15 @@ namespace Raccord.Application.Services.Users.Projects
             {
                 ID = projectUser.ID,
                 User = projectUser.User.TranslateSummary(),
+            };
+        }
+        public static LinkedProjectUserUserDto TranslateProjectUser(this CrewUnitMember crewUnitMember)
+        {
+            return new LinkedProjectUserUserDto
+            {
+                ID = crewUnitMember.ProjectUser.ID,
+                User = crewUnitMember.ProjectUser.User.TranslateSummary(),
+                LinkID = crewUnitMember.ID
             };
         }
         public static ProjectUserProjectDto TranslateProject(this ProjectUser projectUser)

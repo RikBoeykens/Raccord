@@ -4,6 +4,7 @@ using Raccord.Application.Core.Services.Characters;
 using Raccord.Application.Core.Services.SearchEngine;
 using Raccord.Data.EntityFramework.Repositories.Characters;
 using Raccord.Core.Enums;
+using Raccord.Application.Services.SearchEngine;
 
 namespace Raccord.Application.Services.Characters
 {
@@ -11,6 +12,7 @@ namespace Raccord.Application.Services.Characters
     public class CharacterSearchEngineService : ICharacterSearchEngineService
     {
         private readonly ICharacterRepository _characterRepository;
+        private readonly EntityType _type = EntityType.Character;
 
         // Initialises a new CharacterSearchEngineService
         public CharacterSearchEngineService(ICharacterRepository sceneRepository)
@@ -23,13 +25,14 @@ namespace Raccord.Application.Services.Characters
 
         public new EntityType GetType()
         {
-            return EntityType.Character;
+            return _type;
         }
 
         public SearchTypeResultDto GetResults(SearchRequestDto request)
         {
-            var characterCount = _characterRepository.SearchCount(request.SearchText, request.ProjectID, request.UserID, request.IsAdminSearch);
-            var characters = _characterRepository.Search(request.SearchText, request.ProjectID, request.UserID, request.IsAdminSearch);
+            var excludeIds = request.GetExcludeIDs(_type);
+            var characterCount = _characterRepository.SearchCount(request.SearchText, request.ProjectID, request.UserID, request.IsAdminSearch, excludeIds);
+            var characters = _characterRepository.Search(request.SearchText, request.ProjectID, request.UserID, request.IsAdminSearch, excludeIds);
 
             return new SearchTypeResultDto
             {

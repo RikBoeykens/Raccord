@@ -32,30 +32,30 @@ namespace Raccord.Application.Services.ShootingDays
             _callsheetRepository = callsheetRepository;
         }
 
-        public IEnumerable<ShootingDayDto> GetAvailableForCallsheet(long projectID)
+        public IEnumerable<ShootingDayCrewUnitDto> GetAvailableForCallsheet(long projectID)
         {
-            var availableShootingDays = _shootingDayRepository.GetAllForProject(projectID).Where(sd=> !sd.CallsheetID.HasValue);
+            var availableShootingDays = _shootingDayRepository.GetAllForProject(projectID).Where(sd=> !sd.CallsheetID.HasValue).ToList();
 
-            return availableShootingDays.Select(asd=> asd.Translate());
+            return availableShootingDays.Select(asd=> asd.TranslateCrewUnit());
         }
 
-        public IEnumerable<ShootingDayDto> GetAvailableForCompletion(long projectID)
+        public IEnumerable<ShootingDayCrewUnitDto> GetAvailableForCompletion(long projectID)
         {
-            var availableShootingDays = _shootingDayRepository.GetAllForProject(projectID).Where(sd=> sd.CallsheetID.HasValue&& !sd.Completed);
+            var availableShootingDays = _shootingDayRepository.GetAllForProject(projectID).Where(sd=> sd.CallsheetID.HasValue&& !sd.Completed).ToList();
 
-            return availableShootingDays.Select(asd=> asd.Translate());
+            return availableShootingDays.Select(asd=> asd.TranslateCrewUnit());
         }
 
         public IEnumerable<ShootingDaySummaryDto> GetCompleted(long projectID)
         {
-            var availableShootingDays = _shootingDayRepository.GetAllForProject(projectID).Where(sd=> sd.Completed);
+            var availableShootingDays = _shootingDayRepository.GetAllForCrewUnit(projectID).Where(sd=> sd.Completed).ToList();
 
             return availableShootingDays.Select(asd=> asd.TranslateSummary());
         }
 
-        public IEnumerable<ShootingDayDto> GetAll(long projectID)
+        public IEnumerable<ShootingDayDto> GetAll(long crewUnitID)
         {
-            var shootingDays = _shootingDayRepository.GetAllForProject(projectID);
+            var shootingDays = _shootingDayRepository.GetAllForCrewUnit(crewUnitID);
 
             return shootingDays.Select(asd=> asd.Translate());
         }
@@ -63,7 +63,7 @@ namespace Raccord.Application.Services.ShootingDays
         public FullShootingDayDto GetFull(long ID)
         {
             var shootingDay = _shootingDayRepository.GetFull(ID);
-            var previousShootingDays = _shootingDayRepository.GetAllBeforeDate(shootingDay.ProjectID, shootingDay.Date);
+            var previousShootingDays = _shootingDayRepository.GetAllBeforeDate(shootingDay.CrewUnitID, shootingDay.Date);
             return shootingDay.TranslateFull(previousShootingDays);
         }
 

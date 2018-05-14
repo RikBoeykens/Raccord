@@ -14,6 +14,8 @@ using Raccord.Application.Core.Common.Sorting;
 using Raccord.Data.EntityFramework.Repositories.Images;
 using Raccord.Data.EntityFramework.Repositories.ShootingDays;
 using Raccord.Core.Utilities;
+using Raccord.Application.Core.Common.Paging;
+using Raccord.Data.EntityFramework.Repositories.Breakdowns;
 
 namespace Raccord.Application.Services.Scenes
 {
@@ -25,6 +27,7 @@ namespace Raccord.Application.Services.Scenes
         private readonly IDayNightRepository _dayNightRepository;
         private readonly IScriptLocationRepository _scriptLocationRepository;
         private readonly IShootingDayRepository _shootingDayRepository;
+        private readonly IBreakdownRepository _breakdownRepository;
 
         // Initialises a new SceneService
         public SceneService(
@@ -32,7 +35,8 @@ namespace Raccord.Application.Services.Scenes
             IIntExtRepository intExtRepository,
             IDayNightRepository dayNightRepository,
             IScriptLocationRepository scriptLocationRepository,
-            IShootingDayRepository shootingDayRepository
+            IShootingDayRepository shootingDayRepository,
+            IBreakdownRepository breakdownRepository
             )
         {
             if(sceneRepository == null)
@@ -45,12 +49,15 @@ namespace Raccord.Application.Services.Scenes
                 throw new ArgumentNullException(nameof(scriptLocationRepository));
             if(shootingDayRepository == null)
                 throw new ArgumentNullException(nameof(shootingDayRepository));
+            if(breakdownRepository == null)
+                throw new ArgumentNullException(nameof(breakdownRepository));
             
             _sceneRepository = sceneRepository;
             _intExtRepository = intExtRepository;
             _dayNightRepository = dayNightRepository;
             _scriptLocationRepository = scriptLocationRepository;
             _shootingDayRepository = shootingDayRepository;
+            _breakdownRepository = breakdownRepository;
         }
 
         // Gets all scene for a project
@@ -58,18 +65,19 @@ namespace Raccord.Application.Services.Scenes
         {
             var scenes = _sceneRepository.GetAllForProject(projectID);
 
-            var dtos = scenes.Select(l => l.TranslateSummary());
+            var dtos = scenes.Select(l => l.TranslateSummary()).ToList();
 
             return dtos;
         }
 
         // Gets a single scene by id
-        public FullSceneDto Get(Int64 ID)
+        public FullSceneDto Get(Int64 ID, string userID)
         {
             var scene = _sceneRepository.GetFull(ID);
             var shootingDays = _shootingDayRepository.GetAllForScene(ID);
+            var breakdown = _breakdownRepository.GetForProjectUser(scene.ProjectID, userID);
 
-            var dto = scene.TranslateFull(shootingDays);
+            var dto = scene.TranslateFull(shootingDays, breakdown);
 
             return dto;
         }
@@ -111,7 +119,7 @@ namespace Raccord.Application.Services.Scenes
                 DayNightID = dto.DayNight.ID.GetValueOrNull(),
                 ScriptUploadID = scriptUploadID,
                 ProjectID = dto.ProjectID,
-                SortingOrder = GetNextSceneOrder(dto.ProjectID),
+                SortingOrder = (int?)null,
             };
 
             _sceneRepository.Add(scene);
@@ -159,11 +167,35 @@ namespace Raccord.Application.Services.Scenes
             foreach(var scene in scenes)
             {
                 var orderedIndex = Array.IndexOf(order.SortIDs, scene.ID);
-                scene.SortingOrder = orderedIndex != -1 ? orderedIndex : scenes.Count();
+                scene.SortingOrder = orderedIndex != -1 ? orderedIndex : (int?)null;
                 _sceneRepository.Edit(scene);
             }
 
             _sceneRepository.Commit();
+        }
+
+        public PagedDataDto<SceneSummaryDto> Filter(SceneFilterRequestDto filter, PaginationRequestDto requestDto)
+        {
+            var scenes = _sceneRepository.Filter(
+                filter.ProjectID,
+                filter.IntExtIDs,
+                filter.ScriptLocationIDs,
+                filter.DayNightIDs,
+                filter.LocationSetIDs,
+                filter.LocationIDs,
+                filter.CharacterIDs,
+                filter.BreakdownItemIDs,
+                filter.ScheduleDayIDs,
+                filter.ScheduleSceneShootingDayIDs,
+                filter.CallsheetIDs,
+                filter.CastMemberIDs,
+                filter.CallsheetSceneShootingDayIDs,
+                filter.ShootingDayIDs,
+                filter.SearchText,
+                filter.MinPageLength,
+                filter.MaxPageLength
+            );
+            return scenes.GetPaged<Scene, SceneSummaryDto>(requestDto, Utilities.TranslateSummary);
         }
 
         private void CreatePropertiesIfNecessary(SceneDto scene, long? scriptUploadID = null)
@@ -241,12 +273,6 @@ namespace Raccord.Application.Services.Scenes
                     scene.ScriptLocation.ID = scriptLocation.ID;
                 }
             }
-        }
-
-        private int GetNextSceneOrder(long projectID)
-        {
-            var scenes = _sceneRepository.GetAllForProject(projectID);
-            return scenes.Count();
         }
     }
 }

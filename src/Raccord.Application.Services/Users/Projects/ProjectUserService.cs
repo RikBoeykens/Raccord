@@ -58,6 +58,7 @@ namespace Raccord.Application.Services.Users.Projects
             {
                 ProjectID = dto.ProjectID,
                 UserID = dto.UserID,
+                RoleID = dto.RoleID,
             };
 
             _projectUserRepository.Add(projectUser);
@@ -70,6 +71,8 @@ namespace Raccord.Application.Services.Users.Projects
         public long Update(ProjectUserDto dto)
         {
             var projectUser = _projectUserRepository.GetSingle(dto.ID);
+
+            projectUser.RoleID = dto.RoleID;
 
             _projectUserRepository.Edit(projectUser);
             _projectUserRepository.Commit();

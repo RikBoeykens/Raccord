@@ -1,7 +1,8 @@
 using System.Linq;
-using Raccord.API.ViewModels.Breakdowns.BreakdownTypes;
+using Raccord.API.ViewModels.Breakdowns;
 using Raccord.API.ViewModels.Callsheets.CallsheetScenes;
 using Raccord.API.ViewModels.Callsheets.Characters;
+using Raccord.API.ViewModels.Crew.CrewUnits;
 using Raccord.API.ViewModels.Locations.Locations;
 using Raccord.API.ViewModels.ShootingDays;
 using Raccord.Application.Core.Services.Callsheets;
@@ -18,12 +19,12 @@ namespace Raccord.API.ViewModels.Callsheets
                 Start = dto.Start,
                 End = dto.End,
                 CrewCall = dto.CrewCall,
-                ProjectID = dto.ProjectID,
+                CrewUnit = dto.CrewUnit.Translate(),
                 ShootingDay = dto.ShootingDay.Translate(),
                 Scenes = dto.Scenes.Select(s=> s.Translate()),
                 Characters = dto.Characters.Select(c=> c.Translate()),
                 Locations = dto.Locations.Select(l=> l.Translate()),
-                BreakdownTypes = dto.BreakdownTypes.Select(bt=> bt.Translate()),
+                BreakdownInfo = dto.BreakdownInfo.Translate(),
             };
         }
         public static CallsheetSummaryViewModel Translate(this CallsheetSummaryDto dto)
@@ -34,7 +35,19 @@ namespace Raccord.API.ViewModels.Callsheets
                 Start = dto.Start,
                 End = dto.End,
                 CrewCall = dto.CrewCall,
-                ProjectID = dto.ProjectID,
+                CrewUnitID = dto.CrewUnitID,
+                ShootingDay = dto.ShootingDay.Translate(),
+            };
+        }
+        public static CallsheetCrewUnitViewModel Translate(this CallsheetCrewUnitDto dto)
+        {
+            return new CallsheetCrewUnitViewModel
+            {
+                ID = dto.ID,
+                Start = dto.Start,
+                End = dto.End,
+                CrewCall = dto.CrewCall,
+                CrewUnit = dto.CrewUnit.Translate(),
                 ShootingDay = dto.ShootingDay.Translate(),
             };
         }
@@ -46,7 +59,7 @@ namespace Raccord.API.ViewModels.Callsheets
                 Start = dto.Start,
                 End = dto.End,
                 CrewCall = dto.CrewCall,
-                ProjectID = dto.ProjectID,
+                CrewUnitID = dto.CrewUnitID,
                 ShootingDay = dto.ShootingDay.Translate(),
             };
         }
@@ -58,7 +71,7 @@ namespace Raccord.API.ViewModels.Callsheets
                 Start = vm.Start,
                 End = vm.End,
                 CrewCall = vm.CrewCall,
-                ProjectID = vm.ProjectID,
+                CrewUnitID = vm.CrewUnitID,
                 ShootingDay = vm.ShootingDay.Translate(),
             };
         }

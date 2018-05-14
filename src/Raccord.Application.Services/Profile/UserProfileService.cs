@@ -27,6 +27,13 @@ namespace Raccord.Application.Services.Profile
       return user.Translate();
     }
 
+    public UserProfileSummaryDto GetProfileSummary(string ID)
+    {
+      var user = _userRepository.Get(ID);
+
+      return user.TranslateSummary();
+    }
+
     public UserProfileDto UpdateProfile(UserProfileDto dto, string ID)
     {
       var user = _userRepository.Get(ID);

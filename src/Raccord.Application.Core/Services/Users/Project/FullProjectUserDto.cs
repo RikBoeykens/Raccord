@@ -1,7 +1,10 @@
 using System.Collections.Generic;
+using Raccord.Application.Core.Services.Cast;
 using Raccord.Application.Core.Services.Crew.CrewMembers;
+using Raccord.Application.Core.Services.Crew.CrewUnits;
 using Raccord.Application.Core.Services.Projects;
 using Raccord.Application.Core.Services.Users;
+using Raccord.Application.Core.Services.Users.ProjectRoles;
 
 namespace Raccord.Application.Core.Services.Users.Project
 {
@@ -9,7 +12,9 @@ namespace Raccord.Application.Core.Services.Users.Project
     {
         private UserDto _user;
         private ProjectDto _project;
-        private IEnumerable<CrewMemberDto> _crewMembers;
+        private CastMemberDto _castMember;
+        private ProjectRoleDto _role;
+        private IEnumerable<ProjectUserCrewUnitDto> _crewUnits;
         // ID of the project user
         public long ID { get; set; }
 
@@ -40,18 +45,50 @@ namespace Raccord.Application.Core.Services.Users.Project
         }
 
         /// <summary>
-        /// Crew members linked to the project user
+        /// Cast Member linked to the project user
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<CrewMemberDto> CrewMembers
+        public CastMemberDto CastMember
         {
             get
             {
-                return _crewMembers ?? (_crewMembers = new List<CrewMemberDto>());
+                return _castMember ?? (_castMember = new CastMemberDto());
             }
             set
             {
-                _crewMembers = value;
+                _castMember = value;
+            }
+        }
+
+        /// <summary>
+        /// Project role of the user
+        /// </summary>
+        /// <returns></returns>
+        public ProjectRoleDto ProjectRole
+        {
+            get
+            {
+                return _role ?? (_role = new ProjectRoleDto());
+            }
+            set
+            {
+                _role = value;
+            }
+        }
+
+        /// <summary>
+        /// Crew Units of the user
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<ProjectUserCrewUnitDto> CrewUnits
+        {
+            get
+            {
+                return _crewUnits ?? new List<ProjectUserCrewUnitDto>();
+            }
+            set
+            {
+                _crewUnits = value;
             }
         }
     }

@@ -4,12 +4,14 @@ using Raccord.Application.Core.Services.Crew.CrewMembers;
 using Raccord.Application.Core.Services.SearchEngine;
 using Raccord.Data.EntityFramework.Repositories.Crew.CrewMembers;
 using Raccord.Core.Enums;
+using Raccord.Application.Services.SearchEngine;
 
 namespace Raccord.Application.Services.Crew.CrewMembers
 {
     // Service to search for crew members
     public class CrewMemberSearchEngineService : ICrewMemberSearchEngineService
     {
+        private readonly EntityType _type = EntityType.CrewMember;
         private readonly ICrewMemberRepository _crewMemberRepository;
 
         // Initialises a new CrewMemberSearchEngineService
@@ -23,13 +25,14 @@ namespace Raccord.Application.Services.Crew.CrewMembers
 
         public new EntityType GetType()
         {
-            return EntityType.CrewMember;
+            return _type;
         }
 
         public SearchTypeResultDto GetResults(SearchRequestDto request)
         {
-            var crewCount = _crewMemberRepository.SearchCount(request.SearchText, request.ProjectID, request.UserID, request.IsAdminSearch);
-            var crewMembers = _crewMemberRepository.Search(request.SearchText, request.ProjectID, request.UserID, request.IsAdminSearch);
+            var excludeIds = request.GetExcludeIDs(_type);
+            var crewCount = _crewMemberRepository.SearchCount(request.SearchText, request.ProjectID, request.UserID, request.IsAdminSearch, excludeIds);
+            var crewMembers = _crewMemberRepository.Search(request.SearchText, request.ProjectID, request.UserID, request.IsAdminSearch, excludeIds);
 
             return new SearchTypeResultDto
             {

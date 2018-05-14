@@ -1,0 +1,19 @@
+<h1 md-dialog-title>
+    Crew Unit
+</h1>
+<md-dialog-content>
+    <div fxLayout="row">
+        <md-input-container fxFlex="100%">
+            <input mdInput placeholder="Name" id="crewunit_name" [(ngModel)]="crewUnit.name" #name="ngModel" name="crewunit_name">
+        </md-input-container>
+    </div>
+    <div fxLayout="row">
+        <md-input-container fxFlex="100%">
+            <input mdInput placeholder="Description" id="crewunit_description" [(ngModel)]="crewUnit.description" #description="ngModel" name="crewunit_description">
+        </md-input-container>
+    </div>
+</md-dialog-content>
+<md-dialog-actions>
+    <button md-button md-dialog-close>Cancel</button>
+    <button md-button (click)="submit()">Save</button>
+</md-dialog-actions>

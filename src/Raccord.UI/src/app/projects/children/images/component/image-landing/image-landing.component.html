@@ -38,8 +38,12 @@
             <span class="remove-image-link action-span" (click)="removeCharacterLink(character)">(remove)</span>
         </span>
         <span class="image-link-item" *ngFor="let breakdownItem of image.breakdownItems">
-            <a routerLink="/projects/{{project.id}}/breakdown/items/{{breakdownItem.id}}">
+            <a routerLink="/projects/{{project.id}}/breakdowns/{{breakdownItem.breakdown.id}}/items/{{breakdownItem.id}}">
                 {{breakdownItem.name}}
+            </a>
+            &nbsp;
+            <a routerLink="/projects/{{project.id}}/breakdowns/{{breakdownItem.breakdown.id}}">
+                ({{breakdownItem.breakdown.name}})
             </a>
             <span class="remove-image-link action-span" (click)="removeBreakdownItemLink(breakdownItem)">(remove)</span>
         </span>

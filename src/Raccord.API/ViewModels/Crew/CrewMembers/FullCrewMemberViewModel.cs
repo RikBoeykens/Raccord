@@ -1,7 +1,11 @@
+using Raccord.API.ViewModels.Crew.CrewUnits;
+
 namespace Raccord.API.ViewModels.Crew.CrewMembers
 {
     public class FullCrewMemberViewModel : CrewMemberViewModel
     {
+        private CrewUnitViewModel _crewUnit;
+
         /// <summary>
         /// Linked user ID (if applicable)
         /// </summary>
@@ -13,5 +17,17 @@ namespace Raccord.API.ViewModels.Crew.CrewMembers
         /// </summary>
         /// <returns></returns>
         public bool HasImage { get; set; }
+
+        public CrewUnitViewModel CrewUnit
+        {
+            get
+            {
+                return _crewUnit ?? new CrewUnitViewModel();
+            }
+            set
+            {
+                _crewUnit = value;
+            }
+        }
     }
 }

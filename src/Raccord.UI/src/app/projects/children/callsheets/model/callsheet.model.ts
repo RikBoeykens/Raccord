@@ -1,13 +1,8 @@
-import { BaseModel } from '../../../../shared/model/base.model';
-import { ShootingDay } from "../../shooting-days";
+import { ShootingDay } from '../../shooting-days';
+import { BaseCallsheet } from './base-callsheet.model';
 
-export class Callsheet extends BaseModel{
-    id: number;
-    start: Date;
-    end: Date;
-    crewCall: Date;
-    shootingDay: ShootingDay;
-    projectId: number;
+export class Callsheet extends BaseCallsheet {
+    public crewUnitID: number;
 
     constructor(obj?: {
                         id: number,
@@ -15,19 +10,11 @@ export class Callsheet extends BaseModel{
                         end: Date,
                         crewCall: Date,
                         shootingDay: ShootingDay,
-                        projectId: number,
-                    }){
-        super();
-        if(obj){
-            this.id = obj.id;
-            this.start = obj.start;
-            this.end = obj.end;
-            this.crewCall = obj.crewCall;
-            this.shootingDay = obj.shootingDay;
-            this.projectId = obj.projectId;
-        }
-        else{
-            this.id = 0;
+                        crewUnitID: number,
+                    }) {
+        super(obj);
+        if (obj) {
+            this.crewUnitID = obj.crewUnitID;
         }
     }
 }

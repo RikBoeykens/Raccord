@@ -33,6 +33,18 @@ namespace Raccord.Application.Services.Characters
         {
             var characters = _characterRepository.GetAllForProject(projectID);
 
+            var dtos = characters.Select(l => l.TranslateSummary())
+                                .OrderBy(c => c.Number==0)
+                                .ThenBy(c => c.Number).ThenBy(c  => c.SceneCount);
+
+            return dtos;
+        }
+
+        // Gets all characters for a project
+        public IEnumerable<CharacterSummaryDto> GetAllForCastMember(long castMemberID)
+        {
+            var characters = _characterRepository.GetAllForCastMember(castMemberID);
+
             var dtos = characters.Select(l => l.TranslateSummary());
 
             return dtos;

@@ -1,0 +1,26 @@
+<md-card>      
+    <a routerLink="/" class="breadcrumb">Dashboard</a>
+    <a routerLink="/projects" class="breadcrumb">Projects</a>
+    <a routerLink="/projects/{{project.id}}" class="breadcrumb">{{project.title}}</a>
+    <span class="breadcrumb">Cast</span>
+</md-card>
+<md-card>
+    <md-card-content>
+        <div class="row">
+            <table class="col s12">
+                <tbody>
+                    <tr *ngFor="let castMember of castMembers">
+                        <td>
+                            <user-avatar [userId]="castMember.userID" [fullName]="getFullName(castMember)" [hasImage]="castMember.hasImage"></user-avatar>
+                        </td>
+                        <td>
+                            <a routerLink="/projects/{{project.id}}/cast/{{castMember.id}}">{{getFullName(castMember)}}</a>
+                        </td>
+                        <td>{{castMember.email}}</td>
+                        <td>{{castMember.telephone}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </md-card-content>
+</md-card>

@@ -10,6 +10,7 @@ using Raccord.Domain.Model.Users;
 using Raccord.Domain.Model.Callsheets.CallTypes;
 using Raccord.Domain.Model.Callsheets.Scenes;
 using Raccord.Domain.Model.Crew.Departments;
+using Raccord.Domain.Model.Users.ProjectRoles;
 
 namespace Raccord.Data.EntityFramework
 {
@@ -27,6 +28,9 @@ namespace Raccord.Data.EntityFramework
         public DbSet<BreakdownTypeDefinition> BreakdownTypeDefinitions { get; set; }
         public DbSet<CallTypeDefinition> CallTypeDefinitions { get; set; }
         public DbSet<CrewDepartmentDefinition> CrewDepartmentDefinitions { get; set; }
+        public DbSet<ProjectRoleDefinition> ProjectRoleDefinitions { get; set; }
+        public DbSet<ProjectPermissionDefinition> ProjectPermissionDefinitions { get; set; }
+        public DbSet<ProjectPermissionRoleDefinition> ProjectPermissionRoleDefinitions { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

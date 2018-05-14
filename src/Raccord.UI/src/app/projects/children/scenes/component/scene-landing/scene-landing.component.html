@@ -7,18 +7,16 @@
         <span class="breadcrumb">{{scene.number}}. {{scene.intExt.name}} {{scene.scriptLocation.name}} {{scene.dayNight.name}} - {{scene.summary}}</span>
     </div>
 </div>
-<div class="row">
+<div class="row" *ngIf="getCanEdit()">
     <edit-scene [scene]="viewScene" (submitScene)="updateScene()"></edit-scene>
 </div>
 <md-tab-group>
-  <md-tab label="Overview">
-    <a routerLink="/projects/{{project.id}}/scripttext" fragment="scene-{{scene.id}}">Script</a>
-  </md-tab>
   <md-tab label="Characters">
       <scene-characters [characters]="scene.characters" [sceneId]="scene.id" [projectId]="project.id"></scene-characters>
   </md-tab>
   <md-tab label="Breakdown">
-      <scene-breakdown-items [breakdownItems]="scene.breakdownItems" [sceneId]="scene.id" [projectId]="project.id" [breakdownTypes]="breakdownTypes"></scene-breakdown-items>
+      <i *ngIf="scene.breakdownInfo.id===0">No breakdown selected</i>
+      <scene-breakdown-items *ngIf="scene.breakdownInfo.id!==0" [breakdown]="scene.breakdownInfo" [sceneId]="scene.id" [projectId]="project.id"></scene-breakdown-items>
   </md-tab>
   <md-tab label="Pictures">
       <scene-images [images]="scene.images" [sceneId]="scene.id" [projectId]="project.id"></scene-images>
@@ -26,7 +24,7 @@
   <md-tab label="Shooting days">
       <scene-shooting-days [shootingDays]="scene.shootingDays" [sceneId]="scene.id" [projectId]="project.id"></scene-shooting-days>
   </md-tab>
-  <md-tab label="Slates">
+  <!--md-tab label="Slates">
       <scene-slates [slates]="scene.slates" [sceneId]="scene.id" [projectId]="project.id"></scene-slates>
-  </md-tab>
+  </md-tab-->
 </md-tab-group>

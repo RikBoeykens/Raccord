@@ -2,7 +2,7 @@
     <a routerLink="/" class="breadcrumb">Dashboard</a>
     <a routerLink="/projects" class="breadcrumb">Projects</a>
     <a routerLink="/projects/{{project.id}}" class="breadcrumb">{{project.title}}</a>
-    <a routerLink="/projects/{{project.id}}" class="breadcrumb">Scenes</a>
+    <a routerLink="/projects/{{project.id}}/scenes" class="breadcrumb">Scenes</a>
     <span class="breadcrumb">Timings</span>
 </md-card>
 <md-card>
@@ -10,10 +10,11 @@
         <md-list-item 
            *ngFor="let scene of scenes">
             <show-image *ngIf="scene.primaryImage.id!=0" [image]="scene.primaryImage" [listAvatar]="true"></show-image>
-            {{scene.number}}. {{scene.intExt.name}} {{scene.scriptLocation.name}} {{scene.dayNight.name}} - {{scene.summary}} ({{scene.pageLength | pagelength}})
-            <md-input-container>
+            <a routerLink="/projects/{{project.id}}/scenes/{{scene.id}}"><scene-summary [scene]="scene"></scene-summary></a>
+            <md-input-container *ngIf="getCanEdit()">
                 <input mdInput type="text" placeholder="Timing" [(ngModel)]="scene.timing" name="scene_{{scene.id}}_timing" (blur)="updateTiming(scene)" />
             </md-input-container>
+            <span *ngIf="!getCanEdit()">{{scene.timing | timespan}}</span>
         </md-list-item>
     </md-list>
 </md-card>

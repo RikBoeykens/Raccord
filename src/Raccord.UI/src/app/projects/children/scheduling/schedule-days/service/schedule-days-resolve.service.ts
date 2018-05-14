@@ -6,13 +6,14 @@ import { FullScheduleDay } from '../model/full-schedule-day.model';
 export class ScheduleDaysResolve implements Resolve<FullScheduleDay[]> {
 
   constructor(
-    private scheduleDayHttpService: ScheduleDayHttpService, 
+    private scheduleDayHttpService: ScheduleDayHttpService,
     private router: Router
   ) {}
 
-    resolve(route: ActivatedRouteSnapshot) {
+    public resolve(route: ActivatedRouteSnapshot) {
         let projectId = route.params['projectId'];
-        return this.scheduleDayHttpService.getAll(projectId).then(data => {
+        let crewUnitId = route.params['crewUnitId'];
+        return this.scheduleDayHttpService.getAll(projectId, crewUnitId).then((data) => {
             return data;
         });
     }

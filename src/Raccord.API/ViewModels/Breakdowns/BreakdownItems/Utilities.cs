@@ -16,6 +16,7 @@ namespace Raccord.API.ViewModels.Breakdowns.BreakdownItems
                 ID = dto.ID,
                 Name = dto.Name,
                 Description = dto.Description,
+                Breakdown = dto.Breakdown.Translate(),
                 Type = dto.Type.Translate(),
                 Scenes = dto.Scenes.Select(s=> s.Translate()),
                 Images = dto.Images.Select(i=> i.Translate()),
@@ -30,7 +31,8 @@ namespace Raccord.API.ViewModels.Breakdowns.BreakdownItems
                 ID = dto.ID,
                 Name = dto.Name,
                 Description = dto.Description,
-                Type = dto.Type.Translate(),
+                BreakdownID = dto.BreakdownID,
+                BreakdownTypeID = dto.BreakdownTypeID,
                 SceneCount = dto.SceneCount,
                 PrimaryImage = dto.PrimaryImage.Translate(),
             };
@@ -44,7 +46,8 @@ namespace Raccord.API.ViewModels.Breakdowns.BreakdownItems
                 ID = dto.ID,
                 Name = dto.Name,
                 Description = dto.Description,
-                Type = dto.Type.Translate(),
+                BreakdownID = dto.BreakdownID,
+                BreakdownTypeID = dto.BreakdownTypeID,
             };
         }
 
@@ -68,6 +71,20 @@ namespace Raccord.API.ViewModels.Breakdowns.BreakdownItems
                 Name = dto.Name,
                 Description = dto.Description,
                 Type = dto.Type.Translate(),
+                Breakdown = dto.Breakdown.Translate(),
+                LinkID = dto.LinkID,
+            };
+        }
+
+        // Translates a breakdown item dto to a breakdown item viewmodel
+        public static SceneBreakdownItemViewModel Translate(this SceneBreakdownItemDto dto)
+        {
+            return new SceneBreakdownItemViewModel
+            {
+                ID = dto.ID,
+                Name = dto.Name,
+                Description = dto.Description,
+                Type = dto.Type.Translate(),
                 LinkID = dto.LinkID
             };
         }
@@ -80,7 +97,20 @@ namespace Raccord.API.ViewModels.Breakdowns.BreakdownItems
                 ID = vm.ID,
                 Name = vm.Name,
                 Description = vm.Description,
-                Type = vm.Type.Translate(),
+                BreakdownID = vm.BreakdownID,
+                BreakdownTypeID = vm.BreakdownTypeID,
+            };
+        }
+
+        public static SearchBreakdownItemRequestDto Translate(this SearchBreakdownItemRequestViewModel vm, string userID)
+        {
+            return new SearchBreakdownItemRequestDto
+            {
+                SearchText = vm.SearchText,
+                TypeID = vm.TypeID,
+                BreakdownID = vm.BreakdownID,
+                UserID = userID,
+                ExcludeIDs = vm.ExcludeIDs
             };
         }
     }

@@ -15,7 +15,7 @@ namespace Raccord.Domain.Model.Callsheets.Scenes
         public int PageLength { get; set; }
 
         // The sorting order of the scene within the callsheet
-        public int SortingOrder { get; set; }
+        public int? SortingOrder { get; set; }
 
         // ID of the linked callsheet
         public long CallsheetID { get; set; }

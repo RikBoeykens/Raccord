@@ -10,5 +10,11 @@ namespace Raccord.Application.Core.Services.Users.Project
 
         // Linked project
         public long ProjectID { get; set; }
+
+        /// <summary>
+        /// Role for the project user
+        /// </summary>
+        /// <returns></returns>
+        public long? RoleID { get; set; }
     }
 }
