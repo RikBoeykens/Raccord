@@ -1,15 +1,23 @@
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
+using AspNet.Security.OAuth.Validation;
+using AspNet.Security.OpenIdConnect.Primitives;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.PlatformAbstractions;
+using Raccord.API.Options;
 using Raccord.Data.EntityFramework;
 using Raccord.Data.EntityFramework.Seeding;
 using Raccord.Domain.Model.Users;
-using AspNet.Security.OpenIdConnect.Primitives;
-using Microsoft.AspNetCore.Identity;
 using Swashbuckle.AspNetCore.Swagger;
 
 namespace Raccord.API
@@ -18,25 +26,30 @@ namespace Raccord.API
     {
         public Startup(IHostingEnvironment env)
         {
+            var appEnv = PlatformServices.Default.Application;
+            ApplicationBasePath = appEnv.ApplicationBasePath;
+            ConfigPath = Path.Combine(env.ContentRootPath, "_config");
+
             var builder = new ConfigurationBuilder()
-                .SetBasePath(env.ContentRootPath)
-                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
+                .SetBasePath(ConfigPath)
+                .AddJsonFile("app.json")
                 .AddEnvironmentVariables();
+
             Configuration = builder.Build();
         }
 
-        public IConfigurationRoot Configuration { get; }
+        public IConfigurationRoot Configuration { get; private set; }
+        public string ApplicationBasePath { get; private set; }
+        public string ConfigPath { get; private set; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
+        // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.Configure<DbContextSettings>(Configuration.GetSection("DbContextSettings"));
             // Add framework services.
-            services.AddCors();
-            
-            services.AddMvc();
-
-            var connectionString = Configuration["DbContextSettings:ConnectionString"];
+            var dbConfig = Configuration.GetSection("DbContextSettings");
+            var connectionString = dbConfig.GetValue<string>("ConnectionString");
             services.AddDbContext<RaccordDBContext>(opts =>{ 
                 opts.UseNpgsql(connectionString);
                 
@@ -46,9 +59,12 @@ namespace Raccord.API
                 opts.UseOpenIddict();
             });
 
+
+            // Register the Identity services.
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<RaccordDBContext>()
                 .AddDefaultTokenProviders();
+
             // Configure Identity to use the same JWT claims as OpenIddict instead
             // of the legacy WS-Federation claims it uses by default (ClaimTypes),
             // which saves you from doing the mapping in your authorization controller.
@@ -56,27 +72,44 @@ namespace Raccord.API
             {
                 options.ClaimsIdentity.UserNameClaimType = OpenIdConnectConstants.Claims.Name;
                 options.ClaimsIdentity.UserIdClaimType = OpenIdConnectConstants.Claims.Subject;
-                //options.ClaimsIdentity.RoleClaimType = OpenIdConnectConstants.Claims.Role;
+                options.ClaimsIdentity.RoleClaimType = OpenIdConnectConstants.Claims.Role;
             });
- 
+
             // Register the OpenIddict services.
-            services.AddOpenIddict()
+            services.AddOpenIddict(options =>
+            {
                 // Register the Entity Framework stores.
-                .AddEntityFrameworkCoreStores<RaccordDBContext>()
- 
+                options.AddEntityFrameworkCoreStores<RaccordDBContext>();
+
                 // Register the ASP.NET Core MVC binder used by OpenIddict.
                 // Note: if you don't call this method, you won't be able to
                 // bind OpenIdConnectRequest or OpenIdConnectResponse parameters.
-                .AddMvcBinders()
- 
+                options.AddMvcBinders();
+
                 // Enable the token endpoint.
-                .EnableTokenEndpoint("/api/authorization/connect/token")
- 
-                // Enable the password flow.
-                .AllowPasswordFlow()
- 
+                options.EnableTokenEndpoint("/api/authorization/connect/token");
+
+                // Enable the password and the refresh token flows.
+                options.AllowPasswordFlow()
+                       .AllowRefreshTokenFlow();
+
                 // During development, you can disable the HTTPS requirement.
-                .DisableHttpsRequirement();
+                options.DisableHttpsRequirement();
+
+                // Note: to use JWT access tokens instead of the default
+                // encrypted format, the following lines are required:
+                //
+                // options.UseJsonWebTokens();
+                // options.AddEphemeralSigningKey();
+            });
+
+            // Register the validation handler that is used to decrypt the tokens
+            services.AddAuthentication(options =>
+                {
+                    options.DefaultAuthenticateScheme = 
+                        OAuthValidationDefaults.AuthenticationScheme;
+                })
+                .AddOAuthValidation();
 
             DependencyInjection.ConfigureServices(services);
 
@@ -89,6 +122,9 @@ namespace Raccord.API
             {
                 options.CustomSchemaIds(x=> x.FullName);
             });
+            services.AddCors();
+            
+            services.AddMvc();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -97,23 +133,7 @@ namespace Raccord.API
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
 
-            // Add a middleware used to validate access
-            // tokens and protect the API endpoints.
-            app.UseOAuthValidation();
- 
-            // Alternatively, you can also use the introspection middleware.
-            // Using it is recommended if your resource server is in a
-            // different application/separated from the authorization server.
-            //
-            // app.UseOAuthIntrospection(options =>
-            // {
-            //     options.AutomaticAuthenticate = true;
-            //     options.AutomaticChallenge = true;
-            //     options.Authority = "http://localhost:58795/";
-            //     options.Audiences.Add("resource_server");
-            //     options.ClientId = "resource_server";
-            //     options.ClientSecret = "875sqd4s5d748z78z7ds1ff8zz8814ff88ed8ea4z4zzd";
-            // });
+            app.UseAuthentication();
 
             app.UseCors(builder =>
                 builder.WithOrigins("http://localhost:5000", "http://localhost:3000")
@@ -121,9 +141,7 @@ namespace Raccord.API
                        .AllowAnyHeader()
             );
 
-            app.UseOpenIddict();
-
-                app.UseSwagger();
+            app.UseSwagger();
 
             // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.), specifying the Swagger JSON endpoint.
             app.UseSwaggerUI(c =>

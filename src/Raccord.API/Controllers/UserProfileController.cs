@@ -121,7 +121,7 @@ namespace Raccord.API.Controllers
             _userProfileService.AddProfileImage(new AddProfileImageDto
             {
                 ID = GetUserId(),
-                FileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"'),
+                FileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.ToString().Trim('"'),
                 FileContent = file.OpenReadStream()
             });
 

@@ -47,7 +47,7 @@ namespace Raccord.API.Controllers
 
                 var uploadScriptID = _scriptUploadService.UploadScript(new ScriptUploadRequestDto
                 {
-                    FileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"'),
+                    FileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.ToString().Trim('"'),
                     FileContent = file.OpenReadStream(),
                     ProjectID = projectID
                 });

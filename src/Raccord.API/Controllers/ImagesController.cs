@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
@@ -12,6 +11,7 @@ using Raccord.API.ViewModels.Common.SelectedEntity;
 using Microsoft.AspNetCore.Identity;
 using Raccord.Domain.Model.Users;
 using Raccord.API.ViewModels.Common.Images;
+using System;
 
 namespace Raccord.API.Controllers
 {
@@ -77,7 +77,7 @@ namespace Raccord.API.Controllers
                     images.Add(new NewImageContentDto
                     {
                         FileContent = file.OpenReadStream(),
-                        FileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"'),
+                        FileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.ToString().Trim('"'),
                         SelectedEntity = selectedEntity?.Translate(),
                     });
                 }

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using Raccord.Domain.Model.Callsheets;
 using Raccord.Domain.Model.Crew.CrewUnits;
 using Raccord.Domain.Model.Projects;
