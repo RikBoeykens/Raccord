@@ -1,18 +1,14 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-
-  <PropertyGroup>
-    <TargetFramework>netstandard1.6</TargetFramework>
-    <AssemblyName>Raccord.Application.Services</AssemblyName>
-    <PackageId>Raccord.Application.Services</PackageId>
-    <NetStandardImplicitPackageVersion>1.6.0</NetStandardImplicitPackageVersion>
-    <PackageTargetFallback>$(PackageTargetFallback);dnxcore50;net451</PackageTargetFallback>
-  </PropertyGroup>
+<Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
-    <ProjectReference Include="../Raccord.Domain.Model/Raccord.Domain.Model.csproj" />
-    <ProjectReference Include="../Raccord.Application.Core/Raccord.Application.Core.csproj" />
-    <ProjectReference Include="../Raccord.Data.EntityFramework/Raccord.Data.EntityFramework.csproj" />
-    <ProjectReference Include="../Raccord.Core/Raccord.Core.csproj" />
+    <ProjectReference Include="..\Raccord.Core\Raccord.Core.csproj" />
+    <ProjectReference Include="..\Raccord.Domain.Model\Raccord.Domain.Model.csproj" />
+    <ProjectReference Include="..\Raccord.Application.Core\Raccord.Application.Core.csproj" />
+    <ProjectReference Include="..\Raccord.Data.EntityFramework\Raccord.Data.EntityFramework.csproj" />
   </ItemGroup>
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
 
 </Project>

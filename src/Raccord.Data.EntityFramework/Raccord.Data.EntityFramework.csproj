@@ -1,25 +1,20 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-
-  <PropertyGroup>
-    <TargetFramework>netstandard1.6</TargetFramework>
-    <AssemblyName>Raccord.Data.EntityFramework</AssemblyName>
-    <PackageId>Raccord.Data.EntityFramework</PackageId>
-    <NetStandardImplicitPackageVersion>1.6.0</NetStandardImplicitPackageVersion>
-    <PackageTargetFallback>$(PackageTargetFallback);dnxcore50;net451</PackageTargetFallback>
-  </PropertyGroup>
+<Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
-    <ProjectReference Include="../Raccord.Domain.Model/Raccord.Domain.Model.csproj" />
     <ProjectReference Include="..\Raccord.Core\Raccord.Core.csproj" />
+    <ProjectReference Include="..\Raccord.Domain.Model\Raccord.Domain.Model.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="1.0.0" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="1.0.3" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="2.0.0-*" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="2.0.0-*" />
   </ItemGroup>
 
   <ItemGroup>
-    <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="1.0.0" />
+    <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="2.0.0-*" />
   </ItemGroup>
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
 
 </Project>

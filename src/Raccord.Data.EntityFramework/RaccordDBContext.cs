@@ -11,6 +11,11 @@ using Raccord.Domain.Model.Callsheets.CallTypes;
 using Raccord.Domain.Model.Callsheets.Scenes;
 using Raccord.Domain.Model.Crew.Departments;
 using Raccord.Domain.Model.Users.ProjectRoles;
+using Raccord.Domain.Model.Callsheets;
+using Raccord.Domain.Model.ShootingDays;
+using Raccord.Domain.Model.ShootingDays.Scenes;
+using Raccord.Domain.Model.Scheduling;
+using Raccord.Domain.Model.Cast;
 
 namespace Raccord.Data.EntityFramework
 {
@@ -40,6 +45,26 @@ namespace Raccord.Data.EntityFramework
                         .HasOne(cs=> cs.ShootingDayScene)
                         .WithOne(sds=> sds.CallsheetScene)
                         .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<ShootingDay>()
+                        .HasOne(cs => cs.Callsheet)
+                        .WithOne(sd => sd.ShootingDay)
+                        .HasForeignKey<Callsheet>(cs => cs.ShootingDayID);
+
+            modelBuilder.Entity<ShootingDay>()
+                        .HasOne(cs => cs.ScheduleDay)
+                        .WithOne(sd => sd.ShootingDay)
+                        .HasForeignKey<ScheduleDay>(cs => cs.ShootingDayID);
+
+            modelBuilder.Entity<CallsheetScene>()
+                        .HasOne(cs => cs.ShootingDayScene)
+                        .WithOne(sd => sd.CallsheetScene)
+                        .HasForeignKey<ShootingDayScene>(cs => cs.CallsheetSceneID);
+
+            modelBuilder.Entity<ProjectUser>()
+                        .HasOne(cs => cs.CastMember)
+                        .WithOne(sd => sd.ProjectUser)
+                        .HasForeignKey<CastMember>(cs => cs.ProjectUserID);
         }
     }
 }
