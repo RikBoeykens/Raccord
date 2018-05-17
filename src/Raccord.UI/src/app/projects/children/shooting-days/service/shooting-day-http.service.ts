@@ -7,12 +7,16 @@ import { JsonResponse } from '../../../../shared/model/json-response.model';
 import { ShootingDaySummary } from '../model/shooting-day-summary.model';
 import { FullShootingDay } from '../model/full-shooting-day.model';
 import { ShootingDayCrewUnit } from '../model/shooting-day-crew-unit.model';
+import { AuthService } from '../../../../security/service/auth.service';
 
 @Injectable()
 export class ShootingDayHttpService extends BaseHttpService {
 
-    constructor(protected _http: Http) {
-        super(_http);
+    constructor(
+        protected _http: Http,
+        protected _authService: AuthService
+    ) {
+        super(_http, _authService);
         this._baseUri = `${AppSettings.API_ENDPOINT}/shootingdays`;
     }
 

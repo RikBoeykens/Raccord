@@ -10,12 +10,13 @@ import { LinkedScheduleScene } from '../../schedule-scenes/model/linked-schedule
 import { JsonResponse } from '../../../../shared/model/json-response.model';
 import { SortOrder } from '../../../../shared/model/sort-order.model';
 import { BaseProjectHttpService } from '../../../../shared/service/base-project-http.service';
+import { AuthService } from '../../../../../security/service/auth.service';
 
 @Injectable()
 export class ScheduleCharacterHttpService extends BaseProjectHttpService {
 
-    constructor(protected _http: Http) {
-        super(_http, 'schedulecharacters');
+    constructor(protected _http: Http, protected _authService: AuthService) {
+        super(_http, _authService, 'schedulecharacters');
     }
 
     public getCharacters(authProjectId: number, sceneId): Promise<LinkedCharacter[]> {

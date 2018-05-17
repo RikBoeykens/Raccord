@@ -9,12 +9,16 @@ import { LinkImage } from '../model/link-image.model';
 import { JsonResponse } from '../../../../shared/model/json-response.model';
 import { SelectedEntity } from '../../../../shared/model/selected-entity.model';
 import { Base64Image } from '../../../../shared/model/base-64-image.model';
+import { AuthService } from '../../../../security/service/auth.service';
 
 @Injectable()
 export class ImageHttpService extends BaseHttpService {
 
-    constructor(protected _http: Http) { 
-        super(_http);
+    constructor(
+        protected _http: Http,
+        protected _authService: AuthService
+    ) {
+        super(_http, _authService);
         this._baseUri = `${AppSettings.API_ENDPOINT}/images`;
     }
 

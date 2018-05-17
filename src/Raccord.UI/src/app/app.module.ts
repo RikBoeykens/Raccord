@@ -533,6 +533,7 @@ import {
 } from './calendar';
 
 const APP_PROVIDERS = [
+  AuthService,
   LoadingService,
   CanDeactivateGuard,
   DialogService,
@@ -594,7 +595,6 @@ const APP_PROVIDERS = [
   LocationSetHttpService,
   LocationSetResolve,
   SceneLocationSetsResolve,
-  AuthService,
   AuthGuard,
   AccountHttpService,
   CanEditGeneralProjectPermissionGuard,
@@ -693,6 +693,10 @@ const PIPES = [
     TimespanPipe
 ];
 
+// Interceptors
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { TokenInterceptor } from './security';
+
 // external modules
 import { DragulaModule } from 'ng2-dragula';
 import { MaterialModule } from '@angular/material';
@@ -734,7 +738,12 @@ import '../styles/headings.css';
   ],
   providers: [ // expose our Services and Providers into Angular's dependency injection
     ENV_PROVIDERS,
-    APP_PROVIDERS
+    APP_PROVIDERS,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    }
   ]
 })
 export class AppModule {}

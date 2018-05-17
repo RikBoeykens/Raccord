@@ -6,12 +6,16 @@ import { FullUser } from '../model/full-user.model';
 import { CreateUser } from '../model/create-user.model';
 import { UserSummary } from '../model/user-summary.model';
 import { User } from '../model/user.model';
+import { AuthService } from '../../../security/service/auth.service';
 
 @Injectable()
 export class AdminUserHttpService extends BaseHttpService {
 
-    constructor(protected _http: Http) { 
-        super(_http);
+    constructor(
+        protected _http: Http,
+        protected _authService: AuthService
+    ) {
+        super(_http, _authService);
         this._baseUri = `${AppSettings.API_ADMIN_ENDPOINT}/users`;
     }
 

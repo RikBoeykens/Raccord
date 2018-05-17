@@ -8,12 +8,13 @@ import { ScheduleDay } from '../model/schedule-day.model';
 import { JsonResponse } from '../../../../../shared/model/json-response.model';
 import { BaseProjectHttpService } from '../../../../shared/service/base-project-http.service';
 import { FullScheduleDayCrewUnit } from '../model/full-schedule-day-crew-unit.model';
+import { AuthService } from '../../../../../security/service/auth.service';
 
 @Injectable()
 export class ScheduleDayHttpService extends BaseProjectHttpService {
 
-    constructor(protected _http: Http) {
-        super(_http, 'scheduledays');
+    constructor(protected _http: Http, protected _authService: AuthService) {
+        super(_http, _authService, 'scheduledays');
     }
 
     public getAll(authProjectId: number, crewUnitId: number): Promise<FullScheduleDay[]> {

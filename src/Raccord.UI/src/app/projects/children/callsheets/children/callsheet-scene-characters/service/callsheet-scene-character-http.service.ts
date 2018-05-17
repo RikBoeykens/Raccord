@@ -9,12 +9,16 @@ import { LinkedCharacter } from '../../../../characters/model/linked-character.m
 import { LinkedCallsheetScene } from '../../../';
 import { JsonResponse } from '../../../../shared/model/json-response.model';
 import { SortOrder } from '../../../../shared/model/sort-order.model';
+import { AuthService } from '../../../../../../security/service/auth.service';
 
 @Injectable()
 export class CallsheetSceneCharacterHttpService extends BaseHttpService {
 
-    constructor(protected _http: Http) { 
-        super(_http);
+    constructor(
+        protected _http: Http,
+        protected _authService: AuthService
+    ) {
+        super(_http, _authService);
         this._baseUri = `${AppSettings.API_ENDPOINT}/callsheetscenecharacters`;
     }
 

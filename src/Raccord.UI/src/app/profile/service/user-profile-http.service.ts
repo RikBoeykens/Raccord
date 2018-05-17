@@ -5,12 +5,16 @@ import { AppSettings } from "../../app.settings";
 import { UserProfile } from "../model/user-profile.model";
 import { Base64Image } from "../../shared/model/base-64-image.model";
 import { UserProfileSummary } from "../model/user-profile-summary.model";
+import { AuthService } from "../../security/service/auth.service";
 
 @Injectable()
 export class UserProfileHttpService extends BaseHttpService {
 
-  constructor(protected _http: Http) { 
-      super(_http);
+  constructor(
+    protected _http: Http,
+    protected _authService: AuthService
+) {
+    super(_http, _authService);
       this._baseUri = `${AppSettings.API_ENDPOINT}/userprofile`;
   }
 

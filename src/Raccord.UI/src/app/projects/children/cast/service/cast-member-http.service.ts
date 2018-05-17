@@ -5,12 +5,16 @@ import { AppSettings } from '../../../../app.settings';
 import { CastMember } from '../model/cast-member.model';
 import { CastMemberSummary } from '../model/cast-member-summary.model';
 import { FullCastMember } from '../model/full-cast-member.model';
+import { AuthService } from '../../../../security/service/auth.service';
 
 @Injectable()
 export class CastMemberHttpService extends BaseHttpService {
 
-    constructor(protected _http: Http) {
-        super(_http);
+    constructor(
+        protected _http: Http,
+        protected _authService: AuthService
+    ) {
+        super(_http, _authService);
         this._baseUri = `${AppSettings.API_ENDPOINT}/castmembers`;
     }
 

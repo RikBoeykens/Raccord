@@ -7,7 +7,7 @@ import { DialogService } from '../../../shared/service/dialog.service';
 import { Login } from '../../';
 import { AccountHelpers } from '../../../account/helpers/account.helper';
 import { UserProfileHttpService } from '../../../profile/service/user-profile-http.service';
-import { ProjectHttpService } from '../../../projects';
+import { ProjectHttpService } from '../../../projects/service/project-http.service';
 
 @Component({
     templateUrl: 'login.component.html',

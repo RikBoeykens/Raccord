@@ -3,13 +3,17 @@ import { Http } from "@angular/http";
 import { BaseHttpService } from "../../../../shared/service/base-http.service";
 import { AppSettings } from "../../../../app.settings";
 import { SceneText } from "../model/scene-text.model";
+import { AuthService } from "../../../../security/service/auth.service";
 
 @Injectable()
 export class ScriptTextHttpService extends BaseHttpService {
 
-  constructor(protected _http: Http) { 
-      super(_http);
-      this._baseUri = `${AppSettings.API_ENDPOINT}/scripttexts`;
+  constructor(
+      protected _http: Http,
+      protected _authService: AuthService
+  ) {
+    super(_http, _authService);
+    this._baseUri = `${AppSettings.API_ENDPOINT}/scripttexts`;
   }
 
   public getForProject(id: number): Promise<SceneText[]> {

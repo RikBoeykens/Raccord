@@ -5,12 +5,13 @@ import { BaseProjectHttpService } from '../../../../shared/service/base-project-
 import { CrewUnitSummary } from '../model/crew-unit-summary.model';
 import { FullCrewUnit } from '../model/full-crew-unit.model';
 import { CrewUnit } from '../model/crew-unit.model';
+import { AuthService } from '../../../../../security/service/auth.service';
 
 @Injectable()
 export class CrewUnitHttpService extends BaseProjectHttpService {
 
-    constructor(protected _http: Http) {
-        super(_http, 'crewunits');
+    constructor(protected _http: Http, protected _authService: AuthService) {
+        super(_http, _authService, 'crewunits');
     }
 
     public getAll(authProjectId: number): Promise<CrewUnitSummary[]> {

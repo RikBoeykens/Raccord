@@ -7,12 +7,13 @@ import { ScheduleDayNoteSummary } from '../model/schedule-day-note-summary.model
 import { ScheduleDayNote } from '../model/schedule-day-note.model';
 import { JsonResponse } from '../../../../../shared/model/json-response.model';
 import { BaseProjectHttpService } from '../../../../shared/service/base-project-http.service';
+import { AuthService } from '../../../../../security/service/auth.service';
 
 @Injectable()
 export class ScheduleDayNoteHttpService extends BaseProjectHttpService {
 
-    constructor(protected _http: Http) {
-        super(_http, 'scheduledaynotes');
+    constructor(protected _http: Http, protected _authService: AuthService) {
+        super(_http, _authService, 'scheduledaynotes');
     }
 
     public getAll(authProjectId: number): Promise<ScheduleDayNoteSummary[]> {

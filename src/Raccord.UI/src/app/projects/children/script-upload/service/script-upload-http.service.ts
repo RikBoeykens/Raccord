@@ -3,13 +3,17 @@ import { Http } from "@angular/http";
 import { BaseHttpService } from "../../../../shared/service/base-http.service";
 import { AppSettings } from "../../../../app.settings";
 import { FullScriptUpload } from "../model/full-script-upload.model";
+import { AuthService } from "../../../../security/service/auth.service";
 
 @Injectable()
 export class ScriptUploadHttpService extends BaseHttpService {
 
-  constructor(protected _http: Http) { 
-      super(_http);
-      this._baseUri = `${AppSettings.API_ENDPOINT}/scriptuploads`;
+  constructor(
+    protected _http: Http,
+    protected _authService: AuthService
+  ) {
+    super(_http, _authService);
+    this._baseUri = `${AppSettings.API_ENDPOINT}/scriptuploads`;
   }
 
   public get(id: number): Promise<FullScriptUpload> {

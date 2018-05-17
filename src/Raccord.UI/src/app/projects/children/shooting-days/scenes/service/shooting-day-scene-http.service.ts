@@ -5,12 +5,16 @@ import { AppSettings } from '../../../../../app.settings';
 import { ShootingDaySceneScene } from '../model/shooting-day-scene-scene.model';
 import { ShootingDaySceneDay } from '../model/shooting-day-scene-day.model';
 import { ShootingDayScene } from '../model/shooting-day-scene.model';
+import { AuthService } from '../../../../../security/service/auth.service';
 
 @Injectable()
 export class ShootingDaySceneHttpService extends BaseHttpService {
 
-    constructor(protected _http: Http) {
-        super(_http);
+    constructor(
+        protected _http: Http,
+        protected _authService: AuthService
+    ) {
+        super(_http, _authService);
         this._baseUri = `${AppSettings.API_ENDPOINT}/shootingdayscenes`;
     }
 

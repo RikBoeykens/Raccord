@@ -6,12 +6,16 @@ import { FullIntExt } from '../model/full-int-ext.model';
 import { IntExtSummary } from '../model/int-ext-summary.model';
 import { IntExt } from '../model/int-ext.model';
 import { JsonResponse } from '../../../../shared/model/json-response.model';
+import { AuthService } from '../../../../security/service/auth.service';
 
 @Injectable()
 export class IntExtHttpService extends BaseHttpService {
 
-    constructor(protected _http: Http) { 
-        super(_http);
+    constructor(
+        protected _http: Http,
+        protected _authService: AuthService
+    ) {
+        super(_http, _authService);
         this._baseUri = `${AppSettings.API_ENDPOINT}/intexts`;
     }
 

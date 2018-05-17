@@ -4,12 +4,13 @@ import { AppSettings } from '../../../../app.settings';
 import { Comment } from '../model/comment.model';
 import { PostComment } from '../model/post-comment.model';
 import { BaseProjectHttpService } from '../../../shared/service/base-project-http.service';
+import { AuthService } from '../../../../security/service/auth.service';
 
 @Injectable()
 export class CommentHttpService extends BaseProjectHttpService {
 
-    constructor(protected _http: Http) {
-        super(_http, 'comments');
+    constructor(protected _http: Http, protected _authService: AuthService) {
+        super(_http, _authService, 'comments');
     }
 
     public getAll(

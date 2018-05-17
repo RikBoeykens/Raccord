@@ -5,12 +5,16 @@ import { AppSettings } from '../../../../../app.settings';
 import { CrewMember } from '../model/crew-member.model';
 import { CrewMemberSummary } from '../model/crew-member-summary.model';
 import { FullCrewMember } from '../model/full-crew-member.model';
+import { AuthService } from '../../../../../security/service/auth.service';
 
 @Injectable()
 export class CrewMemberHttpService extends BaseHttpService {
 
-    constructor(protected _http: Http) {
-        super(_http);
+    constructor(
+        protected _http: Http,
+        protected _authService: AuthService
+    ) {
+        super(_http, _authService);
         this._baseUri = `${AppSettings.API_ENDPOINT}/crewmembers`;
     }
 

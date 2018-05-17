@@ -7,12 +7,16 @@ import { CallsheetSummary } from '../';
 import { Callsheet } from '../';
 import { JsonResponse } from '../../../../shared/model/json-response.model';
 import { CallsheetCrewUnit } from '../model/callsheet-crew-unit.model';
+import { AuthService } from '../../../../security/service/auth.service';
 
 @Injectable()
 export class CallsheetHttpService extends BaseHttpService {
 
-    constructor(protected _http: Http) {
-        super(_http);
+    constructor(
+        protected _http: Http,
+        protected _authService: AuthService
+    ) {
+        super(_http, _authService);
         this._baseUri = `${AppSettings.API_ENDPOINT}/callsheets`;
     }
 

@@ -3,12 +3,16 @@ import { Http } from '@angular/http';
 import { BaseHttpService } from '../../../../../shared/service/base-http.service';
 import { AppSettings } from '../../../../../app.settings';
 import { LinkedImage } from '../../../images/model/linked-image.model';
+import { AuthService } from '../../../../../security/service/auth.service';
 
 @Injectable()
 export class ImageSlateHttpService extends BaseHttpService {
 
-    constructor(protected _http: Http) { 
-        super(_http);
+    constructor(
+        protected _http: Http,
+        protected _authService: AuthService
+    ) {
+        super(_http, _authService);
         this._baseUri = `${AppSettings.API_ENDPOINT}/imageslates`;
     }
 

@@ -313,7 +313,6 @@ export class EditScheduleComponent implements OnInit {
                             e.getAttribute('data-schedule-scene-id'),
                             0
                         );
-                        console.log(scheduleSceneId);
                         this.moveScheduleScene(destinationDayId, scheduleSceneId);
                     }
                 });

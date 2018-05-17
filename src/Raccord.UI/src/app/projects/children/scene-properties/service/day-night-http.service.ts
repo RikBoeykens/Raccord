@@ -6,12 +6,16 @@ import { FullDayNight } from '../model/full-day-night.model';
 import { DayNightSummary } from '../model/day-night-summary.model';
 import { DayNight } from '../model/day-night.model';
 import { JsonResponse } from '../../../../shared/model/json-response.model';
+import { AuthService } from '../../../../security/service/auth.service';
 
 @Injectable()
 export class DayNightHttpService extends BaseHttpService {
 
-    constructor(protected _http: Http) { 
-        super(_http);
+    constructor(
+        protected _http: Http,
+        protected _authService: AuthService
+    ) {
+        super(_http, _authService);
         this._baseUri = `${AppSettings.API_ENDPOINT}/daynights`;
     }
 

@@ -6,12 +6,16 @@ import { ProjectUser } from '../model/project-user.model';
 import { FullProjectUser } from '../model/full-project-user.model';
 import { ProjectUserUser } from '../model/project-user-user.model';
 import { ProjectUserProject } from '../model/project-user-project.model';
+import { AuthService } from '../../../security/service/auth.service';
 
 @Injectable()
 export class AdminProjectUserHttpService extends BaseHttpService {
 
-    constructor(protected _http: Http) {
-        super(_http);
+    constructor(
+        protected _http: Http,
+        protected _authService: AuthService
+    ) {
+        super(_http, _authService);
         this._baseUri = `${AppSettings.API_ADMIN_ENDPOINT}/projectusers`;
     }
 

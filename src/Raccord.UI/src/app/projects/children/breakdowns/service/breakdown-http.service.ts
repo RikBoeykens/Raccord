@@ -7,12 +7,13 @@ import { FullBreakdown } from '../model/full-breakdown.model';
 import { Breakdown } from '../model/breakdown.model';
 import { PublishBreakdown } from '../model/publish-breakdown.model';
 import { SelectedBreakdown } from '../model/selected-breakdown.model';
+import { AuthService } from '../../../../security';
 
 @Injectable()
 export class BreakdownHttpService extends BaseProjectHttpService {
 
-    constructor(protected _http: Http) {
-        super(_http, 'breakdowns');
+    constructor(protected _http: Http, protected _authService: AuthService) {
+        super(_http, _authService, 'breakdowns');
     }
 
     public getAll(authProjectId: number): Promise<BreakdownSummary[]> {

@@ -6,12 +6,16 @@ import { FullCharacter } from '../model/full-character.model';
 import { CharacterSummary } from '../model/character-summary.model';
 import { Character } from '../model/character.model';
 import { JsonResponse } from '../../../../shared/model/json-response.model';
+import { AuthService } from '../../../../security/service/auth.service';
 
 @Injectable()
 export class CharacterHttpService extends BaseHttpService {
 
-    constructor(protected _http: Http) { 
-        super(_http);
+    constructor(
+        protected _http: Http,
+        protected _authService: AuthService
+    ) {
+        super(_http, _authService);
         this._baseUri = `${AppSettings.API_ENDPOINT}/characters`;
     }
 

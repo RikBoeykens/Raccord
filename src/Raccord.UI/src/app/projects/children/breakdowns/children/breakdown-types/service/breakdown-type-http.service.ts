@@ -5,12 +5,16 @@ import { AppSettings } from '../../../../../../app.settings';
 import { FullBreakdownType } from '../model/full-breakdown-type.model';
 import { BreakdownTypeSummary } from '../model/breakdown-type-summary.model';
 import { BreakdownType } from '../model/breakdown-type.model';
+import { AuthService } from '../../../../../../security/service/auth.service';
 
 @Injectable()
 export class BreakdownTypeHttpService extends BaseHttpService {
 
-    constructor(protected _http: Http) {
-        super(_http);
+    constructor(
+        protected _http: Http,
+        protected _authService: AuthService
+    ) {
+        super(_http, _authService);
         this._baseUri = `${AppSettings.API_ENDPOINT}/breakdowntypes`;
     }
 

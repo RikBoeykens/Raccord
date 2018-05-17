@@ -6,12 +6,16 @@ import { FullScriptLocation } from '../model/full-script-location.model';
 import { ScriptLocationSummary } from '../model/script-location-summary.model';
 import { ScriptLocation } from '../model/script-location.model';
 import { JsonResponse } from '../../../../shared/model/json-response.model';
+import { AuthService } from '../../../../security/service/auth.service';
 
 @Injectable()
 export class ScriptLocationHttpService extends BaseHttpService {
 
-    constructor(protected _http: Http) { 
-        super(_http);
+    constructor(
+        protected _http: Http,
+        protected _authService: AuthService
+    ) {
+        super(_http, _authService);
         this._baseUri = `${AppSettings.API_ENDPOINT}/scriptlocations`;
     }
 

@@ -6,12 +6,16 @@ import { FullBreakdownItem } from '../model/full-breakdown-item.model';
 import { BreakdownItemSummary } from '../model/breakdown-item-summary.model';
 import { BreakdownItem } from '../model/breakdown-item.model';
 import { LinkedImage } from '../../../../images/model/linked-image.model';
+import { AuthService } from '../../../../../../security/service/auth.service';
 
 @Injectable()
 export class ImageBreakdownItemHttpService extends BaseHttpService {
 
-    constructor(protected _http: Http) { 
-        super(_http);
+    constructor(
+        protected _http: Http,
+        protected _authService: AuthService
+    ) {
+        super(_http, _authService);
         this._baseUri = `${AppSettings.API_ENDPOINT}/imagebreakdownitems`;
     }
 

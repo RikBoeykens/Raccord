@@ -5,12 +5,16 @@ import { BaseHttpService } from '../../../shared/service/base-http.service';
 import { LinkedProjectUserUser } from '../../project-users/model/linked-project-user-user.model';
 import { ProjectUserCrewUnit }
     from '../../../projects/children/crew/crew-units/model/project-user-crew-unit.model';
+import { AuthService } from '../../../security/service/auth.service';
 
 @Injectable()
 export class AdminCrewUnitMemberHttpService extends BaseHttpService {
 
-    constructor(protected _http: Http) {
-        super(_http);
+    constructor(
+        protected _http: Http,
+        protected _authService: AuthService
+    ) {
+        super(_http, _authService);
         this._baseUri = `${AppSettings.API_ADMIN_ENDPOINT}/crewunitmembers`;
     }
 

@@ -8,12 +8,16 @@ import { LocationSetScriptLocation } from '../model/location-set-script-location
 import { LocationSetSummary } from '../model/location-set-summary.model';
 import { LocationSet } from '../model/location-set.model';
 import { JsonResponse } from '../../../../../shared/model/json-response.model';
+import { AuthService } from '../../../../../security/service/auth.service';
 
 @Injectable()
 export class LocationSetHttpService extends BaseHttpService {
 
-    constructor(protected _http: Http) { 
-        super(_http);
+    constructor(
+        protected _http: Http,
+        protected _authService: AuthService
+    ) {
+        super(_http, _authService);
         this._baseUri = `${AppSettings.API_ENDPOINT}/locationsets`;
     }
 

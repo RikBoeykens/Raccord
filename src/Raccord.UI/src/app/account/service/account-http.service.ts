@@ -5,18 +5,22 @@ import { AppSettings } from '../../app.settings';
 import { UserSummary } from '../model/user-summary.model';
 import { JsonResponse } from '../../shared/model/json-response.model';
 import { UserPermissionSummary } from '../model/user-permission-summary.model';
+import { AuthService } from '../../security/service/auth.service';
 
 @Injectable()
 export class AccountHttpService extends BaseHttpService {
 
-    constructor(protected _http: Http) { 
-        super(_http);
+    constructor(
+        protected _http: Http,
+        protected _authService: AuthService
+    ) {
+        super(_http, _authService);
         this._baseUri = `${AppSettings.API_ENDPOINT}/account`;
     }
 
-    getProjectPermissions(): Promise<UserPermissionSummary> {
+    public getProjectPermissions(): Promise<UserPermissionSummary> {
 
-        var uri = `${this._baseUri}/permissions`;
+        let uri = `${this._baseUri}/permissions`;
 
         return this.doGet(uri);
     }

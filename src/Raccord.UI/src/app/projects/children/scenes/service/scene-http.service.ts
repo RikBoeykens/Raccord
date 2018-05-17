@@ -12,12 +12,16 @@ import { SceneFilterRequest } from '../model/scene-filter-request.model';
 import { PagedData } from '../../../../shared/children/paging/model/paged-data.model';
 import { PageRequest } from '../../../../shared/children/paging/model/page-request.model';
 import { PageRequestHelpers } from '../../../../shared/children/paging/helpers/page-request-helpers';
+import { AuthService } from '../../../../security/service/auth.service';
 
 @Injectable()
 export class SceneHttpService extends BaseHttpService {
 
-    constructor(protected _http: Http) { 
-        super(_http);
+    constructor(
+        protected _http: Http,
+        protected _authService: AuthService
+    ) {
+        super(_http, _authService);
         this._baseUri = `${AppSettings.API_ENDPOINT}/scenes`;
     }
 
