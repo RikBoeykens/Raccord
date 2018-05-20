@@ -11,6 +11,7 @@ import { HtmlClassHelpers } from '../../../../../shared/helpers/html-class.helpe
 import { TimespanHelpers } from "../../../../../shared/helpers/timespan.helpers";
 import { ProjectPermissionEnum } from '../../../../../shared/children/users/project-roles/enums/project-permission.enum';
 import { AccountHelpers } from '../../../../../account/helpers/account.helper';
+import { LoadingWrapperService } from '../../../../../shared/service/loading-wrapper.service';
 
 @Component({
     templateUrl: 'scene-timings.component.html',
@@ -22,6 +23,7 @@ export class SceneTimingsComponent implements OnInit {
 
     constructor(
         private _sceneHttpService: SceneHttpService,
+        private _loadingWrapperService: LoadingWrapperService,
         private _loadingService: LoadingService,
         private _dialogService: DialogService,
         private _route: ActivatedRoute,
@@ -36,14 +38,11 @@ export class SceneTimingsComponent implements OnInit {
         });
     }
 
-    getScenes(){
-        
-        let loadingId = this._loadingService.startLoading();
-
-        this._sceneHttpService.getAll(this.project.id).then(data => {
-            this.scenes = data;
-            this._loadingService.endLoading(loadingId);
-        });
+    public getScenes() {
+        this._loadingWrapperService.Load(
+            this._sceneHttpService.getAll(this.project.id),
+            (data) => this.scenes = data
+        );
     }
 
     updateTiming(scene: Scene){

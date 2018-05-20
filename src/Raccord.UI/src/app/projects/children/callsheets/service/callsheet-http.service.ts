@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { BaseHttpService } from '../../../../shared/service/base-http.service';
 import { AppSettings } from '../../../../app.settings';
 import { FullCallsheet } from '../';
@@ -7,41 +7,39 @@ import { CallsheetSummary } from '../';
 import { Callsheet } from '../';
 import { JsonResponse } from '../../../../shared/model/json-response.model';
 import { CallsheetCrewUnit } from '../model/callsheet-crew-unit.model';
-import { AuthService } from '../../../../security/service/auth.service';
 
 @Injectable()
 export class CallsheetHttpService extends BaseHttpService {
 
     constructor(
-        protected _http: Http,
-        protected _authService: AuthService
+        protected _http: HttpClient,
     ) {
-        super(_http, _authService);
+        super(_http);
         this._baseUri = `${AppSettings.API_ENDPOINT}/callsheets`;
     }
 
-    public getAll(crewUnitId): Promise<CallsheetSummary[]> {
+    public getAll(crewUnitId): Promise<CallsheetSummary[] | void> {
 
         let uri = `${this._baseUri}/${crewUnitId}/crewUnit`;
 
         return this.doGetArray(uri);
     }
 
-    public getAllForProject(projectId): Promise<CallsheetCrewUnit[]> {
+    public getAllForProject(projectId): Promise<CallsheetCrewUnit[] | void> {
 
         let uri = `${this._baseUri}/${projectId}/project`;
 
         return this.doGetArray(uri);
     }
 
-    public get(id: number): Promise<FullCallsheet> {
+    public get(id: number): Promise<FullCallsheet | void> {
 
         let uri = `${this._baseUri}/${id}`;
 
         return this.doGet(uri);
     }
 
-    public getSummary(id: Number): Promise<CallsheetSummary> {
+    public getSummary(id: Number): Promise<CallsheetSummary | void> {
 
         let uri = `${this._baseUri}/${id}/summary`;
 

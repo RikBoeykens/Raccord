@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { BaseHttpService } from '../../../../../../shared/service/base-http.service';
 import { AppSettings } from '../../../../../../app.settings';
 import { FullCallsheetScene } from '../model/full-callsheet-scene.model';
@@ -10,48 +10,46 @@ import { CallsheetSceneCharacters } from '../model/callsheet-scene-characters.mo
 import { CallsheetScene } from '../model/callsheet-scene.model';
 import { JsonResponse } from '../../../../../shared/model/json-response.model';
 import { SortOrder } from "../../../../../../shared/model/sort-order.model";
-import { AuthService } from '../../../../../../security/service/auth.service';
 
 @Injectable()
 export class CallsheetSceneHttpService extends BaseHttpService {
 
     constructor(
-        protected _http: Http,
-        protected _authService: AuthService
+        protected _http: HttpClient,
     ) {
-        super(_http, _authService);
+        super(_http);
         this._baseUri = `${AppSettings.API_ENDPOINT}/callsheetscenes`;
     }
 
-    getScenes(id): Promise<CallsheetSceneScene[]> {
+    getScenes(id): Promise<CallsheetSceneScene[] | void> {
 
         var uri = `${this._baseUri}/${id}/callsheet`;
 
         return this.doGetArray(uri);
     }
 
-    getDays(id): Promise<CallsheetSceneCallsheet[]> {
+    getDays(id): Promise<CallsheetSceneCallsheet[] | void> {
 
         var uri = `${this._baseUri}/${id}/scene`;
 
         return this.doGetArray(uri);
     }
 
-    getLocations(id): Promise<CallsheetSceneLocation[]> {
+    getLocations(id): Promise<CallsheetSceneLocation[] | void> {
 
         var uri = `${this._baseUri}/${id}/locations`;
 
         return this.doGetArray(uri);
     }
 
-    getCharacters(id): Promise<CallsheetSceneCharacters[]> {
+    getCharacters(id): Promise<CallsheetSceneCharacters[] | void> {
 
         var uri = `${this._baseUri}/${id}/characters`;
 
         return this.doGetArray(uri);
     }
 
-    get(id: number): Promise<FullCallsheetScene>{
+    get(id: number): Promise<FullCallsheetScene | void>{
 
         var uri = `${this._baseUri}/${id}`;
 

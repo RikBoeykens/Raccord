@@ -1,38 +1,36 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { BaseHttpService } from '../../../../shared/service/base-http.service';
 import { AppSettings } from '../../../../app.settings';
 import { CastMember } from '../model/cast-member.model';
 import { CastMemberSummary } from '../model/cast-member-summary.model';
 import { FullCastMember } from '../model/full-cast-member.model';
-import { AuthService } from '../../../../security/service/auth.service';
 
 @Injectable()
 export class CastMemberHttpService extends BaseHttpService {
 
     constructor(
-        protected _http: Http,
-        protected _authService: AuthService
+        protected _http: HttpClient,
     ) {
-        super(_http, _authService);
+        super(_http);
         this._baseUri = `${AppSettings.API_ENDPOINT}/castmembers`;
     }
 
-    public getAll(projectId): Promise<CastMemberSummary[]> {
+    public getAll(projectId): Promise<CastMemberSummary[] | void> {
 
         let uri = `${this._baseUri}/${projectId}/project`;
 
         return this.doGetArray(uri);
     }
 
-    public get(id: number): Promise<FullCastMember> {
+    public get(id: number): Promise<FullCastMember | void> {
 
         let uri = `${this._baseUri}/${id}`;
 
         return this.doGet(uri);
     }
 
-    public getSummary(id: Number): Promise<CastMemberSummary> {
+    public getSummary(id: Number): Promise<CastMemberSummary | void> {
 
         let uri = `${this._baseUri}/${id}/summary`;
 

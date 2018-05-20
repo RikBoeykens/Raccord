@@ -1,38 +1,36 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { BaseHttpService } from '../../../../../shared/service/base-http.service';
 import { AppSettings } from '../../../../../app.settings';
 import { CrewMember } from '../model/crew-member.model';
 import { CrewMemberSummary } from '../model/crew-member-summary.model';
 import { FullCrewMember } from '../model/full-crew-member.model';
-import { AuthService } from '../../../../../security/service/auth.service';
 
 @Injectable()
 export class CrewMemberHttpService extends BaseHttpService {
 
     constructor(
-        protected _http: Http,
-        protected _authService: AuthService
+        protected _http: HttpClient,
     ) {
-        super(_http, _authService);
+        super(_http);
         this._baseUri = `${AppSettings.API_ENDPOINT}/crewmembers`;
     }
 
-    public getAll(departmentId): Promise<CrewMemberSummary[]> {
+    public getAll(departmentId): Promise<CrewMemberSummary[] | void> {
 
         let uri = `${this._baseUri}/${departmentId}/department`;
 
         return this.doGetArray(uri);
     }
 
-    public get(id: number): Promise<FullCrewMember> {
+    public get(id: number): Promise<FullCrewMember | void> {
 
         let uri = `${this._baseUri}/${id}`;
 
         return this.doGet(uri);
     }
 
-    public getSummary(id: Number): Promise<CrewMemberSummary> {
+    public getSummary(id: Number): Promise<CrewMemberSummary | void> {
 
         let uri = `${this._baseUri}/${id}/summary`;
 

@@ -21,6 +21,11 @@ export class LoadingService {
     }
   }
 
+  public endAllLoading() {
+    this.loadingIds = [];
+    this.toggleLoadingSource.next(false);
+  }
+
   private generateId(): string {
     return Math.round(Math.random() * 1000).toString();
   }

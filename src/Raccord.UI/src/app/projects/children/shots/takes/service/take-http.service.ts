@@ -1,42 +1,40 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { BaseHttpService } from '../../../../../shared/service/base-http.service';
 import { AppSettings } from '../../../../../app.settings';
 import { TakeSummary } from "../model/take-summary.model";
 import { FullTake } from "../model/full-take.model";
 import { Take } from "../model/take.model";
-import { AuthService } from '../../../../../security/service/auth.service';
 
 @Injectable()
 export class TakeHttpService extends BaseHttpService {
 
     constructor(
-        protected _http: Http,
-        protected _authService: AuthService
+        protected _http: HttpClient,
     ) {
-        super(_http, _authService);
+        super(_http);
         this._baseUri = `${AppSettings.API_ENDPOINT}/takes`;
     }
 
-    getAll(slateId): Promise<TakeSummary[]> {
+    getAll(slateId): Promise<TakeSummary[] | void> {
 
         var uri = `${this._baseUri}/${slateId}/slate`;
 
-        return this.doGetArray(uri);
+        return this.doGetArray<TakeSummary>(uri);
     }
 
-    get(id: number): Promise<FullTake>{
+    get(id: number): Promise<FullTake | void> {
 
         var uri = `${this._baseUri}/${id}`;
 
-        return this.doGet(uri);
+        return this.doGet<FullTake>(uri);
     }
 
-    getSummary(id: Number): Promise<TakeSummary> {
+    getSummary(id: Number): Promise<TakeSummary | void> {
 
         var uri = `${this._baseUri}/${id}/summary`;
 
-        return this.doGet(uri);
+        return this.doGet<TakeSummary>(uri);
     }
 
     post(take: Take): Promise<number> {

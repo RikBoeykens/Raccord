@@ -5,6 +5,7 @@ import { ProjectSummary } from '../../../../projects';
 import { LoadingService } from '../../../../loading/service/loading.service';
 import { DialogService } from '../../../../shared/service/dialog.service';
 import { Image } from '../../children/images/model/image.model';
+import { LoadingWrapperService } from '../../../../shared/service/loading-wrapper.service';
 
 @Component({
     templateUrl: 'admin-projects-list.component.html',
@@ -15,6 +16,7 @@ export class AdminProjectsListComponent implements OnInit {
 
     constructor(
         private _adminProjectHttpService: AdminProjectHttpService,
+        private _loadingWrapperService: LoadingWrapperService,
         private _loadingService: LoadingService,
         private _dialogService: DialogService,
         private _route: ActivatedRoute,
@@ -29,13 +31,10 @@ export class AdminProjectsListComponent implements OnInit {
     }
 
     getProjects(){
-        
-        let loadingId = this._loadingService.startLoading();
-
-        this._adminProjectHttpService.getAll().then(data => {
-            this.projects = data;
-            this._loadingService.endLoading(loadingId);
-        });
+        this._loadingWrapperService.Load(
+            this._adminProjectHttpService.getAll(),
+            (data) => this.projects = data
+        );
     }
 
     remove(project: ProjectSummary){

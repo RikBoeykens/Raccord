@@ -1,24 +1,22 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { BaseHttpService } from '../../../../shared/service/base-http.service';
 import { AppSettings } from '../../../../app.settings';
 import { LinkedImage } from '../../images/model/linked-image.model';
 import { JsonResponse } from '../../../../shared/model/json-response.model';
 import { SortOrder } from '../../../../shared/model/sort-order.model';
-import { AuthService } from '../../../../security/service/auth.service';
 
 @Injectable()
 export class ImageCharacterHttpService extends BaseHttpService {
 
     constructor(
-        protected _http: Http,
-        protected _authService: AuthService
+        protected _http: HttpClient,
     ) {
-        super(_http, _authService);
+        super(_http);
         this._baseUri = `${AppSettings.API_ENDPOINT}/imagecharacters`;
     }
 
-    getImages(characterId): Promise<LinkedImage[]> {
+    getImages(characterId): Promise<LinkedImage[] | void> {
 
         var uri = `${this._baseUri}/${characterId}/images`;
 

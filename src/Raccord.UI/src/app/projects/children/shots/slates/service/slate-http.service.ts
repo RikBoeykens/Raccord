@@ -1,43 +1,41 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { BaseHttpService } from '../../../../../shared/service/base-http.service';
 import { AppSettings } from '../../../../../app.settings';
 import { JsonResponse } from '../../../../../shared/model/json-response.model';
 import { SlateSummary } from "../model/slate-summary.model";
 import { FullSlate } from "../model/full-slate.model";
 import { Slate } from "../model/slate.model";
-import { AuthService } from '../../../../../security/service/auth.service';
 
 @Injectable()
 export class SlateHttpService extends BaseHttpService {
 
     constructor(
-        protected _http: Http,
-        protected _authService: AuthService
+        protected _http: HttpClient,
     ) {
-        super(_http, _authService);
+        super(_http);
         this._baseUri = `${AppSettings.API_ENDPOINT}/slates`;
     }
 
-    getAll(projectId): Promise<SlateSummary[]> {
+    getAll(projectId): Promise<SlateSummary[] | void> {
 
         var uri = `${this._baseUri}/${projectId}/project`;
 
-        return this.doGetArray(uri);
+        return this.doGetArray<SlateSummary>(uri);
     }
 
-    get(id: number): Promise<FullSlate>{
+    get(id: number): Promise<FullSlate | void> {
 
         var uri = `${this._baseUri}/${id}`;
 
-        return this.doGet(uri);
+        return this.doGet<FullSlate>(uri);
     }
 
-    getSummary(id: Number): Promise<SlateSummary> {
+    getSummary(id: Number): Promise<SlateSummary | void> {
 
         var uri = `${this._baseUri}/${id}/summary`;
 
-        return this.doGet(uri);
+        return this.doGet<SlateSummary>(uri);
     }
 
     post(slate: Slate): Promise<number> {

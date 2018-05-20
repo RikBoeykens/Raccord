@@ -13,13 +13,16 @@ export class TokenInterceptor implements HttpInterceptor {
 
   public intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
-    let token = this._auth.getAccessToken();
-    console.log(token);
-    request = request.clone({
-      setHeaders: {
-        Authorization: `Bearer ${token}`
+    return this._auth.getAccessToken().mergeMap((token: string) => {
+      if (token) {
+        request = request.clone({
+          setHeaders: {
+            Authorization: `Bearer ${token}`
+          }
+        });
       }
+      return next.handle(request);
     });
-    return next.handle(request);
+
   }
 }

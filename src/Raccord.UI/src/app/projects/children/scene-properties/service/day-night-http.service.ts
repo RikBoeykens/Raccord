@@ -1,39 +1,37 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { BaseHttpService } from '../../../../shared/service/base-http.service';
 import { AppSettings } from '../../../../app.settings';
 import { FullDayNight } from '../model/full-day-night.model';
 import { DayNightSummary } from '../model/day-night-summary.model';
 import { DayNight } from '../model/day-night.model';
 import { JsonResponse } from '../../../../shared/model/json-response.model';
-import { AuthService } from '../../../../security/service/auth.service';
 
 @Injectable()
 export class DayNightHttpService extends BaseHttpService {
 
     constructor(
-        protected _http: Http,
-        protected _authService: AuthService
+        protected _http: HttpClient,
     ) {
-        super(_http, _authService);
+        super(_http);
         this._baseUri = `${AppSettings.API_ENDPOINT}/daynights`;
     }
 
-    getAll(projectId): Promise<DayNightSummary[]> {
+    getAll(projectId): Promise<DayNightSummary[] | void> {
 
         var uri = `${this._baseUri}/${projectId}/project`;
 
         return this.doGetArray(uri);
     }
 
-    get(id: number): Promise<FullDayNight>{
+    get(id: number): Promise<FullDayNight | void>{
 
         var uri = `${this._baseUri}/${id}`;
 
         return this.doGet(uri);
     }
 
-    getSummary(id: Number): Promise<DayNightSummary> {
+    getSummary(id: Number): Promise<DayNightSummary | void> {
 
         var uri = `${this._baseUri}/${id}/summary`;
 

@@ -10,3 +10,6 @@ export { LatLng } from './model/lat-lng.model';
 export { MatchHeightDirective } from './directives/match-height.directive';
 // Services
 export { LoadingWrapperService } from './service/loading-wrapper.service';
+
+// Interceptors
+export { HttpReponseInterceptor } from './interceptors/http-response.interceptor';

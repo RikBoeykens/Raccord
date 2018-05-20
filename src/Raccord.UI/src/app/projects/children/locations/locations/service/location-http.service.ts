@@ -1,39 +1,37 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { BaseHttpService } from '../../../../../shared/service/base-http.service';
 import { AppSettings } from '../../../../../app.settings';
 import { FullLocation } from '../model/full-location.model';
 import { LocationSummary } from '../model/location-summary.model';
 import { Location } from '../model/location.model';
 import { JsonResponse } from '../../../../../shared/model/json-response.model';
-import { AuthService } from '../../../../../security/service/auth.service';
 
 @Injectable()
 export class LocationHttpService extends BaseHttpService {
 
     constructor(
-        protected _http: Http,
-        protected _authService: AuthService
+        protected _http: HttpClient,
     ) {
-        super(_http, _authService);
+        super(_http);
         this._baseUri = `${AppSettings.API_ENDPOINT}/locations`;
     }
 
-    getAll(projectId): Promise<LocationSummary[]> {
+    getAll(projectId): Promise<LocationSummary[] | void> {
 
         var uri = `${this._baseUri}/${projectId}/project`;
 
         return this.doGetArray(uri);
     }
 
-    get(id: number): Promise<FullLocation>{
+    get(id: number): Promise<FullLocation | void>{
 
         var uri = `${this._baseUri}/${id}`;
 
         return this.doGet(uri);
     }
 
-    getSummary(id: Number): Promise<LocationSummary> {
+    getSummary(id: Number): Promise<LocationSummary | void> {
 
         var uri = `${this._baseUri}/${id}/summary`;
 

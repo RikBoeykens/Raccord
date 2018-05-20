@@ -8,6 +8,9 @@ import { Login } from '../../';
 import { AccountHelpers } from '../../../account/helpers/account.helper';
 import { UserProfileHttpService } from '../../../profile/service/user-profile-http.service';
 import { ProjectHttpService } from '../../../projects/service/project-http.service';
+import { UserProfileSummary } from '../../../profile/model/user-profile-summary.model';
+import { UserPermissionSummary } from '../../../account/model/user-permission-summary.model';
+import { UserProjectSummary } from '../../../projects/model/user-project-summary.model';
 
 @Component({
     templateUrl: 'login.component.html',
@@ -41,13 +44,13 @@ export class LoginComponent implements OnInit  {
         this._authService.login(this.login).then((data) => {
             this._router.navigateByUrl(this.returnUrl);
             this._userProfileHttpService.getSummary().then((profileData) => {
-                AccountHelpers.setUser(profileData);
+                AccountHelpers.setUser(<UserProfileSummary> profileData);
             });
             this._accountService.getProjectPermissions().then((permissionData) => {
-                AccountHelpers.setPermissions(permissionData);
+                AccountHelpers.setPermissions(<UserPermissionSummary> permissionData);
             });
             this._projectHttpService.getSummaries().then((projectSummaries) => {
-                AccountHelpers.setUserProjects(projectSummaries);
+                AccountHelpers.setUserProjects(<UserProjectSummary[]> projectSummaries);
             });
         }).catch()
         .then(() => this._loadingService.endLoading(loadingId));

@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Http, Response, Headers, RequestOptions } from '@angular/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { JsonResponse } from '../model/json-response.model';
 import { SortOrder } from '../model/sort-order.model';
 import { HeaderHelpers } from '../helpers/header.helpers';
 import 'rxjs/add/operator/toPromise';
-import { AuthService } from '../../security/service/auth.service';
 
 @Injectable()
 export abstract class BaseHttpService {
@@ -12,33 +11,31 @@ export abstract class BaseHttpService {
     protected _baseUri: string;
 
     constructor(
-        protected _http: Http,
-        private authHttpService: AuthService
+        protected _http: HttpClient
     ) {
     }
 
-    protected doGetArray(uri: string, useAuthToken: Boolean = true) {
-        let headers = useAuthToken ? this.getAuthJsonHeaders() : HeaderHelpers.JsonHeaders();
+    protected doGetArray<T>(uri: string, useAuthToken: Boolean = true): Promise<T[] | void> {
+        let headers = useAuthToken ? HeaderHelpers.AuthJsonHeaders() : HeaderHelpers.JsonHeaders();
         return this._http.get(uri, {headers})
             .toPromise()
-            .then((response) => this.extractArray(response))
+            .then((response) => this.extractArray<T>(response))
             .catch(this.handleErrorPromise);
     }
 
-    protected doGet(uri: string, useAuthToken: Boolean = true) {
-        let headers = useAuthToken ? this.getAuthJsonHeaders() : HeaderHelpers.JsonHeaders();
+    protected doGet<T>(uri: string, useAuthToken: Boolean = true) {
+        let headers = useAuthToken ? HeaderHelpers.AuthJsonHeaders() : HeaderHelpers.JsonHeaders();
         return this._http.get(uri, {headers})
             .toPromise()
-            .then((response) => response.json())
+            .then((response: T) => response)
             .catch(this.handleErrorPromise);
     }
 
     protected doPost(object: any, uri: string, useAuthToken: Boolean = true) {
-
         let body = JSON.stringify(object);
         let headers = useAuthToken ?
-                        this.getAuthFormHeaders() :
-                        HeaderHelpers.ContentHeaders();
+                        HeaderHelpers.AuthFormHeaders() :
+                        HeaderHelpers.ContentHttpHeaders();
         return this._http.post(uri, body, {headers})
             .toPromise()
             .then((response) => this.extractJsonResponse(response))
@@ -47,8 +44,8 @@ export abstract class BaseHttpService {
 
     protected doDelete(uri: string, useAuthToken: Boolean = true) {
         let headers = useAuthToken ?
-                        this.getAuthFormHeaders() :
-                        HeaderHelpers.ContentHeaders();
+                        HeaderHelpers.AuthFormHeaders() :
+                        HeaderHelpers.ContentHttpHeaders();
 
         return this._http.delete(uri, {headers})
             .toPromise()
@@ -59,9 +56,8 @@ export abstract class BaseHttpService {
     protected doSort(order: SortOrder, uri: string, useAuthToken: Boolean = true) {
         let body = JSON.stringify(order);
         let headers = useAuthToken ?
-                        this.getAuthFormHeaders() :
-                        HeaderHelpers.ContentHeaders();
-
+                        HeaderHelpers.AuthFormHeaders() :
+                        HeaderHelpers.ContentHttpHeaders();
         return this._http.post(uri, body, { headers })
             .toPromise()
             .then((response) => this.extractJsonResponse(response))
@@ -78,9 +74,8 @@ export abstract class BaseHttpService {
                 formData.append(property, object[property]);
             }
         }
-
         let headers = useAuthToken ?
-                        this.getAuthFormDataHeaders() :
+                        HeaderHelpers.AuthFormDataHeaders() :
                         HeaderHelpers.FormDataHeaders();
 
         return this._http.post(uri, formData, { headers })
@@ -89,20 +84,16 @@ export abstract class BaseHttpService {
             .catch(this.handleErrorPromise);
     }
 
-    protected extractJsonResponse(res: Object) {
-
+    protected extractJsonResponse(res: Object): any {
         let response = <JsonResponse> res;
-
         if (!response.ok) {
             return response.message;
         }
-
         return response.data;
     }
 
-    protected extractArray(res: Object, showprogress: boolean = true) {
-        let data = res;
-        return data || [];
+    protected extractArray<T>(res: Object, showprogress: boolean = true): any {
+        return res as T[] || [];
     }
 
     protected handleErrorPromise(error: any): Promise<void> {
@@ -122,23 +113,5 @@ export abstract class BaseHttpService {
         }
         console.error(errMsg);
         return Promise.reject(errMsg);
-    }
-
-    private getAuthJsonHeaders(): Headers {
-        let headers = HeaderHelpers.AuthJsonHeaders();
-        headers.append('Authorization', `Bearer ${this.authHttpService.getAccessToken()}`);
-        return headers;
-    }
-
-    private getAuthFormHeaders(): Headers {
-        let headers = HeaderHelpers.AuthFormHeaders();
-        headers.append('Authorization', `Bearer ${this.authHttpService.getAccessToken()}`);
-        return headers;
-    }
-
-    private getAuthFormDataHeaders(): Headers {
-        let headers = HeaderHelpers.AuthFormDataHeaders();
-        headers.append('Authorization', `Bearer ${this.authHttpService.getAccessToken()}`);
-        return headers;
     }
 }

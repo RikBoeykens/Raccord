@@ -1,22 +1,20 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { BaseHttpService } from '../../../../../shared/service/base-http.service';
 import { AppSettings } from '../../../../../app.settings';
 import { FullCrewDepartment } from '../model/full-crew-department.model';
-import { AuthService } from '../../../../../security/service/auth.service';
 
 @Injectable()
 export class CrewDepartmentHttpService extends BaseHttpService {
 
     constructor(
-        protected _http: Http,
-        protected _authService: AuthService
+        protected _http: HttpClient,
     ) {
-        super(_http, _authService);
+        super(_http);
         this._baseUri = `${AppSettings.API_ENDPOINT}/crewdepartments`;
     }
 
-    public getAll(crewUnitId): Promise<FullCrewDepartment[]> {
+    public getAll(crewUnitId): Promise<FullCrewDepartment[] | void> {
 
         const uri = `${this._baseUri}/${crewUnitId}/unit`;
 

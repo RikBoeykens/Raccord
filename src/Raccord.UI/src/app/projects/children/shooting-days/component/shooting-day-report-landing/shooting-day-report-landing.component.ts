@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { LoadingService } from '../../../../../loading/service/loading.service';
-import { DialogService } from '../../../../../shared/service/dialog.service';
 import { ProjectSummary } from '../../../../model/project-summary.model';
 import { FullShootingDay } from "../../model/full-shooting-day.model";
 import { ShootingDayHttpService } from "../../service/shooting-day-http.service";
@@ -16,6 +14,7 @@ import { MdDialog } from "@angular/material";
 import { EditShootingDaySceneDialog } from "../../scenes/component/edit-shooting-day-scene-dialog/edit-shooting-day-scene-dialog.component";
 import { TimespanHelpers } from "../../../../../shared/helpers/timespan.helpers";
 import { ShootingDay } from '../..';
+import { LoadingWrapperService } from '../../../../../shared/service/loading-wrapper.service';
 
 @Component({
     templateUrl: 'shooting-day-report-landing.component.html',
@@ -29,8 +28,7 @@ export class ShootingDayReportLandingComponent {
     constructor(
         private _shootingDayHttpService: ShootingDayHttpService,
         private _shootingDaySceneHttpService: ShootingDaySceneHttpService,
-        private _loadingService: LoadingService,
-        private _dialogService: DialogService,
+        private _loadingWrapperService: LoadingWrapperService,
         private _route: ActivatedRoute,
         private _router: Router,
         private _dialog: MdDialog
@@ -44,57 +42,39 @@ export class ShootingDayReportLandingComponent {
         });
     }
 
-    getShootingDay(){
-        let loadingId = this._loadingService.startLoading();
-
-        this._shootingDayHttpService.get(this.shootingDay.id).then(data => {
-            this.shootingDay = new ShootingDayWrapper(data);
-            this._loadingService.endLoading(loadingId);
-        });
-    }
-
-    updateShootingDay(){
-        let loadingId = this._loadingService.startLoading();
-
-        this.setTimes(this.shootingDay);
-
-        this._shootingDayHttpService.post(new ShootingDay({
-            id: this.shootingDay.id,
-            number: this.shootingDay.number,
-            date: this.shootingDay.date,
-            start: this.shootingDay.start,
-            end: this.shootingDay.end,
-            turn: this.shootingDay.turn,
-            overTime: this.shootingDay.overTime,
-            completed: this.shootingDay.completed,
-            scheduleDayID: this.shootingDay.scheduleDayID,
-            callsheetID: this.shootingDay.callsheetID,
-            crewUnitID: this.shootingDay.crewUnit.id
-        })).then(data=>{
-            if(typeof(data)=='string'){
-                this._dialogService.error(data);
-                this.getShootingDay();
-            }else{
-            }
-        }).catch()
-        .then(()=>
-            this._loadingService.endLoading(loadingId)
+    getShootingDay() {
+        this._loadingWrapperService.Load(
+            this._shootingDayHttpService.get(this.shootingDay.id),
+            (data) => this.shootingDay = new ShootingDayWrapper(data)
         );
     }
 
-    setTimes(shootingDay: ShootingDayWrapper){
-        shootingDay.start = TimeHelpers.getTime(shootingDay.startString);
-        shootingDay.turn = TimeHelpers.getTime(shootingDay.turnString);
-        shootingDay.end = TimeHelpers.getTime(shootingDay.endString);
+    updateShootingDay() {
+        this.setTimes(this.shootingDay);
+        this._loadingWrapperService.Load(
+            this._shootingDayHttpService.post(new ShootingDay({
+                id: this.shootingDay.id,
+                number: this.shootingDay.number,
+                date: this.shootingDay.date,
+                start: this.shootingDay.start,
+                end: this.shootingDay.end,
+                turn: this.shootingDay.turn,
+                overTime: this.shootingDay.overTime,
+                completed: this.shootingDay.completed,
+                scheduleDayID: this.shootingDay.scheduleDayID,
+                callsheetID: this.shootingDay.callsheetID,
+                crewUnitID: this.shootingDay.crewUnit.id
+            })),
+            () => null,
+            () => this.getShootingDay()
+        );
     }
-    
-    getScenes(){
-        let loadingId = this._loadingService.startLoading();
 
-        this._shootingDaySceneHttpService.getScenes(this.shootingDay.id).then(data => {
-            this.shootingDay.scenes = data;
-            this._loadingService.endLoading(loadingId);
-        });
+    getScenes(){
+        this._loadingWrapperService.Load(
+            this._shootingDaySceneHttpService.getScenes(this.shootingDay.id),
+            (data) => this.shootingDay.scenes = data
+        );
     }
 
     getNotStartedScenes(){
@@ -137,23 +117,15 @@ export class ShootingDayReportLandingComponent {
         return result;
     }
 
-    addShootingDayScene(scene: SelectedEntity){
-        let loadingId = this._loadingService.startLoading();
-
+    addShootingDayScene(scene: SelectedEntity) {
         let newShootingDayScene = new ShootingDayScene();
         newShootingDayScene.sceneID = scene.entityId;
         newShootingDayScene.shootingDayID = this.shootingDay.id;
         newShootingDayScene.completion = Completion.partCompleted;
 
-        this._shootingDaySceneHttpService.post(newShootingDayScene).then(data=>{
-            if(typeof(data)=='string'){
-                this._dialogService.error(data);
-            }else{
-                this.getScenes();
-            }
-        }).catch()
-        .then(()=>
-            this._loadingService.endLoading(loadingId)
+        this._loadingWrapperService.Load(
+            this._shootingDaySceneHttpService.post(newShootingDayScene),
+            () => this.getScenes()
         );
     }
 
@@ -167,8 +139,6 @@ export class ShootingDayReportLandingComponent {
     }
     
     updateShootingDayScene(scene: ShootingDaySceneScene){
-        let loadingId = this._loadingService.startLoading();
-
         let shootingDayScene = new ShootingDayScene();
         shootingDayScene.id = scene.id;
         shootingDayScene.completion = scene.completion;
@@ -176,31 +146,23 @@ export class ShootingDayReportLandingComponent {
         shootingDayScene.pageLength = scene.pageLength;
         shootingDayScene.timings = scene.timings;
 
-        this._shootingDaySceneHttpService.post(shootingDayScene).then(data=>{
-            if(typeof(data)=='string'){
-                this._dialogService.error(data);
-            }else{
-                this.getScenes();
-            }
-        }).catch()
-        .then(()=>
-            this._loadingService.endLoading(loadingId)
+        this._loadingWrapperService.Load(
+            this._shootingDaySceneHttpService.post(shootingDayScene),
+            () => this.getScenes()
         );
     }
-    
-    removeShootingDayScene(scene: ShootingDaySceneScene){
-        let loadingId = this._loadingService.startLoading();
 
-        this._shootingDaySceneHttpService.delete(scene.id).then(data=>{
-            if(typeof(data)=='string'){
-                this._dialogService.error(data);
-            }else{
-                this.getScenes();
-            }
-        }).catch()
-        .then(()=>
-            this._loadingService.endLoading(loadingId)
+    removeShootingDayScene(scene: ShootingDaySceneScene) {
+        this._loadingWrapperService.Load(
+            this._shootingDaySceneHttpService.delete(scene.id),
+            () => this.getScenes()
         );
+    }
+
+    private setTimes(shootingDay: ShootingDayWrapper) {
+        shootingDay.start = TimeHelpers.getTime(shootingDay.startString);
+        shootingDay.turn = TimeHelpers.getTime(shootingDay.turnString);
+        shootingDay.end = TimeHelpers.getTime(shootingDay.endString);
     }
 }
 

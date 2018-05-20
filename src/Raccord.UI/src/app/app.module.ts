@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
 import {
   NgModule,
   ApplicationRef
@@ -696,6 +697,7 @@ const PIPES = [
 // Interceptors
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from './security';
+import { HttpReponseInterceptor } from './shared';
 
 // external modules
 import { DragulaModule } from 'ng2-dragula';
@@ -726,6 +728,7 @@ import '../styles/headings.css';
     BrowserAnimationsModule,
     FormsModule,
     HttpModule,
+    HttpClientModule,
     DragulaModule,
     MaterialModule,
     FlexLayoutModule,
@@ -742,6 +745,11 @@ import '../styles/headings.css';
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpReponseInterceptor,
       multi: true
     }
   ]

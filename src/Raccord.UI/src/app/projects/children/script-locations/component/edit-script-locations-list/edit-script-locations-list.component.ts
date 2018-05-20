@@ -8,6 +8,7 @@ import { LoadingService } from '../../../../../loading/service/loading.service';
 import { DialogService } from '../../../../../shared/service/dialog.service';
 import { DragulaService } from 'ng2-dragula';
 import { HtmlClassHelpers } from '../../../../../shared/helpers/html-class.helpers';
+import { LoadingWrapperService } from '../../../../../shared/service/loading-wrapper.service';
 
 @Component({
     templateUrl: 'edit-script-locations-list.component.html',
@@ -24,6 +25,7 @@ export class EditScriptLocationsListComponent implements OnInit {
 
     constructor(
         private _scriptLocationHttpService: ScriptLocationHttpService,
+        private _loadingWrapperService: LoadingWrapperService,
         private _loadingService: LoadingService,
         private _dialogService: DialogService,
         private _route: ActivatedRoute,
@@ -70,14 +72,12 @@ export class EditScriptLocationsListComponent implements OnInit {
         this.newScriptLocation = null;
     }
 
-    getScriptLocations(){
-        
-        let loadingId = this._loadingService.startLoading();
-
-        this._scriptLocationHttpService.getAll(this.project.id).then(data => {
-            this.scriptLocations = data.map(function(scriptLocation){ return new ScriptLocationDroppableWrapper(scriptLocation); });
-            this._loadingService.endLoading(loadingId);
-        });
+    getScriptLocations() {
+        this._loadingWrapperService.Load(
+            this._scriptLocationHttpService.getAll(this.project.id),
+            (data) => this.scriptLocations = data.map((scriptLocation) =>
+                new ScriptLocationDroppableWrapper(scriptLocation))
+        );
     }
 
     addScriptLocation(){

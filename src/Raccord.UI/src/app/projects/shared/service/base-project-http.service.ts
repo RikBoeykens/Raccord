@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BaseHttpService } from '../../../shared/service/base-http.service';
 import { AppSettings } from '../../../app.settings';
-import { AuthService } from '../../../security';
 
 @Injectable()
 export class BaseProjectHttpService extends BaseHttpService {
@@ -10,9 +9,8 @@ export class BaseProjectHttpService extends BaseHttpService {
 
   constructor(
       protected _http: HttpClient,
-      protected _authService: AuthService,
       controllerName: string) {
-      super(_http, _authService);
+      super(_http);
       this._baseUri = `${AppSettings.API_PROJECT_ENDPOINT}`;
       this.controllerName = controllerName;
   }

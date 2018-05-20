@@ -5,6 +5,7 @@ import { LoadingService } from '../../../../../../../loading/service/loading.ser
 import { DialogService } from '../../../../../../../shared/service/dialog.service';
 import { SelectedEntity } from '../../../../../../../shared/model/selected-entity.model';
 import { EntityType } from '../../../../../../../shared/enums/entity-type.enum';
+import { LoadingWrapperService } from '../../../../../../../shared/service/loading-wrapper.service';
 
 @Component({
     selector: 'breakdown-item-images',
@@ -20,6 +21,7 @@ export class BreakdownItemImagesComponent implements OnInit{
 
     constructor(
         private _imageBreakdownItemHttpService: ImageBreakdownItemHttpService,
+        private _loadingWrapperService: LoadingWrapperService,
         private _loadingService: LoadingService,
         private _dialogService: DialogService,
     ){
@@ -30,12 +32,10 @@ export class BreakdownItemImagesComponent implements OnInit{
     }
 
     getImages(){
-        let loadingId = this._loadingService.startLoading();
-
-        this._imageBreakdownItemHttpService.getImages(this.breakdownItemId).then(data => {
-            this.images = data;
-            this._loadingService.endLoading(loadingId);
-        });
+        this._loadingWrapperService.Load(
+            this._imageBreakdownItemHttpService.getImages(this.breakdownItemId),
+            (data) => this.images = data
+        );
     }
 
     setAsPrimary(image: LinkedImage){

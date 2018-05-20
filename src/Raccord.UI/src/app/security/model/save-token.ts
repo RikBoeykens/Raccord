@@ -1,11 +1,11 @@
 export class SaveToken {
     public accessToken: string;
-    public expiryDate: Date;
+    public expiryDate: number;
     public refreshToken: string;
 
     constructor(obj?: {
         accessToken: string,
-        expiryDate: Date,
+        expiryDate: number,
         refreshToken: string
     }) {
         if (obj) {

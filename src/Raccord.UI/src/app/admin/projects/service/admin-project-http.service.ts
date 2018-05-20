@@ -1,38 +1,36 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { BaseHttpService } from '../../../shared/service/base-http.service';
 import { AppSettings } from '../../../app.settings';
 import { FullProject } from '../../../projects';
 import { ProjectSummary } from '../../../projects';
 import { Project } from '../../../projects';
-import { AuthService } from '../../../security/service/auth.service';
 
 @Injectable()
 export class AdminProjectHttpService extends BaseHttpService {
 
     constructor(
-        protected _http: Http,
-        protected _authService: AuthService
+        protected _http: HttpClient,
     ) {
-        super(_http, _authService);
+        super(_http);
         this._baseUri = `${AppSettings.API_ADMIN_ENDPOINT}/projects`;
     }
 
-    getAll(): Promise<ProjectSummary[]> {
+    getAll(): Promise<ProjectSummary[] | void> {
 
         var uri = this._baseUri;
 
         return this.doGetArray(uri);
     }
 
-    get(id: number): Promise<FullProject>{
+    get(id: number): Promise<FullProject | void>{
 
         var uri = `${this._baseUri}/${id}`;
 
         return this.doGet(uri);
     }
 
-    getSummary(id: Number): Promise<ProjectSummary> {
+    getSummary(id: Number): Promise<ProjectSummary | void> {
 
         var uri = `${this._baseUri}/${id}/summary`;
 

@@ -11,6 +11,7 @@ import { BreakdownTypeSummary } from
 import { AccountHelpers } from '../../../../../account/helpers/account.helper';
 import { ProjectPermissionEnum } from
     '../../../../../shared/children/users/project-roles/enums/project-permission.enum';
+import { LoadingWrapperService } from '../../../../../shared/service/loading-wrapper.service';
 
 @Component({
     templateUrl: 'scene-landing.component.html',
@@ -23,6 +24,7 @@ export class SceneLandingComponent implements OnInit {
 
     constructor(
         private _sceneHttpService: SceneHttpService,
+        private _loadingWrapperService: LoadingWrapperService,
         private _loadingService: LoadingService,
         private _dialogService: DialogService,
         private _route: ActivatedRoute,
@@ -39,13 +41,13 @@ export class SceneLandingComponent implements OnInit {
     }
 
     public getScene() {
-        let loadingId = this._loadingService.startLoading();
-
-        this._sceneHttpService.get(this.scene.id).then((data) => {
-            this.scene = data;
-            this.viewScene = new Scene(data);
-            this._loadingService.endLoading(loadingId);
-        });
+        this._loadingWrapperService.Load(
+            this._sceneHttpService.get(this.scene.id),
+            (data) => {
+                this.scene = data;
+                this.viewScene = new Scene(data);
+            }
+        );
     }
 
     public updateScene() {

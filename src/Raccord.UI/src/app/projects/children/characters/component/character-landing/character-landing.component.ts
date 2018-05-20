@@ -8,6 +8,7 @@ import { Character } from '../../model/character.model';
 import { ProjectSummary } from '../../../../model/project-summary.model';
 import { AccountHelpers } from '../../../../../account/helpers/account.helper';
 import { ProjectPermissionEnum } from '../../../../../shared/children/users/project-roles/enums/project-permission.enum';
+import { LoadingWrapperService } from '../../../../../shared/service/loading-wrapper.service';
 
 @Component({
     templateUrl: 'character-landing.component.html',
@@ -20,6 +21,7 @@ export class CharacterLandingComponent {
 
     constructor(
         private _characterHttpService: CharacterHttpService,
+        private _loadingWrapperService: LoadingWrapperService,
         private _loadingService: LoadingService,
         private _dialogService: DialogService,
         private _route: ActivatedRoute,
@@ -36,13 +38,10 @@ export class CharacterLandingComponent {
     }
 
     getCharacter(){
-        let loadingId = this._loadingService.startLoading();
-
-        this._characterHttpService.get(this.character.id).then(data => {
-            this.character = data;
-            this.viewCharacter = new Character(data);
-            this._loadingService.endLoading(loadingId);
-        });
+        this._loadingWrapperService.Load(
+            this._characterHttpService.get(this.character.id),
+            (data) => this.character = data
+        );
     }
 
     updateCharacter(){

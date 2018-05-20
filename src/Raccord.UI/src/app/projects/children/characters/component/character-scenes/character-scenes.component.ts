@@ -7,6 +7,7 @@ import { SelectedEntity } from '../../../../../shared/model/selected-entity.mode
 import { EntityType } from '../../../../../shared/enums/entity-type.enum';
 import { AccountHelpers } from '../../../../../account/helpers/account.helper';
 import { ProjectPermissionEnum } from '../../../../../shared/children/users/project-roles/enums/project-permission.enum';
+import { LoadingWrapperService } from '../../../../../shared/service/loading-wrapper.service';
 
 @Component({
     selector: 'character-scenes',
@@ -21,18 +22,17 @@ export class CharacterScenesComponent{
 
     constructor(
         private _characterSceneHttpService: CharacterSceneHttpService,
+        private _loadingWrapperService: LoadingWrapperService,
         private _loadingService: LoadingService,
         private _dialogService: DialogService,
     ){
     }
 
     getScenes(){
-        let loadingId = this._loadingService.startLoading();
-
-        this._characterSceneHttpService.getScenes(this.characterId).then(data => {
-            this.scenes = data;
-            this._loadingService.endLoading(loadingId);
-        });
+        this._loadingWrapperService.Load(
+            this._characterSceneHttpService.getScenes(this.characterId),
+            (data) => this.scenes = data
+        );
     }
 
     removeLink(scene: LinkedScene){

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { BaseHttpService } from '../../../../../shared/service/base-http.service';
 import { AppSettings } from '../../../../../app.settings';
 import { FullLocationSet } from '../model/full-location-set.model';
@@ -8,41 +8,39 @@ import { LocationSetScriptLocation } from '../model/location-set-script-location
 import { LocationSetSummary } from '../model/location-set-summary.model';
 import { LocationSet } from '../model/location-set.model';
 import { JsonResponse } from '../../../../../shared/model/json-response.model';
-import { AuthService } from '../../../../../security/service/auth.service';
 
 @Injectable()
 export class LocationSetHttpService extends BaseHttpService {
 
     constructor(
-        protected _http: Http,
-        protected _authService: AuthService
+        protected _http: HttpClient,
     ) {
-        super(_http, _authService);
+        super(_http);
         this._baseUri = `${AppSettings.API_ENDPOINT}/locationsets`;
     }
 
-    getLocations(id): Promise<LocationSetLocation[]> {
+    getLocations(id): Promise<LocationSetLocation[] | void> {
 
         var uri = `${this._baseUri}/${id}/scriptlocation`;
 
         return this.doGetArray(uri);
     }
 
-    getScriptLocations(id): Promise<LocationSetScriptLocation[]> {
+    getScriptLocations(id): Promise<LocationSetScriptLocation[] | void> {
 
         var uri = `${this._baseUri}/${id}/location`;
 
         return this.doGetArray(uri);
     }
 
-    getForScene(id): Promise<LocationSetSummary[]> {
+    getForScene(id): Promise<LocationSetSummary[] | void> {
 
         var uri = `${this._baseUri}/${id}/scene`;
 
         return this.doGetArray(uri);
     }
 
-    get(id: number): Promise<FullLocationSet>{
+    get(id: number): Promise<FullLocationSet | void>{
 
         var uri = `${this._baseUri}/${id}`;
 
