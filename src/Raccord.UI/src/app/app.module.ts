@@ -203,6 +203,9 @@ import {
   CalendarComponent,
   CalendarHeaderComponent
 } from './calendar';
+import {
+  ErrorComponent
+} from './error';
 
 const COMPONENTS = [
   AppComponent,
@@ -349,7 +352,8 @@ const COMPONENTS = [
   ShowProfileImageComponent,
   UserAvatarComponent,
   CalendarComponent,
-  CalendarHeaderComponent
+  CalendarHeaderComponent,
+  ErrorComponent
 ];
 
 const ENTRY_COMPONENTS = [

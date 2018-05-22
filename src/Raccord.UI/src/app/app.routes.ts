@@ -166,6 +166,7 @@ import { AuthGuard } from './security';
 import { ProjectChartsResolve } from './charts/index';
 import { UserProfileResolve } from './profile';
 import { RouteSettings } from './shared/settings/route.settings';
+import { ErrorComponent } from './error';
 
 export const ROUTES: Routes = [
   { path: '',      component: DashboardComponent, canActivate: [AuthGuard] },
@@ -940,5 +941,6 @@ export const ROUTES: Routes = [
       }
     ]
   },
+  { path: 'error', component: ErrorComponent },
   { path: '**',    component: NoContentComponent },
 ];

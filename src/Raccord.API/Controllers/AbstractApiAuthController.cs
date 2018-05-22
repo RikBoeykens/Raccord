@@ -2,10 +2,12 @@ using System;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Raccord.Domain.Model.Users;
+using AspNet.Security.OAuth.Validation;
+using Microsoft.AspNetCore.Authentication;
 
 namespace Raccord.API.Controllers
 {
-    [Authorize]
+    [Authorize(AuthenticationSchemes = OAuthValidationDefaults.AuthenticationScheme)]
     public abstract class AbstractApiAuthController : AbstractApiController 
     {
         protected readonly UserManager<ApplicationUser> _userManager;
