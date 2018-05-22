@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
+using Raccord.Application.Core.ExternalServices.Communication.Mail;
 using Raccord.Application.Core.Services.Users;
 using Raccord.Data.EntityFramework.Repositories.Users;
 using Raccord.Domain.Model.Users;
@@ -13,19 +14,17 @@ namespace Raccord.Application.Services.Users
     {
         private UserManager<ApplicationUser> _userManager;
         private IUserRepository _userRepository;
+        private ISendMailService _sendMailService;
 
         public UserService(
             UserManager<ApplicationUser> userManager,
-            IUserRepository userRepository
+            IUserRepository userRepository,
+            ISendMailService sendMailService
         )
         {
-            if(userManager==null)
-                throw new ArgumentNullException(nameof(userManager));
-            if(userRepository==null)
-                throw new ArgumentNullException(nameof(userRepository));
-
             _userManager = userManager;
             _userRepository = userRepository;
+            _sendMailService = sendMailService;
         }
 
         public IEnumerable<UserSummaryDto> GetAll()
@@ -61,6 +60,12 @@ namespace Raccord.Application.Services.Users
                 LastName = dto.LastName
             };
             var result = await _userManager.CreateAsync(user, dto.Password);
+            _sendMailService.SendMail(new SendMailRequestDto
+            {
+                Recipient = dto.Email,
+                Subject = "User created",
+                Body = "User was created"
+            });
 
             return user.Id;
         }

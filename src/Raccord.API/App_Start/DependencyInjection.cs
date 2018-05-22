@@ -140,12 +140,20 @@ using Raccord.Application.Core.Services.Crew.CrewUnits.Members;
 using Raccord.Application.Services.Crew.CrewUnits.Members;
 using Raccord.Application.Core.Services.Calendar;
 using Raccord.Application.Services.Calendar;
+using Raccord.Application.Core.ExternalServices.Communication.Mail;
+using Raccord.Application.ExternalServices.Communication.Mail;
 
 namespace Raccord.API
 {
     public static class DependencyInjection
     {
         public static void ConfigureServices(IServiceCollection services)
+        {
+            ConfigureInternalServices(services);
+            ConfigureExternalService(services);
+        }
+
+        private static void ConfigureInternalServices(IServiceCollection services)
         {
             services.AddTransient<RaccordDBContextSeeding>();
 
@@ -317,6 +325,11 @@ namespace Raccord.API
             services.AddTransient<IUnitCrewMemberService, UnitCrewMemberService>();
 
             services.AddTransient<ICalendarService, CalendarService>();
+        }
+
+        private static void ConfigureExternalService(IServiceCollection services)
+        {
+            services.AddTransient<ISendMailService, SendMailService>();
         }
     }
 }
