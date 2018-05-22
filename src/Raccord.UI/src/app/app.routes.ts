@@ -248,8 +248,7 @@ export const ROUTES: Routes = [
           },
           {
             path: RouteSettings.ADD,
-            component: AdminAddUserComponent,
-            canDeactivate: [CanDeactivateGuard],
+            component: AdminAddUserComponent
           },
           {
             path: ':userId',
