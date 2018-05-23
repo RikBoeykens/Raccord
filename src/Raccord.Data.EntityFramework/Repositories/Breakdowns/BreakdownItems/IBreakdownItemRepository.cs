@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace Raccord.Data.EntityFramework.Repositories.Breakdowns.BreakdownItems
 {
     // Interface defining a repository for breakdown items
-    public interface IBreakdownItemRepository : IBaseRepository<BreakdownItem>
+    public interface IBreakdownItemRepository : IBaseRepository<BreakdownItem, long>
     {
         IEnumerable<BreakdownItem> GetAllForType(long typeID);
         BreakdownItem GetFull(long ID);

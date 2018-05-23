@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 namespace Raccord.Data.EntityFramework.Repositories.ScriptLocations
 {
     // Repository for locations
-    public class ScriptLocationRepository : BaseRepository<ScriptLocation>, IScriptLocationRepository
+    public class ScriptLocationRepository : BaseRepository<ScriptLocation, long>, IScriptLocationRepository
     {
         public ScriptLocationRepository(RaccordDBContext context) : base(context) 
         {

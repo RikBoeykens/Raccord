@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 namespace Raccord.Data.EntityFramework.Repositories.Projects
 {
     // Repository for projects
-    public class ProjectRepository : BaseRepository<Project>, IProjectRepository
+    public class ProjectRepository : BaseRepository<Project, long>, IProjectRepository
     {
         public ProjectRepository(RaccordDBContext context) : base(context) 
         {

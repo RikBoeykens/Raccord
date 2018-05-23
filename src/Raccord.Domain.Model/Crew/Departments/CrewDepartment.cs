@@ -6,7 +6,7 @@ using Raccord.Domain.Model.Projects;
 namespace Raccord.Domain.Model.Crew.Departments
 {
     // Crew department
-    public class CrewDepartment : Entity
+    public class CrewDepartment : Entity<long>
     {
         private ICollection<CrewMember> _crew;
         

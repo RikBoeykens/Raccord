@@ -1,7 +1,7 @@
 namespace Raccord.Domain.Model.Scenes.Actions
 {
   // Action in a scene
-  public class SceneAction : Entity
+  public class SceneAction : Entity<long>
   {
     // Text of the action
     public string Text { get; set; }

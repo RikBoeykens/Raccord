@@ -3,7 +3,7 @@ using Raccord.Domain.Model.Projects;
 namespace Raccord.Domain.Model.Crew.Departments
 {
     // Crew Department Definition
-    public class CrewDepartmentDefinition : Entity
+    public class CrewDepartmentDefinition : Entity<long>
     {
         // Name of the department
         public string Name { get; set; }

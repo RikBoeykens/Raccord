@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace Raccord.Data.EntityFramework.Repositories.SceneProperties
 {
     // Interface defining a repository for Int/Ext
-    public interface IIntExtRepository : IBaseRepository<IntExt>
+    public interface IIntExtRepository : IBaseRepository<IntExt, long>
     {
         IEnumerable<IntExt> GetAllForProject(long projectID);
         IntExt GetFull(long ID);

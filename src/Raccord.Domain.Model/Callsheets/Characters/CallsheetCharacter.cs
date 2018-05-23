@@ -4,7 +4,7 @@ using Raccord.Domain.Model.Characters;
 namespace Raccord.Domain.Model.Callsheets.Characters
 {
     // join for character and callsheet scene
-    public class CallsheetCharacter : Entity
+    public class CallsheetCharacter : Entity<long>
     {
         private ICollection<CharacterCall> _characterCalls;
 

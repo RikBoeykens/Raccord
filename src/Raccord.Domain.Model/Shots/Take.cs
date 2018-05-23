@@ -2,7 +2,7 @@ using System;
 
 namespace Raccord.Domain.Model.Shots
 {
-    public class Take : Entity
+    public class Take : Entity<long>
     {
         // Number of the take
         public string Number { get; set; }

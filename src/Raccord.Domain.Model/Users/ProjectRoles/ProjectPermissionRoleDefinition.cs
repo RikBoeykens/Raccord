@@ -2,7 +2,7 @@ using Raccord.Core.Enums;
 
 namespace Raccord.Domain.Model.Users.ProjectRoles
 {
-  public class ProjectPermissionRoleDefinition : Entity
+  public class ProjectPermissionRoleDefinition : Entity<long>
   {
     /// <summary>
     /// ID of the linked role

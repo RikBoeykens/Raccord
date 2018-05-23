@@ -3,7 +3,7 @@ using Raccord.Domain.Model.Characters;
 namespace Raccord.Domain.Model.Callsheets.Scenes
 {
     // join for character and callsheet scene
-    public class CallsheetSceneCharacter : Entity
+    public class CallsheetSceneCharacter : Entity<long>
     {
 
         // ID of the linked character

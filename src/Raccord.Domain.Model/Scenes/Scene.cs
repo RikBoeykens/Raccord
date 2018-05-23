@@ -17,7 +17,7 @@ using Raccord.Domain.Model.Scenes.Dialogues;
 namespace Raccord.Domain.Model.Scenes
 {
     /// Represents a scene
-    public class Scene : Entity
+    public class Scene : Entity<long>
     {
         private ICollection<ImageScene> _images;
         private ICollection<CharacterScene> _characters;

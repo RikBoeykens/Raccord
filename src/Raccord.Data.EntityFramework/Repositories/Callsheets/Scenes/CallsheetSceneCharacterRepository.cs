@@ -6,7 +6,7 @@ using Raccord.Domain.Model.Callsheets.Scenes;
 namespace Raccord.Data.EntityFramework.Repositories.Callsheets.Scenes
 {
     // Repository for character scenes
-    public class CallsheetSceneCharacterRepository : BaseRepository<CallsheetSceneCharacter>, ICallsheetSceneCharacterRepository
+    public class CallsheetSceneCharacterRepository : BaseRepository<CallsheetSceneCharacter, long>, ICallsheetSceneCharacterRepository
     {
         public CallsheetSceneCharacterRepository(RaccordDBContext context) : base(context) 
         {

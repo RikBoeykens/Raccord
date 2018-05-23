@@ -7,7 +7,7 @@ using Raccord.Domain.Model.ShootingDays;
 namespace Raccord.Domain.Model.Scheduling
 {
     /// Represents schedule day
-    public class ScheduleDay : Entity
+    public class ScheduleDay : Entity<long>
     {        
         private ICollection<ScheduleScene> _scenes;
         private ICollection<ScheduleDayNote> _notes;

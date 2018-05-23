@@ -5,7 +5,7 @@ using Raccord.Domain.Model.Projects;
 namespace Raccord.Domain.Model.Callsheets.CallTypes
 {
     /// Represents definition of a call type
-    public class CallType : Entity
+    public class CallType : Entity<long>
     {
         private ICollection<CharacterCall> _characterCalls;
 

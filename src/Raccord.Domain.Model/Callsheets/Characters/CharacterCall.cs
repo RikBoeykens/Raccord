@@ -4,7 +4,7 @@ using Raccord.Domain.Model.Callsheets.CallTypes;
 namespace Raccord.Domain.Model.Callsheets.Characters
 {
     // join for character and callsheet scene
-    public class CharacterCall : Entity
+    public class CharacterCall : Entity<long>
     {
         // Time of call
         public DateTime CallTime { get; set; }

@@ -6,7 +6,7 @@ using Raccord.Domain.Model.Scheduling;
 namespace Raccord.Domain.Model.Characters
 {
     // join for character and scene
-    public class CharacterScene : Entity
+    public class CharacterScene : Entity<long>
     {
         private ICollection<ScheduleCharacter> _scheduleDays;
         private ICollection<CallsheetSceneCharacter> _callsheets;

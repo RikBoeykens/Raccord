@@ -6,7 +6,7 @@ using Raccord.Domain.Model.Images;
 namespace Raccord.Data.EntityFramework.Repositories.ImageSlates
 {
     // Repository for images
-    public class ImageSlateRepository : BaseRepository<ImageSlate>, IImageSlateRepository
+    public class ImageSlateRepository : BaseRepository<ImageSlate, long>, IImageSlateRepository
     {
         public ImageSlateRepository(RaccordDBContext context) : base(context) 
         {

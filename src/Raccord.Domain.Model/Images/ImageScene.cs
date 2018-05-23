@@ -3,7 +3,7 @@ using Raccord.Domain.Model.Scenes;
 namespace Raccord.Domain.Model.Images
 {
     // join for image and scene
-    public class ImageScene : Entity
+    public class ImageScene : Entity<long>
     {
         // Indicates if the image is the primary image for the scene
         public bool IsPrimaryImage { get; set; }

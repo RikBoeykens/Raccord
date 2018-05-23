@@ -5,7 +5,7 @@ using System;
 namespace Raccord.Data.EntityFramework.Repositories.ShootingDays
 {
     // Interface defining a repository for Int/Ext
-    public interface IShootingDayRepository : IBaseRepository<ShootingDay>
+    public interface IShootingDayRepository : IBaseRepository<ShootingDay, long>
     {
         IEnumerable<ShootingDay> GetAllForCrewUnit(long crewUnitID);
         IEnumerable<ShootingDay> GetAllForProject(long projectID);

@@ -7,7 +7,7 @@ namespace Raccord.Domain.Model.Comments
   /// <summary>
   /// Comment on a project/scene/.../comment
   /// </summary>
-  public class Comment: Entity
+  public class Comment: Entity<long>
   {
     private ICollection<Comment> _comments;
 

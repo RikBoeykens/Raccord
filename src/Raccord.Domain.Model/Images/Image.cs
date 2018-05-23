@@ -4,7 +4,7 @@ using Raccord.Domain.Model.Projects;
 namespace Raccord.Domain.Model.Images
 {
     /// Represents a image
-    public class Image : Entity
+    public class Image : Entity<long>
     {
         private ICollection<ImageScene> _scenes;
         private ICollection<ImageScriptLocation> _locations;

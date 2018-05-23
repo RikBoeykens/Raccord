@@ -4,7 +4,7 @@ using Raccord.Domain.Model.Crew.CrewMembers;
 namespace Raccord.Data.EntityFramework.Repositories.Crew.CrewMembers
 {
     // Interface defining a repository for crew members
-    public interface ICrewMemberRepository : IBaseRepository<CrewMember>
+    public interface ICrewMemberRepository : IBaseRepository<CrewMember, long>
     {
         IEnumerable<CrewMember> GetAllForDepartment(long departmentID);
         CrewMember GetFull(long ID);

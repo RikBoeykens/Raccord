@@ -7,7 +7,7 @@ using System;
 namespace Raccord.Data.EntityFramework.Repositories.Scheduling.ScheduleScenes
 {
     // Repository for ScheduleScene
-    public class ScheduleSceneRepository : BaseRepository<ScheduleScene>, IScheduleSceneRepository
+    public class ScheduleSceneRepository : BaseRepository<ScheduleScene, long>, IScheduleSceneRepository
     {
         public ScheduleSceneRepository(RaccordDBContext context) : base(context) 
         {

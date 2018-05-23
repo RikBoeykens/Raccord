@@ -3,7 +3,7 @@ using Raccord.Domain.Model.Characters;
 namespace Raccord.Domain.Model.Images
 {
     // join for image and character
-    public class ImageCharacter : Entity
+    public class ImageCharacter : Entity<long>
     {
         // Indicates if the image is the primary image for the character
         public bool IsPrimaryImage { get; set; }

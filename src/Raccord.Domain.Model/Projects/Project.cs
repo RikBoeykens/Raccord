@@ -10,7 +10,7 @@ using Raccord.Domain.Model.Users;
 namespace Raccord.Domain.Model.Projects
 {
     /// Represents a single project
-    public class Project : Entity
+    public class Project : Entity<long>
     {
         private ICollection<Image> _images;
         private ICollection<ProjectUser> _projectUsers;

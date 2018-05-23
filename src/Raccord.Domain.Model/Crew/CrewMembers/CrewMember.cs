@@ -8,7 +8,7 @@ using Raccord.Domain.Model.Users;
 namespace Raccord.Domain.Model.Crew.CrewMembers
 {
     /// Represents a breakdown item
-    public class CrewMember : Entity
+    public class CrewMember : Entity<long>
     {
         /// First Name of the crew member
         public string FirstName { get; set; }

@@ -3,7 +3,7 @@ using Raccord.Core.Enums;
 
 namespace Raccord.Domain.Model.Users.ProjectRoles
 {
-  public class ProjectPermissionDefinition : Entity
+  public class ProjectPermissionDefinition : Entity<long>
   {
     private ICollection<ProjectPermissionRoleDefinition> _roles;
 

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace Raccord.Data.EntityFramework.Repositories.Scheduling.ScheduleDays
 {
     // Interface defining a repository for Int/Ext
-    public interface IScheduleDayRepository : IBaseRepository<ScheduleDay>
+    public interface IScheduleDayRepository : IBaseRepository<ScheduleDay, long>
     {
         IEnumerable<ScheduleDay> GetAllForCrewUnit(long crewUnitID);
         IEnumerable<ScheduleDay> GetAllForCharacters(long[] characterIds);

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace Raccord.Data.EntityFramework.Repositories.Images
 {
     // Interface defining a repository for Images
-    public interface IImageRepository : IBaseRepository<Image>
+    public interface IImageRepository : IBaseRepository<Image, long>
     {
         IEnumerable<Image> GetAllForProject(long projectID);
         Image GetFull(long ID);

@@ -3,9 +3,9 @@ using System;
 namespace Raccord.Domain.Model
 {
     /// Abstract base entity
-    public abstract class Entity
+    public abstract class Entity<T>
     {
         /// ID of the abstract entity
-        public long ID { get; set; }
+        public T ID { get; set; }
     }
 }

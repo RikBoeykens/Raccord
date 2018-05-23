@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 namespace Raccord.Data.EntityFramework.Repositories.Scenes
 {
     // Repository for scenes
-    public class SceneRepository : BaseRepository<Scene>, ISceneRepository
+    public class SceneRepository : BaseRepository<Scene, long>, ISceneRepository
     {
         public SceneRepository(RaccordDBContext context) : base(context) 
         {

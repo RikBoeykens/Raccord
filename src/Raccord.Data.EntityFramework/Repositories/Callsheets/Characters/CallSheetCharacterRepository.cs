@@ -6,7 +6,7 @@ using Raccord.Domain.Model.Callsheets.Characters;
 namespace Raccord.Data.EntityFramework.Repositories.Callsheets.Characters
 {
     // Repository for breakdown type definitions
-    public class CallsheetCharacterRepository : BaseRepository<CallsheetCharacter>, ICallsheetCharacterRepository
+    public class CallsheetCharacterRepository : BaseRepository<CallsheetCharacter, long>, ICallsheetCharacterRepository
     {
         public CallsheetCharacterRepository(RaccordDBContext context) : base(context) 
         {

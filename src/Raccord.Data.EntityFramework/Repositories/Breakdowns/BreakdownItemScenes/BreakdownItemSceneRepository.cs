@@ -6,7 +6,7 @@ using Raccord.Domain.Model.Breakdowns.BreakdownItems;
 namespace Raccord.Data.EntityFramework.Repositories.Breakdowns.BreakdownItemScenes
 {
     // Repository for breakdown item scenes
-    public class BreakdownItemSceneRepository : BaseRepository<BreakdownItemScene>, IBreakdownItemSceneRepository
+    public class BreakdownItemSceneRepository : BaseRepository<BreakdownItemScene, long>, IBreakdownItemSceneRepository
     {
         public BreakdownItemSceneRepository(RaccordDBContext context) : base(context) 
         {

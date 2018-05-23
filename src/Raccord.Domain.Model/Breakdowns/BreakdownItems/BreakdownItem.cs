@@ -5,7 +5,7 @@ using Raccord.Domain.Model.Images;
 namespace Raccord.Domain.Model.Breakdowns.BreakdownItems
 {
     /// Represents a breakdown item
-    public class BreakdownItem : Entity
+    public class BreakdownItem : Entity<long>
     {
         private ICollection<BreakdownItemScene> _scenes;
         private ICollection<ImageBreakdownItem> _images;

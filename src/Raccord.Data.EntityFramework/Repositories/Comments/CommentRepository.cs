@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 namespace Raccord.Data.EntityFramework.Repositories.Comments
 {
     // Repository for comments
-    public class CommentRepository : BaseRepository<Comment>, ICommentRepository
+    public class CommentRepository : BaseRepository<Comment, long>, ICommentRepository
     {
         public CommentRepository(RaccordDBContext context) : base(context) 
         {

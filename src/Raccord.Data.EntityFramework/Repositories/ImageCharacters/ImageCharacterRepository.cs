@@ -6,7 +6,7 @@ using Raccord.Domain.Model.Images;
 namespace Raccord.Data.EntityFramework.Repositories.ImageCharacters
 {
     // Repository for image characters
-    public class ImageCharacterRepository : BaseRepository<ImageCharacter>, IImageCharacterRepository
+    public class ImageCharacterRepository : BaseRepository<ImageCharacter, long>, IImageCharacterRepository
     {
         public ImageCharacterRepository(RaccordDBContext context) : base(context) 
         {

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace Raccord.Data.EntityFramework.Repositories.Scenes
 {
     // Interface defining a repository for Scenes
-    public interface ISceneRepository : IBaseRepository<Scene>
+    public interface ISceneRepository : IBaseRepository<Scene, long>
     {
         IEnumerable<Scene> GetAllForProject(long projectID);
         Scene GetFull(long ID);

@@ -11,8 +11,8 @@ using System.Threading.Tasks;
 
 namespace Raccord.Data.EntityFramework.Repositories
 {
-    public class BaseRepository<T> : IBaseRepository<T>
-                 where T : Entity, new()
+    public class BaseRepository<T, TId> : IBaseRepository<T, TId>
+                 where T : Entity<TId>, new()
     {
 
         protected RaccordDBContext _context;
@@ -51,9 +51,9 @@ namespace Raccord.Data.EntityFramework.Repositories
             }
             return await query.ToListAsync();
         }
-        public T GetSingle(Int64 id)
+        public T GetSingle(TId id)
         {
-            return _context.Set<T>().FirstOrDefault(x => x.ID == id);
+            return _context.Set<T>().FirstOrDefault(x => x.ID.Equals(id));
         }
 
         public T GetSingle(Expression<Func<T, bool>> predicate)
@@ -72,9 +72,9 @@ namespace Raccord.Data.EntityFramework.Repositories
             return query.Where(predicate).FirstOrDefault();
         }
 
-        public async Task<T> GetSingleAsync(int id)
+        public async Task<T> GetSingleAsync(TId id)
         {
-            return await _context.Set<T>().FirstOrDefaultAsync(e => e.ID == id);
+            return await _context.Set<T>().FirstOrDefaultAsync(e => e.ID.Equals(id));
         }
         public virtual IEnumerable<T> FindBy(Expression<Func<T, bool>> predicate)
         {

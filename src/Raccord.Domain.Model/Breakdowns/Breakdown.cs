@@ -6,7 +6,7 @@ using Raccord.Domain.Model.Users;
 
 namespace Raccord.Domain.Model.Breakdowns
 {
-  public class Breakdown : Entity
+  public class Breakdown : Entity<long>
   {
     private ICollection<BreakdownType> _types;
     private ICollection<BreakdownItem> _items;

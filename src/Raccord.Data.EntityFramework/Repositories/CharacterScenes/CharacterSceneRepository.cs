@@ -6,7 +6,7 @@ using Raccord.Domain.Model.Characters;
 namespace Raccord.Data.EntityFramework.Repositories.CharacterScenes
 {
     // Repository for character scenes
-    public class CharacterSceneRepository : BaseRepository<CharacterScene>, ICharacterSceneRepository
+    public class CharacterSceneRepository : BaseRepository<CharacterScene, long>, ICharacterSceneRepository
     {
         public CharacterSceneRepository(RaccordDBContext context) : base(context) 
         {

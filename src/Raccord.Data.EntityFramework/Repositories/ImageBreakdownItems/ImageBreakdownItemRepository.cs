@@ -6,7 +6,7 @@ using Raccord.Domain.Model.Images;
 namespace Raccord.Data.EntityFramework.Repositories.ImageBreakdownItems
 {
     // Repository for image breakdown items
-    public class ImageBreakdownItemRepository : BaseRepository<ImageBreakdownItem>, IImageBreakdownItemRepository
+    public class ImageBreakdownItemRepository : BaseRepository<ImageBreakdownItem, long>, IImageBreakdownItemRepository
     {
         public ImageBreakdownItemRepository(RaccordDBContext context) : base(context) 
         {

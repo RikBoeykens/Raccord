@@ -3,7 +3,7 @@ using Raccord.Domain.Model.Breakdowns.BreakdownItems;
 namespace Raccord.Domain.Model.Images
 {
     // join for image and BreakdownItem
-    public class ImageBreakdownItem : Entity
+    public class ImageBreakdownItem : Entity<long>
     {
         // Indicates if the image is the primary image for the BreakdownItem
         public bool IsPrimaryImage { get; set; }
