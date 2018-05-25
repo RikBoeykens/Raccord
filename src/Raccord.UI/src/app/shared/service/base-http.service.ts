@@ -33,9 +33,7 @@ export abstract class BaseHttpService {
 
     protected doPost(object: any, uri: string, useAuthToken: Boolean = true) {
         let body = JSON.stringify(object);
-        let headers = useAuthToken ?
-                        HeaderHelpers.AuthFormHeaders() :
-                        HeaderHelpers.ContentHttpHeaders();
+        let headers = HeaderHelpers.AuthFormHeaders();
         return this._http.post(uri, body, {headers})
             .toPromise()
             .then((response) => this.extractJsonResponse(response))

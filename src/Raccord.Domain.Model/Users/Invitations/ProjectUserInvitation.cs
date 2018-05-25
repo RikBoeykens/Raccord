@@ -1,3 +1,4 @@
+using System;
 using Raccord.Domain.Model.Projects;
 using Raccord.Domain.Model.Users.ProjectRoles;
 
@@ -8,7 +9,7 @@ namespace Raccord.Domain.Model.Users.Invitations
     public long ProjectID { get; set; }
 
     public virtual Project Project { get; set; }
-    public long UserInvitationID { get; set; }
+    public Guid UserInvitationID { get; set; }
 
     public virtual UserInvitation UserInvitation { get; set; }
 

@@ -1356,9 +1356,7 @@ namespace Raccord.Data.EntityFramework.Migrations
 
                     b.Property<long?>("RoleID");
 
-                    b.Property<long>("UserInvitationID");
-
-                    b.Property<Guid?>("UserInvitationID1");
+                    b.Property<Guid>("UserInvitationID");
 
                     b.HasKey("ID");
 
@@ -1366,7 +1364,7 @@ namespace Raccord.Data.EntityFramework.Migrations
 
                     b.HasIndex("RoleID");
 
-                    b.HasIndex("UserInvitationID1");
+                    b.HasIndex("UserInvitationID");
 
                     b.ToTable("ProjectUserInvitation");
                 });
@@ -2050,7 +2048,8 @@ namespace Raccord.Data.EntityFramework.Migrations
 
                     b.HasOne("Raccord.Domain.Model.Users.Invitations.UserInvitation", "UserInvitation")
                         .WithMany("ProjectUsers")
-                        .HasForeignKey("UserInvitationID1");
+                        .HasForeignKey("UserInvitationID")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Raccord.Domain.Model.Users.ProjectRoles.ProjectPermissionRoleDefinition", b =>

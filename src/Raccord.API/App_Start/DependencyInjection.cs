@@ -142,6 +142,12 @@ using Raccord.Application.Core.Services.Calendar;
 using Raccord.Application.Services.Calendar;
 using Raccord.Application.Core.ExternalServices.Communication.Mail;
 using Raccord.Application.ExternalServices.Communication.Mail;
+using Raccord.Data.EntityFramework.Repositories.Users.Invitations;
+using Raccord.Data.EntityFramework.Repositories.Users.Invitations.Projects;
+using Raccord.Application.Core.Services.Users.Invitations;
+using Raccord.Application.Services.Users.Invitations.Project;
+using Raccord.Application.Core.Services.Users.Invitations.Project;
+using Raccord.Application.Services.Users.Invitations;
 
 namespace Raccord.API
 {
@@ -325,6 +331,12 @@ namespace Raccord.API
             services.AddTransient<IUnitCrewMemberService, UnitCrewMemberService>();
 
             services.AddTransient<ICalendarService, CalendarService>();
+
+            services.AddTransient<IUserInvitationRepository, UserInvitationRepository>();
+            services.AddTransient<IUserInvitationService, UserInvitationService>();
+
+            services.AddTransient<IProjectUserInvitationRepository, ProjectUserInvitationRepository>();
+            services.AddTransient<IProjectUserInvitationService, ProjectUserInvitationService>();
         }
 
         private static void ConfigureExternalService(IServiceCollection services)

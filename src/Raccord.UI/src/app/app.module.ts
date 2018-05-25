@@ -188,7 +188,10 @@ import {
   AdminAddCastDialogComponent,
   AdminChooseProjectUserDialogComponent,
   AdminCrewUnitLandingComponent,
-  AdminCrewUnitsListComponent
+  AdminCrewUnitsListComponent,
+  AdminUserInvitationsListComponent,
+  AdminAddUserInvitationDialogComponent,
+  AdminUserInvitationLandingComponent
 } from './admin';
 import{
   RaccordChartComponent
@@ -206,6 +209,9 @@ import {
 import {
   ErrorComponent
 } from './error';
+import {
+  CreateUserFromInvitationComponent
+} from './invitations';
 
 const COMPONENTS = [
   AppComponent,
@@ -347,13 +353,16 @@ const COMPONENTS = [
   AdminProjectUserLandingComponent,
   AdminCrewUnitLandingComponent,
   AdminCrewUnitsListComponent,
+  AdminUserInvitationsListComponent,
+  AdminUserInvitationLandingComponent,
   RaccordChartComponent,
   UserProfileLandingComponent,
   ShowProfileImageComponent,
   UserAvatarComponent,
   CalendarComponent,
   CalendarHeaderComponent,
-  ErrorComponent
+  ErrorComponent,
+  CreateUserFromInvitationComponent
 ];
 
 const ENTRY_COMPONENTS = [
@@ -369,6 +378,7 @@ const ENTRY_COMPONENTS = [
   AdminAddCrewMemberDialogComponent,
   AdminAddCastDialogComponent,
   AdminChooseProjectUserDialogComponent,
+  AdminAddUserInvitationDialogComponent,
   EditBreakdownTypeDialogComponent,
   EditCastMemberDialogComponent
 ];
@@ -520,7 +530,11 @@ import {
   AdminProjectRolesResolve,
   AdminCrewUnitHttpService,
   AdminCrewUnitMemberHttpService,
-  AdminCrewUnitResolve
+  AdminCrewUnitResolve,
+  AdminUserInvitationHttpService,
+  AdminUserInvitationsResolve,
+  AdminUserInvitationResolve,
+  AdminProjectUserInvitationHttpService
 } from './admin';
 
 import {
@@ -536,6 +550,10 @@ import {
 import {
   CalendarHttpService
 } from './calendar';
+import {
+  InvitationHttpService,
+  InvitationResolve
+} from './invitations';
 
 const APP_PROVIDERS = [
   AuthService,
@@ -651,6 +669,10 @@ const APP_PROVIDERS = [
   AdminCrewUnitHttpService,
   AdminCrewUnitMemberHttpService,
   AdminCrewUnitResolve,
+  AdminUserInvitationHttpService,
+  AdminUserInvitationsResolve,
+  AdminUserInvitationResolve,
+  AdminProjectUserInvitationHttpService,
   ChartHttpService,
   ProjectChartsResolve,
   CrewDepartmentHttpService,
@@ -675,7 +697,9 @@ const APP_PROVIDERS = [
   CastMemberResolve,
   CastMembersResolve,
   ProjectCalendarHttpService,
-  CalendarHttpService
+  CalendarHttpService,
+  InvitationHttpService,
+  InvitationResolve
 ];
 
 // Directives

@@ -1,0 +1,39 @@
+<div class="row">      
+    <div class="col s12">
+        <a routerLink="/" class="breadcrumb">Dashboard</a>
+        <span class="breadcrumb">User Invitations</span>
+    </div>
+</div>
+<div class="row">
+    <table class="col s12">
+        <thead>
+            <tr>
+                <th></th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Accepted</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let invitation of invitations">
+                <td>
+                    <user-avatar [userId]="invitation.id" [fullName]="getFullName(invitation)" [hasImage]="false"></user-avatar>
+                </td>
+                <td>
+                    <a [routerLink]="[invitation.id]">{{getFullName(invitation)}}</a>
+                </td>
+                <td>
+                    <a [routerLink]="[invitation.id]">{{invitation.email}}</a>
+                </td>
+                <td>
+                    <md-icon *ngIf="invitation.acceptedDate">check</md-icon>
+                </td>
+                <td>
+                    <button md-button (click)="remove(invitation)"><md-icon>delete</md-icon></button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<button md-fab (click)="showAddInvitation()"><md-icon>add</md-icon></button>

@@ -49,6 +49,7 @@ namespace Raccord.API
         {
             services.Configure<DbContextSettings>(Configuration.GetSection("DbContextSettings"));
             services.Configure<MailSettings>(Configuration.GetSection("MailSettings"));
+            services.Configure<UISettings>(Configuration.GetSection("UISettings"));
             // Add framework services.
             var dbConfig = Configuration.GetSection("DbContextSettings");
             var connectionString = dbConfig.GetValue<string>("ConnectionString");

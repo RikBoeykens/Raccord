@@ -75,10 +75,15 @@ import {
   AdminProjectUserLandingComponent,
   AdminCrewUnitLandingComponent,
   AdminCrewUnitsListComponent,
+  AdminUserInvitationsListComponent,
+  AdminUserInvitationLandingComponent
 } from './admin';
 import{
   UserProfileLandingComponent
 } from './profile';
+import {
+  CreateUserFromInvitationComponent
+} from './invitations';
 
 import { ProjectResolve } from './projects';
 import { ProjectSummaryResolve } from './projects';
@@ -151,7 +156,9 @@ import {
   AdminUserProjectsResolve,
   AdminProjectUserResolve,
   AdminProjectRolesResolve,
-  AdminCrewUnitResolve
+  AdminCrewUnitResolve,
+  AdminUserInvitationResolve,
+  AdminUserInvitationsResolve
 } from './admin';
 
 import {
@@ -160,6 +167,9 @@ import {
   CanReadCallsheetProjectPermissionGuard,
   CanReadGeneralProjectPermissionGuard
 } from './account';
+import {
+  InvitationResolve
+} from './invitations';
 
 import { CanDeactivateGuard } from './shared/service/can-deactivate-guard.service';
 import { AuthGuard } from './security';
@@ -173,6 +183,13 @@ export const ROUTES: Routes = [
   { path: RouteSettings.DASHBOARD,  component: DashboardComponent, canActivate: [AuthGuard] },
   { path: RouteSettings.LOGIN,  component: LoginComponent },
   { path: RouteSettings.SEARCH,  component: SearchComponent, canActivate: [AuthGuard] },
+  {
+    path: `${RouteSettings.INVITATIONS}/:invitationId`,
+    component: CreateUserFromInvitationComponent,
+    resolve: {
+      invitation: InvitationResolve
+    }
+  },
   {
     path: RouteSettings.ADMIN,
     canActivate: [AdminGuard],
@@ -260,6 +277,30 @@ export const ROUTES: Routes = [
                   user: AdminUserResolve,
                   projects: AdminUserProjectsResolve,
                   projectRoles: AdminProjectRolesResolve
+                }
+              },
+            ]
+          }
+        ]
+      },
+      {
+        path: RouteSettings.INVITATIONS,
+        children: [
+          {
+            path: '',
+            component: AdminUserInvitationsListComponent,
+            resolve: {
+              invitations: AdminUserInvitationsResolve
+            }
+          },
+          {
+            path: ':invitationId',
+            children: [
+              {
+                path: '',
+                component: AdminUserInvitationLandingComponent,
+                resolve: {
+                  invitation: AdminUserInvitationResolve
                 }
               },
             ]

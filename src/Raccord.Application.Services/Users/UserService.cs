@@ -14,17 +14,14 @@ namespace Raccord.Application.Services.Users
     {
         private UserManager<ApplicationUser> _userManager;
         private IUserRepository _userRepository;
-        private ISendMailService _sendMailService;
 
         public UserService(
             UserManager<ApplicationUser> userManager,
-            IUserRepository userRepository,
-            ISendMailService sendMailService
+            IUserRepository userRepository
         )
         {
             _userManager = userManager;
             _userRepository = userRepository;
-            _sendMailService = sendMailService;
         }
 
         public IEnumerable<UserSummaryDto> GetAll()
@@ -60,12 +57,6 @@ namespace Raccord.Application.Services.Users
                 LastName = dto.LastName
             };
             var result = await _userManager.CreateAsync(user, dto.Password);
-            _sendMailService.SendMail(new SendMailRequestDto
-            {
-                Recipient = dto.Email,
-                Subject = "User created",
-                Body = "User was created"
-            });
 
             return user.Id;
         }

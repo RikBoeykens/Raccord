@@ -40,6 +40,9 @@ export class AuthService {
 
     public getAccessToken(): Observable<string> {
         let tokens = TokenHelpers.getTokens();
+        if (!tokens) {
+            return Observable.of(null);
+        }
         if (new Date().getTime() >= tokens.expiryDate) {
             return Observable.fromPromise(this.refreshToken(tokens))
                 .catch(() => Observable.throw(this.logout()));
