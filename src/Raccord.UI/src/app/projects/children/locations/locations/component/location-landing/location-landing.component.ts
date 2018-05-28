@@ -11,6 +11,7 @@ import { LocationSetScriptLocation } from '../../../index';
 import { MapsHelpers } from '../../../../../../shared/helpers/maps.helpers';
 import { AccountHelpers } from '../../../../../../account/helpers/account.helper';
 import { ProjectPermissionEnum } from '../../../../../../shared/children/users/project-roles/enums/project-permission.enum';
+import { LoadingWrapperService } from '../../../../../../shared/service/loading-wrapper.service';
 
 @Component({
     templateUrl: 'location-landing.component.html',
@@ -26,6 +27,7 @@ export class LocationLandingComponent {
 
     constructor(
         private _locationHttpService: LocationHttpService,
+        private _loadingWrapperService: LoadingWrapperService,
         private _loadingService: LoadingService,
         private _dialogService: DialogService,
         private _route: ActivatedRoute,
@@ -43,13 +45,13 @@ export class LocationLandingComponent {
     }
 
     getLocation(){
-        let loadingId = this._loadingService.startLoading();
-
-        this._locationHttpService.get(this.location.id).then(data => {
-            this.location = data;
-            this.viewLocation = new Location(data);
-            this._loadingService.endLoading(loadingId);
-        });
+        this._loadingWrapperService.Load(
+            this._locationHttpService.get(this.location.id),
+            (data) => {
+                this.location = data;
+                this.viewLocation = new Location(data);
+            }
+        );
     }
 
     updateLocation(){

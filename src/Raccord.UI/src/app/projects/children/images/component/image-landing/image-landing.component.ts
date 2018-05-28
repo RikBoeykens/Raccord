@@ -19,6 +19,7 @@ import { EntityType } from '../../../../../shared/enums/entity-type.enum';
 import { SelectedEntity } from '../../../../../shared/model/selected-entity.model';
 import { LinkedSlate } from "../../../shots/slates/model/linked-slate.model";
 import { LinkedBreakdownItem } from '../../../breakdowns/children/breakdown-items/model/linked-breakdown-item.model';
+import { LoadingWrapperService } from '../../../../../shared/service/loading-wrapper.service';
 
 @Component({
     templateUrl: 'image-landing.component.html',
@@ -42,6 +43,7 @@ export class ImageLandingComponent {
         private _imageCharacterHttpService: ImageCharacterHttpService,
         private _imageBreakdownItemHttpService: ImageBreakdownItemHttpService,
         private _imageSlateHttpService: ImageSlateHttpService,
+        private _loadingWrapperService: LoadingWrapperService,
         private _loadingService: LoadingService,
         private _dialogService: DialogService,
         private _route: ActivatedRoute,
@@ -58,13 +60,13 @@ export class ImageLandingComponent {
     }
 
     getImage(){
-        let loadingId = this._loadingService.startLoading();
-
-        this._imageHttpService.get(this.image.id).then(data => {
-            this.image = data;
-            this.viewImage = new Image(data);
-            this._loadingService.endLoading(loadingId);
-        });
+        this._loadingWrapperService.Load(
+            this._imageHttpService.get(this.image.id),
+            (data) => {
+                this.image = data;
+                this.viewImage = new Image(data);
+            }
+        );
     }
 
     updateImage(){

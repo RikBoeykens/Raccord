@@ -1,7 +1,7 @@
 namespace Raccord.Domain.Model.Callsheets.CallTypes
 {
     /// Represents definition of a call type
-    public class CallTypeDefinition : Entity
+    public class CallTypeDefinition : Entity<long>
     {
         /// Name of the call type
         public string Name { get; set; }

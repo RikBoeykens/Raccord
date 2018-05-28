@@ -10,7 +10,7 @@ using Raccord.Domain.Model.Users.ProjectRoles;
 
 namespace Raccord.Domain.Model.Users
 {
-    public class ProjectUser : Entity
+    public class ProjectUser : Entity<long>
     {
         private ICollection<CrewUnitMember> _crewUnitMembers;
 

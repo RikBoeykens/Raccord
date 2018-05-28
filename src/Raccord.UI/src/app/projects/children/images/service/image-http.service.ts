@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { BaseHttpService } from '../../../../shared/service/base-http.service';
 import { AppSettings } from '../../../../app.settings';
 import { FullImage } from '../model/full-image.model';
@@ -13,33 +13,35 @@ import { Base64Image } from '../../../../shared/model/base-64-image.model';
 @Injectable()
 export class ImageHttpService extends BaseHttpService {
 
-    constructor(protected _http: Http) { 
+    constructor(
+        protected _http: HttpClient,
+    ) {
         super(_http);
         this._baseUri = `${AppSettings.API_ENDPOINT}/images`;
     }
 
-    getAll(projectId): Promise<ImageSummary[]> {
+    getAll(projectId): Promise<ImageSummary[] | void> {
 
         var uri = `${this._baseUri}/${projectId}/project`;
 
         return this.doGetArray(uri);
     }
 
-    get(id: number): Promise<FullImage>{
+    get(id: number): Promise<FullImage | void>{
 
         var uri = `${this._baseUri}/${id}`;
 
         return this.doGet(uri);
     }
 
-    getSummary(id: Number): Promise<ImageSummary> {
+    getSummary(id: Number): Promise<ImageSummary | void> {
 
         var uri = `${this._baseUri}/${id}/summary`;
 
         return this.doGet(uri);
     }
 
-    getBase64(id: Number): Promise<Base64Image> {
+    getBase64(id: Number): Promise<Base64Image | void> {
 
         var uri = `${this._baseUri}/${id}/base64`;
 

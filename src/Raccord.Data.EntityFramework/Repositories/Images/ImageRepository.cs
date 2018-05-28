@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 namespace Raccord.Data.EntityFramework.Repositories.Images
 {
     // Repository for images
-    public class ImageRepository : BaseRepository<Image>, IImageRepository
+    public class ImageRepository : BaseRepository<Image, long>, IImageRepository
     {
         public ImageRepository(RaccordDBContext context) : base(context) 
         {

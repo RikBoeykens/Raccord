@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { AppSettings } from '../../../../../app.settings';
 import { BaseProjectHttpService } from '../../../../shared/service/base-project-http.service';
 import { CrewUnitSummary } from '../model/crew-unit-summary.model';
@@ -9,32 +9,32 @@ import { CrewUnit } from '../model/crew-unit.model';
 @Injectable()
 export class CrewUnitHttpService extends BaseProjectHttpService {
 
-    constructor(protected _http: Http) {
+    constructor(protected _http: HttpClient) {
         super(_http, 'crewunits');
     }
 
-    public getAll(authProjectId: number): Promise<CrewUnitSummary[]> {
+    public getAll(authProjectId: number): Promise<CrewUnitSummary[] | void> {
 
         let uri = `${this.getUri(authProjectId)}/project`;
 
         return this.doGetArray(uri);
     }
 
-    public getAllForUser(authProjectId: number): Promise<CrewUnitSummary[]> {
+    public getAllForUser(authProjectId: number): Promise<CrewUnitSummary[] | void> {
 
         let uri = `${this.getUri(authProjectId)}/user`;
 
         return this.doGetArray(uri);
     }
 
-    public get(authProjectId: number, id: number): Promise<FullCrewUnit> {
+    public get(authProjectId: number, id: number): Promise<FullCrewUnit | void> {
 
         let uri = `${this.getUri(authProjectId)}/${id}`;
 
         return this.doGet(uri);
     }
 
-    public getSummary(authProjectId: number, id: Number): Promise<CrewUnitSummary> {
+    public getSummary(authProjectId: number, id: Number): Promise<CrewUnitSummary | void> {
 
         let uri = `${this.getUri(authProjectId)}/${id}/summary`;
 

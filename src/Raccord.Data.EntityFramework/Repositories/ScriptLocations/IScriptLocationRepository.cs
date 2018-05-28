@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace Raccord.Data.EntityFramework.Repositories.ScriptLocations
 {
     // Interface defining a repository for Locations
-    public interface IScriptLocationRepository : IBaseRepository<ScriptLocation>
+    public interface IScriptLocationRepository : IBaseRepository<ScriptLocation, long>
     {
         IEnumerable<ScriptLocation> GetAllForProject(long projectID);
         ScriptLocation GetFull(long ID);

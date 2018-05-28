@@ -5,6 +5,7 @@ import { UserSummary } from '../../model/user-summary.model';
 import { LoadingService } from '../../../../loading/service/loading.service';
 import { DialogService } from '../../../../shared/service/dialog.service';
 import { Image } from '../../children/images/model/image.model';
+import { LoadingWrapperService } from '../../../../shared/service/loading-wrapper.service';
 
 @Component({
     templateUrl: 'admin-users-list.component.html',
@@ -15,6 +16,7 @@ export class AdminUsersListComponent implements OnInit {
 
     constructor(
         private _adminUserHttpService: AdminUserHttpService,
+        private _loadingWrapperService: LoadingWrapperService,
         private _loadingService: LoadingService,
         private _dialogService: DialogService,
         private _route: ActivatedRoute,
@@ -28,14 +30,11 @@ export class AdminUsersListComponent implements OnInit {
         });
     }
 
-    getProjects(){
-        
-        let loadingId = this._loadingService.startLoading();
-
-        this._adminUserHttpService.getAll().then(data => {
-            this.users = data;
-            this._loadingService.endLoading(loadingId);
-        });
+    getProjects() {
+        this._loadingWrapperService.Load(
+            this._adminUserHttpService.getAll(),
+            (data) => this.users = data
+        );
     }
 
     remove(user: UserSummary){

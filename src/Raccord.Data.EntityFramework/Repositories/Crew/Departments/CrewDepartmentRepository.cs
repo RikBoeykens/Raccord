@@ -6,7 +6,7 @@ using Raccord.Domain.Model.Crew.Departments;
 namespace Raccord.Data.EntityFramework.Repositories.Crew.Departments
 {
     // Repository for breakdown types
-    public class CrewDepartmentRepository : BaseRepository<CrewDepartment>, ICrewDepartmentRepository
+    public class CrewDepartmentRepository : BaseRepository<CrewDepartment, long>, ICrewDepartmentRepository
     {
         public CrewDepartmentRepository(RaccordDBContext context) : base(context) 
         {

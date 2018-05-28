@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { BaseHttpService } from '../../../../shared/service/base-http.service';
 import { AppSettings } from '../../../../app.settings';
 import { FullScriptLocation } from '../model/full-script-location.model';
@@ -10,26 +10,28 @@ import { JsonResponse } from '../../../../shared/model/json-response.model';
 @Injectable()
 export class ScriptLocationHttpService extends BaseHttpService {
 
-    constructor(protected _http: Http) { 
+    constructor(
+        protected _http: HttpClient,
+    ) {
         super(_http);
         this._baseUri = `${AppSettings.API_ENDPOINT}/scriptlocations`;
     }
 
-    getAll(projectId): Promise<ScriptLocationSummary[]> {
+    getAll(projectId): Promise<ScriptLocationSummary[] | void> {
 
         var uri = `${this._baseUri}/${projectId}/project`;
 
         return this.doGetArray(uri);
     }
 
-    get(id: number): Promise<FullScriptLocation>{
+    get(id: number): Promise<FullScriptLocation | void>{
 
         var uri = `${this._baseUri}/${id}`;
 
         return this.doGet(uri);
     }
 
-    getSummary(id: Number): Promise<ScriptLocationSummary> {
+    getSummary(id: Number): Promise<ScriptLocationSummary | void> {
 
         var uri = `${this._baseUri}/${id}/summary`;
 

@@ -37,6 +37,8 @@ export { AdminProjectLandingComponent } from
   './projects/component/admin-project-landing/admin-project-landing.component';
 export { AdminProjectSettingsComponent } from
   './projects/component/admin-project-settings/admin-project-settings.component';
+export { AdminChooseProjectDialogComponent } from
+  './projects/component/admin-choose-project-dialog/admin-choose-project-dialog.component';
 
 export { AdminUsersListComponent } from
   './users/component/admin-users-list/admin-users-list.component';
@@ -68,3 +70,22 @@ export { AdminCrewUnitLandingComponent } from
   './crew-units/component/admin-crew-unit-landing/admin-crew-unit-landing.component';
 export { AdminCrewUnitsListComponent } from
   './crew-units/component/admin-crew-units-list/admin-crew-units-list.component';
+
+export { AdminUserInvitationHttpService } from
+  './invitations/service/admin-user-invitation-http.service';
+export { AdminUserInvitationResolve } from
+  './invitations/service/admin-user-invitation-resolve.service';
+  export { AdminUserInvitationsResolve } from
+  './invitations/service/admin-user-invitations-resolve.service';
+export { AdminProjectUserInvitationHttpService } from
+  './invitations/children/project/service/admin-project-user-invitation-http.service';
+export { AdminProjectUserInvitationsResolve } from
+  './invitations/children/project/service/admin-project-user-invitations-resolve.service';
+
+export { AdminUserInvitationsListComponent } from
+  './invitations/component/admin-user-invitations-list/admin-user-invitations-list.component';
+export { AdminAddUserInvitationDialogComponent } from
+  // tslint:disable-next-line:max-line-length
+  './invitations/component/admin-add-user-invitation-dialog/admin-add-user-invitation-dialog.component';
+export { AdminUserInvitationLandingComponent } from
+  './invitations/component/admin-user-invitation-landing/admin-user-invitation-landing.component';

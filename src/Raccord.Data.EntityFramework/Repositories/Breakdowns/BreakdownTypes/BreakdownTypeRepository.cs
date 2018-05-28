@@ -6,7 +6,7 @@ using Raccord.Domain.Model.Breakdowns.BreakdownTypes;
 namespace Raccord.Data.EntityFramework.Repositories.Breakdowns.BreakdownTypes
 {
     // Repository for breakdown types
-    public class BreakdownTypeRepository : BaseRepository<BreakdownType>, IBreakdownTypeRepository
+    public class BreakdownTypeRepository : BaseRepository<BreakdownType, long>, IBreakdownTypeRepository
     {
         public BreakdownTypeRepository(RaccordDBContext context) : base(context) 
         {

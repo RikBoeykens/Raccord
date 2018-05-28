@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
 import {
   NgModule,
   ApplicationRef
@@ -187,7 +188,11 @@ import {
   AdminAddCastDialogComponent,
   AdminChooseProjectUserDialogComponent,
   AdminCrewUnitLandingComponent,
-  AdminCrewUnitsListComponent
+  AdminCrewUnitsListComponent,
+  AdminUserInvitationsListComponent,
+  AdminAddUserInvitationDialogComponent,
+  AdminUserInvitationLandingComponent,
+  AdminChooseProjectDialogComponent
 } from './admin';
 import{
   RaccordChartComponent
@@ -202,6 +207,12 @@ import {
   CalendarComponent,
   CalendarHeaderComponent
 } from './calendar';
+import {
+  ErrorComponent
+} from './error';
+import {
+  CreateUserFromInvitationComponent
+} from './invitations';
 
 const COMPONENTS = [
   AppComponent,
@@ -343,12 +354,16 @@ const COMPONENTS = [
   AdminProjectUserLandingComponent,
   AdminCrewUnitLandingComponent,
   AdminCrewUnitsListComponent,
+  AdminUserInvitationsListComponent,
+  AdminUserInvitationLandingComponent,
   RaccordChartComponent,
   UserProfileLandingComponent,
   ShowProfileImageComponent,
   UserAvatarComponent,
   CalendarComponent,
-  CalendarHeaderComponent
+  CalendarHeaderComponent,
+  ErrorComponent,
+  CreateUserFromInvitationComponent
 ];
 
 const ENTRY_COMPONENTS = [
@@ -364,6 +379,8 @@ const ENTRY_COMPONENTS = [
   AdminAddCrewMemberDialogComponent,
   AdminAddCastDialogComponent,
   AdminChooseProjectUserDialogComponent,
+  AdminAddUserInvitationDialogComponent,
+  AdminChooseProjectDialogComponent,
   EditBreakdownTypeDialogComponent,
   EditCastMemberDialogComponent
 ];
@@ -485,6 +502,7 @@ import {
 
 import {
   AuthService,
+  LoginService,
   AuthGuard
 } from './security';
 
@@ -515,7 +533,12 @@ import {
   AdminProjectRolesResolve,
   AdminCrewUnitHttpService,
   AdminCrewUnitMemberHttpService,
-  AdminCrewUnitResolve
+  AdminCrewUnitResolve,
+  AdminUserInvitationHttpService,
+  AdminUserInvitationsResolve,
+  AdminUserInvitationResolve,
+  AdminProjectUserInvitationHttpService,
+  AdminProjectUserInvitationsResolve,
 } from './admin';
 
 import {
@@ -531,8 +554,14 @@ import {
 import {
   CalendarHttpService
 } from './calendar';
+import {
+  InvitationHttpService,
+  InvitationResolve
+} from './invitations';
 
 const APP_PROVIDERS = [
+  AuthService,
+  LoginService,
   LoadingService,
   CanDeactivateGuard,
   DialogService,
@@ -594,7 +623,6 @@ const APP_PROVIDERS = [
   LocationSetHttpService,
   LocationSetResolve,
   SceneLocationSetsResolve,
-  AuthService,
   AuthGuard,
   AccountHttpService,
   CanEditGeneralProjectPermissionGuard,
@@ -646,6 +674,11 @@ const APP_PROVIDERS = [
   AdminCrewUnitHttpService,
   AdminCrewUnitMemberHttpService,
   AdminCrewUnitResolve,
+  AdminUserInvitationHttpService,
+  AdminUserInvitationsResolve,
+  AdminUserInvitationResolve,
+  AdminProjectUserInvitationHttpService,
+  AdminProjectUserInvitationsResolve,
   ChartHttpService,
   ProjectChartsResolve,
   CrewDepartmentHttpService,
@@ -670,7 +703,9 @@ const APP_PROVIDERS = [
   CastMemberResolve,
   CastMembersResolve,
   ProjectCalendarHttpService,
-  CalendarHttpService
+  CalendarHttpService,
+  InvitationHttpService,
+  InvitationResolve
 ];
 
 // Directives
@@ -692,6 +727,11 @@ const PIPES = [
     PageLengthPipe,
     TimespanPipe
 ];
+
+// Interceptors
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { TokenInterceptor } from './security';
+import { HttpReponseInterceptor } from './shared';
 
 // external modules
 import { DragulaModule } from 'ng2-dragula';
@@ -722,6 +762,7 @@ import '../styles/headings.css';
     BrowserAnimationsModule,
     FormsModule,
     HttpModule,
+    HttpClientModule,
     DragulaModule,
     MaterialModule,
     FlexLayoutModule,
@@ -734,7 +775,17 @@ import '../styles/headings.css';
   ],
   providers: [ // expose our Services and Providers into Angular's dependency injection
     ENV_PROVIDERS,
-    APP_PROVIDERS
+    APP_PROVIDERS,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpReponseInterceptor,
+      multi: true
+    }
   ]
 })
 export class AppModule {}

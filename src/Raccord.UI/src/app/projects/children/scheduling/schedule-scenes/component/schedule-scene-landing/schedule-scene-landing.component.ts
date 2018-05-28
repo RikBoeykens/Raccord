@@ -67,14 +67,13 @@ export class ScheduleSceneLandingComponent implements OnInit, OnChanges {
     }
 
     public getScheduleScene() {
-
-        let loadingId = this._loadingService.startLoading();
-
-        this._scheduleSceneHttpService.get(this.project.id, this.scheduleScene.id).then((data) => {
-            this.scheduleScene = data;
-            this.setScheduleCharacterWrappers();
-            this._loadingService.endLoading(loadingId);
-        });
+        this._loadingWrapperService.Load(
+            this._scheduleSceneHttpService.get(this.project.id, this.scheduleScene.id),
+            (data) => {
+                this.scheduleScene = data;
+                this.setScheduleCharacterWrappers();
+            }
+        );
     }
 
     public updateScheduleScene() {

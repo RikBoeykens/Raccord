@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 namespace Raccord.Data.EntityFramework.Repositories.Cast
 {
     // Repository for cast members
-    public class CastMemberRepository : BaseRepository<CastMember>, ICastMemberRepository
+    public class CastMemberRepository : BaseRepository<CastMember, long>, ICastMemberRepository
     {
         public CastMemberRepository(RaccordDBContext context) : base(context) 
         {

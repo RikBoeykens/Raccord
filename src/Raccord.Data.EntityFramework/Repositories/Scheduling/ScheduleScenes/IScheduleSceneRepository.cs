@@ -5,7 +5,7 @@ using System;
 namespace Raccord.Data.EntityFramework.Repositories.Scheduling.ScheduleScenes
 {
     // Interface defining a repository for Int/Ext
-    public interface IScheduleSceneRepository : IBaseRepository<ScheduleScene>
+    public interface IScheduleSceneRepository : IBaseRepository<ScheduleScene, long>
     {
         IEnumerable<ScheduleScene> GetAllForScheduleDay(long dayID);
         IEnumerable<ScheduleScene> GetAllForScheduleDaySort(long dayID);

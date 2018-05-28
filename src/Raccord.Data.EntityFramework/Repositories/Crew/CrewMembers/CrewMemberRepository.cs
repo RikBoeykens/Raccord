@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 namespace Raccord.Data.EntityFramework.Repositories.Crew.CrewMembers
 {
     // Repository for crew members
-    public class CrewMemberRepository : BaseRepository<CrewMember>, ICrewMemberRepository
+    public class CrewMemberRepository : BaseRepository<CrewMember, long>, ICrewMemberRepository
     {
         public CrewMemberRepository(RaccordDBContext context) : base(context) 
         {

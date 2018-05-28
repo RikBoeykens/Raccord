@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { AppSettings } from '../../../../app.settings';
 import { Comment } from '../model/comment.model';
 import { PostComment } from '../model/post-comment.model';
@@ -8,7 +8,7 @@ import { BaseProjectHttpService } from '../../../shared/service/base-project-htt
 @Injectable()
 export class CommentHttpService extends BaseProjectHttpService {
 
-    constructor(protected _http: Http) {
+    constructor(protected _http: HttpClient) {
         super(_http, 'comments');
     }
 
@@ -16,7 +16,7 @@ export class CommentHttpService extends BaseProjectHttpService {
         authProjectId: number,
         parentProjectId?: number,
         parentCommentId?: number
-    ): Promise<Comment[]> {
+    ): Promise<Comment[] | void> {
 
         let uri =
             `${this.getUri(authProjectId)}` +
@@ -26,7 +26,7 @@ export class CommentHttpService extends BaseProjectHttpService {
         return this.doGetArray(uri);
     }
 
-    public get(authProjectId: number, id: number): Promise<Comment> {
+    public get(authProjectId: number, id: number): Promise<Comment | void> {
 
         let uri = `${this.getUri(authProjectId)}/${id}`;
 

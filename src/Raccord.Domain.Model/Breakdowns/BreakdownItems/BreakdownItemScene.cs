@@ -3,7 +3,7 @@ using Raccord.Domain.Model.Scenes;
 namespace Raccord.Domain.Model.Breakdowns.BreakdownItems
 {
     // join for breakdown item and scene
-    public class BreakdownItemScene : Entity
+    public class BreakdownItemScene : Entity<long>
     {
 
         // ID of the linked breakdown item

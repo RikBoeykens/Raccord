@@ -8,6 +8,7 @@ import { LoadingService } from '../../../../../loading/service/loading.service';
 import { DialogService } from '../../../../../shared/service/dialog.service';
 import { DragulaService } from 'ng2-dragula';
 import { HtmlClassHelpers } from '../../../../../shared/helpers/html-class.helpers';
+import { LoadingWrapperService } from '../../../../../shared/service/loading-wrapper.service';
 
 @Component({
     templateUrl: 'edit-characters-list.component.html',
@@ -24,6 +25,7 @@ export class EditCharactersListComponent implements OnInit {
 
     constructor(
         private _characterHttpService: CharacterHttpService,
+        private _loadingWrapperService: LoadingWrapperService,
         private _loadingService: LoadingService,
         private _dialogService: DialogService,
         private _route: ActivatedRoute,
@@ -70,14 +72,12 @@ export class EditCharactersListComponent implements OnInit {
         this.newCharacter = null;
     }
 
-    getCharacters(){
-        
-        let loadingId = this._loadingService.startLoading();
-
-        this._characterHttpService.getAll(this.project.id).then(data => {
-            this.characters = data.map(function(character){ return new CharacterDroppableWrapper(character); });
-            this._loadingService.endLoading(loadingId);
-        });
+    public getCharacters() {
+        this._loadingWrapperService.Load(
+            this._characterHttpService.getAll(this.project.id),
+            (data) => this.characters =
+                data.map((character) => new CharacterDroppableWrapper(character))
+        );
     }
 
     addCharacter(){

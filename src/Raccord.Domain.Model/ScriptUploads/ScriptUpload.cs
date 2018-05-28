@@ -8,7 +8,7 @@ using Raccord.Domain.Model.Projects;
 namespace Raccord.Domain.Model.ScriptUploads
 {
   // Keeps information about a script upload
-  public class ScriptUpload : Entity
+  public class ScriptUpload : Entity<long>
   {
     private ICollection<Scene> _scenes;
     private ICollection<ScriptLocation> _scriptLocations;

@@ -4,7 +4,7 @@ using Raccord.Domain.Model.Callsheets.CallTypes;
 namespace Raccord.Data.EntityFramework.Repositories.Callsheets.CallTypes
 {
     // Interface defining a repository for Call type
-    public interface ICallTypeRepository : IBaseRepository<CallType>
+    public interface ICallTypeRepository : IBaseRepository<CallType, long>
     {
         IEnumerable<CallType> GetAllForProject(long projectID);
     }

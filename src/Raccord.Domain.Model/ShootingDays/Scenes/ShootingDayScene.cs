@@ -10,7 +10,7 @@ using Raccord.Core.Enums;
 namespace Raccord.Domain.Model.ShootingDays.Scenes
 {
     /// Represents shooting day scene
-    public class ShootingDayScene : Entity
+    public class ShootingDayScene : Entity<long>
     {
         // Length in eights
         public int PageLength { get; set; }

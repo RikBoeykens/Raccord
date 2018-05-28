@@ -16,6 +16,7 @@ using Raccord.Domain.Model.ShootingDays;
 using Raccord.Domain.Model.ShootingDays.Scenes;
 using Raccord.Domain.Model.Scheduling;
 using Raccord.Domain.Model.Cast;
+using Raccord.Domain.Model.Users.Invitations;
 
 namespace Raccord.Data.EntityFramework
 {
@@ -65,6 +66,10 @@ namespace Raccord.Data.EntityFramework
                         .HasOne(cs => cs.CastMember)
                         .WithOne(sd => sd.ProjectUser)
                         .HasForeignKey<CastMember>(cs => cs.ProjectUserID);
+
+            modelBuilder.Entity<UserInvitation>()
+                        .HasMany(pui => pui.ProjectUserInvitations)
+                        .WithOne(ui => ui.UserInvitation);
         }
     }
 }

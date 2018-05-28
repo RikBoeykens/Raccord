@@ -29,9 +29,9 @@ export class ShowProfileImageComponent implements OnInit{
 
     ngOnInit(){
         let id = this.noUserDefined() ? this.userId : this.user.id;
-        this._userProfileHttpService.getBase64(id).then(data => {
+        this._userProfileHttpService.getBase64(id).then((data: Base64Image) => {
             this.loadingImage = false;
-            if (data.hasContent){
+            if (data.hasContent) {
                 this.base64Image = data;
             }
         });

@@ -9,6 +9,7 @@ import { ProjectUserProject } from '../../../project-users/model/project-user-pr
 import { AdminProjectUserHttpService } from '../../../index';
 import { ProjectUser } from '../../../project-users/model/project-user.model';
 import { ProjectRole } from "../../../project-roles/model/project-role.model";
+import { LoadingWrapperService } from '../../../../shared/service/loading-wrapper.service';
 
 @Component({
     templateUrl: 'admin-user-landing.component.html',
@@ -24,6 +25,7 @@ export class AdminUserLandingComponent {
     constructor(
         private _projectHttpService: AdminUserHttpService,
         private _projectUserHttpService: AdminProjectUserHttpService,
+        private _loadingWrapperService: LoadingWrapperService,
         private _loadingService: LoadingService,
         private _dialogService: DialogService,
         private route: ActivatedRoute,
@@ -40,26 +42,18 @@ export class AdminUserLandingComponent {
         this.resetSearchProject();
     }
 
-    resetSearchProject(){
+    public resetSearchProject() {
         this.searchProject = new Project();
     }
 
-    getProjects(){
-        let loadingId = this._loadingService.startLoading();
-
-        this._projectUserHttpService.getProjects(this.user.id).then(data=>{
-            if(typeof(data)=='string'){
-                this._dialogService.error(data);
-            }else{
-                this.projects = data;
-            }
-        }).catch()
-        .then(()=>
-            this._loadingService.endLoading(loadingId)
+    public getProjects() {
+        this._loadingWrapperService.Load(
+            this._projectUserHttpService.getProjects(this.user.id),
+            (data) => this.projects = data
         );
     }
 
-    addProject(){
+    public addProject() {
         let loadingId = this._loadingService.startLoading();
 
         let newProjectUser = new ProjectUser();

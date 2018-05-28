@@ -8,6 +8,7 @@ import { LoadingService } from '../../../../../loading/service/loading.service';
 import { DialogService } from '../../../../../shared/service/dialog.service';
 import { DragulaService } from 'ng2-dragula';
 import { HtmlClassHelpers } from '../../../../../shared/helpers/html-class.helpers';
+import { LoadingWrapperService } from '../../../../../shared/service/loading-wrapper.service';
 
 @Component({
     templateUrl: 'images-list.component.html',
@@ -19,6 +20,7 @@ export class ImagesListComponent implements OnInit {
 
     constructor(
         private _imageHttpService: ImageHttpService,
+        private _loadingWrapperService: LoadingWrapperService,
         private _loadingService: LoadingService,
         private _dialogService: DialogService,
         private _route: ActivatedRoute,
@@ -34,14 +36,11 @@ export class ImagesListComponent implements OnInit {
         });
     }
 
-    getImages(){
-        
-        let loadingId = this._loadingService.startLoading();
-
-        this._imageHttpService.getAll(this.project.id).then(images => {
-            this.images = images;
-            this._loadingService.endLoading(loadingId);
-        });
+    getImages() {
+        this._loadingWrapperService.Load(
+            this._imageHttpService.getAll(this.project.id),
+            (data) => this.images = data
+        );
     }
 
     imagesUploaded(){

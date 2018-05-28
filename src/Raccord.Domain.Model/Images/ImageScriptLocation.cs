@@ -3,7 +3,7 @@ using Raccord.Domain.Model.ScriptLocations;
 namespace Raccord.Domain.Model.Images
 {
     // join for image and script location
-    public class ImageScriptLocation : Entity
+    public class ImageScriptLocation : Entity<long>
     {
         // Indicates if the image is the primary image for the location
         public bool IsPrimaryImage { get; set; }

@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 namespace Raccord.Data.EntityFramework.Repositories.Characters
 {
     // Repository for characters
-    public class CharacterRepository : BaseRepository<Character>, ICharacterRepository
+    public class CharacterRepository : BaseRepository<Character, long>, ICharacterRepository
     {
         public CharacterRepository(RaccordDBContext context) : base(context) 
         {

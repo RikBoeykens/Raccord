@@ -10,6 +10,7 @@ import { AppSettings } from '../../../../../../app.settings';
 import { MapsHelpers } from '../../../../../../shared/helpers/maps.helpers';
 import { AccountHelpers } from '../../../../../../account/helpers/account.helper';
 import { ProjectPermissionEnum } from '../../../../../../shared/children/users/project-roles/enums/project-permission.enum';
+import { LoadingWrapperService } from '../../../../../../shared/service/loading-wrapper.service';
 
 @Component({
     templateUrl: 'location-set-landing.component.html',
@@ -23,6 +24,7 @@ export class LocationSetLandingComponent {
 
     constructor(
         private _locationHttpService: LocationSetHttpService,
+        private _loadingWrapperService: LoadingWrapperService,
         private _loadingService: LoadingService,
         private _dialogService: DialogService,
         private _route: ActivatedRoute,
@@ -47,20 +49,20 @@ export class LocationSetLandingComponent {
     }
 
     getLocationSet(){
-        let loadingId = this._loadingService.startLoading();
-
-        this._locationHttpService.get(this.locationSet.id).then(data => {
-            this.locationSet = data;
-            this.viewLocationSet = new LocationSet({
-                id: data.id, 
-                name: data.name,
-                description: data.description,
-                latLng: data.latLng,
-                locationId: data.location.id,
-                scriptLocationId: data.scriptLocation.id
-            });
-            this._loadingService.endLoading(loadingId);
-        });
+        this._loadingWrapperService.Load(
+            this._locationHttpService.get(this.locationSet.id),
+            (data) => {
+                this.locationSet = data;
+                this.viewLocationSet = new LocationSet({
+                    id: data.id,
+                    name: data.name,
+                    description: data.description,
+                    latLng: data.latLng,
+                    locationId: data.location.id,
+                    scriptLocationId: data.scriptLocation.id
+                });
+            }
+        );
     }
 
     updateLocationSet(){

@@ -86,7 +86,6 @@ export class FilterScenesComponent implements OnChanges {
   }
 
   private setPageLengthNumbers() {
-    console.log(this.minPageLengthString);
     if (this.minPageLengthString !== '') {
       this.sceneFilter.minPageLength =
         PageLengthHelpers.getPageLengthNumber(this.minPageLengthString);

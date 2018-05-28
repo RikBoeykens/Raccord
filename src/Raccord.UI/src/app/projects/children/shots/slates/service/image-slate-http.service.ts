@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { BaseHttpService } from '../../../../../shared/service/base-http.service';
 import { AppSettings } from '../../../../../app.settings';
 import { LinkedImage } from '../../../images/model/linked-image.model';
@@ -7,16 +7,18 @@ import { LinkedImage } from '../../../images/model/linked-image.model';
 @Injectable()
 export class ImageSlateHttpService extends BaseHttpService {
 
-    constructor(protected _http: Http) { 
+    constructor(
+        protected _http: HttpClient,
+    ) {
         super(_http);
         this._baseUri = `${AppSettings.API_ENDPOINT}/imageslates`;
     }
 
-    getImages(slateId): Promise<LinkedImage[]> {
+    getImages(slateId): Promise<LinkedImage[] | void> {
 
         var uri = `${this._baseUri}/${slateId}/images`;
 
-        return this.doGetArray(uri);
+        return this.doGetArray<LinkedImage>(uri);
     }
 
     addLink(imageId: number, slateId: number): Promise<any>{

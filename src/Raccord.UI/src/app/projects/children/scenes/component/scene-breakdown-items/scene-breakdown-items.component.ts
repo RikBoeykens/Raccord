@@ -14,6 +14,7 @@ import { SceneBreakdown } from '../../../breakdowns/model/scene-breakdown.model'
 import { SceneBreakdownItem } from
     '../../../breakdowns/children/breakdown-items/model/scene-breakdown-item.model';
 import { AccountHelpers } from '../../../../../account/helpers/account.helper';
+import { LoadingWrapperService } from '../../../../../shared/service/loading-wrapper.service';
 
 @Component({
     selector: 'scene-breakdown-items',
@@ -32,6 +33,7 @@ export class SceneBreakdownItemsComponent implements OnInit {
     constructor(
         private _breakdownItemSceneHttpService: BreakdownItemSceneHttpService,
         private _breakdownItemHttpService: BreakdownItemHttpService,
+        private _loadingWrapperService: LoadingWrapperService,
         private _loadingService: LoadingService,
         private _dialogService: DialogService,
     ) {
@@ -43,15 +45,13 @@ export class SceneBreakdownItemsComponent implements OnInit {
     }
 
     public getBreakdownItems() {
-        let loadingId = this._loadingService.startLoading();
-
-        this._breakdownItemSceneHttpService.getBreakdownItems(
-            this.sceneId,
-            this.breakdown.id
-        ).then((data) => {
-            this.breakdown.items = data;
-            this._loadingService.endLoading(loadingId);
-        });
+        this._loadingWrapperService.Load(
+            this._breakdownItemSceneHttpService.getBreakdownItems(
+                this.sceneId,
+                this.breakdown.id
+            ),
+            (data) => this.breakdown.items = data
+        );
     }
 
     public resetNewBreakdownItem() {

@@ -7,6 +7,7 @@ import { FullBreakdownItem } from '../../model/full-breakdown-item.model';
 import { BreakdownItem } from '../../model/breakdown-item.model';
 import { ProjectSummary } from '../../../../../../model/project-summary.model';
 import { AccountHelpers } from '../../../../../../../account/helpers/account.helper';
+import { LoadingWrapperService } from '../../../../../../../shared/service/loading-wrapper.service';
 
 @Component({
     templateUrl: 'breakdown-item-landing.component.html',
@@ -19,6 +20,7 @@ export class BreakdownItemLandingComponent {
 
     constructor(
         private _breakdownItemHttpService: BreakdownItemHttpService,
+        private _loadingWrapperService: LoadingWrapperService,
         private _loadingService: LoadingService,
         private _dialogService: DialogService,
         private _route: ActivatedRoute,
@@ -35,13 +37,13 @@ export class BreakdownItemLandingComponent {
     }
 
     getBreakdownItem(){
-        let loadingId = this._loadingService.startLoading();
-
-        this._breakdownItemHttpService.get(this.breakdownItem.id).then(data => {
-            this.breakdownItem = data;
-            this.viewBreakdownItem = this.translate(data);
-            this._loadingService.endLoading(loadingId);
-        });
+        this._loadingWrapperService.Load(
+            this._breakdownItemHttpService.get(this.breakdownItem.id),
+            (data) => {
+                this.breakdownItem = data;
+                this.viewBreakdownItem = this.translate(data);
+            }
+        );
     }
 
     updateBreakdownItem(){

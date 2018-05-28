@@ -9,7 +9,7 @@ using Raccord.Domain.Model.ShootingDays;
 
 namespace Raccord.Domain.Model.Callsheets
 {
-    public class Callsheet : Entity
+    public class Callsheet : Entity<long>
     {
         private ICollection<CallsheetScene> _scenes;
         private ICollection<CallsheetCharacter> _callsheetCharacters;

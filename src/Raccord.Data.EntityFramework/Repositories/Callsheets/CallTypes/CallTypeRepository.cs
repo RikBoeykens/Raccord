@@ -6,7 +6,7 @@ using Raccord.Domain.Model.Callsheets.CallTypes;
 namespace Raccord.Data.EntityFramework.Repositories.Callsheets.CallTypes
 {
     // Repository for call types
-    public class CallTypeRepository : BaseRepository<CallType>, ICallTypeRepository
+    public class CallTypeRepository : BaseRepository<CallType, long>, ICallTypeRepository
     {
         public CallTypeRepository(RaccordDBContext context) : base(context) 
         {

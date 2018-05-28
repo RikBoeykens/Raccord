@@ -8,15 +8,15 @@ export class DialogService {
         public _snackBar: MdSnackBar
     ) {}
 
-    public confirm(message: string){
+    public confirm(message: string) {
         return confirm(message);
     }
 
-    public success(message: string){
+    public success(message: string) {
         this._snackBar.open(message, null, {duration: 3000});
     }
 
-    public error(message: string){
+    public error(message: string) {
         this._snackBar.open(message, null, {duration: 3000});
     }
 }

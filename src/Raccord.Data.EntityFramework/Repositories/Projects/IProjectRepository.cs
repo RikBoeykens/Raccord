@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace Raccord.Data.EntityFramework.Repositories.Projects
 {
     // Interface defining a repository for Projects
-    public interface IProjectRepository : IBaseRepository<Project>
+    public interface IProjectRepository : IBaseRepository<Project, long>
     {
         IEnumerable<Project> GetAllForUser(string userID);
         int SearchCount(string searchText, string userID, bool isAdmin, long[] excludeIds);

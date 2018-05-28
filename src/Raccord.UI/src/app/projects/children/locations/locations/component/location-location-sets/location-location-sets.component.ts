@@ -9,12 +9,13 @@ import { SelectedEntity } from '../../../../../../shared/model/selected-entity.m
 import { EntityType } from '../../../../../../shared/enums/entity-type.enum';
 import { AccountHelpers } from '../../../../../../account/helpers/account.helper';
 import { ProjectPermissionEnum } from '../../../../../../shared/children/users/project-roles/enums/project-permission.enum';
+import { LoadingWrapperService } from '../../../../../../shared/service/loading-wrapper.service';
 
 @Component({
     selector: 'location-location-sets',
     templateUrl: 'location-location-sets.component.html'
 })
-export class LocationLocationSetsComponent implements OnInit{
+export class LocationLocationSetsComponent {
 
     @Input() projectId: number;
     @Input() locationId: number;
@@ -24,44 +25,35 @@ export class LocationLocationSetsComponent implements OnInit{
     constructor(
         private _locationSetHttpService: LocationSetHttpService,
         private _scriptLocationHttpService: ScriptLocationHttpService,
+        private _loadingWrapperService: LoadingWrapperService,
         private _loadingService: LoadingService,
         private _dialogService: DialogService,
     ){
     }
 
-    ngOnInit(){
-    }
-
     getSets(){
-        let loadingId = this._loadingService.startLoading();
-
-        this._locationSetHttpService.getScriptLocations(this.locationId).then(data => {
-            this.sets = data;
-            this._loadingService.endLoading(loadingId);
-        });
+        this._loadingWrapperService.Load(
+            this._locationSetHttpService.getScriptLocations(this.locationId),
+            (data) => this.sets = data
+        );
     }
 
-    addSet(scriptLocation: SelectedEntity){
-        let loadingId = this._loadingService.startLoading();
+    addSet(scriptLocation: SelectedEntity) {
+        this._loadingWrapperService.Load(
+            this._scriptLocationHttpService.get(scriptLocation.entityId),
+            (data) => {
+                let newSet = new LocationSet();
+                newSet.locationId = this.locationId;
+                newSet.scriptLocationId = scriptLocation.entityId;
+                newSet.name = data.name;
+                newSet.description = data.description;
 
-        this._scriptLocationHttpService.get(scriptLocation.entityId).then(data=>{
-            let newSet = new LocationSet();
-            newSet.locationId = this.locationId;
-            newSet.scriptLocationId = scriptLocation.entityId;
-            newSet.name = data.name;
-            newSet.description = data.description;
-
-            this._locationSetHttpService.post(newSet).then(data=>{
-                if(typeof(data)=='string'){
-                    this._dialogService.error(data);
-                }else{
-                    this.getSets();
-                }
-            }).catch()
-            .then(()=>
-                this._loadingService.endLoading(loadingId)
-            );
-        });
+                this._loadingWrapperService.Load(
+                    this._locationSetHttpService.post(newSet),
+                    () => this.getSets()
+                )
+            }
+        );
     }
 
     remove(locationSet: LocationSetScriptLocation){

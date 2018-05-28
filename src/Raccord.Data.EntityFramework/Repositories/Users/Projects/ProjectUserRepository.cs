@@ -6,7 +6,7 @@ using Raccord.Domain.Model.Users;
 namespace Raccord.Data.EntityFramework.Repositories.Users.Projects
 {
     // Repository for preojct users
-    public class ProjectUserRepository : BaseRepository<ProjectUser>, IProjectUserRepository
+    public class ProjectUserRepository : BaseRepository<ProjectUser, long>, IProjectUserRepository
     {
         public ProjectUserRepository(RaccordDBContext context) : base(context) 
         {

@@ -8,7 +8,7 @@ using Raccord.Domain.Model.ScriptUploads;
 namespace Raccord.Domain.Model.ScriptLocations
 {
     /// Represents a location
-    public class ScriptLocation : Entity
+    public class ScriptLocation : Entity<long>
     {
         private ICollection<Scene> _scenes;
         private ICollection<ImageScriptLocation> _images;

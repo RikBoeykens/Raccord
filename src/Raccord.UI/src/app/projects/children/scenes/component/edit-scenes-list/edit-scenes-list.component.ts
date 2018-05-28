@@ -8,6 +8,7 @@ import { LoadingService } from '../../../../../loading/service/loading.service';
 import { DialogService } from '../../../../../shared/service/dialog.service';
 import { DragulaService } from 'ng2-dragula';
 import { HtmlClassHelpers } from '../../../../../shared/helpers/html-class.helpers';
+import { LoadingWrapperService } from '../../../../../shared/service/loading-wrapper.service';
 
 @Component({
     templateUrl: 'edit-scenes-list.component.html',
@@ -23,6 +24,7 @@ export class EditScenesListComponent implements OnInit {
 
     constructor(
         private _sceneHttpService: SceneHttpService,
+        private _loadingWrapperService: LoadingWrapperService,
         private _loadingService: LoadingService,
         private _dialogService: DialogService,
         private _route: ActivatedRoute,
@@ -72,13 +74,10 @@ export class EditScenesListComponent implements OnInit {
     }
 
     getScenes(){
-        
-        let loadingId = this._loadingService.startLoading();
-
-        this._sceneHttpService.getAll(this.project.id).then(data => {
-            this.scenes = data;
-            this._loadingService.endLoading(loadingId);
-        });
+        this._loadingWrapperService.Load(
+            this._sceneHttpService.getAll(this.project.id),
+            (data) => this.scenes = data
+        );
     }
 
     addScene(){

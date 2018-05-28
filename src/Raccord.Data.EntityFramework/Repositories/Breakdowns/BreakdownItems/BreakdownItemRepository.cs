@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 namespace Raccord.Data.EntityFramework.Repositories.Breakdowns.BreakdownItems
 {
     // Repository for locations
-    public class BreakdownItemRepository : BaseRepository<BreakdownItem>, IBreakdownItemRepository
+    public class BreakdownItemRepository : BaseRepository<BreakdownItem, long>, IBreakdownItemRepository
     {
         public BreakdownItemRepository(RaccordDBContext context) : base(context) 
         {

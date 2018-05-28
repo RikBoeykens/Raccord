@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { BaseHttpService } from '../../../../../../shared/service/base-http.service';
 import { AppSettings } from '../../../../../../app.settings';
 import { FullBreakdownItem } from '../model/full-breakdown-item.model';
@@ -10,12 +10,14 @@ import { LinkedImage } from '../../../../images/model/linked-image.model';
 @Injectable()
 export class ImageBreakdownItemHttpService extends BaseHttpService {
 
-    constructor(protected _http: Http) { 
+    constructor(
+        protected _http: HttpClient,
+    ) {
         super(_http);
         this._baseUri = `${AppSettings.API_ENDPOINT}/imagebreakdownitems`;
     }
 
-    getImages(breakdownItemId): Promise<LinkedImage[]> {
+    getImages(breakdownItemId): Promise<LinkedImage[] | void> {
 
         var uri = `${this._baseUri}/${breakdownItemId}/images`;
 

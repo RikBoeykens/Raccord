@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace Raccord.Data.EntityFramework.Repositories.Callsheets
 {
     // Interface defining a repository for Int/Ext
-    public interface ICallsheetRepository : IBaseRepository<Callsheet>
+    public interface ICallsheetRepository : IBaseRepository<Callsheet, long>
     {
         IEnumerable<Callsheet> GetAllForCrewUnit(long crewUnitID);
         IEnumerable<Callsheet> GetAllForProject(long projectID);

@@ -6,14 +6,16 @@ using Raccord.Domain.Model.Crew.CrewUnits;
 using Raccord.Domain.Model.Crew.Departments;
 using Raccord.Domain.Model.Images;
 using Raccord.Domain.Model.Users;
+using Raccord.Domain.Model.Users.Invitations;
 
 namespace Raccord.Domain.Model.Projects
 {
     /// Represents a single project
-    public class Project : Entity
+    public class Project : Entity<long>
     {
         private ICollection<Image> _images;
         private ICollection<ProjectUser> _projectUsers;
+        private ICollection<ProjectUserInvitation> _projectUserInvitations;
         private ICollection<CallType> _callTypes;
         private ICollection<Comment> _comments;
         private ICollection<Breakdown> _breakdowns;
@@ -46,6 +48,20 @@ namespace Raccord.Domain.Model.Projects
             set
             {
                 _projectUsers = value;
+            }
+
+        }
+
+        // Invitations associated with the project
+        public virtual ICollection<ProjectUserInvitation> ProjectUserInvitations
+        {
+            get
+            {
+                return _projectUserInvitations ?? new List<ProjectUserInvitation>();
+            }
+            set
+            {
+                _projectUserInvitations = value;
             }
 
         }

@@ -8,7 +8,7 @@ using Raccord.Domain.Model.ShootingDays.Scenes;
 namespace Raccord.Domain.Model.Locations.LocationSets
 {
     // Represents a set on a location, linked to a script location
-    public class LocationSet : Entity
+    public class LocationSet : Entity<long>
     {
         private ICollection<ScheduleScene> _scheduleScenes;
         private ICollection<CallsheetScene> _callsheetScenes;

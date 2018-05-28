@@ -5,7 +5,7 @@ using Raccord.Domain.Model.Projects;
 namespace Raccord.Domain.Model.Crew.CrewUnits
 {
     /// Represents a unit of crew
-    public class CrewUnit : Entity
+    public class CrewUnit : Entity<long>
     {
       private ICollection<CrewUnitMember> _members;
       private ICollection<CrewDepartment> _departments;

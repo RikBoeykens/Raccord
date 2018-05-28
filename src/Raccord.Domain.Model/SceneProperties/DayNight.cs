@@ -6,7 +6,7 @@ using Raccord.Domain.Model.ScriptUploads;
 namespace Raccord.Domain.Model.SceneProperties
 {
     /// Represents day/night options
-    public class DayNight : Entity
+    public class DayNight : Entity<long>
     {
         private ICollection<Scene> _scenes;
 

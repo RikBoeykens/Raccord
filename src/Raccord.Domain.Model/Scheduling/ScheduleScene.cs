@@ -6,7 +6,7 @@ using Raccord.Domain.Model.Scenes;
 namespace Raccord.Domain.Model.Scheduling
 {
     /// Represents schedule scene on a day
-    public class ScheduleScene : Entity
+    public class ScheduleScene : Entity<long>
     {
         private ICollection<ScheduleCharacter> _characters;
 

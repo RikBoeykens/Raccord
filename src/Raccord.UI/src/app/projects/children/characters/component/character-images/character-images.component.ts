@@ -5,6 +5,7 @@ import { LoadingService } from '../../../../../loading/service/loading.service';
 import { DialogService } from '../../../../../shared/service/dialog.service';
 import { SelectedEntity } from '../../../../../shared/model/selected-entity.model';
 import { EntityType } from '../../../../../shared/enums/entity-type.enum';
+import { LoadingWrapperService } from '../../../../../shared/service/loading-wrapper.service';
 
 @Component({
     selector: 'character-images',
@@ -20,6 +21,7 @@ export class CharacterImagesComponent implements OnInit{
 
     constructor(
         private _imageCharacterHttpService: ImageCharacterHttpService,
+        private _loadingWrapperService: LoadingWrapperService,
         private _loadingService: LoadingService,
         private _dialogService: DialogService,
     ){
@@ -29,13 +31,11 @@ export class CharacterImagesComponent implements OnInit{
         this.selectedEntity = new SelectedEntity({entityId: this.characterId, type: EntityType.character});
     }
 
-    getImages(){
-        let loadingId = this._loadingService.startLoading();
-
-        this._imageCharacterHttpService.getImages(this.characterId).then(data => {
-            this.images = data;
-            this._loadingService.endLoading(loadingId);
-        });
+    getImages() {
+        this._loadingWrapperService.Load(
+            this._imageCharacterHttpService.getImages(this.characterId),
+            (data) => this.images = data
+        );
     }
 
     setAsPrimary(image: LinkedImage){

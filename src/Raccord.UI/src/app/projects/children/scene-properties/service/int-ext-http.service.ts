@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { BaseHttpService } from '../../../../shared/service/base-http.service';
 import { AppSettings } from '../../../../app.settings';
 import { FullIntExt } from '../model/full-int-ext.model';
@@ -10,28 +10,30 @@ import { JsonResponse } from '../../../../shared/model/json-response.model';
 @Injectable()
 export class IntExtHttpService extends BaseHttpService {
 
-    constructor(protected _http: Http) { 
+    constructor(
+        protected _http: HttpClient,
+    ) {
         super(_http);
         this._baseUri = `${AppSettings.API_ENDPOINT}/intexts`;
     }
 
-    getAll(projectId): Promise<IntExtSummary[]> {
+    getAll(projectId): Promise<IntExtSummary[] | void> {
 
         var uri = `${this._baseUri}/${projectId}/project`;
 
         return this.doGetArray(uri);
     }
 
-    get(id: number): Promise<FullIntExt>{
+    get(id: number): Promise<FullIntExt | void> {
 
-        var uri = `${this._baseUri}/${id}`;
+        let uri = `${this._baseUri}/${id}`;
 
         return this.doGet(uri);
     }
 
-    getSummary(id: Number): Promise<IntExtSummary> {
+    getSummary(id: Number): Promise<IntExtSummary | void> {
 
-        var uri = `${this._baseUri}/${id}/summary`;
+        let uri = `${this._baseUri}/${id}/summary`;
 
         return this.doGet(uri);
     }

@@ -1,51 +1,80 @@
 import { Component } from '@angular/core';
 import { Injectable } from '@angular/core';
+import { HttpHeaders } from '@angular/common/http';
 import { Http, Headers } from '@angular/http';
 import { BaseHttpService } from '../../shared/service/base-http.service';
 import { AppSettings } from '../../app.settings';
 import { OpenIdDictToken } from '../';
 import { Login } from '../';
-import { TokenHelpers } from "../";
-import { HeaderHelpers } from "../../shared/helpers/header.helpers";
-import { AccountHelpers } from "../../account/helpers/account.helper";
- 
+import { TokenHelpers } from '../helpers/token.helpers';
+import { HeaderHelpers } from '../../shared/helpers/header.helpers';
+import { AccountHelpers } from '../../account/helpers/account.helper';
+import { Observable } from 'rxjs/Observable';
+import { SaveToken } from '../model/save-token';
+import 'rxjs/add/observable/fromPromise';
+
 @Injectable()
 export class AuthService {
-    _baseUri: string;
+    private _baseUri: string;
 
-    constructor(private _http: Http) { 
+    constructor(private _http: Http) {
         this._baseUri = `${AppSettings.API_ENDPOINT}/authorization`;
     }
 
-    login(login: Login):Promise<any>{
-        let uri = `${this._baseUri}/connect/token`;
+    public login(login: Login): Promise<any> {
+        return this.retrieveTokens(login, 'password');
+    }
 
-        let body = 'username=' + login.email + '&password=' + login.password + '&grant_type=password';
- 
-        return this._http.post(uri, body, { headers: HeaderHelpers.ContentHeaders() })
-                    .toPromise()
-                    .then((response)=>{
-                        this.internalLogin(response.json());
-                    });
-    }
- 
-    // After a successful login, save token data into session storage
-    // note: use "localStorage" for persistent, browser-wide logins; "sessionStorage" for per-session storage.
-    internalLogin(responseData: OpenIdDictToken) {
-        let access_token: string = responseData.access_token;
-        let expires_in: number = responseData.expires_in;
-        TokenHelpers.setTokens(access_token, expires_in);
-    }
- 
     // called when logging out user; clears tokens from browser
-    logout() {
+    public logout() {
         TokenHelpers.removeTokens();
         AccountHelpers.removeUser();
     }
- 
+
     // simple check of logged in status: if there is a token, we're (probably) logged in.
-    // ideally we check status and check token has not expired (server will back us up, if this not done, but it could be cleaner)
-    loggedIn() {
-        return !!TokenHelpers.getAcessToken();
+    // ideally we check status and check token has not expired
+    // (server will back us up, if this not done, but it could be cleaner)
+    public loggedIn() {
+        return !!TokenHelpers.getTokens();
+    }
+
+    public getAccessToken(): Observable<string> {
+        let tokens = TokenHelpers.getTokens();
+        if (!tokens) {
+            return Observable.of(null);
+        }
+        if (new Date().getTime() >= tokens.expiryDate) {
+            return Observable.fromPromise(this.refreshToken(tokens))
+                .catch(() => Observable.throw(this.logout()));
+        }
+        return Observable.of(tokens.accessToken);
+    }
+
+    private refreshToken(tokens: SaveToken): Promise<string> {
+        console.info('doing refresh token call');
+        return this.retrieveTokens({refresh_token: tokens.refreshToken}, 'refresh_token');
+    }
+
+    private retrieveTokens(data: any, grantType: string): Promise<string> {
+        let uri = `${this._baseUri}/connect/token`;
+
+        Object.assign(data, { grant_type: grantType, scope: 'openid offline_access' });
+
+        const params = new URLSearchParams();
+        Object.keys(data)
+            .forEach((key) => params.append(key, data[key]));
+
+        return this._http.post(uri, params.toString(), { headers: HeaderHelpers.ContentHeaders() })
+                    .toPromise()
+                    .then((response) => {
+                        let token = <OpenIdDictToken> response.json();
+                        this.internalLogin(token);
+                        return token.access_token;
+                    });
+    }
+
+    // After a successful login, save token data into session storage
+    private internalLogin(responseData: OpenIdDictToken) {
+        TokenHelpers.setTokens(responseData);
     }
 }

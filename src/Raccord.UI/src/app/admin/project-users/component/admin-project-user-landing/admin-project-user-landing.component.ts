@@ -83,17 +83,9 @@ export class AdminProjectUserLandingComponent implements OnInit  {
   }
 
   public getProjectUser() {
-    let loadingId = this._loadingService.startLoading();
-
-    this._projectUserHttpService.get(this.projectUser.id).then((data) => {
-        if (typeof(data) === 'string') {
-            this._dialogService.error(data);
-        }else {
-            this.projectUser = data;
-        }
-    }).catch()
-    .then(() =>
-        this._loadingService.endLoading(loadingId)
+    this._loadingWrapperService.Load(
+        this._projectUserHttpService.get(this.projectUser.id),
+        (data) => this.projectUser = data
     );
   }
 

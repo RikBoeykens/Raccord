@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace Raccord.Data.EntityFramework.Repositories.ScriptUploads
 {
     // Interface defining a repository for ScriptUploads
-    public interface IScriptUploadRepository : IBaseRepository<ScriptUpload>
+    public interface IScriptUploadRepository : IBaseRepository<ScriptUpload, long>
     {
         IEnumerable<ScriptUpload> GetAllForProject(long projectID);
         ScriptUpload GetFull(long ID);

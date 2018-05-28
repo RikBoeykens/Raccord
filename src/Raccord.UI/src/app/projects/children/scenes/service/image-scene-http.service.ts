@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { BaseHttpService } from '../../../../shared/service/base-http.service';
 import { AppSettings } from '../../../../app.settings';
 import { FullScene } from '../model/full-scene.model';
@@ -12,12 +12,14 @@ import { SortOrder } from '../../../../shared/model/sort-order.model';
 @Injectable()
 export class ImageSceneHttpService extends BaseHttpService {
 
-    constructor(protected _http: Http) { 
+    constructor(
+        protected _http: HttpClient,
+    ) {
         super(_http);
         this._baseUri = `${AppSettings.API_ENDPOINT}/imagescenes`;
     }
 
-    getImages(sceneId): Promise<LinkedImage[]> {
+    getImages(sceneId): Promise<LinkedImage[] | void> {
 
         var uri = `${this._baseUri}/${sceneId}/images`;
 

@@ -1,0 +1,30 @@
+<md-card *ngIf="canCreate">
+    <form id="register-form" class="col offset-s2 s8"
+          #registerForm = "ngForm"
+          (ngSubmit)="createUser()">
+        <div fxLayout="row">
+            <md-input-container fxFlex="50%">
+                <input mdInput placeholder="First Name" id="register_firstname" required [(ngModel)]="request.firstName" #firstname="ngModel" name="register_firstname">
+            </md-input-container>
+            <md-input-container fxFlex="50%">
+                <input mdInput placeholder="Last Name" id="register_lastname" required [(ngModel)]="request.lastName" #lastname="ngModel" name="register_lastname">
+            </md-input-container>
+        </div>
+        <div fxLayout="row">
+            <md-input-container fxFlex="50%">
+                <input mdInput type="password" placeholder="Password" id="register_password" required [(ngModel)]="request.password" #password="ngModel" name="register_password">
+            </md-input-container>
+        </div>
+        <div fxLayout="row">
+            <md-input-container fxFlex="50%">
+                <input mdInput type="password" placeholder="Confirm" required>
+            </md-input-container>
+        </div>
+        <div fxLayout="row">
+            <button md-raised-button type="submit" [disabled]="!registerForm.form.valid||!passwordsdMatch()">Register</button>
+        </div>
+    </form>
+</md-card>
+<md-card *ngIf="!canCreate">
+    <h2>This user has already been created</h2>
+</md-card>

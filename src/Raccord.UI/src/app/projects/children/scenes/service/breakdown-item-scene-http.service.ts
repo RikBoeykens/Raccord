@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { BaseHttpService } from '../../../../shared/service/base-http.service';
 import { AppSettings } from '../../../../app.settings';
 import { FullScene } from '../model/full-scene.model';
@@ -12,19 +12,21 @@ import { LinkedScene } from '..//model/linked-scene.model';
 @Injectable()
 export class BreakdownItemSceneHttpService extends BaseHttpService {
 
-    constructor(protected _http: Http) {
+    constructor(
+        protected _http: HttpClient,
+    ) {
         super(_http);
         this._baseUri = `${AppSettings.API_ENDPOINT}/breakdownitemscenes`;
     }
 
-    public getBreakdownItems(sceneId: number, breakdownId: number): Promise<SceneBreakdownItem[]> {
+    public getBreakdownItems(sceneId: number, breakdownId: number): Promise<SceneBreakdownItem[] | void> {
 
         let uri = `${this._baseUri}/${sceneId}/items/${breakdownId}`;
 
         return this.doGetArray(uri);
     }
 
-    public getScenes(itemId): Promise<LinkedScene[]> {
+    public getScenes(itemId): Promise<LinkedScene[] | void> {
 
         let uri = `${this._baseUri}/${itemId}/scenes`;
 

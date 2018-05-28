@@ -3,7 +3,7 @@ using Raccord.Domain.Model.Shots;
 namespace Raccord.Domain.Model.Images
 {
     // join for image and slate
-    public class ImageSlate : Entity
+    public class ImageSlate : Entity<long>
     {
         // Indicates if the image is the primary image for the slate
         public bool IsPrimaryImage { get; set; }

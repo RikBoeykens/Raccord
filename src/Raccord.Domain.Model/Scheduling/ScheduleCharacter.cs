@@ -3,7 +3,7 @@ using Raccord.Domain.Model.Characters;
 namespace Raccord.Domain.Model.Scheduling
 {
     // join for character and schedule scene
-    public class ScheduleCharacter : Entity
+    public class ScheduleCharacter : Entity<long>
     {
 
         // ID of the linked character

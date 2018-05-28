@@ -4,6 +4,7 @@ import { CommentHttpService } from '../../service/comment-http.service';
 import { LoadingService } from '../../../../../loading/service/loading.service';
 import { DialogService } from '../../../../../shared/service/dialog.service';
 import { AccountHelpers } from '../../../../../account/helpers/account.helper';
+import { LoadingWrapperService } from '../../../../../shared/service/loading-wrapper.service';
 
 @Component({
     selector: 'comment-container',
@@ -17,6 +18,7 @@ export class CommentContainerComponent implements OnInit{
 
     constructor(
       private _commentHttpService: CommentHttpService,
+      private _loadingWrapperService: LoadingWrapperService,
       private _loadingService: LoadingService,
       private _dialogService: DialogService
     ){
@@ -27,7 +29,10 @@ export class CommentContainerComponent implements OnInit{
     }
 
     getComments() {
-        this._commentHttpService.getAll(this.projectId, this.parentProjectId, null).then((comments)=> this.comments = comments);
+        this._loadingWrapperService.Load(
+            this._commentHttpService.getAll(this.projectId, this.parentProjectId, null),
+            (data) => this.comments = data
+        );
     }
 
     onCommentSubmit(id: number) {

@@ -6,7 +6,7 @@ using Raccord.Domain.Model.Scheduling;
 namespace Raccord.Data.EntityFramework.Repositories.Scheduling.ScheduleCharacters
 {
     // Repository for character scenes
-    public class ScheduleCharacterRepository : BaseRepository<ScheduleCharacter>, IScheduleCharacterRepository
+    public class ScheduleCharacterRepository : BaseRepository<ScheduleCharacter, long>, IScheduleCharacterRepository
     {
         public ScheduleCharacterRepository(RaccordDBContext context) : base(context) 
         {

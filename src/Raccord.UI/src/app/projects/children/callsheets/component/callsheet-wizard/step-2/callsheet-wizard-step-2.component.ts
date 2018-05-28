@@ -9,6 +9,7 @@ import { CallsheetScene } from "../../../";
 import { CallsheetSceneLocation } from "../../../";
 import { LocationSetSummary } from "../../../../locations/location-sets/model/location-set-summary.model";
 import { Location } from "../../../../locations/locations/model/location.model";
+import { LoadingWrapperService } from '../../../../../../shared/service/loading-wrapper.service';
 
 @Component({
     templateUrl: 'callsheet-wizard-step-2.component.html',
@@ -23,6 +24,7 @@ export class CallsheetWizardStep2Component implements OnInit {
         private _route: ActivatedRoute,
         private _router: Router,
         private _callsheetSceneHttpService: CallsheetSceneHttpService,
+        private _loadingWrapperService: LoadingWrapperService,
         private _loadingService: LoadingService,
         private _dialogService: DialogService
     ) {
@@ -37,12 +39,10 @@ export class CallsheetWizardStep2Component implements OnInit {
     }
 
     getScenes(){
-        let loadingId = this._loadingService.startLoading();
-
-        this._callsheetSceneHttpService.getLocations(this.callsheet.id).then(data => {
-            this.scenes = data;
-            this._loadingService.endLoading(loadingId);
-        });
+        this._loadingWrapperService.Load(
+            this._callsheetSceneHttpService.getLocations(this.callsheet.id),
+            (data) => this.scenes = data
+        );
     }
 
     getLocations(){

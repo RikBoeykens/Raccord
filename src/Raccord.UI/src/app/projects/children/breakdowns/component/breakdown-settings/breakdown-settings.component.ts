@@ -73,12 +73,10 @@ export class BreakdownSettingsComponent implements OnInit {
     }
 
     public getBreakdownTypes() {
-        let loadingId = this._loadingService.startLoading();
-
-        this._breakdownTypeHttpService.getAllForBreakdown(this.breakdown.id).then(data => {
-            this.breakdown.types = data;
-            this._loadingService.endLoading(loadingId);
-        });
+        this._loadingWrapperService.Load(
+            this._breakdownTypeHttpService.getAllForBreakdown(this.breakdown.id),
+            (data) => this.breakdown.types = data
+        );
     }
 
     public showAddBreakdownType() {

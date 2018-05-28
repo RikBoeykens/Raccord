@@ -6,7 +6,7 @@ using Raccord.Domain.Model.Users.ProjectRoles;
 namespace Raccord.Data.EntityFramework.Repositories.Users.ProjectRoles
 {
     // Repository for preojct users
-    public class ProjectRoleDefinitionRepository : BaseRepository<ProjectRoleDefinition>, IProjectRoleDefinitionRepository
+    public class ProjectRoleDefinitionRepository : BaseRepository<ProjectRoleDefinition, long>, IProjectRoleDefinitionRepository
     {
         public ProjectRoleDefinitionRepository(RaccordDBContext context) : base(context) 
         {
