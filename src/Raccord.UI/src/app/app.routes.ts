@@ -158,7 +158,8 @@ import {
   AdminProjectRolesResolve,
   AdminCrewUnitResolve,
   AdminUserInvitationResolve,
-  AdminUserInvitationsResolve
+  AdminUserInvitationsResolve,
+  AdminProjectUserInvitationsResolve
 } from './admin';
 
 import {
@@ -300,7 +301,9 @@ export const ROUTES: Routes = [
                 path: '',
                 component: AdminUserInvitationLandingComponent,
                 resolve: {
-                  invitation: AdminUserInvitationResolve
+                  invitation: AdminUserInvitationResolve,
+                  projects: AdminProjectUserInvitationsResolve,
+                  projectRoles: AdminProjectRolesResolve
                 }
               },
             ]

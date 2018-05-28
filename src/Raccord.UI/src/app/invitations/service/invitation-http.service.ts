@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BaseHttpService } from '../../shared/service/base-http.service';
 import { AppSettings } from '../../app.settings';
-import { UserInvitation } from '../model/user-invitation.model';
+import { UserInvitationSummary } from '../model/user-invitation-summary.model';
 import { CreateUserFromInvitation } from '../model/create-user-from-invitation.model';
 import { CreateUserResult } from '../model/create-user-result.model';
 
@@ -16,9 +16,7 @@ export class InvitationHttpService extends BaseHttpService {
         this._baseUri = `${AppSettings.API_ENDPOINT}/invitations`;
     }
 
-    public get(id: string): Promise<UserInvitation | void> {
-
-      console.log(`in service" ${id}`);
+    public get(id: string): Promise<UserInvitationSummary | void> {
       let uri = `${this._baseUri}/${id}`;
       return this.doGet(uri, false);
     }

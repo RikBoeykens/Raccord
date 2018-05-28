@@ -16,7 +16,6 @@ export class HeaderHelpers {
         let header = new HttpHeaders();
         header = header.set('Content-Type', 'application/json');
         header = header.set('Accept', 'application/json');
-        console.log(header);
         return header;
     }
 

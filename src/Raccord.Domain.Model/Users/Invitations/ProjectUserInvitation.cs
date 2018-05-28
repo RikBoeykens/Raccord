@@ -10,7 +10,6 @@ namespace Raccord.Domain.Model.Users.Invitations
 
     public virtual Project Project { get; set; }
     public Guid UserInvitationID { get; set; }
-
     public virtual UserInvitation UserInvitation { get; set; }
 
     /// <summary>

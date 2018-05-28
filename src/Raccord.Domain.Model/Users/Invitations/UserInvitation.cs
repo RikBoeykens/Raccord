@@ -12,7 +12,7 @@ namespace Raccord.Domain.Model.Users.Invitations
     public DateTime? AcceptedDate { get; set; }
 
     // Projects associated with the user
-    public virtual ICollection<ProjectUserInvitation> ProjectUsers
+    public virtual ICollection<ProjectUserInvitation> ProjectUserInvitations
     {
       get
       {

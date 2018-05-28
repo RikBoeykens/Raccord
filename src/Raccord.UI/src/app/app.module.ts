@@ -191,7 +191,8 @@ import {
   AdminCrewUnitsListComponent,
   AdminUserInvitationsListComponent,
   AdminAddUserInvitationDialogComponent,
-  AdminUserInvitationLandingComponent
+  AdminUserInvitationLandingComponent,
+  AdminChooseProjectDialogComponent
 } from './admin';
 import{
   RaccordChartComponent
@@ -379,6 +380,7 @@ const ENTRY_COMPONENTS = [
   AdminAddCastDialogComponent,
   AdminChooseProjectUserDialogComponent,
   AdminAddUserInvitationDialogComponent,
+  AdminChooseProjectDialogComponent,
   EditBreakdownTypeDialogComponent,
   EditCastMemberDialogComponent
 ];
@@ -500,6 +502,7 @@ import {
 
 import {
   AuthService,
+  LoginService,
   AuthGuard
 } from './security';
 
@@ -534,7 +537,8 @@ import {
   AdminUserInvitationHttpService,
   AdminUserInvitationsResolve,
   AdminUserInvitationResolve,
-  AdminProjectUserInvitationHttpService
+  AdminProjectUserInvitationHttpService,
+  AdminProjectUserInvitationsResolve,
 } from './admin';
 
 import {
@@ -557,6 +561,7 @@ import {
 
 const APP_PROVIDERS = [
   AuthService,
+  LoginService,
   LoadingService,
   CanDeactivateGuard,
   DialogService,
@@ -673,6 +678,7 @@ const APP_PROVIDERS = [
   AdminUserInvitationsResolve,
   AdminUserInvitationResolve,
   AdminProjectUserInvitationHttpService,
+  AdminProjectUserInvitationsResolve,
   ChartHttpService,
   ProjectChartsResolve,
   CrewDepartmentHttpService,

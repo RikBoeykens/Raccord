@@ -2047,7 +2047,7 @@ namespace Raccord.Data.EntityFramework.Migrations
                         .HasForeignKey("RoleID");
 
                     b.HasOne("Raccord.Domain.Model.Users.Invitations.UserInvitation", "UserInvitation")
-                        .WithMany("ProjectUsers")
+                        .WithMany("ProjectUserInvitations")
                         .HasForeignKey("UserInvitationID")
                         .OnDelete(DeleteBehavior.Cascade);
                 });

@@ -5,12 +5,8 @@ import { LoadingService } from '../../../loading/service/loading.service';
 import { AccountHttpService } from '../../../account/service/account-http.service';
 import { DialogService } from '../../../shared/service/dialog.service';
 import { Login } from '../../';
-import { AccountHelpers } from '../../../account/helpers/account.helper';
-import { UserProfileHttpService } from '../../../profile/service/user-profile-http.service';
-import { ProjectHttpService } from '../../../projects/service/project-http.service';
-import { UserProfileSummary } from '../../../profile/model/user-profile-summary.model';
-import { UserPermissionSummary } from '../../../account/model/user-permission-summary.model';
-import { UserProjectSummary } from '../../../projects/model/user-project-summary.model';
+import { LoginService } from './../../service/login.service';
+import { LoadingWrapperService } from '../../../shared/service/loading-wrapper.service';
 
 @Component({
     templateUrl: 'login.component.html',
@@ -21,38 +17,23 @@ export class LoginComponent implements OnInit  {
     returnUrl: string;
 
     constructor(
-        private _authService: AuthService,
-        private _loadingService: LoadingService,
-        private _accountService: AccountHttpService,
-        private _userProfileHttpService: UserProfileHttpService,
-        private _projectHttpService: ProjectHttpService,
-        private _dialogService: DialogService,
+        private _loginService: LoginService,
+        private _loadingWrapperService: LoadingWrapperService,
         private _route: ActivatedRoute,
         private _router: Router
     ){
         this.login = new Login();
     }
 
-    ngOnInit() {
+    public ngOnInit() {
       // get return url from route parameters or default to '/'
       this.returnUrl = this._route.snapshot.queryParams['returnUrl'] || '/';
     }
 
-    doLogin(){
-        let loadingId = this._loadingService.startLoading();
-
-        this._authService.login(this.login).then((data) => {
-            this._router.navigateByUrl(this.returnUrl);
-            this._userProfileHttpService.getSummary().then((profileData) => {
-                AccountHelpers.setUser(<UserProfileSummary> profileData);
-            });
-            this._accountService.getProjectPermissions().then((permissionData) => {
-                AccountHelpers.setPermissions(<UserPermissionSummary> permissionData);
-            });
-            this._projectHttpService.getSummaries().then((projectSummaries) => {
-                AccountHelpers.setUserProjects(<UserProjectSummary[]> projectSummaries);
-            });
-        }).catch()
-        .then(() => this._loadingService.endLoading(loadingId));
+    public doLogin() {
+        this._loadingWrapperService.Load(
+            this._loginService.login(this.login),
+            () => this._router.navigateByUrl(this.returnUrl)
+        );
     }
 }

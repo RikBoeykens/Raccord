@@ -1,4 +1,4 @@
-<div class="row">
+<md-card *ngIf="canCreate">
     <form id="register-form" class="col offset-s2 s8"
           #registerForm = "ngForm"
           (ngSubmit)="createUser()">
@@ -21,7 +21,10 @@
             </md-input-container>
         </div>
         <div fxLayout="row">
-            <button md-raised-button type="submit" [disabled]="!registerForm.form.valid">Register</button>
+            <button md-raised-button type="submit" [disabled]="!registerForm.form.valid||!passwordsdMatch()">Register</button>
         </div>
     </form>
-</div>
+</md-card>
+<md-card *ngIf="!canCreate">
+    <h2>This user has already been created</h2>
+</md-card>

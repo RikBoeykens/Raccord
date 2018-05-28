@@ -26,9 +26,9 @@ namespace Raccord.API.Controllers
 
         // GET: api/takes/1/slate
         [HttpGet("{id}")]
-        public UserInvitationViewModel Get(Guid id)
+        public UserInvitationSummaryViewModel Get(Guid id)
         {
-            var dto = _userInvitationService.Get(id);
+            var dto = _userInvitationService.GetSummary(id);
 
             var vm = dto.Translate();
 

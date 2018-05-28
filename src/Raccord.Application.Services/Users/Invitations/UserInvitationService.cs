@@ -8,6 +8,7 @@ using Raccord.Application.Core.Services.Users;
 using Raccord.Application.Core.Services.Users.Invitations;
 using Raccord.Core.Options;
 using Raccord.Data.EntityFramework.Repositories.Users.Invitations;
+using Raccord.Data.EntityFramework.Repositories.Users.Invitations.Projects;
 using Raccord.Data.EntityFramework.Repositories.Users.Projects;
 using Raccord.Domain.Model.Users;
 using Raccord.Domain.Model.Users.Invitations;
@@ -17,6 +18,7 @@ namespace Raccord.Application.Services.Users.Invitations
   public class UserInvitationService : IUserInvitationService
   {
     private readonly IUserInvitationRepository _userInvitationRepository;
+    private readonly IProjectUserInvitationRepository _projectUserInvitationRepository;
     private readonly IProjectUserRepository _projectUserRepository;
     private readonly IUserService _userService;
     private readonly ISendMailService _sendMailService;
@@ -24,12 +26,14 @@ namespace Raccord.Application.Services.Users.Invitations
 
     public UserInvitationService(
       IUserInvitationRepository userInvitationRepository,
+      IProjectUserInvitationRepository projectUserInvitationRepository,
       IProjectUserRepository projectUserRepository,
       IUserService userService,
       ISendMailService sendMailService,
       IOptions<UISettings> uiSettings
     ){
       _userInvitationRepository = userInvitationRepository;
+      _projectUserInvitationRepository = projectUserInvitationRepository;
       _projectUserRepository = projectUserRepository;
       _userService = userService;
       _sendMailService = sendMailService;
@@ -119,7 +123,7 @@ namespace Raccord.Application.Services.Users.Invitations
 
     public async Task<string> CreateUserFromInvitation(CreateUserFromInvitationDto dto)
     {
-      var userInvitation = _userInvitationRepository.GetFull(dto.ID);
+      var userInvitation = _userInvitationRepository.GetSingle(dto.ID);
       if(userInvitation.AcceptedDate.HasValue)
       {
         throw new Exception("Already created");
@@ -137,7 +141,9 @@ namespace Raccord.Application.Services.Users.Invitations
       _userInvitationRepository.Edit(userInvitation);
       _userInvitationRepository.Commit();
 
-      var projectUsers = userInvitation.ProjectUsers.Select(pu => new ProjectUser
+      var projectUserInvitations = _projectUserInvitationRepository.GetAllForInvitation(userInvitation.ID);
+
+      var projectUsers = projectUserInvitations.ToList().Select(pu => new ProjectUser
       {
         ProjectID = pu.ProjectID,
         UserID = createdUserId,

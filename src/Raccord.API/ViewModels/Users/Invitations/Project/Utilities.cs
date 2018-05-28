@@ -31,7 +31,8 @@ namespace Raccord.API.ViewModels.Users.Invitations.Project
       return new ProjectUserInvitationViewModel
       {
         ID = dto.ID,
-        UserInvitationID = dto.UserInvitationID,
+        ProjectID = dto.ProjectID,
+        UserInvitationID = dto.UserInvitationID.ToString(),
         RoleID = dto.RoleID,
       };
     }
@@ -46,7 +47,8 @@ namespace Raccord.API.ViewModels.Users.Invitations.Project
       return new ProjectUserInvitationDto
       {
         ID = vm.ID,
-        UserInvitationID = vm.UserInvitationID,
+        ProjectID = vm.ProjectID,
+        UserInvitationID = new System.Guid(vm.UserInvitationID),
         RoleID = vm.RoleID,
       };
     }

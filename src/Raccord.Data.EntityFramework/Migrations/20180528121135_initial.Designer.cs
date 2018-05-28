@@ -12,7 +12,7 @@ using System;
 namespace Raccord.Data.EntityFramework.Migrations
 {
     [DbContext(typeof(RaccordDBContext))]
-    [Migration("20180524073642_initial")]
+    [Migration("20180528121135_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -2048,7 +2048,7 @@ namespace Raccord.Data.EntityFramework.Migrations
                         .HasForeignKey("RoleID");
 
                     b.HasOne("Raccord.Domain.Model.Users.Invitations.UserInvitation", "UserInvitation")
-                        .WithMany("ProjectUsers")
+                        .WithMany("ProjectUserInvitations")
                         .HasForeignKey("UserInvitationID")
                         .OnDelete(DeleteBehavior.Cascade);
                 });

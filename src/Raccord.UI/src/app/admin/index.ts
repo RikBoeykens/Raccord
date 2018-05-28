@@ -37,6 +37,8 @@ export { AdminProjectLandingComponent } from
   './projects/component/admin-project-landing/admin-project-landing.component';
 export { AdminProjectSettingsComponent } from
   './projects/component/admin-project-settings/admin-project-settings.component';
+export { AdminChooseProjectDialogComponent } from
+  './projects/component/admin-choose-project-dialog/admin-choose-project-dialog.component';
 
 export { AdminUsersListComponent } from
   './users/component/admin-users-list/admin-users-list.component';
@@ -77,6 +79,8 @@ export { AdminUserInvitationResolve } from
   './invitations/service/admin-user-invitations-resolve.service';
 export { AdminProjectUserInvitationHttpService } from
   './invitations/children/project/service/admin-project-user-invitation-http.service';
+export { AdminProjectUserInvitationsResolve } from
+  './invitations/children/project/service/admin-project-user-invitations-resolve.service';
 
 export { AdminUserInvitationsListComponent } from
   './invitations/component/admin-user-invitations-list/admin-user-invitations-list.component';

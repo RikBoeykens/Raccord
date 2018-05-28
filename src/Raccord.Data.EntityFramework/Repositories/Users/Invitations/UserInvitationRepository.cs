@@ -23,9 +23,9 @@ namespace Raccord.Data.EntityFramework.Repositories.Users.Invitations
     {
       var query = _context.Set<UserInvitation>();
 
-      return query.Include(ui => ui.ProjectUsers)
+      return query.Include(ui => ui.ProjectUserInvitations)
                     .ThenInclude(pu => pu.Project)
-                  .Include(ui => ui.ProjectUsers)
+                  .Include(ui => ui.ProjectUserInvitations)
                     .ThenInclude(pu => pu.Role);
     }
   }

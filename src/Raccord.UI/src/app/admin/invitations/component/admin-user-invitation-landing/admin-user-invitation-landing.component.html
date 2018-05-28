@@ -1,7 +1,7 @@
 <div class="row">      
     <div class="col s12">
         <a routerLink="/" class="breadcrumb">Dashboard</a>
-        <a routerLink="/admin/invitations" class="breadcrumb">Users</a>
+        <a routerLink="/admin/invitations" class="breadcrumb">Invitations</a>
         <span class="breadcrumb">{{getFullName(invitation)}}</span>
     </div>
 </div>
@@ -30,3 +30,4 @@
         </tbody>
     </table>
 </div>
+<button md-fab (click)="showAddProject()"><md-icon>add</md-icon></button>
