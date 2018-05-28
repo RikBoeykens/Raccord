@@ -1347,6 +1347,46 @@ namespace Raccord.Data.EntityFramework.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
+            modelBuilder.Entity("Raccord.Domain.Model.Users.Invitations.ProjectUserInvitation", b =>
+                {
+                    b.Property<long>("ID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<long>("ProjectID");
+
+                    b.Property<long?>("RoleID");
+
+                    b.Property<Guid>("UserInvitationID");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("ProjectID");
+
+                    b.HasIndex("RoleID");
+
+                    b.HasIndex("UserInvitationID");
+
+                    b.ToTable("ProjectUserInvitation");
+                });
+
+            modelBuilder.Entity("Raccord.Domain.Model.Users.Invitations.UserInvitation", b =>
+                {
+                    b.Property<Guid>("ID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime?>("AcceptedDate");
+
+                    b.Property<string>("Email");
+
+                    b.Property<string>("FirstName");
+
+                    b.Property<string>("LastName");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("UserInvitation");
+                });
+
             modelBuilder.Entity("Raccord.Domain.Model.Users.ProjectRoles.ProjectPermissionDefinition", b =>
                 {
                     b.Property<long>("ID")
@@ -1992,6 +2032,23 @@ namespace Raccord.Data.EntityFramework.Migrations
                     b.HasOne("Raccord.Domain.Model.Shots.Slate", "Slate")
                         .WithMany("Takes")
                         .HasForeignKey("SlateID")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Raccord.Domain.Model.Users.Invitations.ProjectUserInvitation", b =>
+                {
+                    b.HasOne("Raccord.Domain.Model.Projects.Project", "Project")
+                        .WithMany("ProjectUserInvitations")
+                        .HasForeignKey("ProjectID")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Raccord.Domain.Model.Users.ProjectRoles.ProjectRoleDefinition", "Role")
+                        .WithMany()
+                        .HasForeignKey("RoleID");
+
+                    b.HasOne("Raccord.Domain.Model.Users.Invitations.UserInvitation", "UserInvitation")
+                        .WithMany("ProjectUserInvitations")
+                        .HasForeignKey("UserInvitationID")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
