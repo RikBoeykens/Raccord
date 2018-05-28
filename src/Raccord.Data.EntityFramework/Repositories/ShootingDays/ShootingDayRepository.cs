@@ -7,7 +7,7 @@ using System;
 namespace Raccord.Data.EntityFramework.Repositories.ShootingDays
 {
     // Repository for Shooting Day
-    public class ShootingDayRepository : BaseRepository<ShootingDay>, IShootingDayRepository
+    public class ShootingDayRepository : BaseRepository<ShootingDay, long>, IShootingDayRepository
     {
         public ShootingDayRepository(RaccordDBContext context) : base(context) 
         {

@@ -31,7 +31,6 @@ export class CrewUnitsNavListComponent implements OnInit {
       this.crewUnits = data.crewUnits;
     });
     this._route.params.subscribe((params: Params) => {
-      console.log(params['navType']);
       this.crewUnitNav = params['navType'];
     });
   }

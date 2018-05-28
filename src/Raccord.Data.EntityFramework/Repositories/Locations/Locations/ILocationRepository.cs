@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace Raccord.Data.EntityFramework.Repositories.Locations.Locations
 {
     // Interface defining a repository for Int/Ext
-    public interface ILocationRepository : IBaseRepository<Location>
+    public interface ILocationRepository : IBaseRepository<Location, long>
     {
         IEnumerable<Location> GetAllForProject(long projectID);
         Location GetFull(long ID);

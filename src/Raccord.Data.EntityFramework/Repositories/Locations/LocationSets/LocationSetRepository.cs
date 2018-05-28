@@ -7,7 +7,7 @@ using System;
 namespace Raccord.Data.EntityFramework.Repositories.Locations.LocationSets
 {
     // Repository for ScheduleScene
-    public class LocationSetRepository : BaseRepository<LocationSet>, ILocationSetRepository
+    public class LocationSetRepository : BaseRepository<LocationSet, long>, ILocationSetRepository
     {
         public LocationSetRepository(RaccordDBContext context) : base(context) 
         {

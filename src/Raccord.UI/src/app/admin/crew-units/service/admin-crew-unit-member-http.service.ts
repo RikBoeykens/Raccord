@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { AppSettings } from '../../../app.settings';
 import { BaseHttpService } from '../../../shared/service/base-http.service';
 import { LinkedProjectUserUser } from '../../project-users/model/linked-project-user-user.model';
@@ -9,19 +9,21 @@ import { ProjectUserCrewUnit }
 @Injectable()
 export class AdminCrewUnitMemberHttpService extends BaseHttpService {
 
-    constructor(protected _http: Http) {
+    constructor(
+        protected _http: HttpClient,
+    ) {
         super(_http);
         this._baseUri = `${AppSettings.API_ADMIN_ENDPOINT}/crewunitmembers`;
     }
 
-    public getCrewUnits(sceneId): Promise<ProjectUserCrewUnit[]> {
+    public getCrewUnits(sceneId): Promise<ProjectUserCrewUnit[] | void> {
 
         let uri = `${this._baseUri}/${sceneId}/crewunits`;
 
         return this.doGetArray(uri);
     }
 
-    public getProjectUsers(crewUnitId): Promise<LinkedProjectUserUser[]> {
+    public getProjectUsers(crewUnitId): Promise<LinkedProjectUserUser[] | void> {
 
         let uri = `${this._baseUri}/${crewUnitId}/projectusers`;
 

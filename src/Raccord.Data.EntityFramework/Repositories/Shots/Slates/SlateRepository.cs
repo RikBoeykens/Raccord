@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 namespace Raccord.Data.EntityFramework.Repositories.Shots.Slates
 {
     // Repository for slates
-    public class SlateRepository : BaseRepository<Slate>, ISlateRepository
+    public class SlateRepository : BaseRepository<Slate, long>, ISlateRepository
     {
         public SlateRepository(RaccordDBContext context) : base(context) 
         {

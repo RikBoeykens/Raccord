@@ -11,7 +11,7 @@ using Raccord.Domain.Model.Shots;
 
 namespace Raccord.Domain.Model.ShootingDays
 {
-    public class ShootingDay : Entity
+    public class ShootingDay : Entity<long>
     {
         private ICollection<Slate> _slates;
         private ICollection<ShootingDayScene> _scenes;

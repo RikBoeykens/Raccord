@@ -7,7 +7,7 @@ using System;
 namespace Raccord.Data.EntityFramework.Repositories.Callsheets.Scenes
 {
     // Repository for CallsheetScene
-    public class CallsheetSceneRepository : BaseRepository<CallsheetScene>, ICallsheetSceneRepository
+    public class CallsheetSceneRepository : BaseRepository<CallsheetScene, long>, ICallsheetSceneRepository
     {
         public CallsheetSceneRepository(RaccordDBContext context) : base(context) 
         {

@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 namespace Raccord.Data.EntityFramework.Repositories.ScriptUploads
 {
     // Repository for script uploads
-    public class ScriptUploadRepository : BaseRepository<ScriptUpload>, IScriptUploadRepository
+    public class ScriptUploadRepository : BaseRepository<ScriptUpload, long>, IScriptUploadRepository
     {
         public ScriptUploadRepository(RaccordDBContext context) : base(context) 
         {

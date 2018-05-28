@@ -7,7 +7,7 @@ using Raccord.Domain.Model.ShootingDays;
 namespace Raccord.Domain.Model.Shots
 {
 
-    public class Slate : Entity
+    public class Slate : Entity<long>
     {
         private ICollection<Take> _takes;
         private ICollection<ImageSlate> _images;

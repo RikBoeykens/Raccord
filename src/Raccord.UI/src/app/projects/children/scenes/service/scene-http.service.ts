@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { BaseHttpService } from '../../../../shared/service/base-http.service';
 import { AppSettings } from '../../../../app.settings';
 import { FullScene } from '../model/full-scene.model';
@@ -16,33 +16,35 @@ import { PageRequestHelpers } from '../../../../shared/children/paging/helpers/p
 @Injectable()
 export class SceneHttpService extends BaseHttpService {
 
-    constructor(protected _http: Http) { 
+    constructor(
+        protected _http: HttpClient,
+    ) {
         super(_http);
         this._baseUri = `${AppSettings.API_ENDPOINT}/scenes`;
     }
 
-    getAll(projectId): Promise<SceneSummary[]> {
+    getAll(projectId): Promise<SceneSummary[] | void> {
 
         var uri = `${this._baseUri}/${projectId}/project`;
 
         return this.doGetArray(uri);
     }
 
-    get(id: number): Promise<FullScene>{
+    get(id: number): Promise<FullScene | void> {
 
         var uri = `${this._baseUri}/${id}`;
 
         return this.doGet(uri);
     }
 
-    getSummary(id: Number): Promise<SceneSummary> {
+    getSummary(id: Number): Promise<SceneSummary | void> {
 
         var uri = `${this._baseUri}/${id}/summary`;
 
         return this.doGet(uri);
     }
 
-    getImages(id: number): Promise<LinkedImage[]> {
+    getImages(id: number): Promise<LinkedImage[] | void> {
 
         var uri = `${this._baseUri}/${id}/images`;
 

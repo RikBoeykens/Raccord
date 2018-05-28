@@ -67,7 +67,6 @@ export class CrewUnitsListComponent implements OnInit {
       this._crewUnitService.getAll(this.project.id),
       (data) => this.crewUnits = data
     );
-    this._crewUnitService.getAll(this.project.id).then((data) => this.crewUnits = data);
   }
 
   private showCrewUnitDialog(crewUnit: CrewUnit) {

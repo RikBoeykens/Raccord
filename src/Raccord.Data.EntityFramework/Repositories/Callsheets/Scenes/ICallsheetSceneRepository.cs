@@ -5,7 +5,7 @@ using System;
 namespace Raccord.Data.EntityFramework.Repositories.Callsheets.Scenes
 {
     // Interface defining a repository for callsheet
-    public interface ICallsheetSceneRepository : IBaseRepository<CallsheetScene>
+    public interface ICallsheetSceneRepository : IBaseRepository<CallsheetScene, long>
     {
         IEnumerable<CallsheetScene> GetAllForCallsheet(long callsheetID);
         IEnumerable<CallsheetScene> GetAllForScene(long sceneID);

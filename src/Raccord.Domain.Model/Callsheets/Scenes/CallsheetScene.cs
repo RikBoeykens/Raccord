@@ -7,7 +7,7 @@ using Raccord.Domain.Model.ShootingDays.Scenes;
 namespace Raccord.Domain.Model.Callsheets.Scenes
 {
     /// Represents schedule scene on a day
-    public class CallsheetScene : Entity
+    public class CallsheetScene : Entity<long>
     {
         private ICollection<CallsheetSceneCharacter> _characters;
 

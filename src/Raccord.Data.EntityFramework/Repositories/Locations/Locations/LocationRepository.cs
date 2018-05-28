@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 namespace Raccord.Data.EntityFramework.Repositories.Locations.Locations
 {
     // Repository for ScheduleDay
-    public class LocationRepository : BaseRepository<Location>, ILocationRepository
+    public class LocationRepository : BaseRepository<Location, long>, ILocationRepository
     {
         public LocationRepository(RaccordDBContext context) : base(context) 
         {

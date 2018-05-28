@@ -6,7 +6,7 @@ using Raccord.Domain.Model.ScriptUploads;
 namespace Raccord.Domain.Model.SceneProperties
 {
     /// Represents int/ext options
-    public class IntExt : Entity
+    public class IntExt : Entity<long>
     {
         private ICollection<Scene> _scenes;
 

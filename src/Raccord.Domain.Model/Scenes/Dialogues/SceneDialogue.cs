@@ -2,7 +2,7 @@ using Raccord.Domain.Model.Characters;
 
 namespace Raccord.Domain.Model.Scenes.Dialogues
 {
-  public class SceneDialogue : Entity
+  public class SceneDialogue : Entity<long>
   {
     // Text of the action
     public string Text { get; set; }

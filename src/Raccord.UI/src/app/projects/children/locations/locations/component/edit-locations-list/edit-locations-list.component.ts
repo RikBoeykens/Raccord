@@ -9,6 +9,7 @@ import { DialogService } from '../../../../../../shared/service/dialog.service';
 import { DragulaService } from 'ng2-dragula';
 import { HtmlClassHelpers } from '../../../../../../shared/helpers/html-class.helpers';
 import { LatLng } from '../../../../../../shared/index';
+import { LoadingWrapperService } from '../../../../../../shared/service/loading-wrapper.service';
 import { MapsHelpers } from '../../../../../../shared/helpers/maps.helpers';
 
 @Component({
@@ -27,6 +28,7 @@ export class EditLocationsListComponent implements OnInit {
 
     constructor(
         private _locationHttpService: LocationHttpService,
+        private _loadingWrapperService: LoadingWrapperService,
         private _loadingService: LoadingService,
         private _dialogService: DialogService,
         private _route: ActivatedRoute,
@@ -74,14 +76,11 @@ export class EditLocationsListComponent implements OnInit {
         this.newLocation = null;
     }
 
-    getLocations(){
-        
-        let loadingId = this._loadingService.startLoading();
-
-        this._locationHttpService.getAll(this.project.id).then(data => {
-            this.locations = data;
-            this._loadingService.endLoading(loadingId);
-        });
+    getLocations() {
+        this._loadingWrapperService.Load(
+            this._locationHttpService.getAll(this.project.id),
+            (data) => this.locations = data
+        );
     }
 
     addLocation(){

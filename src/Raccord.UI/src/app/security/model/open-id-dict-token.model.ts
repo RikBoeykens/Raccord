@@ -1,6 +1,6 @@
 export class OpenIdDictToken {
-    access_token: string;
-    expires_in: number;
-    refresh_token: string;
-    token_type: string;
+    public access_token: string;
+    public expires_in: number;
+    public refresh_token: string;
+    public token_type: string;
 }

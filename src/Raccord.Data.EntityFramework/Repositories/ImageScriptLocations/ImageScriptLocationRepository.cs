@@ -6,7 +6,7 @@ using Raccord.Domain.Model.Images;
 namespace Raccord.Data.EntityFramework.Repositories.ImageScriptLocations
 {
     // Repository for image locations
-    public class ImageScriptLocationRepository : BaseRepository<ImageScriptLocation>, IImageScriptLocationRepository
+    public class ImageScriptLocationRepository : BaseRepository<ImageScriptLocation, long>, IImageScriptLocationRepository
     {
         public ImageScriptLocationRepository(RaccordDBContext context) : base(context) 
         {

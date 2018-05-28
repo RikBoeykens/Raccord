@@ -5,7 +5,7 @@ using Raccord.Domain.Model.Projects;
 namespace Raccord.Domain.Model.Breakdowns.BreakdownTypes
 {
     /// Represents a breakdown type
-    public class BreakdownType : Entity
+    public class BreakdownType : Entity<long>
     {
         private ICollection<BreakdownItem> _items;
 

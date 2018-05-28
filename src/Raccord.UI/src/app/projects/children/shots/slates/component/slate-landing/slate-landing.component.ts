@@ -2,9 +2,9 @@ import { Component } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MdDialog } from '@angular/material';
 import { ProjectSummary } from '../../../../../model/project-summary.model';
-import { FullSlate } from "../../model/full-slate.model";
-import { Slate } from "../../model/slate.model";
-import { SlateHttpService } from "../../service/slate-http.service";
+import { FullSlate } from '../../model/full-slate.model';
+import { Slate } from '../../model/slate.model';
+import { SlateHttpService } from '../../service/slate-http.service';
 import { LoadingService } from "../../../../../../loading/service/loading.service";
 import { DialogService } from "../../../../../../shared/service/dialog.service";
 import { ChooseSceneDialog, ChooseShootingDayDialog } from "../../../../../index";
@@ -13,6 +13,7 @@ import { Scene } from "../../../../scenes/model/scene.model";
 import { ShootingDay } from "../../../../shooting-days/index";
 import { TakeHttpService } from "../../../takes/service/take-http.service";
 import { Take } from "../../../takes/model/take.model";
+import { LoadingWrapperService } from '../../../../../../shared/service/loading-wrapper.service';
 
 @Component({
     templateUrl: 'slate-landing.component.html',
@@ -28,8 +29,7 @@ export class SlateLandingComponent {
     constructor(
         private _slateHttpService: SlateHttpService,
         private _takeHttpService: TakeHttpService,
-        private _loadingService: LoadingService,
-        private _dialogService: DialogService,
+        private _loadingWrapperService: LoadingWrapperService,
         private _route: ActivatedRoute,
         private _router: Router,
         private _dialog: MdDialog
@@ -46,28 +46,20 @@ export class SlateLandingComponent {
         });
     }
 
-    getSlate(){
-        let loadingId = this._loadingService.startLoading();
-
-        this._slateHttpService.get(this.slate.id).then(data => {
-            this.slate = data;
-            this.viewSlate = new Slate(data);
-            this._loadingService.endLoading(loadingId);
-        });
+    getSlate() {
+        this._loadingWrapperService.Load(
+            this._slateHttpService.get(this.slate.id),
+            (data) => {
+                this.slate = data;
+                this.viewSlate = new Slate(data);
+            }
+        );
     }
 
-    updateSlate(){
-        let loadingId = this._loadingService.startLoading();
-
-        this._slateHttpService.post(this.viewSlate).then(data=>{
-            if(typeof(data)=='string'){
-                this._dialogService.error(data);
-            }else{
-                this.getSlate();
-            }
-        }).catch()
-        .then(()=>
-            this._loadingService.endLoading(loadingId)
+    updateSlate() {
+        this._loadingWrapperService.Load(
+            this._slateHttpService.post(this.viewSlate),
+            () => this.getSlate()
         );
     }
 
@@ -82,11 +74,12 @@ export class SlateLandingComponent {
             }
         });
     }
-    
-    chooseShootingDay(){
-        let shootingDayDialog = this._dialog.open(ChooseShootingDayDialog, {data: this.availableShootingDays});
-        shootingDayDialog.afterClosed().subscribe(shootingDay=> {
-            if(shootingDay){
+
+    public chooseShootingDay(){
+        let shootingDayDialog = this._dialog.open(
+            ChooseShootingDayDialog, {data: this.availableShootingDays});
+        shootingDayDialog.afterClosed().subscribe((shootingDay) => {
+            if (shootingDay) {
                 this.slate.shootingDay = new ShootingDay(shootingDay);
                 this.viewSlate.shootingDay = new ShootingDay(shootingDay);
 
@@ -95,51 +88,26 @@ export class SlateLandingComponent {
         });
     }
 
-    addTake(){
-        let loadingId = this._loadingService.startLoading();
-
+    public addTake() {
         let newTake = new Take();
         newTake.slate = this.viewSlate;
-
-        this._takeHttpService.post(newTake).then(data=>{
-            if(typeof(data)=='string'){
-                this._dialogService.error(data);
-            }else{
-                this.getSlate();
-            }
-        }).catch()
-        .then(()=>
-            this._loadingService.endLoading(loadingId)
+        this._loadingWrapperService.Load(
+            this._takeHttpService.post(newTake),
+            () => this.getSlate()
         );
     }
 
-    updateTake(take: Take){
-        let loadingId = this._loadingService.startLoading();
-
-        this._takeHttpService.post(take).then(data=>{
-            if(typeof(data)=='string'){
-                this._dialogService.error(data);
-            }else{
-                this.getSlate();
-            }
-        }).catch()
-        .then(()=>
-            this._loadingService.endLoading(loadingId)
+    public updateTake(take: Take){
+        this._loadingWrapperService.Load(
+            this._takeHttpService.post(take),
+            () => this.getSlate()
         );
     }
 
-    removeTake(take: Take){
-        let loadingId = this._loadingService.startLoading();
-
-        this._takeHttpService.delete(take.id).then(data=>{
-            if(typeof(data)=='string'){
-                this._dialogService.error(data);
-            }else{
-                this.getSlate();
-            }
-        }).catch()
-        .then(()=>
-            this._loadingService.endLoading(loadingId)
+    public removeTake(take: Take){
+        this._loadingWrapperService.Load(
+            this._takeHttpService.delete(take.id),
+            () => this.getSlate()
         );
     }
 }

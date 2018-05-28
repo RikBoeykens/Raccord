@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 namespace Raccord.Data.EntityFramework.Repositories.Shots.Takes
 {
     // Repository for takes
-    public class TakeRepository : BaseRepository<Take>, ITakeRepository
+    public class TakeRepository : BaseRepository<Take, long>, ITakeRepository
     {
         public TakeRepository(RaccordDBContext context) : base(context) 
         {

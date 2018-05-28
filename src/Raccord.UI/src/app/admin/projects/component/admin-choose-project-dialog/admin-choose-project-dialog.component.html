@@ -1,0 +1,23 @@
+<h1 md-dialog-title>
+    Choose Project
+</h1>
+<md-dialog-content>
+    <div fxLayout="row" fxLayoutGap="10px">
+        <admin-search-project fxFlex="100%" [searchProject]="searchProject"></admin-search-project>
+    </div>
+    <div fxLayout="row" fxLayoutGap="10px">
+        <md-select *ngIf="availableRoles.length"
+                    fxFlex="100%" 
+                    mdInput placeholder="Role" 
+                    [(ngModel)]="chosenRoleId" 
+                    #projectRole="ngModel" 
+                    name="user_role_id">
+            <md-option [value]="">---</md-option>
+            <md-option *ngFor="let projectRole of availableRoles" [value]="projectRole.id">{{ projectRole.name }}</md-option>
+        </md-select>
+    </div>
+</md-dialog-content>
+<md-dialog-actions>
+    <button md-button md-dialog-close>Cancel</button>
+    <button md-button (click)="submit()">Save</button>
+</md-dialog-actions>

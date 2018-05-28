@@ -9,7 +9,7 @@ using Raccord.Domain.Model.Cast;
 namespace Raccord.Domain.Model.Characters
 {
     /// Represents a character
-    public class Character : Entity
+    public class Character : Entity<long>
     {
         private ICollection<CharacterScene> _scenes;
         private ICollection<ImageCharacter> _images;

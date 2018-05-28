@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 namespace Raccord.Data.EntityFramework.Repositories.Callsheets
 {
     // Repository for Shooting Day
-    public class CallsheetRepository : BaseRepository<Callsheet>, ICallsheetRepository
+    public class CallsheetRepository : BaseRepository<Callsheet, long>, ICallsheetRepository
     {
         public CallsheetRepository(RaccordDBContext context) : base(context) 
         {

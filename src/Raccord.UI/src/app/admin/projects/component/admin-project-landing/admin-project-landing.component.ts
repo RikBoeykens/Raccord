@@ -6,6 +6,7 @@ import { LoadingService } from "../../../../loading/service/loading.service";
 import { DialogService } from "../../../../shared/service/dialog.service";
 import { ProjectUserUser } from '../../../project-users/model/project-user-user.model';
 import { AdminProjectUserHttpService } from '../../../index';
+import { LoadingWrapperService } from '../../../../shared/service/loading-wrapper.service';
 
 @Component({
     templateUrl: 'admin-project-landing.component.html',
@@ -18,6 +19,7 @@ export class AdminProjectLandingComponent {
     constructor(
         private _projectHttpService: AdminProjectHttpService,
         private _projectUserHttpService: AdminProjectUserHttpService,
+        private _loadingWrapperService: LoadingWrapperService,
         private _loadingService: LoadingService,
         private _dialogService: DialogService,
         private route: ActivatedRoute,
@@ -33,17 +35,9 @@ export class AdminProjectLandingComponent {
     }
 
     getProjectUsers(){
-        let loadingId = this._loadingService.startLoading();
-
-        this._projectUserHttpService.getUsers(this.project.id).then(data=>{
-            if(typeof(data)=='string'){
-                this._dialogService.error(data);
-            }else{
-                this.projectUsers = data;
-            }
-        }).catch()
-        .then(()=>
-            this._loadingService.endLoading(loadingId)
+        this._loadingWrapperService.Load(
+            this._projectUserHttpService.getUsers(this.project.id),
+            (data) => this.projectUsers = data
         );
     }
 

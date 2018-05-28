@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { BaseHttpService } from '../../../../../shared/service/base-http.service';
 import { AppSettings } from '../../../../../app.settings';
 import { FullScheduleDayNote } from '../model/full-schedule-day-note.model';
@@ -11,25 +11,25 @@ import { BaseProjectHttpService } from '../../../../shared/service/base-project-
 @Injectable()
 export class ScheduleDayNoteHttpService extends BaseProjectHttpService {
 
-    constructor(protected _http: Http) {
+    constructor(protected _http: HttpClient) {
         super(_http, 'scheduledaynotes');
     }
 
-    public getAll(authProjectId: number): Promise<ScheduleDayNoteSummary[]> {
+    public getAll(authProjectId: number): Promise<ScheduleDayNoteSummary[] | void> {
 
         let uri = `${this.getUri(authProjectId)}/project`;
 
         return this.doGetArray(uri);
     }
 
-    public get(authProjectId: number, id: number): Promise<FullScheduleDayNote> {
+    public get(authProjectId: number, id: number): Promise<FullScheduleDayNote | void> {
 
         let uri = `${this.getUri(authProjectId)}/${id}`;
 
         return this.doGet(uri);
     }
 
-    public getSummary(authProjectId: number, id: Number): Promise<ScheduleDayNoteSummary> {
+    public getSummary(authProjectId: number, id: Number): Promise<ScheduleDayNoteSummary | void> {
 
         let uri = `${this.getUri(authProjectId)}/${id}/summary`;
 

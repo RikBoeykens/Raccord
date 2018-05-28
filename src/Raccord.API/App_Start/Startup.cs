@@ -15,6 +15,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.PlatformAbstractions;
 using Raccord.API.Options;
+using Raccord.Core.Options;
 using Raccord.Data.EntityFramework;
 using Raccord.Data.EntityFramework.Seeding;
 using Raccord.Domain.Model.Users;
@@ -47,6 +48,8 @@ namespace Raccord.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.Configure<DbContextSettings>(Configuration.GetSection("DbContextSettings"));
+            services.Configure<MailSettings>(Configuration.GetSection("MailSettings"));
+            services.Configure<UISettings>(Configuration.GetSection("UISettings"));
             // Add framework services.
             var dbConfig = Configuration.GetSection("DbContextSettings");
             var connectionString = dbConfig.GetValue<string>("ConnectionString");

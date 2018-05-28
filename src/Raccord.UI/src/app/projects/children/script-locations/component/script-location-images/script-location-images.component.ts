@@ -5,6 +5,7 @@ import { LoadingService } from '../../../../../loading/service/loading.service';
 import { DialogService } from '../../../../../shared/service/dialog.service';
 import { SelectedEntity } from '../../../../../shared/model/selected-entity.model';
 import { EntityType } from '../../../../../shared/enums/entity-type.enum';
+import { LoadingWrapperService } from '../../../../../shared/service/loading-wrapper.service';
 
 @Component({
     selector: 'screenplay-location-images',
@@ -22,6 +23,7 @@ export class ScriptLocationImagesComponent implements OnInit{
         private _imageScriptLocationHttpService: ImageScriptLocationHttpService,
         private _loadingService: LoadingService,
         private _dialogService: DialogService,
+        private _loadingWrapperService: LoadingWrapperService
     ){
     }
 
@@ -30,12 +32,10 @@ export class ScriptLocationImagesComponent implements OnInit{
     }
 
     getImages(){
-        let loadingId = this._loadingService.startLoading();
-
-        this._imageScriptLocationHttpService.getImages(this.scriptLocationId).then(data => {
-            this.images = data;
-            this._loadingService.endLoading(loadingId);
-        });
+        this._loadingWrapperService.Load(
+            this._imageScriptLocationHttpService.getImages(this.scriptLocationId),
+            (data) => this.images = data
+        );
     }
 
     setAsPrimary(image: LinkedImage){

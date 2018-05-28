@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { BaseHttpService } from "../../shared/service/base-http.service";
-import { Http } from "@angular/http";
+import { HttpClient } from '@angular/common/http';
 import { AppSettings } from "../../app.settings";
 import { UserProfile } from "../model/user-profile.model";
 import { Base64Image } from "../../shared/model/base-64-image.model";
@@ -9,19 +9,21 @@ import { UserProfileSummary } from "../model/user-profile-summary.model";
 @Injectable()
 export class UserProfileHttpService extends BaseHttpService {
 
-  constructor(protected _http: Http) { 
-      super(_http);
+  constructor(
+    protected _http: HttpClient,
+) {
+    super(_http);
       this._baseUri = `${AppSettings.API_ENDPOINT}/userprofile`;
   }
 
-  get(): Promise<UserProfile>{
+  get(): Promise<UserProfile | void>{
 
     let uri = `${this._baseUri}`;
 
     return this.doGet(uri);
   }
 
-  getSummary(): Promise<UserProfileSummary>{
+  getSummary(): Promise<UserProfileSummary | void>{
 
     let uri = `${this._baseUri}/summary`;
 
@@ -46,7 +48,7 @@ export class UserProfileHttpService extends BaseHttpService {
     return this.doDelete(uri);
   }
 
-  getBase64(userId: string): Promise<Base64Image> {
+  getBase64(userId: string): Promise<Base64Image | void> {
 
     let uri = `${this._baseUri}/image/${userId}/base64`;
 

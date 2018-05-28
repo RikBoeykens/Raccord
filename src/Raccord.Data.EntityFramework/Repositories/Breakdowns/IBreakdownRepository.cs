@@ -4,7 +4,7 @@ using Raccord.Domain.Model.Breakdowns;
 namespace Raccord.Data.EntityFramework.Repositories.Breakdowns
 {
     // Interface defining a repository for Breakdown
-    public interface IBreakdownRepository : IBaseRepository<Breakdown>
+    public interface IBreakdownRepository : IBaseRepository<Breakdown, long>
     {
         IEnumerable<Breakdown> GetAllForParent(long projectID);
         IEnumerable<Breakdown> GetAllForParent(long projectID, string userID);

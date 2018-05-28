@@ -5,7 +5,7 @@ using Raccord.Domain.Model.Users;
 
 namespace Raccord.Domain.Model.Cast
 {
-  public class CastMember : Entity
+  public class CastMember : Entity<long>
   {
     private ICollection<Character> _characters;
     public string FirstName { get; set; }

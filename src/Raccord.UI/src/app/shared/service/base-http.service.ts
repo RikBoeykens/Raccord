@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, Response, Headers, RequestOptions } from '@angular/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { JsonResponse } from '../model/json-response.model';
 import { SortOrder } from '../model/sort-order.model';
 import { HeaderHelpers } from '../helpers/header.helpers';
@@ -10,36 +10,31 @@ export abstract class BaseHttpService {
 
     protected _baseUri: string;
 
-    constructor(protected _http: Http) {
+    constructor(
+        protected _http: HttpClient
+    ) {
     }
 
-    protected doGetArray(uri: string, useAuthToken: Boolean = true) {
+    protected doGetArray<T>(uri: string, useAuthToken: Boolean = true): Promise<T[] | void> {
         let headers = useAuthToken ? HeaderHelpers.AuthJsonHeaders() : HeaderHelpers.JsonHeaders();
-        let options = new RequestOptions({headers});
-        return this._http.get(uri, options)
+        return this._http.get(uri, {headers})
             .toPromise()
-            .then((response) => this.extractArray(response))
+            .then((response) => this.extractArray<T>(response))
             .catch(this.handleErrorPromise);
     }
 
-    protected doGet(uri: string, useAuthToken: Boolean = true) {
+    protected doGet<T>(uri: string, useAuthToken: Boolean = true) {
         let headers = useAuthToken ? HeaderHelpers.AuthJsonHeaders() : HeaderHelpers.JsonHeaders();
-        let options = new RequestOptions({headers});
-        return this._http.get(uri, options)
+        return this._http.get(uri, {headers})
             .toPromise()
-            .then((response) => response.json())
+            .then((response: T) => response)
             .catch(this.handleErrorPromise);
     }
 
     protected doPost(object: any, uri: string, useAuthToken: Boolean = true) {
-
         let body = JSON.stringify(object);
-        let headers = useAuthToken ?
-                        HeaderHelpers.AuthFormHeaders() :
-                        HeaderHelpers.ContentHeaders();
-        let options = new RequestOptions({headers});
-
-        return this._http.post(uri, body, options)
+        let headers = HeaderHelpers.AuthFormHeaders();
+        return this._http.post(uri, body, {headers})
             .toPromise()
             .then((response) => this.extractJsonResponse(response))
             .catch(this.handleErrorPromise);
@@ -48,10 +43,9 @@ export abstract class BaseHttpService {
     protected doDelete(uri: string, useAuthToken: Boolean = true) {
         let headers = useAuthToken ?
                         HeaderHelpers.AuthFormHeaders() :
-                        HeaderHelpers.ContentHeaders();
-        let options = new RequestOptions({headers});
+                        HeaderHelpers.ContentHttpHeaders();
 
-        return this._http.delete(uri, options)
+        return this._http.delete(uri, {headers})
             .toPromise()
             .then((response) => this.extractJsonResponse(response))
             .catch(this.handleErrorPromise);
@@ -61,10 +55,8 @@ export abstract class BaseHttpService {
         let body = JSON.stringify(order);
         let headers = useAuthToken ?
                         HeaderHelpers.AuthFormHeaders() :
-                        HeaderHelpers.ContentHeaders();
-        let options = new RequestOptions({ headers });
-
-        return this._http.post(uri, body, options)
+                        HeaderHelpers.ContentHttpHeaders();
+        return this._http.post(uri, body, { headers })
             .toPromise()
             .then((response) => this.extractJsonResponse(response))
             .catch(this.handleErrorPromise);
@@ -80,32 +72,26 @@ export abstract class BaseHttpService {
                 formData.append(property, object[property]);
             }
         }
-
         let headers = useAuthToken ?
                         HeaderHelpers.AuthFormDataHeaders() :
                         HeaderHelpers.FormDataHeaders();
-        let options = new RequestOptions({ headers });
 
-        return this._http.post(uri, formData, options)
+        return this._http.post(uri, formData, { headers })
             .toPromise()
             .then((response) => this.extractJsonResponse(response))
             .catch(this.handleErrorPromise);
     }
 
-    protected extractJsonResponse(res: Response) {
-
-        let response = <JsonResponse> res.json();
-
+    protected extractJsonResponse(res: Object): any {
+        let response = <JsonResponse> res;
         if (!response.ok) {
             return response.message;
         }
-
         return response.data;
     }
 
-    protected extractArray(res: Response, showprogress: boolean = true) {
-        let data = res.json();
-        return data || [];
+    protected extractArray<T>(res: Object, showprogress: boolean = true): any {
+        return res as T[] || [];
     }
 
     protected handleErrorPromise(error: any): Promise<void> {

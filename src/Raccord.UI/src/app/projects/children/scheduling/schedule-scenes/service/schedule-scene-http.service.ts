@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { BaseHttpService } from '../../../../../shared/service/base-http.service';
 import { AppSettings } from '../../../../../app.settings';
 import { FullScheduleScene } from '../model/full-schedule-scene.model';
@@ -13,25 +13,25 @@ import { BaseProjectHttpService } from '../../../../shared/service/base-project-
 @Injectable()
 export class ScheduleSceneHttpService extends BaseProjectHttpService {
 
-    constructor(protected _http: Http) {
+    constructor(protected _http: HttpClient) {
         super(_http, 'schedulescenes');
     }
 
-    public getScenes(authProjectId: number, scheduleDayId: number): Promise<ScheduleSceneScene[]> {
+    public getScenes(authProjectId: number, scheduleDayId: number): Promise<ScheduleSceneScene[] | void> {
 
         let uri = `${this.getUri(authProjectId)}/${scheduleDayId}/day`;
 
         return this.doGetArray(uri);
     }
 
-    public getDays(authProjectId: number, sceneId: number): Promise<ScheduleSceneDay[]> {
+    public getDays(authProjectId: number, sceneId: number): Promise<ScheduleSceneDay[] | void> {
 
         let uri = `${this.getUri(authProjectId)}/${sceneId}/scene`;
 
         return this.doGetArray(uri);
     }
 
-    public get(authProjectId: number, id: number): Promise<FullScheduleScene> {
+    public get(authProjectId: number, id: number): Promise<FullScheduleScene | void> {
 
         let uri = `${this.getUri(authProjectId)}/${id}`;
 

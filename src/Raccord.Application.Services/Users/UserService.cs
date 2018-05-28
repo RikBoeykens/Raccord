@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
+using Raccord.Application.Core.ExternalServices.Communication.Mail;
 using Raccord.Application.Core.Services.Users;
 using Raccord.Data.EntityFramework.Repositories.Users;
 using Raccord.Domain.Model.Users;
@@ -19,11 +20,6 @@ namespace Raccord.Application.Services.Users
             IUserRepository userRepository
         )
         {
-            if(userManager==null)
-                throw new ArgumentNullException(nameof(userManager));
-            if(userRepository==null)
-                throw new ArgumentNullException(nameof(userRepository));
-
             _userManager = userManager;
             _userRepository = userRepository;
         }

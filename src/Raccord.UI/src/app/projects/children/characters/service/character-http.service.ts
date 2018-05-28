@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { BaseHttpService } from '../../../../shared/service/base-http.service';
 import { AppSettings } from '../../../../app.settings';
 import { FullCharacter } from '../model/full-character.model';
@@ -10,33 +10,35 @@ import { JsonResponse } from '../../../../shared/model/json-response.model';
 @Injectable()
 export class CharacterHttpService extends BaseHttpService {
 
-    constructor(protected _http: Http) { 
+    constructor(
+        protected _http: HttpClient,
+    ) {
         super(_http);
         this._baseUri = `${AppSettings.API_ENDPOINT}/characters`;
     }
 
-    public getAll(projectId): Promise<CharacterSummary[]> {
+    public getAll(projectId): Promise<CharacterSummary[] | void> {
 
         let uri = `${this._baseUri}/${projectId}/project`;
 
         return this.doGetArray(uri);
     }
 
-    public getAllForCastMember(castMemberId): Promise<CharacterSummary[]> {
+    public getAllForCastMember(castMemberId): Promise<CharacterSummary[] | void> {
 
         let uri = `${this._baseUri}/${castMemberId}/castmember`;
 
         return this.doGetArray(uri);
     }
 
-    public get(id: number): Promise<FullCharacter>{
+    public get(id: number): Promise<FullCharacter | void>{
 
         let uri = `${this._baseUri}/${id}`;
 
         return this.doGet(uri);
     }
 
-    public getSummary(id: Number): Promise<CharacterSummary> {
+    public getSummary(id: Number): Promise<CharacterSummary | void> {
 
         let uri = `${this._baseUri}/${id}/summary`;
 

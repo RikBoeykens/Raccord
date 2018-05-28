@@ -2,9 +2,9 @@ import { Component, Input, OnInit } from '@angular/core';
 import { LinkedImage } from "../../../../images/model/linked-image.model";
 import { SelectedEntity } from "../../../../../../shared/model/selected-entity.model";
 import { ImageSlateHttpService } from "../../service/image-slate-http.service";
-import { LoadingService } from "../../../../../../loading/service/loading.service";
 import { DialogService } from "../../../../../../shared/service/dialog.service";
 import { EntityType } from "../../../../../../shared/enums/entity-type.enum";
+import { LoadingWrapperService } from '../../../../../../shared/service/loading-wrapper.service';
 
 @Component({
     selector: 'slate-images',
@@ -20,8 +20,8 @@ export class SlateImagesComponent implements OnInit{
 
     constructor(
         private _imageSlateHttpService: ImageSlateHttpService,
-        private _loadingService: LoadingService,
-        private _dialogService: DialogService,
+        private _loadingWrapperService: LoadingWrapperService,
+        private _dialogService: DialogService
     ){
     }
 
@@ -30,63 +30,43 @@ export class SlateImagesComponent implements OnInit{
     }
 
     getImages(){
-        let loadingId = this._loadingService.startLoading();
-
-        this._imageSlateHttpService.getImages(this.slateId).then(data => {
-            this.images = data;
-            this._loadingService.endLoading(loadingId);
-        });
-    }
-
-    setAsPrimary(image: LinkedImage){
-        let loadingId = this._loadingService.startLoading();
-
-        this._imageSlateHttpService.setImageAsPrimary(image.linkID).then(data=>{
-            if(typeof(data)=='string'){
-                this._dialogService.error(data);
-            }else{
-                this.getImages();
-                this._dialogService.success("Successfully set as primary for slate.");
-            }
-        }).catch()
-        .then(()=>
-            this._loadingService.endLoading(loadingId)
+        this._loadingWrapperService.Load(
+            this._imageSlateHttpService.getImages(this.slateId),
+            (data) => this.images = data
         );
     }
 
-    removeAsPrimary(image: LinkedImage){
-        let loadingId = this._loadingService.startLoading();
-
-        this._imageSlateHttpService.removeImageAsPrimary(image.linkID).then(data=>{
-            if(typeof(data)=='string'){
-                this._dialogService.error(data);
-            }else{
+    setAsPrimary(image: LinkedImage) {
+        this._loadingWrapperService.Load(
+            this._imageSlateHttpService.setImageAsPrimary(image.linkID),
+            () => {
                 this.getImages();
-                this._dialogService.success("Successfully removed as primary for slate.");
+                this._dialogService.success('Successfully set as primary for slate.');
             }
-        }).catch()
-        .then(()=>
-            this._loadingService.endLoading(loadingId)
+        );
+    }
+
+    removeAsPrimary(image: LinkedImage) {
+        this._loadingWrapperService.Load(
+            this._imageSlateHttpService.removeImageAsPrimary(image.linkID),
+            () => {
+                this.getImages();
+                this._dialogService.success('Successfully removed as primary for slate.');
+            }
         );
     }
 
     removeLink(image: LinkedImage){
-        let loadingId = this._loadingService.startLoading();
-
-        this._imageSlateHttpService.removeLink(image.linkID).then(data=>{
-            if(typeof(data)=='string'){
-                this._dialogService.error(data);
-            }else{
+        this._loadingWrapperService.Load(
+            this._imageSlateHttpService.removeLink(image.linkID),
+            () => {
                 this.getImages();
-                this._dialogService.success("Successfully removed link between image and slate.");
+                this._dialogService.success('Successfully removed link between image and slate.');
             }
-        }).catch()
-        .then(()=>
-            this._loadingService.endLoading(loadingId)
         );
     }
 
-    imagesUploaded(){
+    public imagesUploaded() {
         this.getImages();
     }
 }

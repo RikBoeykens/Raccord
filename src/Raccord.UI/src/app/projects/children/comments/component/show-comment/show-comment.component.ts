@@ -4,6 +4,7 @@ import { CommentHttpService } from '../../service/comment-http.service';
 import { LoadingService } from '../../../../../loading/service/loading.service';
 import { DialogService } from '../../../../../shared/service/dialog.service';
 import { AccountHelpers } from '../../../../../account/helpers/account.helper';
+import { LoadingWrapperService } from '../../../../../shared/service/loading-wrapper.service';
 
 @Component({
     selector: 'show-comment',
@@ -20,6 +21,7 @@ export class ShowCommentComponent implements OnInit{
 
     constructor(
       private _commentHttpService: CommentHttpService,
+      private _loadingWrapperService: LoadingWrapperService,
       private _loadingService: LoadingService,
       private _dialogService: DialogService
     ){
@@ -29,12 +31,18 @@ export class ShowCommentComponent implements OnInit{
         this.getChildComments();
     }
 
-    getComment() {
-        this._commentHttpService.get(this.projectId, this.comment.id).then((comment)=> this.comment = comment);
+    public getComment() {
+        this._loadingWrapperService.Load(
+            this._commentHttpService.get(this.projectId, this.comment.id),
+            (data) => this.comment = data
+        );
     }
 
     getChildComments() {
-        this._commentHttpService.getAll(this.projectId, null, this.comment.id).then((comments)=> this.childComments = comments);
+        this._loadingWrapperService.Load(
+            this._commentHttpService.getAll(this.projectId, null, this.comment.id),
+            (data) => this.childComments = data
+        );
     }
 
     getFullName() {

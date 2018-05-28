@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 namespace Raccord.Data.EntityFramework.Repositories.Scheduling.ScheduleDays
 {
     // Repository for ScheduleDay
-    public class ScheduleDayRepository : BaseRepository<ScheduleDay>, IScheduleDayRepository
+    public class ScheduleDayRepository : BaseRepository<ScheduleDay, long>, IScheduleDayRepository
     {
         public ScheduleDayRepository(RaccordDBContext context) : base(context) 
         {

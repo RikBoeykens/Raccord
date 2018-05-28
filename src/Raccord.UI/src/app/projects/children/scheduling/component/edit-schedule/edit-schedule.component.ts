@@ -125,15 +125,12 @@ export class EditScheduleComponent implements OnInit {
     }
 
     public getScheduleDays() {
-
-        let loadingId = this._loadingService.startLoading();
-
-        this._scheduleDayHttpService.getAll(this.project.id, this.crewUnit.id).then((data) => {
-            this.scheduleDays = data.map((scheduleDay) => {
-                return new ScheduleDayDragSceneWrapper(scheduleDay);
-            });
-            this._loadingService.endLoading(loadingId);
-        });
+        this._loadingWrapperService.Load(
+            this._scheduleDayHttpService.getAll(this.project.id, this.crewUnit.id),
+            (data) => this.scheduleDays = data.map((scheduleDay) => {
+                    return new ScheduleDayDragSceneWrapper(scheduleDay);
+                })
+        );
     }
 
     public resetNewScheduleDay() {
@@ -313,7 +310,6 @@ export class EditScheduleComponent implements OnInit {
                             e.getAttribute('data-schedule-scene-id'),
                             0
                         );
-                        console.log(scheduleSceneId);
                         this.moveScheduleScene(destinationDayId, scheduleSceneId);
                     }
                 });

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { AppSettings } from '../../../../app.settings';
 import { BaseProjectHttpService } from '../../../shared/service/base-project-http.service';
 import { BreakdownSummary } from '../model/breakdown-summary.model';
@@ -11,32 +11,32 @@ import { SelectedBreakdown } from '../model/selected-breakdown.model';
 @Injectable()
 export class BreakdownHttpService extends BaseProjectHttpService {
 
-    constructor(protected _http: Http) {
+    constructor(protected _http: HttpClient) {
         super(_http, 'breakdowns');
     }
 
-    public getAll(authProjectId: number): Promise<BreakdownSummary[]> {
+    public getAll(authProjectId: number): Promise<BreakdownSummary[] | void> {
 
         let uri = `${this.getUri(authProjectId)}/project`;
 
         return this.doGetArray(uri);
     }
 
-    public get(authProjectId: number, id: number): Promise<FullBreakdown> {
+    public get(authProjectId: number, id: number): Promise<FullBreakdown | void> {
 
         let uri = `${this.getUri(authProjectId)}/${id}`;
 
         return this.doGet(uri);
     }
 
-    public getSummary(authProjectId: number, id: Number): Promise<BreakdownSummary> {
+    public getSummary(authProjectId: number, id: Number): Promise<BreakdownSummary | void> {
 
         let uri = `${this.getUri(authProjectId)}/${id}/summary`;
 
         return this.doGet(uri);
     }
 
-    public getSelected(authProjectId: number): Promise<SelectedBreakdown> {
+    public getSelected(authProjectId: number): Promise<SelectedBreakdown | void> {
 
         let uri = `${this.getUri(authProjectId)}/selected`;
 

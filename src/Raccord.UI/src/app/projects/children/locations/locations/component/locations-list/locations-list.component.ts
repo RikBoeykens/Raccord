@@ -6,6 +6,7 @@ import { Location } from '../../../';
 import { ProjectSummary } from '../../../../../model/project-summary.model';
 import { LoadingService } from '../../../../../../loading/service/loading.service';
 import { LatLng } from '../../../../../../shared/index';
+import { LoadingWrapperService } from '../../../../../../shared/service/loading-wrapper.service';
 import { MapsHelpers } from '../../../../../../shared/helpers/maps.helpers';
 
 @Component({
@@ -20,6 +21,7 @@ export class LocationsListComponent implements OnInit {
 
     constructor(
         private _locationHttpService: LocationHttpService,
+        private _loadingWrapperService: LoadingWrapperService,
         private _loadingService: LoadingService,
         private _route: ActivatedRoute,
         private _router: Router,
@@ -35,16 +37,13 @@ export class LocationsListComponent implements OnInit {
     }
 
     getLocations(){
-        
-        let loadingId = this._loadingService.startLoading();
-
-        this._locationHttpService.getAll(this.project.id).then(data => {
-            this.locations = data;
-            this._loadingService.endLoading(loadingId);
-        });
+        this._loadingWrapperService.Load(
+            this._locationHttpService.getAll(this.project.id),
+            (data) => this.locations = data
+        );
     }
 
-    public setBounds(){
+    public setBounds() {
         this.markerLocations = this.locations.filter(l=> l.latLng.hasLatLng);
         if(this.markerLocations.length){
             this.bounds = MapsHelpers.getBounds(this.markerLocations.map((location)=> location.latLng));

@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 namespace Raccord.Data.EntityFramework.Repositories.Scenes.Dialogues
 {
     // Repository for scene dialogues
-    public class SceneDialogueRepository : BaseRepository<SceneDialogue>, ISceneDialogueRepository
+    public class SceneDialogueRepository : BaseRepository<SceneDialogue, long>, ISceneDialogueRepository
     {
         public SceneDialogueRepository(RaccordDBContext context) : base(context) 
         {

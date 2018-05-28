@@ -31,6 +31,7 @@ export class ShowImageComponent implements OnInit{
     ngOnInit(){
         this._imageHttpService.getBase64(this.image.id).then(data => {
             this.loadingImage = false;
+            data = <Base64Image> data;
             if(data.hasContent){
                 this.base64Image = data;
             }

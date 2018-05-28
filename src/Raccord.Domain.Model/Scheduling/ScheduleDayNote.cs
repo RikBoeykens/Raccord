@@ -1,7 +1,7 @@
 namespace Raccord.Domain.Model.Scheduling
 {
     /// Represents schedule scene on a day
-    public class ScheduleDayNote : Entity
+    public class ScheduleDayNote : Entity<long>
     {
         // Content of the note
         public string Content { get; set; }

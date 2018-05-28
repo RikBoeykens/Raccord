@@ -11,6 +11,7 @@ import { BreakdownItem } from '../../../breakdown-items/model/breakdown-item.mod
 import { ProjectSummary } from '../../../../../../model/project-summary.model';
 import { HtmlClassHelpers } from '../../../../../../../shared/helpers/html-class.helpers';
 import { AccountHelpers } from '../../../../../../../account/helpers/account.helper';
+import { LoadingWrapperService } from '../../../../../../../shared/service/loading-wrapper.service';
 
 @Component({
     templateUrl: 'breakdown-type-landing.component.html',
@@ -31,6 +32,7 @@ export class BreakdownTypeLandingComponent {
     constructor(
         private _breakdownTypeHttpService: BreakdownTypeHttpService,
         private _breakdownItemHttpService: BreakdownItemHttpService,
+        private _loadingWrapperService: LoadingWrapperService,
         private _loadingService: LoadingService,
         private _dialogService: DialogService,
         private _route: ActivatedRoute,
@@ -79,15 +81,16 @@ export class BreakdownTypeLandingComponent {
         this.newBreakdownItem = null;
     }
 
-    getBreakdownType(){
-        let loadingId = this._loadingService.startLoading();
-
-        this._breakdownTypeHttpService.get(this.breakdownType.id).then(data => {
-            this.breakdownType = data;
-            this.breakdownItems = data.breakdownItems.map(function(breakdownItem){ return new BreakdownItemDroppableWrapper(breakdownItem); });
-
-            this._loadingService.endLoading(loadingId);
-        });
+    public getBreakdownType() {
+        this._loadingWrapperService.Load(
+            this._breakdownTypeHttpService.get(this.breakdownType.id),
+            (data) => {
+                this.breakdownType = data;
+                this.breakdownItems =
+                    data.breakdownItems.map((breakdownItem) =>
+                        new BreakdownItemDroppableWrapper(breakdownItem));
+            }
+        );
     }
 
     addBreakdownItem(){

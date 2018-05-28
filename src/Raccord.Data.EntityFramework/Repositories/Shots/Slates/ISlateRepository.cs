@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace Raccord.Data.EntityFramework.Repositories.Shots.Slates
 {
     // Interface defining a repository for Scenes
-    public interface ISlateRepository : IBaseRepository<Slate>
+    public interface ISlateRepository : IBaseRepository<Slate, long>
     {
         IEnumerable<Slate> GetAllForProject(long projectID);
         Slate GetFull(long ID);

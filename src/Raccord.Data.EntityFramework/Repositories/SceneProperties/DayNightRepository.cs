@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 namespace Raccord.Data.EntityFramework.Repositories.SceneProperties
 {
     // Repository for Day/Night
-    public class DayNightRepository : BaseRepository<DayNight>, IDayNightRepository
+    public class DayNightRepository : BaseRepository<DayNight, long>, IDayNightRepository
     {
         public DayNightRepository(RaccordDBContext context) : base(context) 
         {

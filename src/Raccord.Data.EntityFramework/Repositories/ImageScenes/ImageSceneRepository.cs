@@ -6,7 +6,7 @@ using Raccord.Domain.Model.Images;
 namespace Raccord.Data.EntityFramework.Repositories.ImageScenes
 {
     // Repository for images
-    public class ImageSceneRepository : BaseRepository<ImageScene>, IImageSceneRepository
+    public class ImageSceneRepository : BaseRepository<ImageScene, long>, IImageSceneRepository
     {
         public ImageSceneRepository(RaccordDBContext context) : base(context) 
         {

@@ -8,6 +8,7 @@ import { LoadingService } from '../../../../../loading/service/loading.service';
 import { DialogService } from '../../../../../shared/service/dialog.service';
 import { DragulaService } from 'ng2-dragula';
 import { HtmlClassHelpers } from '../../../../../shared/helpers/html-class.helpers';
+import { LoadingWrapperService } from '../../../../../shared/service/loading-wrapper.service';
 
 @Component({
     templateUrl: 'edit-int-ext-list.component.html',
@@ -24,6 +25,7 @@ export class EditIntExtListComponent implements OnInit {
 
     constructor(
         private _intExtHttpService: IntExtHttpService,
+        private _loadingWrapperService: LoadingWrapperService,
         private _loadingService: LoadingService,
         private _dialogService: DialogService,
         private _route: ActivatedRoute,
@@ -71,13 +73,10 @@ export class EditIntExtListComponent implements OnInit {
     }
 
     getIntExts(){
-        
-        let loadingId = this._loadingService.startLoading();
-
-        this._intExtHttpService.getAll(this.project.id).then(data => {
-            this.intExts = data.map(function(intExt){ return new IntExtDroppableWrapper(intExt); });
-            this._loadingService.endLoading(loadingId);
-        });
+        this._loadingWrapperService.Load(
+            this._intExtHttpService.getAll(this.project.id),
+            (data) => this.intExts = data.map((intExt) => new IntExtDroppableWrapper(intExt))
+        );
     }
 
     addIntExt(){

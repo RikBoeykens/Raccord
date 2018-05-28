@@ -10,6 +10,7 @@ import { CallsheetSummary } from "../../../";
 import { CallsheetScene } from "../../../";
 import { CallsheetSceneCharacters } from "../../../";
 import { LinkedCharacter } from "../../../..//characters/model/linked-character.model";
+import { LoadingWrapperService } from '../../../../../../shared/service/loading-wrapper.service';
 
 @Component({
     templateUrl: 'callsheet-wizard-step-3.component.html',
@@ -26,6 +27,7 @@ export class CallsheetWizardStep3Component implements OnInit {
         private _callsheetSceneHttpService: CallsheetSceneHttpService,
         private _callsheetSceneCharacterHttpService: CallsheetSceneCharacterHttpService,
         private _callsheetCharacterHttpService: CallsheetCharacterHttpService,
+        private _loadingWrapperService: LoadingWrapperService,
         private _loadingService: LoadingService,
         private _dialogService: DialogService
     ) {
@@ -39,13 +41,11 @@ export class CallsheetWizardStep3Component implements OnInit {
         });
     }
 
-    getScenes(){
-        let loadingId = this._loadingService.startLoading();
-
-        this._callsheetSceneHttpService.getCharacters(this.callsheet.id).then(data => {
-            this.scenes = data.map((scene)=> new CallsheetSceneWrapper(scene));
-            this._loadingService.endLoading(loadingId);
-        });
+    public getScenes() {
+        this._loadingWrapperService.Load(
+            this._callsheetSceneHttpService.getCharacters(this.callsheet.id),
+            (data) => this.scenes = data.map((scene) => new CallsheetSceneWrapper(scene))
+        );
     }
 
     goToNextStep(){

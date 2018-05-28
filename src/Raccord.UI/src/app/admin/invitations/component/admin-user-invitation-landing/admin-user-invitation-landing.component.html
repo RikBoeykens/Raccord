@@ -1,0 +1,33 @@
+<div class="row">      
+    <div class="col s12">
+        <a routerLink="/" class="breadcrumb">Dashboard</a>
+        <a routerLink="/admin/invitations" class="breadcrumb">Invitations</a>
+        <span class="breadcrumb">{{getFullName(invitation)}}</span>
+    </div>
+</div>
+<h3>Projects</h3>
+<div class="row" *ngIf="invitation.projects.length">
+    <table class="col s12">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Role</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let projectInvitation of invitation.projects">
+                <td>
+                    {{projectInvitation.project.title}}
+                </td>
+                <td>
+                    {{projectInvitation.projectRole.name}}
+                </td>
+                <td>
+                    <button md-button (click)="removeProject(invitation)"><md-icon>delete</md-icon></button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<button md-fab (click)="showAddProject()"><md-icon>add</md-icon></button>

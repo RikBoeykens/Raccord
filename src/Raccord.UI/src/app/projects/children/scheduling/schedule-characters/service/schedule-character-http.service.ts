@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { BaseHttpService } from '../../../../../shared/service/base-http.service';
 import { AppSettings } from '../../../../../app.settings';
 import { FullScene } from '../../model/full-scene.model';
@@ -14,18 +14,18 @@ import { BaseProjectHttpService } from '../../../../shared/service/base-project-
 @Injectable()
 export class ScheduleCharacterHttpService extends BaseProjectHttpService {
 
-    constructor(protected _http: Http) {
+    constructor(protected _http: HttpClient) {
         super(_http, 'schedulecharacters');
     }
 
-    public getCharacters(authProjectId: number, sceneId): Promise<LinkedCharacter[]> {
+    public getCharacters(authProjectId: number, sceneId): Promise<LinkedCharacter[] | void> {
 
         let uri = `${this.getUri(authProjectId)}/${sceneId}/characters`;
 
         return this.doGetArray(uri);
     }
 
-    public getScenes(authProjectId: number, characterId): Promise<LinkedScheduleScene[]> {
+    public getScenes(authProjectId: number, characterId): Promise<LinkedScheduleScene[] | void> {
 
         let uri = `${this.getUri(authProjectId)}/${characterId}/schedulescenes`;
 

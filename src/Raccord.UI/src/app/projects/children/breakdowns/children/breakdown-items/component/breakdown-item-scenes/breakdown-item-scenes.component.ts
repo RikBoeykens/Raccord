@@ -30,12 +30,10 @@ export class BreakdownItemScenesComponent {
     }
 
     public getScenes() {
-        let loadingId = this._loadingService.startLoading();
-
-        this._breakdownItemSceneHttpService.getScenes(this.breakdownItemId).then((data) => {
-            this.scenes = data;
-            this._loadingService.endLoading(loadingId);
-        });
+        this._loadingWrapperService.Load(
+            this._breakdownItemSceneHttpService.getScenes(this.breakdownItemId),
+            (data) => this.scenes = data
+        );
     }
 
     public addLink(scene: SelectedEntity) {

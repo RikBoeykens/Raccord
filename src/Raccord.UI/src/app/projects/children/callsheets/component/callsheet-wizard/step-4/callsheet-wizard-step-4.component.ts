@@ -11,6 +11,7 @@ import { CallsheetCharacterCharacter } from "../../../";
 import { CharacterCallCallType } from "../../../";
 import { LinkedCharacter } from "../../../..//characters/model/linked-character.model";
 import { TimeHelpers } from "../../../../../../shared/helpers/time.helpers";
+import { LoadingWrapperService } from '../../../../../../shared/service/loading-wrapper.service';
 
 @Component({
     templateUrl: 'callsheet-wizard-step-4.component.html',
@@ -27,6 +28,7 @@ export class CallsheetWizardStep4Component implements OnInit {
         private _callsheetHttpService: CallsheetHttpService,
         private _callsheetCharacterHttpService: CallsheetCharacterHttpService,
         private _characterCallHttpService: CharacterCallHttpService,
+        private _loadingWrapperService: LoadingWrapperService,
         private _loadingService: LoadingService,
         private _dialogService: DialogService
     ) {
@@ -40,18 +42,11 @@ export class CallsheetWizardStep4Component implements OnInit {
         });
     }
 
-    getCharacters(){
-        let loadingId = this._loadingService.startLoading();
-
-        this._callsheetCharacterHttpService.getCharacters(this.callsheet.id).then(data=>{
-            if(typeof(data)=='string'){
-                this._dialogService.error(data);
-            }else{
-                this.characters = data.map((character)=>new CallsheetCharacterWrapper(character));
-            }
-        }).catch()
-        .then(()=>
-            this._loadingService.endLoading(loadingId)
+    public getCharacters() {
+        this._loadingWrapperService.Load(
+            this._callsheetCharacterHttpService.getCharacters(this.callsheet.id),
+            (data) => this.characters =
+                data.map((character) => new CallsheetCharacterWrapper(character))
         );
     }
 

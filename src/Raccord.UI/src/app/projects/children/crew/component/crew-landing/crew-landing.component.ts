@@ -15,6 +15,7 @@ import { ProjectPermissionEnum } from
     '../../../../../shared/children/users/project-roles/enums/project-permission.enum';
 import { CrewUnitSummary } from '../../crew-units/model/crew-unit-summary.model';
 import { CrewUnitNavEnum } from '../../crew-units/enum/crew-unit-nav.enum';
+import { LoadingWrapperService } from '../../../../../shared/service/loading-wrapper.service';
 
 @Component({
     templateUrl: 'crew-landing.component.html',
@@ -28,6 +29,7 @@ export class CrewLandingComponent implements OnInit {
     constructor(
         private _crewDepartmentHttpService: CrewDepartmentHttpService,
         private _crewMemberHttpService: CrewMemberHttpService,
+        private _loadingWrapperService: LoadingWrapperService,
         private _loadingService: LoadingService,
         private _dialogService: DialogService,
         private _route: ActivatedRoute,
@@ -50,11 +52,10 @@ export class CrewLandingComponent implements OnInit {
     }
 
     public getDepartments() {
-        let loadingId = this._loadingService.startLoading();
-        this._crewDepartmentHttpService.getAll(this.project.id).then((data) => {
-            this.departments = data;
-            this._loadingService.endLoading(loadingId);
-        });
+        this._loadingWrapperService.Load(
+            this._crewDepartmentHttpService.getAll(this.project.id),
+            (data) => this.departments = data
+        );
     }
 
     public addCrewMember(departmentId: number) {

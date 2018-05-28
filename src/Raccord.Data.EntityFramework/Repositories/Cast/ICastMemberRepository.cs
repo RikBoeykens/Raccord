@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace Raccord.Data.EntityFramework.Repositories.Cast
 {
     // Interface defining a repository for Cast Members
-    public interface ICastMemberRepository : IBaseRepository<CastMember>
+    public interface ICastMemberRepository : IBaseRepository<CastMember, long>
     {
         IEnumerable<CastMember> GetAllForProject(long projectID);
         CastMember GetFull(long ID);

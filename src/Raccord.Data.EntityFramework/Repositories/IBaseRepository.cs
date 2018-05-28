@@ -8,16 +8,16 @@ using System.Threading.Tasks;
 
 namespace Raccord.Data.EntityFramework.Repositories
 {
-    public interface IBaseRepository<T> where T : Entity, new()
+    public interface IBaseRepository<T, TId> where T : Entity<TId>, new()
     {
         IEnumerable<T> AllIncluding(params Expression<Func<T, object>>[] includeProperties);
         Task<IEnumerable<T>> AllIncludingAsync(params Expression<Func<T, object>>[] includeProperties);
         IEnumerable<T> GetAll();
         Task<IEnumerable<T>> GetAllAsync();
-        T GetSingle(Int64 id);
+        T GetSingle(TId id);
         T GetSingle(Expression<Func<T, bool>> predicate);
         T GetSingle(Expression<Func<T, bool>> predicate, params Expression<Func<T, object>>[] includeProperties);
-        Task<T> GetSingleAsync(int id);
+        Task<T> GetSingleAsync(TId id);
         IEnumerable<T> FindBy(Expression<Func<T, bool>> predicate);
         IEnumerable<T> FindBy(Expression<Func<T, bool>> predicate, params Expression<Func<T, object>>[] includeProperties);
         Task<IEnumerable<T>> FindByAsync(Expression<Func<T, bool>> predicate);

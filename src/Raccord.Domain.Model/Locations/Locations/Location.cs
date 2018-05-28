@@ -5,7 +5,7 @@ using Raccord.Domain.Model.Projects;
 namespace Raccord.Domain.Model.Locations.Locations
 {
     // Represents a physical location
-    public class Location : Entity
+    public class Location : Entity<long>
     {
         private ICollection<LocationSet> _sets;
         

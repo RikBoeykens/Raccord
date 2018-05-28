@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 namespace Raccord.Data.EntityFramework.Repositories.SceneProperties
 {
     // Repository for Int/Ext
-    public class IntExtRepository : BaseRepository<IntExt>, IIntExtRepository
+    public class IntExtRepository : BaseRepository<IntExt, long>, IIntExtRepository
     {
         public IntExtRepository(RaccordDBContext context) : base(context) 
         {
