@@ -12,9 +12,10 @@ using System;
 namespace Raccord.Data.EntityFramework.Migrations
 {
     [DbContext(typeof(RaccordDBContext))]
-    partial class RaccordDBContextModelSnapshot : ModelSnapshot
+    [Migration("20180529094911_extra-comments")]
+    partial class extracomments
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -590,9 +591,9 @@ namespace Raccord.Data.EntityFramework.Migrations
 
                     b.Property<long?>("CallsheetID");
 
-                    b.Property<long?>("ParentBreakdownItemID");
+                    b.Property<long?>("CharacterID");
 
-                    b.Property<long?>("ParentCharacterID");
+                    b.Property<long?>("ParentBreakdownItemID");
 
                     b.Property<long?>("ParentCommentID");
 
@@ -618,9 +619,9 @@ namespace Raccord.Data.EntityFramework.Migrations
 
                     b.HasIndex("CallsheetID");
 
-                    b.HasIndex("ParentBreakdownItemID");
+                    b.HasIndex("CharacterID");
 
-                    b.HasIndex("ParentCharacterID");
+                    b.HasIndex("ParentBreakdownItemID");
 
                     b.HasIndex("ParentCommentID");
 
@@ -1734,13 +1735,13 @@ namespace Raccord.Data.EntityFramework.Migrations
                         .WithMany("Comments")
                         .HasForeignKey("CallsheetID");
 
+                    b.HasOne("Raccord.Domain.Model.Characters.Character")
+                        .WithMany("Comments")
+                        .HasForeignKey("CharacterID");
+
                     b.HasOne("Raccord.Domain.Model.Breakdowns.BreakdownItems.BreakdownItem", "ParentBreakdownItem")
                         .WithMany("Comments")
                         .HasForeignKey("ParentBreakdownItemID");
-
-                    b.HasOne("Raccord.Domain.Model.Characters.Character", "ParentCharacter")
-                        .WithMany("Comments")
-                        .HasForeignKey("ParentCharacterID");
 
                     b.HasOne("Raccord.Domain.Model.Comments.Comment", "ParentComment")
                         .WithMany("Comments")
