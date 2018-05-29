@@ -67,9 +67,12 @@
         <select-entity [projectId]="project.id"
                        [includeTypes]="imageLinkTypes"
                        (entitySelected)="linkImage($event)">
+        </select-entity>
     </md-card-content>
-    </select-entity>
 </md-card>
 <md-card *ngIf="getCanComment()">
-    <comment-container [projectId]="project.id" [parentId]="image.id" [parentType]="getParentCommentType()"></comment-container>
+    <md-card-title>Comments</md-card-title>
+    <md-card-content>
+        <comment-container [projectId]="project.id" [parentId]="image.id" [parentType]="getParentCommentType()"></comment-container>
+    </md-card-content>
 </md-card>

@@ -29,6 +29,10 @@
             </agm-marker>
         </agm-map>
     </md-tab>
+    <md-tab *ngIf="getCanComment()"
+            label="Comments">
+        <comment-container [projectId]="project.id" [parentId]="location.id" [parentType]="getParentCommentType()"></comment-container>
+    </md-tab>
     <md-tab label="Sets">
         <location-location-sets [sets]="location.sets" [locationId]="location.id" [projectId]="project.id"></location-location-sets>
     </md-tab>

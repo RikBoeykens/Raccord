@@ -9,6 +9,10 @@
     <edit-character [character]="viewCharacter" (submitCharacter)="updateCharacter()"></edit-character>
 </md-card>
 <md-tab-group>
+    <md-tab *ngIf="getCanComment()"
+            label="Comments">
+        <comment-container [projectId]="project.id" [parentId]="character.id" [parentType]="getParentCommentType()"></comment-container>
+    </md-tab>
   <md-tab label="Scenes">
       <character-scenes [scenes]="character.scenes" [characterId]="character.id" [projectId]="project.id"></character-scenes>
   </md-tab>

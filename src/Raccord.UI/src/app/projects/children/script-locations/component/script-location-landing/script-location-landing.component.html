@@ -9,6 +9,10 @@
     <edit-script-location [scriptLocation]="viewScriptLocation" (submitScriptLocation)="updateScriptLocation()"></edit-script-location>
 </md-card>
 <md-tab-group>
+    <md-tab *ngIf="getCanComment()"
+            label="Comments">
+        <comment-container [projectId]="project.id" [parentId]="scriptLocation.id" [parentType]="getParentCommentType()"></comment-container>
+    </md-tab>
   <md-tab label="Scenes">
     <div class="row">
         <md-nav-list>
