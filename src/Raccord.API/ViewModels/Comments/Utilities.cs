@@ -32,8 +32,8 @@ namespace Raccord.API.ViewModels.Comments
       {
         ID = vm.ID,
         Text = vm.Text,
-        ProjectID = vm.ProjectID,
-        CommentID = vm.CommentID,
+        ParentID = vm.ParentID,
+        ParentType = vm.ParentType,
         UserID = userID
       };
     }

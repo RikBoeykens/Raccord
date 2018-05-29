@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Raccord.Domain.Model.Comments;
 using Raccord.Domain.Model.Projects;
 
 namespace Raccord.Domain.Model.Images
@@ -11,6 +12,7 @@ namespace Raccord.Domain.Model.Images
         private ICollection<ImageCharacter> _characters;
         private ICollection<ImageBreakdownItem> _breakdownItems;
         private ICollection<ImageSlate> _slates;
+        private ICollection<Comment> _comments;
 
         /// Title of the image
         public string Title { get; set; }
@@ -95,6 +97,19 @@ namespace Raccord.Domain.Model.Images
             set
             {
                 _slates = value;
+            }
+        }
+        
+        // Comments made to the image
+        public virtual ICollection<Comment> Comments
+        {
+            get
+            {
+                return _comments ?? (_comments = new List<Comment>());
+            }
+            set
+            {
+                _comments = value;
             }
         }
     }

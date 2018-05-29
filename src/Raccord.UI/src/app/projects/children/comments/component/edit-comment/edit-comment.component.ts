@@ -3,8 +3,9 @@ import { Comment } from '../../model/comment.model';
 import { PostComment } from '../../model/post-comment.model';
 import { OnInit } from '@angular/core/src/metadata/lifecycle_hooks';
 import { CommentHttpService } from '../../service/comment-http.service';
-import { LoadingService } from '../../../../../loading/service/loading.service';
 import { DialogService } from '../../../../../shared/service/dialog.service';
+import { ParentCommentType } from '../../../../../shared/enums/parent-comment-type.enum';
+import { LoadingWrapperService } from '../../../../../shared/service/loading-wrapper.service';
 
 @Component({
     selector: 'edit-comment',
@@ -12,46 +13,40 @@ import { DialogService } from '../../../../../shared/service/dialog.service';
 })
 export class EditCommentComponent implements OnInit{
 
-    @Output() submittedComment = new EventEmitter();
-    @Input() comment: Comment;
-    @Input() projectId: number;
-    @Input() parentProjectId?: number;
-    @Input() parentCommentId?: number;
-    postComment: PostComment;
+    @Output() public submittedComment = new EventEmitter();
+    @Input() public comment: Comment;
+    @Input() public projectId: number;
+    @Input() public parentId: number;
+    @Input() public parentType: ParentCommentType;
+    public postComment: PostComment;
 
     constructor(
       private _commentHttpService: CommentHttpService,
-      private _loadingService: LoadingService,
+      private _loadingWrapperService: LoadingWrapperService,
       private _dialogService: DialogService
-    ){
+    ) {
     }
 
-    ngOnInit() {
+    public ngOnInit() {
         this.setNewPostComment();
     }
 
-    setNewPostComment() {
+    public setNewPostComment() {
         this.postComment = new PostComment({
             id: this.comment != null ? this.comment.id : 0,
             text: this.comment != null ? this.comment.text : '',
-            projectID: this.parentProjectId,
-            commentID: this.parentCommentId
+            parentID: this.parentId,
+            parentType: this.parentType
           });
     }
 
-    doCommentSubmit(){
-      let loadingId = this._loadingService.startLoading();
-
-      this._commentHttpService.post(this.projectId, this.postComment).then(data=>{
-          if(typeof(data)=='string'){
-              this._dialogService.error(data);
-          }else{
-              this.setNewPostComment();
-              this.submittedComment.emit(data);
-          }
-      }).catch()
-      .then(()=>
-          this._loadingService.endLoading(loadingId)
-      );
+    public doCommentSubmit() {
+        this._loadingWrapperService.Load(
+            this._commentHttpService.post(this.projectId, this.postComment),
+            (data) => {
+                this.setNewPostComment();
+                this.submittedComment.emit(data);
+            }
+        );
     }
 }

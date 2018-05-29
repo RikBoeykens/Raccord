@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Raccord.Domain.Model.Comments;
 using Raccord.Domain.Model.Locations.LocationSets;
 using Raccord.Domain.Model.Projects;
 
@@ -8,6 +9,7 @@ namespace Raccord.Domain.Model.Locations.Locations
     public class Location : Entity<long>
     {
         private ICollection<LocationSet> _sets;
+        private ICollection<Comment> _comments;
         
         // Name of the location
         public string Name { get; set; }
@@ -49,6 +51,19 @@ namespace Raccord.Domain.Model.Locations.Locations
             set
             {
                 _sets = value;
+            }
+        }
+        
+        // Comments made to the location
+        public virtual ICollection<Comment> Comments
+        {
+            get
+            {
+                return _comments ?? (_comments = new List<Comment>());
+            }
+            set
+            {
+                _comments = value;
             }
         }
     }

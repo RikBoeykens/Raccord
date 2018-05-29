@@ -12,6 +12,7 @@ import { MapsHelpers } from '../../../../../../shared/helpers/maps.helpers';
 import { AccountHelpers } from '../../../../../../account/helpers/account.helper';
 import { ProjectPermissionEnum } from '../../../../../../shared/children/users/project-roles/enums/project-permission.enum';
 import { LoadingWrapperService } from '../../../../../../shared/service/loading-wrapper.service';
+import { ParentCommentType } from '../../../../../../shared/enums/parent-comment-type.enum';
 
 @Component({
     templateUrl: 'location-landing.component.html',
@@ -83,5 +84,16 @@ export class LocationLandingComponent {
             this.project.id,
             ProjectPermissionEnum.canEditGeneral
         );
+    }
+
+    public getCanComment() {
+        return AccountHelpers.hasProjectPermission(
+            this.project.id,
+            ProjectPermissionEnum.CanComment
+        );
+    }
+
+    public getParentCommentType() {
+        return ParentCommentType.location;
     }
 }

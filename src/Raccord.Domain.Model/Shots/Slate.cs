@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Raccord.Domain.Model.Comments;
 using Raccord.Domain.Model.Images;
 using Raccord.Domain.Model.Projects;
 using Raccord.Domain.Model.Scenes;
@@ -11,6 +12,7 @@ namespace Raccord.Domain.Model.Shots
     {
         private ICollection<Take> _takes;
         private ICollection<ImageSlate> _images;
+        private ICollection<Comment> _comments;
 
         // Number of the shot
         public string Number { get; set; }
@@ -80,6 +82,19 @@ namespace Raccord.Domain.Model.Shots
             set
             {
                 _images = value;
+            }
+        }
+        
+        // Comments made to the slate
+        public virtual ICollection<Comment> Comments
+        {
+            get
+            {
+                return _comments ?? (_comments = new List<Comment>());
+            }
+            set
+            {
+                _comments = value;
             }
         }
     }

@@ -14,8 +14,8 @@ export class LoadingWrapperService {
     public Load(loadFunction: Promise<any>, onLoaded?: Function, onFinally?: Function) {
       let loadingId = this._loadingService.startLoading();
       loadFunction.then((data) => {
-        if (typeof(data) === 'string') {
-          this._dialogService.error(data);
+        if (data && data.hasError) {
+          this._dialogService.error(data.message);
         }else {
           if (onLoaded) {
             onLoaded(data);

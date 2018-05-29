@@ -13,10 +13,14 @@
     <edit-breakdown-item [breakdownItem]="viewBreakdownItem" (submitBreakdownItem)="updateBreakdownItem()"></edit-breakdown-item>
 </div>
 <md-tab-group>
-  <md-tab label="Scenes">
-      <breakdown-item-scenes [scenes]="breakdownItem.scenes" [breakdownItemId]="breakdownItem.id" [projectId]="project.id" [createdById]="breakdownItem.breakdown.createdBy.id"></breakdown-item-scenes>
-  </md-tab>
-  <md-tab label="Pictures">
-      <breakdown-item-images [images]="breakdownItem.images" [breakdownItemId]="breakdownItem.id" [projectId]="project.id"></breakdown-item-images>
-  </md-tab>
+    <md-tab *ngIf="getCanComment()"
+            label="Comments">
+        <comment-container [projectId]="project.id" [parentId]="breakdownItem.id" [parentType]="getParentCommentType()"></comment-container>
+    </md-tab>
+    <md-tab label="Scenes">
+        <breakdown-item-scenes [scenes]="breakdownItem.scenes" [breakdownItemId]="breakdownItem.id" [projectId]="project.id" [createdById]="breakdownItem.breakdown.createdBy.id"></breakdown-item-scenes>
+    </md-tab>
+    <md-tab label="Pictures">
+        <breakdown-item-images [images]="breakdownItem.images" [breakdownItemId]="breakdownItem.id" [projectId]="project.id"></breakdown-item-images>
+    </md-tab>
 </md-tab-group>
