@@ -4,6 +4,7 @@ import { JsonResponse } from '../model/json-response.model';
 import { SortOrder } from '../model/sort-order.model';
 import { HeaderHelpers } from '../helpers/header.helpers';
 import 'rxjs/add/operator/toPromise';
+import { ErrorInfo } from '../model/error-info.model';
 
 @Injectable()
 export abstract class BaseHttpService {
@@ -85,7 +86,10 @@ export abstract class BaseHttpService {
     protected extractJsonResponse(res: Object): any {
         let response = <JsonResponse> res;
         if (!response.ok) {
-            return response.message;
+            return new ErrorInfo({
+                message: response.message,
+                error: null
+            });
         }
         return response.data;
     }

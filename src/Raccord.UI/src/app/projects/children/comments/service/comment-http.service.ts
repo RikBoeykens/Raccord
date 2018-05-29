@@ -4,6 +4,7 @@ import { AppSettings } from '../../../../app.settings';
 import { Comment } from '../model/comment.model';
 import { PostComment } from '../model/post-comment.model';
 import { BaseProjectHttpService } from '../../../shared/service/base-project-http.service';
+import { ParentCommentType } from '../../../../shared/enums/parent-comment-type.enum';
 
 @Injectable()
 export class CommentHttpService extends BaseProjectHttpService {
@@ -14,14 +15,14 @@ export class CommentHttpService extends BaseProjectHttpService {
 
     public getAll(
         authProjectId: number,
-        parentProjectId?: number,
-        parentCommentId?: number
+        parentId: number,
+        parentType: ParentCommentType
     ): Promise<Comment[] | void> {
 
         let uri =
             `${this.getUri(authProjectId)}` +
-                `?parentProjectId=${parentProjectId}` +
-                `&parentCommentId=${parentCommentId}`;
+                `?parentID=${parentId}` +
+                `&parentType=${parentType}`;
 
         return this.doGetArray(uri);
     }

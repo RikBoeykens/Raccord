@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Raccord.Application.Core.Services.Profile;
+using Raccord.Core.Enums;
 
 namespace Raccord.Application.Core.Services.Comments
 {
@@ -8,16 +9,7 @@ namespace Raccord.Application.Core.Services.Comments
   /// </summary>
   public class GetCommentDto
   {
-    /// <summary>
-    /// ID of the linked project
-    /// </summary>
-    /// <returns></returns>
-    public long? ProjectID { get; set; }
-
-    /// <summary>
-    /// ID of the linked comment
-    /// </summary>
-    /// <returns></returns>
-    public long? CommentID { get; set; }
+    public long ParentID { get; set; }
+    public ParentCommentType ParentType { get; set; }
   }
 }
