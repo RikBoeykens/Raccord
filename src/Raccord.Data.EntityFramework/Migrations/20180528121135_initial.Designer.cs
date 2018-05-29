@@ -12,9 +12,10 @@ using System;
 namespace Raccord.Data.EntityFramework.Migrations
 {
     [DbContext(typeof(RaccordDBContext))]
-    partial class RaccordDBContextModelSnapshot : ModelSnapshot
+    [Migration("20180528121135_initial")]
+    partial class initial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -588,27 +589,9 @@ namespace Raccord.Data.EntityFramework.Migrations
                     b.Property<long>("ID")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<long?>("CallsheetID");
-
-                    b.Property<long?>("ParentBreakdownItemID");
-
-                    b.Property<long?>("ParentCharacterID");
-
                     b.Property<long?>("ParentCommentID");
 
-                    b.Property<long?>("ParentImageID");
-
-                    b.Property<long?>("ParentLocationID");
-
                     b.Property<long?>("ParentProjectID");
-
-                    b.Property<long?>("ParentSceneID");
-
-                    b.Property<long?>("ParentScriptLocationID");
-
-                    b.Property<long?>("ParentSlateID");
-
-                    b.Property<long?>("ParentTakeID");
 
                     b.Property<string>("Text");
 
@@ -616,27 +599,9 @@ namespace Raccord.Data.EntityFramework.Migrations
 
                     b.HasKey("ID");
 
-                    b.HasIndex("CallsheetID");
-
-                    b.HasIndex("ParentBreakdownItemID");
-
-                    b.HasIndex("ParentCharacterID");
-
                     b.HasIndex("ParentCommentID");
 
-                    b.HasIndex("ParentImageID");
-
-                    b.HasIndex("ParentLocationID");
-
                     b.HasIndex("ParentProjectID");
-
-                    b.HasIndex("ParentSceneID");
-
-                    b.HasIndex("ParentScriptLocationID");
-
-                    b.HasIndex("ParentSlateID");
-
-                    b.HasIndex("ParentTakeID");
 
                     b.HasIndex("UserID");
 
@@ -1730,49 +1695,13 @@ namespace Raccord.Data.EntityFramework.Migrations
 
             modelBuilder.Entity("Raccord.Domain.Model.Comments.Comment", b =>
                 {
-                    b.HasOne("Raccord.Domain.Model.Callsheets.Callsheet")
-                        .WithMany("Comments")
-                        .HasForeignKey("CallsheetID");
-
-                    b.HasOne("Raccord.Domain.Model.Breakdowns.BreakdownItems.BreakdownItem", "ParentBreakdownItem")
-                        .WithMany("Comments")
-                        .HasForeignKey("ParentBreakdownItemID");
-
-                    b.HasOne("Raccord.Domain.Model.Characters.Character", "ParentCharacter")
-                        .WithMany("Comments")
-                        .HasForeignKey("ParentCharacterID");
-
                     b.HasOne("Raccord.Domain.Model.Comments.Comment", "ParentComment")
                         .WithMany("Comments")
                         .HasForeignKey("ParentCommentID");
 
-                    b.HasOne("Raccord.Domain.Model.Images.Image", "ParentImage")
-                        .WithMany("Comments")
-                        .HasForeignKey("ParentImageID");
-
-                    b.HasOne("Raccord.Domain.Model.Locations.Locations.Location", "ParentLocation")
-                        .WithMany("Comments")
-                        .HasForeignKey("ParentLocationID");
-
                     b.HasOne("Raccord.Domain.Model.Projects.Project", "ParentProject")
                         .WithMany("Comments")
                         .HasForeignKey("ParentProjectID");
-
-                    b.HasOne("Raccord.Domain.Model.Scenes.Scene", "ParentScene")
-                        .WithMany("Comments")
-                        .HasForeignKey("ParentSceneID");
-
-                    b.HasOne("Raccord.Domain.Model.ScriptLocations.ScriptLocation", "ParentScriptLocation")
-                        .WithMany("Comments")
-                        .HasForeignKey("ParentScriptLocationID");
-
-                    b.HasOne("Raccord.Domain.Model.Shots.Slate", "ParentSlate")
-                        .WithMany("Comments")
-                        .HasForeignKey("ParentSlateID");
-
-                    b.HasOne("Raccord.Domain.Model.Shots.Take", "ParentTake")
-                        .WithMany("Comments")
-                        .HasForeignKey("ParentTakeID");
 
                     b.HasOne("Raccord.Domain.Model.Users.ApplicationUser", "User")
                         .WithMany()
