@@ -1,3 +1,5 @@
+using Raccord.Core.Enums;
+
 namespace Raccord.Application.Core.Services.Comments
 {
   /// <summary>
@@ -10,17 +12,7 @@ namespace Raccord.Application.Core.Services.Comments
     /// </summary>
     /// <returns></returns>
     public string UserID { get; set; }
-
-    /// <summary>
-    /// ID of the parent project (if applicable)
-    /// </summary>
-    /// <returns></returns>
-    public long? ProjectID { get; set; }
-
-    /// <summary>
-    /// ID of the parent comment (if applicable)
-    /// </summary>
-    /// <returns></returns>
-    public long? CommentID { get; set; }
+    public long ParentID { get; set; }
+    public ParentCommentType ParentType { get; set; }
   }
 }

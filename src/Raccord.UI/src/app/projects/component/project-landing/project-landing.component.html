@@ -10,6 +10,12 @@
         <project-calendar [projectId]="project.id"></project-calendar>
     </md-card>
 </div>
+<md-card *ngIf="getCanComment()">
+    <md-card-header>Comments</md-card-header>
+    <md-card-content>
+        <comment-container [projectId]="project.id" [parentId]="project.id" [parentType]="getParentCommentType()"></comment-container>
+    </md-card-content>
+</md-card>
 <div class="row">
     <div>
         <md-card *ngIf="false">
@@ -190,9 +196,3 @@
         </md-card>
     </div>
 </div>
-<md-card *ngIf="getCanComment()">
-    <md-card-header>Comments</md-card-header>
-    <md-card-content>
-        <comment-container [projectId]="project.id" [parentProjectId]="project.id"></comment-container>
-    </md-card-content>
-</md-card>

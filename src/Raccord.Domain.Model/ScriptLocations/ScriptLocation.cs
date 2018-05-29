@@ -4,6 +4,7 @@ using Raccord.Domain.Model.Scenes;
 using Raccord.Domain.Model.Images;
 using Raccord.Domain.Model.Locations.LocationSets;
 using Raccord.Domain.Model.ScriptUploads;
+using Raccord.Domain.Model.Comments;
 
 namespace Raccord.Domain.Model.ScriptLocations
 {
@@ -13,6 +14,7 @@ namespace Raccord.Domain.Model.ScriptLocations
         private ICollection<Scene> _scenes;
         private ICollection<ImageScriptLocation> _images;
         private ICollection<LocationSet> _sets;
+        private ICollection<Comment> _comments;
 
         /// Name of the location
         public string Name { get; set; }
@@ -68,6 +70,19 @@ namespace Raccord.Domain.Model.ScriptLocations
             set
             {
                 _sets = value;
+            }
+        }
+        
+        // Comments made to the script location
+        public virtual ICollection<Comment> Comments
+        {
+            get
+            {
+                return _comments ?? (_comments = new List<Comment>());
+            }
+            set
+            {
+                _comments = value;
             }
         }
     }

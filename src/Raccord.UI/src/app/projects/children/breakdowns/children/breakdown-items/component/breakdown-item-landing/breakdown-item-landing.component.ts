@@ -8,6 +8,8 @@ import { BreakdownItem } from '../../model/breakdown-item.model';
 import { ProjectSummary } from '../../../../../../model/project-summary.model';
 import { AccountHelpers } from '../../../../../../../account/helpers/account.helper';
 import { LoadingWrapperService } from '../../../../../../../shared/service/loading-wrapper.service';
+import { ProjectPermissionEnum } from '../../../../../../../shared/children/users/project-roles/enums/project-permission.enum';
+import { ParentCommentType } from '../../../../../../../shared/enums/parent-comment-type.enum';
 
 @Component({
     templateUrl: 'breakdown-item-landing.component.html',
@@ -63,6 +65,17 @@ export class BreakdownItemLandingComponent {
 
     userCanEdit() {
         return this.breakdownItem.breakdown.createdBy.id === AccountHelpers.getUserId();
+    }
+
+    public getCanComment() {
+        return AccountHelpers.hasProjectPermission(
+            this.project.id,
+            ProjectPermissionEnum.CanComment
+        );
+    }
+
+    public getParentCommentType() {
+        return ParentCommentType.breakdownItem;
     }
 
     private translate(item: FullBreakdownItem): BreakdownItem {

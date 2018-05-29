@@ -13,6 +13,7 @@ using Raccord.Domain.Model.ShootingDays.Scenes;
 using Raccord.Domain.Model.ScriptUploads;
 using Raccord.Domain.Model.Scenes.Actions;
 using Raccord.Domain.Model.Scenes.Dialogues;
+using Raccord.Domain.Model.Comments;
 
 namespace Raccord.Domain.Model.Scenes
 {
@@ -28,6 +29,7 @@ namespace Raccord.Domain.Model.Scenes
         private ICollection<ShootingDayScene> _shootingDayScenes;
         private ICollection<SceneAction> _actions;
         private ICollection<SceneDialogue> _dialogues;
+        private ICollection<Comment> _comments;
 
         // Number of the scene
         public string Number { get; set; }
@@ -188,6 +190,19 @@ namespace Raccord.Domain.Model.Scenes
             set
             {
                 _dialogues = value;
+            }
+        }
+        
+        // Comments made to the scene
+        public virtual ICollection<Comment> Comments
+        {
+            get
+            {
+                return _comments ?? (_comments = new List<Comment>());
+            }
+            set
+            {
+                _comments = value;
             }
         }
     }

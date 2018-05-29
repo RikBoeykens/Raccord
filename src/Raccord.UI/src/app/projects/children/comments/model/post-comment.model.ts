@@ -1,20 +1,21 @@
 import { BaseComment } from "./base-comment.model";
 import { UserProfile } from "../../../../profile/model/user-profile.model";
+import { ParentCommentType } from "../../../../shared/enums/parent-comment-type.enum";
 
 export class PostComment extends BaseComment{
-    projectID?: number;
-    commentID?: number;
+    public parentType: ParentCommentType;
+    public parentID: number;
 
     constructor(obj?: {
                         id: number,
                         text: string,
-                        projectID?: number,
-                        commentID?: number
+                        parentType: ParentCommentType,
+                        parentID: number
                     }){
         super(obj);
         if(obj){
-            this.projectID = obj.projectID;
-            this.commentID = obj.commentID;
+            this.parentType = obj.parentType;
+            this.parentID = obj.parentID;
         }
     }
 }

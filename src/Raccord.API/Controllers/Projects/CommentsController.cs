@@ -30,16 +30,12 @@ namespace Raccord.API.Controllers.Projects
 
         // GET: api/comments
         [HttpGet]
-        public IEnumerable<CommentViewModel> GetForProject([FromQuery]long? parentProjectId = null, [FromQuery]long? parentCommentId = null)
+        public IEnumerable<CommentViewModel> GetForProject([FromQuery]long parentId, [FromQuery]ParentCommentType parentType)
         {
-            if(!parentProjectId.HasValue && !parentCommentId.HasValue)
-            {
-                throw new NullReferenceException();
-            }
             var dtos = _commentService.GetForParent(new GetCommentDto
             {
-                ProjectID = parentProjectId,
-                CommentID = parentCommentId
+                ParentID = parentId,
+                ParentType = parentType
             });
 
             return dtos.Select(c=> c.Translate());

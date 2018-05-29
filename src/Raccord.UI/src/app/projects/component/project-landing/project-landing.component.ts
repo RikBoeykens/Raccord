@@ -6,6 +6,7 @@ import { AccountHelpers } from '../../../account/helpers/account.helper';
 import { ProjectPermissionEnum } from
     '../../../shared/children/users/project-roles/enums/project-permission.enum';
 import { CrewUnitNavEnum } from '../../children/crew/crew-units/enum/crew-unit-nav.enum';
+import { ParentCommentType } from '../../../shared/enums/parent-comment-type.enum';
 
 @Component({
     templateUrl: 'project-landing.component.html',
@@ -77,5 +78,9 @@ export class ProjectLandingComponent implements OnInit {
         return AccountHelpers.hasCrew(
             this.project.id
         );
+    }
+
+    public getParentCommentType() {
+        return ParentCommentType.project;
     }
 }

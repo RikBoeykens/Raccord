@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Raccord.Domain.Model.Breakdowns.BreakdownTypes;
+using Raccord.Domain.Model.Comments;
 using Raccord.Domain.Model.Images;
 
 namespace Raccord.Domain.Model.Breakdowns.BreakdownItems
@@ -9,6 +10,7 @@ namespace Raccord.Domain.Model.Breakdowns.BreakdownItems
     {
         private ICollection<BreakdownItemScene> _scenes;
         private ICollection<ImageBreakdownItem> _images;
+        private ICollection<Comment> _comments;
 
         /// Name of the breakdown item
         public string Name { get; set; }
@@ -51,6 +53,19 @@ namespace Raccord.Domain.Model.Breakdowns.BreakdownItems
             set
             {
                 _images = value;
+            }
+        }
+        
+        // Comments made to the breakdown item
+        public virtual ICollection<Comment> Comments
+        {
+            get
+            {
+                return _comments ?? (_comments = new List<Comment>());
+            }
+            set
+            {
+                _comments = value;
             }
         }
     }

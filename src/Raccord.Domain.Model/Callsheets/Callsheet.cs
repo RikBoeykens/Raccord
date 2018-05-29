@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using Raccord.Domain.Model.Callsheets.Characters;
 using Raccord.Domain.Model.Callsheets.Scenes;
+using Raccord.Domain.Model.Comments;
 using Raccord.Domain.Model.Crew.CrewUnits;
 using Raccord.Domain.Model.Projects;
 using Raccord.Domain.Model.ShootingDays;
@@ -13,6 +14,7 @@ namespace Raccord.Domain.Model.Callsheets
     {
         private ICollection<CallsheetScene> _scenes;
         private ICollection<CallsheetCharacter> _callsheetCharacters;
+        private ICollection<Comment> _comments;
 
         // Time of day the callsheet day starts
         public DateTime Start { get; set; }
@@ -58,6 +60,19 @@ namespace Raccord.Domain.Model.Callsheets
             set
             {
                 _callsheetCharacters = value;
+            }
+        }
+        
+        // Comments made to the callsheet
+        public virtual ICollection<Comment> Comments
+        {
+            get
+            {
+                return _comments ?? (_comments = new List<Comment>());
+            }
+            set
+            {
+                _comments = value;
             }
         }
     }

@@ -61,10 +61,15 @@
         <button md-button *ngIf="image.isPrimaryImage" (click)="removeAsPrimary(image)"><md-icon>flash_off</md-icon> Remove as Primary for Project</button>
     </div>
 </div>
-<div class="row">
-    <h5>Add link</h5>
-    <select-entity [projectId]="project.id"
-                   [includeTypes]="imageLinkTypes"
-                   (entitySelected)="linkImage($event)">
+<md-card>
+    <md-card-title>Link Image</md-card-title>
+    <md-card-content>
+        <select-entity [projectId]="project.id"
+                       [includeTypes]="imageLinkTypes"
+                       (entitySelected)="linkImage($event)">
+    </md-card-content>
     </select-entity>
-</div>
+</md-card>
+<md-card *ngIf="getCanComment()">
+    <comment-container [projectId]="project.id" [parentId]="image.id" [parentType]="getParentCommentType()"></comment-container>
+</md-card>

@@ -5,6 +5,7 @@ using Raccord.Domain.Model.ScriptUploads;
 using Raccord.Domain.Model.Scenes.Dialogues;
 using Raccord.Domain.Model.Users;
 using Raccord.Domain.Model.Cast;
+using Raccord.Domain.Model.Comments;
 
 namespace Raccord.Domain.Model.Characters
 {
@@ -14,6 +15,7 @@ namespace Raccord.Domain.Model.Characters
         private ICollection<CharacterScene> _scenes;
         private ICollection<ImageCharacter> _images;
         private ICollection<SceneDialogue> _dialogues;
+        private ICollection<Comment> _comments;
 
         // Number for the character
         public int Number { get; set; }
@@ -78,6 +80,19 @@ namespace Raccord.Domain.Model.Characters
             set
             {
                 _dialogues = value;
+            }
+        }
+        
+        // Comments made to the character
+        public virtual ICollection<Comment> Comments
+        {
+            get
+            {
+                return _comments ?? (_comments = new List<Comment>());
+            }
+            set
+            {
+                _comments = value;
             }
         }
     }

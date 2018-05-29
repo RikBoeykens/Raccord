@@ -1,9 +1,12 @@
 using System;
+using System.Collections.Generic;
+using Raccord.Domain.Model.Comments;
 
 namespace Raccord.Domain.Model.Shots
 {
     public class Take : Entity<long>
     {
+        private ICollection<Comment> _comments;
         // Number of the take
         public string Number { get; set; }
 
@@ -30,5 +33,18 @@ namespace Raccord.Domain.Model.Shots
 
         // Parent slate
         public Slate Slate { get; set; }
+        
+        // Comments made to the slate
+        public virtual ICollection<Comment> Comments
+        {
+            get
+            {
+                return _comments ?? (_comments = new List<Comment>());
+            }
+            set
+            {
+                _comments = value;
+            }
+        }
     }
 }

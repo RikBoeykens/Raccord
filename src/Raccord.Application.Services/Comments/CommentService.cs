@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Raccord.Application.Core.Services.Comments;
+using Raccord.Core.Enums;
 using Raccord.Data.EntityFramework.Repositories.Comments;
 using Raccord.Domain.Model.Comments;
 
@@ -17,7 +18,7 @@ namespace Raccord.Application.Services.Comments
 
     public IEnumerable<CommentDto> GetForParent(GetCommentDto dto)
     {
-      var comments = _commentRepository.GetForParent(dto.ProjectID, dto.CommentID);
+      var comments = _commentRepository.GetForParent(dto.ParentID, dto.ParentType);
 
       return comments.Select(c=> c.Translate());
     }
@@ -33,10 +34,49 @@ namespace Raccord.Application.Services.Comments
       var comment = new Comment
       {
         Text = dto.Text,
-        UserID = dto.UserID,
-        ParentProjectID = dto.ProjectID,
-        ParentCommentID = dto.CommentID
+        UserID = dto.UserID
       };
+
+      if(dto.ParentType == ParentCommentType.BreakdownItem)
+      {
+        comment.ParentBreakdownItemID = dto.ParentID;
+      }
+      if(dto.ParentType == ParentCommentType.Character)
+      {
+        comment.ParentCharacterID = dto.ParentID;
+      }
+      if(dto.ParentType == ParentCommentType.Comment)
+      {
+        comment.ParentCommentID = dto.ParentID;
+      }
+      if(dto.ParentType == ParentCommentType.Image)
+      {
+        comment.ParentImageID = dto.ParentID;
+      }
+      if(dto.ParentType == ParentCommentType.Location)
+      {
+        comment.ParentLocationID = dto.ParentID;
+      }
+      if(dto.ParentType == ParentCommentType.Project)
+      {
+        comment.ParentProjectID = dto.ParentID;
+      }
+      if(dto.ParentType == ParentCommentType.Scene)
+      {
+        comment.ParentSceneID = dto.ParentID;
+      }
+      if(dto.ParentType == ParentCommentType.ScriptLocation)
+      {
+        comment.ParentScriptLocationID = dto.ParentID;
+      }
+      if(dto.ParentType == ParentCommentType.Slate)
+      {
+        comment.ParentSlateID = dto.ParentID;
+      }
+      if(dto.ParentType == ParentCommentType.Take)
+      {
+        comment.ParentTakeID = dto.ParentID;
+      }
 
       _commentRepository.Add(comment);
       _commentRepository.Commit();

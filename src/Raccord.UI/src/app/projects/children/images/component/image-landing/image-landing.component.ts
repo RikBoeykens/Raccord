@@ -20,6 +20,9 @@ import { SelectedEntity } from '../../../../../shared/model/selected-entity.mode
 import { LinkedSlate } from "../../../shots/slates/model/linked-slate.model";
 import { LinkedBreakdownItem } from '../../../breakdowns/children/breakdown-items/model/linked-breakdown-item.model';
 import { LoadingWrapperService } from '../../../../../shared/service/loading-wrapper.service';
+import { AccountHelpers } from '../../../../../account/helpers/account.helper';
+import { ProjectPermissionEnum } from '../../../../../shared/children/users/project-roles/enums/project-permission.enum';
+import { ParentCommentType } from '../../../../../shared/enums/parent-comment-type.enum';
 
 @Component({
     templateUrl: 'image-landing.component.html',
@@ -294,5 +297,16 @@ export class ImageLandingComponent {
         .then(()=>
             this._loadingService.endLoading(loadingId)
         );
+    }
+
+    public getCanComment() {
+        return AccountHelpers.hasProjectPermission(
+            this.project.id,
+            ProjectPermissionEnum.CanComment
+        );
+    }
+
+    public getParentCommentType() {
+        return ParentCommentType.image;
     }
 }

@@ -11,7 +11,7 @@
         <a class="comment-action" *ngIf="canEdit()" (click)="removeComment()">remove</a>
     </div>
     <div class="child-comments">
-        <edit-comment *ngIf="showAddComment" [parentCommentId]="comment.id" [projectId]="projectId" (submittedComment)="commentAdded($event)"></edit-comment>
+        <edit-comment *ngIf="showAddComment" [parentId]="comment.id" [parentType]="getCommentType()" [projectId]="projectId" (submittedComment)="commentAdded($event)"></edit-comment>
         <show-comment *ngFor="let childComment of childComments" [comment]="childComment" (removedComment)="onRemovedChildComment()" [projectId]="projectId"></show-comment>
     </div>
 </div>
