@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace Raccord.Application.Core.Common.Location
 {
     public class AddressDto
@@ -10,5 +12,13 @@ namespace Raccord.Application.Core.Common.Location
         public string Address3 { get; set; }
         // Address 4
         public string Address4 { get; set; }
+
+        public string GetAddressString
+        {
+            get
+            {
+                return $"{Address1}, {Address2}, {Address3}, {Address4}";
+            }
+        }
     }
 }

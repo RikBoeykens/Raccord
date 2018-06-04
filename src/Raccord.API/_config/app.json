@@ -18,5 +18,9 @@
   },
   "UISettings":{
     "Uri": "http://localhost:3000"
+  },
+  "GeocodingSettings":{
+    "Uri": "https://maps.googleapis.com/maps/api/geocode/json",
+    "ApiKey": "AIzaSyAHVRCUkTtP9FDacHfHoEJDeWQu0sRA7-U"
   }
 }

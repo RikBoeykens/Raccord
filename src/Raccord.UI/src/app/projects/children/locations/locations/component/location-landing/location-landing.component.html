@@ -10,7 +10,10 @@
 </md-card>
 <md-tab-group>
     <md-tab label="Overview">
-        <agm-map *ngIf="viewLocation.latLng.hasLatLng" [fitBounds]="bounds">
+        <button md-raised-button (click)="showAddLatLng()"><md-icon>public</md-icon>Find on map</button>
+        <agm-map *ngIf="viewLocation.latLng.hasLatLng" 
+                [fitBounds]="bounds"
+                #AgmMap>
             <agm-marker 
                         [latitude]="viewLocation.latLng.latitude" 
                         [longitude]="viewLocation.latLng.longitude"

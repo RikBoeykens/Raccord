@@ -12,6 +12,8 @@ export class LatLng {
             this.latitude = obj.latitude;
             this.longitude = obj.longitude;
             this.hasLatLng = obj.hasLatLng;
+        } else {
+            this.hasLatLng = false;
         }
     }
 }

@@ -148,6 +148,8 @@ using Raccord.Application.Core.Services.Users.Invitations;
 using Raccord.Application.Services.Users.Invitations.Project;
 using Raccord.Application.Core.Services.Users.Invitations.Project;
 using Raccord.Application.Services.Users.Invitations;
+using Raccord.Application.Core.ExternalServices.Location;
+using Raccord.Application.ExternalServices.Location;
 
 namespace Raccord.API
 {
@@ -342,6 +344,7 @@ namespace Raccord.API
         private static void ConfigureExternalService(IServiceCollection services)
         {
             services.AddTransient<ISendMailService, SendMailService>();
+            services.AddTransient<IGeocodingService, GeocodingService>();
         }
     }
 }
