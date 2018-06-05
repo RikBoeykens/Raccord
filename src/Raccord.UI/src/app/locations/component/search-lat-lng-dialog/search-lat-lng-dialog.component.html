@@ -4,7 +4,7 @@
 <md-dialog-content>
     <div fxLayout="row">
         <md-input-container fxFlex="100%">
-            <input mdInput placeholder="Search" id="location_search" (change)="getLatLng()" [(ngModel)]="address.address1" #search="ngModel" name="location_search">
+            <input mdInput placeholder="Search" id="location_search" (change)="getLatLng()" [(ngModel)]="searchText" #search="ngModel" name="location_search">
         </md-input-container>
     </div>
     <div fxLayout="row"
@@ -13,7 +13,7 @@
     </div>
     <div *ngIf="!loading">
         <div fxLayout="row"
-            *ngIf="!results.length">
+            *ngIf="!results.length && performedSearch">
             no results found
         </div>
         <div fxLayout="row"
@@ -22,19 +22,19 @@
                 <md-radio-button [value]="result.latLng" *ngFor="let result of results">{{result.formattedAddress}}</md-radio-button>
             </md-radio-group>
         </div>
-        <agm-map [latitude]="viewLatLng.latitude"
-            [longitude]="viewLatLng.longitude"
-            [usePanning]="true"
-            [zoom]="zoom"
-            *ngIf="viewLatLng.hasLatLng">
-            <agm-marker 
-                [latitude]="viewLatLng.latitude"
-                [longitude]="viewLatLng.longitude"
-                [markerDraggable]="true"
-                (dragEnd)="markerDragEnd(m, $event)">
-            </agm-marker>
-        </agm-map>
     </div>
+    <agm-map [latitude]="viewLatLng.latitude"
+        [longitude]="viewLatLng.longitude"
+        [usePanning]="true"
+        [zoom]="zoom"
+        *ngIf="viewLatLng.hasLatLng">
+        <agm-marker 
+            [latitude]="viewLatLng.latitude"
+            [longitude]="viewLatLng.longitude"
+            [markerDraggable]="true"
+            (dragEnd)="markerDragEnd(m, $event)">
+        </agm-marker>
+    </agm-map>
 </md-dialog-content>
 <md-dialog-actions>
     <button md-button md-dialog-close>Cancel</button>

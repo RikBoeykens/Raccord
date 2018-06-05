@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -20,6 +21,18 @@ namespace Raccord.API.Controllers
             ): base(userManager)
         {
             _geocodingService = geocodingService;
+        }
+
+        // api/geocoding
+        [HttpGet("{searchText}")]
+        public IEnumerable<GeocodeResponseViewModel> Get([FromRoute]string searchText)
+        {
+            if(string.IsNullOrEmpty(searchText))
+            {
+                return new List<GeocodeResponseViewModel>();
+            }
+            var results = _geocodingService.GetLatLng(searchText);
+            return results.Select(r=> r.Translate());
         }
 
         // api/geocoding

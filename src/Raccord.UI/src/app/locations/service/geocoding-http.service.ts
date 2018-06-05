@@ -15,7 +15,13 @@ export class GeocodingHttpService extends BaseHttpService {
         this._baseUri = `${AppSettings.API_ENDPOINT}/geocoding`;
     }
 
-    public getLatLng(request: Address): Promise<GeocodingResponse[]> {
+    public getLatLng(searchText: string): Promise<GeocodingResponse[] | void> {
+      let uri = `${this._baseUri}/${searchText}`;
+
+      return this.doGetArray(uri, false);
+    }
+
+    public getLatLngByAddress(request: Address): Promise<GeocodingResponse[]> {
       let uri = this._baseUri;
 
       return this.doPost(request, uri, false);

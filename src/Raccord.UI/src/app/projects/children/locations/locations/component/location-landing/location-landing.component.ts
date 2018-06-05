@@ -65,7 +65,7 @@ export class LocationLandingComponent implements OnInit {
         );
     }
 
-    updateLocation(){
+    public updateLocation() {
         let loadingId = this._loadingService.startLoading();
 
         this._locationHttpService.post(this.viewLocation).then(data=>{
@@ -108,12 +108,20 @@ export class LocationLandingComponent implements OnInit {
     }
 
     public showAddLatLng() {
-        let findLatLngAddress = new Address();
-        findLatLngAddress.address1 = this.getAddressString(this.location.address);
+        this.showLatLngDialog({
+            searchText: this.getAddressString(this.location.address)
+        });
+    }
+
+    public showUpdateLatLng() {
+        this.showLatLngDialog({
+            latLng: this.viewLocation.latLng
+        });
+    }
+
+    private showLatLngDialog(data: any) {
         let addProjectDialog = this._dialog.open(SearchLatLngDialogComponent, {
-            data: {
-                address: findLatLngAddress
-            },
+            data,
             width: SearchLatLngDialogComponent.width
         });
         addProjectDialog.afterClosed().subscribe((chosenLatLng: LatLng) => {

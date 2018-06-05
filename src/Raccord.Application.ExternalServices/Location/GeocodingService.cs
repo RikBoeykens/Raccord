@@ -22,7 +22,15 @@ namespace Raccord.Application.ExternalServices.Location
     public IEnumerable<GeocodeResponseDto> GetLatLng(AddressDto requestDto)
     {
       var client = GetRestClient();
-      var request = GetRequest(requestDto);
+      var request = GetRequest(requestDto.GetAddressString);
+      var response = client.Execute(request);
+      return ParseResponse(response);
+    }
+
+    public IEnumerable<GeocodeResponseDto> GetLatLng(string searchText)
+    {
+      var client = GetRestClient();
+      var request = GetRequest(searchText);
       var response = client.Execute(request);
       return ParseResponse(response);
     }
@@ -34,11 +42,11 @@ namespace Raccord.Application.ExternalServices.Location
       return client;
     }
 
-    private RestRequest GetRequest(AddressDto address)
+    private RestRequest GetRequest(string searchText)
     {
       RestRequest request = new RestRequest ();
       request.AddParameter ("key", _geocodingSettings.ApiKey);
-      request.AddParameter ("address", address.GetAddressString);
+      request.AddParameter ("address", searchText);
       request.Method = Method.GET;
       return request;
     }

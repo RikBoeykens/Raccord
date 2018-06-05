@@ -16,8 +16,9 @@ export class SearchLatLngDialogComponent implements OnInit {
     public static width: string = '600px';
     public zoom: number = AppSettings.MAP_DEFAULT_ZOOM;
 
-    public address: Address;
+    public searchText: string;
     public results: GeocodingResponse[] = [];
+    public performedSearch: boolean = false;
     public loading: Boolean = false;
     public viewLatLng: LatLng = new LatLng();
     public selectedLatLng: LatLng = new LatLng();
@@ -27,10 +28,14 @@ export class SearchLatLngDialogComponent implements OnInit {
         private _geocodingHttpService: GeocodingHttpService,
         private _loadingWrapperService: LoadingWrapperService,
         @Inject(MD_DIALOG_DATA) private data: {
-            address: Address
+            searchText: string,
+            latLng?: LatLng
         }
     ) {
-        this.address = data.address;
+        this.searchText = data.searchText;
+        if (data.latLng) {
+            this.setLatLng(data.latLng);
+        }
     }
 
     public ngOnInit() {
@@ -38,17 +43,23 @@ export class SearchLatLngDialogComponent implements OnInit {
     }
 
     public getLatLng() {
-        if (this.address && this.address.address1 !== '') {
+        if (this.searchText && this.searchText !== '') {
             this.loading = true;
-            this._geocodingHttpService.getLatLng(this.address).then((data: GeocodingResponse[]) => {
+            this._geocodingHttpService.getLatLng(this.searchText)
+            .then((data: GeocodingResponse[]) => {
+                this.performedSearch = true;
                 this.results = data;
-                if (data) {
-                    this.selectedLatLng = data[0].latLng;
-                    this.viewLatLng = data[0].latLng;
+                if (data && !this.selectedLatLng) {
+                    this.setLatLng(data[0].latLng);
                 }
                 this.loading = false;
             });
         }
+    }
+
+    public setLatLng(latLng) {
+        this.selectedLatLng = latLng;
+        this.viewLatLng = latLng;
     }
 
     public markerDragEnd(m: any, $event: any) {
