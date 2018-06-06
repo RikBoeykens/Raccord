@@ -213,6 +213,12 @@ import {
 import {
   CreateUserFromInvitationComponent
 } from './invitations';
+import {
+  SearchLatLngDialogComponent
+} from './locations';
+import {
+  WeatherInfoComponent
+} from './weather';
 
 const COMPONENTS = [
   AppComponent,
@@ -363,7 +369,8 @@ const COMPONENTS = [
   CalendarComponent,
   CalendarHeaderComponent,
   ErrorComponent,
-  CreateUserFromInvitationComponent
+  CreateUserFromInvitationComponent,
+  WeatherInfoComponent
 ];
 
 const ENTRY_COMPONENTS = [
@@ -382,7 +389,8 @@ const ENTRY_COMPONENTS = [
   AdminAddUserInvitationDialogComponent,
   AdminChooseProjectDialogComponent,
   EditBreakdownTypeDialogComponent,
-  EditCastMemberDialogComponent
+  EditCastMemberDialogComponent,
+  SearchLatLngDialogComponent
 ];
 
 // Services
@@ -558,6 +566,9 @@ import {
   InvitationHttpService,
   InvitationResolve
 } from './invitations';
+import {
+  GeocodingHttpService
+} from './locations';
 
 const APP_PROVIDERS = [
   AuthService,
@@ -705,7 +716,8 @@ const APP_PROVIDERS = [
   ProjectCalendarHttpService,
   CalendarHttpService,
   InvitationHttpService,
-  InvitationResolve
+  InvitationResolve,
+  GeocodingHttpService
 ];
 
 // Directives

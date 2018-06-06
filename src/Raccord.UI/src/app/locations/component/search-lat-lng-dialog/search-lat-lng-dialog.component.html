@@ -1,0 +1,42 @@
+<h1 md-dialog-title>
+    Search On Map
+</h1>
+<md-dialog-content>
+    <div fxLayout="row">
+        <md-input-container fxFlex="100%">
+            <input mdInput placeholder="Search" id="location_search" (change)="getLatLng()" [(ngModel)]="searchText" #search="ngModel" name="location_search">
+        </md-input-container>
+    </div>
+    <div fxLayout="row"
+        *ngIf="loading">
+        <md-spinner></md-spinner>
+    </div>
+    <div *ngIf="!loading">
+        <div fxLayout="row"
+            *ngIf="!results.length && performedSearch">
+            no results found
+        </div>
+        <div fxLayout="row"
+            *ngIf="results.length">
+            <md-radio-group class="raccord-radio-group" [(ngModel)]="selectedLatLng" (change)="selectLatLng()">
+                <md-radio-button [value]="result.latLng" *ngFor="let result of results">{{result.formattedAddress}}</md-radio-button>
+            </md-radio-group>
+        </div>
+    </div>
+    <agm-map [latitude]="viewLatLng.latitude"
+        [longitude]="viewLatLng.longitude"
+        [usePanning]="true"
+        [zoom]="zoom"
+        *ngIf="viewLatLng.hasLatLng">
+        <agm-marker 
+            [latitude]="viewLatLng.latitude"
+            [longitude]="viewLatLng.longitude"
+            [markerDraggable]="true"
+            (dragEnd)="markerDragEnd(m, $event)">
+        </agm-marker>
+    </agm-map>
+</md-dialog-content>
+<md-dialog-actions>
+    <button md-button md-dialog-close>Cancel</button>
+    <button md-button (click)="submit()">Save</button>
+</md-dialog-actions>

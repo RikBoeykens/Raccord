@@ -17,14 +17,14 @@ namespace Raccord.Data.EntityFramework.Repositories.ShootingDays
         {
             var query = GetIncludedSummary();
 
-            return query.Where(d=> d.CrewUnitID == crewUnitID);
+            return query.Where(d=> d.CrewUnitID == crewUnitID).OrderBy(sd => sd.Date);
         }
 
         public IEnumerable<ShootingDay> GetAllForProject(long projectID)
         {
             var query = GetIncludedProject();
 
-            return query.Where(d=> d.CrewUnit.ProjectID == projectID);
+            return query.Where(d=> d.CrewUnit.ProjectID == projectID).OrderBy(sd => sd.Date);
         }
 
         public IEnumerable<ShootingDay> GetAllBeforeDate(long crewUnitID, DateTime date)

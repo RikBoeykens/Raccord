@@ -104,5 +104,11 @@ namespace Raccord.Application.Services.Locations.LocationSets
 
             return dto;
         }
+
+        public static bool HasLatLng(this LocationSet locationSet)
+        {
+            if (locationSet==null) return false;
+            return locationSet.Latitude.HasValue && locationSet.Longitude.HasValue;
+        }
     }
 }

@@ -5,6 +5,7 @@ import { CallsheetCharacterCharacter } from '../';
 import { CallsheetLocation } from '../../locations/locations/model/callsheet-location.model';
 import { CallsheetBreakdown } from '../../breakdowns/model/callsheet-breakdown.model';
 import { CrewUnit } from '../../crew/crew-units/model/crew-unit.model';
+import { WeatherInfo } from '../../../../weather/model/weather-info.model';
 
 export class FullCallsheet extends BaseCallsheet {
     public scenes: CallsheetSceneScene[];
@@ -12,6 +13,7 @@ export class FullCallsheet extends BaseCallsheet {
     public locations: CallsheetLocation[];
     public breakdownInfo: CallsheetBreakdown;
     public crewUnit: CrewUnit;
+    public weatherInfo: WeatherInfo;
 
     constructor(obj?: {
                         id: number,
@@ -23,7 +25,8 @@ export class FullCallsheet extends BaseCallsheet {
                         characters: CallsheetCharacterCharacter[],
                         crewUnit: CrewUnit,
                         locations: CallsheetLocation[],
-                        breakdownInfo: CallsheetBreakdown
+                        breakdownInfo: CallsheetBreakdown,
+                        weatherInfo: WeatherInfo
                     }) {
         super(obj);
         if (obj) {
@@ -32,6 +35,7 @@ export class FullCallsheet extends BaseCallsheet {
             this.locations = obj.locations;
             this.breakdownInfo = obj.breakdownInfo;
             this.crewUnit = obj.crewUnit;
+            this.weatherInfo = obj.weatherInfo;
         }
     }
 }

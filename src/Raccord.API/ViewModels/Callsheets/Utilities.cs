@@ -5,6 +5,7 @@ using Raccord.API.ViewModels.Callsheets.Characters;
 using Raccord.API.ViewModels.Crew.CrewUnits;
 using Raccord.API.ViewModels.Locations.Locations;
 using Raccord.API.ViewModels.ShootingDays;
+using Raccord.API.ViewModels.Weather;
 using Raccord.Application.Core.Services.Callsheets;
 
 namespace Raccord.API.ViewModels.Callsheets
@@ -25,6 +26,7 @@ namespace Raccord.API.ViewModels.Callsheets
                 Characters = dto.Characters.Select(c=> c.Translate()),
                 Locations = dto.Locations.Select(l=> l.Translate()),
                 BreakdownInfo = dto.BreakdownInfo.Translate(),
+                WeatherInfo = dto.WeatherInfo.Translate()
             };
         }
         public static CallsheetSummaryViewModel Translate(this CallsheetSummaryDto dto)

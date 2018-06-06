@@ -17,7 +17,9 @@
       <div>
           Location: <a routerLink="/projects/{{project.id}}/locations/{{locationSet.location.id}}">{{locationSet.location.name}}</a>
       </div>
-      <agm-map *ngIf="locationSet.location.latLng.hasLatLng && locationSet.latLng.hasLatLng" [fitBounds]="bounds">
+      <button md-raised-button *ngIf="locationSet.location.latLng.hasLatLng && !locationSet.latLng.hasLatLng" (click)="showAddLatLng()"><md-icon>public</md-icon>Set on map</button>
+      <button md-raised-button *ngIf="locationSet.location.latLng.hasLatLng && locationSet.latLng.hasLatLng" (click)="showUpdateLatLng()"><md-icon>public</md-icon>Update Coordinates</button>
+      <agm-map *ngIf="locationSet.location.latLng.hasLatLng" [fitBounds]="bounds">
           <agm-marker 
                     [latitude]="locationSet.location.latLng.latitude" 
                     [longitude]="locationSet.location.latLng.longitude"
@@ -29,7 +31,8 @@
           <agm-marker 
                     [latitude]="locationSet.latLng.latitude" 
                     [longitude]="locationSet.latLng.longitude"
-                    [label]="'S'">
+                    [label]="'S'"
+                    *ngIf="locationSet.latLng.hasLatLng">
             <agm-info-window>
                 Set: {{locationSet.name}}
             </agm-info-window>

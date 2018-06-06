@@ -252,3 +252,8 @@ $placeholder-font-size: 20px;
     background-color: mat-color($accent);
   }
 }
+
+.raccord-radio-group {
+  display: inline-flex;
+  flex-direction: column;
+}

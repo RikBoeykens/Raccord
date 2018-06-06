@@ -4,6 +4,7 @@ using Raccord.API.ViewModels.Callsheets.CallsheetScenes;
 using Raccord.API.ViewModels.Callsheets.Characters;
 using Raccord.API.ViewModels.Crew.CrewUnits;
 using Raccord.API.ViewModels.Locations.Locations;
+using Raccord.API.ViewModels.Weather;
 
 namespace Raccord.API.ViewModels.Callsheets
 {
@@ -78,5 +79,6 @@ namespace Raccord.API.ViewModels.Callsheets
                 _crewUnit = value;
             }
         }
+        public WeatherInfoViewModel WeatherInfo { get; set; }
     }
 }

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { LocationHttpService } from '../../service/location-http.service';
 import { LoadingService } from '../../../../../../loading/service/loading.service';
@@ -10,14 +10,20 @@ import { AppSettings } from '../../../../../../app.settings';
 import { LocationSetScriptLocation } from '../../../index';
 import { MapsHelpers } from '../../../../../../shared/helpers/maps.helpers';
 import { AccountHelpers } from '../../../../../../account/helpers/account.helper';
-import { ProjectPermissionEnum } from '../../../../../../shared/children/users/project-roles/enums/project-permission.enum';
+import { ProjectPermissionEnum }
+    from '../../../../../../shared/children/users/project-roles/enums/project-permission.enum';
 import { LoadingWrapperService } from '../../../../../../shared/service/loading-wrapper.service';
 import { ParentCommentType } from '../../../../../../shared/enums/parent-comment-type.enum';
+import { MdDialog } from '@angular/material';
+import { SearchLatLngDialogComponent } from '../../../../../../locations';
+import { Address, LatLng } from '../../../../../../shared';
+import { AgmMap } from '@agm/core';
 
 @Component({
     templateUrl: 'location-landing.component.html',
 })
-export class LocationLandingComponent {
+export class LocationLandingComponent implements OnInit {
+    @ViewChild('AgmMap') public agmMap: any;
 
     location: FullLocation;
     viewLocation: Location;
@@ -31,31 +37,35 @@ export class LocationLandingComponent {
         private _loadingWrapperService: LoadingWrapperService,
         private _loadingService: LoadingService,
         private _dialogService: DialogService,
+        private _dialog: MdDialog,
         private _route: ActivatedRoute,
         private _router: Router
-    ){
+    ) {
     }
 
-    ngOnInit() {
+    public ngOnInit() {
         this._route.data.subscribe((data: { location: FullLocation, project: ProjectSummary }) => {
-            this.location = data.location;
-            this.viewLocation = new Location(data.location);
-            this.setBounds();
+            this.setLocation(data.location);
             this.project = data.project;
         });
     }
 
-    getLocation(){
+    public setLocation(location) {
+        this.location = location;
+        this.viewLocation = new Location(location);
+        this.setBounds();
+    }
+
+    public getLocation() {
         this._loadingWrapperService.Load(
             this._locationHttpService.get(this.location.id),
             (data) => {
-                this.location = data;
-                this.viewLocation = new Location(data);
+                this.setLocation(data);
             }
         );
     }
 
-    updateLocation(){
+    public updateLocation() {
         let loadingId = this._loadingService.startLoading();
 
         this._locationHttpService.post(this.viewLocation).then(data=>{
@@ -95,5 +105,47 @@ export class LocationLandingComponent {
 
     public getParentCommentType() {
         return ParentCommentType.location;
+    }
+
+    public showAddLatLng() {
+        this.showLatLngDialog({
+            searchText: this.getAddressString(this.location.address)
+        });
+    }
+
+    public showUpdateLatLng() {
+        this.showLatLngDialog({
+            latLng: this.viewLocation.latLng
+        });
+    }
+
+    private showLatLngDialog(data: any) {
+        let addProjectDialog = this._dialog.open(SearchLatLngDialogComponent, {
+            data,
+            width: SearchLatLngDialogComponent.width
+        });
+        addProjectDialog.afterClosed().subscribe((chosenLatLng: LatLng) => {
+            if (chosenLatLng) {
+                this.viewLocation.latLng = chosenLatLng;
+                this.updateLocation();
+            }
+        });
+    }
+
+    private getAddressString(address: Address) {
+        let result = '';
+        if (address.address1) {
+            result += ` ${address.address1}`;
+        }
+        if (address.address2) {
+            result += ` ${address.address2}`;
+        }
+        if (address.address3) {
+            result += ` ${address.address3}`;
+        }
+        if (address.address4) {
+            result += ` ${address.address4}`;
+        }
+        return result;
     }
 }

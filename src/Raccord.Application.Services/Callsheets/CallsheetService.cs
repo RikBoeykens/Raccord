@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Raccord.Application.Core.ExternalServices.Weather;
 using Raccord.Application.Core.Services.Callsheets;
 using Raccord.Data.EntityFramework.Repositories.Breakdowns;
 using Raccord.Data.EntityFramework.Repositories.Callsheets;
@@ -22,6 +23,7 @@ namespace Raccord.Application.Services.Callsheets
         private readonly IScheduleDayRepository _scheduleDayRepository;
         private readonly ICallsheetSceneCharacterRepository _callsheetSceneCharacterRepository;
         private readonly IBreakdownRepository _breakdownRepository;
+        private readonly IWeatherService _weatherService;
 
         // Initialises a new CharacterService
         public CallsheetService(
@@ -29,25 +31,16 @@ namespace Raccord.Application.Services.Callsheets
             IShootingDayRepository shootingDayRepository,
             IScheduleDayRepository scheduleDayRepository,
             ICallsheetSceneCharacterRepository callsheetSceneCharacterRepository,
-            IBreakdownRepository breakdownRepository
+            IBreakdownRepository breakdownRepository,
+            IWeatherService weatherService
             )
         {
-            if(callsheetRepository == null)
-                throw new ArgumentNullException(nameof(callsheetRepository));
-            if(shootingDayRepository == null)
-                throw new ArgumentNullException(nameof(shootingDayRepository));
-            if(scheduleDayRepository == null)
-                throw new ArgumentNullException(nameof(scheduleDayRepository));
-            if(callsheetSceneCharacterRepository == null)
-                throw new ArgumentNullException(nameof(callsheetSceneCharacterRepository));
-            if(breakdownRepository == null)
-                throw new ArgumentNullException(nameof(breakdownRepository));
-            
             _callsheetRepository = callsheetRepository;
             _shootingDayRepository = shootingDayRepository;
             _scheduleDayRepository = scheduleDayRepository;
             _callsheetSceneCharacterRepository = callsheetSceneCharacterRepository;
             _breakdownRepository = breakdownRepository;
+            _weatherService = weatherService;
         }
 
         // Gets all callsheets for a crew unit
@@ -77,7 +70,13 @@ namespace Raccord.Application.Services.Callsheets
 
             var breakdown = _breakdownRepository.GetForProjectUser(callsheet.CrewUnitID, userID);
 
-            var dto = callsheet.TranslateFull(breakdown);
+            var latLng = callsheet.GetFirstLatLng();
+            var weatherInfo = (latLng != null && latLng.HasLatLng) ?  _weatherService.GetWeatherInfo(new WeatherRequestDto
+            {
+                LatLng = latLng,
+                Date = callsheet.ShootingDay.Date
+            }) : null;
+            var dto = callsheet.TranslateFull(breakdown, weatherInfo);
 
             return dto;
         }

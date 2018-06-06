@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { LocationSetHttpService } from '../../service/location-set-http.service';
 import { LoadingService } from '../../../../../../loading/service/loading.service';
@@ -9,18 +9,22 @@ import { ProjectSummary } from '../../../../../model/project-summary.model';
 import { AppSettings } from '../../../../../../app.settings';
 import { MapsHelpers } from '../../../../../../shared/helpers/maps.helpers';
 import { AccountHelpers } from '../../../../../../account/helpers/account.helper';
-import { ProjectPermissionEnum } from '../../../../../../shared/children/users/project-roles/enums/project-permission.enum';
+import { ProjectPermissionEnum } from
+    '../../../../../../shared/children/users/project-roles/enums/project-permission.enum';
 import { LoadingWrapperService } from '../../../../../../shared/service/loading-wrapper.service';
+import { MdDialog } from '@angular/material';
+import { SearchLatLngDialogComponent } from '../../../../../../locations/component/search-lat-lng-dialog/search-lat-lng-dialog.component';
+import { LatLng } from '../../../../../../shared/model/lat-lng.model';
 
 @Component({
     templateUrl: 'location-set-landing.component.html',
 })
-export class LocationSetLandingComponent {
+export class LocationSetLandingComponent implements OnInit {
 
-    locationSet: FullLocationSet;
-    viewLocationSet: LocationSet;
-    project: ProjectSummary;
-    bounds: any;
+    public locationSet: FullLocationSet;
+    public viewLocationSet: LocationSet;
+    public project: ProjectSummary;
+    public bounds: any;
 
     constructor(
         private _locationHttpService: LocationSetHttpService,
@@ -28,12 +32,16 @@ export class LocationSetLandingComponent {
         private _loadingService: LoadingService,
         private _dialogService: DialogService,
         private _route: ActivatedRoute,
-        private _router: Router
-    ){
+        private _router: Router,
+        private _dialog: MdDialog
+    ) {
     }
 
-    ngOnInit() {
-        this._route.data.subscribe((data: { locationSet: FullLocationSet, project: ProjectSummary }) => {
+    public ngOnInit() {
+        this._route.data.subscribe((data: {
+            locationSet: FullLocationSet,
+            project: ProjectSummary
+        }) => {
             this.locationSet = data.locationSet;
             this.viewLocationSet = new LocationSet({
                 id: data.locationSet.id, 
@@ -48,7 +56,7 @@ export class LocationSetLandingComponent {
         });
     }
 
-    getLocationSet(){
+    public getLocationSet() {
         this._loadingWrapperService.Load(
             this._locationHttpService.get(this.locationSet.id),
             (data) => {
@@ -61,28 +69,26 @@ export class LocationSetLandingComponent {
                     locationId: data.location.id,
                     scriptLocationId: data.scriptLocation.id
                 });
+                this.setBounds();
             }
         );
     }
 
-    updateLocationSet(){
-        let loadingId = this._loadingService.startLoading();
-
-        this._locationHttpService.post(this.viewLocationSet).then(data=>{
-            if(typeof(data)=='string'){
-                this._dialogService.error(data);
-            }else{
-                this.getLocationSet();
-            }
-        }).catch()
-        .then(()=>
-            this._loadingService.endLoading(loadingId)
+    public updateLocationSet() {
+        this._loadingWrapperService.Load(
+            this._locationHttpService.post(this.viewLocationSet),
+            (data) => this.getLocationSet()
         );
     }
-    
-    public setBounds(){
-        if(this.locationSet.location.latLng.hasLatLng && this.locationSet.latLng.hasLatLng){
-            this.bounds = MapsHelpers.getBounds([this.locationSet.location.latLng, this.locationSet.latLng]);
+
+    public setBounds() {
+        if (this.locationSet.location.latLng.hasLatLng) {
+            let markers = [this.locationSet.location.latLng];
+            if (this.locationSet.latLng.hasLatLng) {
+                markers.push(this.locationSet.latLng);
+            }
+            this.bounds =
+                MapsHelpers.getBounds(markers);
         }
     }
 
@@ -91,5 +97,30 @@ export class LocationSetLandingComponent {
             this.project.id,
             ProjectPermissionEnum.canEditGeneral
         );
+    }
+
+    public showAddLatLng() {
+        this.showLatLngDialog({
+            latLng: this.locationSet.location.latLng
+        });
+    }
+
+    public showUpdateLatLng() {
+        this.showLatLngDialog({
+            latLng: this.locationSet.latLng
+        });
+    }
+
+    private showLatLngDialog(data: any) {
+        let addProjectDialog = this._dialog.open(SearchLatLngDialogComponent, {
+            data,
+            width: SearchLatLngDialogComponent.width
+        });
+        addProjectDialog.afterClosed().subscribe((chosenLatLng: LatLng) => {
+            if (chosenLatLng) {
+                this.viewLocationSet.latLng = chosenLatLng;
+                this.updateLocationSet();
+            }
+        });
     }
 }

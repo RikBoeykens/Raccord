@@ -8,6 +8,7 @@ using Raccord.Application.Core.Services.Locations.Locations;
 using Raccord.Application.Core.Services.Breakdowns.BreakdownTypes;
 using Raccord.Application.Core.Services.Breakdowns;
 using Raccord.Application.Core.Services.Crew.CrewUnits;
+using Raccord.Application.Core.ExternalServices.Weather;
 
 namespace Raccord.Application.Core.Services.Callsheets
 {
@@ -82,5 +83,7 @@ namespace Raccord.Application.Core.Services.Callsheets
                 _crewUnit = value;
             }
         }
+
+        public WeatherInfoDto WeatherInfo { get; set; }
     }
 }
