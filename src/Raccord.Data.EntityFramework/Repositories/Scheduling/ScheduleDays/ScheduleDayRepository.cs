@@ -16,14 +16,14 @@ namespace Raccord.Data.EntityFramework.Repositories.Scheduling.ScheduleDays
         {
             var query = GetIncludedFull();
 
-            return query.Where(sd=> sd.CrewUnitID == crewUnitID);
+            return query.Where(sd=> sd.CrewUnitID == crewUnitID).OrderBy(sd => sd.Date);
         }
 
         public IEnumerable<ScheduleDay> GetAllWithScenesForCrewUnit(long crewUnitID)
         {
             var query = GetIncludedSummary();
 
-            return query.Where(sd=> sd.CrewUnitID == crewUnitID && sd.ScheduleScenes.Any());
+            return query.Where(sd=> sd.CrewUnitID == crewUnitID && sd.ScheduleScenes.Any()).OrderBy(sd => sd.Date);
         }
 
         public IEnumerable<ScheduleDay> GetAllForCharacters(long[] characterIds)

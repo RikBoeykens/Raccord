@@ -19,6 +19,12 @@
         <a [routerLink]="['wizard', 4]">Edit</a>
     </md-card-footer>
 </md-card>
+<md-card *ngIf="callsheet.weatherInfo">
+    <md-card-title>Weather</md-card-title>
+    <md-card-content>
+        <weather-info [weatherInfo]="callsheet.weatherInfo"></weather-info>
+    </md-card-content>
+</md-card>
 <md-card>
     <md-card-title>Locations</md-card-title>
     <md-card-content>

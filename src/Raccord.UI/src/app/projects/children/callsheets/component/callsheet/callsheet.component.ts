@@ -56,10 +56,11 @@ export class CallsheetComponent implements OnInit {
     public setBounds() {
         this.markerLocations = this.callsheet.locations.filter((l) => l.latLng.hasLatLng);
         this.markerLocations.forEach((location) => {
-            this.markerLocationSets = this.markerLocationSets.concat(location.sets);
+            this.markerLocationSets =
+                this.markerLocationSets.concat(location.sets.filter((l) => l.latLng.hasLatLng));
         });
         if (this.markerLocations.length || this.markerLocationSets.length) {
-            let latLngs = this.markerLocations.map((location)=> location.latLng);
+            let latLngs = this.markerLocations.map((location) => location.latLng);
             latLngs =
                 latLngs.concat(this.markerLocationSets.map((locationSet) => locationSet.latLng));
             this.bounds = MapsHelpers.getBounds(latLngs);

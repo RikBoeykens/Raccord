@@ -150,6 +150,8 @@ using Raccord.Application.Core.Services.Users.Invitations.Project;
 using Raccord.Application.Services.Users.Invitations;
 using Raccord.Application.Core.ExternalServices.Location;
 using Raccord.Application.ExternalServices.Location;
+using Raccord.Application.Core.ExternalServices.Weather;
+using Raccord.Application.ExternalServices.Weather;
 
 namespace Raccord.API
 {
@@ -345,6 +347,7 @@ namespace Raccord.API
         {
             services.AddTransient<ISendMailService, SendMailService>();
             services.AddTransient<IGeocodingService, GeocodingService>();
+            services.AddTransient<IWeatherService, WeatherService>();
         }
     }
 }

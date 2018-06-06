@@ -22,5 +22,9 @@
   "GeocodingSettings":{
     "Uri": "https://maps.googleapis.com/maps/api/geocode/json",
     "ApiKey": "AIzaSyAHVRCUkTtP9FDacHfHoEJDeWQu0sRA7-U"
+  },
+  "WeatherSettings":{
+    "Uri": "https://api.darksky.net/forecast",
+    "ApiKey": "0b8f22e04a4d110e7b17cf5aa760de39"
   }
 }

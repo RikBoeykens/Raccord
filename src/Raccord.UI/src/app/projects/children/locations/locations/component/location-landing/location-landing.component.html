@@ -10,8 +10,8 @@
 </md-card>
 <md-tab-group>
     <md-tab label="Overview">
-        <button md-raised-button *ngIf="!viewLocation.latLng" (click)="showAddLatLng()"><md-icon>public</md-icon>Find on map</button>
-        <button md-raised-button *ngIf="viewLocation.latLng" (click)="showUpdateLatLng()"><md-icon>public</md-icon>Update Coordinates</button>
+        <button md-raised-button *ngIf="!viewLocation.latLng.hasLatLng" (click)="showAddLatLng()"><md-icon>public</md-icon>Find on map</button>
+        <button md-raised-button *ngIf="viewLocation.latLng.hasLatLng" (click)="showUpdateLatLng()"><md-icon>public</md-icon>Update Coordinates</button>
         <agm-map *ngIf="viewLocation.latLng.hasLatLng" 
                 [fitBounds]="bounds"
                 #AgmMap>

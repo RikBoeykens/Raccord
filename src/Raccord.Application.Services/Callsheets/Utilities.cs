@@ -1,5 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
+using Raccord.Application.Core.Common.Location;
+using Raccord.Application.Core.ExternalServices.Weather;
 using Raccord.Application.Core.Services.Breakdowns;
 using Raccord.Application.Core.Services.Breakdowns.BreakdownItemScenes;
 using Raccord.Application.Core.Services.Breakdowns.BreakdownTypes;
@@ -21,6 +23,7 @@ using Raccord.Application.Services.ShootingDays;
 using Raccord.Domain.Model.Breakdowns;
 using Raccord.Domain.Model.Breakdowns.BreakdownTypes;
 using Raccord.Domain.Model.Callsheets;
+using Raccord.Domain.Model.Locations.LocationSets;
 using Raccord.Domain.Model.Scenes;
 
 namespace Raccord.Application.Services.Callsheets
@@ -28,7 +31,7 @@ namespace Raccord.Application.Services.Callsheets
     // Utilities and helper methods for callsheets
     public static class Utilities
     {
-        public static FullCallsheetDto TranslateFull(this Callsheet callsheet, Breakdown breakdown)
+        public static FullCallsheetDto TranslateFull(this Callsheet callsheet, Breakdown breakdown, WeatherInfoDto weatherInfo)
         {
             var scenes = callsheet.CallsheetScenes.OrderBy(t=> t.SortingOrder);
             var locations = new List<CallsheetLocationDto>();
@@ -94,7 +97,8 @@ namespace Raccord.Application.Services.Callsheets
                 Scenes = scenes.Select(cs=> cs.TranslateScene()),
                 Characters = callsheet.CallsheetCharacters.Select(cc=> cc.TranslateCharacter()),
                 Locations = locations,
-                BreakdownInfo = breakdownInfo
+                BreakdownInfo = breakdownInfo,
+                WeatherInfo = weatherInfo
             };
 
             return dto;
@@ -143,6 +147,34 @@ namespace Raccord.Application.Services.Callsheets
             };
 
             return dto;
+        }
+
+        public static LatLngDto GetFirstLatLng(this Callsheet callsheet)
+        {
+            var firstLocationSet = callsheet.CallsheetScenes.OrderBy(t=> t.SortingOrder)
+                            .FirstOrDefault(cs => cs.LocationSetID.HasValue)?.LocationSet;
+            
+            if(firstLocationSet== null)
+            {
+                return null;
+            }
+            if(firstLocationSet.HasLatLng())
+            {
+                return new LatLngDto
+                {
+                    Latitude = firstLocationSet.Latitude,
+                    Longitude = firstLocationSet.Longitude
+                };
+            }
+            if(firstLocationSet.Location.HasLatLng())
+            {
+                return new LatLngDto
+                {
+                    Latitude = firstLocationSet.Location.Latitude,
+                    Longitude = firstLocationSet.Location.Longitude
+                };
+            }
+            return null;
         }
     }
 }

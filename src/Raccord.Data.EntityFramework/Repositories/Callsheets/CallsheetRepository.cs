@@ -16,14 +16,14 @@ namespace Raccord.Data.EntityFramework.Repositories.Callsheets
         {
             var query = GetIncludedCrewUnit();
 
-            return query.Where(d=> d.CrewUnitID == crewUnitID);
+            return query.Where(d=> d.CrewUnitID == crewUnitID).OrderBy(c => c.ShootingDay.Date);
         }
 
         public IEnumerable<Callsheet> GetAllForProject(long projectID)
         {
             var query = GetIncludedCrewUnit();
 
-            return query.Where(d=> d.CrewUnit.ProjectID == projectID);
+            return query.Where(d=> d.CrewUnit.ProjectID == projectID).OrderBy(c => c.ShootingDay.Date);
         }
 
         public Callsheet GetFull(long ID)
