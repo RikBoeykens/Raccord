@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Raccord.API.ViewModels.Characters;
 using Raccord.API.ViewModels.Scenes;
@@ -15,6 +16,12 @@ namespace Raccord.API.ViewModels.Cast
     /// </summary>
     /// <returns></returns>
     public string UserID { get; set; }
+
+    /// <summary>
+    /// Linked user invitation ID (if applicable)
+    /// </summary>
+    /// <returns></returns>
+    public Guid? UserInvitationID { get; set; }
 
     /// <summary>
     /// Indicates if the crew member has an image specified

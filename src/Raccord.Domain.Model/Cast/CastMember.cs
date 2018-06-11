@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Raccord.Domain.Model.Characters;
 using Raccord.Domain.Model.Projects;
 using Raccord.Domain.Model.Users;
+using Raccord.Domain.Model.Users.Invitations;
 
 namespace Raccord.Domain.Model.Cast
 {
@@ -22,6 +23,9 @@ namespace Raccord.Domain.Model.Cast
 
     public long? ProjectUserID { get; set; }
     public virtual ProjectUser ProjectUser { get; set; }
+
+    public long? ProjectUserInvitationID { get; set; }
+    public virtual ProjectUserInvitation ProjectUserInvitation { get; set; }
 
     public virtual ICollection<Character> Characters
     {

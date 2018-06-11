@@ -51,6 +51,8 @@ namespace Raccord.Data.EntityFramework.Repositories.Cast
 
             return query.Include(cm => cm.ProjectUser)
                             .ThenInclude(pu=> pu.User)
+                        .Include(cm => cm.ProjectUserInvitation)
+                            .ThenInclude(pu=> pu.UserInvitation)
                         .Include(cm => cm.Characters)
                             .ThenInclude(i=> i.CharacterScenes)
                                 .ThenInclude(i=> i.Scene)
@@ -79,6 +81,8 @@ namespace Raccord.Data.EntityFramework.Repositories.Cast
 
             return query.Include(cm => cm.ProjectUser)
                             .ThenInclude(pu=> pu.User)
+                        .Include(cm => cm.ProjectUserInvitation)
+                            .ThenInclude(pu=> pu.UserInvitation)
                         .Include(cm => cm.Characters)
                             .ThenInclude(c => c.ImageCharacters)
                                 .ThenInclude(ic => ic.Character);
@@ -98,7 +102,9 @@ namespace Raccord.Data.EntityFramework.Repositories.Cast
             return query.Include(s=> s.Project)
                             .ThenInclude(p=> p.ProjectUsers)
                         .Include(cm=> cm.ProjectUser)
-                            .ThenInclude(pu=> pu.User);
+                            .ThenInclude(pu=> pu.User)
+                        .Include(cm => cm.ProjectUserInvitation)
+                            .ThenInclude(pu=> pu.UserInvitation);
         }
 
         private IQueryable<CastMember> GetSearchQuery(string searchText, long? projectID, string userID, bool isAdmin, long[] excludeIds)

@@ -76,7 +76,8 @@ import {
   AdminCrewUnitLandingComponent,
   AdminCrewUnitsListComponent,
   AdminUserInvitationsListComponent,
-  AdminUserInvitationLandingComponent
+  AdminUserInvitationLandingComponent,
+  AdminProjectUserInvitationLandingComponent
 } from './admin';
 import{
   UserProfileLandingComponent
@@ -159,7 +160,8 @@ import {
   AdminCrewUnitResolve,
   AdminUserInvitationResolve,
   AdminUserInvitationsResolve,
-  AdminProjectUserInvitationsResolve
+  AdminProjectUserInvitationsResolve,
+  AdminProjectUserInvitationResolve
 } from './admin';
 
 import {
@@ -318,6 +320,19 @@ export const ROUTES: Routes = [
             component: AdminProjectUserLandingComponent,
             resolve: {
               projectUser: AdminProjectUserResolve,
+              projectRoles: AdminProjectRolesResolve,
+            }
+          },
+        ]
+      },
+      {
+        path: RouteSettings.PROJECTUSERINVITATIONS,
+        children: [
+          {
+            path: ':projectUserInvitationId',
+            component: AdminProjectUserInvitationLandingComponent,
+            resolve: {
+              projectUserInvitation: AdminProjectUserInvitationResolve,
               projectRoles: AdminProjectRolesResolve,
             }
           },

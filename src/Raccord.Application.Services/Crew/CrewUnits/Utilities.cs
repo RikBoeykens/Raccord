@@ -89,5 +89,23 @@ namespace Raccord.Application.Services.Crew.CrewUnits
         CrewMembers = crewUnitMember.CrewMembers.Select(c => c.Translate())
       };
     }
+
+    public static ProjectUserCrewUnitDto TranslateCrewUnit(this CrewUnitInvitationMember crewUnitInvitationMember)
+    {
+      if(crewUnitInvitationMember == null || crewUnitInvitationMember.CrewUnit == null)
+      {
+        return null;
+      }
+
+      return new ProjectUserCrewUnitDto
+      {
+        ID = crewUnitInvitationMember.CrewUnit.ID,
+        Name = crewUnitInvitationMember.CrewUnit.Name,
+        Description = crewUnitInvitationMember.CrewUnit.Description,
+        ProjectID = crewUnitInvitationMember.CrewUnit.ProjectID,
+        LinkID = crewUnitInvitationMember.ID,
+        CrewMembers = crewUnitInvitationMember.CrewMembers.Select(c => c.Translate())
+      };
+    }
   }
 }

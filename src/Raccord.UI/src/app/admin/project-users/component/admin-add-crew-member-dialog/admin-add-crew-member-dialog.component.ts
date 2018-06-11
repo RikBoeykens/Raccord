@@ -2,8 +2,9 @@ import { Component, Inject } from '@angular/core';
 import { MD_DIALOG_DATA, MdDialogRef } from '@angular/material';
 import { CrewMember }
     from '../../../../projects/children/crew/crew-members/model/crew-member.model';
-import { CreateUnitCrewMember } from '../../../crew-units/model/create-unit-crew-member.model';
-import { CrewDepartment } from '../../../../projects/children/crew/departments/model/crew-department.model';
+import { CrewDepartment }
+    from '../../../../projects/children/crew/departments/model/crew-department.model';
+import { CreateCrewMember } from '../../../crew-units/model/create-crew-member.model';
 
 @Component({
     selector: 'admin-add-crew-member-dialog',
@@ -12,13 +13,13 @@ import { CrewDepartment } from '../../../../projects/children/crew/departments/m
 
 export class AdminAddCrewMemberDialogComponent {
 
-    public crewMember: CreateUnitCrewMember;
+    public crewMember: CreateCrewMember;
     public departments: CrewDepartment[] = [];
 
     constructor(
         private _dialogRef: MdDialogRef<AdminAddCrewMemberDialogComponent>,
         @Inject(MD_DIALOG_DATA) private data: {
-            crewMember: CreateUnitCrewMember,
+            crewMember: CreateCrewMember,
             departments: CrewDepartment[]
         }
     ) {

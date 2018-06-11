@@ -1,0 +1,63 @@
+<md-card>      
+  <a routerLink="/" class="breadcrumb">Dashboard</a>
+  <a routerLink="/admin/invitations" class="breadcrumb">Invitations</a>
+  <a routerLink="/admin/invitations/{{projectUserInvitation.userInvitation.id}}" class="breadcrumb">{{getInvitationFullName(projectUserInvitation.userInvitation)}}</a>
+  <span class="breadcrumb">{{projectUserInvitation.project.title}}</span>
+</md-card>
+<md-card>
+    <md-card-title>Role</md-card-title>
+    <md-card-content>
+        <div fxLayout="row">
+            <md-select fxFlex="50%" 
+                        mdInput placeholder="Role" 
+                        [(ngModel)]="projectUserInvitation.projectRole.id" 
+                        #projectRole="ngModel" 
+                        name="user_role_id"
+                        (change)="updateProjectUserInvitation()">
+                <md-option [value]="">---</md-option>
+                <md-option *ngFor="let projectRole of projectRoles" [value]="projectRole.id">{{ projectRole.name }}</md-option>
+            </md-select>
+        </div>
+    </md-card-content>
+</md-card>
+<md-card>
+    <md-card-title>Linked cast</md-card-title>
+    <md-card-content>
+        <a *ngIf="projectUserInvitation.castMember.id!==0" routerLink="/projects/{{projectUserInvitation.project.id}}/cast/{{projectUserInvitation.castMember.id}}">{{getFullName(projectUserInvitation.castMember)}}</a>
+        <i *ngIf="projectUserInvitation.castMember.id===0">No cast linked</i>
+        <button *ngIf="projectUserInvitation.castMember.id===0" md-fab (click)="showLinkCastMember()"><md-icon>link</md-icon></button>
+        <button *ngIf="projectUserInvitation.castMember.id===0" md-fab (click)="showAddCastMemberDialog()"><md-icon>add</md-icon></button>
+    </md-card-content>
+</md-card>
+<md-card>
+<md-card-title>Linked Units</md-card-title>
+    <md-card-content>
+        <md-list>
+            <div *ngFor="let crewUnit of projectUserInvitation.crewUnits">
+                <h3 sub-header>
+                    <a routerLink="/admin/projects/{{projectUserInvitation.project.id}}/units/{{crewUnit.id}}">{{crewUnit.name}}</a>
+                    <button
+                        md-icon-button
+                        (click)="showAddCrewMember(crewUnit)"
+                        mdTooltip="add crew member">
+                        <md-icon>add</md-icon>
+                    </button>
+                    <button
+                        md-icon-button
+                        (click)="removeUnitMemberLink(crewUnit)"
+                        mdTooltip="delete">
+                        <md-icon>delete</md-icon>
+                    </button>
+                </h3>
+                <md-list-item 
+                    *ngFor="let crewMember of crewUnit.crewMembers">
+                    <span>{{crewMember.department.name}} - {{crewMember.jobTitle}}</span>
+                    <button md-icon-button (click)="editCrewMember(crewMember)"><md-icon>edit</md-icon></button>
+                    <button md-icon-button (click)="removeCrewMemberLink(crewUnit, crewMember)"><md-icon>delete</md-icon></button>
+                </md-list-item>
+            </div>
+        </md-list>
+        <i *ngIf="!projectUserInvitation.crewUnits.length">No units linked</i>
+        <button md-fab (click)="showAddCrewUnitMember()"><md-icon>add</md-icon></button>
+    </md-card-content>
+</md-card>

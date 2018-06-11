@@ -42,5 +42,17 @@ namespace Raccord.Domain.Model.Crew.CrewMembers
         /// </summary>
         /// <returns></returns>
         public virtual CrewUnitMember CrewUnitMember { get; set; }
+
+        /// <summary>
+        /// Id of the linked Crew Unit Member (if applicable)
+        /// </summary>
+        /// <returns></returns>
+        public long? CrewUnitInvitationMemberID { get; set; }
+
+        /// <summary>
+        /// Linked Crew Unit Invitation Member (if applicable)
+        /// </summary>
+        /// <returns></returns>
+        public virtual CrewUnitInvitationMember CrewUnitInvitationMember { get; set; }
     }
 }

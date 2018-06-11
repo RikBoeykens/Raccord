@@ -19,7 +19,7 @@
                         <td>{{castMember.email}}</td>
                         <td>{{castMember.telephone}}</td>
                         <td>
-                            <div *ngIf="getCanEdit()&&castMember.userID===''">
+                            <div *ngIf="getCanEdit()&&getCanEditCastMember(castMember)">
                                 <button md-icon-button (click)="editCastMember(castMember)"><md-icon>edit</md-icon></button>
                                 <button md-icon-button (click)="removeCastMember(castMember)"><md-icon>delete</md-icon></button>
                             </div>

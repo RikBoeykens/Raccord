@@ -1,3 +1,5 @@
+using System;
+
 namespace Raccord.API.ViewModels.Crew.CrewMembers
 {
     public class CrewMemberSummaryViewModel : CrewMemberViewModel
@@ -7,6 +9,12 @@ namespace Raccord.API.ViewModels.Crew.CrewMembers
         /// </summary>
         /// <returns></returns>
         public string UserID { get; set; }
+
+        /// <summary>
+        /// Linked user invitation ID (if applicable)
+        /// </summary>
+        /// <returns></returns>
+        public Guid? UserInvitationID { get; set; }
 
         /// <summary>
         /// Indicates if the crew member has an image specified

@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using Raccord.Application.Core.Services.Cast;
 using Raccord.Application.Core.Services.SearchEngine;
@@ -26,6 +27,7 @@ namespace Raccord.Application.Services.Cast
         Email = castMember.GetEmail(),
         ProjectID = castMember.ProjectID,
         UserID = castMember.GetUserID(),
+        UserInvitationID = castMember.GetUserInvitationID(),
         HasImage = castMember.GetHasImage(),
         Characters = castMember.Characters.Select(c => c.TranslateSummary()),
         Scenes = castMember.Characters.SelectMany(c => c.CharacterScenes).OrderBy(cs => cs.Scene.SortingOrder).Select(cs => cs.TranslateScene()).Distinct()
@@ -47,6 +49,7 @@ namespace Raccord.Application.Services.Cast
         Email = castMember.GetEmail(),
         ProjectID = castMember.ProjectID,
         UserID = castMember.GetUserID(),
+        UserInvitationID = castMember.GetUserInvitationID(),
         HasImage = castMember.GetHasImage(),
       };
     }
@@ -89,7 +92,11 @@ namespace Raccord.Application.Services.Cast
     {
       if(castMember.ProjectUserID.HasValue)
       {
-        return castMember.ProjectUser.User.FirstName;
+        return castMember.ProjectUser?.User?.FirstName;
+      }
+      if(castMember.ProjectUserInvitationID.HasValue)
+      {
+        return castMember.ProjectUserInvitation?.UserInvitation?.FirstName;
       }
       return castMember.FirstName;
     }
@@ -98,7 +105,11 @@ namespace Raccord.Application.Services.Cast
     {
       if(castMember.ProjectUserID.HasValue)
       {
-        return castMember.ProjectUser.User.LastName;
+        return castMember.ProjectUser?.User?.LastName;
+      }
+      if(castMember.ProjectUserInvitationID.HasValue)
+      {
+        return castMember.ProjectUserInvitation?.UserInvitation?.LastName;
       }
       return castMember.LastName;
     }
@@ -107,7 +118,11 @@ namespace Raccord.Application.Services.Cast
     {
       if(castMember.ProjectUserID.HasValue)
       {
-        return castMember.ProjectUser.User.Telephone;
+        return castMember.ProjectUser?.User?.Telephone;
+      }
+      if(castMember.ProjectUserInvitationID.HasValue)
+      {
+        return string.Empty;
       }
       return castMember.Telephone;
     }
@@ -116,7 +131,11 @@ namespace Raccord.Application.Services.Cast
     {
       if(castMember.ProjectUserID.HasValue)
       {
-        return castMember.ProjectUser.User.PreferredEmail;
+        return castMember.ProjectUser?.User?.PreferredEmail;
+      }
+      if(castMember.ProjectUserInvitationID.HasValue)
+      {
+        return castMember.ProjectUserInvitation?.UserInvitation?.Email;
       }
       return castMember.Email;
     }
@@ -125,16 +144,25 @@ namespace Raccord.Application.Services.Cast
     {
       if(castMember.ProjectUserID.HasValue)
       {
-        return castMember.ProjectUser.UserID;
+        return castMember.ProjectUser?.UserID;
       }
       return string.Empty;
+    }
+
+    private static Guid? GetUserInvitationID(this CastMember castMember)
+    {
+      if(castMember.ProjectUserInvitationID.HasValue)
+      {
+        return castMember.ProjectUserInvitation?.UserInvitationID;
+      }
+      return null;
     }
 
     private static bool GetHasImage(this CastMember castMember)
     {
       if(castMember.ProjectUserID.HasValue)
       {
-        return castMember.ProjectUser.User.ImageContent != null;
+        return castMember.ProjectUser?.User?.ImageContent != null;
       }
       return false;
     }

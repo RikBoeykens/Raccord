@@ -7,23 +7,23 @@ using Raccord.Domain.Model.Crew.CrewMembers;
 namespace Raccord.Application.Services.Crew.CrewUnits.Members
 {
     // Service for project user crew functionality
-    public class UnitCrewMemberService : IUnitCrewMemberService
+    public class CrewUnitInvitationMemberCrewMemberService : ICrewUnitInvitationMemberCrewMemberService
     {
       private readonly ICrewMemberRepository _crewMemberRepository;
 
-      public UnitCrewMemberService(
+      public CrewUnitInvitationMemberCrewMemberService(
         ICrewMemberRepository crewMemberRepository
       ){
         _crewMemberRepository = crewMemberRepository;
       }
 
-      public long Create(CreateUnitCrewMemberDto dto)
+      public long Create(CreateCrewUnitInvitationMemberCrewMemberDto dto)
       {
         var newCrewMember = new CrewMember
         {
           JobTitle = dto.JobTitle,
           DepartmentID = dto.DepartmentID,
-          CrewUnitMemberID = dto.CrewUnitMemberID
+          CrewUnitInvitationMemberID = dto.CrewUnitInvitationMemberID
         };
 
         _crewMemberRepository.Add(newCrewMember);
@@ -32,21 +32,21 @@ namespace Raccord.Application.Services.Crew.CrewUnits.Members
         return newCrewMember.ID;
       }
 
-      public void LinkExisting(long crewUnitMemberID, long crewMemberID)
+      public void LinkExisting(long crewUnitInvitationMemberID, long crewMemberID)
       {
         var crewMember = _crewMemberRepository.GetSingle(crewMemberID);
-        crewMember.CrewUnitMemberID = crewUnitMemberID;
+        crewMember.CrewUnitInvitationMemberID = crewUnitInvitationMemberID;
 
         _crewMemberRepository.Edit(crewMember);
         _crewMemberRepository.Commit();
       }
 
-      public void RemoveLink(long crewUnitMemberID, long crewMemberID)
+      public void RemoveLink(long crewUnitInvitationMemberID, long crewMemberID)
       {
-        var crewMember = _crewMemberRepository.FindBy(cm=> cm.ID == crewMemberID && cm.CrewUnitMemberID == crewUnitMemberID).FirstOrDefault();
+        var crewMember = _crewMemberRepository.FindBy(cm=> cm.ID == crewMemberID && cm.CrewUnitInvitationMemberID == crewUnitInvitationMemberID).FirstOrDefault();
         if(crewMember!= null)
         {
-          crewMember.CrewUnitMemberID = null;
+          crewMember.CrewUnitInvitationMemberID = null;
 
           _crewMemberRepository.Edit(crewMember);
           _crewMemberRepository.Commit();

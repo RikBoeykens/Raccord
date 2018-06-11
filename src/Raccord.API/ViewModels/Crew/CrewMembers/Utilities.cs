@@ -18,6 +18,7 @@ namespace Raccord.API.ViewModels.Crew.CrewMembers
                 Telephone = dto.Telephone,
                 Department = dto.Department.Translate(),
                 UserID = dto.UserID,
+                UserInvitationID = dto.UserInvitationID,
                 HasImage = dto.HasImage,
                 CrewUnit = dto.CrewUnit.Translate(),
             };
@@ -35,6 +36,7 @@ namespace Raccord.API.ViewModels.Crew.CrewMembers
                 Telephone = dto.Telephone,
                 Department = dto.Department.Translate(),
                 UserID = dto.UserID,
+                UserInvitationID = dto.UserInvitationID,
                 HasImage = dto.HasImage,
             };
         }

@@ -1,3 +1,6 @@
+using System.Linq;
+using Raccord.API.ViewModels.Cast;
+using Raccord.API.ViewModels.Crew.CrewUnits;
 using Raccord.API.ViewModels.Projects;
 using Raccord.API.ViewModels.Users.ProjectRoles;
 using Raccord.Application.Core.Services.Users.Invitations.Project;
@@ -6,6 +9,23 @@ namespace Raccord.API.ViewModels.Users.Invitations.Project
 {
   public static class Utilities
   {
+    public static FullProjectUserInvitationViewModel Translate(this FullProjectUserInvitationDto dto)
+    {
+      if(dto == null)
+      {
+        return null;
+      }
+
+      return new FullProjectUserInvitationViewModel
+      {
+        ID = dto.ID,
+        Project = dto.Project.Translate(),
+        UserInvitation = dto.UserInvitation.Translate(),
+        CastMember = dto.CastMember.Translate(),
+        ProjectRole = dto.ProjectRole.Translate(),
+        CrewUnits = dto.CrewUnits.Select(cu => cu.Translate())
+      };
+    }
     public static ProjectUserInvitationSummaryViewModel Translate(this ProjectUserInvitationSummaryDto dto)
     {
       if(dto == null)

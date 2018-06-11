@@ -2,19 +2,19 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { AppSettings } from '../../../app.settings';
 import { BaseHttpService } from '../../../shared/service/base-http.service';
-import { CreateUnitCrewMember } from '../model/create-unit-crew-member.model';
+import { CreateCrewUnitMemberCrewMember } from '../model/create-crew-unit-member-crew-member.model';
 
 @Injectable()
-export class AdminUnitCrewMembersHttpService extends BaseHttpService {
+export class AdminCrewUnitMemberCrewMembersHttpService extends BaseHttpService {
 
     constructor(
         protected _http: HttpClient,
     ) {
         super(_http);
-        this._baseUri = `${AppSettings.API_ADMIN_ENDPOINT}/unitcrewmembers`;
+        this._baseUri = `${AppSettings.API_ADMIN_ENDPOINT}/crewunitmembercrewmembers`;
     }
 
-    public post(createInfo: CreateUnitCrewMember): Promise<any> {
+    public post(createInfo: CreateCrewUnitMemberCrewMember): Promise<any> {
         let uri = this._baseUri;
 
         return this.doPost(createInfo, uri);

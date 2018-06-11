@@ -73,6 +73,11 @@ export class EditCastMembersListComponent implements OnInit {
         );
     }
 
+    public getCanEditCastMember(castMember: CastMemberSummary)
+    {
+        return !castMember.userID && !castMember.userInvitationID;
+    }
+
     private getCastMembers() {
         this._loadingWrapperService.Load(
             this._castMemberHttpService.getAll(this.project.id),

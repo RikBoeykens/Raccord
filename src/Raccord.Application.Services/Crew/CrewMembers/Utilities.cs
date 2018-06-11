@@ -6,6 +6,7 @@ using Raccord.Core.Enums;
 using Raccord.Domain.Model.Crew.CrewMembers;
 using Raccord.Application.Services.Crew.Departments;
 using Raccord.Application.Services.Crew.CrewUnits;
+using System;
 
 namespace Raccord.Application.Services.Crew.CrewMembers
 {
@@ -24,6 +25,7 @@ namespace Raccord.Application.Services.Crew.CrewMembers
                 Department = crewMember.Department.Translate(),
                 CrewUnit = crewMember.Department.CrewUnit.Translate(),
                 UserID = crewMember.GetUserID(),
+                UserInvitationID = crewMember.GetUserInvitationID(),
                 HasImage = crewMember.GetHasImage(),
             };
         }
@@ -39,6 +41,7 @@ namespace Raccord.Application.Services.Crew.CrewMembers
                 Email = crewMember.GetEmail(),
                 Department = crewMember.Department.Translate(),
                 UserID = crewMember.GetUserID(),
+                UserInvitationID = crewMember.GetUserInvitationID(),
                 HasImage = crewMember.GetHasImage(),
             };
         }
@@ -97,7 +100,11 @@ namespace Raccord.Application.Services.Crew.CrewMembers
         {
             if(crewMember.GetHasUser())
             {
-                return crewMember.CrewUnitMember.ProjectUser.User.FirstName;
+                return crewMember.CrewUnitMember?.ProjectUser?.User?.FirstName;
+            }
+            if(crewMember.GetHasUserInvitation())
+            {
+                return crewMember.CrewUnitInvitationMember?.ProjectUserInvitation?.UserInvitation?.FirstName;
             }
             return crewMember.FirstName;
         }
@@ -106,7 +113,11 @@ namespace Raccord.Application.Services.Crew.CrewMembers
         {
             if(crewMember.GetHasUser())
             {
-                return crewMember.CrewUnitMember.ProjectUser.User.LastName;
+                return crewMember.CrewUnitMember?.ProjectUser?.User?.LastName;
+            }
+            if(crewMember.GetHasUserInvitation())
+            {
+                return crewMember.CrewUnitInvitationMember?.ProjectUserInvitation?.UserInvitation?.LastName;
             }
             return crewMember.LastName;
         }
@@ -115,7 +126,7 @@ namespace Raccord.Application.Services.Crew.CrewMembers
         {
             if(crewMember.GetHasUser())
             {
-                return crewMember.CrewUnitMember.ProjectUser.User.Telephone;
+                return crewMember.CrewUnitMember?.ProjectUser?.User?.Telephone;
             }
             return crewMember.Telephone;
         }
@@ -124,7 +135,11 @@ namespace Raccord.Application.Services.Crew.CrewMembers
         {
             if(crewMember.GetHasUser())
             {
-                return crewMember.CrewUnitMember.ProjectUser.User.PreferredEmail;
+                return crewMember.CrewUnitMember?.ProjectUser?.User?.PreferredEmail;
+            }
+            if(crewMember.GetHasUserInvitation())
+            {
+                return crewMember.CrewUnitInvitationMember?.ProjectUserInvitation?.UserInvitation?.Email;
             }
             return crewMember.Email;
         }
@@ -133,19 +148,33 @@ namespace Raccord.Application.Services.Crew.CrewMembers
         {
             if(crewMember.GetHasUser())
             {
-                return crewMember.CrewUnitMember.ProjectUser.UserID;
+                return crewMember.CrewUnitMember?.ProjectUser?.UserID;
             }
             return string.Empty;
         }
 
+        private static Guid? GetUserInvitationID(this CrewMember crewMember)
+        {
+            if(crewMember.GetHasUserInvitation())
+            {
+                return crewMember.CrewUnitInvitationMember?.ProjectUserInvitation?.UserInvitationID;
+            }
+            return null;
+        }
+
         private static bool GetHasImage(this CrewMember crewMember)
         {
-            return crewMember.GetHasUser() && crewMember.CrewUnitMember.ProjectUser.User.ImageContent != null;
+            return crewMember.GetHasUser() && crewMember.CrewUnitMember?.ProjectUser?.User?.ImageContent != null;
         }
 
         private static bool GetHasUser(this CrewMember crewMember)
         {
             return crewMember.CrewUnitMemberID.HasValue;
+        }
+
+        private static bool GetHasUserInvitation(this CrewMember crewMember)
+        {
+            return crewMember.CrewUnitInvitationMemberID.HasValue;
         }
     }
 }

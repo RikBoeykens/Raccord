@@ -7,9 +7,15 @@ using Raccord.Application.Core.ExternalServices.Communication.Mail;
 using Raccord.Application.Core.Services.Users;
 using Raccord.Application.Core.Services.Users.Invitations;
 using Raccord.Core.Options;
+using Raccord.Data.EntityFramework.Repositories.Cast;
+using Raccord.Data.EntityFramework.Repositories.Crew.CrewMembers;
+using Raccord.Data.EntityFramework.Repositories.Crew.CrewUnits.Members;
 using Raccord.Data.EntityFramework.Repositories.Users.Invitations;
 using Raccord.Data.EntityFramework.Repositories.Users.Invitations.Projects;
 using Raccord.Data.EntityFramework.Repositories.Users.Projects;
+using Raccord.Domain.Model.Cast;
+using Raccord.Domain.Model.Crew.CrewMembers;
+using Raccord.Domain.Model.Crew.CrewUnits;
 using Raccord.Domain.Model.Users;
 using Raccord.Domain.Model.Users.Invitations;
 
@@ -20,6 +26,9 @@ namespace Raccord.Application.Services.Users.Invitations
     private readonly IUserInvitationRepository _userInvitationRepository;
     private readonly IProjectUserInvitationRepository _projectUserInvitationRepository;
     private readonly IProjectUserRepository _projectUserRepository;
+    private readonly ICrewUnitMemberRepository _crewUnitMemberRepository;
+    private readonly ICrewMemberRepository _crewMemberRepository;
+    private readonly ICastMemberRepository _castMemberRepository;
     private readonly IUserService _userService;
     private readonly ISendMailService _sendMailService;
     private readonly UISettings _uiSettings;
@@ -28,6 +37,9 @@ namespace Raccord.Application.Services.Users.Invitations
       IUserInvitationRepository userInvitationRepository,
       IProjectUserInvitationRepository projectUserInvitationRepository,
       IProjectUserRepository projectUserRepository,
+      ICrewUnitMemberRepository crewUnitMemberRepository,
+      ICrewMemberRepository crewMemberRepository,
+      ICastMemberRepository castMemberRepository,
       IUserService userService,
       ISendMailService sendMailService,
       IOptions<UISettings> uiSettings
@@ -35,6 +47,9 @@ namespace Raccord.Application.Services.Users.Invitations
       _userInvitationRepository = userInvitationRepository;
       _projectUserInvitationRepository = projectUserInvitationRepository;
       _projectUserRepository = projectUserRepository;
+      _crewUnitMemberRepository = crewUnitMemberRepository;
+      _crewMemberRepository = crewMemberRepository;
+      _castMemberRepository = castMemberRepository;
       _userService = userService;
       _sendMailService = sendMailService;
       _uiSettings = uiSettings.Value;
@@ -141,19 +156,43 @@ namespace Raccord.Application.Services.Users.Invitations
       _userInvitationRepository.Edit(userInvitation);
       _userInvitationRepository.Commit();
 
-      var projectUserInvitations = _projectUserInvitationRepository.GetAllForInvitation(userInvitation.ID);
+      var projectUserInvitations = _projectUserInvitationRepository.GetAllForCreateUser(userInvitation.ID);
 
-      var projectUsers = projectUserInvitations.ToList().Select(pu => new ProjectUser
+      foreach(var projectUserInvitation in projectUserInvitations.ToList())
       {
-        ProjectID = pu.ProjectID,
-        UserID = createdUserId,
-        RoleID = pu.RoleID
-      });
-      foreach(var projectUser in projectUsers)
-      {
+        var projectUser = new ProjectUser
+        {
+          ProjectID = projectUserInvitation.ProjectID,
+          UserID = createdUserId,
+          RoleID = projectUserInvitation.RoleID,
+          CastMemberID = projectUserInvitation.CastMemberID
+        };
         _projectUserRepository.Add(projectUser);
+        _projectUserRepository.Commit();
+
+        if(projectUser.CastMemberID.HasValue)
+        {
+          LinkCastMember(projectUser.CastMemberID.Value, projectUser.ID);
+        }
+        
+        foreach(var crewUnitInvitationMember in projectUserInvitation.CrewUnitInvitationMembers.ToList())
+        {
+          var crewUnitMember = new CrewUnitMember
+          {
+            CrewUnitID = crewUnitInvitationMember.CrewUnitID,
+            ProjectUserID = projectUser.ID
+          };
+          _crewUnitMemberRepository.Add(crewUnitMember);
+          _crewUnitMemberRepository.Commit();
+          foreach(var invitationCrewMember in crewUnitInvitationMember.CrewMembers.ToList())
+          {
+            var crewMember = _crewMemberRepository.GetSingle(invitationCrewMember.ID);
+            crewMember.CrewUnitMemberID = crewUnitMember.ID;
+            _crewMemberRepository.Edit(crewMember);
+            _crewMemberRepository.Commit();
+          }
+        }
       }
-      _projectUserRepository.Commit();
 
       return createdUserId;
     }
@@ -169,6 +208,14 @@ namespace Raccord.Application.Services.Users.Invitations
         Subject = "Raccord Invitation",
         Body = body
       });
+    }
+
+    private void LinkCastMember(long castMemberID, long projectUserID)
+    {
+          var castMember = _castMemberRepository.GetSingle(castMemberID);
+          castMember.ProjectUserID = projectUserID;
+          _castMemberRepository.Edit(castMember);
+          _castMemberRepository.Commit();
     }
   }
 }

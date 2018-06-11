@@ -405,40 +405,6 @@ namespace Raccord.Data.EntityFramework.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Comment",
-                columns: table => new
-                {
-                    ID = table.Column<long>(nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
-                    ParentCommentID = table.Column<long>(nullable: true),
-                    ParentProjectID = table.Column<long>(nullable: true),
-                    Text = table.Column<string>(nullable: true),
-                    UserID = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Comment", x => x.ID);
-                    table.ForeignKey(
-                        name: "FK_Comment_Comment_ParentCommentID",
-                        column: x => x.ParentCommentID,
-                        principalTable: "Comment",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Comment_Projects_ParentProjectID",
-                        column: x => x.ParentProjectID,
-                        principalTable: "Projects",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Comment_AspNetUsers_UserID",
-                        column: x => x.UserID,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "CrewUnit",
                 columns: table => new
                 {
@@ -538,6 +504,7 @@ namespace Raccord.Data.EntityFramework.Migrations
                 {
                     ID = table.Column<long>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
+                    CastMemberID = table.Column<long>(nullable: true),
                     ProjectID = table.Column<long>(nullable: false),
                     RoleID = table.Column<long>(nullable: true),
                     UserInvitationID = table.Column<Guid>(nullable: false)
@@ -796,6 +763,32 @@ namespace Raccord.Data.EntityFramework.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "CrewUnitInvitationMember",
+                columns: table => new
+                {
+                    ID = table.Column<long>(nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
+                    CrewUnitID = table.Column<long>(nullable: false),
+                    ProjectUserInvitationID = table.Column<long>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CrewUnitInvitationMember", x => x.ID);
+                    table.ForeignKey(
+                        name: "FK_CrewUnitInvitationMember_CrewUnit_CrewUnitID",
+                        column: x => x.CrewUnitID,
+                        principalTable: "CrewUnit",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_CrewUnitInvitationMember_ProjectUserInvitation_ProjectUserInvitationID",
+                        column: x => x.ProjectUserInvitationID,
+                        principalTable: "ProjectUserInvitation",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "BreakdownItem",
                 columns: table => new
                 {
@@ -834,6 +827,7 @@ namespace Raccord.Data.EntityFramework.Migrations
                     LastName = table.Column<string>(nullable: true),
                     ProjectID = table.Column<long>(nullable: false),
                     ProjectUserID = table.Column<long>(nullable: true),
+                    ProjectUserInvitationID = table.Column<long>(nullable: true),
                     Telephone = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
@@ -849,6 +843,12 @@ namespace Raccord.Data.EntityFramework.Migrations
                         name: "FK_CastMember_ProjectUser_ProjectUserID",
                         column: x => x.ProjectUserID,
                         principalTable: "ProjectUser",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_CastMember_ProjectUserInvitation_ProjectUserInvitationID",
+                        column: x => x.ProjectUserInvitationID,
+                        principalTable: "ProjectUserInvitation",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -1115,6 +1115,7 @@ namespace Raccord.Data.EntityFramework.Migrations
                 {
                     ID = table.Column<long>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
+                    CrewUnitInvitationMemberID = table.Column<long>(nullable: true),
                     CrewUnitMemberID = table.Column<long>(nullable: true),
                     DepartmentID = table.Column<long>(nullable: false),
                     Email = table.Column<string>(nullable: true),
@@ -1126,6 +1127,12 @@ namespace Raccord.Data.EntityFramework.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_CrewMember", x => x.ID);
+                    table.ForeignKey(
+                        name: "FK_CrewMember_CrewUnitInvitationMember_CrewUnitInvitationMemberID",
+                        column: x => x.CrewUnitInvitationMemberID,
+                        principalTable: "CrewUnitInvitationMember",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_CrewMember_CrewUnitMember_CrewUnitMemberID",
                         column: x => x.CrewUnitMemberID,
@@ -1630,6 +1637,103 @@ namespace Raccord.Data.EntityFramework.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Comment",
+                columns: table => new
+                {
+                    ID = table.Column<long>(nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
+                    CallsheetID = table.Column<long>(nullable: true),
+                    ParentBreakdownItemID = table.Column<long>(nullable: true),
+                    ParentCharacterID = table.Column<long>(nullable: true),
+                    ParentCommentID = table.Column<long>(nullable: true),
+                    ParentImageID = table.Column<long>(nullable: true),
+                    ParentLocationID = table.Column<long>(nullable: true),
+                    ParentProjectID = table.Column<long>(nullable: true),
+                    ParentSceneID = table.Column<long>(nullable: true),
+                    ParentScriptLocationID = table.Column<long>(nullable: true),
+                    ParentSlateID = table.Column<long>(nullable: true),
+                    ParentTakeID = table.Column<long>(nullable: true),
+                    Text = table.Column<string>(nullable: true),
+                    UserID = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Comment", x => x.ID);
+                    table.ForeignKey(
+                        name: "FK_Comment_Callsheet_CallsheetID",
+                        column: x => x.CallsheetID,
+                        principalTable: "Callsheet",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Comment_BreakdownItem_ParentBreakdownItemID",
+                        column: x => x.ParentBreakdownItemID,
+                        principalTable: "BreakdownItem",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Comment_Character_ParentCharacterID",
+                        column: x => x.ParentCharacterID,
+                        principalTable: "Character",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Comment_Comment_ParentCommentID",
+                        column: x => x.ParentCommentID,
+                        principalTable: "Comment",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Comment_Image_ParentImageID",
+                        column: x => x.ParentImageID,
+                        principalTable: "Image",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Comment_Location_ParentLocationID",
+                        column: x => x.ParentLocationID,
+                        principalTable: "Location",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Comment_Projects_ParentProjectID",
+                        column: x => x.ParentProjectID,
+                        principalTable: "Projects",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Comment_Scenes_ParentSceneID",
+                        column: x => x.ParentSceneID,
+                        principalTable: "Scenes",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Comment_ScriptLocations_ParentScriptLocationID",
+                        column: x => x.ParentScriptLocationID,
+                        principalTable: "ScriptLocations",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Comment_Slate_ParentSlateID",
+                        column: x => x.ParentSlateID,
+                        principalTable: "Slate",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Comment_Take_ParentTakeID",
+                        column: x => x.ParentTakeID,
+                        principalTable: "Take",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Comment_AspNetUsers_UserID",
+                        column: x => x.UserID,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -1765,6 +1869,12 @@ namespace Raccord.Data.EntityFramework.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
+                name: "IX_CastMember_ProjectUserInvitationID",
+                table: "CastMember",
+                column: "ProjectUserInvitationID",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Character_CastMemberID",
                 table: "Character",
                 column: "CastMemberID");
@@ -1800,14 +1910,59 @@ namespace Raccord.Data.EntityFramework.Migrations
                 column: "SceneID");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Comment_CallsheetID",
+                table: "Comment",
+                column: "CallsheetID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Comment_ParentBreakdownItemID",
+                table: "Comment",
+                column: "ParentBreakdownItemID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Comment_ParentCharacterID",
+                table: "Comment",
+                column: "ParentCharacterID");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Comment_ParentCommentID",
                 table: "Comment",
                 column: "ParentCommentID");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Comment_ParentImageID",
+                table: "Comment",
+                column: "ParentImageID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Comment_ParentLocationID",
+                table: "Comment",
+                column: "ParentLocationID");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Comment_ParentProjectID",
                 table: "Comment",
                 column: "ParentProjectID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Comment_ParentSceneID",
+                table: "Comment",
+                column: "ParentSceneID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Comment_ParentScriptLocationID",
+                table: "Comment",
+                column: "ParentScriptLocationID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Comment_ParentSlateID",
+                table: "Comment",
+                column: "ParentSlateID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Comment_ParentTakeID",
+                table: "Comment",
+                column: "ParentTakeID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Comment_UserID",
@@ -1818,6 +1973,11 @@ namespace Raccord.Data.EntityFramework.Migrations
                 name: "IX_CrewDepartment_CrewUnitID",
                 table: "CrewDepartment",
                 column: "CrewUnitID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CrewMember_CrewUnitInvitationMemberID",
+                table: "CrewMember",
+                column: "CrewUnitInvitationMemberID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_CrewMember_CrewUnitMemberID",
@@ -1833,6 +1993,16 @@ namespace Raccord.Data.EntityFramework.Migrations
                 name: "IX_CrewUnit_ProjectID",
                 table: "CrewUnit",
                 column: "ProjectID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CrewUnitInvitationMember_CrewUnitID",
+                table: "CrewUnitInvitationMember",
+                column: "CrewUnitID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CrewUnitInvitationMember_ProjectUserInvitationID",
+                table: "CrewUnitInvitationMember",
+                column: "ProjectUserInvitationID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_CrewUnitMember_CrewUnitID",
@@ -2221,9 +2391,6 @@ namespace Raccord.Data.EntityFramework.Migrations
                 name: "ProjectPermissionRoleDefinitions");
 
             migrationBuilder.DropTable(
-                name: "ProjectUserInvitation");
-
-            migrationBuilder.DropTable(
                 name: "SceneAction");
 
             migrationBuilder.DropTable(
@@ -2239,9 +2406,6 @@ namespace Raccord.Data.EntityFramework.Migrations
                 name: "ShootingDayScene");
 
             migrationBuilder.DropTable(
-                name: "Take");
-
-            migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
@@ -2249,6 +2413,12 @@ namespace Raccord.Data.EntityFramework.Migrations
 
             migrationBuilder.DropTable(
                 name: "CallsheetCharacter");
+
+            migrationBuilder.DropTable(
+                name: "Take");
+
+            migrationBuilder.DropTable(
+                name: "CrewUnitInvitationMember");
 
             migrationBuilder.DropTable(
                 name: "CrewUnitMember");
@@ -2267,9 +2437,6 @@ namespace Raccord.Data.EntityFramework.Migrations
 
             migrationBuilder.DropTable(
                 name: "ProjectPermissionDefinitions");
-
-            migrationBuilder.DropTable(
-                name: "UserInvitation");
 
             migrationBuilder.DropTable(
                 name: "CharacterScene");
@@ -2326,16 +2493,22 @@ namespace Raccord.Data.EntityFramework.Migrations
                 name: "ProjectUser");
 
             migrationBuilder.DropTable(
+                name: "ProjectUserInvitation");
+
+            migrationBuilder.DropTable(
                 name: "CrewUnit");
 
             migrationBuilder.DropTable(
                 name: "ScriptUpload");
 
             migrationBuilder.DropTable(
+                name: "Breakdown");
+
+            migrationBuilder.DropTable(
                 name: "ProjectRoleDefinitions");
 
             migrationBuilder.DropTable(
-                name: "Breakdown");
+                name: "UserInvitation");
 
             migrationBuilder.DropTable(
                 name: "Projects");

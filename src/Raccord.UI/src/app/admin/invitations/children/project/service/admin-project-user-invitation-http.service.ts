@@ -4,6 +4,7 @@ import { BaseHttpService } from '../../../../../shared/service/base-http.service
 import { AppSettings } from '../../../../../app.settings';
 import { ProjectUserInvitationSummary } from '../model/project-user-invitation-summary.model';
 import { ProjectUserInvitation } from '../model/project-user-invitation.model';
+import { FullProjectUserInvitation } from '../model/full-project-user-invitation.model';
 
 @Injectable()
 export class AdminProjectUserInvitationHttpService extends BaseHttpService {
@@ -22,9 +23,16 @@ export class AdminProjectUserInvitationHttpService extends BaseHttpService {
         return this.doGetArray(uri);
     }
 
-    public get(id: number): Promise<ProjectUserInvitationSummary | void> {
+    public get(id: number): Promise<FullProjectUserInvitation | void> {
 
         let uri = `${this._baseUri}/${id}`;
+
+        return this.doGet(uri);
+    }
+
+    public getSummary(id: number): Promise<ProjectUserInvitationSummary | void> {
+
+        let uri = `${this._baseUri}/${id}/summary`;
 
         return this.doGet(uri);
     }

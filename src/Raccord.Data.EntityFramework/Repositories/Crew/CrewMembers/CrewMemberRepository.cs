@@ -52,7 +52,10 @@ namespace Raccord.Data.EntityFramework.Repositories.Crew.CrewMembers
             return query.Include(t => t.Department)
                         .Include(cm => cm.CrewUnitMember)
                             .ThenInclude(cm=> cm.ProjectUser)
-                                .ThenInclude(pu=> pu.User);
+                                .ThenInclude(pu=> pu.User)
+                        .Include(cm => cm.CrewUnitInvitationMember)
+                            .ThenInclude(cm=> cm.ProjectUserInvitation)
+                                .ThenInclude(pu=> pu.UserInvitation);
         }
 
         private IQueryable<CrewMember> GetIncludedSummary()
@@ -62,7 +65,10 @@ namespace Raccord.Data.EntityFramework.Repositories.Crew.CrewMembers
             return query.Include(t => t.Department)
                         .Include(cm => cm.CrewUnitMember)
                             .ThenInclude(cm=> cm.ProjectUser)
-                                .ThenInclude(pu=> pu.User);
+                                .ThenInclude(pu=> pu.User)
+                        .Include(cm => cm.CrewUnitInvitationMember)
+                            .ThenInclude(cm=> cm.ProjectUserInvitation)
+                                .ThenInclude(pu=> pu.UserInvitation);
         }
 
         private IQueryable<CrewMember> GetIncluded()
@@ -82,7 +88,10 @@ namespace Raccord.Data.EntityFramework.Repositories.Crew.CrewMembers
                          .ThenInclude(p=> p.ProjectUsers)
                         .Include(cm => cm.CrewUnitMember)
                             .ThenInclude(cm=> cm.ProjectUser)
-                                .ThenInclude(pu=> pu.User);
+                                .ThenInclude(pu=> pu.User)
+                        .Include(cm => cm.CrewUnitInvitationMember)
+                            .ThenInclude(cm=> cm.ProjectUserInvitation)
+                                .ThenInclude(pu=> pu.UserInvitation);
         }
 
         private IQueryable<CrewMember> GetSearchQuery(string searchText, long? projectID, string userID, bool isAdmin, long[] excludeIds)

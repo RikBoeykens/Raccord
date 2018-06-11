@@ -36,16 +36,17 @@ import { CrewUnitHttpService } from
     '../../../../projects/children/crew/crew-units/service/crew-unit-http.service';
 import { CrewUnitSummary }
     from '../../../../projects/children/crew/crew-units/model/crew-unit-summary.model';
-import { ChooseCrewUnitDialogComponent, CrewDepartmentHttpService } from '../../../../projects';
+import { ChooseCrewUnitDialogComponent, CrewDepartmentHttpService, EditCastMemberDialogComponent } from '../../../../projects';
 import { LinkedCrewUnit }
     from '../../../../projects/children/crew/crew-units/model/linked-crew-unit.model';
 import { ProjectUserCrewUnit } from
     '../../../../projects/children/crew/crew-units/model/project-user-crew-unit.model';
-import { AdminUnitCrewMembersHttpService } from
-    '../../../crew-units/service/admin-unit-crew-members-http.service';
+import { AdminCrewUnitMemberCrewMembersHttpService } from
+    '../../../crew-units/service/admin-crew-unit-member-crew-members-http.service';
 import { CrewDepartment } from '../../../../projects/children/crew/departments/model/crew-department.model';
-import { CreateUnitCrewMember } from '../../../crew-units/model/create-unit-crew-member.model';
-import { AdminAddCrewMemberDialogComponent } from '../../..';
+import { AdminAddCrewMemberDialogComponent, AdminLinkCastDialogComponent } from '../../..';
+import { CreateCrewUnitMemberCrewMember } from '../../../crew-units/model/create-crew-unit-member-crew-member.model';
+import { CreateCrewMember } from '../../../crew-units/model/create-crew-member.model';
 
 @Component({
   templateUrl: 'admin-project-user-landing.component.html',
@@ -58,7 +59,7 @@ export class AdminProjectUserLandingComponent implements OnInit  {
   constructor(
       private _projectUserHttpService: AdminProjectUserHttpService,
       private _projectUserCastHttpService: AdminProjectUserCastHttpService,
-      private _unitCrewMembersHttpService: AdminUnitCrewMembersHttpService,
+      private _crewUnitMemberCrewMembersHttpService: AdminCrewUnitMemberCrewMembersHttpService,
       private _crewMemberHttpService: CrewMemberHttpService,
       private _castMemberHttpService: CastMemberHttpService,
       private _crewUnitMemberHttpService: AdminCrewUnitMemberHttpService,
@@ -120,7 +121,8 @@ export class AdminProjectUserLandingComponent implements OnInit  {
   public removeCrewMemberLink(crewUnit: ProjectUserCrewUnit, crewMember: CrewMember) {
     let loadingId = this._loadingService.startLoading();
 
-    this._unitCrewMembersHttpService.removeLink(crewUnit.linkID, crewMember.id).then((data) => {
+    this._crewUnitMemberCrewMembersHttpService
+            .removeLink(crewUnit.linkID, crewMember.id).then((data) => {
         if (typeof(data) === 'string') {
             this._dialogService.error(data);
         }else {
@@ -137,38 +139,43 @@ export class AdminProjectUserLandingComponent implements OnInit  {
     );
   }
 
-  public showAddCastMember() {
+  public showLinkCastMember() {
     this._loadingWrapperService.Load(
         this._castMemberHttpService.getAll(this.projectUser.project.id),
         (data: CastMemberSummary[]) => {
-            let castMemberDialog = this._dialog.open(AdminAddCastDialogComponent, {data:
+            let castMemberDialog = this._dialog.open(AdminLinkCastDialogComponent, {data:
                 {
-                    castMembers: data.filter((cast: CastMemberSummary) => cast.userID === '')
+                    castMembers: data.filter((cast: CastMemberSummary) =>
+                        !cast.userID && !cast.userInvitationID)
                 }});
             castMemberDialog.afterClosed().subscribe((returnedCastMember: CastMemberSummary) => {
                 if (returnedCastMember) {
-                    this.addCastLink(returnedCastMember);
+                    this.addCastLink(returnedCastMember.id);
                 }
             });
         }
     );
-
   }
 
   public showAddCrewMember(crewUnit: ProjectUserCrewUnit) {
     this._loadingWrapperService.Load(
         this._crewDepartmentHttpService.getAll(crewUnit.id),
         (data: CrewDepartment[]) => {
-            let newCrewMember = new CreateUnitCrewMember();
-            newCrewMember.crewUnitMemberID = crewUnit.linkID;
+            let createCrewMember = new CreateCrewMember();
             let crewMemberDialog = this._dialog.open(AdminAddCrewMemberDialogComponent, {data:
                 {
-                    crewMember: newCrewMember,
+                    crewMember: createCrewMember,
                     departments: data
                 }});
-            crewMemberDialog.afterClosed().subscribe((returnedCrewMember: CreateUnitCrewMember) => {
+            crewMemberDialog.afterClosed()
+                    .subscribe((returnedCrewMember: CreateCrewMember) => {
                 if (returnedCrewMember) {
-                    this.addCrewMember(returnedCrewMember);
+                    let newCrewMember = new CreateCrewUnitMemberCrewMember({
+                        crewUnitMemberID: crewUnit.linkID,
+                        jobTitle: returnedCrewMember.jobTitle,
+                        departmentID: returnedCrewMember.departmentID
+                    });
+                    this.addCrewMember(newCrewMember);
                 }
             });
         }
@@ -223,9 +230,30 @@ export class AdminProjectUserLandingComponent implements OnInit  {
         );
     }
 
-    private addCastLink(castMember: CastMemberSummary) {
+    public showAddCastMemberDialog() {
+        let castMember = new CastMember();
+        castMember.projectID = this.projectUser.project.id;
+        let castMemberDialog = this._dialog.open(AdminAddCastDialogComponent, {data:
+            {
+                castMember,
+            }});
+        castMemberDialog.afterClosed().subscribe((returnedCastMember: CastMember) => {
+            if (returnedCastMember) {
+                this.postCastMember(returnedCastMember);
+            }
+        });
+    }
+
+    private postCastMember(castMember: CastMember) {
         this._loadingWrapperService.Load(
-            this._projectUserCastHttpService.addLink(this.projectUser.id, castMember.id),
+            this._castMemberHttpService.post(castMember),
+            (data) => this.addCastLink(data)
+        );
+    }
+
+    private addCastLink(castMemberId: number) {
+        this._loadingWrapperService.Load(
+            this._projectUserCastHttpService.addLink(this.projectUser.id, castMemberId),
             () => {
                 this.getProjectUser();
             }
@@ -262,9 +290,9 @@ export class AdminProjectUserLandingComponent implements OnInit  {
         );
     }
 
-    private addCrewMember(crewMember: CreateUnitCrewMember) {
+    private addCrewMember(crewMember: CreateCrewUnitMemberCrewMember) {
         this._loadingWrapperService.Load(
-            this._unitCrewMembersHttpService.post(crewMember),
+            this._crewUnitMemberCrewMembersHttpService.post(crewMember),
             () => {
                 this.getUnits();
             }

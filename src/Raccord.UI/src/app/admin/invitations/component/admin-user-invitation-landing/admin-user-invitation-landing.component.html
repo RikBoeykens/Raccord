@@ -18,10 +18,10 @@
         <tbody>
             <tr *ngFor="let projectInvitation of invitation.projects">
                 <td>
-                    {{projectInvitation.project.title}}
+                    <a routerLink="/admin/projectuserinvitations/{{projectInvitation.id}}">{{projectInvitation.project.title}}</a>
                 </td>
                 <td>
-                    {{projectInvitation.projectRole.name}}
+                    <a routerLink="/admin/projectuserinvitations/{{projectInvitation.id}}">{{projectInvitation.projectRole.name}}</a>
                 </td>
                 <td>
                     <button md-button (click)="removeProject(invitation)"><md-icon>delete</md-icon></button>

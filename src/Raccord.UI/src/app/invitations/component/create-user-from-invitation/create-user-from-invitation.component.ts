@@ -6,7 +6,8 @@ import { InvitationHttpService } from '../../service/invitation-http.service';
 import { LoadingWrapperService } from '../../../shared/service/loading-wrapper.service';
 import { CreateUserFromInvitation } from '../../model/create-user-from-invitation.model';
 import { AuthService } from '../../../security/service/auth.service';
-import { Login } from '../../../security';
+import { LoginService } from '../../../security/service/login.service';
+import { ValidationHelpers } from '../../../shared/helpers/validation.helpers';
 
 @Component({
     templateUrl: 'create-user-from-invitation.component.html'
@@ -21,12 +22,14 @@ export class CreateUserFromInvitationComponent implements OnInit {
         private _invitationHttpService: InvitationHttpService,
         private _loadingWrapperService: LoadingWrapperService,
         private _authService: AuthService,
+        private _loginService: LoginService,
         private _router: Router,
         private _route: ActivatedRoute
     ) {
     }
 
     public ngOnInit() {
+        this._authService.logout();
         this._route.data.subscribe((data: {
             invitation: UserInvitationSummary
         }) => {
@@ -49,12 +52,16 @@ export class CreateUserFromInvitationComponent implements OnInit {
         );
     }
 
+    public passwordIsValid(): boolean {
+        return ValidationHelpers.isValidPassword(this.request.password);
+    }
+
     public passwordsdMatch(): boolean {
         return this.request.password === this.confirmpassword;
     }
 
     private login() {
-        this._authService.login({
+        this._loginService.login({
             username: this.emailAddress,
             password: this.request.password
         }).then(() => this._router.navigate(['/']));

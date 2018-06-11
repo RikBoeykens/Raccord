@@ -67,6 +67,11 @@ namespace Raccord.Data.EntityFramework
                         .WithOne(sd => sd.ProjectUser)
                         .HasForeignKey<CastMember>(cs => cs.ProjectUserID);
 
+            modelBuilder.Entity<ProjectUserInvitation>()
+                        .HasOne(cs => cs.CastMember)
+                        .WithOne(sd => sd.ProjectUserInvitation)
+                        .HasForeignKey<CastMember>(cs => cs.ProjectUserInvitationID);
+
             modelBuilder.Entity<UserInvitation>()
                         .HasMany(pui => pui.ProjectUserInvitations)
                         .WithOne(ui => ui.UserInvitation);

@@ -152,6 +152,8 @@ using Raccord.Application.Core.ExternalServices.Location;
 using Raccord.Application.ExternalServices.Location;
 using Raccord.Application.Core.ExternalServices.Weather;
 using Raccord.Application.ExternalServices.Weather;
+using Raccord.Application.Services.Users.Invitations.Project.Cast;
+using Raccord.Application.Core.Services.Users.Invitations.Project.Cast;
 
 namespace Raccord.API
 {
@@ -322,6 +324,7 @@ namespace Raccord.API
             services.AddTransient<IBreakdownService, BreakdownService>();
 
             services.AddTransient<IProjectUserCastService, ProjectUserCastService>();
+            services.AddTransient<IProjectUserInvitationCastService, ProjectUserInvitationCastService>();
 
             services.AddTransient<ICastMemberRepository, CastMemberRepository>();
             services.AddTransient<ICastMemberService, CastMemberService>();
@@ -331,8 +334,11 @@ namespace Raccord.API
             services.AddTransient<ICrewUnitService, CrewUnitService>();
 
             services.AddTransient<ICrewUnitMemberRepository, CrewUnitMemberRepository>();
+            services.AddTransient<ICrewUnitInvitationMemberRepository, CrewUnitInvitationMemberRepository>();
             services.AddTransient<ICrewUnitMemberService, CrewUnitMemberService>();
-            services.AddTransient<IUnitCrewMemberService, UnitCrewMemberService>();
+            services.AddTransient<ICrewUnitInvitationMemberService, CrewUnitInvitationMemberService>();
+            services.AddTransient<ICrewUnitMemberCrewMemberService, CrewUnitMemberCrewMemberService>();
+            services.AddTransient<ICrewUnitInvitationMemberCrewMemberService, CrewUnitInvitationMemberCrewMemberService>();
 
             services.AddTransient<ICalendarService, CalendarService>();
 

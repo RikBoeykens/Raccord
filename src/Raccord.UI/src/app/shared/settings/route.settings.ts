@@ -4,6 +4,7 @@ export class RouteSettings {
     public static get UNITS(): string { return 'units'; }
     public static get USERS(): string { return 'users'; }
     public static get PROJECTUSERS(): string { return 'projectusers'; }
+    public static get PROJECTUSERINVITATIONS(): string { return 'projectuserinvitations'; }
     public static get PROFILE(): string { return 'profile'; }
 
     public static get PROJECTS(): string { return 'projects'; }

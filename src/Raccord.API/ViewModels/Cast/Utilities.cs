@@ -23,6 +23,7 @@ namespace Raccord.API.ViewModels.Cast
         Email = dto.Email,
         ProjectID = dto.ProjectID,
         UserID = dto.UserID,
+        UserInvitationID = dto.UserInvitationID,
         HasImage = dto.HasImage,
         Characters = dto.Characters.Select(c => c.Translate()),
         Scenes = dto.Scenes.Select(s => s.Translate()),
@@ -44,6 +45,7 @@ namespace Raccord.API.ViewModels.Cast
         Email = dto.Email,
         ProjectID = dto.ProjectID,
         UserID = dto.UserID,
+        UserInvitationID = dto.UserInvitationID,
         HasImage = dto.HasImage,
       };
     }
