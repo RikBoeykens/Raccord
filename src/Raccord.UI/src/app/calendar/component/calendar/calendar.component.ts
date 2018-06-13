@@ -12,10 +12,7 @@ import {
     endOfDay,
     format
   } from 'date-fns';
-import { RouteInfo } from '../../../shared/model/route-info.model';
-import { RouteHelpers } from '../../../shared/helpers/route.helpers';
-import { CalendarItem } from '../../model/calendar-item';
-import { CalendarHelpers } from '../../helpers/calendar.helpers';
+import { RouteInfo, RouteHelpers } from '../../../shared';
 
 @Component({
   selector: 'calendar',
@@ -58,7 +55,7 @@ export class CalendarComponent implements OnInit {
       }
 
     public eventClicked(event: CalendarEvent<{ routeInfo: RouteInfo }>): void {
-        let routeArray = RouteHelpers.getRouteArray(event.meta.routeInfo);
+        const routeArray = RouteHelpers.getRouteArray(event.meta.routeInfo);
         this._router.navigate(routeArray);
     }
 
@@ -75,7 +72,7 @@ export class CalendarComponent implements OnInit {
         day: endOfDay
       }[this.view];
 
-      let dates = {start: getStart(this.viewDate), end: getEnd(this.viewDate)};
+      const dates = {start: getStart(this.viewDate), end: getEnd(this.viewDate)};
       this.dateChange.emit(dates);
     }
 }

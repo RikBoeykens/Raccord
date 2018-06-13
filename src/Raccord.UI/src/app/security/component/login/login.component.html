@@ -2,20 +2,18 @@
     <form id="login-form" class="col offset-s2 s8"
           #loginForm = "ngForm"
           (ngSubmit)="doLogin()">
-        <div class="row">
-            <md-input-container>
-                <input mdInput placeholder="Email" id="login_email" required [(ngModel)]="login.username" #email="ngModel" name="login_email">
-            </md-input-container>
+        <div fxLayout="row">
+            <mat-form-field fxFlex="50%">
+                <input matInput placeholder="Email" id="login_email" required [(ngModel)]="login.username" #email="ngModel" name="login_email">
+            </mat-form-field>
         </div>
-        <div class="row">
-            <md-input-container>
-                <input mdInput type="password" placeholder="Password" id="login_password" required [(ngModel)]="login.password" #password="ngModel" name="login_password">
-            </md-input-container>
+        <div fxLayout="row">
+            <mat-form-field fxFlex="50%">
+                <input matInput type="password" placeholder="Password" id="login_password" required [(ngModel)]="login.password" #password="ngModel" name="login_password">
+            </mat-form-field>
         </div>
-        <div class="row">
-            <div class="col s12">
-                <button md-raised-button type="submit" [disabled]="!loginForm.form.valid">Log in</button>
-            </div>
+        <div fxLayout="row">
+            <button mat-raised-button type="submit" [disabled]="!loginForm.form.valid">Log in</button>
         </div>
     </form>
 </div>

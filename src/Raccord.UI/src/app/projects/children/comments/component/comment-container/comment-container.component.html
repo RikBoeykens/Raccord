@@ -1,4 +1,0 @@
-<div class="comment-container">
-  <edit-comment [projectId]="projectId" [parentId]="parentId" [parentType]="parentType" (submittedComment)="onCommentSubmit($event)"></edit-comment>
-  <show-comment *ngFor="let comment of comments" [comment]="comment" (removedComment)="onRemovedComment()" [projectId]="projectId"></show-comment>
-</div>

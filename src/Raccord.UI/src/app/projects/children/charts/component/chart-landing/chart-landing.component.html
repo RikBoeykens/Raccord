@@ -1,9 +1,0 @@
-<md-card>      
-        <a routerLink="/" class="breadcrumb">Dashboard</a>
-        <a routerLink="/projects" class="breadcrumb">Projects</a>
-        <a routerLink="/projects/{{project.id}}" class="breadcrumb">{{project.title}}</a>
-        <span class="breadcrumb">Charts</span>
-</md-card>
-<md-card *ngFor="let chart of charts">
-        <raccord-chart [chartObjectData]="chart"></raccord-chart>        
-</md-card>

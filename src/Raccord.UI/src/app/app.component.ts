@@ -1,50 +1,28 @@
-/*
+/**
  * Angular 2 decorators and services
  */
-import {
-  Component
-} from '@angular/core';
-import { Router, NavigationStart, NavigationEnd, NavigationCancel, NavigationError, Event as RouterEvent } from '@angular/router';
-import { LoadingService } from './loading/service/loading.service';
+import { Component, ViewEncapsulation } from '@angular/core';
+import { AppState } from './app.service';
 
-/*
+/**
  * App Component
  * Top Level Component
  */
 @Component({
   selector: 'app',
+  encapsulation: ViewEncapsulation.None,
   styleUrls: [
     './app.component.css'
   ],
   templateUrl: 'app.component.html'
 })
-export class AppComponent{
-
-    loadingId: string;
-
-    constructor(
-        private _router: Router,
-        private _loadingService: LoadingService
-    ) {
-        _router.events.subscribe((event: RouterEvent) => {
-            this.navigationInterceptor(event);
-        });
-    }
-
-    navigationInterceptor(event: RouterEvent): void {
-        if (event instanceof NavigationStart) {
-            this.loadingId = this._loadingService.startLoading();
-        }
-        if (event instanceof NavigationEnd) {
-            this._loadingService.endLoading(this.loadingId);
-        }
-
-        // Set loading state to false in both of the below events to hide the spinner in case a request fails
-        if (event instanceof NavigationCancel) {
-            this._loadingService.endLoading(this.loadingId);
-        }
-        if (event instanceof NavigationError) {
-            this._loadingService.endLoading(this.loadingId);
-        }
-    }
+export class AppComponent {
 }
+
+/**
+ * Please review the https://github.com/AngularClass/angular-examples/ repo for
+ * more angular app examples that you may copy/paste
+ * (The examples may not be updated as quickly. Please open an issue on github for us to update it)
+ * For help or questions please contact us at @AngularClass on twitter
+ * or our chat on Slack at https://AngularClass.com/slack-join
+ */

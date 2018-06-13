@@ -9,11 +9,16 @@
     "sourceMap": true,
     "noEmit": true,
     "noEmitHelpers": true,
+    "importHelpers": true,
     "strictNullChecks": false,
     "lib": [
       "dom",
       "es6"
     ],
+    "baseUrl": "./src",
+    "paths": {
+      "@angular/*": ["node_modules/@angular/*"]
+    },
     "typeRoots": [
       "node_modules/@types"
     ],
@@ -21,14 +26,13 @@
       "hammerjs",
       "jasmine",
       "node",
-      "source-map",
       "uglify-js",
       "webpack"
     ]
   },
   "exclude": [
     "node_modules",
-    "wwwroot"
+    "dist"
   ],
   "awesomeTypescriptLoaderOptions": {
     "forkChecker": true,

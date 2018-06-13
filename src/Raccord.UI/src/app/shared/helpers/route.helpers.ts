@@ -1,6 +1,4 @@
-import { RouteInfo } from '../model/route-info.model';
-import { EntityType } from '../enums/entity-type.enum';
-import { RouteSettings } from '../settings/route.settings';
+import { RouteInfo, EntityType, RouteSettings } from '..';
 
 export class RouteHelpers {
 

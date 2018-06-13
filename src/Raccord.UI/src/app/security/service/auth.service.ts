@@ -1,17 +1,16 @@
 import { Component } from '@angular/core';
 import { Injectable } from '@angular/core';
-import { HttpHeaders } from '@angular/common/http';
 import { Http, Headers } from '@angular/http';
-import { BaseHttpService } from '../../shared/service/base-http.service';
 import { AppSettings } from '../../app.settings';
 import { OpenIdDictToken } from '../';
 import { Login } from '../';
 import { TokenHelpers } from '../helpers/token.helpers';
-import { HeaderHelpers } from '../../shared/helpers/header.helpers';
-import { AccountHelpers } from '../../account/helpers/account.helper';
 import { Observable } from 'rxjs/Observable';
 import { SaveToken } from '../model/save-token';
 import 'rxjs/add/observable/fromPromise';
+import 'rxjs/add/observable/of';
+import { AccountHelpers } from '../../shared/children/account';
+import { HeaderHelpers } from '../../shared';
 
 @Injectable()
 export class AuthService {
@@ -39,7 +38,7 @@ export class AuthService {
     }
 
     public getAccessToken(): Observable<string> {
-        let tokens = TokenHelpers.getTokens();
+        const tokens = TokenHelpers.getTokens();
         if (!tokens) {
             return Observable.of(null);
         }
@@ -56,7 +55,7 @@ export class AuthService {
     }
 
     private retrieveTokens(data: any, grantType: string): Promise<string> {
-        let uri = `${this._baseUri}/connect/token`;
+        const uri = `${this._baseUri}/connect/token`;
 
         Object.assign(data, { grant_type: grantType, scope: 'openid offline_access' });
 
@@ -64,10 +63,10 @@ export class AuthService {
         Object.keys(data)
             .forEach((key) => params.append(key, data[key]));
 
-        return this._http.post(uri, params.toString(), { headers: HeaderHelpers.ContentHeaders() })
+        return this._http.post(uri, params.toString(), {headers: HeaderHelpers.ContentHeaders()})
                     .toPromise()
                     .then((response) => {
-                        let token = <OpenIdDictToken> response.json();
+                        const token = response.json() as OpenIdDictToken;
                         this.internalLogin(token);
                         return token.access_token;
                     });

@@ -4,7 +4,7 @@ import { SaveToken } from '../model/save-token';
 export class TokenHelpers {
   public static setTokens(openIdDictToken: OpenIdDictToken) {
     const now = new Date();
-    let expiryDate =
+    const expiryDate =
       new Date(now.getTime() + openIdDictToken.expires_in * 1000).getTime();
     let tokens = this.getTokens();
     if (!tokens) {
@@ -20,7 +20,7 @@ export class TokenHelpers {
   }
 
   public static getTokens(): SaveToken {
-    let tokensString = sessionStorage.getItem('auth-tokens');
+    const tokensString = sessionStorage.getItem('auth-tokens');
     return tokensString == null ? null : JSON.parse(tokensString);
   }
 
