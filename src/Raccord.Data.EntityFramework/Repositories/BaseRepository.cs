@@ -105,6 +105,7 @@ namespace Raccord.Data.EntityFramework.Repositories
         public virtual void Edit(T entity)
         {
             EntityEntry dbEntityEntry = _context.Entry<T>(entity);
+            entity.UpdatedAt = DateTimeOffset.Now;
             dbEntityEntry.State = EntityState.Modified;
         }
         public virtual void Delete(T entity)

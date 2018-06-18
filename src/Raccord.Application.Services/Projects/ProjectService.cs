@@ -13,6 +13,7 @@ using Raccord.Domain.Model.Crew.Departments;
 using Raccord.Data.EntityFramework.Repositories.Users;
 using Raccord.Application.Services.Crew.CrewMembers;
 using Raccord.Domain.Model.Crew.CrewUnits;
+using Raccord.Application.Core.Common.Paging;
 
 namespace Raccord.Application.Services.Projects
 {
@@ -69,6 +70,17 @@ namespace Raccord.Application.Services.Projects
             var projectDtos = projects.Select(p => p.TranslateUserSummary(user));
 
             return projectDtos;
+        }
+
+        public PagedDataDto<UserProjectDto> GetAllForUserPaged(string userId, PaginationRequestDto paginationRequest)
+        {
+            var projects = _projectRepository.GetAllForUser(userId);
+
+            var user = _userRepository.GetFull(userId);
+
+            var projectDtos = projects.Select(p => p.TranslateUserSummary(user));
+
+            return projects.GetPaged<Project, UserProjectDto>(paginationRequest, x => Utilities.TranslateUser(x, user));
         }
 
         public IEnumerable<UserProjectDto> GetFullForUser(string userId)

@@ -5,23 +5,28 @@ export class LoadingService {
 
   public toggleLoadingSource = new Subject<boolean>();
   public toggleLoading$ = this.toggleLoadingSource.asObservable();
-  private isLoading: number = 0;
+  private loadingIds: string[] = [];
 
-  public startLoading() {
-    this.isLoading++;
+  public startLoading(): string {
+    const id = this.generateId();
+    this.loadingIds.push(id);
     this.toggleLoadingSource.next(true);
+    return id;
   }
 
-  public endLoading() {
-    this.isLoading--;
-    if (this.isLoading <= 0) {
-      this.isLoading = 0;
+  public endLoading(id: string) {
+    this.loadingIds.splice(this.loadingIds.indexOf(id));
+    if (!this.loadingIds.length) {
       this.toggleLoadingSource.next(false);
     }
   }
 
   public endAllLoading() {
-    this.isLoading = 0;
+    this.loadingIds = [];
     this.toggleLoadingSource.next(false);
+  }
+
+  private generateId(): string {
+    return Math.round(Math.random() * 1000).toString();
   }
 }

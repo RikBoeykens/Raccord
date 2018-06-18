@@ -1,3 +1,8 @@
+export { ProjectAvatarComponent } from './component/project-avatar/project-avatar.component';
+export { ProjectCardComponent } from './component/project-card/project-card.component';
+
+export { PagedProjectsResolve } from './service/paged-projects-resolve.service';
+export { ShortPagedProjectsResolve } from './service/short-paged-projects-resolve.service';
 export { ProjectHttpService } from './service/project-http.service';
 
 export { FullProject } from './model/full-project.model';

@@ -60,8 +60,10 @@ namespace Raccord.Data.EntityFramework.Migrations
                 {
                     ID = table.Column<long>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
+                    CreatedAt = table.Column<DateTimeOffset>(nullable: false, defaultValueSql: "now()"),
                     Description = table.Column<string>(nullable: true),
-                    Name = table.Column<string>(nullable: true)
+                    Name = table.Column<string>(nullable: true),
+                    UpdatedAt = table.Column<DateTimeOffset>(nullable: false, defaultValueSql: "now()")
                 },
                 constraints: table =>
                 {
@@ -74,10 +76,12 @@ namespace Raccord.Data.EntityFramework.Migrations
                 {
                     ID = table.Column<long>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
+                    CreatedAt = table.Column<DateTimeOffset>(nullable: false, defaultValueSql: "now()"),
                     Description = table.Column<string>(nullable: true),
                     Name = table.Column<string>(nullable: true),
                     ShortName = table.Column<string>(nullable: true),
-                    SortingOrder = table.Column<int>(nullable: true)
+                    SortingOrder = table.Column<int>(nullable: true),
+                    UpdatedAt = table.Column<DateTimeOffset>(nullable: false, defaultValueSql: "now()")
                 },
                 constraints: table =>
                 {
@@ -90,9 +94,11 @@ namespace Raccord.Data.EntityFramework.Migrations
                 {
                     ID = table.Column<long>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
+                    CreatedAt = table.Column<DateTimeOffset>(nullable: false, defaultValueSql: "now()"),
                     Description = table.Column<string>(nullable: true),
                     Name = table.Column<string>(nullable: true),
-                    SortingOrder = table.Column<int>(nullable: true)
+                    SortingOrder = table.Column<int>(nullable: true),
+                    UpdatedAt = table.Column<DateTimeOffset>(nullable: false, defaultValueSql: "now()")
                 },
                 constraints: table =>
                 {
@@ -143,9 +149,11 @@ namespace Raccord.Data.EntityFramework.Migrations
                 {
                     ID = table.Column<long>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
+                    CreatedAt = table.Column<DateTimeOffset>(nullable: false, defaultValueSql: "now()"),
                     Description = table.Column<string>(nullable: true),
                     Name = table.Column<string>(nullable: true),
-                    Permission = table.Column<int>(nullable: false)
+                    Permission = table.Column<int>(nullable: false),
+                    UpdatedAt = table.Column<DateTimeOffset>(nullable: false, defaultValueSql: "now()")
                 },
                 constraints: table =>
                 {
@@ -158,9 +166,11 @@ namespace Raccord.Data.EntityFramework.Migrations
                 {
                     ID = table.Column<long>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
+                    CreatedAt = table.Column<DateTimeOffset>(nullable: false, defaultValueSql: "now()"),
                     Description = table.Column<string>(nullable: true),
                     Name = table.Column<string>(nullable: true),
-                    Role = table.Column<int>(nullable: false)
+                    Role = table.Column<int>(nullable: false),
+                    UpdatedAt = table.Column<DateTimeOffset>(nullable: false, defaultValueSql: "now()")
                 },
                 constraints: table =>
                 {
@@ -173,7 +183,9 @@ namespace Raccord.Data.EntityFramework.Migrations
                 {
                     ID = table.Column<long>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
-                    Title = table.Column<string>(nullable: true)
+                    CreatedAt = table.Column<DateTimeOffset>(nullable: false, defaultValueSql: "now()"),
+                    Title = table.Column<string>(nullable: true),
+                    UpdatedAt = table.Column<DateTimeOffset>(nullable: false, defaultValueSql: "now()")
                 },
                 constraints: table =>
                 {
@@ -186,9 +198,11 @@ namespace Raccord.Data.EntityFramework.Migrations
                 {
                     ID = table.Column<Guid>(nullable: false),
                     AcceptedDate = table.Column<DateTime>(nullable: true),
+                    CreatedAt = table.Column<DateTimeOffset>(nullable: false, defaultValueSql: "now()"),
                     Email = table.Column<string>(nullable: true),
                     FirstName = table.Column<string>(nullable: true),
-                    LastName = table.Column<string>(nullable: true)
+                    LastName = table.Column<string>(nullable: true),
+                    UpdatedAt = table.Column<DateTimeOffset>(nullable: false, defaultValueSql: "now()")
                 },
                 constraints: table =>
                 {
@@ -331,8 +345,10 @@ namespace Raccord.Data.EntityFramework.Migrations
                 {
                     ID = table.Column<long>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
+                    CreatedAt = table.Column<DateTimeOffset>(nullable: false, defaultValueSql: "now()"),
                     ProjectPermissionID = table.Column<long>(nullable: false),
-                    ProjectRoleID = table.Column<long>(nullable: false)
+                    ProjectRoleID = table.Column<long>(nullable: false),
+                    UpdatedAt = table.Column<DateTimeOffset>(nullable: false, defaultValueSql: "now()")
                 },
                 constraints: table =>
                 {
@@ -357,11 +373,13 @@ namespace Raccord.Data.EntityFramework.Migrations
                 {
                     ID = table.Column<long>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
+                    CreatedAt = table.Column<DateTimeOffset>(nullable: false, defaultValueSql: "now()"),
                     Description = table.Column<string>(nullable: true),
                     IsDefaultProjectBreakdown = table.Column<bool>(nullable: false),
                     IsPublished = table.Column<bool>(nullable: false),
                     Name = table.Column<string>(nullable: true),
                     ProjectID = table.Column<long>(nullable: false),
+                    UpdatedAt = table.Column<DateTimeOffset>(nullable: false, defaultValueSql: "now()"),
                     UserID = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
@@ -387,11 +405,13 @@ namespace Raccord.Data.EntityFramework.Migrations
                 {
                     ID = table.Column<long>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
+                    CreatedAt = table.Column<DateTimeOffset>(nullable: false, defaultValueSql: "now()"),
                     Description = table.Column<string>(nullable: true),
                     Name = table.Column<string>(nullable: true),
                     ProjectID = table.Column<long>(nullable: false),
                     ShortName = table.Column<string>(nullable: true),
-                    SortingOrder = table.Column<int>(nullable: true)
+                    SortingOrder = table.Column<int>(nullable: true),
+                    UpdatedAt = table.Column<DateTimeOffset>(nullable: false, defaultValueSql: "now()")
                 },
                 constraints: table =>
                 {
@@ -410,9 +430,11 @@ namespace Raccord.Data.EntityFramework.Migrations
                 {
                     ID = table.Column<long>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
+                    CreatedAt = table.Column<DateTimeOffset>(nullable: false, defaultValueSql: "now()"),
                     Description = table.Column<string>(nullable: true),
                     Name = table.Column<string>(nullable: true),
-                    ProjectID = table.Column<long>(nullable: false)
+                    ProjectID = table.Column<long>(nullable: false),
+                    UpdatedAt = table.Column<DateTimeOffset>(nullable: false, defaultValueSql: "now()")
                 },
                 constraints: table =>
                 {
@@ -431,12 +453,14 @@ namespace Raccord.Data.EntityFramework.Migrations
                 {
                     ID = table.Column<long>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
+                    CreatedAt = table.Column<DateTimeOffset>(nullable: false, defaultValueSql: "now()"),
                     Description = table.Column<string>(nullable: true),
                     FileContent = table.Column<byte[]>(nullable: true),
                     FileName = table.Column<string>(nullable: true),
                     IsPrimaryImage = table.Column<bool>(nullable: false),
                     ProjectID = table.Column<long>(nullable: false),
-                    Title = table.Column<string>(nullable: true)
+                    Title = table.Column<string>(nullable: true),
+                    UpdatedAt = table.Column<DateTimeOffset>(nullable: false, defaultValueSql: "now()")
                 },
                 constraints: table =>
                 {
@@ -459,11 +483,13 @@ namespace Raccord.Data.EntityFramework.Migrations
                     Address2 = table.Column<string>(nullable: true),
                     Address3 = table.Column<string>(nullable: true),
                     Address4 = table.Column<string>(nullable: true),
+                    CreatedAt = table.Column<DateTimeOffset>(nullable: false, defaultValueSql: "now()"),
                     Description = table.Column<string>(nullable: true),
                     Latitude = table.Column<double>(nullable: true),
                     Longitude = table.Column<double>(nullable: true),
                     Name = table.Column<string>(nullable: true),
-                    ProjectID = table.Column<long>(nullable: false)
+                    ProjectID = table.Column<long>(nullable: false),
+                    UpdatedAt = table.Column<DateTimeOffset>(nullable: false, defaultValueSql: "now()")
                 },
                 constraints: table =>
                 {
@@ -482,10 +508,12 @@ namespace Raccord.Data.EntityFramework.Migrations
                 {
                     ID = table.Column<long>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
+                    CreatedAt = table.Column<DateTimeOffset>(nullable: false, defaultValueSql: "now()"),
                     End = table.Column<DateTime>(nullable: true),
                     FileName = table.Column<string>(nullable: true),
                     ProjectID = table.Column<long>(nullable: false),
-                    Start = table.Column<DateTime>(nullable: false)
+                    Start = table.Column<DateTime>(nullable: false),
+                    UpdatedAt = table.Column<DateTimeOffset>(nullable: false, defaultValueSql: "now()")
                 },
                 constraints: table =>
                 {
@@ -505,8 +533,10 @@ namespace Raccord.Data.EntityFramework.Migrations
                     ID = table.Column<long>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
                     CastMemberID = table.Column<long>(nullable: true),
+                    CreatedAt = table.Column<DateTimeOffset>(nullable: false, defaultValueSql: "now()"),
                     ProjectID = table.Column<long>(nullable: false),
                     RoleID = table.Column<long>(nullable: true),
+                    UpdatedAt = table.Column<DateTimeOffset>(nullable: false, defaultValueSql: "now()"),
                     UserInvitationID = table.Column<Guid>(nullable: false)
                 },
                 constraints: table =>
@@ -573,8 +603,10 @@ namespace Raccord.Data.EntityFramework.Migrations
                     ID = table.Column<long>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
                     BreakdownID = table.Column<long>(nullable: false),
+                    CreatedAt = table.Column<DateTimeOffset>(nullable: false, defaultValueSql: "now()"),
                     Description = table.Column<string>(nullable: true),
-                    Name = table.Column<string>(nullable: true)
+                    Name = table.Column<string>(nullable: true),
+                    UpdatedAt = table.Column<DateTimeOffset>(nullable: false, defaultValueSql: "now()")
                 },
                 constraints: table =>
                 {
@@ -594,9 +626,11 @@ namespace Raccord.Data.EntityFramework.Migrations
                     ID = table.Column<long>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
                     CastMemberID = table.Column<long>(nullable: true),
+                    CreatedAt = table.Column<DateTimeOffset>(nullable: false, defaultValueSql: "now()"),
                     ProjectID = table.Column<long>(nullable: false),
                     RoleID = table.Column<long>(nullable: true),
                     SelectedBreakdownID = table.Column<long>(nullable: true),
+                    UpdatedAt = table.Column<DateTimeOffset>(nullable: false, defaultValueSql: "now()"),
                     UserID = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
@@ -634,10 +668,12 @@ namespace Raccord.Data.EntityFramework.Migrations
                 {
                     ID = table.Column<long>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
+                    CreatedAt = table.Column<DateTimeOffset>(nullable: false, defaultValueSql: "now()"),
                     CrewUnitID = table.Column<long>(nullable: false),
                     Description = table.Column<string>(nullable: true),
                     Name = table.Column<string>(nullable: true),
-                    SortingOrder = table.Column<int>(nullable: true)
+                    SortingOrder = table.Column<int>(nullable: true),
+                    UpdatedAt = table.Column<DateTimeOffset>(nullable: false, defaultValueSql: "now()")
                 },
                 constraints: table =>
                 {
@@ -658,6 +694,7 @@ namespace Raccord.Data.EntityFramework.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
                     CallsheetID = table.Column<long>(nullable: true),
                     Completed = table.Column<bool>(nullable: false),
+                    CreatedAt = table.Column<DateTimeOffset>(nullable: false, defaultValueSql: "now()"),
                     CrewUnitID = table.Column<long>(nullable: false),
                     Date = table.Column<DateTime>(nullable: false),
                     End = table.Column<DateTime>(nullable: false),
@@ -665,7 +702,8 @@ namespace Raccord.Data.EntityFramework.Migrations
                     OverTime = table.Column<TimeSpan>(nullable: false),
                     ScheduleDayID = table.Column<long>(nullable: true),
                     Start = table.Column<DateTime>(nullable: false),
-                    Turn = table.Column<DateTime>(nullable: false)
+                    Turn = table.Column<DateTime>(nullable: false),
+                    UpdatedAt = table.Column<DateTimeOffset>(nullable: false, defaultValueSql: "now()")
                 },
                 constraints: table =>
                 {
@@ -684,10 +722,12 @@ namespace Raccord.Data.EntityFramework.Migrations
                 {
                     ID = table.Column<long>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
+                    CreatedAt = table.Column<DateTimeOffset>(nullable: false, defaultValueSql: "now()"),
                     Description = table.Column<string>(nullable: true),
                     Name = table.Column<string>(nullable: true),
                     ProjectID = table.Column<long>(nullable: false),
-                    ScriptUploadID = table.Column<long>(nullable: true)
+                    ScriptUploadID = table.Column<long>(nullable: true),
+                    UpdatedAt = table.Column<DateTimeOffset>(nullable: false, defaultValueSql: "now()")
                 },
                 constraints: table =>
                 {
@@ -712,10 +752,12 @@ namespace Raccord.Data.EntityFramework.Migrations
                 {
                     ID = table.Column<long>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
+                    CreatedAt = table.Column<DateTimeOffset>(nullable: false, defaultValueSql: "now()"),
                     Description = table.Column<string>(nullable: true),
                     Name = table.Column<string>(nullable: true),
                     ProjectID = table.Column<long>(nullable: false),
-                    ScriptUploadID = table.Column<long>(nullable: true)
+                    ScriptUploadID = table.Column<long>(nullable: true),
+                    UpdatedAt = table.Column<DateTimeOffset>(nullable: false, defaultValueSql: "now()")
                 },
                 constraints: table =>
                 {
@@ -740,10 +782,12 @@ namespace Raccord.Data.EntityFramework.Migrations
                 {
                     ID = table.Column<long>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
+                    CreatedAt = table.Column<DateTimeOffset>(nullable: false, defaultValueSql: "now()"),
                     Description = table.Column<string>(nullable: true),
                     Name = table.Column<string>(nullable: true),
                     ProjectID = table.Column<long>(nullable: false),
-                    ScriptUploadID = table.Column<long>(nullable: true)
+                    ScriptUploadID = table.Column<long>(nullable: true),
+                    UpdatedAt = table.Column<DateTimeOffset>(nullable: false, defaultValueSql: "now()")
                 },
                 constraints: table =>
                 {
@@ -768,8 +812,10 @@ namespace Raccord.Data.EntityFramework.Migrations
                 {
                     ID = table.Column<long>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
+                    CreatedAt = table.Column<DateTimeOffset>(nullable: false, defaultValueSql: "now()"),
                     CrewUnitID = table.Column<long>(nullable: false),
-                    ProjectUserInvitationID = table.Column<long>(nullable: false)
+                    ProjectUserInvitationID = table.Column<long>(nullable: false),
+                    UpdatedAt = table.Column<DateTimeOffset>(nullable: false, defaultValueSql: "now()")
                 },
                 constraints: table =>
                 {
@@ -796,8 +842,10 @@ namespace Raccord.Data.EntityFramework.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
                     BreakdownID = table.Column<long>(nullable: false),
                     BreakdownTypeID = table.Column<long>(nullable: false),
+                    CreatedAt = table.Column<DateTimeOffset>(nullable: false, defaultValueSql: "now()"),
                     Description = table.Column<string>(nullable: true),
-                    Name = table.Column<string>(nullable: true)
+                    Name = table.Column<string>(nullable: true),
+                    UpdatedAt = table.Column<DateTimeOffset>(nullable: false, defaultValueSql: "now()")
                 },
                 constraints: table =>
                 {
@@ -822,13 +870,15 @@ namespace Raccord.Data.EntityFramework.Migrations
                 {
                     ID = table.Column<long>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
+                    CreatedAt = table.Column<DateTimeOffset>(nullable: false, defaultValueSql: "now()"),
                     Email = table.Column<string>(nullable: true),
                     FirstName = table.Column<string>(nullable: true),
                     LastName = table.Column<string>(nullable: true),
                     ProjectID = table.Column<long>(nullable: false),
                     ProjectUserID = table.Column<long>(nullable: true),
                     ProjectUserInvitationID = table.Column<long>(nullable: true),
-                    Telephone = table.Column<string>(nullable: true)
+                    Telephone = table.Column<string>(nullable: true),
+                    UpdatedAt = table.Column<DateTimeOffset>(nullable: false, defaultValueSql: "now()")
                 },
                 constraints: table =>
                 {
@@ -859,8 +909,10 @@ namespace Raccord.Data.EntityFramework.Migrations
                 {
                     ID = table.Column<long>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
+                    CreatedAt = table.Column<DateTimeOffset>(nullable: false, defaultValueSql: "now()"),
                     CrewUnitID = table.Column<long>(nullable: false),
-                    ProjectUserID = table.Column<long>(nullable: false)
+                    ProjectUserID = table.Column<long>(nullable: false),
+                    UpdatedAt = table.Column<DateTimeOffset>(nullable: false, defaultValueSql: "now()")
                 },
                 constraints: table =>
                 {
@@ -885,11 +937,13 @@ namespace Raccord.Data.EntityFramework.Migrations
                 {
                     ID = table.Column<long>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
+                    CreatedAt = table.Column<DateTimeOffset>(nullable: false, defaultValueSql: "now()"),
                     CrewCall = table.Column<DateTime>(nullable: false),
                     CrewUnitID = table.Column<long>(nullable: false),
                     End = table.Column<DateTime>(nullable: false),
                     ShootingDayID = table.Column<long>(nullable: false),
-                    Start = table.Column<DateTime>(nullable: false)
+                    Start = table.Column<DateTime>(nullable: false),
+                    UpdatedAt = table.Column<DateTimeOffset>(nullable: false, defaultValueSql: "now()")
                 },
                 constraints: table =>
                 {
@@ -914,11 +968,13 @@ namespace Raccord.Data.EntityFramework.Migrations
                 {
                     ID = table.Column<long>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
+                    CreatedAt = table.Column<DateTimeOffset>(nullable: false, defaultValueSql: "now()"),
                     CrewUnitID = table.Column<long>(nullable: false),
                     Date = table.Column<DateTime>(nullable: false),
                     End = table.Column<DateTime>(nullable: true),
                     ShootingDayID = table.Column<long>(nullable: true),
-                    Start = table.Column<DateTime>(nullable: true)
+                    Start = table.Column<DateTime>(nullable: true),
+                    UpdatedAt = table.Column<DateTimeOffset>(nullable: false, defaultValueSql: "now()")
                 },
                 constraints: table =>
                 {
@@ -943,9 +999,11 @@ namespace Raccord.Data.EntityFramework.Migrations
                 {
                     ID = table.Column<long>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
+                    CreatedAt = table.Column<DateTimeOffset>(nullable: false, defaultValueSql: "now()"),
                     ImageID = table.Column<long>(nullable: false),
                     IsPrimaryImage = table.Column<bool>(nullable: false),
-                    ScriptLocationID = table.Column<long>(nullable: false)
+                    ScriptLocationID = table.Column<long>(nullable: false),
+                    UpdatedAt = table.Column<DateTimeOffset>(nullable: false, defaultValueSql: "now()")
                 },
                 constraints: table =>
                 {
@@ -970,12 +1028,14 @@ namespace Raccord.Data.EntityFramework.Migrations
                 {
                     ID = table.Column<long>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
+                    CreatedAt = table.Column<DateTimeOffset>(nullable: false, defaultValueSql: "now()"),
                     Description = table.Column<string>(nullable: true),
                     Latitude = table.Column<double>(nullable: true),
                     LocationID = table.Column<long>(nullable: false),
                     Longitude = table.Column<double>(nullable: true),
                     Name = table.Column<string>(nullable: true),
-                    ScriptLocationID = table.Column<long>(nullable: false)
+                    ScriptLocationID = table.Column<long>(nullable: false),
+                    UpdatedAt = table.Column<DateTimeOffset>(nullable: false, defaultValueSql: "now()")
                 },
                 constraints: table =>
                 {
@@ -1000,6 +1060,7 @@ namespace Raccord.Data.EntityFramework.Migrations
                 {
                     ID = table.Column<long>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
+                    CreatedAt = table.Column<DateTimeOffset>(nullable: false, defaultValueSql: "now()"),
                     DayNightID = table.Column<long>(nullable: true),
                     IntExtID = table.Column<long>(nullable: true),
                     Number = table.Column<string>(nullable: true),
@@ -1009,7 +1070,8 @@ namespace Raccord.Data.EntityFramework.Migrations
                     ScriptUploadID = table.Column<long>(nullable: true),
                     SortingOrder = table.Column<int>(nullable: true),
                     Summary = table.Column<string>(nullable: true),
-                    Timing = table.Column<TimeSpan>(nullable: false)
+                    Timing = table.Column<TimeSpan>(nullable: false),
+                    UpdatedAt = table.Column<DateTimeOffset>(nullable: false, defaultValueSql: "now()")
                 },
                 constraints: table =>
                 {
@@ -1053,8 +1115,10 @@ namespace Raccord.Data.EntityFramework.Migrations
                     ID = table.Column<long>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
                     BreakdownItemID = table.Column<long>(nullable: false),
+                    CreatedAt = table.Column<DateTimeOffset>(nullable: false, defaultValueSql: "now()"),
                     ImageID = table.Column<long>(nullable: false),
-                    IsPrimaryImage = table.Column<bool>(nullable: false)
+                    IsPrimaryImage = table.Column<bool>(nullable: false),
+                    UpdatedAt = table.Column<DateTimeOffset>(nullable: false, defaultValueSql: "now()")
                 },
                 constraints: table =>
                 {
@@ -1080,11 +1144,13 @@ namespace Raccord.Data.EntityFramework.Migrations
                     ID = table.Column<long>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
                     CastMemberID = table.Column<long>(nullable: true),
+                    CreatedAt = table.Column<DateTimeOffset>(nullable: false, defaultValueSql: "now()"),
                     Description = table.Column<string>(nullable: true),
                     Name = table.Column<string>(nullable: true),
                     Number = table.Column<int>(nullable: false),
                     ProjectID = table.Column<long>(nullable: false),
-                    ScriptUploadID = table.Column<long>(nullable: true)
+                    ScriptUploadID = table.Column<long>(nullable: true),
+                    UpdatedAt = table.Column<DateTimeOffset>(nullable: false, defaultValueSql: "now()")
                 },
                 constraints: table =>
                 {
@@ -1115,6 +1181,7 @@ namespace Raccord.Data.EntityFramework.Migrations
                 {
                     ID = table.Column<long>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
+                    CreatedAt = table.Column<DateTimeOffset>(nullable: false, defaultValueSql: "now()"),
                     CrewUnitInvitationMemberID = table.Column<long>(nullable: true),
                     CrewUnitMemberID = table.Column<long>(nullable: true),
                     DepartmentID = table.Column<long>(nullable: false),
@@ -1122,7 +1189,8 @@ namespace Raccord.Data.EntityFramework.Migrations
                     FirstName = table.Column<string>(nullable: true),
                     JobTitle = table.Column<string>(nullable: true),
                     LastName = table.Column<string>(nullable: true),
-                    Telephone = table.Column<string>(nullable: true)
+                    Telephone = table.Column<string>(nullable: true),
+                    UpdatedAt = table.Column<DateTimeOffset>(nullable: false, defaultValueSql: "now()")
                 },
                 constraints: table =>
                 {
@@ -1154,8 +1222,10 @@ namespace Raccord.Data.EntityFramework.Migrations
                     ID = table.Column<long>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
                     Content = table.Column<string>(nullable: true),
+                    CreatedAt = table.Column<DateTimeOffset>(nullable: false, defaultValueSql: "now()"),
                     ScheduleDayID = table.Column<long>(nullable: false),
-                    SortingOrder = table.Column<int>(nullable: true)
+                    SortingOrder = table.Column<int>(nullable: true),
+                    UpdatedAt = table.Column<DateTimeOffset>(nullable: false, defaultValueSql: "now()")
                 },
                 constraints: table =>
                 {
@@ -1175,7 +1245,9 @@ namespace Raccord.Data.EntityFramework.Migrations
                     ID = table.Column<long>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
                     BreakdownItemID = table.Column<long>(nullable: false),
-                    SceneID = table.Column<long>(nullable: false)
+                    CreatedAt = table.Column<DateTimeOffset>(nullable: false, defaultValueSql: "now()"),
+                    SceneID = table.Column<long>(nullable: false),
+                    UpdatedAt = table.Column<DateTimeOffset>(nullable: false, defaultValueSql: "now()")
                 },
                 constraints: table =>
                 {
@@ -1201,11 +1273,13 @@ namespace Raccord.Data.EntityFramework.Migrations
                     ID = table.Column<long>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
                     CallsheetID = table.Column<long>(nullable: false),
+                    CreatedAt = table.Column<DateTimeOffset>(nullable: false, defaultValueSql: "now()"),
                     LocationSetID = table.Column<long>(nullable: true),
                     PageLength = table.Column<int>(nullable: false),
                     SceneID = table.Column<long>(nullable: false),
                     ShootingDaySceneID = table.Column<long>(nullable: false),
-                    SortingOrder = table.Column<int>(nullable: true)
+                    SortingOrder = table.Column<int>(nullable: true),
+                    UpdatedAt = table.Column<DateTimeOffset>(nullable: false, defaultValueSql: "now()")
                 },
                 constraints: table =>
                 {
@@ -1236,9 +1310,11 @@ namespace Raccord.Data.EntityFramework.Migrations
                 {
                     ID = table.Column<long>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
+                    CreatedAt = table.Column<DateTimeOffset>(nullable: false, defaultValueSql: "now()"),
                     ImageID = table.Column<long>(nullable: false),
                     IsPrimaryImage = table.Column<bool>(nullable: false),
-                    SceneID = table.Column<long>(nullable: false)
+                    SceneID = table.Column<long>(nullable: false),
+                    UpdatedAt = table.Column<DateTimeOffset>(nullable: false, defaultValueSql: "now()")
                 },
                 constraints: table =>
                 {
@@ -1263,9 +1339,11 @@ namespace Raccord.Data.EntityFramework.Migrations
                 {
                     ID = table.Column<long>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
+                    CreatedAt = table.Column<DateTimeOffset>(nullable: false, defaultValueSql: "now()"),
                     Order = table.Column<int>(nullable: false),
                     SceneID = table.Column<long>(nullable: false),
-                    Text = table.Column<string>(nullable: true)
+                    Text = table.Column<string>(nullable: true),
+                    UpdatedAt = table.Column<DateTimeOffset>(nullable: false, defaultValueSql: "now()")
                 },
                 constraints: table =>
                 {
@@ -1284,11 +1362,13 @@ namespace Raccord.Data.EntityFramework.Migrations
                 {
                     ID = table.Column<long>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
+                    CreatedAt = table.Column<DateTimeOffset>(nullable: false, defaultValueSql: "now()"),
                     LocationSetID = table.Column<long>(nullable: true),
                     PageLength = table.Column<int>(nullable: false),
                     SceneID = table.Column<long>(nullable: false),
                     ScheduleDayID = table.Column<long>(nullable: false),
-                    SortingOrder = table.Column<int>(nullable: true)
+                    SortingOrder = table.Column<int>(nullable: true),
+                    UpdatedAt = table.Column<DateTimeOffset>(nullable: false, defaultValueSql: "now()")
                 },
                 constraints: table =>
                 {
@@ -1320,6 +1400,7 @@ namespace Raccord.Data.EntityFramework.Migrations
                     ID = table.Column<long>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
                     Aperture = table.Column<string>(nullable: true),
+                    CreatedAt = table.Column<DateTimeOffset>(nullable: false, defaultValueSql: "now()"),
                     Description = table.Column<string>(nullable: true),
                     Distance = table.Column<string>(nullable: true),
                     Filters = table.Column<string>(nullable: true),
@@ -1330,7 +1411,8 @@ namespace Raccord.Data.EntityFramework.Migrations
                     SceneID = table.Column<long>(nullable: true),
                     ShootingDayID = table.Column<long>(nullable: true),
                     SortingOrder = table.Column<int>(nullable: true),
-                    Sound = table.Column<string>(nullable: true)
+                    Sound = table.Column<string>(nullable: true),
+                    UpdatedAt = table.Column<DateTimeOffset>(nullable: false, defaultValueSql: "now()")
                 },
                 constraints: table =>
                 {
@@ -1362,7 +1444,9 @@ namespace Raccord.Data.EntityFramework.Migrations
                     ID = table.Column<long>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
                     CallsheetID = table.Column<long>(nullable: false),
-                    CharacterID = table.Column<long>(nullable: false)
+                    CharacterID = table.Column<long>(nullable: false),
+                    CreatedAt = table.Column<DateTimeOffset>(nullable: false, defaultValueSql: "now()"),
+                    UpdatedAt = table.Column<DateTimeOffset>(nullable: false, defaultValueSql: "now()")
                 },
                 constraints: table =>
                 {
@@ -1388,7 +1472,9 @@ namespace Raccord.Data.EntityFramework.Migrations
                     ID = table.Column<long>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
                     CharacterID = table.Column<long>(nullable: false),
-                    SceneID = table.Column<long>(nullable: false)
+                    CreatedAt = table.Column<DateTimeOffset>(nullable: false, defaultValueSql: "now()"),
+                    SceneID = table.Column<long>(nullable: false),
+                    UpdatedAt = table.Column<DateTimeOffset>(nullable: false, defaultValueSql: "now()")
                 },
                 constraints: table =>
                 {
@@ -1414,8 +1500,10 @@ namespace Raccord.Data.EntityFramework.Migrations
                     ID = table.Column<long>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
                     CharacterID = table.Column<long>(nullable: false),
+                    CreatedAt = table.Column<DateTimeOffset>(nullable: false, defaultValueSql: "now()"),
                     ImageID = table.Column<long>(nullable: false),
-                    IsPrimaryImage = table.Column<bool>(nullable: false)
+                    IsPrimaryImage = table.Column<bool>(nullable: false),
+                    UpdatedAt = table.Column<DateTimeOffset>(nullable: false, defaultValueSql: "now()")
                 },
                 constraints: table =>
                 {
@@ -1441,9 +1529,11 @@ namespace Raccord.Data.EntityFramework.Migrations
                     ID = table.Column<long>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
                     CharacterID = table.Column<long>(nullable: false),
+                    CreatedAt = table.Column<DateTimeOffset>(nullable: false, defaultValueSql: "now()"),
                     Order = table.Column<int>(nullable: false),
                     SceneID = table.Column<long>(nullable: false),
-                    Text = table.Column<string>(nullable: true)
+                    Text = table.Column<string>(nullable: true),
+                    UpdatedAt = table.Column<DateTimeOffset>(nullable: false, defaultValueSql: "now()")
                 },
                 constraints: table =>
                 {
@@ -1470,11 +1560,13 @@ namespace Raccord.Data.EntityFramework.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
                     CallsheetSceneID = table.Column<long>(nullable: true),
                     Completion = table.Column<int>(nullable: false),
+                    CreatedAt = table.Column<DateTimeOffset>(nullable: false, defaultValueSql: "now()"),
                     LocationSetID = table.Column<long>(nullable: true),
                     PageLength = table.Column<int>(nullable: false),
                     SceneID = table.Column<long>(nullable: false),
                     ShootingDayID = table.Column<long>(nullable: false),
-                    Timings = table.Column<TimeSpan>(nullable: false)
+                    Timings = table.Column<TimeSpan>(nullable: false),
+                    UpdatedAt = table.Column<DateTimeOffset>(nullable: false, defaultValueSql: "now()")
                 },
                 constraints: table =>
                 {
@@ -1511,9 +1603,11 @@ namespace Raccord.Data.EntityFramework.Migrations
                 {
                     ID = table.Column<long>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
+                    CreatedAt = table.Column<DateTimeOffset>(nullable: false, defaultValueSql: "now()"),
                     ImageID = table.Column<long>(nullable: false),
                     IsPrimaryImage = table.Column<bool>(nullable: false),
-                    SlateID = table.Column<long>(nullable: false)
+                    SlateID = table.Column<long>(nullable: false),
+                    UpdatedAt = table.Column<DateTimeOffset>(nullable: false, defaultValueSql: "now()")
                 },
                 constraints: table =>
                 {
@@ -1539,13 +1633,15 @@ namespace Raccord.Data.EntityFramework.Migrations
                     ID = table.Column<long>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
                     CameraRoll = table.Column<string>(nullable: true),
+                    CreatedAt = table.Column<DateTimeOffset>(nullable: false, defaultValueSql: "now()"),
                     Length = table.Column<TimeSpan>(nullable: false),
                     Notes = table.Column<string>(nullable: true),
                     Number = table.Column<string>(nullable: true),
                     Selected = table.Column<bool>(nullable: false),
                     SlateID = table.Column<long>(nullable: false),
                     SortingOrder = table.Column<int>(nullable: true),
-                    SoundRoll = table.Column<string>(nullable: true)
+                    SoundRoll = table.Column<string>(nullable: true),
+                    UpdatedAt = table.Column<DateTimeOffset>(nullable: false, defaultValueSql: "now()")
                 },
                 constraints: table =>
                 {
@@ -1566,7 +1662,9 @@ namespace Raccord.Data.EntityFramework.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
                     CallTime = table.Column<DateTime>(nullable: false),
                     CallTypeID = table.Column<long>(nullable: false),
-                    CallsheetCharacterID = table.Column<long>(nullable: false)
+                    CallsheetCharacterID = table.Column<long>(nullable: false),
+                    CreatedAt = table.Column<DateTimeOffset>(nullable: false, defaultValueSql: "now()"),
+                    UpdatedAt = table.Column<DateTimeOffset>(nullable: false, defaultValueSql: "now()")
                 },
                 constraints: table =>
                 {
@@ -1592,7 +1690,9 @@ namespace Raccord.Data.EntityFramework.Migrations
                     ID = table.Column<long>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
                     CallsheetSceneID = table.Column<long>(nullable: false),
-                    CharacterSceneID = table.Column<long>(nullable: false)
+                    CharacterSceneID = table.Column<long>(nullable: false),
+                    CreatedAt = table.Column<DateTimeOffset>(nullable: false, defaultValueSql: "now()"),
+                    UpdatedAt = table.Column<DateTimeOffset>(nullable: false, defaultValueSql: "now()")
                 },
                 constraints: table =>
                 {
@@ -1618,7 +1718,9 @@ namespace Raccord.Data.EntityFramework.Migrations
                     ID = table.Column<long>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
                     CharacterSceneID = table.Column<long>(nullable: false),
-                    ScheduleSceneID = table.Column<long>(nullable: false)
+                    CreatedAt = table.Column<DateTimeOffset>(nullable: false, defaultValueSql: "now()"),
+                    ScheduleSceneID = table.Column<long>(nullable: false),
+                    UpdatedAt = table.Column<DateTimeOffset>(nullable: false, defaultValueSql: "now()")
                 },
                 constraints: table =>
                 {
@@ -1644,6 +1746,7 @@ namespace Raccord.Data.EntityFramework.Migrations
                     ID = table.Column<long>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
                     CallsheetID = table.Column<long>(nullable: true),
+                    CreatedAt = table.Column<DateTimeOffset>(nullable: false, defaultValueSql: "now()"),
                     ParentBreakdownItemID = table.Column<long>(nullable: true),
                     ParentCharacterID = table.Column<long>(nullable: true),
                     ParentCommentID = table.Column<long>(nullable: true),
@@ -1655,6 +1758,7 @@ namespace Raccord.Data.EntityFramework.Migrations
                     ParentSlateID = table.Column<long>(nullable: true),
                     ParentTakeID = table.Column<long>(nullable: true),
                     Text = table.Column<string>(nullable: true),
+                    UpdatedAt = table.Column<DateTimeOffset>(nullable: false, defaultValueSql: "now()"),
                     UserID = table.Column<string>(nullable: true)
                 },
                 constraints: table =>

@@ -4,6 +4,7 @@ import { HeaderHelpers } from '../helpers/header.helper';
 import { JsonResponse } from '../model/json-response.model';
 import { ErrorInfo } from '../model/error-info.model';
 import { SortOrder } from '../model/sort-order.model';
+import { PageRequest, PageRequestHelpers, PagedData } from '../children/paging';
 
 @Injectable()
 export abstract class BaseHttpService {
@@ -21,6 +22,21 @@ export abstract class BaseHttpService {
         .toPromise()
         .then((response) => this.extractArray<T>(response))
         .catch(this.handleErrorPromise);
+    }
+
+    protected doGetPaged<T>(
+        uri: string,
+        paginationRequest: PageRequest,
+        useAuthToken: boolean = true
+    ): Promise<PagedData<T> | void> {
+        uri += `?${PageRequestHelpers.ConstructParams(paginationRequest)}`;
+        const headers = useAuthToken ?
+            HeaderHelpers.AuthJsonHeaders() :
+            HeaderHelpers.JsonHeaders();
+        return this._http.get(uri, {headers})
+            .toPromise()
+            .then((response) => this.extractJsonResponse<PagedData<T>>(response))
+            .catch(this.handleErrorPromise);
     }
 
     protected doGet<T>(uri: string, useAuthToken: boolean = true) {
@@ -82,7 +98,7 @@ export abstract class BaseHttpService {
           .catch(this.handleErrorPromise);
     }
 
-    protected extractJsonResponse(res: any): any {
+    protected extractJsonResponse<T>(res: any): any {
       const response = res as JsonResponse;
       if (!response.ok) {
           return new ErrorInfo({
@@ -90,7 +106,7 @@ export abstract class BaseHttpService {
               error: null
           });
       }
-      return response.data;
+      return response.data as T;
     }
 
     protected extractArray<T>(res: any, showprogress: boolean = true): any {

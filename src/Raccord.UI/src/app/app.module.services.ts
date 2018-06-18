@@ -13,6 +13,11 @@ import {
   AccountHttpService
 } from './shared/children/account';
 import {
+  ImageHttpService
+} from './shared/children/images/service/image-http.service';
+import {
+  ShortPagedProjectsResolve,
+  PagedProjectsResolve,
   ProjectHttpService
 } from './shared/children/projects';
 import {
@@ -30,7 +35,10 @@ export const SERVICES = [
   AuthGuard,
   LoginService,
   AccountHttpService,
+  ImageHttpService,
   ProjectHttpService,
+  ShortPagedProjectsResolve,
+  PagedProjectsResolve,
   UserProfileHttpService,
   LoadingWrapperService,
   DialogService

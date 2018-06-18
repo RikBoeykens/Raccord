@@ -1,2 +1,25 @@
-<p>Welcome to Raccord!</p>
-<dashboard-calendar></dashboard-calendar>
+<div class="raccord-page-header">
+    <h1 class="raccord-header-title">
+        <mat-icon>dashboard</mat-icon>Dashboard
+    </h1>
+</div>
+<div class="raccord-narrow-container">
+    <h2>Calendar</h2>
+    <mat-card>
+        <mat-card-content>
+            <dashboard-calendar></dashboard-calendar>
+        </mat-card-content>
+    </mat-card>
+    <h2>My Projects</h2>
+    <div fxLayout="row wrap" fxLayoutGap="5px">
+        <project-card
+            [project]="project"
+            *ngFor="let project of pagedProjects.data"></project-card>
+        <a routerLink="/projects"
+            *ngIf="pagedProjects.pageInfo.total > 3">
+            <mat-card class="project-card more-info-card">
+                <mat-card-title>...</mat-card-title>
+            </mat-card>
+        </a>
+    </div>
+</div>

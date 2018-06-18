@@ -17,6 +17,10 @@ using Raccord.Domain.Model.ShootingDays.Scenes;
 using Raccord.Domain.Model.Scheduling;
 using Raccord.Domain.Model.Cast;
 using Raccord.Domain.Model.Users.Invitations;
+using System.Linq;
+using Raccord.Domain.Model;
+using System.Collections.Generic;
+using System;
 
 namespace Raccord.Data.EntityFramework
 {
@@ -75,6 +79,35 @@ namespace Raccord.Data.EntityFramework
             modelBuilder.Entity<UserInvitation>()
                         .HasMany(pui => pui.ProjectUserInvitations)
                         .WithOne(ui => ui.UserInvitation);
+
+            SetPropertiesForBaseEntities<long>(modelBuilder);
+            SetPropertiesForBaseEntities<Guid>(modelBuilder);
+        }
+
+        private void SetPropertiesForBaseEntities<T>(ModelBuilder modelBuilder)
+        {
+            foreach (var entityType in GetEntityTypes<T>(modelBuilder))
+            {
+                SetBaseEntityProperties(modelBuilder, entityType);
+            }
+        }
+
+        private IEnumerable<IMutableEntityType> GetEntityTypes<T>(ModelBuilder modelBuilder)
+        {
+            return modelBuilder.Model.GetEntityTypes().Where(t => t.ClrType.IsSubclassOf(typeof(Entity<T>)));
+        }
+
+        private void SetBaseEntityProperties(ModelBuilder modelBuilder, IMutableEntityType entityType)
+        {
+            modelBuilder.Entity(
+                entityType.Name,
+                x =>
+                {
+                    x.Property("CreatedAt")
+                        .HasDefaultValueSql("now()");
+                    x.Property("UpdatedAt")
+                        .HasDefaultValueSql("now()");
+                });
         }
     }
 }

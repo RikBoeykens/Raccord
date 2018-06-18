@@ -1,6 +1,7 @@
 export class RouteSettings {
-  public static get DASHBOARD(): string { return 'dashboard'; }
+  public static get DASHBOARD(): string { return ''; }
   public static get LOGIN(): string { return 'login'; }
+  public static get ERROR(): string { return 'error'; }
   public static get UNITS(): string { return 'units'; }
   public static get USERS(): string { return 'users'; }
   public static get PROJECTUSERS(): string { return 'projectusers'; }

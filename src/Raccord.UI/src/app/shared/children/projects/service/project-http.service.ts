@@ -7,6 +7,7 @@ import { UserProjectSummary } from '../model/user-project-summary.model';
 import { FullProject } from '../model/full-project.model';
 import { ProjectSummary } from '../model/project-summary.model';
 import { Project } from '../model/project.model';
+import { PageRequest, PagedData } from '../../paging';
 
 @Injectable()
 export class ProjectHttpService extends BaseHttpService {
@@ -30,6 +31,15 @@ export class ProjectHttpService extends BaseHttpService {
       const uri = `${this._baseUri}/summary`;
 
       return this.doGetArray<UserProjectSummary>(uri);
+    }
+
+    public getPaged(
+      pageRequest: PageRequest
+    ): Promise<PagedData<UserProject> | void> {
+
+      const uri = `${this._baseUri}/paged`;
+
+      return this.doGetPaged<UserProject>(uri, pageRequest);
     }
 
     public get(id: number): Promise<FullProject | void> {

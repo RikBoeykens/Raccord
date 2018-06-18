@@ -19,13 +19,22 @@ $theme: mat-light-theme($primary, $accent, $warn);
 // Include all theme styles for the components.
 @include angular-material-theme($theme);
 
+html,
+body{
+  height: 100%;
+}
 
 body{
   margin: 0px;
   background-color: $bg-color;
   color: $text-color;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
+a {
+  text-decoration: none;
+  color: inherit;
+}
 ul{
   list-style-type: none;
 }
@@ -65,11 +74,6 @@ ul.autocomplete-content{
 
 .highlight{
   color: mat-color($accent);
-}
-
-.project-card{
-  width: 25%;
-  display: inline-block;
 }
 
 .breadcrumb:not(:first-child):before{
@@ -256,4 +260,47 @@ $placeholder-font-size: 20px;
 .raccord-radio-group {
   display: inline-flex;
   flex-direction: column;
+}
+
+.raccord-sidenav-container {
+  height: 100%;
+}
+
+.raccord-narrow-container {
+  width: 66.66%;
+  margin-right: auto;
+  padding-top: 5px;
+  padding-left: 5px;
+}
+
+.toolbar-fill-remaining-space {
+  flex: 1 1 auto;
+}
+
+.toolbar-user-avatar {
+  cursor: pointer;
+}
+
+.project-card {
+  width: 200px;
+}
+
+.more-info-card {
+  mat-card-title {
+    text-align: center;
+  }
+}
+
+.external-screen-container {
+  width: 66.66%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.raccord-page-header {
+
+  .raccord-header-title {
+    margin-top: 0px;
+    margin-bottom: 0px;
+  }
 }

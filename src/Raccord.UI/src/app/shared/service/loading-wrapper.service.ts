@@ -11,7 +11,7 @@ export class LoadingWrapperService {
     ) {}
 
     public Load(loadFunction: Promise<any>, onLoaded?: (data) => void, onFinally?: () => void) {
-      this._loadingService.startLoading();
+      const loadingId = this._loadingService.startLoading();
       loadFunction.then((data) => {
         if (data && data.hasError) {
           this._dialogService.error(data.message);
@@ -20,13 +20,13 @@ export class LoadingWrapperService {
             onLoaded(data);
           }
         }
-        this._loadingService.endLoading();
+        this._loadingService.endLoading(loadingId);
         if (onFinally) {
           onFinally();
         }
       }).catch((err) => {
         this._dialogService.error('Something went wrong');
-        this._loadingService.endLoading();
+        this._loadingService.endLoading(loadingId);
         if (onFinally) {
           onFinally();
         }

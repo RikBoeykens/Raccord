@@ -1,0 +1,4 @@
+<span>
+    <mat-spinner *ngIf="loadingImage"></mat-spinner>
+    <img [class.mat-card-image]="cardImage" [class.mat-list-avatar]="listAvatar" [class.mat-card-avatar]="cardAvatar" [src]="getImageUrl()" title="{{image.title}}" *ngIf="base64Image.hasContent" />
+</span>

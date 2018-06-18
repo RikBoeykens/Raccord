@@ -21,15 +21,19 @@ export class LoginService {
 
   public login(login: Login): Promise<any> {
     return this._authService.login(login).then(() => {
-      this._userProfileHttpService.getSummary().then((profileData: UserProfileSummary) => {
+      const profilePromise = this._userProfileHttpService.getSummary().then(
+        (profileData: UserProfileSummary) => {
         AccountHelpers.setUser(profileData);
       });
-      this._accountService.getProjectPermissions().then((permissionData: UserPermissionSummary) => {
+      const permissionPromise = this._accountService.getProjectPermissions().then(
+        (permissionData: UserPermissionSummary) => {
         AccountHelpers.setPermissions(permissionData);
       });
-      this._projectHttpService.getSummaries().then((projectSummaries: UserProjectSummary[]) => {
+      const projectPromise = this._projectHttpService.getSummaries().then(
+        (projectSummaries: UserProjectSummary[]) => {
         AccountHelpers.setUserProjects(projectSummaries);
       });
+      return Promise.all([profilePromise, permissionPromise, projectPromise]);
     });
   }
 }

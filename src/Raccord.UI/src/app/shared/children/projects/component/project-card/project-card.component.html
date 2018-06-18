@@ -1,0 +1,16 @@
+<a routerLink="/projects/{{project.id}}">
+  <mat-card class="project-card">
+      <project-avatar [cardImage]="'mat-card-image'" [project]="project"></project-avatar>
+      <mat-card-title>{{project.title}}</mat-card-title>
+      <mat-card-content>
+          <mat-chip-list mat-line>
+              <span *ngFor="let crewMember of project.crewMembers">
+                  <mat-chip>{{crewMember.department.name}} - {{crewMember.jobTitle}} ({{crewMember.crewUnit.name}})</mat-chip>
+              </span>
+              <span *ngFor="let character of project.characters">
+                  <mat-chip><character-summary [character]="character"></character-summary></mat-chip>
+              </span>
+          </mat-chip-list>
+      </mat-card-content>
+  </mat-card>
+</a>

@@ -1,0 +1,4 @@
+<span class="user-avatar">
+  <show-profile-image *ngIf="getHasImage()" [user]="user" [userId]="userId" [fullName]="fullName" class="user-avatar-profile-image"></show-profile-image>
+  <placeholder-image *ngIf="!getHasImage()" class="user-avatar-placeholder" [value]="getUserName()"></placeholder-image>
+</span>

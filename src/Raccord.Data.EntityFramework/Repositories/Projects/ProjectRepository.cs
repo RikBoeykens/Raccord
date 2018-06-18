@@ -23,7 +23,8 @@ namespace Raccord.Data.EntityFramework.Repositories.Projects
         {
             var query = GetIncludedSummary();
 
-            return query.Where(p=> p.ProjectUsers.Any(c=> c.UserID == userID));
+            return query.Where(p=> p.ProjectUsers.Any(c=> c.UserID == userID))
+                        .OrderBy(p => p.CreatedAt);
         }
 
         public Project GetFull(long ID)

@@ -7,5 +7,7 @@ namespace Raccord.Domain.Model
     {
         /// ID of the abstract entity
         public T ID { get; set; }
+        public DateTimeOffset CreatedAt { get; set; }
+        public DateTimeOffset UpdatedAt { get; set; }
     }
 }

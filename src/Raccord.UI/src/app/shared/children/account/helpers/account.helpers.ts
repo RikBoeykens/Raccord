@@ -9,6 +9,7 @@ export class AccountHelpers {
   public static setUser(userSummary: UserProfileSummary) {
     sessionStorage.setItem(this._userIdKey, userSummary.id);
     sessionStorage.setItem(this._userNameKey, `${userSummary.firstName} ${userSummary.lastName}`);
+    sessionStorage.setItem(this._userHasImageKey, userSummary.hasImage.toString());
   }
 
   public static setUserProjects(projectSummaries: UserProjectSummary[]) {
@@ -51,6 +52,10 @@ export class AccountHelpers {
     return sessionStorage.getItem(this._userNameKey);
   }
 
+  public static getHasImage(): boolean {
+    return sessionStorage.getItem(this._userHasImageKey) === true.toString();
+  }
+
   public static isAdmin(): boolean {
     return sessionStorage.getItem(this._userIsAdminKey) === true.toString();
   }
@@ -82,6 +87,7 @@ export class AccountHelpers {
   private static readonly _userIdKey = 'user_id';
   private static readonly _userNameKey = 'user_name';
   private static readonly _userIsAdminKey = 'user_is_admin';
+  private static readonly _userHasImageKey = 'user_has_image';
   private static readonly _userProjectPermissionKey = 'user_project_permission';
   private static readonly _userProjectSummaryKey = 'user_project_summary';
   private static readonly _userProjectHasCrew = 'has_crew';

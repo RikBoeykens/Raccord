@@ -268,6 +268,10 @@ namespace Raccord.Data.EntityFramework.Migrations
                     b.Property<long>("ID")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<DateTimeOffset>("CreatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("now()");
+
                     b.Property<string>("Description");
 
                     b.Property<bool>("IsDefaultProjectBreakdown");
@@ -277,6 +281,10 @@ namespace Raccord.Data.EntityFramework.Migrations
                     b.Property<string>("Name");
 
                     b.Property<long>("ProjectID");
+
+                    b.Property<DateTimeOffset>("UpdatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("now()");
 
                     b.Property<string>("UserID");
 
@@ -298,9 +306,17 @@ namespace Raccord.Data.EntityFramework.Migrations
 
                     b.Property<long>("BreakdownTypeID");
 
+                    b.Property<DateTimeOffset>("CreatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("now()");
+
                     b.Property<string>("Description");
 
                     b.Property<string>("Name");
+
+                    b.Property<DateTimeOffset>("UpdatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("now()");
 
                     b.HasKey("ID");
 
@@ -318,7 +334,15 @@ namespace Raccord.Data.EntityFramework.Migrations
 
                     b.Property<long>("BreakdownItemID");
 
+                    b.Property<DateTimeOffset>("CreatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("now()");
+
                     b.Property<long>("SceneID");
+
+                    b.Property<DateTimeOffset>("UpdatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("now()");
 
                     b.HasKey("ID");
 
@@ -336,9 +360,17 @@ namespace Raccord.Data.EntityFramework.Migrations
 
                     b.Property<long>("BreakdownID");
 
+                    b.Property<DateTimeOffset>("CreatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("now()");
+
                     b.Property<string>("Description");
 
                     b.Property<string>("Name");
+
+                    b.Property<DateTimeOffset>("UpdatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("now()");
 
                     b.HasKey("ID");
 
@@ -352,9 +384,17 @@ namespace Raccord.Data.EntityFramework.Migrations
                     b.Property<long>("ID")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<DateTimeOffset>("CreatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("now()");
+
                     b.Property<string>("Description");
 
                     b.Property<string>("Name");
+
+                    b.Property<DateTimeOffset>("UpdatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("now()");
 
                     b.HasKey("ID");
 
@@ -366,6 +406,10 @@ namespace Raccord.Data.EntityFramework.Migrations
                     b.Property<long>("ID")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<DateTimeOffset>("CreatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("now()");
+
                     b.Property<DateTime>("CrewCall");
 
                     b.Property<long>("CrewUnitID");
@@ -375,6 +419,10 @@ namespace Raccord.Data.EntityFramework.Migrations
                     b.Property<long>("ShootingDayID");
 
                     b.Property<DateTime>("Start");
+
+                    b.Property<DateTimeOffset>("UpdatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("now()");
 
                     b.HasKey("ID");
 
@@ -391,6 +439,10 @@ namespace Raccord.Data.EntityFramework.Migrations
                     b.Property<long>("ID")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<DateTimeOffset>("CreatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("now()");
+
                     b.Property<string>("Description");
 
                     b.Property<string>("Name");
@@ -400,6 +452,10 @@ namespace Raccord.Data.EntityFramework.Migrations
                     b.Property<string>("ShortName");
 
                     b.Property<int?>("SortingOrder");
+
+                    b.Property<DateTimeOffset>("UpdatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("now()");
 
                     b.HasKey("ID");
 
@@ -413,6 +469,10 @@ namespace Raccord.Data.EntityFramework.Migrations
                     b.Property<long>("ID")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<DateTimeOffset>("CreatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("now()");
+
                     b.Property<string>("Description");
 
                     b.Property<string>("Name");
@@ -420,6 +480,10 @@ namespace Raccord.Data.EntityFramework.Migrations
                     b.Property<string>("ShortName");
 
                     b.Property<int?>("SortingOrder");
+
+                    b.Property<DateTimeOffset>("UpdatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("now()");
 
                     b.HasKey("ID");
 
@@ -434,6 +498,14 @@ namespace Raccord.Data.EntityFramework.Migrations
                     b.Property<long>("CallsheetID");
 
                     b.Property<long>("CharacterID");
+
+                    b.Property<DateTimeOffset>("CreatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("now()");
+
+                    b.Property<DateTimeOffset>("UpdatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("now()");
 
                     b.HasKey("ID");
 
@@ -455,6 +527,14 @@ namespace Raccord.Data.EntityFramework.Migrations
 
                     b.Property<long>("CallsheetCharacterID");
 
+                    b.Property<DateTimeOffset>("CreatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("now()");
+
+                    b.Property<DateTimeOffset>("UpdatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("now()");
+
                     b.HasKey("ID");
 
                     b.HasIndex("CallTypeID");
@@ -471,6 +551,10 @@ namespace Raccord.Data.EntityFramework.Migrations
 
                     b.Property<long>("CallsheetID");
 
+                    b.Property<DateTimeOffset>("CreatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("now()");
+
                     b.Property<long?>("LocationSetID");
 
                     b.Property<int>("PageLength");
@@ -480,6 +564,10 @@ namespace Raccord.Data.EntityFramework.Migrations
                     b.Property<long>("ShootingDaySceneID");
 
                     b.Property<int?>("SortingOrder");
+
+                    b.Property<DateTimeOffset>("UpdatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("now()");
 
                     b.HasKey("ID");
 
@@ -501,6 +589,14 @@ namespace Raccord.Data.EntityFramework.Migrations
 
                     b.Property<long>("CharacterSceneID");
 
+                    b.Property<DateTimeOffset>("CreatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("now()");
+
+                    b.Property<DateTimeOffset>("UpdatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("now()");
+
                     b.HasKey("ID");
 
                     b.HasIndex("CallsheetSceneID");
@@ -515,6 +611,10 @@ namespace Raccord.Data.EntityFramework.Migrations
                     b.Property<long>("ID")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<DateTimeOffset>("CreatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("now()");
+
                     b.Property<string>("Email");
 
                     b.Property<string>("FirstName");
@@ -528,6 +628,10 @@ namespace Raccord.Data.EntityFramework.Migrations
                     b.Property<long?>("ProjectUserInvitationID");
 
                     b.Property<string>("Telephone");
+
+                    b.Property<DateTimeOffset>("UpdatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("now()");
 
                     b.HasKey("ID");
 
@@ -549,6 +653,10 @@ namespace Raccord.Data.EntityFramework.Migrations
 
                     b.Property<long?>("CastMemberID");
 
+                    b.Property<DateTimeOffset>("CreatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("now()");
+
                     b.Property<string>("Description");
 
                     b.Property<string>("Name");
@@ -558,6 +666,10 @@ namespace Raccord.Data.EntityFramework.Migrations
                     b.Property<long>("ProjectID");
 
                     b.Property<long?>("ScriptUploadID");
+
+                    b.Property<DateTimeOffset>("UpdatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("now()");
 
                     b.HasKey("ID");
 
@@ -577,7 +689,15 @@ namespace Raccord.Data.EntityFramework.Migrations
 
                     b.Property<long>("CharacterID");
 
+                    b.Property<DateTimeOffset>("CreatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("now()");
+
                     b.Property<long>("SceneID");
+
+                    b.Property<DateTimeOffset>("UpdatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("now()");
 
                     b.HasKey("ID");
 
@@ -594,6 +714,10 @@ namespace Raccord.Data.EntityFramework.Migrations
                         .ValueGeneratedOnAdd();
 
                     b.Property<long?>("CallsheetID");
+
+                    b.Property<DateTimeOffset>("CreatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("now()");
 
                     b.Property<long?>("ParentBreakdownItemID");
 
@@ -616,6 +740,10 @@ namespace Raccord.Data.EntityFramework.Migrations
                     b.Property<long?>("ParentTakeID");
 
                     b.Property<string>("Text");
+
+                    b.Property<DateTimeOffset>("UpdatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("now()");
 
                     b.Property<string>("UserID");
 
@@ -653,6 +781,10 @@ namespace Raccord.Data.EntityFramework.Migrations
                     b.Property<long>("ID")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<DateTimeOffset>("CreatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("now()");
+
                     b.Property<long?>("CrewUnitInvitationMemberID");
 
                     b.Property<long?>("CrewUnitMemberID");
@@ -668,6 +800,10 @@ namespace Raccord.Data.EntityFramework.Migrations
                     b.Property<string>("LastName");
 
                     b.Property<string>("Telephone");
+
+                    b.Property<DateTimeOffset>("UpdatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("now()");
 
                     b.HasKey("ID");
 
@@ -685,11 +821,19 @@ namespace Raccord.Data.EntityFramework.Migrations
                     b.Property<long>("ID")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<DateTimeOffset>("CreatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("now()");
+
                     b.Property<string>("Description");
 
                     b.Property<string>("Name");
 
                     b.Property<long>("ProjectID");
+
+                    b.Property<DateTimeOffset>("UpdatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("now()");
 
                     b.HasKey("ID");
 
@@ -703,9 +847,17 @@ namespace Raccord.Data.EntityFramework.Migrations
                     b.Property<long>("ID")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<DateTimeOffset>("CreatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("now()");
+
                     b.Property<long>("CrewUnitID");
 
                     b.Property<long>("ProjectUserInvitationID");
+
+                    b.Property<DateTimeOffset>("UpdatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("now()");
 
                     b.HasKey("ID");
 
@@ -721,9 +873,17 @@ namespace Raccord.Data.EntityFramework.Migrations
                     b.Property<long>("ID")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<DateTimeOffset>("CreatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("now()");
+
                     b.Property<long>("CrewUnitID");
 
                     b.Property<long>("ProjectUserID");
+
+                    b.Property<DateTimeOffset>("UpdatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("now()");
 
                     b.HasKey("ID");
 
@@ -739,6 +899,10 @@ namespace Raccord.Data.EntityFramework.Migrations
                     b.Property<long>("ID")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<DateTimeOffset>("CreatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("now()");
+
                     b.Property<long>("CrewUnitID");
 
                     b.Property<string>("Description");
@@ -746,6 +910,10 @@ namespace Raccord.Data.EntityFramework.Migrations
                     b.Property<string>("Name");
 
                     b.Property<int?>("SortingOrder");
+
+                    b.Property<DateTimeOffset>("UpdatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("now()");
 
                     b.HasKey("ID");
 
@@ -759,11 +927,19 @@ namespace Raccord.Data.EntityFramework.Migrations
                     b.Property<long>("ID")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<DateTimeOffset>("CreatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("now()");
+
                     b.Property<string>("Description");
 
                     b.Property<string>("Name");
 
                     b.Property<int?>("SortingOrder");
+
+                    b.Property<DateTimeOffset>("UpdatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("now()");
 
                     b.HasKey("ID");
 
@@ -774,6 +950,10 @@ namespace Raccord.Data.EntityFramework.Migrations
                 {
                     b.Property<long>("ID")
                         .ValueGeneratedOnAdd();
+
+                    b.Property<DateTimeOffset>("CreatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("now()");
 
                     b.Property<string>("Description");
 
@@ -786,6 +966,10 @@ namespace Raccord.Data.EntityFramework.Migrations
                     b.Property<long>("ProjectID");
 
                     b.Property<string>("Title");
+
+                    b.Property<DateTimeOffset>("UpdatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("now()");
 
                     b.HasKey("ID");
 
@@ -801,9 +985,17 @@ namespace Raccord.Data.EntityFramework.Migrations
 
                     b.Property<long>("BreakdownItemID");
 
+                    b.Property<DateTimeOffset>("CreatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("now()");
+
                     b.Property<long>("ImageID");
 
                     b.Property<bool>("IsPrimaryImage");
+
+                    b.Property<DateTimeOffset>("UpdatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("now()");
 
                     b.HasKey("ID");
 
@@ -821,9 +1013,17 @@ namespace Raccord.Data.EntityFramework.Migrations
 
                     b.Property<long>("CharacterID");
 
+                    b.Property<DateTimeOffset>("CreatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("now()");
+
                     b.Property<long>("ImageID");
 
                     b.Property<bool>("IsPrimaryImage");
+
+                    b.Property<DateTimeOffset>("UpdatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("now()");
 
                     b.HasKey("ID");
 
@@ -839,11 +1039,19 @@ namespace Raccord.Data.EntityFramework.Migrations
                     b.Property<long>("ID")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<DateTimeOffset>("CreatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("now()");
+
                     b.Property<long>("ImageID");
 
                     b.Property<bool>("IsPrimaryImage");
 
                     b.Property<long>("SceneID");
+
+                    b.Property<DateTimeOffset>("UpdatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("now()");
 
                     b.HasKey("ID");
 
@@ -859,11 +1067,19 @@ namespace Raccord.Data.EntityFramework.Migrations
                     b.Property<long>("ID")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<DateTimeOffset>("CreatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("now()");
+
                     b.Property<long>("ImageID");
 
                     b.Property<bool>("IsPrimaryImage");
 
                     b.Property<long>("ScriptLocationID");
+
+                    b.Property<DateTimeOffset>("UpdatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("now()");
 
                     b.HasKey("ID");
 
@@ -879,11 +1095,19 @@ namespace Raccord.Data.EntityFramework.Migrations
                     b.Property<long>("ID")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<DateTimeOffset>("CreatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("now()");
+
                     b.Property<long>("ImageID");
 
                     b.Property<bool>("IsPrimaryImage");
 
                     b.Property<long>("SlateID");
+
+                    b.Property<DateTimeOffset>("UpdatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("now()");
 
                     b.HasKey("ID");
 
@@ -907,6 +1131,10 @@ namespace Raccord.Data.EntityFramework.Migrations
 
                     b.Property<string>("Address4");
 
+                    b.Property<DateTimeOffset>("CreatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("now()");
+
                     b.Property<string>("Description");
 
                     b.Property<double?>("Latitude");
@@ -916,6 +1144,10 @@ namespace Raccord.Data.EntityFramework.Migrations
                     b.Property<string>("Name");
 
                     b.Property<long>("ProjectID");
+
+                    b.Property<DateTimeOffset>("UpdatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("now()");
 
                     b.HasKey("ID");
 
@@ -929,6 +1161,10 @@ namespace Raccord.Data.EntityFramework.Migrations
                     b.Property<long>("ID")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<DateTimeOffset>("CreatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("now()");
+
                     b.Property<string>("Description");
 
                     b.Property<double?>("Latitude");
@@ -940,6 +1176,10 @@ namespace Raccord.Data.EntityFramework.Migrations
                     b.Property<string>("Name");
 
                     b.Property<long>("ScriptLocationID");
+
+                    b.Property<DateTimeOffset>("UpdatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("now()");
 
                     b.HasKey("ID");
 
@@ -955,7 +1195,15 @@ namespace Raccord.Data.EntityFramework.Migrations
                     b.Property<long>("ID")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<DateTimeOffset>("CreatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("now()");
+
                     b.Property<string>("Title");
+
+                    b.Property<DateTimeOffset>("UpdatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("now()");
 
                     b.HasKey("ID");
 
@@ -967,6 +1215,10 @@ namespace Raccord.Data.EntityFramework.Migrations
                     b.Property<long>("ID")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<DateTimeOffset>("CreatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("now()");
+
                     b.Property<string>("Description");
 
                     b.Property<string>("Name");
@@ -974,6 +1226,10 @@ namespace Raccord.Data.EntityFramework.Migrations
                     b.Property<long>("ProjectID");
 
                     b.Property<long?>("ScriptUploadID");
+
+                    b.Property<DateTimeOffset>("UpdatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("now()");
 
                     b.HasKey("ID");
 
@@ -989,6 +1245,10 @@ namespace Raccord.Data.EntityFramework.Migrations
                     b.Property<long>("ID")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<DateTimeOffset>("CreatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("now()");
+
                     b.Property<string>("Description");
 
                     b.Property<string>("Name");
@@ -996,6 +1256,10 @@ namespace Raccord.Data.EntityFramework.Migrations
                     b.Property<long>("ProjectID");
 
                     b.Property<long?>("ScriptUploadID");
+
+                    b.Property<DateTimeOffset>("UpdatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("now()");
 
                     b.HasKey("ID");
 
@@ -1011,11 +1275,19 @@ namespace Raccord.Data.EntityFramework.Migrations
                     b.Property<long>("ID")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<DateTimeOffset>("CreatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("now()");
+
                     b.Property<int>("Order");
 
                     b.Property<long>("SceneID");
 
                     b.Property<string>("Text");
+
+                    b.Property<DateTimeOffset>("UpdatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("now()");
 
                     b.HasKey("ID");
 
@@ -1031,11 +1303,19 @@ namespace Raccord.Data.EntityFramework.Migrations
 
                     b.Property<long>("CharacterID");
 
+                    b.Property<DateTimeOffset>("CreatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("now()");
+
                     b.Property<int>("Order");
 
                     b.Property<long>("SceneID");
 
                     b.Property<string>("Text");
+
+                    b.Property<DateTimeOffset>("UpdatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("now()");
 
                     b.HasKey("ID");
 
@@ -1050,6 +1330,10 @@ namespace Raccord.Data.EntityFramework.Migrations
                 {
                     b.Property<long>("ID")
                         .ValueGeneratedOnAdd();
+
+                    b.Property<DateTimeOffset>("CreatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("now()");
 
                     b.Property<long?>("DayNightID");
 
@@ -1070,6 +1354,10 @@ namespace Raccord.Data.EntityFramework.Migrations
                     b.Property<string>("Summary");
 
                     b.Property<TimeSpan>("Timing");
+
+                    b.Property<DateTimeOffset>("UpdatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("now()");
 
                     b.HasKey("ID");
 
@@ -1093,7 +1381,15 @@ namespace Raccord.Data.EntityFramework.Migrations
 
                     b.Property<long>("CharacterSceneID");
 
+                    b.Property<DateTimeOffset>("CreatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("now()");
+
                     b.Property<long>("ScheduleSceneID");
+
+                    b.Property<DateTimeOffset>("UpdatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("now()");
 
                     b.HasKey("ID");
 
@@ -1109,6 +1405,10 @@ namespace Raccord.Data.EntityFramework.Migrations
                     b.Property<long>("ID")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<DateTimeOffset>("CreatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("now()");
+
                     b.Property<long>("CrewUnitID");
 
                     b.Property<DateTime>("Date");
@@ -1118,6 +1418,10 @@ namespace Raccord.Data.EntityFramework.Migrations
                     b.Property<long?>("ShootingDayID");
 
                     b.Property<DateTime?>("Start");
+
+                    b.Property<DateTimeOffset>("UpdatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("now()");
 
                     b.HasKey("ID");
 
@@ -1136,9 +1440,17 @@ namespace Raccord.Data.EntityFramework.Migrations
 
                     b.Property<string>("Content");
 
+                    b.Property<DateTimeOffset>("CreatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("now()");
+
                     b.Property<long>("ScheduleDayID");
 
                     b.Property<int?>("SortingOrder");
+
+                    b.Property<DateTimeOffset>("UpdatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("now()");
 
                     b.HasKey("ID");
 
@@ -1152,6 +1464,10 @@ namespace Raccord.Data.EntityFramework.Migrations
                     b.Property<long>("ID")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<DateTimeOffset>("CreatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("now()");
+
                     b.Property<long?>("LocationSetID");
 
                     b.Property<int>("PageLength");
@@ -1161,6 +1477,10 @@ namespace Raccord.Data.EntityFramework.Migrations
                     b.Property<long>("ScheduleDayID");
 
                     b.Property<int?>("SortingOrder");
+
+                    b.Property<DateTimeOffset>("UpdatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("now()");
 
                     b.HasKey("ID");
 
@@ -1178,6 +1498,10 @@ namespace Raccord.Data.EntityFramework.Migrations
                     b.Property<long>("ID")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<DateTimeOffset>("CreatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("now()");
+
                     b.Property<string>("Description");
 
                     b.Property<string>("Name");
@@ -1185,6 +1509,10 @@ namespace Raccord.Data.EntityFramework.Migrations
                     b.Property<long>("ProjectID");
 
                     b.Property<long?>("ScriptUploadID");
+
+                    b.Property<DateTimeOffset>("UpdatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("now()");
 
                     b.HasKey("ID");
 
@@ -1200,6 +1528,10 @@ namespace Raccord.Data.EntityFramework.Migrations
                     b.Property<long>("ID")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<DateTimeOffset>("CreatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("now()");
+
                     b.Property<DateTime?>("End");
 
                     b.Property<string>("FileName");
@@ -1207,6 +1539,10 @@ namespace Raccord.Data.EntityFramework.Migrations
                     b.Property<long>("ProjectID");
 
                     b.Property<DateTime>("Start");
+
+                    b.Property<DateTimeOffset>("UpdatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("now()");
 
                     b.HasKey("ID");
 
@@ -1224,6 +1560,10 @@ namespace Raccord.Data.EntityFramework.Migrations
 
                     b.Property<int>("Completion");
 
+                    b.Property<DateTimeOffset>("CreatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("now()");
+
                     b.Property<long?>("LocationSetID");
 
                     b.Property<int>("PageLength");
@@ -1233,6 +1573,10 @@ namespace Raccord.Data.EntityFramework.Migrations
                     b.Property<long>("ShootingDayID");
 
                     b.Property<TimeSpan>("Timings");
+
+                    b.Property<DateTimeOffset>("UpdatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("now()");
 
                     b.HasKey("ID");
 
@@ -1257,6 +1601,10 @@ namespace Raccord.Data.EntityFramework.Migrations
 
                     b.Property<bool>("Completed");
 
+                    b.Property<DateTimeOffset>("CreatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("now()");
+
                     b.Property<long>("CrewUnitID");
 
                     b.Property<DateTime>("Date");
@@ -1273,6 +1621,10 @@ namespace Raccord.Data.EntityFramework.Migrations
 
                     b.Property<DateTime>("Turn");
 
+                    b.Property<DateTimeOffset>("UpdatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("now()");
+
                     b.HasKey("ID");
 
                     b.HasIndex("CrewUnitID");
@@ -1286,6 +1638,10 @@ namespace Raccord.Data.EntityFramework.Migrations
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("Aperture");
+
+                    b.Property<DateTimeOffset>("CreatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("now()");
 
                     b.Property<string>("Description");
 
@@ -1309,6 +1665,10 @@ namespace Raccord.Data.EntityFramework.Migrations
 
                     b.Property<string>("Sound");
 
+                    b.Property<DateTimeOffset>("UpdatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("now()");
+
                     b.HasKey("ID");
 
                     b.HasIndex("ProjectID");
@@ -1327,6 +1687,10 @@ namespace Raccord.Data.EntityFramework.Migrations
 
                     b.Property<string>("CameraRoll");
 
+                    b.Property<DateTimeOffset>("CreatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("now()");
+
                     b.Property<TimeSpan>("Length");
 
                     b.Property<string>("Notes");
@@ -1340,6 +1704,10 @@ namespace Raccord.Data.EntityFramework.Migrations
                     b.Property<int?>("SortingOrder");
 
                     b.Property<string>("SoundRoll");
+
+                    b.Property<DateTimeOffset>("UpdatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("now()");
 
                     b.HasKey("ID");
 
@@ -1417,9 +1785,17 @@ namespace Raccord.Data.EntityFramework.Migrations
 
                     b.Property<long?>("CastMemberID");
 
+                    b.Property<DateTimeOffset>("CreatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("now()");
+
                     b.Property<long>("ProjectID");
 
                     b.Property<long?>("RoleID");
+
+                    b.Property<DateTimeOffset>("UpdatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("now()");
 
                     b.Property<Guid>("UserInvitationID");
 
@@ -1441,11 +1817,19 @@ namespace Raccord.Data.EntityFramework.Migrations
 
                     b.Property<DateTime?>("AcceptedDate");
 
+                    b.Property<DateTimeOffset>("CreatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("now()");
+
                     b.Property<string>("Email");
 
                     b.Property<string>("FirstName");
 
                     b.Property<string>("LastName");
+
+                    b.Property<DateTimeOffset>("UpdatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("now()");
 
                     b.HasKey("ID");
 
@@ -1457,11 +1841,19 @@ namespace Raccord.Data.EntityFramework.Migrations
                     b.Property<long>("ID")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<DateTimeOffset>("CreatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("now()");
+
                     b.Property<string>("Description");
 
                     b.Property<string>("Name");
 
                     b.Property<int>("Permission");
+
+                    b.Property<DateTimeOffset>("UpdatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("now()");
 
                     b.HasKey("ID");
 
@@ -1473,9 +1865,17 @@ namespace Raccord.Data.EntityFramework.Migrations
                     b.Property<long>("ID")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<DateTimeOffset>("CreatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("now()");
+
                     b.Property<long>("ProjectPermissionID");
 
                     b.Property<long>("ProjectRoleID");
+
+                    b.Property<DateTimeOffset>("UpdatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("now()");
 
                     b.HasKey("ID");
 
@@ -1491,11 +1891,19 @@ namespace Raccord.Data.EntityFramework.Migrations
                     b.Property<long>("ID")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<DateTimeOffset>("CreatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("now()");
+
                     b.Property<string>("Description");
 
                     b.Property<string>("Name");
 
                     b.Property<int>("Role");
+
+                    b.Property<DateTimeOffset>("UpdatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("now()");
 
                     b.HasKey("ID");
 
@@ -1509,11 +1917,19 @@ namespace Raccord.Data.EntityFramework.Migrations
 
                     b.Property<long?>("CastMemberID");
 
+                    b.Property<DateTimeOffset>("CreatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("now()");
+
                     b.Property<long>("ProjectID");
 
                     b.Property<long?>("RoleID");
 
                     b.Property<long?>("SelectedBreakdownID");
+
+                    b.Property<DateTimeOffset>("UpdatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("now()");
 
                     b.Property<string>("UserID");
 

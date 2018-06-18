@@ -56,7 +56,7 @@ import '../styles/headings.css';
     RouterModule.forRoot(ROUTES, {
       useHash: Boolean(history.pushState) === false,
       preloadingStrategy: PreloadAllModules
-    }),
+    })
   ],
   /**
    * Expose our Services and Providers into Angular's dependency injection.
