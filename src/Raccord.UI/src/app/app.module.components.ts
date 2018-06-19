@@ -14,7 +14,9 @@ import {
 } from './navigation';
 import { NoContentComponent } from './no-content';
 import {
-  ProjectsListComponent
+  ProjectCalendarComponent,
+  ProjectsListComponent,
+  ProjectDashboardComponent
 } from './projects';
 import { LoginComponent } from './security';
 import {
@@ -46,7 +48,9 @@ export const COMPONENTS = [
   RaccordToolbarComponent,
   RaccordSidenavComponent,
   NoContentComponent,
+  ProjectCalendarComponent,
   ProjectsListComponent,
+  ProjectDashboardComponent,
   LoginComponent,
   CharacterSummaryComponent,
   ShowImageComponent,

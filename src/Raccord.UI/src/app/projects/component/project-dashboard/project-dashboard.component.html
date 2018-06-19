@@ -1,0 +1,13 @@
+<div class="raccord-narrow-container">
+  <div class="raccord-page-header">
+    <h1 class="raccord-header-title">
+      {{project.title}}
+    </h1>
+  </div>
+  <h2>Calendar</h2>
+  <mat-card>
+    <mat-card-content>
+      <project-calendar [projectId]="project.id"></project-calendar>
+    </mat-card-content>
+  </mat-card>
+</div>

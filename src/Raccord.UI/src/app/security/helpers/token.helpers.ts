@@ -1,5 +1,6 @@
 import { OpenIdDictToken } from '..';
 import { SaveToken } from '../model/save-token';
+import { StorageSettings } from '../../shared';
 
 export class TokenHelpers {
   public static setTokens(openIdDictToken: OpenIdDictToken) {
@@ -16,15 +17,15 @@ export class TokenHelpers {
     }
     tokens.accessToken = openIdDictToken.access_token;
     tokens.expiryDate = expiryDate;
-    sessionStorage.setItem('auth-tokens', JSON.stringify(tokens));
+    localStorage.setItem(StorageSettings.AUTHTOKENS, JSON.stringify(tokens));
   }
 
   public static getTokens(): SaveToken {
-    const tokensString = sessionStorage.getItem('auth-tokens');
+    const tokensString = localStorage.getItem(StorageSettings.AUTHTOKENS);
     return tokensString == null ? null : JSON.parse(tokensString);
   }
 
   public static removeTokens() {
-    sessionStorage.clear();
+    localStorage.clear();
   }
 }

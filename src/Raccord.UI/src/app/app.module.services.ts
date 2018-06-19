@@ -5,6 +5,9 @@ import {
   CalendarHttpService
 } from './calendar';
 import {
+  ProjectCalendarHttpService
+} from './projects';
+import {
   AuthService,
   AuthGuard,
   LoginService
@@ -18,6 +21,9 @@ import {
 import {
   ShortPagedProjectsResolve,
   PagedProjectsResolve,
+  CurrentProjectService,
+  CurrentProjectResolve,
+  ResetCurrentProjectResolve,
   ProjectHttpService
 } from './shared/children/projects';
 import {
@@ -31,11 +37,15 @@ import {
 export const SERVICES = [
   LoadingService,
   CalendarHttpService,
+  ProjectCalendarHttpService,
   AuthService,
   AuthGuard,
   LoginService,
   AccountHttpService,
   ImageHttpService,
+  CurrentProjectService,
+  CurrentProjectResolve,
+  ResetCurrentProjectResolve,
   ProjectHttpService,
   ShortPagedProjectsResolve,
   PagedProjectsResolve,

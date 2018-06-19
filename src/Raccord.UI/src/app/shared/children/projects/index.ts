@@ -3,6 +3,9 @@ export { ProjectCardComponent } from './component/project-card/project-card.comp
 
 export { PagedProjectsResolve } from './service/paged-projects-resolve.service';
 export { ShortPagedProjectsResolve } from './service/short-paged-projects-resolve.service';
+export { CurrentProjectService } from './service/current-project.service';
+export { CurrentProjectResolve } from './service/current-project-resolve.service';
+export { ResetCurrentProjectResolve } from './service/reset-current-project-resolve.service';
 export { ProjectHttpService } from './service/project-http.service';
 
 export { FullProject } from './model/full-project.model';

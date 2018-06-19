@@ -1,4 +1,9 @@
 <mat-nav-list>
-  <a mat-list-item routerLink="/">Raccord</a>
-  <a mat-list-item routerLink="/projects">My Projects</a>
+  <a mat-list-item routerLink="/">My Dashboard</a>
+  <a mat-list-item 
+    routerLink="/projects/{{currentProject.id}}"
+    *ngIf="currentProject">
+    <project-avatar [listAvatar]="true" [project]="currentProject"></project-avatar>
+    {{currentProject.title}}
+  </a>
 </mat-nav-list>

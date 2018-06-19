@@ -19,3 +19,4 @@ export { RouteInfo } from './model/route-info.model';
 export { SortOrder } from './model/sort-order.model';
 
 export { RouteSettings } from './settings/route.settings';
+export { StorageSettings } from './settings/storage.settings';

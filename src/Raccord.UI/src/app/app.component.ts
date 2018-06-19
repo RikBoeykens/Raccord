@@ -16,7 +16,7 @@ import { LoadingService } from './loading/service/loading.service';
   templateUrl: 'app.component.html'
 })
 export class AppComponent {
-  public opened: boolean = true;
+  public opened: boolean = false;
   private _loadingId: string;
 
   constructor(
