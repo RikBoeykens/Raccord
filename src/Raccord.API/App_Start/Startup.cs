@@ -19,6 +19,7 @@ using Raccord.Core.Options;
 using Raccord.Data.EntityFramework;
 using Raccord.Data.EntityFramework.Seeding;
 using Raccord.Domain.Model.Users;
+using Raccord.UI.Helpers;
 using Swashbuckle.AspNetCore.Swagger;
 
 namespace Raccord.API
@@ -34,6 +35,7 @@ namespace Raccord.API
             var builder = new ConfigurationBuilder()
                 .SetBasePath(ConfigPath)
                 .AddJsonFile("app.json")
+                .AddJsonFile($"app.{env.EnvironmentName}.json", optional: true)
                 .AddEnvironmentVariables();
 
             Configuration = builder.Build();
@@ -54,7 +56,12 @@ namespace Raccord.API
             services.Configure<WeatherSettings>(Configuration.GetSection("WeatherSettings"));
             // Add framework services.
             var dbConfig = Configuration.GetSection("DbContextSettings");
-            var connectionString = dbConfig.GetValue<string>("ConnectionString");
+            var connectionUri = Configuration["DATABASE_URL"];
+            if(string.IsNullOrEmpty(connectionUri))
+            {
+                connectionUri = dbConfig.GetValue<string>("ConnectionUri");
+            }
+            var connectionString = string.IsNullOrEmpty(connectionUri) ? dbConfig.GetValue<string>("ConnectionString") : DbSettingsHelpers.GetConnectionString(connectionUri);
             services.AddDbContext<RaccordDBContext>(opts =>{ 
                 opts.UseNpgsql(connectionString);
                 
@@ -141,7 +148,7 @@ namespace Raccord.API
             app.UseAuthentication();
 
             app.UseCors(builder =>
-                builder.WithOrigins("http://localhost:5000", "http://localhost:3000")
+                builder.WithOrigins("http://localhost:3000", "http://raccord-ui-poc.herokuapp.com")
                        .AllowAnyMethod()
                        .AllowAnyHeader()
             );

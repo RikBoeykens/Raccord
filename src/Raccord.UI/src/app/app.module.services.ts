@@ -2,6 +2,9 @@ import {
   LoadingService
 } from './loading';
 import {
+  SidenavService
+} from './navigation';
+import {
   CalendarHttpService
 } from './calendar';
 import {
@@ -36,6 +39,7 @@ import {
 
 export const SERVICES = [
   LoadingService,
+  SidenavService,
   CalendarHttpService,
   ProjectCalendarHttpService,
   AuthService,

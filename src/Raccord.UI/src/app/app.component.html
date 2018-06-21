@@ -1,7 +1,7 @@
-<raccord-toolbar (toggleMenu)="toggleMenu()" *ngIf="loggedIn()"></raccord-toolbar>
+<raccord-toolbar *ngIf="loggedIn()"></raccord-toolbar>
 <raccord-loading></raccord-loading>
 <mat-sidenav-container class="raccord-sidenav-container">
-  <mat-sidenav mode="over" [opened]="opened&&loggedIn()">
+  <mat-sidenav class="raccord-sidenav" [opened]="opened&&loggedIn()">
     <raccord-sidenav></raccord-sidenav>
   </mat-sidenav>
   <mat-sidenav-content class="raccord-sidenav-content">

@@ -4,6 +4,7 @@
     routerLink="/projects/{{currentProject.id}}"
     *ngIf="currentProject">
     <project-avatar [listAvatar]="true" [project]="currentProject"></project-avatar>
+    &nbsp;
     {{currentProject.title}}
   </a>
 </mat-nav-list>

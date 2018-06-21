@@ -11,4 +11,5 @@ export class ProjectAvatarComponent {
     @Input() public cardImage;
     @Input() public listAvatar;
     @Input() public cardAvatar;
+    @Input() public headerAvatar;
 }

@@ -1,0 +1,8 @@
+{
+  "DbContextSettings" :{
+    "ConnectionString": "User ID=postgres;Password=Yqzu&çè!;Host=localhost;Port=5432;Database=RaccordApp;Pooling=true;"
+  },
+  "UISettings":{
+    "Uri": "http://localhost:3000"
+  }
+}

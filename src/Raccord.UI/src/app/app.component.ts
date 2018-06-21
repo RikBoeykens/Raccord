@@ -6,6 +6,7 @@ import { AuthService } from './security/service/auth.service';
 import { Router, RouterEvent, NavigationStart, NavigationEnd,
   NavigationCancel, NavigationError } from '@angular/router';
 import { LoadingService } from './loading/service/loading.service';
+import { SidenavService } from './navigation/service/sidenav.service';
 
 /**
  * App Component
@@ -22,15 +23,15 @@ export class AppComponent {
   constructor(
     private _router: Router,
     private _authService: AuthService,
+    private _sidenavService: SidenavService,
     private _loadingService: LoadingService
   ) {
     _router.events.subscribe((event: RouterEvent) => {
         this.navigationInterceptor(event);
     });
-  }
-
-  public toggleMenu() {
-    this.opened = !this.opened;
+    _sidenavService.toggleSidenav$.subscribe((open) => {
+      this.opened = open;
+  });
   }
 
   public loggedIn(): boolean {
@@ -38,18 +39,19 @@ export class AppComponent {
   }
 
   private navigationInterceptor(event: RouterEvent): void {
-      if (event instanceof NavigationStart) {
-          this._loadingId = this._loadingService.startLoading();
-      }
-      if (event instanceof NavigationEnd) {
-          this._loadingService.endLoading(this._loadingId);
-      }
+    this._sidenavService.setHideSideNav();
+    if (event instanceof NavigationStart) {
+      this._loadingId = this._loadingService.startLoading();
+    }
+    if (event instanceof NavigationEnd) {
+      this._loadingService.endLoading(this._loadingId);
+    }
 
-      if (event instanceof NavigationCancel) {
-          this._loadingService.endLoading(this._loadingId);
-      }
-      if (event instanceof NavigationError) {
-          this._loadingService.endLoading(this._loadingId);
-      }
+    if (event instanceof NavigationCancel) {
+      this._loadingService.endLoading(this._loadingId);
+    }
+    if (event instanceof NavigationError) {
+      this._loadingService.endLoading(this._loadingId);
+    }
   }
 }

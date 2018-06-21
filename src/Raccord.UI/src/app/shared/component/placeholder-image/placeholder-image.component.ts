@@ -9,6 +9,7 @@ export class PlaceholderImageComponent implements OnInit, OnChanges {
     @Input() public cardImage;
     @Input() public listAvatar;
     @Input() public cardAvatar;
+    @Input() public headerAvatar;
     public text: string;
     public bgColour: string;
     private availableColours: string[] =

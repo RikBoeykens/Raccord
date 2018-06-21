@@ -11,7 +11,7 @@
         </mat-card-content>
     </mat-card>
     <h2>My Projects</h2>
-    <div fxLayout="row wrap" fxLayoutGap="5px">
+    <div fxLayout="row wrap" fxLayoutGap="5px" *ngIf="pagedProjects">
         <project-card
             [project]="project"
             *ngFor="let project of pagedProjects.data"></project-card>

@@ -2,22 +2,23 @@ import { Component, Output, EventEmitter } from '@angular/core';
 import { AuthService } from '../../../security/service/auth.service';
 import { Router } from '@angular/router';
 import { AccountHelpers } from '../../../shared/children/account';
+import { SidenavService } from '../../service/sidenav.service';
 
 @Component({
   selector: 'raccord-toolbar',
   templateUrl: 'raccord-toolbar.component.html',
 })
 export class RaccordToolbarComponent {
-  @Output() private toggleMenu: EventEmitter<void> = new EventEmitter();
 
   constructor(
     private _authService: AuthService,
+    private _sidenavService: SidenavService,
     private _router: Router
   ) {
   }
 
   public doToggleMenu() {
-    this.toggleMenu.emit();
+    this._sidenavService.toggleSideNav();
   }
 
   public loggedIn(): boolean {

@@ -113,12 +113,8 @@ export abstract class BaseHttpService {
         return res as T[] || [];
     }
 
-    protected handleErrorPromise(error: any): Promise<void> {
-        let errMsg = '';
-        try {
-            error = JSON.parse(error._body);
-        } finally {
-            errMsg = error.errorMessage
+    protected handleErrorPromise(error: any): any {
+        const errMsg = error.errorMessage
             ? error.errorMessage
             : error.message
                 ? error.message
@@ -127,8 +123,10 @@ export abstract class BaseHttpService {
                     : error.status
                         ? `${error.status} - ${error.statusText}`
                         : 'unknown server error';
-        }
         console.error(errMsg);
-        return Promise.reject(errMsg);
+        return new ErrorInfo({
+            message: 'Something went wrong',
+            error
+        });
     }
 }
