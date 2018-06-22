@@ -3,6 +3,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { Image } from '../..';
 import { Base64Image, ImageHelpers } from '../../../..';
 import { ImageHttpService } from '../../service/image-http.service';
+import { ColourHelpers } from '../../../../helpers/colour.helpers';
 
 @Component({
     selector: 'show-image',
@@ -36,5 +37,9 @@ export class ShowImageComponent implements OnInit {
 
     public getImageUrl() {
         return this._sanitizer.bypassSecurityTrustUrl(ImageHelpers.getBase64Url(this.base64Image));
+    }
+
+    public getBgColour() {
+        return ColourHelpers.getColour(this.image.title);
     }
 }

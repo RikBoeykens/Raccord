@@ -317,23 +317,32 @@ raccord-toolbar {
   .raccord-header-title {
     margin-top: 0px;
     margin-bottom: 0px;
+
+    .raccord-header-avatar {
+      vertical-align: middle;
+    }
   }
 }
 
 .raccord-list-avatar {
   flex-shrink: 0;
-  width: 40px;
-  height: 40px;
+  width: 40px !important;
+  height: 40px !important;
   border-radius: $avatar-border-radius;
 }
 
 .raccord-header-avatar {
   flex-shrink: 0;
-  width: 50px;
-  height: 50px;
+  width: 50px !important;
+  height: 50px !important;
   border-radius: $avatar-border-radius;
 }
 
 .raccord-action-link {
   cursor: pointer;
+}
+
+.loading-image {
+  display: inline-block;
+  background-color: red;
 }

@@ -1,4 +1,5 @@
 import { Component, Input, OnInit, OnChanges } from '@angular/core';
+import { ColourHelpers } from '../../helpers/colour.helpers';
 
 @Component({
     selector: 'placeholder-image',
@@ -50,20 +51,6 @@ export class PlaceholderImageComponent implements OnInit, OnChanges {
     }
 
     private setColours() {
-      const colourValue = this.getColourValue();
-      let colourIndex = (colourValue % this.availableColours.length) - 1;
-      colourIndex = colourIndex < 0
-                    ||
-                    colourIndex > (this.availableColours.length - 1)
-                    ? 0 : colourIndex;
-      this.bgColour = this.availableColours[colourIndex];
-    }
-
-    private getColourValue(): number {
-      let value = 0;
-      for (const letter of this.text) {
-        value += letter.charCodeAt(0);
-      }
-      return value !== 0 ? value : 1;
+      this.bgColour = ColourHelpers.getColour(this.text);
     }
 }

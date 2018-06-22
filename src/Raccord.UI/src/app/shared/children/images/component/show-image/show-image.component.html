@@ -1,4 +1,4 @@
 <span>
-    <mat-spinner *ngIf="loadingImage"></mat-spinner>
+    <span [class.mat-card-image]="cardImage" [class.raccord-list-avatar]="listAvatar" [class.mat-card-avatar]="cardAvatar" [class.raccord-header-avatar]="headerAvatar" class="placeholder-image" class="loading-image" [style.height.px]="50" [style.width.px]="50" [style.background-color]="getBgColour()" *ngIf="loadingImage"></span>
     <img [class.mat-card-image]="cardImage" [class.raccord-list-avatar]="listAvatar" [class.mat-card-avatar]="cardAvatar" [class.raccord-header-avatar]="headerAvatar" [src]="getImageUrl()" title="{{image.title}}" *ngIf="base64Image.hasContent" />
 </span>
