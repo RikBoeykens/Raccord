@@ -1,6 +1,11 @@
 import { Routes } from '@angular/router';
 import { RouteSettings } from './shared';
 
+import {
+  AdminLandingComponent,
+  AdminGuard
+} from './admin';
+
 import { DashboardComponent } from './dashboard';
 
 import { NoContentComponent } from './no-content';
@@ -37,6 +42,16 @@ export const ROUTES: Routes = [
       projects: ShortPagedProjectsResolve,
       ResetCurrentProjectResolve
     }
+  },
+  {
+    path: RouteSettings.ADMIN,
+    canActivate: [AuthGuard, AdminGuard],
+    children: [
+      {
+        path: '',
+        component: AdminLandingComponent,
+      }
+    ]
   },
   {
     path: RouteSettings.PROJECTS,

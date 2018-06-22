@@ -1,5 +1,8 @@
 import { AppComponent } from './app.component';
 import {
+  AdminLandingComponent
+} from './admin';
+import {
   CalendarComponent,
   CalendarHeaderComponent
 } from './calendar';
@@ -40,6 +43,7 @@ import {
 
 export const COMPONENTS = [
   AppComponent,
+  AdminLandingComponent,
   CalendarComponent,
   CalendarHeaderComponent,
   DashboardComponent,

@@ -1,4 +1,7 @@
 import {
+  AdminGuard
+} from './admin';
+import {
   LoadingService
 } from './loading';
 import {
@@ -38,6 +41,7 @@ import {
 } from './shared';
 
 export const SERVICES = [
+  AdminGuard,
   LoadingService,
   SidenavService,
   CalendarHttpService,
