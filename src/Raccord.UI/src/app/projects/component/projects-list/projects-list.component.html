@@ -4,4 +4,17 @@
       My Projects
     </h1>
   </div>
+  <div fxLayout="row wrap" fxLayoutGap="5px" *ngIf="pagedProjects && pagedProjects.pageInfo">
+    <project-card
+        [project]="project"
+        *ngFor="let project of pagedProjects.data"></project-card>
+  </div>
+  <div fxLayout="row">
+    <a *ngIf="pagedProjects.pageInfo.total > pagedProjects.pageInfo.page * pagedProjects.pageInfo.pageSize"
+      class="raccord-action-link"
+      (click)="getMoreProjects()">
+      <mat-icon>arrow_drop_down</mat-icon>
+      show more
+    </a>
+  </div>
 </div>

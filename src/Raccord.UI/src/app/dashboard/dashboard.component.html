@@ -11,14 +11,14 @@
         </mat-card-content>
     </mat-card>
     <h2>My Projects</h2>
-    <div fxLayout="row wrap" fxLayoutGap="5px" *ngIf="pagedProjects">
+    <div fxLayout="row wrap" fxLayoutGap="5px" *ngIf="pagedProjects && pagedProjects.pageInfo">
         <project-card
             [project]="project"
             *ngFor="let project of pagedProjects.data"></project-card>
         <a routerLink="/projects"
-            *ngIf="pagedProjects.pageInfo.total > 3">
+            *ngIf="pagedProjects.pageInfo.total > pagedProjects.pageInfo.page * pagedProjects.pageInfo.pageSize">
             <mat-card class="project-card more-info-card">
-                <mat-card-title>...</mat-card-title>
+                <mat-card-title>more</mat-card-title>
             </mat-card>
         </a>
     </div>

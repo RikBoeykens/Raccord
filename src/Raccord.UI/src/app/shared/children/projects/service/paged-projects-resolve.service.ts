@@ -11,7 +11,7 @@ export class PagedProjectsResolve implements Resolve<PagedData<UserProject>> {
   public resolve(route: ActivatedRouteSnapshot) {
     return this._projectHttpService.getPaged(new PageRequest({
       page: 1,
-      pageSize: 12,
+      pageSize: 3,
       full: false
     })).then((data) => {
       if (data) {
