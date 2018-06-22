@@ -43,14 +43,16 @@ export class AuthService {
             return Observable.of(null);
         }
         if (new Date().getTime() >= tokens.expiryDate) {
-            return Observable.fromPromise(this.refreshToken(tokens))
-                .catch(() => Observable.throw(this.logout()));
+            return Observable.fromPromise(
+                this.refreshToken(tokens).catch(() => {
+                    this.logout();
+                    return '';
+                }));
         }
         return Observable.of(tokens.accessToken);
     }
 
     private refreshToken(tokens: SaveToken): Promise<string> {
-        console.info('doing refresh token call');
         return this.retrieveTokens({refresh_token: tokens.refreshToken}, 'refresh_token');
     }
 
