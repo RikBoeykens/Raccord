@@ -14,6 +14,7 @@ import { ROUTES } from './app.routes';
 // App is our top level component
 import { AppComponent } from './app.component';
 import { COMPONENTS } from './app.module.components';
+import { DIALOGS } from './app.module.components';
 import { SERVICES } from './app.module.services';
 import { INTERCEPTORS } from './app.module.interceptors';
 
@@ -34,7 +35,11 @@ import '../styles/headings.css';
 @NgModule({
   bootstrap: [ AppComponent ],
   declarations: [
-    COMPONENTS
+    COMPONENTS,
+    DIALOGS
+  ],
+  entryComponents: [
+    DIALOGS
   ],
   /**
    * Import Angular's modules.

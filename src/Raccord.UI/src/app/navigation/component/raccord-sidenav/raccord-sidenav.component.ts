@@ -1,5 +1,6 @@
 import { Component, OnInit, OnChanges } from '@angular/core';
 import { ProjectSummary, CurrentProjectService } from '../../../shared/children/projects';
+import { AccountHelpers } from '../../../shared/children/account';
 
 @Component({
   selector: 'raccord-sidenav',
@@ -18,5 +19,9 @@ export class RaccordSidenavComponent implements OnInit {
 
   public ngOnInit() {
     this.currentProject = this._currentProjectService.getCurrentProject();
+  }
+
+  public isAdmin() {
+    return AccountHelpers.isAdmin();
   }
 }

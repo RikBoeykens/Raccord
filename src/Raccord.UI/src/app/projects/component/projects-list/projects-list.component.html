@@ -10,11 +10,8 @@
         *ngFor="let project of pagedProjects.data"></project-card>
   </div>
   <div fxLayout="row">
-    <a *ngIf="pagedProjects.pageInfo.total > pagedProjects.pageInfo.page * pagedProjects.pageInfo.pageSize"
-      class="raccord-action-link"
+    <more-action *ngIf="pagedProjects.pageInfo.total > pagedProjects.pageInfo.page * pagedProjects.pageInfo.pageSize"
       (click)="getMoreProjects()">
-      show more
-      <mat-icon>arrow_drop_down</mat-icon>
-    </a>
+    </more-action>
   </div>
 </div>

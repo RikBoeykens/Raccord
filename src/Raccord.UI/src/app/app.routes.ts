@@ -2,8 +2,10 @@ import { Routes } from '@angular/router';
 import { RouteSettings } from './shared';
 
 import {
+  AdminProjectsListComponent,
   AdminLandingComponent,
-  AdminGuard
+  AdminGuard,
+  AdminProjectsResolve
 } from './admin';
 
 import { DashboardComponent } from './dashboard';
@@ -50,6 +52,18 @@ export const ROUTES: Routes = [
       {
         path: '',
         component: AdminLandingComponent,
+      },
+      {
+        path: RouteSettings.PROJECTS,
+        children: [
+          {
+            path: '',
+            component: AdminProjectsListComponent,
+            resolve: {
+              projects: AdminProjectsResolve
+            }
+          }
+        ]
       }
     ]
   },

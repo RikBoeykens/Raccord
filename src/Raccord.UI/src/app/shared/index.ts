@@ -1,7 +1,9 @@
 export { DialogService } from './service/dialog.service';
 export { LoadingWrapperService } from './service/loading-wrapper.service';
 
+export { ConfirmDialogComponent } from './component/confirm-dialog/confirm-dialog.component';
 export { ErrorComponent } from './component/error/error.component';
+export { MoreActionComponent } from './component/more-action/more-action.component';
 // tslint:disable-next-line:max-line-length
 export { PlaceholderImageComponent } from './component/placeholder-image/placeholder-image.component';
 

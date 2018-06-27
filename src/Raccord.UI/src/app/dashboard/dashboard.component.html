@@ -10,16 +10,16 @@
             <dashboard-calendar></dashboard-calendar>
         </mat-card-content>
     </mat-card>
-    <h2>My Projects</h2>
+    <div class="raccord-sub-header"
+        fxLayout="row">
+        <h2>My Projects</h2>
+        <span class="raccord-acton-link-container">
+            <a routerLink="/projects" class="raccord-action-link">more</a>
+        </span>
+    </div>
     <div fxLayout="row wrap" fxLayoutGap="5px" *ngIf="pagedProjects && pagedProjects.pageInfo">
         <project-card
             [project]="project"
             *ngFor="let project of pagedProjects.data"></project-card>
-        <a routerLink="/projects"
-            *ngIf="pagedProjects.pageInfo.total > pagedProjects.pageInfo.page * pagedProjects.pageInfo.pageSize">
-            <mat-card class="project-card more-info-card">
-                <mat-card-title>more</mat-card-title>
-            </mat-card>
-        </a>
     </div>
 </div>

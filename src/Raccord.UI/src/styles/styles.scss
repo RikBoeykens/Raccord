@@ -11,7 +11,7 @@
 
 // Define a theme.
 $primary: mat-palette($mat-indigo);
-$accent:  mat-palette($mat-pink, A200, A100, A400);
+$accent:  mat-palette($mat-teal);
 $warn: mat-palette($mat-red);
 
 $theme: mat-light-theme($primary, $accent, $warn);
@@ -28,7 +28,11 @@ body{
 
 a {
   text-decoration: none;
-  color: inherit;
+  color: mat-color($accent);
+  
+  mat-icon {
+    vertical-align: middle;
+  }
 }
 ul{
   list-style-type: none;
@@ -338,11 +342,16 @@ raccord-toolbar {
   border-radius: $avatar-border-radius;
 }
 
+.raccord-sub-header {
+  .raccord-action-link {
+    vertical-align: middle;
+  }
+}
+
 .raccord-action-link {
   cursor: pointer;
 }
 
 .loading-image {
   display: inline-block;
-  background-color: red;
 }

@@ -1,5 +1,7 @@
 import { AppComponent } from './app.component';
 import {
+  AdminEditProjectDialogComponent,
+  AdminProjectsListComponent,
   AdminLandingComponent
 } from './admin';
 import {
@@ -37,12 +39,15 @@ import {
   UserAvatarComponent
 } from './shared/children/users';
 import {
+  ConfirmDialogComponent,
   ErrorComponent,
+  MoreActionComponent,
   PlaceholderImageComponent
 } from './shared';
 
 export const COMPONENTS = [
   AppComponent,
+  AdminProjectsListComponent,
   AdminLandingComponent,
   CalendarComponent,
   CalendarHeaderComponent,
@@ -63,5 +68,11 @@ export const COMPONENTS = [
   ShowProfileImageComponent,
   UserAvatarComponent,
   ErrorComponent,
+  MoreActionComponent,
   PlaceholderImageComponent
+];
+
+export const DIALOGS = [
+  AdminEditProjectDialogComponent,
+  ConfirmDialogComponent
 ];
