@@ -15,8 +15,14 @@ namespace Raccord.Data.EntityFramework.Repositories.Users.Invitations.Projects
 
     public IEnumerable<ProjectUserInvitation> GetAllForInvitation(Guid invitationID)
     {
-      var query = GetIncludedSummary();
+      var query = GetIncludedProject();
       return query.Where(pui => pui.UserInvitationID == invitationID);
+    }
+
+    public IEnumerable<ProjectUserInvitation> GetAllForProject(long projectID)
+    {
+      var query = GetIncludedUserInvitation();
+      return query.Where(pui => pui.ProjectID == projectID && !pui.UserInvitation.AcceptedDate.HasValue);
     }
 
     public IEnumerable<ProjectUserInvitation> GetAllForCreateUser(Guid invitationID)
@@ -59,6 +65,26 @@ namespace Raccord.Data.EntityFramework.Repositories.Users.Invitations.Projects
     {
       var query = _context.Set<ProjectUserInvitation>();
       return query.Include(pui => pui.Project)
+                  .Include(pui => pui.Role)
+                  .Include(pu => pu.CastMember)
+                  .Include(pu => pu.CrewUnitInvitationMembers)
+                    .ThenInclude(pu => pu.CrewMembers);
+    }
+
+    private IQueryable<ProjectUserInvitation> GetIncludedProject()
+    {
+      var query = _context.Set<ProjectUserInvitation>();
+      return query.Include(pui => pui.Project)
+                  .Include(pui => pui.Role)
+                  .Include(pu => pu.CastMember)
+                  .Include(pu => pu.CrewUnitInvitationMembers)
+                    .ThenInclude(pu => pu.CrewMembers);
+    }
+
+    private IQueryable<ProjectUserInvitation> GetIncludedUserInvitation()
+    {
+      var query = _context.Set<ProjectUserInvitation>();
+      return query.Include(pui => pui.UserInvitation)
                   .Include(pui => pui.Role)
                   .Include(pu => pu.CastMember)
                   .Include(pu => pu.CrewUnitInvitationMembers)

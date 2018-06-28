@@ -26,7 +26,7 @@ namespace Raccord.Application.Services.Users.Invitations.Project
         CrewUnits = projectUserInvitation.CrewUnitInvitationMembers.Select(cum => cum.TranslateCrewUnit())
       };
     }
-    public static ProjectUserInvitationSummaryDto Translate(this ProjectUserInvitation projectUserInvitation)
+    public static ProjectUserInvitationSummaryDto TranslateSummary(this ProjectUserInvitation projectUserInvitation)
     {
       if(projectUserInvitation == null)
       {
@@ -35,7 +35,32 @@ namespace Raccord.Application.Services.Users.Invitations.Project
       return new ProjectUserInvitationSummaryDto
       {
         ID = projectUserInvitation.ID,
+        ProjectRole = projectUserInvitation.Role.Translate(),
+      };
+    }
+    public static ProjectUserInvitationProjectDto TranslateProject(this ProjectUserInvitation projectUserInvitation)
+    {
+      if(projectUserInvitation == null)
+      {
+        return null;
+      }
+      return new ProjectUserInvitationProjectDto
+      {
+        ID = projectUserInvitation.ID,
         Project = projectUserInvitation.Project.Translate(),
+        ProjectRole = projectUserInvitation.Role.Translate(),
+      };
+    }
+    public static ProjectUserInvitationUserInvitationDto TranslateInvitation(this ProjectUserInvitation projectUserInvitation)
+    {
+      if(projectUserInvitation == null)
+      {
+        return null;
+      }
+      return new ProjectUserInvitationUserInvitationDto
+      {
+        ID = projectUserInvitation.ID,
+        UserInvitation = projectUserInvitation.UserInvitation.Translate(),
         ProjectRole = projectUserInvitation.Role.Translate(),
       };
     }

@@ -7,12 +7,13 @@ import { DialogService } from '../../../../../shared/service/dialog.service';
 import { MatTableDataSource, MatDialog } from '@angular/material';
 // tslint:disable-next-line:max-line-length
 import { AdminEditProjectDialogComponent } from '../admin-edit-project-dialog/admin-edit-project-dialog.component';
+import { AdminProjectSummary } from '../../../..';
 
 @Component({
   templateUrl: 'admin-projects-list.component.html',
 })
 export class AdminProjectsListComponent implements OnInit {
-  public displayedColumns = ['image', 'title', 'options'];
+  public displayedColumns = ['image', 'title', 'usercount', 'invitationcount', 'options'];
   public projectsDataSource = [];
 
   constructor(
@@ -25,12 +26,12 @@ export class AdminProjectsListComponent implements OnInit {
   }
 
   public ngOnInit() {
-    this._route.data.subscribe((data: { projects: ProjectSummary[] }) => {
+    this._route.data.subscribe((data: { projects: AdminProjectSummary[] }) => {
       this.setProjects(data.projects);
     });
   }
 
-  public setProjects(projects: ProjectSummary[]) {
+  public setProjects(projects: AdminProjectSummary[]) {
     this.projectsDataSource = projects;
   }
 

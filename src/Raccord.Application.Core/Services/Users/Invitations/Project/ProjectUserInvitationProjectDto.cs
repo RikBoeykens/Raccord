@@ -4,19 +4,18 @@ using Raccord.Application.Core.Services.Users.ProjectRoles;
 
 namespace Raccord.Application.Core.Services.Users.Invitations.Project
 {
-  public class ProjectUserInvitationSummaryDto
+  public class ProjectUserInvitationProjectDto : ProjectUserInvitationSummaryDto
   {
-    private ProjectRoleDto _role;
-    public long ID { get; set; }
-    public ProjectRoleDto ProjectRole
+    private ProjectDto _project;
+    public ProjectDto Project
     {
       get
       {
-        return _role ?? new ProjectRoleDto();
+        return _project ?? new ProjectDto();
       }
       set
       {
-        _role = value;
+        _project = value;
       }
     }
   }

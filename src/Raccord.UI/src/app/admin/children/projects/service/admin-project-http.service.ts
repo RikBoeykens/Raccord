@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { BaseHttpService } from '../../../../shared/service/base-http.service';
 import { AppSettings } from '../../../../app.settings';
 import { ProjectSummary, FullProject, Project } from '../../../../shared/children/projects';
+import { AdminProjectSummary } from '../../..';
 
 @Injectable()
 export class AdminProjectHttpService extends BaseHttpService {
@@ -14,7 +15,7 @@ export class AdminProjectHttpService extends BaseHttpService {
     this._baseUri = `${AppSettings.API_ADMIN_ENDPOINT}/projects`;
   }
 
-  public getAll(): Promise<ProjectSummary[] | void> {
+  public getAll(): Promise<AdminProjectSummary[] | void> {
 
     const uri = this._baseUri;
 

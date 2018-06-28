@@ -1,6 +1,7 @@
 export { DialogService } from './service/dialog.service';
 export { LoadingWrapperService } from './service/loading-wrapper.service';
 
+export { BackLinkComponent } from './component/back-link/back-link.component';
 export { ConfirmDialogComponent } from './component/confirm-dialog/confirm-dialog.component';
 export { ErrorComponent } from './component/error/error.component';
 export { MoreActionComponent } from './component/more-action/more-action.component';

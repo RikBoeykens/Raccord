@@ -8,6 +8,7 @@ namespace Raccord.Data.EntityFramework.Repositories.Users.Invitations.Projects
   public interface IProjectUserInvitationRepository : IBaseRepository<ProjectUserInvitation, long>
   {
     IEnumerable<ProjectUserInvitation> GetAllForInvitation(Guid invitationID);
+    IEnumerable<ProjectUserInvitation> GetAllForProject(long projectID);
     IEnumerable<ProjectUserInvitation> GetAllForCreateUser(Guid invitationID);
     ProjectUserInvitation GetFull(long ID);
     ProjectUserInvitation GetSummary(long ID);

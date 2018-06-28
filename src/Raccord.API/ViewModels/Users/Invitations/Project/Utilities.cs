@@ -36,7 +36,34 @@ namespace Raccord.API.ViewModels.Users.Invitations.Project
       return new ProjectUserInvitationSummaryViewModel
       {
         ID = dto.ID,
+        ProjectRole = dto.ProjectRole.Translate()
+      };
+    }
+    public static ProjectUserInvitationProjectViewModel Translate(this ProjectUserInvitationProjectDto dto)
+    {
+      if(dto == null)
+      {
+        return null;
+      }
+
+      return new ProjectUserInvitationProjectViewModel
+      {
+        ID = dto.ID,
         Project = dto.Project.Translate(),
+        ProjectRole = dto.ProjectRole.Translate()
+      };
+    }
+    public static ProjectUserInvitationUserInvitationViewModel Translate(this ProjectUserInvitationUserInvitationDto dto)
+    {
+      if(dto == null)
+      {
+        return null;
+      }
+
+      return new ProjectUserInvitationUserInvitationViewModel
+      {
+        ID = dto.ID,
+        UserInvitation = dto.UserInvitation.Translate(),
         ProjectRole = dto.ProjectRole.Translate()
       };
     }

@@ -23,7 +23,7 @@ namespace Raccord.API.Controllers.Admin
 
         // GET: api/projects
         [HttpGet]
-        public IEnumerable<ProjectSummaryViewModel> Get()
+        public IEnumerable<AdminProjectSummaryViewModel> Get()
         {
             var projectDtos = _projectService.GetAll();
 

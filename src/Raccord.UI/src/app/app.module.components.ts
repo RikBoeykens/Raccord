@@ -39,6 +39,7 @@ import {
   UserAvatarComponent
 } from './shared/children/users';
 import {
+  BackLinkComponent,
   ConfirmDialogComponent,
   ErrorComponent,
   MoreActionComponent,
@@ -67,6 +68,7 @@ export const COMPONENTS = [
   ProjectCardComponent,
   ShowProfileImageComponent,
   UserAvatarComponent,
+  BackLinkComponent,
   ErrorComponent,
   MoreActionComponent,
   PlaceholderImageComponent

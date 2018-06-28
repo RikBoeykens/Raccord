@@ -21,7 +21,7 @@ namespace Raccord.Application.Services.Users.Invitations
         FirstName = userInvitation.FirstName,
         LastName = userInvitation.LastName,
         AcceptedDate = userInvitation.AcceptedDate,
-        Projects = userInvitation.ProjectUserInvitations.Select(pu => pu.Translate())
+        Projects = userInvitation.ProjectUserInvitations.Select(pu => pu.TranslateProject())
       };
     }
 

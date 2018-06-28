@@ -1,8 +1,7 @@
 <div class="raccord-narrow-container">
   <div class="raccord-page-header">
     <a routerLink="/admin">
-      <mat-icon>arrow_left</mat-icon>
-      back
+      <back-link></back-link>
     </a>
     <h1 class="raccord-header-title">
       Projects
@@ -14,7 +13,7 @@
     <ng-container matColumnDef="image">
       <mat-header-cell *matHeaderCellDef></mat-header-cell>
       <mat-cell *matCellDef="let project">
-        <project-avatar [project]="project"></project-avatar>
+        <project-avatar [project]="project" [listAvatar]="true"></project-avatar>
       </mat-cell>
     </ng-container>
 
@@ -23,6 +22,22 @@
       <mat-header-cell *matHeaderCellDef>Title</mat-header-cell>
       <mat-cell *matCellDef="let project">
         <a routerLink="/admin/projects/{{project.id}}">{{project.title}}</a>
+      </mat-cell>
+    </ng-container>
+
+    <!-- User count Column -->
+    <ng-container matColumnDef="usercount">
+      <mat-header-cell *matHeaderCellDef>Users</mat-header-cell>
+      <mat-cell *matCellDef="let project">
+        {{project.userCount}}
+      </mat-cell>
+    </ng-container>
+
+    <!-- Invitation count Column -->
+    <ng-container matColumnDef="invitationcount">
+      <mat-header-cell *matHeaderCellDef>Invitations</mat-header-cell>
+      <mat-cell *matCellDef="let project">
+        {{project.invitationCount}}
       </mat-cell>
     </ng-container>
 

@@ -6,13 +6,13 @@ namespace Raccord.Application.Core.Services.Users.Invitations
 {
   public class FullUserInvitationDto : UserInvitationDto
   {
-    private IEnumerable<ProjectUserInvitationSummaryDto> _projects;
+    private IEnumerable<ProjectUserInvitationProjectDto> _projects;
     public DateTime? AcceptedDate { get; set; }        
-    public IEnumerable<ProjectUserInvitationSummaryDto> Projects
+    public IEnumerable<ProjectUserInvitationProjectDto> Projects
     {
       get
       {
-          return _projects ?? new List<ProjectUserInvitationSummaryDto>();
+          return _projects ?? new List<ProjectUserInvitationProjectDto>();
       }
       set
       {

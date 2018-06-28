@@ -52,11 +52,11 @@ namespace Raccord.Application.Services.Projects
         }
 
         // Gets all projects
-        public IEnumerable<ProjectSummaryDto> GetAll()
+        public IEnumerable<AdminProjectSummaryDto> GetAll()
         {
             var projects = _projectRepository.GetAll();
 
-            var projectDtos = projects.Select(p => p.TranslateSummary());
+            var projectDtos = projects.Select(p => p.TranslateAdminSummary());
 
             return projectDtos;
         }
@@ -100,6 +100,16 @@ namespace Raccord.Application.Services.Projects
             var project = _projectRepository.GetFull(ID);
 
             var projectDto = project.TranslateFull();
+
+            return projectDto;
+        }
+
+        // Gets a single project by id
+        public AdminFullProjectDto GetForAdmin(long ID)
+        {
+            var project = _projectRepository.GetFullAdmin(ID);
+
+            var projectDto = project.TranslateFullAdmin();
 
             return projectDto;
         }
