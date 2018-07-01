@@ -1,4 +1,5 @@
 using Raccord.API.ViewModels.Users;
+using Raccord.API.ViewModels.Users.ProjectRoles;
 
 namespace Raccord.API.ViewModels.Users.Projects
 {
@@ -6,6 +7,7 @@ namespace Raccord.API.ViewModels.Users.Projects
     public class ProjectUserUserViewModel
     {
         private UserSummaryViewModel _user;
+        private ProjectRoleViewModel _role;
 
         // ID of the crew user
         public long ID { get; set; }
@@ -20,6 +22,17 @@ namespace Raccord.API.ViewModels.Users.Projects
             set
             {
                 _user = value;
+            }
+        }
+        public ProjectRoleViewModel ProjectRole
+        {
+            get
+            {
+                return _role ?? new ProjectRoleViewModel();
+            }
+            set
+            {
+                _role = value;
             }
         }
     }

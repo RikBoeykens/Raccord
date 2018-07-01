@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { UserProfileSummary } from '../../..';
+import { UserProfileSummary } from '../../../..';
 
 @Component({
     selector: 'user-avatar',

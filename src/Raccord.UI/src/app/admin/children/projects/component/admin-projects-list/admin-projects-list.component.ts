@@ -14,7 +14,7 @@ import { AdminProjectSummary } from '../../../..';
 })
 export class AdminProjectsListComponent implements OnInit {
   public displayedColumns = ['image', 'title', 'usercount', 'invitationcount', 'options'];
-  public projectsDataSource = [];
+  public projects: AdminProjectSummary[] = [];
 
   constructor(
     private _adminProjectHttpService: AdminProjectHttpService,
@@ -32,7 +32,7 @@ export class AdminProjectsListComponent implements OnInit {
   }
 
   public setProjects(projects: AdminProjectSummary[]) {
-    this.projectsDataSource = projects;
+    this.projects = projects;
   }
 
   public getProjects() {
@@ -84,8 +84,8 @@ export class AdminProjectsListComponent implements OnInit {
       this._adminProjectHttpService.delete(projectId),
       () => {
         this._dialogService.success('The project was successfully removed.');
-        this.projectsDataSource =
-          this.projectsDataSource.filter((project: ProjectSummary) => project.id !== projectId);
+        this.projects =
+          this.projects.filter((project: ProjectSummary) => project.id !== projectId);
       }
     );
   }

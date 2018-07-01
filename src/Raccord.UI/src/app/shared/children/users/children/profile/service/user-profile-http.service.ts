@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BaseHttpService } from '../../../../service/base-http.service';
+import { BaseHttpService } from '../../../../../service/base-http.service';
 import { HttpClient } from '@angular/common/http';
-import { AppSettings } from '../../../../../app.settings';
+import { AppSettings } from '../../../../../../app.settings';
 import { UserProfile } from '../model/user-profile.model';
 import { UserProfileSummary } from '../model/user-profile-summary.model';
-import { Base64Image } from '../../../../model/base-64.image.model';
+import { Base64Image } from '../../../../../model/base-64.image.model';
 
 @Injectable()
 export class UserProfileHttpService extends BaseHttpService {

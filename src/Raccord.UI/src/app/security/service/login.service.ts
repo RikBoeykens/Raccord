@@ -7,7 +7,7 @@ import { UserProfileSummary } from '../../shared/children/users';
 import { UserPermissionSummary } from '../../shared/children/users';
 import { UserProjectSummary } from '../../shared/children/projects';
 // tslint:disable-next-line:max-line-length
-import { UserProfileHttpService } from '../../shared/children/users/profile/service/user-profile-http.service';
+import { UserProfileHttpService } from '../../shared/children/users/children/profile/service/user-profile-http.service';
 import { ProjectHttpService } from '../../shared/children/projects/service/project-http.service';
 
 @Injectable()

@@ -1,12 +1,29 @@
-export { UserProfileHttpService } from './profile/service/user-profile-http.service';
+export { UserPermissionSummary } from './children/permissions/model/user-permission-summary.model';
 
 // tslint:disable-next-line:max-line-length
-export { ShowProfileImageComponent } from './profile/component/show-profile-image/show-profile-image.component';
-export { UserAvatarComponent } from './profile/component/user-avatar/user-avatar.component';
-
-export { UserPermissionSummary } from './permissions/model/user-permission-summary.model';
-export { UserProfileSummary } from './profile/model/user-profile-summary.model';
-export { UserProfile } from './profile/model/user-profile.model';
-export { ProjectPermissionEnum } from './project-permissions/enums/project-permission.enum';
+export { ShowProfileImageComponent } from './children/profile/component/show-profile-image/show-profile-image.component';
 // tslint:disable-next-line:max-line-length
-export { ProjectPermissionSummary } from './project-permissions/model/project-permission-summary.model';
+export { UserAvatarComponent } from './children/profile/component/user-avatar/user-avatar.component';
+
+export { UserProfileSummary } from './children/profile/model/user-profile-summary.model';
+export { UserProfile } from './children/profile/model/user-profile.model';
+
+export { UserProfileHttpService } from './children/profile/service/user-profile-http.service';
+
+// tslint:disable-next-line:max-line-length
+export { ProjectPermissionEnum } from './children/project-permissions/enums/project-permission.enum';
+// tslint:disable-next-line:max-line-length
+export { ProjectPermissionSummary } from './children/project-permissions/model/project-permission-summary.model';
+
+export { ProjectRole } from './children/project-roles/model/project-role.model';
+
+export { ProjectUserUser } from './children/projects/model/project-user-user.model';
+
+// tslint:disable-next-line:max-line-length
+export { ProjectUserInvitationSummary } from './children/user-invitations/model/project-user-invitation-summary.model';
+// tslint:disable-next-line:max-line-length
+export { ProjectUserInvitationUserInvitation } from './children/user-invitations/model/project-user-invitation-user-invitation.model';
+export { UserInvitation } from './children/user-invitations/model/user-invitation.model';
+
+export { UserSummary } from './model/user-summary.model';
+export { User } from './model/user.model';

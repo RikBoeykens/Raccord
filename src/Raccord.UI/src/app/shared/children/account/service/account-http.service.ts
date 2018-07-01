@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { UserPermissionSummary } from '../../users/permissions/model/user-permission-summary.model';
+// tslint:disable-next-line:max-line-length
+import { UserPermissionSummary } from '../../users/children/permissions/model/user-permission-summary.model';
 import { AppSettings } from '../../../../app.settings';
 import { BaseHttpService } from '../../../service/base-http.service';
 

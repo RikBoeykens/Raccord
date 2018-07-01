@@ -31,7 +31,9 @@ namespace Raccord.Data.EntityFramework.Repositories.Crew.CrewUnits.Members
             IQueryable<CrewUnitMember> query = _context.Set<CrewUnitMember>();
 
             return query.Include(cum => cum.ProjectUser)
-                            .ThenInclude(pu => pu.User);
+                            .ThenInclude(pu => pu.User)
+                        .Include(cum => cum.ProjectUser)
+                            .ThenInclude(pu => pu.Role);
         }
 
         private IQueryable<CrewUnitMember> GetIncludedUnit()

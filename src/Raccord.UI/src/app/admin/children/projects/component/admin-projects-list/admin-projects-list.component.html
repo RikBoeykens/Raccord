@@ -7,52 +7,11 @@
       Projects
     </h1>
   </div>
-  <mat-table #table [dataSource]="projectsDataSource">
-
-    <!-- Image Column -->
-    <ng-container matColumnDef="image">
-      <mat-header-cell *matHeaderCellDef></mat-header-cell>
-      <mat-cell *matCellDef="let project">
-        <project-avatar [project]="project" [listAvatar]="true"></project-avatar>
-      </mat-cell>
-    </ng-container>
-
-    <!-- Title Column -->
-    <ng-container matColumnDef="title">
-      <mat-header-cell *matHeaderCellDef>Title</mat-header-cell>
-      <mat-cell *matCellDef="let project">
-        <a routerLink="/admin/projects/{{project.id}}">{{project.title}}</a>
-      </mat-cell>
-    </ng-container>
-
-    <!-- User count Column -->
-    <ng-container matColumnDef="usercount">
-      <mat-header-cell *matHeaderCellDef>Users</mat-header-cell>
-      <mat-cell *matCellDef="let project">
-        {{project.userCount}}
-      </mat-cell>
-    </ng-container>
-
-    <!-- Invitation count Column -->
-    <ng-container matColumnDef="invitationcount">
-      <mat-header-cell *matHeaderCellDef>Invitations</mat-header-cell>
-      <mat-cell *matCellDef="let project">
-        {{project.invitationCount}}
-      </mat-cell>
-    </ng-container>
-
-    <!-- Options Column -->
-    <ng-container matColumnDef="options">
-      <mat-header-cell *matHeaderCellDef></mat-header-cell>
-      <mat-cell *matCellDef="let project">
-        <button mat-icon-button (click)="showEditProject(project)"><mat-icon>edit</mat-icon></button>
-        <button mat-icon-button (click)="showConfirmRemove(project)"><mat-icon>delete</mat-icon></button>
-      </mat-cell>
-    </ng-container>
-
-    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-  </mat-table>
+  <admin-projects-table 
+    [projects]="projects"
+    (showConfirmRemove)="showConfirmRemove($event)"
+    (showEditProject)="showEditProject($event)">
+  </admin-projects-table>
   <button mat-fab 
       class="raccord-fab"
       (click)="showAddProject()">

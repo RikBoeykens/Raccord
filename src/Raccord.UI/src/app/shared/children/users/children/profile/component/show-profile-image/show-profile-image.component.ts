@@ -1,9 +1,9 @@
 import { Component, Input } from '@angular/core';
 import { OnInit } from '@angular/core/src/metadata/lifecycle_hooks';
 import { DomSanitizer } from '@angular/platform-browser';
-import { UserProfileSummary } from '../../..';
-import { Base64Image, ImageHelpers } from '../../../../..';
+import { Base64Image, ImageHelpers } from '../../../../../..';
 import { UserProfileHttpService } from '../../service/user-profile-http.service';
+import { UserProfileSummary } from '../../../..';
 
 @Component({
     selector: 'show-profile-image',

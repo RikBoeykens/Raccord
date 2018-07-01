@@ -34,6 +34,7 @@ namespace Raccord.Application.Services.Users.Projects
             {
                 ID = projectUser.ID,
                 User = projectUser.User.TranslateSummary(),
+                ProjectRole = projectUser.Role.Translate(),
             };
         }
         public static LinkedProjectUserUserDto TranslateProjectUser(this CrewUnitMember crewUnitMember)
@@ -42,6 +43,7 @@ namespace Raccord.Application.Services.Users.Projects
             {
                 ID = crewUnitMember.ProjectUser.ID,
                 User = crewUnitMember.ProjectUser.User.TranslateSummary(),
+                ProjectRole = crewUnitMember.ProjectUser.Role.Translate(),
                 LinkID = crewUnitMember.ID
             };
         }
@@ -50,7 +52,8 @@ namespace Raccord.Application.Services.Users.Projects
             return new ProjectUserProjectDto
             {
                 ID = projectUser.ID,
-                Project = projectUser.Project.TranslateSummary()
+                Project = projectUser.Project.TranslateSummary(),
+                ProjectRole = projectUser.Role.Translate(),
             };
         }
         public static ProjectUserDto Translate(this ProjectUser projectUser)

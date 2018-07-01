@@ -77,7 +77,8 @@ namespace Raccord.Data.EntityFramework.Repositories.Users.Projects
         {
             IQueryable<ProjectUser> query = _context.Set<ProjectUser>();
 
-            return query.Include(cs=> cs.User);
+            return query.Include(cs=> cs.User)
+                        .Include(pu => pu.Role);
         }
 
         private IQueryable<ProjectUser> GetIncludedProject()
@@ -85,7 +86,8 @@ namespace Raccord.Data.EntityFramework.Repositories.Users.Projects
             IQueryable<ProjectUser> query = _context.Set<ProjectUser>();
 
             return query.Include(cs=> cs.Project)
-                        .ThenInclude(p=> p.Images);
+                        .ThenInclude(p=> p.Images)
+                        .Include(pu => pu.Role);
         }
 
         private IQueryable<ProjectUser> GetIncludedPermissions()

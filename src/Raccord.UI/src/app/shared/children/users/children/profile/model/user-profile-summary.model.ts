@@ -1,4 +1,4 @@
-import { BaseModel } from '../../../../model/base.model';
+import { BaseModel } from '../../../../../model/base.model';
 
 export class UserProfileSummary extends BaseModel {
   public id: string;

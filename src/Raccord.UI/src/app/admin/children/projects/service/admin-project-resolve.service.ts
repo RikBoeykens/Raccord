@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Resolve, ActivatedRouteSnapshot } from '@angular/router';
-import { FullProject } from '../../../../shared/children/projects';
 import { AdminProjectHttpService } from './admin-project-http.service';
+import { AdminFullProject } from '../../..';
 
 @Injectable()
-export class AdminProjectResolve implements Resolve<FullProject> {
+export class AdminProjectResolve implements Resolve<AdminFullProject> {
 
   constructor(
       private _projectHttpService: AdminProjectHttpService
@@ -13,6 +13,6 @@ export class AdminProjectResolve implements Resolve<FullProject> {
   public resolve(route: ActivatedRouteSnapshot) {
     const id = route.params['projectId'];
 
-    return this._projectHttpService.get(id).then((data: FullProject) => data);
+    return this._projectHttpService.get(id).then((data: AdminFullProject) => data);
   }
 }

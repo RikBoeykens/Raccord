@@ -9,6 +9,7 @@ export { MoreActionComponent } from './component/more-action/more-action.compone
 export { PlaceholderImageComponent } from './component/placeholder-image/placeholder-image.component';
 
 export { EntityType } from './enums/entity-type.enum';
+export { ProjectRoleEnum } from './enums/project-role.enum';
 
 export { HeaderHelpers } from './helpers/header.helper';
 export { ImageHelpers } from './helpers/image.helpers';

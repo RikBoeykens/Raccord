@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BaseHttpService } from '../../../../shared/service/base-http.service';
 import { AppSettings } from '../../../../app.settings';
-import { ProjectSummary, FullProject, Project } from '../../../../shared/children/projects';
-import { AdminProjectSummary } from '../../..';
+import { ProjectSummary, Project } from '../../../../shared/children/projects';
+import { AdminProjectSummary, AdminFullProject } from '../../..';
 
 @Injectable()
 export class AdminProjectHttpService extends BaseHttpService {
@@ -22,7 +22,7 @@ export class AdminProjectHttpService extends BaseHttpService {
     return this.doGetArray(uri);
   }
 
-  public get(id: number): Promise<FullProject | void> {
+  public get(id: number): Promise<AdminFullProject | void> {
 
     const uri = `${this._baseUri}/${id}`;
 
