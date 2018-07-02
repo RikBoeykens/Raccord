@@ -4,7 +4,7 @@
   <ng-container matColumnDef="image">
     <mat-header-cell *matHeaderCellDef></mat-header-cell>
     <mat-cell *matCellDef="let projectUser">
-      <user-avatar [user]="projectUser"></user-avatar>
+      <user-avatar [user]="projectUser.user"></user-avatar>
     </mat-cell>
   </ng-container>
 

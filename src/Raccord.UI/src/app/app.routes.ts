@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { RouteSettings } from './shared';
 
 import {
+  AdminProjectRolesResolve,
   AdminProjectDashboardComponent,
   AdminProjectsListComponent,
   AdminLandingComponent,
@@ -69,7 +70,8 @@ export const ROUTES: Routes = [
             path: ':projectId',
             component: AdminProjectDashboardComponent,
             resolve: {
-              project: AdminProjectResolve
+              project: AdminProjectResolve,
+              projectRoles: AdminProjectRolesResolve
             }
           }
         ]

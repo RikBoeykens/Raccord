@@ -1,7 +1,11 @@
 import {
+  AdminProjectUserHttpService,
+  AdminProjectRoleHttpService,
+  AdminProjectRolesResolve,
   AdminProjectHttpService,
   AdminProjectResolve,
   AdminProjectsResolve,
+  AdminUserHttpService,
   AdminGuard
 } from './admin';
 import {
@@ -44,9 +48,13 @@ import {
 } from './shared';
 
 export const SERVICES = [
+  AdminProjectUserHttpService,
+  AdminProjectRoleHttpService,
+  AdminProjectRolesResolve,
   AdminProjectHttpService,
   AdminProjectResolve,
   AdminProjectsResolve,
+  AdminUserHttpService,
   AdminGuard,
   LoadingService,
   SidenavService,
