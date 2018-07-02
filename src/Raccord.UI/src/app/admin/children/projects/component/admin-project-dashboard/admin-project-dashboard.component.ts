@@ -5,7 +5,7 @@ import { Project } from '../../../../../shared/children/projects';
 import { MatDialog } from '@angular/material';
 import { AdminEditProjectDialogComponent } from '../../../..';
 import { AdminProjectHttpService } from '../../service/admin-project-http.service';
-import { LoadingWrapperService } from '../../../../../shared';
+import { LoadingWrapperService, DialogService } from '../../../../../shared';
 import { ProjectRole, ProjectUser, ProjectUserUser } from '../../../../../shared/children/users';
 // tslint:disable-next-line:max-line-length
 import { AdminProjectsAddUserDialogComponent } from '../admin-projects-add-user-dialog/admin-projects-add-user-dialog.component';
@@ -26,6 +26,7 @@ export class AdminProjectDashboardComponent implements OnInit {
     private _adminUserHttpService: AdminUserHttpService,
     private _adminProjectUserHttpService: AdminProjectUserHttpService,
     private _loadingWrapperService: LoadingWrapperService,
+    private _dialogService: DialogService,
     private _route: ActivatedRoute,
     private _dialog: MatDialog
   ) {
@@ -66,6 +67,13 @@ export class AdminProjectDashboardComponent implements OnInit {
     });
   }
 
+  public showConfirmRemoveUser(projectUser: ProjectUserUser) {
+    this._dialogService.confirm(
+      `Are you sure you want to remove ${projectUser.user.firstName} ${projectUser.user.lastName}?`,
+      () => this.removeProjectUser(projectUser.id)
+    );
+  }
+
   private postProject(project: Project) {
     this._loadingWrapperService.Load(
       this._adminProjectHttpService.post(project),
@@ -98,6 +106,13 @@ export class AdminProjectDashboardComponent implements OnInit {
     this._loadingWrapperService.Load(
       this._adminProjectUserHttpService.getUsers(this.project.id),
       (users: ProjectUserUser[]) => this.project.users = users
+    );
+  }
+
+  private removeProjectUser(id: number) {
+    this._loadingWrapperService.Load(
+      this._adminProjectUserHttpService.delete(id),
+      () => this.getUsers()
     );
   }
 }

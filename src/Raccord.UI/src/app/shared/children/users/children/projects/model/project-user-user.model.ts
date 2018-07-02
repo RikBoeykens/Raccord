@@ -3,19 +3,19 @@ import { UserSummary } from '../../../model/user-summary.model';
 import { ProjectRole } from '../../..';
 
 export class ProjectUserUser extends BaseModel {
-  public ID: number;
+  public id: number;
   public user: UserSummary;
   public projectRole: ProjectRole;
 
   constructor(
     obj?: {
-      ID: number,
+      id: number,
       user: UserSummary,
       projectRole: ProjectRole
     }
   ) {
     super();
-    this.ID = obj.ID;
+    this.id = obj.id;
     this.user = obj.user;
     this.projectRole = obj.projectRole;
   }
