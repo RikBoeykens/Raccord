@@ -3,13 +3,31 @@
     <a routerLink="/admin">
       <back-link></back-link>
     </a>
-    <h1 class="raccord-header-title">
-      <project-avatar [headerAvatar]="true" [project]="project"></project-avatar>
-      {{project.title}}
-    </h1>
+    <div fxLayout="row">
+      <h1 class="raccord-header-title">
+        <project-avatar [headerAvatar]="true" [project]="project"></project-avatar>
+        {{project.title}}
+      </h1>
+      <button mat-mini-fab
+        (click)="showEditProject()"><mat-icon>edit</mat-icon></button>
+    </div>
   </div>
   <div class="raccord-sub-header"
       fxLayout="row">
       <h2>Users</h2>
+      <button mat-icon-button><mat-icon>add</mat-icon></button>
   </div>
+  <admin-project-project-users-table 
+    [projectUsers]="project.users"
+    (showConfirmRemove)="showConfirmRemoveUser($event)">
+  </admin-project-project-users-table>
+  <div class="raccord-sub-header"
+      fxLayout="row">
+      <h2>Invitations</h2>
+      <button mat-icon-button><mat-icon>add</mat-icon></button>
+  </div>
+  <admin-project-project-invitations-table 
+    [projectUserInvitations]="project.invitations"
+    (showConfirmRemove)="showConfirmRemoveInvitation($event)">
+  </admin-project-project-invitations-table>
 </div>

@@ -2,6 +2,8 @@ import { AppComponent } from './app.component';
 import {
   AdminEditProjectDialogComponent,
   AdminProjectDashboardComponent,
+  AdminProjectProjectInvitationsTableComponent,
+  AdminProjectProjectUsersTableComponent,
   AdminProjectsListComponent,
   AdminProjectsTableComponent,
   AdminLandingComponent
@@ -51,6 +53,8 @@ import {
 export const COMPONENTS = [
   AppComponent,
   AdminProjectDashboardComponent,
+  AdminProjectProjectInvitationsTableComponent,
+  AdminProjectProjectUsersTableComponent,
   AdminProjectsListComponent,
   AdminProjectsTableComponent,
   AdminLandingComponent,

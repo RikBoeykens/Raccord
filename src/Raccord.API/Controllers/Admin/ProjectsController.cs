@@ -33,9 +33,9 @@ namespace Raccord.API.Controllers.Admin
         }
         // GET api/projects/5
         [HttpGet("{id}")]
-        public FullProjectViewModel Get(long id)
+        public AdminFullProjectViewModel Get(long id)
         {
-            var projectDto = _projectService.Get(id);
+            var projectDto = _projectService.GetForAdmin(id);
 
             var projectVm = projectDto.Translate();
 

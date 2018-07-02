@@ -8,12 +8,12 @@ import { Project } from '../../../../../shared/children/projects';
 })
 export class AdminProjectsTableComponent {
   @Input() public projects: AdminProjectSummary[];
-  @Output() public showEditProject: EventEmitter<Project> = new EventEmitter();
+  @Output() public showEdit: EventEmitter<Project> = new EventEmitter();
   @Output() public showConfirmRemove: EventEmitter<Project> = new EventEmitter();
   public displayedColumns = ['image', 'title', 'usercount', 'invitationcount', 'options'];
 
-  public doShowEditProject(project: Project) {
-    this.showEditProject.emit(project);
+  public doShowEdit(project: Project) {
+    this.showEdit.emit(project);
   }
   public doShowConfirmRemove(project: Project) {
     this.showConfirmRemove.emit(project);
