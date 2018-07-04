@@ -3,7 +3,7 @@ import { User } from '../../../../shared/children/users';
 export class FullUser extends User {
   constructor(
     obj?: {
-      ID: string,
+      id: string,
       email: string,
       firstName: string,
       lastName: string

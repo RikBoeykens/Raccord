@@ -5,6 +5,7 @@ import {
   AdminProjectProjectInvitationsTableComponent,
   AdminProjectProjectUsersTableComponent,
   AdminProjectsAddUserDialogComponent,
+  AdminProjectsLinkUserDialogComponent,
   AdminProjectsListComponent,
   AdminProjectsTableComponent,
   AdminLandingComponent
@@ -86,5 +87,6 @@ export const COMPONENTS = [
 export const DIALOGS = [
   AdminEditProjectDialogComponent,
   AdminProjectsAddUserDialogComponent,
+  AdminProjectsLinkUserDialogComponent,
   ConfirmDialogComponent
 ];

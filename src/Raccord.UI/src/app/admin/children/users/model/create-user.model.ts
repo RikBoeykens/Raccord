@@ -5,7 +5,7 @@ export class CreateUser extends User {
 
   constructor(
     obj?: {
-      ID: string,
+      id: string,
       email: string,
       firstName: string,
       lastName: string,

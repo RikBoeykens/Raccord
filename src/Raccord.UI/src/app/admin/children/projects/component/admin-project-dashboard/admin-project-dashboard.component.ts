@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Project } from '../../../../../shared/children/projects';
 import { MatDialog } from '@angular/material';
-import { AdminEditProjectDialogComponent } from '../../../..';
+import { AdminEditProjectDialogComponent, AdminProjectsLinkUserDialogComponent } from '../../../..';
 import { AdminProjectHttpService } from '../../service/admin-project-http.service';
 import { LoadingWrapperService, DialogService } from '../../../../../shared';
 import { ProjectRole, ProjectUser, ProjectUserUser } from '../../../../../shared/children/users';
@@ -63,6 +63,18 @@ export class AdminProjectDashboardComponent implements OnInit {
     addUserDialog.afterClosed().subscribe((returnedData: {user: CreateUser, roleId: number}) => {
       if (returnedData) {
           this.createUser(returnedData.user, returnedData.roleId);
+      }
+    });
+  }
+
+  public showLinkUser() {
+    const linkUserDialog = this._dialog.open(AdminProjectsLinkUserDialogComponent, {data:
+    {
+        projectRoles: this.projectRoles
+    }});
+    linkUserDialog.afterClosed().subscribe((returnedData: {userId: string, roleId: number}) => {
+      if (returnedData) {
+          this.linkUser(returnedData.userId, returnedData.roleId);
       }
     });
   }

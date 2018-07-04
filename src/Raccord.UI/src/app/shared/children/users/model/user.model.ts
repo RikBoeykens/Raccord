@@ -1,14 +1,14 @@
 import { BaseModel } from '../../../model/base.model';
 
 export class User extends BaseModel {
-  public ID: string;
+  public id: string;
   public email: string;
   public firstName: string;
   public lastName: string;
 
   constructor(
     obj?: {
-      ID: string,
+      id: string,
       email: string,
       firstName: string,
       lastName: string
@@ -16,7 +16,7 @@ export class User extends BaseModel {
   ) {
     super();
     if (obj) {
-      this.ID = obj.ID,
+      this.id = obj.id,
       this.email = obj.email;
       this.firstName = obj.firstName;
       this.lastName = obj.lastName;

@@ -1,0 +1,42 @@
+<h3 mat-dialog-title>Link Existing User</h3>
+<form id="projects-link-user-form"
+  #projectsLinkUserForm = "ngForm"
+  (ngSubmit)="submit()">
+  <mat-dialog-content>
+    <div fxLayout="row">
+      <mat-form-field>
+        <input type="text" placeholder="Search User" aria-label="Search User" matInput [matAutocomplete]="adminSearchUserAuto" [(ngModel)]="searchText" name="search-user-text">
+        <input type="hidden" required [(ngModel)]="selectedUser.id" name="search-user-id" />
+        <mat-autocomplete #adminSearchUserAuto="matAutocomplete" (optionSelected)="onSelectionChanged($event)" [displayWith]="clearSearch">
+          <mat-option *ngFor="let user of filteredUsers" [value]="user">
+            {{getName(user)}}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+    </div>
+    <div fxLayout="row" *ngIf="selectedUser.id">
+      <mat-chip-list>
+          <mat-chip [removable]="true" (remove)="removeSelectedUser()">
+            {{getName(selectedUser)}}
+            <mat-icon matChipRemove>cancel</mat-icon>
+          </mat-chip>
+      </mat-chip-list>
+    </div>
+    <div fxLayout="row">
+      <mat-form-field>
+        <mat-select 
+          mdInput placeholder="Role" 
+          [(ngModel)]="chosenRoleId" 
+          #projectRole="ngModel" 
+          name="user-role">
+          <mat-option [value]="">---</mat-option>
+          <mat-option *ngFor="let projectRole of availableRoles" [value]="projectRole.id">{{projectRole.name}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button mat-button type="submit" [disabled]="!projectsLinkUserForm.form.valid">Save</button>
+  </mat-dialog-actions>
+</form>

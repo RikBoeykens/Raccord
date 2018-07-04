@@ -17,6 +17,8 @@ export { AdminProjectProjectUsersTableComponent } from './children/projects/comp
 // tslint:disable-next-line:max-line-length
 export { AdminProjectsAddUserDialogComponent } from './children/projects/component/admin-projects-add-user-dialog/admin-projects-add-user-dialog.component';
 // tslint:disable-next-line:max-line-length
+export { AdminProjectsLinkUserDialogComponent } from './children/projects/component/admin-projects-link-user-dialog/admin-projects-link-user-dialog.component';
+// tslint:disable-next-line:max-line-length
 export { AdminProjectsListComponent } from './children/projects/component/admin-projects-list/admin-projects-list.component';
 // tslint:disable-next-line:max-line-length
 export { AdminProjectsTableComponent } from './children/projects/component/admin-projects-table/admin-projects-table.component';
