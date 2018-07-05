@@ -7,6 +7,7 @@ using Raccord.Application.Core.Services.SearchEngine;
 using Raccord.Core.Enums;
 using Raccord.Application.Services.Images;
 using Raccord.Application.Services.Locations.LocationSets;
+using Raccord.Application.Core.Common.Routing;
 
 namespace Raccord.Application.Services.ScriptLocations
 {
@@ -100,10 +101,13 @@ namespace Raccord.Application.Services.ScriptLocations
             var dto = new SearchResultDto
             {
                 ID = scriptLocation.ID,
-                RouteIDs = new long[]{scriptLocation.ProjectID, scriptLocation.ID},
                 DisplayName = scriptLocation.Name,
                 Info = $"Project: {scriptLocation.Project.Title}",
-                Type = EntityType.ScriptLocation,
+                RouteInfo = new RouteInfoDto
+                {
+                    RouteIDs = new object[]{scriptLocation.ProjectID, scriptLocation.ID},
+                    Type = EntityType.ScriptLocation,
+                }
             };
 
             return dto;

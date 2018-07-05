@@ -1,27 +1,29 @@
 import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { ProjectRole, User } from '../../../../../shared/children/users';
+import { AdminSearchEngineService } from '../../../search/service/admin-search-engine.service';
+import { LoadingWrapperService } from '../../../../../shared/service/loading-wrapper.service';
+import {
+  SearchRequest,
+  SearchTypeResult,
+  SearchResult
+} from '../../../../../shared/children/search';
+import { EntityType } from '../../../../../shared';
 
 @Component({
   templateUrl: 'admin-projects-link-user-dialog.component.html',
 })
 
 export class AdminProjectsLinkUserDialogComponent {
-  public selectedUser: User = new User();
+  public selectedUser: SearchResult = new SearchResult();
   public searchText: string;
   public chosenRoleId: number;
   public availableRoles: ProjectRole[];
-  // tslint:disable-next-line:max-line-length
-  public filteredUsers: User[] = [
-    new User({id: '1', email: 'a@b.com', firstName: 'Rik', lastName: 'Boeykens'}),
-    new User({id: '2', email: 'a@b.com', firstName: 'Jan', lastName: 'Smith'}),
-    new User({id: '3', email: 'a@b.com', firstName: 'Janine', lastName: 'Bischops'}),
-    new User({id: '4', email: 'a@b.com', firstName: 'Karel', lastName: 'Eggers'}),
-    new User({id: '5', email: 'a@b.com', firstName: 'Jaap', lastName: 'Van In'}),
-    new User({id: '6', email: 'a@b.com', firstName: 'Sarah', lastName: 'Boeykens'}),
-  ];
+  public filteredUsers: SearchResult[] = [];
 
   constructor(
+    private _adminSearchEngineService: AdminSearchEngineService,
+    private _loadingWrapperService: LoadingWrapperService,
     private _dialogRef: MatDialogRef<AdminProjectsLinkUserDialogComponent>,
     @Inject(MAT_DIALOG_DATA) private data: {
       projectRoles: ProjectRole[]
@@ -30,12 +32,29 @@ export class AdminProjectsLinkUserDialogComponent {
     this.availableRoles = data.projectRoles;
   }
 
-  public submit() {
-    this._dialogRef.close({userId: this.selectedUser.id, roleId: this.chosenRoleId});
+  public searchUsers() {
+    if (this.searchText && this.searchText !== '') {
+      this._loadingWrapperService.Load(
+        this._adminSearchEngineService.search(new SearchRequest({
+          searchText: this.searchText,
+          projectId: 0,
+          includeTypes: [EntityType.user],
+          excludeTypes: [],
+          excludeTypeIDs: []
+        })),
+        (data: SearchTypeResult[]) => {
+          if (data && data.length && data[0].results) {
+            this.filteredUsers = data[0].results;
+          }
+        }
+      );
+    } else {
+      this.resetResults();
+    }
   }
 
-  public getName(user: User) {
-    return `${user.firstName} ${user.lastName}`;
+  public submit() {
+    this._dialogRef.close({userId: this.selectedUser.id, roleId: this.chosenRoleId});
   }
 
   public onSelectionChanged(event$) {
@@ -48,6 +67,10 @@ export class AdminProjectsLinkUserDialogComponent {
   }
 
   public removeSelectedUser() {
-    this.selectedUser = new User();
+    this.selectedUser = new SearchResult();
+  }
+
+  private resetResults() {
+    this.filteredUsers = [];
   }
 }

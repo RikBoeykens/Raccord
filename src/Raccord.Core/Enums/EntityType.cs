@@ -17,6 +17,8 @@ namespace Raccord.Core.Enums
         CastMember = 11,
         ScheduleDay = 12,
         Callsheet = 13,
-        ShootingDay = 14
+        ShootingDay = 14,
+        User = 15,
+        UserInvitation = 16
     }
 }

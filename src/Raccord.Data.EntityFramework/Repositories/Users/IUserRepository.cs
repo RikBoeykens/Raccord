@@ -12,5 +12,7 @@ namespace Raccord.Data.EntityFramework.Repositories.Users
         IEnumerable<ApplicationUser> GetAll();
         void Edit(ApplicationUser entity);
         void Commit();
+        int SearchCount(string searchText, string userID, string[] excludeIds);
+        IEnumerable<ApplicationUser> Search(string searchText, string userID, string[] excludeIds);
     }
 }

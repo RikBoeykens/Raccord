@@ -11,6 +11,7 @@ using Raccord.Application.Services.Crew.CrewMembers;
 using Raccord.Application.Services.Characters;
 using Raccord.Application.Services.Users.Projects;
 using Raccord.Application.Services.Users.Invitations.Project;
+using Raccord.Application.Core.Common.Routing;
 
 namespace Raccord.Application.Services.Projects
 {
@@ -126,9 +127,12 @@ namespace Raccord.Application.Services.Projects
             var dto = new SearchResultDto
             {
                 ID = project.ID,
-                RouteIDs = new long[]{project.ID},
                 DisplayName = project.Title,
-                Type = EntityType.Project,
+                RouteInfo = new RouteInfoDto
+                {
+                    RouteIDs = new object[]{project.ID},
+                    Type = EntityType.Project,
+                }
             };
 
             return dto;

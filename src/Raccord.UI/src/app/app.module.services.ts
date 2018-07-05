@@ -5,6 +5,7 @@ import {
   AdminProjectHttpService,
   AdminProjectResolve,
   AdminProjectsResolve,
+  AdminSearchEngineService,
   AdminUserHttpService,
   AdminGuard
 } from './admin';
@@ -54,6 +55,7 @@ export const SERVICES = [
   AdminProjectHttpService,
   AdminProjectResolve,
   AdminProjectsResolve,
+  AdminSearchEngineService,
   AdminUserHttpService,
   AdminGuard,
   LoadingService,

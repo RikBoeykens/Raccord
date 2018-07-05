@@ -4,6 +4,7 @@ using Raccord.Domain.Model.SceneProperties;
 using Raccord.Application.Services.Scenes;
 using Raccord.Application.Core.Services.SearchEngine;
 using Raccord.Core.Enums;
+using Raccord.Application.Core.Common.Routing;
 
 namespace Raccord.Application.Services.SceneProperties
 {
@@ -74,9 +75,12 @@ namespace Raccord.Application.Services.SceneProperties
             var dto = new SearchResultDto
             {
                 ID = intExt.ID,
-                RouteIDs = new long[]{intExt.ProjectID, intExt.ID},
                 DisplayName = intExt.Name,
-                Type = EntityType.IntExt,
+                RouteInfo = new RouteInfoDto
+                {
+                    RouteIDs = new object[]{intExt.ProjectID, intExt.ID},
+                    Type = EntityType.IntExt,
+                }
             };
 
             return dto;
@@ -146,9 +150,12 @@ namespace Raccord.Application.Services.SceneProperties
             var dto = new SearchResultDto
             {
                 ID = dayNight.ID,
-                RouteIDs = new long[]{dayNight.ProjectID, dayNight.ID},
                 DisplayName = dayNight.Name,
-                Type = EntityType.DayNight,
+                RouteInfo = new RouteInfoDto
+                {
+                    RouteIDs = new object[]{dayNight.ProjectID, dayNight.ID},
+                    Type = EntityType.DayNight,
+                }
             };
 
             return dto;

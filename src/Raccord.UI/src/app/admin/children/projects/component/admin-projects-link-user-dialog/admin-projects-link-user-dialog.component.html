@@ -5,11 +5,11 @@
   <mat-dialog-content>
     <div fxLayout="row">
       <mat-form-field>
-        <input type="text" placeholder="Search User" aria-label="Search User" matInput [matAutocomplete]="adminSearchUserAuto" [(ngModel)]="searchText" name="search-user-text">
+        <input type="text" placeholder="Search User" aria-label="Search User" matInput [matAutocomplete]="adminSearchUserAuto" [(ngModel)]="searchText" name="search-user-text" (input)="searchUsers()">
         <input type="hidden" required [(ngModel)]="selectedUser.id" name="search-user-id" />
         <mat-autocomplete #adminSearchUserAuto="matAutocomplete" (optionSelected)="onSelectionChanged($event)" [displayWith]="clearSearch">
           <mat-option *ngFor="let user of filteredUsers" [value]="user">
-            {{getName(user)}}
+            {{user.displayName}}
           </mat-option>
         </mat-autocomplete>
       </mat-form-field>
@@ -17,7 +17,7 @@
     <div fxLayout="row" *ngIf="selectedUser.id">
       <mat-chip-list>
           <mat-chip [removable]="true" (remove)="removeSelectedUser()">
-            {{getName(selectedUser)}}
+            {{selectedUser.displayName}}
             <mat-icon matChipRemove>cancel</mat-icon>
           </mat-chip>
       </mat-chip-list>

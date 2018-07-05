@@ -9,6 +9,7 @@ using Raccord.Core.Enums;
 using Raccord.Application.Services.Scheduling.ScheduleDays;
 using Raccord.Application.Core.Services.Locations.LocationSets;
 using System.Collections.Generic;
+using Raccord.Application.Core.Common.Routing;
 
 namespace Raccord.Application.Services.Locations.Locations
 {
@@ -83,10 +84,13 @@ namespace Raccord.Application.Services.Locations.Locations
             var dto = new SearchResultDto
             {
                 ID = location.ID,
-                RouteIDs = new long[]{location.ProjectID, location.ID},
                 DisplayName = location.Name,
                 Info = $"Project: {location.Project.Title}",
-                Type = EntityType.Location,
+                RouteInfo = new RouteInfoDto
+                {
+                    RouteIDs = new object[]{location.ProjectID, location.ID},
+                    Type = EntityType.Location,
+                }
             };
 
             return dto;

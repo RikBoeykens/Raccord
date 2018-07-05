@@ -9,6 +9,7 @@ using Raccord.Core.Enums;
 using Raccord.Application.Services.Characters;
 using Raccord.Application.Services.Breakdowns.BreakdownItems;
 using Raccord.Application.Services.Shots.Slates;
+using Raccord.Application.Core.Common.Routing;
 
 namespace Raccord.Application.Services.Images
 {
@@ -148,10 +149,13 @@ namespace Raccord.Application.Services.Images
             var dto = new SearchResultDto
             {
                 ID = image.ID,
-                RouteIDs = new long[]{image.ProjectID, image.ID},
                 DisplayName = image.Title,
                 Info = $"Project: {image.Project.Title}",
-                Type = EntityType.Image,
+                RouteInfo = new RouteInfoDto
+                {
+                    RouteIDs = new object[]{image.ProjectID, image.ID},
+                    Type = EntityType.Image,
+                }
             };
 
             return dto;

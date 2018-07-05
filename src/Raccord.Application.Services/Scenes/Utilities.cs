@@ -20,6 +20,7 @@ using Raccord.Application.Services.ShootingDays;
 using Raccord.Domain.Model.Breakdowns;
 using Raccord.Application.Core.Services.Breakdowns;
 using Raccord.Application.Services.Breakdowns;
+using Raccord.Application.Core.Common.Routing;
 
 namespace Raccord.Application.Services.Scenes
 {
@@ -180,10 +181,13 @@ namespace Raccord.Application.Services.Scenes
             var dto = new SearchResultDto
             {
                 ID = scene.ID,
-                RouteIDs = new long[]{scene.ProjectID, scene.ID},
                 DisplayName = scene.GetDisplaySummary(),
                 Info = $"Project: {scene.Project.Title}",
-                Type = EntityType.Scene,
+                RouteInfo = new RouteInfoDto
+                {
+                    RouteIDs = new object[]{scene.ProjectID, scene.ID},
+                    Type = EntityType.Scene,
+                }
             };
 
             return dto;

@@ -14,6 +14,8 @@ using Raccord.Application.Core.Services.Locations.Locations;
 using Raccord.Application.Core.Services.Shots.Slates;
 using Raccord.Application.Core.Services.Crew.CrewMembers;
 using Raccord.Application.Core.Services.Cast;
+using Raccord.Application.Core.Services.Users;
+using Raccord.Application.Core.Services.Users.Invitations;
 
 namespace Raccord.Application.Services.SearchEngine
 {
@@ -32,6 +34,8 @@ namespace Raccord.Application.Services.SearchEngine
         private ISlateSearchEngineService _slateSearchEngineService;
         private ICrewMemberSearchEngineService _crewMemberSearchEngineService;
         private ICastMemberSearchEngineService _castMemberSearchEngineService;
+        private IUserSearchEngineService _userSearchEngineService;
+        private IUserInvitationSearchEngineService _userInvitationSearchEngineService;
 
         public SearchEngineServiceWrapper(
             IProjectSearchEngineService projectSearchEngineService,
@@ -45,7 +49,9 @@ namespace Raccord.Application.Services.SearchEngine
             ILocationSearchEngineService locationSearchEngineService,
             ISlateSearchEngineService slateSearchEngineService,
             ICrewMemberSearchEngineService crewMemberSearchEngineService,
-            ICastMemberSearchEngineService castMemberSearchEngineService
+            ICastMemberSearchEngineService castMemberSearchEngineService,
+            IUserSearchEngineService userSearchEngineService,
+            IUserInvitationSearchEngineService userInvitationSearchEngineService
         )
         {
             if(projectSearchEngineService==null)
@@ -72,6 +78,10 @@ namespace Raccord.Application.Services.SearchEngine
                 throw new ArgumentNullException(nameof(crewMemberSearchEngineService));
             if(castMemberSearchEngineService==null)
                 throw new ArgumentNullException(nameof(castMemberSearchEngineService));
+            if(userSearchEngineService==null)
+                throw new ArgumentNullException(nameof(userSearchEngineService));
+            if(userInvitationSearchEngineService==null)
+                throw new ArgumentNullException(nameof(userInvitationSearchEngineService));
 
             _projectSearchEngineService = projectSearchEngineService;
             _sceneSearchEngineService = sceneSearchEngineService;
@@ -85,6 +95,8 @@ namespace Raccord.Application.Services.SearchEngine
             _slateSearchEngineService = slateSearchEngineService;
             _crewMemberSearchEngineService = crewMemberSearchEngineService;
             _castMemberSearchEngineService = castMemberSearchEngineService;
+            _userSearchEngineService = userSearchEngineService;
+            _userInvitationSearchEngineService = userInvitationSearchEngineService;
         }
         public IEnumerable<SearchTypeResultDto> GetResults(SearchRequestDto request)
         {
@@ -114,7 +126,9 @@ namespace Raccord.Application.Services.SearchEngine
                 _locationSearchEngineService,
                 _slateSearchEngineService,
                 _crewMemberSearchEngineService,
-                _castMemberSearchEngineService
+                _castMemberSearchEngineService,
+                _userSearchEngineService,
+                _userInvitationSearchEngineService
             };
 
             if(includeTypes.Any())

@@ -61,6 +61,18 @@ namespace Raccord.Data.EntityFramework.Repositories.Users
             _context.SaveChanges();
         }
 
+        public int SearchCount(string searchText, string userID, string[] excludeIds)
+        {
+            var query = GetSearchQuery(searchText, userID, excludeIds);
+
+            return query.Count();        
+        }
+
+        public IEnumerable<ApplicationUser> Search(string searchText, string userID, string[] excludeIds)
+        {
+            return GetSearchQuery(searchText, userID, excludeIds);
+        }
+
         private IQueryable<ApplicationUser> GetIncluded()
         {
             IQueryable<ApplicationUser> query = _context.Set<ApplicationUser>();
@@ -95,6 +107,31 @@ namespace Raccord.Data.EntityFramework.Repositories.Users
         }
 
         private IQueryable<ApplicationUser> GetIncludedSummary()
+        {
+            IQueryable<ApplicationUser> query = _context.Set<ApplicationUser>();
+
+            return query;
+        }
+
+        private IQueryable<ApplicationUser> GetSearchQuery(string searchText, string userId, string[] excludeIds)
+        {
+            var query = GetIncludedSearch();
+
+            query = query.Where(u=> u.FirstName.ToLower().Contains(searchText.ToLower())
+                                ||
+                                u.LastName.ToLower().Contains(searchText.ToLower())
+                                ||
+                                u.Email.ToLower().Contains(searchText.ToLower()));
+
+            if(excludeIds.Any())
+            {
+                query = query.Where(c=> !excludeIds.Any(id=> id == c.Id));
+            }
+
+            return query;
+        }
+
+        private IQueryable<ApplicationUser> GetIncludedSearch()
         {
             IQueryable<ApplicationUser> query = _context.Set<ApplicationUser>();
 

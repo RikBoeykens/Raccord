@@ -267,6 +267,7 @@ namespace Raccord.API
 
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<IUserService, UserService>();
+            services.AddTransient<IUserSearchEngineService, UserSearchEngineService>();
 
             services.AddTransient<IProjectUserRepository, ProjectUserRepository>();            
             services.AddTransient<IProjectUserService, ProjectUserService>();            
@@ -344,6 +345,7 @@ namespace Raccord.API
 
             services.AddTransient<IUserInvitationRepository, UserInvitationRepository>();
             services.AddTransient<IUserInvitationService, UserInvitationService>();
+            services.AddTransient<IUserInvitationSearchEngineService, UserInvitationSearchEngineService>();
 
             services.AddTransient<IProjectUserInvitationRepository, ProjectUserInvitationRepository>();
             services.AddTransient<IProjectUserInvitationService, ProjectUserInvitationService>();

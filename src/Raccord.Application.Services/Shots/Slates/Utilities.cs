@@ -1,4 +1,5 @@
 using System.Linq;
+using Raccord.Application.Core.Common.Routing;
 using Raccord.Application.Core.Services.SearchEngine;
 using Raccord.Application.Core.Services.Shots.Slates;
 using Raccord.Application.Services.Images;
@@ -96,10 +97,13 @@ namespace Raccord.Application.Services.Shots.Slates
             return new SearchResultDto
             {
                 ID = slate.ID,
-                RouteIDs = new long[]{slate.ProjectID, slate.ID},
                 DisplayName = slate.Number,
                 Info = $"Project: {slate.Project.Title}",
-                Type = EntityType.Slate,  
+                RouteInfo = new RouteInfoDto
+                {
+                    RouteIDs = new object[]{slate.ProjectID, slate.ID},
+                    Type = EntityType.Slate,
+                }
             };
         }
     }

@@ -7,6 +7,7 @@ using Raccord.Application.Core.Services.SearchEngine;
 using Raccord.Core.Enums;
 using Raccord.Application.Services.Images;
 using Raccord.Application.Services.Breakdowns.BreakdownTypes;
+using Raccord.Application.Core.Common.Routing;
 
 namespace Raccord.Application.Services.Breakdowns.BreakdownItems
 {
@@ -93,10 +94,13 @@ namespace Raccord.Application.Services.Breakdowns.BreakdownItems
             var dto = new SearchResultDto
             {
                 ID = breakdownItem.ID,
-                RouteIDs = new long[]{breakdownItem.BreakdownType.Breakdown.ProjectID, breakdownItem.BreakdownID, breakdownItem.ID},
                 DisplayName = $"{breakdownItem.Name} ({breakdownItem.Breakdown.Name} - {breakdownItem.BreakdownType.Name})",
                 Info = $"Project: {breakdownItem.BreakdownType.Breakdown.Project.Title}",
-                Type = EntityType.BreakdownItem,
+                RouteInfo = new RouteInfoDto
+                {
+                    RouteIDs = new object[]{breakdownItem.BreakdownType.Breakdown.ProjectID, breakdownItem.BreakdownID, breakdownItem.ID},
+                    Type = EntityType.BreakdownItem
+                }
             };
 
             return dto;

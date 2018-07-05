@@ -30,7 +30,7 @@ namespace Raccord.Application.Services.Breakdowns.BreakdownItems
 
         public SearchTypeResultDto GetResults(SearchRequestDto request)
         {
-            var excludeIds = request.GetExcludeIDs(_type);
+            var excludeIds = request.GetExcludeLongIDs(_type);
             var itemCount = _breakdownItemRepository.SearchCount(request.SearchText, projectID: request.ProjectID, typeID: null, userID: request.UserID, isAdmin: request.IsAdminSearch, excludeIds: excludeIds);
             var items = _breakdownItemRepository.Search(request.SearchText, projectID: request.ProjectID, typeID: null, userID: request.UserID, isAdmin: request.IsAdminSearch, excludeIds: excludeIds);
 

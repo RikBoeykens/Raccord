@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using Raccord.Application.Core.Common.Routing;
 using Raccord.Application.Core.Services.Cast;
 using Raccord.Application.Core.Services.SearchEngine;
 using Raccord.Application.Services.Characters;
@@ -76,10 +77,13 @@ namespace Raccord.Application.Services.Cast
       return new SearchResultDto
       {
         ID = castMember.ID,
-        RouteIDs = new long[]{castMember.ProjectID, castMember.ID},
         DisplayName = $"{castMember.GetDisplayName()}",
         Info = $"Project: {castMember.Project.Title}",
-        Type = EntityType.CastMember,  
+        RouteInfo = new RouteInfoDto
+        {
+          RouteIDs = new object[]{castMember.ProjectID, castMember.ID},
+          Type = EntityType.CastMember,
+        }
       };
     }
 

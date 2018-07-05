@@ -54,21 +54,21 @@ namespace Raccord.Application.Services.Calendar
       return "Day";
     }
 
-    private static IEnumerable<long> GetRouteIDs(ShootingDay shootingDay, EntityType entityType)
+    private static IEnumerable<object> GetRouteIDs(ShootingDay shootingDay, EntityType entityType)
     {
       if(entityType == EntityType.ShootingDay)
       {
-        return new List<long>{ shootingDay.CrewUnit.ProjectID, shootingDay.ID };
+        return new List<object>{ shootingDay.CrewUnit.ProjectID, shootingDay.ID };
       }
       if(entityType == EntityType.Callsheet)
       {
-        return new List<long>{ shootingDay.CrewUnit.ProjectID, shootingDay.CallsheetID.Value };
+        return new List<object>{ shootingDay.CrewUnit.ProjectID, shootingDay.CallsheetID.Value };
       }
       if(entityType == EntityType.ScheduleDay)
       {
-        return new List<long>{ shootingDay.CrewUnit.ProjectID, shootingDay.CrewUnitID };
+        return new List<object>{ shootingDay.CrewUnit.ProjectID, shootingDay.CrewUnitID };
       }
-      return new List<long>();
+      return new List<object>();
     }
     public static IEnumerable<CalendarItemDto> TranslateToCalendarItemScenes(this ShootingDay shootingDay)
     {
@@ -100,7 +100,7 @@ namespace Raccord.Application.Services.Calendar
         RouteInfo = new RouteInfoDto
         {
           Type = EntityType.Scene,
-          RouteIDs = new List<long>{ projectID, sds.SceneID }
+          RouteIDs = new List<object>{ projectID, sds.SceneID }
         }
       });
     }
@@ -114,7 +114,7 @@ namespace Raccord.Application.Services.Calendar
         RouteInfo = new RouteInfoDto
         {
           Type = EntityType.Scene,
-          RouteIDs = new List<long>{ projectID, css.SceneID }
+          RouteIDs = new List<object>{ projectID, css.SceneID }
         }
       });
     }
@@ -128,7 +128,7 @@ namespace Raccord.Application.Services.Calendar
         RouteInfo = new RouteInfoDto
         {
           Type = EntityType.Scene,
-          RouteIDs = new List<long>{ projectID, ss.SceneID }
+          RouteIDs = new List<object>{ projectID, ss.SceneID }
         }
       });
     }

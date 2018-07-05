@@ -15,6 +15,7 @@ using Raccord.Application.Services.Scheduling.ScheduleDays;
 using Raccord.Domain.Model.Callsheets.Scenes;
 using Raccord.Application.Services.Profile;
 using Raccord.Application.Services.Cast;
+using Raccord.Application.Core.Common.Routing;
 
 namespace Raccord.Application.Services.Characters
 {
@@ -105,10 +106,13 @@ namespace Raccord.Application.Services.Characters
             var dto = new SearchResultDto
             {
                 ID = character.ID,
-                RouteIDs = new long[]{character.ProjectID, character.ID},
                 DisplayName = character.Name,
                 Info = $"Project: {character.Project.Title}",
-                Type = EntityType.Character,
+                RouteInfo = new RouteInfoDto
+                {
+                    RouteIDs = new object[]{character.ProjectID, character.ID},
+                    Type = EntityType.Character,
+                }
             };
 
             return dto;

@@ -1,6 +1,10 @@
+using System;
 using System.Linq;
+using Raccord.Application.Core.Common.Routing;
+using Raccord.Application.Core.Services.SearchEngine;
 using Raccord.Application.Core.Services.Users.Invitations;
 using Raccord.Application.Services.Users.Invitations.Project;
+using Raccord.Core.Enums;
 using Raccord.Domain.Model.Users.Invitations;
 
 namespace Raccord.Application.Services.Users.Invitations
@@ -56,6 +60,21 @@ namespace Raccord.Application.Services.Users.Invitations
         FirstName = userInvitation.FirstName,
         LastName = userInvitation.LastName,
       };
+    }
+
+    public static SearchResultDto TranslateToSearchResult(this UserInvitation userInvitation)
+    {
+    var dto = new SearchResultDto
+    {
+      ID = userInvitation.ID,
+      DisplayName = $"{userInvitation.FirstName} {userInvitation.LastName}",
+      RouteInfo = new RouteInfoDto
+      {
+        RouteIDs = new object[]{userInvitation.ID},
+        Type = EntityType.User,
+      }
+    };
+    return dto;
     }
   }
 }

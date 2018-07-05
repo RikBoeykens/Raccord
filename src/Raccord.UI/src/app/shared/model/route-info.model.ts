@@ -2,11 +2,11 @@ import { EntityType } from '..';
 
 export class RouteInfo {
   public type: EntityType;
-  public routeIDs: number[];
+  public routeIDs: any[];
 
   constructor(obj?: {
       type: EntityType,
-      routeIDs: number[]
+      routeIDs: any[]
   }) {
       if (obj) {
           this.type = obj.type;

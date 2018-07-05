@@ -5,13 +5,13 @@ namespace Raccord.API.ViewModels.Common.Routing
 {
   public class RouteInfoViewModel
   {
-      private IEnumerable<long> _routeIDs;
+      private IEnumerable<object> _routeIDs;
       public EntityType Type { get; set; }
-      public IEnumerable<long> RouteIDs
+      public IEnumerable<object> RouteIDs
       {
         get
         {
-          return _routeIDs ?? new List<long>();
+          return _routeIDs ?? new List<object>();
         }
         set
         {

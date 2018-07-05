@@ -7,6 +7,7 @@ using Raccord.Domain.Model.Crew.CrewMembers;
 using Raccord.Application.Services.Crew.Departments;
 using Raccord.Application.Services.Crew.CrewUnits;
 using System;
+using Raccord.Application.Core.Common.Routing;
 
 namespace Raccord.Application.Services.Crew.CrewMembers
 {
@@ -78,16 +79,20 @@ namespace Raccord.Application.Services.Crew.CrewMembers
             return new SearchResultDto
             {
                 ID = crewMember.ID,
-                RouteIDs = new long[]
-                {
-                    crewMember.Department.CrewUnit.ProjectID,
-                    crewMember.Department.CrewUnitID,
-                    crewMember.DepartmentID,
-                    crewMember.ID
-                },
+
                 DisplayName = $"{crewMember.GetDisplayName()} - {crewMember.Department.Name}",
                 Info = $"Project: {crewMember.Department.CrewUnit.Project.Title}",
-                Type = EntityType.CrewMember,  
+                RouteInfo = new RouteInfoDto
+                {
+                    RouteIDs = new object[]
+                    {
+                        crewMember.Department.CrewUnit.ProjectID,
+                        crewMember.Department.CrewUnitID,
+                        crewMember.DepartmentID,
+                        crewMember.ID
+                    },
+                    Type = EntityType.CrewMember,
+                }
             };
         }
 

@@ -1,4 +1,7 @@
+using Raccord.Application.Core.Common.Routing;
+using Raccord.Application.Core.Services.SearchEngine;
 using Raccord.Application.Core.Services.Users;
+using Raccord.Core.Enums;
 using Raccord.Domain.Model.Users;
 
 namespace Raccord.Application.Services.Users
@@ -37,6 +40,21 @@ namespace Raccord.Application.Services.Users
                 FirstName = user.FirstName,
                 LastName = user.LastName
             };
+        }
+
+        public static SearchResultDto TranslateToSearchResult(this ApplicationUser user)
+        {
+            var dto = new SearchResultDto
+            {
+                ID = user.Id,
+                DisplayName = $"{user.FirstName} {user.LastName}",
+                RouteInfo = new RouteInfoDto
+                {
+                    RouteIDs = new string[]{user.Id},
+                    Type = EntityType.User,
+                }
+            };
+            return dto;
         }
     }
 }

@@ -30,6 +30,8 @@ export { AdminProjectHttpService } from './children/projects/service/admin-proje
 export { AdminProjectsResolve } from './children/projects/service/admin-projects-resolve.service';
 export { AdminProjectResolve } from './children/projects/service/admin-project-resolve.service';
 
+export { AdminSearchEngineService } from './children/search/service/admin-search-engine.service';
+
 export { CreateUser } from './children/users/model/create-user.model';
 export { FullUser } from './children/users/model/full-user.model';
 

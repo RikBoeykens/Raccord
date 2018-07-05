@@ -13,5 +13,7 @@ export enum EntityType {
   castMember = 11,
   scheduleDay = 12,
   callsheet = 13,
-  shootingDay = 14
+  shootingDay = 14,
+  user = 15,
+  userInvitation = 16
 }

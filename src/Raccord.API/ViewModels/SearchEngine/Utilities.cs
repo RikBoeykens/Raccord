@@ -1,3 +1,4 @@
+using Raccord.API.ViewModels.Common.Routing;
 using Raccord.Application.Core.Services.SearchEngine;
 using System.Linq;
 
@@ -24,10 +25,9 @@ namespace Raccord.API.ViewModels.SearchEngine
             return new SearchResultViewModel
             {
                 ID = dto.ID,
-                RouteIDs = dto.RouteIDs,
                 DisplayName = dto.DisplayName,
-                Type = dto.Type,
-                Info = dto.Info
+                Info = dto.Info,
+                RouteInfo = dto.RouteInfo.Translate()
             };
         }
 
