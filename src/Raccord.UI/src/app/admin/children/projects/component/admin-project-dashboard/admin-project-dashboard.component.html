@@ -1,6 +1,6 @@
 <div class="raccord-narrow-container">
   <div class="raccord-page-header">
-    <a routerLink="/admin">
+    <a routerLink="/admin/projects">
       <back-link></back-link>
     </a>
     <div fxLayout="row">
@@ -12,16 +12,10 @@
         (click)="showEditProject()"><mat-icon>edit</mat-icon></button>
     </div>
   </div>
-  <div class="raccord-sub-header"
-      fxLayout="row">
-      <h2>Users</h2>
-      <button mat-icon-button (click)="showAddUser()"><mat-icon>add</mat-icon></button>
-      <button mat-icon-button (click)="showLinkUser()"><mat-icon>link</mat-icon></button>
-  </div>
-  <admin-project-project-users-table 
+  <admin-project-project-users
+    [projectId]="project.id"
     [projectUsers]="project.users"
-    (showConfirmRemove)="showConfirmRemoveUser($event)">
-  </admin-project-project-users-table>
+    [projectRoles]="projectRoles"></admin-project-project-users>
   <div class="raccord-sub-header"
       fxLayout="row">
       <h2>Invitations</h2>

@@ -13,6 +13,8 @@ export { AdminProjectDashboardComponent } from './children/projects/component/ad
 // tslint:disable-next-line:max-line-length
 export { AdminProjectProjectInvitationsTableComponent } from './children/projects/component/admin-project-project-invitations-table/admin-project-project-invitations-table.component';
 // tslint:disable-next-line:max-line-length
+export { AdminProjectProjectUsersComponent } from './children/projects/component/admin-project-project-users/admin-project-project-users.component';
+// tslint:disable-next-line:max-line-length
 export { AdminProjectProjectUsersTableComponent } from './children/projects/component/admin-project-project-users-table/admin-project-project-users-table.component';
 // tslint:disable-next-line:max-line-length
 export { AdminProjectsAddUserDialogComponent } from './children/projects/component/admin-projects-add-user-dialog/admin-projects-add-user-dialog.component';
