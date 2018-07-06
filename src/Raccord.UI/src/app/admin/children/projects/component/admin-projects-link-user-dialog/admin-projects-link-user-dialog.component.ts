@@ -16,14 +16,11 @@ import { EntityType } from '../../../../../shared';
 
 export class AdminProjectsLinkUserDialogComponent {
   public selectedUser: SearchResult = new SearchResult();
-  public searchText: string;
   public chosenRoleId: number;
   public availableRoles: ProjectRole[];
-  public filteredUsers: SearchResult[] = [];
+  public userEntityType: EntityType = EntityType.user;
 
   constructor(
-    private _adminSearchEngineService: AdminSearchEngineService,
-    private _loadingWrapperService: LoadingWrapperService,
     private _dialogRef: MatDialogRef<AdminProjectsLinkUserDialogComponent>,
     @Inject(MAT_DIALOG_DATA) private data: {
       projectRoles: ProjectRole[]
@@ -32,45 +29,15 @@ export class AdminProjectsLinkUserDialogComponent {
     this.availableRoles = data.projectRoles;
   }
 
-  public searchUsers() {
-    if (this.searchText && this.searchText !== '') {
-      this._loadingWrapperService.Load(
-        this._adminSearchEngineService.search(new SearchRequest({
-          searchText: this.searchText,
-          projectId: 0,
-          includeTypes: [EntityType.user],
-          excludeTypes: [],
-          excludeTypeIDs: []
-        })),
-        (data: SearchTypeResult[]) => {
-          if (data && data.length && data[0].results) {
-            this.filteredUsers = data[0].results;
-          }
-        }
-      );
-    } else {
-      this.resetResults();
-    }
-  }
-
   public submit() {
     this._dialogRef.close({userId: this.selectedUser.id, roleId: this.chosenRoleId});
   }
 
-  public onSelectionChanged(event$) {
-    this.selectedUser = event$.option.value;
-  }
-
-  public clearSearch(value) {
-    this.searchText = '';
-    return '';
+  public onSelect(searchResult: SearchResult) {
+    this.selectedUser = searchResult;
   }
 
   public removeSelectedUser() {
     this.selectedUser = new SearchResult();
-  }
-
-  private resetResults() {
-    this.filteredUsers = [];
   }
 }

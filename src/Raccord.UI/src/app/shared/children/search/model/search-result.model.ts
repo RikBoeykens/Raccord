@@ -3,14 +3,14 @@ import { EntityType } from '../../..';
 import { RouteInfo } from '../../../model/route-info.model';
 
 export class SearchResult extends BaseModel {
-    public id: number;
+    public id: any;
     public displayName: string;
     public info: string;
     public routeInfo: RouteInfo;
 
     constructor(
         obj?: {
-            id: number,
+            id: any,
             displayName: string,
             info: string;
             routeInfo: RouteInfo

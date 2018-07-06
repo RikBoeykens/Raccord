@@ -4,15 +4,8 @@
   (ngSubmit)="submit()">
   <mat-dialog-content>
     <div fxLayout="row">
-      <mat-form-field>
-        <input type="text" placeholder="Search User" aria-label="Search User" matInput [matAutocomplete]="adminSearchUserAuto" [(ngModel)]="searchText" name="search-user-text" (input)="searchUsers()">
-        <input type="hidden" required [(ngModel)]="selectedUser.id" name="search-user-id" />
-        <mat-autocomplete #adminSearchUserAuto="matAutocomplete" (optionSelected)="onSelectionChanged($event)" [displayWith]="clearSearch">
-          <mat-option *ngFor="let user of filteredUsers" [value]="user">
-            {{user.displayName}}
-          </mat-option>
-        </mat-autocomplete>
-      </mat-form-field>
+      <admin-search-entity (onSelect)="onSelect($event)" [entityType]="userEntityType"></admin-search-entity>
+      <input type="hidden" required [(ngModel)]="selectedUser.id" name="search-user-id" />
     </div>
     <div fxLayout="row" *ngIf="selectedUser.id">
       <mat-chip-list>

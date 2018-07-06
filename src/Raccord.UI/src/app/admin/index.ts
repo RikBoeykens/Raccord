@@ -38,5 +38,7 @@ export { FullUser } from './children/users/model/full-user.model';
 export { AdminUserHttpService } from './children/users/service/admin-user-http.service';
 
 export { AdminLandingComponent } from './component/admin-landing/admin-landing.component';
+// tslint:disable-next-line:max-line-length
+export { AdminSearchEntityComponent } from './component/admin-search-entity/admin-search-entity.component';
 
 export { AdminGuard } from './service/admin-guard.service';

@@ -8,7 +8,8 @@ import {
   AdminProjectsLinkUserDialogComponent,
   AdminProjectsListComponent,
   AdminProjectsTableComponent,
-  AdminLandingComponent
+  AdminLandingComponent,
+  AdminSearchEntityComponent
 } from './admin';
 import {
   CalendarComponent,
@@ -60,6 +61,7 @@ export const COMPONENTS = [
   AdminProjectsListComponent,
   AdminProjectsTableComponent,
   AdminLandingComponent,
+  AdminSearchEntityComponent,
   CalendarComponent,
   CalendarHeaderComponent,
   DashboardComponent,
