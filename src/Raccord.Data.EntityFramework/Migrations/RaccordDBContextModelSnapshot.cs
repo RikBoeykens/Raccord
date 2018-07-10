@@ -128,7 +128,7 @@ namespace Raccord.Data.EntityFramework.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("OpenIddict.Models.OpenIddictApplication", b =>
+            modelBuilder.Entity("OpenIddict.EntityFrameworkCore.Models.OpenIddictApplication", b =>
                 {
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
@@ -164,7 +164,7 @@ namespace Raccord.Data.EntityFramework.Migrations
                     b.ToTable("OpenIddictApplications");
                 });
 
-            modelBuilder.Entity("OpenIddict.Models.OpenIddictAuthorization", b =>
+            modelBuilder.Entity("OpenIddict.EntityFrameworkCore.Models.OpenIddictAuthorization", b =>
                 {
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
@@ -194,7 +194,7 @@ namespace Raccord.Data.EntityFramework.Migrations
                     b.ToTable("OpenIddictAuthorizations");
                 });
 
-            modelBuilder.Entity("OpenIddict.Models.OpenIddictScope", b =>
+            modelBuilder.Entity("OpenIddict.EntityFrameworkCore.Models.OpenIddictScope", b =>
                 {
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
@@ -221,7 +221,7 @@ namespace Raccord.Data.EntityFramework.Migrations
                     b.ToTable("OpenIddictScopes");
                 });
 
-            modelBuilder.Entity("OpenIddict.Models.OpenIddictToken", b =>
+            modelBuilder.Entity("OpenIddict.EntityFrameworkCore.Models.OpenIddictToken", b =>
                 {
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
@@ -1991,20 +1991,20 @@ namespace Raccord.Data.EntityFramework.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("OpenIddict.Models.OpenIddictAuthorization", b =>
+            modelBuilder.Entity("OpenIddict.EntityFrameworkCore.Models.OpenIddictAuthorization", b =>
                 {
-                    b.HasOne("OpenIddict.Models.OpenIddictApplication", "Application")
+                    b.HasOne("OpenIddict.EntityFrameworkCore.Models.OpenIddictApplication", "Application")
                         .WithMany("Authorizations")
                         .HasForeignKey("ApplicationId");
                 });
 
-            modelBuilder.Entity("OpenIddict.Models.OpenIddictToken", b =>
+            modelBuilder.Entity("OpenIddict.EntityFrameworkCore.Models.OpenIddictToken", b =>
                 {
-                    b.HasOne("OpenIddict.Models.OpenIddictApplication", "Application")
+                    b.HasOne("OpenIddict.EntityFrameworkCore.Models.OpenIddictApplication", "Application")
                         .WithMany("Tokens")
                         .HasForeignKey("ApplicationId");
 
-                    b.HasOne("OpenIddict.Models.OpenIddictAuthorization", "Authorization")
+                    b.HasOne("OpenIddict.EntityFrameworkCore.Models.OpenIddictAuthorization", "Authorization")
                         .WithMany("Tokens")
                         .HasForeignKey("AuthorizationId");
                 });

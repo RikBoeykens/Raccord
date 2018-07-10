@@ -17,6 +17,7 @@ using Raccord.Domain.Model.Users;
 using Microsoft.AspNetCore.Authentication;
 using System.Collections.Generic;
 using Microsoft.Extensions.Options;
+using OpenIddict.Abstractions;
 
 namespace Raccord.API.Controllers
 {

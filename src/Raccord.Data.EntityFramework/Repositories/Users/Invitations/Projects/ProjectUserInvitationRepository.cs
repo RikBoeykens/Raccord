@@ -24,6 +24,11 @@ namespace Raccord.Data.EntityFramework.Repositories.Users.Invitations.Projects
       var query = GetIncludedUserInvitation();
       return query.Where(pui => pui.ProjectID == projectID && !pui.UserInvitation.AcceptedDate.HasValue);
     }
+    public int GetCountForProject(long projectID)
+    {
+      var query = GetIncluded();
+      return query.Count(pui => pui.ProjectID == projectID && !pui.UserInvitation.AcceptedDate.HasValue);
+    }
 
     public IEnumerable<ProjectUserInvitation> GetAllForCreateUser(Guid invitationID)
     {
@@ -59,6 +64,11 @@ namespace Raccord.Data.EntityFramework.Repositories.Users.Invitations.Projects
                     .Include(pu => pu.CrewUnitInvitationMembers)
                       .ThenInclude(pu => pu.CrewMembers)
                         .ThenInclude(cm => cm.Department);
+    }
+
+    private IQueryable<ProjectUserInvitation> GetIncluded()
+    {
+      return _context.Set<ProjectUserInvitation>();
     }
 
     private IQueryable<ProjectUserInvitation> GetIncludedSummary()

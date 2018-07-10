@@ -1,12 +1,15 @@
 import { AppComponent } from './app.component';
 import {
-  AdminEditProjectDialogComponent,
-  AdminProjectDashboardComponent,
   AdminProjectProjectInvitationsTableComponent,
+  AdminProjectProjectUserInvitationsComponent,
+  AdminProjectsAddUserInvitationDialogComponent,
+  AdminProjectsLinkUserInvitationDialogComponent,
   AdminProjectProjectUsersComponent,
   AdminProjectProjectUsersTableComponent,
   AdminProjectsAddUserDialogComponent,
   AdminProjectsLinkUserDialogComponent,
+  AdminEditProjectDialogComponent,
+  AdminProjectDashboardComponent,
   AdminProjectsListComponent,
   AdminProjectsTableComponent,
   AdminLandingComponent,
@@ -56,10 +59,11 @@ import {
 
 export const COMPONENTS = [
   AppComponent,
-  AdminProjectDashboardComponent,
   AdminProjectProjectInvitationsTableComponent,
+  AdminProjectProjectUserInvitationsComponent,
   AdminProjectProjectUsersComponent,
   AdminProjectProjectUsersTableComponent,
+  AdminProjectDashboardComponent,
   AdminProjectsListComponent,
   AdminProjectsTableComponent,
   AdminLandingComponent,
@@ -89,8 +93,10 @@ export const COMPONENTS = [
 ];
 
 export const DIALOGS = [
-  AdminEditProjectDialogComponent,
+  AdminProjectsAddUserInvitationDialogComponent,
+  AdminProjectsLinkUserInvitationDialogComponent,
   AdminProjectsAddUserDialogComponent,
   AdminProjectsLinkUserDialogComponent,
+  AdminEditProjectDialogComponent,
   ConfirmDialogComponent
 ];

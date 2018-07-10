@@ -1,20 +1,21 @@
 import { Component, Input } from '@angular/core';
+import { MatDialog } from '@angular/material';
 import {
   ProjectUserUser,
   ProjectRole,
   ProjectUser
-} from '../../../../../shared/children/users';
-import { MatDialog } from '@angular/material';
+} from '../../../../../../../shared/children/users';
 import {
   AdminProjectsAddUserDialogComponent,
   CreateUser,
   AdminProjectsLinkUserDialogComponent
-} from '../../../..';
-import { LoadingWrapperService } from '../../../../../shared/service/loading-wrapper.service';
-import { DialogService } from '../../../../../shared/service/dialog.service';
-import { AdminUserHttpService } from '../../../users/service/admin-user-http.service';
-// tslint:disable-next-line:max-line-length
-import { AdminProjectUserHttpService } from '../../../project-users/service/admin-project-user-http.service';
+} from '../../../../../..';
+import { LoadingWrapperService } from '../../../../../../../shared/service/loading-wrapper.service';
+import { DialogService } from '../../../../../../../shared/service/dialog.service';
+import { AdminUserHttpService } from '../../../../../users/service/admin-user-http.service';
+import {
+  AdminProjectUserHttpService
+} from '../../../../../project-users/service/admin-project-user-http.service';
 
 @Component({
   selector: 'admin-project-project-users',

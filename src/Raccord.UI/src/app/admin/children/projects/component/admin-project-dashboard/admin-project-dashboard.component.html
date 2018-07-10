@@ -16,13 +16,8 @@
     [projectId]="project.id"
     [projectUsers]="project.users"
     [projectRoles]="projectRoles"></admin-project-project-users>
-  <div class="raccord-sub-header"
-      fxLayout="row">
-      <h2>Invitations</h2>
-      <button mat-icon-button><mat-icon>add</mat-icon></button>
-  </div>
-  <admin-project-project-invitations-table 
+  <admin-project-project-user-invitations
+    [projectId]="project.id"
     [projectUserInvitations]="project.invitations"
-    (showConfirmRemove)="showConfirmRemoveInvitation($event)">
-  </admin-project-project-invitations-table>
+    [projectRoles]="projectRoles"></admin-project-project-user-invitations>
 </div>

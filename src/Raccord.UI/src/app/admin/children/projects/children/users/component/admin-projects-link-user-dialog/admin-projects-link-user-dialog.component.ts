@@ -1,14 +1,10 @@
 import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { ProjectRole, User } from '../../../../../shared/children/users';
-import { AdminSearchEngineService } from '../../../search/service/admin-search-engine.service';
-import { LoadingWrapperService } from '../../../../../shared/service/loading-wrapper.service';
+import { ProjectRole } from '../../../../../../../shared/children/users';
 import {
-  SearchRequest,
-  SearchTypeResult,
   SearchResult
-} from '../../../../../shared/children/search';
-import { EntityType } from '../../../../../shared';
+} from '../../../../../../../shared/children/search';
+import { EntityType } from '../../../../../../../shared';
 
 @Component({
   templateUrl: 'admin-projects-link-user-dialog.component.html',

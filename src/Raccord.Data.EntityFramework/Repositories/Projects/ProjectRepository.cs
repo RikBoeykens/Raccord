@@ -16,7 +16,7 @@ namespace Raccord.Data.EntityFramework.Repositories.Projects
         {
             var query = GetIncludedAdminSummary();
 
-            return query;
+            return query.OrderByDescending(p => p.CreatedAt);
         }
 
         public IEnumerable<Project> GetAllForUser(string userID)
@@ -24,7 +24,7 @@ namespace Raccord.Data.EntityFramework.Repositories.Projects
             var query = GetIncludedSummary();
 
             return query.Where(p=> p.ProjectUsers.Any(c=> c.UserID == userID))
-                        .OrderBy(p => p.CreatedAt);
+                        .OrderByDescending(p => p.CreatedAt);
         }
 
         public Project GetFull(long ID)
@@ -99,9 +99,7 @@ namespace Raccord.Data.EntityFramework.Repositories.Projects
 
             return query.Include(l=> l.Images)
                         .Include(p=> p.ProjectUsers)
-                        .ThenInclude(p=> p.User)
-                        .Include(p=> p.ProjectUserInvitations)
-                        .ThenInclude(p=> p.UserInvitation);
+                        .ThenInclude(p=> p.User);
         }
 
         private IQueryable<Project> GetIncluded()

@@ -1,13 +1,12 @@
-import { ProjectUserInvitationSummary } from './project-user-invitation-summary.model';
-import { UserInvitation } from './user-invitation.model';
-import { ProjectRole } from '../../..';
+import { ProjectUserInvitationSummary, UserInvitation } from '../../..';
+import { ProjectRole } from '../../../../users';
 
 export class ProjectUserInvitationUserInvitation extends ProjectUserInvitationSummary {
   public userInvitation: UserInvitation;
 
   constructor(
     obj?: {
-      ID: number,
+      id: number,
       projectRole: ProjectRole,
       userInvitation: UserInvitation
     }

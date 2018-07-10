@@ -1,9 +1,11 @@
 import { FullProject } from '../../../../shared/children/projects';
 import {
-  ProjectUserUser,
-  ProjectUserInvitationUserInvitation
+  ProjectUserUser
 } from '../../../../shared/children/users';
 import { Image } from '../../../../shared/children/images';
+import {
+  ProjectUserInvitationUserInvitation
+} from '../../../../shared/children/user-invitations';
 
 export class AdminFullProject extends FullProject {
   public users: ProjectUserUser[];

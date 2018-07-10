@@ -7,6 +7,7 @@ import {
   AdminProjectsListComponent,
   AdminLandingComponent,
   AdminGuard,
+  AdminDashboardResolve,
   AdminProjectsResolve,
   AdminProjectResolve
 } from './admin';
@@ -55,6 +56,9 @@ export const ROUTES: Routes = [
       {
         path: '',
         component: AdminLandingComponent,
+        resolve: {
+          dashboardInfo: AdminDashboardResolve
+        }
       },
       {
         path: RouteSettings.PROJECTS,

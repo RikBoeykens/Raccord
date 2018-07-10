@@ -22,11 +22,5 @@ export { ProjectUserProject } from './children/projects/model/project-user-proje
 export { ProjectUserUser } from './children/projects/model/project-user-user.model';
 export { ProjectUser } from './children/projects/model/project-user.model';
 
-// tslint:disable-next-line:max-line-length
-export { ProjectUserInvitationSummary } from './children/user-invitations/model/project-user-invitation-summary.model';
-// tslint:disable-next-line:max-line-length
-export { ProjectUserInvitationUserInvitation } from './children/user-invitations/model/project-user-invitation-user-invitation.model';
-export { UserInvitation } from './children/user-invitations/model/user-invitation.model';
-
 export { UserSummary } from './model/user-summary.model';
 export { User } from './model/user.model';

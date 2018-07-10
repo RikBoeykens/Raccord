@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { ProjectUserUser } from '../../../../../shared/children/users';
+import { ProjectUserUser } from '../../../../../../../shared/children/users';
 
 @Component({
   selector: 'admin-project-project-users-table',

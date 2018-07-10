@@ -1,7 +1,7 @@
 import { Component, Inject } from '@angular/core';
-import { CreateUser } from '../../../..';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { ProjectRole } from '../../../../../shared/children/users';
+import { CreateUser } from '../../../../../..';
+import { ProjectRole } from '../../../../../../../shared/children/users';
 
 @Component({
   templateUrl: 'admin-projects-add-user-dialog.component.html',

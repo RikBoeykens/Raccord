@@ -12,6 +12,7 @@ using Raccord.Application.Services.Characters;
 using Raccord.Application.Services.Users.Projects;
 using Raccord.Application.Services.Users.Invitations.Project;
 using Raccord.Application.Core.Common.Routing;
+using Raccord.Domain.Model.Users.Invitations;
 
 namespace Raccord.Application.Services.Projects
 {
@@ -29,27 +30,27 @@ namespace Raccord.Application.Services.Projects
 
             return dto;
         }
-        public static AdminFullProjectDto TranslateFullAdmin(this Project project)
+        public static AdminFullProjectDto TranslateFullAdmin(this Project project, IEnumerable<ProjectUserInvitation> projectInvitations)
         {
             var dto = new AdminFullProjectDto
             {
                 ID = project.ID,
                 Title = project.Title,
                 Users = project.ProjectUsers.Select(pu => pu.TranslateUser()),
-                Invitations = project.ProjectUserInvitations.Select(pu => pu.TranslateInvitation()),
+                Invitations = projectInvitations.Select(pu => pu.TranslateInvitation()),
                 PrimaryImage = project.Images.FirstOrDefault(i=> i.IsPrimaryImage)?.Translate(),
             };
 
             return dto;
         }
-        public static AdminProjectSummaryDto TranslateAdminSummary(this Project project)
+        public static AdminProjectSummaryDto TranslateAdminSummary(this Project project, int invitationCount)
         {
             var dto = new AdminProjectSummaryDto
             {
                 ID = project.ID,
                 Title = project.Title,
                 UserCount = project.ProjectUsers.Count(),
-                InvitationCount = project.ProjectUserInvitations.Count(pui => !pui.UserInvitation.AcceptedDate.HasValue),
+                InvitationCount = invitationCount,
                 PrimaryImage = project.Images.FirstOrDefault(i=> i.IsPrimaryImage)?.Translate(),
             };
 

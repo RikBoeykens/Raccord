@@ -87,33 +87,21 @@ namespace Raccord.API
                 options.ClaimsIdentity.RoleClaimType = OpenIdConnectConstants.Claims.Role;
             });
 
-            // Register the OpenIddict services.
-            services.AddOpenIddict(options =>
-            {
-                // Register the Entity Framework stores.
-                options.AddEntityFrameworkCoreStores<RaccordDBContext>();
-
-                // Register the ASP.NET Core MVC binder used by OpenIddict.
-                // Note: if you don't call this method, you won't be able to
-                // bind OpenIdConnectRequest or OpenIdConnectResponse parameters.
-                options.AddMvcBinders();
-
-                // Enable the token endpoint.
-                options.EnableTokenEndpoint("/api/authorization/connect/token");
-
-                // Enable the password and the refresh token flows.
-                options.AllowPasswordFlow()
-                       .AllowRefreshTokenFlow();
-
-                // During development, you can disable the HTTPS requirement.
-                options.DisableHttpsRequirement();
-
-                // Note: to use JWT access tokens instead of the default
-                // encrypted format, the following lines are required:
-                //
-                // options.UseJsonWebTokens();
-                // options.AddEphemeralSigningKey();
-            });
+            services.AddOpenIddict()
+                .AddCore(options =>
+                {
+                    options.UseEntityFrameworkCore()
+                        .UseDbContext<RaccordDBContext>();
+                })
+                .AddServer(options =>
+                {
+                    options.UseMvc();
+                    options.EnableTokenEndpoint("/api/authorization/connect/token");
+                    options.AllowPasswordFlow();
+                    options.AllowRefreshTokenFlow();
+                    options.AcceptAnonymousClients();
+                    options.DisableHttpsRequirement();
+                });
 
             // Register the validation handler that is used to decrypt the tokens
             services.AddAuthentication(options =>

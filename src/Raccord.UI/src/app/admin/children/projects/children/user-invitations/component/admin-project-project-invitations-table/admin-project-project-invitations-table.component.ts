@@ -1,5 +1,7 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { ProjectUserInvitationUserInvitation } from '../../../../../shared/children/users';
+import {
+  ProjectUserInvitationUserInvitation
+} from '../../../../../../../shared/children/user-invitations';
 
 @Component({
   selector: 'admin-project-project-invitations-table',
