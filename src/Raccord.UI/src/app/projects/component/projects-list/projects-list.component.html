@@ -5,9 +5,11 @@
     </h1>
   </div>
   <div fxLayout="row wrap" fxLayoutGap="5px" *ngIf="pagedProjects && pagedProjects.pageInfo">
-    <project-card
-        [project]="project"
-        *ngFor="let project of pagedProjects.data"></project-card>
+    <a routerLink="/projects/{{project.id}}"
+        *ngFor="let project of pagedProjects.data">
+      <project-card
+          [project]="project"></project-card>
+    </a>
   </div>
   <div fxLayout="row">
     <more-action *ngIf="pagedProjects.pageInfo.total > pagedProjects.pageInfo.page * pagedProjects.pageInfo.pageSize"
