@@ -3,8 +3,9 @@ import { BaseHttpService } from '../../../../shared/service/base-http.service';
 import { HttpClient } from '@angular/common/http';
 import { AppSettings } from '../../../../app.settings';
 import {
-  UserInvitationSummary, FullUserInvitation, UserInvitation, UserInvitationResult
+  UserInvitationSummary, UserInvitation, UserInvitationResult
 } from '../../../../shared/children/user-invitations';
+import { AdminUserInvitationSummary, AdminFullUserInvitation } from '../../..';
 
 @Injectable()
 export class AdminUserInvitationHttpService extends BaseHttpService {
@@ -16,14 +17,14 @@ export class AdminUserInvitationHttpService extends BaseHttpService {
         this._baseUri = `${AppSettings.API_ADMIN_ENDPOINT}/userinvitations`;
     }
 
-    public getAll(): Promise<UserInvitationSummary[] | void> {
+    public getAll(): Promise<AdminUserInvitationSummary[] | void> {
 
       const uri = this._baseUri;
 
       return this.doGetArray(uri);
     }
 
-    public get(id: string): Promise<FullUserInvitation | void> {
+    public get(id: string): Promise<AdminFullUserInvitation | void> {
 
       const uri = `${this._baseUri}/${id}`;
 

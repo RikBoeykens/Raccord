@@ -28,6 +28,23 @@ namespace Raccord.Application.Services.Users.Invitations
         Projects = userInvitation.ProjectUserInvitations.Select(pu => pu.TranslateProject())
       };
     }
+    public static AdminFullUserInvitationDto TranslateFullAdmin(this UserInvitation userInvitation)
+    {
+      if(userInvitation == null)
+      {
+        return null;
+      }
+
+      return new AdminFullUserInvitationDto
+      {
+        ID = userInvitation.ID,
+        Email = userInvitation.Email,
+        FirstName = userInvitation.FirstName,
+        LastName = userInvitation.LastName,
+        AcceptedDate = userInvitation.AcceptedDate,
+        Projects = userInvitation.ProjectUserInvitations.Select(pu => pu.TranslateProject())
+      };
+    }
 
     public static UserInvitationSummaryDto TranslateSummary(this UserInvitation userInvitation)
     {
@@ -43,6 +60,24 @@ namespace Raccord.Application.Services.Users.Invitations
         FirstName = userInvitation.FirstName,
         LastName = userInvitation.LastName,
         AcceptedDate = userInvitation.AcceptedDate,
+      };
+    }
+
+    public static AdminUserInvitationSummaryDto TranslateAdminSummary(this UserInvitation userInvitation)
+    {
+      if(userInvitation == null)
+      {
+        return null;
+      }
+
+      return new AdminUserInvitationSummaryDto
+      {
+        ID = userInvitation.ID,
+        Email = userInvitation.Email,
+        FirstName = userInvitation.FirstName,
+        LastName = userInvitation.LastName,
+        AcceptedDate = userInvitation.AcceptedDate,
+        ProjectCount = userInvitation.ProjectUserInvitations.Count
       };
     }
 

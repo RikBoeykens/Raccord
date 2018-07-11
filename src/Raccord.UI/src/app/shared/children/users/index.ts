@@ -22,5 +22,6 @@ export { ProjectUserProject } from './children/projects/model/project-user-proje
 export { ProjectUserUser } from './children/projects/model/project-user-user.model';
 export { ProjectUser } from './children/projects/model/project-user.model';
 
+export { FullUser } from './model/full-user.model';
 export { UserSummary } from './model/user-summary.model';
 export { User } from './model/user.model';

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Options;
+using Raccord.Application.Core.Common.Paging;
 using Raccord.Application.Core.ExternalServices.Communication.Mail;
 using Raccord.Application.Core.Services.Users;
 using Raccord.Application.Core.Services.Users.Invitations;
@@ -18,6 +19,7 @@ using Raccord.Domain.Model.Crew.CrewMembers;
 using Raccord.Domain.Model.Crew.CrewUnits;
 using Raccord.Domain.Model.Users;
 using Raccord.Domain.Model.Users.Invitations;
+using InvitationUtilities = Raccord.Application.Services.Users.Invitations.Utilities;
 
 namespace Raccord.Application.Services.Users.Invitations
 {
@@ -65,6 +67,13 @@ namespace Raccord.Application.Services.Users.Invitations
       return dtos;
     }
 
+    public PagedDataDto<AdminUserInvitationSummaryDto> GetAdminPaged(PaginationRequestDto requestDto)
+    {
+      var userInvitations = _userInvitationRepository.GetAll();
+
+      return userInvitations.GetPaged<UserInvitation, AdminUserInvitationSummaryDto>(requestDto, InvitationUtilities.TranslateAdminSummary);
+    }
+
     // Gets a single project user by id
     public UserInvitationDto Get(Guid ID)
     {
@@ -81,6 +90,16 @@ namespace Raccord.Application.Services.Users.Invitations
       var projectUser = _userInvitationRepository.GetFull(ID);
 
       var dto = projectUser.TranslateFull();
+
+      return dto;
+    }
+
+    // Gets a single project user by id
+    public FullUserInvitationDto GetFullAdmin(Guid ID)
+    {
+      var projectUser = _userInvitationRepository.GetFull(ID);
+
+      var dto = projectUser.TranslateFullAdmin();
 
       return dto;
     }

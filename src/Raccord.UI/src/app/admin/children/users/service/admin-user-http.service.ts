@@ -3,7 +3,7 @@ import { BaseHttpService } from '../../../../shared/service/base-http.service';
 import { HttpClient } from '@angular/common/http';
 import { AppSettings } from '../../../../app.settings';
 import { UserSummary, User } from '../../../../shared/children/users';
-import { CreateUser, FullUser } from '../../..';
+import { CreateUser, AdminFullUser, AdminUserSummary } from '../../..';
 
 @Injectable()
 export class AdminUserHttpService extends BaseHttpService {
@@ -15,14 +15,14 @@ export class AdminUserHttpService extends BaseHttpService {
     this._baseUri = `${AppSettings.API_ADMIN_ENDPOINT}/users`;
   }
 
-  public getAll(): Promise<UserSummary[] | void> {
+  public getAll(): Promise<AdminUserSummary[] | void> {
 
     const uri = this._baseUri;
 
     return this.doGetArray(uri);
   }
 
-  public get(id: string): Promise<FullUser | void> {
+  public get(id: string): Promise<AdminFullUser | void> {
 
     const uri = `${this._baseUri}/${id}`;
 

@@ -7,6 +7,7 @@ using Raccord.API.ViewModels.Core;
 using Raccord.Application.Core.Services.Users;
 using Microsoft.AspNetCore.Authorization;
 using System.Threading.Tasks;
+using Raccord.Application.Core.Common.Paging;
 
 namespace Raccord.API.Controllers.Admin
 {
@@ -24,15 +25,15 @@ namespace Raccord.API.Controllers.Admin
 
         // GET: api/admin/users
         [HttpGet]
-        public IEnumerable<UserSummaryViewModel> Get()
+        public IEnumerable<AdminUserSummaryViewModel> Get()
         {
-            var dtos = _userService.GetAll();
+            var pagedUsers = _userService.GetAdminPaged(new PaginationRequestDto { Full = true });
 
-            return dtos.Select(p => p.Translate());
+            return pagedUsers.Data.Select(p => p.Translate());
         }
         // GET api/admin/users/5
         [HttpGet("{id}")]
-        public FullUserViewModel Get(string id)
+        public AdminFullUserViewModel Get(string id)
         {
             var dto = _userService.Get(id);
 

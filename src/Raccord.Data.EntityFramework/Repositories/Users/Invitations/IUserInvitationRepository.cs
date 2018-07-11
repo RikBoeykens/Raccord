@@ -10,5 +10,6 @@ namespace Raccord.Data.EntityFramework.Repositories.Users.Invitations
     UserInvitation GetFull(Guid ID);
     int SearchCount(string searchText, string userID, Guid[] excludeIds);
     IEnumerable<UserInvitation> Search(string searchText, string userID, Guid[] excludeIds);
+    IEnumerable<UserInvitation> GetAllAdmin();
   }
 }

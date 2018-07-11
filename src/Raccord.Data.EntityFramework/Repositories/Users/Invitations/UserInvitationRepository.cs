@@ -20,6 +20,13 @@ namespace Raccord.Data.EntityFramework.Repositories.Users.Invitations
       return query.FirstOrDefault(ui => ui.ID == ID);
     }
 
+    public IEnumerable<UserInvitation> GetAllAdmin()
+    {
+      var query = GetIncludedAdminSummary();
+
+      return query;
+    }
+
     public int SearchCount(string searchText, string userID, Guid[] excludeIds)
     {
         var query = GetSearchQuery(searchText, userID, excludeIds);
@@ -40,6 +47,13 @@ namespace Raccord.Data.EntityFramework.Repositories.Users.Invitations
                     .ThenInclude(pu => pu.Project)
                   .Include(ui => ui.ProjectUserInvitations)
                     .ThenInclude(pu => pu.Role);
+    }
+
+    private IQueryable<UserInvitation> GetIncludedAdminSummary()
+    {
+      var query = _context.Set<UserInvitation>();
+
+      return query.Include(ui => ui.ProjectUserInvitations);
     }
 
     private IQueryable<UserInvitation> GetSearchQuery(string searchText, string userId, Guid[] excludeIds)

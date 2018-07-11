@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
+using Raccord.Application.Core.Common.Paging;
 using Raccord.Application.Core.ExternalServices.Communication.Mail;
 using Raccord.Application.Core.Services.Users;
 using Raccord.Data.EntityFramework.Repositories.Users;
 using Raccord.Domain.Model.Users;
+using UserUtilities = Raccord.Application.Services.Users.Utilities;
 
 namespace Raccord.Application.Services.Users
 {
@@ -31,11 +33,18 @@ namespace Raccord.Application.Services.Users
             return users.Select(u=> u.TranslateSummary());
         }
 
-        public FullUserDto Get(string ID)
+        public PagedDataDto<AdminUserSummaryDto> GetAdminPaged(PaginationRequestDto requestDto)
         {
-            var user = _userRepository.GetFull(ID);
+            var users = _userRepository.GetAll();
 
-            return user.TranslateFull();
+            return users.GetPaged<ApplicationUser, AdminUserSummaryDto>(requestDto, UserUtilities.TranslateAdminSummary);
+        }
+
+        public AdminFullUserDto Get(string ID)
+        {
+            var user = _userRepository.GetFullAdmin(ID);
+
+            return user.TranslateFullAdmin();
         }
 
         public UserSummaryDto GetSummary(string ID)

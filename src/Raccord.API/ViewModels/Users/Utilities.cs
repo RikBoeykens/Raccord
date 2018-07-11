@@ -25,6 +25,19 @@ namespace Raccord.API.ViewModels.Users
                 Email = dto.Email,
                 FirstName = dto.FirstName,
                 LastName = dto.LastName,
+                HasImage = dto.HasImage
+            };
+        }
+
+        public static AdminFullUserViewModel Translate(this AdminFullUserDto dto)
+        {
+            return new AdminFullUserViewModel
+            {
+                ID = dto.ID,
+                Email = dto.Email,
+                FirstName = dto.FirstName,
+                LastName = dto.LastName,
+                HasImage = dto.HasImage
             };
         }
 
@@ -37,6 +50,19 @@ namespace Raccord.API.ViewModels.Users
                 FirstName = dto.FirstName,
                 LastName = dto.LastName,
                 HasImage = dto.HasImage
+            };
+        }
+
+        public static AdminUserSummaryViewModel Translate(this AdminUserSummaryDto dto)
+        {
+            return new AdminUserSummaryViewModel
+            {
+                ID = dto.ID,
+                Email = dto.Email,
+                FirstName = dto.FirstName,
+                LastName = dto.LastName,
+                HasImage = dto.HasImage,
+                ProjectCount = dto.ProjectCount
             };
         }
 

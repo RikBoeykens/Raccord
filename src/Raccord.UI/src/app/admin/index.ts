@@ -47,10 +47,16 @@ export { AdminProjectResolve } from './children/projects/service/admin-project-r
 export { AdminSearchEngineService } from './children/search/service/admin-search-engine.service';
 
 // tslint:disable-next-line:max-line-length
+export { AdminFullUserInvitation } from './children/user-invitations/model/admin-full-user-invitation.model';
+// tslint:disable-next-line:max-line-length
+export { AdminUserInvitationSummary } from './children/user-invitations/model/admin-user-invitation-summary.model';
+
+// tslint:disable-next-line:max-line-length
 export { AdminUserInvitationHttpService } from './children/user-invitations/service/admin-user-invitation-http.service';
 
+export { AdminFullUser } from './children/users/model/admin-full-user.model';
+export { AdminUserSummary } from './children/users/model/admin-user-summary.model';
 export { CreateUser } from './children/users/model/create-user.model';
-export { FullUser } from './children/users/model/full-user.model';
 
 export { AdminUserHttpService } from './children/users/service/admin-user-http.service';
 

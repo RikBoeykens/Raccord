@@ -8,6 +8,7 @@ namespace Raccord.Data.EntityFramework.Repositories.Users
         ApplicationUser Get(string id);
         ApplicationUser GetSummary(string id);
         ApplicationUser GetFull(string id);
+        ApplicationUser GetFullAdmin(string id);
         ApplicationUser GetForPermissions(string id);
         IEnumerable<ApplicationUser> GetAll();
         void Edit(ApplicationUser entity);
