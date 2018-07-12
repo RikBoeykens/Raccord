@@ -10,6 +10,35 @@
       </h1>
     </div>
   </div>
+  <mat-card class="raccord-label-info">
+    <div fxLayout="row"
+      class="raccord-label-info-row">
+      <span fxFlex="50%" class="raccord-label">
+        First name
+      </span>
+      <span fxFlex="50%" class="raccord-info">
+        {{user.firstName}}
+      </span>
+    </div>
+    <div fxLayout="row"
+    class="raccord-label-info-row">
+      <span fxFlex="50%" class="raccord-label">
+        Last name
+      </span>
+      <span fxFlex="50%" class="raccord-info">
+        {{user.lastName}}
+      </span>
+    </div>
+    <div fxLayout="row"
+      class="raccord-label-info-row">
+      <span fxFlex="50%" class="raccord-label">
+        Email
+      </span>
+      <span fxFlex="50%" class="raccord-info">
+        {{user.email}}
+      </span>
+    </div>
+  </mat-card>
   <admin-user-project-users
     [userId]="user.id"
     [projectUsers]="user.projects"

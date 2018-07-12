@@ -368,3 +368,13 @@ raccord-toolbar {
 .loading-image {
   display: inline-block;
 }
+
+.raccord-label-info {
+  margin-top: 10px;
+
+  .raccord-label-info-row {
+    .raccord-label {
+      font-style: italic;
+    }
+  }
+}
