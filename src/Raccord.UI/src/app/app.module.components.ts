@@ -8,12 +8,22 @@ import {
   AdminProjectProjectUsersTableComponent,
   AdminProjectsAddUserDialogComponent,
   AdminProjectsLinkUserDialogComponent,
+  AdminAddProjectRoleDialogComponent,
+  AdminChooseProjectRoleDialogComponent,
   AdminEditProjectDialogComponent,
   AdminProjectDashboardComponent,
   AdminProjectsListComponent,
   AdminProjectsTableComponent,
+  AdminUserInvitationCardComponent,
+  AdminUserProjectUsersComponent,
+  AdminUserProjectUsersTableComponent,
+  AdminAddUserDialogComponent,
+  AdminUserCardComponent,
+  AdminUsersListComponent,
+  AdminUsersTableComponent,
   AdminLandingComponent,
-  AdminSearchEntityComponent
+  AdminSearchEntityComponent,
+  AdminUserDashboardComponent
 } from './admin';
 import {
   CalendarComponent,
@@ -53,6 +63,8 @@ import {
   BackLinkComponent,
   ConfirmDialogComponent,
   ErrorComponent,
+  GenericAvatarComponent,
+  GenericCardComponent,
   MoreActionComponent,
   PlaceholderImageComponent
 } from './shared';
@@ -66,6 +78,13 @@ export const COMPONENTS = [
   AdminProjectDashboardComponent,
   AdminProjectsListComponent,
   AdminProjectsTableComponent,
+  AdminUserInvitationCardComponent,
+  AdminUserProjectUsersComponent,
+  AdminUserProjectUsersTableComponent,
+  AdminUserCardComponent,
+  AdminUserDashboardComponent,
+  AdminUsersListComponent,
+  AdminUsersTableComponent,
   AdminLandingComponent,
   AdminSearchEntityComponent,
   CalendarComponent,
@@ -88,6 +107,8 @@ export const COMPONENTS = [
   UserAvatarComponent,
   BackLinkComponent,
   ErrorComponent,
+  GenericAvatarComponent,
+  GenericCardComponent,
   MoreActionComponent,
   PlaceholderImageComponent
 ];
@@ -97,6 +118,9 @@ export const DIALOGS = [
   AdminProjectsLinkUserInvitationDialogComponent,
   AdminProjectsAddUserDialogComponent,
   AdminProjectsLinkUserDialogComponent,
+  AdminAddProjectRoleDialogComponent,
+  AdminChooseProjectRoleDialogComponent,
   AdminEditProjectDialogComponent,
+  AdminAddUserDialogComponent,
   ConfirmDialogComponent
 ];

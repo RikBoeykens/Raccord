@@ -1,0 +1,4 @@
+<span class="generic-avatar">
+  <show-image *ngIf="image.id!=0" [image]="image" [cardImage]="cardImage" [listAvatar]="listAvatar" [cardAvatar]="cardAvatar" [headerAvatar]="headerAvatar"></show-image>
+  <placeholder-image *ngIf="!image.id!=0" class="generic-avatar-placeholder" [value]="title" [cardImage]="cardImage" [listAvatar]="listAvatar" [cardAvatar]="cardAvatar" [headerAvatar]="headerAvatar"></placeholder-image>
+</span>

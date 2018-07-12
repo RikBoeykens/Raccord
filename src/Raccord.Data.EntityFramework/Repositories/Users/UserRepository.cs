@@ -110,7 +110,8 @@ namespace Raccord.Data.EntityFramework.Repositories.Users
             return query.Include(u=> u.ProjectUsers)
                             .ThenInclude(pu=> pu.Role)
                         .Include(u => u.ProjectUsers)
-                            .ThenInclude(pu => pu.Project);
+                            .ThenInclude(pu => pu.Project)
+                                .ThenInclude(p => p.Images);
         }
 
         private IQueryable<ApplicationUser> GetIncludedPermissions()

@@ -218,6 +218,14 @@ $avatar-border-radius: 15px;
   }
 }
 
+.generic-avatar {
+  .generic-avatar-placeholder {
+    .placeholder-image {
+      border-radius: $avatar-border-radius;
+    }
+  }
+}
+
 $placeholder-font-size: 20px;
 
 .placeholder-image{
@@ -300,6 +308,11 @@ raccord-toolbar {
 }
 
 .project-card {
+  width: 200px;
+  margin-bottom: 5px;
+}
+
+.generic-card {
   width: 200px;
   margin-bottom: 5px;
 }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Login } from '../../';
-import { LoginService } from './../../service/login.service';
+import { Login } from '../..';
+import { LoginService } from '../../service/login.service';
 import { LoadingWrapperService } from '../../../shared/service/loading-wrapper.service';
 
 @Component({

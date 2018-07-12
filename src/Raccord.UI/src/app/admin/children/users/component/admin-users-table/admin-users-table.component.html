@@ -1,0 +1,37 @@
+<mat-table #userstable [dataSource]="users">
+
+  <!-- Image Column -->
+  <ng-container matColumnDef="image">
+    <mat-header-cell *matHeaderCellDef></mat-header-cell>
+    <mat-cell *matCellDef="let user">
+      <user-avatar [user]="user" [listAvatar]="true"></user-avatar>
+    </mat-cell>
+  </ng-container>
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="fullname">
+    <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+    <mat-cell *matCellDef="let user">
+      <a routerLink="/admin/users/{{user.id}}">{{getFullName(user)}}</a>
+    </mat-cell>
+  </ng-container>
+
+  <!-- Email Column -->
+  <ng-container matColumnDef="email">
+    <mat-header-cell *matHeaderCellDef>Email</mat-header-cell>
+    <mat-cell *matCellDef="let user">
+      <a href="mailto:{{user.email}}">{{user.email}}</a>
+    </mat-cell>
+  </ng-container>
+
+  <!-- Project count Column -->
+  <ng-container matColumnDef="projectcount">
+    <mat-header-cell *matHeaderCellDef>Projects</mat-header-cell>
+    <mat-cell *matCellDef="let user">
+      {{user.projectCount}}
+    </mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>

@@ -29,6 +29,10 @@ export { AdminProjectsAddUserDialogComponent } from './children/projects/childre
 export { AdminProjectsLinkUserDialogComponent } from './children/projects/children/users/component/admin-projects-link-user-dialog/admin-projects-link-user-dialog.component';
 
 // tslint:disable-next-line:max-line-length
+export { AdminAddProjectRoleDialogComponent } from './children/projects/component/admin-add-project-role-dialog/admin-add-project-role-dialog.component';
+// tslint:disable-next-line:max-line-length
+export { AdminChooseProjectRoleDialogComponent } from './children/projects/component/admin-choose-project-role-dialog/admin-choose-project-role-dialog.component';
+// tslint:disable-next-line:max-line-length
 export { AdminEditProjectDialogComponent } from './children/projects/component/admin-edit-project-dialog/admin-edit-project-dialog.component';
 // tslint:disable-next-line:max-line-length
 export { AdminProjectDashboardComponent } from './children/projects/component/admin-project-dashboard/admin-project-dashboard.component';
@@ -47,6 +51,9 @@ export { AdminProjectResolve } from './children/projects/service/admin-project-r
 export { AdminSearchEngineService } from './children/search/service/admin-search-engine.service';
 
 // tslint:disable-next-line:max-line-length
+export { AdminUserInvitationCardComponent } from './children/user-invitations/component/admin-user-invitation-card/admin-user-invitation-card.component';
+
+// tslint:disable-next-line:max-line-length
 export { AdminFullUserInvitation } from './children/user-invitations/model/admin-full-user-invitation.model';
 // tslint:disable-next-line:max-line-length
 export { AdminUserInvitationSummary } from './children/user-invitations/model/admin-user-invitation-summary.model';
@@ -54,11 +61,29 @@ export { AdminUserInvitationSummary } from './children/user-invitations/model/ad
 // tslint:disable-next-line:max-line-length
 export { AdminUserInvitationHttpService } from './children/user-invitations/service/admin-user-invitation-http.service';
 
+// tslint:disable-next-line:max-line-length
+export { AdminUserProjectUsersComponent } from './children/users/children/projects/component/admin-user-project-users/admin-user-project-users.component';
+// tslint:disable-next-line:max-line-length
+export { AdminUserProjectUsersTableComponent } from './children/users/children/projects/component/admin-user-project-users-table/admin-user-project-users-table.component';
+
+// tslint:disable-next-line:max-line-length
+export { AdminAddUserDialogComponent } from './children/users/component/admin-add-user-dialog/admin-add-user-dialog.component';
+// tslint:disable-next-line:max-line-length
+export { AdminUserCardComponent } from './children/users/component/admin-user-card/admin-user-card.component';
+// tslint:disable-next-line:max-line-length
+export { AdminUserDashboardComponent } from './children/users/component/admin-user-dashboard/admin-user-dashboard.component';
+// tslint:disable-next-line:max-line-length
+export { AdminUsersListComponent } from './children/users/component/admin-users-list/admin-users-list.component';
+// tslint:disable-next-line:max-line-length
+export { AdminUsersTableComponent } from './children/users/component/admin-users-table/admin-users-table.component';
+
 export { AdminFullUser } from './children/users/model/admin-full-user.model';
 export { AdminUserSummary } from './children/users/model/admin-user-summary.model';
 export { CreateUser } from './children/users/model/create-user.model';
 
 export { AdminUserHttpService } from './children/users/service/admin-user-http.service';
+export { AdminUserResolve } from './children/users/service/admin-user-resolve.service';
+export { AdminUsersResolve } from './children/users/service/admin-users-resolve.service';
 
 export { AdminLandingComponent } from './component/admin-landing/admin-landing.component';
 // tslint:disable-next-line:max-line-length

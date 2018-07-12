@@ -16,6 +16,8 @@ export class ShowProfileImageComponent implements OnInit {
     @Input() public fullName: string;
     @Input() public cardImage;
     @Input() public listAvatar;
+    @Input() public cardAvatar;
+    @Input() public headerAvatar;
 
     public base64Image: Base64Image = new Base64Image();
     public loadingImage: boolean = true;

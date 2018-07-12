@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BaseHttpService } from '../../shared/service/base-http.service';
 import { AppSettings } from '../../app.settings';
-import { CalendarItem } from '../../calendar/model/calendar-item';
+import { CalendarItem } from '../model/calendar-item';
 
 @Injectable()
 export class CalendarHttpService extends BaseHttpService {

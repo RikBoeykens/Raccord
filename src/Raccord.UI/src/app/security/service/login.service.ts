@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AuthService } from './auth.service';
 import { AccountHttpService } from '../../shared/children/account/service/account-http.service';
-import { Login } from 'app/security';
+import { Login } from '..';
 import { AccountHelpers } from '../../shared/children/account';
 import { UserProfileSummary } from '../../shared/children/users';
 import { UserPermissionSummary } from '../../shared/children/users';

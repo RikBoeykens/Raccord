@@ -9,7 +9,11 @@ import {
   AdminGuard,
   AdminDashboardResolve,
   AdminProjectsResolve,
-  AdminProjectResolve
+  AdminProjectResolve,
+  AdminUsersListComponent,
+  AdminUsersResolve,
+  AdminUserDashboardComponent,
+  AdminUserResolve
 } from './admin';
 
 import { DashboardComponent } from './dashboard';
@@ -75,6 +79,26 @@ export const ROUTES: Routes = [
             component: AdminProjectDashboardComponent,
             resolve: {
               project: AdminProjectResolve,
+              projectRoles: AdminProjectRolesResolve
+            }
+          }
+        ]
+      },
+      {
+        path: RouteSettings.USERS,
+        children: [
+          {
+            path: '',
+            component: AdminUsersListComponent,
+            resolve: {
+              users: AdminUsersResolve
+            }
+          },
+          {
+            path: ':userId',
+            component: AdminUserDashboardComponent,
+            resolve: {
+              user: AdminUserResolve,
               projectRoles: AdminProjectRolesResolve
             }
           }

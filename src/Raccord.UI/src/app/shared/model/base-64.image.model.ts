@@ -1,4 +1,4 @@
-import { BaseModel } from '../model/base.model';
+import { BaseModel } from './base.model';
 
 export class Base64Image extends BaseModel {
   public fileName: string;

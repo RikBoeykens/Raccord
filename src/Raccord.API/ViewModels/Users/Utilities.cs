@@ -1,3 +1,5 @@
+using System.Linq;
+using Raccord.API.ViewModels.Users.Projects;
 using Raccord.Application.Core.Services.Users;
 
 namespace Raccord.API.ViewModels.Users
@@ -37,7 +39,8 @@ namespace Raccord.API.ViewModels.Users
                 Email = dto.Email,
                 FirstName = dto.FirstName,
                 LastName = dto.LastName,
-                HasImage = dto.HasImage
+                HasImage = dto.HasImage,
+                Projects = dto.Projects.Select(p => p.Translate())
             };
         }
 

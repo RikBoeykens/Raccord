@@ -11,6 +11,10 @@ export class UserAvatarComponent {
     @Input() public userId: string;
     @Input() public fullName: string;
     @Input() public hasImage: boolean;
+    @Input() public cardImage;
+    @Input() public listAvatar;
+    @Input() public cardAvatar;
+    @Input() public headerAvatar;
 
     public getUserName(): string {
         if (!this.noUserDefined()) {

@@ -1,0 +1,31 @@
+<h3 mat-dialog-title>Add User</h3>
+<form id="add-user-form"
+  #addUserForm = "ngForm"
+  (ngSubmit)="submit()">
+  <mat-dialog-content>
+    <div fxLayout="row">
+      <mat-form-field>
+        <input required matInput placeholder="First Name" [(ngModel)]="user.firstName" name="user-firstname">
+      </mat-form-field>
+    </div>
+    <div fxLayout="row">
+      <mat-form-field>
+        <input required matInput placeholder="Last Name" [(ngModel)]="user.lastName" name="user-lastname">
+      </mat-form-field>
+    </div>
+    <div fxLayout="row">
+      <mat-form-field>
+        <input required matInput placeholder="Email" [(ngModel)]="user.email" name="user-email">
+      </mat-form-field>
+    </div>
+    <div fxLayout="row">
+      <mat-form-field>
+        <input required type="password" matInput placeholder="Password" [(ngModel)]="user.password" name="user-password">
+      </mat-form-field>
+    </div>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button mat-button type="submit" [disabled]="!addUserForm.form.valid">Save</button>
+  </mat-dialog-actions>
+</form>

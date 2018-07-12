@@ -9,6 +9,8 @@ import {
   AdminSearchEngineService,
   AdminUserInvitationHttpService,
   AdminUserHttpService,
+  AdminUserResolve,
+  AdminUsersResolve,
   AdminDashboardHttpService,
   AdminDashboardResolve,
   AdminGuard
@@ -63,6 +65,8 @@ export const SERVICES = [
   AdminSearchEngineService,
   AdminUserInvitationHttpService,
   AdminUserHttpService,
+  AdminUserResolve,
+  AdminUsersResolve,
   AdminDashboardHttpService,
   AdminDashboardResolve,
   AdminGuard,
