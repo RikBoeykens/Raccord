@@ -6,6 +6,7 @@ export { ConfirmDialogComponent } from './component/confirm-dialog/confirm-dialo
 export { ErrorComponent } from './component/error/error.component';
 export { GenericAvatarComponent } from './component/generic-avatar/generic-avatar.component';
 export { GenericCardComponent } from './component/generic-card/generic-card.component';
+export { MailLinkComponent } from './component/mail-link/mail-link.component';
 export { MoreActionComponent } from './component/more-action/more-action.component';
 // tslint:disable-next-line:max-line-length
 export { PlaceholderImageComponent } from './component/placeholder-image/placeholder-image.component';

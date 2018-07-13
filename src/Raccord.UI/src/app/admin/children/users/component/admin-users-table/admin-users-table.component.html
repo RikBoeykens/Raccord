@@ -20,7 +20,7 @@
   <ng-container matColumnDef="email">
     <mat-header-cell *matHeaderCellDef>Email</mat-header-cell>
     <mat-cell *matCellDef="let user">
-      <a href="mailto:{{user.email}}">{{user.email}}</a>
+      <mail-link [email]="user.email"></mail-link>
     </mat-cell>
   </ng-container>
 

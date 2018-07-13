@@ -65,6 +65,7 @@ import {
   ErrorComponent,
   GenericAvatarComponent,
   GenericCardComponent,
+  MailLinkComponent,
   MoreActionComponent,
   PlaceholderImageComponent
 } from './shared';
@@ -109,6 +110,7 @@ export const COMPONENTS = [
   ErrorComponent,
   GenericAvatarComponent,
   GenericCardComponent,
+  MailLinkComponent,
   MoreActionComponent,
   PlaceholderImageComponent
 ];
