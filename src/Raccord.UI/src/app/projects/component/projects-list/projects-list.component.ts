@@ -4,6 +4,7 @@ import { UserProject } from '../../../shared/children/projects';
 import { ProjectHttpService } from '../../../shared/children/projects/service/project-http.service';
 import { ActivatedRoute } from '@angular/router';
 import { LoadingWrapperService } from '../../../shared/service/loading-wrapper.service';
+import { RouteSettings } from '../../../shared';
 
 @Component({
   selector: 'projects-list',
@@ -36,5 +37,9 @@ export class ProjectsListComponent implements OnInit {
         this.pagedProjects.data.push.apply(this.pagedProjects.data, data.data);
       }
     );
+  }
+
+  public getProjectLink(project: UserProject) {
+    return `/${RouteSettings.PROJECTS}/${project.id}`;
   }
 }

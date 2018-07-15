@@ -47,7 +47,7 @@ namespace Raccord.Application.Services.Users.Invitations.Project
       return new ProjectUserInvitationProjectDto
       {
         ID = projectUserInvitation.ID,
-        Project = projectUserInvitation.Project.Translate(),
+        Project = projectUserInvitation.Project.TranslateSummary(),
         ProjectRole = projectUserInvitation.Role.Translate(),
       };
     }

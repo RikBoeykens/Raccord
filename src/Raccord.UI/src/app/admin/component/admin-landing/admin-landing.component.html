@@ -8,11 +8,11 @@
       fxLayout="row">
       <h2>Projects</h2>
       <span class="raccord-acton-link-container">
-          <a routerLink="/admin/projects" class="raccord-action-link">more</a>
+          <a routerLink="{{getProjectsLink()}}" class="raccord-action-link">more</a>
       </span>
   </div>
   <div fxLayout="row wrap" fxLayoutGap="5px" *ngIf="projects && projects.pageInfo">
-    <a routerLink="/admin/projects/{{project.id}}"
+    <a routerLink="{{getProjectLink(project)}}"
       *ngFor="let project of projects.data">
       <generic-card
         [image]="project.primaryImage" [title]="project.title"></generic-card>
@@ -22,11 +22,11 @@
       fxLayout="row">
       <h2>Users</h2>
       <span class="raccord-acton-link-container">
-          <a routerLink="/admin/users" class="raccord-action-link">more</a>
+          <a routerLink="{{getUsersLink()}}" class="raccord-action-link">more</a>
       </span>
   </div>
   <div fxLayout="row wrap" fxLayoutGap="5px" *ngIf="users && users.pageInfo">
-    <a routerLink="/admin/users/{{user.id}}"
+    <a routerLink="{{getUserLink(user)}}"
       *ngFor="let user of users.data">
       <admin-user-card [user]="user"></admin-user-card>
     </a>
@@ -35,11 +35,11 @@
       fxLayout="row">
       <h2>Invitations</h2>
       <span class="raccord-acton-link-container">
-          <a routerLink="/admin/user-invitations" class="raccord-action-link">more</a>
+          <a routerLink="{{getUserInvitationsLink()}}" class="raccord-action-link">more</a>
       </span>
   </div>
   <div fxLayout="row wrap" fxLayoutGap="5px" *ngIf="invitations && invitations.pageInfo">
-    <a routerLink="/admin/user-invitations/{{invitation.id}}"
+    <a routerLink="{{getUserInvitationLink(invitation)}}"
       *ngFor="let invitation of invitations.data">
       <admin-user-invitation-card [userInvitation]="invitation"></admin-user-invitation-card>
     </a>

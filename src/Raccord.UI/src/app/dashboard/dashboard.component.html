@@ -14,11 +14,11 @@
         fxLayout="row">
         <h2>My Projects</h2>
         <span class="raccord-acton-link-container">
-            <a routerLink="/projects" class="raccord-action-link">more</a>
+            <a routerLink="{{getProjectsLink()}}" class="raccord-action-link">more</a>
         </span>
     </div>
     <div fxLayout="row wrap" fxLayoutGap="5px" *ngIf="pagedProjects && pagedProjects.pageInfo">
-        <a routerLink="/projects/{{project.id}}"
+        <a routerLink="{{getProjectLink(project)}}"
             *ngFor="let project of pagedProjects.data">
             <project-card
                 [project]="project"></project-card>

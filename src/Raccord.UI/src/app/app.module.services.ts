@@ -3,6 +3,7 @@ import {
   AdminProjectRolesResolve,
   AdminProjectUserInvitationHttpService,
   AdminProjectUserHttpService,
+  AdminProjectUserResolve,
   AdminProjectHttpService,
   AdminProjectResolve,
   AdminProjectsResolve,
@@ -13,7 +14,9 @@ import {
   AdminUsersResolve,
   AdminDashboardHttpService,
   AdminDashboardResolve,
-  AdminGuard
+  AdminGuard,
+  AdminUserInvitationsResolve,
+  AdminUserInvitationResolve
 } from './admin';
 import {
   LoadingService
@@ -59,11 +62,14 @@ export const SERVICES = [
   AdminProjectRolesResolve,
   AdminProjectUserInvitationHttpService,
   AdminProjectUserHttpService,
+  AdminProjectUserResolve,
   AdminProjectHttpService,
   AdminProjectResolve,
   AdminProjectsResolve,
   AdminSearchEngineService,
   AdminUserInvitationHttpService,
+  AdminUserInvitationsResolve,
+  AdminUserInvitationResolve,
   AdminUserHttpService,
   AdminUserResolve,
   AdminUsersResolve,

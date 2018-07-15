@@ -6,12 +6,12 @@ namespace Raccord.API.ViewModels.Users.Invitations.Project
 {
   public class ProjectUserInvitationProjectViewModel : ProjectUserInvitationSummaryViewModel
   {
-    private ProjectViewModel _project;
-    public ProjectViewModel Project
+    private ProjectSummaryViewModel _project;
+    public ProjectSummaryViewModel Project
     {
       get
       {
-        return _project ?? new ProjectViewModel();
+        return _project ?? new ProjectSummaryViewModel();
       }
       set
       {

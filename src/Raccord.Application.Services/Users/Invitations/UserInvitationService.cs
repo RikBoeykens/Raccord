@@ -71,7 +71,11 @@ namespace Raccord.Application.Services.Users.Invitations
     {
       var userInvitations = _userInvitationRepository.GetAll();
 
-      return userInvitations.GetPaged<UserInvitation, AdminUserInvitationSummaryDto>(requestDto, InvitationUtilities.TranslateAdminSummary);
+      return userInvitations.GetPaged<UserInvitation, AdminUserInvitationSummaryDto>(requestDto, (userInvitation)=>
+      {
+        var projectCount = _projectUserInvitationRepository.GetCountForInvitation(userInvitation.ID);
+        return userInvitation.TranslateAdminSummary(projectCount);
+      });
     }
 
     // Gets a single project user by id
@@ -89,7 +93,9 @@ namespace Raccord.Application.Services.Users.Invitations
     {
       var projectUser = _userInvitationRepository.GetFull(ID);
 
-      var dto = projectUser.TranslateFull();
+      var projectUserInvitations = _projectUserInvitationRepository.GetAllForInvitation(ID);
+
+      var dto = projectUser.TranslateFull(projectUserInvitations);
 
       return dto;
     }
@@ -99,7 +105,9 @@ namespace Raccord.Application.Services.Users.Invitations
     {
       var projectUser = _userInvitationRepository.GetFull(ID);
 
-      var dto = projectUser.TranslateFullAdmin();
+      var projectUserInvitations = _projectUserInvitationRepository.GetAllForInvitation(ID);
+
+      var dto = projectUser.TranslateFullAdmin(projectUserInvitations);
 
       return dto;
     }

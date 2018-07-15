@@ -7,8 +7,16 @@ export { AdminProjectRolesResolve } from './children/project-roles/service/admin
 
 // tslint:disable-next-line:max-line-length
 export { AdminProjectUserInvitationHttpService } from './children/project-user-invitations/service/admin-project-user-invitation-http.service';
+
+// tslint:disable-next-line:max-line-length
+export { AdminProjectUserDashboardComponent } from './children/project-users/component/admin-project-user-dashboard/admin-project-user-dashboard.component';
+
+export { AdminFullProjectUser } from './children/project-users/model/admin-full-project-user.model';
+
 // tslint:disable-next-line:max-line-length
 export { AdminProjectUserHttpService } from './children/project-users/service/admin-project-user-http.service';
+// tslint:disable-next-line:max-line-length
+export { AdminProjectUserResolve } from './children/project-users/service/admin-project-user-resolve.service';
 
 // tslint:disable-next-line:max-line-length
 export { AdminProjectProjectInvitationsTableComponent } from './children/projects/children/user-invitations/component/admin-project-project-invitations-table/admin-project-project-invitations-table.component';
@@ -51,7 +59,20 @@ export { AdminProjectResolve } from './children/projects/service/admin-project-r
 export { AdminSearchEngineService } from './children/search/service/admin-search-engine.service';
 
 // tslint:disable-next-line:max-line-length
+export { AdminUserInvitationProjectUserInvitationsComponent } from './children/user-invitations/children/projects/component/admin-user-invitation-project-user-invitations/admin-user-invitation-project-user-invitations.component';
+// tslint:disable-next-line:max-line-length
+export { AdminUserInvitationProjectUserInvitationsTableComponent } from './children/user-invitations/children/projects/component/admin-user-invitation-project-user-invitations-table/admin-user-invitation-project-user-invitations-table.component';
+
+// tslint:disable-next-line:max-line-length
+export { AdminAddUserInvitationDialogComponent } from './children/user-invitations/component/admin-add-user-invitation-dialog/admin-add-user-invitation-dialog.component';
+// tslint:disable-next-line:max-line-length
 export { AdminUserInvitationCardComponent } from './children/user-invitations/component/admin-user-invitation-card/admin-user-invitation-card.component';
+// tslint:disable-next-line:max-line-length
+export { AdminUserInvitationDashboardComponent } from './children/user-invitations/component/admin-user-invitation-dashboard/admin-user-invitation-dashboard.component';
+// tslint:disable-next-line:max-line-length
+export { AdminUserInvitationsListComponent } from './children/user-invitations/component/admin-user-invitations-list/admin-user-invitations-list.component';
+// tslint:disable-next-line:max-line-length
+export { AdminUserInvitationsTableComponent } from './children/user-invitations/component/admin-user-invitations-table/admin-user-invitations-table.component';
 
 // tslint:disable-next-line:max-line-length
 export { AdminFullUserInvitation } from './children/user-invitations/model/admin-full-user-invitation.model';
@@ -60,6 +81,10 @@ export { AdminUserInvitationSummary } from './children/user-invitations/model/ad
 
 // tslint:disable-next-line:max-line-length
 export { AdminUserInvitationHttpService } from './children/user-invitations/service/admin-user-invitation-http.service';
+// tslint:disable-next-line:max-line-length
+export { AdminUserInvitationResolve } from './children/user-invitations/service/admin-user-invitation-resolve.service';
+// tslint:disable-next-line:max-line-length
+export { AdminUserInvitationsResolve } from './children/user-invitations/service/admin-user-invitations-resolve.service';
 
 // tslint:disable-next-line:max-line-length
 export { AdminUserProjectUsersComponent } from './children/users/children/projects/component/admin-user-project-users/admin-user-project-users.component';

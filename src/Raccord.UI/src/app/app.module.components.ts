@@ -1,5 +1,6 @@
 import { AppComponent } from './app.component';
 import {
+  AdminProjectUserDashboardComponent,
   AdminProjectProjectInvitationsTableComponent,
   AdminProjectProjectUserInvitationsComponent,
   AdminProjectsAddUserInvitationDialogComponent,
@@ -14,16 +15,21 @@ import {
   AdminProjectDashboardComponent,
   AdminProjectsListComponent,
   AdminProjectsTableComponent,
+  AdminUserInvitationProjectUserInvitationsComponent,
+  AdminUserInvitationProjectUserInvitationsTableComponent,
   AdminUserInvitationCardComponent,
+  AdminUserInvitationDashboardComponent,
+  AdminUserInvitationsListComponent,
+  AdminUserInvitationsTableComponent,
   AdminUserProjectUsersComponent,
   AdminUserProjectUsersTableComponent,
   AdminAddUserDialogComponent,
   AdminUserCardComponent,
+  AdminUserDashboardComponent,
   AdminUsersListComponent,
   AdminUsersTableComponent,
   AdminLandingComponent,
-  AdminSearchEntityComponent,
-  AdminUserDashboardComponent
+  AdminSearchEntityComponent
 } from './admin';
 import {
   CalendarComponent,
@@ -72,6 +78,7 @@ import {
 
 export const COMPONENTS = [
   AppComponent,
+  AdminProjectUserDashboardComponent,
   AdminProjectProjectInvitationsTableComponent,
   AdminProjectProjectUserInvitationsComponent,
   AdminProjectProjectUsersComponent,
@@ -79,7 +86,12 @@ export const COMPONENTS = [
   AdminProjectDashboardComponent,
   AdminProjectsListComponent,
   AdminProjectsTableComponent,
+  AdminUserInvitationProjectUserInvitationsComponent,
+  AdminUserInvitationProjectUserInvitationsTableComponent,
   AdminUserInvitationCardComponent,
+  AdminUserInvitationDashboardComponent,
+  AdminUserInvitationsListComponent,
+  AdminUserInvitationsTableComponent,
   AdminUserProjectUsersComponent,
   AdminUserProjectUsersTableComponent,
   AdminUserCardComponent,

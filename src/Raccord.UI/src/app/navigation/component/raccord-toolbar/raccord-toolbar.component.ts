@@ -3,6 +3,7 @@ import { AuthService } from '../../../security/service/auth.service';
 import { Router } from '@angular/router';
 import { AccountHelpers } from '../../../shared/children/account';
 import { SidenavService } from '../../service/sidenav.service';
+import { RouteSettings } from '../../../shared';
 
 @Component({
   selector: 'raccord-toolbar',
@@ -39,6 +40,10 @@ export class RaccordToolbarComponent {
 
   public logOff() {
     this._authService.logout();
-    this._router.navigate(['/login']);
+    this._router.navigate([`/${RouteSettings.LOGIN}`]);
+  }
+
+  public getProfileLink() {
+    return `/${RouteSettings.PROFILE}`;
   }
 }

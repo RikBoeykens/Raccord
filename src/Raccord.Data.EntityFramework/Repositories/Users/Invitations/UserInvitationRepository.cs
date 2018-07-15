@@ -43,17 +43,14 @@ namespace Raccord.Data.EntityFramework.Repositories.Users.Invitations
     {
       var query = _context.Set<UserInvitation>();
 
-      return query.Include(ui => ui.ProjectUserInvitations)
-                    .ThenInclude(pu => pu.Project)
-                  .Include(ui => ui.ProjectUserInvitations)
-                    .ThenInclude(pu => pu.Role);
+      return query;
     }
 
     private IQueryable<UserInvitation> GetIncludedAdminSummary()
     {
       var query = _context.Set<UserInvitation>();
 
-      return query.Include(ui => ui.ProjectUserInvitations);
+      return query;
     }
 
     private IQueryable<UserInvitation> GetSearchQuery(string searchText, string userId, Guid[] excludeIds)

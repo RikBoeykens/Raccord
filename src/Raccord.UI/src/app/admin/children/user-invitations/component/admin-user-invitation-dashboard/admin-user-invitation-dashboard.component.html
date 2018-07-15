@@ -1,0 +1,55 @@
+<div class="raccord-narrow-container">
+  <div class="raccord-page-header">
+    <a routerLink="{{getBackLink()}}">
+      <back-link></back-link>
+    </a>
+    <div fxLayout="row">
+      <h1 class="raccord-header-title">
+        <placeholder-image [headerAvatar]="true" [value]="getFullName()"></placeholder-image>
+        {{getFullName()}}
+      </h1>
+    </div>
+  </div>
+  <mat-card class="raccord-label-info">
+    <div fxLayout="row"
+      class="raccord-label-info-row">
+      <span fxFlex="50%" class="raccord-label">
+        First name
+      </span>
+      <span fxFlex="50%" class="raccord-info">
+        {{userInvitation.firstName}}
+      </span>
+    </div>
+    <div fxLayout="row"
+    class="raccord-label-info-row">
+      <span fxFlex="50%" class="raccord-label">
+        Last name
+      </span>
+      <span fxFlex="50%" class="raccord-info">
+        {{userInvitation.lastName}}
+      </span>
+    </div>
+    <div fxLayout="row"
+      class="raccord-label-info-row">
+      <span fxFlex="50%" class="raccord-label">
+        Email
+      </span>
+      <span fxFlex="50%" class="raccord-info">
+        <mail-link [email]="userInvitation.email"></mail-link>
+      </span>
+    </div>
+    <div fxLayout="row"
+      class="raccord-label-info-row">
+      <span fxFlex="50%" class="raccord-label">
+        Accepted
+      </span>
+      <span fxFlex="50%" class="raccord-info">
+        {{userInvitation.acceptedDate}}
+      </span>
+    </div>
+  </mat-card>
+  <admin-user-invitation-project-user-invitations
+    [userInvitationId]="userInvitation.id"
+    [projectUserInvitations]="userInvitation.projects"
+    [projectRoles]="projectRoles"></admin-user-invitation-project-user-invitations>
+</div>

@@ -5,6 +5,7 @@ import { AdminUserSummary, AdminAddUserDialogComponent } from '../../../..';
 import { AdminUserHttpService } from '../../service/admin-user-http.service';
 import { LoadingWrapperService } from '../../../../../shared/service/loading-wrapper.service';
 import { CreateUser } from '../../model/create-user.model';
+import { RouteSettings } from '../../../../../shared';
 
 @Component({
   templateUrl: 'admin-users-list.component.html',
@@ -39,6 +40,10 @@ export class AdminUsersListComponent implements OnInit {
 
   public showAddUser() {
     this.showAddUserDialog();
+  }
+
+  public getBackLink() {
+    return `/${RouteSettings.ADMIN}`;
   }
 
   private showAddUserDialog() {

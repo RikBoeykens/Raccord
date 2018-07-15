@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using Raccord.Application.Core.Common.Routing;
 using Raccord.Application.Core.Services.SearchEngine;
@@ -11,7 +12,7 @@ namespace Raccord.Application.Services.Users.Invitations
 {
   public static class Utilities
   {
-    public static FullUserInvitationDto TranslateFull(this UserInvitation userInvitation)
+    public static FullUserInvitationDto TranslateFull(this UserInvitation userInvitation, IEnumerable<ProjectUserInvitation> projectUserInvitations)
     {
       if(userInvitation == null)
       {
@@ -25,10 +26,10 @@ namespace Raccord.Application.Services.Users.Invitations
         FirstName = userInvitation.FirstName,
         LastName = userInvitation.LastName,
         AcceptedDate = userInvitation.AcceptedDate,
-        Projects = userInvitation.ProjectUserInvitations.Select(pu => pu.TranslateProject())
+        Projects = projectUserInvitations.Select(pu => pu.TranslateProject())
       };
     }
-    public static AdminFullUserInvitationDto TranslateFullAdmin(this UserInvitation userInvitation)
+    public static AdminFullUserInvitationDto TranslateFullAdmin(this UserInvitation userInvitation, IEnumerable<ProjectUserInvitation> projectUserInvitations)
     {
       if(userInvitation == null)
       {
@@ -42,7 +43,7 @@ namespace Raccord.Application.Services.Users.Invitations
         FirstName = userInvitation.FirstName,
         LastName = userInvitation.LastName,
         AcceptedDate = userInvitation.AcceptedDate,
-        Projects = userInvitation.ProjectUserInvitations.Select(pu => pu.TranslateProject())
+        Projects = projectUserInvitations.Select(pu => pu.TranslateProject())
       };
     }
 
@@ -63,7 +64,7 @@ namespace Raccord.Application.Services.Users.Invitations
       };
     }
 
-    public static AdminUserInvitationSummaryDto TranslateAdminSummary(this UserInvitation userInvitation)
+    public static AdminUserInvitationSummaryDto TranslateAdminSummary(this UserInvitation userInvitation, int projectCount)
     {
       if(userInvitation == null)
       {
@@ -77,7 +78,7 @@ namespace Raccord.Application.Services.Users.Invitations
         FirstName = userInvitation.FirstName,
         LastName = userInvitation.LastName,
         AcceptedDate = userInvitation.AcceptedDate,
-        ProjectCount = userInvitation.ProjectUserInvitations.Count
+        ProjectCount = projectCount
       };
     }
 

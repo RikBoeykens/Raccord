@@ -10,13 +10,17 @@ import { SaveToken } from '../model/save-token';
 import 'rxjs/add/observable/fromPromise';
 import 'rxjs/add/observable/of';
 import { AccountHelpers } from '../../shared/children/account';
-import { HeaderHelpers } from '../../shared';
+import { HeaderHelpers, RouteSettings } from '../../shared';
+import { Router } from '../../../../node_modules/@angular/router';
 
 @Injectable()
 export class AuthService {
     private _baseUri: string;
 
-    constructor(private _http: Http) {
+    constructor(
+        private _http: Http,
+        private _router: Router
+    ) {
         this._baseUri = `${AppSettings.API_ENDPOINT}/authorization`;
     }
 
@@ -46,6 +50,7 @@ export class AuthService {
             return Observable.fromPromise(
                 this.refreshToken(tokens).catch(() => {
                     this.logout();
+                    this._router.navigateByUrl(`/${RouteSettings.LOGIN}`);
                     return '';
                 }));
         }

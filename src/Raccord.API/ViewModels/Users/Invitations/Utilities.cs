@@ -66,6 +66,7 @@ namespace Raccord.API.ViewModels.Users.Invitations
         FirstName = dto.FirstName,
         LastName = dto.LastName,
         AcceptedDate = dto.AcceptedDate,
+        ProjectCount = dto.ProjectCount
       };
     }
     public static UserInvitationViewModel Translate(this UserInvitationDto dto)

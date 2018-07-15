@@ -28,6 +28,18 @@ namespace Raccord.Application.Services.Users.Projects
                 CrewUnits = projectUser.CrewUnitMembers.Select(cum => cum.TranslateCrewUnit())
             };
         }
+        public static AdminFullProjectUserDto TranslateFullAdmin(this ProjectUser projectUser)
+        {
+            return new AdminFullProjectUserDto
+            {
+                ID = projectUser.ID,
+                User = projectUser.User.Translate(),
+                Project = projectUser.Project.Translate(),
+                CastMember = projectUser.CastMember.Translate(),
+                ProjectRole = projectUser.Role.Translate(),
+                CrewUnits = projectUser.CrewUnitMembers.Select(cum => cum.TranslateCrewUnit())
+            };
+        }
         public static ProjectUserUserDto TranslateUser(this ProjectUser projectUser)
         {
             return new ProjectUserUserDto

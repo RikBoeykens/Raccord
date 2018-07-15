@@ -15,7 +15,7 @@
       [hasImage]="getHasImage()"
       [matMenuTriggerFor]="navMenu"></user-avatar>
     <mat-menu #navMenu="matMenu">
-      <a routerLink="/profile" mat-menu-item><mat-icon>account_box</mat-icon>Profile</a>
+      <a routerLink="{{getProfileLink()}}" mat-menu-item><mat-icon>account_box</mat-icon>Profile</a>
       <button mat-menu-item (click)="logOff()"><mat-icon>exit_to_app</mat-icon>Log out</button>
     </mat-menu>
   </span>

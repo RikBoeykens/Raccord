@@ -1,0 +1,37 @@
+<mat-table #projectuserinvitationprojectstable [dataSource]="projectUserInvitations">
+
+  <!-- Image Column -->
+  <ng-container matColumnDef="image">
+    <mat-header-cell *matHeaderCellDef></mat-header-cell>
+    <mat-cell *matCellDef="let projectUserInvitation">
+      <project-avatar [listAvatar]="true" [project]="projectUserInvitation.project"></project-avatar>
+    </mat-cell>
+  </ng-container>
+
+  <!-- Title Column -->
+  <ng-container matColumnDef="title">
+    <mat-header-cell *matHeaderCellDef>Title</mat-header-cell>
+    <mat-cell *matCellDef="let projectUserInvitation">
+      <a routerLink="{{getAdminProjectUserInvitationLink(projectUserInvitation)}}" [queryParams]="{src: 'userinvitation'}">{{projectUserInvitation.project.title}}</a>
+    </mat-cell>
+  </ng-container>
+
+  <!-- Role Column -->
+  <ng-container matColumnDef="role">
+    <mat-header-cell *matHeaderCellDef>Role</mat-header-cell>
+    <mat-cell *matCellDef="let projectUserInvitation">
+      {{projectUserInvitation.projectRole.name}}
+    </mat-cell>
+  </ng-container>
+
+  <!-- Options Column -->
+  <ng-container matColumnDef="options">
+    <mat-header-cell *matHeaderCellDef></mat-header-cell>
+    <mat-cell *matCellDef="let projectUserInvitation">
+      <button mat-icon-button (click)="doShowConfirmRemove(projectUserInvitation)"><mat-icon>delete</mat-icon></button>
+    </mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>

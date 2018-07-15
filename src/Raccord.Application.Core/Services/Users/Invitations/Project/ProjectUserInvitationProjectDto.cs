@@ -6,12 +6,12 @@ namespace Raccord.Application.Core.Services.Users.Invitations.Project
 {
   public class ProjectUserInvitationProjectDto : ProjectUserInvitationSummaryDto
   {
-    private ProjectDto _project;
-    public ProjectDto Project
+    private ProjectSummaryDto _project;
+    public ProjectSummaryDto Project
     {
       get
       {
-        return _project ?? new ProjectDto();
+        return _project ?? new ProjectSummaryDto();
       }
       set
       {

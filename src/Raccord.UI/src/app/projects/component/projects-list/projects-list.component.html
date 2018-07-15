@@ -5,7 +5,7 @@
     </h1>
   </div>
   <div fxLayout="row wrap" fxLayoutGap="5px" *ngIf="pagedProjects && pagedProjects.pageInfo">
-    <a routerLink="/projects/{{project.id}}"
+    <a routerLink="{{getProjectLink(project)}}"
         *ngFor="let project of pagedProjects.data">
       <project-card
           [project]="project"></project-card>

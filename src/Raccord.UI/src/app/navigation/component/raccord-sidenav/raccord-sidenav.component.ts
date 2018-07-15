@@ -1,6 +1,7 @@
 import { Component, OnInit, OnChanges } from '@angular/core';
 import { ProjectSummary, CurrentProjectService } from '../../../shared/children/projects';
 import { AccountHelpers } from '../../../shared/children/account';
+import { RouteSettings } from '../../../shared';
 
 @Component({
   selector: 'raccord-sidenav',
@@ -23,5 +24,17 @@ export class RaccordSidenavComponent implements OnInit {
 
   public isAdmin() {
     return AccountHelpers.isAdmin();
+  }
+
+  public getProfileLink() {
+    return `/${RouteSettings.PROFILE}`;
+  }
+
+  public getAdminLink() {
+    return `/${RouteSettings.ADMIN}`;
+  }
+
+  public getProjectLink() {
+      return `/${RouteSettings.PROJECTS}`;
   }
 }

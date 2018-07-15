@@ -12,7 +12,7 @@
   <ng-container matColumnDef="title">
     <mat-header-cell *matHeaderCellDef>Title</mat-header-cell>
     <mat-cell *matCellDef="let project">
-      <a routerLink="/admin/projects/{{project.id}}">{{project.title}}</a>
+      <a routerLink="{{getAdminProjectLink(project)}}">{{project.title}}</a>
     </mat-cell>
   </ng-container>
 

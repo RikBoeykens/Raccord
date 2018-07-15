@@ -12,7 +12,7 @@
   <ng-container matColumnDef="fullname">
     <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
     <mat-cell *matCellDef="let user">
-      <a routerLink="/admin/users/{{user.id}}">{{getFullName(user)}}</a>
+      <a routerLink="{{getAdminUserLink(user)}}">{{getFullName(user)}}</a>
     </mat-cell>
   </ng-container>
 

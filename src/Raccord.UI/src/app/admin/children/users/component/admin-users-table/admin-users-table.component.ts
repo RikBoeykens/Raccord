@@ -1,5 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { AdminUserSummary } from '../../../..';
+import { RouteSettings } from '../../../../../shared';
 
 @Component({
   selector: 'admin-users-table',
@@ -11,5 +12,9 @@ export class AdminUsersTableComponent {
 
   public getFullName(user: AdminUserSummary) {
     return `${user.firstName} ${user.lastName}`;
+  }
+
+  public getAdminUserLink(user: AdminUserSummary) {
+    return `/${RouteSettings.ADMIN}/${RouteSettings.USERS}/${user.id}`;
   }
 }
