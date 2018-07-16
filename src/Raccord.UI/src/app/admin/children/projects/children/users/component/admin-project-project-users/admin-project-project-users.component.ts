@@ -8,7 +8,8 @@ import {
 import {
   AdminProjectsAddUserDialogComponent,
   CreateUser,
-  AdminProjectsLinkUserDialogComponent
+  AdminProjectsLinkUserDialogComponent,
+  AdminEditProjectRoleDialogComponent
 } from '../../../../../..';
 import { LoadingWrapperService } from '../../../../../../../shared/service/loading-wrapper.service';
 import { DialogService } from '../../../../../../../shared/service/dialog.service';
@@ -62,6 +63,36 @@ export class AdminProjectProjectUsersComponent {
     this._dialogService.confirm(
       `Are you sure you want to remove ${projectUser.user.firstName} ${projectUser.user.lastName}?`,
       () => this.removeProjectUser(projectUser.id)
+    );
+  }
+
+  public showEditProjectUser(projectUser: ProjectUserUser) {
+    const editProjectDialog = this._dialog.open(AdminEditProjectRoleDialogComponent, {data:
+    {
+        chosenRoleId: projectUser.projectRole.id,
+        title: 'Edit Project User',
+        projectRoles: this.projectRoles
+    }});
+    editProjectDialog.afterClosed().subscribe((returnedInfo: {roleId?: number}) => {
+      if (returnedInfo) {
+        const editProjectUser = new ProjectUser({
+          id: projectUser.id,
+          projectID: this.projectId,
+          userID: projectUser.user.id,
+          roleID: returnedInfo.roleId
+        });
+        this.postProjectUser(editProjectUser);
+      }
+    });
+  }
+
+  private postProjectUser(projectUser: ProjectUser) {
+
+    this._loadingWrapperService.Load(
+      this._adminProjectUserHttpService.post(projectUser),
+      () => {
+        this.getUsers();
+      }
     );
   }
 

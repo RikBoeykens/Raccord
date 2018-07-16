@@ -36,6 +36,7 @@
   <ng-container matColumnDef="options">
     <mat-header-cell *matHeaderCellDef></mat-header-cell>
     <mat-cell *matCellDef="let project">
+      <button mat-icon-button (click)="doShowEdit(project)"><mat-icon>edit</mat-icon></button>
       <button mat-icon-button (click)="doShowConfirmRemove(project)"><mat-icon>delete</mat-icon></button>
     </mat-cell>
   </ng-container>

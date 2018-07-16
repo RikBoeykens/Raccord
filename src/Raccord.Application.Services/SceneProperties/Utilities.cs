@@ -11,150 +11,150 @@ namespace Raccord.Application.Services.SceneProperties
     // Utilities and helper methods for Locations
     public static class Utilities
     {
-        public static FullIntExtDto TranslateFull(this IntExt intExt)
+        public static FullSceneIntroDto TranslateFull(this SceneIntro sceneIntro)
         {
-            if(intExt == null)
+            if(sceneIntro == null)
             {
                 return null;
             }
 
-            var dto = new FullIntExtDto
+            var dto = new FullSceneIntroDto
             {
-                ID = intExt.ID,
-                Name = intExt.Name,
-                Description = intExt.Description,
-                Scenes = intExt.Scenes.Select(s=> s.TranslateSummary()),
-                ProjectID = intExt.ProjectID,
+                ID = sceneIntro.ID,
+                Name = sceneIntro.Name,
+                Description = sceneIntro.Description,
+                Scenes = sceneIntro.Scenes.Select(s=> s.TranslateSummary()),
+                ProjectID = sceneIntro.ProjectID,
             };
 
             return dto;
         }
-        public static IntExtSummaryDto TranslateSummary(this IntExt intExt)
+        public static SceneIntroSummaryDto TranslateSummary(this SceneIntro sceneIntro)
         {
-            if(intExt == null)
-            {
-                return null;
-            }
-            
-            var dto = new IntExtSummaryDto
-            {
-                ID = intExt.ID,
-                Name = intExt.Name,
-                Description = intExt.Description,
-                ProjectID = intExt.ProjectID,
-                SceneCount = intExt.Scenes.Count(),
-            };
-
-            return dto;
-        }
-        public static IntExtDto Translate(this IntExt intExt)
-        {
-            if(intExt == null)
+            if(sceneIntro == null)
             {
                 return null;
             }
             
-            var dto = new IntExtDto
+            var dto = new SceneIntroSummaryDto
             {
-                ID = intExt.ID,
-                Name = intExt.Name,
-                Description = intExt.Description,
-                ProjectID = intExt.ProjectID,
+                ID = sceneIntro.ID,
+                Name = sceneIntro.Name,
+                Description = sceneIntro.Description,
+                ProjectID = sceneIntro.ProjectID,
+                SceneCount = sceneIntro.Scenes.Count(),
+            };
+
+            return dto;
+        }
+        public static SceneIntroDto Translate(this SceneIntro sceneIntro)
+        {
+            if(sceneIntro == null)
+            {
+                return null;
+            }
+            
+            var dto = new SceneIntroDto
+            {
+                ID = sceneIntro.ID,
+                Name = sceneIntro.Name,
+                Description = sceneIntro.Description,
+                ProjectID = sceneIntro.ProjectID,
             };
 
             return dto;
         }
 
-        public static SearchResultDto TranslateToSearchResult(this IntExt intExt)
+        public static SearchResultDto TranslateToSearchResult(this SceneIntro sceneIntro)
         {
-            if(intExt == null)
+            if(sceneIntro == null)
             {
                 return null;
             }
             
             var dto = new SearchResultDto
             {
-                ID = intExt.ID,
-                DisplayName = intExt.Name,
+                ID = sceneIntro.ID,
+                DisplayName = sceneIntro.Name,
                 RouteInfo = new RouteInfoDto
                 {
-                    RouteIDs = new object[]{intExt.ProjectID, intExt.ID},
-                    Type = EntityType.IntExt,
+                    RouteIDs = new object[]{sceneIntro.ProjectID, sceneIntro.ID},
+                    Type = EntityType.SceneIntro,
                 }
             };
 
             return dto;
         }
 
-        public static FullDayNightDto TranslateFull(this DayNight dayNight)
+        public static FullTimeOfDayDto TranslateFull(this TimeOfDay timeOfDay)
         {
-            if(dayNight == null)
+            if(timeOfDay == null)
             {
                 return null;
             }
             
-            var dto = new FullDayNightDto
+            var dto = new FullTimeOfDayDto
             {
-                ID = dayNight.ID,
-                Name = dayNight.Name,
-                Description = dayNight.Description,
-                Scenes = dayNight.Scenes.Select(s=> s.TranslateSummary()),
-                ProjectID = dayNight.ProjectID,
+                ID = timeOfDay.ID,
+                Name = timeOfDay.Name,
+                Description = timeOfDay.Description,
+                Scenes = timeOfDay.Scenes.Select(s=> s.TranslateSummary()),
+                ProjectID = timeOfDay.ProjectID,
             };
 
             return dto;
         }
-        public static DayNightSummaryDto TranslateSummary(this DayNight dayNight)
+        public static TimeOfDaySummaryDto TranslateSummary(this TimeOfDay timeOfDay)
         {
-            if(dayNight == null)
+            if(timeOfDay == null)
             {
                 return null;
             }
             
-            var dto = new DayNightSummaryDto
+            var dto = new TimeOfDaySummaryDto
             {
-                ID = dayNight.ID,
-                Name = dayNight.Name,
-                Description = dayNight.Description,
-                ProjectID = dayNight.ProjectID,
-                SceneCount = dayNight.Scenes.Count(),
+                ID = timeOfDay.ID,
+                Name = timeOfDay.Name,
+                Description = timeOfDay.Description,
+                ProjectID = timeOfDay.ProjectID,
+                SceneCount = timeOfDay.Scenes.Count(),
             };
 
             return dto;
         }
-        public static DayNightDto Translate(this DayNight dayNight)
+        public static TimeOfDayDto Translate(this TimeOfDay timeOfDay)
         {
-            if(dayNight == null)
+            if(timeOfDay == null)
             {
                 return null;
             }
             
-            var dto = new DayNightDto
+            var dto = new TimeOfDayDto
             {
-                ID = dayNight.ID,
-                Name = dayNight.Name,
-                Description = dayNight.Description,
-                ProjectID = dayNight.ProjectID,
+                ID = timeOfDay.ID,
+                Name = timeOfDay.Name,
+                Description = timeOfDay.Description,
+                ProjectID = timeOfDay.ProjectID,
             };
 
             return dto;
         }
 
-        public static SearchResultDto TranslateToSearchResult(this DayNight dayNight)
+        public static SearchResultDto TranslateToSearchResult(this TimeOfDay timeOfDay)
         {
-            if(dayNight == null)
+            if(timeOfDay == null)
             {
                 return null;
             }
             
             var dto = new SearchResultDto
             {
-                ID = dayNight.ID,
-                DisplayName = dayNight.Name,
+                ID = timeOfDay.ID,
+                DisplayName = timeOfDay.Name,
                 RouteInfo = new RouteInfoDto
                 {
-                    RouteIDs = new object[]{dayNight.ProjectID, dayNight.ID},
-                    Type = EntityType.DayNight,
+                    RouteIDs = new object[]{timeOfDay.ProjectID, timeOfDay.ID},
+                    Type = EntityType.TimeOfDay,
                 }
             };
 

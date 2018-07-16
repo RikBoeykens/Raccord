@@ -29,6 +29,27 @@ namespace Raccord.API.ViewModels.Cast
         Scenes = dto.Scenes.Select(s => s.Translate()),
       };
     }
+    public static AdminFullCastMemberViewModel Translate(this AdminFullCastMemberDto dto)
+    {
+      if(dto == null)
+      {
+        return null;
+      }
+
+      return new AdminFullCastMemberViewModel
+      {
+        ID = dto.ID,
+        FirstName = dto.FirstName,
+        LastName = dto.LastName,
+        Telephone = dto.Telephone,
+        Email = dto.Email,
+        ProjectID = dto.ProjectID,
+        UserID = dto.UserID,
+        UserInvitationID = dto.UserInvitationID,
+        HasImage = dto.HasImage,
+        Characters = dto.Characters.Select(c => c.Translate())
+      };
+    }
     public static CastMemberSummaryViewModel Translate(this CastMemberSummaryDto dto)
     {
       if(dto == null)

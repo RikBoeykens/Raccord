@@ -12,7 +12,7 @@ namespace Raccord.Application.Core.Services.Users.Project
     {
         private UserDto _user;
         private ProjectDto _project;
-        private CastMemberDto _castMember;
+        protected CastMemberDto _castMember;
         private ProjectRoleDto _role;
         private IEnumerable<ProjectUserCrewUnitDto> _crewUnits;
         // ID of the project user

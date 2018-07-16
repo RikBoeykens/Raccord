@@ -59,6 +59,8 @@ namespace Raccord.Data.EntityFramework.Repositories.Users.Projects
                                 .ThenInclude(pr => pr.ProjectPermission)
                         .Include(pu => pu.CastMember)
                             .ThenInclude(cm => cm.Characters)
+                                .ThenInclude(c => c.ImageCharacters)
+                                    .ThenInclude(ic => ic.Image)
                         .Include(pu => pu.CrewUnitMembers)
                             .ThenInclude(pu => pu.CrewUnit)
                         .Include(pu => pu.CrewUnitMembers)

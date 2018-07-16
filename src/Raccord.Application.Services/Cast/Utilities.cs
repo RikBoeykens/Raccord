@@ -34,6 +34,27 @@ namespace Raccord.Application.Services.Cast
         Scenes = castMember.Characters.SelectMany(c => c.CharacterScenes).OrderBy(cs => cs.Scene.SortingOrder).Select(cs => cs.TranslateScene()).Distinct()
       };
     }
+    public static AdminFullCastMemberDto TranslateFullAdmin(this CastMember castMember)
+    {
+      if(castMember == null)
+      {
+        return null;
+      }
+
+      return new AdminFullCastMemberDto
+      {
+        ID = castMember.ID,
+        FirstName = castMember.GetFirstName(),
+        LastName = castMember.GetLastName(),
+        Telephone = castMember.GetTelephone(),
+        Email = castMember.GetEmail(),
+        ProjectID = castMember.ProjectID,
+        UserID = castMember.GetUserID(),
+        UserInvitationID = castMember.GetUserInvitationID(),
+        HasImage = castMember.GetHasImage(),
+        Characters = castMember.Characters.Select(c => c.TranslateSummary()),
+      };
+    }
     public static CastMemberSummaryDto TranslateSummary(this CastMember castMember)
     {
       if(castMember == null)

@@ -42,9 +42,9 @@ namespace Raccord.Data.EntityFramework.Repositories.Breakdowns.BreakdownItemScen
             IQueryable<BreakdownItemScene> query = _context.Set<BreakdownItemScene>();
 
             return query.Include(bis=> bis.Scene)
-                        .ThenInclude(s=> s.IntExt)
+                            .ThenInclude(s=> s.SceneIntro)
                         .Include(bis=> bis.Scene)
-                        .ThenInclude(s=> s.DayNight)
+                            .ThenInclude(s=> s.TimeOfDay)
                         .Include(bis=> bis.Scene)
                         .ThenInclude(s=> s.ScriptLocation)
                         .Include(bis=> bis.Scene)

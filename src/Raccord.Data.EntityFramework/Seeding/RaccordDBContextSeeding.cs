@@ -208,8 +208,8 @@ namespace Raccord.Data.EntityFramework.Seeding
         private void TestSeeding()
         {
             SeedProjects();
-            SeedIntExts();
-            SeedDayNights();
+            SeedSceneIntros();
+            SeedTimeOfDays();
             SeedScriptLocations();
             SeedScenes();
             SeedCallTypes();
@@ -236,37 +236,37 @@ namespace Raccord.Data.EntityFramework.Seeding
             }
         }
 
-        private void SeedIntExts()
+        private void SeedSceneIntros()
         {
-            if(!_context.IntExts.Any())
+            if(!_context.SceneIntros.Any())
             {
-                var entities = new List<IntExt>
+                var entities = new List<SceneIntro>
                 {
-                    new IntExt { ProjectID = 1, Name = "INT" },
-                    new IntExt { ProjectID = 1, Name = "EXT" },
-                    new IntExt { ProjectID = 2, Name = "INT" },
-                    new IntExt { ProjectID = 2, Name = "EXT" },
+                    new SceneIntro { ProjectID = 1, Name = "INT" },
+                    new SceneIntro { ProjectID = 1, Name = "EXT" },
+                    new SceneIntro { ProjectID = 2, Name = "INT" },
+                    new SceneIntro { ProjectID = 2, Name = "EXT" },
                 };
 
-                _context.IntExts.AddRange(entities);
+                _context.SceneIntros.AddRange(entities);
 
                 _context.SaveChanges();
             }
         }
 
-        private void SeedDayNights()
+        private void SeedTimeOfDays()
         {
-            if(!_context.DayNights.Any())
+            if(!_context.TimeOfDays.Any())
             {
-                var entities = new List<DayNight>
+                var entities = new List<TimeOfDay>
                 {
-                    new DayNight { ProjectID = 1, Name = "DAY" },
-                    new DayNight { ProjectID = 1, Name = "NIGHT" },
-                    new DayNight { ProjectID = 2, Name = "DAY" },
-                    new DayNight { ProjectID = 2, Name = "NIGHT" },
+                    new TimeOfDay { ProjectID = 1, Name = "DAY" },
+                    new TimeOfDay { ProjectID = 1, Name = "NIGHT" },
+                    new TimeOfDay { ProjectID = 2, Name = "DAY" },
+                    new TimeOfDay { ProjectID = 2, Name = "NIGHT" },
                 };
 
-                _context.DayNights.AddRange(entities);
+                _context.TimeOfDays.AddRange(entities);
 
                 _context.SaveChanges();
             }
@@ -302,16 +302,16 @@ namespace Raccord.Data.EntityFramework.Seeding
             {
                 var entities = new List<Scene>
                 {
-                    new Scene { ProjectID = 1, IntExtID = 2, ScriptLocationID = 1, DayNightID = 1, PageLength = 1, Number = "1", Summary = "Establishing shot" },
-                    new Scene { ProjectID = 1, IntExtID = 1, ScriptLocationID = 2, DayNightID = 1, PageLength = 9, Number = "2", Summary = "Janice gets ready to go out." },
-                    new Scene { ProjectID = 1, IntExtID = 1, ScriptLocationID = 3, DayNightID = 1, PageLength = 2, Number = "2A", Summary = "Janice picks up her lunch." },
-                    new Scene { ProjectID = 1, IntExtID = 2, ScriptLocationID = 5, DayNightID = 2, PageLength = 8, Number = "3", Summary = "Janice goes home through the park." },
+                    new Scene { ProjectID = 1, SceneIntroID = 2, ScriptLocationID = 1, TimeOfDayID = 1, PageLength = 1, Number = "1", Summary = "Establishing shot" },
+                    new Scene { ProjectID = 1, SceneIntroID = 1, ScriptLocationID = 2, TimeOfDayID = 1, PageLength = 9, Number = "2", Summary = "Janice gets ready to go out." },
+                    new Scene { ProjectID = 1, SceneIntroID = 1, ScriptLocationID = 3, TimeOfDayID = 1, PageLength = 2, Number = "2A", Summary = "Janice picks up her lunch." },
+                    new Scene { ProjectID = 1, SceneIntroID = 2, ScriptLocationID = 5, TimeOfDayID = 2, PageLength = 8, Number = "3", Summary = "Janice goes home through the park." },
 
-                    new Scene { ProjectID = 2, IntExtID = 3, ScriptLocationID = 6, DayNightID = 4, PageLength = 2, Number = "1", Summary = "A dark forest" },                    
-                    new Scene { ProjectID = 2, IntExtID = 4, ScriptLocationID = 7, DayNightID = 4, PageLength = 10, Number = "2", Summary = "Freddy in his little cottage" },                    
-                    new Scene { ProjectID = 2, IntExtID = 3, ScriptLocationID = 6, DayNightID = 4, PageLength = 6, Number = "3", Summary = "Freddy goes for a walk in the forest" },                    
-                    new Scene { ProjectID = 2, IntExtID = 3, ScriptLocationID = 8, DayNightID = 3, PageLength = 2, Number = "4", Summary = "Freddy walks through a meadow" },                    
-                    new Scene { ProjectID = 2, IntExtID = 3, ScriptLocationID = 9, DayNightID = 3, PageLength = 3, Number = "5", Summary = "Freddy takes a bath in a river" },                    
+                    new Scene { ProjectID = 2, SceneIntroID = 3, ScriptLocationID = 6, TimeOfDayID = 4, PageLength = 2, Number = "1", Summary = "A dark forest" },                    
+                    new Scene { ProjectID = 2, SceneIntroID = 4, ScriptLocationID = 7, TimeOfDayID = 4, PageLength = 10, Number = "2", Summary = "Freddy in his little cottage" },                    
+                    new Scene { ProjectID = 2, SceneIntroID = 3, ScriptLocationID = 6, TimeOfDayID = 4, PageLength = 6, Number = "3", Summary = "Freddy goes for a walk in the forest" },                    
+                    new Scene { ProjectID = 2, SceneIntroID = 3, ScriptLocationID = 8, TimeOfDayID = 3, PageLength = 2, Number = "4", Summary = "Freddy walks through a meadow" },                    
+                    new Scene { ProjectID = 2, SceneIntroID = 3, ScriptLocationID = 9, TimeOfDayID = 3, PageLength = 3, Number = "5", Summary = "Freddy takes a bath in a river" },                    
                 };
 
                 _context.Scenes.AddRange(entities);

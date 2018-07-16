@@ -4,8 +4,9 @@ import {
   ProjectRole
 } from '../../../../../../../shared/children/users';
 import {
-  AdminAddProjectRoleDialogComponent,
-  AdminChooseProjectRoleDialogComponent
+  AdminAddProjectAndRoleDialogComponent,
+  AdminChooseProjectAndRoleDialogComponent,
+  AdminEditProjectRoleDialogComponent
 } from '../../../../../..';
 import { LoadingWrapperService } from '../../../../../../../shared/service/loading-wrapper.service';
 import { DialogService } from '../../../../../../../shared/service/dialog.service';
@@ -39,7 +40,7 @@ export class AdminUserInvitationProjectUserInvitationsComponent {
   ) {}
 
   public showAddProject() {
-    const addProjectDialog = this._dialog.open(AdminAddProjectRoleDialogComponent, {data:
+    const addProjectDialog = this._dialog.open(AdminAddProjectAndRoleDialogComponent, {data:
     {
         projectRoles: this.projectRoles
     }});
@@ -51,7 +52,7 @@ export class AdminUserInvitationProjectUserInvitationsComponent {
   }
 
   public showLinkProject() {
-    const linkProjectDialog = this._dialog.open(AdminChooseProjectRoleDialogComponent, {data:
+    const linkProjectDialog = this._dialog.open(AdminChooseProjectAndRoleDialogComponent, {data:
     {
         projectRoles: this.projectRoles
     }});
@@ -69,6 +70,36 @@ export class AdminUserInvitationProjectUserInvitationsComponent {
     this._dialogService.confirm(
       `Are you sure you want to remove ${projectUserInvitation.project.title}?`,
       () => this.removeProjectUserInvitation(projectUserInvitation.id)
+    );
+  }
+
+  public showEditProjectUser(projectUserInvitation: ProjectUserInvitationProject) {
+    const editProjectDialog = this._dialog.open(AdminEditProjectRoleDialogComponent, {data:
+    {
+        chosenRoleId: projectUserInvitation.projectRole.id,
+        title: 'Edit Project Invitation',
+        projectRoles: this.projectRoles
+    }});
+    editProjectDialog.afterClosed().subscribe((returnedInfo: {roleId?: number}) => {
+      if (returnedInfo) {
+        const editProjectUser = new ProjectUserInvitation({
+          id: projectUserInvitation.id,
+          projectID: projectUserInvitation.project.id,
+          userInvitationID: this.userInvitationId,
+          roleID: returnedInfo.roleId
+        });
+        this.postProjectUserInvitation(editProjectUser);
+      }
+    });
+  }
+
+  private postProjectUserInvitation(projectUserInvitation: ProjectUserInvitation) {
+
+    this._loadingWrapperService.Load(
+      this._adminProjectUserInvitationHttpService.update(projectUserInvitation),
+      () => {
+        this.getProjects();
+      }
     );
   }
 

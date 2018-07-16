@@ -5,7 +5,8 @@ import {
 } from '../../../../../../../shared/children/users';
 import {
   AdminProjectsAddUserInvitationDialogComponent,
-  AdminProjectsLinkUserInvitationDialogComponent
+  AdminProjectsLinkUserInvitationDialogComponent,
+  AdminEditProjectRoleDialogComponent
 } from '../../../../../..';
 import {
   AdminUserInvitationHttpService
@@ -82,6 +83,36 @@ export class AdminProjectProjectUserInvitationsComponent {
       // tslint:disable-next-line:max-line-length
       `Are you sure you want to remove ${projectUserInvitation.userInvitation.firstName} ${projectUserInvitation.userInvitation.lastName}?`,
       () => this.removeProjectUserInvitation(projectUserInvitation.id)
+    );
+  }
+
+  public showEditUserInvitation(projectUserInvitation: ProjectUserInvitationUserInvitation) {
+    const editProjectDialog = this._dialog.open(AdminEditProjectRoleDialogComponent, {data:
+    {
+        chosenRoleId: projectUserInvitation.projectRole.id,
+        title: 'Edit Project Invitation',
+        projectRoles: this.projectRoles
+    }});
+    editProjectDialog.afterClosed().subscribe((returnedInfo: {roleId?: number}) => {
+      if (returnedInfo) {
+        const editProjectUserInvitation = new ProjectUserInvitation({
+          id: projectUserInvitation.id,
+          projectID: this.projectId,
+          userInvitationID: projectUserInvitation.userInvitation.id,
+          roleID: returnedInfo.roleId
+        });
+        this.postProjectUserInvitation(editProjectUserInvitation);
+      }
+    });
+  }
+
+  private postProjectUserInvitation(projectUserInvitation: ProjectUserInvitation) {
+
+    this._loadingWrapperService.Load(
+      this._adminProjectUserInvitationHttpService.update(projectUserInvitation),
+      () => {
+        this.getUserInvitations();
+      }
     );
   }
 

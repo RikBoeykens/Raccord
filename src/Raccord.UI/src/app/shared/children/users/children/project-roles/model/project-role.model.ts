@@ -2,14 +2,14 @@ import { BaseModel } from '../../../../../model/base.model';
 import { ProjectRoleEnum } from '../../../../../enums/project-role.enum';
 
 export class ProjectRole extends BaseModel {
-  public ID: number;
+  public id: number;
   public name: string;
   public description: string;
   public role: ProjectRoleEnum;
 
   constructor(
     obj?: {
-      ID: number,
+      id: number,
       name: string,
       description: string,
       role: ProjectRoleEnum
@@ -17,7 +17,7 @@ export class ProjectRole extends BaseModel {
   ) {
     super();
     if (obj) {
-      this.ID = obj.ID;
+      this.id = obj.id;
       this.name = obj.name;
       this.description = obj.description;
       this.role = obj.role;

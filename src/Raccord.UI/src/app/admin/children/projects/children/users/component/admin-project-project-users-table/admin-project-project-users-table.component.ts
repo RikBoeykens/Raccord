@@ -11,6 +11,10 @@ export class AdminProjectProjectUsersTableComponent {
   @Output() public showConfirmRemove: EventEmitter<ProjectUserUser> = new EventEmitter();
   public displayedColumns = ['image', 'name', 'role', 'options'];
 
+  public doShowEdit(user: ProjectUserUser) {
+    this.showEdit.emit(user);
+  }
+
   public doShowConfirmRemove(user: ProjectUserUser) {
     this.showConfirmRemove.emit(user);
   }

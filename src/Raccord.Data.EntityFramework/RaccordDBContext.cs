@@ -33,8 +33,8 @@ namespace Raccord.Data.EntityFramework
         public DbSet<Project> Projects { get; set; }
         public DbSet<Scene> Scenes { get; set; }
         public DbSet<ScriptLocation> ScriptLocations { get; set; }
-        public DbSet<IntExt> IntExts { get; set; }
-        public DbSet<DayNight> DayNights { get; set; }
+        public DbSet<SceneIntro> SceneIntros { get; set; }
+        public DbSet<TimeOfDay> TimeOfDays { get; set; }
         public DbSet<BreakdownTypeDefinition> BreakdownTypeDefinitions { get; set; }
         public DbSet<CallTypeDefinition> CallTypeDefinitions { get; set; }
         public DbSet<CrewDepartmentDefinition> CrewDepartmentDefinitions { get; set; }

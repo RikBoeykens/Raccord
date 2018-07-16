@@ -13,8 +13,8 @@ export class RouteSettings {
   public static get TIMINGS(): string { return 'timings'; }
   public static get SCRIPTLOCATIONS(): string { return 'scriptlocations'; }
   public static get SCENEPROPERTIES(): string { return 'sceneproperties'; }
-  public static get DAYNIGHTS(): string { return 'daynights'; }
-  public static get INTEXTS(): string { return 'intexts'; }
+  public static get TIMEOFDAYS(): string { return 'timeofdays'; }
+  public static get SCENEINTROS(): string { return 'sceneintros'; }
   public static get IMAGES(): string { return 'images'; }
   public static get CHARACTERS(): string { return 'characters'; }
   public static get CAST(): string { return 'cast'; }

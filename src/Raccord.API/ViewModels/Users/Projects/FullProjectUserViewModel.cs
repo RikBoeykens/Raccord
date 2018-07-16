@@ -14,7 +14,7 @@ namespace Raccord.API.ViewModels.Users.Projects
     {
         private ProjectViewModel _project;
         private UserViewModel _user;
-        private CastMemberViewModel _castMember;
+        protected CastMemberViewModel _castMember;
         private ProjectRoleViewModel _projectRole;
         private IEnumerable<ProjectUserCrewUnitViewModel> _crewUnits;
 

@@ -5,7 +5,6 @@ import { AppSettings } from '../../../../app.settings';
 import {
   ProjectUserUser,
   ProjectUserProject,
-  FullProjectUser,
   ProjectUser
 } from '../../../../shared/children/users';
 import { AdminFullProjectUser } from '../../..';

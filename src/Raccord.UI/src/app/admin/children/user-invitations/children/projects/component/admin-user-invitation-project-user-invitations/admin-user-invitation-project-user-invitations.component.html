@@ -6,5 +6,6 @@
 </div>
 <admin-user-invitation-project-user-invitations-table 
   [projectUserInvitations]="projectUserInvitations"
+  (showEdit)="showEditProjectUserInvitation($event)"
   (showConfirmRemove)="showConfirmRemoveProject($event)">
 </admin-user-invitation-project-user-invitations-table>

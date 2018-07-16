@@ -1,0 +1,18 @@
+<div class="raccord-sub-header"
+  fxLayout="row">
+  <h2>Cast Member</h2>
+  <button mat-icon-button *ngIf="castMember.id===0" (click)="showAddCastMember()"><mat-icon>add</mat-icon></button>
+  <button mat-icon-button *ngIf="castMember.id===0" (click)="showLinkCastMember()"><mat-icon>link</mat-icon></button>
+</div>
+<mat-card class="raccord-label-info"
+ *ngIf="castMember.id!==0">
+  <div fxLayout="row"
+    class="raccord-label-info-row">
+    <span fxFlex="50%" class="raccord-label">
+      Cast Member
+    </span>
+    <span fxFlex="50%" class="raccord-info">
+      <a routerLink="{{getCastMemberLink()}}">{{getFullName()}}</a>
+    </span>
+  </div>
+</mat-card>

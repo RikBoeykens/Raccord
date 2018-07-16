@@ -1,5 +1,10 @@
 import { AdminDashboard } from './model/admin-dashboard.model';
 
+export { AdminFullCastMember } from './children/cast-members/model/admin-full-cast-member.model';
+
+// tslint:disable-next-line:max-line-length
+export { AdminEditProjectRoleDialogComponent } from './children/project-roles/component/admin-edit-project-role-dialog/admin-edit-project-role-dialog.component';
+
 // tslint:disable-next-line:max-line-length
 export { AdminProjectRoleHttpService } from './children/project-roles/service/admin-project-role-http.service';
 // tslint:disable-next-line:max-line-length
@@ -8,6 +13,8 @@ export { AdminProjectRolesResolve } from './children/project-roles/service/admin
 // tslint:disable-next-line:max-line-length
 export { AdminProjectUserInvitationHttpService } from './children/project-user-invitations/service/admin-project-user-invitation-http.service';
 
+// tslint:disable-next-line:max-line-length
+export { AdminProjectUserCastMemberComponent } from './children/project-users/children/cast-members/component/admin-project-user-cast-member/admin-project-user-cast-member.component';
 // tslint:disable-next-line:max-line-length
 export { AdminProjectUserDashboardComponent } from './children/project-users/component/admin-project-user-dashboard/admin-project-user-dashboard.component';
 
@@ -37,9 +44,9 @@ export { AdminProjectsAddUserDialogComponent } from './children/projects/childre
 export { AdminProjectsLinkUserDialogComponent } from './children/projects/children/users/component/admin-projects-link-user-dialog/admin-projects-link-user-dialog.component';
 
 // tslint:disable-next-line:max-line-length
-export { AdminAddProjectRoleDialogComponent } from './children/projects/component/admin-add-project-role-dialog/admin-add-project-role-dialog.component';
+export { AdminAddProjectAndRoleDialogComponent } from './children/projects/component/admin-add-project-and-role-dialog/admin-add-project-and-role-dialog.component';
 // tslint:disable-next-line:max-line-length
-export { AdminChooseProjectRoleDialogComponent } from './children/projects/component/admin-choose-project-role-dialog/admin-choose-project-role-dialog.component';
+export { AdminChooseProjectAndRoleDialogComponent } from './children/projects/component/admin-choose-project-and-role-dialog/admin-choose-project-and-role-dialog.component';
 // tslint:disable-next-line:max-line-length
 export { AdminEditProjectDialogComponent } from './children/projects/component/admin-edit-project-dialog/admin-edit-project-dialog.component';
 // tslint:disable-next-line:max-line-length

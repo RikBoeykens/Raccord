@@ -1,5 +1,7 @@
 import { AppComponent } from './app.component';
 import {
+  AdminEditProjectRoleDialogComponent,
+  AdminProjectUserCastMemberComponent,
   AdminProjectUserDashboardComponent,
   AdminProjectProjectInvitationsTableComponent,
   AdminProjectProjectUserInvitationsComponent,
@@ -9,8 +11,8 @@ import {
   AdminProjectProjectUsersTableComponent,
   AdminProjectsAddUserDialogComponent,
   AdminProjectsLinkUserDialogComponent,
-  AdminAddProjectRoleDialogComponent,
-  AdminChooseProjectRoleDialogComponent,
+  AdminAddProjectAndRoleDialogComponent,
+  AdminChooseProjectAndRoleDialogComponent,
   AdminEditProjectDialogComponent,
   AdminProjectDashboardComponent,
   AdminProjectsListComponent,
@@ -78,6 +80,7 @@ import {
 
 export const COMPONENTS = [
   AppComponent,
+  AdminProjectUserCastMemberComponent,
   AdminProjectUserDashboardComponent,
   AdminProjectProjectInvitationsTableComponent,
   AdminProjectProjectUserInvitationsComponent,
@@ -128,12 +131,13 @@ export const COMPONENTS = [
 ];
 
 export const DIALOGS = [
+  AdminEditProjectRoleDialogComponent,
   AdminProjectsAddUserInvitationDialogComponent,
   AdminProjectsLinkUserInvitationDialogComponent,
   AdminProjectsAddUserDialogComponent,
   AdminProjectsLinkUserDialogComponent,
-  AdminAddProjectRoleDialogComponent,
-  AdminChooseProjectRoleDialogComponent,
+  AdminAddProjectAndRoleDialogComponent,
+  AdminChooseProjectAndRoleDialogComponent,
   AdminEditProjectDialogComponent,
   AdminAddUserDialogComponent,
   ConfirmDialogComponent

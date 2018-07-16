@@ -50,6 +50,16 @@ namespace Raccord.Application.Services.Cast
             return dto;
         }
 
+        // Gets a single cast member by id
+        public AdminFullCastMemberDto GetFullAdmin(long ID)
+        {
+            var castMember = _castMemberRepository.GetFull(ID);
+
+            var dto = castMember.TranslateFullAdmin();
+
+            return dto;
+        }
+
         // Gets a summary of a single cast member
         public CastMemberSummaryDto GetSummary(long ID)
         {

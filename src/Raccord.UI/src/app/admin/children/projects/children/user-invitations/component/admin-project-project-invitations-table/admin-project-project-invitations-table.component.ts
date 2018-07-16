@@ -14,6 +14,10 @@ export class AdminProjectProjectInvitationsTableComponent {
     EventEmitter<ProjectUserInvitationUserInvitation> = new EventEmitter();
   public displayedColumns = ['image', 'name', 'role', 'options'];
 
+  public doShowEdit(invitation: ProjectUserInvitationUserInvitation) {
+    this.showEdit.emit(invitation);
+  }
+
   public doShowConfirmRemove(invitation: ProjectUserInvitationUserInvitation) {
     this.showConfirmRemove.emit(invitation);
   }

@@ -28,6 +28,7 @@
   <ng-container matColumnDef="options">
     <mat-header-cell *matHeaderCellDef></mat-header-cell>
     <mat-cell *matCellDef="let projectUserInvitation">
+      <button mat-icon-button (click)="doShowEdit(projectUserInvitation)"><mat-icon>edit</mat-icon></button>
       <button mat-icon-button (click)="doShowConfirmRemove(projectUserInvitation)"><mat-icon>delete</mat-icon></button>
     </mat-cell>
   </ng-container>

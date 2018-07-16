@@ -1210,7 +1210,7 @@ namespace Raccord.Data.EntityFramework.Migrations
                     b.ToTable("Projects");
                 });
 
-            modelBuilder.Entity("Raccord.Domain.Model.SceneProperties.DayNight", b =>
+            modelBuilder.Entity("Raccord.Domain.Model.SceneProperties.SceneIntro", b =>
                 {
                     b.Property<long>("ID")
                         .ValueGeneratedOnAdd();
@@ -1237,10 +1237,10 @@ namespace Raccord.Data.EntityFramework.Migrations
 
                     b.HasIndex("ScriptUploadID");
 
-                    b.ToTable("DayNights");
+                    b.ToTable("SceneIntros");
                 });
 
-            modelBuilder.Entity("Raccord.Domain.Model.SceneProperties.IntExt", b =>
+            modelBuilder.Entity("Raccord.Domain.Model.SceneProperties.TimeOfDay", b =>
                 {
                     b.Property<long>("ID")
                         .ValueGeneratedOnAdd();
@@ -1267,7 +1267,7 @@ namespace Raccord.Data.EntityFramework.Migrations
 
                     b.HasIndex("ScriptUploadID");
 
-                    b.ToTable("IntExts");
+                    b.ToTable("TimeOfDays");
                 });
 
             modelBuilder.Entity("Raccord.Domain.Model.Scenes.Actions.SceneAction", b =>
@@ -1335,15 +1335,13 @@ namespace Raccord.Data.EntityFramework.Migrations
                         .ValueGeneratedOnAdd()
                         .HasDefaultValueSql("now()");
 
-                    b.Property<long?>("DayNightID");
-
-                    b.Property<long?>("IntExtID");
-
                     b.Property<string>("Number");
 
                     b.Property<int>("PageLength");
 
                     b.Property<long>("ProjectID");
+
+                    b.Property<long?>("SceneIntroID");
 
                     b.Property<long?>("ScriptLocationID");
 
@@ -1353,6 +1351,8 @@ namespace Raccord.Data.EntityFramework.Migrations
 
                     b.Property<string>("Summary");
 
+                    b.Property<long?>("TimeOfDayID");
+
                     b.Property<TimeSpan>("Timing");
 
                     b.Property<DateTimeOffset>("UpdatedAt")
@@ -1361,15 +1361,15 @@ namespace Raccord.Data.EntityFramework.Migrations
 
                     b.HasKey("ID");
 
-                    b.HasIndex("DayNightID");
-
-                    b.HasIndex("IntExtID");
-
                     b.HasIndex("ProjectID");
+
+                    b.HasIndex("SceneIntroID");
 
                     b.HasIndex("ScriptLocationID");
 
                     b.HasIndex("ScriptUploadID");
+
+                    b.HasIndex("TimeOfDayID");
 
                     b.ToTable("Scenes");
                 });
@@ -2380,7 +2380,7 @@ namespace Raccord.Data.EntityFramework.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("Raccord.Domain.Model.SceneProperties.DayNight", b =>
+            modelBuilder.Entity("Raccord.Domain.Model.SceneProperties.SceneIntro", b =>
                 {
                     b.HasOne("Raccord.Domain.Model.Projects.Project", "Project")
                         .WithMany()
@@ -2392,7 +2392,7 @@ namespace Raccord.Data.EntityFramework.Migrations
                         .HasForeignKey("ScriptUploadID");
                 });
 
-            modelBuilder.Entity("Raccord.Domain.Model.SceneProperties.IntExt", b =>
+            modelBuilder.Entity("Raccord.Domain.Model.SceneProperties.TimeOfDay", b =>
                 {
                     b.HasOne("Raccord.Domain.Model.Projects.Project", "Project")
                         .WithMany()
@@ -2427,18 +2427,14 @@ namespace Raccord.Data.EntityFramework.Migrations
 
             modelBuilder.Entity("Raccord.Domain.Model.Scenes.Scene", b =>
                 {
-                    b.HasOne("Raccord.Domain.Model.SceneProperties.DayNight", "DayNight")
-                        .WithMany("Scenes")
-                        .HasForeignKey("DayNightID");
-
-                    b.HasOne("Raccord.Domain.Model.SceneProperties.IntExt", "IntExt")
-                        .WithMany("Scenes")
-                        .HasForeignKey("IntExtID");
-
                     b.HasOne("Raccord.Domain.Model.Projects.Project", "Project")
                         .WithMany()
                         .HasForeignKey("ProjectID")
                         .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Raccord.Domain.Model.SceneProperties.SceneIntro", "SceneIntro")
+                        .WithMany("Scenes")
+                        .HasForeignKey("SceneIntroID");
 
                     b.HasOne("Raccord.Domain.Model.ScriptLocations.ScriptLocation", "ScriptLocation")
                         .WithMany("Scenes")
@@ -2447,6 +2443,10 @@ namespace Raccord.Data.EntityFramework.Migrations
                     b.HasOne("Raccord.Domain.Model.ScriptUploads.ScriptUpload", "ScriptUpload")
                         .WithMany("Scenes")
                         .HasForeignKey("ScriptUploadID");
+
+                    b.HasOne("Raccord.Domain.Model.SceneProperties.TimeOfDay", "TimeOfDay")
+                        .WithMany("Scenes")
+                        .HasForeignKey("TimeOfDayID");
                 });
 
             modelBuilder.Entity("Raccord.Domain.Model.Scheduling.ScheduleCharacter", b =>

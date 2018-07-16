@@ -6,8 +6,9 @@ import {
   ProjectUserProject
 } from '../../../../../../../shared/children/users';
 import {
-  AdminAddProjectRoleDialogComponent,
-  AdminChooseProjectRoleDialogComponent
+  AdminAddProjectAndRoleDialogComponent,
+  AdminChooseProjectAndRoleDialogComponent,
+  AdminEditProjectRoleDialogComponent
 } from '../../../../../..';
 import { LoadingWrapperService } from '../../../../../../../shared/service/loading-wrapper.service';
 import { DialogService } from '../../../../../../../shared/service/dialog.service';
@@ -37,7 +38,7 @@ export class AdminUserProjectUsersComponent {
   ) {}
 
   public showAddProject() {
-    const addProjectDialog = this._dialog.open(AdminAddProjectRoleDialogComponent, {data:
+    const addProjectDialog = this._dialog.open(AdminAddProjectAndRoleDialogComponent, {data:
     {
         projectRoles: this.projectRoles
     }});
@@ -49,7 +50,7 @@ export class AdminUserProjectUsersComponent {
   }
 
   public showLinkProject() {
-    const linkProjectDialog = this._dialog.open(AdminChooseProjectRoleDialogComponent, {data:
+    const linkProjectDialog = this._dialog.open(AdminChooseProjectAndRoleDialogComponent, {data:
     {
         projectRoles: this.projectRoles
     }});
@@ -67,6 +68,36 @@ export class AdminUserProjectUsersComponent {
     this._dialogService.confirm(
       `Are you sure you want to remove ${projectUser.project.title}?`,
       () => this.removeProjectUser(projectUser.id)
+    );
+  }
+
+  public showEditProjectUser(projectUser: ProjectUserProject) {
+    const editProjectDialog = this._dialog.open(AdminEditProjectRoleDialogComponent, {data:
+    {
+        chosenRoleId: projectUser.projectRole.id,
+        title: 'Edit Project User',
+        projectRoles: this.projectRoles
+    }});
+    editProjectDialog.afterClosed().subscribe((returnedInfo: {roleId?: number}) => {
+      if (returnedInfo) {
+        const editProjectUser = new ProjectUser({
+          id: projectUser.id,
+          projectID: projectUser.project.id,
+          userID: this.userId,
+          roleID: returnedInfo.roleId
+        });
+        this.postProjectUser(editProjectUser);
+      }
+    });
+  }
+
+  private postProjectUser(projectUser: ProjectUser) {
+
+    this._loadingWrapperService.Load(
+      this._adminProjectUserHttpService.post(projectUser),
+      () => {
+        this.getProjects();
+      }
     );
   }
 

@@ -6,9 +6,9 @@ namespace Raccord.Application.Core.Services.Scenes
     // Dto to filter scenes
   public class SceneFilterRequestDto
   {
-    private IEnumerable<long> _intExtIDs;
+    private IEnumerable<long> _sceneIntroIDs;
     private IEnumerable<long> _scriptLocationIDs;
-    private IEnumerable<long> _dayNightIDs;
+    private IEnumerable<long> _timeOfDayIDs;
     private IEnumerable<long> _locationSetIDs;
     private IEnumerable<long> _locationIDs;
     private IEnumerable<long> _characterIDs;
@@ -28,15 +28,15 @@ namespace Raccord.Application.Core.Services.Scenes
 
     public int? MaxPageLength { get; set; }
 
-    public IEnumerable<long> IntExtIDs
+    public IEnumerable<long> SceneIntroIDs
     {
       get
       {
-        return _intExtIDs ?? (_intExtIDs = new List<long>());
+        return _sceneIntroIDs ?? new List<long>();
       }
       set
       {
-        _intExtIDs = value;
+        _sceneIntroIDs = value;
       }
     }
     
@@ -52,15 +52,15 @@ namespace Raccord.Application.Core.Services.Scenes
       }
     }
     
-    public IEnumerable<long> DayNightIDs
+    public IEnumerable<long> TimeOfDayIDs
     {
       get
       {
-        return _dayNightIDs ?? (_dayNightIDs = new List<long>());
+        return _timeOfDayIDs ?? new List<long>();
       }
       set
       {
-        _dayNightIDs = value;
+        _timeOfDayIDs = value;
       }
     }
     

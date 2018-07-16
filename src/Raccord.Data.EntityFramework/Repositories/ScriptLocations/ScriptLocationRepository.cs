@@ -50,9 +50,9 @@ namespace Raccord.Data.EntityFramework.Repositories.ScriptLocations
             IQueryable<ScriptLocation> query = _context.Set<ScriptLocation>();
 
             return query.Include(l=> l.Scenes)
-                        .ThenInclude(s=> s.IntExt)
+                        .ThenInclude(s=> s.SceneIntro)
                         .Include(l=> l.Scenes)
-                        .ThenInclude(s=> s.DayNight)
+                        .ThenInclude(s=> s.TimeOfDay)
                         .Include(l=> l.ImageLocations)
                         .ThenInclude(il=> il.Image)
                         .Include(l=> l.LocationSets)

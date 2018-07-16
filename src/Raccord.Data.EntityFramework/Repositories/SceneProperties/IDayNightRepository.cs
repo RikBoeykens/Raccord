@@ -4,12 +4,12 @@ using System.Collections.Generic;
 namespace Raccord.Data.EntityFramework.Repositories.SceneProperties
 {
     // Interface defining a repository for Int/Ext
-    public interface IDayNightRepository : IBaseRepository<DayNight, long>
+    public interface ITimeOfDayRepository : IBaseRepository<TimeOfDay, long>
     {
-        IEnumerable<DayNight> GetAllForProject(long projectID);
-        DayNight GetFull(long ID);
-        DayNight GetSummary(long ID);
+        IEnumerable<TimeOfDay> GetAllForProject(long projectID);
+        TimeOfDay GetFull(long ID);
+        TimeOfDay GetSummary(long ID);
         int SearchCount(string searchText, long? projectID, string userID, bool isAdmin, long[] excludeIds);
-        IEnumerable<DayNight> Search(string searchText, long? projectID, string userID, bool isAdmin, long[] excludeIds);
+        IEnumerable<TimeOfDay> Search(string searchText, long? projectID, string userID, bool isAdmin, long[] excludeIds);
     }
 }

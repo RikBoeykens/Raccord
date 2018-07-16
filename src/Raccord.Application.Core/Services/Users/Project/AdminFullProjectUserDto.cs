@@ -10,5 +10,18 @@ namespace Raccord.Application.Core.Services.Users.Project
 {
   public class AdminFullProjectUserDto : FullProjectUserDto
   {
+    private new AdminFullCastMemberDto _castMember;
+
+    public new AdminFullCastMemberDto CastMember
+    {
+      get
+      {
+        return _castMember ?? new AdminFullCastMemberDto();
+      }
+      set
+      {
+        _castMember = value;
+      }
+    }
   }
 }

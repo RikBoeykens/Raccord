@@ -12,5 +12,18 @@ namespace Raccord.API.ViewModels.Users.Projects
     // vm to represent a crew user
     public class AdminFullProjectUserViewModel : FullProjectUserViewModel
     {
+        private new AdminFullCastMemberViewModel _castMember;
+
+        public new AdminFullCastMemberViewModel CastMember
+        {
+        get
+        {
+            return _castMember ?? new AdminFullCastMemberViewModel();
+        }
+        set
+        {
+            _castMember = value;
+        }
+        }
     }
 }

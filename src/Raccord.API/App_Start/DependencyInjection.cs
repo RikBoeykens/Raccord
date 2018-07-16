@@ -177,17 +177,17 @@ namespace Raccord.API
             services.AddTransient<ISceneService, SceneService>();
             services.AddTransient<ISceneSearchEngineService, SceneSearchEngineService>();
             
-            services.AddTransient<IIntExtRepository, IntExtRepository>();
-            services.AddTransient<IIntExtService, IntExtService>();
-            services.AddTransient<IIntExtSearchEngineService, IntExtSearchEngineService>();
+            services.AddTransient<ISceneIntroRepository, SceneIntroRepository>();
+            services.AddTransient<ISceneIntroService, SceneIntroService>();
+            services.AddTransient<ISceneIntroSearchEngineService, SceneIntroSearchEngineService>();
             
             services.AddTransient<IScriptLocationRepository, ScriptLocationRepository>();
             services.AddTransient<IScriptLocationService, ScriptLocationService>();
             services.AddTransient<IScriptLocationSearchEngineService, ScriptLocationSearchEngineService>();
             
-            services.AddTransient<IDayNightRepository, DayNightRepository>();
-            services.AddTransient<IDayNightService, DayNightService>();
-            services.AddTransient<IDayNightSearchEngineService, DayNightSearchEngineService>();
+            services.AddTransient<ITimeOfDayRepository, TimeOfDayRepository>();
+            services.AddTransient<ITimeOfDayService, TimeOfDayService>();
+            services.AddTransient<ITimeOfDaySearchEngineService, TimeOfDaySearchEngineService>();
             
             services.AddTransient<IImageRepository, ImageRepository>();
             services.AddTransient<IImageService, ImageService>();

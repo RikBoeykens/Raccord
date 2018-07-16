@@ -46,9 +46,9 @@ namespace Raccord.Application.Services.Scenes
                 Summary = scene.Summary,
                 PageLength = scene.PageLength,
                 Timing = scene.Timing,
-                IntExt = scene.IntExt.Translate(),
+                SceneIntro = scene.SceneIntro.Translate(),
                 ScriptLocation = scene.ScriptLocation.Translate(),
-                DayNight = scene.DayNight.Translate(),
+                TimeOfDay = scene.TimeOfDay.Translate(),
                 Images = scene.ImageScenes.Select(i=> i.TranslateImage()),
                 Characters = scene.CharacterScenes.Select(i=> i.TranslateCharacter()),
                 BreakdownInfo = breakdownDto,
@@ -69,9 +69,9 @@ namespace Raccord.Application.Services.Scenes
                 Summary = scene.Summary,
                 PageLength = scene.PageLength,
                 Timing = scene.Timing,
-                IntExt = scene.IntExt.Translate(),
+                SceneIntro = scene.SceneIntro.Translate(),
                 ScriptLocation = scene.ScriptLocation.Translate(),
-                DayNight = scene.DayNight.Translate(),
+                TimeOfDay = scene.TimeOfDay.Translate(),
                 /*PrimaryImage = scene.ImageScenes.FirstOrDefault(i=> i.IsPrimaryImage)?.Image.Translate(),*/
                 ProjectID = scene.ProjectID,
             };
@@ -88,9 +88,9 @@ namespace Raccord.Application.Services.Scenes
                 Summary = scene.Summary,
                 PageLength = scene.PageLength,
                 Timing = scene.Timing,
-                IntExt = scene.IntExt.Translate(),
+                SceneIntro = scene.SceneIntro.Translate(),
                 ScriptLocation = scene.ScriptLocation.Translate(),
-                DayNight = scene.DayNight.Translate(),
+                TimeOfDay = scene.TimeOfDay.Translate(),
                 ProjectID = scene.ProjectID,
             };
 
@@ -106,9 +106,9 @@ namespace Raccord.Application.Services.Scenes
                 Summary = imageScene.Scene.Summary,
                 PageLength = imageScene.Scene.PageLength,
                 Timing = imageScene.Scene.Timing,
-                IntExt = imageScene.Scene.IntExt.Translate(),
+                SceneIntro = imageScene.Scene.SceneIntro.Translate(),
                 ScriptLocation = imageScene.Scene.ScriptLocation.Translate(),
-                DayNight = imageScene.Scene.DayNight.Translate(),
+                TimeOfDay = imageScene.Scene.TimeOfDay.Translate(),
                 ProjectID = imageScene.Scene.ProjectID,
                 LinkID = imageScene.ID,
             };
@@ -125,9 +125,9 @@ namespace Raccord.Application.Services.Scenes
                 Summary = characterScene.Scene.Summary,
                 PageLength = characterScene.Scene.PageLength,
                 Timing = characterScene.Scene.Timing,
-                IntExt = characterScene.Scene.IntExt.Translate(),
+                SceneIntro = characterScene.Scene.SceneIntro.Translate(),
                 ScriptLocation = characterScene.Scene.ScriptLocation.Translate(),
-                DayNight = characterScene.Scene.DayNight.Translate(),
+                TimeOfDay = characterScene.Scene.TimeOfDay.Translate(),
                 ProjectID = characterScene.Scene.ProjectID,
                 PrimaryImage = characterScene.Scene.ImageScenes.FirstOrDefault(i=> i.IsPrimaryImage)?.Image.Translate(),
                 LinkID = characterScene.ID,
@@ -145,9 +145,9 @@ namespace Raccord.Application.Services.Scenes
                 Summary = breakdownItemScene.Scene.Summary,
                 PageLength = breakdownItemScene.Scene.PageLength,
                 Timing = breakdownItemScene.Scene.Timing,
-                IntExt = breakdownItemScene.Scene.IntExt.Translate(),
+                SceneIntro = breakdownItemScene.Scene.SceneIntro.Translate(),
                 ScriptLocation = breakdownItemScene.Scene.ScriptLocation.Translate(),
-                DayNight = breakdownItemScene.Scene.DayNight.Translate(),
+                TimeOfDay = breakdownItemScene.Scene.TimeOfDay.Translate(),
                 ProjectID = breakdownItemScene.Scene.ProjectID,
                 PrimaryImage = breakdownItemScene.Scene.ImageScenes.FirstOrDefault(i=> i.IsPrimaryImage)?.Image.Translate(),
                 LinkID = breakdownItemScene.ID,
@@ -165,9 +165,9 @@ namespace Raccord.Application.Services.Scenes
                 Summary = scheduleScene.Scene.Summary,
                 Timing = scheduleScene.Scene.Timing,
                 PageLength = scheduleScene.Scene.PageLength,
-                IntExt = scheduleScene.Scene.IntExt.Translate(),
+                SceneIntro = scheduleScene.Scene.SceneIntro.Translate(),
                 ScriptLocation = scheduleScene.Scene.ScriptLocation.Translate(),
-                DayNight = scheduleScene.Scene.DayNight.Translate(),
+                TimeOfDay = scheduleScene.Scene.TimeOfDay.Translate(),
                 ProjectID = scheduleScene.Scene.ProjectID,
                 PrimaryImage = scheduleScene.Scene.ImageScenes.FirstOrDefault(i=> i.IsPrimaryImage)?.Image.Translate(),
                 LinkID = scheduleScene.ID,
@@ -195,11 +195,11 @@ namespace Raccord.Application.Services.Scenes
 
         public static string GetDisplaySummary(this Scene scene)
         {
-            if(!scene.IntExtID.HasValue || !scene.ScriptLocationID.HasValue || !scene.DayNightID.HasValue)
+            if(!scene.SceneIntroID.HasValue || !scene.ScriptLocationID.HasValue || !scene.TimeOfDayID.HasValue)
             {
                 return $"{scene.Number}. {scene.Summary}";
             }
-            return $"{scene.Number}. {scene.IntExt.Name} {scene.ScriptLocation.Name} {scene.DayNight.Name} - {scene.Summary}";
+            return $"{scene.Number}. {scene.SceneIntro.Name} {scene.ScriptLocation.Name} {scene.TimeOfDay.Name} - {scene.Summary}";
         }
     }
 }

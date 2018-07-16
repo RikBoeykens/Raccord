@@ -8,6 +8,8 @@
         <user-avatar [user]="projectUser.user"></user-avatar>
         {{getFullName()}}
       </h1>
+      <button mat-mini-fab
+        (click)="showEditProjectUser()"><mat-icon>edit</mat-icon></button>
     </div>
   </div>
   <mat-card class="raccord-label-info">
@@ -39,4 +41,9 @@
       </span>
     </div>
   </mat-card>
+  <admin-project-user-cast-member 
+    [castMember]="projectUser.castMember"
+    [projectId]="projectUser.project.id"
+    [projectUserId]="projectUser.id">
+  </admin-project-user-cast-member>
 </div>
