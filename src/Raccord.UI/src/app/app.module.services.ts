@@ -4,6 +4,9 @@ import {
   AdminCrewUnitHttpService,
   AdminProjectRoleHttpService,
   AdminProjectRolesResolve,
+  AdminProjectUserInvitationCastHttpService,
+  AdminCrewUnitInvitationMemberCrewMembersHttpService,
+  AdminCrewUnitInvitationMemberHttpService,
   AdminProjectUserInvitationHttpService,
   AdminProjectUserInvitationResolve,
   AdminProjectUserCastHttpService,
@@ -25,6 +28,10 @@ import {
   AdminUserInvitationsResolve,
   AdminUserInvitationResolve
 } from './admin';
+import {
+  InvitationHttpService,
+  InvitationResolve
+} from './invitations';
 import {
   LoadingService
 } from './loading';
@@ -57,7 +64,8 @@ import {
   ProjectHttpService
 } from './shared/children/projects';
 import {
-  UserProfileHttpService
+  UserProfileHttpService,
+  UserProfileResolve
 } from './shared/children/users';
 import {
   LoadingWrapperService,
@@ -70,6 +78,9 @@ export const SERVICES = [
   AdminCrewUnitHttpService,
   AdminProjectRoleHttpService,
   AdminProjectRolesResolve,
+  AdminProjectUserInvitationCastHttpService,
+  AdminCrewUnitInvitationMemberCrewMembersHttpService,
+  AdminCrewUnitInvitationMemberHttpService,
   AdminProjectUserInvitationHttpService,
   AdminProjectUserInvitationResolve,
   AdminProjectUserHttpService,
@@ -90,6 +101,8 @@ export const SERVICES = [
   AdminDashboardHttpService,
   AdminDashboardResolve,
   AdminGuard,
+  InvitationHttpService,
+  InvitationResolve,
   LoadingService,
   SidenavService,
   CalendarHttpService,
@@ -106,6 +119,7 @@ export const SERVICES = [
   ShortPagedProjectsResolve,
   PagedProjectsResolve,
   UserProfileHttpService,
+  UserProfileResolve,
   LoadingWrapperService,
   DialogService
 ];

@@ -1,0 +1,28 @@
+<div class="external-screen-container">
+    <h1>Register</h1>
+    <form id="invitation-form"
+          #invitationForm = "ngForm"
+          (ngSubmit)="createUser()">
+        <div fxLayout="row">
+            <mat-form-field fxFlex="50%">
+                <input matInput placeholder="First Name" id="request_firstname" required [(ngModel)]="request.firstName" #firstName="ngModel" name="request_firstname">
+            </mat-form-field>
+            <mat-form-field fxFlex="50%">
+                <input matInput placeholder="Last Name" id="request_lastname" required [(ngModel)]="request.lastName" #lastname="ngModel" name="request_lastname">
+            </mat-form-field>
+        </div>
+        <div fxLayout="row">
+            <mat-form-field fxFlex="50%">
+                <input matInput type="password" placeholder="Password" id="request_password" required [(ngModel)]="request.password" #password="ngModel" name="request_password">
+            </mat-form-field>
+        </div>
+        <div fxLayout="row">
+            <mat-form-field fxFlex="50%">
+                <input matInput type="password" placeholder="Confirm" id="confirm_password" required [(ngModel)]="confirmPassword" #confirmpassword="ngModel" name="confirm_password">
+            </mat-form-field>
+        </div>
+        <div fxLayout="row">
+            <button mat-raised-button type="submit" [disabled]="!invitationForm.form.valid||!passwordIsValid()||!passwordsdMatch()">Register</button>
+        </div>
+    </form>
+</div>

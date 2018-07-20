@@ -40,7 +40,7 @@ export class RouteSettings {
   public static get SCENE(): string { return 'scene'; }
   public static get WIZARD(): string { return 'wizard'; }
   public static get NAV(): string { return 'nav'; }
-  public static get INVITATIONS(): string { return 'userinvitations'; }
+  public static get INVITATIONS(): string { return 'invitations'; }
 
   public static get ADD(): string { return 'add'; }
   public static get EDIT(): string { return 'edit'; }

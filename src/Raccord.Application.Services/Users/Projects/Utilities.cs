@@ -21,7 +21,7 @@ namespace Raccord.Application.Services.Users.Projects
             return new FullProjectUserDto
             {
                 ID = projectUser.ID,
-                User = projectUser.User.Translate(),
+                User = projectUser.User.TranslateSummary(),
                 Project = projectUser.Project.Translate(),
                 CastMember = projectUser.CastMember.Translate(),
                 ProjectRole = projectUser.Role.Translate(),
@@ -33,7 +33,7 @@ namespace Raccord.Application.Services.Users.Projects
             return new AdminFullProjectUserDto
             {
                 ID = projectUser.ID,
-                User = projectUser.User.Translate(),
+                User = projectUser.User.TranslateSummary(),
                 Project = projectUser.Project.Translate(),
                 CastMember = projectUser.CastMember.TranslateFullAdmin(),
                 ProjectRole = projectUser.Role.Translate(),

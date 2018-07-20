@@ -1,0 +1,65 @@
+<div class="raccord-narrow-container">
+  <div class="raccord-page-header">
+    <div fxLayout="row">
+      <h1 class="raccord-header-title">
+        My Profile
+      </h1>
+      <button mat-mini-fab
+        (click)="showEditUserProfile()"><mat-icon>edit</mat-icon></button>
+    </div>
+  </div>
+  <mat-card class="raccord-label-info">
+    <div fxLayout="row"
+      class="raccord-label-info-row">
+      <span fxFlex="50%" class="raccord-label">
+        First name
+      </span>
+      <span fxFlex="50%" class="raccord-info">
+        {{userProfile.firstName}}
+      </span>
+    </div>
+    <div fxLayout="row"
+    class="raccord-label-info-row">
+      <span fxFlex="50%" class="raccord-label">
+        Last name
+      </span>
+      <span fxFlex="50%" class="raccord-info">
+        {{userProfile.lastName}}
+      </span>
+    </div>
+    <div fxLayout="row"
+      class="raccord-label-info-row">
+      <span fxFlex="50%" class="raccord-label">
+          Preferred email
+      </span>
+      <span fxFlex="50%" class="raccord-info">
+        <mail-link [email]="userProfile.preferredEmail"></mail-link>
+      </span>
+    </div>
+    <div fxLayout="row"
+      class="raccord-label-info-row">
+      <span fxFlex="50%" class="raccord-label">
+        Telephone
+      </span>
+      <span fxFlex="50%" class="raccord-info">
+        <phone-link [telephone]="userProfile.telephone"></phone-link>
+      </span>
+    </div>
+  </mat-card>
+  <div class="raccord-sub-header"
+    fxLayout="row">
+    <h2>Profile Image</h2>
+    <button mat-icon-button (click)="showEditProfileImage()">
+      <mat-icon *ngIf="!userProfile.hasImage">add</mat-icon>
+      <mat-icon *ngIf="userProfile.hasImage">edit</mat-icon>
+    </button>
+    <button mat-icon-button *ngIf="userProfile.hasImage" (click)="showConfirmRemoveImage()">
+      <mat-icon>delete</mat-icon>
+    </button>
+  </div>
+  <user-avatar
+    [userId]="userProfile.id" 
+    [fullName]="getFullName()" 
+    [hasImage]="userProfile.hasImage">
+  </user-avatar>
+</div>

@@ -6,7 +6,6 @@ import {
   CrewUnitSummary,
   CrewDepartment
 } from '../../../../../../../shared/children/crew';
-import { User } from '../../../../../../../shared/children/users';
 import {
   AdminChooseCrewUnitDialogComponent,
   AdminAddCrewUnitMemberCrewMemberDialogComponent,
@@ -24,6 +23,7 @@ import {
 import {
   AdminCrewUnitInvitationMemberCrewMembersHttpService
 } from '../../service/admin-crew-unit-invitation-member-crew-member-http.service';
+import { UserInvitation } from '../../../../../../../shared/children/user-invitations';
 
 @Component({
   selector: 'admin-project-user-invitation-crew',
@@ -31,9 +31,9 @@ import {
 })
 export class AdminProjectUserInvitationCrewComponent {
   @Input() public crewUnits: ProjectLinkCrewUnit[];
-  @Input() public projectUserId: number;
+  @Input() public projectUserInvitationId: number;
   @Input() public projectId: number;
-  @Input() public user: User;
+  @Input() public userInvitation: UserInvitation;
 
   constructor(
     private _dialog: MatDialog,
@@ -77,7 +77,10 @@ export class AdminProjectUserInvitationCrewComponent {
 
   private linkCrewUnit(crewUnitId: number) {
     this._loadingWrapperService.Load(
-      this._adminCrewUnitInvitationMemberHttpService.addLink(this.projectUserId, crewUnitId),
+      this._adminCrewUnitInvitationMemberHttpService.addLink(
+        this.projectUserInvitationId,
+        crewUnitId
+      ),
       () => this.getCrewUnits()
     );
   }
@@ -108,7 +111,7 @@ export class AdminProjectUserInvitationCrewComponent {
 
   private getCrewUnits() {
     this._loadingWrapperService.Load(
-      this._adminCrewUnitInvitationMemberHttpService.getCrewUnits(this.projectUserId),
+      this._adminCrewUnitInvitationMemberHttpService.getCrewUnits(this.projectUserInvitationId),
       (crewUnits: ProjectLinkCrewUnit[]) => this.crewUnits = crewUnits
     );
   }

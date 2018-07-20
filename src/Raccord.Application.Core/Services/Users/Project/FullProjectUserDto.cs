@@ -10,7 +10,7 @@ namespace Raccord.Application.Core.Services.Users.Project
 {
     public class FullProjectUserDto
     {
-        private UserDto _user;
+        private UserSummaryDto _user;
         private ProjectDto _project;
         protected CastMemberDto _castMember;
         private ProjectRoleDto _role;
@@ -32,11 +32,11 @@ namespace Raccord.Application.Core.Services.Users.Project
         }
 
         // Linked user
-        public UserDto User
+        public UserSummaryDto User
         {
             get
             {
-                return _user ?? (_user = new UserDto());
+                return _user ?? (_user = new UserSummaryDto());
             }
             set
             {

@@ -9,6 +9,7 @@ export { UserProfileSummary } from './children/profile/model/user-profile-summar
 export { UserProfile } from './children/profile/model/user-profile.model';
 
 export { UserProfileHttpService } from './children/profile/service/user-profile-http.service';
+export { UserProfileResolve } from './children/profile/service/user-profile-resolve.service';
 
 // tslint:disable-next-line:max-line-length
 export { ProjectPermissionEnum } from './children/project-permissions/enums/project-permission.enum';

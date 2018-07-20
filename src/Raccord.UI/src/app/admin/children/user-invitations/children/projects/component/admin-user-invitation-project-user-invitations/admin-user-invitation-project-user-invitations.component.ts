@@ -73,7 +73,7 @@ export class AdminUserInvitationProjectUserInvitationsComponent {
     );
   }
 
-  public showEditProjectUser(projectUserInvitation: ProjectUserInvitationProject) {
+  public showEditProjectUserInvitation(projectUserInvitation: ProjectUserInvitationProject) {
     const editProjectDialog = this._dialog.open(AdminEditProjectRoleDialogComponent, {data:
     {
         chosenRoleId: projectUserInvitation.projectRole.id,

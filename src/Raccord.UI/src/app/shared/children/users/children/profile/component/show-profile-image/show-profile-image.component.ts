@@ -4,6 +4,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { Base64Image, ImageHelpers } from '../../../../../..';
 import { UserProfileHttpService } from '../../service/user-profile-http.service';
 import { UserProfileSummary } from '../../../..';
+import { ColourHelpers } from '../../../../../../helpers/colour.helpers';
 
 @Component({
     selector: 'show-profile-image',
@@ -47,6 +48,10 @@ export class ShowProfileImageComponent implements OnInit {
             return `${this.user.firstName} ${this.user.lastName}`;
         }
         return this.fullName;
+    }
+
+    public getBgColour() {
+        return ColourHelpers.getColour(this.getTitle());
     }
 
     private noUserDefined(): boolean {

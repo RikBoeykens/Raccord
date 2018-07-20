@@ -43,6 +43,16 @@ import {
   AuthGuard,
   LoginComponent
 } from './security';
+import {
+  CreateUserFromInvitationComponent,
+  InvitationResolve
+} from './invitations';
+import {
+  UserProfileDashboardComponent
+} from './profile';
+import {
+  UserProfileResolve
+} from './shared/children/users';
 
 export const ROUTES: Routes = [
   {
@@ -152,7 +162,7 @@ export const ROUTES: Routes = [
             path: ':projectUserInvitationId',
             component: AdminProjectUserInvitationDashboardComponent,
             resolve: {
-              projectUser: AdminProjectUserInvitationResolve,
+              projectUserInvitation: AdminProjectUserInvitationResolve,
               projectRoles: AdminProjectRolesResolve
             }
           }
@@ -180,6 +190,20 @@ export const ROUTES: Routes = [
         }
       }
     ]
+  },
+  {
+    path: `${RouteSettings.INVITATIONS}/:invitationId`,
+    component: CreateUserFromInvitationComponent,
+    resolve: {
+      invitation: InvitationResolve
+    }
+  },
+  {
+    path: RouteSettings.PROFILE,
+    component: UserProfileDashboardComponent,
+    resolve: {
+      userProfile: UserProfileResolve
+    }
   },
   {
     path: RouteSettings.ERROR,

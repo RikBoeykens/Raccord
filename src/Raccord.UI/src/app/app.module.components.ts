@@ -39,7 +39,8 @@ import {
   AdminUsersListComponent,
   AdminUsersTableComponent,
   AdminLandingComponent,
-  AdminSearchEntityComponent
+  AdminSearchEntityComponent,
+  AdminAddUserInvitationDialogComponent
 } from './admin';
 import {
   CalendarComponent,
@@ -49,12 +50,19 @@ import {
   DashboardComponent,
   DashboardCalendarComponent
 } from './dashboard';
+import {
+  CreateUserFromInvitationComponent
+} from './invitations';
 import { LoadingComponent } from './loading';
 import {
   RaccordToolbarComponent,
   RaccordSidenavComponent
 } from './navigation';
 import { NoContentComponent } from './no-content';
+import {
+  EditUserProfileDialogComponent,
+  UserProfileDashboardComponent
+} from './profile';
 import {
   ProjectCalendarComponent,
   ProjectsListComponent,
@@ -76,6 +84,7 @@ import {
   UserAvatarComponent
 } from './shared/children/users';
 import {
+  AddImageDialogComponent,
   BackLinkComponent,
   ConfirmDialogComponent,
   ErrorComponent,
@@ -83,6 +92,7 @@ import {
   GenericCardComponent,
   MailLinkComponent,
   MoreActionComponent,
+  PhoneLinkComponent,
   PlaceholderImageComponent
 } from './shared';
 
@@ -103,6 +113,7 @@ export const COMPONENTS = [
   AdminProjectsTableComponent,
   AdminUserInvitationProjectUserInvitationsComponent,
   AdminUserInvitationProjectUserInvitationsTableComponent,
+  AdminAddUserInvitationDialogComponent,
   AdminUserInvitationCardComponent,
   AdminUserInvitationDashboardComponent,
   AdminUserInvitationsListComponent,
@@ -119,10 +130,12 @@ export const COMPONENTS = [
   CalendarHeaderComponent,
   DashboardComponent,
   DashboardCalendarComponent,
+  CreateUserFromInvitationComponent,
   LoadingComponent,
   RaccordToolbarComponent,
   RaccordSidenavComponent,
   NoContentComponent,
+  UserProfileDashboardComponent,
   ProjectCalendarComponent,
   ProjectsListComponent,
   ProjectDashboardComponent,
@@ -139,6 +152,7 @@ export const COMPONENTS = [
   GenericCardComponent,
   MailLinkComponent,
   MoreActionComponent,
+  PhoneLinkComponent,
   PlaceholderImageComponent
 ];
 
@@ -155,6 +169,9 @@ export const DIALOGS = [
   AdminAddProjectAndRoleDialogComponent,
   AdminChooseProjectAndRoleDialogComponent,
   AdminEditProjectDialogComponent,
+  AdminAddUserInvitationDialogComponent,
   AdminAddUserDialogComponent,
+  EditUserProfileDialogComponent,
+  AddImageDialogComponent,
   ConfirmDialogComponent
 ];

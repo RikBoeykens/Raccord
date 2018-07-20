@@ -13,7 +13,7 @@ namespace Raccord.API.ViewModels.Users.Projects
     public class FullProjectUserViewModel
     {
         private ProjectViewModel _project;
-        private UserViewModel _user;
+        private UserSummaryViewModel _user;
         protected CastMemberViewModel _castMember;
         private ProjectRoleViewModel _projectRole;
         private IEnumerable<ProjectLinkCrewUnitViewModel> _crewUnits;
@@ -35,11 +35,11 @@ namespace Raccord.API.ViewModels.Users.Projects
         }
 
         // Linked user
-        public UserViewModel User
+        public UserSummaryViewModel User
         {
             get
             {
-                return _user ?? (_user = new UserViewModel());
+                return _user ?? (_user = new UserSummaryViewModel());
             }
             set
             {

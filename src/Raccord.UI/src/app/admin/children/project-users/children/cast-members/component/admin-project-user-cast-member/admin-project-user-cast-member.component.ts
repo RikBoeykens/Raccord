@@ -151,7 +151,7 @@ export class AdminProjectUserCastMemberComponent {
   }
 
   private getToAddCharacterIds(updatedCharacterIds: number[]): number[] {
-    if (!this.castMember) {
+    if (!this.castMember || !this.castMember.id) {
       return updatedCharacterIds;
     }
 
@@ -161,7 +161,7 @@ export class AdminProjectUserCastMemberComponent {
   }
 
   private getToRemoveCharacterIds(updatedCharacterIds: number[]): number[] {
-    if (!this.castMember) {
+    if (!this.castMember || !this.castMember.id) {
       return [];
     }
 
@@ -171,7 +171,7 @@ export class AdminProjectUserCastMemberComponent {
   }
 
   private getCastMember(castMemberId?: number) {
-    if (this.castMember) {
+    if (this.castMember && this.castMember.id) {
       castMemberId = this.castMember.id;
     }
     this._loadingWrapperService.Load(
