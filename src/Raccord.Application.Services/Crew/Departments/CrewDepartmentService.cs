@@ -28,5 +28,12 @@ namespace Raccord.Application.Services.Crew.Departments
             var departments = _crewDepartmentRepository.GetAllForUnit(unitID);
             return departments.Select(d=> d.TranslateFull());
         }
+
+        // Gets all callsheet scenes for a scene
+        public IEnumerable<CrewDepartmentDto> GetSummariesForUnit(long unitID)
+        {
+            var departments = _crewDepartmentRepository.GetAllForUnit(unitID);
+            return departments.Select(d=> d.Translate());
+        }
     }
 }

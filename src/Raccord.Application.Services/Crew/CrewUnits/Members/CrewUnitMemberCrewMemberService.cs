@@ -23,7 +23,7 @@ namespace Raccord.Application.Services.Crew.CrewUnits.Members
         {
           JobTitle = dto.JobTitle,
           DepartmentID = dto.DepartmentID,
-          CrewUnitMemberID = dto.CrewUnitMemberID
+          CrewUnitMemberID = dto.LinkID
         };
 
         _crewMemberRepository.Add(newCrewMember);

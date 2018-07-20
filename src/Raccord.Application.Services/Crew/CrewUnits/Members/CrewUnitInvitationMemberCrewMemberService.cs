@@ -17,13 +17,13 @@ namespace Raccord.Application.Services.Crew.CrewUnits.Members
         _crewMemberRepository = crewMemberRepository;
       }
 
-      public long Create(CreateCrewUnitInvitationMemberCrewMemberDto dto)
+      public long Create(CreateCrewUnitMemberCrewMemberDto dto)
       {
         var newCrewMember = new CrewMember
         {
           JobTitle = dto.JobTitle,
           DepartmentID = dto.DepartmentID,
-          CrewUnitInvitationMemberID = dto.CrewUnitInvitationMemberID
+          CrewUnitInvitationMemberID = dto.LinkID
         };
 
         _crewMemberRepository.Add(newCrewMember);

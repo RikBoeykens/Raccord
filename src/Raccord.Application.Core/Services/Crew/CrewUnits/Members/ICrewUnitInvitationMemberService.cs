@@ -8,7 +8,7 @@ namespace Raccord.Application.Core.Services.Crew.CrewUnits.Members
     // Interface for crew unit member functionality
     public interface ICrewUnitInvitationMemberService
     {
-        IEnumerable<ProjectUserCrewUnitDto> GetCrewUnits(long projectUserInvitationID);
+        IEnumerable<ProjectLinkCrewUnitDto> GetCrewUnits(long projectUserInvitationID);
 
         // Links a project user to a crew unit
         void AddLink(long projectUserInvitationID, long crewUnitID);

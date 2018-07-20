@@ -23,7 +23,7 @@ namespace Raccord.API.Controllers.Admin
 
         // POST api/crewunitinvitationmembercrewmembers
         [HttpPost]
-        public JsonResult Post([FromBody]CreateCrewUnitInvitationMemberCrewMemberViewModel vm)
+        public JsonResult Post([FromBody]CreateCrewUnitMemberCrewMemberViewModel vm)
         {
             var response = new JsonResponse();
 

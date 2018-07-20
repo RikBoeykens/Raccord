@@ -1,0 +1,29 @@
+<h3 mat-dialog-title>Add Invitation</h3>
+<form id="projects-add-crew-unit-member-crew-member-form"
+  #projectsAddCrewUnitMemberCrewMemberForm = "ngForm"
+  (ngSubmit)="submit()">
+  <mat-dialog-content>
+    <div fxLayout="row">
+      <mat-form-field>
+        <input required matInput placeholder="Job Title" [(ngModel)]="crewMemberInfo.jobTitle" name="jobtitle">
+      </mat-form-field>
+    </div>
+    <div fxLayout="row">
+      <mat-form-field>
+        <mat-select 
+          mdInput placeholder="Department" 
+          [(ngModel)]="crewMemberInfo.departmentID" 
+          #department="ngModel" 
+          required
+          name="department">
+          <mat-option [value]="">---</mat-option>
+          <mat-option *ngFor="let department of availableDepartments" [value]="department.id">{{department.name}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button mat-button type="submit" [disabled]="!projectsAddCrewUnitMemberCrewMemberForm.form.valid">Save</button>
+  </mat-dialog-actions>
+</form>

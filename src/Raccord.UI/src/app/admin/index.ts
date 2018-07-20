@@ -1,6 +1,32 @@
 import { AdminDashboard } from './model/admin-dashboard.model';
 
+// tslint:disable-next-line:max-line-length
+export { AdminChooseCastMemberDialogComponent } from './children/cast-members/component/admin-choose-cast-member-dialog/admin-choose-cast-member-dialog.component';
+
 export { AdminFullCastMember } from './children/cast-members/model/admin-full-cast-member.model';
+
+// tslint:disable-next-line:max-line-length
+export { AdminCastMemberHttpService } from './children/cast-members/service/admin-cast-member-http.service';
+
+// tslint:disable-next-line:max-line-length
+export { AdminChooseCharactersDialogComponent } from './children/characters/component/admin-choose-characters-dialog/admin-choose-characters-dialog.component';
+
+// tslint:disable-next-line:max-line-length
+export { AdminCrewDepartmentHttpService } from './children/crew/crew-departments/service/admin-crew-department-http.service';
+
+// tslint:disable-next-line:max-line-length
+export { AdminAddCrewUnitMemberCrewMemberDialogComponent } from './children/crew/crew-members/component/admin-add-crew-unit-member-crew-member-dialog/admin-add-crew-unit-member-crew-member-dialog.component';
+
+// tslint:disable-next-line:max-line-length
+export { CreateCrewUnitMemberCrewMember } from './children/crew/crew-members/model/create-crew-unit-member-crew-member.model';
+
+// tslint:disable-next-line:max-line-length
+export { AdminChooseCrewUnitDialogComponent } from './children/crew/crew-units/component/admin-choose-crew-unit-dialog/admin-choose-crew-unit-dialog.component';
+
+export { FullAdminCrewUnit } from './children/crew/crew-units/model/full-admin-crew-unit.model';
+
+// tslint:disable-next-line:max-line-length
+export { AdminCrewUnitHttpService } from './children/crew/crew-units/service/admin-crew-unit-http.service';
 
 // tslint:disable-next-line:max-line-length
 export { AdminEditProjectRoleDialogComponent } from './children/project-roles/component/admin-edit-project-role-dialog/admin-edit-project-role-dialog.component';
@@ -11,10 +37,44 @@ export { AdminProjectRoleHttpService } from './children/project-roles/service/ad
 export { AdminProjectRolesResolve } from './children/project-roles/service/admin-project-roles-resolve.service';
 
 // tslint:disable-next-line:max-line-length
+export { AdminProjectUserInvitationCastMemberComponent } from './children/project-user-invitations/children/cast-members/component/admin-project-user-invitation-cast-member/admin-project-user-invitation-cast-member.component';
+
+// tslint:disable-next-line:max-line-length
+export { AdminProjectUserInvitationCastHttpService } from './children/project-user-invitations/children/cast-members/service/admin-project-user-invitation-cast-http.service';
+
+// tslint:disable-next-line:max-line-length
+export { AdminProjectUserInvitationCrewComponent } from './children/project-user-invitations/children/crew/component/admin-project-user-invitation-crew/admin-project-user-invitation-crew.component';
+
+// tslint:disable-next-line:max-line-length
+export { AdminCrewUnitInvitationMemberCrewMembersHttpService } from './children/project-user-invitations/children/crew/service/admin-crew-unit-invitation-member-crew-member-http.service';
+// tslint:disable-next-line:max-line-length
+export { AdminCrewUnitInvitationMemberHttpService } from './children/project-user-invitations/children/crew/service/admin-crew-unit-invitation-member-http.service';
+
+// tslint:disable-next-line:max-line-length
+export { AdminProjectUserInvitationDashboardComponent } from './children/project-user-invitations/component/admin-project-user-invitation-dashboard/admin-project-user-invitation-dashboard.component';
+
+// tslint:disable-next-line:max-line-length
+export { AdminFullProjectUserInvitation } from './children/project-user-invitations/model/admin-full-project-user-invitation.model';
+
+// tslint:disable-next-line:max-line-length
 export { AdminProjectUserInvitationHttpService } from './children/project-user-invitations/service/admin-project-user-invitation-http.service';
+// tslint:disable-next-line:max-line-length
+export { AdminProjectUserInvitationResolve } from './children/project-user-invitations/service/admin-project-user-invitation-resolve.service';
 
 // tslint:disable-next-line:max-line-length
 export { AdminProjectUserCastMemberComponent } from './children/project-users/children/cast-members/component/admin-project-user-cast-member/admin-project-user-cast-member.component';
+
+// tslint:disable-next-line:max-line-length
+export { AdminProjectUserCastHttpService } from './children/project-users/children/cast-members/service/admin-project-user-cast-http.service';
+
+// tslint:disable-next-line:max-line-length
+export { AdminProjectUserCrewComponent } from './children/project-users/children/crew/component/admin-project-user-crew/admin-project-user-crew.component';
+
+// tslint:disable-next-line:max-line-length
+export { AdminCrewUnitMemberCrewMembersHttpService } from './children/project-users/children/crew/service/admin-crew-unit-member-crew-member-http.service';
+// tslint:disable-next-line:max-line-length
+export { AdminCrewUnitMemberHttpService } from './children/project-users/children/crew/service/admin-crew-unit-member-http.service';
+
 // tslint:disable-next-line:max-line-length
 export { AdminProjectUserDashboardComponent } from './children/project-users/component/admin-project-user-dashboard/admin-project-user-dashboard.component';
 

@@ -9,6 +9,7 @@ import {
     ProjectUserInvitation,
     ProjectUserInvitationProject
 } from '../../../../shared/children/user-invitations';
+import { AdminFullProjectUserInvitation } from '../../..';
 
 @Injectable()
 export class AdminProjectUserInvitationHttpService extends BaseHttpService {
@@ -32,7 +33,7 @@ export class AdminProjectUserInvitationHttpService extends BaseHttpService {
         return this.doGetArray(uri);
     }
 
-    public get(id: number): Promise<FullProjectUserInvitation | void> {
+    public get(id: number): Promise<AdminFullProjectUserInvitation | void> {
 
         const uri = `${this._baseUri}/${id}`;
 

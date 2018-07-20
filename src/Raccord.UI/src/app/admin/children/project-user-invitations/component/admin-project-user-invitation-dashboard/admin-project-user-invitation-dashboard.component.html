@@ -1,0 +1,56 @@
+<div class="raccord-narrow-container">
+  <div class="raccord-page-header">
+    <a routerLink="{{getBackLink()}}">
+      <back-link></back-link>
+    </a>
+    <div fxLayout="row">
+      <h1 class="raccord-header-title">
+        <placeholder-image [value]="getFullName()"></placeholder-image>
+        {{getFullName()}}
+      </h1>
+      <button mat-mini-fab
+        (click)="showEditProjectUserInvitation()"><mat-icon>edit</mat-icon></button>
+    </div>
+  </div>
+  <mat-card class="raccord-label-info">
+    <div fxLayout="row"
+      class="raccord-label-info-row">
+      <span fxFlex="50%" class="raccord-label">
+        User
+      </span>
+      <span fxFlex="50%" class="raccord-info">
+        <a routerLink="{{getUserInvitationLink()}}">{{getFullName()}}</a>
+      </span>
+    </div>
+    <div fxLayout="row"
+      class="raccord-label-info-row">
+      <span fxFlex="50%" class="raccord-label">
+        Project
+      </span>
+      <span fxFlex="50%" class="raccord-info">
+        <a routerLink="{{getProjectLink()}}">{{projectUserInvitation.project.title}}</a>
+      </span>
+    </div>
+    <div fxLayout="row"
+      class="raccord-label-info-row">
+      <span fxFlex="50%" class="raccord-label">
+        Role
+      </span>
+      <span fxFlex="50%" class="raccord-info">
+        {{projectUserInvitation.projectRole.name}}
+      </span>
+    </div>
+  </mat-card>
+  <admin-project-user-invitation-cast-member 
+    [castMember]="projectUserInvitation.castMember"
+    [projectId]="projectUserInvitation.project.id"
+    [projectUserInvitationId]="projectUserInvitation.id"
+    [userInvitation]="projectUserInvitation.userInvitation">
+  </admin-project-user-invitation-cast-member>
+  <admin-project-user-invitation-crew 
+    [crewUnits]="projectUserInvitation.crewUnits"
+    [projectId]="projectUserInvitation.project.id"
+    [projectUserInvitationId]="projectUserInvitation.id"
+    [userInvitation]="projectUserInvitation.userInvitation">
+  </admin-project-user-invitation-crew>
+</div>

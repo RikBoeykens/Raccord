@@ -3,7 +3,7 @@ import { UserInvitation } from '../../..';
 import { Project } from '../../../../projects';
 import { ProjectRole } from '../../../../users';
 import { CastMember } from '../../../../cast';
-import { ProjectUserCrewUnit } from '../../../../crew';
+import { ProjectLinkCrewUnit } from '../../../../crew';
 
 export class FullProjectUserInvitation extends BaseModel {
   public id: number;
@@ -11,7 +11,7 @@ export class FullProjectUserInvitation extends BaseModel {
   public project: Project;
   public projectRole: ProjectRole;
   public castMember: CastMember;
-  public crewUnits: ProjectUserCrewUnit[];
+  public crewUnits: ProjectLinkCrewUnit[];
 
   constructor(obj?: {
     id: number,
@@ -19,7 +19,7 @@ export class FullProjectUserInvitation extends BaseModel {
     project: Project,
     projectRole: ProjectRole,
     castMember: CastMember,
-    crewUnits: ProjectUserCrewUnit[]
+    crewUnits: ProjectLinkCrewUnit[]
   }) {
     super();
     if (obj) {

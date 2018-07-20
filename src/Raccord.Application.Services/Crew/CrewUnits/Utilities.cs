@@ -72,14 +72,14 @@ namespace Raccord.Application.Services.Crew.CrewUnits
       };
     }
 
-    public static ProjectUserCrewUnitDto TranslateCrewUnit(this CrewUnitMember crewUnitMember)
+    public static ProjectLinkCrewUnitDto TranslateCrewUnit(this CrewUnitMember crewUnitMember)
     {
       if(crewUnitMember == null || crewUnitMember.CrewUnit == null)
       {
         return null;
       }
 
-      return new ProjectUserCrewUnitDto
+      return new ProjectLinkCrewUnitDto
       {
         ID = crewUnitMember.CrewUnit.ID,
         Name = crewUnitMember.CrewUnit.Name,
@@ -90,14 +90,14 @@ namespace Raccord.Application.Services.Crew.CrewUnits
       };
     }
 
-    public static ProjectUserCrewUnitDto TranslateCrewUnit(this CrewUnitInvitationMember crewUnitInvitationMember)
+    public static ProjectLinkCrewUnitDto TranslateCrewUnit(this CrewUnitInvitationMember crewUnitInvitationMember)
     {
       if(crewUnitInvitationMember == null || crewUnitInvitationMember.CrewUnit == null)
       {
         return null;
       }
 
-      return new ProjectUserCrewUnitDto
+      return new ProjectLinkCrewUnitDto
       {
         ID = crewUnitInvitationMember.CrewUnit.ID,
         Name = crewUnitInvitationMember.CrewUnit.Name,

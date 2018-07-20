@@ -1,0 +1,10 @@
+<h3 mat-dialog-title>{{title}}</h3>
+<mat-dialog-content>
+  <mat-nav-list>
+    <a mat-list-item 
+      *ngFor="let crewUnit of crewUnits"
+      (click)="onClick(crewUnit)">
+      {{crewUnit.name}}
+    </a>
+  </mat-nav-list>
+</mat-dialog-content>

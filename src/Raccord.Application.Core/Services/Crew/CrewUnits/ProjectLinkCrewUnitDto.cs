@@ -3,7 +3,7 @@ using Raccord.Application.Core.Services.Crew.CrewMembers;
 
 namespace Raccord.Application.Core.Services.Crew.CrewUnits
 {
-  public class ProjectUserCrewUnitDto : CrewUnitDto
+  public class ProjectLinkCrewUnitDto : CrewUnitDto
   {
     private IEnumerable<CrewMemberDto> _crewMembers;
     public long LinkID { get; set; }

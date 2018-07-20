@@ -12,7 +12,7 @@ using System;
 namespace Raccord.Data.EntityFramework.Migrations
 {
     [DbContext(typeof(RaccordDBContext))]
-    [Migration("20180716195833_initial")]
+    [Migration("20180717072556_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -680,7 +680,7 @@ namespace Raccord.Data.EntityFramework.Migrations
 
                     b.HasIndex("ScriptUploadID");
 
-                    b.ToTable("Character");
+                    b.ToTable("Characters");
                 });
 
             modelBuilder.Entity("Raccord.Domain.Model.Characters.CharacterScene", b =>

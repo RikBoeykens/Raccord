@@ -1138,7 +1138,7 @@ namespace Raccord.Data.EntityFramework.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Character",
+                name: "Characters",
                 columns: table => new
                 {
                     ID = table.Column<long>(nullable: false)
@@ -1154,21 +1154,21 @@ namespace Raccord.Data.EntityFramework.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Character", x => x.ID);
+                    table.PrimaryKey("PK_Characters", x => x.ID);
                     table.ForeignKey(
-                        name: "FK_Character_CastMember_CastMemberID",
+                        name: "FK_Characters_CastMember_CastMemberID",
                         column: x => x.CastMemberID,
                         principalTable: "CastMember",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Character_Projects_ProjectID",
+                        name: "FK_Characters_Projects_ProjectID",
                         column: x => x.ProjectID,
                         principalTable: "Projects",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Character_ScriptUpload_ScriptUploadID",
+                        name: "FK_Characters_ScriptUpload_ScriptUploadID",
                         column: x => x.ScriptUploadID,
                         principalTable: "ScriptUpload",
                         principalColumn: "ID",
@@ -1458,9 +1458,9 @@ namespace Raccord.Data.EntityFramework.Migrations
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_CallsheetCharacter_Character_CharacterID",
+                        name: "FK_CallsheetCharacter_Characters_CharacterID",
                         column: x => x.CharacterID,
-                        principalTable: "Character",
+                        principalTable: "Characters",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -1480,9 +1480,9 @@ namespace Raccord.Data.EntityFramework.Migrations
                 {
                     table.PrimaryKey("PK_CharacterScene", x => x.ID);
                     table.ForeignKey(
-                        name: "FK_CharacterScene_Character_CharacterID",
+                        name: "FK_CharacterScene_Characters_CharacterID",
                         column: x => x.CharacterID,
-                        principalTable: "Character",
+                        principalTable: "Characters",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
@@ -1509,9 +1509,9 @@ namespace Raccord.Data.EntityFramework.Migrations
                 {
                     table.PrimaryKey("PK_ImageCharacter", x => x.ID);
                     table.ForeignKey(
-                        name: "FK_ImageCharacter_Character_CharacterID",
+                        name: "FK_ImageCharacter_Characters_CharacterID",
                         column: x => x.CharacterID,
-                        principalTable: "Character",
+                        principalTable: "Characters",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
@@ -1539,9 +1539,9 @@ namespace Raccord.Data.EntityFramework.Migrations
                 {
                     table.PrimaryKey("PK_SceneDialogue", x => x.ID);
                     table.ForeignKey(
-                        name: "FK_SceneDialogue_Character_CharacterID",
+                        name: "FK_SceneDialogue_Characters_CharacterID",
                         column: x => x.CharacterID,
-                        principalTable: "Character",
+                        principalTable: "Characters",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
@@ -1777,9 +1777,9 @@ namespace Raccord.Data.EntityFramework.Migrations
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Comment_Character_ParentCharacterID",
+                        name: "FK_Comment_Characters_ParentCharacterID",
                         column: x => x.ParentCharacterID,
-                        principalTable: "Character",
+                        principalTable: "Characters",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
@@ -1979,21 +1979,6 @@ namespace Raccord.Data.EntityFramework.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Character_CastMemberID",
-                table: "Character",
-                column: "CastMemberID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Character_ProjectID",
-                table: "Character",
-                column: "ProjectID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Character_ScriptUploadID",
-                table: "Character",
-                column: "ScriptUploadID");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_CharacterCall_CallTypeID",
                 table: "CharacterCall",
                 column: "CallTypeID");
@@ -2002,6 +1987,21 @@ namespace Raccord.Data.EntityFramework.Migrations
                 name: "IX_CharacterCall_CallsheetCharacterID",
                 table: "CharacterCall",
                 column: "CallsheetCharacterID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Characters_CastMemberID",
+                table: "Characters",
+                column: "CastMemberID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Characters_ProjectID",
+                table: "Characters",
+                column: "ProjectID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Characters_ScriptUploadID",
+                table: "Characters",
+                column: "ScriptUploadID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_CharacterScene_CharacterID",
@@ -2561,7 +2561,7 @@ namespace Raccord.Data.EntityFramework.Migrations
                 name: "OpenIddictApplications");
 
             migrationBuilder.DropTable(
-                name: "Character");
+                name: "Characters");
 
             migrationBuilder.DropTable(
                 name: "ScheduleDay");

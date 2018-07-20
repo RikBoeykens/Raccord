@@ -19,7 +19,9 @@ import {
   AdminUserInvitationsResolve,
   AdminUserInvitationResolve,
   AdminProjectUserDashboardComponent,
-  AdminProjectUserResolve
+  AdminProjectUserResolve,
+  AdminProjectUserInvitationDashboardComponent,
+  AdminProjectUserInvitationResolve
 } from './admin';
 
 import { DashboardComponent } from './dashboard';
@@ -138,6 +140,19 @@ export const ROUTES: Routes = [
             component: AdminProjectUserDashboardComponent,
             resolve: {
               projectUser: AdminProjectUserResolve,
+              projectRoles: AdminProjectRolesResolve
+            }
+          }
+        ]
+      },
+      {
+        path: RouteSettings.PROJECTUSERINVITATIONS,
+        children: [
+          {
+            path: ':projectUserInvitationId',
+            component: AdminProjectUserInvitationDashboardComponent,
+            resolve: {
+              projectUser: AdminProjectUserInvitationResolve,
               projectRoles: AdminProjectRolesResolve
             }
           }

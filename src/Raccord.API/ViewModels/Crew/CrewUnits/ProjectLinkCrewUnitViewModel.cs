@@ -3,7 +3,7 @@ using Raccord.API.ViewModels.Crew.CrewMembers;
 
 namespace Raccord.API.ViewModels.Crew.CrewUnits
 {
-  public class ProjectUserCrewUnitViewModel : CrewUnitViewModel
+  public class ProjectLinkCrewUnitViewModel : CrewUnitViewModel
   {
     private IEnumerable<CrewMemberViewModel> _crewMembers;
     public long LinkID { get; set; }

@@ -1,0 +1,29 @@
+<h3 mat-dialog-title>{{title}}</h3>
+<form id="choose-character-form"
+  #chooseCharacterForm = "ngForm"
+  (ngSubmit)="submit()">
+  <mat-dialog-content>
+    <div fxLayout="row">
+      <admin-search-entity 
+        (onSelect)="onSelect($event)"
+        [entityType]="characterEntityType"
+        [projectId]="projectId">
+      </admin-search-entity>
+    </div>
+    <div fxLayout="row" *ngIf="selectedCharacters">
+      <mat-chip-list>
+          <mat-chip
+            *ngFor="let character of selectedCharacters"
+            [removable]="true" 
+            (remove)="removeSelectedCharacter(character)">
+            {{character.displayName}}
+            <mat-icon matChipRemove>cancel</mat-icon>
+          </mat-chip>
+      </mat-chip-list>
+    </div>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button mat-button type="submit" [disabled]="!chooseCharacterForm.form.valid">Save</button>
+  </mat-dialog-actions>
+</form>

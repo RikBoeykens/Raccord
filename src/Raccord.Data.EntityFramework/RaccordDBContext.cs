@@ -21,6 +21,7 @@ using System.Linq;
 using Raccord.Domain.Model;
 using System.Collections.Generic;
 using System;
+using Raccord.Domain.Model.Characters;
 
 namespace Raccord.Data.EntityFramework
 {
@@ -35,6 +36,7 @@ namespace Raccord.Data.EntityFramework
         public DbSet<ScriptLocation> ScriptLocations { get; set; }
         public DbSet<SceneIntro> SceneIntros { get; set; }
         public DbSet<TimeOfDay> TimeOfDays { get; set; }
+        public DbSet<Character> Characters { get; set; }
         public DbSet<BreakdownTypeDefinition> BreakdownTypeDefinitions { get; set; }
         public DbSet<CallTypeDefinition> CallTypeDefinitions { get; set; }
         public DbSet<CrewDepartmentDefinition> CrewDepartmentDefinitions { get; set; }

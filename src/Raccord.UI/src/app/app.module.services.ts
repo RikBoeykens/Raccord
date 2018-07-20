@@ -1,7 +1,14 @@
 import {
+  AdminCastMemberHttpService,
+  AdminCrewDepartmentHttpService,
+  AdminCrewUnitHttpService,
   AdminProjectRoleHttpService,
   AdminProjectRolesResolve,
   AdminProjectUserInvitationHttpService,
+  AdminProjectUserInvitationResolve,
+  AdminProjectUserCastHttpService,
+  AdminCrewUnitMemberCrewMembersHttpService,
+  AdminCrewUnitMemberHttpService,
   AdminProjectUserHttpService,
   AdminProjectUserResolve,
   AdminProjectHttpService,
@@ -58,10 +65,17 @@ import {
 } from './shared';
 
 export const SERVICES = [
+  AdminCastMemberHttpService,
+  AdminCrewDepartmentHttpService,
+  AdminCrewUnitHttpService,
   AdminProjectRoleHttpService,
   AdminProjectRolesResolve,
   AdminProjectUserInvitationHttpService,
+  AdminProjectUserInvitationResolve,
   AdminProjectUserHttpService,
+  AdminProjectUserCastHttpService,
+  AdminCrewUnitMemberCrewMembersHttpService,
+  AdminCrewUnitMemberHttpService,
   AdminProjectUserResolve,
   AdminProjectHttpService,
   AdminProjectResolve,

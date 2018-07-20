@@ -12,6 +12,7 @@ import { AdminSearchEngineService } from '../../children/search/service/admin-se
 export class AdminSearchEntityComponent {
   @Input() public entityType: EntityType;
   @Output() public onSelect: EventEmitter<SearchResult> = new EventEmitter();
+  @Input() public projectId?: number;
   public searchText: string;
   public filteredResults: SearchResult[] = [];
 
@@ -25,7 +26,7 @@ export class AdminSearchEntityComponent {
       this._loadingWrapperService.Load(
         this._adminSearchEngineService.search(new SearchRequest({
           searchText: this.searchText,
-          projectId: 0,
+          projectId: this.projectId,
           includeTypes: [this.entityType],
           excludeTypes: [],
           excludeTypeIDs: []

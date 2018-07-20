@@ -1,7 +1,7 @@
 import { User, ProjectRole } from '../../../../shared/children/users';
 import { Project } from '../../../../shared/children/projects';
 import { CastMember } from '../../../../shared/children/cast';
-import { ProjectUserCrewUnit } from '../../../../shared/children/crew';
+import { ProjectLinkCrewUnit } from '../../../../shared/children/crew';
 import { BaseModel } from '../../../../shared';
 import { AdminFullCastMember } from '../../..';
 
@@ -11,7 +11,7 @@ export class AdminFullProjectUser extends BaseModel {
   public user: User;
   public castMember: AdminFullCastMember;
   public projectRole: ProjectRole;
-  public crewUnits: ProjectUserCrewUnit[];
+  public crewUnits: ProjectLinkCrewUnit[];
 
   constructor(obj?: {
       id: number,
@@ -19,7 +19,7 @@ export class AdminFullProjectUser extends BaseModel {
       user: User,
       castMember: AdminFullCastMember,
       projectRole: ProjectRole,
-      crewUnits: ProjectUserCrewUnit[]
+      crewUnits: ProjectLinkCrewUnit[]
   }) {
       super();
       if (obj) {

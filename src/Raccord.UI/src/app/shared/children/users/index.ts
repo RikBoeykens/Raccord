@@ -18,6 +18,7 @@ export { ProjectPermissionSummary } from './children/project-permissions/model/p
 export { ProjectRole } from './children/project-roles/model/project-role.model';
 
 export { FullProjectUser } from './children/projects/model/full-project-user.model';
+export { LinkedProjectUserUser } from './children/projects/model/linked-project-user-user.model';
 export { ProjectUserProject } from './children/projects/model/project-user-project.model';
 export { ProjectUserUser } from './children/projects/model/project-user-user.model';
 export { ProjectUser } from './children/projects/model/project-user.model';

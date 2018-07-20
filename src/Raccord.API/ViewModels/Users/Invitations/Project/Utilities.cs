@@ -26,6 +26,23 @@ namespace Raccord.API.ViewModels.Users.Invitations.Project
         CrewUnits = dto.CrewUnits.Select(cu => cu.Translate())
       };
     }
+    public static AdminFullProjectUserInvitationViewModel Translate(this AdminFullProjectUserInvitationDto dto)
+    {
+      if(dto == null)
+      {
+        return null;
+      }
+
+      return new AdminFullProjectUserInvitationViewModel
+      {
+        ID = dto.ID,
+        Project = dto.Project.Translate(),
+        UserInvitation = dto.UserInvitation.Translate(),
+        CastMember = dto.CastMember.Translate(),
+        ProjectRole = dto.ProjectRole.Translate(),
+        CrewUnits = dto.CrewUnits.Select(cu => cu.Translate())
+      };
+    }
     public static ProjectUserInvitationSummaryViewModel Translate(this ProjectUserInvitationSummaryDto dto)
     {
       if(dto == null)

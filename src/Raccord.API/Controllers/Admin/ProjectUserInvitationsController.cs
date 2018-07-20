@@ -41,7 +41,7 @@ namespace Raccord.API.Controllers.Admin
         }
         // GET api/admin/users/5
         [HttpGet("{id}")]
-        public FullProjectUserInvitationViewModel Get(long id)
+        public AdminFullProjectUserInvitationViewModel Get(long id)
         {
             var dto = _projectUserInvitationService.Get(id);
 

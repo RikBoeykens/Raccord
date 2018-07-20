@@ -679,7 +679,7 @@ namespace Raccord.Data.EntityFramework.Migrations
 
                     b.HasIndex("ScriptUploadID");
 
-                    b.ToTable("Character");
+                    b.ToTable("Characters");
                 });
 
             modelBuilder.Entity("Raccord.Domain.Model.Characters.CharacterScene", b =>

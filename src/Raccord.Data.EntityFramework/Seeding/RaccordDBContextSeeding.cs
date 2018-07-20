@@ -17,6 +17,7 @@ using Raccord.Domain.Model.Users.ProjectRoles;
 using Raccord.Core.Enums;
 using Raccord.Domain.Model.Breakdowns;
 using Raccord.Domain.Model.Crew.CrewUnits;
+using Raccord.Domain.Model.Characters;
 
 namespace Raccord.Data.EntityFramework.Seeding
 {
@@ -212,6 +213,7 @@ namespace Raccord.Data.EntityFramework.Seeding
             SeedTimeOfDays();
             SeedScriptLocations();
             SeedScenes();
+            SeedCharacters();
             SeedCallTypes();
             SeedCrew();
             SeedCrewUnits();
@@ -315,6 +317,26 @@ namespace Raccord.Data.EntityFramework.Seeding
                 };
 
                 _context.Scenes.AddRange(entities);
+
+                _context.SaveChanges();
+            }
+        }
+
+        private void SeedCharacters()
+        {
+            if(!_context.Characters.Any())
+            {
+                var entities = new List<Character>
+                {
+                    new Character { ProjectID = 1, Name = "Alice", Number = 1, },
+                    new Character { ProjectID = 1, Name = "Bob", Number = 2, },
+                    new Character { ProjectID = 1, Name = "Carol", Number = 3, },
+                    new Character { ProjectID = 1, Name = "Janice", Number = 4, },
+
+                    new Character { ProjectID = 2, Name = "Freddy", Number = 1 }
+                };
+
+                _context.Characters.AddRange(entities);
 
                 _context.SaveChanges();
             }

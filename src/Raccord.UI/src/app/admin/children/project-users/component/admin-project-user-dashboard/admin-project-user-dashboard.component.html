@@ -44,6 +44,13 @@
   <admin-project-user-cast-member 
     [castMember]="projectUser.castMember"
     [projectId]="projectUser.project.id"
-    [projectUserId]="projectUser.id">
+    [projectUserId]="projectUser.id"
+    [user]="projectUser.user">
   </admin-project-user-cast-member>
+  <admin-project-user-crew 
+    [crewUnits]="projectUser.crewUnits"
+    [projectId]="projectUser.project.id"
+    [projectUserId]="projectUser.id"
+    [user]="projectUser.user">
+  </admin-project-user-crew>
 </div>

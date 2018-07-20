@@ -16,7 +16,7 @@ namespace Raccord.API.ViewModels.Users.Projects
         private UserViewModel _user;
         protected CastMemberViewModel _castMember;
         private ProjectRoleViewModel _projectRole;
-        private IEnumerable<ProjectUserCrewUnitViewModel> _crewUnits;
+        private IEnumerable<ProjectLinkCrewUnitViewModel> _crewUnits;
 
         // ID of the crew user
         public long ID { get; set; }
@@ -75,11 +75,11 @@ namespace Raccord.API.ViewModels.Users.Projects
                 _projectRole = value;
             }
         }
-        public IEnumerable<ProjectUserCrewUnitViewModel> CrewUnits
+        public IEnumerable<ProjectLinkCrewUnitViewModel> CrewUnits
         {
             get
             {
-                return _crewUnits ?? new List<ProjectUserCrewUnitViewModel>();
+                return _crewUnits ?? new List<ProjectLinkCrewUnitViewModel>();
             }
             set
             {

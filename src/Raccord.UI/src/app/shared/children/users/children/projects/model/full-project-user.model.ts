@@ -1,7 +1,7 @@
 import { BaseModel } from '../../../../..';
 import { Project } from '../../../../projects';
 import { User, ProjectRole } from '../../..';
-import { ProjectUserCrewUnit } from '../../../../crew';
+import { ProjectLinkCrewUnit } from '../../../../crew';
 import { CastMember } from '../../../../cast';
 
 export class FullProjectUser extends BaseModel {
@@ -10,7 +10,7 @@ export class FullProjectUser extends BaseModel {
   public user: User;
   public castMember: CastMember;
   public projectRole: ProjectRole;
-  public crewUnits: ProjectUserCrewUnit[];
+  public crewUnits: ProjectLinkCrewUnit[];
 
   constructor(obj?: {
       id: number,
@@ -18,7 +18,7 @@ export class FullProjectUser extends BaseModel {
       user: User,
       castMember: CastMember,
       projectRole: ProjectRole,
-      crewUnits: ProjectUserCrewUnit[]
+      crewUnits: ProjectLinkCrewUnit[]
   }) {
       super();
       if (obj) {

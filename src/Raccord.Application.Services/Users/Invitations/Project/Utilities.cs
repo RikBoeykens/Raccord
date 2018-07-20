@@ -26,6 +26,22 @@ namespace Raccord.Application.Services.Users.Invitations.Project
         CrewUnits = projectUserInvitation.CrewUnitInvitationMembers.Select(cum => cum.TranslateCrewUnit())
       };
     }
+    public static AdminFullProjectUserInvitationDto TranslateFullAdmin(this ProjectUserInvitation projectUserInvitation)
+    {
+      if(projectUserInvitation == null)
+      {
+        return null;
+      }
+      return new AdminFullProjectUserInvitationDto
+      {
+        ID = projectUserInvitation.ID,
+        UserInvitation = projectUserInvitation.UserInvitation.Translate(),
+        Project = projectUserInvitation.Project.Translate(),
+        CastMember = projectUserInvitation.CastMember.TranslateFullAdmin(),
+        ProjectRole = projectUserInvitation.Role.Translate(),
+        CrewUnits = projectUserInvitation.CrewUnitInvitationMembers.Select(cum => cum.TranslateCrewUnit())
+      };
+    }
     public static ProjectUserInvitationSummaryDto TranslateSummary(this ProjectUserInvitation projectUserInvitation)
     {
       if(projectUserInvitation == null)

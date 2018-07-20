@@ -34,11 +34,11 @@ namespace Raccord.Application.Services.Users.Invitations.Project
       return dtos;
     }
 
-    public FullProjectUserInvitationDto Get(long ID)
+    public AdminFullProjectUserInvitationDto Get(long ID)
     {
       var projectUser = _projectUserInvitationRepository.GetFull(ID);
 
-      var dto = projectUser.TranslateFull();
+      var dto = projectUser.TranslateFullAdmin();
 
       return dto;
     }

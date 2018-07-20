@@ -1,6 +1,6 @@
 import { CrewUnit, CrewMember } from '../..';
 
-export class ProjectUserCrewUnit extends CrewUnit {
+export class ProjectLinkCrewUnit extends CrewUnit {
   public linkID: number;
   public crewMembers: CrewMember[];
 
