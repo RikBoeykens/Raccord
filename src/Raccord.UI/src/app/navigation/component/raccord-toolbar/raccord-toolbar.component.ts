@@ -46,4 +46,8 @@ export class RaccordToolbarComponent {
   public getProfileLink() {
     return `/${RouteSettings.PROFILE}`;
   }
+
+  public goToSearch() {
+    this._router.navigate([RouteSettings.SEARCH]);
+  }
 }

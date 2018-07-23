@@ -68,7 +68,12 @@ import {
   ProjectsListComponent,
   ProjectDashboardComponent
 } from './projects';
-import { LoginComponent } from './security';
+import {
+  SearchDashboardComponent
+} from './search';
+import {
+  LoginComponent
+} from './security';
 import {
   CharacterSummaryComponent
 } from './shared/children/characters';
@@ -139,6 +144,7 @@ export const COMPONENTS = [
   ProjectCalendarComponent,
   ProjectsListComponent,
   ProjectDashboardComponent,
+  SearchDashboardComponent,
   LoginComponent,
   CharacterSummaryComponent,
   ShowImageComponent,

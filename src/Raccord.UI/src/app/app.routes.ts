@@ -53,6 +53,7 @@ import {
 import {
   UserProfileResolve
 } from './shared/children/users';
+import { SearchDashboardComponent } from './search';
 
 export const ROUTES: Routes = [
   {
@@ -204,6 +205,10 @@ export const ROUTES: Routes = [
     resolve: {
       userProfile: UserProfileResolve
     }
+  },
+  {
+    path: RouteSettings.SEARCH,
+    component: SearchDashboardComponent
   },
   {
     path: RouteSettings.ERROR,

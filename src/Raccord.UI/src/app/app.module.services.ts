@@ -45,6 +45,9 @@ import {
   ProjectCalendarHttpService
 } from './projects';
 import {
+  SearchEngineHttpService
+} from './search';
+import {
   AuthService,
   AuthGuard,
   LoginService
@@ -107,6 +110,7 @@ export const SERVICES = [
   SidenavService,
   CalendarHttpService,
   ProjectCalendarHttpService,
+  SearchEngineHttpService,
   AuthService,
   AuthGuard,
   LoginService,
