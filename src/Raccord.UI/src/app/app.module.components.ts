@@ -65,6 +65,7 @@ import {
 } from './profile';
 import {
   ProjectCalendarComponent,
+  CallsheetComponent,
   ProjectsListComponent,
   ProjectDashboardComponent
 } from './projects';
@@ -88,6 +89,9 @@ import {
   ShowProfileImageComponent,
   UserAvatarComponent
 } from './shared/children/users';
+import {
+  WeatherInfoComponent
+} from './shared/children/weather';
 import {
   AddImageDialogComponent,
   BackLinkComponent,
@@ -142,6 +146,7 @@ export const COMPONENTS = [
   NoContentComponent,
   UserProfileDashboardComponent,
   ProjectCalendarComponent,
+  CallsheetComponent,
   ProjectsListComponent,
   ProjectDashboardComponent,
   SearchDashboardComponent,
@@ -152,6 +157,7 @@ export const COMPONENTS = [
   ProjectCardComponent,
   ShowProfileImageComponent,
   UserAvatarComponent,
+  WeatherInfoComponent,
   BackLinkComponent,
   ErrorComponent,
   GenericAvatarComponent,

@@ -28,6 +28,8 @@ import { DashboardComponent } from './dashboard';
 
 import { NoContentComponent } from './no-content';
 import {
+  CallsheetComponent,
+  CallsheetResolve,
   ProjectsListComponent,
   ProjectDashboardComponent
 } from './projects';
@@ -185,10 +187,28 @@ export const ROUTES: Routes = [
       },
       {
         path: ':projectId',
-        component: ProjectDashboardComponent,
-        resolve: {
-          CurrentProjectResolve
-        }
+        children: [
+          {
+            path: '',
+            component: ProjectDashboardComponent,
+            resolve: {
+              CurrentProjectResolve
+            }
+          },
+          {
+            path: RouteSettings.CALLSHEETS,
+            children: [
+              {
+                path: ':callsheetId',
+                component: CallsheetComponent,
+                resolve: {
+                  CurrentProjectResolve,
+                  callsheet: CallsheetResolve
+                }
+              }
+            ]
+          }
+        ]
       }
     ]
   },

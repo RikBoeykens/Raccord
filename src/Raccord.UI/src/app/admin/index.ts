@@ -185,4 +185,5 @@ export { AdminDashboard } from './model/admin-dashboard.model';
 
 export { AdminDashboardHttpService } from './service/admin-dashboard-http.service';
 export { AdminDashboardResolve } from './service/admin-dashboard.resolve';
+export { AdminExampleHttpService } from './service/admin-example-http.service';
 export { AdminGuard } from './service/admin-guard.service';

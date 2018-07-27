@@ -24,6 +24,7 @@ import {
   AdminUsersResolve,
   AdminDashboardHttpService,
   AdminDashboardResolve,
+  AdminExampleHttpService,
   AdminGuard,
   AdminUserInvitationsResolve,
   AdminUserInvitationResolve
@@ -42,7 +43,10 @@ import {
   CalendarHttpService
 } from './calendar';
 import {
-  ProjectCalendarHttpService
+  ProjectCalendarHttpService,
+  CharacterCallHttpService,
+  CallsheetHttpService,
+  CallsheetResolve
 } from './projects';
 import {
   SearchEngineHttpService
@@ -103,6 +107,7 @@ export const SERVICES = [
   AdminUsersResolve,
   AdminDashboardHttpService,
   AdminDashboardResolve,
+  AdminExampleHttpService,
   AdminGuard,
   InvitationHttpService,
   InvitationResolve,
@@ -110,6 +115,9 @@ export const SERVICES = [
   SidenavService,
   CalendarHttpService,
   ProjectCalendarHttpService,
+  CharacterCallHttpService,
+  CallsheetHttpService,
+  CallsheetResolve,
   SearchEngineHttpService,
   AuthService,
   AuthGuard,

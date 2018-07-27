@@ -8,5 +8,6 @@ namespace Raccord.Application.Core.Services.ScriptTexts
     IEnumerable<SceneTextDto> GetForCallsheet(long callsheetID);
     IEnumerable<SceneTextDto> GetForUser(long projectID, string userID);
     SceneTextDto GetForScene(long sceneID);
+    void AddScriptTexts(long sceneId, IEnumerable<SceneActionDto> actions, IEnumerable<SceneDialogueDto> dialogues);
   }
 }

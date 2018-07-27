@@ -36,7 +36,7 @@ namespace Raccord.Application.Services.Projects
             {
                 ID = project.ID,
                 Title = project.Title,
-                Users = project.ProjectUsers.Select(pu => pu.TranslateUser()),
+                Users = project.ProjectUsers.Where(pu => !pu.User.IsDummyUser).Select(pu => pu.TranslateUser()),
                 Invitations = projectInvitations.Select(pu => pu.TranslateInvitation()),
                 PrimaryImage = project.Images.FirstOrDefault(i=> i.IsPrimaryImage)?.Translate(),
             };

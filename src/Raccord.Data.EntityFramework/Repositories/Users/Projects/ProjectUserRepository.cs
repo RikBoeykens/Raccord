@@ -16,7 +16,7 @@ namespace Raccord.Data.EntityFramework.Repositories.Users.Projects
         {
             var query = GetIncludedUser();
 
-            return query.Where(c=> c.ProjectID == projectID);
+            return query.Where(c=> c.ProjectID == projectID && !c.User.IsDummyUser);
         }
 
         public IEnumerable<ProjectUser> GetAllForUser(string userID)

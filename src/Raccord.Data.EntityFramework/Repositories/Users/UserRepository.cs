@@ -54,7 +54,7 @@ namespace Raccord.Data.EntityFramework.Repositories.Users
         {
             var query = GetIncludedAdminSummary();
 
-            return query;
+            return query.Where(u => !u.IsDummyUser);
         }
 
         public virtual void Edit(ApplicationUser user)
@@ -141,6 +141,8 @@ namespace Raccord.Data.EntityFramework.Repositories.Users
         private IQueryable<ApplicationUser> GetSearchQuery(string searchText, string userId, string[] excludeIds)
         {
             var query = GetIncludedSearch();
+
+            query = query.Where(u =>!u.IsDummyUser);
 
             query = query.Where(u=> u.FirstName.ToLower().Contains(searchText.ToLower())
                                 ||

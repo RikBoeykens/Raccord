@@ -13,13 +13,18 @@ namespace Raccord.Application.Services.Calendar
 {
   public static class Utilities
   {
-    public static CalendarItemDto TranslateToCalendarItem(this ShootingDay shootingDay)
+    public static CalendarItemDto TranslateToCalendarItem(this ShootingDay shootingDay, bool addProjectTitle)
     {
       var entityType = GetShootingDayType(shootingDay);
 
+      var label = $"{GetTypeName(entityType)} # {shootingDay.Number} - {shootingDay.CrewUnit.Name}";
+      if(addProjectTitle)
+      {
+        label = $"{shootingDay.CrewUnit.Project.Title} - {label}";
+      }
       return new CalendarItemDto
       {
-        Label = $"{shootingDay.CrewUnit.Project.Title} - {GetTypeName(entityType)} # {shootingDay.Number}",
+        Label = label,
         Date = shootingDay.Date,
         RouteInfo = new RouteInfoDto
         {

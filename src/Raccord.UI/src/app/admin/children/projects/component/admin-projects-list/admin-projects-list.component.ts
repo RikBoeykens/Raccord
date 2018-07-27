@@ -8,6 +8,8 @@ import { MatTableDataSource, MatDialog } from '@angular/material';
 // tslint:disable-next-line:max-line-length
 import { AdminEditProjectDialogComponent } from '../admin-edit-project-dialog/admin-edit-project-dialog.component';
 import { AdminProjectSummary } from '../../../..';
+import { AdminCreateExample } from '../../../../model/admin-create-example.model';
+import { AdminExampleHttpService } from '../../../../service/admin-example-http.service';
 
 @Component({
   templateUrl: 'admin-projects-list.component.html',
@@ -18,6 +20,7 @@ export class AdminProjectsListComponent implements OnInit {
 
   constructor(
     private _adminProjectHttpService: AdminProjectHttpService,
+    private _adminExampleHttpService: AdminExampleHttpService,
     private _loadingWrapperService: LoadingWrapperService,
     private _dialogService: DialogService,
     private _dialog: MatDialog,
@@ -46,6 +49,10 @@ export class AdminProjectsListComponent implements OnInit {
     this.showEditProjectDialog(new Project(), 'Add Project');
   }
 
+  public showAddExampleProject() {
+    this.showEditProjectExampleDialog();
+  }
+
   public showEditProject(project: Project) {
     this.showEditProjectDialog(new Project(project), 'Edit Project');
   }
@@ -70,9 +77,31 @@ export class AdminProjectsListComponent implements OnInit {
     });
   }
 
+  private showEditProjectExampleDialog() {
+    const editProjectDialog = this._dialog.open(AdminEditProjectDialogComponent, {data:
+    {
+        project: new Project(),
+        title: 'Create Example'
+    }});
+    editProjectDialog.afterClosed().subscribe((returnedProject: Project) => {
+      if (returnedProject) {
+          this.postExampleProject(new AdminCreateExample({projectName: returnedProject.title}));
+      }
+    });
+  }
+
   private postProject(project: Project) {
     this._loadingWrapperService.Load(
       this._adminProjectHttpService.post(project),
+      () => {
+        this.getProjects();
+      }
+    );
+  }
+
+  private postExampleProject(project: AdminCreateExample) {
+    this._loadingWrapperService.Load(
+      this._adminExampleHttpService.post(project),
       () => {
         this.getProjects();
       }

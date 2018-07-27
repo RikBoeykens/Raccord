@@ -1737,6 +1737,8 @@ namespace Raccord.Data.EntityFramework.Migrations
 
                     b.Property<string>("ImageName");
 
+                    b.Property<bool>("IsDummyUser");
+
                     b.Property<string>("LastName");
 
                     b.Property<bool>("LockoutEnabled");

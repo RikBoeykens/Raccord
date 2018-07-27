@@ -3,3 +3,4 @@ export { CharacterSummaryComponent } from './component/character-summary/charact
 
 export { CharacterSummary } from './model/character-summary.model';
 export { Character } from './model/character.model';
+export { LinkedCharacter } from './model/linked-character.model';

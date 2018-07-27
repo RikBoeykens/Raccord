@@ -18,13 +18,16 @@ export { ProjectRoleEnum } from './enums/project-role.enum';
 
 export { HeaderHelpers } from './helpers/header.helper';
 export { ImageHelpers } from './helpers/image.helpers';
+export { MapsHelpers } from './helpers/maps.helpers';
 export { RouteHelpers } from './helpers/route.helpers';
 export { ValidationHelpers } from './helpers/validation.helpers';
 
+export { Address } from './model/address.model';
 export { Base64Image } from './model/base-64.image.model';
 export { BaseModel } from './model/base.model';
 export { ErrorInfo } from './model/error-info.model';
 export { JsonResponse } from './model/json-response.model';
+export { LatLng } from './model/lat-lng.model';
 export { RouteInfo } from './model/route-info.model';
 export { SortOrder } from './model/sort-order.model';
 

@@ -95,11 +95,17 @@ namespace Raccord.Data.EntityFramework.Seeding
             {
                 var definitions = new List<CrewDepartmentDefinition>
                 {
-                    new CrewDepartmentDefinition{ SortingOrder = 1, Name = "Directorial Department" },
-                    new CrewDepartmentDefinition{ SortingOrder = 2, Name = "Camera Department" },
-                    new CrewDepartmentDefinition{ SortingOrder = 3, Name = "Sound Department" },
-                    new CrewDepartmentDefinition{ SortingOrder = 4, Name = "Hair and Make Up Department" },
-                    new CrewDepartmentDefinition{ SortingOrder = 5, Name = "Costume Department" },
+                    new CrewDepartmentDefinition{ SortingOrder = 1, Name = "Director" },
+                    new CrewDepartmentDefinition{ SortingOrder = 2, Name = "Producers" },
+                    new CrewDepartmentDefinition{ SortingOrder = 3, Name = "Production" },
+                    new CrewDepartmentDefinition{ SortingOrder = 4, Name = "Art Department" },
+                    new CrewDepartmentDefinition{ SortingOrder = 5, Name = "Assistant Directors" },
+                    new CrewDepartmentDefinition{ SortingOrder = 6, Name = "Camera" },
+                    new CrewDepartmentDefinition{ SortingOrder = 7, Name = "Costume" },
+                    new CrewDepartmentDefinition{ SortingOrder = 8, Name = "Electrical" },
+                    new CrewDepartmentDefinition{ SortingOrder = 9, Name = "Locations" },
+                    new CrewDepartmentDefinition{ SortingOrder = 10, Name = "Make Up & Hair" },
+                    new CrewDepartmentDefinition{ SortingOrder = 11, Name = "Props" }
                 };
 
                 _context.CrewDepartmentDefinitions.AddRange(definitions);

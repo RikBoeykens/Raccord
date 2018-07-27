@@ -63,7 +63,8 @@ namespace Raccord.Application.Services.Users
                 EmailConfirmed = true,
                 PreferredEmail = dto.Email,
                 FirstName = dto.FirstName,
-                LastName = dto.LastName
+                LastName = dto.LastName,
+                IsDummyUser = dto.IsDummyUser
             };
             var result = await _userManager.CreateAsync(user, dto.Password);
 
