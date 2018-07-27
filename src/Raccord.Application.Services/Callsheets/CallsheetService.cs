@@ -68,7 +68,7 @@ namespace Raccord.Application.Services.Callsheets
         {
             var callsheet = _callsheetRepository.GetFull(ID);
 
-            var breakdown = _breakdownRepository.GetForProjectUser(callsheet.CrewUnitID, userID);
+            var breakdown = _breakdownRepository.GetForProjectUser(callsheet.CrewUnit.ProjectID, userID);
 
             var latLng = callsheet.GetFirstLatLng();
             var weatherInfo = (latLng != null && latLng.HasLatLng) ?  _weatherService.GetWeatherInfo(new WeatherRequestDto
@@ -99,8 +99,9 @@ namespace Raccord.Application.Services.Callsheets
 
             var callsheet = new Callsheet
             {
-                Start = linkedScheduleDay.Start ?? default(DateTime),
-                End = linkedScheduleDay.End ?? default(DateTime),
+                CrewCall = dto.CrewCall,
+                Start = dto.Start,
+                End = dto.End,
                 ShootingDayID = dto.ShootingDay.ID,
                 CrewUnitID = dto.CrewUnitID,
             };

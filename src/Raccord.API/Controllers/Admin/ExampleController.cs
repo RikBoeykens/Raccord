@@ -9,6 +9,7 @@ using Raccord.Application.Core.Common.Location;
 using Raccord.Application.Core.Common.Sorting;
 using Raccord.Application.Core.Services.Breakdowns;
 using Raccord.Application.Core.Services.Breakdowns.BreakdownItems;
+using Raccord.Application.Core.Services.Breakdowns.BreakdownItemScenes;
 using Raccord.Application.Core.Services.Breakdowns.BreakdownTypes;
 using Raccord.Application.Core.Services.Callsheets;
 using Raccord.Application.Core.Services.Callsheets.CallsheetSceneCharacters;
@@ -69,6 +70,7 @@ namespace Raccord.API.Controllers.Admin
     private readonly IBreakdownService _breakdownService;
     private readonly IBreakdownTypeService _breakdownTypeService;
     private readonly IBreakdownItemService _breakdownItemService;
+    private readonly IBreakdownItemSceneService _breakdownItemSceneService;
     private static Random _rnd = new Random();
     public ExampleController(
       IProjectService projectService,
@@ -98,7 +100,8 @@ namespace Raccord.API.Controllers.Admin
       ICrewMemberService crewMemberService,
       IBreakdownService breakdownService,
       IBreakdownTypeService breakdownTypeService,
-      IBreakdownItemService breakdownItemService
+      IBreakdownItemService breakdownItemService,
+      IBreakdownItemSceneService breakdownItemSceneService
       ): base()
     {
       _projectService = projectService;
@@ -129,6 +132,7 @@ namespace Raccord.API.Controllers.Admin
       _breakdownService = breakdownService;
       _breakdownTypeService = breakdownTypeService;
       _breakdownItemService = breakdownItemService;
+      _breakdownItemSceneService = breakdownItemSceneService;
     }
 
     // POST api/example
@@ -174,6 +178,8 @@ namespace Raccord.API.Controllers.Admin
         var breakdownId = CreateBreakdown(projectId, userIds.jamesSmithId);
 
         var breakdownItemIds = CreateBreakdownItems(breakdownId);
+
+        LinkBreakdownItemScenes(breakdownItemIds, sceneIds);
 
         CreateComments(userIds, characterIds, callsheetIds, scriptLocationIds, locationIds, breakdownItemIds, sceneIds);
 
@@ -1287,8 +1293,6 @@ namespace Raccord.API.Controllers.Admin
         LocationSetID = locationSetIds.houseId,
         PageLength = 5
       });
-      _scheduleCharacterService.AddLink(main_day1_scene4Id, characterSceneIds.scene4_AliceId);
-      _scheduleCharacterService.AddLink(main_day1_scene4Id, characterSceneIds.scene4_BobId);
 
       var main_day1_scene5Id = _scheduleSceneService.Add(new ScheduleSceneDto
       {
@@ -1297,8 +1301,6 @@ namespace Raccord.API.Controllers.Admin
         LocationSetID = locationSetIds.streetId,
         PageLength = 2
       });
-      _scheduleCharacterService.AddLink(main_day1_scene5Id, characterSceneIds.scene5_AliceId);
-      _scheduleCharacterService.AddLink(main_day1_scene5Id, characterSceneIds.scene5_BobId);
 
       var main_day2_scene5Id = _scheduleSceneService.Add(new ScheduleSceneDto
       {
@@ -1307,8 +1309,6 @@ namespace Raccord.API.Controllers.Admin
         LocationSetID = locationSetIds.streetId,
         PageLength = 7
       });
-      _scheduleCharacterService.AddLink(main_day2_scene5Id, characterSceneIds.scene5_AliceId);
-      _scheduleCharacterService.AddLink(main_day2_scene5Id, characterSceneIds.scene5_BobId);
 
       var main_day3_scene2Id = _scheduleSceneService.Add(new ScheduleSceneDto
       {
@@ -1317,7 +1317,6 @@ namespace Raccord.API.Controllers.Admin
         LocationSetID = locationSetIds.houseLivingRoomId,
         PageLength = 3
       });
-      _scheduleCharacterService.AddLink(main_day3_scene2Id, characterSceneIds.scene2_AliceId);
 
       var main_day3_scene3Id = _scheduleSceneService.Add(new ScheduleSceneDto
       {
@@ -1326,7 +1325,6 @@ namespace Raccord.API.Controllers.Admin
         LocationSetID = locationSetIds.houseKitchenId,
         PageLength = 4
       });
-      _scheduleCharacterService.AddLink(main_day3_scene3Id, characterSceneIds.scene3_AliceId);
 
       var main_day4_scene6Id = _scheduleSceneService.Add(new ScheduleSceneDto
       {
@@ -1335,9 +1333,6 @@ namespace Raccord.API.Controllers.Admin
         LocationSetID = locationSetIds.forestId,
         PageLength = 6
       });
-      _scheduleCharacterService.AddLink(main_day4_scene6Id, characterSceneIds.scene6_AliceId);
-      _scheduleCharacterService.AddLink(main_day4_scene6Id, characterSceneIds.scene6_BobId);
-      _scheduleCharacterService.AddLink(main_day4_scene6Id, characterSceneIds.scene6_CharlieId);
 
       var second_day1_scene1Id = _scheduleSceneService.Add(new ScheduleSceneDto
       {
@@ -1394,24 +1389,6 @@ namespace Raccord.API.Controllers.Admin
         End = scheduleDay.End.Value,
         CrewUnitID = scheduleDay.CrewUnitID
       });
-
-      foreach(var scheduleDayScene in scheduleDay.Scenes)
-      {
-        var callsheetSceneId = _callsheetSceneService.Add(new CallsheetSceneDto
-        {
-          PageLength = scheduleDayScene.PageLength,
-          SceneID = scheduleDayScene.Scene.ID,
-          CallsheetID = callsheetId,
-          LocationSetID = scheduleDayScene.LocationSet.ID
-        });
-        var characterScenes = _characterSceneService.GetCharacters(scheduleDayScene.Scene.ID);
-
-        foreach(var character in scheduleDayScene.Characters)
-        {
-          var characterScene = characterScenes.FirstOrDefault(cs => cs.ID == character.ID);
-          _callsheetSceneCharacterService.AddLink(callsheetSceneId, characterScene.LinkID);
-        }
-      }
 
       _callsheetCharacterService.SetCharacters(callsheetId, projectId);
 
@@ -1490,12 +1467,6 @@ namespace Raccord.API.Controllers.Admin
       return results;
     }
 
-    /*
-                      new BreakdownTypeDefinition{ Name = "Costume" },
-                    new BreakdownTypeDefinition{ Name = "Hair / Make Up" },
-                    new BreakdownTypeDefinition{ Name = "Props" },
-                    new BreakdownTypeDefinition{ Name = "Vehicles" },
-     */
     private (long bobsCarId, long charliesCarId) CreateVehicleBreakdownItems(long breakdownId, long breakdownTypeId)
     {
       var bobsCarId = _breakdownItemService.Add(GetBreakdownItemDto(breakdownId, breakdownTypeId, "Bob's car"));
@@ -1523,6 +1494,54 @@ namespace Raccord.API.Controllers.Admin
         BreakdownID = breakdownId,
         BreakdownTypeID = breakdownTypeId
       };
+    }
+
+    public void LinkBreakdownItemScenes(
+      (
+        long bobsCarId,
+        long charliesCarId,
+        long alicesPhoneId,
+        long bobsPhoneId,
+        long alicesBagId,
+        long alicesCoatId
+      ) breakdownItemIds,
+      (
+        long scene1Id,
+        long scene2Id,
+        long scene3Id,
+        long scene4Id,
+        long scene5Id,
+        long scene5AId,
+        long scene6Id
+      )sceneIds
+    )
+    {
+      _breakdownItemSceneService.AddLink(breakdownItemIds.alicesBagId, sceneIds.scene2Id);
+      _breakdownItemSceneService.AddLink(breakdownItemIds.alicesCoatId, sceneIds.scene2Id);
+      _breakdownItemSceneService.AddLink(breakdownItemIds.alicesBagId, sceneIds.scene3Id);
+      _breakdownItemSceneService.AddLink(breakdownItemIds.alicesCoatId, sceneIds.scene3Id);
+      _breakdownItemSceneService.AddLink(breakdownItemIds.alicesPhoneId, sceneIds.scene3Id);
+      _breakdownItemSceneService.AddLink(breakdownItemIds.alicesBagId, sceneIds.scene4Id);
+      _breakdownItemSceneService.AddLink(breakdownItemIds.alicesCoatId, sceneIds.scene4Id);
+      _breakdownItemSceneService.AddLink(breakdownItemIds.alicesPhoneId, sceneIds.scene4Id);
+      _breakdownItemSceneService.AddLink(breakdownItemIds.bobsCarId, sceneIds.scene4Id);
+      _breakdownItemSceneService.AddLink(breakdownItemIds.bobsPhoneId, sceneIds.scene4Id);
+      _breakdownItemSceneService.AddLink(breakdownItemIds.alicesBagId, sceneIds.scene5Id);
+      _breakdownItemSceneService.AddLink(breakdownItemIds.alicesCoatId, sceneIds.scene5Id);
+      _breakdownItemSceneService.AddLink(breakdownItemIds.alicesPhoneId, sceneIds.scene5Id);
+      _breakdownItemSceneService.AddLink(breakdownItemIds.bobsCarId, sceneIds.scene5Id);
+      _breakdownItemSceneService.AddLink(breakdownItemIds.bobsPhoneId, sceneIds.scene5Id);
+      _breakdownItemSceneService.AddLink(breakdownItemIds.alicesBagId, sceneIds.scene5AId);
+      _breakdownItemSceneService.AddLink(breakdownItemIds.alicesCoatId, sceneIds.scene5AId);
+      _breakdownItemSceneService.AddLink(breakdownItemIds.alicesPhoneId, sceneIds.scene5AId);
+      _breakdownItemSceneService.AddLink(breakdownItemIds.bobsCarId, sceneIds.scene5AId);
+      _breakdownItemSceneService.AddLink(breakdownItemIds.bobsPhoneId, sceneIds.scene5AId);
+      _breakdownItemSceneService.AddLink(breakdownItemIds.alicesBagId, sceneIds.scene6Id);
+      _breakdownItemSceneService.AddLink(breakdownItemIds.alicesCoatId, sceneIds.scene6Id);
+      _breakdownItemSceneService.AddLink(breakdownItemIds.alicesPhoneId, sceneIds.scene6Id);
+      _breakdownItemSceneService.AddLink(breakdownItemIds.bobsCarId, sceneIds.scene6Id);
+      _breakdownItemSceneService.AddLink(breakdownItemIds.bobsPhoneId, sceneIds.scene6Id);
+      _breakdownItemSceneService.AddLink(breakdownItemIds.charliesCarId, sceneIds.scene6Id);
     }
 #endregion
 
