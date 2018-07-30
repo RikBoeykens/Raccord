@@ -19,7 +19,7 @@ import { RouteInfo, RouteHelpers } from '../../../shared';
   templateUrl: 'calendar.component.html',
 })
 export class CalendarComponent implements OnInit {
-    public view: string = 'month';
+    public view: string = 'week';
     public viewDate: Date = new Date();
     public activeDayIsOpen: boolean = false;
     @Input() public events: Array<CalendarEvent<{ routeInfo: RouteInfo }>> =

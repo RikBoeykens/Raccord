@@ -3,8 +3,8 @@ import {
     CallsheetSceneScene,
     CallsheetCharacterCharacter,
     ShootingDay,
-    CallsheetLocation,
-    CallsheetBreakdown
+    CallsheetBreakdown,
+    CallsheetLocation
 } from '../../..';
 import { CrewUnit } from '../../../../shared/children/crew';
 import { WeatherInfo } from '../../../../shared/children/weather';

@@ -3,15 +3,15 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ProjectSummary } from '../../../../../shared/children/projects';
 import {
   FullCallsheet,
-  CallsheetLocation,
   CallsheetLocationSet,
   CallsheetSceneScene,
   Location,
-  CallsheetCharacterCharacter
+  CallsheetCharacterCharacter,
+  CallsheetLocation
 } from '../../../..';
 import { ProjectHelpers } from '../../../../../shared/children/projects/helpers/project.helpers';
 import { CastMember } from '../../../../../shared/children/cast';
-import { MapsHelpers } from '../../../../../shared';
+import { RouteSettings } from '../../../../../shared';
 
 @Component({
   templateUrl: 'callsheet.component.html',
@@ -19,9 +19,6 @@ import { MapsHelpers } from '../../../../../shared';
 export class CallsheetComponent implements OnInit {
   public project: ProjectSummary;
   public callsheet: FullCallsheet;
-  public bounds: any;
-  public markerLocations: CallsheetLocation[] = [];
-  public markerLocationSets: CallsheetLocationSet[] = [];
 
   constructor(
       private _route: ActivatedRoute
@@ -34,7 +31,6 @@ export class CallsheetComponent implements OnInit {
     }) => {
       this.project = ProjectHelpers.getCurrentProject();
       this.callsheet = data.callsheet;
-      this.setBounds();
     });
   }
 
@@ -52,30 +48,21 @@ export class CallsheetComponent implements OnInit {
     return locations;
   }
 
-  public setBounds() {
-      this.markerLocations = this.callsheet.locations.filter((l) => l.latLng.hasLatLng);
-      this.markerLocations.forEach((location) => {
-        this.markerLocationSets =
-            this.markerLocationSets.concat(location.sets.filter((l) => l.latLng.hasLatLng));
-      });
-      if (this.markerLocations.length || this.markerLocationSets.length) {
-        let latLngs = this.markerLocations.map((location) => location.latLng);
-        latLngs =
-            latLngs.concat(this.markerLocationSets.map((locationSet) => locationSet.latLng));
-        this.bounds = MapsHelpers.getBounds(latLngs);
-      }
-  }
-
   public showCharacterImage(callsheetCharacter: CallsheetCharacterCharacter) {
       return callsheetCharacter.castMember.id === 0 &&
       callsheetCharacter.character.primaryImage.id !== 0;
   }
 
   public showUserImage(callsheetCharacter: CallsheetCharacterCharacter) {
-      return callsheetCharacter.castMember.id !== 0;
+    return callsheetCharacter.castMember.id !== 0;
   }
 
   public getFullName(castMember: CastMember) {
-      return `${castMember.firstName} ${castMember.lastName}`;
+    return `${castMember.firstName} ${castMember.lastName}`;
+  }
+
+  public getCrewUnitLink() {
+    // tslint:disable-next-line:max-line-length
+    return `/${RouteSettings.PROJECTS}/${this.project.id}/${RouteSettings.CALLSHEETS}/${this.callsheet.crewUnit.id}`;
   }
 }

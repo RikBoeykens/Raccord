@@ -1,0 +1,11 @@
+<mat-card class="callsheet-location-card">
+  <mat-card-title>#{{location.number}}. <a routerLink="{{getLocationLink()}}">{{location.name}}</a></mat-card-title>
+  <mat-card-content>
+    <div class="address-container">
+      <p>{{location.address.address1}}</p>
+      <p>{{location.address.address2}}</p>
+      <p>{{location.address.address3}}</p>
+      <p>{{location.address.address4}}</p>
+    </div>
+  </mat-card-content>
+</mat-card>

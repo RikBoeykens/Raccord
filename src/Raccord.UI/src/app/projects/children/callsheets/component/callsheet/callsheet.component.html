@@ -5,4 +5,52 @@
       Callsheet {{callsheet.shootingDay.number}}
     </h1>
   </div>
+  <mat-card class="raccord-label-info">
+    <div fxLayout="row"
+      class="raccord-label-info-row">
+      <span fxFlex="50%" class="raccord-label">
+        Date
+      </span>
+      <span fxFlex="50%" class="raccord-info">
+        {{callsheet.shootingDay.date | date}}
+      </span>
+    </div>
+    <div fxLayout="row"
+      class="raccord-label-info-row">
+      <span fxFlex="50%" class="raccord-label">
+        Crew Call
+      </span>
+      <span fxFlex="50%" class="raccord-info">
+        {{callsheet.crewCall | date:'shortTime'}}
+      </span>
+    </div>
+    <div fxLayout="row"
+      class="raccord-label-info-row">
+      <span fxFlex="50%" class="raccord-label">
+        Unit
+      </span>
+      <span fxFlex="50%" class="raccord-info">
+        <a routerLink="{{getCrewUnitLink()}}">
+          {{callsheet.crewUnit.name}}
+        </a>
+      </span>
+    </div>
+  </mat-card>
+  <div *ngIf="callsheet.weatherInfo">
+    <h2>Weather Info</h2>
+    <mat-card class="raccord-label-info">
+      <weather-info [weatherInfo]="callsheet.weatherInfo"></weather-info>
+    </mat-card>
+  </div>
+  <div *ngIf="callsheet.locations.length">
+    <h2>Locations</h2>
+    <div fxLayout="row wrap" fxLayoutGap="5px">
+      <callsheet-location-card
+        *ngFor="let location of callsheet.locations"
+        [location]="location"></callsheet-location-card>
+    </div>
+    <callsheet-locations-map
+      [locations]="callsheet.locations"
+      [projectId]="project.id"></callsheet-locations-map>
+  </div>
 </div>

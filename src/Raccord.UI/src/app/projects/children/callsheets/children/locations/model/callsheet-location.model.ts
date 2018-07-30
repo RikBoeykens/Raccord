@@ -1,6 +1,6 @@
-import { Location } from './location.model';
-import { CallsheetLocationSet } from '../../..';
-import { Address, LatLng } from '../../../../shared';
+import { Location } from '../../../../locations/model/location.model';
+import { CallsheetLocationSet } from '../../../../..';
+import { Address, LatLng } from '../../../../../../shared';
 
 export class CallsheetLocation extends Location {
     public number: string;

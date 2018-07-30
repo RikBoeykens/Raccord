@@ -33,6 +33,18 @@ export { CharacterCallHttpService } from './children/callsheets/children/charact
 export { CallsheetCharacterCharacter } from './children/callsheets/children/characters/model/callsheet-character-character.model';
 
 // tslint:disable-next-line:max-line-length
+export { CallsheetLocationSet } from './children/callsheets/children/location-sets/model/callsheet-location-set.model';
+
+// tslint:disable-next-line:max-line-length
+export { CallsheetLocationCardComponent } from './children/callsheets/children/locations/component/callsheet-location-card/callsheet-location-card.component';
+
+// tslint:disable-next-line:max-line-length
+export { CallsheetLocationsMapComponent } from './children/callsheets/children/locations/component/callsheet-locations-map/callsheet-locations-map.component';
+
+// tslint:disable-next-line:max-line-length
+export { CallsheetLocation } from './children/callsheets/children/locations/model/callsheet-location.model';
+
+// tslint:disable-next-line:max-line-length
 export { CallsheetSceneScene } from './children/callsheets/children/scenes/model/callsheet-scene-scene.model';
 
 export { CallsheetComponent } from './children/callsheets/component/callsheet/callsheet.component';
@@ -47,14 +59,11 @@ export { CallsheetHttpService } from './children/callsheets/service/callsheet-ht
 export { CallsheetResolve } from './children/callsheets/service/callsheet-resolve.service';
 
 // tslint:disable-next-line:max-line-length
-export { CallsheetLocationSet } from './children/locations/children/location-sets/model/callsheet-location-set.model';
-// tslint:disable-next-line:max-line-length
 export { LocationSetScriptLocation } from './children/locations/children/location-sets/model/location-set-script-location.model';
 // tslint:disable-next-line:max-line-length
 export { LocationSetSummary } from './children/locations/children/location-sets/model/location-set-summary.model';
 export { LocationSet } from './children/locations/children/location-sets/model/location-set.model';
 
-export { CallsheetLocation } from './children/locations/model/callsheet-location.model';
 export { Location } from './children/locations/model/location.model';
 
 export { BaseShootingDay } from './children/shooting-days/model/base-shooting-day.model';

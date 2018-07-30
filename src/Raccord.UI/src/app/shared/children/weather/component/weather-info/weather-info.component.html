@@ -1,5 +1,45 @@
 <div class="weather-info-container">
     <p>{{weatherInfo.summary}}</p>
-    <p>Min: {{weatherInfo.temperatureLow}}</p>
-    <p>Max: {{weatherInfo.temperatureHigh}}</p>
+    <div fxLayout="row">
+        <div fxFlex="50%">
+            <div fxLayout="row"
+                class="raccord-label-info-row">
+                <span fxFlex="50%" class="raccord-label">
+                    Min
+                </span>
+                <span fxFlex="50%" class="raccord-info">
+                    {{weatherInfo.temperatureLow}} °C
+                </span>
+            </div>
+            <div fxLayout="row"
+                class="raccord-label-info-row">
+                <span fxFlex="50%" class="raccord-label">
+                    Max
+                </span>
+                <span fxFlex="50%" class="raccord-info">
+                    {{weatherInfo.temperatureHigh}} °C
+                </span>
+            </div>
+        </div>
+        <div fxFlex="50%">
+            <div fxLayout="row"
+                class="raccord-label-info-row">
+                <span fxFlex="50%" class="raccord-label">
+                    Sunrise
+                </span>
+                <span fxFlex="50%" class="raccord-info">
+                    {{weatherInfo.sunriseTime | date:'shortTime'}}
+                </span>
+            </div>
+            <div fxLayout="row"
+                class="raccord-label-info-row">
+                <span fxFlex="50%" class="raccord-label">
+                    Sunset
+                </span>
+                <span fxFlex="50%" class="raccord-info">
+                    {{weatherInfo.sunsetTime | date:'shortTime'}}
+                </span>
+            </div>
+        </div>
+    </div>
 </div>

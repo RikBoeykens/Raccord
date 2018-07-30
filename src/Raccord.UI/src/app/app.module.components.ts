@@ -65,6 +65,8 @@ import {
 } from './profile';
 import {
   ProjectCalendarComponent,
+  CallsheetLocationCardComponent,
+  CallsheetLocationsMapComponent,
   CallsheetComponent,
   ProjectsListComponent,
   ProjectDashboardComponent
@@ -146,6 +148,8 @@ export const COMPONENTS = [
   NoContentComponent,
   UserProfileDashboardComponent,
   ProjectCalendarComponent,
+  CallsheetLocationCardComponent,
+  CallsheetLocationsMapComponent,
   CallsheetComponent,
   ProjectsListComponent,
   ProjectDashboardComponent,
