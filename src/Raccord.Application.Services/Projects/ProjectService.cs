@@ -87,8 +87,6 @@ namespace Raccord.Application.Services.Projects
 
             var user = _userRepository.GetFull(userId);
 
-            var projectDtos = projects.Select(p => p.TranslateUserSummary(user));
-
             return projects.GetPaged<Project, UserProjectDto>(paginationRequest, x => Utilities.TranslateUser(x, user));
         }
 

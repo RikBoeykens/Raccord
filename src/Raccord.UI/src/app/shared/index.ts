@@ -31,5 +31,8 @@ export { LatLng } from './model/lat-lng.model';
 export { RouteInfo } from './model/route-info.model';
 export { SortOrder } from './model/sort-order.model';
 
+export { PageLengthPipe } from './pipes/page-length.pipe';
+export { TimespanPipe } from './pipes/timespan.pipe';
+
 export { RouteSettings } from './settings/route.settings';
 export { StorageSettings } from './settings/storage.settings';

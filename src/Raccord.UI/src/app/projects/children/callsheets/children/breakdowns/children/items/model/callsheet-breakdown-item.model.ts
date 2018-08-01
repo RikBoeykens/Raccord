@@ -1,4 +1,6 @@
-import { BaseBreakdownItem } from './base-breakdown-item.model';
+import {
+    BaseBreakdownItem
+} from '../../../../../../breakdowns/children/items/model/base-breakdown-item.model';
 
 export class CallsheetBreakdownItem extends BaseBreakdownItem {
     constructor(

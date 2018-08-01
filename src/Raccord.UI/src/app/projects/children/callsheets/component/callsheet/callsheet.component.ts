@@ -48,21 +48,27 @@ export class CallsheetComponent implements OnInit {
     return locations;
   }
 
-  public showCharacterImage(callsheetCharacter: CallsheetCharacterCharacter) {
-      return callsheetCharacter.castMember.id === 0 &&
-      callsheetCharacter.character.primaryImage.id !== 0;
-  }
-
-  public showUserImage(callsheetCharacter: CallsheetCharacterCharacter) {
-    return callsheetCharacter.castMember.id !== 0;
-  }
-
-  public getFullName(castMember: CastMember) {
-    return `${castMember.firstName} ${castMember.lastName}`;
+  public getBackLink() {
+    // tslint:disable-next-line:max-line-length
+    return `/${RouteSettings.PROJECTS}/${this.project.id}/${RouteSettings.CALLSHEETS}`;
   }
 
   public getCrewUnitLink() {
     // tslint:disable-next-line:max-line-length
-    return `/${RouteSettings.PROJECTS}/${this.project.id}/${RouteSettings.CALLSHEETS}/${this.callsheet.crewUnit.id}`;
+    return `/${RouteSettings.PROJECTS}/${this.project.id}/${RouteSettings.UNITS}/${this.callsheet.crewUnit.id}`;
+  }
+
+  public getBreakdownLink() {
+    // tslint:disable-next-line:max-line-length
+    return `/${RouteSettings.PROJECTS}/${this.project.id}/${RouteSettings.BREAKDOWNS}/${this.callsheet.breakdownInfo.id}`;
+  }
+
+  public getSidesLink() {
+    // tslint:disable-next-line:max-line-length
+    return `/${RouteSettings.PROJECTS}/${this.project.id}/${RouteSettings.CALLSHEETS}/${this.callsheet.id}/${RouteSettings.SIDES}`;
+  }
+
+  public hasBreakdown() {
+    return this.callsheet.breakdownInfo.id !== 0;
   }
 }

@@ -65,9 +65,19 @@ import {
 } from './profile';
 import {
   ProjectCalendarComponent,
+  CallsheetBreakdownsTableComponent,
+  CallsheetCharactersTableComponent,
   CallsheetLocationCardComponent,
   CallsheetLocationsMapComponent,
+  CallsheetScenesTableComponent,
   CallsheetComponent,
+  CallsheetSidesComponent,
+  SceneActionComponent,
+  SceneDialogueComponent,
+  SceneHeaderComponent,
+  ScriptTextComponent,
+  ScriptTextLandingComponent,
+  ScriptTextUserComponent,
   ProjectsListComponent,
   ProjectDashboardComponent
 } from './projects';
@@ -78,6 +88,7 @@ import {
   LoginComponent
 } from './security';
 import {
+  CharacterAvatarComponent,
   CharacterSummaryComponent
 } from './shared/children/characters';
 import {
@@ -87,6 +98,9 @@ import {
   ProjectAvatarComponent,
   ProjectCardComponent
 } from './shared/children/projects';
+import {
+  SceneAvatarComponent
+} from './shared/children/scenes';
 import {
   ShowProfileImageComponent,
   UserAvatarComponent
@@ -148,17 +162,29 @@ export const COMPONENTS = [
   NoContentComponent,
   UserProfileDashboardComponent,
   ProjectCalendarComponent,
+  CallsheetBreakdownsTableComponent,
+  CallsheetCharactersTableComponent,
   CallsheetLocationCardComponent,
   CallsheetLocationsMapComponent,
+  CallsheetScenesTableComponent,
   CallsheetComponent,
+  CallsheetSidesComponent,
+  SceneActionComponent,
+  SceneDialogueComponent,
+  SceneHeaderComponent,
+  ScriptTextComponent,
+  ScriptTextLandingComponent,
+  ScriptTextUserComponent,
   ProjectsListComponent,
   ProjectDashboardComponent,
   SearchDashboardComponent,
   LoginComponent,
+  CharacterAvatarComponent,
   CharacterSummaryComponent,
   ShowImageComponent,
   ProjectAvatarComponent,
   ProjectCardComponent,
+  SceneAvatarComponent,
   ShowProfileImageComponent,
   UserAvatarComponent,
   WeatherInfoComponent,

@@ -29,7 +29,14 @@ import { DashboardComponent } from './dashboard';
 import { NoContentComponent } from './no-content';
 import {
   CallsheetComponent,
+  CallsheetSidesComponent,
   CallsheetResolve,
+  CallsheetSummaryResolve,
+  ScriptTextLandingComponent,
+  ScriptTextUserComponent,
+  ScriptTextResolve,
+  ScriptTextCallsheetResolve,
+  ScriptTextUserResolve,
   ProjectsListComponent,
   ProjectDashboardComponent
 } from './projects';
@@ -200,10 +207,45 @@ export const ROUTES: Routes = [
             children: [
               {
                 path: ':callsheetId',
-                component: CallsheetComponent,
+                children: [
+                  {
+                    path: '',
+                    component: CallsheetComponent,
+                    resolve: {
+                      CurrentProjectResolve,
+                      callsheet: CallsheetResolve
+                    }
+                  },
+                  {
+                    path: RouteSettings.SIDES,
+                    component: CallsheetSidesComponent,
+                    resolve: {
+                      CurrentProjectResolve,
+                      callsheet: CallsheetSummaryResolve,
+                      sceneTexts: ScriptTextCallsheetResolve
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            path: RouteSettings.SCRIPTTEXT,
+            children: [
+              {
+                path: '',
+                component: ScriptTextLandingComponent,
                 resolve: {
                   CurrentProjectResolve,
-                  callsheet: CallsheetResolve
+                  sceneTexts: ScriptTextResolve,
+                }
+              },
+              {
+                path: RouteSettings.USER,
+                component: ScriptTextUserComponent,
+                resolve: {
+                  CurrentProjectResolve,
+                  sceneTexts: ScriptTextUserResolve,
                 }
               }
             ]

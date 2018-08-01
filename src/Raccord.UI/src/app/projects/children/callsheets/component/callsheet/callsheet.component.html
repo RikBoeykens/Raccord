@@ -1,9 +1,15 @@
 
 <div class="raccord-narrow-container">
   <div class="raccord-page-header">
-    <h1 class="raccord-header-title">
-      Callsheet {{callsheet.shootingDay.number}}
-    </h1>
+    <a routerLink="{{getBackLink()}}">
+      <back-link></back-link>
+    </a>
+    <div fxLayout="row">
+      <h1 class="raccord-header-title">
+        Callsheet {{callsheet.shootingDay.number}}
+        <a mat-mini-fab routerLink="{{getSidesLink()}}"><mat-icon>subject</mat-icon></a>
+      </h1>
+    </div>
   </div>
   <mat-card class="raccord-label-info">
     <div fxLayout="row"
@@ -53,4 +59,21 @@
       [locations]="callsheet.locations"
       [projectId]="project.id"></callsheet-locations-map>
   </div>
+  <h2>Scenes</h2>
+  <callsheet-scenes-table 
+    [callsheetScenes]="callsheet.scenes"
+    [projectId]="project.id"></callsheet-scenes-table>
+  <h2>Cast</h2>
+  <callsheet-characters-table 
+    [callsheetCharacters]="callsheet.characters"
+    [projectId]="project.id"></callsheet-characters-table>
+  <h2>
+    Breakdown
+    <span *ngIf="hasBreakdown()">
+      (<a routerLink="{{getBreakdownLink()">{{callsheet.breakdownInfo.name}}</a>)
+    </span>
+  </h2>
+  <callsheet-breakdowns-table
+    [callsheetBreakdownTypes]="callsheet.breakdownInfo.types"
+    [projectId]="project.id"></callsheet-breakdowns-table>
 </div>

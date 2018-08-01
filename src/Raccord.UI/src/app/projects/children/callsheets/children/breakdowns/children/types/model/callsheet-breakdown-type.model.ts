@@ -1,5 +1,7 @@
-import { BaseBreakdownType } from './base-breakdown-type.model';
-import { CallsheetBreakdownItemScene } from '../../../../..';
+import {
+    BaseBreakdownType
+} from '../../../../../../breakdowns/children/types/model/base-breakdown-type.model';
+import { CallsheetBreakdownItemScene } from '../../../../../../..';
 
 export class CallsheetBreakdownType extends BaseBreakdownType {
     public scenes: CallsheetBreakdownItemScene[];

@@ -5,6 +5,7 @@ using Raccord.Domain.Model.ScriptLocations;
 using Raccord.Application.Core.Services.ScriptLocations;
 using Raccord.Data.EntityFramework.Repositories.ScriptLocations;
 using Raccord.Domain.Model.Images;
+using Raccord.Application.Core.Common.Paging;
 
 namespace Raccord.Application.Services.ScriptLocations
 {
@@ -30,6 +31,12 @@ namespace Raccord.Application.Services.ScriptLocations
             var dtos = locations.Select(l => l.TranslateSummary());
 
             return dtos;
+        }
+
+        public PagedDataDto<ScriptLocationSummaryDto> GetPagedForProject(PaginationRequestDto paginationRequest,long projectId)
+        {
+            var locations = _scriptLocationRepository.GetAllForProject(projectId);
+            return locations.GetPaged<ScriptLocation, ScriptLocationSummaryDto>(paginationRequest, x => x.TranslateSummary());
         }
 
         // Gets a single location by id

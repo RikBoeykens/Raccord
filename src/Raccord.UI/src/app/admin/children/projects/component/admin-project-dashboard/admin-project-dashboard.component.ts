@@ -7,7 +7,7 @@ import {
   AdminEditProjectDialogComponent
 } from '../../../..';
 import { AdminProjectHttpService } from '../../service/admin-project-http.service';
-import { LoadingWrapperService } from '../../../../../shared';
+import { LoadingWrapperService, RouteSettings } from '../../../../../shared';
 import { ProjectRole } from '../../../../../shared/children/users';
 
 @Component({
@@ -33,6 +33,10 @@ export class AdminProjectDashboardComponent implements OnInit {
       this.project = data.project;
       this.projectRoles = data.projectRoles;
     });
+  }
+
+  public getBackLink() {
+    return `/${RouteSettings.ADMIN}/${RouteSettings.PROJECTS}`;
   }
 
   public showEditProject() {

@@ -9,6 +9,7 @@ using Raccord.Data.EntityFramework.Repositories.Characters;
 using Raccord.Application.Core.Common.Sorting;
 using Raccord.Data.EntityFramework.Repositories.Images;
 using Raccord.Domain.Model.Images;
+using Raccord.Application.Core.Common.Paging;
 
 namespace Raccord.Application.Services.Characters
 {
@@ -48,6 +49,12 @@ namespace Raccord.Application.Services.Characters
             var dtos = characters.Select(l => l.TranslateSummary());
 
             return dtos;
+        }
+
+        public PagedDataDto<CharacterSummaryDto> GetPagedForProject(PaginationRequestDto paginationRequest,long projectId)
+        {
+            var characters = _characterRepository.GetAllForProject(projectId);
+            return characters.GetPaged<Character, CharacterSummaryDto>(paginationRequest, x => x.TranslateSummary());
         }
 
         // Gets a single character by id

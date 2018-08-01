@@ -46,7 +46,14 @@ import {
   ProjectCalendarHttpService,
   CharacterCallHttpService,
   CallsheetHttpService,
-  CallsheetResolve
+  CallsheetResolve,
+  ScriptTextResolve,
+  ScriptTextCallsheetResolve,
+  ScriptTextUserResolve,
+  ScriptTextHttpService,
+  CallsheetSummaryResolve,
+  ScriptDashboardHttpService,
+  ScriptDashboardResolve
 } from './projects';
 import {
   SearchEngineHttpService
@@ -118,6 +125,13 @@ export const SERVICES = [
   CharacterCallHttpService,
   CallsheetHttpService,
   CallsheetResolve,
+  CallsheetSummaryResolve,
+  ScriptTextResolve,
+  ScriptTextCallsheetResolve,
+  ScriptTextUserResolve,
+  ScriptTextHttpService,
+  ScriptDashboardHttpService,
+  ScriptDashboardResolve,
   SearchEngineHttpService,
   AuthService,
   AuthGuard,

@@ -1,0 +1,18 @@
+<div class="scene-header" id="scene-{{scene.id}}">
+  <span class="scene-header-number">{{scene.number}}</span>
+  <a routerLink="{{getSceneLink()}}"
+      class="scene-header-info"
+      id="scene-{{scene.id}}">
+    <span *ngIf="scene.sceneIntro.id==0&&scene.scriptLocation.id==0&&scene.timeOfDay.id==0">
+      <span *ngIf="scene.summary">
+          {{scene.summary}}
+      </span>
+      <span *ngIf="!scene.summary">
+          <i>No content</i>
+      </span>
+    </span>
+    <span *ngIf="scene.sceneIntro.id!=0||scene.scriptLocation.id!=0||scene.timeOfDay.id!=0">
+      {{scene.sceneIntro.name}}. {{scene.scriptLocation.name}} - {{scene.timeOfDay.name}}
+    </span>
+  </a>
+</div>

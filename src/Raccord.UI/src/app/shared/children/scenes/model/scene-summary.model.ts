@@ -1,6 +1,6 @@
 import { SceneIntro, TimeOfDay } from '../../sceneproperties';
 import { ScriptLocation } from '../../script-locations';
-import { Scene } from '..';
+import { Scene } from './scene.model';
 import { Image } from '../../images';
 
 export class SceneSummary extends Scene {

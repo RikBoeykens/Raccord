@@ -1,5 +1,5 @@
-import { BaseModel } from '../../../../../../shared';
-import { CallsheetBreakdownItem } from '../../../../..';
+import { BaseModel } from '../../../../../../../../shared/model/base.model';
+import { CallsheetBreakdownItem } from '../../../../../../..';
 
 export class CallsheetBreakdownItemScene extends BaseModel {
     public sceneID: number;

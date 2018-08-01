@@ -1,5 +1,5 @@
-import { Breakdown } from './breakdown.model';
-import { CallsheetBreakdownType } from '../../..';
+import { Breakdown } from '../../../../breakdowns/model/breakdown.model';
+import { CallsheetBreakdownType } from '../../../../..';
 
 export class CallsheetBreakdown extends Breakdown {
   public types: CallsheetBreakdownType[];

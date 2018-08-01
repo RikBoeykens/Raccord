@@ -17,6 +17,7 @@ import { COMPONENTS } from './app.module.components';
 import { DIALOGS } from './app.module.components';
 import { SERVICES } from './app.module.services';
 import { INTERCEPTORS } from './app.module.interceptors';
+import { PIPES } from './app.module.pipes';
 
 // external modules
 import { DragulaModule } from 'ng2-dragula';
@@ -36,7 +37,8 @@ import '../styles/headings.css';
   bootstrap: [ AppComponent ],
   declarations: [
     COMPONENTS,
-    DIALOGS
+    DIALOGS,
+    PIPES
   ],
   entryComponents: [
     DIALOGS

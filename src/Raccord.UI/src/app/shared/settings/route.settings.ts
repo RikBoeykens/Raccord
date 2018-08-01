@@ -11,6 +11,7 @@ export class RouteSettings {
   public static get PROJECTS(): string { return 'projects'; }
   public static get SCENES(): string { return 'scenes'; }
   public static get TIMINGS(): string { return 'timings'; }
+  public static get SCRIPT(): string { return 'scriptlocations'; }
   public static get SCRIPTLOCATIONS(): string { return 'scriptlocations'; }
   public static get SCENEPROPERTIES(): string { return 'sceneproperties'; }
   public static get TIMEOFDAYS(): string { return 'timeofdays'; }
@@ -19,6 +20,8 @@ export class RouteSettings {
   public static get CHARACTERS(): string { return 'characters'; }
   public static get CAST(): string { return 'cast'; }
   public static get BREAKDOWNS(): string { return 'breakdowns'; }
+  public static get BREAKDOWNTYPES(): string { return 'breakdowntypes'; }
+  public static get BREAKDOWNITEMS(): string { return 'breakdownitems'; }
   public static get SCHEDULING(): string { return 'scheduling'; }
   public static get LOCATIONS(): string { return 'locations'; }
   public static get LOCATIONSETS(): string { return 'locationsets'; }
@@ -30,6 +33,7 @@ export class RouteSettings {
   public static get SCRIPTUPLOADS(): string { return 'scriptuploads'; }
   public static get SCRIPTTEXT(): string { return 'scripttext'; }
   public static get CALLSHEET(): string { return 'callsheet'; }
+  public static get SIDES(): string { return 'sides'; }
 
   public static get ADMIN(): string { return 'admin'; }
   public static get SETTINGS(): string { return 'settings'; }
