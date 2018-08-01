@@ -11,24 +11,27 @@ export class RouteSettings {
   public static get PROJECTS(): string { return 'projects'; }
   public static get SCENES(): string { return 'scenes'; }
   public static get TIMINGS(): string { return 'timings'; }
-  public static get SCRIPT(): string { return 'scriptlocations'; }
+  public static get SCRIPT(): string { return 'script'; }
   public static get SCRIPTLOCATIONS(): string { return 'scriptlocations'; }
   public static get SCENEPROPERTIES(): string { return 'sceneproperties'; }
   public static get TIMEOFDAYS(): string { return 'timeofdays'; }
   public static get SCENEINTROS(): string { return 'sceneintros'; }
   public static get IMAGES(): string { return 'images'; }
+  public static get CASTDASHBOARD(): string { return 'castdashboard'; }
   public static get CHARACTERS(): string { return 'characters'; }
   public static get CAST(): string { return 'cast'; }
   public static get BREAKDOWNS(): string { return 'breakdowns'; }
   public static get BREAKDOWNTYPES(): string { return 'breakdowntypes'; }
   public static get BREAKDOWNITEMS(): string { return 'breakdownitems'; }
   public static get SCHEDULING(): string { return 'scheduling'; }
+  public static get LOCATIONSDASHBOARD(): string { return 'locationsdashboard'; }
   public static get LOCATIONS(): string { return 'locations'; }
   public static get LOCATIONSETS(): string { return 'locationsets'; }
   public static get CALLSHEETS(): string { return 'callsheets'; }
   public static get SLATES(): string { return 'slates'; }
   public static get CHARTS(): string { return 'charts'; }
   public static get SHOOTINGDAYS(): string { return 'shootingdays'; }
+  public static get CREW(): string { return 'crew'; }
   public static get UNITLISTS(): string { return 'unitlists'; }
   public static get SCRIPTUPLOADS(): string { return 'scriptuploads'; }
   public static get SCRIPTTEXT(): string { return 'scripttext'; }

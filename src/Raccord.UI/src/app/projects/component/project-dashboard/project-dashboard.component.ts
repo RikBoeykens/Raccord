@@ -4,6 +4,7 @@ import { ProjectSummary } from '../../../shared/children/projects';
 import { ProjectHelpers } from '../../../shared/children/projects/helpers/project.helpers';
 import { AccountHelpers } from '../../../shared/children/account';
 import { ProjectPermissionEnum } from '../../../shared/children/users';
+import { RouteSettings } from '../../../shared';
 
 @Component({
   selector: 'project-dashboard',
@@ -28,5 +29,21 @@ export class ProjectDashboardComponent implements OnInit {
           this.project.id,
           ProjectPermissionEnum.canReadGeneral
       );
+  }
+
+  public getScriptLink() {
+    return `/${RouteSettings.PROJECTS}/${this.project.id}/${RouteSettings.SCRIPT}`;
+  }
+
+  public getLocationLink() {
+    return `/${RouteSettings.PROJECTS}/${this.project.id}/${RouteSettings.LOCATIONSDASHBOARD}`;
+  }
+
+  public getCastLink() {
+    return `/${RouteSettings.PROJECTS}/${this.project.id}/${RouteSettings.CASTDASHBOARD}`;
+  }
+
+  public getCrewLink() {
+    return `/${RouteSettings.PROJECTS}/${this.project.id}/${RouteSettings.CREW}`;
   }
 }

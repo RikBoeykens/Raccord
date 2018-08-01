@@ -78,6 +78,7 @@ import {
   ScriptTextComponent,
   ScriptTextLandingComponent,
   ScriptTextUserComponent,
+  ScriptDashboardComponent,
   ProjectsListComponent,
   ProjectDashboardComponent
 } from './projects';
@@ -175,6 +176,7 @@ export const COMPONENTS = [
   ScriptTextComponent,
   ScriptTextLandingComponent,
   ScriptTextUserComponent,
+  ScriptDashboardComponent,
   ProjectsListComponent,
   ProjectDashboardComponent,
   SearchDashboardComponent,

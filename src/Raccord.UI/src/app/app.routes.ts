@@ -37,6 +37,8 @@ import {
   ScriptTextResolve,
   ScriptTextCallsheetResolve,
   ScriptTextUserResolve,
+  ScriptDashboardComponent,
+  ScriptDashboardResolve,
   ProjectsListComponent,
   ProjectDashboardComponent
 } from './projects';
@@ -178,7 +180,10 @@ export const ROUTES: Routes = [
           }
         ]
       }
-    ]
+    ],
+    resolve: {
+      ResetCurrentProjectResolve
+    }
   },
   {
     path: RouteSettings.PROJECTS,
@@ -197,10 +202,7 @@ export const ROUTES: Routes = [
         children: [
           {
             path: '',
-            component: ProjectDashboardComponent,
-            resolve: {
-              CurrentProjectResolve
-            }
+            component: ProjectDashboardComponent
           },
           {
             path: RouteSettings.CALLSHEETS,
@@ -212,7 +214,6 @@ export const ROUTES: Routes = [
                     path: '',
                     component: CallsheetComponent,
                     resolve: {
-                      CurrentProjectResolve,
                       callsheet: CallsheetResolve
                     }
                   },
@@ -220,7 +221,6 @@ export const ROUTES: Routes = [
                     path: RouteSettings.SIDES,
                     component: CallsheetSidesComponent,
                     resolve: {
-                      CurrentProjectResolve,
                       callsheet: CallsheetSummaryResolve,
                       sceneTexts: ScriptTextCallsheetResolve
                     }
@@ -236,7 +236,6 @@ export const ROUTES: Routes = [
                 path: '',
                 component: ScriptTextLandingComponent,
                 resolve: {
-                  CurrentProjectResolve,
                   sceneTexts: ScriptTextResolve,
                 }
               },
@@ -244,13 +243,27 @@ export const ROUTES: Routes = [
                 path: RouteSettings.USER,
                 component: ScriptTextUserComponent,
                 resolve: {
-                  CurrentProjectResolve,
                   sceneTexts: ScriptTextUserResolve,
                 }
               }
             ]
+          },
+          {
+            path: RouteSettings.SCRIPT,
+            children: [
+              {
+                path: '',
+                component: ScriptDashboardComponent,
+                resolve: {
+                  dashboardInfo: ScriptDashboardResolve
+                }
+              }
+            ]
           }
-        ]
+        ],
+        resolve: {
+          CurrentProjectResolve
+        }
       }
     ]
   },
@@ -265,12 +278,16 @@ export const ROUTES: Routes = [
     path: RouteSettings.PROFILE,
     component: UserProfileDashboardComponent,
     resolve: {
-      userProfile: UserProfileResolve
+      userProfile: UserProfileResolve,
+      ResetCurrentProjectResolve
     }
   },
   {
     path: RouteSettings.SEARCH,
-    component: SearchDashboardComponent
+    component: SearchDashboardComponent,
+    resolve: {
+      ResetCurrentProjectResolve
+    }
   },
   {
     path: RouteSettings.ERROR,

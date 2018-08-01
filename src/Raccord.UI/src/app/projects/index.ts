@@ -112,6 +112,9 @@ export { ScriptTextResolve } from './children/script/children/script-texts/servi
 // tslint:disable-next-line:max-line-length
 export { ScriptTextUserResolve } from './children/script/children/script-texts/service/script-text-user-resolve.service';
 
+// tslint:disable-next-line:max-line-length
+export { ScriptDashboardComponent } from './children/script/component/script-dashboard/script-dashboard.component';
+
 export { ScriptDashboard } from './children/script/model/script-dashboard.model';
 
 // tslint:disable-next-line:max-line-length

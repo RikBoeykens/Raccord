@@ -30,6 +30,10 @@ export class ScriptDashboardComponent implements OnInit {
     this.project = ProjectHelpers.getCurrentProject();
   }
 
+  public getBackLink() {
+    return `/${RouteSettings.PROJECTS}/${this.project.id}`;
+  }
+
   public getScenesLink() {
     return `/${RouteSettings.PROJECTS}/${this.project.id}/${RouteSettings.SCENES}`;
   }

@@ -5,6 +5,28 @@
       {{project.title}}
     </h1>
   </div>
+  <div fxLayout="row wrap" fxLayoutGap="5px">
+    <a routerLink="{{getScriptLink()}}">
+      <mat-card class="link-card">
+        <h3>Script</h3>
+      </mat-card>
+    </a>
+    <a routerLink="{{getLocationLink()}}">
+      <mat-card class="link-card">
+        <h3>Locations</h3>
+      </mat-card>
+    </a>
+    <a routerLink="{{getCastLink()}}">
+      <mat-card class="link-card">
+        <h3>Cast</h3>
+      </mat-card>
+    </a>
+    <a routerLink="{{getCrewLink()}}">
+      <mat-card class="link-card">
+        <h3>Crew</h3>
+      </mat-card>
+    </a>
+  </div>
   <div *ngIf="getCanRead()">
     <h2>Calendar</h2>
     <mat-card>

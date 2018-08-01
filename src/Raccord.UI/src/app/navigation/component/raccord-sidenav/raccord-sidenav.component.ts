@@ -37,4 +37,8 @@ export class RaccordSidenavComponent implements OnInit {
   public getProjectLink() {
       return `/${RouteSettings.PROJECTS}`;
   }
+
+  public getScriptLink() {
+      return `/${RouteSettings.PROJECTS}/${this.currentProject.id}/${RouteSettings.SCRIPT}`;
+  }
 }
