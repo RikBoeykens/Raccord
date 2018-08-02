@@ -34,7 +34,33 @@ export class ScriptDashboardComponent implements OnInit {
     return `/${RouteSettings.PROJECTS}/${this.project.id}`;
   }
 
+  public getScriptLink() {
+    return `/${RouteSettings.PROJECTS}/${this.project.id}/${RouteSettings.SCRIPTTEXT}`;
+  }
+
   public getScenesLink() {
     return `/${RouteSettings.PROJECTS}/${this.project.id}/${RouteSettings.SCENES}`;
+  }
+
+  public getSceneLink(scene: SceneSummary) {
+    return `/${RouteSettings.PROJECTS}/${this.project.id}/${RouteSettings.SCENES}/${scene.id}`;
+  }
+
+  public getCharactersLink() {
+    return `/${RouteSettings.PROJECTS}/${this.project.id}/${RouteSettings.CHARACTERS}`;
+  }
+
+  public getCharacterLink(character: CharacterSummary) {
+    // tslint:disable-next-line:max-line-length
+    return `/${RouteSettings.PROJECTS}/${this.project.id}/${RouteSettings.CHARACTERS}/${character.id}`;
+  }
+
+  public getScriptLocationsLink() {
+    return `/${RouteSettings.PROJECTS}/${this.project.id}/${RouteSettings.SCRIPTLOCATIONS}`;
+  }
+
+  public getScriptLocationLink(scriptLocation: ScriptLocationSummary) {
+    // tslint:disable-next-line:max-line-length
+    return `/${RouteSettings.PROJECTS}/${this.project.id}/${RouteSettings.SCRIPTLOCATIONS}/${scriptLocation.id}`;
   }
 }

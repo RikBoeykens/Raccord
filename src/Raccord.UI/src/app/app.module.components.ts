@@ -90,6 +90,7 @@ import {
 } from './security';
 import {
   CharacterAvatarComponent,
+  CharacterCardComponent,
   CharacterSummaryComponent
 } from './shared/children/characters';
 import {
@@ -100,8 +101,14 @@ import {
   ProjectCardComponent
 } from './shared/children/projects';
 import {
-  SceneAvatarComponent
+  SceneAvatarComponent,
+  SceneCardComponent,
+  SceneSummaryComponent
 } from './shared/children/scenes';
+import {
+  ScriptLocationAvatarComponent,
+  ScriptLocationCardComponent
+} from './shared/children/script-locations';
 import {
   ShowProfileImageComponent,
   UserAvatarComponent
@@ -181,12 +188,17 @@ export const COMPONENTS = [
   ProjectDashboardComponent,
   SearchDashboardComponent,
   LoginComponent,
+  CharacterCardComponent,
   CharacterAvatarComponent,
   CharacterSummaryComponent,
   ShowImageComponent,
   ProjectAvatarComponent,
   ProjectCardComponent,
   SceneAvatarComponent,
+  SceneCardComponent,
+  SceneSummaryComponent,
+  ScriptLocationAvatarComponent,
+  ScriptLocationCardComponent,
   ShowProfileImageComponent,
   UserAvatarComponent,
   WeatherInfoComponent,

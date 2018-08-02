@@ -16,6 +16,11 @@
         <h3>Locations</h3>
       </mat-card>
     </a>
+    <a routerLink="{{getSchedulingLink()}}">
+      <mat-card class="link-card">
+        <h3>Scheduling</h3>
+      </mat-card>
+    </a>
     <a routerLink="{{getCastLink()}}">
       <mat-card class="link-card">
         <h3>Cast</h3>
@@ -28,7 +33,6 @@
     </a>
   </div>
   <div *ngIf="getCanRead()">
-    <h2>Calendar</h2>
     <mat-card>
       <mat-card-content>
         <project-calendar [projectId]="project.id"></project-calendar>

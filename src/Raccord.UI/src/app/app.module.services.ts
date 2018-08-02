@@ -61,7 +61,8 @@ import {
 import {
   AuthService,
   AuthGuard,
-  LoginService
+  LoginService,
+  LoggedInGuard
 } from './security';
 import {
   AccountHttpService
@@ -136,6 +137,7 @@ export const SERVICES = [
   AuthService,
   AuthGuard,
   LoginService,
+  LoggedInGuard,
   AccountHttpService,
   ImageHttpService,
   CurrentProjectService,

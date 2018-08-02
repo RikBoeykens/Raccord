@@ -12,9 +12,10 @@ using System;
 namespace Raccord.Data.EntityFramework.Migrations
 {
     [DbContext(typeof(RaccordDBContext))]
-    partial class RaccordDBContextModelSnapshot : ModelSnapshot
+    [Migration("20180802142415_comment-cascade-delete")]
+    partial class commentcascadedelete
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -2187,13 +2188,11 @@ namespace Raccord.Data.EntityFramework.Migrations
 
                     b.HasOne("Raccord.Domain.Model.Breakdowns.BreakdownItems.BreakdownItem", "ParentBreakdownItem")
                         .WithMany("Comments")
-                        .HasForeignKey("ParentBreakdownItemID")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("ParentBreakdownItemID");
 
                     b.HasOne("Raccord.Domain.Model.Characters.Character", "ParentCharacter")
                         .WithMany("Comments")
-                        .HasForeignKey("ParentCharacterID")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("ParentCharacterID");
 
                     b.HasOne("Raccord.Domain.Model.Comments.Comment", "ParentComment")
                         .WithMany("Comments")
@@ -2202,23 +2201,19 @@ namespace Raccord.Data.EntityFramework.Migrations
 
                     b.HasOne("Raccord.Domain.Model.Images.Image", "ParentImage")
                         .WithMany("Comments")
-                        .HasForeignKey("ParentImageID")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("ParentImageID");
 
                     b.HasOne("Raccord.Domain.Model.Locations.Locations.Location", "ParentLocation")
                         .WithMany("Comments")
-                        .HasForeignKey("ParentLocationID")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("ParentLocationID");
 
                     b.HasOne("Raccord.Domain.Model.Projects.Project", "ParentProject")
                         .WithMany("Comments")
-                        .HasForeignKey("ParentProjectID")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("ParentProjectID");
 
                     b.HasOne("Raccord.Domain.Model.Scenes.Scene", "ParentScene")
                         .WithMany("Comments")
-                        .HasForeignKey("ParentSceneID")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("ParentSceneID");
 
                     b.HasOne("Raccord.Domain.Model.ScriptLocations.ScriptLocation", "ParentScriptLocation")
                         .WithMany("Comments")
@@ -2227,13 +2222,11 @@ namespace Raccord.Data.EntityFramework.Migrations
 
                     b.HasOne("Raccord.Domain.Model.Shots.Slate", "ParentSlate")
                         .WithMany("Comments")
-                        .HasForeignKey("ParentSlateID")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("ParentSlateID");
 
                     b.HasOne("Raccord.Domain.Model.Shots.Take", "ParentTake")
                         .WithMany("Comments")
-                        .HasForeignKey("ParentTakeID")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("ParentTakeID");
 
                     b.HasOne("Raccord.Domain.Model.Users.ApplicationUser", "User")
                         .WithMany()

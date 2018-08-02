@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { CreateUserFromInvitation } from '../..';
 import { InvitationHttpService } from '../../service/invitation-http.service';
-import { LoadingWrapperService, ValidationHelpers } from '../../../shared';
+import { LoadingWrapperService, ValidationHelpers, RouteSettings } from '../../../shared';
 import { AuthService, LoginService } from '../../../security';
 import { UserInvitationSummary } from '../../../shared/children/user-invitations';
 
@@ -12,7 +12,6 @@ import { UserInvitationSummary } from '../../../shared/children/user-invitations
 export class CreateUserFromInvitationComponent implements OnInit {
     public request: CreateUserFromInvitation = new CreateUserFromInvitation();
     public confirmPassword: string;
-    public canCreate: boolean = true;
     private emailAddress: string;
 
     constructor(
@@ -30,16 +29,17 @@ export class CreateUserFromInvitationComponent implements OnInit {
         this._route.data.subscribe((data: {
             invitation: UserInvitationSummary
         }) => {
-            this.request = new CreateUserFromInvitation({
-                id: data.invitation.id,
-                firstName: data.invitation.firstName,
-                lastName: data.invitation.lastName,
-                password: ''
-            });
             if (data.invitation.acceptedDate) {
-                this.canCreate = false;
+                this._router.navigate([RouteSettings.LOGIN]);
+            } else {
+                this.request = new CreateUserFromInvitation({
+                    id: data.invitation.id,
+                    firstName: data.invitation.firstName,
+                    lastName: data.invitation.lastName,
+                    password: ''
+                });
+                this.emailAddress = data.invitation.email;
             }
-            this.emailAddress = data.invitation.email;
         });
     }
     public createUser() {

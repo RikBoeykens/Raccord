@@ -39,6 +39,23 @@ export class RaccordSidenavComponent implements OnInit {
   }
 
   public getScriptLink() {
-      return `/${RouteSettings.PROJECTS}/${this.currentProject.id}/${RouteSettings.SCRIPT}`;
+    return `/${RouteSettings.PROJECTS}/${this.currentProject.id}/${RouteSettings.SCRIPT}`;
+  }
+
+  public getLocationLink() {
+    // tslint:disable-next-line:max-line-length
+    return `/${RouteSettings.PROJECTS}/${this.currentProject.id}/${RouteSettings.LOCATIONSDASHBOARD}`;
+  }
+
+  public getSchedulingLink() {
+    return `/${RouteSettings.PROJECTS}/${this.currentProject.id}/${RouteSettings.SCHEDULING}`;
+  }
+
+  public getCastLink() {
+    return `/${RouteSettings.PROJECTS}/${this.currentProject.id}/${RouteSettings.CASTDASHBOARD}`;
+  }
+
+  public getCrewLink() {
+    return `/${RouteSettings.PROJECTS}/${this.currentProject.id}/${RouteSettings.CREW}`;
   }
 }

@@ -39,6 +39,10 @@ export class ProjectDashboardComponent implements OnInit {
     return `/${RouteSettings.PROJECTS}/${this.project.id}/${RouteSettings.LOCATIONSDASHBOARD}`;
   }
 
+  public getSchedulingLink() {
+    return `/${RouteSettings.PROJECTS}/${this.project.id}/${RouteSettings.SCHEDULING}`;
+  }
+
   public getCastLink() {
     return `/${RouteSettings.PROJECTS}/${this.project.id}/${RouteSettings.CASTDASHBOARD}`;
   }

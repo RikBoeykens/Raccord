@@ -52,7 +52,8 @@ import { ErrorComponent } from './shared';
 
 import {
   AuthGuard,
-  LoginComponent
+  LoginComponent,
+  LoggedInGuard
 } from './security';
 import {
   CreateUserFromInvitationComponent,
@@ -70,6 +71,7 @@ export const ROUTES: Routes = [
   {
     path: RouteSettings.LOGIN,
     component: LoginComponent,
+    canActivate: [LoggedInGuard],
     resolve: {
       ResetCurrentProjectResolve
     }
@@ -270,6 +272,7 @@ export const ROUTES: Routes = [
   {
     path: `${RouteSettings.INVITATIONS}/:invitationId`,
     component: CreateUserFromInvitationComponent,
+    canActivate: [LoggedInGuard],
     resolve: {
       invitation: InvitationResolve
     }
@@ -277,6 +280,7 @@ export const ROUTES: Routes = [
   {
     path: RouteSettings.PROFILE,
     component: UserProfileDashboardComponent,
+    canActivate: [AuthGuard],
     resolve: {
       userProfile: UserProfileResolve,
       ResetCurrentProjectResolve
@@ -285,6 +289,7 @@ export const ROUTES: Routes = [
   {
     path: RouteSettings.SEARCH,
     component: SearchDashboardComponent,
+    canActivate: [AuthGuard],
     resolve: {
       ResetCurrentProjectResolve
     }

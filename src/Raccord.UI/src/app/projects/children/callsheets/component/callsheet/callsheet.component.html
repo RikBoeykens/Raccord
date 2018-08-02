@@ -43,13 +43,19 @@
     </div>
   </mat-card>
   <div *ngIf="callsheet.weatherInfo">
-    <h2>Weather Info</h2>
+    <div class="raccord-sub-header"
+        fxLayout="row">
+        <h2>Weather Info</h2>
+    </div>
     <mat-card class="raccord-label-info">
       <weather-info [weatherInfo]="callsheet.weatherInfo"></weather-info>
     </mat-card>
   </div>
   <div *ngIf="callsheet.locations.length">
-    <h2>Locations</h2>
+    <div class="raccord-sub-header"
+        fxLayout="row">
+        <h2>Locations</h2>
+    </div>
     <div fxLayout="row wrap" fxLayoutGap="5px">
       <callsheet-location-card
         *ngFor="let location of callsheet.locations"
@@ -59,20 +65,29 @@
       [locations]="callsheet.locations"
       [projectId]="project.id"></callsheet-locations-map>
   </div>
-  <h2>Scenes</h2>
+  <div class="raccord-sub-header"
+      fxLayout="row">
+      <h2>Scenes</h2>
+  </div>
   <callsheet-scenes-table 
     [callsheetScenes]="callsheet.scenes"
     [projectId]="project.id"></callsheet-scenes-table>
-  <h2>Cast</h2>
+  <div class="raccord-sub-header"
+      fxLayout="row">
+      <h2>Cast</h2>
+  </div>
   <callsheet-characters-table 
     [callsheetCharacters]="callsheet.characters"
     [projectId]="project.id"></callsheet-characters-table>
-  <h2>
-    Breakdown
-    <span *ngIf="hasBreakdown()">
-      (<a routerLink="{{getBreakdownLink()">{{callsheet.breakdownInfo.name}}</a>)
-    </span>
-  </h2>
+  <div class="raccord-sub-header"
+      fxLayout="row">
+      <h2>
+        Breakdown
+        <span *ngIf="hasBreakdown()">
+          (<a routerLink="{{getBreakdownLink()">{{callsheet.breakdownInfo.name}}</a>)
+        </span>
+      </h2>
+  </div>
   <callsheet-breakdowns-table
     [callsheetBreakdownTypes]="callsheet.breakdownInfo.types"
     [projectId]="project.id"></callsheet-breakdowns-table>

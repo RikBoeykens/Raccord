@@ -260,12 +260,12 @@ namespace Raccord.API.Controllers.Admin
       });
       var houseLivingRoomId = _scriptLocationService.Add(new ScriptLocationDto
       {
-        Name = "HOUSE - LIVING ROOM",
+        Name = "HOUSE LIVING ROOM",
         ProjectID = projectId
       });
       var houseKitchenId = _scriptLocationService.Add(new ScriptLocationDto
       {
-        Name = "HOUSE - KITCHEN",
+        Name = "HOUSE KITCHEN",
         ProjectID = projectId
       });
       var bobsCarStreetId = _scriptLocationService.Add(new ScriptLocationDto
@@ -1360,7 +1360,7 @@ namespace Raccord.API.Controllers.Admin
 #endregion
 
 #region callsheets
-    private (long mainCallsheet1Id, long mainCallsheet2Id) CreateCallsheets(
+    private (long mainCallsheet1Id, long mainCallsheet2Id, long mainCallsheet3Id, long secondCallsheet1Id) CreateCallsheets(
       long projectId,
       (long mainUnitId, long secondUnitId) crewUnitIds,
       (long scheduleDay1_mainUnitId,
@@ -1372,7 +1372,9 @@ namespace Raccord.API.Controllers.Admin
     {
       var mainCallsheet1Id = CreateCallsheetForScheduleDay(projectId, scheduleDayIds.scheduleDay1_mainUnitId);
       var mainCallsheet2Id = CreateCallsheetForScheduleDay(projectId, scheduleDayIds.scheduleDay2_mainUnitId);
-      return (mainCallsheet1Id, mainCallsheet2Id);
+      var mainCallsheet3Id = CreateCallsheetForScheduleDay(projectId, scheduleDayIds.scheduleDay3_mainUnitId);
+      var secondCallsheet1Id = CreateCallsheetForScheduleDay(projectId, scheduleDayIds.scheduleDay1_2ndUnitId);
+      return (mainCallsheet1Id, mainCallsheet2Id, mainCallsheet3Id, secondCallsheet1Id);
     }
 
     private long CreateCallsheetForScheduleDay(long projectId, long scheduleDayId)
@@ -1560,7 +1562,7 @@ namespace Raccord.API.Controllers.Admin
       string susanTaylorId, long susanTaylorProjectId
     ) userIds,
     (long aliceId, long bobId, long charlieId) characterIds,
-    (long mainCallsheet1Id, long mainCallsheet2Id) callsheetIds,
+    (long mainCallsheet1Id, long mainCallsheet2Id, long mainCallsheet3Id, long secondCallsheet1Id) callsheetIds,
     (
       long houseId,
       long houseLivingRoomId,

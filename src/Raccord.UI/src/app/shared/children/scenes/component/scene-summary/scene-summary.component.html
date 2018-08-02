@@ -1,0 +1,25 @@
+<span>
+  <span *ngIf="scene.sceneIntro.id==0&&scene.scriptLocation.id==0&&scene.timeOfDay.id==0">
+    <span *ngIf="scene.summary">
+        {{scene.summary}}
+    </span>
+    <span *ngIf="!scene.summary">
+        <i>No content</i>
+    </span>
+  </span>
+  <span *ngIf="scene.sceneIntro.id!=0||scene.scriptLocation.id!=0||scene.timeOfDay.id!=0">
+    {{scene.number}}. {{scene.sceneIntro.name}} {{scene.scriptLocation.name}} {{scene.timeOfDay.name}}
+    <span *ngIf="scene.summary">
+      - {{scene.summary}}
+    </span>
+  </span>
+  <span *ngIf="showPageLength">
+    &nbsp;
+    <span *ngIf="!pageLengthOverride">
+      ({{scene.pageLength | myPagelength}})
+    </span>
+    <span *ngIf="pageLengthOverride">
+      ({{pageLengthOverride | myPagelength}})
+    </span>
+  </span>
+</span>
