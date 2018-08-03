@@ -15,6 +15,7 @@ export { PlaceholderImageComponent } from './component/placeholder-image/placeho
 
 export { EntityType } from './enums/entity-type.enum';
 export { ProjectRoleEnum } from './enums/project-role.enum';
+export { ShootingDayTypeEnum } from './enums/shooting-day-type.enum';
 
 export { HeaderHelpers } from './helpers/header.helper';
 export { ImageHelpers } from './helpers/image.helpers';

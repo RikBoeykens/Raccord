@@ -18,9 +18,9 @@ namespace Raccord.Data.EntityFramework.Repositories.Scenes
         Scene GetScript(long ID);
         IEnumerable<Scene> Filter(
             long projectID, 
-            IEnumerable<long> intExtIDs, 
+            IEnumerable<long> sceneIntroIDs, 
             IEnumerable<long> scriptLocationIDs, 
-            IEnumerable<long> dayNightIDs,
+            IEnumerable<long> timeOfDayIDs,
             IEnumerable<long> locationSetIDs,
             IEnumerable<long> locationIDs,
             IEnumerable<long> characterIDs,

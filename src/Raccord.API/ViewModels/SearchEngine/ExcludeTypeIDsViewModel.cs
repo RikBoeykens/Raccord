@@ -15,7 +15,7 @@ namespace Raccord.API.ViewModels.SearchEngine
         {
             get
             {
-                return _ids ?? new List<object>();
+                return _ids ?? (_ids = new List<object>());
             }
             set
             {

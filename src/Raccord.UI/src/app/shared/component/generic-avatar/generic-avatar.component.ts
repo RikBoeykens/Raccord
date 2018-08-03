@@ -8,6 +8,7 @@ import { Image } from '../../children/images/model/image.model';
 export class GenericAvatarComponent {
     @Input() public image: Image;
     @Input() public title: string;
+    @Input() public overridePlaceHolderText: string;
     @Input() public cardImage;
     @Input() public listAvatar;
     @Input() public cardAvatar;

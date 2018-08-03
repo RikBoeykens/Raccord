@@ -1,4 +1,4 @@
-import { BaseModel } from '../../../../shared';
+import { BaseModel } from '../../../../../../shared';
 
 export class BaseShootingDay extends BaseModel {
   public id: number;

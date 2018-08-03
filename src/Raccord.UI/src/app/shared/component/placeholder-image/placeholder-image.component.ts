@@ -7,6 +7,7 @@ import { ColourHelpers } from '../../helpers/colour.helpers';
 })
 export class PlaceholderImageComponent implements OnInit, OnChanges {
     @Input() public value: string;
+    @Input() public overridePlaceHolderText: string;
     @Input() public cardImage;
     @Input() public listAvatar;
     @Input() public cardAvatar;
@@ -33,6 +34,9 @@ export class PlaceholderImageComponent implements OnInit, OnChanges {
     }
 
     private getPlaceholderText(): string {
+      if (this.overridePlaceHolderText) {
+        return this.overridePlaceHolderText;
+      }
       if (!this.value) {
         return '';
       }

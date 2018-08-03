@@ -32,7 +32,7 @@ namespace Raccord.API.ViewModels.Scenes
     {
       get
       {
-        return _sceneIntroIDs ?? new List<long>();
+        return _sceneIntroIDs ?? (_sceneIntroIDs = new List<long>());
       }
       set
       {
@@ -56,7 +56,7 @@ namespace Raccord.API.ViewModels.Scenes
     {
       get
       {
-        return _timeOfDayIDs ?? new List<long>();
+        return _timeOfDayIDs ?? (_timeOfDayIDs = new List<long>());
       }
       set
       {

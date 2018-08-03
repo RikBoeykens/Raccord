@@ -1,0 +1,65 @@
+<mat-table #scenestable [dataSource]="scenes" class="scenes-table">
+
+  <!-- Image Column -->
+  <ng-container matColumnDef="image">
+    <mat-header-cell *matHeaderCellDef></mat-header-cell>
+    <mat-cell *matCellDef="let scene">
+      <a routerLink="{{getSceneLink(scene)}}">
+        <scene-avatar [scene]="scene" [listAvatar]="true"></scene-avatar>
+      </a>
+    </mat-cell>
+  </ng-container>
+
+  <!-- Scene Intro Column -->
+  <ng-container matColumnDef="sceneIntro">
+    <mat-header-cell *matHeaderCellDef>INT/EXT</mat-header-cell>
+    <mat-cell *matCellDef="let scene">
+      <a routerLink="{{getSceneLink(scene)}}">
+        {{scene.sceneIntro.name}}
+      </a>
+    </mat-cell>
+  </ng-container>
+
+  <!-- Script Location Column -->
+  <ng-container matColumnDef="scriptLocation">
+    <mat-header-cell *matHeaderCellDef>LOC</mat-header-cell>
+    <mat-cell *matCellDef="let scene">
+      <a routerLink="{{getSceneLink(scene)}}">
+        {{scene.scriptLocation.name}}
+      </a>
+    </mat-cell>
+  </ng-container>
+
+  <!-- Time Of Day Column -->
+  <ng-container matColumnDef="timeOfDay">
+    <mat-header-cell *matHeaderCellDef>Day / Night</mat-header-cell>
+    <mat-cell *matCellDef="let scene">
+      <a routerLink="{{getSceneLink(scene)}}">
+        {{scene.timeOfDay.name}}
+      </a>
+    </mat-cell>
+  </ng-container>
+
+  <!-- Summary Column -->
+  <ng-container matColumnDef="summary">
+    <mat-header-cell class="col-summary" *matHeaderCellDef>Summary</mat-header-cell>
+    <mat-cell class="col-summary" *matCellDef="let scene">
+      <a routerLink="{{getSceneLink(scene)}}">
+        {{scene.summary}}
+      </a>
+    </mat-cell>
+  </ng-container>
+
+  <!-- Page Length Column -->
+  <ng-container matColumnDef="pageLength">
+    <mat-header-cell *matHeaderCellDef>PG</mat-header-cell>
+    <mat-cell *matCellDef="let scene">
+      <a routerLink="{{getSceneLink(scene)}}">
+        {{scene.pageLength | myPagelength}}
+      </a>
+    </mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>

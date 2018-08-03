@@ -1,0 +1,17 @@
+<div fxLayout="row" fxLayoutGap="10px">
+    <mat-input-container fxFlex="50%">
+        <input matInput placeholder="Search" [(ngModel)]="sceneFilter.searchText" name="scene_search_text" (input)="doFilter()">
+    </mat-input-container>
+    <mat-input-container fxFlex="25%">
+        <input matInput placeholder="Min" [(ngModel)]="minPageLengthString" name="scene_min_pagelength" (input)="filterPagelengths()">
+    </mat-input-container>
+    <mat-input-container fxFlex="25%">
+        <input matInput placeholder="Max" [(ngModel)]="maxPageLengthString" name="scene_max_pagelength" (input)="filterPagelengths()">
+    </mat-input-container>
+</div>
+<search-entities-collection [projectId]="projectId" (onChange)="filterSceneIntros($event)" [entityType]="getSceneIntroType()" [entityTypeName]="'Scene Intro'"></search-entities-collection>
+<search-entities-collection [projectId]="projectId" (onChange)="filterTimeOfDays($event)" [entityType]="getTimeOfDayType()" [entityTypeName]="'Time of Day'"></search-entities-collection>
+<search-entities-collection [projectId]="projectId" (onChange)="filterScriptLocations($event)" [entityType]="getScriptLocationType()" [entityTypeName]="'Location (script)'"></search-entities-collection>
+<search-entities-collection [projectId]="projectId" (onChange)="filterLocations($event)" [entityType]="getLocationType()" [entityTypeName]="'Location'"></search-entities-collection>
+<search-entities-collection [projectId]="projectId" (onChange)="filterCharacters($event)" [entityType]="getCharacterType()" [entityTypeName]="'Character'"></search-entities-collection>
+<search-entities-collection [projectId]="projectId" (onChange)="filterCast($event)" [entityType]="getCastType()" [entityTypeName]="'Cast'"></search-entities-collection>

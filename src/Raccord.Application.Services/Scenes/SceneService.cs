@@ -177,23 +177,23 @@ namespace Raccord.Application.Services.Scenes
         public PagedDataDto<SceneSummaryDto> Filter(SceneFilterRequestDto filter, PaginationRequestDto requestDto)
         {
             var scenes = _sceneRepository.Filter(
-                filter.ProjectID,
-                filter.SceneIntroIDs,
-                filter.ScriptLocationIDs,
-                filter.TimeOfDayIDs,
-                filter.LocationSetIDs,
-                filter.LocationIDs,
-                filter.CharacterIDs,
-                filter.BreakdownItemIDs,
-                filter.ScheduleDayIDs,
-                filter.ScheduleSceneShootingDayIDs,
-                filter.CallsheetIDs,
-                filter.CastMemberIDs,
-                filter.CallsheetSceneShootingDayIDs,
-                filter.ShootingDayIDs,
-                filter.SearchText,
-                filter.MinPageLength,
-                filter.MaxPageLength
+                projectID: filter.ProjectID,
+                sceneIntroIDs: filter.SceneIntroIDs,
+                scriptLocationIDs: filter.ScriptLocationIDs,
+                timeOfDayIDs: filter.TimeOfDayIDs,
+                locationSetIDs: filter.LocationSetIDs,
+                locationIDs: filter.LocationIDs,
+                characterIDs: filter.CharacterIDs,
+                castMemberIDs: filter.CastMemberIDs,
+                breakdownItemIDs: filter.BreakdownItemIDs,
+                scheduleDayIDs: filter.ScheduleDayIDs,
+                scheduleSceneShootingDayIDs: filter.ScheduleSceneShootingDayIDs,
+                callsheetIDs: filter.CallsheetIDs,
+                callsheetSceneShootingDayIDs: filter.CallsheetSceneShootingDayIDs,
+                shootingDayIDs: filter.ShootingDayIDs,
+                searchText: filter.SearchText,
+                minPageLength: filter.MinPageLength,
+                maxPageLength: filter.MaxPageLength
             );
             return scenes.GetPaged<Scene, SceneSummaryDto>(requestDto, Utilities.TranslateSummary);
         }

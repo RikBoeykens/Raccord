@@ -72,6 +72,9 @@ import {
   CallsheetScenesTableComponent,
   CallsheetComponent,
   CallsheetSidesComponent,
+  FilterScenesComponent,
+  ScenesListComponent,
+  ScenesTableComponent,
   SceneActionComponent,
   SceneDialogueComponent,
   SceneHeaderComponent,
@@ -83,7 +86,9 @@ import {
   ProjectDashboardComponent
 } from './projects';
 import {
-  SearchDashboardComponent
+  SearchDashboardComponent,
+  SearchEntitiesCollectionComponent,
+  SearchEntityComponent
 } from './search';
 import {
   LoginComponent
@@ -177,6 +182,9 @@ export const COMPONENTS = [
   CallsheetScenesTableComponent,
   CallsheetComponent,
   CallsheetSidesComponent,
+  FilterScenesComponent,
+  ScenesListComponent,
+  ScenesTableComponent,
   SceneActionComponent,
   SceneDialogueComponent,
   SceneHeaderComponent,
@@ -187,6 +195,8 @@ export const COMPONENTS = [
   ProjectsListComponent,
   ProjectDashboardComponent,
   SearchDashboardComponent,
+  SearchEntitiesCollectionComponent,
+  SearchEntityComponent,
   LoginComponent,
   CharacterCardComponent,
   CharacterAvatarComponent,

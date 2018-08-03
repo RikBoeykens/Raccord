@@ -1,12 +1,12 @@
 import { BaseModel } from '../../../model/base.model';
 
 export class SearchEntity extends BaseModel {
-    public id: number;
+    public id: any;
     public name: string;
 
     constructor(
         obj?: {
-            id: number,
+            id: any,
             name: string
         }
     ) {

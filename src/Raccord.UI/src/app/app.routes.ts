@@ -28,10 +28,14 @@ import { DashboardComponent } from './dashboard';
 
 import { NoContentComponent } from './no-content';
 import {
+  SelectedBreakdownResolve,
   CallsheetComponent,
   CallsheetSidesComponent,
   CallsheetResolve,
   CallsheetSummaryResolve,
+  ScenesListComponent,
+  SceneResolve,
+  ScenesResolve,
   ScriptTextLandingComponent,
   ScriptTextUserComponent,
   ScriptTextResolve,
@@ -258,6 +262,19 @@ export const ROUTES: Routes = [
                 component: ScriptDashboardComponent,
                 resolve: {
                   dashboardInfo: ScriptDashboardResolve
+                }
+              }
+            ]
+          },
+          {
+            path: RouteSettings.SCENES,
+            children: [
+              {
+                path: '',
+                component: ScenesListComponent,
+                resolve: {
+                  scenes: ScenesResolve,
+                  selectedBreakdown: SelectedBreakdownResolve
                 }
               }
             ]

@@ -1,10 +1,22 @@
 // tslint:disable-next-line:max-line-length
 export { BaseBreakdownItem } from './children/breakdowns/children/items/model/base-breakdown-item.model';
+// tslint:disable-next-line:max-line-length
+export { SceneBreakdownItem } from './children/breakdowns/children/items/model/scene-breakdown-item.model';
 
 // tslint:disable-next-line:max-line-length
 export { BaseBreakdownType } from './children/breakdowns/children/types/model/base-breakdown-type.model';
+export { BreakdownType } from './children/breakdowns/children/types/model/breakdown-type.model';
 
+export { BreakdownSummary } from './children/breakdowns/model/breakdown-summary.model';
 export { Breakdown } from './children/breakdowns/model/breakdown.model';
+export { FullBreakdown } from './children/breakdowns/model/full-breakdown.model';
+export { PublishBreakdown } from './children/breakdowns/model/publish-breakdown.model';
+export { SceneBreakdown } from './children/breakdowns/model/scene-breakdown.model';
+export { SelectedBreakdown } from './children/breakdowns/model/selected-breakdown.model';
+
+export { BreakdownHttpService } from './children/breakdowns/service/breakdown-http.service';
+// tslint:disable-next-line:max-line-length
+export { SelectedBreakdownResolve } from './children/breakdowns/service/selected-breakdown-resolve.service';
 
 // tslint:disable-next-line:max-line-length
 export { ProjectCalendarComponent } from './children/calendar/component/project-calendar/project-calendar.component';
@@ -84,6 +96,28 @@ export { LocationSet } from './children/locations/children/location-sets/model/l
 export { Location } from './children/locations/model/location.model';
 
 // tslint:disable-next-line:max-line-length
+export { BaseShootingDay } from './children/scheduling/children/shooting-days/model/base-shooting-day.model';
+// tslint:disable-next-line:max-line-length
+export { ShootingDayInfo } from './children/scheduling/children/shooting-days/model/shooting-day-info.model';
+export { ShootingDay } from './children/scheduling/children/shooting-days/model/shooting-day.model';
+
+// tslint:disable-next-line:max-line-length
+export { FilterScenesComponent } from './children/script/children/scenes/component/filter-scenes/filter-scenes.component';
+// tslint:disable-next-line:max-line-length
+export { ScenesListComponent } from './children/script/children/scenes/component/scenes-list/scenes-list.component';
+// tslint:disable-next-line:max-line-length
+export { ScenesTableComponent } from './children/script/children/scenes/component/scenes-table/scenes-table.component';
+
+export { FullScene } from './children/script/children/scenes/model/full-scene.model';
+// tslint:disable-next-line:max-line-length
+export { SceneFilterRequest } from './children/script/children/scenes/model/scene-filter-request.model';
+
+// tslint:disable-next-line:max-line-length
+export { SceneHttpService } from './children/script/children/scenes/service/scene-http.service';
+export { SceneResolve} from './children/script/children/scenes/service/scene-resolve.service';
+export { ScenesResolve } from './children/script/children/scenes/service/scenes-resolve.service';
+
+// tslint:disable-next-line:max-line-length
 export { SceneActionComponent } from './children/script/children/script-texts/component/scene-action/scene-action.component';
 // tslint:disable-next-line:max-line-length
 export { SceneDialogueComponent } from './children/script/children/script-texts/component/scene-dialogue/scene-dialogue.component';
@@ -120,9 +154,6 @@ export { ScriptDashboard } from './children/script/model/script-dashboard.model'
 // tslint:disable-next-line:max-line-length
 export { ScriptDashboardHttpService } from './children/script/service/script-dashboard-http.service';
 export { ScriptDashboardResolve } from './children/script/service/script-dashboard.resolve';
-
-export { BaseShootingDay } from './children/shooting-days/model/base-shooting-day.model';
-export { ShootingDay } from './children/shooting-days/model/shooting-day.model';
 
 export { ProjectsListComponent } from './component/projects-list/projects-list.component';
 // tslint:disable-next-line:max-line-length
