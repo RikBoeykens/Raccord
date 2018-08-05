@@ -1,6 +1,7 @@
 /* this file will be extracted to main wwwroot folder and is imported in index.html */
 /* This file is for setting global styles  */
 @import 'variables';
+@import 'media-queries';
 @import "~@angular/material/_theming.scss";
 @import '~dragula/dist/dragula.css';
 @import '~angular-calendar/css/angular-calendar.css';
@@ -292,9 +293,11 @@ raccord-toolbar {
 }
 
 .raccord-narrow-container {
-  width: 66.66%;
-  margin-right: auto;
-  margin-left: auto;
+  @include tablet-portrait-and-up {
+    width: 66.66%;
+    margin-right: auto;
+    margin-left: auto;
+  }
   padding-top: 5px;
   padding-left: 5px;
 }
