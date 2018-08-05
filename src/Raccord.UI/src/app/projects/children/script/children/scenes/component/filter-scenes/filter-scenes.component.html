@@ -15,3 +15,4 @@
 <search-entities-collection [projectId]="projectId" (onChange)="filterLocations($event)" [entityType]="getLocationType()" [entityTypeName]="'Location'"></search-entities-collection>
 <search-entities-collection [projectId]="projectId" (onChange)="filterCharacters($event)" [entityType]="getCharacterType()" [entityTypeName]="'Character'"></search-entities-collection>
 <search-entities-collection [projectId]="projectId" (onChange)="filterCast($event)" [entityType]="getCastType()" [entityTypeName]="'Cast'"></search-entities-collection>
+<search-breakdown-item-collection [projectId]="projectId" (onChange)="filterBreakdowns($event)" [breakdown]="breakdown" *ngIf="breakdown"></search-breakdown-item-collection>

@@ -43,6 +43,7 @@ import {
   CalendarHttpService
 } from './calendar';
 import {
+  BreakdownItemHttpService,
   BreakdownHttpService,
   SelectedBreakdownResolve,
   ProjectCalendarHttpService,
@@ -127,6 +128,7 @@ export const SERVICES = [
   LoadingService,
   SidenavService,
   CalendarHttpService,
+  BreakdownItemHttpService,
   BreakdownHttpService,
   SelectedBreakdownResolve,
   ProjectCalendarHttpService,

@@ -3,6 +3,7 @@ import { SceneFilterRequest, SelectedBreakdown } from '../../../../../..';
 import { PageLengthHelpers } from '../../../../../../../shared/helpers/page-length.helpers';
 import { SearchEntity } from '../../../../../../../shared/children/search';
 import { EntityType } from '../../../../../../../shared';
+import { BreakdownItem } from '../../../../../breakdowns/children/items/model/breakdown-item.model';
 
 @Component({
   selector: 'filter-scenes',
@@ -86,6 +87,12 @@ export class FilterScenesComponent implements OnChanges {
   public filterCast(entities: SearchEntity[]) {
     this.sceneFilter.castMemberIDs =
       entities.map((entity: SearchEntity) => entity.id as number);
+    this.doFilter();
+  }
+
+  public filterBreakdowns(entities: BreakdownItem[]) {
+    this.sceneFilter.breakdownItemIDs =
+      entities.map((entity: BreakdownItem) => entity.id as number);
     this.doFilter();
   }
 

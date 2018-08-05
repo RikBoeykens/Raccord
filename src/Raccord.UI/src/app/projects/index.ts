@@ -1,7 +1,22 @@
 // tslint:disable-next-line:max-line-length
+export { SearchBreakdownItemComponent } from './children/breakdowns/children/items/component/search-breakdown-item/search-breakdown-item.component';
+// tslint:disable-next-line:max-line-length
+export { SearchBreakdownItemCollectionComponent } from './children/breakdowns/children/items/component/search-breakdown-item-collection/search-breakdown-item-collection.component';
+
+// tslint:disable-next-line:max-line-length
 export { BaseBreakdownItem } from './children/breakdowns/children/items/model/base-breakdown-item.model';
 // tslint:disable-next-line:max-line-length
+export { BreakdownItemSummary } from './children/breakdowns/children/items/model/breakdown-item-summary.model';
+export { BreakdownItem } from './children/breakdowns/children/items/model/breakdown-item.model';
+// tslint:disable-next-line:max-line-length
+export { FullBreakdownItem } from './children/breakdowns/children/items/model/full-breakdown-item.model';
+// tslint:disable-next-line:max-line-length
 export { SceneBreakdownItem } from './children/breakdowns/children/items/model/scene-breakdown-item.model';
+// tslint:disable-next-line:max-line-length
+export { SearchBreakdownItemRequest } from './children/breakdowns/children/items/model/search-breakdown-item-request.model';
+
+// tslint:disable-next-line:max-line-length
+export { BreakdownItemHttpService } from './children/breakdowns/children/items/service/breakdown-item-http.service';
 
 // tslint:disable-next-line:max-line-length
 export { BaseBreakdownType } from './children/breakdowns/children/types/model/base-breakdown-type.model';

@@ -64,6 +64,8 @@ import {
   UserProfileDashboardComponent
 } from './profile';
 import {
+  SearchBreakdownItemCollectionComponent,
+  SearchBreakdownItemComponent,
   ProjectCalendarComponent,
   CallsheetBreakdownsTableComponent,
   CallsheetCharactersTableComponent,
@@ -174,6 +176,8 @@ export const COMPONENTS = [
   RaccordSidenavComponent,
   NoContentComponent,
   UserProfileDashboardComponent,
+  SearchBreakdownItemCollectionComponent,
+  SearchBreakdownItemComponent,
   ProjectCalendarComponent,
   CallsheetBreakdownsTableComponent,
   CallsheetCharactersTableComponent,
