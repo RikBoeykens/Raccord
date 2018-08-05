@@ -9,4 +9,5 @@ export class SceneSummaryComponent {
   @Input() public scene: Scene;
   @Input() public showPageLength: boolean;
   @Input() public pageLengthOverride: number;
+  @Input() public includeSummary: boolean = true;
 }

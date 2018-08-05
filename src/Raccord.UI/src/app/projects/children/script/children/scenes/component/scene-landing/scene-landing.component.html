@@ -1,0 +1,18 @@
+<div class="raccord-narrow-container">
+    <div class="raccord-page-header">
+      <a routerLink="{{getBackLink()}}">
+        <back-link></back-link>
+      </a>
+      <div fxLayout="row">
+        <h1 class="raccord-header-title">
+          <scene-summary [scene]="scene" [includeSummary]="false"></scene-summary>
+          <a mat-mini-fab routerLink="{{getScriptLink()}}" fragment="scene-{{scene.id}}"><mat-icon>subject</mat-icon></a>
+        </h1>
+      </div>
+      <div fxLayout="row" *ngIf="scene.summary">
+        <h2 class="raccord-header-sub-title">
+          {{scene.summary}}
+        </h2>
+      </div>
+    </div>
+</div>

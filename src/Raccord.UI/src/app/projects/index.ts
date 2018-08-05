@@ -119,6 +119,8 @@ export { ShootingDay } from './children/scheduling/children/shooting-days/model/
 // tslint:disable-next-line:max-line-length
 export { FilterScenesComponent } from './children/script/children/scenes/component/filter-scenes/filter-scenes.component';
 // tslint:disable-next-line:max-line-length
+export { SceneLandingComponent } from './children/script/children/scenes/component/scene-landing/scene-landing.component';
+// tslint:disable-next-line:max-line-length
 export { ScenesListComponent } from './children/script/children/scenes/component/scenes-list/scenes-list.component';
 // tslint:disable-next-line:max-line-length
 export { ScenesTableComponent } from './children/script/children/scenes/component/scenes-table/scenes-table.component';

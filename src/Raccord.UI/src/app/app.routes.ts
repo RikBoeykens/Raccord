@@ -44,7 +44,8 @@ import {
   ScriptDashboardComponent,
   ScriptDashboardResolve,
   ProjectsListComponent,
-  ProjectDashboardComponent
+  ProjectDashboardComponent,
+  SceneLandingComponent
 } from './projects';
 import {
   PagedProjectsResolve,
@@ -275,6 +276,13 @@ export const ROUTES: Routes = [
                 resolve: {
                   scenes: ScenesResolve,
                   selectedBreakdown: SelectedBreakdownResolve
+                }
+              },
+              {
+                path: ':sceneId',
+                component: SceneLandingComponent,
+                resolve: {
+                  scene: SceneResolve
                 }
               }
             ]

@@ -14,6 +14,7 @@ export { PhoneLinkComponent } from './component/phone-link/phone-link.component'
 export { PlaceholderImageComponent } from './component/placeholder-image/placeholder-image.component';
 
 export { EntityType } from './enums/entity-type.enum';
+export { ParentCommentType } from './enums/parent-comment-type.enum';
 export { ProjectRoleEnum } from './enums/project-role.enum';
 export { ShootingDayTypeEnum } from './enums/shooting-day-type.enum';
 

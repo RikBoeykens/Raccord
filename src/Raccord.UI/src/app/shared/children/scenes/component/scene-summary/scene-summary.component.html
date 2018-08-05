@@ -9,7 +9,7 @@
   </span>
   <span *ngIf="scene.sceneIntro.id!=0||scene.scriptLocation.id!=0||scene.timeOfDay.id!=0">
     {{scene.number}}. {{scene.sceneIntro.name}} {{scene.scriptLocation.name}} {{scene.timeOfDay.name}}
-    <span *ngIf="scene.summary">
+    <span *ngIf="includeSummary && scene.summary">
       - {{scene.summary}}
     </span>
   </span>
