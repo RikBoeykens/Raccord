@@ -87,8 +87,7 @@ namespace Raccord.Data.EntityFramework.Repositories.Comments
         {
             IQueryable<Comment> query = _context.Set<Comment>();
 
-            return query.Include(c=> c.User)
-                        .Include(c=> c.Comments);
+            return query.Include(c=> c.User);
         }
     }
 }

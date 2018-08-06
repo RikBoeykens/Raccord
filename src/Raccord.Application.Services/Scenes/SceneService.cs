@@ -16,6 +16,9 @@ using Raccord.Data.EntityFramework.Repositories.ShootingDays;
 using Raccord.Core.Utilities;
 using Raccord.Application.Core.Common.Paging;
 using Raccord.Data.EntityFramework.Repositories.Breakdowns;
+using Raccord.Data.EntityFramework.Repositories.Comments;
+using Raccord.Core.Enums;
+using Raccord.Application.Core.Services.Comments;
 
 namespace Raccord.Application.Services.Scenes
 {
@@ -28,6 +31,7 @@ namespace Raccord.Application.Services.Scenes
         private readonly IScriptLocationRepository _scriptLocationRepository;
         private readonly IShootingDayRepository _shootingDayRepository;
         private readonly IBreakdownRepository _breakdownRepository;
+        private readonly ICommentService _commentService;
 
         // Initialises a new SceneService
         public SceneService(
@@ -36,28 +40,17 @@ namespace Raccord.Application.Services.Scenes
             ITimeOfDayRepository timeOfDayRepository,
             IScriptLocationRepository scriptLocationRepository,
             IShootingDayRepository shootingDayRepository,
-            IBreakdownRepository breakdownRepository
+            IBreakdownRepository breakdownRepository,
+            ICommentService commentService
             )
-        {
-            if(sceneRepository == null)
-                throw new ArgumentNullException(nameof(sceneRepository));
-            if(sceneIntroRepository == null)
-                throw new ArgumentNullException(nameof(sceneIntroRepository));
-            if(timeOfDayRepository == null)
-                throw new ArgumentNullException(nameof(timeOfDayRepository));
-            if(scriptLocationRepository == null)
-                throw new ArgumentNullException(nameof(scriptLocationRepository));
-            if(shootingDayRepository == null)
-                throw new ArgumentNullException(nameof(shootingDayRepository));
-            if(breakdownRepository == null)
-                throw new ArgumentNullException(nameof(breakdownRepository));
-            
+        {            
             _sceneRepository = sceneRepository;
             _sceneIntroRepository = sceneIntroRepository;
             _timeOfDayRepository = timeOfDayRepository;
             _scriptLocationRepository = scriptLocationRepository;
             _shootingDayRepository = shootingDayRepository;
             _breakdownRepository = breakdownRepository;
+            _commentService = commentService;
         }
 
         // Gets all scene for a project
@@ -76,8 +69,9 @@ namespace Raccord.Application.Services.Scenes
             var scene = _sceneRepository.GetFull(ID);
             var shootingDays = _shootingDayRepository.GetAllForScene(ID);
             var breakdown = _breakdownRepository.GetForProjectUser(scene.ProjectID, userID);
+            var comments = _commentService.GetForParent(new GetCommentDto{ParentID = scene.ID, ParentType =  ParentCommentType.Scene }).ToList();
 
-            var dto = scene.TranslateFull(shootingDays, breakdown);
+            var dto = scene.TranslateFull(shootingDays, breakdown, comments);
 
             return dto;
         }

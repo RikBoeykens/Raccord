@@ -6,6 +6,7 @@ using System.Linq;
 using Raccord.API.ViewModels.Scheduling.ScheduleDays;
 using Raccord.API.ViewModels.Profile;
 using Raccord.API.ViewModels.Cast;
+using Raccord.API.ViewModels.Comments;
 
 namespace Raccord.API.ViewModels.Characters
 {
@@ -24,6 +25,7 @@ namespace Raccord.API.ViewModels.Characters
                 Scenes = dto.Scenes.Select(s=> s.Translate()),
                 Images = dto.Images.Select(s=> s.Translate()),
                 ScheduleDays = dto.ScheduleDays.Select(sd=> sd.Translate()),
+                Comments = dto.Comments.Select(c => c.Translate()),
                 CastMember = dto.CastMember.Translate(),
             };
         }

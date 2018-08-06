@@ -18,7 +18,8 @@ namespace Raccord.Application.Services.Comments
       {
         ID = comment.ID,
         Text = comment.Text,
-        User = comment.User.TranslateSummary()
+        User = comment.User.TranslateSummary(),
+        Comments = comment.Comments.Select(c => c.Translate())
       };
     }
   }

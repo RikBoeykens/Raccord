@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Raccord.Application.Core.Services.Locations.Locations;
+using Raccord.Core.Enums;
+using Raccord.Data.EntityFramework.Repositories.Comments;
 using Raccord.Data.EntityFramework.Repositories.Locations.Locations;
 using Raccord.Domain.Model.Locations.Locations;
 
@@ -11,14 +13,16 @@ namespace Raccord.Application.Services.Locations.Locations
     public class LocationService : ILocationService
     {
         private readonly ILocationRepository _locationRepository;
+        private readonly ICommentRepository _commentRepository;
 
         // Initialises a new LocationService
-        public LocationService(ILocationRepository locationRepository)
+        public LocationService(
+            ILocationRepository locationRepository,
+            ICommentRepository commentRepository
+            )
         {
-            if(locationRepository == null)
-                throw new ArgumentNullException(nameof(locationRepository));
-            
             _locationRepository = locationRepository;
+            _commentRepository = commentRepository;
         }
 
         // Gets all locations
@@ -36,7 +40,9 @@ namespace Raccord.Application.Services.Locations.Locations
         {
             var location = _locationRepository.GetFull(ID);
 
-            var dto = location.TranslateFull();
+            var comments = _commentRepository.GetForParent(location.ID, ParentCommentType.Location).ToList();
+
+            var dto = location.TranslateFull(comments);
 
             return dto;
         }

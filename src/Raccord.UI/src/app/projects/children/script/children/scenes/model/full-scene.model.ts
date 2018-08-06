@@ -3,13 +3,14 @@ import { LinkedImage } from '../../../../../../shared/children/images';
 import { LinkedCharacter } from '../../../../../../shared/children/characters';
 import { SceneIntro, TimeOfDay } from '../../../../../../shared/children/sceneproperties';
 import { ScriptLocation } from '../../../../../../shared/children/script-locations';
-import { SceneBreakdown, ShootingDayInfo } from '../../../../..';
+import { SceneBreakdown, ShootingDayInfo, Comment } from '../../../../..';
 
 export class FullScene extends Scene {
   public images: LinkedImage[];
   public characters: LinkedCharacter[];
   public breakdownInfo: SceneBreakdown;
   public shootingDays: ShootingDayInfo[];
+  public comments: Comment[];
 
   constructor(obj?: {
                       id: number,
@@ -24,7 +25,8 @@ export class FullScene extends Scene {
                       images: LinkedImage[],
                       characters: LinkedCharacter[],
                       breakdownInfo: SceneBreakdown,
-                      shootingDays: ShootingDayInfo[]
+                      shootingDays: ShootingDayInfo[],
+                      comments: Comment[]
                   }) {
       super(obj);
       if (obj) {
@@ -32,6 +34,7 @@ export class FullScene extends Scene {
           this.characters = obj.characters;
           this.breakdownInfo = obj.breakdownInfo;
           this.shootingDays = obj.shootingDays;
+          this.comments = obj.comments;
       }
   }
 }

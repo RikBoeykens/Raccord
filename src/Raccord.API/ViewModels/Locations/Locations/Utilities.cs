@@ -1,4 +1,5 @@
 using System.Linq;
+using Raccord.API.ViewModels.Comments;
 using Raccord.API.ViewModels.Common.Location;
 using Raccord.API.ViewModels.Locations.LocationSets;
 using Raccord.API.ViewModels.Scheduling.ScheduleDays;
@@ -20,6 +21,7 @@ namespace Raccord.API.ViewModels.Locations.Locations
                 LatLng = dto.LatLng.Translate(),
                 Sets = dto.Sets.Select(s=> s.Translate()),
                 ScheduleDays = dto.ScheduleDays.Select(sd=> sd.Translate()),
+                Comments = dto.Comments.Select(c => c.Translate()),
                 ProjectID = dto.ProjectID,
             };
         }

@@ -6,6 +6,7 @@ using Raccord.API.ViewModels.Scheduling.ScheduleScenes;
 using Raccord.API.ViewModels.Shots.Slates;
 using Raccord.API.ViewModels.ShootingDays;
 using Raccord.API.ViewModels.Breakdowns;
+using Raccord.API.ViewModels.Comments;
 
 namespace Raccord.API.ViewModels.Scenes
 {
@@ -17,6 +18,7 @@ namespace Raccord.API.ViewModels.Scenes
         private SceneBreakdownViewModel _breakdownInfo;
         private IEnumerable<ShootingDayInfoViewModel> _shootingDays;
         private IEnumerable<SlateSummaryViewModel> _slates;
+        private IEnumerable<CommentViewModel> _comments;
 
         // Images linked to the scene
         public IEnumerable<LinkedImageViewModel> Images
@@ -80,6 +82,19 @@ namespace Raccord.API.ViewModels.Scenes
             set
             {
                 _slates = value;
+            }
+        }
+
+        // Comments linked to the scene
+        public IEnumerable<CommentViewModel> Comments
+        {
+            get
+            {
+                return _comments ?? (_comments = new List<CommentViewModel>());
+            }
+            set
+            {
+                _comments = value;
             }
         }
     }

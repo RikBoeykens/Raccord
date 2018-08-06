@@ -16,13 +16,14 @@ using Raccord.Domain.Model.Callsheets.Scenes;
 using Raccord.Application.Services.Profile;
 using Raccord.Application.Services.Cast;
 using Raccord.Application.Core.Common.Routing;
+using Raccord.Domain.Model.Comments;
 
 namespace Raccord.Application.Services.Characters
 {
     // Utilities and helper methods for Characters
     public static class Utilities
     {
-        public static FullCharacterDto TranslateFull(this Character character)
+        public static FullCharacterDto TranslateFull(this Character character, IEnumerable<Comment> comments)
         {
             var dto = new FullCharacterDto
             {

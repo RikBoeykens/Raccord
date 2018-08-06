@@ -5,6 +5,8 @@ using Raccord.Domain.Model.Breakdowns.BreakdownItems;
 using Raccord.Application.Core.Services.Breakdowns.BreakdownItems;
 using Raccord.Data.EntityFramework.Repositories.Breakdowns.BreakdownItems;
 using Raccord.Domain.Model.Images;
+using Raccord.Data.EntityFramework.Repositories.Comments;
+using Raccord.Core.Enums;
 
 namespace Raccord.Application.Services.Breakdowns.BreakdownItems
 {
@@ -12,14 +14,16 @@ namespace Raccord.Application.Services.Breakdowns.BreakdownItems
     public class BreakdownItemService : IBreakdownItemService
     {
         private readonly IBreakdownItemRepository _breakdownItemRepository;
+        private readonly ICommentRepository _commentRepository;
 
         // Initialises a new BreakdownItemService
-        public BreakdownItemService(IBreakdownItemRepository breakdownitemRepository)
+        public BreakdownItemService(
+            IBreakdownItemRepository breakdownitemRepository,
+            ICommentRepository commentRepository
+            )
         {
-            if(breakdownitemRepository == null)
-                throw new ArgumentNullException(nameof(breakdownitemRepository));
-            
             _breakdownItemRepository = breakdownitemRepository;
+            _commentRepository = commentRepository;
         }
 
         // Gets all breakdown items
@@ -37,7 +41,9 @@ namespace Raccord.Application.Services.Breakdowns.BreakdownItems
         {
             var item = _breakdownItemRepository.GetFull(ID);
 
-            var dto = item.TranslateFull();
+            var comments = _commentRepository.GetForParent(item.ID, ParentCommentType.BreakdownItem).ToList();
+
+            var dto = item.TranslateFull(comments);
 
             return dto;
         }

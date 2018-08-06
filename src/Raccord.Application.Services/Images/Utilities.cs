@@ -10,13 +10,15 @@ using Raccord.Application.Services.Characters;
 using Raccord.Application.Services.Breakdowns.BreakdownItems;
 using Raccord.Application.Services.Shots.Slates;
 using Raccord.Application.Core.Common.Routing;
+using Raccord.Domain.Model.Comments;
+using System.Collections.Generic;
 
 namespace Raccord.Application.Services.Images
 {
     // Utilities and helper methods for Locations
     public static class Utilities
     {
-        public static FullImageDto TranslateFull(this Image image)
+        public static FullImageDto TranslateFull(this Image image, IEnumerable<Comment> comments)
         {
             var dto = new FullImageDto
             {

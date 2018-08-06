@@ -1,4 +1,6 @@
 // tslint:disable-next-line:max-line-length
+export { BreakdownItemAvatarComponent } from './children/breakdowns/children/items/component/breakdown-item-avatar/breakdown-item-avatar.component';
+// tslint:disable-next-line:max-line-length
 export { SearchBreakdownItemComponent } from './children/breakdowns/children/items/component/search-breakdown-item/search-breakdown-item.component';
 // tslint:disable-next-line:max-line-length
 export { SearchBreakdownItemCollectionComponent } from './children/breakdowns/children/items/component/search-breakdown-item-collection/search-breakdown-item-collection.component';
@@ -103,6 +105,19 @@ export { CallsheetResolve } from './children/callsheets/service/callsheet-resolv
 export { CallsheetSummaryResolve } from './children/callsheets/service/callsheet-summary-resolve.service';
 
 // tslint:disable-next-line:max-line-length
+export { CommentContainerComponent } from './children/comments/component/comment-container/comment-container.component';
+// tslint:disable-next-line:max-line-length
+export { EditCommentComponent } from './children/comments/component/edit-comment/edit-comment.component';
+// tslint:disable-next-line:max-line-length
+export { ShowCommentComponent } from './children/comments/component/show-comment/show-comment.component';
+
+export { BaseComment } from './children/comments/model/base-comment.model';
+export { Comment } from './children/comments/model/comment.model';
+export { PostComment } from './children/comments/model/post-comment.model';
+
+export { CommentHttpService } from './children/comments/service/comment-http.service';
+
+// tslint:disable-next-line:max-line-length
 export { LocationSetScriptLocation } from './children/locations/children/location-sets/model/location-set-script-location.model';
 // tslint:disable-next-line:max-line-length
 export { LocationSetSummary } from './children/locations/children/location-sets/model/location-set-summary.model';
@@ -115,6 +130,11 @@ export { BaseShootingDay } from './children/scheduling/children/shooting-days/mo
 // tslint:disable-next-line:max-line-length
 export { ShootingDayInfo } from './children/scheduling/children/shooting-days/model/shooting-day-info.model';
 export { ShootingDay } from './children/scheduling/children/shooting-days/model/shooting-day.model';
+
+// tslint:disable-next-line:max-line-length
+export { SceneBreakdownTableComponent } from './children/script/children/scenes/children/breakdown/component/scene-breakdown-table/scene-breakdown-table.component';
+// tslint:disable-next-line:max-line-length
+export { SceneCharactersTableComponent } from './children/script/children/scenes/children/characters/component/scene-characters-table/scene-characters-table.component';
 
 // tslint:disable-next-line:max-line-length
 export { FilterScenesComponent } from './children/script/children/scenes/component/filter-scenes/filter-scenes.component';

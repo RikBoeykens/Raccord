@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Raccord.API.ViewModels.Comments;
 using Raccord.API.ViewModels.Locations.LocationSets;
 using Raccord.API.ViewModels.Scheduling.ScheduleDays;
 
@@ -9,6 +10,7 @@ namespace Raccord.API.ViewModels.Locations.Locations
     {
         private IEnumerable<LocationSetScriptLocationViewModel> _sets;
         private IEnumerable<ScheduleDaySceneCollectionViewModel> _scheduleDays;
+        private IEnumerable<CommentViewModel> _comments;
 
         // Scenes scheduled for the day
         public IEnumerable<LocationSetScriptLocationViewModel> Sets
@@ -33,6 +35,19 @@ namespace Raccord.API.ViewModels.Locations.Locations
             set
             {
                 _scheduleDays = value;
+            }
+        }
+
+        // comments linked
+        public IEnumerable<CommentViewModel> Comments
+        {
+            get
+            {
+                return _comments ?? (_comments = new List<CommentViewModel>());
+            }
+            set
+            {
+                _comments = value;
             }
         }
     }

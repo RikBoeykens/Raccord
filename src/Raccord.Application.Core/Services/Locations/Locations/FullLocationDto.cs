@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Raccord.Application.Core.Services.Comments;
 using Raccord.Application.Core.Services.Locations.LocationSets;
 using Raccord.Application.Core.Services.Scheduling.ScheduleDays;
 
@@ -9,6 +10,7 @@ namespace Raccord.Application.Core.Services.Locations.Locations
     {
         private IEnumerable<LocationSetScriptLocationDto> _sets;
         private IEnumerable<ScheduleDaySceneCollectionDto> _scheduleDays;
+        private IEnumerable<CommentDto> _comments;
 
         // Sets linked to the location
         public IEnumerable<LocationSetScriptLocationDto> Sets
@@ -33,6 +35,19 @@ namespace Raccord.Application.Core.Services.Locations.Locations
             set
             {
                 _scheduleDays = value;
+            }
+        }
+
+        // Comments linked to the breakdown item
+        public IEnumerable<CommentDto> Comments
+        {
+            get
+            {
+                return _comments ?? (_comments = new List<CommentDto>());
+            }
+            set
+            {
+                _comments = value;
             }
         }
     }

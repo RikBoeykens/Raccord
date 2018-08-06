@@ -8,13 +8,15 @@ using Raccord.Core.Enums;
 using Raccord.Application.Services.Images;
 using Raccord.Application.Services.Breakdowns.BreakdownTypes;
 using Raccord.Application.Core.Common.Routing;
+using System.Collections.Generic;
+using Raccord.Domain.Model.Comments;
 
 namespace Raccord.Application.Services.Breakdowns.BreakdownItems
 {
     // Utilities and helper methods for Breakdown items
     public static class Utilities
     {
-        public static FullBreakdownItemDto TranslateFull(this BreakdownItem breakdownItem)
+        public static FullBreakdownItemDto TranslateFull(this BreakdownItem breakdownItem, IEnumerable<Comment> comments)
         {
             var dto = new FullBreakdownItemDto
             {

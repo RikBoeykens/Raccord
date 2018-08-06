@@ -10,6 +10,8 @@ using Raccord.Application.Core.Common.Sorting;
 using Raccord.Data.EntityFramework.Repositories.Images;
 using Raccord.Domain.Model.Images;
 using Raccord.Application.Core.Common.Paging;
+using Raccord.Data.EntityFramework.Repositories.Comments;
+using Raccord.Core.Enums;
 
 namespace Raccord.Application.Services.Characters
 {
@@ -17,16 +19,16 @@ namespace Raccord.Application.Services.Characters
     public class CharacterService : ICharacterService
     {
         private readonly ICharacterRepository _characterRepository;
+        private readonly ICommentRepository _commentRepository;
 
         // Initialises a new CharacterService
         public CharacterService(
-            ICharacterRepository characterRepository
+            ICharacterRepository characterRepository,
+            ICommentRepository commentRepository
             )
         {
-            if(characterRepository == null)
-                throw new ArgumentNullException(nameof(characterRepository));
-            
             _characterRepository = characterRepository;
+            _commentRepository = commentRepository;
         }
 
         // Gets all characters for a project
@@ -62,7 +64,9 @@ namespace Raccord.Application.Services.Characters
         {
             var character = _characterRepository.GetFull(ID);
 
-            var dto = character.TranslateFull();
+            var comments = _commentRepository.GetForParent(character.ID, ParentCommentType.Character).ToList();
+
+            var dto = character.TranslateFull(comments);
 
             return dto;
         }

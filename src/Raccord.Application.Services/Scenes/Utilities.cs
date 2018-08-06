@@ -21,13 +21,16 @@ using Raccord.Domain.Model.Breakdowns;
 using Raccord.Application.Core.Services.Breakdowns;
 using Raccord.Application.Services.Breakdowns;
 using Raccord.Application.Core.Common.Routing;
+using Raccord.Domain.Model.Comments;
+using Raccord.Application.Services.Comments;
+using Raccord.Application.Core.Services.Comments;
 
 namespace Raccord.Application.Services.Scenes
 {
     // Utilities and helper methods for Scenes
     public static class Utilities
     {
-        public static FullSceneDto TranslateFull(this Scene scene, IEnumerable<ShootingDay> shootingDays, Breakdown breakdown)
+        public static FullSceneDto TranslateFull(this Scene scene, IEnumerable<ShootingDay> shootingDays, Breakdown breakdown, IEnumerable<CommentDto> comments)
         {
             SceneBreakdownDto breakdownDto = null;
             if(breakdown!=null)
@@ -54,6 +57,7 @@ namespace Raccord.Application.Services.Scenes
                 BreakdownInfo = breakdownDto,
                 ShootingDays = shootingDays.Select(sd=> sd.TranslateSceneInfo(scene.ID)).OrderBy(sd=> sd.Type).ThenBy(sd=> sd.Date),
                 Slates = scene.Slates.Select(s=> s.TranslateSummary()),
+                Comments = comments,
                 ProjectID = scene.ProjectID,
             };
 

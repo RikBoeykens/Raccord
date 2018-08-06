@@ -8,13 +8,15 @@ using Raccord.Core.Enums;
 using Raccord.Application.Services.Images;
 using Raccord.Application.Services.Locations.LocationSets;
 using Raccord.Application.Core.Common.Routing;
+using System.Collections.Generic;
+using Raccord.Domain.Model.Comments;
 
 namespace Raccord.Application.Services.ScriptLocations
 {
     // Utilities and helper methods for Locations
     public static class Utilities
     {
-        public static FullScriptLocationDto TranslateFull(this ScriptLocation location)
+        public static FullScriptLocationDto TranslateFull(this ScriptLocation location, IEnumerable<Comment> comments)
         {
             if(location == null)
             {

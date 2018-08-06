@@ -2,6 +2,7 @@ using Raccord.Application.Core.Services.Scenes;
 using Raccord.Application.Core.Services.Images;
 using System.Collections.Generic;
 using Raccord.Application.Core.Services.Locations.LocationSets;
+using Raccord.Application.Core.Services.Comments;
 
 namespace Raccord.Application.Core.Services.ScriptLocations
 {
@@ -11,6 +12,7 @@ namespace Raccord.Application.Core.Services.ScriptLocations
         private IEnumerable<SceneSummaryDto> _scenes;
         private IEnumerable<LinkedImageDto> _images;
         private IEnumerable<LocationSetLocationDto> _sets;
+        private IEnumerable<CommentDto> _comments;
 
         // Scenes linked to the location
         public IEnumerable<SceneSummaryDto> Scenes
@@ -48,6 +50,19 @@ namespace Raccord.Application.Core.Services.ScriptLocations
             set
             {
                 _sets = value;
+            }
+        }
+
+        // Comments linked to the breakdown item
+        public IEnumerable<CommentDto> Comments
+        {
+            get
+            {
+                return _comments ?? (_comments = new List<CommentDto>());
+            }
+            set
+            {
+                _comments = value;
             }
         }
     }

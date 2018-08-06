@@ -6,6 +6,8 @@ using Raccord.Application.Core.Services.ScriptLocations;
 using Raccord.Data.EntityFramework.Repositories.ScriptLocations;
 using Raccord.Domain.Model.Images;
 using Raccord.Application.Core.Common.Paging;
+using Raccord.Data.EntityFramework.Repositories.Comments;
+using Raccord.Core.Enums;
 
 namespace Raccord.Application.Services.ScriptLocations
 {
@@ -13,14 +15,16 @@ namespace Raccord.Application.Services.ScriptLocations
     public class ScriptLocationService : IScriptLocationService
     {
         private readonly IScriptLocationRepository _scriptLocationRepository;
+        private readonly ICommentRepository _commentRepository;
 
         // Initialises a new LocationService
-        public ScriptLocationService(IScriptLocationRepository locationRepository)
+        public ScriptLocationService(
+            IScriptLocationRepository locationRepository,
+            ICommentRepository commentRepository
+            )
         {
-            if(locationRepository == null)
-                throw new ArgumentNullException(nameof(locationRepository));
-            
             _scriptLocationRepository = locationRepository;
+            _commentRepository = commentRepository;
         }
 
         // Gets all locations
@@ -44,7 +48,8 @@ namespace Raccord.Application.Services.ScriptLocations
         {
             var location = _scriptLocationRepository.GetFull(ID);
 
-            var dto = location.TranslateFull();
+            var comments = _commentRepository.GetForParent(location.ID, ParentCommentType.ScriptLocation).ToList();
+            var dto = location.TranslateFull(comments);
 
             return dto;
         }

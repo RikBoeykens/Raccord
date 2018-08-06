@@ -18,6 +18,7 @@ namespace Raccord.API.ViewModels.Comments
         ID = dto.ID,
         Text = dto.Text,
         User = dto.User.Translate(),
+        Comments = dto.Comments.Select(c => c.Translate())
       };
     }
 

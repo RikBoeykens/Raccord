@@ -8,6 +8,7 @@ using Raccord.API.ViewModels.Breakdowns;
 using Raccord.API.ViewModels.Scheduling.ScheduleScenes;
 using Raccord.API.ViewModels.Shots.Slates;
 using Raccord.API.ViewModels.ShootingDays;
+using Raccord.API.ViewModels.Comments;
 
 namespace Raccord.API.ViewModels.Scenes
 {
@@ -31,6 +32,7 @@ namespace Raccord.API.ViewModels.Scenes
                 BreakdownInfo = dto.BreakdownInfo.Translate(),
                 ShootingDays = dto.ShootingDays.Select(sd=> sd.Translate()),
                 Slates = dto.Slates.Select(s=> s.Translate()),
+                Comments = dto.Comments.Select(c => c.Translate()),
                 ProjectID = dto.ProjectID,
             };
         }

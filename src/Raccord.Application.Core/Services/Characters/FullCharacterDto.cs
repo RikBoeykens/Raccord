@@ -4,6 +4,7 @@ using Raccord.Application.Core.Services.Scheduling.ScheduleScenes;
 using System.Collections.Generic;
 using Raccord.Application.Core.Services.Scheduling.ScheduleDays;
 using Raccord.Application.Core.Services.Cast;
+using Raccord.Application.Core.Services.Comments;
 
 namespace Raccord.Application.Core.Services.Characters
 {
@@ -14,6 +15,7 @@ namespace Raccord.Application.Core.Services.Characters
         private IEnumerable<LinkedImageDto> _images;
         private IEnumerable<ScheduleDaySceneCollectionDto> _scheduleDays;
         private CastMemberSummaryDto _castMember;
+        private IEnumerable<CommentDto> _comments;
 
         // Scenes linked to the character
         public IEnumerable<LinkedSceneDto> Scenes
@@ -63,6 +65,19 @@ namespace Raccord.Application.Core.Services.Characters
             set
             {
                 _castMember = value;
+            }
+        }
+
+        // Comments linked to the breakdown item
+        public IEnumerable<CommentDto> Comments
+        {
+            get
+            {
+                return _comments ?? (_comments = new List<CommentDto>());
+            }
+            set
+            {
+                _comments = value;
             }
         }
     }

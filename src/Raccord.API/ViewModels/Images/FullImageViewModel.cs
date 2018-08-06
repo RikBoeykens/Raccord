@@ -4,6 +4,7 @@ using Raccord.API.ViewModels.Characters;
 using System.Collections.Generic;
 using Raccord.API.ViewModels.Breakdowns.BreakdownItems;
 using Raccord.API.ViewModels.Shots.Slates;
+using Raccord.API.ViewModels.Comments;
 
 namespace Raccord.API.ViewModels.Images
 {
@@ -15,6 +16,7 @@ namespace Raccord.API.ViewModels.Images
         private IEnumerable<LinkedCharacterViewModel> _characters;
         private IEnumerable<LinkedBreakdownItemViewModel> _breakdownItems;
         private IEnumerable<LinkedSlateViewModel> _slates;
+        private IEnumerable<CommentViewModel> _comments;
         
         // Indicates if the image is primary image for the project
         public bool IsPrimaryImage { get; set; }
@@ -81,6 +83,19 @@ namespace Raccord.API.ViewModels.Images
             set
             {
                 _slates = value;
+            }
+        }
+
+        // comments linked
+        public IEnumerable<CommentViewModel> Comments
+        {
+            get
+            {
+                return _comments ?? (_comments = new List<CommentViewModel>());
+            }
+            set
+            {
+                _comments = value;
             }
         }
     }

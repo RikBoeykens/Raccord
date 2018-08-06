@@ -10,13 +10,14 @@ using Raccord.Application.Services.Scheduling.ScheduleDays;
 using Raccord.Application.Core.Services.Locations.LocationSets;
 using System.Collections.Generic;
 using Raccord.Application.Core.Common.Routing;
+using Raccord.Domain.Model.Comments;
 
 namespace Raccord.Application.Services.Locations.Locations
 {
     // Utilities and helper methods for Locations
     public static class Utilities
     {
-        public static FullLocationDto TranslateFull(this Location location)
+        public static FullLocationDto TranslateFull(this Location location, IEnumerable<Comment> comments)
         {
             var dto = new FullLocationDto
             {

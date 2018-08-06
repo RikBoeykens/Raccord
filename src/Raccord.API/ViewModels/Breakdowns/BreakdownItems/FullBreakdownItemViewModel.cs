@@ -2,6 +2,7 @@ using Raccord.API.ViewModels.Scenes;
 using Raccord.API.ViewModels.Images;
 using System.Collections.Generic;
 using Raccord.API.ViewModels.Breakdowns.BreakdownTypes;
+using Raccord.API.ViewModels.Comments;
 
 namespace Raccord.API.ViewModels.Breakdowns.BreakdownItems
 {
@@ -12,6 +13,7 @@ namespace Raccord.API.ViewModels.Breakdowns.BreakdownItems
         private BreakdownTypeViewModel _type;
         private IEnumerable<LinkedSceneViewModel> _scenes;
         private IEnumerable<LinkedImageViewModel> _images;
+        private IEnumerable<CommentViewModel> _comments;
 
         // Scenes linked to the breakdown item
         public IEnumerable<LinkedSceneViewModel> Scenes
@@ -68,6 +70,19 @@ namespace Raccord.API.ViewModels.Breakdowns.BreakdownItems
             set
             {
                 _type = value;
+            }
+        }
+
+        // comments linked
+        public IEnumerable<CommentViewModel> Comments
+        {
+            get
+            {
+                return _comments ?? (_comments = new List<CommentViewModel>());
+            }
+            set
+            {
+                _comments = value;
             }
         }
     }

@@ -74,6 +74,10 @@ import {
   CallsheetScenesTableComponent,
   CallsheetComponent,
   CallsheetSidesComponent,
+  CommentContainerComponent,
+  EditCommentComponent,
+  ShowCommentComponent,
+  SceneCharactersTableComponent,
   FilterScenesComponent,
   SceneLandingComponent,
   ScenesListComponent,
@@ -86,7 +90,9 @@ import {
   ScriptTextUserComponent,
   ScriptDashboardComponent,
   ProjectsListComponent,
-  ProjectDashboardComponent
+  ProjectDashboardComponent,
+  BreakdownItemAvatarComponent,
+  SceneBreakdownTableComponent
 } from './projects';
 import {
   SearchDashboardComponent,
@@ -177,6 +183,7 @@ export const COMPONENTS = [
   RaccordSidenavComponent,
   NoContentComponent,
   UserProfileDashboardComponent,
+  BreakdownItemAvatarComponent,
   SearchBreakdownItemCollectionComponent,
   SearchBreakdownItemComponent,
   ProjectCalendarComponent,
@@ -187,6 +194,11 @@ export const COMPONENTS = [
   CallsheetScenesTableComponent,
   CallsheetComponent,
   CallsheetSidesComponent,
+  CommentContainerComponent,
+  EditCommentComponent,
+  ShowCommentComponent,
+  SceneBreakdownTableComponent,
+  SceneCharactersTableComponent,
   FilterScenesComponent,
   SceneLandingComponent,
   ScenesListComponent,
