@@ -24,6 +24,8 @@ using Raccord.Application.Core.Common.Routing;
 using Raccord.Domain.Model.Comments;
 using Raccord.Application.Services.Comments;
 using Raccord.Application.Core.Services.Comments;
+using Raccord.Domain.Model.Callsheets.Scenes;
+using Raccord.Application.Core.Services.ShootingDays.Scenes;
 
 namespace Raccord.Application.Services.Scenes
 {
@@ -204,6 +206,46 @@ namespace Raccord.Application.Services.Scenes
                 return $"{scene.Number}. {scene.Summary}";
             }
             return $"{scene.Number}. {scene.SceneIntro.Name} {scene.ScriptLocation.Name} {scene.TimeOfDay.Name} - {scene.Summary}";
+        }
+
+        public static ShootingDaySceneSummaryDto TranslateSummary(this CallsheetScene callsheetScene)
+        {
+            var dto = new ShootingDaySceneSummaryDto
+            {
+                ID = callsheetScene.Scene.ID,
+                Number = callsheetScene.Scene.Number,
+                Summary = callsheetScene.Scene.Summary,
+                PageLength = callsheetScene.Scene.PageLength,
+                Timing = callsheetScene.Scene.Timing,
+                SceneIntro = callsheetScene.Scene.SceneIntro.Translate(),
+                ScriptLocation = callsheetScene.Scene.ScriptLocation.Translate(),
+                TimeOfDay = callsheetScene.Scene.TimeOfDay.Translate(),
+                ProjectID = callsheetScene.Scene.ProjectID,
+                LinkID = callsheetScene.ID,
+                ScheduledPageLength = callsheetScene.PageLength
+            };
+
+            return dto;
+        }
+
+        public static ShootingDaySceneSummaryDto TranslateSummary(this ScheduleScene scheduleScene)
+        {
+            var dto = new ShootingDaySceneSummaryDto
+            {
+                ID = scheduleScene.Scene.ID,
+                Number = scheduleScene.Scene.Number,
+                Summary = scheduleScene.Scene.Summary,
+                PageLength = scheduleScene.Scene.PageLength,
+                Timing = scheduleScene.Scene.Timing,
+                SceneIntro = scheduleScene.Scene.SceneIntro.Translate(),
+                ScriptLocation = scheduleScene.Scene.ScriptLocation.Translate(),
+                TimeOfDay = scheduleScene.Scene.TimeOfDay.Translate(),
+                ProjectID = scheduleScene.Scene.ProjectID,
+                LinkID = scheduleScene.ID,
+                ScheduledPageLength = scheduleScene.PageLength
+            };
+
+            return dto;
         }
     }
 }

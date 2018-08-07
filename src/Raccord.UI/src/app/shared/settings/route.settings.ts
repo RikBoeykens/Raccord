@@ -24,6 +24,7 @@ export class RouteSettings {
   public static get BREAKDOWNTYPES(): string { return 'breakdowntypes'; }
   public static get BREAKDOWNITEMS(): string { return 'breakdownitems'; }
   public static get SCHEDULING(): string { return 'scheduling'; }
+  public static get SCHEDULES(): string { return 'schedules'; }
   public static get LOCATIONSDASHBOARD(): string { return 'locationsdashboard'; }
   public static get LOCATIONS(): string { return 'locations'; }
   public static get LOCATIONSETS(): string { return 'locationsets'; }

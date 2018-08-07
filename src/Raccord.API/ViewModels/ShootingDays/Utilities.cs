@@ -117,5 +117,17 @@ namespace Raccord.API.ViewModels.ShootingDays
                 CrewUnit = dto.CrewUnit.Translate()
             };
         }
+        public static ShootingDayInfoSceneCollectionViewModel Translate(this ShootingDayInfoSceneCollectionDto dto)
+        {
+            return new ShootingDayInfoSceneCollectionViewModel
+            {
+                ID = dto.ID,
+                Number = dto.Number,
+                Date = dto.Date,
+                Type = dto.Type,
+                CrewUnit = dto.CrewUnit.Translate(),
+                Scenes = dto.Scenes.Select(s => s.Translate())
+            };
+        }
     }
 }

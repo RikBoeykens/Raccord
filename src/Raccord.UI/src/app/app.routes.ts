@@ -33,9 +33,18 @@ import {
   CallsheetSidesComponent,
   CallsheetResolve,
   CallsheetSummaryResolve,
+  CharacterLandingComponent,
+  CharactersListComponent,
+  CharacterResolve,
+  CharactersResolve,
   ScenesListComponent,
   SceneResolve,
   ScenesResolve,
+  SceneLandingComponent,
+  ScriptLocationLandingComponent,
+  ScriptLocationsListComponent,
+  ScriptLocationResolve,
+  ScriptLocationsResolve,
   ScriptTextLandingComponent,
   ScriptTextUserComponent,
   ScriptTextResolve,
@@ -44,8 +53,7 @@ import {
   ScriptDashboardComponent,
   ScriptDashboardResolve,
   ProjectsListComponent,
-  ProjectDashboardComponent,
-  SceneLandingComponent
+  ProjectDashboardComponent
 } from './projects';
 import {
   PagedProjectsResolve,
@@ -283,6 +291,44 @@ export const ROUTES: Routes = [
                 component: SceneLandingComponent,
                 resolve: {
                   scene: SceneResolve
+                }
+              }
+            ]
+          },
+          {
+            path: RouteSettings.SCRIPTLOCATIONS,
+            children: [
+              {
+                path: '',
+                component: ScriptLocationsListComponent,
+                resolve: {
+                  scriptLocations: ScriptLocationsResolve
+                }
+              },
+              {
+                path: ':scriptLocationId',
+                component: ScriptLocationLandingComponent,
+                resolve: {
+                  scriptLocation: ScriptLocationResolve
+                }
+              }
+            ]
+          },
+          {
+            path: RouteSettings.CHARACTERS,
+            children: [
+              {
+                path: '',
+                component: CharactersListComponent,
+                resolve: {
+                  characters: CharactersResolve
+                }
+              },
+              {
+                path: ':characterId',
+                component: CharacterLandingComponent,
+                resolve: {
+                  character: CharacterResolve
                 }
               }
             ]

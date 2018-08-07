@@ -17,13 +17,17 @@ using Raccord.Application.Services.Profile;
 using Raccord.Application.Services.Cast;
 using Raccord.Application.Core.Common.Routing;
 using Raccord.Domain.Model.Comments;
+using Raccord.Application.Core.Services.ShootingDays;
+using Raccord.Domain.Model.ShootingDays;
+using Raccord.Application.Services.ShootingDays;
+using Raccord.Application.Core.Services.Comments;
 
 namespace Raccord.Application.Services.Characters
 {
     // Utilities and helper methods for Characters
     public static class Utilities
     {
-        public static FullCharacterDto TranslateFull(this Character character, IEnumerable<Comment> comments)
+        public static FullCharacterDto TranslateFull(this Character character, IEnumerable<CommentDto> comments, IEnumerable<ShootingDay> shootingDays)
         {
             var dto = new FullCharacterDto
             {
@@ -33,8 +37,9 @@ namespace Raccord.Application.Services.Characters
                 Description = character.Description,
                 Images = character.ImageCharacters.Select(i=> i.TranslateImage()),
                 Scenes = character.CharacterScenes.OrderBy(s=> s.Scene.Number).Select(s=> s.TranslateScene()),
-                ScheduleDays = character.GetCharacterScheduleDays(),
+                ShootingDays = shootingDays.GetCharacterShootingDays(character.ID),
                 CastMember = character.CastMember.TranslateSummary(),
+                Comments = comments,
                 ProjectID = character.ProjectID,
             };
 

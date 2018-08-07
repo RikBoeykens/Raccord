@@ -12,6 +12,8 @@ using Raccord.Domain.Model.Images;
 using Raccord.Application.Core.Common.Paging;
 using Raccord.Data.EntityFramework.Repositories.Comments;
 using Raccord.Core.Enums;
+using Raccord.Data.EntityFramework.Repositories.ShootingDays;
+using Raccord.Application.Core.Services.Comments;
 
 namespace Raccord.Application.Services.Characters
 {
@@ -19,16 +21,19 @@ namespace Raccord.Application.Services.Characters
     public class CharacterService : ICharacterService
     {
         private readonly ICharacterRepository _characterRepository;
-        private readonly ICommentRepository _commentRepository;
+        private readonly IShootingDayRepository _shootingDayRepository;
+        private readonly ICommentService _commentService;
 
         // Initialises a new CharacterService
         public CharacterService(
             ICharacterRepository characterRepository,
-            ICommentRepository commentRepository
+            IShootingDayRepository shootingDayRepository,
+            ICommentService commentService
             )
         {
             _characterRepository = characterRepository;
-            _commentRepository = commentRepository;
+            _shootingDayRepository = shootingDayRepository;
+            _commentService = commentService;
         }
 
         // Gets all characters for a project
@@ -64,9 +69,11 @@ namespace Raccord.Application.Services.Characters
         {
             var character = _characterRepository.GetFull(ID);
 
-            var comments = _commentRepository.GetForParent(character.ID, ParentCommentType.Character).ToList();
+            var comments = _commentService.GetForParent(new GetCommentDto{ ParentID = character.ID, ParentType = ParentCommentType.Character}).ToList();
 
-            var dto = character.TranslateFull(comments);
+            var shootingDays = _shootingDayRepository.GetAllForCharacter(character.ID).ToList();
+
+            var dto = character.TranslateFull(comments, shootingDays);
 
             return dto;
         }

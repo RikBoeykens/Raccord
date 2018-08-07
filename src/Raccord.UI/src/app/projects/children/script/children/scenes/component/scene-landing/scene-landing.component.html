@@ -98,4 +98,12 @@
     </mat-expansion-panel-header>
     <scene-breakdown-table [sceneBreakdown]="scene.breakdownInfo" [projectId]="project.id"></scene-breakdown-table>
   </mat-expansion-panel>
+  <mat-expansion-panel class="raccord-expansion-panel">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Scheduling ({{scene.shootingDays.length}})
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <shooting-day-info [shootingDays]="scene.shootingDays" [projectId]="project.id"></shooting-day-info>
+  </mat-expansion-panel>
 </div>

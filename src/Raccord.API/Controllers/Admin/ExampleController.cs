@@ -1348,6 +1348,11 @@ namespace Raccord.API.Controllers.Admin
         LocationSetID = locationSetIds.streetId,
         PageLength = 1
       });
+      var second_day1_scene5_linkedCharactersToRemove = _scheduleCharacterService.GetCharacters(second_day1_scene5Id).ToList();
+      foreach(var character in second_day1_scene5_linkedCharactersToRemove)
+      {
+        _scheduleCharacterService.RemoveLink(character.LinkID);
+      }
       var second_day1_scene5AId = _scheduleSceneService.Add(new ScheduleSceneDto
       {
         SceneID = sceneIds.scene5AId,
@@ -1355,6 +1360,11 @@ namespace Raccord.API.Controllers.Admin
         LocationSetID = locationSetIds.highwayId,
         PageLength = 1
       });
+      var second_day1_scene5A_linkedCharactersToRemove = _scheduleCharacterService.GetCharacters(second_day1_scene5AId).ToList();
+      foreach(var character in second_day1_scene5A_linkedCharactersToRemove)
+      {
+        _scheduleCharacterService.RemoveLink(character.LinkID);
+      }
       return (main_day1_scene4Id, main_day1_scene5Id, main_day2_scene5Id, main_day3_scene2Id, main_day3_scene3Id, main_day4_scene6Id, second_day1_scene1Id, second_day1_scene5Id, second_day1_scene5AId);
     }
 #endregion

@@ -1,7 +1,8 @@
 
 import { Input, Component, OnInit } from '@angular/core';
 import { CallsheetLocation, CallsheetLocationSet } from '../../../../../..';
-import { MapsHelpers } from '../../../../../../../shared';
+import { MapsHelpers, RouteSettings } from '../../../../../../../shared';
+import { SceneSummary } from '../../../../../../../shared/children/scenes';
 
 @Component({
   selector: 'callsheet-locations-map',
@@ -16,6 +17,19 @@ export class CallsheetLocationsMapComponent implements OnInit {
 
   public ngOnInit() {
     this.setBounds();
+  }
+
+  public getLocationLink(location: CallsheetLocation) {
+    return `/${RouteSettings.PROJECTS}/${this.projectId}/${RouteSettings.LOCATIONS}/${location.id}`;
+  }
+
+  public getLocationSetLink(locationSet: CallsheetLocationSet) {
+    // tslint:disable-next-line:max-line-length
+    return `/${RouteSettings.PROJECTS}/${this.projectId}/${RouteSettings.LOCATIONSETS}/${locationSet.id}`;
+  }
+
+  public getSceneLink(scene: SceneSummary) {
+    return `/${RouteSettings.PROJECTS}/${this.projectId}/${RouteSettings.SCENES}/${scene.id}`;
   }
 
   private setBounds() {

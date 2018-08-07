@@ -72,9 +72,6 @@ export { CallsheetCharactersTableComponent } from './children/callsheets/childre
 export { CallsheetCharacterCharacter } from './children/callsheets/children/characters/model/callsheet-character-character.model';
 
 // tslint:disable-next-line:max-line-length
-export { CallsheetLocationSet } from './children/callsheets/children/location-sets/model/callsheet-location-set.model';
-
-// tslint:disable-next-line:max-line-length
 export { CallsheetLocationCardComponent } from './children/callsheets/children/locations/component/callsheet-location-card/callsheet-location-card.component';
 
 // tslint:disable-next-line:max-line-length
@@ -118,6 +115,10 @@ export { PostComment } from './children/comments/model/post-comment.model';
 export { CommentHttpService } from './children/comments/service/comment-http.service';
 
 // tslint:disable-next-line:max-line-length
+export { CallsheetLocationSet } from './children/locations/children/location-sets/model/callsheet-location-set.model';
+// tslint:disable-next-line:max-line-length
+export { LocationSetLocation } from './children/locations/children/location-sets/model/location-set-location.model';
+// tslint:disable-next-line:max-line-length
 export { LocationSetScriptLocation } from './children/locations/children/location-sets/model/location-set-script-location.model';
 // tslint:disable-next-line:max-line-length
 export { LocationSetSummary } from './children/locations/children/location-sets/model/location-set-summary.model';
@@ -126,10 +127,37 @@ export { LocationSet } from './children/locations/children/location-sets/model/l
 export { Location } from './children/locations/model/location.model';
 
 // tslint:disable-next-line:max-line-length
+export { ShootingDaySceneSummary } from './children/scheduling/children/shooting-days/children/scenes/model/shooting-day-scene-summary.model';
+
+// tslint:disable-next-line:max-line-length
+export { ShootingDayInfoComponent } from './children/scheduling/children/shooting-days/component/shooting-day-info/shooting-day-info.component';
+// tslint:disable-next-line:max-line-length
+export { ShootingDayInfoScenesComponent } from './children/scheduling/children/shooting-days/component/shooting-day-info-scenes/shooting-day-info-scenes.component';
+// tslint:disable-next-line:max-line-length
+export { ShootingDayInfoTableComponent } from './children/scheduling/children/shooting-days/component/shooting-day-info-table/shooting-day-info-table.component';
+// tslint:disable-next-line:max-line-length
+export { ShootingDayInfoScenesTableComponent } from './children/scheduling/children/shooting-days/component/shooting-day-info-scenes-table/shooting-day-info-scenes-table.component';
+
+// tslint:disable-next-line:max-line-length
 export { BaseShootingDay } from './children/scheduling/children/shooting-days/model/base-shooting-day.model';
 // tslint:disable-next-line:max-line-length
 export { ShootingDayInfo } from './children/scheduling/children/shooting-days/model/shooting-day-info.model';
+// tslint:disable-next-line:max-line-length
+export { ShootingDayInfoSceneCollection } from './children/scheduling/children/shooting-days/model/shooting-day-info-scene-collection.model';
 export { ShootingDay } from './children/scheduling/children/shooting-days/model/shooting-day.model';
+
+// tslint:disable-next-line:max-line-length
+export { CharacterLandingComponent } from './children/script/children/characters/component/character-landing/character-landing.component';
+// tslint:disable-next-line:max-line-length
+export { CharactersListComponent } from './children/script/children/characters/component/characters-list/characters-list.component';
+
+export { FullCharacter } from './children/script/children/characters/model/full-character.model';
+// tslint:disable-next-line:max-line-length
+export { CharacterHttpService } from './children/script/children/characters/service/character-http.service';
+// tslint:disable-next-line:max-line-length
+export { CharacterResolve } from './children/script/children/characters/service/character-resolve.service';
+// tslint:disable-next-line:max-line-length
+export { CharactersResolve } from './children/script/children/characters/service/characters-resolve.service';
 
 // tslint:disable-next-line:max-line-length
 export { SceneBreakdownTableComponent } from './children/script/children/scenes/children/breakdown/component/scene-breakdown-table/scene-breakdown-table.component';
@@ -153,6 +181,28 @@ export { SceneFilterRequest } from './children/script/children/scenes/model/scen
 export { SceneHttpService } from './children/script/children/scenes/service/scene-http.service';
 export { SceneResolve} from './children/script/children/scenes/service/scene-resolve.service';
 export { ScenesResolve } from './children/script/children/scenes/service/scenes-resolve.service';
+
+// tslint:disable-next-line:max-line-length
+export { ScriptLocationLocationSetsComponent } from './children/script/children/script-locations/children/location-sets/component/script-location-location-sets/script-location-location-sets.component';
+// tslint:disable-next-line:max-line-length
+export { ScriptLocationLocationSetsMapComponent } from './children/script/children/script-locations/children/location-sets/component/script-location-location-sets-map/script-location-location-sets-map.component';
+// tslint:disable-next-line:max-line-length
+export { ScriptLocationLocationSetsTableComponent } from './children/script/children/script-locations/children/location-sets/component/script-location-location-sets-table/script-location-location-sets-table.component';
+
+// tslint:disable-next-line:max-line-length
+export { ScriptLocationLandingComponent } from './children/script/children/script-locations/component/script-location-landing/script-location-landing.component';
+// tslint:disable-next-line:max-line-length
+export { ScriptLocationsListComponent } from './children/script/children/script-locations/component/script-locations-list/script-locations-list.component';
+
+// tslint:disable-next-line:max-line-length
+export { FullScriptLocation } from './children/script/children/script-locations/model/full-script-location.model';
+
+// tslint:disable-next-line:max-line-length
+export { ScriptLocationHttpService } from './children/script/children/script-locations/service/script-location-http.service';
+// tslint:disable-next-line:max-line-length
+export { ScriptLocationResolve } from './children/script/children/script-locations/service/script-location-resolve.service';
+// tslint:disable-next-line:max-line-length
+export { ScriptLocationsResolve } from './children/script/children/script-locations/service/script-locations-resolve.service';
 
 // tslint:disable-next-line:max-line-length
 export { SceneActionComponent } from './children/script/children/script-texts/component/scene-action/scene-action.component';

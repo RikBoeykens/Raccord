@@ -10,13 +10,14 @@ using Raccord.Application.Services.Locations.LocationSets;
 using Raccord.Application.Core.Common.Routing;
 using System.Collections.Generic;
 using Raccord.Domain.Model.Comments;
+using Raccord.Application.Core.Services.Comments;
 
 namespace Raccord.Application.Services.ScriptLocations
 {
     // Utilities and helper methods for Locations
     public static class Utilities
     {
-        public static FullScriptLocationDto TranslateFull(this ScriptLocation location, IEnumerable<Comment> comments)
+        public static FullScriptLocationDto TranslateFull(this ScriptLocation location, IEnumerable<CommentDto> comments)
         {
             if(location == null)
             {
@@ -31,6 +32,7 @@ namespace Raccord.Application.Services.ScriptLocations
                 Scenes = location.Scenes.OrderBy(s=> s.Number).Select(s=> s.TranslateSummary()),
                 Images = location.ImageLocations.Select(s=> s.TranslateImage()),
                 Sets = location.LocationSets.Select(ls=> ls.TranslateLocation()),
+                Comments = comments,
                 ProjectID = location.ProjectID,
             };
 

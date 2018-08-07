@@ -60,6 +60,16 @@ namespace Raccord.Data.EntityFramework.Repositories.ShootingDays
                                     );
         }
 
+        public IEnumerable<ShootingDay> GetAllForCharacter(long characterID)
+        {
+            var query = GetIncludedCharacter();
+
+            return query.Where(sd => sd.CallsheetID.HasValue && sd.Callsheet.CallsheetScenes.Any(cs=> cs.Characters.Any(c => c.CharacterScene.CharacterID == characterID))
+                                    ||
+                                    sd.ScheduleDayID.HasValue && sd.ScheduleDay.ScheduleScenes.Any(ss=> ss.Characters.Any(c => c.CharacterScene.CharacterID == characterID))
+                                    );
+        }
+
 
         public int SearchCount(string searchText, long? projectID)
         {
@@ -214,6 +224,56 @@ namespace Raccord.Data.EntityFramework.Repositories.ShootingDays
                         .ThenInclude(sd=> sd.ScheduleScenes)
                         .Include(sd=> sd.Callsheet)
                         .ThenInclude(cs=> cs.CallsheetScenes);
+        }
+
+        private IQueryable<ShootingDay> GetIncludedCharacter()
+        {
+            IQueryable<ShootingDay> query = _context.Set<ShootingDay>();
+
+            return query.Include(sd => sd.CrewUnit)
+                        .Include(sd=> sd.ShootingDayScenes)
+                        .Include(sd=> sd.ScheduleDay)
+                            .ThenInclude(sd=> sd.ScheduleScenes)
+                                .ThenInclude(sc => sc.Characters)
+                                    .ThenInclude(c => c.CharacterScene)
+                        .Include(sd=> sd.ScheduleDay)
+                            .ThenInclude(sd=> sd.ScheduleScenes)
+                                .ThenInclude(ss => ss.Scene)
+                                    .ThenInclude(s => s.SceneIntro)
+                        .Include(sd=> sd.ScheduleDay)
+                            .ThenInclude(sd=> sd.ScheduleScenes)
+                                .ThenInclude(ss => ss.Scene)
+                                    .ThenInclude(s => s.ScriptLocation)
+                        .Include(sd=> sd.ScheduleDay)
+                            .ThenInclude(sd=> sd.ScheduleScenes)
+                                .ThenInclude(ss => ss.Scene)
+                                    .ThenInclude(s => s.TimeOfDay)
+                        .Include(sd=> sd.ScheduleDay)
+                            .ThenInclude(sd=> sd.ScheduleScenes)
+                                .ThenInclude(ss => ss.Scene)
+                                    .ThenInclude(s => s.ImageScenes)
+                                        .ThenInclude(i => i.Image)
+                        .Include(sd=> sd.Callsheet)
+                            .ThenInclude(cs=> cs.CallsheetScenes)
+                                .ThenInclude(css => css.Characters)
+                                    .ThenInclude(c => c.CharacterScene)
+                        .Include(sd=> sd.Callsheet)
+                            .ThenInclude(sd=> sd.CallsheetScenes)
+                                .ThenInclude(ss => ss.Scene)
+                                    .ThenInclude(s => s.SceneIntro)
+                        .Include(sd=> sd.Callsheet)
+                            .ThenInclude(sd=> sd.CallsheetScenes)
+                                .ThenInclude(ss => ss.Scene)
+                                    .ThenInclude(s => s.ScriptLocation)
+                        .Include(sd=> sd.Callsheet)
+                            .ThenInclude(sd=> sd.CallsheetScenes)
+                                .ThenInclude(ss => ss.Scene)
+                                    .ThenInclude(s => s.TimeOfDay)
+                        .Include(sd=> sd.Callsheet)
+                            .ThenInclude(sd=> sd.CallsheetScenes)
+                                .ThenInclude(ss => ss.Scene)
+                                    .ThenInclude(s => s.ImageScenes)
+                                        .ThenInclude(i => i.Image);
         }
 
         private IQueryable<ShootingDay> GetIncludedCalendarCrewUnit()

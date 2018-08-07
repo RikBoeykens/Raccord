@@ -1,16 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { ProjectSummary } from '../../../../../shared/children/projects';
 import {
   FullCallsheet,
-  CallsheetLocationSet,
   CallsheetSceneScene,
-  Location,
-  CallsheetCharacterCharacter,
-  CallsheetLocation
+  Location
 } from '../../../..';
 import { ProjectHelpers } from '../../../../../shared/children/projects/helpers/project.helpers';
-import { CastMember } from '../../../../../shared/children/cast';
 import { RouteSettings } from '../../../../../shared';
 
 @Component({

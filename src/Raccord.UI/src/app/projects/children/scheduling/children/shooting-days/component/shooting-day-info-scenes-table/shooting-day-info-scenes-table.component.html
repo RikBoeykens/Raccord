@@ -1,0 +1,47 @@
+<mat-table #shootingdayinfoscenestable [dataSource]="shootingDays" class="shooting-day-info-scenes-table">
+
+  <!-- Unit Column -->
+  <ng-container matColumnDef="unit">
+    <mat-header-cell *matHeaderCellDef>Unit</mat-header-cell>
+    <mat-cell *matCellDef="let shootingDay">
+      <a routerLink="{{getCrewUnitLink(shootingDay)}}">
+        {{shootingDay.crewUnit.name}}
+      </a>
+    </mat-cell>
+  </ng-container>
+
+  <!-- Number Column -->
+  <ng-container matColumnDef="number">
+    <mat-header-cell *matHeaderCellDef>SD</mat-header-cell>
+    <mat-cell *matCellDef="let shootingDay">
+      <a routerLink="{{getShootingDayLink(shootingDay)}}">
+        {{shootingDay.number}}
+      </a>
+    </mat-cell>
+  </ng-container>
+
+  <!-- Date Column -->
+  <ng-container matColumnDef="date">
+    <mat-header-cell *matHeaderCellDef>Date</mat-header-cell>
+    <mat-cell *matCellDef="let shootingDay">
+      <a routerLink="{{getShootingDayLink(shootingDay)}}">
+        {{shootingDay.date | date}}
+      </a>
+    </mat-cell>
+  </ng-container>
+
+  <!-- Date Column -->
+  <ng-container matColumnDef="scenes">
+    <mat-header-cell class="col-scenes" *matHeaderCellDef>Scenes</mat-header-cell>
+    <mat-cell class="col-scenes" *matCellDef="let shootingDay">
+      <div *ngFor="let scene of shootingDay.scenes">
+        <a routerLink="{{getSceneLink(scene)}}">
+          <scene-summary [scene]="scene" [pageLengthOverride]="scene.scheduledPageLength" [showPageLength]="true"></scene-summary>
+        </a>
+      </div>
+    </mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>

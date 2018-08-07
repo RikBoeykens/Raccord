@@ -15,6 +15,7 @@ namespace Raccord.Data.EntityFramework.Repositories.ShootingDays
         int SearchCount(string searchText, long? projectID);
         IEnumerable<ShootingDay> Search(string searchText, long? projectID);
         IEnumerable<ShootingDay> GetAllForScene(long sceneID);
+        IEnumerable<ShootingDay> GetAllForCharacter(long characterID);
         IEnumerable<ShootingDay> GetAllForCrewUnitCalendar(long[] crewUnitIDs, DateTime start, DateTime end);
         IEnumerable<ShootingDay> GetAllForCharacterCalendar(long[] characterIds, DateTime start, DateTime end);
         IEnumerable<ShootingDay> GetAllForCrewUnitCalendarScenes(long[] crewUnitIDs, DateTime start, DateTime end);

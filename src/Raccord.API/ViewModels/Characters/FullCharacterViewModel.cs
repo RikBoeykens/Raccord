@@ -6,6 +6,7 @@ using Raccord.API.ViewModels.Scheduling.ScheduleDays;
 using Raccord.API.ViewModels.Profile;
 using Raccord.API.ViewModels.Cast;
 using Raccord.API.ViewModels.Comments;
+using Raccord.API.ViewModels.ShootingDays;
 
 namespace Raccord.API.ViewModels.Characters
 {
@@ -14,7 +15,7 @@ namespace Raccord.API.ViewModels.Characters
     {
         private IEnumerable<LinkedSceneViewModel> _scenes;
         private IEnumerable<LinkedImageViewModel> _images;
-        private IEnumerable<ScheduleDaySceneCollectionViewModel> _scheduleDays;
+        private IEnumerable<ShootingDayInfoSceneCollectionViewModel> _shootingDays;
         private CastMemberSummaryViewModel _castMember;
         private IEnumerable<CommentViewModel> _comments;
 
@@ -45,15 +46,15 @@ namespace Raccord.API.ViewModels.Characters
         }
 
         // Schedule scenes linked to the character
-        public IEnumerable<ScheduleDaySceneCollectionViewModel> ScheduleDays
+        public IEnumerable<ShootingDayInfoSceneCollectionViewModel> ShootingDays
         {
             get
             {
-                return _scheduleDays ?? (_scheduleDays = new List<ScheduleDaySceneCollectionViewModel>());
+                return _shootingDays ?? (_shootingDays = new List<ShootingDayInfoSceneCollectionViewModel>());
             }
             set
             {
-                _scheduleDays = value;
+                _shootingDays = value;
             }
         }
 

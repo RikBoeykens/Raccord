@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using Raccord.Application.Core.Services.Scheduling.ScheduleDays;
 using Raccord.Application.Core.Services.Cast;
 using Raccord.Application.Core.Services.Comments;
+using Raccord.Application.Core.Services.ShootingDays;
 
 namespace Raccord.Application.Core.Services.Characters
 {
@@ -13,7 +14,7 @@ namespace Raccord.Application.Core.Services.Characters
     {
         private IEnumerable<LinkedSceneDto> _scenes;
         private IEnumerable<LinkedImageDto> _images;
-        private IEnumerable<ScheduleDaySceneCollectionDto> _scheduleDays;
+        private IEnumerable<ShootingDayInfoSceneCollectionDto> _shootingDays;
         private CastMemberSummaryDto _castMember;
         private IEnumerable<CommentDto> _comments;
 
@@ -44,15 +45,15 @@ namespace Raccord.Application.Core.Services.Characters
         }
 
         // Schedule days linked to the character
-        public IEnumerable<ScheduleDaySceneCollectionDto> ScheduleDays
+        public IEnumerable<ShootingDayInfoSceneCollectionDto> ShootingDays
         {
             get
             {
-                return _scheduleDays ?? (_scheduleDays = new List<ScheduleDaySceneCollectionDto>());
+                return _shootingDays ?? (_shootingDays = new List<ShootingDayInfoSceneCollectionDto>());
             }
             set
             {
-                _scheduleDays = value;
+                _shootingDays = value;
             }
         }
 

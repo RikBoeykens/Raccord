@@ -2,7 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Raccord.Application.Core.Services.ShootingDays;
+using Raccord.Application.Core.Services.ShootingDays.Scenes;
 using Raccord.Application.Services.Crew.CrewUnits;
+using Raccord.Application.Services.Scenes;
 using Raccord.Application.Services.ShootingDays.Scenes;
 using Raccord.Application.Services.Shots.Slates;
 using Raccord.Core.Enums;
@@ -126,6 +128,33 @@ namespace Raccord.Application.Services.ShootingDays
             }
 
             return dto;
+        }
+
+        public static IEnumerable<ShootingDayInfoSceneCollectionDto> GetCharacterShootingDays(this IEnumerable<ShootingDay> shootingDays, long characterId)
+        {
+            var callsheetShootingDays = shootingDays.Where(sd => sd.CallsheetID.HasValue && sd.Callsheet.CallsheetScenes.Any(cs => cs.Characters.Any(csc => csc.CharacterScene.CharacterID == characterId))).ToList();
+
+            var callsheetDtos = callsheetShootingDays.Select(sd => new ShootingDayInfoSceneCollectionDto
+            {
+                Number = sd.Number,
+                Date = sd.Date,
+                CrewUnit = sd.CrewUnit.Translate(),
+                Type = ShootingDayType.Callsheet,
+                Scenes = sd.Callsheet.CallsheetScenes.Where(cs => cs.Characters.Any(csc => csc.CharacterScene.CharacterID == characterId))
+                    .Select(cs => cs.TranslateSummary())
+            });
+            var scheduleShootingDays = shootingDays.Where(sd =>sd.ScheduleDayID.HasValue && !sd.CallsheetID.HasValue && sd.ScheduleDay.ScheduleScenes.Any(cs => cs.Characters.Any(csc => csc.CharacterScene.CharacterID == characterId))).ToList();
+
+            var scheduleDtos = scheduleShootingDays.Select(sd => new ShootingDayInfoSceneCollectionDto
+            {
+                Number = sd.Number,
+                Date = sd.Date,
+                CrewUnit = sd.CrewUnit.Translate(),
+                Type = ShootingDayType.Scheduled,
+                Scenes = sd.ScheduleDay.ScheduleScenes.Where(cs => cs.Characters.Any(csc => csc.CharacterScene.CharacterID == characterId))
+                    .Select(cs => cs.TranslateSummary())
+            });
+            return callsheetDtos.Concat(scheduleDtos);
         }
     }
 }
