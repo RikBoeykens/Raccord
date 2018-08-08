@@ -1,0 +1,42 @@
+<div class="raccord-narrow-container">
+  <div class="raccord-page-header">
+    <a routerLink="{{getBackLink()}}">
+      <back-link></back-link>
+    </a>
+    <div fxLayout="row">
+      <h1 class="raccord-header-title">
+        Location Dashboard
+      </h1>
+    </div>
+  </div>
+  <!-- Locations -->
+  <div class="raccord-sub-header"
+    fxLayout="row">
+    <h2>Locations</h2>
+    <span class="raccord-action-link-container">
+        <a routerLink="{{getLocationsLink()}}" class="raccord-action-link">more</a>
+    </span>
+  </div>
+  <div fxLayout="row wrap" fxLayoutGap="5px" *ngIf="locations && locations.pageInfo">
+    <a routerLink="{{getLocationLink(location)}}"
+        *ngFor="let location of locations.data">
+        <location-card
+            [location]="location"></location-card>
+    </a>
+  </div>
+  <!-- Script Locations -->
+  <div class="raccord-sub-header"
+    fxLayout="row">
+    <h2>Locations (script)</h2>
+    <span class="raccord-action-link-container">
+        <a routerLink="{{getScriptLocationsLink()}}" class="raccord-action-link">more</a>
+    </span>
+  </div>
+  <div fxLayout="row wrap" fxLayoutGap="5px" *ngIf="scriptLocations && scriptLocations.pageInfo">
+    <a routerLink="{{getScriptLocationLink(scriptLocation)}}"
+        *ngFor="let scriptLocation of scriptLocations.data">
+        <scrpt-location-card
+            [scriptLocation]="scriptLocation"></scrpt-location-card>
+    </a>
+  </div>
+</div>

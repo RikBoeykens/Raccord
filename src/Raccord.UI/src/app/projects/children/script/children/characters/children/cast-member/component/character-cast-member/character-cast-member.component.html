@@ -1,0 +1,26 @@
+<div class="raccord-label-info">
+  <div fxLayout="row">
+    <cast-member-avatar [castMember]="castMember"></cast-member-avatar>
+    <a routerLink="{{getCastMemberLink()">
+      {{getFullName()}}
+    </a>
+  </div>
+  <div fxLayout="row"
+    class="raccord-label-info-row">
+    <span fxFlex="50%" class="raccord-label">
+      Telephone
+    </span>
+    <span fxFlex="50%" class="raccord-info">
+      <phone-link [telephone]="castMember.telephone"></phone-link>
+    </span>
+  </div>
+  <div fxLayout="row"
+    class="raccord-label-info-row">
+    <span fxFlex="50%" class="raccord-label">
+      Email
+    </span>
+    <span fxFlex="50%" class="raccord-info">
+      <mail-link [email]="castMember.email"></mail-link>
+    </span>
+  </div>
+</div>

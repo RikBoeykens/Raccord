@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Raccord.Application.Core.Services.Comments;
 using Raccord.Application.Core.Services.Locations.LocationSets;
 using Raccord.Application.Core.Services.Scheduling.ScheduleDays;
+using Raccord.Application.Core.Services.ShootingDays;
 
 namespace Raccord.Application.Core.Services.Locations.Locations
 {
@@ -9,7 +10,7 @@ namespace Raccord.Application.Core.Services.Locations.Locations
     public class FullLocationDto: LocationDto
     {
         private IEnumerable<LocationSetScriptLocationDto> _sets;
-        private IEnumerable<ScheduleDaySceneCollectionDto> _scheduleDays;
+        private IEnumerable<ShootingDayInfoSceneCollectionDto> _shootingDays;
         private IEnumerable<CommentDto> _comments;
 
         // Sets linked to the location
@@ -26,15 +27,15 @@ namespace Raccord.Application.Core.Services.Locations.Locations
         }
 
         // Schedule days linked to the location
-        public IEnumerable<ScheduleDaySceneCollectionDto> ScheduleDays
+        public IEnumerable<ShootingDayInfoSceneCollectionDto> ShootingDays
         {
             get
             {
-                return _scheduleDays ?? (_scheduleDays = new List<ScheduleDaySceneCollectionDto>());
+                return _shootingDays ?? (_shootingDays = new List<ShootingDayInfoSceneCollectionDto>());
             }
             set
             {
-                _scheduleDays = value;
+                _shootingDays = value;
             }
         }
 

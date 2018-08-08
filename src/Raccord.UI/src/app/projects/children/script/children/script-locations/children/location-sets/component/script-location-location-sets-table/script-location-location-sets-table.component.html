@@ -4,7 +4,7 @@
   <ng-container matColumnDef="image">
     <mat-header-cell *matHeaderCellDef></mat-header-cell>
     <mat-cell *matCellDef="let locationSet">
-      <a routerLink="{{getLocationSetLink(locationSet)}}">
+      <a routerLink="{{getLocationSetLink(locationSet)}}" [queryParams]="{src: 'scriptlocation'}">
         <placeholder-image [value]="locationSet.name"></placeholder-image>
       </a>
     </mat-cell>
@@ -14,7 +14,7 @@
   <ng-container matColumnDef="set">
     <mat-header-cell *matHeaderCellDef>Set</mat-header-cell>
     <mat-cell *matCellDef="let locationSet">
-      <a routerLink="{{getLocationSetLink(locationSet)}}">
+      <a routerLink="{{getLocationSetLink(locationSet)}}" [queryParams]="{src: 'scriptlocation'}">
         {{locationSet.name}}
       </a>
     </mat-cell>

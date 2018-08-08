@@ -1,0 +1,42 @@
+<div class="raccord-narrow-container">
+  <div class="raccord-page-header">
+    <a routerLink="{{getBackLink()}}">
+      <back-link></back-link>
+    </a>
+    <div fxLayout="row">
+      <h1 class="raccord-header-title">
+        Cast Dashboard
+      </h1>
+    </div>
+  </div>
+  <!-- Cast Member -->
+  <div class="raccord-sub-header"
+    fxLayout="row">
+    <h2>Cast</h2>
+    <span class="raccord-action-link-container">
+        <a routerLink="{{getCastMembersLink()}}" class="raccord-action-link">more</a>
+    </span>
+  </div>
+  <div fxLayout="row wrap" fxLayoutGap="5px" *ngIf="castMembers && castMembers.pageInfo">
+    <a routerLink="{{getCastMemberLink(castMember)}}"
+        *ngFor="let castMember of castMembers.data">
+        <cast-member-card
+            [castMember]="castMember"></cast-member-card>
+    </a>
+  </div>
+  <!-- Characters -->
+  <div class="raccord-sub-header"
+    fxLayout="row">
+    <h2>Characters</h2>
+    <span class="raccord-action-link-container">
+        <a routerLink="{{getCharactersLink()}}" class="raccord-action-link">more</a>
+    </span>
+  </div>
+  <div fxLayout="row wrap" fxLayoutGap="5px" *ngIf="characters && characters.pageInfo">
+    <a routerLink="{{getCharacterLink(character)}}"
+        *ngFor="let character of characters.data">
+        <character-card
+            [character]="character"></character-card>
+    </a>
+  </div>
+</div>

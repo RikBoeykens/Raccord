@@ -70,6 +70,16 @@ namespace Raccord.Data.EntityFramework.Repositories.ShootingDays
                                     );
         }
 
+        public IEnumerable<ShootingDay> GetAllForLocationSets(long[] locationSetIDs)
+        {
+            var query = GetIncludedLocationSet();
+
+            return query.Where(sd => locationSetIDs.Any(lId => sd.CallsheetID.HasValue && sd.Callsheet.CallsheetScenes.Any(cs => cs.LocationSetID == lId))
+                                    ||
+                                    locationSetIDs.Any(lId => sd.ScheduleDayID.HasValue && sd.ScheduleDay.ScheduleScenes.Any(cs => cs.LocationSetID == lId))
+                                    );
+        }
+
 
         public int SearchCount(string searchText, long? projectID)
         {
@@ -257,6 +267,48 @@ namespace Raccord.Data.EntityFramework.Repositories.ShootingDays
                             .ThenInclude(cs=> cs.CallsheetScenes)
                                 .ThenInclude(css => css.Characters)
                                     .ThenInclude(c => c.CharacterScene)
+                        .Include(sd=> sd.Callsheet)
+                            .ThenInclude(sd=> sd.CallsheetScenes)
+                                .ThenInclude(ss => ss.Scene)
+                                    .ThenInclude(s => s.SceneIntro)
+                        .Include(sd=> sd.Callsheet)
+                            .ThenInclude(sd=> sd.CallsheetScenes)
+                                .ThenInclude(ss => ss.Scene)
+                                    .ThenInclude(s => s.ScriptLocation)
+                        .Include(sd=> sd.Callsheet)
+                            .ThenInclude(sd=> sd.CallsheetScenes)
+                                .ThenInclude(ss => ss.Scene)
+                                    .ThenInclude(s => s.TimeOfDay)
+                        .Include(sd=> sd.Callsheet)
+                            .ThenInclude(sd=> sd.CallsheetScenes)
+                                .ThenInclude(ss => ss.Scene)
+                                    .ThenInclude(s => s.ImageScenes)
+                                        .ThenInclude(i => i.Image);
+        }
+
+        private IQueryable<ShootingDay> GetIncludedLocationSet()
+        {
+            IQueryable<ShootingDay> query = _context.Set<ShootingDay>();
+
+            return query.Include(sd => sd.CrewUnit)
+                        .Include(sd=> sd.ShootingDayScenes)
+                        .Include(sd=> sd.ScheduleDay)
+                            .ThenInclude(sd=> sd.ScheduleScenes)
+                                .ThenInclude(ss => ss.Scene)
+                                    .ThenInclude(s => s.SceneIntro)
+                        .Include(sd=> sd.ScheduleDay)
+                            .ThenInclude(sd=> sd.ScheduleScenes)
+                                .ThenInclude(ss => ss.Scene)
+                                    .ThenInclude(s => s.ScriptLocation)
+                        .Include(sd=> sd.ScheduleDay)
+                            .ThenInclude(sd=> sd.ScheduleScenes)
+                                .ThenInclude(ss => ss.Scene)
+                                    .ThenInclude(s => s.TimeOfDay)
+                        .Include(sd=> sd.ScheduleDay)
+                            .ThenInclude(sd=> sd.ScheduleScenes)
+                                .ThenInclude(ss => ss.Scene)
+                                    .ThenInclude(s => s.ImageScenes)
+                                        .ThenInclude(i => i.Image)
                         .Include(sd=> sd.Callsheet)
                             .ThenInclude(sd=> sd.CallsheetScenes)
                                 .ThenInclude(ss => ss.Scene)

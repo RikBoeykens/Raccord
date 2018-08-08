@@ -1,0 +1,2 @@
+<user-avatar [userId]="castMember.userID" *ngIf="castMember.hasImage" [cardImage]="cardImage" [listAvatar]="listAvatar" [cardAvatar]="cardAvatar" [headerAvatar]="headerAvatar"></user-avatar>
+<placeholder-image [value]="getFullName()" *ngIf="!castMember.hasImage" [cardImage]="cardImage" [listAvatar]="listAvatar" [cardAvatar]="cardAvatar" [headerAvatar]="headerAvatar"></placeholder-image>

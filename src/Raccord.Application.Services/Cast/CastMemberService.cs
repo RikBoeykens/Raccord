@@ -6,6 +6,7 @@ using Raccord.Application.Core.Services.Cast;
 using Raccord.Data.EntityFramework.Repositories.Cast;
 using Raccord.Domain.Model.Cast;
 using Raccord.Data.EntityFramework.Repositories.Characters;
+using Raccord.Application.Core.Common.Paging;
 
 namespace Raccord.Application.Services.Cast
 {
@@ -38,6 +39,12 @@ namespace Raccord.Application.Services.Cast
             var dtos = castMembers.Select(l => l.TranslateSummary()).ToList();
 
             return dtos;
+        }
+
+        public PagedDataDto<CastMemberSummaryDto> GetPagedForProject(PaginationRequestDto paginationRequest,long projectId)
+        {
+            var castMembers = _castMemberRepository.GetAllForProject(projectId);
+            return castMembers.GetPaged<CastMember, CastMemberSummaryDto>(paginationRequest, x => x.TranslateSummary());
         }
 
         // Gets a single cast member by id

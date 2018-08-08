@@ -1,4 +1,4 @@
-import { Location } from '../../../../locations/model/location.model';
+import { Location } from '../../../../locations/children/locations/model/location.model';
 import { CallsheetLocationSet } from '../../../../..';
 import { Address, LatLng } from '../../../../../../shared';
 

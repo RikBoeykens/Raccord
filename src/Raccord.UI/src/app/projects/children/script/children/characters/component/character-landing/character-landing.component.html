@@ -25,6 +25,15 @@
     </mat-expansion-panel-header>
     <scenes-table [scenes]="character.scenes" [projectId]="project.id"></scenes-table>
   </mat-expansion-panel>
+  <mat-expansion-panel class="raccord-expansion-panel"
+    *ngIf="character.castMember.id!==0">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Cast Member
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <character-cast-member [castMember]="character.castMember" [projectId]="project.id"></character-cast-member>
+  </mat-expansion-panel>
   <mat-expansion-panel class="raccord-expansion-panel">
     <mat-expansion-panel-header>
       <mat-panel-title>

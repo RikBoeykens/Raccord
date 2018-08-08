@@ -10,9 +10,9 @@
   <agm-marker *ngFor="let marker of markerLocationSets"
             [latitude]="marker.latLng.latitude" 
             [longitude]="marker.latLng.longitude"
-            [label]="'L'">
+            [label]="'S'">
     <agm-info-window>
-      <div><a routerLink="{{getLocationSetLink(marker)}}">{{marker.name}}</a></div>
+      <div><a routerLink="{{getLocationSetLink(marker)}}" [queryParams]="{src: 'scriptlocation'}">{{marker.name}}</a></div>
     </agm-info-window>
   </agm-marker>
 </agm-map>

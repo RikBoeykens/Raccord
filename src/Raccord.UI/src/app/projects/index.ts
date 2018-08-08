@@ -102,6 +102,14 @@ export { CallsheetResolve } from './children/callsheets/service/callsheet-resolv
 export { CallsheetSummaryResolve } from './children/callsheets/service/callsheet-summary-resolve.service';
 
 // tslint:disable-next-line:max-line-length
+export { CastDashboardComponent } from './children/cast/component/cast-dashboard/cast-dashboard.component';
+
+export { CastDashboard } from './children/cast/model/cast-dashboard.model';
+
+export { CastDashboardHttpService } from './children/cast/service/cast-dashboard-http.service';
+export { CastDashboardResolve } from './children/cast/service/cast-dashboard.resolve';
+
+// tslint:disable-next-line:max-line-length
 export { CommentContainerComponent } from './children/comments/component/comment-container/comment-container.component';
 // tslint:disable-next-line:max-line-length
 export { EditCommentComponent } from './children/comments/component/edit-comment/edit-comment.component';
@@ -124,7 +132,24 @@ export { LocationSetScriptLocation } from './children/locations/children/locatio
 export { LocationSetSummary } from './children/locations/children/location-sets/model/location-set-summary.model';
 export { LocationSet } from './children/locations/children/location-sets/model/location-set.model';
 
-export { Location } from './children/locations/model/location.model';
+// tslint:disable-next-line:max-line-length
+export { LocationAvatarComponent } from './children/locations/children/locations/component/location-avatar/location-avatar.component';
+// tslint:disable-next-line:max-line-length
+export { LocationCardComponent } from './children/locations/children/locations/component/location-card/location-card.component';
+
+export { FullLocation } from './children/locations/children/locations/model/full-location.model';
+// tslint:disable-next-line:max-line-length
+export { LocationSummary } from './children/locations/children/locations/model/location-summary.model';
+export { Location } from './children/locations/children/locations/model/location.model';
+
+// tslint:disable-next-line:max-line-length
+export { LocationDashboardComponent } from './children/locations/component/location-dashboard/location-dashboard.component';
+
+export { LocationDashboard } from './children/locations/model/location-dashboard.model';
+
+// tslint:disable-next-line:max-line-length
+export { LocationDashboardHttpService } from './children/locations/service/location-dashboard-http.service';
+export { LocationDashboardResolve } from './children/locations/service/location-dashboard.resolve';
 
 // tslint:disable-next-line:max-line-length
 export { ShootingDaySceneSummary } from './children/scheduling/children/shooting-days/children/scenes/model/shooting-day-scene-summary.model';
@@ -145,6 +170,9 @@ export { ShootingDayInfo } from './children/scheduling/children/shooting-days/mo
 // tslint:disable-next-line:max-line-length
 export { ShootingDayInfoSceneCollection } from './children/scheduling/children/shooting-days/model/shooting-day-info-scene-collection.model';
 export { ShootingDay } from './children/scheduling/children/shooting-days/model/shooting-day.model';
+
+// tslint:disable-next-line:max-line-length
+export { CharacterCastMemberComponent } from './children/script/children/characters/children/cast-member/component/character-cast-member/character-cast-member.component';
 
 // tslint:disable-next-line:max-line-length
 export { CharacterLandingComponent } from './children/script/children/characters/component/character-landing/character-landing.component';

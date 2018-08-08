@@ -75,13 +75,18 @@ import {
   CallsheetScenesTableComponent,
   CallsheetComponent,
   CallsheetSidesComponent,
+  CastDashboardComponent,
   CommentContainerComponent,
   EditCommentComponent,
   ShowCommentComponent,
+  LocationAvatarComponent,
+  LocationCardComponent,
+  LocationDashboardComponent,
   ShootingDayInfoComponent,
   ShootingDayInfoTableComponent,
   ShootingDayInfoScenesComponent,
   ShootingDayInfoScenesTableComponent,
+  CharacterCastMemberComponent,
   CharacterLandingComponent,
   CharactersListComponent,
   SceneBreakdownTableComponent,
@@ -113,6 +118,10 @@ import {
 import {
   LoginComponent
 } from './security';
+import {
+  CastMemberAvatarComponent,
+  CastMemberCardComponent
+} from './shared/children/cast';
 import {
   CharacterAvatarComponent,
   CharacterCardComponent,
@@ -205,13 +214,18 @@ export const COMPONENTS = [
   CallsheetScenesTableComponent,
   CallsheetComponent,
   CallsheetSidesComponent,
+  CastDashboardComponent,
   CommentContainerComponent,
   EditCommentComponent,
   ShowCommentComponent,
+  LocationAvatarComponent,
+  LocationCardComponent,
+  LocationDashboardComponent,
   ShootingDayInfoComponent,
   ShootingDayInfoTableComponent,
   ShootingDayInfoScenesComponent,
   ShootingDayInfoScenesTableComponent,
+  CharacterCastMemberComponent,
   CharacterLandingComponent,
   CharactersListComponent,
   SceneBreakdownTableComponent,
@@ -239,6 +253,8 @@ export const COMPONENTS = [
   SearchEntityComponent,
   LoginComponent,
   CharacterCardComponent,
+  CastMemberCardComponent,
+  CastMemberAvatarComponent,
   CharacterAvatarComponent,
   CharacterSummaryComponent,
   ShowImageComponent,

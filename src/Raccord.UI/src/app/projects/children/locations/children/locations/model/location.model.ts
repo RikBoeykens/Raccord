@@ -1,4 +1,4 @@
-import { BaseModel, Address, LatLng } from '../../../../shared';
+import { BaseModel, Address, LatLng } from '../../../../../../shared';
 
 export class Location extends BaseModel {
   public id: number;

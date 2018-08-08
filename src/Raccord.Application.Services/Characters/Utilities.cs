@@ -37,7 +37,7 @@ namespace Raccord.Application.Services.Characters
                 Description = character.Description,
                 Images = character.ImageCharacters.Select(i=> i.TranslateImage()),
                 Scenes = character.CharacterScenes.OrderBy(s=> s.Scene.Number).Select(s=> s.TranslateScene()),
-                ShootingDays = shootingDays.GetCharacterShootingDays(character.ID),
+                ShootingDays = shootingDays.GetCharacterShootingDays(new long[]{ character.ID }),
                 CastMember = character.CastMember.TranslateSummary(),
                 Comments = comments,
                 ProjectID = character.ProjectID,

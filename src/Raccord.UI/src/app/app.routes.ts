@@ -33,6 +33,10 @@ import {
   CallsheetSidesComponent,
   CallsheetResolve,
   CallsheetSummaryResolve,
+  CastDashboardComponent,
+  CastDashboardResolve,
+  LocationDashboardComponent,
+  LocationDashboardResolve,
   CharacterLandingComponent,
   CharactersListComponent,
   CharacterResolve,
@@ -332,7 +336,31 @@ export const ROUTES: Routes = [
                 }
               }
             ]
-          }
+          },
+          {
+            path: RouteSettings.LOCATIONSDASHBOARD,
+            children: [
+              {
+                path: '',
+                component: LocationDashboardComponent,
+                resolve: {
+                  dashboardInfo: LocationDashboardResolve
+                }
+              }
+            ]
+          },
+          {
+            path: RouteSettings.CASTDASHBOARD,
+            children: [
+              {
+                path: '',
+                component: CastDashboardComponent,
+                resolve: {
+                  dashboardInfo: CastDashboardResolve
+                }
+              }
+            ]
+          },
         ],
         resolve: {
           CurrentProjectResolve
