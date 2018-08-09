@@ -1176,7 +1176,7 @@ namespace Raccord.API.Controllers.Admin
       });
       var highwayId = _locationSetService.Add(new LocationSetDto
       {
-        Name = "HIHGHWAY",
+        Name = "HIGHWAY",
         LocationID = locationIds.westlinkBelfastId,
         ScriptLocationID = scriptLocationIds.highwayId
       });
