@@ -1,0 +1,18 @@
+<div class="raccord-narrow-container">
+  <div class="raccord-page-header">
+    <a routerLink="{{getBackLink()}}">
+      <back-link></back-link>
+    </a>
+    <h1 class="raccord-header-title">
+      Locations
+    </h1>
+  </div>
+  <div fxLayout="row wrap" fxLayoutGap="5px" *ngIf="locations">
+    <a routerLink="{{getLocationLink(location)}}"
+        *ngFor="let location of locations">
+      <location-card
+          [location]="location"></location-card>
+    </a>
+  </div>
+  <locations-list-map [locations]="locations"></locations-list-map>
+</div>

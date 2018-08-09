@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { FullCharacter, Comment } from '../../../../../..';
+import { FullLocation, Comment } from '../../../../../..';
 import { ProjectSummary } from '../../../../../../../shared/children/projects';
 import {
   ProjectHelpers
@@ -10,11 +10,11 @@ import { ProjectPermissionEnum } from '../../../../../../../shared/children/user
 import { ParentCommentType, RouteSettings } from '../../../../../../../shared';
 
 @Component({
-  templateUrl: 'character-landing.component.html',
+  templateUrl: 'location-landing.component.html',
 })
-export class CharacterLandingComponent implements OnInit {
+export class LocationLandingComponent implements OnInit {
 
-  public character: FullCharacter;
+  public location: FullLocation;
   public project: ProjectSummary;
 
   constructor(
@@ -23,14 +23,14 @@ export class CharacterLandingComponent implements OnInit {
   }
 
   public ngOnInit() {
-    this._route.data.subscribe((data: { character: FullCharacter }) => {
-      this.character = data.character;
+    this._route.data.subscribe((data: { location: FullLocation }) => {
+      this.location = data.location;
     });
     this.project = ProjectHelpers.getCurrentProject();
   }
 
   public getBackLink() {
-    return `/${RouteSettings.PROJECTS}/${this.project.id}/${RouteSettings.CHARACTERS}`;
+    return `/${RouteSettings.PROJECTS}/${this.project.id}/${RouteSettings.LOCATIONS}`;
   }
 
   public getCanComment() {
@@ -41,12 +41,12 @@ export class CharacterLandingComponent implements OnInit {
   }
 
   public getParentCommentType() {
-    return ParentCommentType.character;
+    return ParentCommentType.location;
   }
 
   public getCommentCount() {
     let total = 0;
-    this.character.comments.forEach((comment: Comment) => total += comment.commentCount);
+    this.location.comments.forEach((comment: Comment) => total += comment.commentCount);
     return total;
   }
 }

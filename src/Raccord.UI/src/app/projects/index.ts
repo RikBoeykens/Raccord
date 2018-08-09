@@ -136,11 +136,28 @@ export { LocationSet } from './children/locations/children/location-sets/model/l
 export { LocationAvatarComponent } from './children/locations/children/locations/component/location-avatar/location-avatar.component';
 // tslint:disable-next-line:max-line-length
 export { LocationCardComponent } from './children/locations/children/locations/component/location-card/location-card.component';
+// tslint:disable-next-line:max-line-length
+export { LocationLandingComponent } from './children/locations/children/locations/component/location-landing/location-landing.component';
+// tslint:disable-next-line:max-line-length
+export { LocationLocationSetsMapComponent } from './children/locations/children/locations/component/location-location-sets-map/location-location-sets-map.component';
+// tslint:disable-next-line:max-line-length
+export { LocationLocationSetsTableComponent } from './children/locations/children/locations/component/location-location-sets-table/location-location-sets-table.component';
+// tslint:disable-next-line:max-line-length
+export { LocationsListComponent } from './children/locations/children/locations/component/locations-list/locations-list.component';
+// tslint:disable-next-line:max-line-length
+export { LocationsListMapComponent } from './children/locations/children/locations/component/locations-list-map/locations-list-map.component';
 
 export { FullLocation } from './children/locations/children/locations/model/full-location.model';
 // tslint:disable-next-line:max-line-length
 export { LocationSummary } from './children/locations/children/locations/model/location-summary.model';
 export { Location } from './children/locations/children/locations/model/location.model';
+
+// tslint:disable-next-line:max-line-length
+export { LocationHttpService } from './children/locations/children/locations/service/location-http.service';
+// tslint:disable-next-line:max-line-length
+export { LocationResolve } from './children/locations/children/locations/service/location-resolve.service';
+// tslint:disable-next-line:max-line-length
+export { LocationsResolve } from './children/locations/children/locations/service/locations-resolve.service';
 
 // tslint:disable-next-line:max-line-length
 export { LocationDashboardComponent } from './children/locations/component/location-dashboard/location-dashboard.component';

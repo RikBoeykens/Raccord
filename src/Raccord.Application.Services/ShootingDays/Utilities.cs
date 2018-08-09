@@ -136,6 +136,7 @@ namespace Raccord.Application.Services.ShootingDays
 
             var callsheetDtos = callsheetShootingDays.Select(sd => new ShootingDayInfoSceneCollectionDto
             {
+                ID = sd.CallsheetID.Value,
                 Number = sd.Number,
                 Date = sd.Date,
                 CrewUnit = sd.CrewUnit.Translate(),
@@ -147,6 +148,7 @@ namespace Raccord.Application.Services.ShootingDays
 
             var scheduleDtos = scheduleShootingDays.Select(sd => new ShootingDayInfoSceneCollectionDto
             {
+                ID = sd.ScheduleDayID.Value,
                 Number = sd.Number,
                 Date = sd.Date,
                 CrewUnit = sd.CrewUnit.Translate(),
@@ -163,6 +165,7 @@ namespace Raccord.Application.Services.ShootingDays
 
             var callsheetDtos = callsheetShootingDays.Select(sd => new ShootingDayInfoSceneCollectionDto
             {
+                ID = sd.CallsheetID.Value,
                 Number = sd.Number,
                 Date = sd.Date,
                 CrewUnit = sd.CrewUnit.Translate(),
@@ -174,6 +177,7 @@ namespace Raccord.Application.Services.ShootingDays
 
             var scheduleDtos = scheduleShootingDays.Select(sd => new ShootingDayInfoSceneCollectionDto
             {
+                ID = sd.ScheduleDayID.Value,
                 Number = sd.Number,
                 Date = sd.Date,
                 CrewUnit = sd.CrewUnit.Translate(),

@@ -35,6 +35,10 @@ import {
   CallsheetSummaryResolve,
   CastDashboardComponent,
   CastDashboardResolve,
+  LocationLandingComponent,
+  LocationsListComponent,
+  LocationResolve,
+  LocationsResolve,
   LocationDashboardComponent,
   LocationDashboardResolve,
   CharacterLandingComponent,
@@ -345,6 +349,25 @@ export const ROUTES: Routes = [
                 component: LocationDashboardComponent,
                 resolve: {
                   dashboardInfo: LocationDashboardResolve
+                }
+              }
+            ]
+          },
+          {
+            path: RouteSettings.LOCATIONS,
+            children: [
+              {
+                path: '',
+                component: LocationsListComponent,
+                resolve: {
+                  locations: LocationsResolve
+                }
+              },
+              {
+                path: ':locationId',
+                component: LocationLandingComponent,
+                resolve: {
+                  location: LocationResolve
                 }
               }
             ]
