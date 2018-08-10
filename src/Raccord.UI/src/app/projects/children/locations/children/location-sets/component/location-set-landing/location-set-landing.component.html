@@ -10,6 +10,26 @@
     </div>
   </div>
   <location-set-landing-map [locationSet]="locationSet" [projectId]="project.id"></location-set-landing-map>
+  <mat-card class="raccord-label-info">
+    <div fxLayout="row"
+      class="raccord-label-info-row">
+      <span fxFlex="50%" class="raccord-label">
+        Location
+      </span>
+      <span fxFlex="50%" class="raccord-info">
+        <a routerLink="{{getLocationLink()}}">{{locationSet.location.name}}</a>
+      </span>
+    </div>
+    <div fxLayout="row"
+      class="raccord-label-info-row">
+      <span fxFlex="50%" class="raccord-label">
+        Location (script)
+      </span>
+      <span fxFlex="50%" class="raccord-info">
+        <a routerLink="{{getScriptLocationLink()}}">{{locationSet.scriptLocation.name}}</a>
+      </span>
+    </div>
+  </mat-card>
   <mat-expansion-panel class="raccord-expansion-panel" *ngIf="getCanComment()">
     <mat-expansion-panel-header>
       <mat-panel-title>
