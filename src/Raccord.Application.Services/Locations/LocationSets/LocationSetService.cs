@@ -4,6 +4,9 @@ using System.Linq;
 using Raccord.Domain.Model.Locations.LocationSets;
 using Raccord.Application.Core.Services.Locations.LocationSets;
 using Raccord.Data.EntityFramework.Repositories.Locations.LocationSets;
+using Raccord.Application.Core.Services.Comments;
+using Raccord.Data.EntityFramework.Repositories.ShootingDays;
+using Raccord.Core.Enums;
 
 namespace Raccord.Application.Services.Locations.LocationSets
 {
@@ -11,14 +14,19 @@ namespace Raccord.Application.Services.Locations.LocationSets
     public class LocationSetService : ILocationSetService
     {
         private readonly ILocationSetRepository _locationSetRepository;
+        private readonly ICommentService _commentService;
+        private readonly IShootingDayRepository _shootingDayRepository;
 
         // Initialises a new LocationSetService
-        public LocationSetService(ILocationSetRepository locationSetRepository)
+        public LocationSetService(
+            ILocationSetRepository locationSetRepository,
+            ICommentService commentService,
+            IShootingDayRepository shootingDayRepository
+            )
         {
-            if(locationSetRepository == null)
-                throw new ArgumentNullException(nameof(locationSetRepository));
-            
             _locationSetRepository = locationSetRepository;
+            _commentService = commentService;
+            _shootingDayRepository = shootingDayRepository;
         }
 
         // Gets all sets for a location
@@ -55,7 +63,10 @@ namespace Raccord.Application.Services.Locations.LocationSets
         {
             var locationSet = _locationSetRepository.GetFull(ID);
 
-            var dto = locationSet.TranslateFull();
+            var comments = _commentService.GetForParent(new GetCommentDto{ ParentID = locationSet.ID, ParentType = ParentCommentType.LocationSet}).ToList();
+            var shootingDays = _shootingDayRepository.GetAllForLocationSets(new long[]{locationSet.ID}).ToList();
+
+            var dto = locationSet.TranslateFull(comments, shootingDays);
 
             return dto;
         }

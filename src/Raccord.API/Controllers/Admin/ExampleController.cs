@@ -1041,7 +1041,8 @@ namespace Raccord.API.Controllers.Admin
         FirstName = fullName.firstName,
         LastName = fullName.lastName,
         Email = GetEmail(fullName.firstName, fullName.lastName),
-        Telephone = GetRandomPhone()
+        Telephone = GetRandomPhone(),
+        Department = new CrewDepartmentDto { ID = departmentId }
       });
     }
     private (string firstName, string lastName) GetRandomFullName()

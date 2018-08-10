@@ -27,6 +27,7 @@ using Raccord.Domain.Model.Breakdowns.BreakdownItems;
 using Raccord.Domain.Model.Images;
 using Raccord.Domain.Model.Locations.Locations;
 using Raccord.Domain.Model.Shots;
+using Raccord.Domain.Model.Locations.LocationSets;
 
 namespace Raccord.Data.EntityFramework
 {
@@ -115,6 +116,11 @@ namespace Raccord.Data.EntityFramework
             modelBuilder.Entity<Location>()
                         .HasMany(sc => sc.Comments)
                         .WithOne(c => c.ParentLocation)
+                        .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<LocationSet>()
+                        .HasMany(sc => sc.Comments)
+                        .WithOne(c => c.ParentLocationSet)
                         .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<ScriptLocation>()

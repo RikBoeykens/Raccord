@@ -1,9 +1,11 @@
 using System.Linq;
+using Raccord.API.ViewModels.Comments;
 using Raccord.API.ViewModels.Common.Location;
 using Raccord.API.ViewModels.Locations.Locations;
 using Raccord.API.ViewModels.Scenes;
 using Raccord.API.ViewModels.Scheduling.ScheduleDays;
 using Raccord.API.ViewModels.ScriptLocations;
+using Raccord.API.ViewModels.ShootingDays;
 using Raccord.Application.Core.Services.Locations.LocationSets;
 
 namespace Raccord.API.ViewModels.Locations.LocationSets
@@ -21,7 +23,8 @@ namespace Raccord.API.ViewModels.Locations.LocationSets
                 LatLng = dto.LatLng.Translate(),
                 Location = dto.Location.Translate(),
                 ScriptLocation = dto.ScriptLocation.Translate(),
-                ScheduleDays = dto.ScheduleDays.Select(sd=> sd.Translate())
+                ShootingDays = dto.ShootingDays.Select(sd=> sd.Translate()),
+                Comments = dto.Comments.Select(sd=> sd.Translate())
             };
         }
         // Translates a scene dto to a scene viewmodel

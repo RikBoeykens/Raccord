@@ -123,7 +123,14 @@ export { PostComment } from './children/comments/model/post-comment.model';
 export { CommentHttpService } from './children/comments/service/comment-http.service';
 
 // tslint:disable-next-line:max-line-length
+export { LocationSetLandingComponent } from './children/locations/children/location-sets/component/location-set-landing/location-set-landing.component';
+// tslint:disable-next-line:max-line-length
+export { LocationSetLandingMapComponent } from './children/locations/children/location-sets/component/location-set-landing-map/location-set-landing-map.component';
+
+// tslint:disable-next-line:max-line-length
 export { CallsheetLocationSet } from './children/locations/children/location-sets/model/callsheet-location-set.model';
+// tslint:disable-next-line:max-line-length
+export { FullLocationSet } from './children/locations/children/location-sets/model/full-location-set.model';
 // tslint:disable-next-line:max-line-length
 export { LocationSetLocation } from './children/locations/children/location-sets/model/location-set-location.model';
 // tslint:disable-next-line:max-line-length
@@ -131,6 +138,13 @@ export { LocationSetScriptLocation } from './children/locations/children/locatio
 // tslint:disable-next-line:max-line-length
 export { LocationSetSummary } from './children/locations/children/location-sets/model/location-set-summary.model';
 export { LocationSet } from './children/locations/children/location-sets/model/location-set.model';
+
+// tslint:disable-next-line:max-line-length
+export { LocationSetHttpService } from './children/locations/children/location-sets/service/location-set-http.service';
+// tslint:disable-next-line:max-line-length
+export { LocationSetResolve } from './children/locations/children/location-sets/service/location-set-resolve.service';
+// tslint:disable-next-line:max-line-length
+export { SceneLocationSetsResolve } from './children/locations/children/location-sets/service/scene-location-sets-resolve.service';
 
 // tslint:disable-next-line:max-line-length
 export { LocationAvatarComponent } from './children/locations/children/locations/component/location-avatar/location-avatar.component';

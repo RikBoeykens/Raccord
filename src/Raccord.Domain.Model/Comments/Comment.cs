@@ -3,6 +3,7 @@ using Raccord.Domain.Model.Breakdowns.BreakdownItems;
 using Raccord.Domain.Model.Characters;
 using Raccord.Domain.Model.Images;
 using Raccord.Domain.Model.Locations.Locations;
+using Raccord.Domain.Model.Locations.LocationSets;
 using Raccord.Domain.Model.Projects;
 using Raccord.Domain.Model.Scenes;
 using Raccord.Domain.Model.ScriptLocations;
@@ -107,6 +108,18 @@ namespace Raccord.Domain.Model.Comments
     /// </summary>
     /// <returns></returns>
     public virtual Location ParentLocation { get; set; }
+
+    /// <summary>
+    /// ID of the location set the comment is linked to (if applicable)
+    /// </summary>
+    /// <returns></returns>
+    public long? ParentLocationSetID { get; set; }
+
+    /// <summary>
+    /// Location set the comment is linked to (if applicable)
+    /// </summary>
+    /// <returns></returns>
+    public virtual LocationSet ParentLocationSet { get; set; }
 
     /// <summary>
     /// ID of the script location the comment is linked to (if applicable)

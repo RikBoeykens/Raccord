@@ -85,6 +85,10 @@ namespace Raccord.Application.Services.Comments
       {
         comment.ParentTakeID = dto.ParentID;
       }
+      if(dto.ParentType == ParentCommentType.LocationSet)
+      {
+        comment.ParentLocationSetID = dto.ParentID;
+      }
 
       _commentRepository.Add(comment);
       _commentRepository.Commit();

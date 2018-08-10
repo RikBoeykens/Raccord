@@ -1,0 +1,20 @@
+<agm-map *ngIf="markerLocation || markerLocationSet" [fitBounds]="bounds">
+  <agm-marker *ngIf="markerLocation" 
+            [latitude]="markerLocation.latLng.latitude" 
+            [longitude]="markerLocation.latLng.longitude"
+            [label]="'L'">
+    <agm-info-window>
+      <a routerLink="{{getLocationLink()">
+        {{markerLocation.name}}
+      </a>
+    </agm-info-window>
+  </agm-marker>
+  <agm-marker *ngIf="markerLocationSet" 
+            [latitude]="markerLocationSet.latLng.latitude" 
+            [longitude]="markerLocationSet.latLng.longitude"
+            [label]="'S'">
+    <agm-info-window>
+      {{markerLocationSet.name}}
+    </agm-info-window>
+  </agm-marker>
+</agm-map>
