@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Raccord.Application.Core.Common.Paging;
 
 namespace Raccord.Application.Core.Services.Callsheets
 {
@@ -19,6 +20,6 @@ namespace Raccord.Application.Core.Services.Callsheets
 
         // Deletes a single instance
         void Delete(long ID);
-        IEnumerable<CallsheetCrewUnitDto> GetForProject(long projectID);
+        PagedDataDto<CallsheetCrewUnitDto> GetForProject(long projectID, PaginationRequestDto requestDto);
     }
 }

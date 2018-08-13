@@ -60,13 +60,13 @@ namespace Raccord.Data.EntityFramework.Repositories.ShootingDays
                                     );
         }
 
-        public IEnumerable<ShootingDay> GetAllForCharacter(long characterID)
+        public IEnumerable<ShootingDay> GetAllForCharacters(long[] characterIDs)
         {
             var query = GetIncludedCharacter();
 
-            return query.Where(sd => sd.CallsheetID.HasValue && sd.Callsheet.CallsheetScenes.Any(cs=> cs.Characters.Any(c => c.CharacterScene.CharacterID == characterID))
+            return query.Where(sd => characterIDs.Any(cId => sd.CallsheetID.HasValue && sd.Callsheet.CallsheetScenes.Any(cs=> cs.Characters.Any(c => c.CharacterScene.CharacterID == cId)))
                                     ||
-                                    sd.ScheduleDayID.HasValue && sd.ScheduleDay.ScheduleScenes.Any(ss=> ss.Characters.Any(c => c.CharacterScene.CharacterID == characterID))
+                                    characterIDs.Any(cId => sd.ScheduleDayID.HasValue && sd.ScheduleDay.ScheduleScenes.Any(ss=> ss.Characters.Any(c => c.CharacterScene.CharacterID == cId)))
                                     );
         }
 

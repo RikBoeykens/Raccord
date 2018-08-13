@@ -1,6 +1,7 @@
 using System.Linq;
 using Raccord.API.ViewModels.Characters;
 using Raccord.API.ViewModels.Scenes;
+using Raccord.API.ViewModels.ShootingDays;
 using Raccord.Application.Core.Services.Cast;
 
 namespace Raccord.API.ViewModels.Cast
@@ -27,6 +28,7 @@ namespace Raccord.API.ViewModels.Cast
         HasImage = dto.HasImage,
         Characters = dto.Characters.Select(c => c.Translate()),
         Scenes = dto.Scenes.Select(s => s.Translate()),
+        ShootingDays = dto.ShootingDays.Select(sd => sd.Translate())
       };
     }
     public static AdminFullCastMemberViewModel Translate(this AdminFullCastMemberDto dto)

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Raccord.API.ViewModels.Characters;
 using Raccord.API.ViewModels.Scenes;
+using Raccord.API.ViewModels.ShootingDays;
 using Raccord.Application.Core.Services.Profile;
 
 namespace Raccord.API.ViewModels.Cast
@@ -10,6 +11,7 @@ namespace Raccord.API.ViewModels.Cast
   {
     private IEnumerable<CharacterSummaryViewModel> _characters;
     private IEnumerable<SceneSummaryViewModel> _scenes;
+    private IEnumerable<ShootingDayInfoSceneCollectionViewModel> _shootingDays;
 
     /// <summary>
     /// Linked user ID (if applicable)
@@ -48,6 +50,17 @@ namespace Raccord.API.ViewModels.Cast
       set
       {
         _scenes = value;
+      }
+    }
+    public IEnumerable<ShootingDayInfoSceneCollectionViewModel> ShootingDays
+    {
+      get
+      {
+        return _shootingDays ?? (_shootingDays = new List<ShootingDayInfoSceneCollectionViewModel>());
+      }
+      set
+      {
+        _shootingDays = value;
       }
     }
   }

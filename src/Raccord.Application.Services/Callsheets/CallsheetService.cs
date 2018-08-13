@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Raccord.Application.Core.Common.Paging;
 using Raccord.Application.Core.ExternalServices.Weather;
 using Raccord.Application.Core.Services.Callsheets;
 using Raccord.Data.EntityFramework.Repositories.Breakdowns;
@@ -54,13 +55,11 @@ namespace Raccord.Application.Services.Callsheets
         }
 
         // Gets all callsheets for a crew unit
-        public IEnumerable<CallsheetCrewUnitDto> GetForProject(long projectID)
+        public PagedDataDto<CallsheetCrewUnitDto> GetForProject(long projectID, PaginationRequestDto requestDto)
         {
             var callsheets = _callsheetRepository.GetAllForProject(projectID);
 
-            var dtos = callsheets.Select(l => l.TranslateCrewUnit());
-
-            return dtos;
+            return callsheets.GetPaged<Callsheet, CallsheetCrewUnitDto>(requestDto, cs => cs.TranslateCrewUnit());
         }
 
         // Gets a single callsheet by id

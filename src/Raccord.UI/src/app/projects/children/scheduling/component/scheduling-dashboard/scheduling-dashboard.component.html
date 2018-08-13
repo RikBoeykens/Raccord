@@ -1,0 +1,42 @@
+<div class="raccord-narrow-container">
+  <div class="raccord-page-header">
+    <a routerLink="{{getBackLink()}}">
+      <back-link></back-link>
+    </a>
+    <div fxLayout="row">
+      <h1 class="raccord-header-title">
+        Scheduling Dashboard
+      </h1>
+    </div>
+  </div>
+  <!-- Schedules -->
+  <div class="raccord-sub-header"
+    fxLayout="row">
+    <h2>Schedules</h2>
+    <span class="raccord-action-link-container">
+        <a routerLink="{{getSchedulesLink()}}" class="raccord-action-link">more</a>
+    </span>
+  </div>
+  <div fxLayout="row wrap" fxLayoutGap="5px" *ngIf="schedules && schedules.pageInfo">
+    <a routerLink="{{getScheduleLink(schedule)}}"
+        *ngFor="let schedule of schedules.data">
+        <schedule-card
+            [schedule]="schedule"></schedule-card>
+    </a>
+  </div>
+  <!-- Callsheets -->
+  <div class="raccord-sub-header"
+    fxLayout="row">
+    <h2>Callsheets</h2>
+    <span class="raccord-action-link-container">
+        <a routerLink="{{getCallsheetsLink()}}" class="raccord-action-link">more</a>
+    </span>
+  </div>
+  <div fxLayout="row wrap" fxLayoutGap="5px" *ngIf="callsheets && callsheets.pageInfo">
+    <a routerLink="{{getCallsheetLink(callsheet)}}"
+        *ngFor="let callsheet of callsheets.data">
+        <callsheet-card
+            [callsheet]="callsheet"></callsheet-card>
+    </a>
+  </div>
+</div>

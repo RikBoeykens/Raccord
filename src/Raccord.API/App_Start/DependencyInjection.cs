@@ -154,6 +154,8 @@ using Raccord.Application.Core.ExternalServices.Weather;
 using Raccord.Application.ExternalServices.Weather;
 using Raccord.Application.Services.Users.Invitations.Project.Cast;
 using Raccord.Application.Core.Services.Users.Invitations.Project.Cast;
+using Raccord.Application.Core.Services.Scheduling;
+using Raccord.Application.Services.Scheduling;
 
 namespace Raccord.API
 {
@@ -223,6 +225,8 @@ namespace Raccord.API
             services.AddTransient<IBreakdownItemSceneRepository, BreakdownItemSceneRepository>();
             services.AddTransient<IBreakdownItemSceneService, BreakdownItemSceneService>();
             
+            services.AddTransient<IScheduleService, ScheduleService>();
+
             services.AddTransient<IScheduleDayRepository, ScheduleDayRepository>();
             services.AddTransient<IScheduleDayService, ScheduleDayService>();
 

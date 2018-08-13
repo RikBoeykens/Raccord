@@ -71,7 +71,7 @@ namespace Raccord.Application.Services.Characters
 
             var comments = _commentService.GetForParent(new GetCommentDto{ ParentID = character.ID, ParentType = ParentCommentType.Character}).ToList();
 
-            var shootingDays = _shootingDayRepository.GetAllForCharacter(character.ID).ToList();
+            var shootingDays = _shootingDayRepository.GetAllForCharacters(new long[]{character.ID}).ToList();
 
             var dto = character.TranslateFull(comments, shootingDays);
 

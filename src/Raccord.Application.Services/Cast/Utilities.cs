@@ -1,18 +1,21 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using Raccord.Application.Core.Common.Routing;
 using Raccord.Application.Core.Services.Cast;
 using Raccord.Application.Core.Services.SearchEngine;
 using Raccord.Application.Services.Characters;
 using Raccord.Application.Services.Scenes;
+using Raccord.Application.Services.ShootingDays;
 using Raccord.Core.Enums;
 using Raccord.Domain.Model.Cast;
+using Raccord.Domain.Model.ShootingDays;
 
 namespace Raccord.Application.Services.Cast
 {
   public static class Utilities
   {
-    public static FullCastMemberDto TranslateFull(this CastMember castMember)
+    public static FullCastMemberDto TranslateFull(this CastMember castMember, IEnumerable<ShootingDay> shootingDays)
     {
       if(castMember == null)
       {
@@ -31,6 +34,7 @@ namespace Raccord.Application.Services.Cast
         UserInvitationID = castMember.GetUserInvitationID(),
         HasImage = castMember.GetHasImage(),
         Characters = castMember.Characters.Select(c => c.TranslateSummary()),
+        ShootingDays = shootingDays.GetCharacterShootingDays(castMember.Characters.Select(c => c.ID).ToArray()),
         Scenes = castMember.Characters.SelectMany(c => c.CharacterScenes).OrderBy(cs => cs.Scene.SortingOrder).Select(cs => cs.TranslateScene()).Distinct()
       };
     }

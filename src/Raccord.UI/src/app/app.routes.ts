@@ -33,6 +33,10 @@ import {
   CallsheetSidesComponent,
   CallsheetResolve,
   CallsheetSummaryResolve,
+  CastMemberLandingComponent,
+  CastMembersListComponent,
+  CastMemberResolve,
+  CastMembersResolve,
   CastDashboardComponent,
   CastDashboardResolve,
   LocationSetLandingComponent,
@@ -43,6 +47,8 @@ import {
   LocationsResolve,
   LocationDashboardComponent,
   LocationDashboardResolve,
+  SchedulingDashboardComponent,
+  SchedulingDashboardResolve,
   CharacterLandingComponent,
   CharactersListComponent,
   CharacterResolve,
@@ -394,6 +400,37 @@ export const ROUTES: Routes = [
                 component: CastDashboardComponent,
                 resolve: {
                   dashboardInfo: CastDashboardResolve
+                }
+              }
+            ]
+          },
+          {
+            path: RouteSettings.CAST,
+            children: [
+              {
+                path: '',
+                component: CastMembersListComponent,
+                resolve: {
+                  castMembers: CastMembersResolve
+                }
+              },
+              {
+                path: ':castMemberId',
+                component: CastMemberLandingComponent,
+                resolve: {
+                  castMember: CastMemberResolve
+                }
+              }
+            ]
+          },
+          {
+            path: RouteSettings.SCHEDULING,
+            children: [
+              {
+                path: '',
+                component: SchedulingDashboardComponent,
+                resolve: {
+                  dashboardInfo: SchedulingDashboardResolve
                 }
               }
             ]

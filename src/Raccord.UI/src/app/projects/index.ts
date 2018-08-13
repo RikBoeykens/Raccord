@@ -88,6 +88,10 @@ export { CallsheetSceneScene } from './children/callsheets/children/scenes/model
 
 export { CallsheetComponent } from './children/callsheets/component/callsheet/callsheet.component';
 // tslint:disable-next-line:max-line-length
+export { CallsheetAvatarComponent } from './children/callsheets/component/callsheet-avatar/callsheet-avatar.component';
+// tslint:disable-next-line:max-line-length
+export { CallsheetCardComponent } from './children/callsheets/component/callsheet-card/callsheet-card.component';
+// tslint:disable-next-line:max-line-length
 export { CallsheetSidesComponent } from './children/callsheets/component/callsheet-sides/callsheet-sides.component';
 
 export { BaseCallsheet } from './children/callsheets/model/base-callsheet.model';
@@ -100,6 +104,20 @@ export { CallsheetHttpService } from './children/callsheets/service/callsheet-ht
 export { CallsheetResolve } from './children/callsheets/service/callsheet-resolve.service';
 // tslint:disable-next-line:max-line-length
 export { CallsheetSummaryResolve } from './children/callsheets/service/callsheet-summary-resolve.service';
+
+// tslint:disable-next-line:max-line-length
+export { CastMemberLandingComponent } from './children/cast/children/cast-members/component/cast-member-landing/cast-member-landing.component';
+// tslint:disable-next-line:max-line-length
+export { CastMembersListComponent } from './children/cast/children/cast-members/component/cast-members-list/cast-members-list.component';
+
+export { FullCastMember } from './children/cast/children/cast-members/model/full-cast-member.model';
+
+// tslint:disable-next-line:max-line-length
+export { CastMemberHttpService } from './children/cast/children/cast-members/service/cast-member-http.service';
+// tslint:disable-next-line:max-line-length
+export { CastMemberResolve } from './children/cast/children/cast-members/service/cast-member-resolve.service';
+// tslint:disable-next-line:max-line-length
+export { CastMembersResolve } from './children/cast/children/cast-members/service/cast-members-resolve.service';
 
 // tslint:disable-next-line:max-line-length
 export { CastDashboardComponent } from './children/cast/component/cast-dashboard/cast-dashboard.component';
@@ -183,6 +201,14 @@ export { LocationDashboardHttpService } from './children/locations/service/locat
 export { LocationDashboardResolve } from './children/locations/service/location-dashboard.resolve';
 
 // tslint:disable-next-line:max-line-length
+export { ScheduleAvatarComponent } from './children/scheduling/children/schedules/component/schedule-avatar/schedule-avatar.component';
+// tslint:disable-next-line:max-line-length
+export { ScheduleCardComponent } from './children/scheduling/children/schedules/component/schedule-card/schedule-card.component';
+
+// tslint:disable-next-line:max-line-length
+export { ScheduleSummary } from './children/scheduling/children/schedules/model/schedule-summary.model';
+
+// tslint:disable-next-line:max-line-length
 export { ShootingDaySceneSummary } from './children/scheduling/children/shooting-days/children/scenes/model/shooting-day-scene-summary.model';
 
 // tslint:disable-next-line:max-line-length
@@ -203,12 +229,24 @@ export { ShootingDayInfoSceneCollection } from './children/scheduling/children/s
 export { ShootingDay } from './children/scheduling/children/shooting-days/model/shooting-day.model';
 
 // tslint:disable-next-line:max-line-length
+export { SchedulingDashboardComponent } from './children/scheduling/component/scheduling-dashboard/scheduling-dashboard.component';
+
+export { SchedulingDashboard } from './children/scheduling/model/scheduling-dashboard.model';
+
+// tslint:disable-next-line:max-line-length
+export { SchedulingDashboardHttpService } from './children/scheduling/service/scheduling-dashboard-http.service';
+// tslint:disable-next-line:max-line-length
+export { SchedulingDashboardResolve } from './children/scheduling/service/scheduling-dashboard.resolve';
+
+// tslint:disable-next-line:max-line-length
 export { CharacterCastMemberComponent } from './children/script/children/characters/children/cast-member/component/character-cast-member/character-cast-member.component';
 
 // tslint:disable-next-line:max-line-length
 export { CharacterLandingComponent } from './children/script/children/characters/component/character-landing/character-landing.component';
 // tslint:disable-next-line:max-line-length
 export { CharactersListComponent } from './children/script/children/characters/component/characters-list/characters-list.component';
+// tslint:disable-next-line:max-line-length
+export { CharactersTableComponent } from './children/script/children/characters/component/characters-table/characters-table.component';
 
 export { FullCharacter } from './children/script/children/characters/model/full-character.model';
 // tslint:disable-next-line:max-line-length
