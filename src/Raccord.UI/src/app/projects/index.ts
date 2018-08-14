@@ -131,12 +131,6 @@ export { CastDashboard } from './children/cast/model/cast-dashboard.model';
 export { CastDashboardHttpService } from './children/cast/service/cast-dashboard-http.service';
 export { CastDashboardResolve } from './children/cast/service/cast-dashboard.resolve';
 
-export { FullCrewUnit } from './children/crew/children/crew-units/model/full-crew-unit.model';
-// tslint:disable-next-line:max-line-length
-export { CrewUnitHttpService } from './children/crew/children/crew-units/service/crew-unit-http.service';
-// tslint:disable-next-line:max-line-length
-export { CrewUnitSummaryResolve } from './children/crew/children/crew-units/service/crew-unit-summary-resolve.service';
-
 // tslint:disable-next-line:max-line-length
 export { CommentContainerComponent } from './children/comments/component/comment-container/comment-container.component';
 // tslint:disable-next-line:max-line-length
@@ -149,6 +143,23 @@ export { Comment } from './children/comments/model/comment.model';
 export { PostComment } from './children/comments/model/post-comment.model';
 
 export { CommentHttpService } from './children/comments/service/comment-http.service';
+
+// tslint:disable-next-line:max-line-length
+export { CrewUnitAvatarComponent } from './children/crew/children/crew-units/component/crew-unit-avatar/crew-unit-avatar.component';
+// tslint:disable-next-line:max-line-length
+export { CrewUnitCardComponent } from './children/crew/children/crew-units/component/crew-unit-card/crew-unit-card.component';
+
+export { FullCrewUnit } from './children/crew/children/crew-units/model/full-crew-unit.model';
+
+// tslint:disable-next-line:max-line-length
+export { CrewUnitHttpService } from './children/crew/children/crew-units/service/crew-unit-http.service';
+// tslint:disable-next-line:max-line-length
+export { CrewUnitSummaryResolve } from './children/crew/children/crew-units/service/crew-unit-summary-resolve.service';
+// tslint:disable-next-line:max-line-length
+export { CrewUnitsResolve } from './children/crew/children/crew-units/service/crew-units-resolve.service';
+
+// tslint:disable-next-line:max-line-length
+export { CrewDashboardComponent } from './children/crew/component/crew-dashboard/crew-dashboard.component';
 
 // tslint:disable-next-line:max-line-length
 export { LocationSetLandingComponent } from './children/locations/children/location-sets/component/location-set-landing/location-set-landing.component';
@@ -212,9 +223,6 @@ export { LocationDashboardResolve } from './children/locations/service/location-
 
 // tslint:disable-next-line:max-line-length
 export { ScheduleDayNote } from './children/scheduling/children/schedules/children/schedule-day-notes/model/schedule-day-note.model';
-
-// tslint:disable-next-line:max-line-length
-export { ScheduleDayCardComponent } from './children/scheduling/children/schedules/children/schedule-days/component/schedule-day-card/schedule-day-card.component';
 
 // tslint:disable-next-line:max-line-length
 export { BaseScheduleDay } from './children/scheduling/children/schedules/children/schedule-days/model/base-schedule-day.model';

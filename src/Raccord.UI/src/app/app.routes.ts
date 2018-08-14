@@ -41,6 +41,7 @@ import {
   CastMembersResolve,
   CastDashboardComponent,
   CastDashboardResolve,
+  CrewDashboardComponent,
   LocationSetLandingComponent,
   LocationSetResolve,
   LocationLandingComponent,
@@ -76,7 +77,8 @@ import {
   ScriptDashboardResolve,
   ProjectsListComponent,
   ProjectDashboardComponent,
-  CrewUnitSummaryResolve
+  CrewUnitSummaryResolve,
+  CrewUnitsResolve
 } from './projects';
 import {
   PagedProjectsResolve,
@@ -465,6 +467,18 @@ export const ROUTES: Routes = [
                 resolve: {
                   scheduleDays: ScheduleDaysResolve,
                   crewUnit: CrewUnitSummaryResolve
+                }
+              }
+            ]
+          },
+          {
+            path: RouteSettings.CREW,
+            children: [
+              {
+                path: '',
+                component: CrewDashboardComponent,
+                resolve: {
+                  crewUnits: CrewUnitsResolve
                 }
               }
             ]

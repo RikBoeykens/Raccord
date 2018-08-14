@@ -1,0 +1,24 @@
+<div class="raccord-narrow-container">
+  <div class="raccord-page-header">
+    <a routerLink="{{getBackLink()}}">
+      <back-link></back-link>
+    </a>
+    <div fxLayout="row">
+      <h1 class="raccord-header-title">
+        Crew Dashboard
+      </h1>
+    </div>
+  </div>
+  <!-- Units -->
+  <div class="raccord-sub-header"
+    fxLayout="row">
+    <h2>Units</h2>
+  </div>
+  <div fxLayout="row wrap" fxLayoutGap="5px" *ngIf="crewUnits">
+    <a routerLink="{{getCrewUnitLink(crewUnit)}}"
+        *ngFor="let crewUnit of crewUnits">
+        <crew-unit-card
+            [crewUnit]="crewUnit"></crew-unit-card>
+    </a>
+  </div>
+</div>
