@@ -58,7 +58,12 @@
   <ng-container matColumnDef="location">
     <mat-header-cell *matHeaderCellDef>Location</mat-header-cell>
     <mat-cell *matCellDef="let callsheetScene">
-      <a routerLink="{{getLocationLink(callsheetScene)}}">{{callsheetScene.locationSet.location.name}}</a>
+      <div>
+        <a routerLink="{{getLocationSetLink(callsheetScene)}}">{{callsheetScene.locationSet.name}}</a>
+      </div>
+      <div>
+        <a routerLink="{{getLocationLink(callsheetScene)}}">{{callsheetScene.locationSet.location.name}}</a>
+      </div>
     </mat-cell>
   </ng-container>
 

@@ -1,0 +1,39 @@
+<mat-table #schedulescenestable [dataSource]="scheduleScenes" class="schedule-scenes-table">
+
+  <!-- Scene Column -->
+  <ng-container matColumnDef="scene">
+    <mat-header-cell class="col-scene" *matHeaderCellDef>Scene</mat-header-cell>
+    <mat-cell class="col-scene" *matCellDef="let scheduleScene">
+      <a routerLink="{{getSceneLink(scheduleScene)}}">
+        <scene-summary [scene]="scheduleScene.scene" [pageLengthOverride]="scheduleScene.scene.pageLength" [showPageLength]="true"></scene-summary>
+      </a>
+    </mat-cell>
+  </ng-container>
+
+  <!-- Characters Column -->
+  <ng-container matColumnDef="characters">
+    <mat-header-cell *matHeaderCellDef>Characters</mat-header-cell>
+    <mat-cell *matCellDef="let scheduleScene">
+      <span *ngFor="let character of scheduleScene.characters">
+        <a routerLink="{{getCharacterLink(character)}}">{{character.number}}</a>
+        &nbsp;
+      </span>
+    </mat-cell>
+  </ng-container>
+
+  <!-- Location Column -->
+  <ng-container matColumnDef="location">
+    <mat-header-cell *matHeaderCellDef>Location</mat-header-cell>
+    <mat-cell *matCellDef="let scheduleScene">
+      <div>
+        <a routerLink="{{getLocationSetLink(scheduleScene)}}">{{scheduleScene.locationSet.name}}</a>
+      </div>
+      <div>
+        <a routerLink="{{getLocationLink(scheduleScene)}}">{{scheduleScene.locationSet.location.name}}</a>
+      </div>
+    </mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>

@@ -31,8 +31,10 @@ import {
   SelectedBreakdownResolve,
   CallsheetComponent,
   CallsheetSidesComponent,
+  CallsheetsListComponent,
   CallsheetResolve,
   CallsheetSummaryResolve,
+  ProjectCallsheetsResolve,
   CastMemberLandingComponent,
   CastMembersListComponent,
   CastMemberResolve,
@@ -47,6 +49,10 @@ import {
   LocationsResolve,
   LocationDashboardComponent,
   LocationDashboardResolve,
+  ScheduleDaysResolve,
+  ScheduleLandingComponent,
+  SchedulesListComponent,
+  SchedulesResolve,
   SchedulingDashboardComponent,
   SchedulingDashboardResolve,
   CharacterLandingComponent,
@@ -69,7 +75,8 @@ import {
   ScriptDashboardComponent,
   ScriptDashboardResolve,
   ProjectsListComponent,
-  ProjectDashboardComponent
+  ProjectDashboardComponent,
+  CrewUnitSummaryResolve
 } from './projects';
 import {
   PagedProjectsResolve,
@@ -234,31 +241,6 @@ export const ROUTES: Routes = [
           {
             path: '',
             component: ProjectDashboardComponent
-          },
-          {
-            path: RouteSettings.CALLSHEETS,
-            children: [
-              {
-                path: ':callsheetId',
-                children: [
-                  {
-                    path: '',
-                    component: CallsheetComponent,
-                    resolve: {
-                      callsheet: CallsheetResolve
-                    }
-                  },
-                  {
-                    path: RouteSettings.SIDES,
-                    component: CallsheetSidesComponent,
-                    resolve: {
-                      callsheet: CallsheetSummaryResolve,
-                      sceneTexts: ScriptTextCallsheetResolve
-                    }
-                  }
-                ]
-              }
-            ]
           },
           {
             path: RouteSettings.SCRIPTTEXT,
@@ -435,6 +417,58 @@ export const ROUTES: Routes = [
               }
             ]
           },
+          {
+            path: RouteSettings.CALLSHEETS,
+            children: [
+              {
+                path: '',
+                component: CallsheetsListComponent,
+                resolve: {
+                  callsheets: ProjectCallsheetsResolve
+                }
+              },
+              {
+                path: ':callsheetId',
+                children: [
+                  {
+                    path: '',
+                    component: CallsheetComponent,
+                    resolve: {
+                      callsheet: CallsheetResolve
+                    }
+                  },
+                  {
+                    path: RouteSettings.SIDES,
+                    component: CallsheetSidesComponent,
+                    resolve: {
+                      callsheet: CallsheetSummaryResolve,
+                      sceneTexts: ScriptTextCallsheetResolve
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            path: RouteSettings.SCHEDULES,
+            children: [
+              {
+                path: '',
+                component: SchedulesListComponent,
+                resolve: {
+                  schedules: SchedulesResolve
+                }
+              },
+              {
+                path: ':crewUnitId',
+                component: ScheduleLandingComponent,
+                resolve: {
+                  scheduleDays: ScheduleDaysResolve,
+                  crewUnit: CrewUnitSummaryResolve
+                }
+              }
+            ]
+          }
         ],
         resolve: {
           CurrentProjectResolve

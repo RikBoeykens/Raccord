@@ -1,0 +1,22 @@
+<div class="raccord-narrow-container">
+  <div class="raccord-page-header">
+    <a routerLink="{{getBackLink()}}">
+      <back-link></back-link>
+    </a>
+    <h1 class="raccord-header-title">
+      Schedule for {{crewUnit.name}}
+      <span *ngIf="getFirstDay() && getLastDay()">
+        &nbsp;-&nbsp;{{getFirstDay().shootingDay.date | date }} to {{getLastDay().shootingDay.date | date }}
+      </span>
+    </h1>
+  </div>
+  <mat-expansion-panel class="raccord-expansion-panel"
+    *ngFor="let scheduleDay of scheduleDays">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        #{{scheduleDay.shootingDay.number}}. {{scheduleDay.shootingDay.date | date}} (Total {{getPageLength(scheduleDay) | myPagelength}})
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <schedule-scenes-table [scheduleScenes]="scheduleDay.scenes" [projectId]="project.id"></schedule-scenes-table>
+  </mat-expansion-panel>
+</div>

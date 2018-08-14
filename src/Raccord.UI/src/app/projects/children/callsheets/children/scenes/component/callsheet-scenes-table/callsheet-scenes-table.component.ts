@@ -30,6 +30,11 @@ export class CallsheetScenesTableComponent {
     return `/${RouteSettings.PROJECTS}/${this.projectId}/${RouteSettings.CHARACTERS}/${character.id}`;
   }
 
+  public getLocationSetLink(callsheetScene: CallsheetSceneScene): string {
+    // tslint:disable-next-line:max-line-length
+    return `/${RouteSettings.PROJECTS}/${this.projectId}/${RouteSettings.LOCATIONS}/${callsheetScene.locationSet.id}`;
+  }
+
   public getLocationLink(callsheetScene: CallsheetSceneScene): string {
     // tslint:disable-next-line:max-line-length
     return `/${RouteSettings.PROJECTS}/${this.projectId}/${RouteSettings.LOCATIONS}/${callsheetScene.locationSet.location.id}`;
