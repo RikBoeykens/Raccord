@@ -3,7 +3,7 @@ using Raccord.API.ViewModels.Crew.CrewUnits;
 
 namespace Raccord.API.ViewModels.Scheduling
 {
-  public class ScheduleSummaryViewModel
+  public class ScheduleCrewUnitSummaryViewModel
   {
     private CrewUnitViewModel _crewUnit;
     public DateTime StartDate { get; set; }

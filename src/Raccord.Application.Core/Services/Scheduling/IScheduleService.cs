@@ -6,6 +6,6 @@ namespace Raccord.Application.Core.Services.Scheduling
     // Interface for location functionality
     public interface IScheduleService
     {
-      PagedDataDto<ScheduleSummaryDto> GetSchedulesPaged(long projectId, PaginationRequestDto requestDto);
+      PagedDataDto<ScheduleCrewUnitSummaryDto> GetSchedulesForProjectPaged(long projectId, PaginationRequestDto requestDto);
     }
 }

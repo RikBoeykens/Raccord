@@ -247,16 +247,16 @@ export { ScheduleScenesTableComponent } from './children/scheduling/children/sch
 export { ScheduleSceneScene } from './children/scheduling/children/schedules/children/schedule-scenes/model/schedule-scene-scene.model';
 
 // tslint:disable-next-line:max-line-length
-export { ScheduleAvatarComponent } from './children/scheduling/children/schedules/component/schedule-avatar/schedule-avatar.component';
-// tslint:disable-next-line:max-line-length
 export { ScheduleCardComponent } from './children/scheduling/children/schedules/component/schedule-card/schedule-card.component';
+// tslint:disable-next-line:max-line-length
+export { ScheduleCrewUnitCardComponent } from './children/scheduling/children/schedules/component/schedule-crew-unit-card/schedule-crew-unit-card.component';
 // tslint:disable-next-line:max-line-length
 export { ScheduleLandingComponent } from './children/scheduling/children/schedules/component/schedule-landing/schedule-landing.component';
 // tslint:disable-next-line:max-line-length
 export { SchedulesListComponent } from './children/scheduling/children/schedules/component/schedules-list/schedules-list.component';
 
 // tslint:disable-next-line:max-line-length
-export { ScheduleSummary } from './children/scheduling/children/schedules/model/schedule-summary.model';
+export { ScheduleCrewUnitSummary } from './children/scheduling/children/schedules/model/schedule-crew-unit-summary.model';
 
 // tslint:disable-next-line:max-line-length
 export { SchedulesHttpService } from './children/scheduling/children/schedules/service/schedules-http.service';

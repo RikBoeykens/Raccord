@@ -21,9 +21,9 @@ namespace Raccord.Application.Services.Scheduling
       _scheduleDayRepository = scheduleDayRepository;
     }
 
-    public PagedDataDto<ScheduleSummaryDto> GetSchedulesPaged(long projectId, PaginationRequestDto requestDto)
+    public PagedDataDto<ScheduleCrewUnitSummaryDto> GetSchedulesForProjectPaged(long projectId, PaginationRequestDto requestDto)
     {
-      var scheduleSummaries = new List<ScheduleSummaryDto>();
+      var scheduleSummaries = new List<ScheduleCrewUnitSummaryDto>();
 
       var crewUnits = _crewUnitRepository.GetAllForProject(projectId);
 
@@ -32,7 +32,7 @@ namespace Raccord.Application.Services.Scheduling
         var scheduleDays = _scheduleDayRepository.GetAllForCrewUnit(crewUnit.ID).OrderBy(sd => sd.ShootingDay.Date);
         var firstDay = scheduleDays.FirstOrDefault();
         var lastDay = scheduleDays.LastOrDefault();
-        scheduleSummaries.Add(new ScheduleSummaryDto
+        scheduleSummaries.Add(new ScheduleCrewUnitSummaryDto
         {
           CrewUnit = crewUnit.Translate(),
           StartDate = firstDay.ShootingDay.Date,
@@ -40,7 +40,7 @@ namespace Raccord.Application.Services.Scheduling
         });
       }
 
-      return scheduleSummaries.GetPaged<ScheduleSummaryDto, ScheduleSummaryDto>(requestDto, x => x);
+      return scheduleSummaries.GetPaged<ScheduleCrewUnitSummaryDto, ScheduleCrewUnitSummaryDto>(requestDto, x => x);
     }
   }
 }

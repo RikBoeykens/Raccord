@@ -57,15 +57,15 @@ namespace Raccord.API.Controllers.Projects
             };
         }
 
-        private PagedDataViewModel<ScheduleSummaryViewModel> GetSchedules(long authProjectId)
+        private PagedDataViewModel<ScheduleCrewUnitSummaryViewModel> GetSchedules(long authProjectId)
         {
-            var paginatedSchedules = _scheduleService.GetSchedulesPaged(authProjectId, new PaginationRequestDto
+            var paginatedSchedules = _scheduleService.GetSchedulesForProjectPaged(authProjectId, new PaginationRequestDto
             {
                 Page = 1,
                 PageSize = _defaultPageSize
             });
 
-            return paginatedSchedules.Translate<ScheduleSummaryViewModel, ScheduleSummaryDto>(x => x.Translate());
+            return paginatedSchedules.Translate<ScheduleCrewUnitSummaryViewModel, ScheduleCrewUnitSummaryDto>(x => x.Translate());
         }
 
         private PagedDataViewModel<CallsheetCrewUnitViewModel> GetCallsheets(long authProjectId)

@@ -1,14 +1,14 @@
 import { BaseModel } from '../../../../shared/model/base.model';
 import { PagedData } from '../../../../shared/children/paging';
-import { ScheduleSummary, CallsheetSummary } from '../../..';
+import { ScheduleCrewUnitSummary, CallsheetSummary } from '../../..';
 
 export class SchedulingDashboard extends BaseModel {
-  public schedules: PagedData<ScheduleSummary>;
+  public schedules: PagedData<ScheduleCrewUnitSummary>;
   public callsheets: PagedData<CallsheetSummary>;
 
   constructor(
     obj?: {
-      schedules: PagedData<ScheduleSummary>,
+      schedules: PagedData<ScheduleCrewUnitSummary>,
       callsheets: PagedData<CallsheetSummary>
   }) {
     super();

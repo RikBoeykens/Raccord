@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ScheduleSummary } from '../../../../../..';
+import { ScheduleCrewUnitSummary } from '../../../../../..';
 import { ProjectSummary } from '../../../../../../../shared/children/projects';
 import { PagedData } from '../../../../../../../shared/children/paging';
 import {
@@ -12,7 +12,7 @@ import { RouteSettings } from '../../../../../../../shared';
   templateUrl: 'schedules-list.component.html'
 })
 export class SchedulesListComponent implements OnInit {
-  public schedules: PagedData<ScheduleSummary>;
+  public schedules: PagedData<ScheduleCrewUnitSummary>;
   public project: ProjectSummary;
 
   constructor(
@@ -21,7 +21,7 @@ export class SchedulesListComponent implements OnInit {
 
   public ngOnInit() {
       this._route.data.subscribe((data: {
-        schedules: PagedData<ScheduleSummary>
+        schedules: PagedData<ScheduleCrewUnitSummary>
       }) => {
           this.schedules = data.schedules;
       });
@@ -32,7 +32,7 @@ export class SchedulesListComponent implements OnInit {
     return `/${RouteSettings.PROJECTS}/${this.project.id}/${RouteSettings.SCHEDULING}`;
   }
 
-  public getScheduleLink(schedule: ScheduleSummary) {
+  public getScheduleLink(schedule: ScheduleCrewUnitSummary) {
     // tslint:disable-next-line:max-line-length
     return `/${RouteSettings.PROJECTS}/${this.project.id}/${RouteSettings.SCHEDULES}/${schedule.crewUnit.id}`;
   }

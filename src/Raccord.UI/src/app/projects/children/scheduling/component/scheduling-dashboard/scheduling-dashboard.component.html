@@ -20,8 +20,8 @@
   <div fxLayout="row wrap" fxLayoutGap="5px" *ngIf="schedules && schedules.pageInfo">
     <a routerLink="{{getScheduleLink(schedule)}}"
         *ngFor="let schedule of schedules.data">
-        <schedule-card
-            [schedule]="schedule"></schedule-card>
+        <schedule-crew-unit-card
+            [schedule]="schedule"></schedule-crew-unit-card>
     </a>
   </div>
   <!-- Callsheets -->

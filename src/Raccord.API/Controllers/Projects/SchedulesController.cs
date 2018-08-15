@@ -43,15 +43,15 @@ namespace Raccord.API.Controllers.Projects
 
         // GET: api/schedules
         [HttpGet]
-        public PagedDataViewModel<ScheduleSummaryViewModel> Get(long authProjectId)
+        public PagedDataViewModel<ScheduleCrewUnitSummaryViewModel> Get(long authProjectId)
         {
-            var paginatedSchedules = _scheduleService.GetSchedulesPaged(authProjectId, new PaginationRequestDto
+            var paginatedSchedules = _scheduleService.GetSchedulesForProjectPaged(authProjectId, new PaginationRequestDto
             {
                 Page = 1,
                 PageSize = _defaultPageSize
             });
 
-            return paginatedSchedules.Translate<ScheduleSummaryViewModel, ScheduleSummaryDto>(x => x.Translate());
+            return paginatedSchedules.Translate<ScheduleCrewUnitSummaryViewModel, ScheduleCrewUnitSummaryDto>(x => x.Translate());
         }
     }
 }

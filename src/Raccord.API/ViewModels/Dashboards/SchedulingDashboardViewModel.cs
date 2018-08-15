@@ -10,14 +10,14 @@ namespace Raccord.API.ViewModels.Dashboards
 {
   public class ScheduleDashboardViewModel
   {
-    private PagedDataViewModel<ScheduleSummaryViewModel> _schedules;
+    private PagedDataViewModel<ScheduleCrewUnitSummaryViewModel> _schedules;
     private PagedDataViewModel<CallsheetCrewUnitViewModel> _callsheets;
 
-    public PagedDataViewModel<ScheduleSummaryViewModel> Schedules
+    public PagedDataViewModel<ScheduleCrewUnitSummaryViewModel> Schedules
     {
       get
       {
-        return _schedules ?? new PagedDataViewModel<ScheduleSummaryViewModel>();
+        return _schedules ?? new PagedDataViewModel<ScheduleCrewUnitSummaryViewModel>();
       }
       set
       {

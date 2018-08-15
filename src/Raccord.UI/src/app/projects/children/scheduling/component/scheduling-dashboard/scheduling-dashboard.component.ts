@@ -5,14 +5,14 @@ import { SchedulingDashboard } from '../../model/scheduling-dashboard.model';
 import { RouteSettings } from '../../../../../shared';
 import { ProjectSummary } from '../../../../../shared/children/projects';
 import { ProjectHelpers } from '../../../../../shared/children/projects/helpers/project.helpers';
-import { ScheduleSummary, CallsheetSummary } from '../../../..';
+import { ScheduleCrewUnitSummary, CallsheetSummary } from '../../../..';
 
 @Component({
   templateUrl: 'scheduling-dashboard.component.html'
 })
 export class SchedulingDashboardComponent implements OnInit {
   public project: ProjectSummary;
-  public schedules: PagedData<ScheduleSummary>;
+  public schedules: PagedData<ScheduleCrewUnitSummary>;
   public callsheets: PagedData<CallsheetSummary>;
   constructor(
     private _route: ActivatedRoute
@@ -34,7 +34,7 @@ export class SchedulingDashboardComponent implements OnInit {
     return `/${RouteSettings.PROJECTS}/${this.project.id}/${RouteSettings.SCHEDULES}`;
   }
 
-  public getScheduleLink(schedule: ScheduleSummary) {
+  public getScheduleLink(schedule: ScheduleCrewUnitSummary) {
     // tslint:disable-next-line:max-line-length
     return `/${RouteSettings.PROJECTS}/${this.project.id}/${RouteSettings.SCHEDULES}/${schedule.crewUnit.id}`;
   }

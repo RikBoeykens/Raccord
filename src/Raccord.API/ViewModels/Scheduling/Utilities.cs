@@ -5,13 +5,13 @@ namespace Raccord.API.ViewModels.Scheduling
 {
   public static class Utilities
   {
-    public static ScheduleSummaryViewModel Translate(this ScheduleSummaryDto dto)
+    public static ScheduleCrewUnitSummaryViewModel Translate(this ScheduleCrewUnitSummaryDto dto)
     {
       if (dto == null)
       {
         return null;
       }
-      return new ScheduleSummaryViewModel
+      return new ScheduleCrewUnitSummaryViewModel
       {
         CrewUnit = dto.CrewUnit.Translate(),
         StartDate = dto.StartDate,

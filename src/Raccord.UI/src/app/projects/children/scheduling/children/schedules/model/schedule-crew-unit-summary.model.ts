@@ -1,7 +1,7 @@
 import { BaseModel } from '../../../../../../shared';
 import { CrewUnit } from '../../../../../../shared/children/crew';
 
-export class ScheduleSummary extends BaseModel {
+export class ScheduleCrewUnitSummary extends BaseModel {
   public startDate: Date;
   public endDate: Date;
   public crewUnit: CrewUnit;
