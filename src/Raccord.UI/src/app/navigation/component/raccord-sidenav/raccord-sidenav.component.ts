@@ -62,4 +62,8 @@ export class RaccordSidenavComponent implements OnInit {
   public getBreakdownLink() {
     return `/${RouteSettings.PROJECTS}/${this.currentProject.id}/${RouteSettings.BREAKDOWNS}`;
   }
+
+  public getSlatesLink() {
+    return `/${RouteSettings.PROJECTS}/${this.currentProject.id}/${RouteSettings.SLATES}`;
+  }
 }

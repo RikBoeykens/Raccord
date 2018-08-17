@@ -453,6 +453,33 @@ export { ScriptDashboard } from './children/script/model/script-dashboard.model'
 export { ScriptDashboardHttpService } from './children/script/service/script-dashboard-http.service';
 export { ScriptDashboardResolve } from './children/script/service/script-dashboard.resolve';
 
+// tslint:disable-next-line:max-line-length
+export { SlateAvatarComponent } from './children/shots/slates/component/slate-avatar/slate-avatar.component';
+// tslint:disable-next-line:max-line-length
+export { SlateCardComponent } from './children/shots/slates/component/slate-card/slate-card.component';
+// tslint:disable-next-line:max-line-length
+export { SlateLandingComponent } from './children/shots/slates/component/slate-landing/slate-landing.component';
+// tslint:disable-next-line:max-line-length
+export { SlatesListComponent } from './children/shots/slates/component/slates-list/slates-list.component';
+// tslint:disable-next-line:max-line-length
+export { SlatesTableComponent } from './children/shots/slates/component/slates-table/slates-table.component';
+
+export { FullSlate } from './children/shots/slates/model/full-slate.model';
+export { LinkedSlate } from './children/shots/slates/model/linked-slate.model';
+export { SlateSummary } from './children/shots/slates/model/slate-summary.model';
+export { Slate } from './children/shots/slates/model/slate.model';
+
+export { SlateHttpService } from './children/shots/slates/service/slate-http.service';
+export { SlateResolve } from './children/shots/slates/service/slate-resolve.service';
+export { SlatesResolve } from './children/shots/slates/service/slates-resolve.service';
+
+// tslint:disable-next-line:max-line-length
+export { TakesTableComponent } from './children/shots/takes/component/takes-table/takes-table.component';
+
+export { FullTake } from './children/shots/takes/model/full-take.model';
+export { TakeSummary } from './children/shots/takes/model/take-summary.model';
+export { Take } from './children/shots/takes/model/take.model';
+
 export { ProjectsListComponent } from './component/projects-list/projects-list.component';
 // tslint:disable-next-line:max-line-length
 export { ProjectDashboardComponent } from './component/project-dashboard/project-dashboard.component';

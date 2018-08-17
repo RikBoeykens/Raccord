@@ -89,6 +89,10 @@ import {
   ScriptTextUserResolve,
   ScriptDashboardComponent,
   ScriptDashboardResolve,
+  SlateLandingComponent,
+  SlatesListComponent,
+  SlatesResolve,
+  SlateResolve,
   ProjectsListComponent,
   ProjectDashboardComponent
 } from './projects';
@@ -545,6 +549,25 @@ export const ROUTES: Routes = [
                     }
                   }
                 ]
+              }
+            ]
+          },
+          {
+            path: RouteSettings.SLATES,
+            children: [
+              {
+                path: '',
+                component: SlatesListComponent,
+                resolve: {
+                  slates: SlatesResolve
+                }
+              },
+              {
+                path: ':slateId',
+                component: SlateLandingComponent,
+                resolve: {
+                  slate: SlateResolve
+                }
               }
             ]
           }

@@ -1,0 +1,35 @@
+<mat-table #slatestable [dataSource]="slates" class="slates-table">
+
+  <!-- Image Column -->
+  <ng-container matColumnDef="image">
+    <mat-header-cell *matHeaderCellDef></mat-header-cell>
+    <mat-cell *matCellDef="let slate">
+      <a routerLink="{{getSlateLink(slate)}}">
+        <slate-avatar [slate]="slate" [listAvatar]="true"></slate-avatar>
+      </a>
+    </mat-cell>
+  </ng-container>
+
+  <!-- Number Column -->
+  <ng-container matColumnDef="number">
+    <mat-header-cell *matHeaderCellDef>No</mat-header-cell>
+    <mat-cell *matCellDef="let slate">
+      <a routerLink="{{getSlateLink(slate)}}">
+        {{slate.number}}
+      </a>
+    </mat-cell>
+  </ng-container>
+
+  <!-- Description Column -->
+  <ng-container matColumnDef="description">
+    <mat-header-cell *matHeaderCellDef>Description</mat-header-cell>
+    <mat-cell *matCellDef="let slate">
+      <a routerLink="{{getSlateLink(slate)}}">
+        {{slate.description}}
+      </a>
+    </mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>

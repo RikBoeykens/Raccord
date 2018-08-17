@@ -54,4 +54,8 @@ export class ProjectDashboardComponent implements OnInit {
   public getBreakdownLink() {
     return `/${RouteSettings.PROJECTS}/${this.project.id}/${RouteSettings.BREAKDOWNS}`;
   }
+
+  public getSlatesLink() {
+    return `/${RouteSettings.PROJECTS}/${this.project.id}/${RouteSettings.SLATES}`;
+  }
 }

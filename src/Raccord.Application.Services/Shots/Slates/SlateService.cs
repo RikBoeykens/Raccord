@@ -4,6 +4,8 @@ using System.Linq;
 using Raccord.Domain.Model.Shots;
 using Raccord.Application.Core.Services.Shots.Slates;
 using Raccord.Data.EntityFramework.Repositories.Shots.Slates;
+using Raccord.Application.Core.Services.Comments;
+using Raccord.Core.Enums;
 
 namespace Raccord.Application.Services.Shots.Slates
 {
@@ -11,14 +13,16 @@ namespace Raccord.Application.Services.Shots.Slates
     public class SlateService : ISlateService
     {
         private readonly ISlateRepository _slateRepository;
+        private readonly ICommentService _commentService;
 
         // Initialises a new DayNightService
-        public SlateService(ISlateRepository slateRepository)
+        public SlateService(
+            ISlateRepository slateRepository,
+            ICommentService commentService
+            )
         {
-            if(slateRepository == null)
-                throw new ArgumentNullException(nameof(slateRepository));
-            
             _slateRepository = slateRepository;
+            _commentService = commentService;
         }
 
         // Gets all slates for a project
@@ -36,7 +40,9 @@ namespace Raccord.Application.Services.Shots.Slates
         {
             var slate = _slateRepository.GetFull(ID);
 
-            var dto = slate.TranslateFull();
+            var comments = _commentService.GetForParent(new GetCommentDto{ ParentID = slate.ID, ParentType = ParentCommentType.Slate});
+
+            var dto = slate.TranslateFull(comments);
 
             return dto;
         }

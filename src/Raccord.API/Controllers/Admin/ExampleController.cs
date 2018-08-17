@@ -34,6 +34,8 @@ using Raccord.Application.Core.Services.Scheduling.ScheduleScenes;
 using Raccord.Application.Core.Services.ScriptLocations;
 using Raccord.Application.Core.Services.ScriptTexts;
 using Raccord.Application.Core.Services.ShootingDays;
+using Raccord.Application.Core.Services.Shots.Slates;
+using Raccord.Application.Core.Services.Shots.Takes;
 using Raccord.Application.Core.Services.Users;
 using Raccord.Application.Core.Services.Users.Project;
 using Raccord.Core.Enums;
@@ -71,6 +73,9 @@ namespace Raccord.API.Controllers.Admin
     private readonly IBreakdownTypeService _breakdownTypeService;
     private readonly IBreakdownItemService _breakdownItemService;
     private readonly IBreakdownItemSceneService _breakdownItemSceneService;
+    private readonly ISlateService _slateService;
+    private readonly ITakeService _takeService;
+    private readonly IShootingDayService _shootingDayService;
     private static Random _rnd = new Random();
     public ExampleController(
       IProjectService projectService,
@@ -101,7 +106,10 @@ namespace Raccord.API.Controllers.Admin
       IBreakdownService breakdownService,
       IBreakdownTypeService breakdownTypeService,
       IBreakdownItemService breakdownItemService,
-      IBreakdownItemSceneService breakdownItemSceneService
+      IBreakdownItemSceneService breakdownItemSceneService,
+      ISlateService slateService,
+      ITakeService takeService,
+      IShootingDayService shootingDayService
       ): base()
     {
       _projectService = projectService;
@@ -133,6 +141,9 @@ namespace Raccord.API.Controllers.Admin
       _breakdownTypeService = breakdownTypeService;
       _breakdownItemService = breakdownItemService;
       _breakdownItemSceneService = breakdownItemSceneService;
+      _slateService = slateService;
+      _takeService = takeService;
+      _shootingDayService = shootingDayService;
     }
 
     // POST api/example
@@ -180,6 +191,8 @@ namespace Raccord.API.Controllers.Admin
         var breakdownItemIds = CreateBreakdownItems(breakdownId);
 
         LinkBreakdownItemScenes(breakdownItemIds, sceneIds);
+
+        var shotIds = CreateShots(projectId, callsheetIds, sceneIds);
 
         CreateComments(userIds, characterIds, callsheetIds, scriptLocationIds, locationIds, breakdownItemIds, sceneIds);
 
@@ -1556,6 +1569,133 @@ namespace Raccord.API.Controllers.Admin
       _breakdownItemSceneService.AddLink(breakdownItemIds.bobsCarId, sceneIds.scene6Id);
       _breakdownItemSceneService.AddLink(breakdownItemIds.bobsPhoneId, sceneIds.scene6Id);
       _breakdownItemSceneService.AddLink(breakdownItemIds.charliesCarId, sceneIds.scene6Id);
+    }
+#endregion
+
+#region 
+    private (
+      long scene4_CUAliceId,
+      long scene4_CUBobId,
+      long scene4_2ShotAliceBobId,
+      long scene5_CUAliceId,
+      long scene5_CUBobId,
+      long scene5_2ShotAliceBobId
+    ) CreateShots(
+        long projectId,
+        (long mainCallsheet1Id, long mainCallsheet2Id, long mainCallsheet3Id, long secondCallsheet1Id)callsheetIds,
+        (
+          long scene1Id,
+          long scene2Id,
+          long scene3Id,
+          long scene4Id,
+          long scene5Id,
+          long scene5AId,
+          long scene6Id
+        ) sceneIds
+    ) {
+        var day1CallsheetSummary = _callsheetService.GetSummary(callsheetIds.mainCallsheet1Id);
+        var shootingDay1Id = day1CallsheetSummary.ShootingDay.ID;
+        var scene4_CUAliceId = CreateShot(new SlateDto
+        {
+          Number = "4",
+          Description = "CU Alice",
+          Lens = "50mm",
+          Distance = @"3' 5""",
+          Aperture = "2.8",
+          Sound = "sync",
+          Filters = "/",
+          Scene = new SceneDto { ID = sceneIds.scene4Id },
+          ShootingDay = new ShootingDayDto { ID = shootingDay1Id },
+          ProjectID = projectId
+        });
+        var scene4_CUBobId = CreateShot(new SlateDto
+        {
+          Number = "4A",
+          Description = "CU Bob",
+          Lens = "50mm",
+          Distance = @"3' 2""",
+          Aperture = "2.8",
+          Sound = "sync",
+          Filters = "/",
+          Scene = new SceneDto { ID = sceneIds.scene4Id },
+          ShootingDay = new ShootingDayDto { ID = shootingDay1Id },
+          ProjectID = projectId
+        });
+        var scene4_2ShotAliceBobId = CreateShot(new SlateDto
+        {
+          Number = "4B",
+          Description = "Medium 2 Shot Alice and Bob",
+          Lens = "35mm",
+          Distance = @"6' 3""",
+          Aperture = "2.8",
+          Sound = "sync",
+          Filters = "/",
+          Scene = new SceneDto { ID = sceneIds.scene4Id },
+          ShootingDay = new ShootingDayDto { ID = shootingDay1Id },
+          ProjectID = projectId
+        });
+        var scene5_CUAliceId = CreateShot(new SlateDto
+        {
+          Number = "5",
+          Description = "CU Alice",
+          Lens = "50mm",
+          Distance = @"3' 5""",
+          Aperture = "2.8",
+          Sound = "sync",
+          Filters = "/",
+          Scene = new SceneDto { ID = sceneIds.scene4Id },
+          ShootingDay = new ShootingDayDto { ID = shootingDay1Id },
+          ProjectID = projectId
+        });
+        var scene5_CUBobId = CreateShot(new SlateDto
+        {
+          Number = "5A",
+          Description = "CU Bob",
+          Lens = "50mm",
+          Distance = @"3' 2""",
+          Aperture = "2.8",
+          Sound = "sync",
+          Filters = "/",
+          Scene = new SceneDto { ID = sceneIds.scene4Id },
+          ShootingDay = new ShootingDayDto { ID = shootingDay1Id },
+          ProjectID = projectId
+        });
+        var scene5_2ShotAliceBobId = CreateShot(new SlateDto
+        {
+          Number = "5B",
+          Description = "Medium 2 Shot Alice and Bob",
+          Lens = "35mm",
+          Distance = @"6' 3""",
+          Aperture = "2.8",
+          Sound = "sync",
+          Filters = "/",
+          Scene = new SceneDto { ID = sceneIds.scene4Id },
+          ShootingDay = new ShootingDayDto { ID = shootingDay1Id },
+          ProjectID = projectId
+        });
+        return (scene4_CUAliceId, scene4_CUBobId, scene4_2ShotAliceBobId, scene4_CUAliceId, scene4_CUBobId, scene4_2ShotAliceBobId);
+    }
+    
+    private long CreateShot(SlateDto slateDto)
+    {
+      var slateId = _slateService.Add(slateDto);
+      var takeAmount = _rnd.Next(2, 7);
+      for(var i = 0; i < takeAmount; i++)
+      {
+        _takeService.Add(new TakeDto
+        {
+          Number = (i + 1).ToString(),
+          Length = new TimeSpan(0, 0, _rnd.Next(11, 59)),
+          CameraRoll = "A001",
+          SoundRoll = "SR1",
+          Selected = _rnd.Next(0, 4) == 0,
+          Slate = new SlateDto
+          {
+            ID = slateId
+          }
+        });
+      }
+      return slateId;
     }
 #endregion
 

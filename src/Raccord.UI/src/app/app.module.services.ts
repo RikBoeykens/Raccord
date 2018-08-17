@@ -100,7 +100,10 @@ import {
   ScriptTextUserResolve,
   ScriptTextHttpService,
   ScriptDashboardHttpService,
-  ScriptDashboardResolve
+  ScriptDashboardResolve,
+  SlateHttpService,
+  SlatesResolve,
+  SlateResolve
 } from './projects';
 import {
   SearchEngineHttpService
@@ -227,6 +230,9 @@ export const SERVICES = [
   ScriptTextHttpService,
   ScriptDashboardHttpService,
   ScriptDashboardResolve,
+  SlateHttpService,
+  SlatesResolve,
+  SlateResolve,
   SearchEngineHttpService,
   AuthService,
   AuthGuard,

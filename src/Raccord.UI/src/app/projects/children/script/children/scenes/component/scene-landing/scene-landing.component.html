@@ -106,4 +106,12 @@
     </mat-expansion-panel-header>
     <shooting-day-info [shootingDays]="scene.shootingDays" [projectId]="project.id"></shooting-day-info>
   </mat-expansion-panel>
+  <mat-expansion-panel class="raccord-expansion-panel">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Slates ({{scene.slates.length}})
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <slates-table [slates]="scene.slates" [projectId]="project.id"></slates-table>
+  </mat-expansion-panel>
 </div>
