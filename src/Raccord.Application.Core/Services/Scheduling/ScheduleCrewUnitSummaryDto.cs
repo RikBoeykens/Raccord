@@ -3,11 +3,9 @@ using Raccord.Application.Core.Services.Crew.CrewUnits;
 
 namespace Raccord.Application.Core.Services.Scheduling
 {
-  public class ScheduleCrewUnitSummaryDto
+  public class ScheduleCrewUnitSummaryDto : ScheduleSummaryDto
   {
     private CrewUnitDto _crewUnit;
-    public DateTime StartDate { get; set; }
-    public DateTime EndDate { get; set; }
     public CrewUnitDto CrewUnit
     {
       get

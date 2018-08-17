@@ -1040,6 +1040,7 @@ namespace Raccord.API.Controllers.Admin
       {
         FirstName = fullName.firstName,
         LastName = fullName.lastName,
+        JobTitle = jobTitle,
         Email = GetEmail(fullName.firstName, fullName.lastName),
         Telephone = GetRandomPhone(),
         Department = new CrewDepartmentDto { ID = departmentId }

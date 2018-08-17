@@ -1,9 +1,8 @@
-import { BaseModel } from '../../../../../../shared';
 import { CrewUnit } from '../../../../../../shared/children/crew';
+import { ScheduleSummary } from './schedule-summary.model';
 
-export class ScheduleCrewUnitSummary extends BaseModel {
-  public startDate: Date;
-  public endDate: Date;
+export class ScheduleCrewUnitSummary extends ScheduleSummary {
+
   public crewUnit: CrewUnit;
 
   constructor(
@@ -13,9 +12,7 @@ export class ScheduleCrewUnitSummary extends BaseModel {
       crewUnit: CrewUnit
     }
   ) {
-    super();
-    this.startDate = obj.startDate;
-    this.endDate = obj.endDate;
+    super(obj);
     this.crewUnit = obj.crewUnit;
   }
 }

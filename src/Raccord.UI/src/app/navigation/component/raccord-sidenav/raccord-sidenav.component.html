@@ -11,6 +11,7 @@
     {{currentProject.title}}
   </a>
   <a mat-list-item routerLink="{{getScriptLink()}}" *ngIf="currentProject">Script</a>
+  <a mat-list-item routerLink="{{getBreakdownLink()}}" *ngIf="currentProject">Breakdown</a>
   <a mat-list-item routerLink="{{getLocationLink()}}" *ngIf="currentProject">Locations</a>
   <a mat-list-item routerLink="{{getSchedulingLink()}}" *ngIf="currentProject">Scheduling</a>
   <a mat-list-item routerLink="{{getCastLink()}}" *ngIf="currentProject">Cast</a>

@@ -1,0 +1,19 @@
+<div class="raccord-narrow-container">
+  <div class="raccord-page-header">
+    <a routerLink="{{getBackLink()}}">
+      <back-link></back-link>
+    </a>
+    <h1 class="raccord-header-title">
+      Unit List for {{crewUnit.name}}
+    </h1>
+  </div>
+  <mat-expansion-panel class="raccord-expansion-panel"
+    *ngFor="let crewDepartment of crewDepartments">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        {{crewDepartment.name}} ({{getCrewCount(crewDepartment)}})
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <crew-members-table [crewMembers]="crewDepartment.crewMembers" [projectId]="project.id"></crew-members-table>
+  </mat-expansion-panel>
+</div>

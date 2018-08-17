@@ -28,6 +28,14 @@ import { DashboardComponent } from './dashboard';
 
 import { NoContentComponent } from './no-content';
 import {
+  BreakdownItemLandingComponent,
+  BreakdownItemResolve,
+  BreakdownTypeLandingComponent,
+  BreakdownTypeResolve,
+  BreakdownLandingComponent,
+  BreakdownsListComponent,
+  BreakdownResolve,
+  BreakdownsResolve,
   SelectedBreakdownResolve,
   CallsheetComponent,
   CallsheetSidesComponent,
@@ -41,6 +49,12 @@ import {
   CastMembersResolve,
   CastDashboardComponent,
   CastDashboardResolve,
+  CrewDepartmentsResolve,
+  CrewUnitDashboardComponent,
+  CrewUnitDashboardResolve,
+  UnitListLandingComponent,
+  CrewUnitSummaryResolve,
+  CrewUnitsResolve,
   CrewDashboardComponent,
   LocationSetLandingComponent,
   LocationSetResolve,
@@ -76,9 +90,7 @@ import {
   ScriptDashboardComponent,
   ScriptDashboardResolve,
   ProjectsListComponent,
-  ProjectDashboardComponent,
-  CrewUnitSummaryResolve,
-  CrewUnitsResolve
+  ProjectDashboardComponent
 } from './projects';
 import {
   PagedProjectsResolve,
@@ -480,6 +492,59 @@ export const ROUTES: Routes = [
                 resolve: {
                   crewUnits: CrewUnitsResolve
                 }
+              },
+              {
+                path: ':crewUnitId',
+                component: CrewUnitDashboardComponent,
+                resolve: {
+                  dashboardInfo: CrewUnitDashboardResolve
+                }
+              }
+            ]
+          },
+          {
+            path: `${RouteSettings.UNITLISTS}/:crewUnitId`,
+            component: UnitListLandingComponent,
+            resolve: {
+              crewUnit: CrewUnitSummaryResolve,
+              crewDepartments: CrewDepartmentsResolve
+            }
+          },
+          {
+            path: RouteSettings.BREAKDOWNS,
+            children: [
+              {
+                path: '',
+                component: BreakdownsListComponent,
+                resolve: {
+                  breakdowns: BreakdownsResolve
+                }
+              },
+              {
+                path: ':breakdownId',
+                children: [
+                  {
+                    path: '',
+                    component: BreakdownLandingComponent,
+                    resolve: {
+                      breakdown: BreakdownResolve
+                    }
+                  },
+                  {
+                    path: `${RouteSettings.BREAKDOWNTYPES}/:breakdownTypeId`,
+                    component: BreakdownTypeLandingComponent,
+                    resolve: {
+                      breakdownType: BreakdownTypeResolve
+                    }
+                  },
+                  {
+                    path: `${RouteSettings.BREAKDOWNITEMS}/:breakdownItemId`,
+                    component: BreakdownItemLandingComponent,
+                    resolve: {
+                      breakdownItem: BreakdownItemResolve
+                    }
+                  }
+                ]
               }
             ]
           }

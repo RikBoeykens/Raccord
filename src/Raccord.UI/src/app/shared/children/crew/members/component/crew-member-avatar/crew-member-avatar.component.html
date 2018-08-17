@@ -1,0 +1,4 @@
+<span class="user-avatar">
+  <show-profile-image *ngIf="crewMember.hasImage" [userId]="userId" [fullName]="getFullName()" class="user-avatar-profile-image" [cardImage]="cardImage" [listAvatar]="listAvatar" [cardAvatar]="cardAvatar" [headerAvatar]="headerAvatar"></show-profile-image>
+  <placeholder-image *ngIf="!crewMember.hasImage" class="user-avatar-placeholder" [value]="getFullName()" [cardImage]="cardImage" [listAvatar]="listAvatar" [cardAvatar]="cardAvatar" [headerAvatar]="headerAvatar"></placeholder-image>
+</span>

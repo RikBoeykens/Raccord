@@ -36,11 +36,26 @@ namespace Raccord.Application.Services.Scheduling
         {
           CrewUnit = crewUnit.Translate(),
           StartDate = firstDay.ShootingDay.Date,
-          EndDate = firstDay.ShootingDay.Date
+          EndDate = lastDay.ShootingDay.Date
         });
       }
 
       return scheduleSummaries.GetPaged<ScheduleCrewUnitSummaryDto, ScheduleCrewUnitSummaryDto>(requestDto, x => x);
+    }
+
+    public PagedDataDto<ScheduleSummaryDto> GetSchedulesForCrewUnitPaged(long crewUnitId, PaginationRequestDto requestDto)
+    {
+      var scheduleSummaries = new List<ScheduleSummaryDto>();
+      var scheduleDays = _scheduleDayRepository.GetAllForCrewUnit(crewUnitId).OrderBy(sd => sd.ShootingDay.Date);
+      var firstDay = scheduleDays.FirstOrDefault();
+      var lastDay = scheduleDays.LastOrDefault();
+      scheduleSummaries.Add(new ScheduleSummaryDto
+      {
+        StartDate = firstDay.ShootingDay.Date,
+        EndDate = lastDay.ShootingDay.Date
+      });
+
+      return scheduleSummaries.GetPaged<ScheduleSummaryDto, ScheduleSummaryDto>(requestDto, x => x);
     }
   }
 }

@@ -7,5 +7,6 @@ namespace Raccord.Application.Core.Services.Scheduling
     public interface IScheduleService
     {
       PagedDataDto<ScheduleCrewUnitSummaryDto> GetSchedulesForProjectPaged(long projectId, PaginationRequestDto requestDto);
+      PagedDataDto<ScheduleSummaryDto> GetSchedulesForCrewUnitPaged(long crewUnitId, PaginationRequestDto requestDto);
     }
 }

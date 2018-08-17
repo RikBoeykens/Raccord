@@ -1,6 +1,10 @@
 // tslint:disable-next-line:max-line-length
 export { BreakdownItemAvatarComponent } from './children/breakdowns/children/items/component/breakdown-item-avatar/breakdown-item-avatar.component';
 // tslint:disable-next-line:max-line-length
+export { BreakdownItemCardComponent } from './children/breakdowns/children/items/component/breakdown-item-card/breakdown-item-card.component';
+// tslint:disable-next-line:max-line-length
+export { BreakdownItemLandingComponent } from './children/breakdowns/children/items/component/breakdown-item-landing/breakdown-item-landing.component';
+// tslint:disable-next-line:max-line-length
 export { SearchBreakdownItemComponent } from './children/breakdowns/children/items/component/search-breakdown-item/search-breakdown-item.component';
 // tslint:disable-next-line:max-line-length
 export { SearchBreakdownItemCollectionComponent } from './children/breakdowns/children/items/component/search-breakdown-item-collection/search-breakdown-item-collection.component';
@@ -19,10 +23,39 @@ export { SearchBreakdownItemRequest } from './children/breakdowns/children/items
 
 // tslint:disable-next-line:max-line-length
 export { BreakdownItemHttpService } from './children/breakdowns/children/items/service/breakdown-item-http.service';
+// tslint:disable-next-line:max-line-length
+export { BreakdownItemResolve } from './children/breakdowns/children/items/service/breakdown-item-resolve.service';
+
+// tslint:disable-next-line:max-line-length
+export { BreakdownTypeAvatarComponent } from './children/breakdowns/children/types/component/breakdown-type-avatar/breakdown-type-avatar.component';
+// tslint:disable-next-line:max-line-length
+export { BreakdownTypeCardComponent } from './children/breakdowns/children/types/component/breakdown-type-card/breakdown-type-card.component';
+// tslint:disable-next-line:max-line-length
+export { BreakdownTypeLandingComponent } from './children/breakdowns/children/types/component/breakdown-type-landing/breakdown-type-landing.component';
 
 // tslint:disable-next-line:max-line-length
 export { BaseBreakdownType } from './children/breakdowns/children/types/model/base-breakdown-type.model';
+// tslint:disable-next-line:max-line-length
+export { BreakdownTypeSummary } from './children/breakdowns/children/types/model/breakdown-type-summary.model';
 export { BreakdownType } from './children/breakdowns/children/types/model/breakdown-type.model';
+// tslint:disable-next-line:max-line-length
+export { FullBreakdownType } from './children/breakdowns/children/types/model/full-breakdown-type.model';
+
+// tslint:disable-next-line:max-line-length
+export { BreakdownTypeHttpService } from './children/breakdowns/children/types/service/breakdown-type-http.service';
+// tslint:disable-next-line:max-line-length
+export { BreakdownTypeResolve } from './children/breakdowns/children/types/service/breakdown-type-resolve.service';
+// tslint:disable-next-line:max-line-length
+export { BreakdownTypesResolve } from './children/breakdowns/children/types/service/breakdown-types-resolve.service';
+
+// tslint:disable-next-line:max-line-length
+export { BreakdownAvatarComponent } from './children/breakdowns/component/breakdown-avatar/breakdown-avatar.component';
+// tslint:disable-next-line:max-line-length
+export { BreakdownCardComponent } from './children/breakdowns/component/breakdown-card/breakdown-card.component';
+// tslint:disable-next-line:max-line-length
+export { BreakdownLandingComponent } from './children/breakdowns/component/breakdown-landing/breakdown-landing.component';
+// tslint:disable-next-line:max-line-length
+export { BreakdownsListComponent } from './children/breakdowns/component/breakdowns-list/breakdowns-list.component';
 
 export { BreakdownSummary } from './children/breakdowns/model/breakdown-summary.model';
 export { Breakdown } from './children/breakdowns/model/breakdown.model';
@@ -32,6 +65,8 @@ export { SceneBreakdown } from './children/breakdowns/model/scene-breakdown.mode
 export { SelectedBreakdown } from './children/breakdowns/model/selected-breakdown.model';
 
 export { BreakdownHttpService } from './children/breakdowns/service/breakdown-http.service';
+export { BreakdownResolve } from './children/breakdowns/service/breakdown-resolve.service';
+export { BreakdownsResolve } from './children/breakdowns/service/breakdowns-resolve.service';
 // tslint:disable-next-line:max-line-length
 export { SelectedBreakdownResolve } from './children/breakdowns/service/selected-breakdown-resolve.service';
 
@@ -92,6 +127,8 @@ export { CallsheetAvatarComponent } from './children/callsheets/component/callsh
 // tslint:disable-next-line:max-line-length
 export { CallsheetCardComponent } from './children/callsheets/component/callsheet-card/callsheet-card.component';
 // tslint:disable-next-line:max-line-length
+export { CallsheetCrewUnitCardComponent } from './children/callsheets/component/callsheet-crew-unit-card/callsheet-crew-unit-card.component';
+// tslint:disable-next-line:max-line-length
 export { CallsheetSidesComponent } from './children/callsheets/component/callsheet-sides/callsheet-sides.component';
 // tslint:disable-next-line:max-line-length
 export { CallsheetsListComponent } from './children/callsheets/component/callsheets-list/callsheets-list.component';
@@ -145,14 +182,34 @@ export { PostComment } from './children/comments/model/post-comment.model';
 export { CommentHttpService } from './children/comments/service/comment-http.service';
 
 // tslint:disable-next-line:max-line-length
+export { CrewDepartmentHttpService } from './children/crew/children/crew-departments/service/crew-department-http.service';
+// tslint:disable-next-line:max-line-length
+export { CrewDepartmentsResolve } from './children/crew/children/crew-departments/service/crew-departments-resolve.service';
+
+// tslint:disable-next-line:max-line-length
+export { CrewMembersTableComponent } from './children/crew/children/crew-members/component/crew-members-table/crew-members-table.component';
+
+// tslint:disable-next-line:max-line-length
 export { CrewUnitAvatarComponent } from './children/crew/children/crew-units/component/crew-unit-avatar/crew-unit-avatar.component';
 // tslint:disable-next-line:max-line-length
 export { CrewUnitCardComponent } from './children/crew/children/crew-units/component/crew-unit-card/crew-unit-card.component';
+// tslint:disable-next-line:max-line-length
+export { CrewUnitDashboardComponent } from './children/crew/children/crew-units/component/crew-unit-dashboard/crew-unit-dashboard.component';
+// tslint:disable-next-line:max-line-length
+export { UnitListLandingComponent } from './children/crew/children/crew-units/component/unit-list-landing/unit-list-landing.component';
 
+// tslint:disable-next-line:max-line-length
+export { CrewUnitDashboard } from './children/crew/children/crew-units/model/crew-unit-dashboard.model';
 export { FullCrewUnit } from './children/crew/children/crew-units/model/full-crew-unit.model';
 
 // tslint:disable-next-line:max-line-length
+export { CrewUnitDashboardHttpService } from './children/crew/children/crew-units/service/crew-unit-dashboard-http.service';
+// tslint:disable-next-line:max-line-length
+export { CrewUnitDashboardResolve } from './children/crew/children/crew-units/service/crew-unit-dashboard.resolve';
+// tslint:disable-next-line:max-line-length
 export { CrewUnitHttpService } from './children/crew/children/crew-units/service/crew-unit-http.service';
+// tslint:disable-next-line:max-line-length
+export { CrewUnitResolve } from './children/crew/children/crew-units/service/crew-unit-resolve.service';
 // tslint:disable-next-line:max-line-length
 export { CrewUnitSummaryResolve } from './children/crew/children/crew-units/service/crew-unit-summary-resolve.service';
 // tslint:disable-next-line:max-line-length
@@ -255,6 +312,8 @@ export { ScheduleLandingComponent } from './children/scheduling/children/schedul
 // tslint:disable-next-line:max-line-length
 export { SchedulesListComponent } from './children/scheduling/children/schedules/component/schedules-list/schedules-list.component';
 
+// tslint:disable-next-line:max-line-length
+export { ScheduleSummary } from './children/scheduling/children/schedules/model/schedule-summary.model';
 // tslint:disable-next-line:max-line-length
 export { ScheduleCrewUnitSummary } from './children/scheduling/children/schedules/model/schedule-crew-unit-summary.model';
 

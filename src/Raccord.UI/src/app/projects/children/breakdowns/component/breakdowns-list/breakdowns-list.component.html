@@ -1,0 +1,17 @@
+<div class="raccord-narrow-container">
+  <div class="raccord-page-header">
+    <a routerLink="{{getBackLink()}}">
+      <back-link></back-link>
+    </a>
+    <h1 class="raccord-header-title">
+      Breakdowns
+    </h1>
+  </div>
+  <div fxLayout="row wrap" fxLayoutGap="5px" *ngIf="breakdowns">
+    <a routerLink="{{getBreakdownLink(breakdown)}}"
+        *ngFor="let breakdown of breakdowns">
+      <breakdown-card
+          [breakdown]="breakdown"></breakdown-card>
+    </a>
+  </div>
+</div>

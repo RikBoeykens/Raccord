@@ -187,5 +187,34 @@ namespace Raccord.Application.Services.ShootingDays
             });
             return callsheetDtos.Concat(scheduleDtos);
         }
+
+        public static IEnumerable<ShootingDayInfoSceneCollectionDto> GetBreakdownItemShootingDays(this IEnumerable<ShootingDay> shootingDays, long breakdownItemId)
+        {
+            var callsheetShootingDays = shootingDays.Where(sd => sd.CallsheetID.HasValue && sd.Callsheet.CallsheetScenes.Any(cs => cs.Scene.BreakdownItemScenes.Any(bis => bis.BreakdownItemID == breakdownItemId))).ToList();
+
+            var callsheetDtos = callsheetShootingDays.Select(sd => new ShootingDayInfoSceneCollectionDto
+            {
+                ID = sd.CallsheetID.Value,
+                Number = sd.Number,
+                Date = sd.Date,
+                CrewUnit = sd.CrewUnit.Translate(),
+                Type = ShootingDayType.Callsheet,
+                Scenes = sd.Callsheet.CallsheetScenes.Where(cs => cs.Scene.BreakdownItemScenes.Any(bis => bis.BreakdownItemID == breakdownItemId))
+                    .Select(cs => cs.TranslateSummary())
+            });
+            var scheduleShootingDays = shootingDays.Where(sd => sd.ScheduleDayID.HasValue && !sd.CallsheetID.HasValue && sd.ScheduleDay.ScheduleScenes.Any(cs => cs.Scene.BreakdownItemScenes.Any(bis => bis.BreakdownItemID == breakdownItemId))).ToList();
+
+            var scheduleDtos = scheduleShootingDays.Select(sd => new ShootingDayInfoSceneCollectionDto
+            {
+                ID = sd.ScheduleDayID.Value,
+                Number = sd.Number,
+                Date = sd.Date,
+                CrewUnit = sd.CrewUnit.Translate(),
+                Type = ShootingDayType.Scheduled,
+                Scenes = sd.ScheduleDay.ScheduleScenes.Where(cs => cs.Scene.BreakdownItemScenes.Any(bis => bis.BreakdownItemID == breakdownItemId))
+                    .Select(cs => cs.TranslateSummary())
+            });
+            return callsheetDtos.Concat(scheduleDtos);
+        }
     }
 }

@@ -5,7 +5,7 @@ import { SchedulingDashboard } from '../../model/scheduling-dashboard.model';
 import { RouteSettings } from '../../../../../shared';
 import { ProjectSummary } from '../../../../../shared/children/projects';
 import { ProjectHelpers } from '../../../../../shared/children/projects/helpers/project.helpers';
-import { ScheduleCrewUnitSummary, CallsheetSummary } from '../../../..';
+import { ScheduleCrewUnitSummary, CallsheetCrewUnit } from '../../../..';
 
 @Component({
   templateUrl: 'scheduling-dashboard.component.html'
@@ -13,7 +13,7 @@ import { ScheduleCrewUnitSummary, CallsheetSummary } from '../../../..';
 export class SchedulingDashboardComponent implements OnInit {
   public project: ProjectSummary;
   public schedules: PagedData<ScheduleCrewUnitSummary>;
-  public callsheets: PagedData<CallsheetSummary>;
+  public callsheets: PagedData<CallsheetCrewUnit>;
   constructor(
     private _route: ActivatedRoute
   ) {}
@@ -43,7 +43,7 @@ export class SchedulingDashboardComponent implements OnInit {
     return `/${RouteSettings.PROJECTS}/${this.project.id}/${RouteSettings.CALLSHEETS}`;
   }
 
-  public getCallsheetLink(callsheet: CallsheetSummary) {
+  public getCallsheetLink(callsheet: CallsheetCrewUnit) {
     // tslint:disable-next-line:max-line-length
     return `/${RouteSettings.PROJECTS}/${this.project.id}/${RouteSettings.CALLSHEETS}/${callsheet.id}`;
   }

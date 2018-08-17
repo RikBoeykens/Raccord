@@ -7,6 +7,8 @@ using Raccord.Data.EntityFramework.Repositories.Breakdowns.BreakdownItems;
 using Raccord.Domain.Model.Images;
 using Raccord.Data.EntityFramework.Repositories.Comments;
 using Raccord.Core.Enums;
+using Raccord.Application.Core.Services.Comments;
+using Raccord.Data.EntityFramework.Repositories.ShootingDays;
 
 namespace Raccord.Application.Services.Breakdowns.BreakdownItems
 {
@@ -14,16 +16,19 @@ namespace Raccord.Application.Services.Breakdowns.BreakdownItems
     public class BreakdownItemService : IBreakdownItemService
     {
         private readonly IBreakdownItemRepository _breakdownItemRepository;
-        private readonly ICommentRepository _commentRepository;
+        private readonly IShootingDayRepository _shootingDayRepository;
+        private readonly ICommentService _commentService;
 
         // Initialises a new BreakdownItemService
         public BreakdownItemService(
             IBreakdownItemRepository breakdownitemRepository,
-            ICommentRepository commentRepository
+            IShootingDayRepository shootingDayRepository,
+            ICommentService commentService
             )
         {
             _breakdownItemRepository = breakdownitemRepository;
-            _commentRepository = commentRepository;
+            _shootingDayRepository = shootingDayRepository;
+            _commentService = commentService;
         }
 
         // Gets all breakdown items
@@ -41,9 +46,10 @@ namespace Raccord.Application.Services.Breakdowns.BreakdownItems
         {
             var item = _breakdownItemRepository.GetFull(ID);
 
-            var comments = _commentRepository.GetForParent(item.ID, ParentCommentType.BreakdownItem).ToList();
+            var comments = _commentService.GetForParent(new GetCommentDto{ParentID = item.ID, ParentType = ParentCommentType.BreakdownItem}).ToList();
+            var shootingDays = _shootingDayRepository.GetAllForBreakdownItem(item.ID);
 
-            var dto = item.TranslateFull(comments);
+            var dto = item.TranslateFull(comments, shootingDays);
 
             return dto;
         }

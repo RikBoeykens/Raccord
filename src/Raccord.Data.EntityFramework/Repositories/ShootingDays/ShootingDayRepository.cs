@@ -80,6 +80,18 @@ namespace Raccord.Data.EntityFramework.Repositories.ShootingDays
                                     );
         }
 
+        public IEnumerable<ShootingDay> GetAllForBreakdownItem(long breakdownItemID)
+        {
+            var query = GetIncludedBreakdownItem();
+
+            return query.Where(sd => sd.ShootingDayScenes.Any(sds=> sds.Scene.BreakdownItemScenes.Any(bis => bis.BreakdownItemID == breakdownItemID))
+                                    ||
+                                    sd.CallsheetID.HasValue && sd.Callsheet.CallsheetScenes.Any(cs=> cs.Scene.BreakdownItemScenes.Any(bis => bis.BreakdownItemID == breakdownItemID))
+                                    ||
+                                    sd.ScheduleDayID.HasValue && sd.ScheduleDay.ScheduleScenes.Any(ss=> ss.Scene.BreakdownItemScenes.Any(bis => bis.BreakdownItemID == breakdownItemID))
+                                    );
+        }
+
 
         public int SearchCount(string searchText, long? projectID)
         {
@@ -229,7 +241,8 @@ namespace Raccord.Data.EntityFramework.Repositories.ShootingDays
         {
             IQueryable<ShootingDay> query = _context.Set<ShootingDay>();
 
-            return query.Include(sd=> sd.ShootingDayScenes)
+            return query.Include(sd => sd.CrewUnit)
+                        .Include(sd=> sd.ShootingDayScenes)
                         .Include(sd=> sd.ScheduleDay)
                         .ThenInclude(sd=> sd.ScheduleScenes)
                         .Include(sd=> sd.Callsheet)
@@ -326,6 +339,24 @@ namespace Raccord.Data.EntityFramework.Repositories.ShootingDays
                                 .ThenInclude(ss => ss.Scene)
                                     .ThenInclude(s => s.ImageScenes)
                                         .ThenInclude(i => i.Image);
+        }
+
+        private IQueryable<ShootingDay> GetIncludedBreakdownItem()
+        {
+            IQueryable<ShootingDay> query = _context.Set<ShootingDay>();
+
+            return query.Include(sd => sd.CrewUnit)
+                        .Include(sd=> sd.ShootingDayScenes)
+                            .ThenInclude(sds => sds.Scene)
+                                .ThenInclude(s => s.BreakdownItemScenes)
+                        .Include(sd=> sd.ScheduleDay)
+                            .ThenInclude(sd=> sd.ScheduleScenes)
+                                .ThenInclude(sds => sds.Scene)
+                                    .ThenInclude(s => s.BreakdownItemScenes)
+                        .Include(sd=> sd.Callsheet)
+                            .ThenInclude(cs=> cs.CallsheetScenes)
+                                .ThenInclude(sds => sds.Scene)
+                                    .ThenInclude(s => s.BreakdownItemScenes);
         }
 
         private IQueryable<ShootingDay> GetIncludedCalendarCrewUnit()

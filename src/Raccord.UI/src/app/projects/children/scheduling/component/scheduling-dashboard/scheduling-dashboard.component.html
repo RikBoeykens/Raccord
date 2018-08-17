@@ -35,8 +35,8 @@
   <div fxLayout="row wrap" fxLayoutGap="5px" *ngIf="callsheets && callsheets.pageInfo">
     <a routerLink="{{getCallsheetLink(callsheet)}}"
         *ngFor="let callsheet of callsheets.data">
-        <callsheet-card
-            [callsheet]="callsheet"></callsheet-card>
+        <callsheet-crew-unit-card
+            [callsheet]="callsheet"></callsheet-crew-unit-card>
     </a>
   </div>
 </div>

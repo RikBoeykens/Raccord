@@ -33,7 +33,6 @@ export class RouteSettings {
   public static get CHARTS(): string { return 'charts'; }
   public static get SHOOTINGDAYS(): string { return 'shootingdays'; }
   public static get CREW(): string { return 'crew'; }
-  public static get CREWUNITDASHBOARD(): string { return 'crewunitdashboard'; }
   public static get UNITLISTS(): string { return 'unitlists'; }
   public static get SCRIPTUPLOADS(): string { return 'scriptuploads'; }
   public static get SCRIPTTEXT(): string { return 'scripttext'; }

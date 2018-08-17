@@ -62,6 +62,14 @@ namespace Raccord.Application.Services.Callsheets
             return callsheets.GetPaged<Callsheet, CallsheetCrewUnitDto>(requestDto, cs => cs.TranslateCrewUnit());
         }
 
+        // Gets all callsheets for a crew unit
+        public PagedDataDto<CallsheetSummaryDto> GetForCrewUnit(long crewUnitId, PaginationRequestDto requestDto)
+        {
+            var callsheets = _callsheetRepository.GetAllForCrewUnit(crewUnitId);
+
+            return callsheets.GetPaged<Callsheet, CallsheetSummaryDto>(requestDto, cs => cs.TranslateSummary());
+        }
+
         // Gets a single callsheet by id
         public FullCallsheetDto Get(long ID, string userID)
         {

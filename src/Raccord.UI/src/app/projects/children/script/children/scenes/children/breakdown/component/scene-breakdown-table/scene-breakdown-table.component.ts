@@ -21,11 +21,11 @@ export class SceneBreakdownTableComponent {
 
   public getBreakdownItemLink(breakdownItem: SceneBreakdownItem): string {
     // tslint:disable-next-line:max-line-length
-    return `/${RouteSettings.PROJECTS}/${this.projectId}/${RouteSettings.BREAKDOWNITEMS}/${breakdownItem.id}`;
+    return `/${RouteSettings.PROJECTS}/${this.projectId}/${RouteSettings.BREAKDOWNS}/${this.sceneBreakdown.id}/${RouteSettings.BREAKDOWNITEMS}/${breakdownItem.id}`;
   }
 
   public getBreakdownTypeLink(breakdownType: BreakdownType): string {
     // tslint:disable-next-line:max-line-length
-    return `/${RouteSettings.PROJECTS}/${this.projectId}/${RouteSettings.BREAKDOWNTYPES}/${breakdownType.id}`;
+    return `/${RouteSettings.PROJECTS}/${this.projectId}/${RouteSettings.BREAKDOWNS}/${this.sceneBreakdown.id}/${RouteSettings.BREAKDOWNTYPES}/${breakdownType.id}`;
   }
 }

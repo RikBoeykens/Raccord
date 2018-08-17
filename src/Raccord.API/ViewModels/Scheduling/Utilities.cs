@@ -18,5 +18,17 @@ namespace Raccord.API.ViewModels.Scheduling
         EndDate = dto.EndDate
       };
     }
+    public static ScheduleSummaryViewModel Translate(this ScheduleSummaryDto dto)
+    {
+      if (dto == null)
+      {
+        return null;
+      }
+      return new ScheduleSummaryViewModel
+      {
+        StartDate = dto.StartDate,
+        EndDate = dto.EndDate
+      };
+    }
   }
 }

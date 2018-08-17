@@ -21,5 +21,6 @@ namespace Raccord.Application.Core.Services.Callsheets
         // Deletes a single instance
         void Delete(long ID);
         PagedDataDto<CallsheetCrewUnitDto> GetForProject(long projectID, PaginationRequestDto requestDto);
+        PagedDataDto<CallsheetSummaryDto> GetForCrewUnit(long projectID, PaginationRequestDto requestDto);
     }
 }

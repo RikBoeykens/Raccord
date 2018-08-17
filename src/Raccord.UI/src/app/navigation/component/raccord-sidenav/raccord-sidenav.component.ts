@@ -58,4 +58,8 @@ export class RaccordSidenavComponent implements OnInit {
   public getCrewLink() {
     return `/${RouteSettings.PROJECTS}/${this.currentProject.id}/${RouteSettings.CREW}`;
   }
+
+  public getBreakdownLink() {
+    return `/${RouteSettings.PROJECTS}/${this.currentProject.id}/${RouteSettings.BREAKDOWNS}`;
+  }
 }

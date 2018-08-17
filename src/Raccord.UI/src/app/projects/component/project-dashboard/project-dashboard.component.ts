@@ -50,4 +50,8 @@ export class ProjectDashboardComponent implements OnInit {
   public getCrewLink() {
     return `/${RouteSettings.PROJECTS}/${this.project.id}/${RouteSettings.CREW}`;
   }
+
+  public getBreakdownLink() {
+    return `/${RouteSettings.PROJECTS}/${this.project.id}/${RouteSettings.BREAKDOWNS}`;
+  }
 }

@@ -3,6 +3,7 @@ using Raccord.API.ViewModels.Images;
 using System.Collections.Generic;
 using Raccord.API.ViewModels.Breakdowns.BreakdownTypes;
 using Raccord.API.ViewModels.Comments;
+using Raccord.API.ViewModels.ShootingDays;
 
 namespace Raccord.API.ViewModels.Breakdowns.BreakdownItems
 {
@@ -14,6 +15,7 @@ namespace Raccord.API.ViewModels.Breakdowns.BreakdownItems
         private IEnumerable<LinkedSceneViewModel> _scenes;
         private IEnumerable<LinkedImageViewModel> _images;
         private IEnumerable<CommentViewModel> _comments;
+        private IEnumerable<ShootingDayInfoSceneCollectionViewModel> _shootingDays;
 
         // Scenes linked to the breakdown item
         public IEnumerable<LinkedSceneViewModel> Scenes
@@ -83,6 +85,19 @@ namespace Raccord.API.ViewModels.Breakdowns.BreakdownItems
             set
             {
                 _comments = value;
+            }
+        }
+
+        // shooting days linked
+        public IEnumerable<ShootingDayInfoSceneCollectionViewModel> ShootingDays
+        {
+            get
+            {
+                return _shootingDays ?? (_shootingDays = new List<ShootingDayInfoSceneCollectionViewModel>());
+            }
+            set
+            {
+                _shootingDays = value;
             }
         }
     }
