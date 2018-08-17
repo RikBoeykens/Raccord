@@ -34,6 +34,7 @@ using Raccord.Application.Core.Services.Scheduling.ScheduleScenes;
 using Raccord.Application.Core.Services.ScriptLocations;
 using Raccord.Application.Core.Services.ScriptTexts;
 using Raccord.Application.Core.Services.ShootingDays;
+using Raccord.Application.Core.Services.ShootingDays.Scenes;
 using Raccord.Application.Core.Services.Shots.Slates;
 using Raccord.Application.Core.Services.Shots.Takes;
 using Raccord.Application.Core.Services.Users;
@@ -76,6 +77,7 @@ namespace Raccord.API.Controllers.Admin
     private readonly ISlateService _slateService;
     private readonly ITakeService _takeService;
     private readonly IShootingDayService _shootingDayService;
+    private readonly IShootingDaySceneService _shootingDaySceneService;
     private static Random _rnd = new Random();
     public ExampleController(
       IProjectService projectService,
@@ -109,7 +111,8 @@ namespace Raccord.API.Controllers.Admin
       IBreakdownItemSceneService breakdownItemSceneService,
       ISlateService slateService,
       ITakeService takeService,
-      IShootingDayService shootingDayService
+      IShootingDayService shootingDayService,
+      IShootingDaySceneService shootingDaySceneService
       ): base()
     {
       _projectService = projectService;
@@ -144,6 +147,7 @@ namespace Raccord.API.Controllers.Admin
       _slateService = slateService;
       _takeService = takeService;
       _shootingDayService = shootingDayService;
+      _shootingDaySceneService = shootingDaySceneService;
     }
 
     // POST api/example
@@ -193,6 +197,7 @@ namespace Raccord.API.Controllers.Admin
         LinkBreakdownItemScenes(breakdownItemIds, sceneIds);
 
         var shotIds = CreateShots(projectId, callsheetIds, sceneIds);
+        CreateShootingDays(callsheetIds.mainCallsheet1Id);
 
         CreateComments(userIds, characterIds, callsheetIds, scriptLocationIds, locationIds, breakdownItemIds, sceneIds);
 
@@ -1697,6 +1702,36 @@ namespace Raccord.API.Controllers.Admin
       }
       return slateId;
     }
+#endregion
+
+#region shootingdays
+  private void CreateShootingDays(long callsheet1Id)
+  {
+    var shootingDay1Id = _callsheetService.GetSummary(callsheet1Id).ShootingDay.ID;
+    _shootingDayService.PrepareForCompletion(shootingDay1Id);
+    var shootingDay = _shootingDayService.GetFull(shootingDay1Id);
+    shootingDay.Turn = shootingDay.Start.AddHours(1);
+    _shootingDayService.Update(new ShootingDayDto
+    {
+      ID = shootingDay.ID,
+      Start = shootingDay.Start,
+      Turn = shootingDay.Start.AddHours(1),
+      End = shootingDay.End.AddHours(1),
+      OverTime = new TimeSpan(1, 0, 0),
+      Completed = true
+    });
+    foreach(var scene in shootingDay.Scenes)
+    {
+      _shootingDaySceneService.Update(new ShootingDaySceneDto
+      {
+        ID = scene.ID,
+        PageLength = scene.PageLength,
+        Timings = scene.Timings,
+        Completion = Completion.Completed,
+        LocationSetID = scene.LocationSet.ID
+      });
+    }
+  }
 #endregion
 
 #region comments

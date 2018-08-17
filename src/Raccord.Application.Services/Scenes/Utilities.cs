@@ -26,6 +26,7 @@ using Raccord.Application.Services.Comments;
 using Raccord.Application.Core.Services.Comments;
 using Raccord.Domain.Model.Callsheets.Scenes;
 using Raccord.Application.Core.Services.ShootingDays.Scenes;
+using Raccord.Domain.Model.ShootingDays.Scenes;
 
 namespace Raccord.Application.Services.Scenes
 {
@@ -206,6 +207,26 @@ namespace Raccord.Application.Services.Scenes
                 return $"{scene.Number}. {scene.Summary}";
             }
             return $"{scene.Number}. {scene.SceneIntro.Name} {scene.ScriptLocation.Name} {scene.TimeOfDay.Name} - {scene.Summary}";
+        }
+
+        public static ShootingDaySceneSummaryDto TranslateSummary(this ShootingDayScene shootingDayScene)
+        {
+            var dto = new ShootingDaySceneSummaryDto
+            {
+                ID = shootingDayScene.Scene.ID,
+                Number = shootingDayScene.Scene.Number,
+                Summary = shootingDayScene.Scene.Summary,
+                PageLength = shootingDayScene.Scene.PageLength,
+                Timing = shootingDayScene.Scene.Timing,
+                SceneIntro = shootingDayScene.Scene.SceneIntro.Translate(),
+                ScriptLocation = shootingDayScene.Scene.ScriptLocation.Translate(),
+                TimeOfDay = shootingDayScene.Scene.TimeOfDay.Translate(),
+                ProjectID = shootingDayScene.Scene.ProjectID,
+                LinkID = shootingDayScene.ID,
+                ScheduledPageLength = shootingDayScene.PageLength
+            };
+
+            return dto;
         }
 
         public static ShootingDaySceneSummaryDto TranslateSummary(this CallsheetScene callsheetScene)
