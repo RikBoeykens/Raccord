@@ -46,7 +46,7 @@ namespace Raccord.API.Controllers
         
         // GET: api/shootingdays/1/completed
         [HttpGet("{projectID}/completed")]
-        public IEnumerable<ShootingDaySummaryViewModel> GetCompleted(long projectID)
+        public IEnumerable<ShootingDayCrewUnitViewModel> GetCompleted(long projectID)
         {
             var availableDays = _shootingDayService.GetCompleted(projectID);
 

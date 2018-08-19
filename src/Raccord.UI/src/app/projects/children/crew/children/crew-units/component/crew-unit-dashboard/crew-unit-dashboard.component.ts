@@ -2,7 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProjectSummary } from '../../../../../../../shared/children/projects';
 import { PagedData } from '../../../../../../../shared/children/paging';
-import { ScheduleSummary, CallsheetSummary, CrewUnitDashboard } from '../../../../../..';
+import {
+  ScheduleSummary,
+  CallsheetSummary,
+  CrewUnitDashboard,
+  ShootingDaySummary
+} from '../../../../../..';
 import {
   ProjectHelpers
 } from '../../../../../../../shared/children/projects/helpers/project.helpers';
@@ -17,6 +22,7 @@ export class CrewUnitDashboardComponent implements OnInit {
   public crewUnit: CrewUnit;
   public schedules: PagedData<ScheduleSummary>;
   public callsheets: PagedData<CallsheetSummary>;
+  public shootingDays: PagedData<ShootingDaySummary>;
   constructor(
     private _route: ActivatedRoute
   ) {}
@@ -26,6 +32,7 @@ export class CrewUnitDashboardComponent implements OnInit {
       this.crewUnit = data.dashboardInfo.crewUnit;
       this.schedules = data.dashboardInfo.schedules;
       this.callsheets = data.dashboardInfo.callsheets;
+      this.shootingDays = data.dashboardInfo.shootingDays;
     });
     this.project = ProjectHelpers.getCurrentProject();
   }
@@ -42,6 +49,11 @@ export class CrewUnitDashboardComponent implements OnInit {
   public getCallsheetLink(callsheet: CallsheetSummary) {
     // tslint:disable-next-line:max-line-length
     return `/${RouteSettings.PROJECTS}/${this.project.id}/${RouteSettings.CALLSHEETS}/${callsheet.id}`;
+  }
+
+  public getShootingDayLink(shootingDay: ShootingDaySummary) {
+    // tslint:disable-next-line:max-line-length
+    return `/${RouteSettings.PROJECTS}/${this.project.id}/${RouteSettings.SHOOTINGDAYS}/${shootingDay.id}`;
   }
 
   public getUnitListLink() {

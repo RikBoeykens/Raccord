@@ -1725,9 +1725,9 @@ namespace Raccord.API.Controllers.Admin
       _shootingDaySceneService.Update(new ShootingDaySceneDto
       {
         ID = scene.ID,
-        PageLength = scene.PageLength,
+        PageLength = scene.PlannedPageLength,
         Timings = scene.Timings,
-        Completion = Completion.Completed,
+        Completion = scene.Scene.Number == "4" ? Completion.Completed : Completion.PartCompleted,
         LocationSetID = scene.LocationSet.ID
       });
     }

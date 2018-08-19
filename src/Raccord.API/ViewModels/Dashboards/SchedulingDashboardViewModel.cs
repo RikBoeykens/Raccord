@@ -5,6 +5,7 @@ using Raccord.API.ViewModels.Locations.Locations;
 using Raccord.API.ViewModels.Scenes;
 using Raccord.API.ViewModels.Scheduling;
 using Raccord.API.ViewModels.ScriptLocations;
+using Raccord.API.ViewModels.ShootingDays;
 
 namespace Raccord.API.ViewModels.Dashboards
 {
@@ -12,6 +13,7 @@ namespace Raccord.API.ViewModels.Dashboards
   {
     private PagedDataViewModel<ScheduleCrewUnitSummaryViewModel> _schedules;
     private PagedDataViewModel<CallsheetCrewUnitViewModel> _callsheets;
+    private PagedDataViewModel<ShootingDayCrewUnitViewModel> _shootingDays;
 
     public PagedDataViewModel<ScheduleCrewUnitSummaryViewModel> Schedules
     {
@@ -33,6 +35,17 @@ namespace Raccord.API.ViewModels.Dashboards
       set
       {
         _callsheets = value;
+      }
+    }
+    public PagedDataViewModel<ShootingDayCrewUnitViewModel> ShootingDays
+    {
+      get
+      {
+        return _shootingDays ?? new PagedDataViewModel<ShootingDayCrewUnitViewModel>();
+      }
+      set
+      {
+        _shootingDays = value;
       }
     }
   }

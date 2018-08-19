@@ -24,6 +24,8 @@ using Raccord.Application.Core.Services.Scheduling;
 using Raccord.Application.Core.Services.Callsheets;
 using Raccord.API.ViewModels.Scheduling;
 using Raccord.API.ViewModels.Callsheets;
+using Raccord.Application.Core.Services.ShootingDays;
+using Raccord.API.ViewModels.ShootingDays;
 
 namespace Raccord.API.Controllers.Projects
 {
@@ -32,16 +34,19 @@ namespace Raccord.API.Controllers.Projects
     {
         private readonly IScheduleService _scheduleService;
         private readonly ICallsheetService _callsheetService;
+        private readonly IShootingDayService _shootingDayService;
         private readonly int _defaultPageSize = 4;
 
         public SchedulingDashboardController(
             IScheduleService scheduleService,
             ICallsheetService callsheetService,
+            IShootingDayService shootingDayService,
             UserManager<ApplicationUser> userManager
             ): base(userManager)
         {
             _scheduleService = scheduleService;
             _callsheetService = callsheetService;
+            _shootingDayService = shootingDayService;
         }
 
         // GET: api/admin/dashboard
@@ -50,10 +55,12 @@ namespace Raccord.API.Controllers.Projects
         {
             var schedules = GetSchedules(authProjectId);
             var callsheets = GetCallsheets(authProjectId);
+            var shootingDays = GetShootingDays(authProjectId);
             return new ScheduleDashboardViewModel
             {
                 Schedules = schedules,
-                Callsheets = callsheets
+                Callsheets = callsheets,
+                ShootingDays = shootingDays
             };
         }
 
@@ -77,6 +84,17 @@ namespace Raccord.API.Controllers.Projects
             });
 
             return paginatedCallsheets.Translate<CallsheetCrewUnitViewModel, CallsheetCrewUnitDto>(x=> x.Translate());
+        }
+
+        private PagedDataViewModel<ShootingDayCrewUnitViewModel> GetShootingDays(long authProjectId)
+        {
+            var paginatedShootingDays = _shootingDayService.GetCompletedForProjectPaged(authProjectId, new PaginationRequestDto
+            {
+                Page = 1,
+                PageSize = _defaultPageSize
+            });
+
+            return paginatedShootingDays.Translate<ShootingDayCrewUnitViewModel, ShootingDayCrewUnitDto>(x=> x.Translate());
         }
     }
 }

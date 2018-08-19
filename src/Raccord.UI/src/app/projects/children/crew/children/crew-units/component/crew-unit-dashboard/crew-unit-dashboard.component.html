@@ -34,4 +34,16 @@
             [callsheet]="callsheet"></callsheet-card>
     </a>
   </div>
+  <!-- Shooting Days -->
+  <div class="raccord-sub-header"
+    fxLayout="row">
+    <h2>Shooting Days</h2>
+  </div>
+  <div fxLayout="row wrap" fxLayoutGap="5px" *ngIf="shootingDays && shootingDays.pageInfo">
+    <a routerLink="{{getShootingDayLink(shootingDay)}}"
+        *ngFor="let shootingDay of shootingDays.data">
+        <shooting-day-card
+            [shootingDay]="shootingDay"></shooting-day-card>
+    </a>
+  </div>
 </div>

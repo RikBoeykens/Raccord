@@ -39,4 +39,19 @@
             [callsheet]="callsheet"></callsheet-crew-unit-card>
     </a>
   </div>
+  <!-- Shooting Days -->
+  <div class="raccord-sub-header"
+    fxLayout="row">
+    <h2>Shooting Days</h2>
+    <span class="raccord-action-link-container">
+        <a routerLink="{{getShootingDaysLink()}}" class="raccord-action-link">more</a>
+    </span>
+  </div>
+  <div fxLayout="row wrap" fxLayoutGap="5px" *ngIf="shootingDays && shootingDays.pageInfo">
+    <a routerLink="{{getShootingDayLink(shootingDay)}}"
+        *ngFor="let shootingDay of shootingDays.data">
+        <shooting-day-crew-unit-card
+            [shootingDay]="shootingDay"></shooting-day-crew-unit-card>
+    </a>
+  </div>
 </div>

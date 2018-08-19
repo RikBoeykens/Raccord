@@ -26,6 +26,8 @@ using Raccord.API.ViewModels.Scheduling;
 using Raccord.API.ViewModels.Callsheets;
 using Raccord.Application.Core.Services.Crew.CrewUnits;
 using Raccord.API.ViewModels.Crew.CrewUnits;
+using Raccord.Application.Core.Services.ShootingDays;
+using Raccord.API.ViewModels.ShootingDays;
 
 namespace Raccord.API.Controllers.Projects
 {
@@ -35,18 +37,21 @@ namespace Raccord.API.Controllers.Projects
         private readonly ICrewUnitService _crewUnitService;
         private readonly IScheduleService _scheduleService;
         private readonly ICallsheetService _callsheetService;
+        private readonly IShootingDayService _shootingDayService;
         private readonly int _defaultPageSize = 10;
 
         public CrewUnitDashboardController(
             ICrewUnitService crewUnitService,
             IScheduleService scheduleService,
             ICallsheetService callsheetService,
+            IShootingDayService shootingDayService,
             UserManager<ApplicationUser> userManager
             ): base(userManager)
         {
             _crewUnitService = crewUnitService;
             _scheduleService = scheduleService;
             _callsheetService = callsheetService;
+            _shootingDayService = shootingDayService;
         }
 
         // GET: api/admin/dashboard
@@ -56,11 +61,13 @@ namespace Raccord.API.Controllers.Projects
             var crewUnit = _crewUnitService.GetSummary(crewUnitId);
             var schedules = GetSchedules(authProjectId, crewUnitId);
             var callsheets = GetCallsheets(authProjectId, crewUnitId);
+            var shootingDays = GetShootingDays(authProjectId, crewUnitId);
             return new CrewUnitDashboardViewModel
             {
                 CrewUnit = crewUnit.Translate(),
                 Schedules = schedules,
-                Callsheets = callsheets
+                Callsheets = callsheets,
+                ShootingDays = shootingDays
             };
         }
 
@@ -84,6 +91,17 @@ namespace Raccord.API.Controllers.Projects
             });
 
             return paginatedCallsheets.Translate<CallsheetSummaryViewModel, CallsheetSummaryDto>(x=> x.Translate());
+        }
+
+        private PagedDataViewModel<ShootingDaySummaryViewModel> GetShootingDays(long authProjectId, long crewUnitId)
+        {
+            var paginatedShootingDays = _shootingDayService.GetCompletedForCrewUnitPaged(crewUnitId, new PaginationRequestDto
+            {
+                Page = 1,
+                PageSize = _defaultPageSize
+            });
+
+            return paginatedShootingDays.Translate<ShootingDaySummaryViewModel, ShootingDaySummaryDto>(x=> x.Translate());
         }
     }
 }

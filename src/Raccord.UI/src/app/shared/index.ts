@@ -13,6 +13,7 @@ export { PhoneLinkComponent } from './component/phone-link/phone-link.component'
 // tslint:disable-next-line:max-line-length
 export { PlaceholderImageComponent } from './component/placeholder-image/placeholder-image.component';
 
+export { Completion } from './enums/completion.enum';
 export { EntityType } from './enums/entity-type.enum';
 export { ParentCommentType } from './enums/parent-comment-type.enum';
 export { ProjectRoleEnum } from './enums/project-role.enum';

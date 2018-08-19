@@ -323,8 +323,18 @@ export { SchedulesHttpService } from './children/scheduling/children/schedules/s
 export { SchedulesResolve } from './children/scheduling/children/schedules/service/schedules.resolve';
 
 // tslint:disable-next-line:max-line-length
+export { BaseShootingDayScene } from './children/scheduling/children/shooting-days/children/scenes/model/base-shooting-day-scene.model';
+// tslint:disable-next-line:max-line-length
+export { ShootingDaySceneScene } from './children/scheduling/children/shooting-days/children/scenes/model/shooting-day-scene-scene.model';
+// tslint:disable-next-line:max-line-length
 export { ShootingDaySceneSummary } from './children/scheduling/children/shooting-days/children/scenes/model/shooting-day-scene-summary.model';
 
+// tslint:disable-next-line:max-line-length
+export { ShootingDayAvatarComponent } from './children/scheduling/children/shooting-days/component/shooting-day-avatar/shooting-day-avatar.component';
+// tslint:disable-next-line:max-line-length
+export { ShootingDayCardComponent } from './children/scheduling/children/shooting-days/component/shooting-day-card/shooting-day-card.component';
+// tslint:disable-next-line:max-line-length
+export { ShootingDayCrewUnitCardComponent } from './children/scheduling/children/shooting-days/component/shooting-day-crew-unit-card/shooting-day-crew-unit-card.component';
 // tslint:disable-next-line:max-line-length
 export { ShootingDayInfoComponent } from './children/scheduling/children/shooting-days/component/shooting-day-info/shooting-day-info.component';
 // tslint:disable-next-line:max-line-length
@@ -333,14 +343,27 @@ export { ShootingDayInfoScenesComponent } from './children/scheduling/children/s
 export { ShootingDayInfoTableComponent } from './children/scheduling/children/shooting-days/component/shooting-day-info-table/shooting-day-info-table.component';
 // tslint:disable-next-line:max-line-length
 export { ShootingDayInfoScenesTableComponent } from './children/scheduling/children/shooting-days/component/shooting-day-info-scenes-table/shooting-day-info-scenes-table.component';
+// tslint:disable-next-line:max-line-length
+export { ShootingDaysListComponent } from './children/scheduling/children/shooting-days/component/shooting-days-list/shooting-days-list.component';
 
 // tslint:disable-next-line:max-line-length
 export { BaseShootingDay } from './children/scheduling/children/shooting-days/model/base-shooting-day.model';
 // tslint:disable-next-line:max-line-length
+export { FullShootingDay } from './children/scheduling/children/shooting-days/model/full-shooting-day.model';
+// tslint:disable-next-line:max-line-length
+export { ShootingDayCrewUnit } from './children/scheduling/children/shooting-days/model/shooting-day-crew-unit.model';
+// tslint:disable-next-line:max-line-length
 export { ShootingDayInfo } from './children/scheduling/children/shooting-days/model/shooting-day-info.model';
 // tslint:disable-next-line:max-line-length
 export { ShootingDayInfoSceneCollection } from './children/scheduling/children/shooting-days/model/shooting-day-info-scene-collection.model';
+// tslint:disable-next-line:max-line-length
+export { ShootingDaySummary } from './children/scheduling/children/shooting-days/model/shooting-day-summary.model';
 export { ShootingDay } from './children/scheduling/children/shooting-days/model/shooting-day.model';
+
+// tslint:disable-next-line:max-line-length
+export { CompletedShootingDaysResolve } from './children/scheduling/children/shooting-days/service/completed-shooting-days-resolve.service';
+// tslint:disable-next-line:max-line-length
+export { ShootingDayHttpService } from './children/scheduling/children/shooting-days/service/shooting-day-http.service';
 
 // tslint:disable-next-line:max-line-length
 export { SchedulingDashboardComponent } from './children/scheduling/component/scheduling-dashboard/scheduling-dashboard.component';

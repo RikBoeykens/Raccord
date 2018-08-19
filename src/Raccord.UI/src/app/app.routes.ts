@@ -68,6 +68,8 @@ import {
   ScheduleLandingComponent,
   SchedulesListComponent,
   SchedulesResolve,
+  ShootingDaysListComponent,
+  CompletedShootingDaysResolve,
   SchedulingDashboardComponent,
   SchedulingDashboardResolve,
   CharacterLandingComponent,
@@ -475,6 +477,26 @@ export const ROUTES: Routes = [
                 component: SchedulesListComponent,
                 resolve: {
                   schedules: SchedulesResolve
+                }
+              },
+              {
+                path: ':crewUnitId',
+                component: ScheduleLandingComponent,
+                resolve: {
+                  scheduleDays: ScheduleDaysResolve,
+                  crewUnit: CrewUnitSummaryResolve
+                }
+              }
+            ]
+          },
+          {
+            path: RouteSettings.SHOOTINGDAYS,
+            children: [
+              {
+                path: '',
+                component: ShootingDaysListComponent,
+                resolve: {
+                  shootingDays: CompletedShootingDaysResolve
                 }
               },
               {
