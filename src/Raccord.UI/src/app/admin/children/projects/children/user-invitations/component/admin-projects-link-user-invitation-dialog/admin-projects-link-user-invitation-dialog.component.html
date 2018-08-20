@@ -1,0 +1,35 @@
+<h3 mat-dialog-title>Link Existing Invitation</h3>
+<form id="projects-link-user-invitation-form"
+  #projectsLinkUserInvitationForm = "ngForm"
+  (ngSubmit)="submit()">
+  <mat-dialog-content>
+    <div fxLayout="row">
+      <admin-search-entity (onSelect)="onSelect($event)" [entityType]="userInvitationEntityType"></admin-search-entity>
+      <input type="hidden" required [(ngModel)]="selectedUserInvitation.id" name="search-user-invitation-id" />
+    </div>
+    <div fxLayout="row" *ngIf="selectedUserInvitation.id">
+      <mat-chip-list>
+          <mat-chip [removable]="true" (remove)="removeSelectedUserInvitation()">
+            {{selectedUserInvitation.displayName}}
+            <mat-icon matChipRemove>cancel</mat-icon>
+          </mat-chip>
+      </mat-chip-list>
+    </div>
+    <div fxLayout="row">
+      <mat-form-field>
+        <mat-select 
+          mdInput placeholder="Role" 
+          [(ngModel)]="chosenRoleId" 
+          #projectRole="ngModel" 
+          name="user-role">
+          <mat-option [value]="">---</mat-option>
+          <mat-option *ngFor="let projectRole of availableRoles" [value]="projectRole.id">{{projectRole.name}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button mat-button type="submit" [disabled]="!projectsLinkUserInvitationForm.form.valid">Save</button>
+  </mat-dialog-actions>
+</form>

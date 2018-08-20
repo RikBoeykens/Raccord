@@ -1,2 +1,26 @@
-<p>Welcome to Raccord</p>
-<dashboard-calendar></dashboard-calendar>
+<div class="raccord-narrow-container">
+    <div class="raccord-page-header">
+        <h1 class="raccord-header-title">
+            My Dashboard
+        </h1>
+    </div>
+    <mat-card>
+        <mat-card-content>
+            <dashboard-calendar></dashboard-calendar>
+        </mat-card-content>
+    </mat-card>
+    <div class="raccord-sub-header"
+        fxLayout="row">
+        <h2>My Projects</h2>
+        <span class="raccord-action-link-container">
+            <a routerLink="{{getProjectsLink()}}" class="raccord-action-link">more</a>
+        </span>
+    </div>
+    <div fxLayout="row wrap" fxLayoutGap="5px" *ngIf="pagedProjects && pagedProjects.pageInfo">
+        <a routerLink="{{getProjectLink(project)}}"
+            *ngFor="let project of pagedProjects.data">
+            <project-card
+                [project]="project"></project-card>
+        </a>
+    </div>
+</div>

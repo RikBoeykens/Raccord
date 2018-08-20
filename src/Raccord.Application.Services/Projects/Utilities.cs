@@ -9,6 +9,10 @@ using Raccord.Application.Core.Services.Crew.CrewMembers;
 using Raccord.Domain.Model.Users;
 using Raccord.Application.Services.Crew.CrewMembers;
 using Raccord.Application.Services.Characters;
+using Raccord.Application.Services.Users.Projects;
+using Raccord.Application.Services.Users.Invitations.Project;
+using Raccord.Application.Core.Common.Routing;
+using Raccord.Domain.Model.Users.Invitations;
 
 namespace Raccord.Application.Services.Projects
 {
@@ -21,6 +25,32 @@ namespace Raccord.Application.Services.Projects
             {
                 ID = project.ID,
                 Title = project.Title,
+                PrimaryImage = project.Images.FirstOrDefault(i=> i.IsPrimaryImage)?.Translate(),
+            };
+
+            return dto;
+        }
+        public static AdminFullProjectDto TranslateFullAdmin(this Project project, IEnumerable<ProjectUserInvitation> projectInvitations)
+        {
+            var dto = new AdminFullProjectDto
+            {
+                ID = project.ID,
+                Title = project.Title,
+                Users = project.ProjectUsers.Where(pu => !pu.User.IsDummyUser).Select(pu => pu.TranslateUser()),
+                Invitations = projectInvitations.Select(pu => pu.TranslateInvitation()),
+                PrimaryImage = project.Images.FirstOrDefault(i=> i.IsPrimaryImage)?.Translate(),
+            };
+
+            return dto;
+        }
+        public static AdminProjectSummaryDto TranslateAdminSummary(this Project project, int invitationCount)
+        {
+            var dto = new AdminProjectSummaryDto
+            {
+                ID = project.ID,
+                Title = project.Title,
+                UserCount = project.ProjectUsers.Count(),
+                InvitationCount = invitationCount,
                 PrimaryImage = project.Images.FirstOrDefault(i=> i.IsPrimaryImage)?.Translate(),
             };
 
@@ -98,9 +128,12 @@ namespace Raccord.Application.Services.Projects
             var dto = new SearchResultDto
             {
                 ID = project.ID,
-                RouteIDs = new long[]{project.ID},
                 DisplayName = project.Title,
-                Type = EntityType.Project,
+                RouteInfo = new RouteInfoDto
+                {
+                    RouteIDs = new object[]{project.ID},
+                    Type = EntityType.Project,
+                }
             };
 
             return dto;

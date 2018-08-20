@@ -17,20 +17,28 @@ namespace Raccord.Application.Services.Users.Invitations.Project
     {
       _projectUserInvitationRepository = projectUserInvitationRepository;
     }
-    public IEnumerable<ProjectUserInvitationSummaryDto> GetProjects(Guid invitationID)
+    public IEnumerable<ProjectUserInvitationProjectDto> GetProjects(Guid invitationID)
     {
       var projectUsers = _projectUserInvitationRepository.GetAllForInvitation(invitationID);
 
-      var dtos = projectUsers.Select(l => l.Translate());
+      var dtos = projectUsers.Select(l => l.TranslateProject());
+
+      return dtos;
+    }
+    public IEnumerable<ProjectUserInvitationUserInvitationDto> GetInvitations(long projectID)
+    {
+      var projectUsers = _projectUserInvitationRepository.GetAllForProject(projectID);
+
+      var dtos = projectUsers.Select(l => l.TranslateInvitation());
 
       return dtos;
     }
 
-    public FullProjectUserInvitationDto Get(long ID)
+    public AdminFullProjectUserInvitationDto Get(long ID)
     {
       var projectUser = _projectUserInvitationRepository.GetFull(ID);
 
-      var dto = projectUser.TranslateFull();
+      var dto = projectUser.TranslateFullAdmin();
 
       return dto;
     }
@@ -39,7 +47,7 @@ namespace Raccord.Application.Services.Users.Invitations.Project
     {
       var projectUser = _projectUserInvitationRepository.GetSummary(ID);
 
-      var dto = projectUser.Translate();
+      var dto = projectUser.TranslateSummary();
 
       return dto;
     }

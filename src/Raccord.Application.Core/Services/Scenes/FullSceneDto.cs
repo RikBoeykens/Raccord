@@ -5,6 +5,7 @@ using Raccord.Application.Core.Services.Breakdowns.BreakdownItems;
 using Raccord.Application.Core.Services.Shots.Slates;
 using Raccord.Application.Core.Services.ShootingDays;
 using Raccord.Application.Core.Services.Breakdowns;
+using Raccord.Application.Core.Services.Comments;
 
 namespace Raccord.Application.Core.Services.Scenes
 {
@@ -16,6 +17,7 @@ namespace Raccord.Application.Core.Services.Scenes
         private SceneBreakdownDto _breakdownInfo;
         private IEnumerable<ShootingDayInfoDto> _shootingDays;
         private IEnumerable<SlateSummaryDto> _slates;
+        private IEnumerable<CommentDto> _comments;
 
         // Images linked to the scene
         public IEnumerable<LinkedImageDto> Images
@@ -79,6 +81,19 @@ namespace Raccord.Application.Core.Services.Scenes
             set
             {
                 _slates = value;
+            }
+        }
+
+        // Comments linked to the scene
+        public IEnumerable<CommentDto> Comments
+        {
+            get
+            {
+                return _comments ?? (_comments = new List<CommentDto>());
+            }
+            set
+            {
+                _comments = value;
             }
         }
     }

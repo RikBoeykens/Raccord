@@ -8,5 +8,6 @@ export enum ParentCommentType {
     character = 6,
     scriptLocation = 7,
     slate = 8,
-    take = 9
+    take = 9,
+    locationSet = 10
 }

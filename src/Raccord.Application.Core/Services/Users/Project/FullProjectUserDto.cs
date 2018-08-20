@@ -10,11 +10,11 @@ namespace Raccord.Application.Core.Services.Users.Project
 {
     public class FullProjectUserDto
     {
-        private UserDto _user;
+        private UserSummaryDto _user;
         private ProjectDto _project;
-        private CastMemberDto _castMember;
+        protected CastMemberDto _castMember;
         private ProjectRoleDto _role;
-        private IEnumerable<ProjectUserCrewUnitDto> _crewUnits;
+        private IEnumerable<ProjectLinkCrewUnitDto> _crewUnits;
         // ID of the project user
         public long ID { get; set; }
 
@@ -32,11 +32,11 @@ namespace Raccord.Application.Core.Services.Users.Project
         }
 
         // Linked user
-        public UserDto User
+        public UserSummaryDto User
         {
             get
             {
-                return _user ?? (_user = new UserDto());
+                return _user ?? (_user = new UserSummaryDto());
             }
             set
             {
@@ -80,11 +80,11 @@ namespace Raccord.Application.Core.Services.Users.Project
         /// Crew Units of the user
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<ProjectUserCrewUnitDto> CrewUnits
+        public IEnumerable<ProjectLinkCrewUnitDto> CrewUnits
         {
             get
             {
-                return _crewUnits ?? new List<ProjectUserCrewUnitDto>();
+                return _crewUnits ?? new List<ProjectLinkCrewUnitDto>();
             }
             set
             {

@@ -26,6 +26,23 @@ namespace Raccord.API.ViewModels.Users.Invitations.Project
         CrewUnits = dto.CrewUnits.Select(cu => cu.Translate())
       };
     }
+    public static AdminFullProjectUserInvitationViewModel Translate(this AdminFullProjectUserInvitationDto dto)
+    {
+      if(dto == null)
+      {
+        return null;
+      }
+
+      return new AdminFullProjectUserInvitationViewModel
+      {
+        ID = dto.ID,
+        Project = dto.Project.Translate(),
+        UserInvitation = dto.UserInvitation.Translate(),
+        CastMember = dto.CastMember.Translate(),
+        ProjectRole = dto.ProjectRole.Translate(),
+        CrewUnits = dto.CrewUnits.Select(cu => cu.Translate())
+      };
+    }
     public static ProjectUserInvitationSummaryViewModel Translate(this ProjectUserInvitationSummaryDto dto)
     {
       if(dto == null)
@@ -36,7 +53,34 @@ namespace Raccord.API.ViewModels.Users.Invitations.Project
       return new ProjectUserInvitationSummaryViewModel
       {
         ID = dto.ID,
+        ProjectRole = dto.ProjectRole.Translate()
+      };
+    }
+    public static ProjectUserInvitationProjectViewModel Translate(this ProjectUserInvitationProjectDto dto)
+    {
+      if(dto == null)
+      {
+        return null;
+      }
+
+      return new ProjectUserInvitationProjectViewModel
+      {
+        ID = dto.ID,
         Project = dto.Project.Translate(),
+        ProjectRole = dto.ProjectRole.Translate()
+      };
+    }
+    public static ProjectUserInvitationUserInvitationViewModel Translate(this ProjectUserInvitationUserInvitationDto dto)
+    {
+      if(dto == null)
+      {
+        return null;
+      }
+
+      return new ProjectUserInvitationUserInvitationViewModel
+      {
+        ID = dto.ID,
+        UserInvitation = dto.UserInvitation.Translate(),
         ProjectRole = dto.ProjectRole.Translate()
       };
     }

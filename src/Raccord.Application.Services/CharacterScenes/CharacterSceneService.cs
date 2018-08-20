@@ -45,19 +45,23 @@ namespace Raccord.Application.Services.CharacterScenes
             return dtos;
         }
 
-        public void AddLink(long characterID, long sceneID)
+        public long AddLink(long characterID, long sceneID)
         {
             var characterScene = _characterSceneRepository.FindBy(i=> i.CharacterID == characterID && i.SceneID==sceneID);
 
             if(!characterScene.Any()){
-                _characterSceneRepository.Add(new CharacterScene
+                var newCharacterScene = new CharacterScene
                 {
                     CharacterID = characterID,
                     SceneID = sceneID
-                });
+                };
+                _characterSceneRepository.Add(newCharacterScene);
 
                 _characterSceneRepository.Commit();
-            }     
+
+                return newCharacterScene.ID;
+            }
+            return characterScene.FirstOrDefault().ID; 
         }
 
         public void RemoveLink(long ID)

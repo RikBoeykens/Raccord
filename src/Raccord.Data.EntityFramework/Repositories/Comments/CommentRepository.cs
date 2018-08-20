@@ -64,6 +64,10 @@ namespace Raccord.Data.EntityFramework.Repositories.Comments
           {
             return query.Where(c => c.ParentTakeID == parentID);
           }
+          if(parentType == ParentCommentType.LocationSet)
+          {
+            return query.Where(c => c.ParentLocationSetID == parentID);
+          }
 
           return new List<Comment>();
         }
@@ -87,8 +91,7 @@ namespace Raccord.Data.EntityFramework.Repositories.Comments
         {
             IQueryable<Comment> query = _context.Set<Comment>();
 
-            return query.Include(c=> c.User)
-                        .Include(c=> c.Comments);
+            return query.Include(c=> c.User);
         }
     }
 }

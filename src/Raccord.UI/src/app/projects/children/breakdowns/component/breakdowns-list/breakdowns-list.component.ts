@@ -1,98 +1,36 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-import { ProjectSummary } from '../../../../model/project-summary.model';
-import { AccountHelpers } from '../../../../../account/helpers/account.helper';
-import { ProjectPermissionEnum } from
-  '../../../../../shared/children/users/project-roles/enums/project-permission.enum';
-import { BreakdownSummary } from '../../model/breakdown-summary.model';
-import { LoadingWrapperService } from '../../../../../shared/service/loading-wrapper.service';
-import { BreakdownHttpService } from '../../service/breakdown-http.service';
-import { Breakdown } from '../../model/breakdown.model';
+import { ActivatedRoute } from '@angular/router';
+import { BreakdownSummary } from '../../../..';
+import { ProjectSummary } from '../../../../../shared/children/projects';
+import { ProjectHelpers } from '../../../../../shared/children/projects/helpers/project.helpers';
+import { RouteSettings } from '../../../../../shared';
 
 @Component({
-    templateUrl: 'breakdowns-list.component.html',
+  templateUrl: 'breakdowns-list.component.html'
 })
 export class BreakdownsListComponent implements OnInit {
-
+  public breakdowns: BreakdownSummary[];
   public project: ProjectSummary;
-  public breakdowns: BreakdownSummary[] = [];
 
   constructor(
-    private _breakdownService: BreakdownHttpService,
-    private _loadingWrapperService: LoadingWrapperService,
-    private _route: ActivatedRoute,
-    private _router: Router,
-  ) {
-  }
+      private _route: ActivatedRoute
+  ) {}
 
   public ngOnInit() {
-    this._route.data.subscribe((data: {
-      project: ProjectSummary,
-      breakdowns: BreakdownSummary[]
-    }) => {
-      this.project = data.project;
-      this.breakdowns = data.breakdowns;
-    });
+      this._route.data.subscribe((data: {
+        breakdowns: BreakdownSummary[]
+      }) => {
+          this.breakdowns = data.breakdowns;
+      });
+      this.project = ProjectHelpers.getCurrentProject();
   }
 
-  public addBreakdown() {
-    this._loadingWrapperService.Load(
-      this._breakdownService.post(
-        this.project.id,
-        new Breakdown({
-          id: 0,
-          name: `Breakdown by ${AccountHelpers.getName()}`,
-          description: '',
-          projectID: this.project.id
-        })
-      ),
-      () => this.getBreakdowns()
-    );
+  public getBackLink() {
+    return `/${RouteSettings.PROJECTS}/${this.project.id}`;
   }
 
-  public removeBreakdown(breakdown: BreakdownSummary) {
-    this._loadingWrapperService.Load(
-      this._breakdownService.delete(this.project.id, breakdown.id),
-      () => this.getBreakdowns()
-    );
-  }
-
-  public select(breakdown: BreakdownSummary) {
-    this._loadingWrapperService.Load(
-      this._breakdownService.select(this.project.id, breakdown.id),
-      () => this.getBreakdowns()
-    );
-  }
-
-  public togglePublish(breakdown: BreakdownSummary) {
-    this._loadingWrapperService.Load(
-      this._breakdownService.togglePublish(this.project.id, breakdown.id, !breakdown.isPublished),
-      () => this.getBreakdowns()
-    );
-  }
-
-  public setDefault(breakdown: BreakdownSummary) {
-    this._loadingWrapperService.Load(
-      this._breakdownService.setDefault(this.project.id, breakdown.id),
-      () => this.getBreakdowns()
-    );
-  }
-
-  public userCreated(breakdown: BreakdownSummary) {
-    return breakdown.createdBy.id === AccountHelpers.getUserId();
-  }
-
-  public getCanEdit() {
-    return AccountHelpers.hasProjectPermission(
-      this.project.id,
-      ProjectPermissionEnum.canEditGeneral
-    );
-  }
-
-  private getBreakdowns() {
-    this._loadingWrapperService.Load(
-      this._breakdownService.getAll(this.project.id),
-      (data) => this.breakdowns = data
-    );
+  public getBreakdownLink(breakdown: BreakdownSummary) {
+    // tslint:disable-next-line:max-line-length
+    return `/${RouteSettings.PROJECTS}/${this.project.id}/${RouteSettings.BREAKDOWNS}/${breakdown.id}`;
   }
 }

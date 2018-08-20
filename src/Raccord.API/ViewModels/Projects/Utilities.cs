@@ -2,6 +2,8 @@ using System.Linq;
 using Raccord.API.ViewModels.Characters;
 using Raccord.API.ViewModels.Crew.CrewMembers;
 using Raccord.API.ViewModels.Images;
+using Raccord.API.ViewModels.Users.Invitations.Project;
+using Raccord.API.ViewModels.Users.Projects;
 using Raccord.Application.Core.Services.Projects;
 
 namespace Raccord.API.ViewModels.Projects
@@ -18,6 +20,18 @@ namespace Raccord.API.ViewModels.Projects
                 PrimaryImage = dto.PrimaryImage.Translate(),
             };
         }
+        // Translates a project dto to a project viewmodel
+        public static AdminFullProjectViewModel Translate(this AdminFullProjectDto dto)
+        {
+            return new AdminFullProjectViewModel
+            {
+                ID = dto.ID,
+                Title = dto.Title,
+                Users = dto.Users.Select(u => u.Translate()),
+                Invitations = dto.Invitations.Select(u => u.Translate()),
+                PrimaryImage = dto.PrimaryImage.Translate(),
+            };
+        }
         // Translates a project summary dto to a project summary viewmodel
         public static ProjectSummaryViewModel Translate(this ProjectSummaryDto dto)
         {
@@ -25,6 +39,18 @@ namespace Raccord.API.ViewModels.Projects
             {
                 ID = dto.ID,
                 Title = dto.Title,
+                PrimaryImage = dto.PrimaryImage.Translate(),
+            };
+        }
+        // Translates a project summary dto to a project summary viewmodel
+        public static AdminProjectSummaryViewModel Translate(this AdminProjectSummaryDto dto)
+        {
+            return new AdminProjectSummaryViewModel
+            {
+                ID = dto.ID,
+                Title = dto.Title,
+                UserCount = dto.UserCount,
+                InvitationCount = dto.InvitationCount,
                 PrimaryImage = dto.PrimaryImage.Translate(),
             };
         }

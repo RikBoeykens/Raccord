@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Raccord.Application.Core.Services.Characters;
 using Raccord.Application.Core.Services.Profile;
 using Raccord.Application.Core.Services.Scenes;
+using Raccord.Application.Core.Services.ShootingDays;
 
 namespace Raccord.Application.Core.Services.Cast
 {
@@ -10,6 +11,7 @@ namespace Raccord.Application.Core.Services.Cast
   {
     private IEnumerable<CharacterSummaryDto> _characters;
     private IEnumerable<SceneSummaryDto> _scenes;
+    private IEnumerable<ShootingDayInfoSceneCollectionDto> _shootingDays;
 
     /// <summary>
     /// Linked user ID (if applicable)
@@ -48,6 +50,17 @@ namespace Raccord.Application.Core.Services.Cast
       set
       {
         _scenes = value;
+      }
+    }
+    public IEnumerable<ShootingDayInfoSceneCollectionDto> ShootingDays
+    {
+      get
+      {
+        return _shootingDays ?? (_shootingDays = new List<ShootingDayInfoSceneCollectionDto>());
+      }
+      set
+      {
+        _shootingDays = value;
       }
     }
   }

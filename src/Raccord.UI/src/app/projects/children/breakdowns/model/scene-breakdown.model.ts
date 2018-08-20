@@ -1,6 +1,5 @@
 import { Breakdown } from './breakdown.model';
-import { SceneBreakdownItem } from '../children/breakdown-items/model/scene-breakdown-item.model';
-import { BreakdownType } from '../children/breakdown-types/model/breakdown-type.model';
+import { SceneBreakdownItem, BreakdownType } from '../../..';
 
 export class SceneBreakdown extends Breakdown {
   public userID: string;

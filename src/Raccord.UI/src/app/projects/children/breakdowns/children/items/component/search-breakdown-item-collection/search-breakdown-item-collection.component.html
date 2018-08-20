@@ -1,0 +1,21 @@
+<div fxLayout="row" fxLayoutGap="10px">
+    <mat-form-field fxFlex="25%">
+        <mat-select 
+            mdInput placeholder="Breakdown Type" 
+            [(ngModel)]="selectedTypeId" 
+            #breakdownType="ngModel" 
+            name="breakdown-type">
+            <mat-option [value]="">---</mat-option>
+            <mat-option *ngFor="let breakdownType of breakdown.types" [value]="breakdownType.id">{{breakdownType.name}}</mat-option>
+        </mat-select>
+    </mat-form-field>
+    <search-breakdown-item fxFlex="25%" [projectId]="projectId"  (onSelect)="addEntity($event)" [typeId]="selectedTypeId" [breakdownId]="breakdown.id" [excludedItems]="entities"></search-breakdown-item>
+</div>
+<div fxLayout="row" fxLayoutGap="10px">
+    <mat-chip-list fxFlex="100%">
+        <mat-chip color="primary" selected="true" *ngFor="let entity of entities">
+            {{entity.name}}
+            <mat-icon (click)="removeEntity(entity)">cancel</mat-icon>
+        </mat-chip>
+    </mat-chip-list>
+</div>

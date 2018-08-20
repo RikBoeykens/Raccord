@@ -5,9 +5,9 @@ namespace Raccord.Core.Enums
     {
         Project = 0,
         Scene = 1,
-        IntExt = 2,
+        SceneIntro = 2,
         ScriptLocation = 3,
-        DayNight = 4,
+        TimeOfDay = 4,
         Image = 5,
         Character = 6,
         BreakdownItem = 7,
@@ -17,6 +17,8 @@ namespace Raccord.Core.Enums
         CastMember = 11,
         ScheduleDay = 12,
         Callsheet = 13,
-        ShootingDay = 14
+        ShootingDay = 14,
+        User = 15,
+        UserInvitation = 16
     }
 }

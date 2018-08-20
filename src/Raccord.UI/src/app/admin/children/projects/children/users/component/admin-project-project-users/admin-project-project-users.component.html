@@ -1,0 +1,11 @@
+<div class="raccord-sub-header"
+  fxLayout="row">
+  <h2>Users</h2>
+  <button mat-icon-button (click)="showAddUser()"><mat-icon>add</mat-icon></button>
+  <button mat-icon-button (click)="showLinkUser()"><mat-icon>link</mat-icon></button>
+</div>
+<admin-project-project-users-table 
+  [projectUsers]="projectUsers"
+  (showEdit)="showEditProjectUser($event)"
+  (showConfirmRemove)="showConfirmRemoveUser($event)">
+</admin-project-project-users-table>

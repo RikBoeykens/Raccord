@@ -25,7 +25,7 @@ namespace Raccord.Application.Services.Crew.CrewUnits.Members
         }
 
         // Gets all crew units for a project user
-        public IEnumerable<ProjectUserCrewUnitDto> GetCrewUnits(long projectUserID)
+        public IEnumerable<ProjectLinkCrewUnitDto> GetCrewUnits(long projectUserID)
         {
             var crewUnitMembers = _crewUnitMemberRepository.GetAllForProjectUser(projectUserID);
 

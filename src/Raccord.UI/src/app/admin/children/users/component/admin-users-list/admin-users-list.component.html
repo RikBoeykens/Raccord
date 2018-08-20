@@ -1,0 +1,18 @@
+<div class="raccord-narrow-container">
+  <div class="raccord-page-header">
+    <a routerLink="{{getBackLink()}}">
+      <back-link></back-link>
+    </a>
+    <h1 class="raccord-header-title">
+      Users
+    </h1>
+  </div>
+  <admin-users-table 
+    [users]="users">
+  </admin-users-table>
+  <button mat-fab 
+      class="raccord-fab"
+      (click)="showAddUser()">
+    <mat-icon aria-label="New User">add</mat-icon>
+  </button>
+</div>

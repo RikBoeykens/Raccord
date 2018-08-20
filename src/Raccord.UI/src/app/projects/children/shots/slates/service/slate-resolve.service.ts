@@ -1,27 +1,18 @@
-import { Injectable }             from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Router, Resolve, ActivatedRouteSnapshot } from '@angular/router';
 import { SlateHttpService } from './slate-http.service';
-import { FullSlate } from "../model/full-slate.model";
+import { FullSlate } from '../model/full-slate.model';
 
 @Injectable()
 export class SlateResolve implements Resolve<FullSlate> {
 
   constructor(
-      private slateHttpService: SlateHttpService, 
-      private router: Router
+      private slateHttpService: SlateHttpService
   ) {}
 
-  resolve(route: ActivatedRouteSnapshot) {
-    let slateId = route.params['slateId'];
+  public resolve(route: ActivatedRouteSnapshot) {
+    const slateId = route.params['slateId'];
 
-    return this.slateHttpService.get(slateId).then(slate => {
-        if (slate) {
-            return slate;
-        } else { // id not found
-            let projectId = route.params['projectId'];
-            this.router.navigate(['/projects', projectId]);
-            return false;
-        }
-    });
+    return this.slateHttpService.get(slateId).then((data: FullSlate) => data);
   }
 }

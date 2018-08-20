@@ -1,0 +1,27 @@
+<div class="raccord-narrow-container">
+  <div class="raccord-page-header">
+    <a routerLink="{{getBackLink()}}">
+      <back-link></back-link>
+    </a>
+    <h1 class="raccord-header-title">
+      Scenes
+    </h1>
+  </div>
+  <div class="raccord-sub-header"
+    fxLayout="row">
+    <h3>Filter Scenes</h3>
+    <span class="raccord-action-link-container">
+        <a (click)="doShowFilter()" *ngIf="!showFilter" class="raccord-action-link">show</a>
+        <a (click)="doHideFilter()" *ngIf="showFilter" class="raccord-action-link">hide</a>
+    </span>
+  </div>
+  <mat-card *ngIf="showFilter">
+    <filter-scenes [sceneFilter]="sceneFilterRequest" [breakdown]="selectedBreakdown" [projectId]="project.id" (filterScenes)="filterScenes()"></filter-scenes>
+  </mat-card>
+  <scenes-table [scenes]="pagedScenes.data" [projectId]="project.id"></scenes-table>
+  <div fxLayout="row">
+    <more-action *ngIf="pagedScenes.pageInfo.total > pagedScenes.pageInfo.page * pagedScenes.pageInfo.pageSize"
+      (click)="getMoreScenes()">
+    </more-action>
+  </div>
+</div>

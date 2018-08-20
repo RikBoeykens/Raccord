@@ -13,6 +13,8 @@ using Raccord.Domain.Model.Crew.Departments;
 using Raccord.Data.EntityFramework.Repositories.Users;
 using Raccord.Application.Services.Crew.CrewMembers;
 using Raccord.Domain.Model.Crew.CrewUnits;
+using Raccord.Application.Core.Common.Paging;
+using Raccord.Data.EntityFramework.Repositories.Users.Invitations.Projects;
 
 namespace Raccord.Application.Services.Projects
 {
@@ -20,6 +22,7 @@ namespace Raccord.Application.Services.Projects
     public class ProjectService : IProjectService
     {
         private readonly IProjectRepository _projectRepository;
+        private readonly IProjectUserInvitationRepository _projectUserInvitationRepository;
         private readonly IBreakdownTypeDefinitionRepository _breakdownTypeDefinitionRepository;
         private readonly ICallTypeDefinitionRepository _callTypeDefinitionRepository;
         private readonly ICrewDepartmentDefinitionRepository _crewDepartmentDefinitionRepository;
@@ -28,6 +31,7 @@ namespace Raccord.Application.Services.Projects
         // Initialises a new ProjectService
         public ProjectService(
             IProjectRepository projectRepository,
+            IProjectUserInvitationRepository projectUserInvitationRepository,
             IBreakdownTypeDefinitionRepository breakdownTypeDefinitionRepository,
             ICallTypeDefinitionRepository callTypeDefinitionRepository,
             ICrewDepartmentDefinitionRepository crewDepartmentDefinitionRepository,
@@ -36,6 +40,8 @@ namespace Raccord.Application.Services.Projects
         {
             if(projectRepository == null)
                 throw new ArgumentNullException(nameof(projectRepository));
+            if(projectUserInvitationRepository == null)
+                throw new ArgumentNullException(nameof(projectUserInvitationRepository));
             if(breakdownTypeDefinitionRepository == null)
                 throw new ArgumentNullException(nameof(breakdownTypeDefinitionRepository));
             if(callTypeDefinitionRepository == null)
@@ -44,18 +50,22 @@ namespace Raccord.Application.Services.Projects
                 throw new ArgumentNullException(nameof(crewDepartmentDefinitionRepository));
             
             _projectRepository = projectRepository;
+            _projectUserInvitationRepository = projectUserInvitationRepository;
             _breakdownTypeDefinitionRepository = breakdownTypeDefinitionRepository;
             _callTypeDefinitionRepository = callTypeDefinitionRepository;
             _crewDepartmentDefinitionRepository = crewDepartmentDefinitionRepository;
             _userRepository = userRepository;
         }
 
-        // Gets all projects
-        public IEnumerable<ProjectSummaryDto> GetAll()
+        // Gets all projects paged
+        public PagedDataDto<AdminProjectSummaryDto> GetAdminPaged(PaginationRequestDto requestDto)
         {
             var projects = _projectRepository.GetAll();
-
-            var projectDtos = projects.Select(p => p.TranslateSummary());
+            
+            var projectDtos = projects.GetPaged<Project, AdminProjectSummaryDto>(requestDto, p => {
+                var invitationCount = _projectUserInvitationRepository.GetCountForProject(p.ID);
+                return p.TranslateAdminSummary(invitationCount);
+            });
 
             return projectDtos;
         }
@@ -69,6 +79,15 @@ namespace Raccord.Application.Services.Projects
             var projectDtos = projects.Select(p => p.TranslateUserSummary(user));
 
             return projectDtos;
+        }
+
+        public PagedDataDto<UserProjectDto> GetAllForUserPaged(string userId, PaginationRequestDto paginationRequest)
+        {
+            var projects = _projectRepository.GetAllForUser(userId);
+
+            var user = _userRepository.GetFull(userId);
+
+            return projects.GetPaged<Project, UserProjectDto>(paginationRequest, x => Utilities.TranslateUser(x, user));
         }
 
         public IEnumerable<UserProjectDto> GetFullForUser(string userId)
@@ -88,6 +107,18 @@ namespace Raccord.Application.Services.Projects
             var project = _projectRepository.GetFull(ID);
 
             var projectDto = project.TranslateFull();
+
+            return projectDto;
+        }
+
+        // Gets a single project by id
+        public AdminFullProjectDto GetForAdmin(long ID)
+        {
+            var project = _projectRepository.GetFullAdmin(ID);
+
+            var invitations = _projectUserInvitationRepository.GetAllForProject(ID);
+
+            var projectDto = project.TranslateFullAdmin(invitations);
 
             return projectDto;
         }

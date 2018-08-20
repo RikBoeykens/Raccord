@@ -30,7 +30,7 @@ namespace Raccord.Application.Services.Crew.CrewMembers
 
         public SearchTypeResultDto GetResults(SearchRequestDto request)
         {
-            var excludeIds = request.GetExcludeIDs(_type);
+            var excludeIds = request.GetExcludeLongIDs(_type);
             var crewCount = _crewMemberRepository.SearchCount(request.SearchText, request.ProjectID, request.UserID, request.IsAdminSearch, excludeIds);
             var crewMembers = _crewMemberRepository.Search(request.SearchText, request.ProjectID, request.UserID, request.IsAdminSearch, excludeIds);
 

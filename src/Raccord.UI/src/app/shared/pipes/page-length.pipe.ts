@@ -1,9 +1,9 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { PageLengthHelpers } from '../helpers/page-length.helpers';
 
-@Pipe({name: 'pagelength'})
+@Pipe({name: 'myPagelength'})
 export class PageLengthPipe implements PipeTransform {
-  transform(value: number): string {
+  public transform(value: number): string {
     return PageLengthHelpers.getPageLengthString(value);
   }
 }

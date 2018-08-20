@@ -5,6 +5,10 @@ using Raccord.Domain.Model.ScriptLocations;
 using Raccord.Application.Core.Services.ScriptLocations;
 using Raccord.Data.EntityFramework.Repositories.ScriptLocations;
 using Raccord.Domain.Model.Images;
+using Raccord.Application.Core.Common.Paging;
+using Raccord.Data.EntityFramework.Repositories.Comments;
+using Raccord.Core.Enums;
+using Raccord.Application.Core.Services.Comments;
 
 namespace Raccord.Application.Services.ScriptLocations
 {
@@ -12,14 +16,16 @@ namespace Raccord.Application.Services.ScriptLocations
     public class ScriptLocationService : IScriptLocationService
     {
         private readonly IScriptLocationRepository _scriptLocationRepository;
+        private readonly ICommentService _commentService;
 
         // Initialises a new LocationService
-        public ScriptLocationService(IScriptLocationRepository locationRepository)
+        public ScriptLocationService(
+            IScriptLocationRepository locationRepository,
+            ICommentService commentService
+            )
         {
-            if(locationRepository == null)
-                throw new ArgumentNullException(nameof(locationRepository));
-            
             _scriptLocationRepository = locationRepository;
+            _commentService = commentService;
         }
 
         // Gets all locations
@@ -32,12 +38,19 @@ namespace Raccord.Application.Services.ScriptLocations
             return dtos;
         }
 
+        public PagedDataDto<ScriptLocationSummaryDto> GetPagedForProject(PaginationRequestDto paginationRequest,long projectId)
+        {
+            var locations = _scriptLocationRepository.GetAllForProject(projectId);
+            return locations.GetPaged<ScriptLocation, ScriptLocationSummaryDto>(paginationRequest, x => x.TranslateSummary());
+        }
+
         // Gets a single location by id
         public FullScriptLocationDto Get(long ID)
         {
             var location = _scriptLocationRepository.GetFull(ID);
 
-            var dto = location.TranslateFull();
+            var comments = _commentService.GetForParent(new GetCommentDto{ ParentID = location.ID, ParentType = ParentCommentType.ScriptLocation}).ToList();
+            var dto = location.TranslateFull(comments);
 
             return dto;
         }

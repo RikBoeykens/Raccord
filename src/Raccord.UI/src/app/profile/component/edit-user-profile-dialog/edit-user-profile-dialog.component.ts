@@ -1,26 +1,25 @@
 import { Component, Inject } from '@angular/core';
-import { MD_DIALOG_DATA, MdDialogRef } from '@angular/material';
-import { UserProfile } from '../../model/user-profile.model';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { UserProfile } from '../../../shared/children/users';
 
 @Component({
-    selector: 'edit-user-profile-dialog',
-    templateUrl: 'edit-user-profile-dialog.component.html',
+  selector: 'edit-user-profile-dialog',
+  templateUrl: 'edit-user-profile-dialog.component.html',
 })
 
-export class EditUserProfileDialog {
+export class EditUserProfileDialogComponent {
+  public userProfile: UserProfile;
 
-    public userProfile: UserProfile;
-
-    constructor(
-        private _dialogRef: MdDialogRef<EditUserProfileDialog>,
-        @Inject(MD_DIALOG_DATA) private data: {
-            userProfile: UserProfile
-        }
-    ) {
-        this.userProfile = data.userProfile;
+  constructor(
+    private _dialogRef: MatDialogRef<EditUserProfileDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) private data: {
+        userProfile: UserProfile
     }
+  ) {
+    this.userProfile = data.userProfile;
+  }
 
-    public submit() {
-        this._dialogRef.close(this.userProfile);
-    }
+  public submit() {
+    this._dialogRef.close({userProfile: this.userProfile});
+  }
 }

@@ -15,13 +15,19 @@ using Raccord.Application.Services.Scheduling.ScheduleDays;
 using Raccord.Domain.Model.Callsheets.Scenes;
 using Raccord.Application.Services.Profile;
 using Raccord.Application.Services.Cast;
+using Raccord.Application.Core.Common.Routing;
+using Raccord.Domain.Model.Comments;
+using Raccord.Application.Core.Services.ShootingDays;
+using Raccord.Domain.Model.ShootingDays;
+using Raccord.Application.Services.ShootingDays;
+using Raccord.Application.Core.Services.Comments;
 
 namespace Raccord.Application.Services.Characters
 {
     // Utilities and helper methods for Characters
     public static class Utilities
     {
-        public static FullCharacterDto TranslateFull(this Character character)
+        public static FullCharacterDto TranslateFull(this Character character, IEnumerable<CommentDto> comments, IEnumerable<ShootingDay> shootingDays)
         {
             var dto = new FullCharacterDto
             {
@@ -31,8 +37,9 @@ namespace Raccord.Application.Services.Characters
                 Description = character.Description,
                 Images = character.ImageCharacters.Select(i=> i.TranslateImage()),
                 Scenes = character.CharacterScenes.OrderBy(s=> s.Scene.Number).Select(s=> s.TranslateScene()),
-                ScheduleDays = character.GetCharacterScheduleDays(),
+                ShootingDays = shootingDays.GetCharacterShootingDays(new long[]{ character.ID }),
                 CastMember = character.CastMember.TranslateSummary(),
+                Comments = comments,
                 ProjectID = character.ProjectID,
             };
 
@@ -105,10 +112,13 @@ namespace Raccord.Application.Services.Characters
             var dto = new SearchResultDto
             {
                 ID = character.ID,
-                RouteIDs = new long[]{character.ProjectID, character.ID},
                 DisplayName = character.Name,
                 Info = $"Project: {character.Project.Title}",
-                Type = EntityType.Character,
+                RouteInfo = new RouteInfoDto
+                {
+                    RouteIDs = new object[]{character.ProjectID, character.ID},
+                    Type = EntityType.Character,
+                }
             };
 
             return dto;

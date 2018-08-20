@@ -1,20 +1,20 @@
-import { BaseModel } from '../../../../../shared/model/base.model';
-import { Scene } from "../../../scenes/model/scene.model";
-import { ShootingDay } from "../../../shooting-days/index";
+import { BaseModel } from '../../../../../shared';
+import { Scene } from '../../../../../shared/children/scenes';
+import { ShootingDay } from '../../../..';
 
-export class Slate extends BaseModel{
-    id: number;
-    number: string;
-    description: string;
-    lens: string;
-    distance: string;
-    aperture: string;
-    filters: string;
-    sound: string;
-    isVfx: boolean;
-    projectID: number;
-    scene? : Scene;
-    shootingDay?: ShootingDay;
+export class Slate extends BaseModel {
+    public id: number;
+    public number: string;
+    public description: string;
+    public lens: string;
+    public distance: string;
+    public aperture: string;
+    public filters: string;
+    public sound: string;
+    public isVfx: boolean;
+    public projectID: number;
+    public scene?: Scene;
+    public shootingDay?: ShootingDay;
 
     constructor(obj?: {
                         id: number,
@@ -29,9 +29,9 @@ export class Slate extends BaseModel{
                         projectID: number,
                         scene?: Scene,
                         shootingDay?: ShootingDay
-                    }){
+                    }) {
         super();
-        if(obj){
+        if (obj) {
             this.id = obj.id;
             this.number = obj.number;
             this.description = obj.description;
@@ -44,13 +44,12 @@ export class Slate extends BaseModel{
             this.projectID = obj.projectID;
             this.scene = obj.scene;
             this.shootingDay = obj.shootingDay;
-        }
-        else{
+        } else {
             this.id = 0;
         }
     }
 
-    getNumber(): string{
-        return this.number ? this.number : "..."; 
+    public getNumber(): string {
+        return this.number ? this.number : '...';
     }
 }

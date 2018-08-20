@@ -1,0 +1,20 @@
+<mat-nav-list>
+  <a mat-list-item routerLink="/">My Dashboard</a>
+  <a mat-list-item routerLink="{{getProfileLink()}}">My Profile</a>
+  <a mat-list-item routerLink="{{getAdminLink()}}" *ngIf="isAdmin()">Admin</a>
+  <mat-divider *ngIf="currentProject"></mat-divider>
+  <a mat-list-item 
+    routerLink="{{getProjectLink(currentProject)}}"
+    *ngIf="currentProject">
+    <project-avatar [listAvatar]="true" [project]="currentProject"></project-avatar>
+    &nbsp;
+    {{currentProject.title}}
+  </a>
+  <a mat-list-item routerLink="{{getScriptLink()}}" *ngIf="currentProject">Script</a>
+  <a mat-list-item routerLink="{{getBreakdownLink()}}" *ngIf="currentProject">Breakdown</a>
+  <a mat-list-item routerLink="{{getLocationLink()}}" *ngIf="currentProject">Locations</a>
+  <a mat-list-item routerLink="{{getSlatesLink()}}" *ngIf="currentProject">Slates</a>
+  <a mat-list-item routerLink="{{getSchedulingLink()}}" *ngIf="currentProject">Scheduling</a>
+  <a mat-list-item routerLink="{{getCastLink()}}" *ngIf="currentProject">Cast</a>
+  <a mat-list-item routerLink="{{getCrewLink()}}" *ngIf="currentProject">Crew</a>
+</mat-nav-list>

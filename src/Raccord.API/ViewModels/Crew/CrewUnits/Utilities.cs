@@ -68,14 +68,14 @@ namespace Raccord.API.ViewModels.Crew.CrewUnits
         ProjectID = dto.ProjectID
       };
     }
-    public static ProjectUserCrewUnitViewModel Translate(this ProjectUserCrewUnitDto dto)
+    public static ProjectLinkCrewUnitViewModel Translate(this ProjectLinkCrewUnitDto dto)
     {
       if(dto == null)
       {
         return null;
       }
 
-      return new ProjectUserCrewUnitViewModel
+      return new ProjectLinkCrewUnitViewModel
       {
         ID = dto.ID,
         Name = dto.Name,

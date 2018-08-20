@@ -1,0 +1,47 @@
+<div class="raccord-narrow-container">
+  <div class="raccord-page-header">
+    <h1 class="raccord-header-title">
+      Admin
+    </h1>
+  </div>
+  <div class="raccord-sub-header"
+      fxLayout="row">
+      <h2>Projects</h2>
+      <span class="raccord-acton-link-container">
+          <a routerLink="{{getProjectsLink()}}" class="raccord-action-link">more</a>
+      </span>
+  </div>
+  <div fxLayout="row wrap" fxLayoutGap="5px" *ngIf="projects && projects.pageInfo">
+    <a routerLink="{{getProjectLink(project)}}"
+      *ngFor="let project of projects.data">
+      <generic-card
+        [image]="project.primaryImage" [title]="project.title"></generic-card>
+    </a>
+  </div>
+  <div class="raccord-sub-header"
+      fxLayout="row">
+      <h2>Users</h2>
+      <span class="raccord-acton-link-container">
+          <a routerLink="{{getUsersLink()}}" class="raccord-action-link">more</a>
+      </span>
+  </div>
+  <div fxLayout="row wrap" fxLayoutGap="5px" *ngIf="users && users.pageInfo">
+    <a routerLink="{{getUserLink(user)}}"
+      *ngFor="let user of users.data">
+      <admin-user-card [user]="user"></admin-user-card>
+    </a>
+  </div>
+  <div class="raccord-sub-header"
+      fxLayout="row">
+      <h2>Invitations</h2>
+      <span class="raccord-acton-link-container">
+          <a routerLink="{{getUserInvitationsLink()}}" class="raccord-action-link">more</a>
+      </span>
+  </div>
+  <div fxLayout="row wrap" fxLayoutGap="5px" *ngIf="invitations && invitations.pageInfo">
+    <a routerLink="{{getUserInvitationLink(invitation)}}"
+      *ngFor="let invitation of invitations.data">
+      <admin-user-invitation-card [userInvitation]="invitation"></admin-user-invitation-card>
+    </a>
+  </div>
+</div>

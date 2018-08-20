@@ -1,6 +1,9 @@
 using System.Linq;
+using Raccord.API.ViewModels.Images;
 using Raccord.API.ViewModels.Locations.LocationSets;
+using Raccord.API.ViewModels.SceneProperties;
 using Raccord.API.ViewModels.Scenes;
+using Raccord.API.ViewModels.ScriptLocations;
 using Raccord.Application.Core.Services.ShootingDays.Scenes;
 
 namespace Raccord.API.ViewModels.ShootingDays.Scenes
@@ -76,6 +79,24 @@ namespace Raccord.API.ViewModels.ShootingDays.Scenes
                 Timings = dto.Timings,
                 Completion = dto.Completion,
                 CallsheetSceneID = dto.CallsheetSceneID
+            };
+        }
+        public static ShootingDaySceneSummaryViewModel Translate(this ShootingDaySceneSummaryDto dto)
+        {
+            return new ShootingDaySceneSummaryViewModel
+            {
+                ID = dto.ID,
+                Number = dto.Number,
+                Summary = dto.Summary,
+                PageLength = dto.PageLength,
+                Timing = dto.Timing,
+                SceneIntro = dto.SceneIntro.Translate(),
+                ScriptLocation = dto.ScriptLocation.Translate(),
+                TimeOfDay = dto.TimeOfDay.Translate(),
+                PrimaryImage = dto.PrimaryImage.Translate(),
+                ProjectID = dto.ProjectID,
+                LinkID = dto.LinkID,
+                ScheduledPageLength = dto.ScheduledPageLength
             };
         }
     }

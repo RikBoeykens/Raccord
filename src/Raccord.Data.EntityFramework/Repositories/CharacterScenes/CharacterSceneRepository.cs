@@ -40,14 +40,14 @@ namespace Raccord.Data.EntityFramework.Repositories.CharacterScenes
             IQueryable<CharacterScene> query = _context.Set<CharacterScene>();
 
             return query.Include(cs=> cs.Scene)
-                        .ThenInclude(s=> s.IntExt)
+                            .ThenInclude(s=> s.SceneIntro)
                         .Include(cs=> cs.Scene)
-                        .ThenInclude(s=> s.DayNight)
+                            .ThenInclude(s=> s.TimeOfDay)
                         .Include(cs=> cs.Scene)
-                        .ThenInclude(s=> s.ScriptLocation)
+                            .ThenInclude(s=> s.ScriptLocation)
                         .Include(cs=> cs.Scene)
-                        .ThenInclude(s=> s.ImageScenes)
-                        .ThenInclude(i=> i.Image);
+                            .ThenInclude(s=> s.ImageScenes)
+                                .ThenInclude(i=> i.Image);
         }
     }
 }

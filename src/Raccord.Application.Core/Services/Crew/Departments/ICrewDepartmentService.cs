@@ -6,5 +6,6 @@ namespace Raccord.Application.Core.Services.Crew.Departments
     public interface ICrewDepartmentService
     {
         IEnumerable<FullCrewDepartmentDto> GetAllForUnit(long unitID);
+        IEnumerable<CrewDepartmentDto> GetSummariesForUnit(long unitID);
     }
 }

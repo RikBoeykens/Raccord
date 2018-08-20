@@ -1,12 +1,10 @@
-import { PageRequest } from "../model/page-request.model";
+import { PageRequest } from '../model/page-request.model';
 
 export class PageRequestHelpers {
-  // for requesting secure data using json
-  public static ConstructParams(request: PageRequest):string {
+  public static ConstructParams(request: PageRequest): string {
       if (request === null || request.full) {
         return '';
       }
-
       return `pageSize=${request.pageSize}&page=${request.page}&full=${request.full}`;
   }
 }

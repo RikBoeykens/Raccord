@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Authorization;
 using System.Threading.Tasks;
 using Raccord.Application.Core.Services.Users.Invitations;
 using Raccord.API.ViewModels.Users.Invitations;
+using Raccord.Application.Core.Common.Paging;
 
 namespace Raccord.API.Controllers.Admin
 {
@@ -23,11 +24,11 @@ namespace Raccord.API.Controllers.Admin
 
         // GET: api/admin/users
         [HttpGet]
-        public IEnumerable<UserInvitationSummaryViewModel> Get()
+        public IEnumerable<AdminUserInvitationSummaryViewModel> Get()
         {
-            var dtos = _userInvitationService.GetAll();
+            var pagedDtos = _userInvitationService.GetAdminPaged(new PaginationRequestDto{ Full = true });
 
-            return dtos.Select(p => p.Translate());
+            return pagedDtos.Data.Select(p => p.Translate());
         }
         // GET api/admin/users/5
         [HttpGet("{id}")]

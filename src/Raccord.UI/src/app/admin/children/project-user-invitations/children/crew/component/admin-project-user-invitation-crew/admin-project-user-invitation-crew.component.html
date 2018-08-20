@@ -1,0 +1,24 @@
+<div class="raccord-sub-header"
+  fxLayout="row">
+  <h2>Crew</h2>
+  <button mat-icon-button (click)="initShowAddCrewUnit()"><mat-icon>link</mat-icon></button>
+</div>
+
+<div fxLayout="row wrap" fxLayoutGap="5px">
+  <mat-card class="admin-crew-unit-card"
+    *ngFor="let crewUnit of crewUnits">
+    <mat-card-header>
+      <mat-card-title>{{crewUnit.name}}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-chip-list>
+        <mat-chip *ngFor="let crewMember of crewUnit.crewMembers">
+          {{crewMember.department.name}} - {{crewMember.jobTitle}}
+        </mat-chip>
+      </mat-chip-list>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-icon-button (click)="initShowAddCrewMember(crewUnit)"><mat-icon>add</mat-icon></button>
+    </mat-card-actions>
+  </mat-card>
+</div>

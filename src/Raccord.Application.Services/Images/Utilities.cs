@@ -9,13 +9,16 @@ using Raccord.Core.Enums;
 using Raccord.Application.Services.Characters;
 using Raccord.Application.Services.Breakdowns.BreakdownItems;
 using Raccord.Application.Services.Shots.Slates;
+using Raccord.Application.Core.Common.Routing;
+using Raccord.Domain.Model.Comments;
+using System.Collections.Generic;
 
 namespace Raccord.Application.Services.Images
 {
     // Utilities and helper methods for Locations
     public static class Utilities
     {
-        public static FullImageDto TranslateFull(this Image image)
+        public static FullImageDto TranslateFull(this Image image, IEnumerable<Comment> comments)
         {
             var dto = new FullImageDto
             {
@@ -148,10 +151,13 @@ namespace Raccord.Application.Services.Images
             var dto = new SearchResultDto
             {
                 ID = image.ID,
-                RouteIDs = new long[]{image.ProjectID, image.ID},
                 DisplayName = image.Title,
                 Info = $"Project: {image.Project.Title}",
-                Type = EntityType.Image,
+                RouteInfo = new RouteInfoDto
+                {
+                    RouteIDs = new object[]{image.ProjectID, image.ID},
+                    Type = EntityType.Image,
+                }
             };
 
             return dto;

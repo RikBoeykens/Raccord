@@ -1,0 +1,5 @@
+<mat-card class="generic-card">
+    <crew-unit-avatar [cardImage]="'mat-card-image'" [crewUnit]="schedule.crewUnit"></crew-unit-avatar>
+    <mat-card-title>{{schedule.startDate | date }} - {{schedule.endDate | date }}</mat-card-title>
+    <mat-card-content>{{schedule.crewUnit.name}}</mat-card-content>
+</mat-card>

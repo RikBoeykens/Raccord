@@ -1,0 +1,27 @@
+<h3 mat-dialog-title>Choose Cast Member</h3>
+<form id="choose-cast-member-form"
+  #chooseCastMemberForm = "ngForm"
+  (ngSubmit)="submit()">
+  <mat-dialog-content>
+    <div fxLayout="row">
+      <admin-search-entity
+        (onSelect)="onSelect($event)"
+        [entityType]="castMemberEntityType"
+        [projectId]="projectId">
+      </admin-search-entity>
+      <input type="hidden" required [(ngModel)]="selectedCastMember.id" name="search-cast-member-id" />
+    </div>
+    <div fxLayout="row" *ngIf="selectedCastMember.id">
+      <mat-chip-list>
+          <mat-chip [removable]="true" (remove)="removeSelectedCastMember()">
+            {{selectedCastMember.displayName}}
+            <mat-icon matChipRemove>cancel</mat-icon>
+          </mat-chip>
+      </mat-chip-list>
+    </div>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button mat-button type="submit" [disabled]="!chooseCastMemberForm.form.valid">Save</button>
+  </mat-dialog-actions>
+</form>

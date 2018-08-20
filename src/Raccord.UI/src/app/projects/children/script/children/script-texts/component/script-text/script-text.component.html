@@ -1,0 +1,9 @@
+<div class="script-text">
+    <div *ngFor="let sceneText of sceneTexts">
+        <scene-header [scene]="sceneText.scene" [projectId]="projectId"></scene-header>
+        <div *ngFor="let sceneComponent of getSceneComponents(sceneText)">
+          <scene-action [sceneAction]="sceneComponent" *ngIf="sceneComponent.type==='action'"></scene-action>
+          <scene-dialogue [sceneDialogue]="sceneComponent" [projectId]="projectId" *ngIf="sceneComponent.type==='dialogue'"></scene-dialogue>
+        </div>
+      </div>
+</div>

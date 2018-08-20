@@ -39,6 +39,8 @@ namespace Raccord.Domain.Model.Users
 
         public string ImageName { get; set; }
 
+        public bool IsDummyUser { get; set; }
+
         // Projects associated with the user
         public virtual ICollection<ProjectUser> ProjectUsers
         {

@@ -4,6 +4,7 @@ using Raccord.Application.Core.Services.ScriptLocations;
 using Raccord.Application.Core.Services.Characters;
 using Raccord.Application.Core.Services.Breakdowns.BreakdownItems;
 using Raccord.Application.Core.Services.Shots.Slates;
+using Raccord.Application.Core.Services.Comments;
 
 namespace Raccord.Application.Core.Services.Images
 {
@@ -15,6 +16,7 @@ namespace Raccord.Application.Core.Services.Images
         private IEnumerable<LinkedCharacterDto> _characters;
         private IEnumerable<LinkedBreakdownItemDto> _items;
         private IEnumerable<LinkedSlateDto> _slates;
+        private IEnumerable<CommentDto> _comments;
         
         // Indicates if the image is primary image for the project
         public bool IsPrimaryImage { get; set; }
@@ -81,6 +83,19 @@ namespace Raccord.Application.Core.Services.Images
             set
             {
                 _slates = value;
+            }
+        }
+
+        // Comments linked to the breakdown item
+        public IEnumerable<CommentDto> Comments
+        {
+            get
+            {
+                return _comments ?? (_comments = new List<CommentDto>());
+            }
+            set
+            {
+                _comments = value;
             }
         }
     }

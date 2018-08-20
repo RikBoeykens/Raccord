@@ -1,4 +1,4 @@
-import { Injectable }             from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Router, Resolve, ActivatedRouteSnapshot } from '@angular/router';
 import { BreakdownHttpService } from './breakdown-http.service';
 import { SelectedBreakdown } from '../model/selected-breakdown.model';
@@ -6,17 +6,12 @@ import { SelectedBreakdown } from '../model/selected-breakdown.model';
 export class SelectedBreakdownResolve implements Resolve<SelectedBreakdown> {
 
   constructor(
-      private breakdownHttpService: BreakdownHttpService,
-      private router: Router
+      private breakdownHttpService: BreakdownHttpService
   ) {}
 
   public resolve(route: ActivatedRouteSnapshot) {
-    let projectId = route.params['projectId'];
+    const id = route.params['projectId'];
 
-    return this.breakdownHttpService.getSelected(projectId).then((breakdown) => {
-        if (breakdown) {
-            return breakdown;
-        }
-    });
+    return this.breakdownHttpService.getSelected(id).then((data: SelectedBreakdown) => data);
   }
 }

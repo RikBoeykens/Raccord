@@ -7,17 +7,11 @@
       "Microsoft": "Information"
     }
   },
-  "DbContextSettings" :{
-    "ConnectionString" : "User ID=postgres;Password=Yqzu&çè!;Host=localhost;Port=5432;Database=RaccordApp;Pooling=true;"
-  },
   "MailSettings":{
     "Uri": "https://api.mailgun.net/v3",
     "Domain": "sandbox111d908cf0a443a99961128cf663170c.mailgun.org",
     "ApiKey": "key-6ed07414f84158e8830f7d7e3c43ff20",
     "DefaultEmail": "rikboeykens@gmail.com"
-  },
-  "UISettings":{
-    "Uri": "http://localhost:3000"
   },
   "GeocodingSettings":{
     "Uri": "https://maps.googleapis.com/maps/api/geocode/json",

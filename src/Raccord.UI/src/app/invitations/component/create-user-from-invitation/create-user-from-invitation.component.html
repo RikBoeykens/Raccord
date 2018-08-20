@@ -1,30 +1,28 @@
-<md-card *ngIf="canCreate">
-    <form id="register-form" class="col offset-s2 s8"
-          #registerForm = "ngForm"
+<div class="external-screen-container">
+    <h1>Register</h1>
+    <form id="invitation-form"
+          #invitationForm = "ngForm"
           (ngSubmit)="createUser()">
-        <div fxLayout="row">
-            <md-input-container fxFlex="50%">
-                <input mdInput placeholder="First Name" id="register_firstname" required [(ngModel)]="request.firstName" #firstname="ngModel" name="register_firstname">
-            </md-input-container>
-            <md-input-container fxFlex="50%">
-                <input mdInput placeholder="Last Name" id="register_lastname" required [(ngModel)]="request.lastName" #lastname="ngModel" name="register_lastname">
-            </md-input-container>
+        <div fxLayout="row" fxLayoutGap="10px">
+            <mat-form-field fxFlex="50%">
+                <input matInput placeholder="First Name" id="request_firstname" required [(ngModel)]="request.firstName" #firstName="ngModel" name="request_firstname">
+            </mat-form-field>
+            <mat-form-field fxFlex="50%">
+                <input matInput placeholder="Last Name" id="request_lastname" required [(ngModel)]="request.lastName" #lastname="ngModel" name="request_lastname">
+            </mat-form-field>
         </div>
         <div fxLayout="row">
-            <md-input-container fxFlex="50%">
-                <input mdInput type="password" placeholder="Password" id="register_password" required [(ngModel)]="request.password" #password="ngModel" name="register_password">
-            </md-input-container>
+            <mat-form-field fxFlex="50%">
+                <input matInput type="password" placeholder="Password" id="request_password" required [(ngModel)]="request.password" #password="ngModel" name="request_password">
+            </mat-form-field>
         </div>
         <div fxLayout="row">
-            <md-input-container fxFlex="50%">
-                <input mdInput type="password" placeholder="Confirm" required [(ngModel)]="confirmpassword" name="confirm_password">
-            </md-input-container>
+            <mat-form-field fxFlex="50%">
+                <input matInput type="password" placeholder="Confirm" id="confirm_password" required [(ngModel)]="confirmPassword" #confirmpassword="ngModel" name="confirm_password">
+            </mat-form-field>
         </div>
         <div fxLayout="row">
-            <button md-raised-button type="submit" [disabled]="!registerForm.form.valid||!passwordIsValid()||!passwordsdMatch()">Register</button>
+            <button mat-raised-button type="submit" [disabled]="!invitationForm.form.valid||!passwordIsValid()||!passwordsdMatch()">Register</button>
         </div>
     </form>
-</md-card>
-<md-card *ngIf="!canCreate">
-    <h2>This user has already been created</h2>
-</md-card>
+</div>

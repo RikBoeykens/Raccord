@@ -1,18 +1,19 @@
-import { Component, Input } from '@angular/core';
-import { OnInit } from '@angular/core/src/metadata/lifecycle_hooks';
+import { Component, Input, OnInit, OnChanges } from '@angular/core';
+import { ColourHelpers } from '../../helpers/colour.helpers';
 
 @Component({
     selector: 'placeholder-image',
     templateUrl: 'placeholder-image.component.html'
 })
-export class PlaceholderImageComponent implements OnInit{
-
-    @Input() value: string;
-    @Input() cardImage;
-    @Input() listAvatar;
-    @Input() cardAvatar;
-    text: string;
-    bgColour: string;
+export class PlaceholderImageComponent implements OnInit, OnChanges {
+    @Input() public value: string;
+    @Input() public overridePlaceHolderText: string;
+    @Input() public cardImage;
+    @Input() public listAvatar;
+    @Input() public cardAvatar;
+    @Input() public headerAvatar;
+    public text: string;
+    public bgColour: string;
     private availableColours: string[] =
       [
         '#F44336', '#E91E63', '#9C27B0', '#673AB7', '#3F51B5', '#1E88E5', '#0288D1', '#0097A7',
@@ -20,15 +21,29 @@ export class PlaceholderImageComponent implements OnInit{
       ];
 
     public ngOnInit() {
+      this.updateValue();
+    }
+
+    public ngOnChanges() {
+      this.updateValue();
+    }
+
+    private updateValue() {
       this.text = this.getPlaceholderText();
       this.setColours();
     }
 
-    private getPlaceholderText(): string{
-      let nameArray = this.value.split(' ');
+    private getPlaceholderText(): string {
+      if (this.overridePlaceHolderText) {
+        return this.overridePlaceHolderText;
+      }
+      if (!this.value) {
+        return '';
+      }
+      const nameArray = this.value.split(' ');
       if (nameArray.length === 0) {
         return '';
-      }else if (nameArray.length === 1){
+      } else if (nameArray.length === 1) {
         return this.getInitial(nameArray[0]);
       } else {
         return `${this.getInitial(nameArray[0])}${this.getInitial(nameArray[1])}`;
@@ -40,17 +55,6 @@ export class PlaceholderImageComponent implements OnInit{
     }
 
     private setColours() {
-      let colourValue = this.getColourValue();
-      let colourIndex = (colourValue % this.availableColours.length) - 1;
-      colourIndex = colourIndex < 0 || colourIndex > (this.availableColours.length -1) ? 0 : colourIndex;
-      this.bgColour = this.availableColours[colourIndex];
-    }
-
-    private getColourValue(): number {
-      let value = 0;
-      for (let letter of this.text) {
-        value += letter.charCodeAt(0);
-      }
-      return value !== 0 ? value : 1;
+      this.bgColour = ColourHelpers.getColour(this.text);
     }
 }

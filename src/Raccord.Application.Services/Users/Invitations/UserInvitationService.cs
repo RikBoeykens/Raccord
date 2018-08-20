@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Options;
+using Raccord.Application.Core.Common.Paging;
 using Raccord.Application.Core.ExternalServices.Communication.Mail;
 using Raccord.Application.Core.Services.Users;
 using Raccord.Application.Core.Services.Users.Invitations;
@@ -18,6 +19,7 @@ using Raccord.Domain.Model.Crew.CrewMembers;
 using Raccord.Domain.Model.Crew.CrewUnits;
 using Raccord.Domain.Model.Users;
 using Raccord.Domain.Model.Users.Invitations;
+using InvitationUtilities = Raccord.Application.Services.Users.Invitations.Utilities;
 
 namespace Raccord.Application.Services.Users.Invitations
 {
@@ -65,6 +67,17 @@ namespace Raccord.Application.Services.Users.Invitations
       return dtos;
     }
 
+    public PagedDataDto<AdminUserInvitationSummaryDto> GetAdminPaged(PaginationRequestDto requestDto)
+    {
+      var userInvitations = _userInvitationRepository.GetAll();
+
+      return userInvitations.GetPaged<UserInvitation, AdminUserInvitationSummaryDto>(requestDto, (userInvitation)=>
+      {
+        var projectCount = _projectUserInvitationRepository.GetCountForInvitation(userInvitation.ID);
+        return userInvitation.TranslateAdminSummary(projectCount);
+      });
+    }
+
     // Gets a single project user by id
     public UserInvitationDto Get(Guid ID)
     {
@@ -80,7 +93,21 @@ namespace Raccord.Application.Services.Users.Invitations
     {
       var projectUser = _userInvitationRepository.GetFull(ID);
 
-      var dto = projectUser.TranslateFull();
+      var projectUserInvitations = _projectUserInvitationRepository.GetAllForInvitation(ID);
+
+      var dto = projectUser.TranslateFull(projectUserInvitations);
+
+      return dto;
+    }
+
+    // Gets a single project user by id
+    public FullUserInvitationDto GetFullAdmin(Guid ID)
+    {
+      var projectUser = _userInvitationRepository.GetFull(ID);
+
+      var projectUserInvitations = _projectUserInvitationRepository.GetAllForInvitation(ID);
+
+      var dto = projectUser.TranslateFullAdmin(projectUserInvitations);
 
       return dto;
     }
@@ -193,7 +220,7 @@ namespace Raccord.Application.Services.Users.Invitations
           }
         }
       }
-
+      SendAcceptedInvitationEmail(dto.FirstName, dto.LastName);
       return createdUserId;
     }
 
@@ -206,6 +233,16 @@ namespace Raccord.Application.Services.Users.Invitations
       _sendMailService.SendMail(new SendMailRequestDto{
         Recipient = email,
         Subject = "Raccord Invitation",
+        Body = body
+      });
+    }
+
+    private void SendAcceptedInvitationEmail(string firstName, string lastName)
+    {
+      var body = $"User {firstName} {lastName} has accepted the invitation";
+
+      _sendMailService.SendMail(new SendMailRequestDto{
+        Subject = "Raccord Invitation Accepted",
         Body = body
       });
     }

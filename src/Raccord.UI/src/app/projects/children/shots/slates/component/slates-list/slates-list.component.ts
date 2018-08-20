@@ -1,63 +1,36 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-import { Slate } from '../../model/slate.model';
-import { SlateSummary } from '../../model/slate-summary.model';
-import { SlateHttpService } from '../../service/slate-http.service';
-import { ProjectSummary } from '../../../../../index';
-import { LoadingWrapperService } from '../../../../../../shared/service/loading-wrapper.service';
-import { DialogService } from '../../../../../../shared/service/dialog.service';
+import { ActivatedRoute } from '@angular/router';
+import { SlateSummary } from '../../../../..';
+import { ProjectSummary } from '../../../../../../shared/children/projects';
+import { ProjectHelpers } from '../../../../../../shared/children/projects/helpers/project.helpers';
+import { RouteSettings } from '../../../../../../shared';
 
 @Component({
-    templateUrl: 'slates-list.component.html',
+  templateUrl: 'slates-list.component.html'
 })
 export class SlatesListComponent implements OnInit {
+  public slates: SlateSummary[];
+  public project: ProjectSummary;
 
-    public slates: SlateSummary[];
-    public project: ProjectSummary;
+  constructor(
+      private _route: ActivatedRoute
+  ) {}
 
-    constructor(
-        private _slateHttpService: SlateHttpService,
-        private _loadingWrapperService: LoadingWrapperService,
-        private _dialogService: DialogService,
-        private _route: ActivatedRoute,
-        private _router: Router,
-    ) {
-    }
+  public ngOnInit() {
+      this._route.data.subscribe((data: {
+        slates: SlateSummary[]
+      }) => {
+          this.slates = data.slates;
+      });
+      this.project = ProjectHelpers.getCurrentProject();
+  }
 
-    public ngOnInit() {
-        this._route.data.subscribe((data: { slates: SlateSummary[], project: ProjectSummary }) => {
-            this.slates = data.slates;
-            this.project = data.project;
-        });
-    }
+  public getBackLink() {
+    return `/${RouteSettings.PROJECTS}/${this.project.id}`;
+  }
 
-    public getSlates(){
-        this._loadingWrapperService.Load(
-            this._slateHttpService.getAll(this.project.id),
-            (data) => this.slates = data
-        );
-    }
-
-    public addSlate() {
-        let newSlate = new Slate();
-        newSlate.projectID = this.project.id;
-
-        this._loadingWrapperService.Load(
-            this._slateHttpService.post(newSlate),
-            (data) => this._router.navigate(['projects', this.project.id, 'slates', data])
-        );
-    }
-
-    public remove(slate: SlateSummary) {
-
-        if (this._dialogService.confirm(`Are you sure you want to remove slate ${slate.number}?`)) {
-            this._loadingWrapperService.Load(
-                this._slateHttpService.delete(slate.id),
-                () => {
-                    this._dialogService.success('The slate was successfully removed');
-                    this.getSlates();
-                }
-            );
-        }
-    }
+  public getSlateLink(slate: SlateSummary) {
+    // tslint:disable-next-line:max-line-length
+    return `/${RouteSettings.PROJECTS}/${this.project.id}/${RouteSettings.SLATES}/${slate.id}`;
+  }
 }

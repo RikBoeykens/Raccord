@@ -1,0 +1,23 @@
+<div class="raccord-narrow-container">
+  <div class="raccord-page-header">
+    <a routerLink="{{getBackLink()}}">
+      <back-link></back-link>
+    </a>
+    <div fxLayout="row">
+      <h1 class="raccord-header-title">
+        <project-avatar [headerAvatar]="true" [project]="project"></project-avatar>
+        {{project.title}}
+      </h1>
+      <button mat-mini-fab
+        (click)="showEditProject()"><mat-icon>edit</mat-icon></button>
+    </div>
+  </div>
+  <admin-project-project-users
+    [projectId]="project.id"
+    [projectUsers]="project.users"
+    [projectRoles]="projectRoles"></admin-project-project-users>
+  <admin-project-project-user-invitations
+    [projectId]="project.id"
+    [projectUserInvitations]="project.invitations"
+    [projectRoles]="projectRoles"></admin-project-project-user-invitations>
+</div>

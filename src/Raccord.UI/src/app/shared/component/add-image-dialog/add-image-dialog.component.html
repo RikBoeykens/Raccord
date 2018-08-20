@@ -1,0 +1,17 @@
+<h3 mat-dialog-title>Add Image</h3>
+<mat-dialog-content>
+  <div fxLayout="row">
+      <input 
+        id="file-input"
+        style="display: none"
+        type="file"
+        (change)="uploadImage($event)"
+        multiple />
+      <button mat-raised-button color="primary" (click)="startUpload()">
+        Upload
+      </button>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button mat-dialog-close>Cancel</button>
+</mat-dialog-actions>

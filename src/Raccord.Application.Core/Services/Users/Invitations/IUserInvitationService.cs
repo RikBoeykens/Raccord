@@ -1,12 +1,14 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Raccord.Application.Core.Common.Paging;
 
 namespace Raccord.Application.Core.Services.Users.Invitations
 {
   public interface IUserInvitationService
   {
     IEnumerable<UserInvitationSummaryDto> GetAll();
+    PagedDataDto<AdminUserInvitationSummaryDto> GetAdminPaged(PaginationRequestDto requestDto);
     FullUserInvitationDto GetFull(Guid ID);
     UserInvitationDto Get(Guid ID);
 

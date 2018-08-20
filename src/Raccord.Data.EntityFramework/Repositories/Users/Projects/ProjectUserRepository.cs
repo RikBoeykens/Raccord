@@ -16,7 +16,7 @@ namespace Raccord.Data.EntityFramework.Repositories.Users.Projects
         {
             var query = GetIncludedUser();
 
-            return query.Where(c=> c.ProjectID == projectID);
+            return query.Where(c=> c.ProjectID == projectID && !c.User.IsDummyUser);
         }
 
         public IEnumerable<ProjectUser> GetAllForUser(string userID)
@@ -59,6 +59,8 @@ namespace Raccord.Data.EntityFramework.Repositories.Users.Projects
                                 .ThenInclude(pr => pr.ProjectPermission)
                         .Include(pu => pu.CastMember)
                             .ThenInclude(cm => cm.Characters)
+                                .ThenInclude(c => c.ImageCharacters)
+                                    .ThenInclude(ic => ic.Image)
                         .Include(pu => pu.CrewUnitMembers)
                             .ThenInclude(pu => pu.CrewUnit)
                         .Include(pu => pu.CrewUnitMembers)
@@ -77,7 +79,8 @@ namespace Raccord.Data.EntityFramework.Repositories.Users.Projects
         {
             IQueryable<ProjectUser> query = _context.Set<ProjectUser>();
 
-            return query.Include(cs=> cs.User);
+            return query.Include(cs=> cs.User)
+                        .Include(pu => pu.Role);
         }
 
         private IQueryable<ProjectUser> GetIncludedProject()
@@ -85,7 +88,8 @@ namespace Raccord.Data.EntityFramework.Repositories.Users.Projects
             IQueryable<ProjectUser> query = _context.Set<ProjectUser>();
 
             return query.Include(cs=> cs.Project)
-                        .ThenInclude(p=> p.Images);
+                        .ThenInclude(p=> p.Images)
+                        .Include(pu => pu.Role);
         }
 
         private IQueryable<ProjectUser> GetIncludedPermissions()

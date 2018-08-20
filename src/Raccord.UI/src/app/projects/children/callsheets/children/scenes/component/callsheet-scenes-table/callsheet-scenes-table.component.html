@@ -1,0 +1,80 @@
+<mat-table #callsheetscenestable
+  class="callsheet-scenes-table"
+  [dataSource]="callsheetScenes">
+
+  <!-- Image Column -->
+  <ng-container matColumnDef="image">
+    <mat-header-cell *matHeaderCellDef></mat-header-cell>
+    <mat-cell *matCellDef="let callsheetScene">
+      <scene-avatar [scene]="callsheetScene.scene" [listAvatar]="true"></scene-avatar>
+    </mat-cell>
+  </ng-container>
+
+  <!-- Set and Scene Description Column -->
+  <ng-container matColumnDef="description">
+    <mat-header-cell class="col-description" *matHeaderCellDef>Set and Scene Description</mat-header-cell>
+    <mat-cell class="col-description" *matCellDef="let callsheetScene">
+      <p>{{callsheetScene.scene.sceneIntro.name}}. <a routerLink="{{getScriptLocationLink(callsheetScene)}}">{{callsheetScene.scene.scriptLocation.name}}</a></p>
+      <p>{{callsheetScene.scene.summary}}</p>
+    </mat-cell>
+  </ng-container>
+
+  <!-- Scene Column -->
+  <ng-container matColumnDef="number">
+    <mat-header-cell *matHeaderCellDef>Sc's</mat-header-cell>
+    <mat-cell *matCellDef="let callsheetScene">
+      <a routerLink="{{getSceneLink(callsheetScene)}}">{{callsheetScene.scene.number}}</a>
+    </mat-cell>
+  </ng-container>
+
+  <!-- Time of Day Column -->
+  <ng-container matColumnDef="timeofday">
+    <mat-header-cell *matHeaderCellDef>D/N</mat-header-cell>
+    <mat-cell *matCellDef="let callsheetScene">
+      {{callsheetScene.scene.timeOfDay.name}}
+    </mat-cell>
+  </ng-container>
+
+  <!-- Page length Column -->
+  <ng-container matColumnDef="pagelength">
+    <mat-header-cell *matHeaderCellDef>PG's</mat-header-cell>
+    <mat-cell *matCellDef="let callsheetScene">
+      {{callsheetScene.pageLength | myPagelength}}
+    </mat-cell>
+  </ng-container>
+
+  <!-- Cast Column -->
+  <ng-container matColumnDef="characters">
+    <mat-header-cell *matHeaderCellDef>Cast</mat-header-cell>
+    <mat-cell *matCellDef="let callsheetScene">
+      <span *ngFor="let character of callsheetScene.characters">
+        <a routerLink="{{getCharacterLink(character)}}">{{character.number}}</a>
+        &nbsp;
+      </span>
+    </mat-cell>
+  </ng-container>
+
+  <!-- Location Column -->
+  <ng-container matColumnDef="location">
+    <mat-header-cell *matHeaderCellDef>Location</mat-header-cell>
+    <mat-cell *matCellDef="let callsheetScene">
+      <div>
+        <a routerLink="{{getLocationSetLink(callsheetScene)}}">{{callsheetScene.locationSet.name}}</a>
+      </div>
+      <div>
+        <a routerLink="{{getLocationLink(callsheetScene)}}">{{callsheetScene.locationSet.location.name}}</a>
+      </div>
+    </mat-cell>
+  </ng-container>
+
+  <!-- Sides Column -->
+  <ng-container matColumnDef="sides">
+    <mat-header-cell *matHeaderCellDef></mat-header-cell>
+    <mat-cell *matCellDef="let callsheetScene">
+      <a routerLink="{{getSidesLink()}}" fragment="scene-{{callsheetScene.scene.id}}" mat-icon-button><mat-icon>subject</mat-icon></a>
+    </mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>

@@ -1,0 +1,45 @@
+<mat-table #crewmemberstable [dataSource]="crewMembers" class="crew-members-table">
+
+  <!-- Image Column -->
+  <ng-container matColumnDef="image">
+    <mat-header-cell *matHeaderCellDef></mat-header-cell>
+    <mat-cell *matCellDef="let crewMember">
+      <crew-member-avatar [crewMember]="crewMember" [listAvatar]="true"></crew-member-avatar>
+    </mat-cell>
+  </ng-container>
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="name">
+    <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+    <mat-cell *matCellDef="let crewMember">
+      {{getFullName(crewMember)}}
+    </mat-cell>
+  </ng-container>
+
+  <!-- Job Column -->
+  <ng-container matColumnDef="job">
+    <mat-header-cell *matHeaderCellDef>Job Title</mat-header-cell>
+    <mat-cell *matCellDef="let crewMember">
+      {{crewMember.jobTitle}}
+    </mat-cell>
+  </ng-container>
+
+  <!-- Phone Column -->
+  <ng-container matColumnDef="phone">
+    <mat-header-cell *matHeaderCellDef>Telephone</mat-header-cell>
+    <mat-cell *matCellDef="let crewMember">
+      <phone-link [telephone]="crewMember.telephone"></phone-link>
+    </mat-cell>
+  </ng-container>
+
+  <!-- Phone Column -->
+  <ng-container matColumnDef="mail">
+    <mat-header-cell *matHeaderCellDef>Email</mat-header-cell>
+    <mat-cell *matCellDef="let crewMember">
+      <mail-link [email]="crewMember.email"></mail-link>
+    </mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>

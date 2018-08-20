@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Subject }    from 'rxjs/Subject';
+import { Subject } from 'rxjs/Subject';
 @Injectable()
 export class LoadingService {
 
@@ -8,7 +8,7 @@ export class LoadingService {
   private loadingIds: string[] = [];
 
   public startLoading(): string {
-    let id = this.generateId();
+    const id = this.generateId();
     this.loadingIds.push(id);
     this.toggleLoadingSource.next(true);
     return id;

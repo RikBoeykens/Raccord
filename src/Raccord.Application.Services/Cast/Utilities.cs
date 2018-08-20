@@ -1,17 +1,21 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
+using Raccord.Application.Core.Common.Routing;
 using Raccord.Application.Core.Services.Cast;
 using Raccord.Application.Core.Services.SearchEngine;
 using Raccord.Application.Services.Characters;
 using Raccord.Application.Services.Scenes;
+using Raccord.Application.Services.ShootingDays;
 using Raccord.Core.Enums;
 using Raccord.Domain.Model.Cast;
+using Raccord.Domain.Model.ShootingDays;
 
 namespace Raccord.Application.Services.Cast
 {
   public static class Utilities
   {
-    public static FullCastMemberDto TranslateFull(this CastMember castMember)
+    public static FullCastMemberDto TranslateFull(this CastMember castMember, IEnumerable<ShootingDay> shootingDays)
     {
       if(castMember == null)
       {
@@ -30,7 +34,29 @@ namespace Raccord.Application.Services.Cast
         UserInvitationID = castMember.GetUserInvitationID(),
         HasImage = castMember.GetHasImage(),
         Characters = castMember.Characters.Select(c => c.TranslateSummary()),
+        ShootingDays = shootingDays.GetCharacterShootingDays(castMember.Characters.Select(c => c.ID).ToArray()),
         Scenes = castMember.Characters.SelectMany(c => c.CharacterScenes).OrderBy(cs => cs.Scene.SortingOrder).Select(cs => cs.TranslateScene()).Distinct()
+      };
+    }
+    public static AdminFullCastMemberDto TranslateFullAdmin(this CastMember castMember)
+    {
+      if(castMember == null)
+      {
+        return null;
+      }
+
+      return new AdminFullCastMemberDto
+      {
+        ID = castMember.ID,
+        FirstName = castMember.GetFirstName(),
+        LastName = castMember.GetLastName(),
+        Telephone = castMember.GetTelephone(),
+        Email = castMember.GetEmail(),
+        ProjectID = castMember.ProjectID,
+        UserID = castMember.GetUserID(),
+        UserInvitationID = castMember.GetUserInvitationID(),
+        HasImage = castMember.GetHasImage(),
+        Characters = castMember.Characters.Select(c => c.TranslateSummary()),
       };
     }
     public static CastMemberSummaryDto TranslateSummary(this CastMember castMember)
@@ -76,10 +102,13 @@ namespace Raccord.Application.Services.Cast
       return new SearchResultDto
       {
         ID = castMember.ID,
-        RouteIDs = new long[]{castMember.ProjectID, castMember.ID},
         DisplayName = $"{castMember.GetDisplayName()}",
         Info = $"Project: {castMember.Project.Title}",
-        Type = EntityType.CastMember,  
+        RouteInfo = new RouteInfoDto
+        {
+          RouteIDs = new object[]{castMember.ProjectID, castMember.ID},
+          Type = EntityType.CastMember,
+        }
       };
     }
 

@@ -1,6 +1,6 @@
 import { BaseCallsheet } from './base-callsheet.model';
-import { ShootingDay } from '../../shooting-days';
-import { CrewUnit } from '../../crew/crew-units/model/crew-unit.model';
+import { CrewUnit } from '../../../../shared/children/crew';
+import { ShootingDay } from '../../..';
 
 export class CallsheetCrewUnit extends BaseCallsheet {
     public crewUnit: CrewUnit;

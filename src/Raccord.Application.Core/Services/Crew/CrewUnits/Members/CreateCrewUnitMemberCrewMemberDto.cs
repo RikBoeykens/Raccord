@@ -7,7 +7,7 @@ namespace Raccord.Application.Core.Services.Crew.CrewUnits.Members
       /// ID of the crew unit member
       /// </summary>
       /// <returns></returns>
-      public long CrewUnitMemberID { get; set; }
+      public long LinkID { get; set; }
 
       /// <summary>
       /// Job title of the crew member

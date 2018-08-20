@@ -19,6 +19,7 @@ using Raccord.Core.Options;
 using Raccord.Data.EntityFramework;
 using Raccord.Data.EntityFramework.Seeding;
 using Raccord.Domain.Model.Users;
+using Raccord.UI.Helpers;
 using Swashbuckle.AspNetCore.Swagger;
 
 namespace Raccord.API
@@ -34,6 +35,7 @@ namespace Raccord.API
             var builder = new ConfigurationBuilder()
                 .SetBasePath(ConfigPath)
                 .AddJsonFile("app.json")
+                .AddJsonFile($"app.{env.EnvironmentName}.json", optional: true)
                 .AddEnvironmentVariables();
 
             Configuration = builder.Build();
@@ -54,7 +56,12 @@ namespace Raccord.API
             services.Configure<WeatherSettings>(Configuration.GetSection("WeatherSettings"));
             // Add framework services.
             var dbConfig = Configuration.GetSection("DbContextSettings");
-            var connectionString = dbConfig.GetValue<string>("ConnectionString");
+            var connectionUri = Configuration["DATABASE_URL"];
+            if(string.IsNullOrEmpty(connectionUri))
+            {
+                connectionUri = dbConfig.GetValue<string>("ConnectionUri");
+            }
+            var connectionString = string.IsNullOrEmpty(connectionUri) ? dbConfig.GetValue<string>("ConnectionString") : DbSettingsHelpers.GetConnectionString(connectionUri);
             services.AddDbContext<RaccordDBContext>(opts =>{ 
                 opts.UseNpgsql(connectionString);
                 
@@ -80,33 +87,21 @@ namespace Raccord.API
                 options.ClaimsIdentity.RoleClaimType = OpenIdConnectConstants.Claims.Role;
             });
 
-            // Register the OpenIddict services.
-            services.AddOpenIddict(options =>
-            {
-                // Register the Entity Framework stores.
-                options.AddEntityFrameworkCoreStores<RaccordDBContext>();
-
-                // Register the ASP.NET Core MVC binder used by OpenIddict.
-                // Note: if you don't call this method, you won't be able to
-                // bind OpenIdConnectRequest or OpenIdConnectResponse parameters.
-                options.AddMvcBinders();
-
-                // Enable the token endpoint.
-                options.EnableTokenEndpoint("/api/authorization/connect/token");
-
-                // Enable the password and the refresh token flows.
-                options.AllowPasswordFlow()
-                       .AllowRefreshTokenFlow();
-
-                // During development, you can disable the HTTPS requirement.
-                options.DisableHttpsRequirement();
-
-                // Note: to use JWT access tokens instead of the default
-                // encrypted format, the following lines are required:
-                //
-                // options.UseJsonWebTokens();
-                // options.AddEphemeralSigningKey();
-            });
+            services.AddOpenIddict()
+                .AddCore(options =>
+                {
+                    options.UseEntityFrameworkCore()
+                        .UseDbContext<RaccordDBContext>();
+                })
+                .AddServer(options =>
+                {
+                    options.UseMvc();
+                    options.EnableTokenEndpoint("/api/authorization/connect/token");
+                    options.AllowPasswordFlow();
+                    options.AllowRefreshTokenFlow();
+                    options.AcceptAnonymousClients();
+                    options.DisableHttpsRequirement();
+                });
 
             // Register the validation handler that is used to decrypt the tokens
             services.AddAuthentication(options =>
@@ -141,7 +136,7 @@ namespace Raccord.API
             app.UseAuthentication();
 
             app.UseCors(builder =>
-                builder.WithOrigins("http://localhost:5000", "http://localhost:3000")
+                builder.WithOrigins("http://localhost:3000", "http://raccord-ui-poc.herokuapp.com")
                        .AllowAnyMethod()
                        .AllowAnyHeader()
             );
@@ -153,7 +148,7 @@ namespace Raccord.API
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "Raccord V1");
             });
-
+ 
             using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
             {
                 var raccordDbContext = serviceScope.ServiceProvider.GetService<RaccordDBContext>();

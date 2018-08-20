@@ -53,16 +53,16 @@ namespace Raccord.Domain.Model.Scenes
         public virtual Project Project { get; set; }
 
         // ID of the linked int/ext
-        public long? IntExtID { get; set; }
+        public long? SceneIntroID { get; set; }
 
         // Linked int/ext
-        public virtual IntExt IntExt { get; set; }
+        public virtual SceneIntro SceneIntro { get; set; }
 
         // ID of the linked day/night
-        public long? DayNightID { get; set; }
+        public long? TimeOfDayID { get; set; }
 
         // Linked day/night
-        public virtual DayNight DayNight { get; set; }
+        public virtual TimeOfDay TimeOfDay { get; set; }
 
         // ID of the linked day/night
         public long? ScriptLocationID { get; set; }

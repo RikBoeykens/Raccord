@@ -1,89 +1,70 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-import { ProjectSummary } from '../../../../model/project-summary.model';
-import { FullCallsheet, CallsheetCharacterCharacter } from "../../";
-import { CallsheetSceneScene } from "../../";
-import { Location } from "../../../locations/locations/model/location.model";
-import { CallsheetLocation } from '../../../locations/locations/model/callsheet-location.model';
-import { MapsHelpers } from '../../../../../shared/helpers/maps.helpers';
-import { CallsheetLocationSet } from '../../../locations/location-sets/model/callsheet-location-set.model';
-import { AccountHelpers } from '../../../../../account/helpers/account.helper';
-import { ProjectPermissionEnum } from '../../../../../shared/children/users/project-roles/enums/project-permission.enum';
-import { CastMember } from '../../../cast/model/cast-member.model';
+import { ActivatedRoute } from '@angular/router';
+import { ProjectSummary } from '../../../../../shared/children/projects';
+import {
+  FullCallsheet,
+  CallsheetSceneScene,
+  Location
+} from '../../../..';
+import { ProjectHelpers } from '../../../../../shared/children/projects/helpers/project.helpers';
+import { RouteSettings } from '../../../../../shared';
 
 @Component({
-    templateUrl: 'callsheet.component.html',
+  templateUrl: 'callsheet.component.html',
 })
 export class CallsheetComponent implements OnInit {
+  public project: ProjectSummary;
+  public callsheet: FullCallsheet;
 
-    project: ProjectSummary;
-    callsheet: FullCallsheet;
-    bounds: any;
-    markerLocations: CallsheetLocation[] = [];
-    markerLocationSets: CallsheetLocationSet[] = [];
+  constructor(
+      private _route: ActivatedRoute
+  ) {
+  }
 
-    constructor(
-        private _route: ActivatedRoute,
-        private _router: Router,
-    ) {
-    }
+  public ngOnInit() {
+    this._route.data.subscribe((data: {
+      callsheet: FullCallsheet
+    }) => {
+      this.project = ProjectHelpers.getCurrentProject();
+      this.callsheet = data.callsheet;
+    });
+  }
 
-    public ngOnInit() {
-        this._route.data.subscribe((data: {
-            project: ProjectSummary,
-            callsheet: FullCallsheet
-        }) => {
-            this.project = data.project;
-            this.callsheet = data.callsheet;
-            this.setBounds();
-        });
-    }
+  public getLocations() {
+    const locations: Location[] = [];
+    this.callsheet.scenes.forEach((scene: CallsheetSceneScene) => {
+      const currentSceneLocation = scene.locationSet.id !== 0 ?
+          scene.locationSet.location : null;
+      if (currentSceneLocation &&
+          (locations.length === 0 ||
+              locations[locations.length - 1].id !== currentSceneLocation.id)) {
+          locations.push(currentSceneLocation);
+      }
+    });
+    return locations;
+  }
 
-    public getLocations() {
-        let locations: Location[] = [];
-        this.callsheet.scenes.forEach((scene: CallsheetSceneScene) => {
-            let currentSceneLocation = scene.locationSet.id !== 0 ?
-                scene.locationSet.location : null;
-            if (currentSceneLocation &&
-                (locations.length === 0 ||
-                    locations[locations.length - 1].id !== currentSceneLocation.id)) {
-                locations.push(currentSceneLocation);
-            }
-        });
-        return locations;
-    }
+  public getBackLink() {
+    // tslint:disable-next-line:max-line-length
+    return `/${RouteSettings.PROJECTS}/${this.project.id}/${RouteSettings.CALLSHEETS}`;
+  }
 
-    public setBounds() {
-        this.markerLocations = this.callsheet.locations.filter((l) => l.latLng.hasLatLng);
-        this.markerLocations.forEach((location) => {
-            this.markerLocationSets =
-                this.markerLocationSets.concat(location.sets.filter((l) => l.latLng.hasLatLng));
-        });
-        if (this.markerLocations.length || this.markerLocationSets.length) {
-            let latLngs = this.markerLocations.map((location) => location.latLng);
-            latLngs =
-                latLngs.concat(this.markerLocationSets.map((locationSet) => locationSet.latLng));
-            this.bounds = MapsHelpers.getBounds(latLngs);
-        }
-    }
+  public getCrewUnitLink() {
+    // tslint:disable-next-line:max-line-length
+    return `/${RouteSettings.PROJECTS}/${this.project.id}/${RouteSettings.CREW}/${this.callsheet.crewUnit.id}`;
+  }
 
-    public getCanEdit() {
-        return AccountHelpers.hasProjectPermission(
-            this.project.id,
-            ProjectPermissionEnum.canEditGeneral
-        );
-    }
+  public getBreakdownLink() {
+    // tslint:disable-next-line:max-line-length
+    return `/${RouteSettings.PROJECTS}/${this.project.id}/${RouteSettings.BREAKDOWNS}/${this.callsheet.breakdownInfo.id}`;
+  }
 
-    public showCharacterImage(callsheetCharacter: CallsheetCharacterCharacter) {
-        return callsheetCharacter.castMember.id === 0 &&
-        callsheetCharacter.character.primaryImage.id !== 0;
-    }
+  public getSidesLink() {
+    // tslint:disable-next-line:max-line-length
+    return `/${RouteSettings.PROJECTS}/${this.project.id}/${RouteSettings.CALLSHEETS}/${this.callsheet.id}/${RouteSettings.SIDES}`;
+  }
 
-    public showUserImage(callsheetCharacter: CallsheetCharacterCharacter) {
-        return callsheetCharacter.castMember.id !== 0;
-    }
-
-    public getFullName(castMember: CastMember) {
-        return `${castMember.firstName} ${castMember.lastName}`;
-    }
+  public hasBreakdown() {
+    return this.callsheet.breakdownInfo.id !== 0;
+  }
 }

@@ -6,27 +6,27 @@ using Microsoft.EntityFrameworkCore;
 namespace Raccord.Data.EntityFramework.Repositories.SceneProperties
 {
     // Repository for Day/Night
-    public class DayNightRepository : BaseRepository<DayNight, long>, IDayNightRepository
+    public class TimeOfDayRepository : BaseRepository<TimeOfDay, long>, ITimeOfDayRepository
     {
-        public DayNightRepository(RaccordDBContext context) : base(context) 
+        public TimeOfDayRepository(RaccordDBContext context) : base(context) 
         {
         }
 
-        public IEnumerable<DayNight> GetAllForProject(long projectID)
+        public IEnumerable<TimeOfDay> GetAllForProject(long projectID)
         {
             var query = GetIncludedSummary();
 
             return query.Where(d=> d.ProjectID == projectID);
         }
 
-        public DayNight GetFull(long ID)
+        public TimeOfDay GetFull(long ID)
         {
             var query = GetIncludedFull();
 
             return query.FirstOrDefault(d => d.ID == ID);
         }
 
-        public DayNight GetSummary(long ID)
+        public TimeOfDay GetSummary(long ID)
         {
             var query = GetIncludedSummary();
 
@@ -40,48 +40,48 @@ namespace Raccord.Data.EntityFramework.Repositories.SceneProperties
             return query.Count();
         }
 
-        public IEnumerable<DayNight> Search(string searchText, long? projectID, string userID, bool isAdmin, long[] excludeIds)
+        public IEnumerable<TimeOfDay> Search(string searchText, long? projectID, string userID, bool isAdmin, long[] excludeIds)
         {
             return GetSearchQuery(searchText, projectID, userID, isAdmin, excludeIds);
 
         }
 
-        private IQueryable<DayNight> GetIncludedFull()
+        private IQueryable<TimeOfDay> GetIncludedFull()
         {
-            IQueryable<DayNight> query = _context.Set<DayNight>();
+            IQueryable<TimeOfDay> query = _context.Set<TimeOfDay>();
 
             return query.Include(d=> d.Scenes)
-                        .ThenInclude(s=> s.IntExt)
+                        .ThenInclude(s=> s.SceneIntro)
                         .Include(d=> d.Scenes)
                         .ThenInclude(s=> s.ScriptLocation);
         }
 
-        private IQueryable<DayNight> GetIncludedSummary()
+        private IQueryable<TimeOfDay> GetIncludedSummary()
         {
-            IQueryable<DayNight> query = _context.Set<DayNight>();
+            IQueryable<TimeOfDay> query = _context.Set<TimeOfDay>();
 
             return query.Include(d=> d.Scenes);
         }
 
-        private IQueryable<DayNight> GetIncluded()
+        private IQueryable<TimeOfDay> GetIncluded()
         {
-            IQueryable<DayNight> query = _context.Set<DayNight>();
+            IQueryable<TimeOfDay> query = _context.Set<TimeOfDay>();
 
             return query;
         }
 
-        private IQueryable<DayNight> GetIncludedSearch()
+        private IQueryable<TimeOfDay> GetIncludedSearch()
         {
-            IQueryable<DayNight> query = _context.Set<DayNight>();
+            IQueryable<TimeOfDay> query = _context.Set<TimeOfDay>();
 
             return query.Include(d=> d.Project)
                         .ThenInclude(p=> p.ProjectUsers);
         }
 
 
-        private IQueryable<DayNight> GetSearchQuery(string searchText, long? projectID, string userID, bool isAdmin, long[] excludeIds)
+        private IQueryable<TimeOfDay> GetSearchQuery(string searchText, long? projectID, string userID, bool isAdmin, long[] excludeIds)
         {
-            IQueryable<DayNight> query = GetIncludedSearch();
+            IQueryable<TimeOfDay> query = GetIncludedSearch();
 
             query = query.Where(l=> l.Name.ToLower().Contains(searchText.ToLower()));
 

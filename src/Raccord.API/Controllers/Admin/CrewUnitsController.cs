@@ -29,5 +29,16 @@ namespace Raccord.API.Controllers.Admin
 
             return dto.Translate();
         }
+
+        // GET: api/crewunits/1/project
+        [HttpGet("{projectId}/project")]
+        public IEnumerable<CrewUnitSummaryViewModel> GetAll([FromRoute]long projectId)
+        {
+            var dtos = _crewUnitService.GetAllForParent(projectId);
+
+            var vms = dtos.Select(p => p.Translate());
+
+            return vms;
+        }
     }
 }

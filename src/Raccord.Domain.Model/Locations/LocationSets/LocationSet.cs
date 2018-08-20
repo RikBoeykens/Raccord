@@ -4,6 +4,7 @@ using Raccord.Domain.Model.Scheduling;
 using System.Collections.Generic;
 using Raccord.Domain.Model.Callsheets.Scenes;
 using Raccord.Domain.Model.ShootingDays.Scenes;
+using Raccord.Domain.Model.Comments;
 
 namespace Raccord.Domain.Model.Locations.LocationSets
 {
@@ -13,6 +14,7 @@ namespace Raccord.Domain.Model.Locations.LocationSets
         private ICollection<ScheduleScene> _scheduleScenes;
         private ICollection<CallsheetScene> _callsheetScenes;
         private ICollection<ShootingDayScene> _shootingDayScenes;
+        private ICollection<Comment> _comments;
 
         /// Name of the set
         public string Name { get; set; }
@@ -74,6 +76,19 @@ namespace Raccord.Domain.Model.Locations.LocationSets
             set
             {
                 _shootingDayScenes = value;
+            }
+        }
+        
+        // Comments made to the location
+        public virtual ICollection<Comment> Comments
+        {
+            get
+            {
+                return _comments ?? (_comments = new List<Comment>());
+            }
+            set
+            {
+                _comments = value;
             }
         }
     }

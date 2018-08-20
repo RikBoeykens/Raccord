@@ -1,0 +1,17 @@
+<div class="raccord-narrow-container">
+  <div class="raccord-page-header">
+    <a routerLink="{{getBackLink()}}">
+      <back-link></back-link>
+    </a>
+    <h1 class="raccord-header-title">
+      Shooting Days
+    </h1>
+  </div>
+  <div fxLayout="row wrap" fxLayoutGap="5px" *ngIf="shootingDays">
+    <a routerLink="{{getShootingDayLink(shootingDay)}}"
+        *ngFor="let shootingDay of shootingDays">
+      <shooting-day-crew-unit-card
+          [shootingDay]="shootingDay"></shooting-day-crew-unit-card>
+    </a>
+  </div>
+</div>

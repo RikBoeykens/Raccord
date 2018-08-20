@@ -1,4 +1,4 @@
-export enum ShootingDayType{
+export enum ShootingDayTypeEnum {
     notScheduled = 0,
     scheduled = 1,
     scheduledNotOnCallsheet = 2,

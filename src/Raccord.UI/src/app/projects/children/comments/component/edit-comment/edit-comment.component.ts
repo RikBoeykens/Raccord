@@ -1,17 +1,13 @@
-import { Component, Input, Output, EventEmitter, OnChanges } from '@angular/core';
-import { Comment } from '../../model/comment.model';
-import { PostComment } from '../../model/post-comment.model';
-import { OnInit } from '@angular/core/src/metadata/lifecycle_hooks';
+import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { ParentCommentType, LoadingWrapperService } from '../../../../../shared';
+import { Comment, PostComment } from '../../../..';
 import { CommentHttpService } from '../../service/comment-http.service';
-import { DialogService } from '../../../../../shared/service/dialog.service';
-import { ParentCommentType } from '../../../../../shared/enums/parent-comment-type.enum';
-import { LoadingWrapperService } from '../../../../../shared/service/loading-wrapper.service';
 
 @Component({
     selector: 'edit-comment',
     templateUrl: 'edit-comment.component.html'
 })
-export class EditCommentComponent implements OnInit{
+export class EditCommentComponent implements OnInit {
 
     @Output() public submittedComment = new EventEmitter();
     @Input() public comment: Comment;
@@ -22,8 +18,7 @@ export class EditCommentComponent implements OnInit{
 
     constructor(
       private _commentHttpService: CommentHttpService,
-      private _loadingWrapperService: LoadingWrapperService,
-      private _dialogService: DialogService
+      private _loadingWrapperService: LoadingWrapperService
     ) {
     }
 

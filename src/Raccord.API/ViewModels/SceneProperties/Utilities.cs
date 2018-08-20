@@ -7,14 +7,14 @@ namespace Raccord.API.ViewModels.SceneProperties
     public static class Utilities
     {
         // Translates a int/ext dto to a int/ext viewmodel
-        public static FullIntExtViewModel Translate(this FullIntExtDto dto)
+        public static FullSceneIntroViewModel Translate(this FullSceneIntroDto dto)
         {
             if(dto == null)
             {
                 return null;
             }
 
-            return new FullIntExtViewModel
+            return new FullSceneIntroViewModel
             {
                 ID = dto.ID,
                 Name = dto.Name,
@@ -24,14 +24,14 @@ namespace Raccord.API.ViewModels.SceneProperties
             };
         }
         // Translates a int/ext summary dto to a int/ext summary viewmodel
-        public static IntExtSummaryViewModel Translate(this IntExtSummaryDto dto)
+        public static SceneIntroSummaryViewModel Translate(this SceneIntroSummaryDto dto)
         {
             if(dto == null)
             {
                 return null;
             }
 
-            return new IntExtSummaryViewModel
+            return new SceneIntroSummaryViewModel
             {
                 ID = dto.ID,
                 Name = dto.Name,
@@ -41,14 +41,14 @@ namespace Raccord.API.ViewModels.SceneProperties
             };
         }
         // Translates a int/ext dto to a int/ext viewmodel
-        public static IntExtViewModel Translate(this IntExtDto dto)
+        public static SceneIntroViewModel Translate(this SceneIntroDto dto)
         {
             if(dto == null)
             {
                 return null;
             }
 
-            return new IntExtViewModel
+            return new SceneIntroViewModel
             {
                 ID = dto.ID,
                 Name = dto.Name,
@@ -58,14 +58,14 @@ namespace Raccord.API.ViewModels.SceneProperties
         }
 
         // Translates a int/ext summary viewmodel to a dto
-        public static IntExtDto Translate(this IntExtViewModel vm)
+        public static SceneIntroDto Translate(this SceneIntroViewModel vm)
         {
             if(vm == null)
             {
                 return null;
             }
 
-            return new IntExtDto
+            return new SceneIntroDto
             {
                 ID = vm.ID,
                 Name = vm.Name,
@@ -75,14 +75,14 @@ namespace Raccord.API.ViewModels.SceneProperties
         }
 
         // Translates a day/night dto to a day/night viewmodel
-        public static FullDayNightViewModel Translate(this FullDayNightDto dto)
+        public static FullTimeOfDayViewModel Translate(this FullTimeOfDayDto dto)
         {
             if(dto == null)
             {
                 return null;
             }
 
-            return new FullDayNightViewModel
+            return new FullTimeOfDayViewModel
             {
                 ID = dto.ID,
                 Name = dto.Name,
@@ -92,14 +92,14 @@ namespace Raccord.API.ViewModels.SceneProperties
             };
         }
         // Translates a day/night summary dto to a day/night summary viewmodel
-        public static DayNightSummaryViewModel Translate(this DayNightSummaryDto dto)
+        public static TimeOfDaySummaryViewModel Translate(this TimeOfDaySummaryDto dto)
         {
             if(dto == null)
             {
                 return null;
             }
 
-            return new DayNightSummaryViewModel
+            return new TimeOfDaySummaryViewModel
             {
                 ID = dto.ID,
                 Name = dto.Name,
@@ -109,14 +109,14 @@ namespace Raccord.API.ViewModels.SceneProperties
             };
         }
         // Translates a day/night summary dto to a day/night summary viewmodel
-        public static DayNightViewModel Translate(this DayNightDto dto)
+        public static TimeOfDayViewModel Translate(this TimeOfDayDto dto)
         {
             if(dto == null)
             {
                 return null;
             }
 
-            return new DayNightViewModel
+            return new TimeOfDayViewModel
             {
                 ID = dto.ID,
                 Name = dto.Name,
@@ -126,14 +126,14 @@ namespace Raccord.API.ViewModels.SceneProperties
         }
 
         // Translates a day/night summary viewmodel to a dto
-        public static DayNightDto Translate(this DayNightViewModel vm)
+        public static TimeOfDayDto Translate(this TimeOfDayViewModel vm)
         {
             if(vm == null)
             {
                 return null;
             }
 
-            return new DayNightDto
+            return new TimeOfDayDto
             {
                 ID = vm.ID,
                 Name = vm.Name,

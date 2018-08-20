@@ -1,19 +1,19 @@
-import { BaseModel } from '../../../../../../shared/model/base.model';
+import { BaseModel } from '../../../../../../shared';
 
-export class CharacterCall extends BaseModel{
-    id: number;
-    callTime: Date;
+export class CharacterCall extends BaseModel {
+    public id: number;
+    public callTime: Date;
 
-    constructor(obj?: {
-                        id: number, 
-                        callTime: Date, 
-                    }){
+    constructor(
+        obj?: {
+        id: number,
+        callTime: Date,
+    }) {
         super();
-        if(obj){
+        if (obj) {
             this.id = obj.id;
             this.callTime = obj.callTime;
-        }
-        else{
+        } else {
             this.id = 0;
         }
     }

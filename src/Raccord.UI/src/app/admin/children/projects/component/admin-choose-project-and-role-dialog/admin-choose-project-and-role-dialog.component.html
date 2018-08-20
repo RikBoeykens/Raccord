@@ -1,0 +1,35 @@
+<h3 mat-dialog-title>Choose Project</h3>
+<form id="choose-project-role-form"
+  #chooseProjectRoleForm = "ngForm"
+  (ngSubmit)="submit()">
+  <mat-dialog-content>
+    <div fxLayout="row">
+      <admin-search-entity (onSelect)="onSelect($event)" [entityType]="projectEntityType"></admin-search-entity>
+      <input type="hidden" required [(ngModel)]="selectedProject.id" name="search-project-id" />
+    </div>
+    <div fxLayout="row" *ngIf="selectedProject.id">
+      <mat-chip-list>
+          <mat-chip [removable]="true" (remove)="removeSelectedProject()">
+            {{selectedProject.displayName}}
+            <mat-icon matChipRemove>cancel</mat-icon>
+          </mat-chip>
+      </mat-chip-list>
+    </div>
+    <div fxLayout="row">
+      <mat-form-field>
+        <mat-select 
+          mdInput placeholder="Role" 
+          [(ngModel)]="chosenRoleId" 
+          #projectRole="ngModel" 
+          name="project-role">
+          <mat-option [value]="">---</mat-option>
+          <mat-option *ngFor="let projectRole of availableRoles" [value]="projectRole.id">{{projectRole.name}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button mat-button type="submit" [disabled]="!chooseProjectRoleForm.form.valid">Save</button>
+  </mat-dialog-actions>
+</form>

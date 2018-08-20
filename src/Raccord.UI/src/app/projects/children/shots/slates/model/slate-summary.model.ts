@@ -1,7 +1,7 @@
 import { Slate } from './slate.model';
-import { Scene } from '../../../scenes/model/scene.model';
-import { ShootingDay } from '../../../shooting-days/index';
-import { Image } from '../../../images/model/image.model';
+import { Image } from '../../../../../shared/children/images';
+import { Scene } from '../../../../../shared/children/scenes';
+import { ShootingDay } from '../../../..';
 
 export class SlateSummary extends Slate {
     public takeCount: number;
@@ -27,8 +27,6 @@ export class SlateSummary extends Slate {
         if (obj) {
             this.takeCount = obj.takeCount;
             this.primaryImage = obj.primaryImage;
-        } else {
-            this.id = 0;
         }
     }
 }

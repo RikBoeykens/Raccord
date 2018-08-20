@@ -35,8 +35,8 @@ namespace Raccord.Application.Services.ScriptUploads
     private const string _actionParagraph = "Action";
     private const string _dialogueParagraph = "Dialogue";
     private const string _textElement = "Text";
-    private string _intExtSeparator;
-    private string _dayNightSeparator;
+    private string _sceneIntroSeparator;
+    private string _timeOfDaySeparator;
 
     public ScriptUploadService(
       IScriptUploadRepository scriptUploadRepository,
@@ -96,9 +96,9 @@ namespace Raccord.Application.Services.ScriptUploads
 
     private void GetSeparators(XElement xmlSmartType)
     {
-      _intExtSeparator = xmlSmartType.Element("SceneIntros").Attribute("Separator").Value;
+      _sceneIntroSeparator = xmlSmartType.Element("SceneIntros").Attribute("Separator").Value;
 
-      _dayNightSeparator = xmlSmartType.Element("TimesOfDay").Attribute("Separator").Value;
+      _timeOfDaySeparator = xmlSmartType.Element("TimesOfDay").Attribute("Separator").Value;
     }
 
     public void ParseParagraphs(IEnumerable<XElement> xmlParagraphs, long projectID, long scriptUploadID)
@@ -143,15 +143,15 @@ namespace Raccord.Application.Services.ScriptUploads
       var pageCount = (xmlSceneProperties.Attribute("Length")?.Value).ParsePageLength();
 
       var sceneHeadingText = xmlParagraph.Element(_textElement).Value;
-      var intExtDto = new IntExtDto{ ProjectID = projectID};
+      var sceneIntroDto = new SceneIntroDto{ ProjectID = projectID};
       var scriptLocationDto = new ScriptLocationDto{ ProjectID = projectID};
-      var dayNightDto = new DayNightDto{ ProjectID = projectID};
+      var timeOfDayDto = new TimeOfDayDto{ ProjectID = projectID};
       string summary = string.Empty;
-      if(sceneHeadingText.HasSeparators(_intExtSeparator, _dayNightSeparator))
+      if(sceneHeadingText.HasSeparators(_sceneIntroSeparator, _timeOfDaySeparator))
       {
-        intExtDto.Name = sceneHeadingText.GetSubstringBeforeSeparator(_intExtSeparator);
-        scriptLocationDto.Name = sceneHeadingText.GetSubstringBetweenSeparators(_intExtSeparator, _dayNightSeparator);
-        dayNightDto.Name = sceneHeadingText.GetSubstringAfterSeparator(_dayNightSeparator);
+        sceneIntroDto.Name = sceneHeadingText.GetSubstringBeforeSeparator(_sceneIntroSeparator);
+        scriptLocationDto.Name = sceneHeadingText.GetSubstringBetweenSeparators(_sceneIntroSeparator, _timeOfDaySeparator);
+        timeOfDayDto.Name = sceneHeadingText.GetSubstringAfterSeparator(_timeOfDaySeparator);
       }
       else
       {
@@ -162,9 +162,9 @@ namespace Raccord.Application.Services.ScriptUploads
       {
         Number = sceneNumber,
         PageLength = pageCount,
-        IntExt = intExtDto,
+        SceneIntro = sceneIntroDto,
         ScriptLocation = scriptLocationDto,
-        DayNight = dayNightDto,
+        TimeOfDay = timeOfDayDto,
         Summary = summary,
         ProjectID = projectID
       };

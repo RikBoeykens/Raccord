@@ -30,7 +30,7 @@ namespace Raccord.Application.Services.Images
 
         public SearchTypeResultDto GetResults(SearchRequestDto request)
         {
-            var excludeIds = request.GetExcludeIDs(_type);
+            var excludeIds = request.GetExcludeLongIDs(_type);
             var imageCount = _imageRepository.SearchCount(request.SearchText, request.ProjectID, request.UserID, request.IsAdminSearch, excludeIds);
             var images = _imageRepository.Search(request.SearchText, request.ProjectID, request.UserID, request.IsAdminSearch, excludeIds);
 

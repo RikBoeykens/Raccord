@@ -1,8 +1,7 @@
-import { BaseComment } from "./base-comment.model";
-import { UserProfile } from "../../../../profile/model/user-profile.model";
-import { ParentCommentType } from "../../../../shared/enums/parent-comment-type.enum";
+import { BaseComment } from './base-comment.model';
+import { ParentCommentType } from '../../../../shared';
 
-export class PostComment extends BaseComment{
+export class PostComment extends BaseComment {
     public parentType: ParentCommentType;
     public parentID: number;
 
@@ -11,9 +10,9 @@ export class PostComment extends BaseComment{
                         text: string,
                         parentType: ParentCommentType,
                         parentID: number
-                    }){
+                    }) {
         super(obj);
-        if(obj){
+        if (obj) {
             this.parentType = obj.parentType;
             this.parentID = obj.parentID;
         }

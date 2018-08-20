@@ -1,0 +1,11 @@
+<div class="raccord-sub-header"
+  fxLayout="row">
+  <h2>Invitations</h2>
+  <button mat-icon-button (click)="showAddUserInvitation()"><mat-icon>add</mat-icon></button>
+  <button mat-icon-button (click)="showLinkUserInvitation()"><mat-icon>link</mat-icon></button>
+</div>
+<admin-project-project-invitations-table 
+  [projectUserInvitations]="projectUserInvitations"
+  (showEdit)="showEditUserInvitation($event)"
+  (showConfirmRemove)="showConfirmRemoveUserInvitation($event)">
+</admin-project-project-invitations-table>

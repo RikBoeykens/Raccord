@@ -1,0 +1,37 @@
+<mat-table #takestable [dataSource]="takes" class="takes-table">
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="selected">
+    <mat-header-cell *matHeaderCellDef></mat-header-cell>
+    <mat-cell *matCellDef="let take">
+      <mat-icon *ngIf="take.selected">check</mat-icon>
+    </mat-cell>
+  </ng-container>
+
+  <!-- Number Column -->
+  <ng-container matColumnDef="number">
+    <mat-header-cell *matHeaderCellDef>No</mat-header-cell>
+    <mat-cell *matCellDef="let take">
+      {{take.number}}
+    </mat-cell>
+  </ng-container>
+
+  <!-- Length Column -->
+  <ng-container matColumnDef="length">
+    <mat-header-cell *matHeaderCellDef>Length</mat-header-cell>
+    <mat-cell *matCellDef="let take">
+      {{take.length}}
+    </mat-cell>
+  </ng-container>
+
+  <!-- Job Column -->
+  <ng-container matColumnDef="notes">
+    <mat-header-cell *matHeaderCellDef>Notes</mat-header-cell>
+    <mat-cell *matCellDef="let take">
+      {{take.notes}}
+    </mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>

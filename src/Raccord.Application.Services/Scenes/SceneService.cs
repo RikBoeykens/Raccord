@@ -16,6 +16,9 @@ using Raccord.Data.EntityFramework.Repositories.ShootingDays;
 using Raccord.Core.Utilities;
 using Raccord.Application.Core.Common.Paging;
 using Raccord.Data.EntityFramework.Repositories.Breakdowns;
+using Raccord.Data.EntityFramework.Repositories.Comments;
+using Raccord.Core.Enums;
+using Raccord.Application.Core.Services.Comments;
 
 namespace Raccord.Application.Services.Scenes
 {
@@ -23,41 +26,31 @@ namespace Raccord.Application.Services.Scenes
     public class SceneService : ISceneService
     {
         private readonly ISceneRepository _sceneRepository;
-        private readonly IIntExtRepository _intExtRepository;
-        private readonly IDayNightRepository _dayNightRepository;
+        private readonly ISceneIntroRepository _sceneIntroRepository;
+        private readonly ITimeOfDayRepository _timeOfDayRepository;
         private readonly IScriptLocationRepository _scriptLocationRepository;
         private readonly IShootingDayRepository _shootingDayRepository;
         private readonly IBreakdownRepository _breakdownRepository;
+        private readonly ICommentService _commentService;
 
         // Initialises a new SceneService
         public SceneService(
             ISceneRepository sceneRepository,
-            IIntExtRepository intExtRepository,
-            IDayNightRepository dayNightRepository,
+            ISceneIntroRepository sceneIntroRepository,
+            ITimeOfDayRepository timeOfDayRepository,
             IScriptLocationRepository scriptLocationRepository,
             IShootingDayRepository shootingDayRepository,
-            IBreakdownRepository breakdownRepository
+            IBreakdownRepository breakdownRepository,
+            ICommentService commentService
             )
-        {
-            if(sceneRepository == null)
-                throw new ArgumentNullException(nameof(sceneRepository));
-            if(intExtRepository == null)
-                throw new ArgumentNullException(nameof(intExtRepository));
-            if(dayNightRepository == null)
-                throw new ArgumentNullException(nameof(dayNightRepository));
-            if(scriptLocationRepository == null)
-                throw new ArgumentNullException(nameof(scriptLocationRepository));
-            if(shootingDayRepository == null)
-                throw new ArgumentNullException(nameof(shootingDayRepository));
-            if(breakdownRepository == null)
-                throw new ArgumentNullException(nameof(breakdownRepository));
-            
+        {            
             _sceneRepository = sceneRepository;
-            _intExtRepository = intExtRepository;
-            _dayNightRepository = dayNightRepository;
+            _sceneIntroRepository = sceneIntroRepository;
+            _timeOfDayRepository = timeOfDayRepository;
             _scriptLocationRepository = scriptLocationRepository;
             _shootingDayRepository = shootingDayRepository;
             _breakdownRepository = breakdownRepository;
+            _commentService = commentService;
         }
 
         // Gets all scene for a project
@@ -76,8 +69,9 @@ namespace Raccord.Application.Services.Scenes
             var scene = _sceneRepository.GetFull(ID);
             var shootingDays = _shootingDayRepository.GetAllForScene(ID);
             var breakdown = _breakdownRepository.GetForProjectUser(scene.ProjectID, userID);
+            var comments = _commentService.GetForParent(new GetCommentDto{ParentID = scene.ID, ParentType =  ParentCommentType.Scene }).ToList();
 
-            var dto = scene.TranslateFull(shootingDays, breakdown);
+            var dto = scene.TranslateFull(shootingDays, breakdown, comments);
 
             return dto;
         }
@@ -114,9 +108,9 @@ namespace Raccord.Application.Services.Scenes
                 Summary = dto.Summary,
                 PageLength = dto.PageLength,
                 Timing = dto.Timing,
-                IntExtID = dto.IntExt.ID.GetValueOrNull(),
+                SceneIntroID = dto.SceneIntro.ID.GetValueOrNull(),
                 ScriptLocationID = dto.ScriptLocation.ID.GetValueOrNull(),
-                DayNightID = dto.DayNight.ID.GetValueOrNull(),
+                TimeOfDayID = dto.TimeOfDay.ID.GetValueOrNull(),
                 ScriptUploadID = scriptUploadID,
                 ProjectID = dto.ProjectID,
                 SortingOrder = (int?)null,
@@ -139,9 +133,9 @@ namespace Raccord.Application.Services.Scenes
             scene.Summary = dto.Summary;
             scene.PageLength = dto.PageLength;
             scene.Timing = dto.Timing;
-            scene.IntExtID = dto.IntExt.ID.GetValueOrNull();
+            scene.SceneIntroID = dto.SceneIntro.ID.GetValueOrNull();
             scene.ScriptLocationID = dto.ScriptLocation.ID.GetValueOrNull();
-            scene.DayNightID = dto.DayNight.ID.GetValueOrNull();
+            scene.TimeOfDayID = dto.TimeOfDay.ID.GetValueOrNull();
 
             _sceneRepository.Edit(scene);
             _sceneRepository.Commit();
@@ -177,75 +171,75 @@ namespace Raccord.Application.Services.Scenes
         public PagedDataDto<SceneSummaryDto> Filter(SceneFilterRequestDto filter, PaginationRequestDto requestDto)
         {
             var scenes = _sceneRepository.Filter(
-                filter.ProjectID,
-                filter.IntExtIDs,
-                filter.ScriptLocationIDs,
-                filter.DayNightIDs,
-                filter.LocationSetIDs,
-                filter.LocationIDs,
-                filter.CharacterIDs,
-                filter.BreakdownItemIDs,
-                filter.ScheduleDayIDs,
-                filter.ScheduleSceneShootingDayIDs,
-                filter.CallsheetIDs,
-                filter.CastMemberIDs,
-                filter.CallsheetSceneShootingDayIDs,
-                filter.ShootingDayIDs,
-                filter.SearchText,
-                filter.MinPageLength,
-                filter.MaxPageLength
+                projectID: filter.ProjectID,
+                sceneIntroIDs: filter.SceneIntroIDs,
+                scriptLocationIDs: filter.ScriptLocationIDs,
+                timeOfDayIDs: filter.TimeOfDayIDs,
+                locationSetIDs: filter.LocationSetIDs,
+                locationIDs: filter.LocationIDs,
+                characterIDs: filter.CharacterIDs,
+                castMemberIDs: filter.CastMemberIDs,
+                breakdownItemIDs: filter.BreakdownItemIDs,
+                scheduleDayIDs: filter.ScheduleDayIDs,
+                scheduleSceneShootingDayIDs: filter.ScheduleSceneShootingDayIDs,
+                callsheetIDs: filter.CallsheetIDs,
+                callsheetSceneShootingDayIDs: filter.CallsheetSceneShootingDayIDs,
+                shootingDayIDs: filter.ShootingDayIDs,
+                searchText: filter.SearchText,
+                minPageLength: filter.MinPageLength,
+                maxPageLength: filter.MaxPageLength
             );
             return scenes.GetPaged<Scene, SceneSummaryDto>(requestDto, Utilities.TranslateSummary);
         }
 
         private void CreatePropertiesIfNecessary(SceneDto scene, long? scriptUploadID = null)
         {
-            if(scene.IntExt.ID == default(long) && !string.IsNullOrEmpty(scene.IntExt.Name))
+            if(scene.SceneIntro.ID == default(long) && !string.IsNullOrEmpty(scene.SceneIntro.Name))
             {
-                var existingIntExt = _intExtRepository.FindBy(i=> i.Name.ToLower() == scene.IntExt.Name.ToLower()&& i.ProjectID == scene.ProjectID);
-                if(existingIntExt.Any())
+                var existingSceneIntro = _sceneIntroRepository.FindBy(i=> i.Name.ToLower() == scene.SceneIntro.Name.ToLower()&& i.ProjectID == scene.ProjectID);
+                if(existingSceneIntro.Any())
                 {
-                    scene.IntExt.ID = existingIntExt.FirstOrDefault().ID;
+                    scene.SceneIntro.ID = existingSceneIntro.FirstOrDefault().ID;
                 }
                 else
                 {
-                    var intExt = new IntExt
+                    var sceneIntro = new SceneIntro
                     {
-                        Name = scene.IntExt.Name,
-                        Description = scene.IntExt.Description,
+                        Name = scene.SceneIntro.Name,
+                        Description = scene.SceneIntro.Description,
                         ScriptUploadID = scriptUploadID,
-                        ProjectID = scene.IntExt.ProjectID,
+                        ProjectID = scene.SceneIntro.ProjectID,
                     };
 
-                    _intExtRepository.Add(intExt);
-                    _intExtRepository.Commit();
+                    _sceneIntroRepository.Add(sceneIntro);
+                    _sceneIntroRepository.Commit();
 
-                    scene.IntExt.ID = intExt.ID;
+                    scene.SceneIntro.ID = sceneIntro.ID;
                 }
             }
 
-            if(scene.DayNight.ID == default(long) && !string.IsNullOrEmpty(scene.DayNight.Name))
+            if(scene.TimeOfDay.ID == default(long) && !string.IsNullOrEmpty(scene.TimeOfDay.Name))
             {
-                var existingDayNight = _dayNightRepository.FindBy(i=> i.Name.ToLower() == scene.DayNight.Name.ToLower()&& i.ProjectID == scene.ProjectID);
+                var existingTimeOfDay = _timeOfDayRepository.FindBy(i=> i.Name.ToLower() == scene.TimeOfDay.Name.ToLower()&& i.ProjectID == scene.ProjectID);
 
-                if(existingDayNight.Any())
+                if(existingTimeOfDay.Any())
                 {
-                    scene.DayNight.ID = existingDayNight.FirstOrDefault().ID;
+                    scene.TimeOfDay.ID = existingTimeOfDay.FirstOrDefault().ID;
                 }
                 else
                 {
-                    var dayNight = new DayNight
+                    var timeOfDay = new TimeOfDay
                     {
-                        Name = scene.DayNight.Name,
-                        Description = scene.DayNight.Description,
+                        Name = scene.TimeOfDay.Name,
+                        Description = scene.TimeOfDay.Description,
                         ScriptUploadID = scriptUploadID,
-                        ProjectID = scene.DayNight.ProjectID,
+                        ProjectID = scene.TimeOfDay.ProjectID,
                     };
 
-                    _dayNightRepository.Add(dayNight);
-                    _dayNightRepository.Commit();
+                    _timeOfDayRepository.Add(timeOfDay);
+                    _timeOfDayRepository.Commit();
 
-                    scene.DayNight.ID = dayNight.ID;
+                    scene.TimeOfDay.ID = timeOfDay.ID;
                 }
             }
 

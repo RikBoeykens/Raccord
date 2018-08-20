@@ -9,13 +9,18 @@ using Raccord.Core.Enums;
 using Raccord.Application.Services.Scheduling.ScheduleDays;
 using Raccord.Application.Core.Services.Locations.LocationSets;
 using System.Collections.Generic;
+using Raccord.Application.Core.Common.Routing;
+using Raccord.Domain.Model.Comments;
+using Raccord.Application.Core.Services.Comments;
+using Raccord.Domain.Model.ShootingDays;
+using Raccord.Application.Services.ShootingDays;
 
 namespace Raccord.Application.Services.Locations.Locations
 {
     // Utilities and helper methods for Locations
     public static class Utilities
     {
-        public static FullLocationDto TranslateFull(this Location location)
+        public static FullLocationDto TranslateFull(this Location location, IEnumerable<CommentDto> comments, IEnumerable<ShootingDay> shootingDays)
         {
             var dto = new FullLocationDto
             {
@@ -25,8 +30,9 @@ namespace Raccord.Application.Services.Locations.Locations
                 Address = LocationUtilities.TranslateAddress(location.Address1, location.Address2, location.Address3, location.Address4),
                 LatLng = LocationUtilities.TranslateLatLng(location.Latitude, location.Longitude),
                 Sets = location.LocationSets.Select(ls=> ls.TranslateScriptLocation()),
-                ScheduleDays = location.GetLocationScheduleDays(),
+                ShootingDays = shootingDays.GetLocationSetShootingDays(location.LocationSets.Select(ls => ls.ID).ToArray()),
                 ProjectID = location.ProjectID,
+                Comments = comments
             };
 
             return dto;
@@ -83,10 +89,13 @@ namespace Raccord.Application.Services.Locations.Locations
             var dto = new SearchResultDto
             {
                 ID = location.ID,
-                RouteIDs = new long[]{location.ProjectID, location.ID},
                 DisplayName = location.Name,
                 Info = $"Project: {location.Project.Title}",
-                Type = EntityType.Location,
+                RouteInfo = new RouteInfoDto
+                {
+                    RouteIDs = new object[]{location.ProjectID, location.ID},
+                    Type = EntityType.Location,
+                }
             };
 
             return dto;

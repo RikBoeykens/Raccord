@@ -1,3 +1,4 @@
+// tslint:disable:variable-name
 export class OpenIdDictToken {
     public access_token: string;
     public expires_in: number;

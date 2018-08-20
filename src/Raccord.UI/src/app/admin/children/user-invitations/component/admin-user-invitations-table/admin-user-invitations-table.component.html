@@ -1,0 +1,45 @@
+<mat-table #userinvitationstable [dataSource]="userInvitations">
+
+  <!-- Image Column -->
+  <ng-container matColumnDef="image">
+    <mat-header-cell *matHeaderCellDef></mat-header-cell>
+    <mat-cell *matCellDef="let userInvitation">
+      <placeholder-image [value]="getFullName(userInvitation)" [listAvatar]="true"></placeholder-image>
+    </mat-cell>
+  </ng-container>
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="fullname">
+    <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+    <mat-cell *matCellDef="let userInvitation">
+      <a routerLink="{{getAdminUserInvitationLink(userInvitation)}}">{{getFullName(userInvitation)}}</a>
+    </mat-cell>
+  </ng-container>
+
+  <!-- Email Column -->
+  <ng-container matColumnDef="email">
+    <mat-header-cell *matHeaderCellDef>Email</mat-header-cell>
+    <mat-cell *matCellDef="let userInvitation">
+      <mail-link [email]="userInvitation.email"></mail-link>
+    </mat-cell>
+  </ng-container>
+
+  <!-- Project count Column -->
+  <ng-container matColumnDef="projectcount">
+    <mat-header-cell *matHeaderCellDef>Projects</mat-header-cell>
+    <mat-cell *matCellDef="let userInvitation">
+      {{userInvitation.projectCount}}
+    </mat-cell>
+  </ng-container>
+
+  <!-- Accepted Column -->
+  <ng-container matColumnDef="accepted">
+    <mat-header-cell *matHeaderCellDef>Accepted</mat-header-cell>
+    <mat-cell *matCellDef="let userInvitation">
+      <mat-icon *ngIf="userInvitation.acceptedDate">check</mat-icon>
+    </mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>

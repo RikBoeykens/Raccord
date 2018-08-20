@@ -1,16 +1,20 @@
-export class Address{
-    address1: string;
-    address2: string;
-    address3: string;
-    address4: string;
+import { BaseModel } from './base.model';
 
-    constructor(obj?: {
+export class Address extends BaseModel {
+    public address1: string;
+    public address2: string;
+    public address3: string;
+    public address4: string;
+
+    constructor(
+        obj?: {
         address1: string,
         address2: string,
         address3: string,
         address4: string,
-    }){
-        if(obj){
+    }) {
+        super();
+        if (obj) {
             this.address1 = obj.address1;
             this.address2 = obj.address2;
             this.address3 = obj.address3;

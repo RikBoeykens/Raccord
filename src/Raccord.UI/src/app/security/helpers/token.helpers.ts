@@ -1,10 +1,11 @@
 import { OpenIdDictToken } from '..';
 import { SaveToken } from '../model/save-token';
+import { StorageSettings } from '../../shared';
 
 export class TokenHelpers {
   public static setTokens(openIdDictToken: OpenIdDictToken) {
     const now = new Date();
-    let expiryDate =
+    const expiryDate =
       new Date(now.getTime() + openIdDictToken.expires_in * 1000).getTime();
     let tokens = this.getTokens();
     if (!tokens) {
@@ -16,15 +17,15 @@ export class TokenHelpers {
     }
     tokens.accessToken = openIdDictToken.access_token;
     tokens.expiryDate = expiryDate;
-    sessionStorage.setItem('auth-tokens', JSON.stringify(tokens));
+    localStorage.setItem(StorageSettings.AUTHTOKENS, JSON.stringify(tokens));
   }
 
   public static getTokens(): SaveToken {
-    let tokensString = sessionStorage.getItem('auth-tokens');
+    const tokensString = localStorage.getItem(StorageSettings.AUTHTOKENS);
     return tokensString == null ? null : JSON.parse(tokensString);
   }
 
   public static removeTokens() {
-    sessionStorage.clear();
+    localStorage.clear();
   }
 }

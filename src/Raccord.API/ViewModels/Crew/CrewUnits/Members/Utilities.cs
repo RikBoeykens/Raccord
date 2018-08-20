@@ -13,21 +13,7 @@ namespace Raccord.API.ViewModels.Crew.CrewUnits.Members
 
       return new CreateCrewUnitMemberCrewMemberDto
       {
-        CrewUnitMemberID = vm.CrewUnitMemberID,
-        JobTitle = vm.JobTitle,
-        DepartmentID = vm.DepartmentID
-      };
-    }
-    public static CreateCrewUnitInvitationMemberCrewMemberDto Translate(this CreateCrewUnitInvitationMemberCrewMemberViewModel vm)
-    {
-      if(vm == null)
-      {
-        return null;
-      }
-
-      return new CreateCrewUnitInvitationMemberCrewMemberDto
-      {
-        CrewUnitInvitationMemberID = vm.CrewUnitInvitationMemberID,
+        LinkID = vm.LinkID,
         JobTitle = vm.JobTitle,
         DepartmentID = vm.DepartmentID
       };

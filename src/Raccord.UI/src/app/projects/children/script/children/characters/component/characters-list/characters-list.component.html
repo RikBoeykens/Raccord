@@ -1,0 +1,17 @@
+<div class="raccord-narrow-container">
+  <div class="raccord-page-header">
+    <a routerLink="{{getBackLink()}}">
+      <back-link></back-link>
+    </a>
+    <h1 class="raccord-header-title">
+      Characters
+    </h1>
+  </div>
+  <div fxLayout="row wrap" fxLayoutGap="5px" *ngIf="characters">
+    <a routerLink="{{getCharacterLink(character)}}"
+        *ngFor="let character of characters">
+      <character-card
+          [character]="character"></character-card>
+    </a>
+  </div>
+</div>

@@ -30,7 +30,7 @@ namespace Raccord.Application.Services.Projects
 
         public SearchTypeResultDto GetResults(SearchRequestDto request)
         {
-            var excludeIds = request.GetExcludeIDs(_type);
+            var excludeIds = request.GetExcludeLongIDs(_type);
             var projectCount = _projectRepository.SearchCount(request.SearchText, request.UserID, request.IsAdminSearch, excludeIds);
             var projects = _projectRepository.Search(request.SearchText, request.UserID, request.IsAdminSearch, excludeIds);
 

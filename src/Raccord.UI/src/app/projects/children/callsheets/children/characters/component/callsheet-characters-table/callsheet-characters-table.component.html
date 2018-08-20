@@ -1,0 +1,44 @@
+<mat-table #callsheetcharacterstable
+  class="callsheet-characters-table"
+  [dataSource]="callsheetCharacters">
+
+  <!-- Image Column -->
+  <ng-container matColumnDef="image">
+    <mat-header-cell *matHeaderCellDef></mat-header-cell>
+    <mat-cell *matCellDef="let callsheetCharacter">
+      <character-avatar *ngIf="showCharacterImage(callsheetCharacter)" [character]="callsheetCharacter.character" [listAvatar]="true"></character-avatar>
+      <user-avatar *ngIf="showUserImage(callsheetCharacter)" [userId]="callsheetCharacter.castMember.userID" [fullName]="getFullName(callsheetCharacter.castMember)" [hasImage]="callsheetCharacter.castMember.hasImage"></user-avatar>
+    </mat-cell>
+  </ng-container>
+
+  <!-- Character Column -->
+  <ng-container matColumnDef="character">
+    <mat-header-cell *matHeaderCellDef></mat-header-cell>
+    <mat-cell *matCellDef="let callsheetCharacter">
+      <a routerLink="{{getCharacterLink(callsheetCharacter)}}">
+        <character-summary [character]="callsheetCharacter.character"></character-summary>
+      </a>
+    </mat-cell>
+  </ng-container>
+
+  <!-- Cast Member Column -->
+  <ng-container matColumnDef="castmember">
+    <mat-header-cell *matHeaderCellDef></mat-header-cell>
+    <mat-cell *matCellDef="let callsheetCharacter">
+      <a routerLink="{{getCastMemberLink(callsheetCharacter)}}">
+        {{getFullName(callsheetCharacter.castMember)}}
+      </a>
+    </mat-cell>
+  </ng-container>
+
+  <!-- Calls -->
+  <ng-container matColumnDef="call{{callType.id}}" *ngFor="let callType of getCharacterCalls(); let i = index">
+    <mat-header-cell *matHeaderCellDef>{{callType.shortName}}</mat-header-cell>
+    <mat-cell *matCellDef="let callsheetCharacter">
+      {{callsheetCharacter.calls[i].callTime | date:'shortTime'}}
+    </mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="displayedColumns()"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns();"></mat-row>
+</mat-table>

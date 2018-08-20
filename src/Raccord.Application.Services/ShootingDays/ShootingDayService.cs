@@ -1,10 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Raccord.Application.Core.Common.Paging;
 using Raccord.Application.Core.Services.ShootingDays;
 using Raccord.Data.EntityFramework.Repositories.Callsheets;
 using Raccord.Data.EntityFramework.Repositories.ShootingDays;
 using Raccord.Data.EntityFramework.Repositories.ShootingDays.Scenes;
+using Raccord.Domain.Model.ShootingDays;
 using Raccord.Domain.Model.ShootingDays.Scenes;
 
 namespace Raccord.Application.Services.ShootingDays
@@ -46,11 +48,25 @@ namespace Raccord.Application.Services.ShootingDays
             return availableShootingDays.Select(asd=> asd.TranslateCrewUnit());
         }
 
-        public IEnumerable<ShootingDaySummaryDto> GetCompleted(long projectID)
+        public IEnumerable<ShootingDayCrewUnitDto> GetCompleted(long crewUnitID)
         {
-            var availableShootingDays = _shootingDayRepository.GetAllForCrewUnit(projectID).Where(sd=> sd.Completed).ToList();
+            var availableShootingDays = _shootingDayRepository.GetAllForProject(crewUnitID).Where(sd=> sd.Completed).ToList();
 
-            return availableShootingDays.Select(asd=> asd.TranslateSummary());
+            return availableShootingDays.Select(asd=> asd.TranslateCrewUnit());
+        }
+
+        public PagedDataDto<ShootingDaySummaryDto> GetCompletedForCrewUnitPaged(long crewUnitID, PaginationRequestDto requestDto)
+        {
+            var availableShootingDays = _shootingDayRepository.GetAllForCrewUnit(crewUnitID).Where(sd=> sd.Completed);
+
+            return availableShootingDays.GetPaged<ShootingDay, ShootingDaySummaryDto>(requestDto, asd=> asd.TranslateSummary());
+        }
+
+        public PagedDataDto<ShootingDayCrewUnitDto> GetCompletedForProjectPaged(long projectID, PaginationRequestDto requestDto)
+        {
+            var availableShootingDays = _shootingDayRepository.GetAllForProject(projectID).Where(sd=> sd.Completed);
+
+            return availableShootingDays.GetPaged<ShootingDay, ShootingDayCrewUnitDto>(requestDto, asd=> asd.TranslateCrewUnit());
         }
 
         public IEnumerable<ShootingDayDto> GetAll(long crewUnitID)

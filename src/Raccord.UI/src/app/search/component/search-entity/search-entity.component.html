@@ -1,10 +1,8 @@
-<div class="search-container">
-    <md-input-container class="search-input-container">
-        <input mdInput placeholder="{{entityTypeName}}" id="entity_search" [(ngModel)]="searchEntity.name" #entity="ngModel" name="entity_search"  (keyup)="doSearch()" (blur)="clearSearch()" autocomplete="off" />
-    </md-input-container>
-    <ul class="autocomplete-content" *ngIf="searchResults.length>0">
-        <li (mousedown)="setResult(result)"*ngFor="let result of searchResults">
-            <span raccord-highlight [search]="searchEntity.name" [text]="result.displayName" classToApply="highlight"></span>
-        </li>
-    </ul>
-</div>
+<mat-form-field>
+  <input type="text" placeholder="{{entityTypeName}}" aria-label="Search" matInput [matAutocomplete]="searchAuto" [(ngModel)]="searchText" name="search-text" (input)="search()">
+  <mat-autocomplete #searchAuto="matAutocomplete" (optionSelected)="onSelectionChanged($event)" [displayWith]="clearSearch">
+    <mat-option *ngFor="let result of filteredResults" [value]="result">
+      {{result.displayName}}
+    </mat-option>
+  </mat-autocomplete>
+</mat-form-field>

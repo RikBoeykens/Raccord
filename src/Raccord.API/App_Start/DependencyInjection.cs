@@ -154,6 +154,8 @@ using Raccord.Application.Core.ExternalServices.Weather;
 using Raccord.Application.ExternalServices.Weather;
 using Raccord.Application.Services.Users.Invitations.Project.Cast;
 using Raccord.Application.Core.Services.Users.Invitations.Project.Cast;
+using Raccord.Application.Core.Services.Scheduling;
+using Raccord.Application.Services.Scheduling;
 
 namespace Raccord.API
 {
@@ -177,17 +179,17 @@ namespace Raccord.API
             services.AddTransient<ISceneService, SceneService>();
             services.AddTransient<ISceneSearchEngineService, SceneSearchEngineService>();
             
-            services.AddTransient<IIntExtRepository, IntExtRepository>();
-            services.AddTransient<IIntExtService, IntExtService>();
-            services.AddTransient<IIntExtSearchEngineService, IntExtSearchEngineService>();
+            services.AddTransient<ISceneIntroRepository, SceneIntroRepository>();
+            services.AddTransient<ISceneIntroService, SceneIntroService>();
+            services.AddTransient<ISceneIntroSearchEngineService, SceneIntroSearchEngineService>();
             
             services.AddTransient<IScriptLocationRepository, ScriptLocationRepository>();
             services.AddTransient<IScriptLocationService, ScriptLocationService>();
             services.AddTransient<IScriptLocationSearchEngineService, ScriptLocationSearchEngineService>();
             
-            services.AddTransient<IDayNightRepository, DayNightRepository>();
-            services.AddTransient<IDayNightService, DayNightService>();
-            services.AddTransient<IDayNightSearchEngineService, DayNightSearchEngineService>();
+            services.AddTransient<ITimeOfDayRepository, TimeOfDayRepository>();
+            services.AddTransient<ITimeOfDayService, TimeOfDayService>();
+            services.AddTransient<ITimeOfDaySearchEngineService, TimeOfDaySearchEngineService>();
             
             services.AddTransient<IImageRepository, ImageRepository>();
             services.AddTransient<IImageService, ImageService>();
@@ -223,6 +225,8 @@ namespace Raccord.API
             services.AddTransient<IBreakdownItemSceneRepository, BreakdownItemSceneRepository>();
             services.AddTransient<IBreakdownItemSceneService, BreakdownItemSceneService>();
             
+            services.AddTransient<IScheduleService, ScheduleService>();
+
             services.AddTransient<IScheduleDayRepository, ScheduleDayRepository>();
             services.AddTransient<IScheduleDayService, ScheduleDayService>();
 
@@ -267,6 +271,7 @@ namespace Raccord.API
 
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<IUserService, UserService>();
+            services.AddTransient<IUserSearchEngineService, UserSearchEngineService>();
 
             services.AddTransient<IProjectUserRepository, ProjectUserRepository>();            
             services.AddTransient<IProjectUserService, ProjectUserService>();            
@@ -344,6 +349,7 @@ namespace Raccord.API
 
             services.AddTransient<IUserInvitationRepository, UserInvitationRepository>();
             services.AddTransient<IUserInvitationService, UserInvitationService>();
+            services.AddTransient<IUserInvitationSearchEngineService, UserInvitationSearchEngineService>();
 
             services.AddTransient<IProjectUserInvitationRepository, ProjectUserInvitationRepository>();
             services.AddTransient<IProjectUserInvitationService, ProjectUserInvitationService>();

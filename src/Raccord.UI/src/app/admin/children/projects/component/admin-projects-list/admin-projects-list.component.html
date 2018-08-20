@@ -1,0 +1,21 @@
+<div class="raccord-narrow-container">
+  <div class="raccord-page-header">
+    <a routerLink="/admin">
+      <back-link></back-link>
+    </a>
+    <div fxLayout="row">
+      <h1 class="raccord-header-title">
+        Projects
+      </h1>
+      <button mat-mini-fab
+        (click)="showAddProject()"><mat-icon>add</mat-icon></button>
+      <button mat-mini-fab
+        (click)="showAddExampleProject()"><mat-icon>send</mat-icon></button>
+    </div>
+  </div>
+  <admin-projects-table 
+    [projects]="projects"
+    (showConfirmRemove)="showConfirmRemove($event)"
+    (showEdit)="showEditProject($event)">
+  </admin-projects-table>
+</div>

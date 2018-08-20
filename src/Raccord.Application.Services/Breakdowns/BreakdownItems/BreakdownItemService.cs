@@ -5,6 +5,10 @@ using Raccord.Domain.Model.Breakdowns.BreakdownItems;
 using Raccord.Application.Core.Services.Breakdowns.BreakdownItems;
 using Raccord.Data.EntityFramework.Repositories.Breakdowns.BreakdownItems;
 using Raccord.Domain.Model.Images;
+using Raccord.Data.EntityFramework.Repositories.Comments;
+using Raccord.Core.Enums;
+using Raccord.Application.Core.Services.Comments;
+using Raccord.Data.EntityFramework.Repositories.ShootingDays;
 
 namespace Raccord.Application.Services.Breakdowns.BreakdownItems
 {
@@ -12,14 +16,19 @@ namespace Raccord.Application.Services.Breakdowns.BreakdownItems
     public class BreakdownItemService : IBreakdownItemService
     {
         private readonly IBreakdownItemRepository _breakdownItemRepository;
+        private readonly IShootingDayRepository _shootingDayRepository;
+        private readonly ICommentService _commentService;
 
         // Initialises a new BreakdownItemService
-        public BreakdownItemService(IBreakdownItemRepository breakdownitemRepository)
+        public BreakdownItemService(
+            IBreakdownItemRepository breakdownitemRepository,
+            IShootingDayRepository shootingDayRepository,
+            ICommentService commentService
+            )
         {
-            if(breakdownitemRepository == null)
-                throw new ArgumentNullException(nameof(breakdownitemRepository));
-            
             _breakdownItemRepository = breakdownitemRepository;
+            _shootingDayRepository = shootingDayRepository;
+            _commentService = commentService;
         }
 
         // Gets all breakdown items
@@ -37,7 +46,10 @@ namespace Raccord.Application.Services.Breakdowns.BreakdownItems
         {
             var item = _breakdownItemRepository.GetFull(ID);
 
-            var dto = item.TranslateFull();
+            var comments = _commentService.GetForParent(new GetCommentDto{ParentID = item.ID, ParentType = ParentCommentType.BreakdownItem}).ToList();
+            var shootingDays = _shootingDayRepository.GetAllForBreakdownItem(item.ID);
+
+            var dto = item.TranslateFull(comments, shootingDays);
 
             return dto;
         }

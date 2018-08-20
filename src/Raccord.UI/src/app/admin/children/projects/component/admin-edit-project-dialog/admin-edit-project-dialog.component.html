@@ -1,0 +1,17 @@
+
+<h3 mat-dialog-title>{{dialogTitle}}</h3>
+<form id="edit-project-form"
+  #editProjectForm = "ngForm"
+  (ngSubmit)="submit()">
+  <mat-dialog-content>
+    <div fxLayout="row">
+      <mat-form-field>
+        <input matInput required placeholder="Title" [(ngModel)]="project.title" name="project-title">
+      </mat-form-field>
+    </div>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button mat-button type="submit" [disabled]="!editProjectForm.form.valid">Save</button>
+  </mat-dialog-actions>
+</form>

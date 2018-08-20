@@ -42,11 +42,11 @@ namespace Raccord.Application.Services.Users.Projects
         }
 
         // Gets a single project user by id
-        public FullProjectUserDto Get(long ID)
+        public AdminFullProjectUserDto Get(long ID)
         {
             var projectUser = _projectUserRepository.GetFull(ID);
 
-            var dto = projectUser.TranslateFull();
+            var dto = projectUser.TranslateFullAdmin();
 
             return dto;
         }

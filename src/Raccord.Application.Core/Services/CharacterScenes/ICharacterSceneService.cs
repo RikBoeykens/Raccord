@@ -11,7 +11,7 @@ namespace Raccord.Application.Core.Services.CharacterScenes
         IEnumerable<LinkedSceneDto> GetScenes(long ID);
 
         // Links a character to a scene
-        void AddLink(long imageID, long sceneID);
+        long AddLink(long characterID, long sceneID);
 
         // Removes link between character and scene
         void RemoveLink(long ID);

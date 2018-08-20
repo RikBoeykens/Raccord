@@ -32,7 +32,7 @@ namespace Raccord.API.Controllers.Projects
         [HttpGet]
         public IEnumerable<CalendarItemViewModel> GetAllForUser(long authProjectId, [FromQuery]DateTime start, [FromQuery]DateTime end)
         {
-            var dtos = _calendarService.GetCalendarItemScenes(GetUserId(), authProjectId, start, end);
+            var dtos = _calendarService.GetCalendarItemsForProject(GetUserId(), authProjectId, start, end);
 
             return dtos.Select(p => p.Translate());
         }

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using Raccord.Domain.Model.Breakdowns;
 using Raccord.Domain.Model.Callsheets.CallTypes;
 using Raccord.Domain.Model.Comments;

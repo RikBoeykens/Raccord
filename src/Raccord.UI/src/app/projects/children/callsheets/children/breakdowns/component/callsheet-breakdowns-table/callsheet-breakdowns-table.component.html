@@ -1,0 +1,27 @@
+<mat-table #callsheetbreakdowntypestable
+  class="callsheet-breakdown-types-table"
+  [dataSource]="callsheetBreakdownTypes">
+
+  <!-- Breakdown Type Column -->
+  <ng-container matColumnDef="type">
+    <mat-cell *matCellDef="let breakdownType">
+      <a routerLink="{{getBreakdownTypeLink(breakdownType)}}">
+        {{breakdownType.name}}
+      </a>
+    </mat-cell>
+  </ng-container>
+
+  <!-- Breakdown Item Scenes Column -->
+  <ng-container matColumnDef="scenes">
+    <mat-cell *matCellDef="let breakdownType">
+      <p *ngFor="let breakdownItemScene of breakdownType.scenes">
+        <em>Sc {{breakdownItemScene.sceneNumber}}:</em>
+        <span class="comma-separated" *ngFor="let item of breakdownItemScene.items">
+          <a routerLink="getBreakdownItemLink(item)">{{item.name}}</a>
+        </span>
+      </p>
+    </mat-cell>
+  </ng-container>
+
+  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>

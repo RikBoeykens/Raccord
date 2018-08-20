@@ -22,6 +22,22 @@ namespace Raccord.API.ViewModels.Users.Invitations
         Projects = dto.Projects.Select(p => p.Translate())
       };
     }
+    public static AdminFullUserInvitationViewModel Translate(this AdminFullUserInvitationDto dto)
+    {
+      if(dto == null)
+      {
+        return null;
+      }
+      return new AdminFullUserInvitationViewModel
+      {
+        ID = dto.ID,
+        Email = dto.Email,
+        FirstName = dto.FirstName,
+        LastName = dto.LastName,
+        AcceptedDate = dto.AcceptedDate,
+        Projects = dto.Projects.Select(p => p.Translate())
+      };
+    }
     public static UserInvitationSummaryViewModel Translate(this UserInvitationSummaryDto dto)
     {
       if(dto == null)
@@ -35,6 +51,22 @@ namespace Raccord.API.ViewModels.Users.Invitations
         FirstName = dto.FirstName,
         LastName = dto.LastName,
         AcceptedDate = dto.AcceptedDate,
+      };
+    }
+    public static AdminUserInvitationSummaryViewModel Translate(this AdminUserInvitationSummaryDto dto)
+    {
+      if(dto == null)
+      {
+        return null;
+      }
+      return new AdminUserInvitationSummaryViewModel
+      {
+        ID = dto.ID,
+        Email = dto.Email,
+        FirstName = dto.FirstName,
+        LastName = dto.LastName,
+        AcceptedDate = dto.AcceptedDate,
+        ProjectCount = dto.ProjectCount
       };
     }
     public static UserInvitationViewModel Translate(this UserInvitationDto dto)

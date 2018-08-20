@@ -3,6 +3,8 @@ using Raccord.API.ViewModels.Scenes;
 using System.Linq;
 using Raccord.API.ViewModels.Images;
 using Raccord.API.ViewModels.Breakdowns.BreakdownTypes;
+using Raccord.API.ViewModels.Comments;
+using Raccord.API.ViewModels.ShootingDays;
 
 namespace Raccord.API.ViewModels.Breakdowns.BreakdownItems
 {
@@ -20,6 +22,8 @@ namespace Raccord.API.ViewModels.Breakdowns.BreakdownItems
                 Type = dto.Type.Translate(),
                 Scenes = dto.Scenes.Select(s=> s.Translate()),
                 Images = dto.Images.Select(i=> i.Translate()),
+                Comments = dto.Comments.Select(c => c.Translate()),
+                ShootingDays = dto.ShootingDays.Select(s => s.Translate())
             };
         }
 

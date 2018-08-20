@@ -1,85 +1,124 @@
-<md-card>
-        <a routerLink="/" class="breadcrumb">Dashboard</a>
-        <a routerLink="/projects" class="breadcrumb">Projects</a>
-        <a routerLink="/projects/{{project.id}}" class="breadcrumb">{{project.title}}</a>
-        <a routerLink="/projects/{{project.id}}/slates" class="breadcrumb">Slates</a>
-        <span class="breadcrumb">{{slate.number ? slate.number: "..."}}</span>
-</md-card>
-<md-card>
-    <div fxLayout="row" fxLayoutGap="10px">
-        <md-input-container fxFlex="33%">
-            <input mdInput type="text" placeholder="Number" required [(ngModel)]="viewSlate.number" name="slate_number" (blur)="updateSlate()" />
-        </md-input-container>
-        <span fxFlex="33%">
-            <span *ngIf="viewSlate.scene.id!==0">Scene # {{viewSlate.scene.number}}</span>
-            <span *ngIf="viewSlate.scene.id===0"><i>no scene selected</i></span>
-            <a (click)="chooseScene()">choose scene</a>
-        </span>
-        <span fxFlex="33%">
-            <span *ngIf="viewSlate.shootingDay.id!==0">SD # {{viewSlate.shootingDay.number}} {{viewSlate.shootingDay.date | date}}</span>
-            <span *ngIf="viewSlate.shootingDay.id===0"><i>no day selected</i></span>
-            <a (click)="chooseShootingDay()">choose day</a>
-        </span>
+<div class="raccord-narrow-container">
+  <div class="raccord-page-header">
+    <a routerLink="{{getBackLink()}}">
+      <back-link></back-link>
+    </a>
+    <div fxLayout="row">
+      <h1 class="raccord-header-title">
+        {{slate.number}} - {{slate.description}}
+      </h1>
     </div>
-</md-card>
-<md-card>
-    <div fxLayout="row" fxLayoutGap="10px">
-        <md-input-container fxFlex="100%">
-            <input mdInput type="text" placeholder="Description" required [(ngModel)]="viewSlate.description" name="slate_description" (blur)="updateSlate()" />
-        </md-input-container>
+  </div>
+  <mat-card class="raccord-label-info">
+    <div fxLayout="row"
+      class="raccord-label-info-row"
+      *ngIf="slate.shootingDay.id">
+      <span fxFlex="50%" class="raccord-label">
+        Shooting Day
+      </span>
+      <span fxFlex="50%" class="raccord-info">
+        <a routerLink="{{getShootingDayLink()}}">
+          {{slate.shootingDay.number}} - {{slate.shootingDay.date | date}}
+        </a>
+      </span>
     </div>
-    <div fxLayout="row" fxLayoutGap="10px">
-        <md-input-container fxFlex="33%">
-            <input mdInput type="text" placeholder="Lens" required [(ngModel)]="viewSlate.lens" name="slate_lens" (blur)="updateSlate()" />
-        </md-input-container>
-        <md-input-container fxFlex="33%">
-            <input mdInput type="text" placeholder="Distance" required [(ngModel)]="viewSlate.distance" name="slate_distance" (blur)="updateSlate()" />
-        </md-input-container>
-        <md-input-container fxFlex="33%">
-            <input mdInput type="text" placeholder="Aperture" required [(ngModel)]="viewSlate.aperture" name="slate_aperture" (blur)="updateSlate()" />
-        </md-input-container>
-    </div>
-    <div fxLayout="row" fxLayoutGap="10px">
-        <md-input-container fxFlex="33%">
-            <input mdInput type="text" placeholder="Filters" [(ngModel)]="viewSlate.filters" name="slate_filter" (blur)="updateSlate()" />
-        </md-input-container>
-        <md-input-container fxFlex="33%">
-            <input mdInput type="text" placeholder="Sound" required [(ngModel)]="viewSlate.sound" name="slate_sound" (blur)="updateSlate()" />
-        </md-input-container>
-        <md-checkbox [(ngModel)]="viewSlate.isVfx" name="slate_isVfx" (change)="updateSlate()">
-            VFX
-        </md-checkbox>
-    </div>
-</md-card>
-<md-card>
-    <div fxLayout="row" fxLayoutGap="10px">
-        <button md-raised-button type="button" (click)="addTake()">Add Take</button>
+    <div fxLayout="row"
+      class="raccord-label-info-row"
+      *ngIf="slate.scene.id">
+      <span fxFlex="50%" class="raccord-label">
+        Scene
+      </span>
+      <span fxFlex="50%" class="raccord-info">
+        <a routerLink="{{getSceneLink()}}">
+          <scene-summary [scene]="slate.scene"></scene-summary>
+        </a>
+      </span>
     </div>
     <div fxLayout="row">
-        <md-list>
-            <md-list-item *ngFor="let take of slate.takes">
-                <md-checkbox [(ngModel)]="take.selected" name="take_{{take.id}}_selected" (change)="updateTake(take)">
-                </md-checkbox>
-                <md-input-container>
-                    <input mdInput type="text" placeholder="Number" required [(ngModel)]="take.number" name="stake_{{take.id}}_number" (blur)="updateTake(take)" />
-                </md-input-container>
-                <md-input-container>
-                    <input mdInput type="text" placeholder="Length" required [(ngModel)]="take.length" name="stake_{{take.id}}_length" (blur)="updateTake(take)" />
-                </md-input-container>
-                <md-input-container>
-                    <input mdInput type="text" placeholder="Notes" required [(ngModel)]="take.notes" name="stake_{{take.id}}_notes" (blur)="updateTake(take)" />
-                </md-input-container>
-                <md-input-container>
-                    <input mdInput type="text" placeholder="Camera Roll" required [(ngModel)]="take.cameraRoll" name="stake_{{take.id}}_camera_roll" (blur)="updateTake(take)" />
-                </md-input-container>
-                <md-input-container>
-                    <input mdInput type="text" placeholder="Sound Roll" required [(ngModel)]="take.soundRoll" name="stake_{{take.id}}_sound_roll" (blur)="updateTake(take)" />
-                </md-input-container>
-                <button md-button (click)="removeTake(take)"><md-icon>delete</md-icon></button>
-            </md-list-item>
-        </md-list>
+      <div fxFlex="25%">
+        <div fxLayout="row"
+        class="raccord-label-info-row">
+          <span fxFlex="50%" class="raccord-label">
+            Lens
+          </span>
+          <span fxFlex="50%" class="raccord-info">
+            {{slate.lens}}
+          </span>
+        </div>
+      </div>
+      <div fxFlex="25%">
+        <div fxLayout="row"
+        class="raccord-label-info-row">
+          <span fxFlex="50%" class="raccord-label">
+            Distance
+          </span>
+          <span fxFlex="50%" class="raccord-info">
+            {{slate.distance}}
+          </span>
+        </div>
+      </div>
+      <div fxFlex="25%">
+        <div fxLayout="row"
+        class="raccord-label-info-row">
+          <span fxFlex="50%" class="raccord-label">
+            Aperture
+          </span>
+          <span fxFlex="50%" class="raccord-info">
+            T{{slate.aperture}}
+          </span>
+        </div>
+      </div>
+      <div fxFlex="25%">
+        <div fxLayout="row"
+        class="raccord-label-info-row">
+          <span fxFlex="50%" class="raccord-label">
+            Filters
+          </span>
+          <span fxFlex="50%" class="raccord-info">
+            {{slate.filters}}
+          </span>
+        </div>
+      </div>
     </div>
-</md-card>
-<md-card>
-    <slate-images [images]="slate.images" [slateId]="slate.id" [projectId]="project.id"></slate-images>
-</md-card>
+    <div fxLayout="row">
+      <div fxFlex="50%">
+        <div fxLayout="row"
+        class="raccord-label-info-row">
+          <div fxFlex="50%" class="raccord-label">
+            Camera Rolls
+          </div>
+          <div fxFlex="50%" class="raccord-info">
+            {{getCameraRolls()}}
+          </div>
+        </div>
+      </div>
+      <div fxFlex="50%">
+        <div fxLayout="row"
+        class="raccord-label-info-row">
+          <div fxFlex="50%" class="raccord-label">
+            Sound Rolls
+          </div>
+          <div fxFlex="50%" class="raccord-info">
+            {{getSoundRolls()}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </mat-card>
+  <mat-expansion-panel class="raccord-expansion-panel">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Takes ({{slate.takes.length}})
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <takes-table [takes]="slate.takes" [projectId]="project.id"></takes-table>
+  </mat-expansion-panel>
+  <mat-expansion-panel class="raccord-expansion-panel" *ngIf="getCanComment()">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Comments ({{getCommentCount()}})
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <comment-container [comments]="slate.comments" [projectId]="project.id" [parentId]="slate.id" [parentType]="getParentCommentType()"></comment-container>
+  </mat-expansion-panel>
+</div>

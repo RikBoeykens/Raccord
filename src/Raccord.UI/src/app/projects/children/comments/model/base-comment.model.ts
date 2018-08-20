@@ -1,19 +1,18 @@
 import { BaseModel } from '../../../../shared/model/base.model';
 
-export class BaseComment extends BaseModel{
-    id: number;
-    text: string;
+export class BaseComment extends BaseModel {
+    public id: number;
+    public text: string;
 
     constructor(obj?: {
                         id: number,
                         text: string
-                    }){
+                    }) {
         super();
-        if(obj){
+        if (obj) {
             this.id = obj.id;
             this.text = obj.text;
-        }
-        else{
+        } else {
             this.id = 0;
         }
     }

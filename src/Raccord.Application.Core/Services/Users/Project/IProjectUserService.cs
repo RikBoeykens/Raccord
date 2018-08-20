@@ -9,7 +9,7 @@ namespace Raccord.Application.Core.Services.Users.Project
 
         IEnumerable<ProjectUserUserDto> GetUsers(long projectID);
 
-        FullProjectUserDto Get(long ID);
+        AdminFullProjectUserDto Get(long ID);
 
         long Add(ProjectUserDto dto);
 

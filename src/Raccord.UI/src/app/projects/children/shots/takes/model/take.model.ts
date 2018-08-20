@@ -1,28 +1,28 @@
-import { BaseModel } from '../../../../../shared/model/base.model';
-import { Slate } from "../../slates/model/slate.model";
+import { BaseModel } from '../../../../../shared';
+import { Slate } from '../../../..';
 
 export class Take extends BaseModel {
-    id: number;
-    number: string;
-    notes: string;
-    length: string;
-    selected: Boolean;
-    cameraRoll: string;
-    soundRoll: string;
-    slate: Slate;
+    public id: number;
+    public number: string;
+    public notes: string;
+    public length: string;
+    public selected: boolean;
+    public cameraRoll: string;
+    public soundRoll: string;
+    public slate: Slate;
 
     constructor(obj?: {
                         id: number,
                         number: string,
                         notes: string,
                         length: string,
-                        selected: Boolean,
+                        selected: boolean,
                         cameraRoll: string,
                         soundRoll: string,
                         slate: Slate
-                    }){
+                    }) {
         super();
-        if(obj){
+        if (obj) {
             this.id = obj.id;
             this.number = obj.number;
             this.notes = obj.notes,
@@ -31,8 +31,7 @@ export class Take extends BaseModel {
             this.cameraRoll = obj.cameraRoll;
             this.soundRoll = obj.soundRoll;
             this.slate = obj.slate;
-        }
-        else{
+        } else {
             this.id = 0;
         }
     }

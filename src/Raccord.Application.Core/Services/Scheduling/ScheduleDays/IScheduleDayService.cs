@@ -6,6 +6,6 @@ namespace Raccord.Application.Core.Services.Scheduling.ScheduleDays
     public interface IScheduleDayService : IService<ScheduleDayDto, ScheduleDaySummaryDto, FullScheduleDayDto>, IAllForParentService<FullScheduleDayDto>
     {
         IEnumerable<FullScheduleDayCrewUnitDto> GetForProjectUser(long projectID, string userID);
-        void PublishDays(long projectID);
+        void PublishDays(long crewUnitID);
     }
 }

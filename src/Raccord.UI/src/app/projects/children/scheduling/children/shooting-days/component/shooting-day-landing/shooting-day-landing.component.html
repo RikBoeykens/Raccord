@@ -1,0 +1,221 @@
+
+<div class="raccord-narrow-container">
+  <div class="raccord-page-header">
+    <a routerLink="{{getBackLink()}}">
+      <back-link></back-link>
+    </a>
+    <div fxLayout="row">
+      <h1 class="raccord-header-title">
+        Shooting Day {{shootingDay.number}}
+      </h1>
+    </div>
+  </div>
+  <mat-card class="raccord-label-info">
+    <div fxLayout="row"
+      class="raccord-label-info-row">
+      <span fxFlex="12.5%" class="raccord-label">
+        Date
+      </span>
+      <span fxFlex="87.5%" class="raccord-info">
+        {{shootingDay.date | date}}
+      </span>
+    </div>
+    <div fxLayout="row"
+      class="raccord-label-info-row">
+      <span fxFlex="12.5%" class="raccord-label">
+        Unit
+      </span>
+      <span fxFlex="87.5%" class="raccord-info">
+        <a routerLink="{{getCrewUnitLink()}}">
+          {{shootingDay.crewUnit.name}}
+        </a>
+      </span>
+    </div>
+    <div fxLayout="row">
+      <div fxFlex="25%">
+        <div fxLayout="row"
+        class="raccord-label-info-row">
+          <span fxFlex="50%" class="raccord-label">
+            Start
+          </span>
+          <span fxFlex="50%" class="raccord-info">
+            {{shootingDay.start | date:'shortTime'}}
+          </span>
+        </div>
+      </div>
+      <div fxFlex="25%">
+        <div fxLayout="row"
+        class="raccord-label-info-row">
+          <span fxFlex="50%" class="raccord-label">
+            Turn
+          </span>
+          <span fxFlex="50%" class="raccord-info">
+            {{shootingDay.turn | date:'shortTime'}}
+          </span>
+        </div>
+      </div>
+      <div fxFlex="25%">
+        <div fxLayout="row"
+        class="raccord-label-info-row">
+          <span fxFlex="50%" class="raccord-label">
+            End
+          </span>
+          <span fxFlex="50%" class="raccord-info">
+            {{shootingDay.end | date:'shortTime'}}
+          </span>
+        </div>
+      </div>
+      <div fxFlex="25%">
+        <div fxLayout="row"
+        class="raccord-label-info-row">
+          <span fxFlex="50%" class="raccord-label">
+            Overtime
+          </span>
+          <span fxFlex="50%" class="raccord-info">
+            {{shootingDay.overTime}}
+          </span>
+        </div>
+      </div>
+    </div>
+  </mat-card>
+  <!-- Scenes -->
+  <div class="raccord-sub-header"
+    fxLayout="row">
+    <h2>Scenes</h2>
+  </div>
+  <mat-card class="raccord-label-info">
+    <shooting-day-scenes-table [shootingDayScenes]="shootingDay.scenes" [projectId]="project.id"></shooting-day-scenes-table>
+    <div fxLayout="row">
+      <div fxFlex="50%">
+        <div fxLayout="row"
+          class="raccord-label-info-row">
+          <span fxFlex="25%" class="raccord-label">
+            Previous scenes:
+          </span>
+          <span fxFlex="75%" class="raccord-info">
+            {{shootingDay.previouslyCompletedSceneCount}}
+          </span>
+        </div>
+        <div fxLayout="row"
+          class="raccord-label-info-row">
+          <span fxFlex="25%" class="raccord-label">
+            New scenes:
+          </span>
+          <span fxFlex="75%" class="raccord-info">
+            {{getCompletedScenesCount()}}
+          </span>
+        </div>
+        <div fxLayout="row"
+          class="raccord-label-info-row">
+          <span fxFlex="25%" class="raccord-label">
+            Total scenes:
+          </span>
+          <span fxFlex="75%" class="raccord-info">
+            {{shootingDay.previouslyCompletedSceneCount + getCompletedScenesCount()}}
+          </span>
+        </div>
+      </div>
+      <div fxFlex="50%">
+        <div fxLayout="row"
+          class="raccord-label-info-row">
+          <span fxFlex="50%" class="raccord-label">
+            Previous pagelength:
+          </span>
+          <span fxFlex="50%" class="raccord-info">
+            {{shootingDay.previouslyCompletedScenePageCount | myPagelength}}
+          </span>
+        </div>
+        <div fxLayout="row"
+          class="raccord-label-info-row">
+          <span fxFlex="50%" class="raccord-label">
+            New pagelength:
+          </span>
+          <span fxFlex="50%" class="raccord-info">
+            {{getCompletedPagelengthCount() | myPagelength}}
+          </span>
+        </div>
+        <div fxLayout="row"
+          class="raccord-label-info-row">
+          <span fxFlex="50%" class="raccord-label">
+            Total pagelength:
+          </span>
+          <span fxFlex="50%" class="raccord-info">
+            {{shootingDay.previouslyCompletedScenePageCount + getCompletedPagelengthCount() | myPagelength}}
+          </span>
+        </div>
+      </div>
+    </div>
+
+  </mat-card>
+  <!-- Slates -->
+  <div class="raccord-sub-header"
+    fxLayout="row">
+    <h2>Setups</h2>
+  </div>
+  <mat-card class="raccord-label-info">
+    <div fxLayout="row"
+      class="raccord-label-info-row">
+      <span fxFlex="12.5%" class="raccord-label">
+        Previous setups:
+      </span>
+      <span fxFlex="87.5%" class="raccord-info">
+        {{shootingDay.previousSetupCount}}
+      </span>
+    </div>
+    <div fxLayout="row"
+      class="raccord-label-info-row">
+      <span fxFlex="12.5%" class="raccord-label">
+        New setups:
+      </span>
+      <span fxFlex="87.5%" class="raccord-info">
+        {{shootingDay.slates.length}}
+      </span>
+    </div>
+    <div fxLayout="row"
+      class="raccord-label-info-row">
+      <span fxFlex="12.5%" class="raccord-label">
+        Total setups:
+      </span>
+      <span fxFlex="87.5%" class="raccord-info">
+        {{shootingDay.previousSetupCount + shootingDay.slates.length}}
+      </span>
+    </div>
+    <div fxLayout="row"
+      class="raccord-label-info-row">
+      <span fxFlex="12.5%" class="raccord-label">
+        Setups:
+      </span>
+      <span fxFlex="87.5%" class="raccord-info">
+        <span class="comma-separated"
+          *ngFor="let slate of shootingDay.slates">
+          <a routerLink="{{getSlateLink(slate)}}">
+            {{slate.number}}
+          </a>
+        </span>
+      </span>
+    </div>
+  </mat-card>
+  <!-- Rolls -->
+  <div class="raccord-sub-header"
+    fxLayout="row">
+    <h2>Rolls</h2>
+  </div>
+  <div fxLayout="row" fxLayoutGap="5px">
+    <div fxFlex="50%">
+      <mat-card>
+        <mat-card-title>Camera Rolls</mat-card-title>
+        <mat-card-content>
+          {{getCameraRolls()}}
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <div fxFlex="50%">
+      <mat-card>
+        <mat-card-title>Sound Rolls</mat-card-title>
+        <mat-card-content>
+          {{getSoundRolls()}}
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>

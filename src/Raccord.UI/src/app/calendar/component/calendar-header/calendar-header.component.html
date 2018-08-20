@@ -1,7 +1,7 @@
 <div fxLayout="row">
   <div fxFlex="33%">
       <button
-      md-raised-button
+      mat-raised-button
       color="primary"
       mwlCalendarPreviousView
       [view]="view"
@@ -10,14 +10,14 @@
       Previous
     </button>
     <button
-      md-raised-button
+      mat-raised-button
       mwlCalendarToday
       [(viewDate)]="viewDate"
       (viewDateChange)="viewDateChange.next(viewDate)">
       Today
     </button>
     <button
-      md-raised-button
+      mat-raised-button
       color="primary"
       mwlCalendarNextView
       [view]="view"
@@ -31,12 +31,12 @@
   </h3>
   <div fxFlex="33%">
     <button
-      md-raised-button
+      mat-raised-button
       (click)="viewChange.emit('month')">
       Month
     </button>
     <button
-      md-raised-button
+      mat-raised-button
       (click)="viewChange.emit('week')">
       Week
     </button>

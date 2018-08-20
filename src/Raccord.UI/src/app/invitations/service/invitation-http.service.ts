@@ -2,9 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BaseHttpService } from '../../shared/service/base-http.service';
 import { AppSettings } from '../../app.settings';
-import { UserInvitationSummary } from '../model/user-invitation-summary.model';
-import { CreateUserFromInvitation } from '../model/create-user-from-invitation.model';
-import { CreateUserResult } from '../model/create-user-result.model';
+import { UserInvitationSummary } from '../../shared/children/user-invitations';
+import { CreateUserFromInvitation, CreateUserResult } from '..';
 
 @Injectable()
 export class InvitationHttpService extends BaseHttpService {
@@ -17,12 +16,12 @@ export class InvitationHttpService extends BaseHttpService {
     }
 
     public get(id: string): Promise<UserInvitationSummary | void> {
-      let uri = `${this._baseUri}/${id}`;
+      const uri = `${this._baseUri}/${id}`;
       return this.doGet(uri, false);
     }
 
     public createUser(request: CreateUserFromInvitation): Promise<CreateUserResult> {
-      let uri = this._baseUri;
+      const uri = this._baseUri;
 
       return this.doPost(request, uri, false);
     }

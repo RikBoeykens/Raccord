@@ -9,6 +9,11 @@ using Raccord.Data.EntityFramework.Repositories.Characters;
 using Raccord.Application.Core.Common.Sorting;
 using Raccord.Data.EntityFramework.Repositories.Images;
 using Raccord.Domain.Model.Images;
+using Raccord.Application.Core.Common.Paging;
+using Raccord.Data.EntityFramework.Repositories.Comments;
+using Raccord.Core.Enums;
+using Raccord.Data.EntityFramework.Repositories.ShootingDays;
+using Raccord.Application.Core.Services.Comments;
 
 namespace Raccord.Application.Services.Characters
 {
@@ -16,16 +21,19 @@ namespace Raccord.Application.Services.Characters
     public class CharacterService : ICharacterService
     {
         private readonly ICharacterRepository _characterRepository;
+        private readonly IShootingDayRepository _shootingDayRepository;
+        private readonly ICommentService _commentService;
 
         // Initialises a new CharacterService
         public CharacterService(
-            ICharacterRepository characterRepository
+            ICharacterRepository characterRepository,
+            IShootingDayRepository shootingDayRepository,
+            ICommentService commentService
             )
         {
-            if(characterRepository == null)
-                throw new ArgumentNullException(nameof(characterRepository));
-            
             _characterRepository = characterRepository;
+            _shootingDayRepository = shootingDayRepository;
+            _commentService = commentService;
         }
 
         // Gets all characters for a project
@@ -50,12 +58,22 @@ namespace Raccord.Application.Services.Characters
             return dtos;
         }
 
+        public PagedDataDto<CharacterSummaryDto> GetPagedForProject(PaginationRequestDto paginationRequest,long projectId)
+        {
+            var characters = _characterRepository.GetAllForProject(projectId);
+            return characters.GetPaged<Character, CharacterSummaryDto>(paginationRequest, x => x.TranslateSummary());
+        }
+
         // Gets a single character by id
         public FullCharacterDto Get(Int64 ID)
         {
             var character = _characterRepository.GetFull(ID);
 
-            var dto = character.TranslateFull();
+            var comments = _commentService.GetForParent(new GetCommentDto{ ParentID = character.ID, ParentType = ParentCommentType.Character}).ToList();
+
+            var shootingDays = _shootingDayRepository.GetAllForCharacters(new long[]{character.ID}).ToList();
+
+            var dto = character.TranslateFull(comments, shootingDays);
 
             return dto;
         }

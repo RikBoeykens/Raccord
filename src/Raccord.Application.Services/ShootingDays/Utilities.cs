@@ -2,7 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Raccord.Application.Core.Services.ShootingDays;
+using Raccord.Application.Core.Services.ShootingDays.Scenes;
 using Raccord.Application.Services.Crew.CrewUnits;
+using Raccord.Application.Services.Scenes;
 using Raccord.Application.Services.ShootingDays.Scenes;
 using Raccord.Application.Services.Shots.Slates;
 using Raccord.Core.Enums;
@@ -126,6 +128,129 @@ namespace Raccord.Application.Services.ShootingDays
             }
 
             return dto;
+        }
+
+        public static IEnumerable<ShootingDayInfoSceneCollectionDto> GetCharacterShootingDays(this IEnumerable<ShootingDay> shootingDays, long[] characterIds)
+        {
+            var completedShootingDays = shootingDays.Where(sd => characterIds.Any(cId => sd.Completed && sd.CallsheetID.HasValue && sd.Callsheet.CallsheetScenes.Any(cs => cs.Characters.Any(csc => csc.CharacterScene.CharacterID == cId)))).ToList();
+
+            var completedDtos = completedShootingDays.Select(sd => new ShootingDayInfoSceneCollectionDto
+            {
+                ID = sd.ID,
+                Number = sd.Number,
+                Date = sd.Date,
+                CrewUnit = sd.CrewUnit.Translate(),
+                Type = ShootingDayType.Shot,
+                Scenes = sd.Callsheet.CallsheetScenes.Where(cs => characterIds.Any(cId => cs.Characters.Any(csc => csc.CharacterScene.CharacterID == cId)))
+                    .Select(cs => cs.TranslateSummary())
+            });
+            var callsheetShootingDays = shootingDays.Where(sd => characterIds.Any(cId => !sd.Completed && sd.CallsheetID.HasValue && sd.Callsheet.CallsheetScenes.Any(cs => cs.Characters.Any(csc => csc.CharacterScene.CharacterID == cId)))).ToList();
+
+            var callsheetDtos = callsheetShootingDays.Select(sd => new ShootingDayInfoSceneCollectionDto
+            {
+                ID = sd.CallsheetID.Value,
+                Number = sd.Number,
+                Date = sd.Date,
+                CrewUnit = sd.CrewUnit.Translate(),
+                Type = ShootingDayType.Callsheet,
+                Scenes = sd.Callsheet.CallsheetScenes.Where(cs => characterIds.Any(cId => cs.Characters.Any(csc => csc.CharacterScene.CharacterID == cId)))
+                    .Select(cs => cs.TranslateSummary())
+            });
+            var scheduleShootingDays = shootingDays.Where(sd => characterIds.Any(cId => !sd.Completed && sd.ScheduleDayID.HasValue && !sd.CallsheetID.HasValue && sd.ScheduleDay.ScheduleScenes.Any(cs => cs.Characters.Any(csc => csc.CharacterScene.CharacterID == cId)))).ToList();
+
+            var scheduleDtos = scheduleShootingDays.Select(sd => new ShootingDayInfoSceneCollectionDto
+            {
+                ID = sd.ScheduleDayID.Value,
+                Number = sd.Number,
+                Date = sd.Date,
+                CrewUnit = sd.CrewUnit.Translate(),
+                Type = ShootingDayType.Scheduled,
+                Scenes = sd.ScheduleDay.ScheduleScenes.Where(cs => characterIds.Any(cId => cs.Characters.Any(csc => csc.CharacterScene.CharacterID == cId)))
+                    .Select(cs => cs.TranslateSummary())
+            });
+            return completedDtos.Concat(callsheetDtos).Concat(scheduleDtos);
+        }
+
+        public static IEnumerable<ShootingDayInfoSceneCollectionDto> GetLocationSetShootingDays(this IEnumerable<ShootingDay> shootingDays, long[] locationSetIds)
+        {            
+            var completedShootingDays =  shootingDays.Where(sd => locationSetIds.Any(lId =>sd.Completed && sd.ShootingDayScenes.Any(cs => cs.LocationSetID == lId))).ToList();
+
+            var completedDtos = completedShootingDays.Select(sd => new ShootingDayInfoSceneCollectionDto
+            {
+                ID = sd.CallsheetID.Value,
+                Number = sd.Number,
+                Date = sd.Date,
+                CrewUnit = sd.CrewUnit.Translate(),
+                Type = ShootingDayType.Shot,
+                Scenes = sd.ShootingDayScenes.Where(cs => locationSetIds.Any(lId => cs.LocationSetID == lId))
+                    .Select(cs => cs.TranslateSummary())
+            });
+            var callsheetShootingDays =  shootingDays.Where(sd => locationSetIds.Any(lId =>!sd.Completed && sd.CallsheetID.HasValue && sd.Callsheet.CallsheetScenes.Any(cs => cs.LocationSetID == lId))).ToList();
+
+            var callsheetDtos = callsheetShootingDays.Select(sd => new ShootingDayInfoSceneCollectionDto
+            {
+                ID = sd.CallsheetID.Value,
+                Number = sd.Number,
+                Date = sd.Date,
+                CrewUnit = sd.CrewUnit.Translate(),
+                Type = ShootingDayType.Callsheet,
+                Scenes = sd.Callsheet.CallsheetScenes.Where(cs => locationSetIds.Any(lId => cs.LocationSetID == lId))
+                    .Select(cs => cs.TranslateSummary())
+            });
+            var scheduleShootingDays =  shootingDays.Where(sd => locationSetIds.Any(lId =>!sd.Completed && sd.ScheduleDayID.HasValue && !sd.CallsheetID.HasValue && sd.ScheduleDay.ScheduleScenes.Any(cs => cs.LocationSetID == lId))).ToList();
+
+            var scheduleDtos = scheduleShootingDays.Select(sd => new ShootingDayInfoSceneCollectionDto
+            {
+                ID = sd.ScheduleDayID.Value,
+                Number = sd.Number,
+                Date = sd.Date,
+                CrewUnit = sd.CrewUnit.Translate(),
+                Type = ShootingDayType.Scheduled,
+                Scenes = sd.ScheduleDay.ScheduleScenes.Where(cs => locationSetIds.Any(lId => cs.LocationSetID == lId))
+                    .Select(cs => cs.TranslateSummary())
+            });
+            return completedDtos.Concat(callsheetDtos).Concat(scheduleDtos);
+        }
+
+        public static IEnumerable<ShootingDayInfoSceneCollectionDto> GetBreakdownItemShootingDays(this IEnumerable<ShootingDay> shootingDays, long breakdownItemId)
+        {
+            var completedShootingDays = shootingDays.Where(sd => sd.Completed && sd.ShootingDayScenes.Any(cs => cs.Scene.BreakdownItemScenes.Any(bis => bis.BreakdownItemID == breakdownItemId))).ToList();
+
+            var completedDtos = completedShootingDays.Select(sd => new ShootingDayInfoSceneCollectionDto
+            {
+                ID = sd.CallsheetID.Value,
+                Number = sd.Number,
+                Date = sd.Date,
+                CrewUnit = sd.CrewUnit.Translate(),
+                Type = ShootingDayType.Shot,
+                Scenes = sd.ShootingDayScenes.Where(cs => cs.Scene.BreakdownItemScenes.Any(bis => bis.BreakdownItemID == breakdownItemId))
+                    .Select(cs => cs.TranslateSummary())
+            });
+            var callsheetShootingDays = shootingDays.Where(sd =>!sd.Completed && sd.CallsheetID.HasValue && sd.Callsheet.CallsheetScenes.Any(cs => cs.Scene.BreakdownItemScenes.Any(bis => bis.BreakdownItemID == breakdownItemId))).ToList();
+
+            var callsheetDtos = callsheetShootingDays.Select(sd => new ShootingDayInfoSceneCollectionDto
+            {
+                ID = sd.CallsheetID.Value,
+                Number = sd.Number,
+                Date = sd.Date,
+                CrewUnit = sd.CrewUnit.Translate(),
+                Type = ShootingDayType.Callsheet,
+                Scenes = sd.Callsheet.CallsheetScenes.Where(cs => cs.Scene.BreakdownItemScenes.Any(bis => bis.BreakdownItemID == breakdownItemId))
+                    .Select(cs => cs.TranslateSummary())
+            });
+            var scheduleShootingDays = shootingDays.Where(sd => !sd.Completed && sd.ScheduleDayID.HasValue && !sd.CallsheetID.HasValue && sd.ScheduleDay.ScheduleScenes.Any(cs => cs.Scene.BreakdownItemScenes.Any(bis => bis.BreakdownItemID == breakdownItemId))).ToList();
+
+            var scheduleDtos = scheduleShootingDays.Select(sd => new ShootingDayInfoSceneCollectionDto
+            {
+                ID = sd.ScheduleDayID.Value,
+                Number = sd.Number,
+                Date = sd.Date,
+                CrewUnit = sd.CrewUnit.Translate(),
+                Type = ShootingDayType.Scheduled,
+                Scenes = sd.ScheduleDay.ScheduleScenes.Where(cs => cs.Scene.BreakdownItemScenes.Any(bis => bis.BreakdownItemID == breakdownItemId))
+                    .Select(cs => cs.TranslateSummary())
+            });
+            return completedDtos.Concat(callsheetDtos).Concat(scheduleDtos);
         }
     }
 }

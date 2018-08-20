@@ -1,9 +1,9 @@
 <form #commentForm = "ngForm"
         (ngSubmit)="doCommentSubmit()">
     <div fxLayout="row" fxLayoutGap="10px">
-        <md-input-container fxFlex="75%">
-            <textarea mdInput placeholder="Text" required [(ngModel)]="postComment.text" #text="ngModel" name="comment_text"></textarea>
-        </md-input-container>
-        <button fxFlex="25%" md-raised-button type="submit"[disabled]="!commentForm.form.valid">Save</button>
+        <mat-input-container fxFlex="75%">
+            <textarea matInput placeholder="Text" required [(ngModel)]="postComment.text" #text="ngModel" name="comment_text"></textarea>
+        </mat-input-container>
+        <button fxFlex="25%" mat-raised-button type="submit"[disabled]="!commentForm.form.valid">Save</button>
     </div>
 </form>

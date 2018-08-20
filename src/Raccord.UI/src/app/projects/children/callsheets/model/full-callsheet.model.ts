@@ -1,11 +1,13 @@
 import { BaseCallsheet } from './base-callsheet.model';
-import { ShootingDay } from '../../shooting-days';
-import { CallsheetSceneScene } from '../';
-import { CallsheetCharacterCharacter } from '../';
-import { CallsheetLocation } from '../../locations/locations/model/callsheet-location.model';
-import { CallsheetBreakdown } from '../../breakdowns/model/callsheet-breakdown.model';
-import { CrewUnit } from '../../crew/crew-units/model/crew-unit.model';
-import { WeatherInfo } from '../../../../weather/model/weather-info.model';
+import {
+    CallsheetSceneScene,
+    CallsheetCharacterCharacter,
+    ShootingDay,
+    CallsheetBreakdown,
+    CallsheetLocation
+} from '../../..';
+import { CrewUnit } from '../../../../shared/children/crew';
+import { WeatherInfo } from '../../../../shared/children/weather';
 
 export class FullCallsheet extends BaseCallsheet {
     public scenes: CallsheetSceneScene[];

@@ -9,6 +9,7 @@ namespace Raccord.Application.Core.Services.Comments
   public class CommentDto : BaseCommentDto
   {
     private UserProfileSummaryDto _user;
+    private IEnumerable<CommentDto> _comments;
 
     /// <summary>
     /// User who made the comment
@@ -23,6 +24,18 @@ namespace Raccord.Application.Core.Services.Comments
       set
       {
         _user = value;
+      }
+    }
+
+    public IEnumerable<CommentDto> Comments
+    {
+      get
+      {
+        return _comments ?? (_comments = new List<CommentDto>());
+      }
+      set
+      {
+        _comments = value;
       }
     }
   }

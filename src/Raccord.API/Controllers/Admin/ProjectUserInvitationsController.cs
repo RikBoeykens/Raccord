@@ -25,15 +25,23 @@ namespace Raccord.API.Controllers.Admin
 
         // GET: api/admin/users
         [HttpGet("{id}/projects")]
-        public IEnumerable<ProjectUserInvitationSummaryViewModel> Get(Guid id)
+        public IEnumerable<ProjectUserInvitationProjectViewModel> Get(Guid id)
         {
             var dtos = _projectUserInvitationService.GetProjects(id);
 
             return dtos.Select(p => p.Translate());
         }
+        // GET: api/admin/users
+        [HttpGet("{id}/invitations")]
+        public IEnumerable<ProjectUserInvitationUserInvitationViewModel> GetInvitations(long id)
+        {
+            var dtos = _projectUserInvitationService.GetInvitations(id);
+
+            return dtos.Select(p => p.Translate());
+        }
         // GET api/admin/users/5
         [HttpGet("{id}")]
-        public FullProjectUserInvitationViewModel Get(long id)
+        public AdminFullProjectUserInvitationViewModel Get(long id)
         {
             var dto = _projectUserInvitationService.Get(id);
 

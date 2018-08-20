@@ -1,7 +1,7 @@
 {
     "version": "0.2.0",
     "configurations": [
-        
+    
         {
             "name": ".NET Core Launch (console)",
             "type": "coreclr",
@@ -18,7 +18,7 @@
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
-            "program": "${workspaceRoot}/bin/Debug/<target-framework>/<project-name.dll>",
+            "program": "${workspaceRoot}/Raccord.API/bin/Debug/netcoreapp2.0/Raccord.API.dll",
             "args": [],
             "cwd": "${workspaceRoot}",
             "stopAtEntry": false,

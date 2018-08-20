@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "public": "wwwroot",
+    "public": "dist",
     "rewrites": [
       {
         "source": "**",

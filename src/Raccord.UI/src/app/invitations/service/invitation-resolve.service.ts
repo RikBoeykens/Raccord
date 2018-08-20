@@ -1,7 +1,8 @@
-import { Injectable }             from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Router, Resolve, ActivatedRouteSnapshot } from '@angular/router';
-import { UserInvitationSummary } from '../model/user-invitation-summary.model';
 import { InvitationHttpService } from './invitation-http.service';
+import { UserInvitationSummary } from '../../shared/children/user-invitations';
+
 @Injectable()
 export class InvitationResolve implements Resolve<UserInvitationSummary> {
 
@@ -11,7 +12,7 @@ export class InvitationResolve implements Resolve<UserInvitationSummary> {
   ) {}
 
   public resolve(route: ActivatedRouteSnapshot) {
-    let invitationId = route.params['invitationId'];
+    const invitationId = route.params['invitationId'];
     return this._invitationHttpService.get(invitationId).then((data) => {
         if (data) {
             return data;

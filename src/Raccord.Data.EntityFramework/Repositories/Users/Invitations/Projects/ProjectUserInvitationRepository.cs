@@ -15,8 +15,24 @@ namespace Raccord.Data.EntityFramework.Repositories.Users.Invitations.Projects
 
     public IEnumerable<ProjectUserInvitation> GetAllForInvitation(Guid invitationID)
     {
-      var query = GetIncludedSummary();
+      var query = GetIncludedProject();
       return query.Where(pui => pui.UserInvitationID == invitationID);
+    }
+
+    public IEnumerable<ProjectUserInvitation> GetAllForProject(long projectID)
+    {
+      var query = GetIncludedUserInvitation();
+      return query.Where(pui => pui.ProjectID == projectID && !pui.UserInvitation.AcceptedDate.HasValue);
+    }
+    public int GetCountForProject(long projectID)
+    {
+      var query = GetIncluded();
+      return query.Count(pui => pui.ProjectID == projectID && !pui.UserInvitation.AcceptedDate.HasValue);
+    }
+    public int GetCountForInvitation(Guid invitationID)
+    {
+      var query = GetIncluded();
+      return query.Count(pui => pui.UserInvitationID == invitationID);
     }
 
     public IEnumerable<ProjectUserInvitation> GetAllForCreateUser(Guid invitationID)
@@ -48,6 +64,8 @@ namespace Raccord.Data.EntityFramework.Repositories.Users.Invitations.Projects
                         .ThenInclude(pr => pr.ProjectPermission)
                     .Include(pu => pu.CastMember)
                       .ThenInclude(cm => cm.Characters)
+                        .ThenInclude(c => c.ImageCharacters)
+                          .ThenInclude(ic => ic.Image)
                     .Include(pu => pu.CrewUnitInvitationMembers)
                       .ThenInclude(pu => pu.CrewUnit)
                     .Include(pu => pu.CrewUnitInvitationMembers)
@@ -55,10 +73,36 @@ namespace Raccord.Data.EntityFramework.Repositories.Users.Invitations.Projects
                         .ThenInclude(cm => cm.Department);
     }
 
+    private IQueryable<ProjectUserInvitation> GetIncluded()
+    {
+      return _context.Set<ProjectUserInvitation>();
+    }
+
     private IQueryable<ProjectUserInvitation> GetIncludedSummary()
     {
       var query = _context.Set<ProjectUserInvitation>();
       return query.Include(pui => pui.Project)
+                  .Include(pui => pui.Role)
+                  .Include(pu => pu.CastMember)
+                  .Include(pu => pu.CrewUnitInvitationMembers)
+                    .ThenInclude(pu => pu.CrewMembers);
+    }
+
+    private IQueryable<ProjectUserInvitation> GetIncludedProject()
+    {
+      var query = _context.Set<ProjectUserInvitation>();
+      return query.Include(pui => pui.Project)
+                    .ThenInclude(p => p.Images)
+                  .Include(pui => pui.Role)
+                  .Include(pu => pu.CastMember)
+                  .Include(pu => pu.CrewUnitInvitationMembers)
+                    .ThenInclude(pu => pu.CrewMembers);
+    }
+
+    private IQueryable<ProjectUserInvitation> GetIncludedUserInvitation()
+    {
+      var query = _context.Set<ProjectUserInvitation>();
+      return query.Include(pui => pui.UserInvitation)
                   .Include(pui => pui.Role)
                   .Include(pu => pu.CastMember)
                   .Include(pu => pu.CrewUnitInvitationMembers)

@@ -1,5 +1,5 @@
 import { BaseCallsheet } from './base-callsheet.model';
-import { ShootingDay } from '../../shooting-days';
+import { ShootingDay } from '../../..';
 
 export class CallsheetSummary extends BaseCallsheet {
     public crewUnitID: number;

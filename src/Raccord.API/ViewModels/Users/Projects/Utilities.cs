@@ -24,12 +24,25 @@ namespace Raccord.API.ViewModels.Users.Projects
                 CrewUnits = dto.CrewUnits.Select(cu => cu.Translate())
             };
         }
+        public static AdminFullProjectUserViewModel Translate(this AdminFullProjectUserDto dto)
+        {
+            return new AdminFullProjectUserViewModel
+            {
+                ID = dto.ID,
+                Project = dto.Project.Translate(),
+                User = dto.User.Translate(),
+                CastMember = dto.CastMember.Translate(),
+                ProjectRole = dto.ProjectRole.Translate(),
+                CrewUnits = dto.CrewUnits.Select(cu => cu.Translate())
+            };
+        }
         public static ProjectUserProjectViewModel Translate(this ProjectUserProjectDto dto)
         {
             return new ProjectUserProjectViewModel
             {
                 ID = dto.ID,
                 Project = dto.Project.Translate(),
+                ProjectRole = dto.ProjectRole.Translate(),
             };
         }
         public static ProjectUserUserViewModel Translate(this ProjectUserUserDto dto)
@@ -37,7 +50,8 @@ namespace Raccord.API.ViewModels.Users.Projects
             return new ProjectUserUserViewModel
             {
                 ID = dto.ID,
-                User = dto.User.Translate()
+                User = dto.User.Translate(),
+                ProjectRole = dto.ProjectRole.Translate(),
             };
         }
         public static LinkedProjectUserUserViewModel Translate(this LinkedProjectUserUserDto dto)
@@ -46,6 +60,7 @@ namespace Raccord.API.ViewModels.Users.Projects
             {
                 ID = dto.ID,
                 User = dto.User.Translate(),
+                ProjectRole = dto.ProjectRole.Translate(),
                 LinkID = dto.LinkID
             };
         }

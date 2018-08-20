@@ -29,12 +29,5 @@ export class MapsHelpers {
         };
     }
 
-    public static getTime(time: string): Date {
-        let timeParts = time.split(':');
-        let hours = parseInt(timeParts[0], 10);
-        let minutes = parseInt(timeParts[1], 10);
-        return new Date(0, 0, 0, hours, minutes);
-    }
-
     private static _buffer = 0.01;
 }

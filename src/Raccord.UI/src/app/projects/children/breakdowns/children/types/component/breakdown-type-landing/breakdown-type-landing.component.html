@@ -1,0 +1,17 @@
+<div class="raccord-narrow-container">
+  <div class="raccord-page-header">
+    <a routerLink="{{getBackLink()}}">
+      <back-link [override]="getBackLinkText()"></back-link>
+    </a>
+    <h1 class="raccord-header-title">
+      {{breakdownType.name}}
+    </h1>
+  </div>
+  <div fxLayout="row wrap" fxLayoutGap="5px" *ngIf="breakdownType.breakdownItems">
+    <a routerLink="{{getBreakdownItemLink(breakdownItem)}}"
+        *ngFor="let breakdownItem of breakdownType.breakdownItems">
+      <breakdown-item-card
+          [breakdownItem]="breakdownItem"></breakdown-item-card>
+    </a>
+  </div>
+</div>

@@ -8,6 +8,7 @@ using Raccord.API.ViewModels.Breakdowns;
 using Raccord.API.ViewModels.Scheduling.ScheduleScenes;
 using Raccord.API.ViewModels.Shots.Slates;
 using Raccord.API.ViewModels.ShootingDays;
+using Raccord.API.ViewModels.Comments;
 
 namespace Raccord.API.ViewModels.Scenes
 {
@@ -23,14 +24,15 @@ namespace Raccord.API.ViewModels.Scenes
                 Summary = dto.Summary,
                 PageLength = dto.PageLength,
                 Timing = dto.Timing,
-                IntExt = dto.IntExt.Translate(),
+                SceneIntro = dto.SceneIntro.Translate(),
                 ScriptLocation = dto.ScriptLocation.Translate(),
-                DayNight = dto.DayNight.Translate(),
+                TimeOfDay = dto.TimeOfDay.Translate(),
                 Images = dto.Images.Select(i=> i.Translate()),
                 Characters = dto.Characters.Select(i=> i.Translate()),
                 BreakdownInfo = dto.BreakdownInfo.Translate(),
                 ShootingDays = dto.ShootingDays.Select(sd=> sd.Translate()),
                 Slates = dto.Slates.Select(s=> s.Translate()),
+                Comments = dto.Comments.Select(c => c.Translate()),
                 ProjectID = dto.ProjectID,
             };
         }
@@ -44,9 +46,9 @@ namespace Raccord.API.ViewModels.Scenes
                 Summary = dto.Summary,
                 PageLength = dto.PageLength,
                 Timing = dto.Timing,
-                IntExt = dto.IntExt.Translate(),
+                SceneIntro = dto.SceneIntro.Translate(),
                 ScriptLocation = dto.ScriptLocation.Translate(),
-                DayNight = dto.DayNight.Translate(),
+                TimeOfDay = dto.TimeOfDay.Translate(),
                 PrimaryImage = dto.PrimaryImage.Translate(),
                 ProjectID = dto.ProjectID,
             };
@@ -61,9 +63,9 @@ namespace Raccord.API.ViewModels.Scenes
                 Summary = dto.Summary,
                 PageLength = dto.PageLength,
                 Timing = dto.Timing,
-                IntExt = dto.IntExt.Translate(),
+                SceneIntro = dto.SceneIntro.Translate(),
                 ScriptLocation = dto.ScriptLocation.Translate(),
-                DayNight = dto.DayNight.Translate(),
+                TimeOfDay = dto.TimeOfDay.Translate(),
                 ProjectID = dto.ProjectID,
             };
         }
@@ -77,9 +79,9 @@ namespace Raccord.API.ViewModels.Scenes
                 Summary = dto.Summary,
                 PageLength = dto.PageLength,
                 Timing = dto.Timing,
-                IntExt = dto.IntExt.Translate(),
+                SceneIntro = dto.SceneIntro.Translate(),
                 ScriptLocation = dto.ScriptLocation.Translate(),
-                DayNight = dto.DayNight.Translate(),
+                TimeOfDay = dto.TimeOfDay.Translate(),
                 PrimaryImage = dto.PrimaryImage.Translate(),
                 ProjectID = dto.ProjectID,
                 LinkID = dto.LinkID,
@@ -96,9 +98,9 @@ namespace Raccord.API.ViewModels.Scenes
                 Summary = vm.Summary,
                 PageLength = vm.PageLength,
                 Timing = vm.Timing,
-                IntExt = vm.IntExt.Translate(),
+                SceneIntro = vm.SceneIntro.Translate(),
                 ScriptLocation = vm.ScriptLocation.Translate(),
-                DayNight = vm.DayNight.Translate(),
+                TimeOfDay = vm.TimeOfDay.Translate(),
                 ProjectID = vm.ProjectID,
             };
         }
@@ -113,9 +115,9 @@ namespace Raccord.API.ViewModels.Scenes
             return new SceneFilterRequestDto
             {
                 ProjectID = vm.ProjectID,
-                IntExtIDs = vm.IntExtIDs,
+                SceneIntroIDs = vm.SceneIntroIDs,
                 ScriptLocationIDs = vm.ScriptLocationIDs,
-                DayNightIDs = vm.DayNightIDs,
+                TimeOfDayIDs = vm.TimeOfDayIDs,
                 LocationSetIDs = vm.LocationSetIDs,
                 LocationIDs = vm.LocationIDs,
                 CharacterIDs = vm.CharacterIDs,

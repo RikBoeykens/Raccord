@@ -1,0 +1,28 @@
+<div class="raccord-sub-header"
+  fxLayout="row">
+  <h2>Cast Member</h2>
+  <button mat-icon-button *ngIf="castMember.id===0" (click)="showAddCastMember()"><mat-icon>add</mat-icon></button>
+  <button mat-icon-button *ngIf="castMember.id===0" (click)="showLinkCastMember()"><mat-icon>link</mat-icon></button>
+  <button mat-icon-button *ngIf="castMember.id!==0" (click)="showEditCastMember()"><mat-icon>edit</mat-icon></button>
+</div>
+<mat-card class="raccord-label-info">
+  <div fxLayout="row"
+    class="raccord-label-info-row">
+    <span fxFlex="50%" class="raccord-label">
+      Cast Member
+    </span>
+    <span fxFlex="50%" class="raccord-info">
+      <a routerLink="{{getCastMemberLink()}}"
+        *ngIf="castMember.id!==0">{{getFullName()}}</a>
+      <span *ngIf="castMember.id===0">
+        <i>None linked</i>
+      </span>
+    </span>
+  </div>
+  <div fxLayout="row"
+    *ngIf="castMember.id!==0">
+    <mat-chip-list>
+      <mat-chip *ngFor="let character of castMember.characters"><character-summary [character]="character"></character-summary></mat-chip>
+    </mat-chip-list>
+  </div>
+</mat-card>

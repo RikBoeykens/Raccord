@@ -14,6 +14,8 @@ using Raccord.Application.Core.Services.Locations.Locations;
 using Raccord.Application.Core.Services.Shots.Slates;
 using Raccord.Application.Core.Services.Crew.CrewMembers;
 using Raccord.Application.Core.Services.Cast;
+using Raccord.Application.Core.Services.Users;
+using Raccord.Application.Core.Services.Users.Invitations;
 
 namespace Raccord.Application.Services.SearchEngine
 {
@@ -22,9 +24,9 @@ namespace Raccord.Application.Services.SearchEngine
     {
         private IProjectSearchEngineService _projectSearchEngineService;
         private ISceneSearchEngineService _sceneSearchEngineService;
-        private IIntExtSearchEngineService _intExtSearchEngineService;
+        private ISceneIntroSearchEngineService _sceneIntroSearchEngineService;
         private IScriptLocationSearchEngineService _scriptLocationSearchEngineService;
-        private IDayNightSearchEngineService _dayNightSearchEngineService;
+        private ITimeOfDaySearchEngineService _timeOfDaySearchEngineService;
         private IImageSearchEngineService _imageSearchEngineService;
         private ICharacterSearchEngineService _characterSearchEngineService;
         private IBreakdownItemSearchEngineService _breakdownItemSearchEngineService;
@@ -32,32 +34,36 @@ namespace Raccord.Application.Services.SearchEngine
         private ISlateSearchEngineService _slateSearchEngineService;
         private ICrewMemberSearchEngineService _crewMemberSearchEngineService;
         private ICastMemberSearchEngineService _castMemberSearchEngineService;
+        private IUserSearchEngineService _userSearchEngineService;
+        private IUserInvitationSearchEngineService _userInvitationSearchEngineService;
 
         public SearchEngineServiceWrapper(
             IProjectSearchEngineService projectSearchEngineService,
             ISceneSearchEngineService sceneSearchEngineService,
-            IIntExtSearchEngineService intExtSearchEngineService,
+            ISceneIntroSearchEngineService sceneIntroSearchEngineService,
             IScriptLocationSearchEngineService scriptLocationSearchEngineService,
-            IDayNightSearchEngineService dayNightSearchEngineService,
+            ITimeOfDaySearchEngineService timeOfDaySearchEngineService,
             IImageSearchEngineService imageSearchEngineService,
             ICharacterSearchEngineService characterSearchEngineService,
             IBreakdownItemSearchEngineService breakdownItemSearchEngineService,
             ILocationSearchEngineService locationSearchEngineService,
             ISlateSearchEngineService slateSearchEngineService,
             ICrewMemberSearchEngineService crewMemberSearchEngineService,
-            ICastMemberSearchEngineService castMemberSearchEngineService
+            ICastMemberSearchEngineService castMemberSearchEngineService,
+            IUserSearchEngineService userSearchEngineService,
+            IUserInvitationSearchEngineService userInvitationSearchEngineService
         )
         {
             if(projectSearchEngineService==null)
                 throw new ArgumentNullException(nameof(projectSearchEngineService));
             if(sceneSearchEngineService==null)
                 throw new ArgumentNullException(nameof(sceneSearchEngineService));
-            if(intExtSearchEngineService==null)
-                throw new ArgumentNullException(nameof(intExtSearchEngineService));
+            if(sceneIntroSearchEngineService==null)
+                throw new ArgumentNullException(nameof(sceneIntroSearchEngineService));
             if(scriptLocationSearchEngineService==null)
                 throw new ArgumentNullException(nameof(scriptLocationSearchEngineService));
-            if(dayNightSearchEngineService==null)
-                throw new ArgumentNullException(nameof(dayNightSearchEngineService));
+            if(timeOfDaySearchEngineService==null)
+                throw new ArgumentNullException(nameof(timeOfDaySearchEngineService));
             if(imageSearchEngineService==null)
                 throw new ArgumentNullException(nameof(imageSearchEngineService));
             if(characterSearchEngineService==null)
@@ -72,12 +78,16 @@ namespace Raccord.Application.Services.SearchEngine
                 throw new ArgumentNullException(nameof(crewMemberSearchEngineService));
             if(castMemberSearchEngineService==null)
                 throw new ArgumentNullException(nameof(castMemberSearchEngineService));
+            if(userSearchEngineService==null)
+                throw new ArgumentNullException(nameof(userSearchEngineService));
+            if(userInvitationSearchEngineService==null)
+                throw new ArgumentNullException(nameof(userInvitationSearchEngineService));
 
             _projectSearchEngineService = projectSearchEngineService;
             _sceneSearchEngineService = sceneSearchEngineService;
-            _intExtSearchEngineService = intExtSearchEngineService;
+            _sceneIntroSearchEngineService = sceneIntroSearchEngineService;
             _scriptLocationSearchEngineService = scriptLocationSearchEngineService;
-            _dayNightSearchEngineService = dayNightSearchEngineService;
+            _timeOfDaySearchEngineService = timeOfDaySearchEngineService;
             _imageSearchEngineService = imageSearchEngineService;
             _characterSearchEngineService = characterSearchEngineService;
             _breakdownItemSearchEngineService = breakdownItemSearchEngineService;
@@ -85,6 +95,8 @@ namespace Raccord.Application.Services.SearchEngine
             _slateSearchEngineService = slateSearchEngineService;
             _crewMemberSearchEngineService = crewMemberSearchEngineService;
             _castMemberSearchEngineService = castMemberSearchEngineService;
+            _userSearchEngineService = userSearchEngineService;
+            _userInvitationSearchEngineService = userInvitationSearchEngineService;
         }
         public IEnumerable<SearchTypeResultDto> GetResults(SearchRequestDto request)
         {
@@ -105,16 +117,18 @@ namespace Raccord.Application.Services.SearchEngine
             {
                 _projectSearchEngineService,
                 _sceneSearchEngineService,
-                _intExtSearchEngineService,
+                _sceneIntroSearchEngineService,
                 _scriptLocationSearchEngineService,
-                _dayNightSearchEngineService,
+                _timeOfDaySearchEngineService,
                 _imageSearchEngineService,
                 _characterSearchEngineService,
                 _breakdownItemSearchEngineService,
                 _locationSearchEngineService,
                 _slateSearchEngineService,
                 _crewMemberSearchEngineService,
-                _castMemberSearchEngineService
+                _castMemberSearchEngineService,
+                _userSearchEngineService,
+                _userInvitationSearchEngineService
             };
 
             if(includeTypes.Any())

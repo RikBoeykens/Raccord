@@ -1,0 +1,58 @@
+<div class="raccord-narrow-container">
+  <div class="raccord-page-header">
+    <a routerLink="{{getBackLink()}}">
+      <back-link></back-link>
+    </a>
+    <div fxLayout="row">
+      <h1 class="raccord-header-title">
+        Script Dashboard
+        <a mat-mini-fab routerLink="{{getScriptLink()}}"><mat-icon>subject</mat-icon></a>
+      </h1>
+    </div>
+  </div>
+  <!-- Scenes -->
+  <div class="raccord-sub-header"
+    fxLayout="row">
+    <h2>Scenes</h2>
+    <span class="raccord-action-link-container">
+        <a routerLink="{{getScenesLink()}}" class="raccord-action-link">more</a>
+    </span>
+  </div>
+  <div fxLayout="row wrap" fxLayoutGap="5px" *ngIf="scenes && scenes.pageInfo">
+    <a routerLink="{{getSceneLink(scene)}}"
+        *ngFor="let scene of scenes.data">
+        <scene-card
+            [scene]="scene"></scene-card>
+    </a>
+  </div>
+  <!-- Characters -->
+  <div class="raccord-sub-header"
+    fxLayout="row">
+    <h2>Characters</h2>
+    <span class="raccord-action-link-container">
+        <a routerLink="{{getCharactersLink()}}" class="raccord-action-link">more</a>
+    </span>
+  </div>
+  <div fxLayout="row wrap" fxLayoutGap="5px" *ngIf="characters && characters.pageInfo">
+    <a routerLink="{{getCharacterLink(character)}}"
+        *ngFor="let character of characters.data">
+        <character-card
+            [character]="character"></character-card>
+    </a>
+  </div>
+  <!-- Script Locations -->
+  <div class="raccord-sub-header"
+    fxLayout="row">
+    <h2>Locations</h2>
+    <span class="raccord-action-link-container">
+        <a routerLink="{{getScriptLocationsLink()}}" class="raccord-action-link">more</a>
+    </span>
+  </div>
+  <div fxLayout="row wrap" fxLayoutGap="5px" *ngIf="scriptLocations && scriptLocations.pageInfo">
+    <a routerLink="{{getScriptLocationLink(scriptLocation)}}"
+        *ngFor="let scriptLocation of scriptLocations.data">
+        <scrpt-location-card
+            [scriptLocation]="scriptLocation"></scrpt-location-card>
+    </a>
+  </div>
+</div>

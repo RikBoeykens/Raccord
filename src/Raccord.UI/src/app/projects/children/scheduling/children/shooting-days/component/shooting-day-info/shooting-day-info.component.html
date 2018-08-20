@@ -1,0 +1,20 @@
+<div *ngIf="getShotAvailable()">
+  <h3>Shot</h3>
+  <shooting-day-info-table [shootingDays]="getShotShootingDays()" [projectId]="projectId"></shooting-day-info-table>
+</div>
+<div *ngIf="getCallsheetNotShotAvailable()">
+  <h3>Callsheet, not shot</h3>
+  <shooting-day-info-table [shootingDays]="getCallsheetNotShotShootingDays()" [projectId]="projectId"></shooting-day-info-table>
+</div>
+<div *ngIf="getCallsheetAvailable()">
+  <h3>Callsheet</h3>
+  <shooting-day-info-table [shootingDays]="getCallsheetShootingDays()" [projectId]="projectId"></shooting-day-info-table>
+</div>
+<div *ngIf="getScheduledNotCallsheetAvailable()">
+  <h3>Scheduled, not on callsheet</h3>
+  <shooting-day-info-table [shootingDays]="getScheduledNotCallsheetShootingDays()" [projectId]="projectId"></shooting-day-info-table>
+</div>
+<div *ngIf="getScheduledAvailable()">
+  <h3>Scheduled</h3>
+  <shooting-day-info-table [shootingDays]="getScheduledShootingDays()" [projectId]="projectId"></shooting-day-info-table>
+</div>

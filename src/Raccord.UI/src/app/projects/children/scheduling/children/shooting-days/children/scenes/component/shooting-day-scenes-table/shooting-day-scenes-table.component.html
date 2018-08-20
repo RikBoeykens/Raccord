@@ -1,0 +1,47 @@
+<mat-table #shootingdayscenestable [dataSource]="shootingDayScenesWithTotalRow" class="shooting-day-scenes-table">
+  
+    <!-- Scene Column -->
+    <ng-container matColumnDef="scene">
+      <mat-header-cell class="col-scene" *matHeaderCellDef>Scene</mat-header-cell>
+      <mat-cell class="col-scene" *matCellDef="let shootingDayScene">
+        <a routerLink="{{getSceneLink(shootingDayScene)}}" *ngIf="shootingDayScene.scene">
+          <scene-summary [scene]="shootingDayScene.scene"></scene-summary>
+        </a>
+      </mat-cell>
+    </ng-container>
+
+    <!-- Total Page length Column -->
+    <ng-container matColumnDef="tpl">
+      <mat-header-cell *matHeaderCellDef>Total</mat-header-cell>
+      <mat-cell *matCellDef="let shootingDayScene">
+        {{shootingDayScene.scenePageLength | myPagelength}}
+      </mat-cell>
+    </ng-container>
+
+    <!-- Planned Page length Column -->
+    <ng-container matColumnDef="ppl">
+      <mat-header-cell *matHeaderCellDef>Planned</mat-header-cell>
+      <mat-cell *matCellDef="let shootingDayScene">
+        {{shootingDayScene.plannedPageLength | myPagelength}}
+      </mat-cell>
+    </ng-container>
+
+    <!-- Completed Page length Column -->
+    <ng-container matColumnDef="cpl">
+      <mat-header-cell *matHeaderCellDef>Completed</mat-header-cell>
+      <mat-cell *matCellDef="let shootingDayScene">
+        {{shootingDayScene.pageLength | myPagelength}}
+      </mat-cell>
+    </ng-container>
+
+    <!-- Remaining Page length Column -->
+    <ng-container matColumnDef="rpl">
+      <mat-header-cell *matHeaderCellDef>Remaining</mat-header-cell>
+      <mat-cell *matCellDef="let shootingDayScene">
+        {{shootingDayScene.scenePageLength - shootingDayScene.pageLength- shootingDayScene.previousPageLength | myPagelength}}
+      </mat-cell>
+    </ng-container>
+  
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>

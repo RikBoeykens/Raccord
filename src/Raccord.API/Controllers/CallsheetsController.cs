@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Raccord.API.ViewModels.Callsheets;
 using Raccord.API.ViewModels.Core;
+using Raccord.Application.Core.Common.Paging;
 using Raccord.Application.Core.Services.Callsheets;
 using Raccord.Domain.Model.Users;
 
@@ -40,9 +41,9 @@ namespace Raccord.API.Controllers
         [HttpGet("{id}/project")]
         public IEnumerable<CallsheetCrewUnitViewModel> GetAllForProject(long id)
         {
-            var dtos = _callsheetService.GetForProject(id);
+            var pagedCallsheets = _callsheetService.GetForProject(id, new PaginationRequestDto {Full = true});
 
-            var vms = dtos.Select(p => p.Translate());
+            var vms = pagedCallsheets.Data.Select(p => p.Translate());
 
             return vms;
         }

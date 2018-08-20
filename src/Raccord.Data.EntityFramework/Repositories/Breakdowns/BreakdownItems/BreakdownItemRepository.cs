@@ -53,16 +53,16 @@ namespace Raccord.Data.EntityFramework.Repositories.Breakdowns.BreakdownItems
                         .Include(bi => bi.Breakdown)
                             .ThenInclude(b => b.User)
                         .Include(bi=> bi.BreakdownItemScenes)
-                        .ThenInclude(s=> s.Scene)
-                        .ThenInclude(s=> s.IntExt)
+                            .ThenInclude(s=> s.Scene)
+                                .ThenInclude(s=> s.SceneIntro)
                         .Include(bi=> bi.BreakdownItemScenes)
-                        .ThenInclude(s=> s.Scene)
-                        .ThenInclude(s=> s.ScriptLocation)
+                            .ThenInclude(s=> s.Scene)
+                                .ThenInclude(s=> s.ScriptLocation)
                         .Include(bi=> bi.BreakdownItemScenes)
-                        .ThenInclude(s=> s.Scene)
-                        .ThenInclude(s=> s.DayNight)
+                            .ThenInclude(s=> s.Scene)
+                                .ThenInclude(s=> s.TimeOfDay)
                         .Include(bi=> bi.ImageBreakdownItems)
-                        .ThenInclude(ibi=> ibi.Image);
+                            .ThenInclude(ibi=> ibi.Image);
         }
 
         private IQueryable<BreakdownItem> GetIncludedSummary()

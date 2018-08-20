@@ -1,5 +1,5 @@
 import { Breakdown } from './breakdown.model';
-import { BreakdownType } from '../children/breakdown-types/model/breakdown-type.model';
+import { BreakdownType } from '../../..';
 
 export class SelectedBreakdown extends Breakdown {
   public types: BreakdownType[];

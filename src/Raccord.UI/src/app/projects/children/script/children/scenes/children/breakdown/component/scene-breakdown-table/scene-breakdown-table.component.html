@@ -1,0 +1,35 @@
+<mat-table #scenebreakdownstable [dataSource]="sceneBreakdown.items" class="scene-breakdown-table">
+
+  <!-- Image Column -->
+  <ng-container matColumnDef="image">
+    <mat-header-cell *matHeaderCellDef></mat-header-cell>
+    <mat-cell *matCellDef="let item">
+      <a routerLink="{{getBreakdownItemLink(item)}}">
+        <breakdown-item-avatar [item]="item" [listAvatar]="true"></breakdown-item-avatar>
+      </a>
+    </mat-cell>
+  </ng-container>
+
+  <!-- Type Column -->
+  <ng-container matColumnDef="type">
+    <mat-header-cell *matHeaderCellDef>Type</mat-header-cell>
+    <mat-cell *matCellDef="let item">
+      <a routerLink="{{getBreakdownTypeLink(item.type)}}">
+        {{item.type.name}}
+      </a>
+    </mat-cell>
+  </ng-container>
+
+  <!-- Item Column -->
+  <ng-container matColumnDef="item">
+    <mat-header-cell *matHeaderCellDef>Item</mat-header-cell>
+    <mat-cell *matCellDef="let item">
+      <a routerLink="{{getBreakdownItemLink(item)}}">
+        {{item.name}}
+      </a>
+    </mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>

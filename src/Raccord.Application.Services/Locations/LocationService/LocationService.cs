@@ -1,8 +1,13 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Raccord.Application.Core.Common.Paging;
+using Raccord.Application.Core.Services.Comments;
 using Raccord.Application.Core.Services.Locations.Locations;
+using Raccord.Core.Enums;
+using Raccord.Data.EntityFramework.Repositories.Comments;
 using Raccord.Data.EntityFramework.Repositories.Locations.Locations;
+using Raccord.Data.EntityFramework.Repositories.ShootingDays;
 using Raccord.Domain.Model.Locations.Locations;
 
 namespace Raccord.Application.Services.Locations.Locations
@@ -11,14 +16,19 @@ namespace Raccord.Application.Services.Locations.Locations
     public class LocationService : ILocationService
     {
         private readonly ILocationRepository _locationRepository;
+        private readonly IShootingDayRepository _shootingDayRepository;
+        private readonly ICommentService _commentService;
 
         // Initialises a new LocationService
-        public LocationService(ILocationRepository locationRepository)
+        public LocationService(
+            ILocationRepository locationRepository,
+            IShootingDayRepository shootingDayRepository,
+            ICommentService commentService
+            )
         {
-            if(locationRepository == null)
-                throw new ArgumentNullException(nameof(locationRepository));
-            
             _locationRepository = locationRepository;
+            _shootingDayRepository = shootingDayRepository;
+            _commentService = commentService;
         }
 
         // Gets all locations
@@ -31,12 +41,21 @@ namespace Raccord.Application.Services.Locations.Locations
             return dtos;
         }
 
+        public PagedDataDto<LocationSummaryDto> GetPagedForProject(PaginationRequestDto paginationRequest,long projectId)
+        {
+            var locations = _locationRepository.GetAllForProject(projectId);
+            return locations.GetPaged<Location, LocationSummaryDto>(paginationRequest, x => x.TranslateSummary());
+        }
+
         // Gets a single schedule day by id
         public FullLocationDto Get(long ID)
         {
             var location = _locationRepository.GetFull(ID);
 
-            var dto = location.TranslateFull();
+            var comments = _commentService.GetForParent(new GetCommentDto {ParentID = location.ID, ParentType = ParentCommentType.Location }).ToList();
+
+            var shootingDays = _shootingDayRepository.GetAllForLocationSets(location.LocationSets.Select(ls => ls.ID).ToArray()).ToList();
+            var dto = location.TranslateFull(comments, shootingDays);
 
             return dto;
         }

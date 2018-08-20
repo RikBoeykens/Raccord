@@ -1,21 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { AdminUserHttpService } from '../../service/admin-user-http.service';
-import { UserInvitationSummary } from '../../model/user-invitation-summary.model';
+import { CreateUserFromInvitation } from '../..';
 import { InvitationHttpService } from '../../service/invitation-http.service';
-import { LoadingWrapperService } from '../../../shared/service/loading-wrapper.service';
-import { CreateUserFromInvitation } from '../../model/create-user-from-invitation.model';
-import { AuthService } from '../../../security/service/auth.service';
-import { LoginService } from '../../../security/service/login.service';
-import { ValidationHelpers } from '../../../shared/helpers/validation.helpers';
+import { LoadingWrapperService, ValidationHelpers, RouteSettings } from '../../../shared';
+import { AuthService, LoginService } from '../../../security';
+import { UserInvitationSummary } from '../../../shared/children/user-invitations';
 
 @Component({
     templateUrl: 'create-user-from-invitation.component.html'
 })
 export class CreateUserFromInvitationComponent implements OnInit {
     public request: CreateUserFromInvitation = new CreateUserFromInvitation();
-    public confirmpassword: string;
-    public canCreate: boolean = true;
+    public confirmPassword: string;
     private emailAddress: string;
 
     constructor(
@@ -33,16 +29,17 @@ export class CreateUserFromInvitationComponent implements OnInit {
         this._route.data.subscribe((data: {
             invitation: UserInvitationSummary
         }) => {
-            this.request = new CreateUserFromInvitation({
-                id: data.invitation.id,
-                firstName: data.invitation.firstName,
-                lastName: data.invitation.lastName,
-                password: ''
-            });
             if (data.invitation.acceptedDate) {
-                this.canCreate = false;
+                this._router.navigate([RouteSettings.LOGIN]);
+            } else {
+                this.request = new CreateUserFromInvitation({
+                    id: data.invitation.id,
+                    firstName: data.invitation.firstName,
+                    lastName: data.invitation.lastName,
+                    password: ''
+                });
+                this.emailAddress = data.invitation.email;
             }
-            this.emailAddress = data.invitation.email;
         });
     }
     public createUser() {
@@ -57,7 +54,7 @@ export class CreateUserFromInvitationComponent implements OnInit {
     }
 
     public passwordsdMatch(): boolean {
-        return this.request.password === this.confirmpassword;
+        return this.request.password === this.confirmPassword;
     }
 
     private login() {

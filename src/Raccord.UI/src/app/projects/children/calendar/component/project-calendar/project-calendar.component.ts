@@ -1,11 +1,9 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, Input } from '@angular/core';
 import { CalendarEvent } from 'angular-calendar';
-import { RouteInfo } from '../../../../../shared/model/route-info.model';
-import { LoadingWrapperService } from '../../../../../shared/service/loading-wrapper.service';
-import { CalendarItem } from '../../../../../calendar/model/calendar-item';
-import { CalendarHelpers } from '../../../../../calendar/helpers/calendar.helpers';
+import { RouteInfo } from '../../../../../shared';
 import { ProjectCalendarHttpService } from '../../service/project-calendar-http.service';
+import { LoadingWrapperService } from '../../../../../shared/service/loading-wrapper.service';
+import { CalendarItem, CalendarHelpers } from '../../../../../calendar';
 
 @Component({
   selector: 'project-calendar',
@@ -17,7 +15,6 @@ export class ProjectCalendarComponent {
         new Array<CalendarEvent<{routeInfo: RouteInfo}>>();
 
     constructor(
-      private _router: Router,
       private _projectCalendarHttpService: ProjectCalendarHttpService,
       private _loadingWrapperService: LoadingWrapperService
     ) {}

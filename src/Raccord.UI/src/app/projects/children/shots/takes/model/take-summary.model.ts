@@ -1,5 +1,5 @@
-import { Slate } from "../../slates/model/slate.model";
-import { Take } from "./take.model";
+import { Take } from './take.model';
+import { Slate } from '../../../..';
 
 export class TakeSummary extends Take {
 
@@ -8,11 +8,11 @@ export class TakeSummary extends Take {
                         number: string,
                         notes: string,
                         length: string,
-                        selected: Boolean,
+                        selected: boolean,
                         cameraRoll: string,
                         soundRoll: string,
                         slate: Slate
-                    }){
+                    }) {
         super(obj);
     }
 }

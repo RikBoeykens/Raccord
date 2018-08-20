@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Raccord.Application.Core.Common.Paging;
 using Raccord.Application.Core.ExternalServices.Weather;
 using Raccord.Application.Core.Services.Callsheets;
 using Raccord.Data.EntityFramework.Repositories.Breakdowns;
@@ -54,13 +55,19 @@ namespace Raccord.Application.Services.Callsheets
         }
 
         // Gets all callsheets for a crew unit
-        public IEnumerable<CallsheetCrewUnitDto> GetForProject(long projectID)
+        public PagedDataDto<CallsheetCrewUnitDto> GetForProject(long projectID, PaginationRequestDto requestDto)
         {
             var callsheets = _callsheetRepository.GetAllForProject(projectID);
 
-            var dtos = callsheets.Select(l => l.TranslateCrewUnit());
+            return callsheets.GetPaged<Callsheet, CallsheetCrewUnitDto>(requestDto, cs => cs.TranslateCrewUnit());
+        }
 
-            return dtos;
+        // Gets all callsheets for a crew unit
+        public PagedDataDto<CallsheetSummaryDto> GetForCrewUnit(long crewUnitId, PaginationRequestDto requestDto)
+        {
+            var callsheets = _callsheetRepository.GetAllForCrewUnit(crewUnitId);
+
+            return callsheets.GetPaged<Callsheet, CallsheetSummaryDto>(requestDto, cs => cs.TranslateSummary());
         }
 
         // Gets a single callsheet by id
@@ -68,7 +75,7 @@ namespace Raccord.Application.Services.Callsheets
         {
             var callsheet = _callsheetRepository.GetFull(ID);
 
-            var breakdown = _breakdownRepository.GetForProjectUser(callsheet.CrewUnitID, userID);
+            var breakdown = _breakdownRepository.GetForProjectUser(callsheet.CrewUnit.ProjectID, userID);
 
             var latLng = callsheet.GetFirstLatLng();
             var weatherInfo = (latLng != null && latLng.HasLatLng) ?  _weatherService.GetWeatherInfo(new WeatherRequestDto
@@ -99,8 +106,9 @@ namespace Raccord.Application.Services.Callsheets
 
             var callsheet = new Callsheet
             {
-                Start = linkedScheduleDay.Start ?? default(DateTime),
-                End = linkedScheduleDay.End ?? default(DateTime),
+                CrewCall = dto.CrewCall,
+                Start = dto.Start,
+                End = dto.End,
                 ShootingDayID = dto.ShootingDay.ID,
                 CrewUnitID = dto.CrewUnitID,
             };

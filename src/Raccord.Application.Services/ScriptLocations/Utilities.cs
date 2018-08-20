@@ -7,13 +7,17 @@ using Raccord.Application.Core.Services.SearchEngine;
 using Raccord.Core.Enums;
 using Raccord.Application.Services.Images;
 using Raccord.Application.Services.Locations.LocationSets;
+using Raccord.Application.Core.Common.Routing;
+using System.Collections.Generic;
+using Raccord.Domain.Model.Comments;
+using Raccord.Application.Core.Services.Comments;
 
 namespace Raccord.Application.Services.ScriptLocations
 {
     // Utilities and helper methods for Locations
     public static class Utilities
     {
-        public static FullScriptLocationDto TranslateFull(this ScriptLocation location)
+        public static FullScriptLocationDto TranslateFull(this ScriptLocation location, IEnumerable<CommentDto> comments)
         {
             if(location == null)
             {
@@ -28,6 +32,7 @@ namespace Raccord.Application.Services.ScriptLocations
                 Scenes = location.Scenes.OrderBy(s=> s.Number).Select(s=> s.TranslateSummary()),
                 Images = location.ImageLocations.Select(s=> s.TranslateImage()),
                 Sets = location.LocationSets.Select(ls=> ls.TranslateLocation()),
+                Comments = comments,
                 ProjectID = location.ProjectID,
             };
 
@@ -100,10 +105,13 @@ namespace Raccord.Application.Services.ScriptLocations
             var dto = new SearchResultDto
             {
                 ID = scriptLocation.ID,
-                RouteIDs = new long[]{scriptLocation.ProjectID, scriptLocation.ID},
                 DisplayName = scriptLocation.Name,
                 Info = $"Project: {scriptLocation.Project.Title}",
-                Type = EntityType.ScriptLocation,
+                RouteInfo = new RouteInfoDto
+                {
+                    RouteIDs = new object[]{scriptLocation.ProjectID, scriptLocation.ID},
+                    Type = EntityType.ScriptLocation,
+                }
             };
 
             return dto;

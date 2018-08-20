@@ -12,6 +12,7 @@ namespace Raccord.Core.Enums
       Character = 6,
       ScriptLocation = 7,
       Slate = 8,
-      Take = 9
+      Take = 9,
+      LocationSet = 10
     }
 }

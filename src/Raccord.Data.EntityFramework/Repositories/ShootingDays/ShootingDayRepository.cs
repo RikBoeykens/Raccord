@@ -60,6 +60,38 @@ namespace Raccord.Data.EntityFramework.Repositories.ShootingDays
                                     );
         }
 
+        public IEnumerable<ShootingDay> GetAllForCharacters(long[] characterIDs)
+        {
+            var query = GetIncludedCharacter();
+
+            return query.Where(sd => characterIDs.Any(cId => sd.CallsheetID.HasValue && sd.Callsheet.CallsheetScenes.Any(cs=> cs.Characters.Any(c => c.CharacterScene.CharacterID == cId)))
+                                    ||
+                                    characterIDs.Any(cId => sd.ScheduleDayID.HasValue && sd.ScheduleDay.ScheduleScenes.Any(ss=> ss.Characters.Any(c => c.CharacterScene.CharacterID == cId)))
+                                    );
+        }
+
+        public IEnumerable<ShootingDay> GetAllForLocationSets(long[] locationSetIDs)
+        {
+            var query = GetIncludedLocationSet();
+
+            return query.Where(sd => locationSetIDs.Any(lId => sd.CallsheetID.HasValue && sd.Callsheet.CallsheetScenes.Any(cs => cs.LocationSetID == lId))
+                                    ||
+                                    locationSetIDs.Any(lId => sd.ScheduleDayID.HasValue && sd.ScheduleDay.ScheduleScenes.Any(cs => cs.LocationSetID == lId))
+                                    );
+        }
+
+        public IEnumerable<ShootingDay> GetAllForBreakdownItem(long breakdownItemID)
+        {
+            var query = GetIncludedBreakdownItem();
+
+            return query.Where(sd => sd.ShootingDayScenes.Any(sds=> sds.Scene.BreakdownItemScenes.Any(bis => bis.BreakdownItemID == breakdownItemID))
+                                    ||
+                                    sd.CallsheetID.HasValue && sd.Callsheet.CallsheetScenes.Any(cs=> cs.Scene.BreakdownItemScenes.Any(bis => bis.BreakdownItemID == breakdownItemID))
+                                    ||
+                                    sd.ScheduleDayID.HasValue && sd.ScheduleDay.ScheduleScenes.Any(ss=> ss.Scene.BreakdownItemScenes.Any(bis => bis.BreakdownItemID == breakdownItemID))
+                                    );
+        }
+
 
         public int SearchCount(string searchText, long? projectID)
         {
@@ -132,7 +164,7 @@ namespace Raccord.Data.EntityFramework.Repositories.ShootingDays
                         .ThenInclude(sds=> sds.ShootingDay)
                         .Include(sd=> sd.ShootingDayScenes)
                         .ThenInclude(sds=> sds.Scene)
-                        .ThenInclude(s=> s.IntExt)
+                        .ThenInclude(s=> s.SceneIntro)
                         .Include(sd=> sd.ShootingDayScenes)
                         .ThenInclude(sds=> sds.Scene)
                         .ThenInclude(s=> s.ScriptLocation)
@@ -140,7 +172,7 @@ namespace Raccord.Data.EntityFramework.Repositories.ShootingDays
                         .ThenInclude(ls=> ls.Location)
                         .Include(sd=> sd.ShootingDayScenes)
                         .ThenInclude(sds=> sds.Scene)
-                        .ThenInclude(s=> s.DayNight)
+                        .ThenInclude(s=> s.TimeOfDay)
                         .Include(sd=> sd.ShootingDayScenes)
                         .ThenInclude(sds=> sds.Scene)
                         .ThenInclude(s=> s.ImageScenes)
@@ -149,13 +181,13 @@ namespace Raccord.Data.EntityFramework.Repositories.ShootingDays
                         .ThenInclude(sds=> sds.CallsheetScene)
                         .Include(sds=> sds.Slates)
                         .ThenInclude(s=> s.Scene)
-                        .ThenInclude(s=> s.IntExt)
+                        .ThenInclude(s=> s.SceneIntro)
                         .Include(sds=> sds.Slates)
                         .ThenInclude(s=> s.Scene)
                         .ThenInclude(s=> s.ScriptLocation)
                         .Include(sds=> sds.Slates)
                         .ThenInclude(s=> s.Scene)
-                        .ThenInclude(s=> s.DayNight)
+                        .ThenInclude(s=> s.TimeOfDay)
                         .Include(sds=> sds.Slates)
                         .ThenInclude(sds=> sds.Takes)
                         .Include(sd=> sd.ShootingDayScenes)
@@ -209,11 +241,122 @@ namespace Raccord.Data.EntityFramework.Repositories.ShootingDays
         {
             IQueryable<ShootingDay> query = _context.Set<ShootingDay>();
 
-            return query.Include(sd=> sd.ShootingDayScenes)
+            return query.Include(sd => sd.CrewUnit)
+                        .Include(sd=> sd.ShootingDayScenes)
                         .Include(sd=> sd.ScheduleDay)
                         .ThenInclude(sd=> sd.ScheduleScenes)
                         .Include(sd=> sd.Callsheet)
                         .ThenInclude(cs=> cs.CallsheetScenes);
+        }
+
+        private IQueryable<ShootingDay> GetIncludedCharacter()
+        {
+            IQueryable<ShootingDay> query = _context.Set<ShootingDay>();
+
+            return query.Include(sd => sd.CrewUnit)
+                        .Include(sd=> sd.ShootingDayScenes)
+                        .Include(sd=> sd.ScheduleDay)
+                            .ThenInclude(sd=> sd.ScheduleScenes)
+                                .ThenInclude(sc => sc.Characters)
+                                    .ThenInclude(c => c.CharacterScene)
+                        .Include(sd=> sd.ScheduleDay)
+                            .ThenInclude(sd=> sd.ScheduleScenes)
+                                .ThenInclude(ss => ss.Scene)
+                                    .ThenInclude(s => s.SceneIntro)
+                        .Include(sd=> sd.ScheduleDay)
+                            .ThenInclude(sd=> sd.ScheduleScenes)
+                                .ThenInclude(ss => ss.Scene)
+                                    .ThenInclude(s => s.ScriptLocation)
+                        .Include(sd=> sd.ScheduleDay)
+                            .ThenInclude(sd=> sd.ScheduleScenes)
+                                .ThenInclude(ss => ss.Scene)
+                                    .ThenInclude(s => s.TimeOfDay)
+                        .Include(sd=> sd.ScheduleDay)
+                            .ThenInclude(sd=> sd.ScheduleScenes)
+                                .ThenInclude(ss => ss.Scene)
+                                    .ThenInclude(s => s.ImageScenes)
+                                        .ThenInclude(i => i.Image)
+                        .Include(sd=> sd.Callsheet)
+                            .ThenInclude(cs=> cs.CallsheetScenes)
+                                .ThenInclude(css => css.Characters)
+                                    .ThenInclude(c => c.CharacterScene)
+                        .Include(sd=> sd.Callsheet)
+                            .ThenInclude(sd=> sd.CallsheetScenes)
+                                .ThenInclude(ss => ss.Scene)
+                                    .ThenInclude(s => s.SceneIntro)
+                        .Include(sd=> sd.Callsheet)
+                            .ThenInclude(sd=> sd.CallsheetScenes)
+                                .ThenInclude(ss => ss.Scene)
+                                    .ThenInclude(s => s.ScriptLocation)
+                        .Include(sd=> sd.Callsheet)
+                            .ThenInclude(sd=> sd.CallsheetScenes)
+                                .ThenInclude(ss => ss.Scene)
+                                    .ThenInclude(s => s.TimeOfDay)
+                        .Include(sd=> sd.Callsheet)
+                            .ThenInclude(sd=> sd.CallsheetScenes)
+                                .ThenInclude(ss => ss.Scene)
+                                    .ThenInclude(s => s.ImageScenes)
+                                        .ThenInclude(i => i.Image);
+        }
+
+        private IQueryable<ShootingDay> GetIncludedLocationSet()
+        {
+            IQueryable<ShootingDay> query = _context.Set<ShootingDay>();
+
+            return query.Include(sd => sd.CrewUnit)
+                        .Include(sd=> sd.ShootingDayScenes)
+                        .Include(sd=> sd.ScheduleDay)
+                            .ThenInclude(sd=> sd.ScheduleScenes)
+                                .ThenInclude(ss => ss.Scene)
+                                    .ThenInclude(s => s.SceneIntro)
+                        .Include(sd=> sd.ScheduleDay)
+                            .ThenInclude(sd=> sd.ScheduleScenes)
+                                .ThenInclude(ss => ss.Scene)
+                                    .ThenInclude(s => s.ScriptLocation)
+                        .Include(sd=> sd.ScheduleDay)
+                            .ThenInclude(sd=> sd.ScheduleScenes)
+                                .ThenInclude(ss => ss.Scene)
+                                    .ThenInclude(s => s.TimeOfDay)
+                        .Include(sd=> sd.ScheduleDay)
+                            .ThenInclude(sd=> sd.ScheduleScenes)
+                                .ThenInclude(ss => ss.Scene)
+                                    .ThenInclude(s => s.ImageScenes)
+                                        .ThenInclude(i => i.Image)
+                        .Include(sd=> sd.Callsheet)
+                            .ThenInclude(sd=> sd.CallsheetScenes)
+                                .ThenInclude(ss => ss.Scene)
+                                    .ThenInclude(s => s.SceneIntro)
+                        .Include(sd=> sd.Callsheet)
+                            .ThenInclude(sd=> sd.CallsheetScenes)
+                                .ThenInclude(ss => ss.Scene)
+                                    .ThenInclude(s => s.ScriptLocation)
+                        .Include(sd=> sd.Callsheet)
+                            .ThenInclude(sd=> sd.CallsheetScenes)
+                                .ThenInclude(ss => ss.Scene)
+                                    .ThenInclude(s => s.TimeOfDay)
+                        .Include(sd=> sd.Callsheet)
+                            .ThenInclude(sd=> sd.CallsheetScenes)
+                                .ThenInclude(ss => ss.Scene)
+                                    .ThenInclude(s => s.ImageScenes)
+                                        .ThenInclude(i => i.Image);
+        }
+
+        private IQueryable<ShootingDay> GetIncludedBreakdownItem()
+        {
+            IQueryable<ShootingDay> query = _context.Set<ShootingDay>();
+
+            return query.Include(sd => sd.CrewUnit)
+                        .Include(sd=> sd.ShootingDayScenes)
+                            .ThenInclude(sds => sds.Scene)
+                                .ThenInclude(s => s.BreakdownItemScenes)
+                        .Include(sd=> sd.ScheduleDay)
+                            .ThenInclude(sd=> sd.ScheduleScenes)
+                                .ThenInclude(sds => sds.Scene)
+                                    .ThenInclude(s => s.BreakdownItemScenes)
+                        .Include(sd=> sd.Callsheet)
+                            .ThenInclude(cs=> cs.CallsheetScenes)
+                                .ThenInclude(sds => sds.Scene)
+                                    .ThenInclude(s => s.BreakdownItemScenes);
         }
 
         private IQueryable<ShootingDay> GetIncludedCalendarCrewUnit()
@@ -249,17 +392,17 @@ namespace Raccord.Data.EntityFramework.Repositories.ShootingDays
                             .ThenInclude(sd => sd.Project)
                         .Include(sd => sd.ShootingDayScenes)
                             .ThenInclude(sds => sds.Scene)
-                                .ThenInclude(s => s.IntExt)
+                                .ThenInclude(s => s.SceneIntro)
                         .Include(sd => sd.ShootingDayScenes)
                             .ThenInclude(sds => sds.Scene)
                                 .ThenInclude(s => s.ScriptLocation)
                         .Include(sd => sd.ShootingDayScenes)
                             .ThenInclude(sds => sds.Scene)
-                                .ThenInclude(s => s.DayNight)
+                                .ThenInclude(s => s.TimeOfDay)
                         .Include(sd => sd.Callsheet)
                             .ThenInclude(cs => cs.CallsheetScenes)
                                 .ThenInclude(cs => cs.Scene)
-                                    .ThenInclude(s => s.IntExt)
+                                    .ThenInclude(s => s.SceneIntro)
                         .Include(sd => sd.Callsheet)
                             .ThenInclude(cs => cs.CallsheetScenes)
                                 .ThenInclude(cs => cs.Scene)
@@ -267,11 +410,11 @@ namespace Raccord.Data.EntityFramework.Repositories.ShootingDays
                         .Include(sd => sd.Callsheet)
                             .ThenInclude(cs => cs.CallsheetScenes)
                                 .ThenInclude(cs => cs.Scene)
-                                    .ThenInclude(s => s.DayNight)
+                                    .ThenInclude(s => s.TimeOfDay)
                         .Include(sd => sd.ScheduleDay)
                             .ThenInclude(sd => sd.ScheduleScenes)
                                 .ThenInclude(ss => ss.Scene)
-                                    .ThenInclude(s => s.IntExt)
+                                    .ThenInclude(s => s.SceneIntro)
                         .Include(sd => sd.ScheduleDay)
                             .ThenInclude(sd => sd.ScheduleScenes)
                                 .ThenInclude(ss => ss.Scene)
@@ -279,7 +422,7 @@ namespace Raccord.Data.EntityFramework.Repositories.ShootingDays
                         .Include(sd => sd.ScheduleDay)
                             .ThenInclude(sd => sd.ScheduleScenes)
                                 .ThenInclude(ss => ss.Scene)
-                                    .ThenInclude(s => s.DayNight);
+                                    .ThenInclude(s => s.TimeOfDay);
         }
 
         private IQueryable<ShootingDay> GetIncludedCalendarCharacterScenes()
@@ -290,20 +433,20 @@ namespace Raccord.Data.EntityFramework.Repositories.ShootingDays
                             .ThenInclude(sd => sd.Project)
                         .Include(sd => sd.ShootingDayScenes)
                             .ThenInclude(sds => sds.Scene)
-                                .ThenInclude(s => s.IntExt)
+                                .ThenInclude(s => s.SceneIntro)
                         .Include(sd => sd.ShootingDayScenes)
                             .ThenInclude(sds => sds.Scene)
                                 .ThenInclude(s => s.ScriptLocation)
                         .Include(sd => sd.ShootingDayScenes)
                             .ThenInclude(sds => sds.Scene)
-                                .ThenInclude(s => s.DayNight)
+                                .ThenInclude(s => s.TimeOfDay)
                         .Include(sd => sd.Callsheet)
                             .ThenInclude(c => c.CallsheetScenes)
                                 .ThenInclude(cs => cs.Characters)
                         .Include(sd => sd.Callsheet)
                             .ThenInclude(cs => cs.CallsheetScenes)
                                 .ThenInclude(cs => cs.Scene)
-                                    .ThenInclude(s => s.IntExt)
+                                    .ThenInclude(s => s.SceneIntro)
                         .Include(sd => sd.Callsheet)
                             .ThenInclude(cs => cs.CallsheetScenes)
                                 .ThenInclude(cs => cs.Scene)
@@ -311,14 +454,14 @@ namespace Raccord.Data.EntityFramework.Repositories.ShootingDays
                         .Include(sd => sd.Callsheet)
                             .ThenInclude(cs => cs.CallsheetScenes)
                                 .ThenInclude(cs => cs.Scene)
-                                    .ThenInclude(s => s.DayNight)
+                                    .ThenInclude(s => s.TimeOfDay)
                         .Include(sd => sd.ScheduleDay)
                             .ThenInclude(sd => sd.ScheduleScenes)
                                 .ThenInclude(ss => ss.Characters)
                         .Include(sd => sd.ScheduleDay)
                             .ThenInclude(sd => sd.ScheduleScenes)
                                 .ThenInclude(ss => ss.Scene)
-                                    .ThenInclude(s => s.IntExt)
+                                    .ThenInclude(s => s.SceneIntro)
                         .Include(sd => sd.ScheduleDay)
                             .ThenInclude(sd => sd.ScheduleScenes)
                                 .ThenInclude(ss => ss.Scene)
@@ -326,7 +469,7 @@ namespace Raccord.Data.EntityFramework.Repositories.ShootingDays
                         .Include(sd => sd.ScheduleDay)
                             .ThenInclude(sd => sd.ScheduleScenes)
                                 .ThenInclude(ss => ss.Scene)
-                                    .ThenInclude(s => s.DayNight);
+                                    .ThenInclude(s => s.TimeOfDay);
         }
     }
 }

@@ -6,6 +6,8 @@ using Raccord.Application.Core.Services.Cast;
 using Raccord.Data.EntityFramework.Repositories.Cast;
 using Raccord.Domain.Model.Cast;
 using Raccord.Data.EntityFramework.Repositories.Characters;
+using Raccord.Application.Core.Common.Paging;
+using Raccord.Data.EntityFramework.Repositories.ShootingDays;
 
 namespace Raccord.Application.Services.Cast
 {
@@ -14,20 +16,18 @@ namespace Raccord.Application.Services.Cast
     {
         private readonly ICastMemberRepository _castMemberRepository;
         private readonly ICharacterRepository _characterRepository;
+        private readonly IShootingDayRepository _shootingDayRepository;
 
         // Initialises a new DayNightService
         public CastMemberService(
             ICastMemberRepository castMemberRepository,
-            ICharacterRepository characterRepository
+            ICharacterRepository characterRepository,
+            IShootingDayRepository shootingDayRepository
             )
         {
-            if(castMemberRepository == null)
-                throw new ArgumentNullException(nameof(castMemberRepository));
-            if(characterRepository == null)
-                throw new ArgumentNullException(nameof(characterRepository));
-            
             _castMemberRepository = castMemberRepository;
             _characterRepository = characterRepository;
+            _shootingDayRepository = shootingDayRepository;
         }
 
         // Gets all cast members for a project
@@ -40,12 +40,30 @@ namespace Raccord.Application.Services.Cast
             return dtos;
         }
 
+        public PagedDataDto<CastMemberSummaryDto> GetPagedForProject(PaginationRequestDto paginationRequest,long projectId)
+        {
+            var castMembers = _castMemberRepository.GetAllForProject(projectId);
+            return castMembers.GetPaged<CastMember, CastMemberSummaryDto>(paginationRequest, x => x.TranslateSummary());
+        }
+
         // Gets a single cast member by id
         public FullCastMemberDto Get(long ID)
         {
             var castMember = _castMemberRepository.GetFull(ID);
 
-            var dto = castMember.TranslateFull();
+            var shootingDays = _shootingDayRepository.GetAllForCharacters(castMember.Characters.Select(c => c.ID).ToArray()).ToList();
+
+            var dto = castMember.TranslateFull(shootingDays);
+
+            return dto;
+        }
+
+        // Gets a single cast member by id
+        public AdminFullCastMemberDto GetFullAdmin(long ID)
+        {
+            var castMember = _castMemberRepository.GetFull(ID);
+
+            var dto = castMember.TranslateFullAdmin();
 
             return dto;
         }

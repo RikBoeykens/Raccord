@@ -1,0 +1,56 @@
+<div class="raccord-narrow-container">
+  <div class="raccord-page-header">
+    <a routerLink="{{getBackLink()}}">
+      <back-link></back-link>
+    </a>
+    <div fxLayout="row">
+      <h1 class="raccord-header-title">
+        {{getFullName()}}
+      </h1>
+    </div>
+  </div>
+  <mat-card class="raccord-label-info">
+    <div fxLayout="row"
+      class="raccord-label-info-row">
+      <span fxFlex="50%" class="raccord-label">
+        Telephone
+      </span>
+      <span fxFlex="50%" class="raccord-info">
+        <phone-link [telephone]="castMember.telephone"></phone-link>
+      </span>
+    </div>
+    <div fxLayout="row"
+      class="raccord-label-info-row">
+      <span fxFlex="50%" class="raccord-label">
+        Email
+      </span>
+      <span fxFlex="50%" class="raccord-info">
+        <mail-link [email]="castMember.email"></mail-link>
+      </span>
+    </div>
+  </mat-card>
+  <mat-expansion-panel class="raccord-expansion-panel">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Characters ({{castMember.characters.length}})
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <characters-table [characters]="castMember.characters" [projectId]="project.id"></characters-table>
+  </mat-expansion-panel>
+  <mat-expansion-panel class="raccord-expansion-panel">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Scenes ({{castMember.scenes.length}})
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <scenes-table [scenes]="castMember.scenes" [projectId]="project.id"></scenes-table>
+  </mat-expansion-panel>
+  <mat-expansion-panel class="raccord-expansion-panel">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Scheduling ({{castMember.shootingDays.length}})
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <shooting-day-info-scenes [shootingDays]="castMember.shootingDays" [projectId]="project.id"></shooting-day-info-scenes>
+  </mat-expansion-panel>
+</div>

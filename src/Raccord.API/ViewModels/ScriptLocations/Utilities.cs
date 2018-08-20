@@ -3,6 +3,7 @@ using Raccord.API.ViewModels.Scenes;
 using System.Linq;
 using Raccord.API.ViewModels.Images;
 using Raccord.API.ViewModels.Locations.LocationSets;
+using Raccord.API.ViewModels.Comments;
 
 namespace Raccord.API.ViewModels.ScriptLocations
 {
@@ -25,6 +26,7 @@ namespace Raccord.API.ViewModels.ScriptLocations
                 Scenes = dto.Scenes.Select(s=> s.Translate()),
                 Images = dto.Images.Select(i=> i.Translate()),
                 Sets = dto.Sets.Select(s=> s.Translate()),
+                Comments = dto.Comments.Select(c => c.Translate())
             };
         }
 

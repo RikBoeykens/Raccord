@@ -1,11 +1,9 @@
 <div fxLayout="row" fxLayoutGap="10px">
-    <search-entity fxFlex="25%" [projectId]="projectId" [searchEntity]="searchEntity" [entityType]="entityType" [entityTypeName]="entityTypeName" (setEntity)="addEntity()" [excludeEntities]="entities"></search-entity>
-    <md-chip-list fxFlex="75%" md-line>
-        <a *ngFor="let entity of entities">
-            <md-chip>
-                {{entity.name}}
-                <md-icon (click)="removeEntity(entity)">cancel</md-icon>
-            </md-chip>
-        </a>
-    </md-chip-list>
+    <search-entity fxFlex="25%" [projectId]="projectId" [entityType]="entityType" [entityTypeName]="entityTypeName" (onSelect)="addEntity($event)" [excludeEntities]="entities"></search-entity>
+    <mat-chip-list fxFlex="75%">
+        <mat-chip color="primary" selected="true" *ngFor="let entity of entities">
+            {{entity.displayName}}
+            <mat-icon (click)="removeEntity(entity)">cancel</mat-icon>
+        </mat-chip>
+    </mat-chip-list>
 </div>

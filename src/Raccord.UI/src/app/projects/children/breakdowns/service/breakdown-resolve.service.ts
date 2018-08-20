@@ -1,26 +1,18 @@
-import { Injectable }             from '@angular/core';
-import { Router, Resolve, ActivatedRouteSnapshot } from '@angular/router';
-import { FullBreakdown } from '../model/full-breakdown.model';
+import { Injectable } from '@angular/core';
+import { Resolve, ActivatedRouteSnapshot } from '@angular/router';
 import { BreakdownHttpService } from './breakdown-http.service';
+import { FullBreakdown } from '../../..';
 @Injectable()
 export class BreakdownResolve implements Resolve<FullBreakdown> {
 
   constructor(
-      private breakdownHttpService: BreakdownHttpService,
-      private router: Router
+    private _breakdownHttpService: BreakdownHttpService
   ) {}
 
-  public resolve(route: ActivatedRouteSnapshot) {
-    let breakdownId = route.params['breakdownId'];
-    let projectId = route.params['projectId'];
-
-    return this.breakdownHttpService.get(projectId, breakdownId).then((scheduleScene) => {
-        if (scheduleScene) {
-            return scheduleScene;
-        } else { // id not found
-            this.router.navigate(['/projects', projectId]);
-            return false;
-        }
-    });
-  }
+    public resolve(route: ActivatedRouteSnapshot) {
+        const projectId = route.params['projectId'];
+        const breakdownId = route.params['breakdownId'];
+        return this._breakdownHttpService.get(projectId, breakdownId)
+            .then((data: FullBreakdown) => data);
+    }
 }

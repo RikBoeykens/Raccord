@@ -1,0 +1,37 @@
+<div class="raccord-narrow-container">
+  <div class="raccord-page-header">
+    <a routerLink="{{getBackLink()}}">
+      <back-link></back-link>
+    </a>
+    <div fxLayout="row">
+      <h1 class="raccord-header-title">
+        {{location.name}}
+      </h1>
+    </div>
+  </div>
+  <location-location-sets-map [location]="location" [projectId]="project.id"></location-location-sets-map>
+  <mat-expansion-panel class="raccord-expansion-panel" *ngIf="getCanComment()">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Comments ({{getCommentCount()}})
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <comment-container [comments]="location.comments" [projectId]="project.id" [parentId]="location.id" [parentType]="getParentCommentType()"></comment-container>
+  </mat-expansion-panel>
+  <mat-expansion-panel class="raccord-expansion-panel">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Sets ({{location.sets.length}})
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <location-location-sets-table [locationSets]="location.sets" [projectId]="project.id"></location-location-sets-table>
+  </mat-expansion-panel>
+  <mat-expansion-panel class="raccord-expansion-panel">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Scheduling ({{location.shootingDays.length}})
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <shooting-day-info-scenes [shootingDays]="location.shootingDays" [projectId]="project.id"></shooting-day-info-scenes>
+  </mat-expansion-panel>
+</div>

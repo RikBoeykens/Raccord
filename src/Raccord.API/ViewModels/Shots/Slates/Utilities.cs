@@ -1,4 +1,5 @@
 using System.Linq;
+using Raccord.API.ViewModels.Comments;
 using Raccord.API.ViewModels.Images;
 using Raccord.API.ViewModels.Scenes;
 using Raccord.API.ViewModels.ShootingDays;
@@ -27,6 +28,7 @@ namespace Raccord.API.ViewModels.Shots.Slates
                 ShootingDay = dto.ShootingDay.Translate(),
                 Takes = dto.Takes.Select(t=> t.Translate()),
                 Images = dto.Images.Select(i=> i.Translate()),
+                Comments = dto.Comments.Select(c => c.Translate())
             };
         }
         public static SlateSummaryViewModel Translate(this SlateSummaryDto dto)

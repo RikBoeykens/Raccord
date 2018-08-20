@@ -1,0 +1,8 @@
+<mat-form-field>
+  <input type="text" placeholder="Search" aria-label="Search" matInput [matAutocomplete]="adminSearchAuto" [(ngModel)]="searchText" name="search-text" (input)="search()">
+  <mat-autocomplete #adminSearchAuto="matAutocomplete" (optionSelected)="onSelectionChanged($event)" [displayWith]="clearSearch">
+    <mat-option *ngFor="let result of filteredResults" [value]="result">
+      {{result.displayName}}
+    </mat-option>
+  </mat-autocomplete>
+</mat-form-field>

@@ -1,9 +1,9 @@
-import { Slate } from "./slate.model";
-import { Scene } from "../../../scenes/model/scene.model";
-import { ShootingDay } from "../../../shooting-days/index";
+import { Slate } from './slate.model';
+import { Scene } from '../../../../../shared/children/scenes';
+import { ShootingDay } from '../../../..';
 
 export class LinkedSlate extends Slate {
-    linkID: number;
+    public linkID: number;
 
     constructor(obj?: {
                         id: number,
@@ -19,13 +19,10 @@ export class LinkedSlate extends Slate {
                         scene?: Scene,
                         shootingDay?: ShootingDay,
                         linkID: number
-                    }){
+                    }) {
         super(obj);
-        if(obj){
+        if (obj) {
             this.linkID = obj.linkID;
-        }
-        else{
-            this.id = 0;
         }
     }
 }

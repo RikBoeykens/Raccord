@@ -6,6 +6,7 @@ using System.Linq;
 using Raccord.API.ViewModels.Characters;
 using Raccord.API.ViewModels.Breakdowns.BreakdownItems;
 using Raccord.API.ViewModels.Shots.Slates;
+using Raccord.API.ViewModels.Comments;
 
 namespace Raccord.API.ViewModels.Images
 {
@@ -27,6 +28,7 @@ namespace Raccord.API.ViewModels.Images
                 BreakdownItems = dto.BreakdownItems.Select(bi=> bi.Translate()),
                 Slates = dto.Slates.Select(s=> s.Translate()),
                 IsPrimaryImage = dto.IsPrimaryImage,
+                Comments = dto.Comments.Select(c => c.Translate()),
             };
         }
 

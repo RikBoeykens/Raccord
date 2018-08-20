@@ -1,23 +1,26 @@
 import { Component } from '@angular/core';
 import { Injectable } from '@angular/core';
-import { HttpHeaders } from '@angular/common/http';
 import { Http, Headers } from '@angular/http';
-import { BaseHttpService } from '../../shared/service/base-http.service';
 import { AppSettings } from '../../app.settings';
-import { OpenIdDictToken } from '../';
-import { Login } from '../';
+import { OpenIdDictToken } from '..';
+import { Login } from '..';
 import { TokenHelpers } from '../helpers/token.helpers';
-import { HeaderHelpers } from '../../shared/helpers/header.helpers';
-import { AccountHelpers } from '../../account/helpers/account.helper';
 import { Observable } from 'rxjs/Observable';
 import { SaveToken } from '../model/save-token';
 import 'rxjs/add/observable/fromPromise';
+import 'rxjs/add/observable/of';
+import { AccountHelpers } from '../../shared/children/account';
+import { HeaderHelpers, RouteSettings } from '../../shared';
+import { Router } from '../../../../node_modules/@angular/router';
 
 @Injectable()
 export class AuthService {
     private _baseUri: string;
 
-    constructor(private _http: Http) {
+    constructor(
+        private _http: Http,
+        private _router: Router
+    ) {
         this._baseUri = `${AppSettings.API_ENDPOINT}/authorization`;
     }
 
@@ -39,24 +42,27 @@ export class AuthService {
     }
 
     public getAccessToken(): Observable<string> {
-        let tokens = TokenHelpers.getTokens();
+        const tokens = TokenHelpers.getTokens();
         if (!tokens) {
             return Observable.of(null);
         }
         if (new Date().getTime() >= tokens.expiryDate) {
-            return Observable.fromPromise(this.refreshToken(tokens))
-                .catch(() => Observable.throw(this.logout()));
+            return Observable.fromPromise(
+                this.refreshToken(tokens).catch(() => {
+                    this.logout();
+                    this._router.navigateByUrl(`/${RouteSettings.LOGIN}`);
+                    return '';
+                }));
         }
         return Observable.of(tokens.accessToken);
     }
 
     private refreshToken(tokens: SaveToken): Promise<string> {
-        console.info('doing refresh token call');
         return this.retrieveTokens({refresh_token: tokens.refreshToken}, 'refresh_token');
     }
 
     private retrieveTokens(data: any, grantType: string): Promise<string> {
-        let uri = `${this._baseUri}/connect/token`;
+        const uri = `${this._baseUri}/connect/token`;
 
         Object.assign(data, { grant_type: grantType, scope: 'openid offline_access' });
 
@@ -64,10 +70,10 @@ export class AuthService {
         Object.keys(data)
             .forEach((key) => params.append(key, data[key]));
 
-        return this._http.post(uri, params.toString(), { headers: HeaderHelpers.ContentHeaders() })
+        return this._http.post(uri, params.toString(), {headers: HeaderHelpers.ContentHeaders()})
                     .toPromise()
                     .then((response) => {
-                        let token = <OpenIdDictToken> response.json();
+                        const token = response.json() as OpenIdDictToken;
                         this.internalLogin(token);
                         return token.access_token;
                     });

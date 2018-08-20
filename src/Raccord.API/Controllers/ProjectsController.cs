@@ -8,6 +8,10 @@ using Raccord.Application.Core.Services.Projects;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Raccord.Domain.Model.Users;
+using Raccord.Application.Core.Common.Paging;
+using PaginationUtilities = Raccord.API.ViewModels.Common.Paging.Utilities;
+using ProjectUtilities = Raccord.API.ViewModels.Projects.Utilities;
+using Raccord.API.ViewModels.Common.Paging;
 
 namespace Raccord.API.Controllers
 {
@@ -47,6 +51,36 @@ namespace Raccord.API.Controllers
 
             return projectVms;
         }
+
+        // GET: api/projects/paged
+        [HttpGet("paged")]
+        public JsonResult GetSummariesPaged([FromQuery]int? pageSize = null, [FromQuery]int? page = null, [FromQuery]bool full = true)
+        {
+            var response = new JsonResponse();
+
+            try
+            {
+                var paginationRequest = PaginationUtilities.ConstructRequest(pageSize, page, full);
+                var paginationResult = _projectService.GetAllForUserPaged(GetUserId(), paginationRequest);
+
+                response = new JsonResponse
+                {
+                    ok = true,
+                    data = paginationResult.Translate<UserProjectViewModel, UserProjectDto>(ProjectUtilities.Translate),
+                };
+            }
+            catch (Exception)
+            {
+                response = new JsonResponse
+                {
+                    ok = false,
+                    message = "Something went wrong while trying to get search results.",
+                };
+            }
+
+            return new JsonResult(response);
+        }
+
         // GET api/projects/5
         [HttpGet("{id}")]
         public FullProjectViewModel Get(long id)

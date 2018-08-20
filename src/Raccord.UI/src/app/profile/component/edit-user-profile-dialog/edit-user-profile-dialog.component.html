@@ -1,27 +1,31 @@
-<h1 md-dialog-title>
-  Profile
-</h1>
-<md-dialog-content>
-  <div fxLayout="row">
-      <md-input-container fxFlex="50%">
-          <input mdInput placeholder="First name" id="user_profile_firstname" [(ngModel)]="userProfile.firstName" #firstname="ngModel" name="user_profile_firstname">
-      </md-input-container>
-      <md-input-container fxFlex="50%">
-          <input mdInput placeholder="Last name" id="user_profile_lastname" [(ngModel)]="userProfile.lastName" #lastname="ngModel" name="user_profile_lastname">
-      </md-input-container>
-  </div>
-  <div fxLayout="row">
-      <md-input-container fxFlex="100%">
-          <input mdInput placeholder="Telephone" id="user_profile_telephone" [(ngModel)]="userProfile.telephone" #telephone="ngModel" name="user_profile_telephone">
-      </md-input-container>
-  </div>
-  <div fxLayout="row">
-    <md-input-container fxFlex="100%">
-        <input mdInput placeholder="Preferred Email" id="user_profile_email" [(ngModel)]="userProfile.preferredEmail" #email="ngModel" name="user_profile_email">
-    </md-input-container>
-  </div>
-</md-dialog-content>
-<md-dialog-actions>
-  <button md-button md-dialog-close>Cancel</button>
-  <button md-button (click)="submit()">Save</button>
-</md-dialog-actions>
+<h3 mat-dialog-title>Edit Profile</h3>
+<form id="edit-user-profile-form"
+  #editUserProfileForm = "ngForm"
+  (ngSubmit)="submit()">
+  <mat-dialog-content>
+    <div fxLayout="row">
+      <mat-form-field>
+        <input matInput required placeholder="First Name" id="user_profile_firstname" [(ngModel)]="userProfile.firstName" #firstname="ngModel" name="user_profile_firstname">
+      </mat-form-field>
+    </div>
+    <div fxLayout="row">
+      <mat-form-field>
+        <input matInput required placeholder="Last Name" id="user_profile_lastname" [(ngModel)]="userProfile.lastName" #lastname="ngModel" name="user_profile_lastname">
+      </mat-form-field>
+    </div>
+    <div fxLayout="row">
+      <mat-form-field>
+        <input matInput required placeholder="Telephone" id="user_profile_telephone" [(ngModel)]="userProfile.telephone" #telephone="ngModel" name="user_profile_telephone">
+      </mat-form-field>
+    </div>
+    <div fxLayout="row">
+      <mat-form-field>
+        <input matInput required placeholder="Email" id="user_profile_email" [(ngModel)]="userProfile.preferredEmail" #email="ngModel" name="user_profile_email">
+      </mat-form-field>
+    </div>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button mat-button type="submit" [disabled]="!editUserProfileForm.form.valid">Save</button>
+  </mat-dialog-actions>
+</form>

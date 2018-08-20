@@ -1,6 +1,7 @@
 /* this file will be extracted to main wwwroot folder and is imported in index.html */
 /* This file is for setting global styles  */
 @import 'variables';
+@import 'media-queries';
 @import "~@angular/material/_theming.scss";
 @import '~dragula/dist/dragula.css';
 @import '~angular-calendar/css/angular-calendar.css';
@@ -11,7 +12,7 @@
 
 // Define a theme.
 $primary: mat-palette($mat-indigo);
-$accent:  mat-palette($mat-pink, A200, A100, A400);
+$accent:  mat-palette($mat-teal);
 $warn: mat-palette($mat-red);
 
 $theme: mat-light-theme($primary, $accent, $warn);
@@ -19,13 +20,21 @@ $theme: mat-light-theme($primary, $accent, $warn);
 // Include all theme styles for the components.
 @include angular-material-theme($theme);
 
-
 body{
   margin: 0px;
   background-color: $bg-color;
   color: $text-color;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
+a {
+  text-decoration: none;
+  color: mat-color($accent);
+  
+  mat-icon {
+    vertical-align: middle;
+  }
+}
 ul{
   list-style-type: none;
 }
@@ -65,11 +74,6 @@ ul.autocomplete-content{
 
 .highlight{
   color: mat-color($accent);
-}
-
-.project-card{
-  width: 25%;
-  display: inline-block;
 }
 
 .breadcrumb:not(:first-child):before{
@@ -215,6 +219,14 @@ $avatar-border-radius: 15px;
   }
 }
 
+.generic-avatar {
+  .generic-avatar-placeholder {
+    .placeholder-image {
+      border-radius: $avatar-border-radius;
+    }
+  }
+}
+
 $placeholder-font-size: 20px;
 
 .placeholder-image{
@@ -256,4 +268,184 @@ $placeholder-font-size: 20px;
 .raccord-radio-group {
   display: inline-flex;
   flex-direction: column;
+}
+
+raccord-toolbar {
+  position: fixed;
+  z-index: 10;
+  left: 0;
+  right: 0;
+}
+
+.top-loader{
+  margin: 0 0;
+  position: fixed;
+  top: 64px;
+  z-index: 10;
+}
+
+.raccord-sidenav-container {
+  position: absolute !important;
+  top: 64px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.raccord-narrow-container {
+  @include tablet-portrait-and-up {
+    width: 66.66%;
+    margin-right: auto;
+    margin-left: auto;
+  }
+  padding-top: 5px;
+  padding-left: 5px;
+}
+
+.toolbar-fill-remaining-space {
+  flex: 1 1 auto;
+}
+
+.toolbar-user-avatar {
+  cursor: pointer;
+}
+
+.project-card {
+  width: 200px;
+  margin-bottom: 5px;
+}
+
+.generic-card {
+  width: 200px;
+  margin-bottom: 5px;
+}
+
+.admin-crew-unit-card {
+  width: 400px;
+  margin-bottom: 5px;
+}
+
+.more-info-card {
+  mat-card-title {
+    text-align: center;
+  }
+}
+
+.link-card {
+  width: 200px;
+  margin-bottom: 5px;
+  margin-top: 5px;
+  text-align: center;
+}
+
+.profile-dashboard-profile-image {
+  width: 200px;
+  margin-bottom: 5px;
+}
+
+.external-screen-container {
+  width: 66.66%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.raccord-page-header {
+
+  .raccord-header-title {
+    margin-top: 0px;
+    margin-bottom: 0px;
+
+    .raccord-header-avatar {
+      vertical-align: middle;
+    }
+  }
+}
+
+.raccord-list-avatar {
+  flex-shrink: 0;
+  width: 40px !important;
+  height: 40px !important;
+  border-radius: $avatar-border-radius;
+}
+
+.raccord-header-avatar {
+  flex-shrink: 0;
+  width: 50px !important;
+  height: 50px !important;
+  border-radius: $avatar-border-radius;
+}
+
+.raccord-sub-header {
+  .raccord-action-link {
+    vertical-align: middle;
+  }
+}
+
+.raccord-action-link {
+  cursor: pointer;
+}
+
+.loading-image {
+  display: inline-block;
+}
+
+.raccord-label-info {
+  margin-top: 10px;
+
+  .raccord-label-info-row {
+    margin-top: 5px;
+    .raccord-label {
+      font-style: italic;
+    }
+  }
+}
+
+.main-search-input {
+  width: 100%;
+}
+
+.search-results-container {
+  width: 100%;
+}
+
+.search-result-info {
+  font-style: italic;
+}
+
+.address-container p {
+  text-align: right;
+}
+
+.callsheet-scenes-table {
+  .col-description {
+    flex-basis: 20%;
+  }
+}
+
+.scenes-table {
+  .col-summary {
+    flex-basis: 20%;
+  }
+}
+
+.shooting-day-info-scenes-table {
+  .col-scenes {
+    flex-basis: 50%;
+  }
+}
+
+.shooting-day-scenes-table {
+  .col-scene {
+    flex-basis: 50%;
+  }
+}
+
+.schedule-scenes-table {
+  .col-scene {
+    flex-basis: 50%;
+  }
+}
+
+.raccord-expansion-panel {
+  margin-top: 5px;
 }

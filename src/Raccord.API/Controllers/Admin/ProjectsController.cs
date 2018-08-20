@@ -6,6 +6,7 @@ using Raccord.API.ViewModels.Projects;
 using Raccord.API.ViewModels.Core;
 using Raccord.Application.Core.Services.Projects;
 using Microsoft.AspNetCore.Authorization;
+using Raccord.Application.Core.Common.Paging;
 
 namespace Raccord.API.Controllers.Admin
 {
@@ -23,19 +24,22 @@ namespace Raccord.API.Controllers.Admin
 
         // GET: api/projects
         [HttpGet]
-        public IEnumerable<ProjectSummaryViewModel> Get()
+        public IEnumerable<AdminProjectSummaryViewModel> Get()
         {
-            var projectDtos = _projectService.GetAll();
+            var projectDtos = _projectService.GetAdminPaged(new PaginationRequestDto
+            {
+                Full = true
+            });
 
-            var projectVms = projectDtos.Select(p => p.Translate());
+            var projectVms = projectDtos.Data.Select(p => p.Translate());
 
             return projectVms;
         }
         // GET api/projects/5
         [HttpGet("{id}")]
-        public FullProjectViewModel Get(long id)
+        public AdminFullProjectViewModel Get(long id)
         {
-            var projectDto = _projectService.Get(id);
+            var projectDto = _projectService.GetForAdmin(id);
 
             var projectVm = projectDto.Translate();
 

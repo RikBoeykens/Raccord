@@ -1,0 +1,35 @@
+<mat-table #scriptlocationlocationsetstable [dataSource]="locationSets" class="script-location-location-sets-table">
+
+  <!-- Image Column -->
+  <ng-container matColumnDef="image">
+    <mat-header-cell *matHeaderCellDef></mat-header-cell>
+    <mat-cell *matCellDef="let locationSet">
+      <a routerLink="{{getLocationSetLink(locationSet)}}" [queryParams]="{src: 'scriptlocation'}">
+        <placeholder-image [value]="locationSet.name"></placeholder-image>
+      </a>
+    </mat-cell>
+  </ng-container>
+
+  <!-- Set Column -->
+  <ng-container matColumnDef="set">
+    <mat-header-cell *matHeaderCellDef>Set</mat-header-cell>
+    <mat-cell *matCellDef="let locationSet">
+      <a routerLink="{{getLocationSetLink(locationSet)}}" [queryParams]="{src: 'scriptlocation'}">
+        {{locationSet.name}}
+      </a>
+    </mat-cell>
+  </ng-container>
+
+  <!-- Location Column -->
+  <ng-container matColumnDef="location">
+    <mat-header-cell *matHeaderCellDef>Location</mat-header-cell>
+    <mat-cell *matCellDef="let locationSet">
+      <a routerLink="{{getLocationLink(locationSet)}}">
+        {{locationSet.location.name}}
+      </a>
+    </mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>

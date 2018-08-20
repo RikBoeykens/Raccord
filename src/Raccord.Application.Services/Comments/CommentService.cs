@@ -18,13 +18,21 @@ namespace Raccord.Application.Services.Comments
 
     public IEnumerable<CommentDto> GetForParent(GetCommentDto dto)
     {
-      var comments = _commentRepository.GetForParent(dto.ParentID, dto.ParentType);
+      var comments = _commentRepository.GetForParent(dto.ParentID, dto.ParentType).ToList();
+
+      foreach(var comment in comments)
+      {
+        GetChildrenRecursive(comment);
+      }
 
       return comments.Select(c=> c.Translate());
     }
+
     public CommentDto Get(long ID)
     {
       var comment = _commentRepository.GetFull(ID);
+
+      GetChildrenRecursive(comment);
 
       return comment.Translate();
     }
@@ -77,6 +85,10 @@ namespace Raccord.Application.Services.Comments
       {
         comment.ParentTakeID = dto.ParentID;
       }
+      if(dto.ParentType == ParentCommentType.LocationSet)
+      {
+        comment.ParentLocationSetID = dto.ParentID;
+      }
 
       _commentRepository.Add(comment);
       _commentRepository.Commit();
@@ -99,6 +111,16 @@ namespace Raccord.Application.Services.Comments
     public void Remove(long ID)
     {
       _commentRepository.RemoveComment(ID);
+    }
+
+    private void GetChildrenRecursive(Comment comment)
+    {
+      var childComments = _commentRepository.GetForParent(comment.ID, ParentCommentType.Comment).ToList();
+      foreach(var childComment in childComments)
+      {
+        GetChildrenRecursive(childComment);
+      }
+      comment.Comments = childComments;
     }
   }
 }

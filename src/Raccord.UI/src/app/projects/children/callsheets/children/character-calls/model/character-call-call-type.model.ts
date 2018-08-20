@@ -1,19 +1,16 @@
-import { CallType } from "../../../";
-import { CharacterCall } from "../../../"
+import { CharacterCall } from './character-call.model';
+import { CallType } from '../../../../..';
 
-export class CharacterCallCallType extends CharacterCall{
-    callType: CallType;
+export class CharacterCallCallType extends CharacterCall {
+    public callType: CallType;
 
-    constructor(obj?: {
-                        id: number, 
-                        callTime: Date, 
-                        callType: CallType
-                    }){
+    constructor(
+        obj?: any
+    ) {
         super(obj);
-        if(obj){
+        if (obj) {
             this.callType = obj.callType;
-        }
-        else{
+        } else {
             this.id = 0;
         }
     }

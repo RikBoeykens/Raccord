@@ -2,6 +2,8 @@ using Raccord.Application.Core.Services.Scenes;
 using Raccord.Application.Core.Services.Images;
 using System.Collections.Generic;
 using Raccord.Application.Core.Services.Breakdowns.BreakdownTypes;
+using Raccord.Application.Core.Services.Comments;
+using Raccord.Application.Core.Services.ShootingDays;
 
 namespace Raccord.Application.Core.Services.Breakdowns.BreakdownItems
 {
@@ -12,6 +14,8 @@ namespace Raccord.Application.Core.Services.Breakdowns.BreakdownItems
         private BreakdownTypeDto _type;
         private IEnumerable<LinkedSceneDto> _scenes;
         private IEnumerable<LinkedImageDto> _images;
+        private IEnumerable<CommentDto> _comments;
+        private IEnumerable<ShootingDayInfoSceneCollectionDto> _shootingDays;
 
         // Scenes linked to the breakdown item
         public IEnumerable<LinkedSceneDto> Scenes
@@ -68,6 +72,32 @@ namespace Raccord.Application.Core.Services.Breakdowns.BreakdownItems
             set
             {
                 _type = value;
+            }
+        }
+
+        // Comments linked to the breakdown item
+        public IEnumerable<CommentDto> Comments
+        {
+            get
+            {
+                return _comments ?? (_comments = new List<CommentDto>());
+            }
+            set
+            {
+                _comments = value;
+            }
+        }
+
+        // Shooting Days linked to the breakdown item
+        public IEnumerable<ShootingDayInfoSceneCollectionDto> ShootingDays
+        {
+            get
+            {
+                return _shootingDays ?? (_shootingDays = new List<ShootingDayInfoSceneCollectionDto>());
+            }
+            set
+            {
+                _shootingDays = value;
             }
         }
     }

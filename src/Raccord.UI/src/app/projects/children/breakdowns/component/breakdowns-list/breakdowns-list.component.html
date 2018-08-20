@@ -1,52 +1,17 @@
-<md-card>      
-  <a routerLink="/" class="breadcrumb">Dashboard</a>
-  <a routerLink="/projects" class="breadcrumb">Projects</a>
-  <a routerLink="/projects/{{project.id}}" class="breadcrumb">{{project.title}}</a>
-  <span class="breadcrumb">Breakdowns</span>
-</md-card>
-<md-card>
-  <span *ngIf="!breakdowns.length">No breakdowns set up</span>
-  <md-list *ngIf="breakdowns.length">
-      <md-list-item 
-         *ngFor="let breakdown of breakdowns">
-        <a [routerLink]="[breakdown.id]" [style.font-weight]="breakdown.selected ? 'bold' : ''">{{breakdown.name}}</a>
-        <button 
-          md-icon-button
-          (click)="setDefault(breakdown)"
-          *ngIf="getCanEdit() && !breakdown.isDefault"
-          mdTooltip="set default">
-          <md-icon>flash_on</md-icon>
-        </button>
-        <button 
-          md-icon-button
-          (click)="togglePublish(breakdown)"
-          *ngIf="userCreated(breakdown)"
-          mdTooltip="{{breakdown.isPublished ? 'unpublish' : 'publish'}}">
-          <md-icon *ngIf="breakdown.isPublished">public</md-icon>
-          <md-icon *ngIf="!breakdown.isPublished">publish</md-icon>
-        </button>
-        <button
-          md-icon-button
-          (click)="select(breakdown)"
-          *ngIf="!breakdown.selected"
-          mdTooltip="select">
-          <md-icon>favorite</md-icon>
-        </button>
-        <a 
-          md-icon-button
-          routerLink="/projects/{{project.id}}/breakdowns/{{breakdown.id}}/settings"
-          *ngIf="userCreated(breakdown)"
-          mdTooltip="settings">
-          <md-icon>settings</md-icon>
-        </a>
-        <button
-          md-icon-button
-          (click)="removeBreakdown(breakdown)"
-          *ngIf="userCreated(breakdown)"
-          mdTooltip="delete">
-          <md-icon>delete</md-icon>
-        </button>
-      </md-list-item>
-  </md-list>
-</md-card>
-<button md-fab (click)="addBreakdown()"><md-icon>add</md-icon></button>
+<div class="raccord-narrow-container">
+  <div class="raccord-page-header">
+    <a routerLink="{{getBackLink()}}">
+      <back-link></back-link>
+    </a>
+    <h1 class="raccord-header-title">
+      Breakdowns
+    </h1>
+  </div>
+  <div fxLayout="row wrap" fxLayoutGap="5px" *ngIf="breakdowns">
+    <a routerLink="{{getBreakdownLink(breakdown)}}"
+        *ngFor="let breakdown of breakdowns">
+      <breakdown-card
+          [breakdown]="breakdown"></breakdown-card>
+    </a>
+  </div>
+</div>

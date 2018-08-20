@@ -1,0 +1,46 @@
+<div class="raccord-narrow-container">
+  <div class="raccord-page-header">
+    <a routerLink="{{getBackLink()}}">
+      <back-link></back-link>
+    </a>
+    <div fxLayout="row">
+      <h1 class="raccord-header-title">
+        <user-avatar [headerAvatar]="true" [user]="user"></user-avatar>
+        {{getFullName()}}
+      </h1>
+    </div>
+  </div>
+  <mat-card class="raccord-label-info">
+    <div fxLayout="row"
+      class="raccord-label-info-row">
+      <span fxFlex="50%" class="raccord-label">
+        First name
+      </span>
+      <span fxFlex="50%" class="raccord-info">
+        {{user.firstName}}
+      </span>
+    </div>
+    <div fxLayout="row"
+    class="raccord-label-info-row">
+      <span fxFlex="50%" class="raccord-label">
+        Last name
+      </span>
+      <span fxFlex="50%" class="raccord-info">
+        {{user.lastName}}
+      </span>
+    </div>
+    <div fxLayout="row"
+      class="raccord-label-info-row">
+      <span fxFlex="50%" class="raccord-label">
+        Email
+      </span>
+      <span fxFlex="50%" class="raccord-info">
+        <mail-link [email]="user.email"></mail-link>
+      </span>
+    </div>
+  </mat-card>
+  <admin-user-project-users
+    [userId]="user.id"
+    [projectUsers]="user.projects"
+    [projectRoles]="projectRoles"></admin-user-project-users>
+</div>

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Raccord.API.ViewModels.Comments;
 using Raccord.API.ViewModels.Images;
 using Raccord.API.ViewModels.Shots.Takes;
 
@@ -8,6 +9,7 @@ namespace Raccord.API.ViewModels.Shots.Slates
     {
         private IEnumerable<TakeViewModel> _takes;
         private IEnumerable<LinkedImageViewModel> _images;
+        private IEnumerable<CommentViewModel> _comments;
 
         public IEnumerable<TakeViewModel> Takes
         {
@@ -31,6 +33,17 @@ namespace Raccord.API.ViewModels.Shots.Slates
             set
             {
                 _images = value;
+            }
+        }
+        public IEnumerable<CommentViewModel> Comments
+        {
+            get
+            {
+                return _comments ?? (_comments = new List<CommentViewModel>());
+            }
+            set
+            {
+                _comments = value;
             }
         }
     }

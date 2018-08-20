@@ -1,4 +1,4 @@
-import { Base64Image } from "../model/base-64-image.model";
+import { Base64Image } from '..';
 
 export class ImageHelpers {
 
@@ -6,7 +6,7 @@ export class ImageHelpers {
     return fileName.split('.').pop();
   }
 
-  public static getBase64Url(image: Base64Image): string{
+  public static getBase64Url(image: Base64Image): string {
     return `data:image/${this.getExtension(image.fileName)};base64,${image.content}`;
   }
 }

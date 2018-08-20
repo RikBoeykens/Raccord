@@ -1,0 +1,117 @@
+<div class="raccord-narrow-container">
+  <div class="raccord-page-header">
+    <a routerLink="{{getBackLink()}}">
+      <back-link></back-link>
+    </a>
+    <div fxLayout="row">
+      <h1 class="raccord-header-title">
+        <scene-summary [scene]="scene" [includeSummary]="false"></scene-summary>
+        <a mat-mini-fab routerLink="{{getScriptLink()}}" fragment="scene-{{scene.id}}"><mat-icon>subject</mat-icon></a>
+      </h1>
+    </div>
+    <div fxLayout="row" *ngIf="scene.summary">
+      <h2 class="raccord-header-sub-title">
+        {{scene.summary}}
+      </h2>
+    </div>
+  </div>
+
+  <mat-card class="raccord-label-info">
+    <div fxLayout="row"
+      class="raccord-label-info-row">
+      <span fxFlex="50%" class="raccord-label">
+        Scene Number
+      </span>
+      <span fxFlex="50%" class="raccord-info">
+        {{scene.number}}
+      </span>
+    </div>
+    <div fxLayout="row"
+      class="raccord-label-info-row">
+      <span fxFlex="50%" class="raccord-label">
+        Intro
+      </span>
+      <span fxFlex="50%" class="raccord-info">
+        {{scene.sceneIntro.name}}
+      </span>
+    </div>
+    <div fxLayout="row"
+      class="raccord-label-info-row">
+      <span fxFlex="50%" class="raccord-label">
+        Location (script)
+      </span>
+      <span fxFlex="50%" class="raccord-info">
+        <a routerLink="{{getScriptLocationLink()}}">
+          {{scene.scriptLocation.name}}
+        </a>
+      </span>
+    </div>
+    <div fxLayout="row"
+      class="raccord-label-info-row">
+      <span fxFlex="50%" class="raccord-label">
+        Time of Day
+      </span>
+      <span fxFlex="50%" class="raccord-info">
+        {{scene.timeOfDay.name}}
+      </span>
+    </div>
+    <div fxLayout="row"
+      class="raccord-label-info-row">
+      <span fxFlex="50%" class="raccord-label">
+        Summary
+      </span>
+      <span fxFlex="50%" class="raccord-info">
+        {{scene.summary}}
+      </span>
+    </div>
+    <div fxLayout="row"
+      class="raccord-label-info-row">
+      <span fxFlex="50%" class="raccord-label">
+        Page count
+      </span>
+      <span fxFlex="50%" class="raccord-info">
+        {{scene.pageLength | myPagelength}}
+      </span>
+    </div>
+  </mat-card>
+  <mat-expansion-panel class="raccord-expansion-panel" *ngIf="getCanComment()">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Comments ({{getCommentCount()}})
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <comment-container [comments]="scene.comments" [projectId]="project.id" [parentId]="scene.id" [parentType]="getParentCommentType()"></comment-container>
+  </mat-expansion-panel>
+  <mat-expansion-panel class="raccord-expansion-panel">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Characters ({{scene.characters.length}})
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <scene-characters-table [characters]="scene.characters" [projectId]="project.id"></scene-characters-table>
+  </mat-expansion-panel>
+  <mat-expansion-panel class="raccord-expansion-panel" *ngIf="scene.breakdownInfo">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Breakdown ({{scene.breakdownInfo.items.length}})
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <scene-breakdown-table [sceneBreakdown]="scene.breakdownInfo" [projectId]="project.id"></scene-breakdown-table>
+  </mat-expansion-panel>
+  <mat-expansion-panel class="raccord-expansion-panel">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Scheduling ({{scene.shootingDays.length}})
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <shooting-day-info [shootingDays]="scene.shootingDays" [projectId]="project.id"></shooting-day-info>
+  </mat-expansion-panel>
+  <mat-expansion-panel class="raccord-expansion-panel">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Slates ({{scene.slates.length}})
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <slates-table [slates]="scene.slates" [projectId]="project.id"></slates-table>
+  </mat-expansion-panel>
+</div>

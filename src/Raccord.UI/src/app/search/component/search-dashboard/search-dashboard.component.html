@@ -1,0 +1,26 @@
+<div class="raccord-narrow-container">
+  <div fxLayout="row">
+    <mat-form-field class="main-search-input">
+      <input matInput 
+        placeholder="Search" 
+        [(ngModel)]="searchText"
+        (input)="doSearch()">
+    </mat-form-field>
+  </div>
+  <div fxLayout="row"
+    *ngIf="showResults">
+    <mat-nav-list
+      class="search-results-container">
+      <div *ngFor="let typeResult of searchTypeResults">
+        <h3 matSubHeader>{{typeResult.type}} ({{typeResult.count}})</h3>
+        <a mat-list-item
+          *ngFor="let searchResult of typeResult.results"
+          [routerLink]="getSearchResultLink(searchResult)">
+          <p mat-line>{{searchResult.displayName}}</p>
+          <p mat-line class="search-result-info">{{searchResult.info}}</p>
+        </a>
+        <mat-divider></mat-divider>
+      </div>
+    </mat-nav-list>
+  </div>
+</div>

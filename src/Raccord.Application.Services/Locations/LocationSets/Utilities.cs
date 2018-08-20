@@ -14,13 +14,16 @@ using Raccord.Application.Services.ScriptLocations;
 using Raccord.Application.Services.Scheduling.ScheduleDays;
 using System.Collections.Generic;
 using Raccord.Domain.Model.Scenes;
+using Raccord.Application.Core.Services.Comments;
+using Raccord.Domain.Model.ShootingDays;
+using Raccord.Application.Services.ShootingDays;
 
 namespace Raccord.Application.Services.Locations.LocationSets
 {
     // Utilities and helper methods for Location sets
     public static class Utilities
     {
-        public static FullLocationSetDto TranslateFull(this LocationSet location)
+        public static FullLocationSetDto TranslateFull(this LocationSet location, IEnumerable<CommentDto> comments, IEnumerable<ShootingDay> shootingDays)
         {
             var dto = new FullLocationSetDto
             {
@@ -30,7 +33,8 @@ namespace Raccord.Application.Services.Locations.LocationSets
                 LatLng = LocationUtilities.TranslateLatLng(location.Latitude, location.Longitude),
                 Location = location.Location.TranslateSummary(),
                 ScriptLocation = location.ScriptLocation.TranslateSummary(),
-                ScheduleDays = location.GetLocationSetScheduleDays(),
+                ShootingDays = shootingDays.GetLocationSetShootingDays(new long[]{location.ID}),
+                Comments = comments
             };
 
             return dto;

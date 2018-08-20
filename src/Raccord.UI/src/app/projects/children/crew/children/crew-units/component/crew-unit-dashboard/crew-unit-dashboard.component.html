@@ -1,0 +1,49 @@
+<div class="raccord-narrow-container">
+  <div class="raccord-page-header">
+    <a routerLink="{{getBackLink()}}">
+      <back-link></back-link>
+    </a>
+    <div fxLayout="row">
+      <h1 class="raccord-header-title">
+        {{crewUnit.name}}
+        <a mat-mini-fab routerLink="{{getUnitListLink()}}"><mat-icon>people</mat-icon></a>
+      </h1>
+    </div>
+  </div>
+  <!-- Schedules -->
+  <div class="raccord-sub-header"
+    fxLayout="row">
+    <h2>Schedules</h2>
+  </div>
+  <div fxLayout="row wrap" fxLayoutGap="5px" *ngIf="schedules && schedules.pageInfo">
+    <a routerLink="{{getScheduleLink(schedule)}}"
+        *ngFor="let schedule of schedules.data">
+        <schedule-card
+            [schedule]="schedule"></schedule-card>
+    </a>
+  </div>
+  <!-- Callsheets -->
+  <div class="raccord-sub-header"
+    fxLayout="row">
+    <h2>Callsheets</h2>
+  </div>
+  <div fxLayout="row wrap" fxLayoutGap="5px" *ngIf="callsheets && callsheets.pageInfo">
+    <a routerLink="{{getCallsheetLink(callsheet)}}"
+        *ngFor="let callsheet of callsheets.data">
+        <callsheet-card
+            [callsheet]="callsheet"></callsheet-card>
+    </a>
+  </div>
+  <!-- Shooting Days -->
+  <div class="raccord-sub-header"
+    fxLayout="row">
+    <h2>Shooting Days</h2>
+  </div>
+  <div fxLayout="row wrap" fxLayoutGap="5px" *ngIf="shootingDays && shootingDays.pageInfo">
+    <a routerLink="{{getShootingDayLink(shootingDay)}}"
+        *ngFor="let shootingDay of shootingDays.data">
+        <shooting-day-card
+            [shootingDay]="shootingDay"></shooting-day-card>
+    </a>
+  </div>
+</div>

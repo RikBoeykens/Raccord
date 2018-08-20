@@ -77,9 +77,9 @@ namespace Raccord.Data.EntityFramework.Repositories.Scenes
 
         public IEnumerable<Scene> Filter(
             long projectID, 
-            IEnumerable<long> intExtIDs, 
+            IEnumerable<long> sceneIntroIDs, 
             IEnumerable<long> scriptLocationIDs, 
-            IEnumerable<long> dayNightIDs,
+            IEnumerable<long> timeOfDayIDs,
             IEnumerable<long> locationSetIDs,
             IEnumerable<long> locationIDs,
             IEnumerable<long> characterIDs,
@@ -99,9 +99,9 @@ namespace Raccord.Data.EntityFramework.Repositories.Scenes
 
             query = query.Where(s=> s.ProjectID == projectID);
 
-            if(intExtIDs.Any())
+            if(sceneIntroIDs.Any())
             {
-                query = query.Where(s => intExtIDs.Any(id=> id == s.IntExtID));
+                query = query.Where(s => sceneIntroIDs.Any(id=> id == s.SceneIntroID));
             }
 
             if(scriptLocationIDs.Any())
@@ -109,9 +109,9 @@ namespace Raccord.Data.EntityFramework.Repositories.Scenes
                 query = query.Where(s => scriptLocationIDs.Any(id=> id == s.ScriptLocationID));
             }
 
-            if(dayNightIDs.Any())
+            if(timeOfDayIDs.Any())
             {
-                query = query.Where(s => dayNightIDs.Any(id=> id == s.DayNightID));
+                query = query.Where(s => timeOfDayIDs.Any(id=> id == s.TimeOfDayID));
             }
 
             if(locationSetIDs.Any())
@@ -188,9 +188,9 @@ namespace Raccord.Data.EntityFramework.Repositories.Scenes
         {
             IQueryable<Scene> query = _context.Set<Scene>();
 
-            return query.Include(s => s.IntExt)
+            return query.Include(s => s.SceneIntro)
                          .Include(s => s.ScriptLocation)
-                         .Include(s => s.DayNight)
+                         .Include(s => s.TimeOfDay)
                          .Include(s=> s.ImageScenes)
                          .ThenInclude(i=> i.Image)
                          .Include(s=> s.CharacterScenes)
@@ -225,9 +225,9 @@ namespace Raccord.Data.EntityFramework.Repositories.Scenes
         {
             IQueryable<Scene> query = _context.Set<Scene>();
 
-            return query.Include(s => s.IntExt)
+            return query.Include(s => s.SceneIntro)
                          .Include(s => s.ScriptLocation)
-                         .Include(s => s.DayNight)
+                         .Include(s => s.TimeOfDay)
                          .Include(s=> s.ImageScenes)
                          .ThenInclude(i=> i.Image);
         }
@@ -236,18 +236,18 @@ namespace Raccord.Data.EntityFramework.Repositories.Scenes
         {
             IQueryable<Scene> query = _context.Set<Scene>();
 
-            return query.Include(s => s.IntExt)
+            return query.Include(s => s.SceneIntro)
                          .Include(s => s.ScriptLocation)
-                         .Include(s => s.DayNight);
+                         .Include(s => s.TimeOfDay);
         }
 
         private IQueryable<Scene> GetIncludedSearch()
         {
             IQueryable<Scene> query = _context.Set<Scene>();
 
-            return query.Include(s => s.IntExt)
+            return query.Include(s => s.SceneIntro)
                          .Include(s => s.ScriptLocation)
-                         .Include(s => s.DayNight)
+                         .Include(s => s.TimeOfDay)
                          .Include(s=> s.Project)
                          .ThenInclude(p=> p.ProjectUsers);
         }
@@ -256,11 +256,11 @@ namespace Raccord.Data.EntityFramework.Repositories.Scenes
         {
             IQueryable<Scene> query = _context.Set<Scene>();
 
-            return query.Include(s => s.IntExt)
+            return query.Include(s => s.SceneIntro)
                          .Include(s => s.ScriptLocation)
                             .ThenInclude(sl=> sl.LocationSets)
                                 .ThenInclude(ls=> ls.Location)
-                         .Include(s => s.DayNight)
+                         .Include(s => s.TimeOfDay)
                          .Include(s => s.CharacterScenes)
                             .ThenInclude(cs => cs.Character)
                          .Include(s => s.BreakdownItemScenes)
@@ -299,9 +299,9 @@ namespace Raccord.Data.EntityFramework.Repositories.Scenes
         {
             IQueryable<Scene> query = _context.Set<Scene>();
 
-            return query.Include(s => s.IntExt)
+            return query.Include(s => s.SceneIntro)
                          .Include(s => s.ScriptLocation)
-                         .Include(s => s.DayNight)
+                         .Include(s => s.TimeOfDay)
                          .Include(s=> s.ImageScenes)
                          .ThenInclude(i=> i.Image)
                          .Include(s => s.Actions)

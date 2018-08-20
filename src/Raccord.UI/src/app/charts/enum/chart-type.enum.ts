@@ -1,4 +1,4 @@
-export enum ChartType{
+export enum ChartType {
     line = 0,
     area = 1,
     bar = 2,

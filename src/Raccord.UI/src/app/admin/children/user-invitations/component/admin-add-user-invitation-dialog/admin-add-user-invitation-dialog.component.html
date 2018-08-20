@@ -1,0 +1,26 @@
+<h3 mat-dialog-title>Add Invitation</h3>
+<form id="add-user-invitation-form"
+  #addUserInvitationForm = "ngForm"
+  (ngSubmit)="submit()">
+  <mat-dialog-content>
+    <div fxLayout="row">
+      <mat-form-field>
+        <input required matInput placeholder="First Name" [(ngModel)]="userInvitation.firstName" name="user-invitation-firstname">
+      </mat-form-field>
+    </div>
+    <div fxLayout="row">
+      <mat-form-field>
+        <input required matInput placeholder="Last Name" [(ngModel)]="userInvitation.lastName" name="user-invitation-lastname">
+      </mat-form-field>
+    </div>
+    <div fxLayout="row">
+      <mat-form-field>
+        <input required matInput placeholder="Email" [(ngModel)]="userInvitation.email" name="user-invitation-email">
+      </mat-form-field>
+    </div>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button mat-button type="submit" [disabled]="!addUserInvitationForm.form.valid">Save</button>
+  </mat-dialog-actions>
+</form>

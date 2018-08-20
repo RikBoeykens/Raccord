@@ -1,5 +1,4 @@
-import { BaseModel } from '../../shared';
-import { RouteInfo } from '../../shared/model/route-info.model';
+import { BaseModel, RouteInfo } from '../../shared';
 
 export class CalendarItem extends BaseModel {
   public date: Date;

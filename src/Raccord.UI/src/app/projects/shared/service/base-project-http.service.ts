@@ -9,7 +9,8 @@ export class BaseProjectHttpService extends BaseHttpService {
 
   constructor(
       protected _http: HttpClient,
-      controllerName: string) {
+      controllerName: string
+    ) {
       super(_http);
       this._baseUri = `${AppSettings.API_PROJECT_ENDPOINT}`;
       this.controllerName = controllerName;

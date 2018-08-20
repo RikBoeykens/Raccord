@@ -30,7 +30,7 @@ namespace Raccord.Application.Services.ScriptLocations
 
         public SearchTypeResultDto GetResults(SearchRequestDto request)
         {
-            var excludeIds = request.GetExcludeIDs(_type);
+            var excludeIds = request.GetExcludeLongIDs(_type);
             var locationCount = _scriptLocationRepository.SearchCount(request.SearchText, request.ProjectID, request.UserID, request.IsAdminSearch, excludeIds);
             var locations = _scriptLocationRepository.Search(request.SearchText, request.ProjectID, request.UserID, request.IsAdminSearch, excludeIds);
 

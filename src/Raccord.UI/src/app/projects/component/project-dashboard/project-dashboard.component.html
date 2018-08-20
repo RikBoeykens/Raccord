@@ -1,0 +1,52 @@
+<div class="raccord-narrow-container">
+  <div class="raccord-page-header">
+    <h1 class="raccord-header-title">
+      <project-avatar [headerAvatar]="true" [project]="project"></project-avatar>
+      {{project.title}}
+    </h1>
+  </div>
+  <div fxLayout="row wrap" fxLayoutGap="5px">
+    <a routerLink="{{getScriptLink()}}">
+      <mat-card class="link-card">
+        <h3>Script</h3>
+      </mat-card>
+    </a>
+    <a routerLink="{{getBreakdownLink()}}">
+      <mat-card class="link-card">
+        <h3>Breakdown</h3>
+      </mat-card>
+    </a>
+    <a routerLink="{{getLocationLink()}}">
+      <mat-card class="link-card">
+        <h3>Locations</h3>
+      </mat-card>
+    </a>
+    <a routerLink="{{getSlatesLink()}}">
+      <mat-card class="link-card">
+        <h3>Slates</h3>
+      </mat-card>
+    </a>
+    <a routerLink="{{getSchedulingLink()}}">
+      <mat-card class="link-card">
+        <h3>Scheduling</h3>
+      </mat-card>
+    </a>
+    <a routerLink="{{getCastLink()}}">
+      <mat-card class="link-card">
+        <h3>Cast</h3>
+      </mat-card>
+    </a>
+    <a routerLink="{{getCrewLink()}}">
+      <mat-card class="link-card">
+        <h3>Crew</h3>
+      </mat-card>
+    </a>
+  </div>
+  <div *ngIf="getCanRead()">
+    <mat-card>
+      <mat-card-content>
+        <project-calendar [projectId]="project.id"></project-calendar>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

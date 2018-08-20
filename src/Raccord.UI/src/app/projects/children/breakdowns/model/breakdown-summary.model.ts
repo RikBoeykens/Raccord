@@ -1,5 +1,5 @@
 import { Breakdown } from './breakdown.model';
-import { UserProfile } from '../../../../profile/model/user-profile.model';
+import { UserProfile } from '../../../../shared/children/users';
 
 export class BreakdownSummary extends Breakdown {
   public createdBy: UserProfile;

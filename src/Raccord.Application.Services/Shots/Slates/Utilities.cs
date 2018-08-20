@@ -1,4 +1,7 @@
+using System.Collections.Generic;
 using System.Linq;
+using Raccord.Application.Core.Common.Routing;
+using Raccord.Application.Core.Services.Comments;
 using Raccord.Application.Core.Services.SearchEngine;
 using Raccord.Application.Core.Services.Shots.Slates;
 using Raccord.Application.Services.Images;
@@ -13,7 +16,7 @@ namespace Raccord.Application.Services.Shots.Slates
 {
     public static class Utilities
     {
-        public static FullSlateDto TranslateFull(this Slate slate)
+        public static FullSlateDto TranslateFull(this Slate slate, IEnumerable<CommentDto> comments)
         {
             return new FullSlateDto
             {
@@ -31,6 +34,7 @@ namespace Raccord.Application.Services.Shots.Slates
                 ShootingDay = slate.ShootingDayID.HasValue ? slate.ShootingDay.Translate() : null,
                 Takes = slate.Takes.Select(t=> t.Translate()),
                 Images = slate.ImageSlates.Select(s=> s.TranslateImage()),
+                Comments = comments
             };
         }
         public static SlateSummaryDto TranslateSummary(this Slate slate)
@@ -96,10 +100,13 @@ namespace Raccord.Application.Services.Shots.Slates
             return new SearchResultDto
             {
                 ID = slate.ID,
-                RouteIDs = new long[]{slate.ProjectID, slate.ID},
                 DisplayName = slate.Number,
                 Info = $"Project: {slate.Project.Title}",
-                Type = EntityType.Slate,  
+                RouteInfo = new RouteInfoDto
+                {
+                    RouteIDs = new object[]{slate.ProjectID, slate.ID},
+                    Type = EntityType.Slate,
+                }
             };
         }
     }

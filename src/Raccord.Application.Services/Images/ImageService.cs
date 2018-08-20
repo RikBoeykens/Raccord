@@ -6,6 +6,7 @@ using Raccord.Domain.Model.Images;
 using Raccord.Application.Core.Services.Images;
 using Raccord.Data.EntityFramework.Repositories.Images;
 using Raccord.Core.Enums;
+using Raccord.Data.EntityFramework.Repositories.Comments;
 
 namespace Raccord.Application.Services.Images
 {
@@ -13,14 +14,16 @@ namespace Raccord.Application.Services.Images
     public class ImageService : IImageService
     {
         private readonly IImageRepository _imageRepository;
+        private readonly ICommentRepository _commentRepository;
 
         // Initialises a new ImageService
-        public ImageService(IImageRepository imageRepository)
+        public ImageService(
+            IImageRepository imageRepository,
+            ICommentRepository commentRepository
+            )
         {
-            if(imageRepository == null)
-                throw new ArgumentNullException(nameof(imageRepository));
-            
             _imageRepository = imageRepository;
+            _commentRepository = commentRepository;
         }
 
         // Gets all images
@@ -38,7 +41,9 @@ namespace Raccord.Application.Services.Images
         {
             var image = _imageRepository.GetFull(ID);
 
-            var dto = image.TranslateFull();
+            var comments = _commentRepository.GetForParent(image.ID, ParentCommentType.Image);
+
+            var dto = image.TranslateFull(comments);
 
             return dto;
         }
