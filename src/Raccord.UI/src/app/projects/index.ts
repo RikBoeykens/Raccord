@@ -323,6 +323,9 @@ export { SchedulesHttpService } from './children/scheduling/children/schedules/s
 export { SchedulesResolve } from './children/scheduling/children/schedules/service/schedules.resolve';
 
 // tslint:disable-next-line:max-line-length
+export { ShootingDayScenesTableComponent } from './children/scheduling/children/shooting-days/children/scenes/component/shooting-day-scenes-table/shooting-day-scenes-table.component';
+
+// tslint:disable-next-line:max-line-length
 export { BaseShootingDayScene } from './children/scheduling/children/shooting-days/children/scenes/model/base-shooting-day-scene.model';
 // tslint:disable-next-line:max-line-length
 export { ShootingDaySceneScene } from './children/scheduling/children/shooting-days/children/scenes/model/shooting-day-scene-scene.model';
@@ -344,6 +347,8 @@ export { ShootingDayInfoTableComponent } from './children/scheduling/children/sh
 // tslint:disable-next-line:max-line-length
 export { ShootingDayInfoScenesTableComponent } from './children/scheduling/children/shooting-days/component/shooting-day-info-scenes-table/shooting-day-info-scenes-table.component';
 // tslint:disable-next-line:max-line-length
+export { ShootingDayLandingComponent } from './children/scheduling/children/shooting-days/component/shooting-day-landing/shooting-day-landing.component';
+// tslint:disable-next-line:max-line-length
 export { ShootingDaysListComponent } from './children/scheduling/children/shooting-days/component/shooting-days-list/shooting-days-list.component';
 
 // tslint:disable-next-line:max-line-length
@@ -364,6 +369,8 @@ export { ShootingDay } from './children/scheduling/children/shooting-days/model/
 export { CompletedShootingDaysResolve } from './children/scheduling/children/shooting-days/service/completed-shooting-days-resolve.service';
 // tslint:disable-next-line:max-line-length
 export { ShootingDayHttpService } from './children/scheduling/children/shooting-days/service/shooting-day-http.service';
+// tslint:disable-next-line:max-line-length
+export { ShootingDayResolve } from './children/scheduling/children/shooting-days/service/shooting-day-resolve.service';
 
 // tslint:disable-next-line:max-line-length
 export { SchedulingDashboardComponent } from './children/scheduling/component/scheduling-dashboard/scheduling-dashboard.component';

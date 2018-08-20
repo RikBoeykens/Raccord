@@ -393,6 +393,7 @@ raccord-toolbar {
   margin-top: 10px;
 
   .raccord-label-info-row {
+    margin-top: 5px;
     .raccord-label {
       font-style: italic;
     }
@@ -429,6 +430,12 @@ raccord-toolbar {
 
 .shooting-day-info-scenes-table {
   .col-scenes {
+    flex-basis: 50%;
+  }
+}
+
+.shooting-day-scenes-table {
+  .col-scene {
     flex-basis: 50%;
   }
 }

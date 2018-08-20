@@ -220,7 +220,7 @@ namespace Raccord.Application.Services.Users.Invitations
           }
         }
       }
-
+      SendAcceptedInvitationEmail(dto.FirstName, dto.LastName);
       return createdUserId;
     }
 
@@ -233,6 +233,16 @@ namespace Raccord.Application.Services.Users.Invitations
       _sendMailService.SendMail(new SendMailRequestDto{
         Recipient = email,
         Subject = "Raccord Invitation",
+        Body = body
+      });
+    }
+
+    private void SendAcceptedInvitationEmail(string firstName, string lastName)
+    {
+      var body = $"User {firstName} {lastName} has accepted the invitation";
+
+      _sendMailService.SendMail(new SendMailRequestDto{
+        Subject = "Raccord Invitation Accepted",
         Body = body
       });
     }
