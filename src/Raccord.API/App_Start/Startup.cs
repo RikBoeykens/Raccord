@@ -148,7 +148,7 @@ namespace Raccord.API
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "Raccord V1");
             });
-
+ 
             using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
             {
                 var raccordDbContext = serviceScope.ServiceProvider.GetService<RaccordDBContext>();

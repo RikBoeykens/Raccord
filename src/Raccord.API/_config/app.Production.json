@@ -1,6 +1,6 @@
 {
   "DbContextSettings" :{
-    "ConnectionUri" : "postgres://wlzywseavoxvrt:1b3ae187cf7d7ae25f4189ca42425d0bc08fe22b3d8e9f30f56fc6f5f924b060@ec2-107-21-201-57.compute-1.amazonaws.com:5432/dar6ujjt88r1ad"
+    "ConnectionUri" : "postgres://pkwbspjqlvpngz:c1e6e78a2caf8ac9d876bc0f2738e0e62abd0b103af09d34f87492127d312e1d@ec2-54-235-242-63.compute-1.amazonaws.com:5432/d8d1p93socteak"
   },
   "UISettings":{
     "Uri": "http://raccord-ui-poc.herokuapp.com"
