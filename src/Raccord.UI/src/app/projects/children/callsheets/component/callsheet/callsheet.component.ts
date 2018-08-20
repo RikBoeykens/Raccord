@@ -51,7 +51,7 @@ export class CallsheetComponent implements OnInit {
 
   public getCrewUnitLink() {
     // tslint:disable-next-line:max-line-length
-    return `/${RouteSettings.PROJECTS}/${this.project.id}/${RouteSettings.UNITS}/${this.callsheet.crewUnit.id}`;
+    return `/${RouteSettings.PROJECTS}/${this.project.id}/${RouteSettings.CREW}/${this.callsheet.crewUnit.id}`;
   }
 
   public getBreakdownLink() {

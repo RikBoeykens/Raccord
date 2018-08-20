@@ -35,7 +35,7 @@ export class ShootingDayLandingComponent implements OnInit {
 
   public getCrewUnitLink() {
     // tslint:disable-next-line:max-line-length
-    return `/${RouteSettings.PROJECTS}/${this.project.id}/${RouteSettings.UNITS}/${this.shootingDay.crewUnit.id}`;
+    return `/${RouteSettings.PROJECTS}/${this.project.id}/${RouteSettings.CREW}/${this.shootingDay.crewUnit.id}`;
   }
 
   public getSlateLink(slate: SlateSummary) {

@@ -19,7 +19,7 @@ export class ShootingDayInfoScenesTableComponent {
 
   public getCrewUnitLink(shootingDay: ShootingDayInfoSceneCollection) {
     // tslint:disable-next-line:max-line-length
-    return `/${RouteSettings.PROJECTS}/${this.projectId}/${RouteSettings.UNITS}/${shootingDay.crewUnit.id}`;
+    return `/${RouteSettings.PROJECTS}/${this.projectId}/${RouteSettings.CREW}/${shootingDay.crewUnit.id}`;
   }
 
   public getSceneLink(scene: SceneSummary) {
