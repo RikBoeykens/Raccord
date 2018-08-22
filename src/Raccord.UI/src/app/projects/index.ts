@@ -169,6 +169,9 @@ export { CastDashboardHttpService } from './children/cast/service/cast-dashboard
 export { CastDashboardResolve } from './children/cast/service/cast-dashboard.resolve';
 
 // tslint:disable-next-line:max-line-length
+export { ChartLandingComponent } from './children/charts/component/chart-landing/chart-landing.component';
+
+// tslint:disable-next-line:max-line-length
 export { CommentContainerComponent } from './children/comments/component/comment-container/comment-container.component';
 // tslint:disable-next-line:max-line-length
 export { EditCommentComponent } from './children/comments/component/edit-comment/edit-comment.component';

@@ -215,7 +215,9 @@ namespace Raccord.Data.EntityFramework.Repositories.ShootingDays
         {
             IQueryable<ShootingDay> query = _context.Set<ShootingDay>();
 
-            return query.Include(sd => sd.CrewUnit);
+            return query.Include(sd => sd.CrewUnit)
+                        .Include(sd => sd.ShootingDayScenes)
+                        .Include(sd => sd.Slates);
         }
 
         private IQueryable<ShootingDay> GetIncludedSearch()

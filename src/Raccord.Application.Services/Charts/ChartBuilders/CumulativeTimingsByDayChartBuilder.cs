@@ -39,12 +39,16 @@ namespace Raccord.Application.Services.Charts.ChartBuilders
             var seriesData = new List<object>();
             
             var timings = new TimeSpan();
+            
+            //set data for 0
+            baseData.Add("0");
+            seriesData.Add(new TimeSpan());
 
             // TODO implement for crew unit
-            var shootingDays = _shootingDayRepository.GetAllForCrewUnit(request.ProjectID).OrderBy(sd=> sd.Date);
+            var shootingDays = _shootingDayRepository.GetAllForProject(request.ProjectID).OrderBy(sd=> sd.Date);
             foreach(var shootingDay in shootingDays)
             {
-                baseData.Add($"SD {shootingDay.Number}");
+                baseData.Add($"SD {shootingDay.Number} - unit {shootingDay.CrewUnit.Name}");
                 var completedTimings = new TimeSpan(shootingDay.ShootingDayScenes.Sum(sds=> sds.Timings.Ticks));
                 timings = timings.Add(completedTimings);
                 seriesData.Add(shootingDay.Completed ? timings : (TimeSpan?)null);
@@ -56,6 +60,7 @@ namespace Raccord.Application.Services.Charts.ChartBuilders
                 ChartType = ChartType.Area,
                 DataType = ChartDataType.Timespan,
                 BaseData = baseData,
+                ChartWidth = 3,
                 SeriesData = new List<ChartSeriesDataDto>
                 {
                     new ChartSeriesDataDto{ Name = "Timings", Data = seriesData}

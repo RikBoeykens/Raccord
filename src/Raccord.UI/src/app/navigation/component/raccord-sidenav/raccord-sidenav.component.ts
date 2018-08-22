@@ -66,4 +66,8 @@ export class RaccordSidenavComponent implements OnInit {
   public getSlatesLink() {
     return `/${RouteSettings.PROJECTS}/${this.currentProject.id}/${RouteSettings.SLATES}`;
   }
+
+  public getChartsLink() {
+    return `/${RouteSettings.PROJECTS}/${this.currentProject.id}/${RouteSettings.CHARTS}`;
+  }
 }

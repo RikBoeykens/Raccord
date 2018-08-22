@@ -8,7 +8,8 @@ import { RouteSettings } from '../../../../../shared';
 })
 export class AdminUsersTableComponent {
   @Input() public users: AdminUserSummary[];
-  public displayedColumns = ['image', 'fullname', 'email', 'projectcount'];
+  @Output() public showConfirmRemove: EventEmitter<AdminUserSummary> = new EventEmitter();
+  public displayedColumns = ['image', 'fullname', 'email', 'projectcount', 'options'];
 
   public getFullName(user: AdminUserSummary) {
     return `${user.firstName} ${user.lastName}`;
@@ -16,5 +17,9 @@ export class AdminUsersTableComponent {
 
   public getAdminUserLink(user: AdminUserSummary) {
     return `/${RouteSettings.ADMIN}/${RouteSettings.USERS}/${user.id}`;
+  }
+
+  public doShowConfirmRemove(user: AdminUserSummary) {
+    this.showConfirmRemove.emit(user);
   }
 }

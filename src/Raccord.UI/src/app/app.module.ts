@@ -24,7 +24,7 @@ import { DragulaModule } from 'ng2-dragula';
 import { CalendarModule } from 'angular-calendar';
 import { AngularMaterialModule } from './shared/modules/angular-material';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { ChartModule } from 'angular-highcharts';
+import { Ng2HighchartsModule } from 'ng2-highcharts';
 import { AgmCoreModule } from '@agm/core';
 
 import '../styles/styles.scss';
@@ -55,7 +55,7 @@ import '../styles/headings.css';
     DragulaModule,
     AngularMaterialModule,
     FlexLayoutModule,
-    ChartModule,
+    Ng2HighchartsModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyAHVRCUkTtP9FDacHfHoEJDeWQu0sRA7-U'
     }),

@@ -338,6 +338,22 @@ raccord-toolbar {
   text-align: center;
 }
 
+.chart-card {
+  margin-bottom: 5px;
+
+  &.chart-card-1 {
+    width: 250px;
+  }
+
+  &.chart-card-2 {
+    width: 400px;
+  }
+
+  &.chart-card-3 {
+    width: 600px;
+  }
+}
+
 .profile-dashboard-profile-image {
   width: 200px;
   margin-bottom: 5px;

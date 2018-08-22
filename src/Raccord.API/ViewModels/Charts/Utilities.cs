@@ -14,6 +14,7 @@ namespace Raccord.API.ViewModels.Charts
                 ChartType = dto.ChartType,
                 DataType = dto.DataType,
                 BaseData = dto.BaseData,
+                ChartWidth = dto.ChartWidth,
                 SeriesData = dto.SeriesData.Select(sd=> sd.Translate()),
             };
         }

@@ -43,10 +43,15 @@ namespace Raccord.Application.Services.Charts.ChartBuilders
             var totalScenes = scenes.Count();
 
             // TODO implement for crew unit
-            var shootingDays = _shootingDayRepository.GetAllForCrewUnit(request.ProjectID).OrderBy(sd=> sd.Date);
+            var shootingDays = _shootingDayRepository.GetAllForProject(request.ProjectID).OrderBy(sd=> sd.Date);
+            
+            //set data for 0
+            baseData.Add("0");
+            seriesData.Add(totalScenes);
+            
             foreach(var shootingDay in shootingDays)
             {
-                baseData.Add($"SD {shootingDay.Number}");
+                baseData.Add($"SD {shootingDay.Number} - unit {shootingDay.CrewUnit.Name}");
                 var completedScenes = shootingDay.ShootingDayScenes.Count(sds=> sds.Completion == Completion.Completed);
                 totalScenes -= completedScenes;
                 seriesData.Add(shootingDay.Completed ? (int?)totalScenes : null);
@@ -58,6 +63,7 @@ namespace Raccord.Application.Services.Charts.ChartBuilders
                 ChartType = ChartType.Area,
                 DataType = ChartDataType.Number,
                 BaseData = baseData,
+                ChartWidth = 3,
                 SeriesData = new List<ChartSeriesDataDto>
                 {
                     new ChartSeriesDataDto{ Name = "Burndown", Data = seriesData}

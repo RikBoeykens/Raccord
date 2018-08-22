@@ -25,6 +25,9 @@ import {
 } from './admin';
 
 import { DashboardComponent } from './dashboard';
+import {
+  ProjectChartsResolve
+} from './charts';
 
 import { NoContentComponent } from './no-content';
 import {
@@ -49,6 +52,7 @@ import {
   CastMembersResolve,
   CastDashboardComponent,
   CastDashboardResolve,
+  ChartLandingComponent,
   CrewDepartmentsResolve,
   CrewUnitDashboardComponent,
   CrewUnitDashboardResolve,
@@ -590,6 +594,18 @@ export const ROUTES: Routes = [
                 component: SlateLandingComponent,
                 resolve: {
                   slate: SlateResolve
+                }
+              }
+            ]
+          },
+          {
+            path: RouteSettings.CHARTS,
+            children: [
+              {
+                path: '',
+                component: ChartLandingComponent,
+                resolve: {
+                  charts: ProjectChartsResolve
                 }
               }
             ]

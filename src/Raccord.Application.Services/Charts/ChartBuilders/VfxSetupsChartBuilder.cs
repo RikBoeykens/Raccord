@@ -43,6 +43,7 @@ namespace Raccord.Application.Services.Charts.ChartBuilders
                 ChartType = ChartType.Pie,
                 DataType = ChartDataType.Number,
                 BaseData = baseData,
+                ChartWidth = 1,
                 SeriesData = new List<ChartSeriesDataDto>
                 {
                     new ChartSeriesDataDto{ Name = "Setups", Data = seriesData}

@@ -43,6 +43,10 @@ import {
   CalendarHttpService
 } from './calendar';
 import {
+  ChartHttpService,
+  ProjectChartsResolve
+} from './charts';
+import {
   BreakdownItemHttpService,
   BreakdownItemResolve,
   BreakdownTypeHttpService,
@@ -175,6 +179,8 @@ export const SERVICES = [
   LoadingService,
   SidenavService,
   CalendarHttpService,
+  ChartHttpService,
+  ProjectChartsResolve,
   BreakdownItemHttpService,
   BreakdownItemResolve,
   BreakdownTypeHttpService,

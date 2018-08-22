@@ -172,7 +172,7 @@ namespace Raccord.Application.Services.Users.Invitations
       }
       var createdUserId = await _userService.Add(new CreateUserDto
       {
-        Email = userInvitation.Email,
+        Email = dto.Email,
         FirstName = dto.FirstName,
         LastName = dto.LastName,
         Password = dto.Password

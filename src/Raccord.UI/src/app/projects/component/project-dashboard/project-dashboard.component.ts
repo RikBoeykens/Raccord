@@ -58,4 +58,8 @@ export class ProjectDashboardComponent implements OnInit {
   public getSlatesLink() {
     return `/${RouteSettings.PROJECTS}/${this.project.id}/${RouteSettings.SLATES}`;
   }
+
+  public getChartsLink() {
+    return `/${RouteSettings.PROJECTS}/${this.project.id}/${RouteSettings.CHARTS}`;
+  }
 }

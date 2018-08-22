@@ -8,6 +8,7 @@
     </h1>
   </div>
   <admin-users-table 
+    (showConfirmRemove)="showConfirmRemove($event)"
     [users]="users">
   </admin-users-table>
   <button mat-fab 

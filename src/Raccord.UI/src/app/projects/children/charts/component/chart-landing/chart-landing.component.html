@@ -1,0 +1,18 @@
+<div class="raccord-narrow-container">
+        <div class="raccord-page-header">
+                <a routerLink="{{getBackLink()}}">
+                        <back-link></back-link>
+                </a>
+                <div fxLayout="row">
+                        <h1 class="raccord-header-title">
+                                Charts
+                        </h1>
+                </div>
+        </div>
+        <div fxLayout="row wrap" fxLayoutGap="5px">
+                <mat-card class="chart-card chart-card-{{chart.chartWidth}}"
+                        *ngFor="let chart of charts">
+                        <raccord-chart [chartObjectData]="chart"></raccord-chart>  
+                </mat-card>
+        </div>
+</div>

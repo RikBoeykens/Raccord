@@ -108,6 +108,7 @@ namespace Raccord.API.ViewModels.Users.Invitations
         ID = vm.ID,
         FirstName = vm.FirstName,
         LastName = vm.LastName,
+        Email = vm.Email,
         Password = vm.Password
       };
     }

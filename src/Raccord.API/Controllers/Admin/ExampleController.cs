@@ -1635,6 +1635,7 @@ namespace Raccord.API.Controllers.Admin
           Aperture = "2.8",
           Sound = "sync",
           Filters = "/",
+          IsVfx = true,
           Scene = new SceneDto { ID = sceneIds.scene4Id },
           ShootingDay = new ShootingDayDto { ID = shootingDay1Id },
           ProjectID = projectId
@@ -1674,6 +1675,7 @@ namespace Raccord.API.Controllers.Admin
           Aperture = "2.8",
           Sound = "sync",
           Filters = "/",
+          IsVfx = true,
           Scene = new SceneDto { ID = sceneIds.scene4Id },
           ShootingDay = new ShootingDayDto { ID = shootingDay1Id },
           ProjectID = projectId
@@ -1720,15 +1722,15 @@ namespace Raccord.API.Controllers.Admin
       OverTime = new TimeSpan(1, 0, 0),
       Completed = true
     });
-    foreach(var scene in shootingDay.Scenes)
+    foreach(var shootingDayScene in shootingDay.Scenes)
     {
       _shootingDaySceneService.Update(new ShootingDaySceneDto
       {
-        ID = scene.ID,
-        PageLength = scene.PlannedPageLength,
-        Timings = scene.Timings,
-        Completion = scene.Scene.Number == "4" ? Completion.Completed : Completion.PartCompleted,
-        LocationSetID = scene.LocationSet.ID
+        ID = shootingDayScene.ID,
+        PageLength = shootingDayScene.PlannedPageLength,
+        Timings = shootingDayScene.Timings,
+        Completion = shootingDayScene.Scene.Number == "4" ? Completion.Completed : Completion.PartCompleted,
+        LocationSetID = shootingDayScene.LocationSet.ID
       });
     }
   }

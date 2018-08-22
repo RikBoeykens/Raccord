@@ -81,11 +81,11 @@ namespace Raccord.Application.Services.Charts
             var services = new List<IChartBuilder>
             {
                 _burndownByPagelengthChartBuilder,
-                _burndownBySceneChartBuilder,
                 _completedByPagelengthChartBuilder,
+                _burndownBySceneChartBuilder,
                 _completedBySceneChartBuilder,
                 _pagelengthByDayChartBuilder,
-                _cumulativeTimingsByDayChartBuilder,
+                //_cumulativeTimingsByDayChartBuilder,
                 _cumulativeSetupsByDayChartBuilder,
                 _setupsByDayChartBuilder,
                 _vfxSetupsChartBuilder

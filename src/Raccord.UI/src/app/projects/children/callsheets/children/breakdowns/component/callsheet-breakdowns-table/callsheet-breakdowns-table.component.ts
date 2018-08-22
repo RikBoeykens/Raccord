@@ -9,13 +9,14 @@ import { CallsheetBreakdownItem } from '../../children/items/model/callsheet-bre
 })
 export class CallsheetBreakdownsTableComponent {
   @Input() public callsheetBreakdownTypes: CallsheetBreakdownType[];
+  @Input() public breakdownId: number;
   @Input() public projectId: number;
 
   public displayedColumns = ['type', 'scenes'];
 
   public getBreakdownTypeLink(type: CallsheetBreakdownType): string {
     // tslint:disable-next-line:max-line-length
-    return `/${RouteSettings.PROJECTS}/${this.projectId}/${RouteSettings.BREAKDOWNTYPES}/${type.id}`;
+    return `/${RouteSettings.PROJECTS}/${this.projectId}/${RouteSettings.BREAKDOWNS}/${this.breakdownId}/${RouteSettings.BREAKDOWNTYPES}/${type.id}`;
   }
 
   public getBreakdownItemLink(item: CallsheetBreakdownItem): string {

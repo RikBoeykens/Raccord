@@ -47,6 +47,9 @@ import {
   CalendarHeaderComponent
 } from './calendar';
 import {
+  RaccordChartComponent
+} from './charts';
+import {
   DashboardComponent,
   DashboardCalendarComponent
 } from './dashboard';
@@ -91,6 +94,7 @@ import {
   CastMemberLandingComponent,
   CastMembersListComponent,
   CastDashboardComponent,
+  ChartLandingComponent,
   CommentContainerComponent,
   EditCommentComponent,
   ShowCommentComponent,
@@ -245,6 +249,7 @@ export const COMPONENTS = [
   AdminSearchEntityComponent,
   CalendarComponent,
   CalendarHeaderComponent,
+  RaccordChartComponent,
   DashboardComponent,
   DashboardCalendarComponent,
   CreateUserFromInvitationComponent,
@@ -280,6 +285,7 @@ export const COMPONENTS = [
   CastMemberLandingComponent,
   CastMembersListComponent,
   CastDashboardComponent,
+  ChartLandingComponent,
   CommentContainerComponent,
   EditCommentComponent,
   ShowCommentComponent,

@@ -12,7 +12,6 @@ import { UserInvitationSummary } from '../../../shared/children/user-invitations
 export class CreateUserFromInvitationComponent implements OnInit {
     public request: CreateUserFromInvitation = new CreateUserFromInvitation();
     public confirmPassword: string;
-    private emailAddress: string;
 
     constructor(
         private _invitationHttpService: InvitationHttpService,
@@ -36,9 +35,9 @@ export class CreateUserFromInvitationComponent implements OnInit {
                     id: data.invitation.id,
                     firstName: data.invitation.firstName,
                     lastName: data.invitation.lastName,
+                    email: data.invitation.email,
                     password: ''
                 });
-                this.emailAddress = data.invitation.email;
             }
         });
     }
@@ -57,9 +56,29 @@ export class CreateUserFromInvitationComponent implements OnInit {
         return this.request.password === this.confirmPassword;
     }
 
+    public passwordHasMinSixCharacters(): boolean {
+        return ValidationHelpers.passwordHasMinSixCharacters(this.request.password);
+    }
+
+    public passwordHasLowercaseCharacter(): boolean {
+        return ValidationHelpers.passwordHasLowercaseCharacter(this.request.password);
+    }
+
+    public passwordHasUppercaseCharacter(): boolean {
+        return ValidationHelpers.passwordHasUppercaseCharacter(this.request.password);
+    }
+
+    public passwordHasDigit(): boolean {
+        return ValidationHelpers.passwordHasDigit(this.request.password);
+    }
+
+    public passwordHasSpecialCharacter(): boolean {
+        return ValidationHelpers.passwordHasSpecialCharacter(this.request.password);
+    }
+
     private login() {
         this._loginService.login({
-            username: this.emailAddress,
+            username: this.request.email,
             password: this.request.password
         }).then(() => this._router.navigate(['/']));
     }

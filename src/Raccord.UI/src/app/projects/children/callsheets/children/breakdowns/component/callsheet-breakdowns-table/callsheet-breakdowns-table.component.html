@@ -17,7 +17,7 @@
       <p *ngFor="let breakdownItemScene of breakdownType.scenes">
         <em>Sc {{breakdownItemScene.sceneNumber}}:</em>
         <span class="comma-separated" *ngFor="let item of breakdownItemScene.items">
-          <a routerLink="getBreakdownItemLink(item)">{{item.name}}</a>
+          <a routerLink="{{getBreakdownItemLink(item)}}">{{item.name}}</a>
         </span>
       </p>
     </mat-cell>

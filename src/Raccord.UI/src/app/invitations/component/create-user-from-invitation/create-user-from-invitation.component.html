@@ -1,5 +1,6 @@
 <div class="external-screen-container">
-    <h1>Register</h1>
+    <h1>RACCORD</h1>
+    <h2>Register</h2>
     <form id="invitation-form"
           #invitationForm = "ngForm"
           (ngSubmit)="createUser()">
@@ -13,6 +14,11 @@
         </div>
         <div fxLayout="row">
             <mat-form-field fxFlex="50%">
+                <input matInput placeholder="Email" id="request_email" required [(ngModel)]="request.email" #firstName="ngModel" name="request_email">
+            </mat-form-field>
+        </div>
+        <div fxLayout="row">
+            <mat-form-field fxFlex="50%">
                 <input matInput type="password" placeholder="Password" id="request_password" required [(ngModel)]="request.password" #password="ngModel" name="request_password">
             </mat-form-field>
         </div>
@@ -20,6 +26,16 @@
             <mat-form-field fxFlex="50%">
                 <input matInput type="password" placeholder="Confirm" id="confirm_password" required [(ngModel)]="confirmPassword" #confirmpassword="ngModel" name="confirm_password">
             </mat-form-field>
+        </div>
+        <div fxLayout="row">
+            <p><em>Password constraints:</em></p>
+            <ul>
+                <li>Minimum 6 characters&nbsp;<mat-icon *ngIf="passwordHasMinSixCharacters()" color="accent">check</mat-icon></li>
+                <li>Uppercase character&nbsp;<mat-icon *ngIf="passwordHasUppercaseCharacter()" color="accent">check</mat-icon></li>
+                <li>Lowercase character&nbsp;<mat-icon *ngIf="passwordHasLowercaseCharacter()" color="accent">check</mat-icon></li>
+                <li>Digit&nbsp;<mat-icon *ngIf="passwordHasDigit()" color="accent">check</mat-icon></li>
+                <li>Special character&nbsp;<mat-icon *ngIf="passwordHasSpecialCharacter()" color="accent">check</mat-icon></li>
+            </ul>
         </div>
         <div fxLayout="row">
             <button mat-raised-button type="submit" [disabled]="!invitationForm.form.valid||!passwordIsValid()||!passwordsdMatch()">Register</button>

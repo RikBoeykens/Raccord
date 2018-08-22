@@ -1,11 +1,12 @@
 <div class="external-screen-container">
-    <h1>Log in</h1>
+    <h1>RACCORD</h1>
+    <h2>Log in</h2>
     <form id="login-form"
           #loginForm = "ngForm"
           (ngSubmit)="doLogin()">
         <div fxLayout="row">
             <mat-form-field fxFlex="50%">
-                <input matInput placeholder="Email" id="login_email" required [(ngModel)]="login.username" #email="ngModel" name="login_email">
+                <input matInput placeholder="Email" id="login_email" required [(ngModel)]="login.username" #email="ngModel" name="login_email" autofocus>
             </mat-form-field>
         </div>
         <div fxLayout="row">

@@ -5,7 +5,7 @@ import { AdminUserSummary, AdminAddUserDialogComponent } from '../../../..';
 import { AdminUserHttpService } from '../../service/admin-user-http.service';
 import { LoadingWrapperService } from '../../../../../shared/service/loading-wrapper.service';
 import { CreateUser } from '../../model/create-user.model';
-import { RouteSettings } from '../../../../../shared';
+import { RouteSettings, DialogService } from '../../../../../shared';
 
 @Component({
   templateUrl: 'admin-users-list.component.html',
@@ -16,6 +16,7 @@ export class AdminUsersListComponent implements OnInit {
   constructor(
     private _adminUserHttpService: AdminUserHttpService,
     private _loadingWrapperService: LoadingWrapperService,
+    private _dialogService: DialogService,
     private _dialog: MatDialog,
     private _route: ActivatedRoute
   ) {
@@ -46,6 +47,17 @@ export class AdminUsersListComponent implements OnInit {
     return `/${RouteSettings.ADMIN}`;
   }
 
+  public getFullName(user: AdminUserSummary) {
+    return `${user.firstName} ${user.lastName}`;
+  }
+
+  public showConfirmRemove(user: AdminUserSummary) {
+    this._dialogService.confirm(
+      `Are you sure you want to remove ${this.getFullName(user)}`,
+      () => this.remove(user.id)
+    );
+  }
+
   private showAddUserDialog() {
     const addUserDialog = this._dialog.open(AdminAddUserDialogComponent);
     addUserDialog.afterClosed().subscribe((returnedUser: CreateUser) => {
@@ -60,6 +72,17 @@ export class AdminUsersListComponent implements OnInit {
       this._adminUserHttpService.add(user),
       () => {
         this.getUsers();
+      }
+    );
+  }
+
+  private remove(userId: string) {
+    this._loadingWrapperService.Load(
+      this._adminUserHttpService.delete(userId),
+      () => {
+        this._dialogService.success('The user was successfully removed.');
+        this.users =
+          this.users.filter((user: AdminUserSummary) => user.id !== userId);
       }
     );
   }

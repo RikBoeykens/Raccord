@@ -84,11 +84,12 @@
       <h2>
         Breakdown
         <span *ngIf="hasBreakdown()">
-          (<a routerLink="{{getBreakdownLink()">{{callsheet.breakdownInfo.name}}</a>)
+          (<a routerLink="{{getBreakdownLink()}}">{{callsheet.breakdownInfo.name}}</a>)
         </span>
       </h2>
   </div>
   <callsheet-breakdowns-table
     [callsheetBreakdownTypes]="callsheet.breakdownInfo.types"
-    [projectId]="project.id"></callsheet-breakdowns-table>
+    [projectId]="project.id"
+    [breakdownId]="callsheet.breakdownInfo.id"></callsheet-breakdowns-table>
 </div>

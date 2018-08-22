@@ -17,6 +17,7 @@ namespace Raccord.Application.Core.Services.Charts
 
         // Chart Data Type
         public ChartDataType DataType { get; set; }
+        public int ChartWidth { get; set; }
 
         // Base data
         public IEnumerable<object> BaseData

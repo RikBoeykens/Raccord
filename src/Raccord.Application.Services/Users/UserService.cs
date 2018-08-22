@@ -7,6 +7,7 @@ using Raccord.Application.Core.Common.Paging;
 using Raccord.Application.Core.ExternalServices.Communication.Mail;
 using Raccord.Application.Core.Services.Users;
 using Raccord.Data.EntityFramework.Repositories.Users;
+using Raccord.Data.EntityFramework.Repositories.Users.Projects;
 using Raccord.Domain.Model.Users;
 using UserUtilities = Raccord.Application.Services.Users.Utilities;
 
@@ -16,14 +17,17 @@ namespace Raccord.Application.Services.Users
     {
         private UserManager<ApplicationUser> _userManager;
         private IUserRepository _userRepository;
+        private IProjectUserRepository _projectUserRepository;
 
         public UserService(
             UserManager<ApplicationUser> userManager,
-            IUserRepository userRepository
+            IUserRepository userRepository,
+            IProjectUserRepository projectUserRepository
         )
         {
             _userManager = userManager;
             _userRepository = userRepository;
+            _projectUserRepository = projectUserRepository;
         }
 
         public IEnumerable<UserSummaryDto> GetAll()
@@ -85,7 +89,12 @@ namespace Raccord.Application.Services.Users
 
         public async Task Delete(string ID)
         {
-            var user = _userRepository.Get(ID);
+            var user = _userRepository.GetFullAdmin(ID);
+            foreach(var projectUser in user.ProjectUsers.ToList()) 
+            {
+                _projectUserRepository.Delete(projectUser);
+            }
+            _projectUserRepository.Commit();
             await _userManager.DeleteAsync(user);
         }
     }

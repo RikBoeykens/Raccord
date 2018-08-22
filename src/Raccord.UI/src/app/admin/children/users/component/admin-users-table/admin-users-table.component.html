@@ -32,6 +32,14 @@
     </mat-cell>
   </ng-container>
 
+  <!-- Options Column -->
+  <ng-container matColumnDef="options">
+    <mat-header-cell *matHeaderCellDef></mat-header-cell>
+    <mat-cell *matCellDef="let user">
+      <button mat-icon-button (click)="doShowConfirmRemove(user)"><mat-icon>delete</mat-icon></button>
+    </mat-cell>
+  </ng-container>
+
   <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
   <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
 </mat-table>
